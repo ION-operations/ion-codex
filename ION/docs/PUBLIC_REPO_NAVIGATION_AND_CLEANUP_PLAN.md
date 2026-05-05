@@ -71,6 +71,14 @@ system.
 - Point `pyproject.toml` package metadata at the root `README.md` so the public
   landing page is the package readme.
 
+## Implemented Fifth Slice
+
+- Replace the long catalog-style public README with a sharper landing page
+  centered on ION as a continuity substrate.
+- Keep detailed navigation in `ION/README.md` and directory-local README files.
+- Correct the landing-page verified test count to the current `265 passed`
+  validation evidence.
+
 ## Proposed Next Slices
 
 1. Add directory-local README files for:
