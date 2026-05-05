@@ -13,7 +13,7 @@ MVP behavior:
 - fetch a compact Sev carrier onboarding/context brief from the local daemon and
   paste it into ChatGPT;
 - render composer-attached tabs and an upward drawer for Status, Action, Agent,
-  Packages, Sandbox, Automation, Artifacts, Diagnostics, and Log views;
+  Packages, Sandbox, Automation, Artifacts, Settings, Diagnostics, and Log views;
 - anchor composer tabs to the full visible composer shell, including uploaded
   image/file thumbnails when ChatGPT expands the composer;
 - show subtle visual capture borders for composer input, attach/send/voice
@@ -28,6 +28,10 @@ MVP behavior:
   Codex review queueing through the sandbox return intake owner;
 - list attachable local package/inbox artifacts and request approval-gated
   browser drop tickets from the local daemon;
+- calibrate the ChatGPT attach/add-file target by letting Braden pick the
+  exact page element once, then using that saved selector before heuristics;
+- tune composer tab lift and drawer height from the Settings tab without a code
+  patch;
 - attempt a visible ChatGPT drag/drop for an approved artifact without clicking
   Send;
 - request approval-gated local operator attachment of an approved artifact
@@ -170,6 +174,34 @@ The Artifacts tab includes the first guarded file lane:
 `Local Attach` performs a daemon dry run before any mouse movement. If geometry
 is missing, stale, near the screen origin, outside the display, or not near the
 composer, the daemon blocks with `LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID`.
+
+If `Preview Target` rings the wrong page element, use:
+
+```text
+Settings -> Pick Attach Target
+```
+
+Then click ChatGPT's real attach/add-file button once. The extension stores a
+selector under `ION_CHATOPS_ATTACH_TARGET_SELECTOR` in page `localStorage`.
+After calibration, `Preview Target`, `Dry Run Attach`, and `Local Attach` use
+that saved target first. If the saved target disappears or is no longer near
+the composer, attach automation fails closed and asks for re-calibration instead
+of falling back to a random visible control.
+
+The Settings tab also exposes lightweight visual tuning:
+
+```text
+Tabs Up / Tabs Down
+Drawer Taller / Drawer Shorter
+Reset Layout
+```
+
+These write only local browser settings:
+
+```text
+ION_CHATOPS_TAB_LIFT_PX
+ION_CHATOPS_DRAWER_MAX_PX
+```
 
 `Attachables` intentionally shows a compact selected-artifact summary rather
 than dumping the full daemon JSON. The selected artifact is the same latest

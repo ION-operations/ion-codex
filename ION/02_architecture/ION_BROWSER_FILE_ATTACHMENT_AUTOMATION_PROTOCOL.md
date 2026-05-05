@@ -109,6 +109,7 @@ Permitted mechanisms:
 Required controls:
 
 - exact target preview,
+- operator target calibration when heuristic detection is wrong,
 - selected file manifest and sha256,
 - Braden approval,
 - stale-target re-check,
@@ -144,6 +145,43 @@ captured_at_ms: current capture timestamp
 
 The daemon must reject missing, stale, out-of-viewport, out-of-display,
 near-origin, or not-near-composer geometry before any desktop action.
+
+## Calibrated Attach Target
+
+The browser extension must not depend solely on heuristic DOM discovery for the
+attach/add-file button. If the preview ring appears on the wrong page element,
+the operator may arm a picker, click the real ChatGPT attach/add-file control,
+and store a local selector for that element.
+
+Calibration requirements:
+
+```text
+Settings -> Pick Attach Target
+-> next non-ION page click is captured
+-> selector, label, and rect are shown
+-> Preview Target must ring that selected control
+```
+
+The selector is browser-local state, not ION authority:
+
+```text
+ION_CHATOPS_ATTACH_TARGET_SELECTOR
+```
+
+If a saved selector is present but the element is hidden, missing, or no longer
+near the composer shell, the extension must fail closed and request
+re-calibration. It must not silently fall back to a broad heuristic and click an
+unrelated page control.
+
+Layout tuning for the composer cockpit is also browser-local state:
+
+```text
+ION_CHATOPS_TAB_LIFT_PX
+ION_CHATOPS_DRAWER_MAX_PX
+```
+
+These settings may adjust visual placement only. They do not expand file,
+daemon, Codex, send-click, or git authority.
 
 ## Non-Authority
 

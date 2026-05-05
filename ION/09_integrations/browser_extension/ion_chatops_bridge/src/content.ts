@@ -9,6 +9,7 @@ import {
   setBridgeDiagnosticsDetail,
   setBridgePackageDetail,
   setBridgeSandboxDetail,
+  setBridgeSettingsDetail,
   setBridgeStatus,
 } from "./approval_ui";
 import { extractIonActionYaml, localValidate, parseIonActionYamlWithDiagnostics, parseStrictIonActionYaml } from "./schema";
@@ -22,6 +23,7 @@ const MODAL_ID = "ion-chatops-bridge-approval";
 const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
 const ATTACH_PREVIEW_ID = "ion-chatops-attach-target-preview";
 const SAFE_MODE_KEY = "ION_CHATOPS_SAFE_MODE";
+const ATTACH_TARGET_SELECTOR_KEY = "ION_CHATOPS_ATTACH_TARGET_SELECTOR";
 const SCAN_DEBOUNCE_MS = 450;
 const ION_ACTION_LINE = /(^|\n)\s*ion_action:\s*(\n|$)/;
 const AUTO_SCAN_SELECTORS = [
@@ -813,6 +815,30 @@ function composerRect(): DOMRect | null {
   return composer?.getBoundingClientRect() ?? null;
 }
 
+function composerShellRect(): DOMRect | null {
+  const composer = findComposer();
+  if (!composer) return null;
+  let best: HTMLElement | null = composer;
+  let current: HTMLElement | null = composer;
+  let depth = 0;
+  while (current?.parentElement && depth < 10) {
+    current = current.parentElement;
+    depth += 1;
+    if (isBridgeElement(current)) break;
+    if (!visibleElement(current)) continue;
+    const rect = current.getBoundingClientRect();
+    const lower = rect.bottom > window.innerHeight * 0.58 && rect.top > window.innerHeight * 0.22;
+    const plausibleWidth = rect.width >= Math.min(320, window.innerWidth * 0.40) && rect.width <= window.innerWidth * 0.92;
+    const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(430, window.innerHeight * 0.50);
+    if (!lower || !plausibleWidth || !plausibleHeight) continue;
+    const buttons = current.querySelectorAll("button, [role='button'], input[type='file']").length;
+    if (buttons >= 2 || /form/i.test(current.tagName) || String(current.getAttribute("data-testid") ?? "").toLowerCase().includes("composer")) {
+      best = current;
+    }
+  }
+  return best?.getBoundingClientRect() ?? null;
+}
+
 function rectPayload(rect: DOMRect): Record<string, number> {
   return {
     x: Math.round(rect.left),
@@ -831,15 +857,112 @@ function visibleElement(node: HTMLElement): boolean {
   return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
 }
 
+function isBridgeElement(element: Element): boolean {
+  return Boolean(element.closest(`#${PANEL_ID}`) ?? element.closest(`#${MODAL_ID}`));
+}
+
+function cssEscape(value: string): string {
+  const css = (window as unknown as { CSS?: { escape?: (input: string) => string } }).CSS;
+  if (typeof css?.escape === "function") return css.escape(value);
+  return value.replace(/["\\#.;:[\]()>+~*=\s]/g, "\\$&");
+}
+
+function cssString(value: string): string {
+  return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
+function storedAttachSelector(): string {
+  try {
+    return String(window.localStorage?.getItem(ATTACH_TARGET_SELECTOR_KEY) ?? "").trim();
+  } catch (_error) {
+    return "";
+  }
+}
+
+function elementWithinComposerBand(node: HTMLElement, rect: DOMRect | null): boolean {
+  const bounds = node.getBoundingClientRect();
+  if (!rect) return bounds.top > window.innerHeight * 0.45;
+  const centerX = bounds.left + bounds.width / 2;
+  const centerY = bounds.top + bounds.height / 2;
+  const xMatch = centerX >= rect.left - 110 && centerX <= rect.right + 110;
+  const yMatch = centerY >= rect.top - 260 && centerY <= rect.bottom + 160;
+  return xMatch && yMatch;
+}
+
+function selectorForElement(node: HTMLElement): string {
+  const id = node.id?.trim();
+  if (id) return `#${cssEscape(id)}`;
+  const tag = node.tagName.toLowerCase();
+  const dataTestId = node.getAttribute("data-testid")?.trim();
+  if (dataTestId) return `${tag}[data-testid="${cssString(dataTestId)}"]`;
+  const aria = node.getAttribute("aria-label")?.trim();
+  if (aria) return `${tag}[aria-label="${cssString(aria)}"]`;
+  const title = node.getAttribute("title")?.trim();
+  if (title) return `${tag}[title="${cssString(title)}"]`;
+
+  const parts: string[] = [];
+  let current: HTMLElement | null = node;
+  let depth = 0;
+  while (current && current.nodeType === Node.ELEMENT_NODE && depth < 5 && !isBridgeElement(current)) {
+    const parent = current.parentElement;
+    let part = current.tagName.toLowerCase();
+    if (parent) {
+      const siblings = Array.from(parent.children).filter((sibling) => sibling.tagName === current?.tagName);
+      if (siblings.length > 1) part += `:nth-of-type(${siblings.indexOf(current) + 1})`;
+    }
+    parts.unshift(part);
+    current = parent;
+    depth += 1;
+  }
+  return parts.join(" > ");
+}
+
+function attachCandidateFromEventTarget(target: EventTarget | null): HTMLElement | null {
+  if (!(target instanceof Element)) return null;
+  if (isBridgeElement(target)) return null;
+  const candidate = target.closest<HTMLElement>("button, [role='button'], input[type='file'], label, [aria-label], [data-testid]");
+  if (candidate && !isBridgeElement(candidate)) return candidate;
+  return target as HTMLElement;
+}
+
+function calibratedAttachControlElement(rect: DOMRect | null): HTMLElement | null {
+  const selector = storedAttachSelector();
+  if (!selector) return null;
+  let node: HTMLElement | null = null;
+  try {
+    node = document.querySelector<HTMLElement>(selector);
+  } catch (_error) {
+    setBridgeArtifactDetail(`calibrated_attach_selector_invalid\nselector: ${selector}`);
+    return null;
+  }
+  if (!node || !visibleElement(node)) {
+    setBridgeArtifactDetail(`calibrated_attach_target_missing_or_hidden\nselector: ${selector}`);
+    return null;
+  }
+  if (!elementWithinComposerBand(node, rect)) {
+    const bounds = node.getBoundingClientRect();
+    setBridgeArtifactDetail([
+      "calibrated_attach_target_not_near_composer",
+      `selector: ${selector}`,
+      `target_rect: ${JSON.stringify(rectPayload(bounds))}`,
+      `composer_rect: ${rect ? JSON.stringify(rectPayload(rect)) : "missing"}`,
+      "Use Settings -> Pick Attach Target to re-calibrate.",
+    ].join("\n"));
+    return null;
+  }
+  return node;
+}
+
 function findAttachControlElement(): HTMLElement | null {
-  const rect = composerRect();
+  const rect = composerShellRect() ?? composerRect();
+  const calibrated = calibratedAttachControlElement(rect);
+  if (calibrated) return calibrated;
+  if (storedAttachSelector()) return null;
   const nodes = Array.from(document.querySelectorAll<HTMLElement>("button, [role='button'], input[type='file']"));
   return nodes.find((node) => {
     if (!visibleElement(node)) return false;
     const label = controlLabel(node).toLowerCase();
-    const bounds = node.getBoundingClientRect();
-    const nearComposer = rect ? Math.abs(bounds.top - rect.top) < 220 || Math.abs(bounds.bottom - rect.bottom) < 220 : bounds.top > window.innerHeight * 0.45;
-    return nearComposer && /attach|upload|file|plus|add/.test(label);
+    return elementWithinComposerBand(node, rect) && /attach|upload|file|plus|add/.test(label);
   }) ?? null;
 }
 
@@ -868,7 +991,7 @@ function findAttachControlRect(): Record<string, unknown> | null {
 
 function localAttachPayload(): Record<string, unknown> | null {
   const targetRect = findAttachControlRect();
-  const composer = composerRect();
+  const composer = composerShellRect() ?? composerRect();
   if (!targetRect || !composer) return null;
   return {
     target_kind: "attach_button",
@@ -885,12 +1008,65 @@ function localAttachPayload(): Record<string, unknown> | null {
   };
 }
 
+function beginAttachTargetPicker(): void {
+  setBridgeStatus("Pick attach target", "Click ChatGPT's real attach/add-file button. The next page click will be captured.", "working");
+  setBridgeSettingsDetail("Attach target picker armed. Click the ChatGPT attach/add-file button, not the ION panel.");
+  const handler = (event: MouseEvent) => {
+    const candidate = attachCandidateFromEventTarget(event.target);
+    if (!candidate) {
+      setBridgeSettingsDetail("Attach target pick ignored because the click was inside ION UI or not an element.");
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    document.removeEventListener("click", handler, true);
+    const selector = selectorForElement(candidate);
+    try {
+      window.localStorage?.setItem(ATTACH_TARGET_SELECTOR_KEY, selector);
+    } catch (_error) {
+      setBridgeSettingsDetail("Attach target could not be saved to localStorage.");
+      setBridgeStatus("Attach target not saved", "localStorage write failed.", "error");
+      return;
+    }
+    const detail = [
+      "attach_target_calibrated",
+      `selector: ${selector}`,
+      `label: ${controlLabel(candidate) || candidate.tagName.toLowerCase()}`,
+      `rect: ${JSON.stringify(rectPayload(candidate.getBoundingClientRect()))}`,
+    ].join("\n");
+    setBridgeSettingsDetail(detail);
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Attach target calibrated", "Preview Target should now ring the selected button.", "success");
+    previewAttachTarget();
+  };
+  document.addEventListener("click", handler, true);
+  window.setTimeout(() => {
+    document.removeEventListener("click", handler, true);
+  }, 12000);
+}
+
+function clearAttachTargetCalibration(): void {
+  try {
+    window.localStorage?.removeItem(ATTACH_TARGET_SELECTOR_KEY);
+  } catch (_error) {
+    // Ignore storage failures; the heuristic path remains available.
+  }
+  document.getElementById(ATTACH_PREVIEW_ID)?.remove();
+  const detail = "attach_target_calibration_cleared\nPreview Target will use the guarded automatic heuristic again.";
+  setBridgeSettingsDetail(detail);
+  setBridgeArtifactDetail(detail);
+  setBridgeStatus("Attach target cleared", "Pick Attach Target can be used to bind it again.", "idle");
+}
+
 function previewAttachTarget(): void {
   ensureDomRegistryStyle();
   const target = findAttachControlElement();
   document.getElementById(ATTACH_PREVIEW_ID)?.remove();
   if (!target) {
-    const detail = "attach_control_not_detected\nNo target ring was drawn.";
+    const detail = storedAttachSelector()
+      ? "attach_control_not_detected\nSaved attach target is missing, hidden, or no longer near the composer. Use Settings -> Pick Attach Target again or Clear Attach Target."
+      : "attach_control_not_detected\nNo target ring was drawn. Use Settings -> Pick Attach Target if the heuristic cannot find the attach/add-file button.";
     setBridgeArtifactDetail(detail);
     setBridgeStatus("Attach target missing", detail, "error");
     return;
@@ -1282,6 +1458,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   submitActionText,
   refreshBridgePosition,
   previewAttachTarget,
+  localAttachPayload,
   requestArtifactLocalAttachDryRun,
   rescan: () => {
     seen.clear();
@@ -1360,6 +1537,12 @@ window.addEventListener("ion-chatops-artifact-dry-run-attach", () => {
 });
 window.addEventListener("ion-chatops-artifact-local-attach", () => {
   requestArtifactLocalAttachLatest();
+});
+window.addEventListener("ion-chatops-settings-pick-attach", () => {
+  beginAttachTargetPicker();
+});
+window.addEventListener("ion-chatops-settings-clear-attach", () => {
+  clearAttachTargetCalibration();
 });
 
 if (safeModeDisabled()) {

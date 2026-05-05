@@ -153,6 +153,7 @@ class Element {
 }
 
 let sent = null;
+const localStore = new Map();
 const documentElement = new Element("html");
 const context = {
   console,
@@ -166,7 +167,17 @@ const context = {
   window: {
     innerHeight: 1000,
     innerWidth: 1000,
-    localStorage: { getItem: () => null },
+    outerHeight: 1000,
+    outerWidth: 1000,
+    screenX: 0,
+    screenY: 0,
+    devicePixelRatio: 1,
+    location: { href: "https://chatgpt.com/c/test" },
+    localStorage: {
+      getItem: (key) => localStore.get(key) ?? null,
+      setItem: (key, value) => localStore.set(key, String(value)),
+      removeItem: (key) => localStore.delete(key),
+    },
     sessionStorage: { getItem: () => null },
     setTimeout(callback) {
       callback();
@@ -358,6 +369,42 @@ if (registryStats.composerControls < 2) throw new Error("DOM registry did not ma
 if (registryCode.dataset.ionYamlStatus !== "valid") throw new Error("DOM registry did not set valid YAML status");
 if (registryButton.dataset.ionControlRole !== "send_button") throw new Error("DOM registry did not classify send control");
 if (composer.dataset.ionControlRole !== "composer_input") throw new Error("DOM registry did not classify composer input");
+
+const profileButton = new Element("button");
+profileButton.setAttribute("aria-label", "BB profile menu");
+profileButton.rect = { top: 930, left: 8, right: 48, bottom: 970, width: 40, height: 40 };
+const attachButton = new Element("button");
+attachButton.setAttribute("aria-label", "Attach files");
+attachButton.rect = { top: 872, left: 198, right: 238, bottom: 912, width: 40, height: 40 };
+context.document.querySelector = (selector) => (selector === "#prompt-textarea" ? composer : null);
+context.document.querySelectorAll = (selector) => {
+  if (selector === "button, [role='button'], input[type='file']") return [profileButton, attachButton];
+  return [];
+};
+let attachPayload = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.localAttachPayload();
+if (!attachPayload) throw new Error("local attach payload was not produced");
+if (!String(attachPayload.target_rect.label || "").includes("Attach files")) {
+  throw new Error("attach heuristic selected the wrong visible control");
+}
+localStore.set("ION_CHATOPS_ATTACH_TARGET_SELECTOR", "button[aria-label=\"BB profile menu\"]");
+context.document.querySelector = (selector) => {
+  if (selector === "#prompt-textarea") return composer;
+  if (selector === "button[aria-label=\"BB profile menu\"]") return profileButton;
+  return null;
+};
+attachPayload = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.localAttachPayload();
+if (attachPayload) throw new Error("calibrated target outside composer band should fail closed");
+localStore.set("ION_CHATOPS_ATTACH_TARGET_SELECTOR", "button[aria-label=\"Attach files\"]");
+context.document.querySelector = (selector) => {
+  if (selector === "#prompt-textarea") return composer;
+  if (selector === "button[aria-label=\"Attach files\"]") return attachButton;
+  return null;
+};
+attachPayload = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.localAttachPayload();
+if (!attachPayload || !String(attachPayload.target_rect.label || "").includes("Attach files")) {
+  throw new Error("calibrated attach target did not resolve");
+}
+localStore.delete("ION_CHATOPS_ATTACH_TARGET_SELECTOR");
 
 byId.clear();
 let disabledSent = null;

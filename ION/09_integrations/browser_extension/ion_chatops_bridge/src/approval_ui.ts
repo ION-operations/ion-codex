@@ -14,6 +14,9 @@ const PANEL_PREFERRED_WIDTH = 640;
 const PANEL_MIN_WIDTH = 320;
 const PANEL_TINY_WIDTH = 230;
 const COMPOSER_PANEL_MAX_WIDTH = 920;
+const ATTACH_TARGET_SELECTOR_KEY = "ION_CHATOPS_ATTACH_TARGET_SELECTOR";
+const TAB_LIFT_KEY = "ION_CHATOPS_TAB_LIFT_PX";
+const DRAWER_MAX_KEY = "ION_CHATOPS_DRAWER_MAX_PX";
 
 type AnchorInfo = {
   mode: "composer" | "topbar_fallback";
@@ -35,6 +38,7 @@ const bridgeState = {
   sandbox: "No ChatGPT sandbox returns have been requested yet.",
   automation: "Automation controls are staged only. This packet does not execute macros.",
   artifacts: "Artifact detection is staged only. No upload or local file movement occurs in this shell slice.",
+  settings: "No local calibration has been changed in this session.",
   diagnostics:
     "Normal carrier flow: Sev emits an ion_action YAML block in ChatGPT, the extension detects it, Braden approves it, the local daemon records/executes it, and ION writes a receipt.\n\nThe buttons below are local diagnostics only. They fabricate known-good test actions so the extension/daemon path can be checked without waiting on ChatGPT to emit YAML.",
   tools: "Daemon: http://127.0.0.1:8767\nUse Rescan after ChatGPT finishes rendering a YAML block.",
@@ -224,7 +228,7 @@ function ensureStyle(): void {
       backdrop-filter: blur(14px);
       margin: 0;
       padding: 10px 10px 11px;
-      max-height: min(38vh, 360px);
+      max-height: min(38vh, var(--ion-chatops-drawer-max-px, 360px));
       overflow: auto;
       pointer-events: auto;
     }
@@ -417,6 +421,73 @@ function topRail(panel: HTMLElement): HTMLElement | null {
 
 function composerCockpit(panel: HTMLElement): HTMLElement | null {
   return panel.querySelector<HTMLElement>(".ion-composer-cockpit");
+}
+
+function readNumberSetting(key: string, fallback: number, min: number, max: number): number {
+  try {
+    const raw = window.localStorage?.getItem(key);
+    const value = raw === null || raw === undefined ? Number.NaN : Number.parseInt(raw, 10);
+    if (!Number.isFinite(value)) return fallback;
+    return Math.max(min, Math.min(max, value));
+  } catch (_error) {
+    return fallback;
+  }
+}
+
+function writeNumberSetting(key: string, value: number, min: number, max: number): number {
+  const bounded = Math.max(min, Math.min(max, Math.round(value)));
+  try {
+    window.localStorage?.setItem(key, String(bounded));
+  } catch (_error) {
+    // Ignore storage failures; the panel will continue with defaults.
+  }
+  return bounded;
+}
+
+function attachTargetSelector(): string {
+  try {
+    return String(window.localStorage?.getItem(ATTACH_TARGET_SELECTOR_KEY) ?? "").trim();
+  } catch (_error) {
+    return "";
+  }
+}
+
+function settingsSummary(): string {
+  const selector = attachTargetSelector();
+  return [
+    `attach_target: ${selector || "not calibrated"}`,
+    `tab_lift_px: ${readNumberSetting(TAB_LIFT_KEY, 2, -24, 48)}`,
+    `drawer_max_px: ${readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680)}`,
+    "",
+    "Use Pick Attach Target, then click ChatGPT's real attach/add-file button once.",
+    "Local Attach should only be used after Preview Target rings the correct button and Dry Run passes.",
+  ].join("\n");
+}
+
+function adjustTabLift(delta: number): void {
+  const next = writeNumberSetting(TAB_LIFT_KEY, readNumberSetting(TAB_LIFT_KEY, 2, -24, 48) + delta, -24, 48);
+  bridgeState.settings = `tab_lift_px set to ${next}`;
+  appendBridgeLog(`Layout adjusted: tab_lift_px=${next}`);
+  renderPanel();
+}
+
+function adjustDrawerMax(delta: number): void {
+  const next = writeNumberSetting(DRAWER_MAX_KEY, readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680) + delta, 220, 680);
+  bridgeState.settings = `drawer_max_px set to ${next}`;
+  appendBridgeLog(`Layout adjusted: drawer_max_px=${next}`);
+  renderPanel();
+}
+
+function resetLayoutSettings(): void {
+  try {
+    window.localStorage?.removeItem(TAB_LIFT_KEY);
+    window.localStorage?.removeItem(DRAWER_MAX_KEY);
+  } catch (_error) {
+    // Ignore storage failures; the panel will continue with defaults.
+  }
+  bridgeState.settings = "Layout tuning reset to defaults.";
+  appendBridgeLog("Layout tuning reset");
+  renderPanel();
 }
 
 function topBarGeometry() {
@@ -643,7 +714,9 @@ function applyComposerLayout(panel: HTMLElement, anchor: AnchorInfo): boolean {
   const left = Math.max(margin, Math.round(rect.left));
   const available = Math.max(PANEL_TINY_WIDTH, Math.min(Math.round(rect.width), window.innerWidth - left - margin));
   const width = available;
-  const bottom = Math.max(4, Math.round(viewport - rect.top + 2));
+  const tabLift = readNumberSetting(TAB_LIFT_KEY, 2, -24, 48);
+  const drawerMax = readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680);
+  const bottom = Math.max(4, Math.round(viewport - rect.top + tabLift));
   const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 520 ? "compact" : "normal";
   const cockpit = composerCockpit(panel);
   panel.dataset.anchorMode = "composer";
@@ -656,6 +729,9 @@ function applyComposerLayout(panel: HTMLElement, anchor: AnchorInfo): boolean {
     cockpit.style.bottom = `${bottom}px`;
     cockpit.style.width = `${width}px`;
     cockpit.style.maxWidth = `${available}px`;
+  }
+  if (typeof panel.style.setProperty === "function") {
+    panel.style.setProperty("--ion-chatops-drawer-max-px", `${drawerMax}px`);
   }
   positionApprovalModal();
   return true;
@@ -726,6 +802,18 @@ function ensurePanel(): HTMLElement {
             <button type="button" class="ion-tool" data-tool="artifact-local-attach">Local Attach</button>
           </div>
         </div>
+        <div class="ion-tab-panel" data-panel="settings">
+          <div class="ion-detail" data-field="settings"></div>
+          <div class="ion-toolbar-actions">
+            <button type="button" class="ion-tool" data-tool="settings-pick-attach">Pick Attach Target</button>
+            <button type="button" class="ion-tool" data-tool="settings-clear-attach">Clear Attach Target</button>
+            <button type="button" class="ion-tool" data-tool="settings-tabs-up">Tabs Up</button>
+            <button type="button" class="ion-tool" data-tool="settings-tabs-down">Tabs Down</button>
+            <button type="button" class="ion-tool" data-tool="settings-drawer-taller">Drawer Taller</button>
+            <button type="button" class="ion-tool" data-tool="settings-drawer-shorter">Drawer Shorter</button>
+            <button type="button" class="ion-tool" data-tool="settings-layout-reset">Reset Layout</button>
+          </div>
+        </div>
         <div class="ion-tab-panel" data-panel="diagnostics">
           <div class="ion-detail" data-field="diagnostics"></div>
           <div class="ion-toolbar-actions">
@@ -743,6 +831,7 @@ function ensurePanel(): HTMLElement {
         <button type="button" class="ion-tab" data-tab="sandbox">Sandbox</button>
         <button type="button" class="ion-tab" data-tab="automation">Automation</button>
         <button type="button" class="ion-tab" data-tab="artifacts">Artifacts</button>
+        <button type="button" class="ion-tab" data-tab="settings">Settings</button>
         <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
         <button type="button" class="ion-tab" data-tab="tools">Logs</button>
       </div>
@@ -831,6 +920,27 @@ function ensurePanel(): HTMLElement {
   panel.querySelector('[data-tool="artifact-local-attach"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-artifact-local-attach"));
   });
+  panel.querySelector('[data-tool="settings-pick-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-pick-attach"));
+  });
+  panel.querySelector('[data-tool="settings-clear-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-attach"));
+  });
+  panel.querySelector('[data-tool="settings-tabs-up"]')?.addEventListener("click", () => {
+    adjustTabLift(4);
+  });
+  panel.querySelector('[data-tool="settings-tabs-down"]')?.addEventListener("click", () => {
+    adjustTabLift(-4);
+  });
+  panel.querySelector('[data-tool="settings-drawer-taller"]')?.addEventListener("click", () => {
+    adjustDrawerMax(40);
+  });
+  panel.querySelector('[data-tool="settings-drawer-shorter"]')?.addEventListener("click", () => {
+    adjustDrawerMax(-40);
+  });
+  panel.querySelector('[data-tool="settings-layout-reset"]')?.addEventListener("click", () => {
+    resetLayoutSettings();
+  });
   panel.querySelector('[data-tool="collapse"]')?.addEventListener("click", () => {
     panel.dataset.expanded = "false";
     renderPanel(panel);
@@ -858,6 +968,7 @@ function renderPanel(panel = ensurePanel()): void {
   const sandboxNode = panel.querySelector<HTMLElement>('[data-field="sandbox"]');
   const automationNode = panel.querySelector<HTMLElement>('[data-field="automation"]');
   const artifactsNode = panel.querySelector<HTMLElement>('[data-field="artifacts"]');
+  const settingsNode = panel.querySelector<HTMLElement>('[data-field="settings"]');
   const diagnosticsNode = panel.querySelector<HTMLElement>('[data-field="diagnostics"]');
   const toolsNode = panel.querySelector<HTMLElement>('[data-field="tools"]');
   if (statusNode) statusNode.textContent = bridgeState.detail;
@@ -867,6 +978,7 @@ function renderPanel(panel = ensurePanel()): void {
   if (sandboxNode) sandboxNode.textContent = bridgeState.sandbox;
   if (automationNode) automationNode.textContent = bridgeState.automation;
   if (artifactsNode) artifactsNode.textContent = bridgeState.artifacts;
+  if (settingsNode) settingsNode.textContent = `${bridgeState.settings}\n\n${settingsSummary()}`;
   if (diagnosticsNode) diagnosticsNode.textContent = `${bridgeState.anchor.detail}\n\n${bridgeState.diagnostics}`;
   if (toolsNode) toolsNode.textContent = `${bridgeState.tools}\n\nRecent:\n${bridgeState.logs.join("\n") || "No events yet."}`;
 }
@@ -929,6 +1041,11 @@ export function setBridgeSandboxDetail(detail: string): void {
 
 export function setBridgeArtifactDetail(detail: string): void {
   bridgeState.artifacts = detail;
+  renderPanel();
+}
+
+export function setBridgeSettingsDetail(detail: string): void {
+  bridgeState.settings = detail;
   renderPanel();
 }
 

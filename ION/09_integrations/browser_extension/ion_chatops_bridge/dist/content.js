@@ -8,6 +8,7 @@
   const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
   const ATTACH_PREVIEW_ID = "ion-chatops-attach-target-preview";
   const SAFE_MODE_KEY = "ION_CHATOPS_SAFE_MODE";
+  const ATTACH_TARGET_SELECTOR_KEY = "ION_CHATOPS_ATTACH_TARGET_SELECTOR";
   const SCAN_DEBOUNCE_MS = 450;
   const ION_ACTION_LINE = /(^|\n)\s*ion_action:\s*(\n|$)/;
   const AUTO_SCAN_SELECTORS = [
@@ -42,6 +43,8 @@
   const PANEL_MIN_WIDTH = 320;
   const PANEL_TINY_WIDTH = 230;
   const COMPOSER_PANEL_MAX_WIDTH = 920;
+  const TAB_LIFT_KEY = "ION_CHATOPS_TAB_LIFT_PX";
+  const DRAWER_MAX_KEY = "ION_CHATOPS_DRAWER_MAX_PX";
   const bridgeState = {
     title: "Monitoring ChatGPT",
     detail: "Waiting for ion_action YAML blocks.",
@@ -52,6 +55,7 @@
     sandbox: "No ChatGPT sandbox returns have been requested yet.",
     automation: "Automation controls are staged only. This packet does not execute macros.",
     artifacts: "Artifact detection is staged only. No upload or local file movement occurs in this shell slice.",
+    settings: "No local calibration has been changed in this session.",
     diagnostics: "Normal carrier flow: Sev emits an ion_action YAML block in ChatGPT, the extension detects it, Braden approves it, the local daemon records/executes it, and ION writes a receipt.\n\nThe buttons below are local diagnostics only. They fabricate known-good test actions so the extension/daemon path can be checked without waiting on ChatGPT to emit YAML.",
     tools: "Daemon: http://127.0.0.1:8767\nUse Rescan after ChatGPT finishes rendering a YAML block.",
     logs: [],
@@ -815,7 +819,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         backdrop-filter: blur(14px);
         margin: 0;
         padding: 10px 10px 11px;
-        max-height: min(38vh, 360px);
+        max-height: min(38vh, var(--ion-chatops-drawer-max-px, 360px));
         overflow: auto;
         pointer-events: auto;
       }
@@ -1008,6 +1012,71 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
 
   function composerCockpit(panel) {
     return panel.querySelector(".ion-composer-cockpit");
+  }
+
+  function readNumberSetting(key, fallback, min, max) {
+    try {
+      const raw = window.localStorage?.getItem(key);
+      const value = raw === null || raw === undefined ? Number.NaN : Number.parseInt(raw, 10);
+      if (!Number.isFinite(value)) return fallback;
+      return Math.max(min, Math.min(max, value));
+    } catch (_error) {
+      return fallback;
+    }
+  }
+
+  function writeNumberSetting(key, value, min, max) {
+    const bounded = Math.max(min, Math.min(max, Math.round(value)));
+    try {
+      window.localStorage?.setItem(key, String(bounded));
+    } catch (_error) {
+    }
+    return bounded;
+  }
+
+  function attachTargetSelector() {
+    try {
+      return String(window.localStorage?.getItem(ATTACH_TARGET_SELECTOR_KEY) ?? "").trim();
+    } catch (_error) {
+      return "";
+    }
+  }
+
+  function settingsSummary() {
+    const selector = attachTargetSelector();
+    return [
+      `attach_target: ${selector || "not calibrated"}`,
+      `tab_lift_px: ${readNumberSetting(TAB_LIFT_KEY, 2, -24, 48)}`,
+      `drawer_max_px: ${readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680)}`,
+      "",
+      "Use Pick Attach Target, then click ChatGPT's real attach/add-file button once.",
+      "Local Attach should only be used after Preview Target rings the correct button and Dry Run passes.",
+    ].join("\n");
+  }
+
+  function adjustTabLift(delta) {
+    const next = writeNumberSetting(TAB_LIFT_KEY, readNumberSetting(TAB_LIFT_KEY, 2, -24, 48) + delta, -24, 48);
+    bridgeState.settings = `tab_lift_px set to ${next}`;
+    appendBridgeLog(`Layout adjusted: tab_lift_px=${next}`);
+    renderPanel();
+  }
+
+  function adjustDrawerMax(delta) {
+    const next = writeNumberSetting(DRAWER_MAX_KEY, readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680) + delta, 220, 680);
+    bridgeState.settings = `drawer_max_px set to ${next}`;
+    appendBridgeLog(`Layout adjusted: drawer_max_px=${next}`);
+    renderPanel();
+  }
+
+  function resetLayoutSettings() {
+    try {
+      window.localStorage?.removeItem(TAB_LIFT_KEY);
+      window.localStorage?.removeItem(DRAWER_MAX_KEY);
+    } catch (_error) {
+    }
+    bridgeState.settings = "Layout tuning reset to defaults.";
+    appendBridgeLog("Layout tuning reset");
+    renderPanel();
   }
 
   function topBarGeometry() {
@@ -1233,7 +1302,9 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     const left = Math.max(margin, Math.round(rect.left));
     const available = Math.max(PANEL_TINY_WIDTH, Math.min(Math.round(rect.width), window.innerWidth - left - margin));
     const width = available;
-    const bottom = Math.max(4, Math.round(viewport - rect.top + 2));
+    const tabLift = readNumberSetting(TAB_LIFT_KEY, 2, -24, 48);
+    const drawerMax = readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680);
+    const bottom = Math.max(4, Math.round(viewport - rect.top + tabLift));
     const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 520 ? "compact" : "normal";
     const cockpit = composerCockpit(panel);
     panel.dataset.anchorMode = "composer";
@@ -1246,6 +1317,9 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       cockpit.style.bottom = `${bottom}px`;
       cockpit.style.width = `${width}px`;
       cockpit.style.maxWidth = `${available}px`;
+    }
+    if (typeof panel.style.setProperty === "function") {
+      panel.style.setProperty("--ion-chatops-drawer-max-px", `${drawerMax}px`);
     }
     positionApprovalModal();
     return true;
@@ -1316,6 +1390,18 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
             <button type="button" class="ion-tool" data-tool="artifact-local-attach">Local Attach</button>
           </div>
           </div>
+          <div class="ion-tab-panel" data-panel="settings">
+            <div class="ion-detail" data-field="settings"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="settings-pick-attach">Pick Attach Target</button>
+              <button type="button" class="ion-tool" data-tool="settings-clear-attach">Clear Attach Target</button>
+              <button type="button" class="ion-tool" data-tool="settings-tabs-up">Tabs Up</button>
+              <button type="button" class="ion-tool" data-tool="settings-tabs-down">Tabs Down</button>
+              <button type="button" class="ion-tool" data-tool="settings-drawer-taller">Drawer Taller</button>
+              <button type="button" class="ion-tool" data-tool="settings-drawer-shorter">Drawer Shorter</button>
+              <button type="button" class="ion-tool" data-tool="settings-layout-reset">Reset Layout</button>
+            </div>
+          </div>
           <div class="ion-tab-panel" data-panel="diagnostics">
             <div class="ion-detail" data-field="diagnostics"></div>
             <div class="ion-toolbar-actions">
@@ -1333,6 +1419,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
           <button type="button" class="ion-tab" data-tab="sandbox">Sandbox</button>
           <button type="button" class="ion-tab" data-tab="automation">Automation</button>
           <button type="button" class="ion-tab" data-tab="artifacts">Artifacts</button>
+          <button type="button" class="ion-tab" data-tab="settings">Settings</button>
           <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
           <button type="button" class="ion-tab" data-tab="tools">Logs</button>
         </div>
@@ -1421,6 +1508,27 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   panel.querySelector('[data-tool="artifact-local-attach"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-artifact-local-attach"));
   });
+    panel.querySelector('[data-tool="settings-pick-attach"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-pick-attach"));
+    });
+    panel.querySelector('[data-tool="settings-clear-attach"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-attach"));
+    });
+    panel.querySelector('[data-tool="settings-tabs-up"]')?.addEventListener("click", () => {
+      adjustTabLift(4);
+    });
+    panel.querySelector('[data-tool="settings-tabs-down"]')?.addEventListener("click", () => {
+      adjustTabLift(-4);
+    });
+    panel.querySelector('[data-tool="settings-drawer-taller"]')?.addEventListener("click", () => {
+      adjustDrawerMax(40);
+    });
+    panel.querySelector('[data-tool="settings-drawer-shorter"]')?.addEventListener("click", () => {
+      adjustDrawerMax(-40);
+    });
+    panel.querySelector('[data-tool="settings-layout-reset"]')?.addEventListener("click", () => {
+      resetLayoutSettings();
+    });
     panel.querySelector('[data-tool="collapse"]')?.addEventListener("click", () => {
       panel.dataset.expanded = "false";
       renderPanel(panel);
@@ -1476,6 +1584,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     const sandboxNode = panel.querySelector('[data-field="sandbox"]');
     const automationNode = panel.querySelector('[data-field="automation"]');
     const artifactsNode = panel.querySelector('[data-field="artifacts"]');
+    const settingsNode = panel.querySelector('[data-field="settings"]');
     const diagnosticsNode = panel.querySelector('[data-field="diagnostics"]');
     const toolsNode = panel.querySelector('[data-field="tools"]');
     if (statusNode) statusNode.textContent = bridgeState.detail;
@@ -1485,6 +1594,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     if (sandboxNode) sandboxNode.textContent = bridgeState.sandbox;
     if (automationNode) automationNode.textContent = bridgeState.automation;
     if (artifactsNode) artifactsNode.textContent = bridgeState.artifacts;
+    if (settingsNode) settingsNode.textContent = `${bridgeState.settings}\n\n${settingsSummary()}`;
     if (diagnosticsNode) diagnosticsNode.textContent = `${bridgeState.anchor.detail}\n\n${bridgeState.diagnostics}`;
     if (toolsNode) {
       toolsNode.textContent = `${bridgeState.tools}\n\nRecent:\n${bridgeState.logs.join("\n") || "No events yet."}`;
@@ -1526,6 +1636,11 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
 
   function setBridgeArtifactDetail(detail) {
     bridgeState.artifacts = detail;
+    renderPanel();
+  }
+
+  function setBridgeSettingsDetail(detail) {
+    bridgeState.settings = detail;
     renderPanel();
   }
 
@@ -1997,6 +2112,30 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return composer?.getBoundingClientRect() ?? null;
   }
 
+  function composerShellRect() {
+    const composer = findComposer();
+    if (!composer) return null;
+    let best = composer;
+    let current = composer;
+    let depth = 0;
+    while (current?.parentElement && depth < 10) {
+      current = current.parentElement;
+      depth += 1;
+      if (isBridgeElement(current)) break;
+      if (!visibleElement(current)) continue;
+      const rect = current.getBoundingClientRect();
+      const lower = rect.bottom > window.innerHeight * 0.58 && rect.top > window.innerHeight * 0.22;
+      const plausibleWidth = rect.width >= Math.min(320, window.innerWidth * 0.40) && rect.width <= window.innerWidth * 0.92;
+      const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(430, window.innerHeight * 0.50);
+      if (!lower || !plausibleWidth || !plausibleHeight) continue;
+      const buttons = current.querySelectorAll("button, [role='button'], input[type='file']").length;
+      if (buttons >= 2 || /form/i.test(current.tagName) || String(current.getAttribute("data-testid") ?? "").toLowerCase().includes("composer")) {
+        best = current;
+      }
+    }
+    return best?.getBoundingClientRect() ?? null;
+  }
+
   function rectPayload(rect) {
     return {
       x: Math.round(rect.left),
@@ -2015,15 +2154,107 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
   }
 
+  function cssEscape(value) {
+    const css = window.CSS;
+    if (typeof css?.escape === "function") return css.escape(value);
+    return value.replace(/["\\#.;:[\]()>+~*=\s]/g, "\\$&");
+  }
+
+  function cssString(value) {
+    return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+  }
+
+  function storedAttachSelector() {
+    try {
+      return String(window.localStorage?.getItem(ATTACH_TARGET_SELECTOR_KEY) ?? "").trim();
+    } catch (_error) {
+      return "";
+    }
+  }
+
+  function elementWithinComposerBand(node, rect) {
+    const bounds = node.getBoundingClientRect();
+    if (!rect) return bounds.top > window.innerHeight * 0.45;
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+    const xMatch = centerX >= rect.left - 110 && centerX <= rect.right + 110;
+    const yMatch = centerY >= rect.top - 260 && centerY <= rect.bottom + 160;
+    return xMatch && yMatch;
+  }
+
+  function selectorForElement(node) {
+    const id = node.id?.trim();
+    if (id) return `#${cssEscape(id)}`;
+    const tag = node.tagName.toLowerCase();
+    const dataTestId = node.getAttribute("data-testid")?.trim();
+    if (dataTestId) return `${tag}[data-testid="${cssString(dataTestId)}"]`;
+    const aria = node.getAttribute("aria-label")?.trim();
+    if (aria) return `${tag}[aria-label="${cssString(aria)}"]`;
+    const title = node.getAttribute("title")?.trim();
+    if (title) return `${tag}[title="${cssString(title)}"]`;
+    const parts = [];
+    let current = node;
+    let depth = 0;
+    while (current && current.nodeType === Node.ELEMENT_NODE && depth < 5 && !isBridgeElement(current)) {
+      const parent = current.parentElement;
+      let part = current.tagName.toLowerCase();
+      if (parent) {
+        const siblings = Array.from(parent.children).filter((sibling) => sibling.tagName === current?.tagName);
+        if (siblings.length > 1) part += `:nth-of-type(${siblings.indexOf(current) + 1})`;
+      }
+      parts.unshift(part);
+      current = parent;
+      depth += 1;
+    }
+    return parts.join(" > ");
+  }
+
+  function attachCandidateFromEventTarget(target) {
+    if (!(target instanceof Element)) return null;
+    if (isBridgeElement(target)) return null;
+    const candidate = target.closest("button, [role='button'], input[type='file'], label, [aria-label], [data-testid]");
+    if (candidate && !isBridgeElement(candidate)) return candidate;
+    return target;
+  }
+
+  function calibratedAttachControlElement(rect) {
+    const selector = storedAttachSelector();
+    if (!selector) return null;
+    let node = null;
+    try {
+      node = document.querySelector(selector);
+    } catch (_error) {
+      setBridgeArtifactDetail(`calibrated_attach_selector_invalid\nselector: ${selector}`);
+      return null;
+    }
+    if (!node || !visibleElement(node)) {
+      setBridgeArtifactDetail(`calibrated_attach_target_missing_or_hidden\nselector: ${selector}`);
+      return null;
+    }
+    if (!elementWithinComposerBand(node, rect)) {
+      const bounds = node.getBoundingClientRect();
+      setBridgeArtifactDetail([
+        "calibrated_attach_target_not_near_composer",
+        `selector: ${selector}`,
+        `target_rect: ${JSON.stringify(rectPayload(bounds))}`,
+        `composer_rect: ${rect ? JSON.stringify(rectPayload(rect)) : "missing"}`,
+        "Use Settings -> Pick Attach Target to re-calibrate.",
+      ].join("\n"));
+      return null;
+    }
+    return node;
+  }
+
   function findAttachControlElement() {
-    const rect = composerRect();
+    const rect = composerShellRect() ?? composerRect();
+    const calibrated = calibratedAttachControlElement(rect);
+    if (calibrated) return calibrated;
+    if (storedAttachSelector()) return null;
     const nodes = Array.from(document.querySelectorAll("button, [role='button'], input[type='file']"));
     return nodes.find((node) => {
       if (!visibleElement(node)) return false;
       const label = controlLabel(node).toLowerCase();
-      const bounds = node.getBoundingClientRect();
-      const nearComposer = rect ? Math.abs(bounds.top - rect.top) < 220 || Math.abs(bounds.bottom - rect.bottom) < 220 : bounds.top > window.innerHeight * 0.45;
-      return nearComposer && /attach|upload|file|plus|add/.test(label);
+      return elementWithinComposerBand(node, rect) && /attach|upload|file|plus|add/.test(label);
     }) ?? null;
   }
 
@@ -2052,7 +2283,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
 
   function localAttachPayload() {
     const targetRect = findAttachControlRect();
-    const composer = composerRect();
+    const composer = composerShellRect() ?? composerRect();
     if (!targetRect || !composer) return null;
     return {
       target_kind: "attach_button",
@@ -2069,12 +2300,64 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     };
   }
 
+  function beginAttachTargetPicker() {
+    setBridgeStatus("Pick attach target", "Click ChatGPT's real attach/add-file button. The next page click will be captured.", "working");
+    setBridgeSettingsDetail("Attach target picker armed. Click the ChatGPT attach/add-file button, not the ION panel.");
+    const handler = (event) => {
+      const candidate = attachCandidateFromEventTarget(event.target);
+      if (!candidate) {
+        setBridgeSettingsDetail("Attach target pick ignored because the click was inside ION UI or not an element.");
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      document.removeEventListener("click", handler, true);
+      const selector = selectorForElement(candidate);
+      try {
+        window.localStorage?.setItem(ATTACH_TARGET_SELECTOR_KEY, selector);
+      } catch (_error) {
+        setBridgeSettingsDetail("Attach target could not be saved to localStorage.");
+        setBridgeStatus("Attach target not saved", "localStorage write failed.", "error");
+        return;
+      }
+      const detail = [
+        "attach_target_calibrated",
+        `selector: ${selector}`,
+        `label: ${controlLabel(candidate) || candidate.tagName.toLowerCase()}`,
+        `rect: ${JSON.stringify(rectPayload(candidate.getBoundingClientRect()))}`,
+      ].join("\n");
+      setBridgeSettingsDetail(detail);
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Attach target calibrated", "Preview Target should now ring the selected button.", "success");
+      previewAttachTarget();
+    };
+    document.addEventListener("click", handler, true);
+    window.setTimeout(() => {
+      document.removeEventListener("click", handler, true);
+    }, 12000);
+  }
+
+  function clearAttachTargetCalibration() {
+    try {
+      window.localStorage?.removeItem(ATTACH_TARGET_SELECTOR_KEY);
+    } catch (_error) {
+    }
+    document.getElementById(ATTACH_PREVIEW_ID)?.remove();
+    const detail = "attach_target_calibration_cleared\nPreview Target will use the guarded automatic heuristic again.";
+    setBridgeSettingsDetail(detail);
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Attach target cleared", "Pick Attach Target can be used to bind it again.", "idle");
+  }
+
   function previewAttachTarget() {
     ensureDomRegistryStyle();
     const target = findAttachControlElement();
     document.getElementById(ATTACH_PREVIEW_ID)?.remove();
     if (!target) {
-      const detail = "attach_control_not_detected\nNo target ring was drawn.";
+      const detail = storedAttachSelector()
+        ? "attach_control_not_detected\nSaved attach target is missing, hidden, or no longer near the composer. Use Settings -> Pick Attach Target again or Clear Attach Target."
+        : "attach_control_not_detected\nNo target ring was drawn. Use Settings -> Pick Attach Target if the heuristic cannot find the attach/add-file button.";
       setBridgeArtifactDetail(detail);
       setBridgeStatus("Attach target missing", detail, "error");
       return;
@@ -2466,7 +2749,9 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     submitActionText,
     refreshBridgePosition,
     previewAttachTarget,
+    localAttachPayload,
     requestArtifactLocalAttachDryRun,
+    beginAttachTargetPicker,
     rescan: () => {
       seen.clear();
       return scan("manual");
@@ -2544,6 +2829,12 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   });
   window.addEventListener("ion-chatops-artifact-local-attach", () => {
     requestArtifactLocalAttachLatest();
+  });
+  window.addEventListener("ion-chatops-settings-pick-attach", () => {
+    beginAttachTargetPicker();
+  });
+  window.addEventListener("ion-chatops-settings-clear-attach", () => {
+    clearAttachTargetCalibration();
   });
   if (safeModeDisabled()) {
     console.info(`ION ChatOps Bridge disabled by ${SAFE_MODE_KEY}. Remove the flag and reload to re-enable.`);
