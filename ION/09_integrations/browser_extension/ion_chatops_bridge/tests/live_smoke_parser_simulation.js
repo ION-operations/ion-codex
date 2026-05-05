@@ -405,6 +405,22 @@ if (!attachPayload || !String(attachPayload.target_rect.label || "").includes("A
   throw new Error("calibrated attach target did not resolve");
 }
 localStore.delete("ION_CHATOPS_ATTACH_TARGET_SELECTOR");
+const dropZone = new Element("main");
+dropZone.setAttribute("data-testid", "chatgpt-drop-zone");
+dropZone.rect = { top: 120, left: 160, right: 980, bottom: 920, width: 820, height: 800 };
+localStore.set("ION_CHATOPS_DROP_TARGET_SELECTOR", "main[data-testid=\"chatgpt-drop-zone\"]");
+context.document.querySelector = (selector) => {
+  if (selector === "#prompt-textarea") return composer;
+  if (selector === "main[data-testid=\"chatgpt-drop-zone\"]") return dropZone;
+  return null;
+};
+const calibratedDropTarget = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.findDropTarget();
+if (calibratedDropTarget !== dropZone) throw new Error("calibrated drop target did not resolve");
+dropZone.rect = { top: -10, left: -10, right: -4, bottom: -4, width: 6, height: 6 };
+if (context.window.__ION_CHATOPS_BRIDGE_DEBUG__.findDropTarget()) {
+  throw new Error("hidden calibrated drop target should fail closed");
+}
+localStore.delete("ION_CHATOPS_DROP_TARGET_SELECTOR");
 
 byId.clear();
 let disabledSent = null;

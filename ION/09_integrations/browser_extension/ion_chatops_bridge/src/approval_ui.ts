@@ -15,6 +15,7 @@ const PANEL_MIN_WIDTH = 320;
 const PANEL_TINY_WIDTH = 230;
 const COMPOSER_PANEL_MAX_WIDTH = 920;
 const ATTACH_TARGET_SELECTOR_KEY = "ION_CHATOPS_ATTACH_TARGET_SELECTOR";
+const DROP_TARGET_SELECTOR_KEY = "ION_CHATOPS_DROP_TARGET_SELECTOR";
 const TAB_LIFT_KEY = "ION_CHATOPS_TAB_LIFT_PX";
 const DRAWER_MAX_KEY = "ION_CHATOPS_DRAWER_MAX_PX";
 
@@ -452,15 +453,26 @@ function attachTargetSelector(): string {
   }
 }
 
+function dropTargetSelector(): string {
+  try {
+    return String(window.localStorage?.getItem(DROP_TARGET_SELECTOR_KEY) ?? "").trim();
+  } catch (_error) {
+    return "";
+  }
+}
+
 function settingsSummary(): string {
   const selector = attachTargetSelector();
+  const dropSelector = dropTargetSelector();
   return [
     `attach_target: ${selector || "not calibrated"}`,
+    `drop_zone: ${dropSelector || "default page/composer zone"}`,
     `tab_lift_px: ${readNumberSetting(TAB_LIFT_KEY, 2, -24, 48)}`,
     `drawer_max_px: ${readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680)}`,
     "",
+    "Use Preview Drop Zone before Drop Latest. Pick Drop Zone if the blue ring is not where ChatGPT accepts file drops.",
     "Use Pick Attach Target, then click ChatGPT's real attach/add-file button once.",
-    "Local Attach should only be used after Preview Target rings the correct button and Dry Run passes.",
+    "Local Attach is a fallback and should only be used after Preview Target rings the correct button and Dry Run passes.",
   ].join("\n");
 }
 
@@ -796,6 +808,7 @@ function ensurePanel(): HTMLElement {
           <div class="ion-detail" data-field="artifacts"></div>
           <div class="ion-toolbar-actions">
             <button type="button" class="ion-tool" data-tool="artifact-attachables">Attachables</button>
+            <button type="button" class="ion-tool" data-tool="artifact-preview-drop">Preview Drop Zone</button>
             <button type="button" class="ion-tool" data-tool="artifact-preview-attach">Preview Target</button>
             <button type="button" class="ion-tool" data-tool="artifact-dry-run-attach">Dry Run Attach</button>
             <button type="button" class="ion-tool" data-tool="artifact-drop-latest">Drop Latest</button>
@@ -807,6 +820,8 @@ function ensurePanel(): HTMLElement {
           <div class="ion-toolbar-actions">
             <button type="button" class="ion-tool" data-tool="settings-pick-attach">Pick Attach Target</button>
             <button type="button" class="ion-tool" data-tool="settings-clear-attach">Clear Attach Target</button>
+            <button type="button" class="ion-tool" data-tool="settings-pick-drop">Pick Drop Zone</button>
+            <button type="button" class="ion-tool" data-tool="settings-clear-drop">Clear Drop Zone</button>
             <button type="button" class="ion-tool" data-tool="settings-tabs-up">Tabs Up</button>
             <button type="button" class="ion-tool" data-tool="settings-tabs-down">Tabs Down</button>
             <button type="button" class="ion-tool" data-tool="settings-drawer-taller">Drawer Taller</button>
@@ -914,6 +929,9 @@ function ensurePanel(): HTMLElement {
   panel.querySelector('[data-tool="artifact-preview-attach"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-artifact-preview-attach"));
   });
+  panel.querySelector('[data-tool="artifact-preview-drop"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-preview-drop"));
+  });
   panel.querySelector('[data-tool="artifact-dry-run-attach"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-artifact-dry-run-attach"));
   });
@@ -925,6 +943,12 @@ function ensurePanel(): HTMLElement {
   });
   panel.querySelector('[data-tool="settings-clear-attach"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-attach"));
+  });
+  panel.querySelector('[data-tool="settings-pick-drop"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-pick-drop"));
+  });
+  panel.querySelector('[data-tool="settings-clear-drop"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-drop"));
   });
   panel.querySelector('[data-tool="settings-tabs-up"]')?.addEventListener("click", () => {
     adjustTabLift(4);

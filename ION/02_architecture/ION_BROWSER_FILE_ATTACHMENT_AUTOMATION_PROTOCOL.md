@@ -36,7 +36,7 @@ Implemented browser-only lane:
 
 ```text
 Artifacts tab
--> Attachables
+-> Attachables / Preview Drop Zone / Drop Latest
 -> Drop Latest
 -> Braden approval
 -> daemon upload ticket
@@ -48,6 +48,10 @@ This lane is intentionally allowed to fail closed. Browsers and ChatGPT may
 reject synthetic drag/drop events. When that happens, the extension must show the
 file name, size, sha256, and receipt path so Braden can use the manual attach
 picker or a stronger future local macro lane.
+
+ChatGPT accepts ordinary user drag/drop over broad page regions, so the primary
+browser target is a page/composer drop zone rather than the attach/add-file
+button. The attach button remains useful for a fallback OS file-picker lane.
 
 Implemented local-operator lane:
 
@@ -182,6 +186,30 @@ ION_CHATOPS_DRAWER_MAX_PX
 
 These settings may adjust visual placement only. They do not expand file,
 daemon, Codex, send-click, or git authority.
+
+## Calibrated Drop Zone
+
+The browser extension should support a separate drop-zone calibration path for
+direct drag/drop uploads:
+
+```text
+Settings -> Pick Drop Zone
+-> next non-ION page click is captured
+-> selector, label, and rect are shown
+-> Preview Drop Zone must ring that selected page/composer drop area
+-> Drop Latest dispatches drag/drop events to that selected area
+```
+
+The selector is browser-local state:
+
+```text
+ION_CHATOPS_DROP_TARGET_SELECTOR
+```
+
+If the saved selector is hidden or stale, `Drop Latest` must fail visibly and ask
+for re-calibration. It must not silently switch to a risky click target. This is
+distinct from `ION_CHATOPS_ATTACH_TARGET_SELECTOR`, which is only for the
+fallback file-picker/local-operator lane.
 
 ## Non-Authority
 

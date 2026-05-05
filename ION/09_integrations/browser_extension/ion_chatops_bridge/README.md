@@ -28,6 +28,9 @@ MVP behavior:
   Codex review queueing through the sandbox return intake owner;
 - list attachable local package/inbox artifacts and request approval-gated
   browser drop tickets from the local daemon;
+- preview and calibrate the ChatGPT page/composer drop zone used by `Drop
+  Latest`; this is now the primary browser upload path because ChatGPT accepts
+  ordinary drag/drop over broad page regions;
 - calibrate the ChatGPT attach/add-file target by letting Braden pick the
   exact page element once, then using that saved selector before heuristics;
 - tune composer tab lift and drawer height from the Settings tab without a code
@@ -157,13 +160,16 @@ The Artifacts tab includes the first guarded file lane:
 
 - `Attachables`: lists files the daemon considers safe to present for browser
   attachment from bounded package/inbox roots.
+- `Preview Drop Zone`: draws a blue ring around the ChatGPT page/composer area
+  that `Drop Latest` will dispatch drag/drop events to.
 - `Preview Target`: draws a temporary green ring around the exact ChatGPT
   attach/add-file control the extension currently sees.
 - `Dry Run Attach`: prepares the selected artifact and asks the daemon to
   validate target geometry/backend state without moving the pointer.
 - `Drop Latest`: asks Braden for approval, asks the daemon for a one-use-ish
   localhost download ticket, fetches the file as a browser `File`, and attempts
-  visible `dragenter`/`dragover`/`drop` events against the ChatGPT composer.
+  visible `dragenter`/`dragover`/`drop` events against the calibrated
+  page/composer drop zone.
 - `Local Attach`: asks Braden for approval, prepares a daemon upload ticket, and
   asks the local operator helper to open the ChatGPT attach control and select
   the exact approved artifact through the OS file picker. This path is
@@ -202,6 +208,26 @@ These write only local browser settings:
 ION_CHATOPS_TAB_LIFT_PX
 ION_CHATOPS_DRAWER_MAX_PX
 ```
+
+Because ChatGPT accepts normal drag/drop over broad page regions, the preferred
+browser lane is:
+
+```text
+Settings -> Pick Drop Zone
+-> click the page/composer area where manual file drops work
+-> Artifacts -> Preview Drop Zone
+-> Artifacts -> Drop Latest
+```
+
+The drop-zone selector is stored in page `localStorage`:
+
+```text
+ION_CHATOPS_DROP_TARGET_SELECTOR
+```
+
+If the saved drop zone is hidden or stale, `Drop Latest` fails visibly and asks
+for re-calibration. `Local Attach` remains a fallback for OS file-picker
+assistance; it is not the primary ChatGPT upload lane.
 
 `Attachables` intentionally shows a compact selected-artifact summary rather
 than dumping the full daemon JSON. The selected artifact is the same latest

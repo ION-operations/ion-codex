@@ -22,8 +22,10 @@ const PANEL_ID = "ion-chatops-bridge-panel";
 const MODAL_ID = "ion-chatops-bridge-approval";
 const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
 const ATTACH_PREVIEW_ID = "ion-chatops-attach-target-preview";
+const DROP_PREVIEW_ID = "ion-chatops-drop-target-preview";
 const SAFE_MODE_KEY = "ION_CHATOPS_SAFE_MODE";
 const ATTACH_TARGET_SELECTOR_KEY = "ION_CHATOPS_ATTACH_TARGET_SELECTOR";
+const DROP_TARGET_SELECTOR_KEY = "ION_CHATOPS_DROP_TARGET_SELECTOR";
 const SCAN_DEBOUNCE_MS = 450;
 const ION_ACTION_LINE = /(^|\n)\s*ion_action:\s*(\n|$)/;
 const AUTO_SCAN_SELECTORS = [
@@ -222,7 +224,8 @@ function ensureDomRegistryStyle(): void {
     [data-ion-control-role="uploaded_attachment"] {
       box-shadow: 0 0 0 1px rgba(129,140,248,0.40), 0 0 0 4px rgba(129,140,248,0.07) !important;
     }
-    #${ATTACH_PREVIEW_ID} {
+    #${ATTACH_PREVIEW_ID},
+    #${DROP_PREVIEW_ID} {
       position: fixed;
       z-index: 2147483645;
       pointer-events: none;
@@ -230,6 +233,11 @@ function ensureDomRegistryStyle(): void {
       border-radius: 12px;
       box-shadow: 0 0 0 5px rgba(52,211,153,0.18), 0 0 28px rgba(52,211,153,0.55);
       background: rgba(52,211,153,0.08);
+    }
+    #${DROP_PREVIEW_ID} {
+      border-color: rgba(96,165,250,0.98);
+      box-shadow: 0 0 0 5px rgba(96,165,250,0.16), 0 0 34px rgba(96,165,250,0.50);
+      background: rgba(96,165,250,0.08);
     }
   `;
   document.documentElement.appendChild(style);
@@ -799,15 +807,66 @@ function requestArtifactAttachables(): void {
   });
 }
 
-function findDropTarget(): HTMLElement | null {
+function visibleDropRect(element: HTMLElement): DOMRect | null {
+  if (!visibleElement(element)) return null;
+  const rect = element.getBoundingClientRect();
+  if (element === document.body || rect.height > window.innerHeight * 1.2) {
+    return {
+      left: 8,
+      top: 56,
+      right: window.innerWidth - 8,
+      bottom: window.innerHeight - 96,
+      width: window.innerWidth - 16,
+      height: Math.max(160, window.innerHeight - 152),
+      x: 8,
+      y: 56,
+      toJSON: () => ({}),
+    } as DOMRect;
+  }
+  return rect;
+}
+
+function storedDropSelector(): string {
+  try {
+    return String(window.localStorage?.getItem(DROP_TARGET_SELECTOR_KEY) ?? "").trim();
+  } catch (_error) {
+    return "";
+  }
+}
+
+function calibratedDropTargetElement(): HTMLElement | null {
+  const selector = storedDropSelector();
+  if (!selector) return null;
+  let node: HTMLElement | null = null;
+  try {
+    node = document.querySelector<HTMLElement>(selector);
+  } catch (_error) {
+    setBridgeArtifactDetail(`calibrated_drop_selector_invalid\nselector: ${selector}`);
+    return null;
+  }
+  if (!node || !visibleDropRect(node)) {
+    setBridgeArtifactDetail(`calibrated_drop_target_missing_or_hidden\nselector: ${selector}`);
+    return null;
+  }
+  return node;
+}
+
+function defaultDropTargetElement(): HTMLElement | null {
   const composer = findComposer();
-  if (!composer) return null;
-  return (
-    composer.closest("form") ??
-    composer.closest("[data-testid*='composer']") ??
-    composer.closest("main") ??
-    composer
-  ) as HTMLElement | null;
+  const main = document.querySelector<HTMLElement>("main");
+  const composerShell =
+    composer?.closest<HTMLElement>("form") ??
+    composer?.closest<HTMLElement>("[data-testid*='composer']") ??
+    null;
+  const candidates = [main, composerShell, document.body, composer].filter(Boolean) as HTMLElement[];
+  return candidates.find((candidate) => visibleDropRect(candidate)) ?? null;
+}
+
+function findDropTarget(): HTMLElement | null {
+  const calibrated = calibratedDropTargetElement();
+  if (calibrated) return calibrated;
+  if (storedDropSelector()) return null;
+  return defaultDropTargetElement();
 }
 
 function composerRect(): DOMRect | null {
@@ -923,6 +982,15 @@ function attachCandidateFromEventTarget(target: EventTarget | null): HTMLElement
   const candidate = target.closest<HTMLElement>("button, [role='button'], input[type='file'], label, [aria-label], [data-testid]");
   if (candidate && !isBridgeElement(candidate)) return candidate;
   return target as HTMLElement;
+}
+
+function dropCandidateFromEventTarget(target: EventTarget | null): HTMLElement | null {
+  if (!(target instanceof Element)) return null;
+  if (isBridgeElement(target)) return null;
+  const candidate =
+    target.closest<HTMLElement>("main, form, [data-testid*='composer' i], [data-message-author-role], article, section, div") ??
+    (target instanceof HTMLElement ? target : null);
+  return candidate && !isBridgeElement(candidate) ? candidate : null;
 }
 
 function calibratedAttachControlElement(rect: DOMRect | null): HTMLElement | null {
@@ -1059,6 +1127,90 @@ function clearAttachTargetCalibration(): void {
   setBridgeStatus("Attach target cleared", "Pick Attach Target can be used to bind it again.", "idle");
 }
 
+function beginDropTargetPicker(): void {
+  setBridgeStatus("Pick drop zone", "Click the ChatGPT area where a normal file drag/drop is accepted.", "working");
+  setBridgeSettingsDetail("Drop-zone picker armed. Click the ChatGPT page/composer area you would normally drop a file onto.");
+  const handler = (event: MouseEvent) => {
+    const candidate = dropCandidateFromEventTarget(event.target);
+    if (!candidate) {
+      setBridgeSettingsDetail("Drop-zone pick ignored because the click was inside ION UI or not a page element.");
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    document.removeEventListener("click", handler, true);
+    const selector = selectorForElement(candidate);
+    try {
+      window.localStorage?.setItem(DROP_TARGET_SELECTOR_KEY, selector);
+    } catch (_error) {
+      setBridgeSettingsDetail("Drop zone could not be saved to localStorage.");
+      setBridgeStatus("Drop zone not saved", "localStorage write failed.", "error");
+      return;
+    }
+    const rect = visibleDropRect(candidate) ?? candidate.getBoundingClientRect();
+    const detail = [
+      "drop_zone_calibrated",
+      `selector: ${selector}`,
+      `label: ${controlLabel(candidate) || candidate.tagName.toLowerCase()}`,
+      `rect: ${JSON.stringify(rectPayload(rect))}`,
+    ].join("\n");
+    setBridgeSettingsDetail(detail);
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Drop zone calibrated", "Preview Drop Zone should now ring the selected drop area.", "success");
+    previewDropTarget();
+  };
+  document.addEventListener("click", handler, true);
+  window.setTimeout(() => {
+    document.removeEventListener("click", handler, true);
+  }, 12000);
+}
+
+function clearDropTargetCalibration(): void {
+  try {
+    window.localStorage?.removeItem(DROP_TARGET_SELECTOR_KEY);
+  } catch (_error) {
+    // Ignore storage failures; default drop targeting remains available.
+  }
+  document.getElementById(DROP_PREVIEW_ID)?.remove();
+  const detail = "drop_zone_calibration_cleared\nDrop Latest will use the guarded default page/composer drop zone again.";
+  setBridgeSettingsDetail(detail);
+  setBridgeArtifactDetail(detail);
+  setBridgeStatus("Drop zone cleared", "Pick Drop Zone can be used to bind it again.", "idle");
+}
+
+function previewDropTarget(): void {
+  ensureDomRegistryStyle();
+  const target = findDropTarget();
+  document.getElementById(DROP_PREVIEW_ID)?.remove();
+  if (!target) {
+    const detail = storedDropSelector()
+      ? "drop_target_not_detected\nSaved drop zone is missing or hidden. Use Settings -> Pick Drop Zone again or Clear Drop Zone."
+      : "drop_target_not_detected\nNo page/composer drop zone was found.";
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Drop zone missing", detail, "error");
+    return;
+  }
+  const rect = visibleDropRect(target) ?? target.getBoundingClientRect();
+  const overlay = document.createElement("div");
+  overlay.id = DROP_PREVIEW_ID;
+  overlay.style.left = `${Math.round(rect.left)}px`;
+  overlay.style.top = `${Math.round(rect.top)}px`;
+  overlay.style.width = `${Math.round(rect.width)}px`;
+  overlay.style.height = `${Math.round(rect.height)}px`;
+  document.documentElement.appendChild(overlay);
+  window.setTimeout(() => overlay.remove(), 4000);
+  const detail = [
+    "preview_drop_zone",
+    `selector: ${storedDropSelector() || "default_page_or_composer_drop_zone"}`,
+    `target: ${target.tagName.toLowerCase()}`,
+    `rect: ${JSON.stringify(rectPayload(rect))}`,
+    "Drop Latest dispatches visible drag/drop events here. Browser/ChatGPT may still reject synthetic drops.",
+  ].join("\n");
+  setBridgeArtifactDetail(detail);
+  setBridgeStatus("Drop zone previewed", "Blue ring marks the current Drop Latest target.", "success");
+}
+
 function previewAttachTarget(): void {
   ensureDomRegistryStyle();
   const target = findAttachControlElement();
@@ -1132,6 +1284,7 @@ async function attemptPreparedArtifactDrop(result: any): Promise<void> {
     return;
   }
   try {
+    previewDropTarget();
     const response = await fetch(downloadUrl);
     if (!response.ok) throw new Error(`download_failed_${response.status}`);
     const blob = await response.blob();
@@ -1458,6 +1611,8 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   submitActionText,
   refreshBridgePosition,
   previewAttachTarget,
+  previewDropTarget,
+  findDropTarget,
   localAttachPayload,
   requestArtifactLocalAttachDryRun,
   rescan: () => {
@@ -1532,6 +1687,9 @@ window.addEventListener("ion-chatops-artifact-drop-latest", () => {
 window.addEventListener("ion-chatops-artifact-preview-attach", () => {
   previewAttachTarget();
 });
+window.addEventListener("ion-chatops-artifact-preview-drop", () => {
+  previewDropTarget();
+});
 window.addEventListener("ion-chatops-artifact-dry-run-attach", () => {
   requestArtifactLocalAttachDryRun();
 });
@@ -1543,6 +1701,12 @@ window.addEventListener("ion-chatops-settings-pick-attach", () => {
 });
 window.addEventListener("ion-chatops-settings-clear-attach", () => {
   clearAttachTargetCalibration();
+});
+window.addEventListener("ion-chatops-settings-pick-drop", () => {
+  beginDropTargetPicker();
+});
+window.addEventListener("ion-chatops-settings-clear-drop", () => {
+  clearDropTargetCalibration();
 });
 
 if (safeModeDisabled()) {
