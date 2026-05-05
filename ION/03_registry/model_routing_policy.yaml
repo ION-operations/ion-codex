@@ -1,0 +1,51 @@
+schema_id: ion.model_routing_policy.v1
+version: V57_MODEL_ROUTER_AND_COST_QUALITY_ROUTING
+authority_scope: A3_STEWARD_MODEL_ROUTING_CANDIDATE
+production_authority: false
+live_routing_authorized: false
+routing_modes:
+  cheapest_good_enough:
+    purpose: low-risk classification, extraction, indexing, draft summaries
+    filters_before_scoring:
+    - capability_threshold
+    - privacy_requirement
+    - hard_budget
+    escalation_rule: escalate only if confidence fails or contradiction appears
+  highest_quality:
+    purpose: high-stakes architecture, canonical claim settlement, difficult reasoning
+    premium_reason_required: true
+    receipt_required: true
+  best_margin:
+    purpose: sustainable workflow execution
+    prefer_batch_when_latency_allows: true
+  fastest_safe:
+    purpose: live UI support and provisional low-risk help
+    requires_minimum_safety_and_quality: true
+  consensus_required:
+    purpose: high-risk or canonical claims
+    steward_settlement_required: true
+  batch_preferred:
+    purpose: large non-urgent work
+    route_to_batch_or_background: true
+  balanced:
+    purpose: general non-production route selection across quality, speed, cost, privacy,
+      and context fit
+    filters_before_scoring:
+    - capability_threshold
+    - privacy_requirement
+    - context_fit
+    - hard_budget
+    score_weights:
+      quality: 0.35
+      cost: 0.2
+      latency: 0.15
+      context: 0.1
+      availability: 0.1
+      privacy: 0.1
+filter_rules:
+  reject_below_capability_threshold: true
+  reject_privacy_mismatch: true
+  block_hard_budget_exceeded: true
+  queue_or_reroute_retry_after: true
+  never_hide_downgrade: true
+routing_decision_authority: dry_run_route_decision_only

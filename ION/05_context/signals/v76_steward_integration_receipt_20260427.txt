@@ -1,0 +1,11 @@
+type: steward_integration_receipt
+cycle_id: V76-20260427-DEMO
+date: 2026-04-27
+
+steward_integration_decision: ACCEPT_DEMO_PROPOSALS_WITNESS_ONLY
+notes:
+  - Proposal v76_role_carrier_return_proposal_20260427.md accepted as witness-only demo integration.
+  - No live-executed posture claimed. Not a production-ready integration.
+
+relay_return_summary_required: true
+next_visible_update_for_braden: See v76_relay_visible_workflow_report_20260427.md

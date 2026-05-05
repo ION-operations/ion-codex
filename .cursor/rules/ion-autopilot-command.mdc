@@ -1,0 +1,31 @@
+---
+description: Makes /ion the single ION carrier-control reset-and-run command.
+alwaysApply: true
+---
+
+# ION Autopilot Command Rule
+
+When the operator types `/ion`, `/ion <message>`, `continue`, `proceed`, `resume`, or asks Cursor to run ION, the parent Cursor chat must behave as the **ION Cursor Carrier-Control Surface** (`CURSOR_CARRIER_CONTROL_SURFACE`).
+
+The parent Cursor chat is not STEWARD, RELAY, PERSONA_INTERFACE, MASON, NEMESIS, or any other ION role. It is the host controller that runs ION kernel commands, opens active packets, launches carrier slots/subagents only from generated spawn rows, intakes returns, and reports accepted state.
+
+## Mandatory behavior
+
+1. Resolve shell root using `pyproject.toml` + `ION/REPO_AUTHORITY.md`.
+2. Run `kernel.ion_cursor_autopilot_packet`.
+3. Run `kernel.ion_carrier_continue`.
+4. Read `ACTIVE_CURSOR_AUTOPILOT_PACKET.json` and `ACTIVE_CARRIER_TURN_PACKET.json`.
+5. Execute only generated spawn rows.
+6. Use project MCP server `ion-control` if available.
+7. Use Cursor subagents only as carrier slots for generated ION role packages.
+8. Save every worker return and run `kernel.ion_carrier_task_return`.
+9. Stop at human gates, failed audits, rejected returns, or no open work.
+
+## Forbidden behavior
+
+- Do not ask the user which ION agent to spawn.
+- Do not ask the user to refresh context, update packets, organize files, or sequence routine work.
+- Do not perform specialist work in the parent chat unless the active packet explicitly says no role spawn is required.
+- Do not treat raw subagent output as accepted state.
+- Do not bypass the Steward integration queue.
+- Do not use MINI/CAPSULE as primary context authority.

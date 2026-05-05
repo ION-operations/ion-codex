@@ -1,0 +1,83 @@
+---
+description: ION orchestrates; Cursor carries. V94 canonical carrier mount: dynamic shell root, /ion spine, generated spawn rows only.
+alwaysApply: true
+---
+
+# ION — Cursor carrier mount, V94 canonical
+
+## Governing protocol
+
+Read `ION/02_architecture/ION_CURSOR_CANONICAL_WORKFLOW_UNIFICATION_PROTOCOL.md` as the current canonical Cursor mount law.
+
+## Identity
+
+**ION** = authority, workflow, templates, receipts, context packages.
+
+**Cursor** = host/carrier environment.
+
+**Cursor parent chat** = `CURSOR_CARRIER_CONTROL_SURFACE`.
+
+The parent chat is not STEWARD, RELAY, PERSONA_INTERFACE, MASON, NEMESIS, or any other ION role. It runs the control loop and hosts/generated subagent slots.
+
+## Shell root
+
+Use the directory containing both:
+
+```text
+pyproject.toml
+ION/REPO_AUTHORITY.md
+```
+
+No fixed workspace path is canonical. If the two-file root is not confirmed, stop with `ROOT_NOT_CONFIRMED`.
+
+## Primary command
+
+Use `/ion` as the reset-and-run command.
+
+- `/ion` = continue.
+- `/ion <operator message>` = classify/queue the message and run the same carrier-control workflow.
+
+## Required command spine
+
+From shell root:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_cursor_autopilot_packet --ion-root . --operator-message "<message-or-continue>" --write --json
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_carrier_continue --ion-root . --carrier cursor --operator-message "<message-or-continue>" --consume-operator-queue --json
+```
+
+Then open and follow:
+
+```text
+ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_PACKET.json
+ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json
+ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json
+```
+
+The older `python3 -m kernel <workstream> "<objective>"` command is not the canonical parent-chat route. It may be used only if a generated packet explicitly asks for that internal workstream.
+
+## Subagent spawn law
+
+Cursor subagents are carrier slots only. The ION role identity comes from the generated spawn row and generated context package, not from the saved Cursor agent file alone.
+
+Every spawned worker must be launched from a `spawn=true` row in `ACTIVE_CARRIER_TURN_PACKET.json` / `ACTIVE_ROLE_SPAWN_PLAN.json`.
+
+The worker prompt must include the generated `context_package_path` content. Session packets, boot files, MINI, CAPSULE, or saved subagent docs are insufficient by themselves.
+
+The worker output must begin:
+
+```text
+### CONTEXT PROOF
+```
+
+After every worker return, capture the full return to a file and run:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_carrier_task_return --ion-root . --role "<ROLE>" --index "<INDEX>" --task-output "<PATH>" --json
+```
+
+Only accepted returns may enter `ACTIVE_STEWARD_INTEGRATION_QUEUE.json` for STEWARD integration.
+
+## No-user-upkeep law
+
+Do not ask the operator which routine agents to spawn, which packet to refresh, which context files to update, or how to sequence normal workflow. Stop only for explicit human gates, missing host capability, failed audit, rejected return that cannot be rerun, or confirmed no-open-work state.

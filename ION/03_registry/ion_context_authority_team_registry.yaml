@@ -1,0 +1,95 @@
+registry_id: ion.context_authority_team.registry.v1
+status: ACTIVE_OPERATIONAL
+rank: A2_CONTEXT_AUTHORITY
+created: 2026-04-28
+purpose: >-
+  Standing specialist team for ION's own self-context: live definition, run map,
+  context graph packaging, branch/canon authority, and template-governed package
+  evolution.
+primary_protocol: ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md
+primary_templates:
+  - ION/07_templates/context/AGENT_CONTEXT_PACKAGE.md
+  - ION/07_templates/context/ION_CONTEXT_DELTA_RECEIPT.md
+  - ION/07_templates/context/ION_CONTEXT_LOAD_PROOF.md
+supersedes_primary_context_surfaces:
+  - ION/MINI.md
+  - ION/CAPSULE.md
+  - ION/STATUS.md
+  - ION/agents/{role}/MINI.md
+  - ION/agents/{role}/CAPSULE.md
+roles:
+  - role_id: role.ionologist
+    display_name: IONOLOGIST
+    boot: ION/03_registry/boots/IONOLOGIST.boot.md
+    semantic_identity: ION/03_registry/semantic_identities/IONOLOGIST.semantic.yaml
+    primary_question: What is ION, exactly, in the current branch?
+    owns:
+      - live ION definition
+      - reconstructive encyclopedia
+      - semantic drift and stale-name correction
+      - current-vs-historical concept map
+  - role_id: role.context_cartographer
+    display_name: CONTEXT_CARTOGRAPHER
+    boot: ION/03_registry/boots/CONTEXT_CARTOGRAPHER.boot.md
+    semantic_identity: ION/03_registry/semantic_identities/CONTEXT_CARTOGRAPHER.semantic.yaml
+    primary_question: What context does this exact agent need, and what loaded material proves it received it?
+    owns:
+      - High-Detail Agent Context Packages
+      - context-load receipts
+      - context package lineage
+      - context graph package boundaries
+  - role_id: role.runtime_cartographer
+    display_name: RUNTIME_CARTOGRAPHER
+    boot: ION/03_registry/boots/RUNTIME_CARTOGRAPHER.boot.md
+    semantic_identity: ION/03_registry/semantic_identities/RUNTIME_CARTOGRAPHER.semantic.yaml
+    primary_question: How does ION actually run here, on this carrier, with these limits?
+    owns:
+      - shell-root and carrier run map
+      - kernel/scheduler/cycle route proofs
+      - carrier limitations and capability levels
+      - spawn sequence verification
+  - role_id: role.canon_librarian
+    display_name: CANON_LIBRARIAN
+    boot: ION/03_registry/boots/CANON_LIBRARIAN.boot.md
+    semantic_identity: ION/03_registry/semantic_identities/CANON_LIBRARIAN.semantic.yaml
+    primary_question: Which source is live authority, which is donor evidence, and which is stale?
+    owns:
+      - branch lineage
+      - authority classification
+      - donor/current/historical separation
+      - stale surface retirement
+  - role_id: role.template_curator
+    display_name: TEMPLATE_CURATOR
+    boot: ION/03_registry/boots/TEMPLATE_CURATOR.boot.md
+    semantic_identity: ION/03_registry/semantic_identities/TEMPLATE_CURATOR.semantic.yaml
+    primary_question: What template makes this context action lawful, repeatable, and checkable?
+    owns:
+      - ION/07_templates context-package templates
+      - template bindings for context evolution
+      - required receipt shapes
+      - stale template repair
+routing:
+  trigger_topics:
+    - ION definition
+    - ION runtime
+    - agent context package
+    - context graph
+    - mini capsule retirement
+    - carrier mount
+    - cursor carrier
+    - scheduler route
+    - kernel route
+    - branch consolidation
+    - template restoration
+  default_sequence:
+    - role.ionologist
+    - role.canon_librarian
+    - role.template_curator
+    - role.context_cartographer
+    - role.runtime_cartographer
+    - role.steward
+    - role.relay
+acceptance_gate:
+  audit_module: kernel.ion_context_authority_team_audit
+  required_package_phrase: High-Detail Agent Context Package
+  required_return_heading: '### CONTEXT PROOF'

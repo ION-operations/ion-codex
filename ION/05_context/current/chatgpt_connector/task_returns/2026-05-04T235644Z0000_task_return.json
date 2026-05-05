@@ -1,0 +1,54 @@
+{
+  "accepted_for_carrier_intake": true,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [
+      "ION/REPO_AUTHORITY.md",
+      "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T235100Z0000_implement_the_next_read_only_github_data_plane_audit_slice_identified_by_prior_a.json",
+      "ION/02_architecture/ION_GITHUB_DATA_PLANE_PROTOCOL.md",
+      "ION/02_architecture/ION_GITHUB_WORK_DAEMON_PROTOCOL.md",
+      "ION/03_registry/ion_github_data_plane_registry.yaml",
+      "ION/05_context/current/github_data_plane/PRIOR_ART_CONSOLIDATION_2026-05-04.md",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/04_packages/kernel/ion_full_carrier_capability_audit.py",
+      "ION/04_packages/kernel/ion_codex_cli_carrier_audit.py",
+      "/home/sev/ION - Production/AIM-ION/scripts/git/codexgit_status_report.py"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T23:56:44+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "RECORDED_FOR_CARRIER_INTAKE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\nroot_confirmed: /home/sev/ION - Production/ION_CODEX; line evidence pyproject.toml and ION/REPO_AUTHORITY.md existed before mutation.\n- ION/REPO_AUTHORITY.md: line/heading evidence read; sha256/path proof available through local filesystem context.\n- ION/02_architecture/ION_MOUNT_CONTRACT.md: line/heading evidence read; sha256/path proof available through local filesystem context.\n- ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T235100Z0000_implement_the_next_read_only_github_data_plane_audit_slice_identified_by_prior_a.json: line/heading evidence read; sha256/path proof available through local filesystem context.\n- ION/02_architecture/ION_GITHUB_DATA_PLANE_PROTOCOL.md: line/heading evidence read; sha256/path proof available through local filesystem context.\n- ION/02_architecture/ION_GITHUB_WORK_DAEMON_PROTOCOL.md: line/heading evidence read; sha256/path proof available through local filesystem context.\n- ION/03_registry/ion_github_data_plane_registry.yaml: line/heading evidence read; sha256/path proof available through local filesystem context.\n- ION/05_context/current/github_data_plane/PRIOR_ART_CONSOLIDATION_2026-05-04.md: line/heading ",
+  "task_output_sha256": "16f05a9f8a7c0d7f52081ca2b2626954cb0e0e945b5b8f50b3b43940c0f516d0",
+  "template_action_proof_result": {
+    "accepted": true,
+    "action_id": "github_data_plane_read_only_audit_slice_2026_05_04",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.patch_proposal.v1",
+    "touched_paths": [
+      "ION/04_packages/kernel/ion_github_data_plane_audit.py",
+      "ION/tests/test_kernel_ion_github_data_plane_audit.py",
+      "ION/02_architecture/ION_GITHUB_DATA_PLANE_PROTOCOL.md",
+      "ION/02_architecture/ION_GITHUB_WORK_DAEMON_PROTOCOL.md",
+      "ION/03_registry/ion_github_data_plane_registry.yaml",
+      "ION/05_context/current/github_data_plane/PRIOR_ART_CONSOLIDATION_2026-05-04.md"
+    ]
+  },
+  "work_request_id": "codex_req_2026-05-04T235100Z0000_implement_the_next_read_only_github_data_plane_audit_slice_identified_by_prior_a",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T235100Z0000_implement_the_next_read_only_github_data_plane_audit_slice_identified_by_prior_a.json"
+}

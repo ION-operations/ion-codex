@@ -1,0 +1,16 @@
+{
+  "suite_id": "v49-demo-visual-fixture-suite",
+  "suite_target": "local-preview",
+  "fixtures": [
+    {
+      "fixture_id": "panel-overlap-repair",
+      "target": "local-preview",
+      "mode": "PRECAPTURED_BEFORE_AFTER_VERIFICATION",
+      "expected_verdict": "VISUAL_REPAIR_VERIFIED",
+      "actual_verdict": "VISUAL_REPAIR_VERIFIED",
+      "before_refs": ["screenshot://v48-before-panel-overlap"],
+      "after_refs": ["screenshot://v48-after-panel-overlap"],
+      "tags": ["layout", "regression-fixture"]
+    }
+  ]
+}

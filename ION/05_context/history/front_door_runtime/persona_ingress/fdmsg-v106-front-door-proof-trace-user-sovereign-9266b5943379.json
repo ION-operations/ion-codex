@@ -1,0 +1,13 @@
+{
+  "boundary_stage": "USER_TO_PERSONA",
+  "created_at": "2026-05-02T22:52:19+00:00",
+  "message_id": "fdmsg-v106-front-door-proof-trace-user-sovereign-9266b5943379",
+  "persona_role_ref": "role.persona_interface",
+  "raw_user_text": "V106 front-door proof trace: verify operator message through Relay, Steward, Persona, and receipts.",
+  "relation_context_refs": [
+    "ION/02_architecture/FRONT_DOOR_RUNTIME_ENTRY_PROTOCOL.md"
+  ],
+  "session_id": "v106-front-door-proof-trace",
+  "user_ref": "user.sovereign",
+  "visible_persona_name": null
+}

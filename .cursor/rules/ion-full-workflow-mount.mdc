@@ -1,0 +1,32 @@
+---
+description: Full Cursor workflow mount — RELAY channel, STEWARD orchestration, named ION role on Task carrier slots only.
+alwaysApply: false
+---
+
+> Operational mount order is governed by `ION/02_architecture/ION_MOUNT_CONTRACT.md`.
+
+# ION — Full workflow mount (Cursor)
+
+## When this applies
+
+Use when the task requires **RELAY → STEWARD** coordinated work with possible **Task** subagents, per `ION/02_architecture/ION_CURSOR_FULL_WORKFLOW_MOUNT_PROTOCOL.md`.
+
+## Spawn stack (required mental model)
+
+**Cursor carrier → RELAY packet channel → STEWARD orchestration authority → spawn request → named ION role mount → bounded Work packet / Context package → subagent execution → proposal return → STEWARD integration → RELAY report**
+
+## Subagents
+
+- A **Task** subagent is a **carrier slot**. It must be **mounted with a named ION role** (`agent_name` + `ION/03_registry/boots/<Role>.boot.md`), bounded **Work packet / Context package**, **authority ceiling**, **allowed_paths**, **forbidden_paths**, **validation_commands**, and **return_contract**.
+- **Forbidden:** generic “just a subagent” spawns; treating the **subagent as the role**; subagent **self-integration** or **scope broadening**.
+
+## Validation
+
+Before spawn: `kernel.v75_cursor_subagent_spawn_readiness_audit.evaluate_v75_spawn_packet` must return **`accepted: true`**.
+
+## Docs
+
+- `ION/docs/cursor/CURSOR_FULL_WORKFLOW_MOUNT_GUIDE.md`
+- `ION/docs/cursor/ION_SUBAGENT_SPAWN_PACKET_TEMPLATE.md`
+- `ION/docs/cursor/ION_SUBAGENT_SPAWN_READINESS_GUIDE.md`
+- `ION/docs/cursor/ION_LIVE_WORKFLOW_STATUS_PACKET.md`

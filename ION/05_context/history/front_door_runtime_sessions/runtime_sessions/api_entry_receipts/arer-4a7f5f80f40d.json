@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-05-02T22:52:19.682870+00:00",
+  "detail": "API carrier api://front-door-proof-trace entered runtime session v106-front-door-proof-trace",
+  "failure_disposition": null,
+  "intent_id": "arei-00b010a71f3c",
+  "receipt_id": "arer-4a7f5f80f40d",
+  "session_id": "v106-front-door-proof-trace",
+  "status": "ACCEPTED",
+  "witness_paths": [
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/sessions/v106-front-door-proof-trace.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/authorities/v106-front-door-proof-trace.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/queues/v106-front-door-proof-trace.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/carrier_bindings/v106-front-door-proof-trace.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/context_bindings/v106-front-door-proof-trace.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/api_carrier_boundaries/acb-a74825790fa0.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/api_entry_receipts/arer-4a7f5f80f40d.json"
+  ]
+}

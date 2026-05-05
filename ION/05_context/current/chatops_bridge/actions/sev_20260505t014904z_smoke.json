@@ -1,0 +1,43 @@
+{
+  "approval": {
+    "approval_token": "ION_CHATOPS_APPROVED",
+    "approved": true,
+    "approved_by": "Braden"
+  },
+  "created_at": "2026-05-05T01:49:07+00:00",
+  "ion_action": {
+    "action_id": "sev-20260505t014904z-smoke",
+    "actor": {
+      "callsign": "Sev",
+      "carrier": "chatgpt_browser"
+    },
+    "authority": {
+      "human_sovereign": "Braden",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true
+    },
+    "content": {
+      "encoding": "utf-8",
+      "text": "# Sev ChatOps Smoke\n\nSev emitted this canonical ION ChatOps action from ChatGPT Browser.\nThe extension detected it, Braden approved it, and the local daemon wrote it."
+    },
+    "intent": "write_file_draft",
+    "receipts": {
+      "requested": [
+        "file_write_receipt",
+        "sha256_receipt"
+      ]
+    },
+    "schema": "ion.chatops.action.v1",
+    "target": {
+      "overwrite": false,
+      "path": "ION/05_context/current/chatops_bridge/smoke/SEV_CHATOPS_SMOKE_sev-20260505t014904z.md",
+      "provider": "local_ion",
+      "root": "ION_CODEX"
+    }
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatops.action_packet.v1",
+  "source": "ion_chatops_bridge"
+}

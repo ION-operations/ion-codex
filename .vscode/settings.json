@@ -1,0 +1,27 @@
+{
+  "python.analysis.extraPaths": ["${workspaceFolder}/ION/04_packages"],
+  "python.analysis.diagnosticMode": "workspace",
+  "python.terminal.activateEnvironment": true,
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.cwd": "${workspaceFolder}",
+  "python.testing.pytestArgs": ["ION/tests"],
+  "terminal.integrated.env.linux": {
+    "PYTHONPATH": "${workspaceFolder}/ION/04_packages"
+  },
+  "terminal.integrated.env.osx": {
+    "PYTHONPATH": "${workspaceFolder}/ION/04_packages"
+  },
+  "terminal.integrated.env.windows": {
+    "PYTHONPATH": "${workspaceFolder}/ION/04_packages"
+  },
+  "files.watcherExclude": {
+    "**/_archive/**": true
+  },
+  "search.exclude": {
+    "**/_archive/**": true
+  },
+  "files.associations": {
+    "*.mdc": "markdown"
+  }
+}

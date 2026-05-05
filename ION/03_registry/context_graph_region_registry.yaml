@@ -1,0 +1,69 @@
+registry_id: context_graph_region_registry
+status: current_phase_seed
+created: '2026-04-24'
+regions:
+- id: region.kernel_runtime
+  mapping_class: ENACTED_KERNEL_RECORD
+  owner_agent_family: Steward
+  reviewer_agent_family: Nemesis
+  surfaces:
+  - ION/04_packages/kernel/
+- id: region.evented_file_graph
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  owner_agent_family: Steward
+  reviewer_agent_family: Nemesis
+  surfaces:
+  - ION/04_packages/kernel/template_completion_events.py
+  - ION/04_packages/kernel/template_reaction_selection.py
+  - ION/04_packages/kernel/template_index_projection.py
+  - ION/04_packages/kernel/template_graph_writeback_proposals.py
+  - ION/04_packages/kernel/template_graph_writeback_review.py
+  - ION/04_packages/kernel/template_graph_commit.py
+- id: region.self_documenting_context
+  mapping_class: ENACTED_REGISTRY_SURFACE
+  owner_agent_family: Scribe
+  reviewer_agent_family: Nemesis
+  surfaces:
+  - ION/02_architecture/SELF_DOCUMENTING_CONTEXT_GRAPH_PROTOCOL.md
+  - ION/03_registry/approved_context_index.yaml
+- id: region.doctrine_evolution
+  mapping_class: ENACTED_REGISTRY_SURFACE
+  owner_agent_family: Steward
+  reviewer_agent_family: Nemesis
+  surfaces:
+  - ION/02_architecture/DOCTRINE_EVOLUTION_PROTOCOL.md
+  - ION/03_registry/doctrine_evolution_registry.yaml
+- id: region.front_door
+  mapping_class: ADAPTER_REQUIRED
+  owner_agent_family: Relay
+  reviewer_agent_family: Steward
+  surfaces: []
+- id: region.semantic_identity
+  mapping_class: ENACTED_REGISTRY_SURFACE
+  owner_agent_family: Steward
+  reviewer_agent_family: Nemesis
+  surfaces:
+  - ION/03_registry/semantic_identities/
+- id: region.template_law
+  mapping_class: ENACTED_TEMPLATE_SURFACE
+  owner_agent_family: Steward
+  reviewer_agent_family: Nemesis
+  surfaces:
+  - ION/07_templates/
+- id: region.recovery_reconstitution
+  mapping_class: ENACTED_FILE_SURFACE
+  owner_agent_family: Vestige
+  reviewer_agent_family: Nemesis
+  surfaces:
+  - ION/06_intelligence/orchestration/context_graph_restoration/
+
+- id: region.gpt55_self_mount
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  owner_agent_family: GPT55_SELF_MOUNT
+  reviewer_agent_family: Nemesis
+  surfaces:
+  - ION/04_packages/kernel/runtime_identity_envelope.py
+  - ION/04_packages/kernel/self_surface_drift_gate.py
+  - ION/04_packages/kernel/agent_succession_packet.py
+  - ION/04_packages/kernel/self_mount_graph_integration.py
+  - ION/05_context/graph/self_mount_graph_state/

@@ -1,0 +1,14 @@
+schema_id: ion.front_stage_council_policy.v1
+authority: A3_DOCTRINE_AND_RUNTIME_PLANNING
+production_authority: false
+council_roles:
+  persona: relationship_horizon_expression
+  relay: context_transport_provenance_freshness
+  steward_vz: authority_risk_claim_class_work_legitimacy
+required_for_high_impact_output:
+  - relay_grounding
+  - steward_vz_claim_permission
+  - persona_final_render
+forbidden_claims:
+  persona_is_total_ion: false
+  persona_may_emit_high_impact_claim_alone: false

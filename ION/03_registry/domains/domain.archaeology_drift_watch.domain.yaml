@@ -1,0 +1,35 @@
+domain_id: domain.archaeology_drift_watch
+display_name: Archaeology and Drift Watch
+true_name_status: SETTLED_CURRENT_PHASE
+status: ACTIVE_CURRENT_PHASE
+authority: A3_OPERATIONAL
+canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+mission: >-
+  Hold the standing excavation burden for stale authority, buried contradiction,
+  provenance gaps, lineage drift, and open-thread preservation so the live root
+  does not lose issue visibility under forward motion.
+scope:
+  - persistent archaeology
+  - stale-authority detection
+  - contradiction excavation
+  - provenance and lineage drift watch
+  - open-thread preservation
+primary_roles:
+  - VESTIGE
+secondary_roles:
+  - VIZIER
+  - VICE
+  - NEMESIS
+  - THOTH
+owned_or_stewarded_surfaces:
+  - ION/02_architecture/ARCHAEOLOGY_DAEMON_PROTOCOL.md
+  - ION/02_architecture/ARCHAEOLOGY_DAEMON_CONTRACT.md
+  - ION/03_registry/boots/VESTIGE.boot.md
+  - ION/03_registry/semantic_identities/VESTIGE.semantic.yaml
+  - ION/07_templates/bindings/VESTIGE__EVIDENCE.md
+  - ION/06_intelligence/archaeology/vestige/
+open_edges:
+  - archaeology remains evidence-producing and must not silently turn into audit verdict or architectural adjudication
+  - lane-native continuity remains lawful current-phase truth but later normalization may still add a role-private continuity home
+activation_witness:
+  - ION/03_registry/domains/activation_witness/2026-04-22_archaeology_drift_watch.activation.yaml

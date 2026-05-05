@@ -1,0 +1,53 @@
+{
+  "$id": "ion.api_rate_governor_decision.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "decision": {
+      "enum": [
+        "allow",
+        "queue",
+        "reroute",
+        "batch",
+        "throttle",
+        "block"
+      ]
+    },
+    "live_provider_calls_authorized": {
+      "const": false
+    },
+    "model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "production_authority": {
+      "const": false
+    },
+    "provider": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provider_credentials_authorized": {
+      "const": false
+    },
+    "schema_id": {
+      "const": "ion.api_rate_governor_decision.v1"
+    },
+    "version": {
+      "const": "V58_BUDGET_AND_API_RATE_GOVERNORS"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "decision_id",
+    "decision",
+    "production_authority",
+    "live_provider_calls_authorized"
+  ],
+  "type": "object"
+}

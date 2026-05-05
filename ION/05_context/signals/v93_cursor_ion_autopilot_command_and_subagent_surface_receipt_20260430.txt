@@ -1,0 +1,12 @@
+ION V93 Cursor /ion Autopilot Command and Subagent Surface Receipt
+
+Status: ready for overlay application.
+
+Core change:
+/ion is the canonical carrier-control reset-and-run command. With no argument it means continue. With an argument it means classify/queue the operator directive and run carrier continuation.
+
+Parent Cursor identity:
+CURSOR_CARRIER_CONTROL_SURFACE. Not STEWARD, RELAY, PERSONA_INTERFACE, or specialist role.
+
+Subagent rule:
+Cursor subagents are carrier slots only. They require generated ION context packages and must return ### CONTEXT PROOF.

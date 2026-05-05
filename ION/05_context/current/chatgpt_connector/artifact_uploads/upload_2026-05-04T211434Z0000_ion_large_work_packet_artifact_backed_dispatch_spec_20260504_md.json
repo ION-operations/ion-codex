@@ -1,0 +1,15 @@
+{
+  "artifact_name": "ION_LARGE_WORK_PACKET_ARTIFACT_BACKED_DISPATCH_SPEC_20260504.md",
+  "chunks": {},
+  "created_at": "2026-05-04T21:14:34+00:00",
+  "expected_sha256": "b74727c249b86af2ba3e7b3e81f6689ff8bc3052755c4a4a6e2735745c6c9600",
+  "live_execution_authority": false,
+  "mime_type": "text/markdown",
+  "production_authority": false,
+  "schema_id": "ion.chatgpt_browser_connector_artifact_upload_session.v1",
+  "status": "OPEN",
+  "target_path": "ION/05_context/current/chatgpt_connector/artifacts/ION_LARGE_WORK_PACKET_ARTIFACT_BACKED_DISPATCH_SPEC_20260504.md",
+  "total_bytes": 4777,
+  "updated_at": "2026-05-04T21:14:34+00:00",
+  "upload_id": "upload_2026-05-04T211434Z0000_ion_large_work_packet_artifact_backed_dispatch_spec_20260504_md"
+}

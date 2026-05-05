@@ -1,0 +1,9 @@
+criterion,status,evidence,notes
+semantic separation,pass,runtime/session trio under bounded thaw review,session authority queue/dispatch and api entry remain explicitly distinct
+receipt linkage,pass,Pass 58 receipt-linkage review,receipts no longer masquerade as substitute authority
+negative-case resilience,pass,Pass 59 negative-case review + executable tests,first refusal slice is executable and bounded
+pause re-entry closure posture,pass,Pass 60 bounded lifecycle-state embodiment + tests,session-side pause and re-entry semantics are explicit enough for emission review
+exact touch set frozen,pass,Pass 61 bounded thaw packet,active files adjacent edits and review-only remainder are explicitly frozen
+promotion coupling discipline,pass with condition,Passes 60-61,trio must emit together and not as independent tracks
+ready to close bounded thaw review,yes conditional,this closure review,eligible to move into coupled active-law emission
+ready for unattended widening,no,this closure review,emission must stay inside the Pass 61 touch set

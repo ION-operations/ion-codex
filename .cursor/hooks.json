@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "python3 .cursor/hooks/ion_carrier_session_start.py"
+      }
+    ]
+  }
+}

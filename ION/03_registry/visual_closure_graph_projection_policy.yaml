@@ -1,0 +1,17 @@
+schema_id: ion.visual_closure_graph_projection_policy.v1
+version: V55_VISUAL_CLOSURE_GRAPH_PROJECTION
+authority_scope: BRANCH_LOCAL_VISUAL_CLOSURE_GRAPH_PROJECTION_ONLY
+production_authority: false
+global_graph_canon_authorized: false
+allowed_issue_statuses: [closed, needs_review, needs_followup, regressed, blocked, open]
+forbidden_authority:
+  unrestricted_browser_control: true
+  external_network_access: true
+  credential_or_session_import: true
+  account_operation: true
+  destructive_action: true
+  form_submission: true
+  persistent_dom_mutation: true
+  production_visual_automation: true
+  production_graph_canon: true
+  production_authority: true

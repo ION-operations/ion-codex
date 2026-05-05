@@ -1,0 +1,14 @@
+{
+  "schema_id": "ion.productized_runtime_manifest.v91",
+  "version": "V91_AGENT_CONTEXT_DYNAMICS_AND_FRONT_DOOR_TEAM",
+  "status": "update_package",
+  "adds": [
+    "ION/04_packages/kernel/ion_agent_context_dynamics.py",
+    "ION/02_architecture/ION_AGENT_CONTEXT_DYNAMICS_AND_CONTEXT_WINDOW_PROTOCOL.md",
+    "ION/02_architecture/ION_FRONT_DOOR_AUTONOMOUS_TEAM_WORKFLOW_PROTOCOL.md",
+    "ION/03_registry/agent_context_dynamics_registry.yaml",
+    "ION/07_templates/context/AGENT_DYNAMIC_CONTEXT_WINDOW_PLAN.md",
+    ".cursor/commands/ion-context-plan.md",
+    ".cursor/rules/ion-agent-context-dynamics.mdc"
+  ]
+}

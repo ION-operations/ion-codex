@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ION Lifecycle Package Manifest",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version_line",
+    "package_class",
+    "source_root",
+    "root_confirmed",
+    "root_required_files",
+    "archive_root_policy",
+    "lifecycle_policy_version",
+    "context_lifecycle_audit_path",
+    "production_authority",
+    "mutation_performed",
+    "zip_creation_performed",
+    "included_hot_context",
+    "excluded_forensic_context",
+    "verdict",
+    "findings"
+  ],
+  "properties": {
+    "schema_id": { "const": "ion.lifecycle_package_manifest.v1" },
+    "version_line": { "const": "V106_LIFECYCLE_AWARE_PACKAGE_ROOT_INTEGRITY" },
+    "package_class": {
+      "type": "string",
+      "enum": ["FULL_PROJECT", "COMPACT_RUNTIME", "FORENSIC_ARCHIVE"]
+    },
+    "root_confirmed": { "type": "boolean" },
+    "production_authority": { "const": false },
+    "mutation_performed": { "const": false },
+    "zip_creation_performed": { "type": "boolean" },
+    "zip_path": { "type": ["string", "null"] },
+    "zip_sha256": { "type": ["string", "null"] },
+    "zip_root_audit": {
+      "type": ["object", "null"],
+      "properties": {
+        "schema_id": { "const": "ion.package_zip_root_audit.v1" },
+        "root_confirmed": { "type": "boolean" },
+        "verdict": { "type": "string" },
+        "archive_root_mode": { "type": "string" },
+        "wrapped_root_prefix": { "type": ["string", "null"] }
+      }
+    },
+    "included_hot_context": { "type": "array", "items": { "type": "string" } },
+    "included_warm_context": { "type": "array", "items": { "type": "string" } },
+    "included_cold_context": { "type": "array", "items": { "type": "string" } },
+    "included_quarantine_context": { "type": "array", "items": { "type": "string" } },
+    "excluded_package_sidecar_context": { "type": "array", "items": { "type": "string" } },
+    "excluded_forensic_context": { "type": "array", "items": { "type": "string" } },
+    "verdict": { "type": "string" },
+    "findings": { "type": "array", "items": { "type": "string" } }
+  }
+}

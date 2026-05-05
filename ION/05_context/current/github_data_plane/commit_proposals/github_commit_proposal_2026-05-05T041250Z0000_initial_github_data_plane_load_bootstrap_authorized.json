@@ -1,0 +1,177 @@
+{
+  "action_id": "initial-github-data-plane-load-bootstrap-authorized",
+  "audit_summary": {
+    "accepted": true,
+    "can_prepare_human_review_commit": true,
+    "findings": [],
+    "first_commit_status": "NO_LOCAL_COMMITS_YET",
+    "verdict": "ION_GITHUB_DATA_PLANE_AUDIT_READY",
+    "warnings": [
+      "no_local_commits_yet",
+      "no_upstream_tracking_branch"
+    ]
+  },
+  "commit_message": "Initialize ION Codex data plane",
+  "created_at": "2026-05-05T04:12:50+00:00",
+  "failure_classes": [
+    "GITHUB_DATA_PLANE_NOT_CONFIGURED",
+    "GIT_WORKTREE_DIRTY_OR_UNSAFE",
+    "GIT_SECRET_SCAN_BLOCK",
+    "GIT_VALIDATION_BLOCK",
+    "CARRIER_ADAPTER_FAILURE",
+    "ION_CORE_FAILURE"
+  ],
+  "failure_classification": null,
+  "findings": [],
+  "git_mutation_performed": false,
+  "github_mutation_performed": false,
+  "live_execution_authority": false,
+  "network_access_used": false,
+  "path_bucket_counts": {
+    ".cursor": 36,
+    ".gitignore": 1,
+    ".vscode": 4,
+    "FILES_ADDED_V100_LIVING_ENCYCLOPEDIA_AND_CONTEXT_SYSTEM_INTEGRATION.txt": 1,
+    "FILES_ADDED_V101_LOCAL_AUTONOMOUS_LOOP_SURVIVAL_SLICE.txt": 1,
+    "FILES_ADDED_V102_CONTEXT_METABOLISM_AND_LIFECYCLE.txt": 1,
+    "FILES_ADDED_V103_TEMPORAL_CONTEXT_ENFORCEMENT_RECONCILIATION.txt": 1,
+    "FILES_ADDED_V104_OPERATIONAL_TRUTH_AUDIT_AND_LONG_HORIZON_ORCHESTRATION.txt": 1,
+    "FILES_ADDED_V105_DEEP_OPERATIONAL_CARTOGRAPHY_AND_CORE_TELEMETRY.txt": 1,
+    "FILES_ADDED_V108_V72_MCP_DONOR_RECONCILIATION.txt": 1,
+    "FILES_ADDED_V109_ACTIVE_RECONCILIATION_STATUS_AND_COCKPIT_VISIBILITY.txt": 1,
+    "FILES_ADDED_V110_PACKAGE_MOUNTABILITY_AND_OPTIONAL_EVIDENCE_STATUS.txt": 1,
+    "FILES_ADDED_V111_ACTIVE_OBJECTIVE_CURRENT_STATE_TRUTH.txt": 1,
+    "FILES_ADDED_V112_PACKAGE_RUNNABLE_STATUS_OPTIONAL_EVIDENCE_REPAIR.txt": 1,
+    "FILES_ADDED_V113_ZERO_SPAWN_EXECUTION_CYCLE_BLOAT_GUARD.txt": 1,
+    "FILES_ADDED_V114_DEFERRED_SPAWN_VISIBILITY.txt": 1,
+    "FILES_ADDED_V125_CODEX_CLI_CARRIER_AND_CHATGPT_CONNECTOR_DOGFOOD.txt": 1,
+    "FILES_ADDED_V63_PROTOCOLIZATION_MCP_MOUNT_AND_FULL_OPERATIONALIZATION.txt": 1,
+    "FILES_ADDED_V64_LOCAL_MCP_BRIDGE.txt": 1,
+    "FILES_ADDED_V65_LOCAL_MCP_CLIENT_CONFIG_AND_SMOKE_HARNESS.txt": 1,
+    "FILES_ADDED_V66_LOCAL_MCP_CLIENT_CERTIFICATION.txt": 1,
+    "FILES_ADDED_V67_MCP_TRANSPORT_PREVIEW.txt": 1,
+    "FILES_ADDED_V68_MCP_SDK_WRAPPER_AND_HOSTED_HTTP_ALPHA_BOUNDARY.txt": 1,
+    "ION": 5448
+  },
+  "path_count": 5530,
+  "path_manifest_path": "ION/05_context/current/github_data_plane/commit_proposals/github_commit_proposal_2026-05-05T041250Z0000_initial_github_data_plane_load_bootstrap_authorized.paths.json",
+  "path_manifest_sha256": "82da2721108aeb6648a709df75497cc34d5d92b8842515db4b45b1027b940f2e",
+  "path_samples": [
+    ".cursor/agents/ion-context-cartographer.md",
+    ".cursor/agents/ion-mason.md",
+    ".cursor/agents/ion-nemesis.md",
+    ".cursor/agents/ion-persona-interface.md",
+    ".cursor/agents/ion-relay.md",
+    ".cursor/agents/ion-runtime-cartographer.md",
+    ".cursor/agents/ion-scribe.md",
+    ".cursor/agents/ion-spawn-row-slot.md",
+    ".cursor/agents/ion-steward.md",
+    ".cursor/commands/ion-cockpit.md",
+    ".cursor/commands/ion-context-plan.md",
+    ".cursor/commands/ion-continue.md",
+    ".cursor/commands/ion-health.md",
+    ".cursor/commands/ion-mcp-status.md",
+    ".cursor/commands/ion.md",
+    ".cursor/hooks.json",
+    ".cursor/hooks/ion_carrier_session_start.py",
+    ".cursor/hooks/ion_session_start_persona_mount.py",
+    ".cursor/hooks/ion_session_start_persona_mount.sh",
+    ".cursor/hooks/ion_stamp_operator_gate.py",
+    ".cursor/mcp.json",
+    ".cursor/rules/ion-agent-context-dynamics.mdc",
+    ".cursor/rules/ion-autopilot-command.mdc",
+    ".cursor/rules/ion-canonical-workflow-unification.mdc",
+    ".cursor/rules/ion-carrier-boot-packet.mdc",
+    ".cursor/rules/ion-carrier-mount.mdc",
+    ".cursor/rules/ion-carrier-relay-mediation.mdc",
+    ".cursor/rules/ion-carrier-runtime-foundation.mdc",
+    ".cursor/rules/ion-carrier-task-return-intake.mdc",
+    ".cursor/rules/ion-context-authority-team.mdc",
+    ".cursor/rules/ion-cursor-onboarding.mdc",
+    ".cursor/rules/ion-full-workflow-mount.mdc",
+    ".cursor/rules/ion-mcp-control-bridge.mdc",
+    ".cursor/rules/ion-persona-user-facing.mdc",
+    ".cursor/skills/ion-autopilot/SKILL.md",
+    ".cursor/skills/ion-carrier-control/SKILL.md",
+    ".gitignore",
+    ".vscode/extensions.json",
+    ".vscode/launch.json",
+    ".vscode/settings.json"
+  ],
+  "path_source": {
+    "ok": true,
+    "source": "git ls-files --cached --modified --others --exclude-standard"
+  },
+  "policy": {
+    "commit_authority": false,
+    "main_auto_push_allowed": false,
+    "main_update_path": "pull_request_or_merge_gate_or_explicit_bootstrap_exception",
+    "push_authority": false,
+    "requires_before_commit_or_push": [
+      "review_this_proposal_receipt",
+      "review_path_manifest",
+      "review_secret_scan",
+      "review_validation_results",
+      "record_approval_or_runtime_policy_gate"
+    ]
+  },
+  "production_authority": false,
+  "proposal_id": "github_commit_proposal_2026-05-05T041250Z0000_initial_github_data_plane_load_bootstrap_authorized",
+  "proposal_path": "ION/05_context/current/github_data_plane/commit_proposals/github_commit_proposal_2026-05-05T041250Z0000_initial_github_data_plane_load_bootstrap_authorized.json",
+  "proposal_sha256": "408c4e5d3df3d1de008b2f649dc63ddeaed54db809c0661aaaa9f10c1fe81b33",
+  "rollback": {
+    "post_commit_before_push": "Use git reset --soft HEAD~1 only under explicit human/ION gate; do not run automatically.",
+    "post_push": "Use git revert <commit> on a follow-up branch/PR unless explicit emergency rollback authority is mounted.",
+    "pre_push": "No rollback needed before commit/push; no git or GitHub mutation is performed by this proposal."
+  },
+  "root": "/home/sev/ION - Production/ION_CODEX",
+  "schema_id": "ion.github_commit_proposal_receipt.v1",
+  "secret_scan": {
+    "accepted": true,
+    "finding_count": 0,
+    "findings": [],
+    "findings_truncated": false,
+    "scanned_file_count": 5524,
+    "schema_id": "ion.git_secret_scan_result.v1",
+    "secret_values_redacted": true,
+    "skipped_file_count": 6
+  },
+  "status": "ready_for_review",
+  "target_branch": "main",
+  "target_remote": "https://github.com/ION-operations/ion-codex.git",
+  "validation": {
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "-m",
+          "pytest",
+          "ION/tests",
+          "-q"
+        ],
+        "passed": true,
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "........................................................................ [ 27%]\n........................................................................ [ 54%]\n........................................................................ [ 81%]\n................................................                         [100%]\n264 passed in 2.14s"
+      },
+      {
+        "command": [
+          "python3",
+          "-S",
+          "-m",
+          "kernel.ion_status",
+          "--ion-root",
+          ".",
+          "--json"
+        ],
+        "passed": true,
+        "returncode": 0,
+        "stderr_tail": "",
+        "stdout_tail": "_spawn_plan\": \"ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json\",\n    \"active_turn_packet\": \"ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json\",\n    \"active_work_packet\": \"ION/05_context/current/ACTIVE_WORK_PACKET.json\",\n    \"cursor_hook_state\": \"ION/05_context/current/ACTIVE_CURSOR_HOOK_STATE.json\",\n    \"human_gate_queue\": \"ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json\",\n    \"operator_message_queue\": \"ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json\",\n    \"steward_integration_queue\": \"ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json\",\n    \"task_return_ledger\": \"ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json\",\n    \"v72_mcp_donor_reconciliation_audit\": \"ION/05_context/current/V108_V72_MCP_DONOR_RECONCILIATION_AUDIT.json\"\n  },\n  \"completed_role_count\": 3,\n  \"cursor_hook_state\": {\n    \"cursor_hook_bridge_verdict\": \"ION_CURSOR_HOOK_BRIDGE_READY\",\n    \"host_connection_state\": \"NOT_CONNECTED_OR_NOT_OBSERVED\",\n    \"live_hook_event_seen\": false,\n    \"path\": \"ION/05_context/current/ACTIVE_CURSOR_HOOK_STATE.json\",\n    \"status\": \"projected_not_connected\"\n  },\n  \"deferred_spawn_count\": 0,\n  \"execution_bundle_materialized\": true,\n  \"live_execution_authority\": false,\n  \"missing_state_surfaces\": [],\n  \"next_lawful_action\": \"continue_or_queue_new_work\",\n  \"objective\": \"Reconcile ChatGPT Browser MCP connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions\",\n  \"open_human_gate_count\": 0,\n  \"open_human_gates\": [],\n  \"operator_message_classification\": {\n    \"action\": \"run_carrier_continue\",\n    \"active_human_gate_count\": 0,\n    \"classification\": \"continuation_signal\",\n    \"confidence\": 0.98,\n    \"live_execution_authority\": false,\n    \"message\": \"continue\",\n    \"mutates_runtime\": true,\n    \"normalized_message\": \"continue\",\n    \"production_authority\": false,\n    \"requires_human_gate_resolution\": false,\n    \"schema_id\": \"ion.operator_message_classification.v1\"\n  },\n  \"operator_message_interpretation\": \"CONTINUATION_SIGNAL_REUSE_ACTIVE_OBJECTIVE\",\n  \"operator_queue_counts\": {\n    \"carrier_packet_generated\": 39,\n    \"superseded_test_residue\": 2\n  },\n  \"optional_evidence_paths\": {\n    \"safe_full_project_package_result\": \"ION/05_context/current/SAFE_FULL_PROJECT_PACKAGE_RESULT_V*.json\",\n    \"trunk_preservation_report\": \"ION/05_context/current/TRUNK_PRESERVATION_REPORT_V*.json\"\n  },\n  \"plan_spawn_count\": 0,\n  \"production_authority\": false,\n  \"safe_full_project_package\": {\n    \"accepted\": null,\n    \"archive_root_mode\": null,\n    \"path\": null,\n    \"path_pattern\": \"ION/05_context/current/SAFE_FULL_PROJECT_PACKAGE_RESULT_V*.json\",\n    \"present\": false,\n    \"zip_path\": null,\n    \"zip_root_verdict\": null,\n    \"zip_sha256\": null\n  },\n  \"schema_id\": \"ion.status.v1\",\n  \"shell_root\": \"/home/sev/ION - Production/ION_CODEX\",\n  \"spawn_queue\": [],\n  \"spawn_queue_count\": 0,\n  \"steward_queue_pending_count\": 0,\n  \"steward_queue_rejected_count\": 0,\n  \"task_return_counts\": {\n    \"accepted\": 0,\n    \"rejected\": 0,\n    \"total\": 0\n  },\n  \"trunk_preservation\": {\n    \"accepted\": null,\n    \"contained_removed_files\": null,\n    \"containment_move_count\": 0,\n    \"new_full_zip\": null,\n    \"packaging_verdict\": null,\n    \"path\": null,\n    \"path_pattern\": \"ION/05_context/current/TRUNK_PRESERVATION_REPORT_V*.json\",\n    \"policy_version\": null,\n    \"present\": false,\n    \"protected_removed_files\": null,\n    \"unexpected_removed_files\": null,\n    \"version_line\": null\n  },\n  \"v72_mcp_donor_reconciliation\": {\n    \"cursor_bridge_preserved\": true,\n    \"donor_runtime_receipts_restored\": false,\n    \"forbidden_runtime_file_count\": 0,\n    \"live_execution_authority\": false,\n    \"missing_donor_surface_count\": 0,\n    \"path\": \"ION/05_context/current/V108_V72_MCP_DONOR_RECONCILIATION_AUDIT.json\",\n    \"present\": true,\n    \"production_authority\": false,\n    \"restored_donor_surface_count\": 38,\n    \"verdict\": \"V72_MCP_DONOR_RECONCILIATION_PASS\"\n  },\n  \"verdict\": \"ION_STATUS_READY\",\n  \"workstream\": \"implementation\"\n}"
+      }
+    ],
+    "passed": true,
+    "run_validation": true
+  },
+  "verdict": "ION_GITHUB_COMMIT_PROPOSAL_READY_FOR_REVIEW"
+}

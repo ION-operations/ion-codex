@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.chatgpt_browser_cloudflare_tunnel.v1",
+  "title": "ION ChatGPT Browser Cloudflare Tunnel Audit",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version_line",
+    "verdict",
+    "accepted",
+    "connector_state",
+    "local_url",
+    "endpoint_path",
+    "cloudflared_found",
+    "http_preview_verdict",
+    "production_authority",
+    "live_execution_authority",
+    "deployment_authority"
+  ],
+  "properties": {
+    "schema_id": { "const": "ion.chatgpt_browser_cloudflare_tunnel.v1" },
+    "version_line": { "const": "V122_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL" },
+    "verdict": {
+      "enum": [
+        "ION_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL_READY",
+        "ION_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL_SETUP_REQUIRED",
+        "ION_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL_BLOCKED"
+      ]
+    },
+    "accepted": { "type": "boolean" },
+    "connector_state": {
+      "enum": [
+        "CLOUDFLARE_TUNNEL_ACTIVE",
+        "CLOUDFLARED_AVAILABLE_TUNNEL_NOT_RUNNING",
+        "CLOUDFLARED_NOT_INSTALLED",
+        "BLOCKED"
+      ]
+    },
+    "local_url": { "type": "string" },
+    "endpoint_path": { "type": "string" },
+    "required_public_connector_path": { "type": "string" },
+    "cloudflared_found": { "type": "boolean" },
+    "cloudflared_path": { "type": ["string", "null"] },
+    "cloudflared_command": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "active_status_path": { "type": "string" },
+    "active_tunnel_url": { "type": ["string", "null"] },
+    "active_connector_url": { "type": ["string", "null"] },
+    "active_running": { "type": "boolean" },
+    "http_preview_verdict": { "type": ["string", "null"] },
+    "findings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "production_authority": { "const": false },
+    "live_execution_authority": { "const": false },
+    "deployment_authority": { "const": false }
+  },
+  "additionalProperties": false
+}

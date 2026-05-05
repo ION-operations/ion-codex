@@ -1,0 +1,40 @@
+{
+  "accepted_for_carrier_intake": true,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T073641Z0000_public_connector_smoke_test_bounded_work_request.json"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T07:37:30+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "RECORDED_FOR_CARRIER_INTAKE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\n1. path: `ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T073641Z0000_public_connector_smoke_test_bounded_work_request.json`; status: file_present; line_count: json_packet; sha256: connector-recorded; excerpt: `public connector smoke test bounded work request`\n\n### TEMPLATE ACTION PROOF\ntemplate_id: `ion.template.audit_observation.v1`\naction_id: `chatgpt_connector.public_smoke_return.2026-05-04T073641Z`\nresult: `public_connector_task_return_recorded`\ntouched_paths:\n- `ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T073641Z0000_public_connector_smoke_test_bounded_work_request.json`\n- `ION/05_context/current/chatgpt_connector/runtime/public_task_return_submit.json`\n\n### ROLE PASS\nPublic connector smoke return verifies that a bounded work request can be queued through the tunnel and a proof-shaped return can be submitted back through the bounded connector path.\n\n### FILES INSPECTED\n- `ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T073641Z0000_public_connector_smoke_test_bounded_work_request.json`: smoke work request packet created by `ion_request_codex_work_packet`.\n\n### NO CHANGE PROPOSED\nNo so",
+  "task_output_sha256": "af1931c0bbc1c24a3f34bb7d025cd75e9b01034fd327b29879d768042d34bf96",
+  "template_action_proof_result": {
+    "accepted": true,
+    "action_id": "chatgpt_connector.public_smoke_return.2026-05-04T073641Z",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.audit_observation.v1",
+    "touched_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T073641Z0000_public_connector_smoke_test_bounded_work_request.json",
+      "ION/05_context/current/chatgpt_connector/runtime/public_task_return_submit.json"
+    ]
+  },
+  "work_request_id": "codex_req_2026-05-04T073641Z0000_public_connector_smoke_test_bounded_work_request",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T073641Z0000_public_connector_smoke_test_bounded_work_request.json"
+}

@@ -1,0 +1,41 @@
+version: V61_DISPATCH_AUTHORIZATION_GOVERNOR_VERDICT_VIEW_MODEL
+policy_id: joc_dispatch_authorization_policy
+production_authority: false
+live_dispatch_claim: false
+external_model_call_claim: false
+
+approval_modes:
+  default: SUPERVISED_REQUIRED
+  forbidden_auto_domains:
+    - credential_vault
+    - settings_mutation
+    - destructive_browser_action
+    - paid_cloud_launch
+    - source_summary_rewrite
+    - canonical_graph_write
+    - unrestricted_agent_activation
+
+blocking_verdicts:
+  budget:
+    - BUDGET_BLOCKED
+    - MONTHLY_BUDGET_EXCEEDED
+    - MISSION_BUDGET_EXCEEDED
+  api_rate:
+    - RATE_LIMIT_BLOCKED
+    - PROVIDER_QUOTA_EXHAUSTED
+    - PARALLELISM_LIMIT_EXCEEDED
+  capability:
+    - FORBIDDEN_CAPABILITY
+    - CREDENTIAL_REQUIRED
+    - DESTRUCTIVE_ACTION
+    - PAID_CLOUD_REQUIRES_MANUAL_APPROVAL
+
+ui_required_surfaces:
+  - mission_route_summary
+  - governor_verdict_rail
+  - budget_band_indicator
+  - api_rate_band_indicator
+  - approval_gate_badge
+  - blocked_capability_list
+  - evidence_reference_list
+  - dispatch_receipt_preview

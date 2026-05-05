@@ -1,0 +1,53 @@
+{
+  "action_id": "sev-20260505-chatops-bridge-smoke",
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": "Braden",
+  "created_at": "2026-05-05T00:53:55+00:00",
+  "failure_classification": null,
+  "files_touched": [
+    "ION/05_context/current/chatops_bridge/actions/sev_20260505_chatops_bridge_smoke.json",
+    "ION/05_context/current/chatops_bridge/artifacts/smoke/sev_chatops_bridge_smoke.txt"
+  ],
+  "github_refs": [],
+  "intent": "write_file_draft",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "receipt_id": "chatops_receipt_20260505T005355Z_sev_20260505_chatops_bridge_smoke",
+  "schema_id": "ion.chatops.receipt.v1",
+  "sha256": {
+    "ION/05_context/current/chatops_bridge/artifacts/smoke/sev_chatops_bridge_smoke.txt": "9d55329582206063937a67b79fc15ef0dbbd92c07f210d55ffb9190154d63183"
+  },
+  "status": "completed",
+  "target_refs": [
+    {
+      "path": "ION/05_context/current/chatops_bridge/artifacts/smoke/sev_chatops_bridge_smoke.txt",
+      "provider": "local_ion"
+    }
+  ],
+  "validation": {
+    "action_validation": {
+      "accepted": true,
+      "action_id": "sev-20260505-chatops-bridge-smoke",
+      "approval_checked": true,
+      "findings": [],
+      "intent": "write_file_draft",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true,
+      "risk_class": "approval_required_mutation",
+      "schema_id": "ion.chatops.action_validation.v1",
+      "warnings": []
+    },
+    "after_write": [
+      "sha256"
+    ],
+    "execution": {
+      "ok": true,
+      "path": "ION/05_context/current/chatops_bridge/artifacts/smoke/sev_chatops_bridge_smoke.txt",
+      "sha256": "9d55329582206063937a67b79fc15ef0dbbd92c07f210d55ffb9190154d63183"
+    }
+  }
+}

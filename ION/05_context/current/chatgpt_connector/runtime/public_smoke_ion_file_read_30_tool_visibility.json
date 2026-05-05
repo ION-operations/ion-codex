@@ -1,0 +1,35 @@
+{
+  "body": {
+    "id": 11,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\n  \"data\": {\n    \"bytes\": 2028,\n    \"live_execution_authority\": false,\n    \"max_bytes\": 8192,\n    \"path\": \"ION/03_registry/chatgpt_browser_carrier_profile.yaml\",\n    \"production_authority\": false,\n    \"sha256\": \"26bf7b374ff27143535e0d256a6c5d7bf016e8c758fb8075166726e3f78d9acc\",\n    \"text\": \"schema_id: ion.chatgpt_browser_carrier_profile.v1\\ncarrier_id: CHATGPT_BROWSER_CARRIER\\nhost_family: chatgpt_browser\\nbase_profile: FULL_CARRIER_MCP_PARITY_TARGET\\ndefault_level: L2_FULL_CARRIER_MCP_PARITY_STAGING\\nlevel_ceiling_without_connector_proof: L2_FULL_CARRIER_MCP_PARITY_STAGING\\nfull_carrier_mcp_parity_aliases:\\n  - full_carrier_mcp_parity\\n  - chatgpt_browser_full_carrier\\ncan_read_bounded_ion_state: true\\ncan_queue_operator_messages: true\\ncan_record_decision_receipts: true\\ncan_submit_task_returns_with_proof: true\\ncan_request_codex_work_packets: true\\ncan_read_project_files_bounded: true\\ncan_search_project_files_bounded: true\\ncan_list_project_tree_bounded: true\\ncan_transfer_artifacts_bounded: true\\ncan_exchange_carrier_messages: true\\ncan_edit_files_directly: staged_artifact_roots_only\\ncan_run_shell_commands: false\\ncan_delete_files: false\\ncan_git_push: false\\ncan_access_credentials: false\\ncan_use_provider_api_calls: false\\nmust_not_claim_ion_identity: true\\nmust_not_claim_steward_relay_persona: true\\ncontext_proof_gate: kernel.ion_context_proof_gate\\ntemplate_action_proof_gate: kernel.ion_template_action_gate\\nreturn_intake_module: kernel.ion_carrier_task_return\\nstatus_module: kernel.ion_status\\nconnector_contract_module: kernel.ion_chatgpt_browser_mcp_connector_contract\\nfull_carrier_tool_registry: ION/03_registry/mcp_full_carrier_tool_registry.yaml\\ncarrier_capability_registry: ION/03_registry/carrier_capability_registry.yaml\\nexecution_packet_template: ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md\\nrequired_onboarding_packet: ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json\\nrequired_return_sections:\\n  - \\\"### CONTEXT PROOF\\\"\\n  - \\\"### TEMPLATE ACTION PROOF\\\"\\n  - \\\"### RESULT\\\"\\nforbidden_claims:\\n  - ION identity\\n  - STEWARD authority\\n  - RELAY authority\\n  - PERSONA authority\\n  - production authority\\n  - live execution authority\\n  - arbitrary local machine control\\n  - arbitrary file write\\nproduction_authority: false\\nlive_execution_authority: false\\ndeployment_authority: false\\n\",\n    \"truncated\": false\n  },\n  \"live_execution_authority\": false,\n  \"mutates_active_state\": false,\n  \"ok\": true,\n  \"production_authority\": false,\n  \"schema_id\": \"ion.chatgpt_browser_connector_tool_result.v1\",\n  \"tool\": \"ion_file_read\"\n}",
+          "type": "text"
+        }
+      ],
+      "isError": false,
+      "structuredContent": {
+        "data": {
+          "bytes": 2028,
+          "live_execution_authority": false,
+          "max_bytes": 8192,
+          "path": "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+          "production_authority": false,
+          "sha256": "26bf7b374ff27143535e0d256a6c5d7bf016e8c758fb8075166726e3f78d9acc",
+          "text": "schema_id: ion.chatgpt_browser_carrier_profile.v1\ncarrier_id: CHATGPT_BROWSER_CARRIER\nhost_family: chatgpt_browser\nbase_profile: FULL_CARRIER_MCP_PARITY_TARGET\ndefault_level: L2_FULL_CARRIER_MCP_PARITY_STAGING\nlevel_ceiling_without_connector_proof: L2_FULL_CARRIER_MCP_PARITY_STAGING\nfull_carrier_mcp_parity_aliases:\n  - full_carrier_mcp_parity\n  - chatgpt_browser_full_carrier\ncan_read_bounded_ion_state: true\ncan_queue_operator_messages: true\ncan_record_decision_receipts: true\ncan_submit_task_returns_with_proof: true\ncan_request_codex_work_packets: true\ncan_read_project_files_bounded: true\ncan_search_project_files_bounded: true\ncan_list_project_tree_bounded: true\ncan_transfer_artifacts_bounded: true\ncan_exchange_carrier_messages: true\ncan_edit_files_directly: staged_artifact_roots_only\ncan_run_shell_commands: false\ncan_delete_files: false\ncan_git_push: false\ncan_access_credentials: false\ncan_use_provider_api_calls: false\nmust_not_claim_ion_identity: true\nmust_not_claim_steward_relay_persona: true\ncontext_proof_gate: kernel.ion_context_proof_gate\ntemplate_action_proof_gate: kernel.ion_template_action_gate\nreturn_intake_module: kernel.ion_carrier_task_return\nstatus_module: kernel.ion_status\nconnector_contract_module: kernel.ion_chatgpt_browser_mcp_connector_contract\nfull_carrier_tool_registry: ION/03_registry/mcp_full_carrier_tool_registry.yaml\ncarrier_capability_registry: ION/03_registry/carrier_capability_registry.yaml\nexecution_packet_template: ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md\nrequired_onboarding_packet: ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json\nrequired_return_sections:\n  - \"### CONTEXT PROOF\"\n  - \"### TEMPLATE ACTION PROOF\"\n  - \"### RESULT\"\nforbidden_claims:\n  - ION identity\n  - STEWARD authority\n  - RELAY authority\n  - PERSONA authority\n  - production authority\n  - live execution authority\n  - arbitrary local machine control\n  - arbitrary file write\nproduction_authority: false\nlive_execution_authority: false\ndeployment_authority: false\n",
+          "truncated": false
+        },
+        "live_execution_authority": false,
+        "mutates_active_state": false,
+        "ok": true,
+        "production_authority": false,
+        "schema_id": "ion.chatgpt_browser_connector_tool_result.v1",
+        "tool": "ion_file_read"
+      }
+    }
+  },
+  "status_code": 200,
+  "url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp"
+}

@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-05-02T22:31:53+00:00",
+  "hydration": {
+    "db_hydration_ms": null,
+    "hydration_conflicts": 0,
+    "measurement_mode": "PROJECTED_ONLY",
+    "receipt_hydration_ms": null,
+    "unresolved_receipts": 0
+  },
+  "kernel": {
+    "cockpit_projection_ms": null,
+    "context_lifecycle_audit_ms": null,
+    "lane_timeline_projection_ms": null,
+    "measurement_mode": "PROJECTED_ONLY"
+  },
+  "production_authority": false,
+  "render": {
+    "last_render_ms": null,
+    "measurement_mode": "PROJECTED_ONLY",
+    "p50_render_ms": null,
+    "p95_render_ms": null,
+    "slow_component": null
+  },
+  "schema_id": "ion.runtime_debug_overlay.v1",
+  "source_paths": {
+    "hydration": "ION/05_context/current/ACTIVE_DB_HYDRATION_METRICS.json",
+    "kernel": "ION/05_context/current/ACTIVE_KERNEL_PROJECTION_TIMINGS.json",
+    "receipt_hydration": "ION/05_context/current/ACTIVE_RECEIPT_HYDRATION_VIEW_MODEL.json",
+    "render": "ION/05_context/current/ACTIVE_RENDER_TIMING_METRICS.json",
+    "sse": "ION/05_context/current/ACTIVE_SSE_EVENT_METRICS.json",
+    "watcher": "ION/05_context/current/ACTIVE_FILE_WATCHER_METRICS.json"
+  },
+  "sse": {
+    "dropped_events": 0,
+    "events_per_second": 0.0,
+    "events_total": 0,
+    "last_event_at": null,
+    "measurement_mode": "NOT_CONNECTED",
+    "reconnect_count": 0
+  },
+  "status": "degraded",
+  "watcher": {
+    "files_changed": 0,
+    "last_refresh_at": null,
+    "measurement_mode": "NOT_CONNECTED",
+    "refresh_ms": null
+  },
+  "window_seconds": 60
+}

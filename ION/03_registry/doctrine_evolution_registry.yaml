@@ -1,0 +1,48 @@
+registry_id: doctrine_evolution_registry
+status: current_phase_seed
+created: '2026-04-24'
+authority_posture: A3_OPERATIONAL_PROPOSAL
+controlling_law: ION must modify ION law lawfully.
+depth_classes:
+  D0: wording / typo / formatting only
+  D1: terminology clarification without semantic change
+  D2: protocol, template, or documentation addition
+  D3: registry, role-jurisdiction, template-behavior, or approved-context change
+  D4: constitutional interpretation change
+  D5: root invariant, self-definition, or organism-wide doctrine change
+current_highest_active_depth: D5
+active_doctrine_evolution_objects:
+- id: context.graph.substrate
+  statement: ION is a living context graph operated by lawful agents through templates.
+  status: PROVISIONAL_RESTORED_ROOT_INVARIANT
+  depth_class: D5
+  required_reviewers:
+  - Steward
+  - Vizier
+  - Vice
+  - Nemesis
+  - Scribe
+  - Vestige
+  - Atlas
+- id: substrate.file_graph.evented
+  statement: ION is a living context graph materialized as an evented, template-instantiated
+    file system.
+  status: PROVISIONAL_MECHANICAL_LAW_WITH_V10_RUNTIME_ENACTMENT
+  depth_class: D4
+  runtime_phase: V10 bounded graph commit chain
+- id: self.documentation.approved_context
+  statement: Before ION can use a file as trusted context, ION must know what that
+    file is.
+  status: PROVISIONAL_APPROVED_CONTEXT_LAW
+  depth_class: D3
+protocols:
+- ION/02_architecture/DOCTRINE_EVOLUTION_PROTOCOL.md
+- ION/02_architecture/ROOT_INVARIANT_RESTORATION_PROTOCOL.md
+- ION/02_architecture/SELF_MODIFICATION_REVIEW_PROTOCOL.md
+- ION/02_architecture/CANON_PROMOTION_AND_RATIFICATION_PROTOCOL.md
+- ION/02_architecture/CONSTITUTIONAL_AMENDMENT_PROTOCOL.md
+templates:
+- ION/07_templates/doctrine/DOCTRINE_EVOLUTION_PACKET.md
+- ION/07_templates/doctrine/ROOT_INVARIANT_RESTORATION_PACKET.md
+- ION/07_templates/doctrine/CONSTITUTIONAL_AMENDMENT_PACKET.md
+- ION/07_templates/doctrine/DOCTRINE_EVOLUTION_RECEIPT.md

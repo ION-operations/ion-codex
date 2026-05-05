@@ -1,0 +1,7 @@
+V102 context metabolism receipt
+report_id: context-lifecycle-report-f72ac3c95f1d6a4a
+verdict: PASS_WITH_LIFECYCLE_MODEL
+total_context_bytes: 15629683
+execution_cycle_bytes: 13627277
+template_proposal_bytes: 0
+mutation_performed: false

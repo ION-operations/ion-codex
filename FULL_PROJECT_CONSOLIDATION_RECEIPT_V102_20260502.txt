@@ -1,0 +1,12 @@
+ION V102 full project consolidation receipt
+version_line: V102_CONTEXT_METABOLISM_AND_LIFECYCLE
+base_input: ION_CURSOR_V101_FULL_PROJECT_CONSOLIDATED_20260501.zip
+created_at: 2026-05-02
+production_authority: false
+mutation_authority: proposal_only
+focused_validation:
+  - PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -m pytest ION/tests/test_kernel_ion_context_lifecycle.py ION/tests/test_kernel_ion_autonomous_loop.py ION/tests/test_kernel_ion_template_action_gate.py -q
+focused_validation_result: 6 passed
+context_lifecycle_scan_verdict: PASS_WITH_LIFECYCLE_MODEL
+current_branch_581mb_condition_verified: false
+full_suite_claim: false

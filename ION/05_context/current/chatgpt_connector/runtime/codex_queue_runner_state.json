@@ -1,0 +1,9 @@
+{
+  "active_run": null,
+  "latest_run": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/run.json",
+  "live_execution_authority": false,
+  "manual_proceed_relay_required": false,
+  "production_authority": false,
+  "schema_id": "ion.codex_queue_runner_state.v1",
+  "updated_at": "2026-05-04T22:04:50+00:00"
+}

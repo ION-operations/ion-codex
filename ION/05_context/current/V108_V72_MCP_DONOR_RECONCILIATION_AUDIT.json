@@ -1,0 +1,40 @@
+{
+  "client_certification_present": true,
+  "current_trunk_mcp_surface_count": 5,
+  "current_trunk_mcp_surfaces_missing": [],
+  "current_trunk_mcp_surfaces_present": [
+    ".cursor/mcp.json",
+    "ION/09_integrations/mcp/ion_mcp_server.py",
+    "ION/09_integrations/mcp/README.md",
+    "ION/04_packages/kernel/ion_mcp_bridge_audit.py",
+    "ION/tests/test_kernel_ion_mcp_bridge_audit.py"
+  ],
+  "cursor_bridge_preserved": true,
+  "donor_branch": "ION_MASTER_CURRENT_3_V72_HOSTED_MCP_BUNDLE_IMPORT_EXPORT_AND_REPLAY_ALPHA_20260426",
+  "donor_runtime_receipts_restored": false,
+  "donor_scope": "V72 MCP donor reconciliation imports protocol, registry, kernel, test, docs, and example surfaces only; old runtime-session receipts remain forensic donor evidence and are not restored into current hot trunk.",
+  "findings": [
+    "required_v72_mcp_donor_surfaces_present",
+    "current_v105_v107_cursor_mcp_bridge_preserved",
+    "old_v72_runtime_session_receipts_not_restored_to_hot_trunk"
+  ],
+  "forbidden_runtime_file_count": 0,
+  "forbidden_runtime_files": [],
+  "forbidden_runtime_prefixes": [
+    "ION/05_context/runtime_state/v64_local_mcp_bridge/"
+  ],
+  "generated_at": "2026-05-03T04:30:17+00:00",
+  "hosted_auth_alpha_present": true,
+  "live_execution_authority": false,
+  "local_bridge_present": true,
+  "missing_donor_surface_count": 0,
+  "missing_donor_surfaces": [],
+  "production_authority": false,
+  "reconciliation_verdict": "V72_MCP_DONOR_RECONCILIATION_PASS",
+  "required_donor_surface_count": 38,
+  "restored_donor_surface_count": 38,
+  "root": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION",
+  "schema_id": "ion.v72_mcp_donor_reconciliation_audit.v1",
+  "transport_preview_present": true,
+  "version_line": "V108_V72_MCP_DONOR_RECONCILIATION"
+}

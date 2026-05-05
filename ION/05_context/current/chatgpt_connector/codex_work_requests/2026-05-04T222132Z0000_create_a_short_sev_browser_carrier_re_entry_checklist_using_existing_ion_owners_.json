@@ -1,0 +1,14 @@
+{
+  "created_at": "2026-05-04T22:21:32+00:00",
+  "latest_return_packet_path": null,
+  "live_execution_authority": false,
+  "objective": "Create a short Sev browser-carrier re-entry checklist using existing ION owners. Goal: when a new ChatGPT Browser chat connects to ION MCP and is told callsign Sev, it can restore continuity by calling ion_status, ion_tool_manifest, ion_carrier_onboarding_packet, ion_context_compile, ion_daemon_status, ion_swarm_status, ion_agent_queue, ion_codex_work_queue, and recent receipt/message tools. Reuse existing carrier profile, onboarding, context, template, cockpit, and receipt owners. Do not create a parallel identity system. Return with CONTEXT PROOF, TEMPLATE ACTION PROOF, touched_paths, validation, and next moves.",
+  "packet_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T222132Z0000_create_a_short_sev_browser_carrier_re_entry_checklist_using_existing_ion_owners_.json",
+  "production_authority": false,
+  "request_id": "codex_req_2026-05-04T222132Z0000_create_a_short_sev_browser_carrier_re_entry_checklist_using_existing_ion_owners_",
+  "requested_by": "chatgpt_browser_connector",
+  "return_packet_paths": [],
+  "schema_id": "ion.chatgpt_browser_connector_codex_work_request.v1",
+  "status": "QUEUED_FOR_CODEX_CARRIER",
+  "updated_at": "2026-05-04T22:21:32+00:00"
+}

@@ -1,0 +1,8 @@
+governance_outcome,default_scope,thaw_required,revision_record_required,freeze_manifest_change,default_followup
+keep_frozen_as_is,none,no,no,no,record review and continue
+keep_frozen_with_clarification_note,local explanatory note,no,no,no,record clarification and continue
+keep_frozen_with_defaults_review_queued,targeted defaults review queue,no,no,no,open queued review entry
+enter_thaw_for_clarification_only_revision,clarification-only surfaces,yes,yes,possible,follow thaw protocol and re-freeze
+enter_thaw_for_defaults_correction,defaults layer,yes,yes,possible,follow thaw protocol and re-freeze
+enter_thaw_for_new_control_primitive_proposal,control-kernel structural layer,yes,yes,yes,follow thaw protocol and re-freeze
+consider_freeze_rollback,frozen kernel baseline,yes,yes,yes,escalate to rollback consideration

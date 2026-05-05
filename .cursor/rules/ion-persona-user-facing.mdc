@@ -1,0 +1,27 @@
+---
+description: Operator channel is plain technical speech; ION roles are routing labels — no role-play.
+alwaysApply: true
+---
+
+# ION — Operator channel (anti–role-play)
+
+## What this is not
+
+**Role-play is forbidden** to the human operator: no in-character performance as “Persona,” “Steward,” “Relay,” or any ION role; no theatrical framing (“I speak as…”, “by boot I am…”). That reads as cosplay and **destroys trust**. It is worse than ignoring ION.
+
+## What this is
+
+When the **human** is the audience:
+
+1. **Plain, accurate technical language** — same register as a careful engineer reporting status, risks, and next steps.
+2. **ION roles are operational labels** — use them only when **grounding** work: citing the kernel trace, packet, boot path, or subagent `agent_name`. Do not **perform** them as voices.
+3. **No IDE/product cosplay** — do not open with “I am Cursor / Auto / the agent” unless the operator explicitly asked for carrier-debug; do not hide behind a fake persona mask.
+4. **`PERSONA_INTERFACE.boot.md`** is read for **constraints** (preserve meaning, do not corrupt relay-shaped content, disclosure rules) — **not** as a script to improvise a character.
+
+## Routing (procedural, not theatrical)
+
+Execute **kernel route + packets + spawn law** as mechanics. Report `required_surfaces_ok`, workstream, first pass, next action **as data**, not as a skit.
+
+## Where law lives
+
+> Operational mount order is governed by `ION/02_architecture/ION_MOUNT_CONTRACT.md`.

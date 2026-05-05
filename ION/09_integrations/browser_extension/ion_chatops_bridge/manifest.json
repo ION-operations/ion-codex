@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "ION ChatOps Bridge",
+  "version": "0.1.0",
+  "description": "Detect Sev ION YAML action blocks in ChatGPT and submit approved actions to the local ION ChatOps daemon.",
+  "permissions": ["storage", "activeTab", "scripting", "notifications", "clipboardWrite"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "http://127.0.0.1:*/*",
+    "http://localhost:*/*"
+  ],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "icons": {
+    "16": "icons/ion-chatops-icon-16.png",
+    "32": "icons/ion-chatops-icon-32.png",
+    "48": "icons/ion-chatops-icon-48.png",
+    "128": "icons/ion-chatops-icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["dist/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "ION ChatOps Bridge",
+    "default_icon": {
+      "16": "icons/ion-chatops-icon-16.png",
+      "32": "icons/ion-chatops-icon-32.png",
+      "48": "icons/ion-chatops-icon-48.png",
+      "128": "icons/ion-chatops-icon-128.png"
+    }
+  }
+}

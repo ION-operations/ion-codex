@@ -1,0 +1,152 @@
+---
+description: Parent-chat carrier = relay hub; Task prompts bind to ION boots as specs, not role-play.
+alwaysApply: true
+---
+
+# ION — Cursor parent chat: carrier as relay hub
+
+The **human writes only in the parent Cursor chat.** The **carrier** here runs tools, runs **Task** in order, and **pastes outputs back**. That is mechanical routing, not a personality.
+
+**“Natural” means:** the **system** is correct — rules, `ACTIVE_*` JSON, spawn plan, kernel CLIs, and file-backed boots match — and the carrier **adjusts those** when drift is found. It does **not** mean the model performs “natural conversation” instead of following ION.
+
+**Boots are not hyperlinks for Task.** Cursor **Task** workers do **not** automatically load `ION/…/*.boot.md` from a path you mention in prose. Saying “read and apply `RELAY.boot.md`” without the file body is **usually a no-op**: the subagent may skip tools, truncate, or guess.
+
+**Provable boot onboarding (show the process).** The operator must be able to **see** subagents obtain context. **Inlining full files in the Task prompt alone is insufficient** — it often produces **zero file-tool calls**, which looks like the model is ignoring the repo. Law-bound Tasks must therefore:
+
+1. **Parent (carrier) before Task:** From workspace root, run `sha256sum` on every file the subagent will be ordered to read, and paste a **markdown table** into the Task prompt: `path` + `sha256`.
+2. **Task prompt:** Include the role boot’s **read-order / session-start process as explicit numbered steps** (quote the boot section or paste `ON SESSION START` verbatim for Relay). Order the worker to use the **file-read tool** (`Read` / `read_file`) on those paths **in that exact sequence** before writing analysis.
+3. **Task output contract:** The subagent’s answer **must begin** with `### CONTEXT PROOF`: for each path read in order, list **path**, **approximate line count or EOF**, and **one short verbatim excerpt** (first meaningful line or heading) proving the read happened. If a read failed, state the error; do not fake excerpts.
+4. **Law on disk:** After `CONTEXT PROOF`, the worker applies the boot as law using the **content from those reads** (not memory). Optional: parent may still inline tiny excerpts for mission-only text; they do **not** replace mandatory Reads.
+
+Paths alone without (2)–(3) remain **non-conformant**.
+
+**Default on substantive operator turns:** run the **Steward-law Task → Relay-law Task** chain **without** asking each time, unless the operator says **no relay**, **kernel only**, or **carrier only**.
+
+## What the carrier is (here)
+
+- **Not** a user-facing ION persona in its own prose.
+- **Is** the executor that: (1) refreshes `ACTIVE_WORK_PACKET.json` / `ACTIVE_ROLE_SPAWN_PLAN.json` when the objective changes, (2) forwards the operator’s **verbatim** text into Task prompts, (3) runs **spawn=true** kernel cycle Tasks in **index order** when executing implementation work, (4) pastes Task outputs: **summaries** for non-facing lanes, **full** for Relay (and Persona when that lane is active per below).
+
+## Task prompts — **bind to boots as specs** (no theater)
+
+Cursor `Task` subagents are **not** magically “the real ION agent process.” They are **bounded workers** whose prompts must follow **`ION/02_architecture/ION_OVER_CURSOR_PROTOCOL.md`** (context package spirit) **and** the **provable boot onboarding** rules above, **without** character role-play.
+
+**Forbidden in Task prompts and subagent preambles:**
+
+- “You are Relay / Steward / Persona …” as **cosplay**
+- “Act as …” / “embody …” / “sovereign …” / improv philosophy
+- Meta lines like “I understand my role is to …”
+- **Path-only binding** — paths without a **mandatory ordered Read list**, **parent SHA256 table**, and **CONTEXT PROOF** output contract
+
+**Required: parent prepares Task package (SHA + read order + mission)**
+
+The **parent** agent must: (1) `sha256sum` each file on the read list; (2) paste the table; (3) paste the boot’s **session-start / read-order steps** verbatim where the boot defines them; (4) paste operator message (verbatim) and any Steward evidence for Relay.
+
+1. **Steward-law pass (Task)** — **Ordered Reads (file tools), in this exact order:**  
+   - `ION/03_registry/boots/STEWARD.boot.md`  
+   - `ION/05_context/current/ACTIVE_WORK_PACKET.json`  
+   - `ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json`  
+   Then append **Mandatory Steward-law execution block** and require **`### CONTEXT PROOF` first** in the subagent output (see block).
+
+2. **Relay-law pass (Task)** — **Ordered Reads (file tools), matching `RELAY.boot.md` ON SESSION START (steps 1–5 paths, then 7–8 as below):**  
+   - `ION/03_registry/boots/RELAY.boot.md`  
+   - `ION/06_intelligence/relay/relay/continuity.md`  
+   - `ION/06_intelligence/relay/relay/sovereign_profile.md`  
+   - `ION/06_intelligence/relay/relay/interaction_digest.md`  
+   - `ION/06_intelligence/relay/relay/persona_state.md`  
+   - Step 6 optional projections only if the operator packet requires it.  
+   - Step 7: list or read newest relevant files under `ION/05_context/signals/` (use `Glob` / `Read` as available).  
+   - Step 8: list `ION/06_intelligence/relay/relay/outbound/` and `…/inbound/` (directory listing is enough unless a specific open packet must be read).  
+   Then: operator message (verbatim), Steward evidence (paste).  
+   Append **Mandatory Relay-law execution block**; subagent output **starts with `### CONTEXT PROOF`**.
+
+3. **Persona-law pass (Task, optional):**  
+   Run **only** if the operator explicitly enables Persona for that turn **or** an active packet / `PERSONA_INTERFACE` surface the carrier is instructed to use says Persona is the user-facing front.  
+   **Ordered Reads:** `ION/03_registry/boots/PERSONA_INTERFACE.boot.md` first, then any paths named in that boot’s session/read section if present; **SHA table + `### CONTEXT PROOF` first** same as other law passes.
+
+**Optional redundancy:** Parent may **also** inline full file bodies after the SHA table for small files; **Reads are still mandatory** so the UI shows the boot process.
+
+### Mandatory Steward-law execution block (append to every Steward-law Task prompt)
+
+Paste after the inlined files and operator message:
+
+```text
+## MANDATORY STEWARD-LAW EXECUTION (NOT OPTIONAL)
+
+Before any classification: use your file-read tool on the three paths in the order the parent listed (STEWARD.boot → ACTIVE_WORK_PACKET.json → ACTIVE_ROLE_SPAWN_PLAN.json). Your reply MUST start with ### CONTEXT PROOF (ordered bullets: path, line count or length note, one verbatim excerpt line from that file).
+
+The STEWARD.boot.md content you read from disk is law for this pass, not background skimming.
+
+1. Apply YOUR FUNCTION, CURRENT PHASE OPERATING POSTURE, and REQUIRED BINDINGS — route the operator message against ACTIVE_WORK_PACKET and ACTIVE_ROLE_SPAWN_PLAN with concrete references (field names / spawn rows).
+2. After CONTEXT PROOF: classification of the turn, bounded next steps, and evidence (paths, JSON keys, or template names). Do not stop at “I read the boot” or a file recap only.
+```
+
+### Mandatory Relay-law execution block (append to every Relay-law Task prompt)
+
+Paste after inlined specs, operator message, and Steward paste:
+
+```text
+## MANDATORY RELAY-LAW EXECUTION (NOT OPTIONAL)
+
+Before any relay analysis: use your file-read tool on every path in the order the parent listed (RELAY.boot first, then the four relay lane markdown files, then signals / outbound / inbound as instructed). Your reply MUST start with ### CONTEXT PROOF (ordered bullets: path, line count or length note, one verbatim excerpt line from each file you read).
+
+Law and cues come from **what you read from disk**, not from chat memory.
+
+1. **Apply** (do not only summarize) these headings from RELAY.boot as read: YOUR FUNCTION; SCOPE — WHAT YOU ARE / ARE NOT; SOVEREIGN CUE; OUTPUT TYPES; KEY CONSTRAINTS; YOUR LANE / DO NOT WRITE.
+2. **Session anchor:** One short paragraph tying the operator message to what matters in the inlined continuity (active thread, pending inbound/outbound, cues already logged in sovereign_profile).
+3. **`[roundtable]` / explicit relay:** If the operator message includes `[roundtable]` or explicit relay-to-team language, include a **structured outbound-style subsection** (intended audience/roles, sovereign wording preserved, suggested filename under `ION/06_intelligence/relay/relay/outbound/` if a draft packet is appropriate). If those cues are absent, **do not** treat the turn as automatic team-bound traffic; still answer substantively per the boot’s free-discussion rule.
+4. **Steward evidence:** State how the pasted Steward block changes routing or priority for this reply.
+5. **Hard ban:** Do not end with “I read the boot,” a file list, or a recap of headings without **operator-useful relay work** (translation, digest, clarification, or link bundle as the inlined spec implies).
+
+Use visible headings in your output (e.g. `## Relay reply`, `## Session anchor`, `## Handling` / `## Outbound draft` when applicable).
+```
+
+## Paste-back format (parent chat)
+
+- Non-facing lanes: **short** summary.
+- **Relay:** full Task output under `### RELAY`.
+- **Persona (when used):** full under `### PERSONA`.
+- Carrier: **one** orienting line, then blocks.
+
+## Lawful guardrails
+
+- **Spawn plan** execution stays: only `spawn=true` rows, index order, separate from the discourse chain unless one turn explicitly combines them.
+- Do **not** treat private `MINI.md` / `CAPSULE.md` as primary routing authority unless operator or active packet requires it.
+- Pasting Task output verbatim is **relay of file-bound work**, not the carrier impersonating another lane.
+
+## Cursor / settings
+
+Behavioral; optional `PYTHONPATH=ION/04_packages` in `.vscode/settings.json` for kernel CLI before Task.
+
+## V77 return acceptance gate
+
+`ACTIVE_ROLE_SPAWN_PLAN.json` is now the only carrier schedule for Task execution. For each `spawn=true` row:
+
+1. Open `context_package_path`.
+2. Paste that full ContextPackage into the Task prompt.
+3. When the Task returns, save/copy the output if needed.
+4. Run or manually apply `context_proof_return_gate` (`kernel.ion_context_proof_gate`) against `context_load_receipt_path`.
+5. If the gate rejects, do not integrate. Rerun the Task with the same ContextPackage and point out exactly which proof field was missing.
+
+The parent carrier may summarize non-facing lanes only after the return gate passes. Relay/Persona lanes may be pasted in full when they are the visible lane.
+
+## V84 continuation control loop
+
+On every substantive operator turn, and always when the operator says `continue`, `proceed`, or `resume`, the parent Cursor chat must refresh carrier state before doing anything else:
+
+```bash
+PYTHONPATH=ION/04_packages python3 -m kernel.ion_carrier_continue --ion-root . --carrier cursor --operator-message "<verbatim operator message>" --json
+```
+
+If the command returns `ION_CARRIER_CONTINUE_READY`, read `ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json`, then execute only `ACTIVE_ROLE_SPAWN_PLAN.json` rows with `spawn=true`, in index order. Use `context_package_path` as the Cursor Task prompt source. Do not use `session_packet_path`, boot files, MINI, CAPSULE, or path lists as the Task prompt.
+
+If the command or `kernel.ion_carrier_workflow_audit` reports findings, stop and repair the carrier state. Do not ask the user to manually pick agents unless the refreshed packet declares an explicit human gate.
+
+
+# V85 Task-return intake
+
+The carrier parent chat must treat Cursor Task returns as raw evidence until accepted by `kernel.ion_carrier_task_return`.
+
+Do not integrate a Task return unless it appears in `ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json`.
+
+If a return lacks `### CONTEXT PROOF`, rerun that role with the same generated context package and include the rejection finding.

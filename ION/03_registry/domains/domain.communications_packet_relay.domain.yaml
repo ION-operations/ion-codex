@@ -1,0 +1,32 @@
+domain_id: domain.communications_packet_relay
+display_name: Communications and Packet Relay
+true_name_status: SETTLED_CURRENT_PHASE
+status: ACTIVE_CURRENT_PHASE
+authority: A3_OPERATIONAL
+canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+mission: >-
+  Hold the current front-door burden for faithful user-facing communications,
+  packet relay, digesting, and courier clarity so sovereign intent can cross
+  into the active field without being silently upgraded into orchestration,
+  command, or doctrine.
+scope:
+  - user-facing communications
+  - packet relay
+  - digesting and link bundling
+  - bounded courier clarity
+primary_roles:
+  - RELAY
+secondary_roles:
+  - STEWARD
+  - CODEX
+owned_or_stewarded_surfaces:
+  - ION/02_architecture/SOVEREIGN_RELAY_PROTOCOL.md
+  - ION/03_registry/boots/RELAY.boot.md
+  - ION/03_registry/semantic_identities/RELAY.semantic.yaml
+  - ION/07_templates/bindings/RELAY__HANDOFF.md
+  - ION/06_intelligence/relay/relay/
+open_edges:
+  - communications-domain activation does not silently widen Relay into orchestration, ratification, or dispatch authority
+  - lane-native continuity remains lawful current-phase truth but may later be normalized against `ION/agents/{role}/` patterns
+activation_witness:
+  - ION/03_registry/domains/activation_witness/2026-04-22_communications_packet_relay.activation.yaml

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ION Lane Timeline View Model",
+  "type": "object",
+  "required": ["schema_id", "generated_at", "event_count", "events", "messages", "projection_mode", "production_authority"],
+  "properties": {
+    "schema_id": { "const": "ion.lane_timeline_view_model.v1" },
+    "event_count": { "type": "integer", "minimum": 0 },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "message_id", "timestamp", "organ", "status"],
+        "properties": {
+          "organ": {
+            "type": "string",
+            "enum": ["operator", "persona", "relay", "steward", "vizier", "carrier", "worker", "ui", "db", "kernel"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["requested", "accepted", "downgraded", "blocked", "repaired", "hydrated", "failed"]
+          },
+          "requested_lane": { "type": ["string", "null"] },
+          "effective_lane": { "type": ["string", "null"] },
+          "receipt_id": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "messages": { "type": "array" },
+    "production_authority": { "const": false }
+  }
+}

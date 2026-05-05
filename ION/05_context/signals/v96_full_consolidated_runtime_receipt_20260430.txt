@@ -1,0 +1,8 @@
+ION V96 FULL CONSOLIDATED RUNTIME RECEIPT
+created_at: 2026-04-30T21:12:52+00:00
+base: V88 operator queue/status full project
+applied_updates: V90,V91,V92,V93,V94,V95
+restored_missing_surfaces: V87 hook bridge/cursor SDK, pyproject.toml, ION/REPO_AUTHORITY.md
+validation: py_compile passed; autopilot/canonical/compiled/carrier audits ready; hook audit findings empty
+production_authority: false
+live_execution_authority: false

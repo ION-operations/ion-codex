@@ -1,0 +1,40 @@
+{
+  "approval": {
+    "approval_token": "ION_CHATOPS_APPROVED",
+    "approved": true,
+    "approved_by": "Braden"
+  },
+  "created_at": "2026-05-05T01:50:47+00:00",
+  "ion_action": {
+    "action_id": "sev-20260505t015046z-codex-work",
+    "actor": {
+      "callsign": "Sev",
+      "carrier": "chatgpt_browser"
+    },
+    "authority": {
+      "human_sovereign": "Braden",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true
+    },
+    "context_refs": [
+      "ION/02_architecture/ION_BROWSER_CARRIER_RUNTIME_PROTOCOL.md",
+      "ION/02_architecture/ION_CHATOPS_YAML_ACTION_PROTOCOL.md",
+      "ION/09_integrations/browser_extension/ion_chatops_bridge/",
+      "ION/04_packages/kernel/ion_chatops_bridge.py"
+    ],
+    "intent": "create_codex_work_packet",
+    "objective": "Continue the ION ChatOps Browser Carrier Runtime work from the latest browser conversation.\nInspect the repo, use existing ION gates, run focused validation, and return CONTEXT PROOF,\nTEMPLATE ACTION PROOF, VALIDATION, and RESULT.",
+    "receipts": {
+      "requested": [
+        "codex_work_packet_receipt",
+        "action_receipt"
+      ]
+    },
+    "schema": "ion.chatops.action.v1"
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatops.action_packet.v1",
+  "source": "ion_chatops_bridge"
+}

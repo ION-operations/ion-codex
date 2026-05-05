@@ -1,0 +1,123 @@
+{
+  "authority": {
+    "global_graph_canon": false,
+    "posture": "A3_BRANCH_LOCAL_GRAPH_PROJECTION",
+    "production_migration_authorized": false,
+    "ratification_required_for_A2_or_A1": true
+  },
+  "blocked_claims": {
+    "global_graph_canon": false,
+    "hidden_memory": false,
+    "numerical_identity_with_predecessor": false,
+    "production_authority": false,
+    "production_graph_migration_authorized": false,
+    "self_ratification": false
+  },
+  "branch": "ION-GPT55-SELF-MOUNT",
+  "edges": [
+    {
+      "edge_type": "edge.mounts_agent_as",
+      "evidence": [
+        "ION/02_architecture/AGENT_SELF_SURFACE_PROTOCOL.md"
+      ],
+      "source": "self_mount_branch:ION-GPT55-SELF-MOUNT",
+      "target": "runtime_identity_envelope:runtime-identity-envelope-8a4239d71058d7c5"
+    },
+    {
+      "edge_type": "edge.constrained_by_drift_gate",
+      "evidence": [
+        "ION/02_architecture/SELF_SURFACE_DRIFT_GATE_PROTOCOL.md"
+      ],
+      "source": "runtime_identity_envelope:runtime-identity-envelope-8a4239d71058d7c5",
+      "target": "self_surface_drift_assessment:self-surface-drift-343e309f805ed6b9"
+    },
+    {
+      "edge_type": "edge.evaluates_self_claim",
+      "evidence": [
+        "ION/04_packages/kernel/self_surface_drift_gate.py"
+      ],
+      "source": "self_surface_drift_assessment:self-surface-drift-343e309f805ed6b9",
+      "target": "runtime_identity_envelope:runtime-identity-envelope-8a4239d71058d7c5"
+    },
+    {
+      "edge_type": "edge.succeeds_without_identity_equivalence",
+      "evidence": [
+        "ION/02_architecture/AGENT_SUCCESSION_PACKET_PROTOCOL.md"
+      ],
+      "source": "runtime_identity_envelope:runtime-identity-envelope-8a4239d71058d7c5",
+      "target": "agent_succession_packet:agent-succession-5af858de6ec8056f"
+    },
+    {
+      "edge_type": "edge.inherits_evidence_from",
+      "evidence": [
+        "ION/05_context/history/front_door_runtime/persona_ingress/fdmsg-sess-v39-blocked-test-user-sovereign-contin-5917182c0919.json",
+        "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-sess-v39-blocked-test-user-sovereign-c07022dbe93b.json",
+        "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-sess-v39-blocked-test-user-so-68a95b74ca24.json",
+        "ION/05_context/history/front_door_runtime/receipts/fdreceipt-fdsteward-fdrelay-fdmsg-sess-v39-blocked-te-f05aeada5bdf.json"
+      ],
+      "source": "agent_succession_packet:agent-succession-5af858de6ec8056f",
+      "target": "runtime_identity_envelope:runtime-identity-envelope-8a4239d71058d7c5"
+    },
+    {
+      "edge_type": "edge.blocked_by_production_readiness",
+      "evidence": [
+        "ION/02_architecture/PRODUCT_READINESS_CHARTER.md"
+      ],
+      "source": "self_mount_branch:ION-GPT55-SELF-MOUNT",
+      "target": "production_readiness:NOT_PRODUCTION_READY"
+    }
+  ],
+  "emitted_at": "2026-04-25T23:40:00+00:00",
+  "global_graph_canon": false,
+  "nodes": [
+    {
+      "authority": "A3_BRANCH",
+      "evidence": [
+        "ION/00_BOOTSTRAP/V34_GPT55_SELF_MOUNT_DELEGATION_LOCK.md"
+      ],
+      "label": "ION-GPT55-SELF-MOUNT",
+      "node_id": "self_mount_branch:ION-GPT55-SELF-MOUNT",
+      "node_type": "node.self_mount_branch"
+    },
+    {
+      "authority": "A3_RUNTIME_IDENTITY",
+      "evidence": [
+        "ION/04_packages/kernel/runtime_identity_envelope.py"
+      ],
+      "label": "delegated self-mount architect",
+      "node_id": "runtime_identity_envelope:runtime-identity-envelope-8a4239d71058d7c5",
+      "node_type": "node.mounted_agent_identity_envelope"
+    },
+    {
+      "authority": "A3_DRIFT_GATE",
+      "evidence": [
+        "ION/04_packages/kernel/self_surface_drift_gate.py"
+      ],
+      "label": "S5",
+      "node_id": "self_surface_drift_assessment:self-surface-drift-343e309f805ed6b9",
+      "node_type": "node.self_surface_drift_assessment"
+    },
+    {
+      "authority": "A3_SUCCESSION",
+      "evidence": [
+        "ION/04_packages/kernel/agent_succession_packet.py"
+      ],
+      "label": "VALID_AGENT_SUCCESSION_PACKET",
+      "node_id": "agent_succession_packet:agent-succession-5af858de6ec8056f",
+      "node_type": "node.agent_succession_packet"
+    },
+    {
+      "authority": "A2/A3_GATE",
+      "evidence": [
+        "ION/04_packages/kernel/production_readiness.py"
+      ],
+      "label": "production readiness blocker",
+      "node_id": "production_readiness:NOT_PRODUCTION_READY",
+      "node_type": "node.production_readiness_blocker"
+    }
+  ],
+  "production_authority": false,
+  "projection_id": "self-mount-graph-d4483ed529a9773a",
+  "schema_id": "ion.self_mount_graph_projection.v1",
+  "verdict": "INVALID_SELF_MOUNT_GRAPH_PROJECTION"
+}

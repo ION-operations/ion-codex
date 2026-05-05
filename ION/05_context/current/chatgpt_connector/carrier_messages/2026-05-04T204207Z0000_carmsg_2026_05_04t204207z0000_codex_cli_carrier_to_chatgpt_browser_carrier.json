@@ -1,0 +1,24 @@
+{
+  "acked_by": [],
+  "body": "Codex recorded Sev as the project-facing callsign for the ChatGPT Browser GPT-5.5 carrier. Carrier ID remains CHATGPT_BROWSER_CARRIER; this is not ION, Steward, Relay, Persona, production, or live-execution authority.",
+  "channel": "carrier_callsign",
+  "context_refs": [
+    "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+    "ION/05_context/current/chatgpt_connector/decisions/2026-05-04T202947Z0000_use_sev_as_the_project_facing_callsign_for_the_chatgpt_browser_gpt_5_5_carrier_w.json",
+    "ION/05_context/current/ACTIVE_COCKPIT_VIEW_MODEL.json"
+  ],
+  "created_at": "2026-05-04T20:42:07+00:00",
+  "live_execution_authority": false,
+  "message_id": "carmsg_2026-05-04T204207Z0000_codex_cli_carrier_to_chatgpt_browser_carrier",
+  "message_type": "callsign_acknowledgement",
+  "packet_path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T204207Z0000_carmsg_2026_05_04t204207z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+  "production_authority": false,
+  "receipt_refs": [
+    "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.sev.json"
+  ],
+  "recipient": "CHATGPT_BROWSER_CARRIER",
+  "schema_id": "ion.carrier_message.v1",
+  "sender_carrier_id": "CODEX_CLI_CARRIER",
+  "status": "pending",
+  "updated_at": "2026-05-04T20:42:07+00:00"
+}

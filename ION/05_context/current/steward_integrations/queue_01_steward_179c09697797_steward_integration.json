@@ -1,0 +1,30 @@
+{
+  "accepted": true,
+  "created_at": "2026-05-03T04:19:33+00:00",
+  "decision": "INTEGRATED_AS_ACCEPTED_STATE_DELTA",
+  "external_execution_authority": false,
+  "gate": {
+    "accepted": true,
+    "action_id": "v107_trunk_preservation_steward_context_review",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.audit_observation.v1",
+    "touched_paths": [
+      "ION/04_packages/kernel/ion_trunk_preservation_gate.py",
+      "ION/04_packages/kernel/ion_safe_full_project_packager.py",
+      "ION/05_context/current/TRUNK_PRESERVATION_REPORT_V107.json"
+    ]
+  },
+  "index": 1,
+  "production_authority": false,
+  "receipt_id": "queue_01_steward_179c09697797_steward_integration",
+  "role": "steward",
+  "schema_id": "ion.steward_queue_integration_receipt.v1",
+  "source": "active_steward_integration_queue",
+  "task_output_path": "ION/05_context/current/task_returns/2026-05-03T040939Z0000_01_steward_task_return.md",
+  "task_output_sha256": "d30017deeebc20791d6de024dee07f09f6d0cddea272ce13f8b86c4a9899b29b",
+  "worker_output_preview": "### CONTEXT PROOF\n- ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md: sha256 37c4f30751a51a4da5d3de74b1d8cf9eb879e10c6fbf4dee398a8c227dad4aca; heading evidence confirms agent context systems protocol governs generated context packages and role context authority.\n- ION/03_registry/agent_context_system_registry.yaml: sha256 0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12; line evidence confirms registry-backed agent context systems are the active context source.\n- ION/05_context/current/agent_context_systems/STEWARD.context_system.md: sha256 29f4f7d4d5e0aa895a74500e651cae04b3f0b8eb8d09726a7f6d546b0de6e310; heading evidence identifies STEWARD context obligations for authority and integration review.\n- ION/03_registry/boots/STEWARD.boot.md: sha256 a8558d06f7e5a1829b8eb362597ccd9064889eb7cca1af990f94f62e177729b4; line evidence confirms STEWARD boot context was available to the carrier return.\n\n### TEMPLATE ACTION PROOF\ntemplate_id: ion.template.audit_observation.v1\naction_id: v107_trunk_preservation_steward_context_review\nresult: V107 preservation gate and safe full-project packager are accepted as non-production-authoritative mutation-safety machinery; protected and unexpected removals block packaging.\ntouched_paths:\n- ION/04_packages/kernel/ion_trunk_preservation_gate.py\n- ION/04_packages/kernel/ion_safe_full_project_packager.py\n- ION/05_context/current/TRUNK_PRESERVATION_REPORT_V107.json\n"
+}

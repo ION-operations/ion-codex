@@ -1,0 +1,45 @@
+schema_id: ion.chatops_local_daemon_policy.v1
+status: draft_non_production
+production_authority: false
+live_execution_authority: false
+listen_host: 127.0.0.1
+listen_port: 8767
+approval_token: ION_CHATOPS_APPROVED
+storage:
+  actions: ION/05_context/current/chatops_bridge/actions/
+  receipts: ION/05_context/current/chatops_bridge/receipts/
+  runtime: ION/05_context/current/chatops_bridge/runtime/
+  artifacts: ION/05_context/current/chatops_bridge/artifacts/
+supported_mvp_intents:
+  - register_artifact
+  - write_file_draft
+  - create_codex_work_packet
+  - create_github_issue_draft
+allowed_write_prefixes:
+  - ION/02_architecture/
+  - ION/03_registry/
+  - ION/05_context/current/chatops_bridge/
+  - ION/05_context/inbox/
+protected_path_tokens:
+  - /.git/
+  - .env
+  - secret
+  - token
+  - credential
+  - vault
+main_policy:
+  main_auto_push_allowed: false
+  scoped_branch_push_allowed: policy_gated_later
+  allowed_branch_prefixes:
+    - work/
+    - docs/
+    - agent/
+    - data-plane/
+    - sev/
+hard_gated_intents:
+  - delete_file
+  - overwrite_protected_file
+  - push_main
+  - access_credential
+  - production_deploy
+  - broad_shell

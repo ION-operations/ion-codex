@@ -1,0 +1,73 @@
+{
+  "accepted": true,
+  "active_connector_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp",
+  "active_process_id": 38274,
+  "active_process_running": true,
+  "active_running": true,
+  "active_status_path": "ION/05_context/current/ACTIVE_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL.json",
+  "active_tunnel_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com",
+  "cloudflared_command": [
+    "/home/sev/.local/bin/cloudflared",
+    "tunnel",
+    "--url",
+    "http://127.0.0.1:8765"
+  ],
+  "cloudflared_found": true,
+  "cloudflared_path": "/home/sev/.local/bin/cloudflared",
+  "connector_state": "TUNNEL_RUNNING_VERIFIED",
+  "deployment_authority": false,
+  "endpoint_path": "/mcp",
+  "findings": [],
+  "health_checks": {
+    "connector_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp",
+    "deployment_authority": false,
+    "live_execution_authority": false,
+    "local_http_preview": {
+      "error": null,
+      "ok": true,
+      "status_code": 200
+    },
+    "local_mcp_tools_list": {
+      "error": null,
+      "expected_tool_count": 15,
+      "forbidden_tools_exposed": [],
+      "missing_tools": [],
+      "ok": true,
+      "status_code": 200,
+      "tool_count": 15
+    },
+    "local_url": "http://127.0.0.1:8765",
+    "production_authority": false,
+    "public_mcp_tools_list": {
+      "error": null,
+      "expected_tool_count": 15,
+      "forbidden_tools_exposed": [],
+      "missing_tools": [],
+      "ok": true,
+      "status_code": 200,
+      "tool_count": 15
+    },
+    "public_write_confirmation_required": {
+      "error": null,
+      "finding": "bounded_write_confirmation_required",
+      "ok": true,
+      "required_confirmation": "ION_BOUNDED_WRITE_CONFIRMED",
+      "status_code": 200
+    },
+    "schema_id": "ion.chatgpt_browser_connector_transport_health.v1"
+  },
+  "http_preview_verdict": "ION_CHATGPT_BROWSER_HTTP_MCP_PREVIEW_READY",
+  "live_execution_authority": false,
+  "local_http_running": true,
+  "local_url": "http://127.0.0.1:8765",
+  "production_authority": false,
+  "public_tunnel_verified": true,
+  "required_public_connector_path": "https://<cloudflare-tunnel-host>/mcp",
+  "schema_id": "ion.chatgpt_browser_cloudflare_tunnel.v1",
+  "stale_connector_url": null,
+  "stale_tunnel_url": null,
+  "transport_state": "TUNNEL_RUNNING_VERIFIED",
+  "verdict": "ION_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL_READY",
+  "version_line": "V122_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL",
+  "write_tools_require_confirmation": true
+}

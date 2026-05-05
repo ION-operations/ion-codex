@@ -1,0 +1,5 @@
+lane,status,selection_state,last_completed_or_target,current_objective,horizon,success_condition,out_of_bounds
+Lane B activation/lifecycle,active-law emitted,closed-completed,Pass 50 active-law emission,hold as landed active center; no second widening pass,closed,pair remains authoritative without reopening scope,new activation widening or second emission cycle
+Lane C runtime/session/API,proposal-space ready,selected-now,Pass 35 delta + Pass 36 design packet,open matched runtime/session review set,H1 review-entry to first promotion-candidate readiness,three review drafts + explicit boundaries against scheduler/reporting/service shells,direct active emission or runtime code mutation
+Lane A meta-template,evidence/design open,not selected,Pass 33 delta + Pass 38 design packet,preserve as queued lane,not current horizon,remains available without drift,silent widening during runtime campaign
+Lane D compactness reconciliation,not started as campaign,not selected,Era 2 lane named in Pass 32,defer,not current horizon,kept explicitly deferred,implicit compactness rewrite while doing runtime work

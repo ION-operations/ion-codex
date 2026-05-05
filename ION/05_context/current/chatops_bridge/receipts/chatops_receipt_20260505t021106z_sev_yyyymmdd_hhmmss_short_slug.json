@@ -1,0 +1,54 @@
+{
+  "action_id": "sev-YYYYMMDD-HHMMSS-short-slug",
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": "Braden",
+  "created_at": "2026-05-05T02:11:06+00:00",
+  "failure_classification": null,
+  "files_touched": [
+    "ION/05_context/current/chatops_bridge/actions/sev_yyyymmdd_hhmmss_short_slug.json",
+    "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T021106Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform.json"
+  ],
+  "github_refs": [],
+  "intent": "create_codex_work_packet",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "receipt_id": "chatops_receipt_20260505T021106Z_sev_yyyymmdd_hhmmss_short_slug",
+  "schema_id": "ion.chatops.receipt.v1",
+  "sha256": {},
+  "status": "completed",
+  "target_refs": [
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T021106Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform.json",
+      "provider": "local_ion",
+      "role": "codex_work_request"
+    }
+  ],
+  "validation": {
+    "action_validation": {
+      "accepted": true,
+      "action_id": "sev-YYYYMMDD-HHMMSS-short-slug",
+      "approval_checked": true,
+      "findings": [],
+      "intent": "create_codex_work_packet",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true,
+      "risk_class": "approval_required_mutation",
+      "schema_id": "ion.chatops.action_validation.v1",
+      "warnings": []
+    },
+    "connector_result": {
+      "codex_work_queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "packet_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T021106Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform.json",
+      "request_id": "codex_req_2026-05-05T021106Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform"
+    },
+    "execution": {
+      "ok": true,
+      "packet_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T021106Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform.json",
+      "request_id": "codex_req_2026-05-05T021106Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform"
+    }
+  }
+}

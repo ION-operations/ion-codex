@@ -1,0 +1,43 @@
+ION V106 core telemetry/runtime floor receipt
+
+date: 2026-05-02
+production_authority: false
+live_execution_authority: false
+
+Implemented and verified:
+- lane timeline view model + JOC panel
+- receipt hydration mapper + JOC panel
+- runtime debug overlay + JOC panel
+- cursor hook state projector + schema + tests
+- Codex extension carrier protocol + profile + execution packet + audit
+- lifecycle package materialization with canonical-root compact runtime zip
+- deterministic front-door proof trace through Persona Interface, Relay, Steward queue/dispatch, Persona return, and receipts
+- active-state integrity audit for test/temp path contamination
+- carrier forced-objective classification correction
+- operator queue test isolation
+- compiled role context bundle audit test isolation
+- unreadable extraction-damaged files restored and package zip permissions normalized
+
+Current status:
+- kernel.ion_status verdict: ION_STATUS_READY
+- missing_state_surfaces: []
+- active objective: V106 runtime floor repair: package root integrity, core telemetry triad, cursor hook state projection
+- cursor hook bridge: ION_CURSOR_HOOK_BRIDGE_READY
+- cursor hook live event observed from this shell: false
+- Codex extension carrier audit: ION_CODEX_EXTENSION_CARRIER_READY
+- front-door proof trace: ION_FRONT_DOOR_PROOF_TRACE_READY
+- active-state integrity audit: ION_ACTIVE_STATE_INTEGRITY_READY
+- compact runtime package: ION/06_artifacts/packages/ION_COMPACT_RUNTIME_V106_20260502.zip
+- compact runtime package verdict: PACKAGE_ZIP_READY_WITH_EXCLUSIONS
+- compact runtime zip root audit: ZIP_ROOT_CONFIRMED
+- compact runtime final hash: recorded in ION/05_context/current/LIFECYCLE_PACKAGE_MANIFEST_COMPACT_RUNTIME_V106.json
+- compact runtime includes ACTIVE_FRONT_DOOR_PROOF_TRACE.json: true
+- compact runtime execution cycle entries: 0
+
+Verification:
+- PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest ION/tests -q
+- result: 67 passed in 0.56s
+
+Remaining boundary:
+- live SSE/DB adapters are not connected; view models mark those channels as projected/not-connected rather than faking live metrics.
+- front-door proof is deterministic; live host/SSE/DB binding through the same path remains unproven.

@@ -1,0 +1,7 @@
+ION/04_packages/kernel/ion_carrier_task_return.py
+ION/tests/test_kernel_ion_carrier_task_return.py
+ION/02_architecture/ION_CARRIER_TASK_RETURN_INTAKE_PROTOCOL.md
+.cursor/rules/ion-carrier-task-return-intake.mdc
+ION/docs/consolidation/ION_V85_CARRIER_TASK_RETURN_INTAKE_REPORT_20260429.md
+ION/05_context/signals/v85_carrier_task_return_intake_receipt_20260429.txt
+FILES_ADDED_V85_CARRIER_TASK_RETURN_INTAKE.txt

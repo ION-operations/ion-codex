@@ -1,0 +1,81 @@
+{
+  "active_spawn_plan_path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+  "active_turn_packet_path": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+  "active_work_packet_path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+  "blocked_by_findings": false,
+  "blocked_by_human_gate": false,
+  "carrier": "codex_extension",
+  "carrier_next_actions": [
+    "Read this ACTIVE_CARRIER_TURN_PACKET.json.",
+    "If human_gates is non-empty, stop spawning and request/record the gate answer.",
+    "Read ACTIVE_ROLE_SPAWN_PLAN.json.",
+    "Execute only role_spawn_plan rows where spawn=true, in ascending index order.",
+    "For each row, paste the generated context_package_path into a Cursor Task worker; do not paste session_packet_path alone.",
+    "Reject any Task return that does not begin with ### CONTEXT PROOF and include ### TEMPLATE ACTION PROOF.",
+    "Validate each Task return against its context_load_receipt_path using kernel.ion_context_proof_gate.",
+    "Validate each Task return's template/action section using kernel.ion_template_action_gate.",
+    "Record each Task return with kernel.ion_carrier_task_return before Steward integration.",
+    "Forward accepted returns to STEWARD integration; use RELAY only for visible reporting.",
+    "Use kernel.ion_status for status requests; do not infer status from chat memory.",
+    "Stop and request human decision only when blocked_by_findings=true or an explicit human gate appears in the active packet."
+  ],
+  "completed_role_count": 3,
+  "completed_role_indexes": [
+    1,
+    2,
+    3
+  ],
+  "created_at": "2026-05-04T14:58:05+00:00",
+  "execution_bundle_root": "ION/05_context/current/execution_cycles/2026-05-04T145805Z0000_carrier_continue_reconcile_chatgpt_browser_mcp_connector_transport_truth_health_check_carrier_spe",
+  "findings": {
+    "cycle_plan": [],
+    "human_gates": [],
+    "onboard": []
+  },
+  "forbidden_parent_chat_actions": [
+    "Do not perform STEWARD/MASON/VIZIER/NEMESIS/etc. work in the parent carrier chat.",
+    "Do not ask the operator which ION agents to spawn when a valid spawn plan exists.",
+    "Do not spawn roles from boot files, MINI.md, CAPSULE.md, or session_packet_path alone.",
+    "Do not treat path-list acknowledgment as context loading.",
+    "Do not continue from stale ACTIVE_ROLE_SPAWN_PLAN.json when this entrypoint can regenerate it.",
+    "Do not ignore ACTIVE_OPERATOR_MESSAGE_QUEUE.json or ACTIVE_HUMAN_GATE_QUEUE.json."
+  ],
+  "human_gate_queue_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+  "human_gates": [],
+  "live_execution_authority": false,
+  "mode": "manual-cursor",
+  "objective": "Reconcile ChatGPT Browser MCP connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions",
+  "operator_message": "continue",
+  "operator_message_classification": {
+    "action": "run_carrier_continue",
+    "active_human_gate_count": 0,
+    "classification": "continuation_signal",
+    "confidence": 0.98,
+    "live_execution_authority": false,
+    "message": "continue",
+    "mutates_runtime": true,
+    "normalized_message": "continue",
+    "production_authority": false,
+    "requires_human_gate_resolution": false,
+    "schema_id": "ion.operator_message_classification.v1"
+  },
+  "operator_message_interpretation": "CONTINUATION_SIGNAL_REUSE_ACTIVE_OBJECTIVE",
+  "operator_message_queue_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+  "production_authority": false,
+  "return_intake_state": {
+    "accepted_count": 0,
+    "pending_count": 0,
+    "rejected_count": 0,
+    "required_action": "No active spawn rows were emitted for this carrier turn; continue or queue new work.",
+    "schema_id": "ion.carrier_return_intake_state.v1",
+    "status": "NO_TASK_RETURNS_REQUIRED"
+  },
+  "schema_id": "ion.carrier_turn_packet.v1",
+  "source_operator_queue_item": null,
+  "spawn_policy": "required",
+  "spawn_queue": [],
+  "spawn_row_limit": 1,
+  "steward_integration_queue_path": "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json",
+  "task_return_ledger_path": "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json",
+  "workstream": "implementation"
+}

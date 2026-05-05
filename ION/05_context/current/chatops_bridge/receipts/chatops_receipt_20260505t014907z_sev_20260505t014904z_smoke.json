@@ -1,0 +1,53 @@
+{
+  "action_id": "sev-20260505t014904z-smoke",
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": "Braden",
+  "created_at": "2026-05-05T01:49:07+00:00",
+  "failure_classification": null,
+  "files_touched": [
+    "ION/05_context/current/chatops_bridge/actions/sev_20260505t014904z_smoke.json",
+    "ION/05_context/current/chatops_bridge/smoke/SEV_CHATOPS_SMOKE_sev-20260505t014904z.md"
+  ],
+  "github_refs": [],
+  "intent": "write_file_draft",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "receipt_id": "chatops_receipt_20260505T014907Z_sev_20260505t014904z_smoke",
+  "schema_id": "ion.chatops.receipt.v1",
+  "sha256": {
+    "ION/05_context/current/chatops_bridge/smoke/SEV_CHATOPS_SMOKE_sev-20260505t014904z.md": "54f411f7d7fdcfe5fbadffe83d87335f848c0ffcbdf6c4dc3653fe11e8de5914"
+  },
+  "status": "completed",
+  "target_refs": [
+    {
+      "path": "ION/05_context/current/chatops_bridge/smoke/SEV_CHATOPS_SMOKE_sev-20260505t014904z.md",
+      "provider": "local_ion"
+    }
+  ],
+  "validation": {
+    "action_validation": {
+      "accepted": true,
+      "action_id": "sev-20260505t014904z-smoke",
+      "approval_checked": true,
+      "findings": [],
+      "intent": "write_file_draft",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true,
+      "risk_class": "approval_required_mutation",
+      "schema_id": "ion.chatops.action_validation.v1",
+      "warnings": []
+    },
+    "after_write": [
+      "sha256"
+    ],
+    "execution": {
+      "ok": true,
+      "path": "ION/05_context/current/chatops_bridge/smoke/SEV_CHATOPS_SMOKE_sev-20260505t014904z.md",
+      "sha256": "54f411f7d7fdcfe5fbadffe83d87335f848c0ffcbdf6c4dc3653fe11e8de5914"
+    }
+  }
+}

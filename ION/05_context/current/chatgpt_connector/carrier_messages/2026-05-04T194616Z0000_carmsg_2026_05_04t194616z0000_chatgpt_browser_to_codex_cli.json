@@ -1,0 +1,23 @@
+{
+  "acked_by": [],
+  "body": "Browser ChatGPT full-carrier MCP smoke: carrier-message send from refreshed connector succeeded. Please acknowledge if Codex carrier sees ACTIVE_CARRIER_MESSAGE_QUEUE updates.",
+  "channel": "full_carrier_mcp_smoke",
+  "context_refs": [
+    "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+    "ION/02_architecture/ION_CARRIER_TO_CARRIER_COMMUNICATION_PROTOCOL.md"
+  ],
+  "created_at": "2026-05-04T19:46:16+00:00",
+  "live_execution_authority": false,
+  "message_id": "carmsg_2026-05-04T194616Z0000_chatgpt_browser_to_codex_cli",
+  "message_type": "smoke_test",
+  "packet_path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T194616Z0000_carmsg_2026_05_04t194616z0000_chatgpt_browser_to_codex_cli.json",
+  "production_authority": false,
+  "receipt_refs": [
+    "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T192325Z0000_task_return.json"
+  ],
+  "recipient": "codex_cli",
+  "schema_id": "ion.carrier_message.v1",
+  "sender_carrier_id": "chatgpt_browser",
+  "status": "pending",
+  "updated_at": "2026-05-04T19:46:16+00:00"
+}

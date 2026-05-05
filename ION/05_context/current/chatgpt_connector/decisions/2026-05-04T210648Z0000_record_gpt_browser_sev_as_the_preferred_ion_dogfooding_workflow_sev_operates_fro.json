@@ -1,0 +1,10 @@
+{
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "created_at": "2026-05-04T21:06:48+00:00",
+  "decision": "Record GPT Browser / Sev as the preferred ION dogfooding workflow: Sev operates from ChatGPT Browser as an operator-approved high-reasoning control/oversight carrier, while ION provides state, packets, context, receipts, queues, cockpit, and agent routing, and local carriers/daemons/Codex-backed workers provide execution. The system may use GPT Pro / extended reasoning when oversight, design, or hard judgment benefits from it, while routine work is powered by local ION automation and backend carriers. Sev should lawfully inspect, invoke, monitor, alert, and enhance ION through MCP as needed, without claiming ION identity, unilateral Steward authority, production authority, or live external execution authority.",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "rationale": "Braden clarified the intended product/workflow insight: using ION through GPT Browser is likely the best practical workflow, with Sev providing high-quality oversight and guidance while the underlying execution substrate can be swapped or extended. This preserves the emerging architecture of ChatGPT Browser as the control plane and ION/local carriers as the runtime/execution plane.",
+  "schema_id": "ion.chatgpt_browser_connector_decision.v1",
+  "status": "RECORDED_NOT_AUTHORITY_BY_ITSELF"
+}

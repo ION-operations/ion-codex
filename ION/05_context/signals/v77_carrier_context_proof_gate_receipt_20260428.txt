@@ -1,0 +1,20 @@
+ION V77 carrier context-proof gate receipt
+created_at_utc: 2026-04-28T20:31:49.803860+00:00
+
+verdict: V77_CARRIER_CONTEXT_PROOF_GATE_LANDED
+
+current_work_packet: ION/05_context/current/ACTIVE_WORK_PACKET.json
+current_spawn_plan: ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json
+current_execution_cycle: ION/05_context/current/execution_cycles/2026-04-28T_v77_strict_context_proof_gate/
+
+new_gate: ION/04_packages/kernel/ion_context_proof_gate.py
+gate_contract: Task returns must begin with ### CONTEXT PROOF and pass receipt validation before Steward integration.
+
+non_authority:
+- production_authority: false
+- live_execution_authority: false
+
+operator_relevant_resolution:
+- Cursor parent chat remains the carrier-control lane.
+- Spawned Tasks must receive generated ContextPackages, not path-only session scaffolds.
+- A Task that only reports reading a context file is rejected.

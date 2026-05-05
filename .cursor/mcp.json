@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "ion-control": {
+      "command": "python3",
+      "args": [
+        "-S",
+        "ION/09_integrations/mcp/ion_mcp_server.py",
+        "--ion-root",
+        "."
+      ],
+      "env": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "ION/04_packages"
+      }
+    }
+  }
+}

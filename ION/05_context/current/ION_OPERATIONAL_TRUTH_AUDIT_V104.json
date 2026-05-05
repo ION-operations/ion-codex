@@ -1,0 +1,137 @@
+{
+  "checks": [
+    {
+      "check_id": "root_invariant",
+      "evidence": [
+        "pyproject.toml",
+        "ION/REPO_AUTHORITY.md"
+      ],
+      "required_next": [],
+      "severity": "info",
+      "status": "PASS",
+      "summary": "Shell root contains pyproject.toml and ION/REPO_AUTHORITY.md."
+    },
+    {
+      "check_id": "active_state_surface",
+      "evidence": [
+        "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+        "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+        "ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json",
+        "ION/05_context/current/ACTIVE_COCKPIT_VIEW_MODEL.json",
+        "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json"
+      ],
+      "required_next": [],
+      "severity": "info",
+      "status": "PASS",
+      "summary": "Required active state files are present."
+    },
+    {
+      "check_id": "active_work_template_binding",
+      "evidence": [
+        "ION/docs/cursor/ION_CURSOR_WORK_CYCLE_PACKET.md",
+        "active_template_exists_field=True"
+      ],
+      "required_next": [],
+      "severity": "info",
+      "status": "PASS",
+      "summary": "Active carrier work-cycle template exists and ACTIVE_WORK_PACKET agrees."
+    },
+    {
+      "check_id": "context_window_stale_existence_flags",
+      "evidence": [],
+      "required_next": [],
+      "severity": "info",
+      "status": "PASS",
+      "summary": "No stale false existence flags remain in the active context-window plan."
+    },
+    {
+      "check_id": "context_window_true_missing_required_surfaces",
+      "evidence": [],
+      "required_next": [],
+      "severity": "info",
+      "status": "PASS",
+      "summary": "No non-legacy required context-window paths are missing."
+    },
+    {
+      "check_id": "role_context_system_completeness",
+      "evidence": [],
+      "required_next": [],
+      "severity": "info",
+      "status": "PASS",
+      "summary": "Required role context-system cards exist and are non-empty."
+    },
+    {
+      "check_id": "local_survival_loop_modules",
+      "evidence": [
+        "ION/04_packages/kernel/ion_autonomous_loop.py",
+        "ION/04_packages/kernel/ion_template_action_gate.py",
+        "ION/04_packages/kernel/ion_steward_integrate.py",
+        "ION/04_packages/kernel/ion_context_lifecycle.py",
+        "ION/04_packages/kernel/ion_temporal_context_enforcement_audit.py"
+      ],
+      "required_next": [],
+      "severity": "info",
+      "status": "PASS",
+      "summary": "Local autonomous loop, template gate, Steward integration, lifecycle, and temporal audit modules exist."
+    },
+    {
+      "check_id": "context_lifecycle_temporal_enforcement",
+      "evidence": [
+        "temporal_context_protocol_surfaces_present",
+        "temporal_context_kernel_surfaces_present",
+        "autonomous_loop_bound_to_context_lifecycle_audit",
+        "carrier_release_packaging_gate_not_yet_bound_to_context_lifecycle",
+        "context_lifecycle_policy_and_tests_present"
+      ],
+      "required_next": [
+        "bind release/carrier packaging to context lifecycle before large forensic branches are zipped as hot runtime"
+      ],
+      "severity": "warning",
+      "status": "PASS",
+      "summary": "Temporal/context enforcement audit verdict: SYSTEM_PRESENT_AND_PARTIALLY_ENFORCED"
+    },
+    {
+      "check_id": "context_lifecycle_size_posture",
+      "evidence": [
+        "context_lifecycle_within_current_branch_soft_limits"
+      ],
+      "required_next": [],
+      "severity": "info",
+      "status": "PASS",
+      "summary": "Context lifecycle audit verdict: PASS_WITH_LIFECYCLE_MODEL; total_context_bytes=18650609"
+    },
+    {
+      "check_id": "worker_adapter_boundary",
+      "evidence": [
+        "ION/04_packages/kernel/ion_autonomous_loop.py"
+      ],
+      "required_next": [
+        "implement a bounded worker-adapter interface after local loop and packaging gates remain stable"
+      ],
+      "severity": "warning",
+      "status": "BLOCKED_BY_DESIGN",
+      "summary": "Autonomous loop remains deterministic/local; external workers are intentionally not bound yet."
+    },
+    {
+      "check_id": "long_horizon_operational_roadmap",
+      "evidence": [
+        "ION/05_context/current/ION_MASTER_OPERATIONAL_ROADMAP_V104.json"
+      ],
+      "required_next": [],
+      "severity": "info",
+      "status": "PASS",
+      "summary": "V104 master operational roadmap is present."
+    }
+  ],
+  "emitted_at": "2026-05-02T20:38:52+00:00",
+  "line": "V104_OPERATIONAL_TRUTH_AUDIT_AND_LONG_HORIZON_ORCHESTRATION",
+  "open_blocker_count": 0,
+  "pass_count": 10,
+  "production_authority": false,
+  "repair_applied_count": 3,
+  "scanned_root": "/mnt/data/ion_v104_work/CURSOR- ION",
+  "schema_id": "ion.operational_truth_audit.v104",
+  "verdict": "PARTIAL_OPERATIONAL_READY_WITH_OPEN_GATES",
+  "warning_count": 1
+}

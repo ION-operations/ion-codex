@@ -1,0 +1,417 @@
+{
+  "active_packet_path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+  "active_template": "ION/docs/cursor/ION_CURSOR_WORK_CYCLE_PACKET.md",
+  "active_template_exists": true,
+  "allowed_paths": [
+    "ION/05_context/current/",
+    "ION/04_packages/kernel/",
+    "ION/tests/",
+    "ION/docs/consolidation/",
+    "ION/05_context/signals/",
+    "ION/02_architecture/"
+  ],
+  "carrier": "codex_extension",
+  "carrier_capabilities": {
+    "can_edit_files": true,
+    "can_read_files": true,
+    "can_run_tests": true,
+    "can_spawn_carrier_slots": false,
+    "can_use_mcp": true,
+    "carrier": "codex_extension",
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "context_package": {
+    "kind": "active_work_packet",
+    "route_sessions": [
+      {
+        "load_targets": [
+          {
+            "exists": true,
+            "kind": "file",
+            "label": "steward.boot",
+            "note": "",
+            "path": "ION/03_registry/boots/STEWARD.boot.md",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "steward.private_mini",
+            "note": "legacy private mini; live context arrives through boot/context-system package",
+            "path": "ION/agents/steward/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "steward.private_capsule",
+            "note": "legacy private capsule; live context arrives through boot/context-system package",
+            "path": "ION/agents/steward/CAPSULE.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "glob",
+            "label": "steward.inbox",
+            "note": "",
+            "path": "ION/05_context/inbox/steward_*",
+            "required": false
+          },
+          {
+            "exists": true,
+            "kind": "dir",
+            "label": "steward.signals",
+            "note": "",
+            "path": "ION/05_context/signals",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "steward.projection.MINI.md",
+            "note": "shared projection only",
+            "path": "ION/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "steward.projection.STATUS.md",
+            "note": "shared projection only",
+            "path": "ION/STATUS.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "steward.projection.CAPSULE.md",
+            "note": "shared projection only",
+            "path": "ION/CAPSULE.md",
+            "required": false
+          }
+        ],
+        "purpose": "classify the task and prepare the scoped implementation route",
+        "required": true,
+        "role": "STEWARD"
+      },
+      {
+        "load_targets": [
+          {
+            "exists": true,
+            "kind": "file",
+            "label": "vizier.boot",
+            "note": "",
+            "path": "ION/03_registry/boots/VIZIER.boot.md",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vizier.private_mini",
+            "note": "legacy private mini; live context arrives through boot/context-system package",
+            "path": "ION/agents/vizier/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vizier.private_capsule",
+            "note": "legacy private capsule; live context arrives through boot/context-system package",
+            "path": "ION/agents/vizier/CAPSULE.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "glob",
+            "label": "vizier.inbox",
+            "note": "",
+            "path": "ION/05_context/inbox/vizier*",
+            "required": false
+          },
+          {
+            "exists": true,
+            "kind": "dir",
+            "label": "vizier.signals",
+            "note": "",
+            "path": "ION/05_context/signals",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vizier.projection.MINI.md",
+            "note": "shared projection only",
+            "path": "ION/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vizier.projection.STATUS.md",
+            "note": "shared projection only",
+            "path": "ION/STATUS.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vizier.projection.CAPSULE.md",
+            "note": "shared projection only",
+            "path": "ION/CAPSULE.md",
+            "required": false
+          }
+        ],
+        "purpose": "define scope, dependencies, and required review posture",
+        "required": true,
+        "role": "VIZIER"
+      },
+      {
+        "load_targets": [
+          {
+            "exists": true,
+            "kind": "file",
+            "label": "mason.boot",
+            "note": "",
+            "path": "ION/03_registry/boots/MASON.boot.md",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "mason.private_mini",
+            "note": "legacy private mini; live context arrives through boot/context-system package",
+            "path": "ION/agents/mason/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "mason.private_capsule",
+            "note": "legacy private capsule; live context arrives through boot/context-system package",
+            "path": "ION/agents/mason/CAPSULE.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "glob",
+            "label": "mason.inbox",
+            "note": "",
+            "path": "ION/05_context/inbox/mason_*",
+            "required": false
+          },
+          {
+            "exists": true,
+            "kind": "dir",
+            "label": "mason.signals",
+            "note": "",
+            "path": "ION/05_context/signals",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "mason.projection.MINI.md",
+            "note": "shared projection only",
+            "path": "ION/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "mason.projection.STATUS.md",
+            "note": "shared projection only",
+            "path": "ION/STATUS.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "mason.projection.CAPSULE.md",
+            "note": "shared projection only",
+            "path": "ION/CAPSULE.md",
+            "required": false
+          }
+        ],
+        "purpose": "execute the bounded implementation slice",
+        "required": true,
+        "role": "MASON"
+      },
+      {
+        "load_targets": [
+          {
+            "exists": true,
+            "kind": "file",
+            "label": "vice.boot",
+            "note": "",
+            "path": "ION/03_registry/boots/VICE.boot.md",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vice.private_mini",
+            "note": "legacy private mini; live context arrives through boot/context-system package",
+            "path": "ION/agents/vice/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vice.private_capsule",
+            "note": "legacy private capsule; live context arrives through boot/context-system package",
+            "path": "ION/agents/vice/CAPSULE.md",
+            "required": false
+          },
+          {
+            "exists": true,
+            "kind": "dir",
+            "label": "vice.signals",
+            "note": "",
+            "path": "ION/05_context/signals",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vice.projection.MINI.md",
+            "note": "shared projection only",
+            "path": "ION/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vice.projection.STATUS.md",
+            "note": "shared projection only",
+            "path": "ION/STATUS.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "vice.projection.CAPSULE.md",
+            "note": "shared projection only",
+            "path": "ION/CAPSULE.md",
+            "required": false
+          }
+        ],
+        "purpose": "apply risk pressure if the slice affects continuity or governance",
+        "required": false,
+        "role": "VICE"
+      },
+      {
+        "load_targets": [
+          {
+            "exists": true,
+            "kind": "file",
+            "label": "nemesis.boot",
+            "note": "",
+            "path": "ION/03_registry/boots/NEMESIS.boot.md",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "nemesis.private_mini",
+            "note": "legacy private mini; live context arrives through boot/context-system package",
+            "path": "ION/agents/nemesis/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "nemesis.private_capsule",
+            "note": "capsule not yet present in the active root",
+            "path": "ION/agents/nemesis/CAPSULE.md",
+            "required": false
+          },
+          {
+            "exists": true,
+            "kind": "dir",
+            "label": "nemesis.signals",
+            "note": "",
+            "path": "ION/05_context/signals",
+            "required": true
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "nemesis.projection.MINI.md",
+            "note": "shared projection only",
+            "path": "ION/MINI.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "nemesis.projection.STATUS.md",
+            "note": "shared projection only",
+            "path": "ION/STATUS.md",
+            "required": false
+          },
+          {
+            "exists": false,
+            "kind": "file",
+            "label": "nemesis.projection.CAPSULE.md",
+            "note": "shared projection only",
+            "path": "ION/CAPSULE.md",
+            "required": false
+          }
+        ],
+        "purpose": "audit or verify when the slice becomes release-sensitive",
+        "required": false,
+        "role": "NEMESIS"
+      }
+    ],
+    "source": "ION/05_context/current/ACTIVE_WORK_PACKET.json"
+  },
+  "created_at": "2026-05-04T13:52:01+00:00",
+  "forbidden_paths": [
+    ".env",
+    ".env.*",
+    "secrets/",
+    "vault/",
+    "credentials/",
+    "archive roots as authority",
+    "sibling roots as authority"
+  ],
+  "integration_target": "STEWARD",
+  "live_execution_authority": false,
+  "mode": "MANUAL_TEMPLATE_BOUND_WORKFLOW",
+  "next_lawful_action": "Execute this active work packet within allowed paths and return evidence through the declared return contract.",
+  "objective": "Reconcile ChatGPT Browser MCP connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions",
+  "packet_type": "ION_ACTIVE_WORK_PACKET",
+  "production_authority": false,
+  "return_contract": [
+    "files_changed",
+    "sample_onboarding_json",
+    "focused_test_result",
+    "full_suite_result",
+    "commit_hash",
+    "remaining_gaps"
+  ],
+  "role_phase_sequence": [
+    "RELAY",
+    "STEWARD",
+    "VIZIER",
+    "MASON",
+    "VICE",
+    "NEMESIS",
+    "STEWARD",
+    "RELAY"
+  ],
+  "route_source": {
+    "kind": "kernel.sequential_kernel",
+    "missing_required_surfaces": {},
+    "required_surfaces_ok": true,
+    "workstream": "implementation"
+  },
+  "schema_version": "1.0",
+  "template_status": "present",
+  "validation_commands": [
+    "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_carrier_onboard.py",
+    "PYTHONPATH=ION/04_packages pytest -q ION/tests"
+  ],
+  "visible_report_target": "RELAY"
+}

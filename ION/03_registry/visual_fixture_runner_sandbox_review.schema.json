@@ -1,0 +1,123 @@
+{
+  "$id": "ion.visual_fixture_runner_sandbox_review.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "allowed_artifact_roots": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "credential_policy": {
+      "enum": [
+        "NO_CREDENTIALS",
+        "SANITIZED_FIXTURES_ONLY",
+        "UNREVIEWED",
+        "BLOCKED"
+      ]
+    },
+    "dom_mutation_policy": {
+      "enum": [
+        "NO_DOM_MUTATION",
+        "TEMPORARY_ANNOTATION_ONLY_PROPOSED",
+        "UNREVIEWED",
+        "BLOCKED"
+      ]
+    },
+    "emitted_at": {
+      "type": "string"
+    },
+    "file_write_policy": {
+      "enum": [
+        "RECEIPT_OUTPUT_ONLY",
+        "WORKSPACE_ARTIFACT_OUTPUT_ONLY_PROPOSED",
+        "UNREVIEWED",
+        "BLOCKED"
+      ]
+    },
+    "forbidden_capabilities": {
+      "type": "object"
+    },
+    "lineage_refs": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "network_isolation": {
+      "enum": [
+        "NO_NETWORK",
+        "LOCALHOST_ONLY_PROPOSED",
+        "UNREVIEWED",
+        "BLOCKED"
+      ]
+    },
+    "production_authority": {
+      "const": false
+    },
+    "recommended_next_actions": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "review_findings": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "review_id": {
+      "type": "string"
+    },
+    "review_verdict": {
+      "enum": [
+        "SANDBOX_REVIEW_PASSED_PLAN_ONLY",
+        "SANDBOX_REVIEW_NEEDS_REMEDIATION",
+        "SANDBOX_REVIEW_BLOCKED_BY_STEWARD",
+        "SANDBOX_REVIEW_REJECTED_FOR_FORBIDDEN_CAPABILITY"
+      ]
+    },
+    "sandbox_scope": {
+      "enum": [
+        "LOCAL_DEV_REVIEW_ONLY",
+        "LOCAL_DEV_SPEC_CANDIDATE",
+        "BLOCKED"
+      ]
+    },
+    "schema_id": {
+      "const": "ion.visual_fixture_runner_sandbox_review.v1"
+    },
+    "steward_gate_status": {
+      "enum": [
+        "APPROVED_REVIEW_ONLY",
+        "STEWARD_REVIEW_REQUIRED",
+        "BLOCKED"
+      ]
+    },
+    "surface_under_review": {
+      "type": "string"
+    },
+    "version": {
+      "const": "V50_VISUAL_FIXTURE_RUNNER_LOCAL_SANDBOX_REVIEW"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "review_id",
+    "emitted_at",
+    "surface_under_review",
+    "sandbox_scope",
+    "network_isolation",
+    "credential_policy",
+    "dom_mutation_policy",
+    "file_write_policy",
+    "steward_gate_status",
+    "review_verdict",
+    "production_authority",
+    "forbidden_capabilities"
+  ],
+  "title": "ION Visual Fixture Runner Sandbox Review Receipt",
+  "type": "object"
+}

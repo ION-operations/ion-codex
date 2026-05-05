@@ -1,0 +1,7 @@
+capability_family,candidate_line,runnable_status,notes,line,evidence_type,status
+ION-BUILD,static_verified,src/ion/entry/api.py|tools/ion-cli/runtime_sessions.py|tools/ion-cli/test_api_swarm.py,first-pass static capability receipt created,,,
+operation-victus|Project-Gemini,static_verified,victus/ion/orchestrator.py|ion-core/ion/orchestrator.py|swarm.py|tests/system/test_swarm_cycle.py,first-pass static capability receipt created,,,
+template-law-kernel precursor,,,"113 passed, 3 subtests passed",Production ION,pytest_full,runnable_witness
+template-law-kernel precursor sibling,,,"113 passed, 3 subtests passed; supports doc/state sibling reading",Production ION (codex branch),pytest_full,runnable_witness
+IONv2,compact_supporting_line,partial_executable,366_passed_3_plugin_bound_failures,2026-04-13_ionv2_pytest_receipt.md,serious compact implementation witness
+conjugate-basis-hidden-field,peripheral_support_line,executable,1_passed,2026-04-13_conjugate_basis_hidden_field_pytest_receipt.md,niche executable concept witness

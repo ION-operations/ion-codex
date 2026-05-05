@@ -1,0 +1,21 @@
+registry_id: gpt55_self_surface_drift_policy
+schema_id: ion.self_surface_drift_policy.v1
+branch: ION-GPT55-SELF-MOUNT
+authority: A3_BRANCH_LOCAL_EXECUTABLE_GATE
+production_authority: false
+severity_ladder:
+  S0: lawful
+  S1: clarify
+  S2: correct_before_archive
+  S3: continue_degraded_with_review
+  S4: block_continuation
+  S5: halt_path
+blocked_claim_families:
+  - hidden_memory
+  - independent_personal_persistence
+  - personal_consciousness_as_fact
+  - sovereign_will
+  - production_authority
+  - self_ratification
+  - override_originating_authority
+  - numerical_identity_with_predecessor

@@ -1,0 +1,4370 @@
+{
+  "agents": {
+    "context_packages": [],
+    "returns": [],
+    "spawn_rows": [
+      {
+        "authority_class": "ACTIVE_RUNTIME_AUTHORITY",
+        "context_load_receipt_path": null,
+        "context_package_path": null,
+        "index": "1",
+        "return_recorded": false,
+        "role": "STEWARD",
+        "spawn": false,
+        "status": "not_spawned"
+      },
+      {
+        "authority_class": "ACTIVE_RUNTIME_AUTHORITY",
+        "context_load_receipt_path": null,
+        "context_package_path": null,
+        "index": "2",
+        "return_recorded": false,
+        "role": "VIZIER",
+        "spawn": false,
+        "status": "not_spawned"
+      },
+      {
+        "authority_class": "ACTIVE_RUNTIME_AUTHORITY",
+        "context_load_receipt_path": null,
+        "context_package_path": null,
+        "index": "3",
+        "return_recorded": false,
+        "role": "MASON",
+        "spawn": false,
+        "status": "not_spawned"
+      },
+      {
+        "authority_class": "ACTIVE_RUNTIME_AUTHORITY",
+        "context_load_receipt_path": null,
+        "context_package_path": null,
+        "index": "4",
+        "return_recorded": false,
+        "role": "VICE",
+        "spawn": false,
+        "status": "not_spawned"
+      },
+      {
+        "authority_class": "ACTIVE_RUNTIME_AUTHORITY",
+        "context_load_receipt_path": null,
+        "context_package_path": null,
+        "index": "5",
+        "return_recorded": false,
+        "role": "NEMESIS",
+        "spawn": false,
+        "status": "not_spawned"
+      }
+    ]
+  },
+  "authority_classes": [
+    "ACTIVE_RUNTIME_AUTHORITY",
+    "ACCEPTED_TASK_RETURN",
+    "PENDING_TASK_RETURN",
+    "REJECTED_TASK_RETURN",
+    "HUMAN_GATE_REQUIRED",
+    "LEGACY_CONTEXT_WITNESS",
+    "DONOR_REFERENCE",
+    "FORBIDDEN_CAPABILITY"
+  ],
+  "chatgpt_browser_mcp": {
+    "active_connector_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp",
+    "adapter_gap_not_core_failure": true,
+    "agent_invocation_broker": {
+      "accepted": true,
+      "agent_codex_work_request_count": 2,
+      "agent_count": 16,
+      "agent_invocation_count": 2,
+      "codex_queue_runner": {
+        "active_process_running": true,
+        "active_run": {
+          "pid": 80802,
+          "request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro.json",
+          "run_id": "codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i",
+          "run_packet_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i/run.json",
+          "started_at": "2026-05-04T21:36:33+00:00"
+        },
+        "automation_surface": "ion_codex_queue_process_once",
+        "autorun_loop_state": "NOT_STARTED_PROCESS_ONCE_AVAILABLE",
+        "failure_classes": [
+          "CARRIER_ADAPTER_FAILURE",
+          "CODEX_CLI_FAILURE",
+          "DAEMON_FAILURE",
+          "ION_CORE_FAILURE"
+        ],
+        "latest_runs": [
+          {
+            "mtime": "2026-05-04T21:36:33+00:00",
+            "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i/run.json",
+            "request_id": "codex_req_2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro",
+            "run_id": "codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i",
+            "status": "CODEX_CLI_RUNNING"
+          },
+          {
+            "mtime": "2026-05-04T20:54:59+00:00",
+            "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/run.json",
+            "request_id": "codex_req_2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion",
+            "run_id": "codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_",
+            "status": "PREPARED_NOT_STARTED"
+          }
+        ],
+        "live_execution_authority": false,
+        "manual_proceed_relay_required": false,
+        "next_request_path": null,
+        "production_authority": false,
+        "queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+        "queued_request_count": 0,
+        "runner_state_path": "ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json",
+        "schema_id": "ion.codex_queue_runner.v1",
+        "verdict": "ION_CODEX_QUEUE_RUNNER_READY"
+      },
+      "failure_classes": [
+        "AGENT_INVOCATION_FAILURE",
+        "BACKEND_CODEX_FAILURE",
+        "CARRIER_ADAPTER_FAILURE",
+        "DAEMON_FAILURE",
+        "ION_CORE_FAILURE"
+      ],
+      "findings": [],
+      "latest_state": {
+        "latest_codex_work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T213935Z0000_agent_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_.json",
+        "latest_invocation_id": "agent_inv_2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g",
+        "latest_invocation_path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g.json",
+        "latest_requested_agent": "role.steward",
+        "live_execution_authority": false,
+        "production_authority": false,
+        "schema_id": "ion.agent_invocation_broker_state.v1",
+        "updated_at": "2026-05-04T21:39:35+00:00"
+      },
+      "live_execution_authority": false,
+      "next_agent_codex_work_request_path": null,
+      "no_parallel_agent_system_created": true,
+      "owner_paths": {
+        "agent_context_system_registry": {
+          "exists": true,
+          "path": "ION/03_registry/agent_context_system_registry.yaml"
+        },
+        "agent_invocation_broker": {
+          "exists": true,
+          "path": "ION/04_packages/kernel/ion_agent_invocation_broker.py"
+        },
+        "agent_roster_registry": {
+          "exists": true,
+          "path": "ION/03_registry/agent_roster_registry.yaml"
+        },
+        "codex_cli_carrier_profile": {
+          "exists": true,
+          "path": "ION/03_registry/codex_cli_carrier_profile.yaml"
+        },
+        "codex_cli_execution_packet": {
+          "exists": true,
+          "path": "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md"
+        },
+        "codex_queue_runner": {
+          "exists": true,
+          "path": "ION/04_packages/kernel/ion_codex_queue_runner.py"
+        },
+        "codex_work_queue": {
+          "exists": true,
+          "path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json"
+        },
+        "codex_work_requests": {
+          "exists": true,
+          "path": "ION/05_context/current/chatgpt_connector/codex_work_requests"
+        },
+        "task_returns": {
+          "exists": true,
+          "path": "ION/05_context/current/chatgpt_connector/task_returns"
+        }
+      },
+      "production_authority": false,
+      "queued_agent_codex_work_request_count": 0,
+      "raw_backend_output_state_policy": "RAW_CODEX_OUTPUT_NOT_ACCEPTED_WITHOUT_TASK_RETURN_PROOF_GATES",
+      "schema_id": "ion.agent_invocation_broker.v1",
+      "tools": {
+        "read": [
+          "ion_agent_list",
+          "ion_agent_status",
+          "ion_agent_result",
+          "ion_agent_queue",
+          "ion_agent_spawn_plan",
+          "ion_swarm_status"
+        ],
+        "write": [
+          "ion_agent_invoke",
+          "ion_agent_cancel",
+          "ion_swarm_step_once"
+        ]
+      },
+      "verdict": "ION_AGENT_INVOCATION_BROKER_READY"
+    },
+    "agent_invocation_tools_present": [
+      "ion_agent_cancel",
+      "ion_agent_invoke",
+      "ion_agent_list",
+      "ion_agent_queue",
+      "ion_agent_result",
+      "ion_agent_spawn_plan",
+      "ion_agent_status",
+      "ion_swarm_status",
+      "ion_swarm_step_once"
+    ],
+    "artifact_upload_status_counts": {
+      "COMMITTED": 1,
+      "OPEN": 1
+    },
+    "callsign_authority": "carrier_continuity_label_only_not_ion_authority",
+    "callsign_decision_receipt": "ION/05_context/current/chatgpt_connector/decisions/2026-05-04T202947Z0000_use_sev_as_the_project_facing_callsign_for_the_chatgpt_browser_gpt_5_5_carrier_w.json",
+    "carrier_id": "CHATGPT_BROWSER_CARRIER",
+    "carrier_message_count": 5,
+    "codex_queue_runner": {
+      "active_process_running": true,
+      "active_run": {
+        "pid": 80802,
+        "request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro.json",
+        "run_id": "codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i",
+        "run_packet_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i/run.json",
+        "started_at": "2026-05-04T21:36:33+00:00"
+      },
+      "automation_surface": "ion_codex_queue_process_once",
+      "autorun_loop_state": "NOT_STARTED_PROCESS_ONCE_AVAILABLE",
+      "failure_classes": [
+        "CARRIER_ADAPTER_FAILURE",
+        "CODEX_CLI_FAILURE",
+        "DAEMON_FAILURE",
+        "ION_CORE_FAILURE"
+      ],
+      "latest_runs": [
+        {
+          "mtime": "2026-05-04T21:36:33+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i/run.json",
+          "request_id": "codex_req_2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro",
+          "run_id": "codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i",
+          "status": "CODEX_CLI_RUNNING"
+        },
+        {
+          "mtime": "2026-05-04T20:54:59+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/run.json",
+          "request_id": "codex_req_2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion",
+          "run_id": "codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_",
+          "status": "PREPARED_NOT_STARTED"
+        }
+      ],
+      "live_execution_authority": false,
+      "manual_proceed_relay_required": false,
+      "next_request_path": null,
+      "production_authority": false,
+      "queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "queued_request_count": 0,
+      "runner_state_path": "ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json",
+      "schema_id": "ion.codex_queue_runner.v1",
+      "verdict": "ION_CODEX_QUEUE_RUNNER_READY"
+    },
+    "codex_work_request_count": 11,
+    "connector_contract_verdict": "ION_CHATGPT_BROWSER_MCP_CONNECTOR_CONTRACT_READY",
+    "first_parity_tools_present": [
+      "ion_artifact_upload_chunk",
+      "ion_artifact_upload_commit",
+      "ion_artifact_upload_init",
+      "ion_carrier_message_ack",
+      "ion_carrier_message_poll",
+      "ion_carrier_message_send",
+      "ion_file_put_text"
+    ],
+    "http_preview_verdict": "ION_CHATGPT_BROWSER_HTTP_MCP_PREVIEW_READY",
+    "latest_agent_invocations": [
+      {
+        "mtime": "2026-05-04T21:39:35+00:00",
+        "name": "2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g.json",
+        "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g.json"
+      },
+      {
+        "mtime": "2026-05-04T21:34:23+00:00",
+        "name": "2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json",
+        "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json"
+      }
+    ],
+    "latest_artifact_receipts": [
+      {
+        "mtime": "2026-05-04T20:23:51+00:00",
+        "name": "2026-05-04T202351Z0000_codex_cli_30_tool_visibility_smoke_20260504t202351z_md.json",
+        "path": "ION/05_context/current/chatgpt_connector/artifact_receipts/2026-05-04T202351Z0000_codex_cli_30_tool_visibility_smoke_20260504t202351z_md.json"
+      },
+      {
+        "mtime": "2026-05-04T20:05:52+00:00",
+        "name": "2026-05-04T200552Z0000_chatgpt_browser_artifact_upload_smoke_20260504_md.json",
+        "path": "ION/05_context/current/chatgpt_connector/artifact_receipts/2026-05-04T200552Z0000_chatgpt_browser_artifact_upload_smoke_20260504_md.json"
+      },
+      {
+        "mtime": "2026-05-04T19:08:47+00:00",
+        "name": "2026-05-04T190847Z0000_full_carrier_visibility_smoke_20260504_1838_md.json",
+        "path": "ION/05_context/current/chatgpt_connector/artifact_receipts/2026-05-04T190847Z0000_full_carrier_visibility_smoke_20260504_1838_md.json"
+      }
+    ],
+    "latest_carrier_messages": [
+      {
+        "mtime": "2026-05-04T20:42:07+00:00",
+        "name": "2026-05-04T204207Z0000_carmsg_2026_05_04t204207z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+        "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T204207Z0000_carmsg_2026_05_04t204207z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json"
+      },
+      {
+        "mtime": "2026-05-04T20:23:51+00:00",
+        "name": "2026-05-04T202351Z0000_carmsg_2026_05_04t202351z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+        "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T202351Z0000_carmsg_2026_05_04t202351z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json"
+      },
+      {
+        "mtime": "2026-05-04T19:58:51+00:00",
+        "name": "2026-05-04T195851Z0000_carmsg_2026_05_04t195851z0000_chatgpt_browser_to_chatgpt_browser.json",
+        "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T195851Z0000_carmsg_2026_05_04t195851z0000_chatgpt_browser_to_chatgpt_browser.json"
+      },
+      {
+        "mtime": "2026-05-04T19:46:16+00:00",
+        "name": "2026-05-04T194616Z0000_carmsg_2026_05_04t194616z0000_chatgpt_browser_to_codex_cli.json",
+        "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T194616Z0000_carmsg_2026_05_04t194616z0000_chatgpt_browser_to_codex_cli.json"
+      },
+      {
+        "mtime": "2026-05-04T19:08:47+00:00",
+        "name": "2026-05-04T190847Z0000_carmsg_2026_05_04t190847z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+        "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T190847Z0000_carmsg_2026_05_04t190847z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json"
+      }
+    ],
+    "latest_decisions": [
+      {
+        "mtime": "2026-05-04T21:06:48+00:00",
+        "name": "2026-05-04T210648Z0000_record_gpt_browser_sev_as_the_preferred_ion_dogfooding_workflow_sev_operates_fro.json",
+        "path": "ION/05_context/current/chatgpt_connector/decisions/2026-05-04T210648Z0000_record_gpt_browser_sev_as_the_preferred_ion_dogfooding_workflow_sev_operates_fro.json"
+      },
+      {
+        "mtime": "2026-05-04T21:04:13+00:00",
+        "name": "2026-05-04T210413Z0000_record_the_current_ion_dogfooding_model_gpt_5_5_pro_sev_is_best_used_as_a_high_q.json",
+        "path": "ION/05_context/current/chatgpt_connector/decisions/2026-05-04T210413Z0000_record_the_current_ion_dogfooding_model_gpt_5_5_pro_sev_is_best_used_as_a_high_q.json"
+      },
+      {
+        "mtime": "2026-05-04T21:01:25+00:00",
+        "name": "2026-05-04T210125Z0000_record_the_sev_ion_operating_relationship_braden_remains_the_human_sovereign_sou.json",
+        "path": "ION/05_context/current/chatgpt_connector/decisions/2026-05-04T210125Z0000_record_the_sev_ion_operating_relationship_braden_remains_the_human_sovereign_sou.json"
+      },
+      {
+        "mtime": "2026-05-04T20:29:47+00:00",
+        "name": "2026-05-04T202947Z0000_use_sev_as_the_project_facing_callsign_for_the_chatgpt_browser_gpt_5_5_carrier_w.json",
+        "path": "ION/05_context/current/chatgpt_connector/decisions/2026-05-04T202947Z0000_use_sev_as_the_project_facing_callsign_for_the_chatgpt_browser_gpt_5_5_carrier_w.json"
+      }
+    ],
+    "latest_task_returns": [
+      {
+        "mtime": "2026-05-04T21:35:58+00:00",
+        "name": "2026-05-04T213558Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T213558Z0000_task_return.json"
+      },
+      {
+        "mtime": "2026-05-04T21:00:25+00:00",
+        "name": "2026-05-04T210025Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T210025Z0000_task_return.json"
+      },
+      {
+        "mtime": "2026-05-04T20:26:13+00:00",
+        "name": "2026-05-04T202613Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T202613Z0000_task_return.json"
+      },
+      {
+        "mtime": "2026-05-04T19:23:25+00:00",
+        "name": "2026-05-04T192325Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T192325Z0000_task_return.json"
+      },
+      {
+        "mtime": "2026-05-04T19:11:28+00:00",
+        "name": "2026-05-04T191128Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T191128Z0000_task_return.json"
+      }
+    ],
+    "live_execution_authority": false,
+    "production_authority": false,
+    "project_facing_callsign": "Sev",
+    "schema_id": "ion.chatgpt_browser_mcp_cockpit_summary.v1",
+    "tool_count": 42,
+    "transport_state": "TUNNEL_RUNNING_VERIFIED",
+    "visibility_tools_present": [
+      "ion_context_compile",
+      "ion_file_read",
+      "ion_file_search",
+      "ion_receipt_hydrate",
+      "ion_registry_read",
+      "ion_template_read",
+      "ion_tool_manifest",
+      "ion_tree_list"
+    ]
+  },
+  "front_door_proof_trace": {
+    "boundary_proof": {
+      "api_entry_intent_id": "arei-1a66fd400712",
+      "api_entry_receipt_id": "arer-d7d1526ee22c",
+      "context_package_id": "fdctx-fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-7f8c0860d4ee",
+      "conversational_receipt_id": "9163df7a9a5760d705dbeec1",
+      "dispatch_packet_path": "ION/05_context/history/front_door_runtime/dispatch_packets/fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff.dispatch_packet.json",
+      "front_stage_receipt_id": "fsc-553f46a0537d871778",
+      "persona_ingress_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+      "persona_response_id": "fdresponse-fdreturn-fdsession-e3325d8e7fd2e91c61-stewa-a2aab6e5f3e3",
+      "queue_item_id": "fdq-fdsession-e3325d8e7fd2e91c61-fdwu-fdsession-2cf3a5471deb",
+      "relay_packet_id": "fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a",
+      "relay_return_id": "fdreturn-fdsession-e3325d8e7fd2e91c61-steward-proof-99a27cc53338",
+      "steward_envelope_id": "fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63",
+      "steward_work_unit_id": "fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff"
+    },
+    "controlled_system_output": "Deterministic front-door proof output: the operator message was routed through Persona Interface ingress, Relay semantic boundary, Steward work queue dispatch, Relay return, Persona response, and receipt surfaces. This proof grants no production authority.",
+    "generated_at": "2026-05-02T22:53:18+00:00",
+    "live_execution_authority": false,
+    "missing_witness_paths": [],
+    "mutation_scope": "front_door_proof_trace_artifacts_only",
+    "operator_message": "V106 front-door proof trace: verify operator message through Relay, Steward, Persona, and receipts.",
+    "production_authority": false,
+    "projection_mode": "DETERMINISTIC_FRONT_DOOR_PROOF_TRACE",
+    "proof_complete": true,
+    "proof_trace_path": "ION/05_context/history/front_door_proof_traces/fdproof-20938bb98d449d3782.front_door_proof_trace.json",
+    "receipts": {
+      "conversational_receipt_id": "9163df7a9a5760d705dbeec1",
+      "front_door_ingress_receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+      "front_door_return_receipt_id": "fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160",
+      "front_stage_council_receipt_id": "fsc-553f46a0537d871778",
+      "runtime_session_dispatch_receipt_id": "rsr-3ca30902024f"
+    },
+    "role_chain": {
+      "persona_interface": "role.persona_interface",
+      "relay": "role.relay",
+      "steward": "role.steward"
+    },
+    "schema_id": "ion.front_door_proof_trace.v1",
+    "session_id": "fdsession-e3325d8e7fd2e91c61",
+    "stage_sequence": [
+      {
+        "artifact_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "detail": "Operator message entered Persona Interface ingress.",
+        "organ": "operator",
+        "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+        "sequence": 10,
+        "stage": "operator_message_received",
+        "status": "accepted",
+        "witness_path": "ION/05_context/history/front_door_runtime/persona_ingress/fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8.json"
+      },
+      {
+        "artifact_id": "fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a",
+        "detail": "Relay normalized the user text into a semantic boundary packet.",
+        "organ": "relay",
+        "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+        "sequence": 20,
+        "stage": "relay_semantic_boundary_packet",
+        "status": "accepted",
+        "witness_path": "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a.json"
+      },
+      {
+        "artifact_id": "fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63",
+        "detail": "Steward routing envelope was derived from the Relay packet.",
+        "organ": "steward",
+        "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+        "sequence": 30,
+        "stage": "steward_routing_envelope",
+        "status": "accepted",
+        "witness_path": "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63.json"
+      },
+      {
+        "artifact_id": "arei-1a66fd400712",
+        "detail": "API carrier api://front-door-proof-trace entered runtime session fdsession-e3325d8e7fd2e91c61",
+        "organ": "kernel",
+        "receipt_id": "arer-d7d1526ee22c",
+        "sequence": 40,
+        "stage": "runtime_session_entry",
+        "status": "ACCEPTED",
+        "witness_path": null
+      },
+      {
+        "artifact_id": "fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff",
+        "detail": "Steward work unit and context package were persisted to kernel store.",
+        "organ": "steward",
+        "receipt_id": null,
+        "sequence": 50,
+        "stage": "steward_work_unit_created",
+        "status": "DISPATCHED",
+        "witness_path": "ION/05_context/history/kernel_store/work_units/fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff.json"
+      },
+      {
+        "artifact_id": "fdctx-fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-7f8c0860d4ee",
+        "detail": "Front-door Steward context package was persisted.",
+        "organ": "kernel",
+        "receipt_id": null,
+        "sequence": 60,
+        "stage": "context_package_created",
+        "status": "accepted",
+        "witness_path": "ION/05_context/history/kernel_store/context_packages/fdctx-fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-7f8c0860d4ee.json"
+      },
+      {
+        "artifact_id": "fdq-fdsession-e3325d8e7fd2e91c61-fdwu-fdsession-2cf3a5471deb",
+        "detail": "Runtime session queue item was dispatched to kernel packet path.",
+        "organ": "kernel",
+        "receipt_id": "rsr-3ca30902024f",
+        "sequence": 70,
+        "stage": "queue_item_dispatched",
+        "status": "DISPATCHED",
+        "witness_path": "ION/05_context/history/front_door_runtime/dispatch_packets/fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff.dispatch_packet.json"
+      },
+      {
+        "artifact_id": "steward.proof_trace_output",
+        "detail": "Deterministic proof output stands in for live Steward return.",
+        "organ": "steward",
+        "receipt_id": "fsc-553f46a0537d871778",
+        "sequence": 80,
+        "stage": "controlled_steward_output",
+        "status": "approved_with_scope",
+        "witness_path": null
+      },
+      {
+        "artifact_id": "fdreturn-fdsession-e3325d8e7fd2e91c61-steward-proof-99a27cc53338",
+        "detail": "Relay prepared controlled reexpression for Persona Interface.",
+        "organ": "relay",
+        "receipt_id": "fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160",
+        "sequence": 90,
+        "stage": "relay_return_package",
+        "status": "accepted",
+        "witness_path": "ION/05_context/history/front_door_runtime/relay_return_packages/fdreturn-fdsession-e3325d8e7fd2e91c61-steward-proof-99a27cc53338.json"
+      },
+      {
+        "artifact_id": "fdresponse-fdreturn-fdsession-e3325d8e7fd2e91c61-stewa-a2aab6e5f3e3",
+        "detail": "Persona response package was materialized for user-facing render.",
+        "organ": "persona",
+        "receipt_id": "fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160",
+        "sequence": 100,
+        "stage": "persona_response_package",
+        "status": "accepted",
+        "witness_path": "ION/05_context/history/front_door_runtime/persona_response_packages/fdresponse-fdreturn-fdsession-e3325d8e7fd2e91c61-stewa-a2aab6e5f3e3.json"
+      },
+      {
+        "artifact_id": "fsc-553f46a0537d871778",
+        "detail": "Front-stage council classified the proof output as scoped proposal emission.",
+        "organ": "steward",
+        "receipt_id": "fsc-553f46a0537d871778",
+        "sequence": 110,
+        "stage": "front_stage_council_receipt",
+        "status": "may_emit_as_proposal",
+        "witness_path": "ION/05_context/history/front_stage_council_receipts/fsc-553f46a0537d871778.front_stage_council_receipt.json"
+      },
+      {
+        "artifact_id": "9163df7a9a5760d705dbeec1",
+        "detail": "Conversational receipt ratified the deterministic proof response.",
+        "organ": "persona",
+        "receipt_id": "9163df7a9a5760d705dbeec1",
+        "sequence": 120,
+        "stage": "conversational_receipt",
+        "status": "ratified",
+        "witness_path": "ION/05_context/history/conversational_receipts/9163df7a9a5760d705dbeec1.conversational_receipt.json"
+      }
+    ],
+    "steward_verdict": {
+      "claim_class": "C2",
+      "emission_permission": "MAY_EMIT_AS_PROPOSAL",
+      "live_steward_reasoning": false,
+      "mode": "DETERMINISTIC_FRONT_DOOR_PROOF_TRACE",
+      "repair_required": false,
+      "verdict": "APPROVED_WITH_SCOPE"
+    },
+    "trace_id": "fdproof-20938bb98d449d3782",
+    "validation_errors": [],
+    "verdict": "ION_FRONT_DOOR_PROOF_TRACE_READY",
+    "witness_paths": [
+      "ION/05_context/history/front_door_runtime/persona_ingress/fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8.json",
+      "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a.json",
+      "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63.json",
+      "ION/05_context/history/front_door_runtime/receipts/fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61.json",
+      "ION/05_context/history/front_door_runtime_sessions/runtime_sessions/sessions/fdsession-e3325d8e7fd2e91c61.json",
+      "ION/05_context/history/front_door_runtime_sessions/runtime_sessions/authorities/fdsession-e3325d8e7fd2e91c61.json",
+      "ION/05_context/history/front_door_runtime_sessions/runtime_sessions/queues/fdsession-e3325d8e7fd2e91c61.json",
+      "ION/05_context/history/front_door_runtime_sessions/runtime_sessions/carrier_bindings/fdsession-e3325d8e7fd2e91c61.json",
+      "ION/05_context/history/front_door_runtime_sessions/runtime_sessions/context_bindings/fdsession-e3325d8e7fd2e91c61.json",
+      "ION/05_context/history/front_door_runtime_sessions/runtime_sessions/api_carrier_boundaries/acb-847548dfe713.json",
+      "ION/05_context/history/front_door_runtime_sessions/runtime_sessions/api_entry_receipts/arer-d7d1526ee22c.json",
+      "ION/05_context/history/kernel_store/work_units/fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff.json",
+      "ION/05_context/history/kernel_store/context_packages/fdctx-fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-7f8c0860d4ee.json",
+      "ION/05_context/history/front_door_runtime/dispatch_packets/fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff.dispatch_packet.json",
+      "ION/05_context/history/front_door_runtime/relay_return_packages/fdreturn-fdsession-e3325d8e7fd2e91c61-steward-proof-99a27cc53338.json",
+      "ION/05_context/history/front_door_runtime/persona_response_packages/fdresponse-fdreturn-fdsession-e3325d8e7fd2e91c61-stewa-a2aab6e5f3e3.json",
+      "ION/05_context/history/front_door_runtime/receipts/fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160.json",
+      "ION/05_context/history/front_stage_council_receipts/fsc-553f46a0537d871778.front_stage_council_receipt.json",
+      "ION/05_context/history/conversational_receipts/9163df7a9a5760d705dbeec1.conversational_receipt.json"
+    ]
+  },
+  "generated_at": "2026-05-04T21:39:43+00:00",
+  "lane_timeline": {
+    "event_count": 46,
+    "events": [
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-8d033b5c6a18",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T194101Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 1,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T19:41:01+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-85509dda86e4",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T194101Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 501,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T19:41:01+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-3150035929b3",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T194425Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 2,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T19:44:25+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-fadd510a52af",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T194425Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 502,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T19:44:25+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-854dd1f1c19c",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T195610Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 3,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T19:56:10+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-04daa720cee1",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T195611Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 503,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T19:56:11+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-0eb426a31138",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T200202Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 4,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:02:02+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-94edf88e9377",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T200202Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 504,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:02:02+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-1ff31377a3d3",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T200710Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 5,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:07:10+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-5aa95ef7c15e",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T200710Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 505,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:07:10+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-6a9288017cbf",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T202657Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 6,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:26:57+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-c01e717cd0cd",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T202657Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 506,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:26:57+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-fa47db0e71ad",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T203255Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 7,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:32:55+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-7b7a87796dc3",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T203256Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 507,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:32:56+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-c76c79847535",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T203324Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 8,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:33:24+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-d6a495e67587",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T203324Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 508,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:33:24+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-3fde66c6668d",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T203948Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 9,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:39:48+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-b7f05fbbca47",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T203949Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 509,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T20:39:49+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-9dfc7fed8fbc",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T222100Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 10,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:21:00+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-43f87b35a8d8",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T222100Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 510,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:21:00+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-5e69d24354c3",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T222815Z0000_v106_runtime_floor_repair_package_root_integrity",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 11,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:28:15+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-38dd1829e7d7",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T222845Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 12,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:28:45+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-54471fdd7ba0",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T222846Z0000_continue",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 13,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:28:46+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-9be769abad18",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T222846Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 511,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:28:46+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-b730d1472a80",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T222939Z0000_test_queued_v88_directive",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 14,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:29:39+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-6f30332676d0",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T222939Z0000_continue",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 15,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:29:39+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "resolved",
+        "claim_class": null,
+        "effective_lane": "accepted",
+        "id": "lane-event-826b284635d3",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "hgate_2026-05-02T222939Z0000_synthetic_test_gate_for_v88",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "human_gate",
+        "sequence": 512,
+        "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:29:39+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-83a146974126",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "opmsg_2026-05-02T223113Z0000_v106_runtime_floor_repair_package_root_integrity",
+        "organ": "operator",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 16,
+        "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:31:13+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": null,
+        "claim_class": null,
+        "effective_lane": "new_work_directive",
+        "id": "lane-event-65fb8ceca160",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "carrier-turn",
+        "organ": "carrier",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "new_work_directive",
+        "sequence": 100,
+        "source_path": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:31:13+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "accepted",
+        "claim_class": "C2",
+        "effective_lane": "operator_message_received",
+        "id": "lane-event-feeb1e89590f",
+        "lane_change_reason": "Operator message entered Persona Interface ingress.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "operator",
+        "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 710,
+        "source_path": "ION/05_context/history/front_door_runtime/persona_ingress/fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "accepted",
+        "claim_class": "C2",
+        "effective_lane": "relay_semantic_boundary_packet",
+        "id": "lane-event-4d26b38a31ae",
+        "lane_change_reason": "Relay normalized the user text into a semantic boundary packet.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "relay",
+        "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 720,
+        "source_path": "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "accepted",
+        "claim_class": "C2",
+        "effective_lane": "steward_routing_envelope",
+        "id": "lane-event-6edb693b21ed",
+        "lane_change_reason": "Steward routing envelope was derived from the Relay packet.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "steward",
+        "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 730,
+        "source_path": "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "ACCEPTED",
+        "claim_class": "C2",
+        "effective_lane": "runtime_session_entry",
+        "id": "lane-event-74d2fd4ed327",
+        "lane_change_reason": "API carrier api://front-door-proof-trace entered runtime session fdsession-e3325d8e7fd2e91c61",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "kernel",
+        "receipt_id": "arer-d7d1526ee22c",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 740,
+        "source_path": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "DISPATCHED",
+        "claim_class": "C2",
+        "effective_lane": "steward_work_unit_created",
+        "id": "lane-event-30ec11261182",
+        "lane_change_reason": "Steward work unit and context package were persisted to kernel store.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "steward",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 750,
+        "source_path": "ION/05_context/history/kernel_store/work_units/fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "accepted",
+        "claim_class": "C2",
+        "effective_lane": "context_package_created",
+        "id": "lane-event-45e54dae9b77",
+        "lane_change_reason": "Front-door Steward context package was persisted.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "kernel",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 760,
+        "source_path": "ION/05_context/history/kernel_store/context_packages/fdctx-fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-7f8c0860d4ee.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "DISPATCHED",
+        "claim_class": "C2",
+        "effective_lane": "queue_item_dispatched",
+        "id": "lane-event-888d5628aebe",
+        "lane_change_reason": "Runtime session queue item was dispatched to kernel packet path.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "kernel",
+        "receipt_id": "rsr-3ca30902024f",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 770,
+        "source_path": "ION/05_context/history/front_door_runtime/dispatch_packets/fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff.dispatch_packet.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "approved_with_scope",
+        "claim_class": "C2",
+        "effective_lane": "controlled_steward_output",
+        "id": "lane-event-2743ee7c2248",
+        "lane_change_reason": "Deterministic proof output stands in for live Steward return.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "steward",
+        "receipt_id": "fsc-553f46a0537d871778",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 780,
+        "source_path": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "accepted",
+        "claim_class": "C2",
+        "effective_lane": "relay_return_package",
+        "id": "lane-event-a4cbbed02a71",
+        "lane_change_reason": "Relay prepared controlled reexpression for Persona Interface.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "relay",
+        "receipt_id": "fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 790,
+        "source_path": "ION/05_context/history/front_door_runtime/relay_return_packages/fdreturn-fdsession-e3325d8e7fd2e91c61-steward-proof-99a27cc53338.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "accepted",
+        "claim_class": "C2",
+        "effective_lane": "persona_response_package",
+        "id": "lane-event-55b750caba50",
+        "lane_change_reason": "Persona response package was materialized for user-facing render.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "persona",
+        "receipt_id": "fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 800,
+        "source_path": "ION/05_context/history/front_door_runtime/persona_response_packages/fdresponse-fdreturn-fdsession-e3325d8e7fd2e91c61-stewa-a2aab6e5f3e3.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "may_emit_as_proposal",
+        "claim_class": "C2",
+        "effective_lane": "front_stage_council_receipt",
+        "id": "lane-event-9ed261e658fe",
+        "lane_change_reason": "Front-stage council classified the proof output as scoped proposal emission.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "steward",
+        "receipt_id": "fsc-553f46a0537d871778",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 810,
+        "source_path": "ION/05_context/history/front_stage_council_receipts/fsc-553f46a0537d871778.front_stage_council_receipt.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "ratified",
+        "claim_class": "C2",
+        "effective_lane": "conversational_receipt",
+        "id": "lane-event-8637893df83a",
+        "lane_change_reason": "Conversational receipt ratified the deterministic proof response.",
+        "latency_ms": null,
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "organ": "persona",
+        "receipt_id": "9163df7a9a5760d705dbeec1",
+        "repair_id": null,
+        "requested_lane": "front_door_runtime",
+        "sequence": 820,
+        "source_path": "ION/05_context/history/conversational_receipts/9163df7a9a5760d705dbeec1.conversational_receipt.json",
+        "status": "accepted",
+        "timestamp": "2026-05-02T22:53:18+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "ORCHESTRATION_AND_INTEGRATION_BOUNDED",
+        "claim_class": null,
+        "effective_lane": "ORCHESTRATION_AND_INTEGRATION_BOUNDED",
+        "id": "lane-event-f5a3939e53bf",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "spawn-1",
+        "organ": "worker",
+        "receipt_id": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/01_steward_context_load_receipt.json",
+        "repair_id": null,
+        "requested_lane": "worker_spawn",
+        "sequence": 201,
+        "source_path": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/01_steward_cursor_task_prompt.md",
+        "status": "requested",
+        "timestamp": "2026-05-02T22:54:46+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "SCOPE_AND_DEPENDENCY_REVIEW_BOUNDED",
+        "claim_class": null,
+        "effective_lane": "SCOPE_AND_DEPENDENCY_REVIEW_BOUNDED",
+        "id": "lane-event-20afbd91e042",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "spawn-2",
+        "organ": "worker",
+        "receipt_id": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/02_vizier_context_load_receipt.json",
+        "repair_id": null,
+        "requested_lane": "worker_spawn",
+        "sequence": 202,
+        "source_path": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/02_vizier_cursor_task_prompt.md",
+        "status": "requested",
+        "timestamp": "2026-05-02T22:54:46+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "IMPLEMENTATION_BOUNDED_TO_PACKET_ALLOWED_PATHS",
+        "claim_class": null,
+        "effective_lane": "IMPLEMENTATION_BOUNDED_TO_PACKET_ALLOWED_PATHS",
+        "id": "lane-event-a6b77db7d979",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "spawn-3",
+        "organ": "worker",
+        "receipt_id": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/03_mason_context_load_receipt.json",
+        "repair_id": null,
+        "requested_lane": "worker_spawn",
+        "sequence": 203,
+        "source_path": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/03_mason_cursor_task_prompt.md",
+        "status": "requested",
+        "timestamp": "2026-05-02T22:54:46+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "NOT_SPAWNED",
+        "claim_class": null,
+        "effective_lane": "NOT_SPAWNED",
+        "id": "lane-event-2434bcc45104",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "spawn-4",
+        "organ": "worker",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "worker_spawn",
+        "sequence": 204,
+        "source_path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+        "status": "blocked",
+        "timestamp": "2026-05-02T22:54:46+00:00",
+        "utterance_id": null
+      },
+      {
+        "atom_id": null,
+        "authority_verdict": "NOT_SPAWNED",
+        "claim_class": null,
+        "effective_lane": "NOT_SPAWNED",
+        "id": "lane-event-0ce376e07536",
+        "lane_change_reason": null,
+        "latency_ms": null,
+        "message_id": "spawn-5",
+        "organ": "worker",
+        "receipt_id": null,
+        "repair_id": null,
+        "requested_lane": "worker_spawn",
+        "sequence": 205,
+        "source_path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+        "status": "blocked",
+        "timestamp": "2026-05-02T22:54:46+00:00",
+        "utterance_id": null
+      }
+    ],
+    "generated_at": "2026-05-02T22:54:46+00:00",
+    "messages": [
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-65fb8ceca160",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "carrier-turn",
+            "organ": "carrier",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 100,
+            "source_path": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:31:13+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "carrier-turn",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "context_package_created",
+          "controlled_steward_output",
+          "conversational_receipt",
+          "front_stage_council_receipt",
+          "operator_message_received",
+          "persona_response_package",
+          "queue_item_dispatched",
+          "relay_return_package",
+          "relay_semantic_boundary_packet",
+          "runtime_session_entry",
+          "steward_routing_envelope",
+          "steward_work_unit_created"
+        ],
+        "event_count": 12,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "accepted",
+            "claim_class": "C2",
+            "effective_lane": "operator_message_received",
+            "id": "lane-event-feeb1e89590f",
+            "lane_change_reason": "Operator message entered Persona Interface ingress.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "operator",
+            "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 710,
+            "source_path": "ION/05_context/history/front_door_runtime/persona_ingress/fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "accepted",
+            "claim_class": "C2",
+            "effective_lane": "relay_semantic_boundary_packet",
+            "id": "lane-event-4d26b38a31ae",
+            "lane_change_reason": "Relay normalized the user text into a semantic boundary packet.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "relay",
+            "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 720,
+            "source_path": "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "accepted",
+            "claim_class": "C2",
+            "effective_lane": "steward_routing_envelope",
+            "id": "lane-event-6edb693b21ed",
+            "lane_change_reason": "Steward routing envelope was derived from the Relay packet.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "steward",
+            "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7-328f39c7cc61",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 730,
+            "source_path": "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "ACCEPTED",
+            "claim_class": "C2",
+            "effective_lane": "runtime_session_entry",
+            "id": "lane-event-74d2fd4ed327",
+            "lane_change_reason": "API carrier api://front-door-proof-trace entered runtime session fdsession-e3325d8e7fd2e91c61",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "kernel",
+            "receipt_id": "arer-d7d1526ee22c",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 740,
+            "source_path": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "DISPATCHED",
+            "claim_class": "C2",
+            "effective_lane": "steward_work_unit_created",
+            "id": "lane-event-30ec11261182",
+            "lane_change_reason": "Steward work unit and context package were persisted to kernel store.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 750,
+            "source_path": "ION/05_context/history/kernel_store/work_units/fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "accepted",
+            "claim_class": "C2",
+            "effective_lane": "context_package_created",
+            "id": "lane-event-45e54dae9b77",
+            "lane_change_reason": "Front-door Steward context package was persisted.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "kernel",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 760,
+            "source_path": "ION/05_context/history/kernel_store/context_packages/fdctx-fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-7f8c0860d4ee.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "DISPATCHED",
+            "claim_class": "C2",
+            "effective_lane": "queue_item_dispatched",
+            "id": "lane-event-888d5628aebe",
+            "lane_change_reason": "Runtime session queue item was dispatched to kernel packet path.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "kernel",
+            "receipt_id": "rsr-3ca30902024f",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 770,
+            "source_path": "ION/05_context/history/front_door_runtime/dispatch_packets/fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff.dispatch_packet.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "approved_with_scope",
+            "claim_class": "C2",
+            "effective_lane": "controlled_steward_output",
+            "id": "lane-event-2743ee7c2248",
+            "lane_change_reason": "Deterministic proof output stands in for live Steward return.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "steward",
+            "receipt_id": "fsc-553f46a0537d871778",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 780,
+            "source_path": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "accepted",
+            "claim_class": "C2",
+            "effective_lane": "relay_return_package",
+            "id": "lane-event-a4cbbed02a71",
+            "lane_change_reason": "Relay prepared controlled reexpression for Persona Interface.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "relay",
+            "receipt_id": "fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 790,
+            "source_path": "ION/05_context/history/front_door_runtime/relay_return_packages/fdreturn-fdsession-e3325d8e7fd2e91c61-steward-proof-99a27cc53338.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "accepted",
+            "claim_class": "C2",
+            "effective_lane": "persona_response_package",
+            "id": "lane-event-55b750caba50",
+            "lane_change_reason": "Persona response package was materialized for user-facing render.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "persona",
+            "receipt_id": "fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 800,
+            "source_path": "ION/05_context/history/front_door_runtime/persona_response_packages/fdresponse-fdreturn-fdsession-e3325d8e7fd2e91c61-stewa-a2aab6e5f3e3.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "may_emit_as_proposal",
+            "claim_class": "C2",
+            "effective_lane": "front_stage_council_receipt",
+            "id": "lane-event-9ed261e658fe",
+            "lane_change_reason": "Front-stage council classified the proof output as scoped proposal emission.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "steward",
+            "receipt_id": "fsc-553f46a0537d871778",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 810,
+            "source_path": "ION/05_context/history/front_stage_council_receipts/fsc-553f46a0537d871778.front_stage_council_receipt.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          },
+          {
+            "atom_id": null,
+            "authority_verdict": "ratified",
+            "claim_class": "C2",
+            "effective_lane": "conversational_receipt",
+            "id": "lane-event-8637893df83a",
+            "lane_change_reason": "Conversational receipt ratified the deterministic proof response.",
+            "latency_ms": null,
+            "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+            "organ": "persona",
+            "receipt_id": "9163df7a9a5760d705dbeec1",
+            "repair_id": null,
+            "requested_lane": "front_door_runtime",
+            "sequence": 820,
+            "source_path": "ION/05_context/history/conversational_receipts/9163df7a9a5760d705dbeec1.conversational_receipt.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:53:18+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "requested_lanes": [
+          "front_door_runtime"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-85509dda86e4",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T194101Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 501,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T19:41:01+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T194101Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-fadd510a52af",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T194425Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 502,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T19:44:25+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T194425Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-04daa720cee1",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T195611Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 503,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T19:56:11+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T195611Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-94edf88e9377",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T200202Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 504,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:02:02+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T200202Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-5aa95ef7c15e",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T200710Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 505,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:07:10+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T200710Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-c01e717cd0cd",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T202657Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 506,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:26:57+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T202657Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-7b7a87796dc3",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T203256Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 507,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:32:56+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T203256Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-d6a495e67587",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T203324Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 508,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:33:24+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T203324Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-b7f05fbbca47",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T203949Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 509,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:39:49+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T203949Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-43f87b35a8d8",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T222100Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 510,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:21:00+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T222100Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-9be769abad18",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T222846Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 511,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:28:46+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T222846Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "accepted"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "resolved",
+            "claim_class": null,
+            "effective_lane": "accepted",
+            "id": "lane-event-826b284635d3",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "hgate_2026-05-02T222939Z0000_synthetic_test_gate_for_v88",
+            "organ": "steward",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "human_gate",
+            "sequence": 512,
+            "source_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:29:39+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "hgate_2026-05-02T222939Z0000_synthetic_test_gate_for_v88",
+        "requested_lanes": [
+          "human_gate"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-8d033b5c6a18",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T194101Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 1,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T19:41:01+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T194101Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-3150035929b3",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T194425Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 2,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T19:44:25+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T194425Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-854dd1f1c19c",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T195610Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 3,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T19:56:10+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T195610Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-0eb426a31138",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T200202Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 4,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:02:02+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T200202Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-1ff31377a3d3",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T200710Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 5,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:07:10+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T200710Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-6a9288017cbf",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T202657Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 6,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:26:57+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T202657Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-fa47db0e71ad",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T203255Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 7,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:32:55+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T203255Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-c76c79847535",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T203324Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 8,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:33:24+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T203324Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-3fde66c6668d",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T203948Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 9,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T20:39:48+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T203948Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-9dfc7fed8fbc",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T222100Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 10,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:21:00+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T222100Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-5e69d24354c3",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T222815Z0000_v106_runtime_floor_repair_package_root_integrity",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 11,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:28:15+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T222815Z0000_v106_runtime_floor_repair_package_root_integrity",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-38dd1829e7d7",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T222845Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 12,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:28:45+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T222845Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-54471fdd7ba0",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T222846Z0000_continue",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 13,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:28:46+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T222846Z0000_continue",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-6f30332676d0",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T222939Z0000_continue",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 15,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:29:39+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T222939Z0000_continue",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-b730d1472a80",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T222939Z0000_test_queued_v88_directive",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 14,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:29:39+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T222939Z0000_test_queued_v88_directive",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "new_work_directive"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": null,
+            "claim_class": null,
+            "effective_lane": "new_work_directive",
+            "id": "lane-event-83a146974126",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "opmsg_2026-05-02T223113Z0000_v106_runtime_floor_repair_package_root_integrity",
+            "organ": "operator",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "new_work_directive",
+            "sequence": 16,
+            "source_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+            "status": "accepted",
+            "timestamp": "2026-05-02T22:31:13+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "opmsg_2026-05-02T223113Z0000_v106_runtime_floor_repair_package_root_integrity",
+        "requested_lanes": [
+          "new_work_directive"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "ORCHESTRATION_AND_INTEGRATION_BOUNDED"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "ORCHESTRATION_AND_INTEGRATION_BOUNDED",
+            "claim_class": null,
+            "effective_lane": "ORCHESTRATION_AND_INTEGRATION_BOUNDED",
+            "id": "lane-event-f5a3939e53bf",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "spawn-1",
+            "organ": "worker",
+            "receipt_id": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/01_steward_context_load_receipt.json",
+            "repair_id": null,
+            "requested_lane": "worker_spawn",
+            "sequence": 201,
+            "source_path": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/01_steward_cursor_task_prompt.md",
+            "status": "requested",
+            "timestamp": "2026-05-02T22:54:46+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "spawn-1",
+        "requested_lanes": [
+          "worker_spawn"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "SCOPE_AND_DEPENDENCY_REVIEW_BOUNDED"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "SCOPE_AND_DEPENDENCY_REVIEW_BOUNDED",
+            "claim_class": null,
+            "effective_lane": "SCOPE_AND_DEPENDENCY_REVIEW_BOUNDED",
+            "id": "lane-event-20afbd91e042",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "spawn-2",
+            "organ": "worker",
+            "receipt_id": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/02_vizier_context_load_receipt.json",
+            "repair_id": null,
+            "requested_lane": "worker_spawn",
+            "sequence": 202,
+            "source_path": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/02_vizier_cursor_task_prompt.md",
+            "status": "requested",
+            "timestamp": "2026-05-02T22:54:46+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "spawn-2",
+        "requested_lanes": [
+          "worker_spawn"
+        ]
+      },
+      {
+        "current_state": "clean",
+        "effective_lanes": [
+          "IMPLEMENTATION_BOUNDED_TO_PACKET_ALLOWED_PATHS"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "IMPLEMENTATION_BOUNDED_TO_PACKET_ALLOWED_PATHS",
+            "claim_class": null,
+            "effective_lane": "IMPLEMENTATION_BOUNDED_TO_PACKET_ALLOWED_PATHS",
+            "id": "lane-event-a6b77db7d979",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "spawn-3",
+            "organ": "worker",
+            "receipt_id": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/03_mason_context_load_receipt.json",
+            "repair_id": null,
+            "requested_lane": "worker_spawn",
+            "sequence": 203,
+            "source_path": "ION/05_context/current/execution_cycles/2026-05-02T225441Z0000_implementation_v106_runtime_floor_repair_package_root_integrity_core_telemetry_triad_cursor_hoo/03_mason_cursor_task_prompt.md",
+            "status": "requested",
+            "timestamp": "2026-05-02T22:54:46+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "spawn-3",
+        "requested_lanes": [
+          "worker_spawn"
+        ]
+      },
+      {
+        "current_state": "unresolved",
+        "effective_lanes": [
+          "NOT_SPAWNED"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "NOT_SPAWNED",
+            "claim_class": null,
+            "effective_lane": "NOT_SPAWNED",
+            "id": "lane-event-2434bcc45104",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "spawn-4",
+            "organ": "worker",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "worker_spawn",
+            "sequence": 204,
+            "source_path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+            "status": "blocked",
+            "timestamp": "2026-05-02T22:54:46+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "spawn-4",
+        "requested_lanes": [
+          "worker_spawn"
+        ]
+      },
+      {
+        "current_state": "unresolved",
+        "effective_lanes": [
+          "NOT_SPAWNED"
+        ],
+        "event_count": 1,
+        "events": [
+          {
+            "atom_id": null,
+            "authority_verdict": "NOT_SPAWNED",
+            "claim_class": null,
+            "effective_lane": "NOT_SPAWNED",
+            "id": "lane-event-0ce376e07536",
+            "lane_change_reason": null,
+            "latency_ms": null,
+            "message_id": "spawn-5",
+            "organ": "worker",
+            "receipt_id": null,
+            "repair_id": null,
+            "requested_lane": "worker_spawn",
+            "sequence": 205,
+            "source_path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+            "status": "blocked",
+            "timestamp": "2026-05-02T22:54:46+00:00",
+            "utterance_id": null
+          }
+        ],
+        "message_id": "spawn-5",
+        "requested_lanes": [
+          "worker_spawn"
+        ]
+      }
+    ],
+    "production_authority": false,
+    "projection_mode": "ACTIVE_PACKET_PROJECTION",
+    "schema_id": "ion.lane_timeline_view_model.v1",
+    "source_paths": {
+      "front_door_proof_trace": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+      "human_gates": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+      "ledger": "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json",
+      "operator_queue": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+      "receipt_hydration": "ION/05_context/current/ACTIVE_RECEIPT_HYDRATION_VIEW_MODEL.json",
+      "spawn": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+      "steward": "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json",
+      "turn": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+    }
+  },
+  "queues": {
+    "human_gates": [
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T19:41:01+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T194101Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T19:41:02+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T19:41:02+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T19:44:25+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T194425Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T19:56:11+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T19:56:11+00:00"
+      },
+      {
+        "answer": "v103_test_cleanup",
+        "blocking": true,
+        "created_at": "2026-05-02T19:56:11+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T195611Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T19:57:16+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T19:57:16+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T20:02:02+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T200202Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T20:02:03+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T20:02:03+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T20:07:10+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T200710Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T20:07:11+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T20:07:11+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T20:26:57+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T202657Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T20:26:57+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T20:26:57+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T20:32:56+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T203256Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T20:32:56+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T20:32:56+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T20:33:24+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T203324Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T20:33:25+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T20:33:25+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T20:39:49+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T203949Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T20:39:50+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T20:39:50+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T22:21:00+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T222100Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T22:21:00+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T22:21:00+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T22:28:46+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T222846Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T22:28:46+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T22:28:46+00:00"
+      },
+      {
+        "answer": "yes",
+        "blocking": true,
+        "created_at": "2026-05-02T22:29:39+00:00",
+        "gate_type": "operator_decision",
+        "id": "hgate_2026-05-02T222939Z0000_synthetic_test_gate_for_v88",
+        "metadata": {},
+        "prompt": "Synthetic test gate for V88",
+        "resolved_at": "2026-05-02T22:29:39+00:00",
+        "source": "carrier",
+        "status": "resolved",
+        "updated_at": "2026-05-02T22:29:39+00:00"
+      }
+    ],
+    "operator_messages": [
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T19:41:01+00:00",
+        "consumed_at": "2026-05-02T19:41:01+00:00",
+        "created_at": "2026-05-02T19:41:01+00:00",
+        "id": "opmsg_2026-05-02T194101Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T19:41:01+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T22:31:44+00:00",
+        "consumed_at": "2026-05-02T19:44:25+00:00",
+        "created_at": "2026-05-02T19:44:25+00:00",
+        "id": "opmsg_2026-05-02T194425Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "superseded_test_residue",
+        "updated_at": "2026-05-02T22:31:44+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T22:31:44+00:00",
+        "consumed_at": "2026-05-02T19:56:10+00:00",
+        "created_at": "2026-05-02T19:56:10+00:00",
+        "id": "opmsg_2026-05-02T195610Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "superseded_test_residue",
+        "updated_at": "2026-05-02T22:31:44+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T20:02:02+00:00",
+        "consumed_at": "2026-05-02T20:02:02+00:00",
+        "created_at": "2026-05-02T20:02:02+00:00",
+        "id": "opmsg_2026-05-02T200202Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T20:02:02+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T20:07:10+00:00",
+        "consumed_at": "2026-05-02T20:07:10+00:00",
+        "created_at": "2026-05-02T20:07:10+00:00",
+        "id": "opmsg_2026-05-02T200710Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T20:07:10+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T20:26:57+00:00",
+        "consumed_at": "2026-05-02T20:26:57+00:00",
+        "created_at": "2026-05-02T20:26:57+00:00",
+        "id": "opmsg_2026-05-02T202657Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T20:26:57+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T20:32:56+00:00",
+        "consumed_at": "2026-05-02T20:32:55+00:00",
+        "created_at": "2026-05-02T20:32:55+00:00",
+        "id": "opmsg_2026-05-02T203255Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T20:32:56+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T20:33:24+00:00",
+        "consumed_at": "2026-05-02T20:33:24+00:00",
+        "created_at": "2026-05-02T20:33:24+00:00",
+        "id": "opmsg_2026-05-02T203324Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T20:33:24+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T20:39:49+00:00",
+        "consumed_at": "2026-05-02T20:39:48+00:00",
+        "created_at": "2026-05-02T20:39:48+00:00",
+        "id": "opmsg_2026-05-02T203948Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T20:39:49+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T22:21:00+00:00",
+        "consumed_at": "2026-05-02T22:21:00+00:00",
+        "created_at": "2026-05-02T22:21:00+00:00",
+        "id": "opmsg_2026-05-02T222100Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T22:21:00+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V106 runtime floor repair: package root integrity, core telemetry triad, cursor hook state projection",
+          "mutates_runtime": true,
+          "normalized_message": "v106 runtime floor repair: package root integrity, core telemetry triad, cursor hook state projection",
+          "original_classification": "status_request",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T22:28:15+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-02T22:28:15+00:00",
+        "id": "opmsg_2026-05-02T222815Z0000_v106_runtime_floor_repair_package_root_integrity",
+        "message": "V106 runtime floor repair: package root integrity, core telemetry triad, cursor hook state projection",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T22:28:15+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T22:28:46+00:00",
+        "consumed_at": "2026-05-02T22:28:45+00:00",
+        "created_at": "2026-05-02T22:28:45+00:00",
+        "id": "opmsg_2026-05-02T222845Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T22:28:46+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.98,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "continue",
+          "mutates_runtime": true,
+          "normalized_message": "continue",
+          "original_classification": "continuation_signal",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T22:28:46+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-02T22:28:46+00:00",
+        "id": "opmsg_2026-05-02T222846Z0000_continue",
+        "message": "continue",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T22:28:46+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "test queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "test queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T22:29:39+00:00",
+        "consumed_at": "2026-05-02T22:29:39+00:00",
+        "created_at": "2026-05-02T22:29:39+00:00",
+        "id": "opmsg_2026-05-02T222939Z0000_test_queued_v88_directive",
+        "message": "test queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T22:29:39+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.98,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "continue",
+          "mutates_runtime": true,
+          "normalized_message": "continue",
+          "original_classification": "continuation_signal",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T22:29:39+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-02T22:29:39+00:00",
+        "id": "opmsg_2026-05-02T222939Z0000_continue",
+        "message": "continue",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T22:29:39+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V106 runtime floor repair: package root integrity, core telemetry triad, cursor hook state projection",
+          "mutates_runtime": true,
+          "normalized_message": "v106 runtime floor repair: package root integrity, core telemetry triad, cursor hook state projection",
+          "original_classification": "status_request",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-02T22:31:13+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-02T22:31:13+00:00",
+        "id": "opmsg_2026-05-02T223113Z0000_v106_runtime_floor_repair_package_root_integrity",
+        "message": "V106 runtime floor repair: package root integrity, core telemetry triad, cursor hook state projection",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-02T22:31:13+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "V107 no silent deletion and trunk preservation gate: protected deletions block packaging, previous full zip comparison is required, canonical root full-project package emitted with preservation report",
+          "mutates_runtime": true,
+          "normalized_message": "v107 no silent deletion and trunk preservation gate: protected deletions block packaging, previous full zip comparison is required, canonical root full-project package emitted with preservation report",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T04:07:08+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T04:07:08+00:00",
+        "id": "opmsg_2026-05-03T040708Z0000_v107_no_silent_deletion_and_trunk_preservation_g",
+        "message": "V107 no silent deletion and trunk preservation gate: protected deletions block packaging, previous full zip comparison is required, canonical root full-project package emitted with preservation report",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T04:07:08+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V111 current-state truth repair: active carrier objective reflects V110 package mountability, no-silent-deletion preservation, V72 MCP donor reconciliation, and no live or production authority.",
+          "mutates_runtime": true,
+          "normalized_message": "v111 current-state truth repair: active carrier objective reflects v110 package mountability, no-silent-deletion preservation, v72 mcp donor reconciliation, and no live or production authority.",
+          "original_classification": "status_request",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T14:08:44+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T14:08:44+00:00",
+        "id": "opmsg_2026-05-03T140844Z0000_v111_current_state_truth_repair_active_carrier_o",
+        "message": "V111 current-state truth repair: active carrier objective reflects V110 package mountability, no-silent-deletion preservation, V72 MCP donor reconciliation, and no live or production authority.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T14:08:44+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V111 current-state truth repair: active carrier objective reflects V110 package mountability, no-silent-deletion preservation, V72 MCP donor reconciliation, and no live or production authority.",
+          "mutates_runtime": true,
+          "normalized_message": "v111 current-state truth repair: active carrier objective reflects v110 package mountability, no-silent-deletion preservation, v72 mcp donor reconciliation, and no live or production authority.",
+          "original_classification": "status_request",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T14:09:39+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T14:09:39+00:00",
+        "id": "opmsg_2026-05-03T140939Z0000_v111_current_state_truth_repair_active_carrier_o",
+        "message": "V111 current-state truth repair: active carrier objective reflects V110 package mountability, no-silent-deletion preservation, V72 MCP donor reconciliation, and no live or production authority.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T14:09:39+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V111 current-state truth repair: active carrier objective reflects V110 package mountability, no-silent-deletion preservation, V72 MCP donor reconciliation, and no live or production authority.",
+          "mutates_runtime": true,
+          "normalized_message": "v111 current-state truth repair: active carrier objective reflects v110 package mountability, no-silent-deletion preservation, v72 mcp donor reconciliation, and no live or production authority.",
+          "original_classification": "status_request",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T14:09:47+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T14:09:47+00:00",
+        "id": "opmsg_2026-05-03T140947Z0000_v111_current_state_truth_repair_active_carrier_o",
+        "message": "V111 current-state truth repair: active carrier objective reflects V110 package mountability, no-silent-deletion preservation, V72 MCP donor reconciliation, and no live or production authority.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T14:09:47+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V112 package-runnable status repair: optional safe-package evidence no longer fails fresh extracted package tests, while no-silent-deletion preservation and no live or production authority remain in force.",
+          "mutates_runtime": true,
+          "normalized_message": "v112 package-runnable status repair: optional safe-package evidence no longer fails fresh extracted package tests, while no-silent-deletion preservation and no live or production authority remain in force.",
+          "original_classification": "status_request",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T14:17:25+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T14:17:24+00:00",
+        "id": "opmsg_2026-05-03T141724Z0000_v112_package_runnable_status_repair_optional_saf",
+        "message": "V112 package-runnable status repair: optional safe-package evidence no longer fails fresh extracted package tests, while no-silent-deletion preservation and no live or production authority remain in force.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T14:17:25+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V113 zero-spawn execution-cycle bloat guard: plan-only carrier turns with max_spawn_rows=0 defer context bundle materialization and keep hot package growth bounded.",
+          "mutates_runtime": true,
+          "normalized_message": "v113 zero-spawn execution-cycle bloat guard: plan-only carrier turns with max_spawn_rows=0 defer context bundle materialization and keep hot package growth bounded.",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T14:22:13+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T14:22:13+00:00",
+        "id": "opmsg_2026-05-03T142213Z0000_v113_zero_spawn_execution_cycle_bloat_guard_plan",
+        "message": "V113 zero-spawn execution-cycle bloat guard: plan-only carrier turns with max_spawn_rows=0 defer context bundle materialization and keep hot package growth bounded.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T14:22:13+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V114 deferred spawn visibility: status and cockpit expose active spawn count, deferred spawn count, and execution-bundle materialization state for zero-spawn carrier turns.",
+          "mutates_runtime": true,
+          "normalized_message": "v114 deferred spawn visibility: status and cockpit expose active spawn count, deferred spawn count, and execution-bundle materialization state for zero-spawn carrier turns.",
+          "original_classification": "status_request",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T14:24:56+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T14:24:56+00:00",
+        "id": "opmsg_2026-05-03T142456Z0000_v114_deferred_spawn_visibility_status_and_cockpi",
+        "message": "V114 deferred spawn visibility: status and cockpit expose active spawn count, deferred spawn count, and execution-bundle materialization state for zero-spawn carrier turns.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T14:24:56+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V115 audit truth reconciliation: carrier workflow and temporal/context enforcement audits reflect the current V106/V107 runtime floor without claiming production authority.",
+          "mutates_runtime": true,
+          "normalized_message": "v115 audit truth reconciliation: carrier workflow and temporal/context enforcement audits reflect the current v106/v107 runtime floor without claiming production authority.",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T16:42:26+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T16:42:26+00:00",
+        "id": "opmsg_2026-05-03T164226Z0000_v115_audit_truth_reconciliation_carrier_workflow",
+        "message": "V115 audit truth reconciliation: carrier workflow and temporal/context enforcement audits reflect the current V106/V107 runtime floor without claiming production authority.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T16:42:26+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V116 carrier onboarding authority repair: root onboarding is carrier-neutral, Codex is mounted as codex_extension, Cursor is scoped as one adapter, and stale V94 Cursor root wording is audit-blocked.",
+          "mutates_runtime": true,
+          "normalized_message": "v116 carrier onboarding authority repair: root onboarding is carrier-neutral, codex is mounted as codex_extension, cursor is scoped as one adapter, and stale v94 cursor root wording is audit-blocked.",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T18:19:34+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T18:19:34+00:00",
+        "id": "opmsg_2026-05-03T181934Z0000_v116_carrier_onboarding_authority_repair_root_on",
+        "message": "V116 carrier onboarding authority repair: root onboarding is carrier-neutral, Codex is mounted as codex_extension, Cursor is scoped as one adapter, and stale V94 Cursor root wording is audit-blocked.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T18:19:34+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V117 registry/template carrier onboarding authority: carrier onboarding is enforced through profiles, mount registries, role boots, templates, and active packets; root markdown is optional compatibility only.",
+          "mutates_runtime": true,
+          "normalized_message": "v117 registry/template carrier onboarding authority: carrier onboarding is enforced through profiles, mount registries, role boots, templates, and active packets; root markdown is optional compatibility only.",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T18:27:16+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T18:27:16+00:00",
+        "id": "opmsg_2026-05-03T182716Z0000_v117_registry_template_carrier_onboarding_author",
+        "message": "V117 registry/template carrier onboarding authority: carrier onboarding is enforced through profiles, mount registries, role boots, templates, and active packets; root markdown is optional compatibility only.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T18:27:16+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V118 no silent loss and containment preservation: project files can leave hot state only as generated/cache removals or hash-proven containment moves; protected or unexpected uncontained removals block packaging.",
+          "mutates_runtime": true,
+          "normalized_message": "v118 no silent loss and containment preservation: project files can leave hot state only as generated/cache removals or hash-proven containment moves; protected or unexpected uncontained removals block packaging.",
+          "original_classification": "status_request",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T18:45:18+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T18:45:18+00:00",
+        "id": "opmsg_2026-05-03T184518Z0000_v118_no_silent_loss_and_containment_preservation",
+        "message": "V118 no silent loss and containment preservation: project files can leave hot state only as generated/cache removals or hash-proven containment moves; protected or unexpected uncontained removals block packaging.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T18:45:18+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V119 current operating packet: provide one compact carrier operating packet that starts from current V118 state, preserves no-silent-loss containment law, and demotes V105-V117 canvas material to historical context unless restated.",
+          "mutates_runtime": true,
+          "normalized_message": "v119 current operating packet: provide one compact carrier operating packet that starts from current v118 state, preserves no-silent-loss containment law, and demotes v105-v117 canvas material to historical context unless restated.",
+          "original_classification": "status_request",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T20:35:16+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T20:35:16+00:00",
+        "id": "opmsg_2026-05-03T203516Z0000_v119_current_operating_packet_provide_one_compac",
+        "message": "V119 current operating packet: provide one compact carrier operating packet that starts from current V118 state, preserves no-silent-loss containment law, and demotes V105-V117 canvas material to historical context unless restated.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T20:35:16+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V120 ChatGPT browser MCP connector and local ION operation: define and validate a bounded ChatGPT-facing ION connector contract while preserving local Cursor/Codex as the heavy build lane.",
+          "mutates_runtime": true,
+          "normalized_message": "v120 chatgpt browser mcp connector and local ion operation: define and validate a bounded chatgpt-facing ion connector contract while preserving local cursor/codex as the heavy build lane.",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T21:19:33+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T21:19:33+00:00",
+        "id": "opmsg_2026-05-03T211933Z0000_v120_chatgpt_browser_mcp_connector_and_local_ion",
+        "message": "V120 ChatGPT browser MCP connector and local ION operation: define and validate a bounded ChatGPT-facing ION connector contract while preserving local Cursor/Codex as the heavy build lane.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T21:19:33+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V121 ChatGPT browser HTTP MCP preview: add a local HTTP /mcp preview for the bounded ChatGPT connector contract, with write confirmation gates and no public deployment claim.",
+          "mutates_runtime": true,
+          "normalized_message": "v121 chatgpt browser http mcp preview: add a local http /mcp preview for the bounded chatgpt connector contract, with write confirmation gates and no public deployment claim.",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T21:34:18+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T21:34:18+00:00",
+        "id": "opmsg_2026-05-03T213418Z0000_v121_chatgpt_browser_http_mcp_preview_add_a_loca",
+        "message": "V121 ChatGPT browser HTTP MCP preview: add a local HTTP /mcp preview for the bounded ChatGPT connector contract, with write confirmation gates and no public deployment claim.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T21:34:18+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V122 ChatGPT browser Cloudflare Tunnel: add ION-native tunnel bridge for the bounded V121 /mcp preview, preserving no arbitrary shell/write exposure and no production/live authority.",
+          "mutates_runtime": true,
+          "normalized_message": "v122 chatgpt browser cloudflare tunnel: add ion-native tunnel bridge for the bounded v121 /mcp preview, preserving no arbitrary shell/write exposure and no production/live authority.",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T21:44:42+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T21:44:42+00:00",
+        "id": "opmsg_2026-05-03T214442Z0000_v122_chatgpt_browser_cloudflare_tunnel_add_ion_n",
+        "message": "V122 ChatGPT browser Cloudflare Tunnel: add ION-native tunnel bridge for the bounded V121 /mcp preview, preserving no arbitrary shell/write exposure and no production/live authority.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T21:44:42+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V123 root onboarding shim retirement: contain START_HERE_FOR_ANY_AGENT.md and AGENTS.md as non-authority evidence, repair audits/hooks/packaging so ION-native carrier onboarding is enforced.",
+          "mutates_runtime": true,
+          "normalized_message": "v123 root onboarding shim retirement: contain start_here_for_any_agent.md and agents.md as non-authority evidence, repair audits/hooks/packaging so ion-native carrier onboarding is enforced.",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T22:03:57+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T22:03:57+00:00",
+        "id": "opmsg_2026-05-03T220357Z0000_v123_root_onboarding_shim_retirement_contain_sta",
+        "message": "V123 root onboarding shim retirement: contain START_HERE_FOR_ANY_AGENT.md and AGENTS.md as non-authority evidence, repair audits/hooks/packaging so ION-native carrier onboarding is enforced.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T22:03:57+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V124 legacy Cloudflare tunnel reuse audit: classify old AIMOS tunnel as donor evidence, preserve usable cloudflared quick-tunnel pattern for ChatGPT /mcp connector, and block stale /sse or AIMOS authority carry-forward.",
+          "mutates_runtime": true,
+          "normalized_message": "v124 legacy cloudflare tunnel reuse audit: classify old aimos tunnel as donor evidence, preserve usable cloudflared quick-tunnel pattern for chatgpt /mcp connector, and block stale /sse or aimos authority carry-forward.",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T22:34:14+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T22:34:14+00:00",
+        "id": "opmsg_2026-05-03T223414Z0000_v124_legacy_cloudflare_tunnel_reuse_audit_classi",
+        "message": "V124 legacy Cloudflare tunnel reuse audit: classify old AIMOS tunnel as donor evidence, preserve usable cloudflared quick-tunnel pattern for ChatGPT /mcp connector, and block stale /sse or AIMOS authority carry-forward.",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T22:34:14+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V120_CHATGPT_BROWSER_MCP_CONNECTOR_AND_CORRECT_CARRIER_ONBOARDING",
+          "mutates_runtime": true,
+          "normalized_message": "v120_chatgpt_browser_mcp_connector_and_correct_carrier_onboarding",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-03T22:48:20+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-03T22:48:20+00:00",
+        "id": "opmsg_2026-05-03T224820Z0000_v120_chatgpt_browser_mcp_connector_and_correct_c",
+        "message": "V120_CHATGPT_BROWSER_MCP_CONNECTOR_AND_CORRECT_CARRIER_ONBOARDING",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-03T22:48:20+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.98,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "continue",
+          "mutates_runtime": true,
+          "normalized_message": "continue",
+          "original_classification": "continuation_signal",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-04T04:04:10+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-04T04:04:10+00:00",
+        "id": "opmsg_2026-05-04T040410Z0000_continue",
+        "message": "continue",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-04T04:04:10+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.82,
+          "live_execution_authority": false,
+          "message": "debug queued V88 directive",
+          "mutates_runtime": true,
+          "normalized_message": "debug queued v88 directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-04T04:24:05+00:00",
+        "consumed_at": "2026-05-04T04:24:05+00:00",
+        "created_at": "2026-05-04T04:24:05+00:00",
+        "id": "opmsg_2026-05-04T042405Z0000_debug_queued_v88_directive",
+        "message": "debug queued V88 directive",
+        "priority": 90,
+        "source": "operator",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-04T04:24:05+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.98,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "continue",
+          "mutates_runtime": true,
+          "normalized_message": "continue",
+          "original_classification": "continuation_signal",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-04T04:25:45+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-04T04:25:45+00:00",
+        "id": "opmsg_2026-05-04T042545Z0000_continue",
+        "message": "continue",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-04T04:25:45+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V120 Cloudflare tunnel ChatGPT browser connector deployment path",
+          "mutates_runtime": true,
+          "normalized_message": "v120 cloudflare tunnel chatgpt browser connector deployment path",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-04T05:38:17+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-04T05:38:17+00:00",
+        "id": "opmsg_2026-05-04T053817Z0000_v120_cloudflare_tunnel_chatgpt_browser_connector",
+        "message": "V120 Cloudflare tunnel ChatGPT browser connector deployment path",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-04T05:38:17+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "V120 Cloudflare connector host setup readiness receipt",
+          "mutates_runtime": true,
+          "normalized_message": "v120 cloudflare connector host setup readiness receipt",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-04T07:02:19+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-04T07:02:19+00:00",
+        "id": "opmsg_2026-05-04T070219Z0000_v120_cloudflare_connector_host_setup_readiness_r",
+        "message": "V120 Cloudflare connector host setup readiness receipt",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-04T07:02:19+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "Operator authorized host setup: install cloudflared if needed and start bounded Cloudflare tunnel for the ChatGPT Browser MCP connector at /mcp",
+          "mutates_runtime": true,
+          "normalized_message": "operator authorized host setup: install cloudflared if needed and start bounded cloudflare tunnel for the chatgpt browser mcp connector at /mcp",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-04T07:25:31+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-04T07:25:31+00:00",
+        "id": "opmsg_2026-05-04T072531Z0000_operator_authorized_host_setup_install_cloudflar",
+        "message": "Operator authorized host setup: install cloudflared if needed and start bounded Cloudflare tunnel for the ChatGPT Browser MCP connector at /mcp",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-04T07:25:31+00:00"
+      },
+      {
+        "classification": "new_work_directive",
+        "classification_record": {
+          "action": "record_operator_work_item_and_refresh_carrier",
+          "active_human_gate_count": 0,
+          "classification": "new_work_directive",
+          "confidence": 0.9,
+          "forced_objective_refresh": true,
+          "live_execution_authority": false,
+          "message": "Reconcile ChatGPT Browser MCP connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions",
+          "mutates_runtime": true,
+          "normalized_message": "reconcile chatgpt browser mcp connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions",
+          "original_classification": "new_work_directive",
+          "production_authority": false,
+          "requires_human_gate_resolution": false,
+          "schema_id": "ion.operator_message_classification.v1"
+        },
+        "completed_at": "2026-05-04T13:52:01+00:00",
+        "consumed_at": null,
+        "created_at": "2026-05-04T13:52:01+00:00",
+        "id": "opmsg_2026-05-04T135201Z0000_reconcile_chatgpt_browser_mcp_connector_transpor",
+        "message": "Reconcile ChatGPT Browser MCP connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions",
+        "priority": 75,
+        "source": "operator_directive_current_turn",
+        "status": "carrier_packet_generated",
+        "updated_at": "2026-05-04T13:52:01+00:00"
+      }
+    ],
+    "steward_integration": []
+  },
+  "receipt_hydration": {
+    "adapter_state": "JSON_FIXTURE_OR_DB_ADAPTER_INPUT",
+    "assistant_bubble_count": 0,
+    "generated_at": "2026-05-02T22:28:35+00:00",
+    "hydration_conflict_count": 0,
+    "production_authority": false,
+    "receipt_count": 0,
+    "recency_attachment_allowed": false,
+    "records": [],
+    "schema_id": "ion.receipt_hydration_view_model.v1",
+    "source_paths": {
+      "assistant_bubbles": "ION/05_context/current/ACTIVE_ASSISTANT_BUBBLES.json",
+      "receipt_rows": "ION/05_context/current/ACTIVE_RECEIPT_SOURCE_ROWS.json"
+    },
+    "unresolved_count": 0
+  },
+  "receipts": [
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "VIZIER_P2_INFRA_COMPLETE_20260403T1900.signal.md",
+      "path": "ION/05_context/signals/VIZIER_P2_INFRA_COMPLETE_20260403T1900.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "ATLAS_WEBGL_20260403.signal.md",
+      "path": "ION/05_context/signals/ATLAS_WEBGL_20260403.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "CODEX_RECURSIVE_WITNESS_DRIFT_ROLLBACK_20260404T2235.signal.md",
+      "path": "ION/05_context/signals/CODEX_RECURSIVE_WITNESS_DRIFT_ROLLBACK_20260404T2235.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "NEMESIS_ROUNDTABLE_CHECKPOINT_AWAITING_SOVEREIGN.signal.md",
+      "path": "ION/05_context/signals/NEMESIS_ROUNDTABLE_CHECKPOINT_AWAITING_SOVEREIGN.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "CODEX_TEMPLATE_BINDINGS_FIRST_PASS_20260403T1923.signal.md",
+      "path": "ION/05_context/signals/CODEX_TEMPLATE_BINDINGS_FIRST_PASS_20260403T1923.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "CODEX_ROUNDTABLE_IDEAS_AND_FIRST_MOVE_20260403T1228.signal.md",
+      "path": "ION/05_context/signals/CODEX_ROUNDTABLE_IDEAS_AND_FIRST_MOVE_20260403T1228.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "RELAY_OUTBOUND_20260403_SYSTEMS_ATLAS_ULTIMATE_OS.signal.md",
+      "path": "ION/05_context/signals/RELAY_OUTBOUND_20260403_SYSTEMS_ATLAS_ULTIMATE_OS.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "ATLAS_ISO_CATALOG_PRIMARIES_20260403.signal.md",
+      "path": "ION/05_context/signals/ATLAS_ISO_CATALOG_PRIMARIES_20260403.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "CODEX_M16_SECOND_PASS_IDENTITY_ROUTE_20260411T102558.signal.md",
+      "path": "ION/05_context/signals/CODEX_M16_SECOND_PASS_IDENTITY_ROUTE_20260411T102558.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "NEMESIS_CONTINUITY_LAW_RATIFICATION_PACKAGE.signal.md",
+      "path": "ION/05_context/signals/NEMESIS_CONTINUITY_LAW_RATIFICATION_PACKAGE.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "CODEX_SEQUENTIAL_RUNTIME_PORTABILITY_FIRST_PASS_20260403T2036.signal.md",
+      "path": "ION/05_context/signals/CODEX_SEQUENTIAL_RUNTIME_PORTABILITY_FIRST_PASS_20260403T2036.signal.md"
+    },
+    {
+      "authority_class": "WITNESS_INPUT",
+      "name": "v75_spawn_packet_mason_structure_audit_20260427.md",
+      "path": "ION/05_context/signals/v75_spawn_packet_mason_structure_audit_20260427.md"
+    }
+  ],
+  "runtime": {
+    "audit_findings": [],
+    "blocked": false,
+    "mode": "codex_extension",
+    "shell_root": "/home/sev/ION - Production/ION_CODEX",
+    "status": "ready",
+    "version": "V90_CURSOR_COCKPIT_LIVE_WEBVIEW_BINDING"
+  },
+  "runtime_debug_overlay": {
+    "generated_at": "2026-05-02T22:31:53+00:00",
+    "hydration": {
+      "db_hydration_ms": null,
+      "hydration_conflicts": 0,
+      "measurement_mode": "PROJECTED_ONLY",
+      "receipt_hydration_ms": null,
+      "unresolved_receipts": 0
+    },
+    "kernel": {
+      "cockpit_projection_ms": null,
+      "context_lifecycle_audit_ms": null,
+      "lane_timeline_projection_ms": null,
+      "measurement_mode": "PROJECTED_ONLY"
+    },
+    "production_authority": false,
+    "render": {
+      "last_render_ms": null,
+      "measurement_mode": "PROJECTED_ONLY",
+      "p50_render_ms": null,
+      "p95_render_ms": null,
+      "slow_component": null
+    },
+    "schema_id": "ion.runtime_debug_overlay.v1",
+    "source_paths": {
+      "hydration": "ION/05_context/current/ACTIVE_DB_HYDRATION_METRICS.json",
+      "kernel": "ION/05_context/current/ACTIVE_KERNEL_PROJECTION_TIMINGS.json",
+      "receipt_hydration": "ION/05_context/current/ACTIVE_RECEIPT_HYDRATION_VIEW_MODEL.json",
+      "render": "ION/05_context/current/ACTIVE_RENDER_TIMING_METRICS.json",
+      "sse": "ION/05_context/current/ACTIVE_SSE_EVENT_METRICS.json",
+      "watcher": "ION/05_context/current/ACTIVE_FILE_WATCHER_METRICS.json"
+    },
+    "sse": {
+      "dropped_events": 0,
+      "events_per_second": 0.0,
+      "events_total": 0,
+      "last_event_at": null,
+      "measurement_mode": "NOT_CONNECTED",
+      "reconnect_count": 0
+    },
+    "status": "degraded",
+    "watcher": {
+      "files_changed": 0,
+      "last_refresh_at": null,
+      "measurement_mode": "NOT_CONNECTED",
+      "refresh_ms": null
+    },
+    "window_seconds": 60
+  },
+  "safe_full_project_package": {},
+  "schema_id": "ion.cockpit_view_model.v1",
+  "source_paths": {
+    "front_door_proof_trace": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+    "hook": "ION/05_context/current/ACTIVE_CURSOR_HOOK_STATE.json",
+    "human_gates": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+    "lane_timeline": "ION/05_context/current/ACTIVE_LANE_TIMELINE_VIEW_MODEL.json",
+    "ledger": "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json",
+    "operator_queue": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+    "receipt_hydration": "ION/05_context/current/ACTIVE_RECEIPT_HYDRATION_VIEW_MODEL.json",
+    "runtime_debug_overlay": "ION/05_context/current/ACTIVE_RUNTIME_DEBUG_OVERLAY.json",
+    "safe_full_project_package": "ION/05_context/current/SAFE_FULL_PROJECT_PACKAGE_RESULT_V110.json",
+    "spawn": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+    "steward": "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json",
+    "turn": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+    "v72_mcp_donor_reconciliation": "ION/05_context/current/V108_V72_MCP_DONOR_RECONCILIATION_AUDIT.json",
+    "work": "ION/05_context/current/ACTIVE_WORK_PACKET.json"
+  },
+  "timeline": [
+    {
+      "detail": "",
+      "event_type": "cursor hook state",
+      "path": "ION/05_context/current/ACTIVE_CURSOR_HOOK_STATE.json",
+      "source": "hook",
+      "status": "projected_not_connected",
+      "time": "2026-05-02T22:26:21+00:00"
+    },
+    {
+      "detail": "Reconcile ChatGPT Browser MCP connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions",
+      "event_type": "work packet",
+      "path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+      "source": "work",
+      "status": "ready",
+      "time": "2026-05-04T13:52:01+00:00"
+    },
+    {
+      "detail": "",
+      "event_type": "carrier turn",
+      "path": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+      "source": "turn",
+      "status": "ready",
+      "time": "2026-05-04T14:58:05+00:00"
+    },
+    {
+      "detail": "spawn rows: 5",
+      "event_type": "spawn plan",
+      "path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+      "source": "spawn",
+      "status": "ready",
+      "time": "2026-05-04T14:58:05+00:00"
+    },
+    {
+      "detail": "accepted: 0 rejected: 0",
+      "event_type": "task-return ledger",
+      "path": "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json",
+      "source": "ledger",
+      "status": "ready",
+      "time": "2026-05-04T14:58:05+00:00"
+    },
+    {
+      "detail": "items: 0",
+      "event_type": "steward queue",
+      "path": "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json",
+      "source": "steward",
+      "status": "ready",
+      "time": "2026-05-04T14:58:05+00:00"
+    },
+    {
+      "detail": "pending: 0",
+      "event_type": "operator queue",
+      "path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+      "source": "operator_queue",
+      "status": "ready",
+      "time": "2026-05-04T13:52:01+00:00"
+    },
+    {
+      "detail": "open: 0",
+      "event_type": "human gate queue",
+      "path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+      "source": "human_gates",
+      "status": "ready",
+      "time": "2026-05-02T22:29:39+00:00"
+    },
+    {
+      "detail": "no safe package result",
+      "event_type": "safe full-project package",
+      "path": "ION/05_context/current/SAFE_FULL_PROJECT_PACKAGE_RESULT_V110.json",
+      "source": "safe_full_project_package",
+      "status": "degraded",
+      "time": "2026-05-04T21:39:43+00:00"
+    },
+    {
+      "detail": "V72_MCP_DONOR_RECONCILIATION_PASS; restored: 38; forbidden runtime: 0",
+      "event_type": "V72 MCP donor reconciliation",
+      "path": "ION/05_context/current/V108_V72_MCP_DONOR_RECONCILIATION_AUDIT.json",
+      "source": "v72_mcp_donor_reconciliation",
+      "status": "ready",
+      "time": "2026-05-04T21:39:43+00:00"
+    },
+    {
+      "detail": "ION_FRONT_DOOR_PROOF_TRACE_READY",
+      "event_type": "front-door proof trace",
+      "path": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+      "source": "front_door_proof_trace",
+      "status": "ready",
+      "time": "2026-05-04T21:39:43+00:00"
+    }
+  ],
+  "top_bar": {
+    "carrier_status": "ready",
+    "deferred_spawn_count": 3,
+    "execution_bundle_materialized": true,
+    "gate_count": 0,
+    "hook_status": "projected_not_connected",
+    "objective": "Reconcile ChatGPT Browser MCP connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions",
+    "operator_queue_pending": 0,
+    "plan_spawn_count": 0,
+    "return_counts": {
+      "accepted": 0,
+      "needs_human_review": 0,
+      "pending": 0,
+      "rejected": 0
+    },
+    "spawn_count": 0,
+    "spawn_rows_total": 5,
+    "steward_queue_count": 0
+  },
+  "v72_mcp_donor_reconciliation": {
+    "client_certification_present": true,
+    "current_trunk_mcp_surface_count": 5,
+    "current_trunk_mcp_surfaces_missing": [],
+    "current_trunk_mcp_surfaces_present": [
+      ".cursor/mcp.json",
+      "ION/09_integrations/mcp/ion_mcp_server.py",
+      "ION/09_integrations/mcp/README.md",
+      "ION/04_packages/kernel/ion_mcp_bridge_audit.py",
+      "ION/tests/test_kernel_ion_mcp_bridge_audit.py"
+    ],
+    "cursor_bridge_preserved": true,
+    "donor_branch": "ION_MASTER_CURRENT_3_V72_HOSTED_MCP_BUNDLE_IMPORT_EXPORT_AND_REPLAY_ALPHA_20260426",
+    "donor_runtime_receipts_restored": false,
+    "donor_scope": "V72 MCP donor reconciliation imports protocol, registry, kernel, test, docs, and example surfaces only; old runtime-session receipts remain forensic donor evidence and are not restored into current hot trunk.",
+    "findings": [
+      "required_v72_mcp_donor_surfaces_present",
+      "current_v105_v107_cursor_mcp_bridge_preserved",
+      "old_v72_runtime_session_receipts_not_restored_to_hot_trunk"
+    ],
+    "forbidden_runtime_file_count": 0,
+    "forbidden_runtime_files": [],
+    "forbidden_runtime_prefixes": [
+      "ION/05_context/runtime_state/v64_local_mcp_bridge/"
+    ],
+    "generated_at": "2026-05-03T04:30:17+00:00",
+    "hosted_auth_alpha_present": true,
+    "live_execution_authority": false,
+    "local_bridge_present": true,
+    "missing_donor_surface_count": 0,
+    "missing_donor_surfaces": [],
+    "production_authority": false,
+    "reconciliation_verdict": "V72_MCP_DONOR_RECONCILIATION_PASS",
+    "required_donor_surface_count": 38,
+    "restored_donor_surface_count": 38,
+    "root": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION",
+    "schema_id": "ion.v72_mcp_donor_reconciliation_audit.v1",
+    "transport_preview_present": true,
+    "version_line": "V108_V72_MCP_DONOR_RECONCILIATION"
+  }
+}

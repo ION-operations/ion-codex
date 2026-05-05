@@ -1,0 +1,10 @@
+{
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "created_at": "2026-05-04T23:21:34+00:00",
+  "decision": "Use neutral ION naming for GitHub SSH identity labels and local SSH key names. Prefer id_ed25519_ion_operations and comment ION-operations instead of personal or legacy Helixion email labels.",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "rationale": "Braden wants GitHub setup to clearly target the ION-operations account/org and avoid confusion with older Helixion identity labels.",
+  "schema_id": "ion.chatgpt_browser_connector_decision.v1",
+  "status": "RECORDED_NOT_AUTHORITY_BY_ITSELF"
+}

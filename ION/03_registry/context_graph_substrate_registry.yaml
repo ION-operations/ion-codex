@@ -1,0 +1,316 @@
+registry_id: context_graph_substrate_registry
+status: PROPOSED_RESTORATION_NOT_YET_RATIFIED
+authority: A2_PRODUCTION_GOVERNANCE_CANDIDATE
+created: 2026-04-24
+root_law: "ION is a living context graph operated by lawful agents through templates."
+source_recovery_packet: ION/06_intelligence/orchestration/context_graph_restoration/2026-04-24_context_graph_substrate_origin_recovery_packet.md
+ratification_packet: ION/06_intelligence/orchestration/context_graph_restoration/2026-04-24_context_graph_rootlaw_ratification_and_build_plan.md
+origin_mapping: ION/06_intelligence/orchestration/context_graph_restoration/2026-04-24_origin_to_current_context_graph_mapping.md
+
+substrate_planes:
+  source_graph:
+    description: Durable graph of typed nodes and edges; source continuity.
+    authority_posture: SOURCE_OR_NEAR_SOURCE_WHEN_PERSISTED
+  compiled_packages:
+    description: Bounded graph neighborhoods assembled for lawful work.
+    authority_posture: PROJECTION_FROM_SOURCE_GRAPH
+  agent_regions:
+    description: Graph regions maintained by manager agents and sub-specialists.
+    authority_posture: JURISDICTIONAL_VIEW
+  templates:
+    description: Graph-operation law for node/edge/package/settlement mutation.
+    authority_posture: GOVERNING_FORM
+  receipts:
+    description: Evidence of graph mutation, settlement, emission, or review.
+    authority_posture: EVIDENCE_NODE
+  membrane_projection:
+    description: Operator-visible projection of graph state.
+    authority_posture: WITNESS_PROJECTION_NOT_SOURCE
+  portable_capsules:
+    description: Zips/bundles/exported continuity graph capsules.
+    authority_posture: PORTABLE_CHECKPOINT_OR_WITNESS_DEPENDING_ON_MANIFEST
+
+node_type_seed:
+  law_node: governing doctrine/protocol/root law
+  protocol_node: architecture or operational protocol
+  template_node: graph-operation form
+  role_node: manager/subagent/custodian role identity
+  agent_jurisdiction_node: role-to-region responsibility binding
+  domain_node: domain registry or conceptual field
+  semantic_identity_node: true-name or lineage identity
+  work_node: work unit, child work, schedule item, or task
+  packet_node: bounded packet/handoff/inbox item
+  receipt_node: emitted evidence of an event or mutation
+  decision_node: verdict, ratification, hold, escalation, settlement
+  evidence_node: donor proof, test output, audit finding, manifest evidence
+  implementation_node: code/module/package surface
+  test_node: validation or regression guard
+  history_node: lineage, donor, recovery, or session history
+  research_node: exploratory/theory/evidence synthesis surface
+  projection_node: status, capsule, membrane board, summary, report
+  external_return_node: MCP/API/browser/IDE return evidence
+
+edge_type_seed:
+  requires: target is required by source
+  produces: source produces target
+  affects: source may change target behavior/state
+  depends_on: source is dependent on target
+  escalates_to: source routes unresolved burden to target
+  supersedes: source replaces target under declared authority
+  contradicts: source conflicts with target and must preserve tension
+  evidenced_by: source claim is supported by target
+  implemented_by: protocol/law is enacted by implementation
+  tested_by: source is guarded by test/validation
+  owned_by: source belongs to manager or custodian
+  routes_to: source dispatches or hands off to target
+  blocks: source prevents target from progressing
+  resolves: source resolves target
+  settles_into: source branch/subresult fan-ins to target
+  compresses_to: detailed graph region projects into compact surface
+  expands_to: compact surface unfolds into graph region
+  evolves_from: source descends from historical target
+  projects_from: witness/projection derives from source
+  packages: context package includes node/edge set
+  mutates: writeback changes node/edge/region state
+
+manager_jurisdiction_seed:
+  steward:
+    region: current_phase_routing_and_lawful_continuation_graph
+    burden: coordinate lawful next steps and approve routing without holding all graph context personally
+    may_fan_out_to: [vizier, vice, nemesis, mason, scribe, vestige, relay, thoth, atlas]
+  vizier:
+    region: architecture_cross_region_synthesis_and_organism_identity_graph
+    burden: synthesize settlements from multiple graph-region custodians
+    may_fan_out_to: [atlas, thoth, mason, scribe, vestige, vice, nemesis]
+  vice:
+    region: contradiction_pressure_false_canon_and_future_answerability_graph
+    burden: preserve uncomfortable tensions and prevent smooth false settlement
+    may_fan_out_to: [nemesis, vestige, atlas, thoth]
+  nemesis:
+    region: evidence_audit_tests_release_risk_and_regression_graph
+    burden: verify claims, reject unsupported restoration, guard anti-drift tests
+    may_fan_out_to: [mason, scribe, vestige]
+  mason:
+    region: implementation_runtime_kernel_schema_and_test_harness_graph
+    burden: implement bounded graph substrate only after law/registry/template settlement
+    may_fan_out_to: [mason.kernel, mason.schema, mason.tests, mason.packaging]
+  scribe:
+    region: documentation_archive_operator_legibility_and_membrane_projection_graph
+    burden: convert graph truth into recoverable human-facing canon without laundering
+    may_fan_out_to: [scribe.encyclopedia, scribe.changelog, scribe.operator_notes]
+  vestige:
+    region: donor_lineage_lost_surface_archeology_and_drift_watch_graph
+    burden: keep origin evidence and historical names visible without promoting residue to live law
+    may_fan_out_to: [vestige.donor_lineage, vestige.lost_surface, vestige.alias_trace]
+  relay:
+    region: intent_packet_signal_external_return_and_boundary_courier_graph
+    burden: carry intent and returns across boundaries without mutating authority
+    may_fan_out_to: [relay.inbox, relay.signals, relay.external_return]
+  thoth:
+    region: research_evidence_extraction_theory_and_experimental_graph
+    burden: extract deep evidence and maintain speculative/proven separation
+    may_fan_out_to: [thoth.research, thoth.ontology, thoth.evidence]
+  atlas:
+    region: topology_comparative_reference_dependency_and_domain_map_graph
+    burden: map graph regions, dependencies, topology, and external comparisons
+    may_fan_out_to: [atlas.internal_topology, atlas.comparative, atlas.domain_map]
+  weaver:
+    region: reserved_ui_projection_visual_language_and_operator_surface_graph
+    burden: render graph state into interface/presentation surfaces if activated
+    status: RESERVED_UNRESOLVED_OR_OPTIONAL
+    may_fan_out_to: [weaver.ui_shell, weaver.mem_map, weaver.visualization]
+
+anti_drift_guards:
+  - ION must not be described as merely a prompt library, file tree, chatbot shell, or ordinary RAG system.
+  - Context packages must remain bounded graph neighborhoods, not pasted history.
+  - Manager agents must not be expected to hold all context; they call graph-region custodians.
+  - Subagents must be bounded by graph region, template, authority, and settlement obligations.
+  - Templates must remain graph-operation law, not aesthetic wrappers.
+  - Receipts must be treated as graph evidence, not decorative logs.
+  - Projection surfaces must remain projections and must not impersonate source graph truth.
+
+evented_file_graph_extension:
+  status: PROPOSED_ROOTLAW_EXTENSION_NOT_YET_RATIFIED
+  root_law_extension: "A valid completed template file is an automation event surface."
+  substrate_phrase: "ION is a living context graph materialized as an evented, template-instantiated file system."
+  governing_protocols:
+    - ION/02_architecture/EVENTED_TEMPLATE_FILE_GRAPH_PROTOCOL.md
+    - ION/02_architecture/TEMPLATE_COMPLETION_EVENT_PROTOCOL.md
+  recovery_packet: ION/06_intelligence/orchestration/context_graph_restoration/2026-04-24_evented_template_file_graph_recovery_packet.md
+
+  true_name_candidates:
+    automation.event.template_completion:
+      short_form: template_completion_event
+      canonical_phrase: Template Completion Event
+      class: automation_graph_event
+      governing_intent:
+        - define the moment when a template-instantiated file becomes actionable by ION automation
+        - allow daemons, schedulers, indexers, registries, and agents to react lawfully to completed files
+        - prevent completed files from being treated as inert documents
+        - prevent incomplete files from triggering unsafe automation
+    substrate.file_graph.evented:
+      short_form: evented_file_graph
+      canonical_phrase: Evented Template File Graph
+      class: substrate_law
+      governing_intent:
+        - define ION as a template-instantiated file graph whose valid file completions trigger lawful automation
+        - bind files, templates, daemons, schedulers, receipts, and graph mutations into one operating cycle
+
+  completion_classes:
+    DRAFT_COMPLETE: enough to preserve as draft evidence; not automation-capable
+    WITNESS_COMPLETE: enough to index as witness/projection; not source mutation authority
+    ACTIONABLE_COMPLETE: enough to route bounded reactions
+    RATIFICATION_READY: enough to request governance review
+    EXECUTION_READY: enough to request bounded execution under scheduler/daemon law
+    BLOCKED_INCOMPLETE: recognizable but missing required authority/context fields
+
+  reaction_family_seed:
+    index_update: update a validation projection or graph index
+    graph_node_create: create or register a new graph node
+    graph_edge_update: add, remove, or mark an edge
+    summary_refresh: mark or update a summary/projection surface
+    dependency_warning: warn affected owners or domains
+    schedule_followup: create scheduler or horizon item
+    agent_activation_request: request specialist/subagent lane
+    question_emit: create an open question rather than guessing
+    contradiction_mark: mark affected claims as contested
+    registry_update_proposal: propose registry mutation
+    receipt_emit: emit evidence of action/refusal
+    settlement_request: route fan-in review
+
+  event_safety_gates:
+    - template class must be known
+    - required fields must be complete
+    - authority class must permit action
+    - validation must pass
+    - downstream effects must be allowed by template
+    - receipts must be emitted for action or refusal
+    - blocked or uncertain effects must escalate instead of guessing
+
+  evented_template_requirements:
+    required_fields:
+      - template.id
+      - template.file_class
+      - template.graph_node_type
+      - template.allowed_statuses
+      - template.required_fields
+      - template.completion_threshold
+      - template.authority_class
+      - template.graph_region
+      - template.allowed_reactions
+      - template.forbidden_reactions
+      - template.receipt_required
+    recommended_fields:
+      - template.downstream_effects
+      - template.scheduler_hooks
+      - template.agent_activation_hooks
+      - template.index_update_hooks
+      - template.settlement_behavior
+
+  anti_drift_guards:
+    - A file existing is not the same as a template completion event.
+    - A completed file is not an automatic permission slip.
+    - Incomplete files must not trigger unsafe automation.
+    - Downstream effects must come from template law, not prose inference.
+    - Daemon reaction remains bounded and supervised.
+    - Every action or refusal must emit receipt evidence.
+
+v4_operationalization_extension:
+  status: PROPOSED_IMPLEMENTATION_PATH_NOT_YET_RATIFIED
+  created: 2026-04-24
+  governing_claim: "The evented template file graph becomes operational only when completion detection, validation, reaction routing, bounded execution, receipt emission, and graph writeback are all explicit."
+  governing_protocols:
+    - ION/02_architecture/TEMPLATE_EVENT_REACTION_PIPELINE_PROTOCOL.md
+    - ION/02_architecture/GRAPH_REACTION_REGISTRY_PROTOCOL.md
+    - ION/02_architecture/TEMPLATE_COMPLETION_WATCHER_AND_INDEXER_PROTOCOL.md
+    - ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+  operationalization_packet: ION/06_intelligence/orchestration/context_graph_restoration/2026-04-24_evented_template_file_graph_v4_operationalization_packet.md
+  implementation_plan: ION/06_intelligence/orchestration/context_graph_restoration/2026-04-24_context_graph_substrate_implementation_plan.md
+  ratification_task: ION/05_context/inbox/context_graph/event_reaction_pipeline_ratification_20260424.task.md
+
+  lifecycle_states:
+    FILE_DISCOVERED:
+      meaning: A file exists at a watched path; no event has been recognized.
+      automation_authority: NONE
+    TEMPLATE_CLASSIFIED:
+      meaning: The file maps to a known template class or is explicitly unknown.
+      automation_authority: CLASSIFICATION_ONLY
+    COMPLETION_CANDIDATE:
+      meaning: The file contains enough fields to evaluate completion.
+      automation_authority: VALIDATION_ONLY
+    VALIDATED_COMPLETE:
+      meaning: The file passes template validation and completion threshold.
+      automation_authority: EVENT_MAY_BE_EMITTED
+    EVENT_EMITTED:
+      meaning: A TemplateCompletionEvent has been written with stable identity.
+      automation_authority: REACTION_ROUTING_ALLOWED
+    REACTIONS_SELECTED:
+      meaning: Allowed downstream reaction set has been computed from template law.
+      automation_authority: BOUNDED_REACTION_PROPOSAL_ONLY
+    REACTION_EXECUTED:
+      meaning: One bounded reaction has executed under daemon/scheduler/operator law.
+      automation_authority: RECEIPT_REQUIRED
+    GRAPH_WRITTEN_BACK:
+      meaning: The source graph or its projections have been updated with receipt evidence.
+      automation_authority: COMPLETE_OR_SETTLEMENT_REQUIRED
+    BLOCKED_OR_REFUSED:
+      meaning: Validation, authority, freshness, contradiction, or safety gate blocked action.
+      automation_authority: QUESTION_OR_REFUSAL_RECEIPT_REQUIRED
+
+  reaction_pipeline:
+    - detect_file_change_or_scan
+    - classify_template
+    - validate_completion_threshold
+    - emit_template_completion_event
+    - select_allowed_reactions
+    - enqueue_or_execute_one_bounded_reaction
+    - emit_reaction_receipt
+    - write_back_graph_mutation_or_refusal
+    - update_indexes_and_membrane_projection
+
+  first_reaction_registry_seed:
+    index_update:
+      executor_family: daemon_or_indexer
+      allowed_effects: [projection_update, coverage_marker, stale_marker]
+      forbidden_effects: [source_law_mutation]
+      receipt: index_update_receipt
+    graph_node_create:
+      executor_family: graph_writer
+      allowed_effects: [node_record_proposal, source_reference_binding]
+      forbidden_effects: [silent_canon_promotion]
+      receipt: graph_writeback_receipt
+    graph_edge_update:
+      executor_family: graph_writer
+      allowed_effects: [edge_record_proposal, relation_status_update]
+      forbidden_effects: [contradiction_deletion_without_settlement]
+      receipt: graph_writeback_receipt
+    schedule_followup:
+      executor_family: scheduler
+      allowed_effects: [horizon_item_proposal, work_unit_proposal]
+      forbidden_effects: [direct_execution_without_gate]
+      receipt: schedule_reaction_receipt
+    agent_activation_request:
+      executor_family: steward_or_relay
+      allowed_effects: [specialist_request, fan_out_packet]
+      forbidden_effects: [unreviewed_new_top_level_role]
+      receipt: agent_activation_request_receipt
+    contradiction_mark:
+      executor_family: vice_or_nemesis
+      allowed_effects: [contested_claim_marker, review_question]
+      forbidden_effects: [contradiction_smoothing]
+      receipt: contradiction_mark_receipt
+    registry_update_proposal:
+      executor_family: registrar_candidate_or_steward
+      allowed_effects: [registry_delta_proposal]
+      forbidden_effects: [direct_registry_mutation_without_verdict]
+      receipt: registry_update_proposal_receipt
+
+  required_guard_tests:
+    - template completion must not fire for unknown template class
+    - incomplete required fields must produce BLOCKED_OR_REFUSED not graph mutation
+    - template downstream effects must be allowlisted
+    - reaction identity must be idempotent for the same file/content hash
+    - each executed reaction must produce a receipt
+    - source graph mutation must cite event and receipt
+    - projection/index update must not impersonate source graph authority
+

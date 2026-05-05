@@ -1,0 +1,62 @@
+{
+  "accepted": true,
+  "active_surface_checks": [
+    {
+      "exists": true,
+      "forbidden_root_read_patterns_present": [],
+      "rel_path": "ION/REPO_AUTHORITY.md"
+    },
+    {
+      "exists": false,
+      "forbidden_root_read_patterns_present": [],
+      "rel_path": "ION/05_context/current/OPERATOR_VISIBLE_LAST_RUN.md"
+    },
+    {
+      "exists": false,
+      "forbidden_root_read_patterns_present": [],
+      "rel_path": "ION/05_context/current/_tmp_onboard.json"
+    },
+    {
+      "exists": true,
+      "forbidden_root_read_patterns_present": [],
+      "rel_path": ".cursor/hooks/ion_session_start_persona_mount.py"
+    }
+  ],
+  "authority_surface_count": 14,
+  "authority_surface_present_count": 14,
+  "emitted_at": "2026-05-03T22:12:49+00:00",
+  "file_checks": [
+    {
+      "exists": false,
+      "forbidden_patterns_present": [],
+      "forbidden_procedural_patterns_present": [],
+      "rel_path": "AGENTS.md"
+    },
+    {
+      "exists": false,
+      "forbidden_patterns_present": [],
+      "forbidden_procedural_patterns_present": [],
+      "rel_path": "START_HERE_FOR_ANY_AGENT.md"
+    }
+  ],
+  "findings": [
+    "shell_root_confirmed",
+    "carrier_registry_template_onboarding_surfaces_present",
+    "optional_root_onboarding_shims_retired_from_hot_root",
+    "root_onboarding_shims_not_authority_and_not_stale"
+  ],
+  "forbidden_active_root_read_patterns_present": 0,
+  "line": "V123_ROOT_ONBOARDING_SHIM_RETIREMENT",
+  "live_execution_authority": false,
+  "missing_authority_surfaces": [],
+  "mutation_performed": false,
+  "optional_root_onboarding_files_present": 0,
+  "procedural_root_patterns_present": 0,
+  "production_authority": false,
+  "root_confirmed": true,
+  "root_missing_files": [],
+  "scanned_root": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION",
+  "schema_id": "ion.carrier_onboarding_authority_audit.v1",
+  "stale_cursor_root_patterns_present": 0,
+  "verdict": "ION_CARRIER_ONBOARDING_AUTHORITY_READY"
+}

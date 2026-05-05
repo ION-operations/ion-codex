@@ -1,0 +1,35 @@
+version: V64_PROVIDER_ADAPTER_READINESS_AND_SELECTOR_HEALTH_VIEW_MODEL
+production_authority: false
+live_dispatch_authority: false
+required_upstream:
+  trace_verdict: DRY_RUN_TRACE_READY
+  execution_mode: TRACE_ONLY_NON_EXECUTING
+allowed_access_methods:
+  - browser_noop
+  - api_noop
+  - cli_noop
+  - local_noop
+  - cloud_noop
+allowed_compute_rings:
+  - RING_1_BROWSER_SESSION
+  - RING_2_API_CLI_LOCAL
+  - RING_3_CLOUD_COMPUTE
+required_view_surfaces:
+  - PROVIDER_ADAPTER_READINESS_RAIL
+  - SESSION_SELECTOR_HEALTH_PANEL
+  - NOOP_ADAPTER_INVARIANT_STRIP
+  - GOVERNOR_EVIDENCE_LINKS
+  - ACCESS_METHOD_BADGE
+  - COMPUTE_RING_BADGE
+  - BLOCKED_CAPABILITY_LEDGER
+  - NEXT_ACTION_CALLOUT
+forbidden_capabilities:
+  live_external_model_dispatch: false
+  browser_session_mutation: false
+  credential_access: false
+  form_submission: false
+  paid_cloud_launch: false
+  source_summary_rewrite: false
+  canonical_graph_write: false
+  unrestricted_agent_activation: false
+  production_authority: false

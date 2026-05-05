@@ -1,0 +1,50 @@
+policy_id: ion.operational_readiness_gate_policy.v1
+version: V63_PROTOCOLIZATION__FULL_OPERATIONALIZATION_AND_TESTING
+authority_scope: OPERATIONAL_READINESS_CLASSIFICATION_ONLY
+readiness_gates:
+  PROTOCOLIZED:
+    description: Protocols and registry surfaces exist; no live authority claimed.
+    required_evidence:
+      - architecture protocols present
+      - schemas load
+      - policies parse
+      - changelog emitted
+  LOCALLY_TESTABLE:
+    description: Kernel and selected branch tests run locally.
+    required_evidence:
+      - kernel import success
+      - selected pytest success
+      - CLI status check
+  LOCALLY_MOUNTABLE:
+    description: Local MCP or CLI mount can emit boot packet and read-only resources.
+    required_evidence:
+      - ion.mount dry-run/local proof
+      - boot packet proof
+      - receipts/resource listing proof
+  APPROVAL_SAFE:
+    description: Privileged MCP requests cannot bypass V62 approval boundary.
+    required_evidence:
+      - live execution refused or approval-required
+      - stale approval rejected
+      - direct kernel write rejected
+  HOSTED_BETA:
+    description: Account/workspace/state-root cloud model exists in controlled beta.
+    required_evidence:
+      - auth scopes
+      - tenant state separation
+      - export/import proof
+  PRODUCTION_CANDIDATE:
+    description: SaaS/enterprise launch candidate with isolation, audit, support, and release controls.
+    required_evidence:
+      - tenant isolation tests
+      - rollback/replay tests
+      - sandbox isolation tests
+      - signed release artifacts
+current_gate: PROTOCOLIZED
+next_allowed_gate: LOCALLY_TESTABLE
+forbidden_current_claims:
+  - HOSTED_BETA
+  - PRODUCTION_CANDIDATE
+  - LIVE_EXECUTION_READY
+  - KUBERNETES_REQUIRED_NOW
+  - PROVIDER_DISPATCH_AUTHORIZED

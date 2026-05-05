@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.local_browser_execution_run_receipt.v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "run_verdict",
+    "authority_scope",
+    "fixture_results",
+    "forbidden_capabilities"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.local_browser_execution_run_receipt.v1"
+    },
+    "version": {
+      "const": "V53_LOCAL_BROWSER_EXECUTION_RUN_RECEIPTS"
+    },
+    "authority_scope": {
+      "const": "LOCAL_DEV_BROWSER_EXECUTION_RUN_RECEIPT_ONLY"
+    },
+    "run_verdict": {
+      "enum": [
+        "LOCAL_BROWSER_EXECUTION_RUN_RECEIPT_ACCEPTED",
+        "LOCAL_BROWSER_EXECUTION_RUN_NEEDS_REVIEW",
+        "LOCAL_BROWSER_EXECUTION_RUN_FAILED_REQUIRES_REVIEW",
+        "LOCAL_BROWSER_EXECUTION_RUN_REJECTED_FOR_FORBIDDEN_EVENT",
+        "LOCAL_BROWSER_EXECUTION_RUN_BLOCKED_BY_STEWARD"
+      ]
+    },
+    "live_browser_execution_authorized": {
+      "const": false
+    },
+    "external_network_authorized": {
+      "const": false
+    },
+    "production_authority": {
+      "const": false
+    }
+  }
+}

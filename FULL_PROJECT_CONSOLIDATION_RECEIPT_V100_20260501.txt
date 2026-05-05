@@ -1,0 +1,11 @@
+receipt_id: ion-cursor-v100-full-project-consolidation-20260501
+receipt_class: full_project_zip_packaging
+base_artifact: ION_CURSOR_CONSOLIDATED_V96_FULL_RUNTIME_20260430(1).zip
+overlays_applied:
+  - ION_CURSOR_V97_LEAD_DEV_SURVIVAL_AUDIT_UPDATE_20260501(3).zip
+  - ION_CURSOR_V98_MASTER_ORCHESTRATION_AUTOMATION_AND_UI_RECOVERY_UPDATE_20260501(2).zip
+  - ION_CURSOR_V99_AGENT_CONTEXT_CONTINUITY_AND_RUNTIME_SEPARATION_DESIGN_UPDATE_20260501.zip
+  - ION_CURSOR_V100_LIVING_ENCYCLOPEDIA_AND_CONTEXT_SYSTEM_INTEGRATION_UPDATE_20260501.zip
+production_claim: false
+full_suite_test_claim: false
+packaging_claim: V96 full project base with V97-V100 overlays applied into project root

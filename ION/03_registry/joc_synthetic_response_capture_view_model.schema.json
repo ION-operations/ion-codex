@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JOC Synthetic Response Capture View Model",
+  "type": "object",
+  "required": [
+    "version",
+    "mission_id",
+    "provider_readiness_ref",
+    "capture_verdict",
+    "authority_scope",
+    "execution_mode",
+    "synthetic_response_payload",
+    "extraction_receipt_preview",
+    "view_surfaces",
+    "blocked_capabilities",
+    "production_authority",
+    "live_dispatch_claim",
+    "external_model_call_authorized"
+  ],
+  "properties": {
+    "version": {"const": "V65_SYNTHETIC_RESPONSE_CAPTURE_AND_EXTRACTION_RECEIPT_PREVIEW"},
+    "authority_scope": {"const": "SYNTHETIC_RESPONSE_CAPTURE_VIEW_MODEL_RECEIPT_ONLY"},
+    "execution_mode": {"enum": ["CAPTURE_PREVIEW_ONLY", "VIEW_ONLY_BLOCKED"]},
+    "capture_verdict": {
+      "enum": [
+        "SYNTHETIC_RESPONSE_CAPTURE_PREVIEW_READY",
+        "BLOCKED_PROVIDER_READINESS_NOT_READY",
+        "BLOCKED_MISSING_CAPTURE_EVIDENCE",
+        "BLOCKED_FORBIDDEN_CAPABILITY",
+        "BLOCKED_LIVE_CAPTURE_REQUESTED",
+        "BLOCKED_SYNTHETIC_PAYLOAD_INVALID"
+      ]
+    },
+    "synthetic_response_payload": {"type": "object"},
+    "extraction_receipt_preview": {"type": "object"},
+    "production_authority": {"const": false},
+    "live_dispatch_claim": {"const": false},
+    "external_model_call_authorized": {"const": false}
+  },
+  "additionalProperties": true
+}

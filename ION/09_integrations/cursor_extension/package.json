@@ -1,0 +1,43 @@
+{
+  "name": "ion-cursor-cockpit",
+  "displayName": "ION Cursor Cockpit",
+  "description": "Cursor/VS Code extension scaffold for rendering ION runtime packets and JOC cockpit state.",
+  "version": "0.90.0",
+  "publisher": "ion-local",
+  "engines": { "vscode": "^1.90.0" },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished", "onCommand:ion.continue", "onView:ionStatus"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "ion.continue", "title": "ION: Continue" },
+      { "command": "ion.status", "title": "ION: Status" },
+      { "command": "ion.auditCarrierWorkflow", "title": "ION: Audit Carrier Workflow" },
+      { "command": "ion.refreshCockpitViewModel", "title": "ION: Refresh Cockpit View Model" },
+      { "command": "ion.openActiveCarrierTurnPacket", "title": "ION: Open Active Carrier Turn Packet" },
+      { "command": "ion.openTaskReturnLedger", "title": "ION: Open Task Return Ledger" },
+      { "command": "ion.openStewardIntegrationQueue", "title": "ION: Open Steward Integration Queue" },
+      { "command": "ion.openHumanGateQueue", "title": "ION: Open Human Gate Queue" },
+      { "command": "ion.openCockpit", "title": "ION: Open JOC Cockpit" }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        { "id": "ion", "title": "ION", "icon": "resources/ion.svg" }
+      ]
+    },
+    "views": {
+      "ion": [
+        { "id": "ionStatus", "name": "ION Status" }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.4.0"
+  }
+}

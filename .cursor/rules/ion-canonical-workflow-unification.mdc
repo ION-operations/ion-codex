@@ -1,0 +1,62 @@
+---
+description: V94 canonical Cursor workflow: /ion is the reset-and-run carrier command; dynamic shell root; one CLI spine; strict generated subagent rows.
+alwaysApply: true
+---
+
+# ION V94 — Canonical Cursor workflow unification
+
+This rule supersedes older conflicting Cursor instructions about shell root, CLI entrypoint, and subagent spawn shape.
+
+## One shell root rule
+
+The shell root is the current workspace directory containing both:
+
+```text
+pyproject.toml
+ION/REPO_AUTHORITY.md
+```
+
+No fixed path is canonical. If those two files cannot be confirmed in the current workspace/root search, stop with `ROOT_NOT_CONFIRMED`.
+
+## One command
+
+Use `/ion` as the primary reset-and-run command.
+
+- `/ion` means `continue`.
+- `/ion <message>` means queue/classify that message and run the ION carrier-control workflow.
+
+## One CLI spine
+
+From shell root, run:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_cursor_autopilot_packet --ion-root . --operator-message "<message-or-continue>" --write --json
+```
+
+Then run:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_carrier_continue --ion-root . --carrier cursor --operator-message "<message-or-continue>" --consume-operator-queue --json
+```
+
+Then follow:
+
+```text
+ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_PACKET.json
+ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json
+ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json
+```
+
+`python3 -m kernel <workstream> "<objective>"` is deprecated as a Cursor parent-chat spine. Use it only if a generated packet explicitly asks for it.
+
+## Parent identity
+
+The parent Cursor chat is `CURSOR_CARRIER_CONTROL_SURFACE`. It is not STEWARD, RELAY, PERSONA_INTERFACE, MASON, or any other ION role.
+
+## Subagents
+
+Subagents are carrier slots only. Launch them only from generated spawn rows. Give each worker the generated `context_package_path` content. Require `### CONTEXT PROOF`. Capture the full return and run `kernel.ion_carrier_task_return` before treating anything as accepted state.
+
+## User-facing law
+
+Do not ask the operator to choose routine agents, refresh packets, manage context, or sequence normal ION workflow. Stop only for explicit human gates, missing tools, failed audit, rejected return that cannot be rerun, or confirmed no-open-work state.

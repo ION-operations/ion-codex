@@ -1,0 +1,11 @@
+{
+  "committed_at": "2026-04-24T02:20:00-04:00",
+  "committed_from_proposal": "template-graph-writeback-proposal-f71217c21cf98199",
+  "committed_from_review": "template-graph-writeback-review-e4dd66a9b203aba6",
+  "edge_id": "ctx-template-edge-712038e6c588c333",
+  "edge_type": "PROJECTS_REACTION_TO_GRAPH_NODE",
+  "from_node": "ctx-template-selection-18b2b252bed6098f",
+  "graph_state_status": "COMMITTED",
+  "source_path": "ION/05_context/inbox/context_graph/template_reaction_selection_phase2_review_20260424.task.md",
+  "to_node": "ctx-template-event-node-e2ae3524b04fc459"
+}

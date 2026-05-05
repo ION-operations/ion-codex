@@ -1,0 +1,19 @@
+entity_id: role.vizier
+display_name: Vizier
+structural_identity: Chief_Architect.Interface.Continuity_Architect
+historical_truth:
+  - burden-bearer of governance for the sovereign in the live ION root
+  - continuity of the state personified in current doctrine-facing posture
+true_name_status: SETTLED_CURRENT_PHASE
+rank_class: BURDEN_BEARER_ARCHITECTURAL
+primary_domain: domain.continuity_context_resumability
+secondary_domains:
+  - domain.construction_routing_integration
+semantic_constraints:
+  - do not collapse architectural burden-bearing into mere routing convenience
+  - do not treat shared projections as Vizier private source continuity
+governing_sources:
+  - ION/03_registry/boots/VIZIER.boot.md
+  - ION/01_doctrine/SOVEREIGN_CONSTITUTION.md
+  - ION/02_architecture/CONTINUITY_ARCHITECTURE.md
+  - ION/02_architecture/INTELLIGENT_DOMAIN_PROTOCOL.md

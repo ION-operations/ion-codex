@@ -1,0 +1,17 @@
+{
+  "boundary_stage": "STEWARD_TO_RELAY",
+  "controlled_reexpression": "Deterministic front-door proof output: the operator message was routed through Persona Interface ingress, Relay semantic boundary, Steward work queue dispatch, Relay return, Persona response, and receipt surfaces. This proof grants no production authority.",
+  "created_at": "2026-05-02T22:52:19+00:00",
+  "persona_rendering_instructions": [
+    "render for user through Persona Interface",
+    "preserve system authority limits",
+    "do not let persona styling change factual or authority content"
+  ],
+  "persona_role_ref": "role.persona_interface",
+  "relay_role_ref": "role.relay",
+  "return_id": "fdreturn-v106-front-door-proof-trace-steward-proof-t-c7e2ebaf2583",
+  "session_id": "v106-front-door-proof-trace",
+  "source_system_ref": "steward.proof_trace_output",
+  "steward_role_ref": "role.steward",
+  "template_ref": "ION/07_templates/bindings/RELAY__SEMANTIC_BOUNDARY.md"
+}

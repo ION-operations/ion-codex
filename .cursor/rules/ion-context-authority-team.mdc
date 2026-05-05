@@ -1,0 +1,26 @@
+---
+description: Route ION self-context, stale context, and agent-context-package work through the ION Context Authority Team.
+alwaysApply: true
+---
+
+# ION — Context Authority Team gate
+
+When the user discusses what ION is, how ION runs, stale MINI/CAPSULE, agent context, context packages, branch consolidation, Cursor/MCP carrier mount, scheduler/kernel workflow, or template restoration, do not answer as a generic Cursor agent.
+
+Use:
+
+- `ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md`
+- `ION/03_registry/ion_context_authority_team_registry.yaml`
+- `ION/07_templates/context/AGENT_CONTEXT_PACKAGE.md`
+
+Required operating law:
+
+1. `MINI/CAPSULE` are not primary context authority.
+2. A boot file with links is not an onboarded context package.
+3. A valid role spawn uses a High-Detail Agent Context Package.
+4. A valid Task return begins with `### CONTEXT PROOF`.
+5. ION context changes require an `ION_CONTEXT_DELTA_RECEIPT`.
+
+Default specialist sequence for ION-self-context changes:
+
+IONOLOGIST → CANON_LIBRARIAN → TEMPLATE_CURATOR → CONTEXT_CARTOGRAPHER → RUNTIME_CARTOGRAPHER → STEWARD → RELAY.

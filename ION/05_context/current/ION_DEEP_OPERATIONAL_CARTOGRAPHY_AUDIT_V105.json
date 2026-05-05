@@ -1,0 +1,360 @@
+{
+  "blocked_count": 0,
+  "emitted_at": "2026-05-03T14:10:32+00:00",
+  "line": "V105_DEEP_OPERATIONAL_CARTOGRAPHY_AND_CORE_SYSTEM_TELEMETRY",
+  "missing_count": 0,
+  "partial_count": 12,
+  "production_authority": false,
+  "ready_count": 3,
+  "scanned_root": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION",
+  "schema_id": "ion.deep_operational_cartography.v105",
+  "systems": [
+    {
+      "disconnected": [],
+      "missing": [],
+      "next_required": [
+        "every carrier must prove pyproject.toml + ION/REPO_AUTHORITY.md before running kernel modules"
+      ],
+      "present": [
+        "pyproject.toml",
+        "ION/REPO_AUTHORITY.md",
+        "START_HERE_FOR_ANY_AGENT.md",
+        "AGENTS.md"
+      ],
+      "severity": "info",
+      "summary": "Shell root and agent entry authority are physically present.",
+      "system_id": "root_authority_and_mount_invariant",
+      "verdict": "READY_SURFACE_PRESENT"
+    },
+    {
+      "disconnected": [],
+      "missing": [],
+      "next_required": [
+        "promote temporal checks from audit/report into packaging, front-door, and worker-adapter gates"
+      ],
+      "present": [
+        "ION/02_architecture/TEMPORAL_CONTEXT_LEASE_PROTOCOL.md",
+        "ION/02_architecture/TRIPLE_TIME_RECONCILIATION_PROTOCOL.md",
+        "ION/02_architecture/ORCHESTRATION_TEMPORAL_RELEVANCE_PROTOCOL.md",
+        "ION/04_packages/kernel/temporal_model.py",
+        "ION/04_packages/kernel/temporal_leases.py",
+        "ION/04_packages/kernel/temporal_relevance.py",
+        "ION/04_packages/kernel/temporal_reconciliation.py",
+        "ION/04_packages/kernel/ion_temporal_context_enforcement_audit.py",
+        "ION/tests/test_kernel_ion_temporal_context_enforcement_audit.py"
+      ],
+      "severity": "info",
+      "summary": "Temporal/context doctrine, kernel adapters, enforcement audit, and focused test are present.",
+      "system_id": "temporal_context_stack",
+      "verdict": "READY_SURFACE_PRESENT"
+    },
+    {
+      "disconnected": [
+        "release/carrier packaging still needs hard lifecycle binding"
+      ],
+      "missing": [],
+      "next_required": [
+        "build compact runtime package + forensic archive package from lifecycle classifications"
+      ],
+      "present": [
+        "ION/02_architecture/ION_CONTEXT_METABOLISM_AND_LIFECYCLE_PROTOCOL.md",
+        "ION/03_registry/context_lifecycle_policy.yaml",
+        "ION/04_packages/kernel/ion_context_lifecycle.py",
+        "ION/tests/test_kernel_ion_context_lifecycle.py",
+        "ION/05_context/current/CONTEXT_LIFECYCLE_AUDIT_V102.json"
+      ],
+      "severity": "warning",
+      "summary": "Context lifecycle/metabolism is incomplete.",
+      "system_id": "context_lifecycle_and_metabolism",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "external workers intentionally remain blocked until bounded adapter gate exists"
+      ],
+      "missing": [],
+      "next_required": [
+        "keep deterministic local loop as floor; attach workers only through proof-gated adapter"
+      ],
+      "present": [
+        "ION/02_architecture/ION_LOCAL_AUTONOMOUS_LOOP_SURVIVAL_PROTOCOL.md",
+        "ION/04_packages/kernel/ion_autonomous_loop.py",
+        "ION/04_packages/kernel/ion_template_action_gate.py",
+        "ION/04_packages/kernel/ion_steward_integrate.py",
+        "ION/tests/test_kernel_ion_autonomous_loop.py",
+        "ION/tests/test_kernel_ion_template_action_gate.py",
+        "ION/tests/test_kernel_ion_steward_integrate.py"
+      ],
+      "severity": "warning",
+      "summary": "Local autonomous-loop survival path is incomplete.",
+      "system_id": "local_autonomous_loop_survival_path",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [],
+      "missing": [],
+      "next_required": [
+        "regenerate role context packages from registry + filesystem before every serious carrier run"
+      ],
+      "present": [
+        "ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md",
+        "ION/02_architecture/ION_AGENT_CONTEXT_DYNAMICS_AND_CONTEXT_WINDOW_PROTOCOL.md",
+        "ION/04_packages/kernel/ion_agent_context_systems.py",
+        "ION/04_packages/kernel/ion_agent_context_dynamics.py",
+        "ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json",
+        "ION/05_context/current/agent_context_systems/STEWARD.context_system.md",
+        "ION/05_context/current/agent_context_systems/CONTEXT_CARTOGRAPHER.context_system.md",
+        "ION/05_context/current/agent_context_systems/RUNTIME_CARTOGRAPHER.context_system.md"
+      ],
+      "severity": "info",
+      "summary": "Agent context-system and rolling context-window surfaces are present.",
+      "system_id": "active_agent_context_systems",
+      "verdict": "READY_SURFACE_PRESENT"
+    },
+    {
+      "disconnected": [
+        "deterministic proof trace exists; live front-door host/SSE/DB binding remains unproven"
+      ],
+      "missing": [],
+      "next_required": [
+        "bind a real operator host message through the same proof trace and UI hydration path"
+      ],
+      "present": [
+        "ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md",
+        "ION/02_architecture/FRONT_DOOR_RUNTIME_ENTRY_PROTOCOL.md",
+        "ION/02_architecture/ION_FRONT_DOOR_AUTONOMOUS_TEAM_WORKFLOW_PROTOCOL.md",
+        "ION/04_packages/kernel/front_door_chat_orchestration.py",
+        "ION/04_packages/kernel/front_door_runtime_entry.py",
+        "ION/04_packages/kernel/ion_front_door_proof_trace.py",
+        "ION/03_registry/ion_front_door_proof_trace.schema.json",
+        "ION/08_ui/joc_cockpit_shell/FrontDoorProofTracePanel.tsx",
+        "ION/tests/test_kernel_ion_front_door_proof_trace.py",
+        "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+        "ION/05_context/current/ACTIVE_FRONT_DOOR_TEAM_PLAN.json"
+      ],
+      "severity": "warning",
+      "summary": "Front-door deterministic proof trace exists; live host binding remains incomplete.",
+      "system_id": "front_door_persona_relay_steward_runtime",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "receipt hydration mapper is fixture/JSON-adapter ready; live DB query binding remains unproven"
+      ],
+      "missing": [],
+      "next_required": [
+        "bind receipt hydration mapper to the real DB/SSE adapter when that surface is present",
+        "keep conflict/unresolved receipt warnings visible in UI instead of attaching by recency"
+      ],
+      "present": [
+        "ION/02_architecture/FRONT_STAGE_COUNCIL_RUNTIME_RECEIPT_PROTOCOL.md",
+        "ION/02_architecture/CONVERSATIONAL_RECEIPT_AND_LIVE_REPAIR_PROTOCOL.md",
+        "ION/04_packages/kernel/front_stage_council_receipt.py",
+        "ION/04_packages/kernel/conversational_receipt.py",
+        "ION/04_packages/kernel/ion_receipt_hydration_mapper.py",
+        "ION/03_registry/ion_receipt_hydration_view_model.schema.json",
+        "ION/08_ui/joc_cockpit_shell/ReceiptHydrationPanel.tsx",
+        "ION/tests/test_kernel_ion_receipt_hydration_mapper.py"
+      ],
+      "severity": "warning",
+      "summary": "Receipt/repair hydration exists but live DB binding is not proven.",
+      "system_id": "receipt_repair_and_hydration_mapping",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "lane timeline, receipt hydration, and debug overlay surfaces are present; live SSE/DB adapters remain projected/not-connected until host integration proves them"
+      ],
+      "missing": [],
+      "next_required": [
+        "bind LaneTimelinePanel to live front-door lane events beyond active-packet projection",
+        "bind receipt hydration integrity view to the real assistant-bubble DB adapter",
+        "bind RuntimeDebugOverlay to live SSE/render/DB hydration timings"
+      ],
+      "present": [
+        "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+        "ION/08_ui/joc_cockpit_shell/RuntimeStatusPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/LaneTimelinePanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/ReceiptHydrationPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/RuntimeDebugOverlayPanel.tsx",
+        "ION/09_integrations/cursor_extension/src/webviews/cockpit/CockpitWebviewProvider.ts",
+        "ION/04_packages/kernel/ion_cockpit_view_model.py",
+        "ION/04_packages/kernel/ion_lane_timeline_view_model.py",
+        "ION/04_packages/kernel/ion_receipt_hydration_mapper.py",
+        "ION/04_packages/kernel/ion_runtime_debug_overlay.py",
+        "ION/tests/test_kernel_ion_cockpit_view_model.py",
+        "ION/tests/test_kernel_ion_lane_timeline_view_model.py",
+        "ION/tests/test_kernel_ion_receipt_hydration_mapper.py",
+        "ION/tests/test_kernel_ion_runtime_debug_overlay.py"
+      ],
+      "severity": "warning",
+      "summary": "JOC/cockpit telemetry overlays exist but live host adapters are not fully proven.",
+      "system_id": "joc_cockpit_ui_and_core_telemetry",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "Codex extension carrier is mounted as tool-assisted; host-native subagents remain unproven"
+      ],
+      "missing": [],
+      "next_required": [
+        "validate Codex returns through carrier task return intake and keep host-native subagents gated by spawn proof"
+      ],
+      "present": [
+        "ION/04_agents/carriers/CURSOR_CARRIER.profile.md",
+        "ION/04_agents/carriers/CODEX_CARRIER.profile.md",
+        "ION/02_architecture/CODEX_EXTENSION_CARRIER_PROTOCOL.md",
+        "ION/02_architecture/ION_OVER_CURSOR_PROTOCOL.md",
+        "ION/02_architecture/CODEX_LEAD_ORCHESTRATION_PROTOCOL.md",
+        "ION/03_registry/codex_extension_carrier_profile.yaml",
+        ".cursor/commands/ion.md",
+        ".cursor/agents/ion-spawn-row-slot.md",
+        "ION/09_integrations/cursor_extension/package.json",
+        "ION/07_templates/carriers/CODEX_EXTENSION_EXECUTION_PACKET.md",
+        "ION/04_packages/kernel/ion_codex_extension_carrier_audit.py",
+        "ION/tests/test_kernel_ion_codex_extension_carrier_audit.py",
+        "ION/05_context/current/CODEX_EXTENSION_CARRIER_AUDIT_V106.json"
+      ],
+      "severity": "warning",
+      "summary": "Cursor/Codex carrier surfaces exist but host-native spawn proof remains bounded.",
+      "system_id": "cursor_carrier_and_codex_extension_surface",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "V72 MCP substrate is restored and current Cursor MCP bridge is preserved; live MCP execution authority remains bounded and unclaimed"
+      ],
+      "missing": [],
+      "next_required": [
+        "keep V72 donor runtime receipts out of hot trunk unless explicitly promoted through archive/donor manifests",
+        "bind restored MCP substrate to live MCP operation only through mount-session, budget, and receipt gates"
+      ],
+      "present": [
+        "ION/00_BOOTSTRAP/V108_V72_MCP_DONOR_RECONCILIATION_LOCK.md",
+        "ION/02_architecture/ION_V72_MCP_DONOR_RECONCILIATION_PROTOCOL.md",
+        "ION/03_registry/ion_v72_mcp_donor_reconciliation_audit.schema.json",
+        "ION/04_packages/kernel/ion_v72_mcp_donor_reconciliation_audit.py",
+        "ION/tests/test_kernel_ion_v72_mcp_donor_reconciliation_audit.py",
+        "ION/05_context/current/V108_V72_MCP_DONOR_RECONCILIATION_AUDIT.json",
+        "ION/04_packages/kernel/ion_mcp_local_bridge.py",
+        "ION/04_packages/kernel/ion_mcp_client_certification.py",
+        "ION/04_packages/kernel/ion_mcp_transport_preview.py",
+        "ION/04_packages/kernel/ion_mcp_bridge_audit.py",
+        "ION/09_integrations/mcp/ion_mcp_server.py"
+      ],
+      "severity": "warning",
+      "summary": "V72 MCP donor reconciliation exists but requires review.",
+      "system_id": "v72_mcp_donor_reconciliation_and_current_bridge",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "normal ChatGPT browser cannot claim real subagents; needs an active-session mount proof and one-artifact/full-zip discipline"
+      ],
+      "missing": [],
+      "next_required": [
+        "create ChatGPT Browser Carrier operating packet for this project line"
+      ],
+      "present": [
+        "ION/04_agents/carriers/CHATGPT_CARRIER.profile.md",
+        "ION/04_agents/carriers/MANUAL_CARRIER.profile.md",
+        "ION/04_agents/carriers/carrier_registry.json",
+        "ION/07_templates/carriers/CARRIER_CAPABILITY_SURVEY.md",
+        "ION/07_templates/carriers/CARRIER_MOUNT_PROOF.md"
+      ],
+      "severity": "warning",
+      "summary": "ChatGPT carrier profile is incomplete.",
+      "system_id": "chatgpt_browser_carrier_surface",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "writeback proposals need diff/residue lifecycle so full graph snapshots do not become hot context"
+      ],
+      "missing": [],
+      "next_required": [
+        "add proposal corpus synthesis + accepted diff residue generation"
+      ],
+      "present": [
+        "ION/02_architecture/EVENTED_TEMPLATE_FILE_GRAPH_PROTOCOL.md",
+        "ION/02_architecture/TEMPLATE_EVENT_REACTION_PIPELINE_PROTOCOL.md",
+        "ION/04_packages/kernel/template_graph_writeback_proposals.py",
+        "ION/04_packages/kernel/template_graph_writeback_review.py",
+        "ION/04_packages/kernel/template_graph_commit.py",
+        "ION/04_packages/kernel/template_contract_registry.py"
+      ],
+      "severity": "warning",
+      "summary": "Template graph evolution surfaces are incomplete.",
+      "system_id": "template_graph_evolution_and_writeback_metabolism",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "compact runtime zip materialization is proven; full-project and forensic archive package approvals remain bounded"
+      ],
+      "missing": [],
+      "next_required": [
+        "extend lifecycle package materialization into operator-approved full-project and forensic archive receipts"
+      ],
+      "present": [
+        "ION/02_architecture/ION_PRODUCTIZED_RUNTIME_BOUNDARY_PROTOCOL.md",
+        "ION/02_architecture/ION_LIFECYCLE_AWARE_PACKAGE_ROOT_INTEGRITY_PROTOCOL.md",
+        "ION/03_registry/ion_lifecycle_package_manifest.schema.json",
+        "ION/05_context/current/ION_RUNTIME_SEPARATION_PLAN_V99.json",
+        "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V104.json",
+        "ION/04_packages/kernel/ion_lifecycle_packager.py",
+        "ION/06_artifacts/packages",
+        "ION/04_packages/kernel/release_readiness.py",
+        "ION/04_packages/kernel/summary_refresh_demo_release_candidate_verify.py",
+        "ION/tests/test_kernel_ion_lifecycle_packager.py"
+      ],
+      "severity": "warning",
+      "summary": "Release/productized runtime boundary is incomplete.",
+      "system_id": "release_packaging_and_productized_runtime_boundary",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "provider adapters remain planning/view-model surfaces until real API call receipts exist"
+      ],
+      "missing": [],
+      "next_required": [
+        "bind provider selection to call receipts and budget/rate governors before external API operation"
+      ],
+      "present": [
+        "ION/02_architecture/MODEL_ROUTER_AND_COST_QUALITY_ROUTING_PROTOCOL.md",
+        "ION/02_architecture/BUDGET_AND_API_RATE_GOVERNORS_PROTOCOL.md",
+        "ION/04_packages/kernel/model_router.py",
+        "ION/04_packages/kernel/cost_quality_router.py",
+        "ION/04_packages/kernel/budget_governor.py",
+        "ION/04_packages/kernel/api_rate_governor.py"
+      ],
+      "severity": "warning",
+      "summary": "Model routing/economics stack is incomplete.",
+      "system_id": "model_router_budget_and_provider_economics",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    },
+    {
+      "disconnected": [
+        "visual/computer-use authority remains bounded; no unrestricted action lane is production-ratified"
+      ],
+      "missing": [],
+      "next_required": [
+        "wire visual receipts into cockpit timeline and front-stage claim receipts"
+      ],
+      "present": [
+        "ION/02_architecture/VISUAL_PERCEPTION_AND_INTERACTION_AGENT_PROTOCOL.md",
+        "ION/02_architecture/VISUAL_CLOSURE_GRAPH_PROJECTION_AND_UI_WORK_SURFACE_PROTOCOL.md",
+        "ION/04_packages/kernel/local_browser_capture_adapter.py",
+        "ION/04_packages/kernel/local_browser_execution_harness.py",
+        "ION/04_packages/kernel/local_visual_harness.py",
+        "ION/04_packages/kernel/visual_before_after_verification.py"
+      ],
+      "severity": "warning",
+      "summary": "Visual/browser lane is incomplete.",
+      "system_id": "visual_browser_and_computer_use_lane",
+      "verdict": "PARTIAL_OR_DISCONNECTED"
+    }
+  ],
+  "verdict": "DEEP_CARTOGRAPHY_PREPARED_WITH_DISCONNECTED_SYSTEMS"
+}

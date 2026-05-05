@@ -1,0 +1,51 @@
+schema_id: ion.model_capability_registry.v1
+version: V56_MODEL_ECONOMICS_REGISTRY_SKELETONS
+authority_scope: A3_STEWARD_MODEL_ECONOMICS_REGISTRY_SKELETON
+production_authority: false
+models:
+  openai/gpt-class-frontier:
+    provider: openai
+    model_id: gpt-class-frontier
+    live_model_id_verified: false
+    capability_tier: supreme
+    capabilities: [reasoning, code, long_context, vision, json_schema]
+    context_class: huge
+    latency_class: interactive
+    privacy_floor_supported: no_retention_preferred
+  anthropic/claude-class-frontier:
+    provider: anthropic
+    model_id: claude-class-frontier
+    live_model_id_verified: false
+    capability_tier: supreme
+    capabilities: [reasoning, code, long_context, vision]
+    context_class: huge
+    latency_class: checked
+    privacy_floor_supported: no_retention_preferred
+  gemini/gemini-class-frontier:
+    provider: gemini
+    model_id: gemini-class-frontier
+    live_model_id_verified: false
+    capability_tier: high
+    capabilities: [reasoning, code, long_context, vision, json_schema]
+    context_class: huge
+    latency_class: interactive
+    privacy_floor_supported: no_retention_preferred
+  cerebras/cerebras-fast-lane:
+    provider: cerebras
+    model_id: cerebras-fast-lane
+    live_model_id_verified: false
+    capability_tier: medium
+    capabilities: [fast_inference, classification, extraction, code]
+    context_class: medium
+    latency_class: realtime
+    privacy_floor_supported: normal
+  local/local-private-lane:
+    provider: local
+    model_id: local-private-lane
+    live_model_id_verified: false
+    capability_tier: low
+    capabilities: [classification, extraction, local_private_tagging]
+    context_class: small
+    latency_class: interactive
+    privacy_floor_supported: local_only
+

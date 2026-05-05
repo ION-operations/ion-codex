@@ -1,0 +1,168 @@
+{
+  "agent": {
+    "activation_owner": "SOVEREIGN_OR_EXPLICIT_BOUND_PACKET",
+    "adapter_surface": "ChatGPT Browser MCP -> ION agent invocation broker -> Codex queue runner",
+    "agent_id": "role.vizier",
+    "aliases": [
+      "VIZIER",
+      "role.vizier",
+      "vizier"
+    ],
+    "audit_relation": "PRIMARY_CONSTRUCTIVE_LINE__AUDITABLE_BY_NEMESIS__PRESSURED_BY_VICE",
+    "backend_carrier_id": "CODEX_CLI_CARRIER",
+    "band": "SETTLED_CORE",
+    "base_sources": [
+      "ION/03_registry/boots/VIZIER.boot.md",
+      "ION/03_registry/semantic_identities/VIZIER.semantic.yaml",
+      "ION/agents/vizier/MINI.md",
+      "ION/agents/vizier/CAPSULE.md"
+    ],
+    "context_paths": [
+      "ION/05_context/current/agent_context_systems/VIZIER.context_system.md",
+      "ION/03_registry/boots/VIZIER.boot.md",
+      "ION/03_registry/semantic_identities/VIZIER.semantic.yaml",
+      "ION/07_templates/bindings/STEWARD__PROPOSAL.md",
+      "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+      "ION/03_registry/daimon_matrix.yaml"
+    ],
+    "context_registry_path": "ION/03_registry/agent_context_system_registry.yaml",
+    "context_registry_section": "agents",
+    "context_system_card": "ION/05_context/current/agent_context_systems/VIZIER.context_system.md",
+    "default_active_package_class": "MISSION_ACTIVE_CONTEXT_PACKAGE",
+    "display_name": "VIZIER",
+    "invocable": true,
+    "live_execution_authority": false,
+    "live_status": "ACTIVE_CURRENT_PHASE",
+    "missing_declared_context_paths": [
+      "ION/agents/vizier/MINI.md",
+      "ION/agents/vizier/CAPSULE.md"
+    ],
+    "package_strategy": "architecture and continuity package with scope, dependencies, system implications, and review posture",
+    "primary_templates": [
+      "ION/07_templates/bindings/STEWARD__PROPOSAL.md",
+      "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md"
+    ],
+    "production_authority": false,
+    "rank_class": "BURDEN_BEARER_ARCHITECTURAL",
+    "role_id": "role.vizier",
+    "roster_registry_path": "ION/03_registry/agent_roster_registry.yaml",
+    "source_refs": [
+      "ION/03_registry/boots/VIZIER.boot.md",
+      "ION/03_registry/semantic_identities/VIZIER.semantic.yaml",
+      "ION/03_registry/daimon_matrix.yaml"
+    ],
+    "standing_class": "ARCHITECTURAL_CONTINUITY_CORE",
+    "structural_identity": "Chief_Architect.Interface.Continuity_Architect"
+  },
+  "backend_carrier_id": "CODEX_CLI_CARRIER",
+  "backend_runner_owner": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+  "codex_work_request_id": "codex_req_agent_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+  "codex_work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+  "context_refs": [
+    "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+    "ION/04_packages/kernel/ion_agent_invocation_broker.py",
+    "ION/04_packages/kernel/ion_codex_queue_runner.py",
+    "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T215826Z0000_task_return.json"
+  ],
+  "created_at": "2026-05-04T22:02:09+00:00",
+  "declared_but_missing_context_paths": [
+    "ION/agents/vizier/CAPSULE.md",
+    "ION/agents/vizier/MINI.md"
+  ],
+  "delegated_operator_carrier": {
+    "carrier_id": "chatgpt_browser",
+    "project_facing_callsign": "Sev"
+  },
+  "failure_classes": [
+    "AGENT_INVOCATION_FAILURE",
+    "BACKEND_CODEX_FAILURE",
+    "CARRIER_ADAPTER_FAILURE",
+    "DAEMON_FAILURE",
+    "ION_CORE_FAILURE"
+  ],
+  "human_sovereign": "Braden",
+  "invocation_id": "agent_inv_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+  "ion_core_engine": "ONE_CORE_ENGINE_MOUNTED_BY_ALL_CARRIERS",
+  "live_execution_authority": false,
+  "mode": "queued",
+  "objective": "Analyze the next architecture slice for ION swarm control after the 42-tool MCP agent invocation broker and stale-runner reconciliation. Focus on how Sev should operate as delegated browser control-plane carrier, how persistent autorun/heartbeat should be added without creating duplicate authority, how alerts/gates should surface to Sev and Braden, and what the next implementation packet should be. Produce a bounded proposal only; do not mutate project files unless required by the invocation protocol.",
+  "production_authority": false,
+  "raw_backend_output_state_policy": "RAW_CODEX_OUTPUT_NOT_ACCEPTED_WITHOUT_TASK_RETURN_PROOF_GATES",
+  "requested_agent": "vizier",
+  "required_context_reads": [
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/agent_roster_registry.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/agent_context_system_registry.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/agent_context_systems/VIZIER.context_system.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/boots/VIZIER.boot.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/semantic_identities/VIZIER.semantic.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/bindings/STEWARD__PROPOSAL.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/daimon_matrix.yaml",
+      "required": true
+    }
+  ],
+  "schema_id": "ion.agent_invocation.v1",
+  "status": "QUEUED_FOR_CODEX_CARRIER",
+  "steward_integration_membrane": "proof_gated_task_return_and_steward_review_surfaces",
+  "updated_at": "2026-05-04T22:02:09+00:00"
+}

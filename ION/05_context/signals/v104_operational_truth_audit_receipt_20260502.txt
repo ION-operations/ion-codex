@@ -1,0 +1,7 @@
+V104 operational truth audit receipt
+verdict: PARTIAL_OPERATIONAL_READY_WITH_OPEN_GATES
+pass_count: 10
+repair_applied_count: 3
+open_blocker_count: 0
+warning_count: 1
+production_authority: false

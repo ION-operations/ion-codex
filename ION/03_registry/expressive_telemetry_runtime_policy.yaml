@@ -1,0 +1,11 @@
+schema_id: ion.expressive_telemetry_runtime_policy.v1
+version: V43_EXPRESSIVE_TELEMETRY_RUNTIME_BINDING
+production_authority: false
+principle: Emotion is not the mask. Emotion is the dashboard.
+forbidden_claims:
+  lived_human_emotion: false
+  hidden_consciousness: false
+  manipulative_affect: false
+  warmth_may_hide_uncertainty: false
+  celebration_may_exceed_verification: false
+

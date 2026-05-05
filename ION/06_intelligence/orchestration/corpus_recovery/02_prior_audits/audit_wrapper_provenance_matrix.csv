@@ -1,0 +1,7 @@
+left_root,right_root,left_files,right_files,common_relpaths,exact_matches,left_only,right_only,interpretation
+00_CONSOLIDATED_ATLAS,00_CONSOLIDATED_ATLAS,151,151,151,151,0,0,self
+composeraudit/00_CONSOLIDATED_ATLAS,composeraudit/00_CONSOLIDATED_ATLAS,326,326,326,326,0,0,self
+geminiaudit/00_CONSOLIDATED_ATLAS,geminiaudit/00_CONSOLIDATED_ATLAS,41,41,41,41,0,0,self
+00_CONSOLIDATED_ATLAS,composeraudit/00_CONSOLIDATED_ATLAS,151,326,40,0,111,286,regen_wrapper
+00_CONSOLIDATED_ATLAS,geminiaudit/00_CONSOLIDATED_ATLAS,151,41,23,0,128,18,regen_wrapper
+composeraudit/00_CONSOLIDATED_ATLAS,geminiaudit/00_CONSOLIDATED_ATLAS,326,41,20,0,306,21,regen_wrapper

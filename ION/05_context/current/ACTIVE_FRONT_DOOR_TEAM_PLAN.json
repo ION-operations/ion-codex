@@ -1,0 +1,78 @@
+{
+  "active_files": {
+    "carrier_turn_packet": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+    "human_gate_queue": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+    "operator_queue": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+    "steward_queue": "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json"
+  },
+  "blocking_rule": "If ACTIVE_HUMAN_GATE_QUEUE has an open blocking gate, do not spawn ordinary work rows until the gate is resolved.",
+  "created_at": "2026-04-30T13:54:21.011588Z",
+  "front_door_triad": [
+    {
+      "activation": "logical_resident_spawn_when_intent_or_output_packet_needed",
+      "display_name": "RELAY",
+      "does_not": "orchestrate globally or integrate raw worker returns",
+      "duty": "compile operator intent and package accepted internal state",
+      "role": "relay"
+    },
+    {
+      "activation": "spawn_when_routing_integration_gate_or_long_horizon_direction_needed",
+      "display_name": "STEWARD",
+      "does_not": "speak as persona or accept unproofed returns",
+      "duty": "route work, direct team, manage gates, integrate accepted returns",
+      "role": "steward"
+    },
+    {
+      "activation": "spawn_or_compile_when_final_user_facing_answer_needed",
+      "display_name": "PERSONA_INTERFACE",
+      "does_not": "own orchestration, implementation, audit, or doctrine",
+      "duty": "render accepted state honestly for the operator",
+      "role": "persona_interface"
+    }
+  ],
+  "main_cursor_identity": {
+    "duty": "Run kernel commands, execute generated carrier turn packets, capture returns, and report accepted state.",
+    "is_ion_role": false,
+    "must_not_claim_roles": [
+      "STEWARD",
+      "RELAY",
+      "PERSONA_INTERFACE"
+    ],
+    "name": "CURSOR_CARRIER_CONTROL_SURFACE"
+  },
+  "no_user_upkeep_law": {
+    "allowed_user_requests": [
+      "human_gate_resolution",
+      "preference_or_direction",
+      "credential_or_external_permission",
+      "scope_authorization"
+    ],
+    "forbidden_user_requests": [
+      "which_agent_should_i_spawn",
+      "please_refresh_context_manually",
+      "please_update_ION_upkeep_files",
+      "please_choose_sequence_when_packet_exists"
+    ],
+    "statement": "The user must not be asked to manage ION upkeep, choose routine agents, refresh packets, or organize context. The carrier-control surface and STEWARD do that unless a human gate is explicit."
+  },
+  "operator_message_classification": "continuation_signal",
+  "queue_counts": {
+    "human_gates_open": 0,
+    "operator_pending": 0,
+    "returns_accepted": 0,
+    "returns_rejected": 0,
+    "returns_total": 0,
+    "steward_pending": 0
+  },
+  "schema_id": "ion.front_door_team_plan.v1",
+  "sequence": [
+    "carrier_control_classifies_message",
+    "carrier_control_runs_ion_carrier_continue",
+    "RELAY packages intent when new user meaning must be transformed",
+    "STEWARD routes objective and spawns specialist roles via generated context packages",
+    "carrier slots return through proof-gated intake",
+    "STEWARD integrates accepted returns only",
+    "RELAY packages accepted state",
+    "PERSONA_INTERFACE renders final user-facing output"
+  ]
+}

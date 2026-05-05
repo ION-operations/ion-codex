@@ -1,0 +1,28 @@
+ion_action:
+  schema: ion.chatops.action.v1
+  action_id: sev-20260505-0001-smoke
+  intent: write_file_draft
+  actor:
+    callsign: Sev
+    carrier: chatgpt_browser
+  authority:
+    human_sovereign: Braden
+    requires_approval: true
+    production_authority: false
+    live_execution_authority: false
+  target:
+    provider: local_ion
+    root: ION_CODEX
+    path: ION/05_context/current/chatops_bridge/smoke/SEV_CHATOPS_SMOKE.md
+    overwrite: false
+  content:
+    encoding: utf-8
+    text: |
+      # Sev ChatOps Smoke
+
+      Sev emitted this canonical ION ChatOps action from ChatGPT Browser.
+      The extension detected it, Braden approved it, and the local daemon wrote it.
+  receipts:
+    requested:
+      - file_write_receipt
+      - sha256_receipt

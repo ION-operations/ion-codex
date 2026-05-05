@@ -1,0 +1,49 @@
+{
+  "$id": "ion.model_route_decision.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "alternatives_considered": {
+      "type": "array"
+    },
+    "decision_status": {
+      "enum": [
+        "ROUTE_SELECTED",
+        "ROUTE_BLOCKED_NO_ELIGIBLE_MODEL",
+        "ROUTE_BLOCKED_BY_PRIVACY",
+        "ROUTE_BLOCKED_BY_CAPABILITY",
+        "ROUTE_BLOCKED_BY_BUDGET_CEILING"
+      ]
+    },
+    "live_provider_calls_authorized": {
+      "const": false
+    },
+    "production_authority": {
+      "const": false
+    },
+    "provider_credentials_authorized": {
+      "const": false
+    },
+    "schema_id": {
+      "const": "ion.model_route_decision.v1"
+    },
+    "version": {
+      "const": "V57_MODEL_ROUTER_AND_COST_QUALITY_ROUTING"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "decision_id",
+    "intent_id",
+    "work_class",
+    "decision_status",
+    "selected_provider",
+    "selected_model",
+    "routing_mode",
+    "selection_reason",
+    "alternatives_considered",
+    "production_authority",
+    "live_provider_calls_authorized"
+  ],
+  "type": "object"
+}

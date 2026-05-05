@@ -1,0 +1,59 @@
+{
+  "accepted_for_carrier_intake": true,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [
+      "ION/REPO_AUTHORITY.md",
+      "ION/02_architecture/ION_BROWSER_CARRIER_RUNTIME_PROTOCOL.md",
+      "ION/02_architecture/ION_CHATOPS_YAML_ACTION_PROTOCOL.md",
+      "ION/04_packages/kernel/ion_chatops_bridge.py",
+      "ION/09_integrations/browser_extension/ion_chatops_bridge/manifest.json",
+      "ION/tests/test_kernel_ion_chatops_action_schema.py",
+      "ION/tests/test_kernel_ion_chatops_bridge_policy.py"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-05T01:03:10+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "RECORDED_FOR_CARRIER_INTAKE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\nroot_confirmed: /home/sev/ION - Production/ION_CODEX; pyproject.toml and ION/REPO_AUTHORITY.md were present.\nfiles_read:\n  - ION/REPO_AUTHORITY.md: heading/excerpt evidence read for repository authority gate.\n  - ION/02_architecture/ION_BROWSER_CARRIER_RUNTIME_PROTOCOL.md: heading/excerpt evidence read; now states one core engine and ChatGPT Browser/Sev full-carrier target invariant.\n  - ION/02_architecture/ION_CHATOPS_YAML_ACTION_PROTOCOL.md: heading/excerpt evidence read; YAML actions are carrier packets and not a new authority language.\n  - ION/04_packages/kernel/ion_chatops_bridge.py: line/sha256-style implementation evidence read; localhost bridge validates actions, writes receipts, and delegates codex work packet creation to existing connector owner.\n  - ION/09_integrations/browser_extension/ion_chatops_bridge/manifest.json: line evidence read; Manifest V3 now references dist scripts and icon files.\n  - ION/tests/test_kernel_ion_chatops_action_schema.py: line evidence read; schema, policy, manifest script, and icon path checks exist.\n  - ION/tests/test_kernel_ion_chatops_bridge_policy.py: line evidence read; validation, approval, overwrite block, draft write",
+  "task_output_sha256": "3c9bedf7b37051c76713a4809c1dfaf58e496eab2cd203f1590c375f77a3d8ab",
+  "template_action_proof_result": {
+    "accepted": true,
+    "action_id": "ion-chatops-browser-carrier-runtime-mvp-return",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.patch_proposal.v1",
+    "touched_paths": [
+      "ION/02_architecture/ION_BROWSER_CARRIER_RUNTIME_PROTOCOL.md",
+      "ION/02_architecture/ION_CHATOPS_YAML_ACTION_PROTOCOL.md",
+      "ION/03_registry/ion_chatops_action.schema.yaml",
+      "ION/03_registry/ion_chatops_extension_policy.yaml",
+      "ION/03_registry/ion_chatops_local_daemon_policy.yaml",
+      "ION/04_packages/kernel/ion_chatops_bridge.py",
+      "ION/09_integrations/browser_extension/ion_chatops_bridge/manifest.json",
+      "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+      "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/background.js",
+      "ION/09_integrations/browser_extension/ion_chatops_bridge/icons/ion-chatops-icon-128.png",
+      "ION/09_integrations/local_daemon/ion_chatops_bridge/ion_chatops_daemon.py",
+      "ION/tests/test_kernel_ion_chatops_action_schema.py",
+      "ION/tests/test_kernel_ion_chatops_bridge_policy.py",
+      "ION/05_context/current/chatops_bridge/actions/sev_20260505_chatops_bridge_smoke.json",
+      "ION/05_context/current/chatops_bridge/receipts/chatops_receipt_20260505t005355z_sev_20260505_chatops_bridge_smoke.json"
+    ]
+  },
+  "work_request_id": null,
+  "work_request_path": null
+}

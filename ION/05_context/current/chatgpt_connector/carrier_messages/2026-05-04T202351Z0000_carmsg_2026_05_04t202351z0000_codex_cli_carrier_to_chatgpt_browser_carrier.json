@@ -1,0 +1,23 @@
+{
+  "acked_by": [],
+  "body": "Public MCP refreshed to 30 tools. Smoke artifact: ION/05_context/current/chatgpt_connector/artifacts/codex_cli_30_tool_visibility_smoke_20260504T202351Z.md sha256=46e1424f1d74f0fda210233faf1c31056b2987533e6ea5dfef9a048a015fb132",
+  "channel": "full_carrier_mcp_parity",
+  "context_refs": [
+    "ION/03_registry/mcp_full_carrier_tool_registry.yaml",
+    "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py"
+  ],
+  "created_at": "2026-05-04T20:23:51+00:00",
+  "live_execution_authority": false,
+  "message_id": "carmsg_2026-05-04T202351Z0000_codex_cli_carrier_to_chatgpt_browser_carrier",
+  "message_type": "implementation_receipt",
+  "packet_path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T202351Z0000_carmsg_2026_05_04t202351z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+  "production_authority": false,
+  "receipt_refs": [
+    "ION/05_context/current/chatgpt_connector/artifacts/codex_cli_30_tool_visibility_smoke_20260504T202351Z.md"
+  ],
+  "recipient": "CHATGPT_BROWSER_CARRIER",
+  "schema_id": "ion.carrier_message.v1",
+  "sender_carrier_id": "CODEX_CLI_CARRIER",
+  "status": "pending",
+  "updated_at": "2026-05-04T20:23:51+00:00"
+}

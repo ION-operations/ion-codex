@@ -1,0 +1,59 @@
+{
+  "capability_claims": {
+    "filesystem_read": "PROFILE_BOUND",
+    "filesystem_write": "PROFILE_BOUND",
+    "host_subagents": "NOT_CLAIMED_FOR_CODEX_CLI",
+    "jsonl_event_capture": "PROFILE_BOUND",
+    "last_message_capture": "PROFILE_BOUND",
+    "noninteractive_exec": "PROFILE_BOUND",
+    "shell_command_execution": "PROFILE_BOUND",
+    "test_execution": "PROFILE_BOUND"
+  },
+  "carrier_id": "CODEX_CLI_CARRIER",
+  "checked_files": {
+    "carrier_registry": "ION/04_agents/carriers/carrier_registry.json",
+    "context_proof_gate": "ION/04_packages/kernel/ion_context_proof_gate.py",
+    "execution_packet_template": "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md",
+    "generic_codex_profile": "ION/04_agents/carriers/CODEX_CARRIER.profile.md",
+    "mount_proof_template": "ION/07_templates/carriers/CARRIER_MOUNT_PROOF.md",
+    "profile": "ION/03_registry/codex_cli_carrier_profile.yaml",
+    "protocol": "ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md",
+    "setup_guide": "ION/docs/setup/CODEX_CLI_ION_DOGFOOD_SETUP_V125.md",
+    "status_module": "ION/04_packages/kernel/ion_status.py",
+    "task_return_module": "ION/04_packages/kernel/ion_carrier_task_return.py",
+    "template_action_gate": "ION/04_packages/kernel/ion_template_action_gate.py"
+  },
+  "context_proof_gate": "kernel.ion_context_proof_gate",
+  "findings": [],
+  "forbidden_claims": [
+    "ION identity",
+    "STEWARD authority",
+    "RELAY authority",
+    "PERSONA authority",
+    "production authority",
+    "git push without explicit human gate",
+    "credential access",
+    "unbounded filesystem access",
+    "direct delete without lifecycle transition receipt"
+  ],
+  "generated_at": "2026-05-04T16:27:33+00:00",
+  "host_family": "codex_cli",
+  "live_execution_authority": false,
+  "mount_level_ceiling": "L2_BOUNDED_EXECUTION_WHEN_PROMPT_AND_RETURN_CAPTURE_ARE_PRESENT",
+  "production_authority": false,
+  "recommended_paths": {
+    "events": "ION/05_context/current/codex_cli/latest_events.jsonl",
+    "prompt": "ION/05_context/current/codex_cli/latest_prompt.md",
+    "return": "ION/05_context/current/codex_cli/latest_return.md"
+  },
+  "required_return_sections": [
+    "### CONTEXT PROOF",
+    "### TEMPLATE ACTION PROOF",
+    "### RESULT"
+  ],
+  "return_intake_module": "kernel.ion_carrier_task_return",
+  "schema_id": "ion.codex_cli_carrier_audit.v1",
+  "template_action_gate": "kernel.ion_template_action_gate",
+  "verdict": "ION_CODEX_CLI_CARRIER_READY",
+  "version_line": "V125_CODEX_CLI_CARRIER_AND_CHATGPT_CONNECTOR_DOGFOOD_SETUP"
+}

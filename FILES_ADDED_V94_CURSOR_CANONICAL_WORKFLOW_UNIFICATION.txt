@@ -1,0 +1,16 @@
+.cursor/agents/ion-spawn-row-slot.md
+.cursor/commands/ion.md
+.cursor/commands/ion-continue.md
+.cursor/commands/ion-health.md
+.cursor/rules/ion-canonical-workflow-unification.mdc
+.cursor/rules/ion-carrier-mount.mdc
+.cursor/rules/ion-cursor-onboarding.mdc
+.cursor/skills/ion-autopilot/SKILL.md
+AGENTS.md
+START_HERE_FOR_ANY_AGENT.md
+ION/02_architecture/ION_CURSOR_CANONICAL_WORKFLOW_UNIFICATION_PROTOCOL.md
+ION/04_packages/kernel/ion_cursor_canonical_workflow_audit.py
+ION/tests/test_kernel_ion_cursor_canonical_workflow_audit.py
+ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V94.json
+ION/05_context/signals/v94_cursor_canonical_workflow_unification_receipt_20260430.txt
+ION/docs/consolidation/ION_V94_CURSOR_CANONICAL_WORKFLOW_UNIFICATION_REPORT_20260430.md

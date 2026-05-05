@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JOC Release Candidate Preview View Model",
+  "type": "object",
+  "required": [
+    "version",
+    "mission_id",
+    "package_plan_ref",
+    "release_candidate_preview_verdict",
+    "authority_scope",
+    "execution_mode",
+    "release_candidate_preview_id",
+    "release_sections",
+    "checksum_preview_ledger",
+    "preflight_verifier_checklist",
+    "blocked_capabilities"
+  ],
+  "properties": {
+    "version": { "const": "V70_RELEASE_CANDIDATE_PREVIEW_AND_PREFLIGHT_VERIFIER_VIEW_MODEL" },
+    "release_candidate_preview_verdict": { "type": "string" },
+    "authority_scope": { "const": "RELEASE_CANDIDATE_PREVIEW_AND_PREFLIGHT_VERIFIER_RECEIPT_ONLY" },
+    "execution_mode": { "enum": ["RELEASE_CANDIDATE_PREVIEW_ONLY", "VIEW_ONLY_BLOCKED"] },
+    "production_authority": { "const": false },
+    "zip_creation_authorized": { "const": false },
+    "release_archive_creation_authorized": { "const": false },
+    "file_system_write_authorized": { "const": false }
+  },
+  "additionalProperties": true
+}

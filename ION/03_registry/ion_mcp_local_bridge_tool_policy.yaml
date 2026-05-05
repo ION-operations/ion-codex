@@ -1,0 +1,44 @@
+version: V64_LOCAL_MCP_BRIDGE_TOOL_POLICY
+authority_scope: LOCAL_MCP_BRIDGE_DRY_RUN_ONLY
+allowed_resolutions:
+  - READ_ONLY
+  - DRY_RUN
+  - APPROVAL_REQUIRED
+  - REFUSED
+forbidden_resolutions:
+  - LIVE_EXECUTED
+read_only_tools:
+  - ion.mount
+  - ion.status
+  - ion.boot_packet
+  - ion.horizon.current
+  - ion.receipts.list
+  - ion.approvals.list
+  - ion.tools.list
+dry_run_tools:
+  - ion.job.plan
+  - ion.bundle.export_preview
+approval_required_tools:
+  - ion.job.submit_dry_run
+  - ion.daemon.dry_run_step
+forbidden_tools:
+  - ion.execute
+  - ion.job.execute_live
+  - ion.daemon.run
+  - ion.daemon.loop
+  - ion.shell.run
+  - ion.browser.mutate
+  - ion.provider.dispatch
+  - ion.secrets.read
+  - ion.secrets.write
+  - ion.governed_write.direct
+blocked_capabilities:
+  live_execution: false
+  external_model_dispatch: false
+  browser_session_mutation: false
+  credential_access: false
+  canonical_graph_write: false
+  direct_kernel_truth_mutation: false
+  unrestricted_daemon_loop: false
+  provider_api_call: false
+  paid_cloud_launch: false

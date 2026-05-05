@@ -1,0 +1,15 @@
+2026-04-27T carrier silence objective
+required_surfaces_ok: True
+kernel: implementation | first line steward classify
+STEWARD 16bbc962-58dc-4ccb-912b-1c57a8aee192
+VIZIER e9c77d4a-f2ef-4549-b704-c29ac9fff5cb
+MASON 50eb6d33-4b4e-45a3-b702-a98c5f96cb8a
+VICE 85a20750-fa86-43fb-920a-2245c6249667
+NEMESIS 6612c193-8a96-4021-b3f7-d6b24f368d2b
+
+# run_c full ION chain 2026-04-27T21:24:15Z
+STEWARD 5769b9c4-6964-464f-87b3-48344e1d2531
+VIZIER fc57864a-12c7-4cba-a2cc-e8e0f470c89c
+MASON 926ccc94-0ea2-4a52-9ee7-5f399f224eb4
+VICE 1866ae75-d774-4362-ac67-3d0a41315642
+NEMESIS 01dfede1-d765-4cea-b937-a30791f6806c

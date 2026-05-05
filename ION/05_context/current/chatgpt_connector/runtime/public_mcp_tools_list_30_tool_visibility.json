@@ -1,0 +1,804 @@
+{
+  "body": {
+    "id": 2,
+    "jsonrpc": "2.0",
+    "result": {
+      "tools": [
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {},
+            "type": "object"
+          },
+          "name": "ion_artifact_manifest"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "chunk_index": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "chunk_sha256": {
+                "type": "string"
+              },
+              "confirmation": {
+                "type": "string"
+              },
+              "data_base64": {
+                "type": "string"
+              },
+              "upload_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "upload_id",
+              "chunk_index",
+              "data_base64",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_artifact_upload_chunk"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "confirmation": {
+                "type": "string"
+              },
+              "upload_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "upload_id",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_artifact_upload_commit"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "artifact_name": {
+                "type": "string"
+              },
+              "confirmation": {
+                "type": "string"
+              },
+              "expected_sha256": {
+                "type": "string"
+              },
+              "mime_type": {
+                "type": "string"
+              },
+              "target_path": {
+                "type": "string"
+              },
+              "total_bytes": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "artifact_name",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_artifact_upload_init"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "ack_by_carrier": {
+                "type": "string"
+              },
+              "confirmation": {
+                "type": "string"
+              },
+              "message_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "message_id",
+              "ack_by_carrier",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_carrier_message_ack"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "channel": {
+                "type": "string"
+              },
+              "include_acked": {
+                "type": "boolean"
+              },
+              "limit": {
+                "maximum": 100,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "recipient": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "name": "ion_carrier_message_poll"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "body": {
+                "type": "string"
+              },
+              "channel": {
+                "type": "string"
+              },
+              "confirmation": {
+                "type": "string"
+              },
+              "context_refs": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "message_type": {
+                "type": "string"
+              },
+              "receipt_refs": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "recipient": {
+                "type": "string"
+              },
+              "sender_carrier_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sender_carrier_id",
+              "recipient",
+              "body",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_carrier_message_send"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "carrier": {
+                "type": "string"
+              },
+              "carrier_profile": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "name": "ion_carrier_onboarding_packet"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {},
+            "type": "object"
+          },
+          "name": "ion_cockpit_view"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "limit": {
+                "maximum": 100,
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "name": "ion_codex_work_queue"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "include_excerpts": {
+                "type": "boolean"
+              },
+              "profile": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "name": "ion_context_compile"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {},
+            "type": "object"
+          },
+          "name": "ion_context_plan"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "confirmation": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "target_path": {
+                "type": "string"
+              },
+              "transition": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "target_path",
+              "reason",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_create_containment_receipt"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {},
+            "type": "object"
+          },
+          "name": "ion_current_operating_packet"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "confirmation": {
+                "type": "string"
+              },
+              "expected_sha256": {
+                "type": "string"
+              },
+              "overwrite": {
+                "type": "boolean"
+              },
+              "target_path": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "target_path",
+              "text",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_file_put_text"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "max_bytes": {
+                "maximum": 262144,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "path": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "type": "object"
+          },
+          "name": "ion_file_read"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "limit": {
+                "maximum": 100,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "max_files": {
+                "maximum": 500,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "query": {
+                "type": "string"
+              },
+              "roots": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 10,
+                "type": "array"
+              }
+            },
+            "required": [
+              "query"
+            ],
+            "type": "object"
+          },
+          "name": "ion_file_search"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {},
+            "type": "object"
+          },
+          "name": "ion_git_status_summary"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "confirmation": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "priority": {
+                "maximum": 100,
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "message",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_queue_operator_message"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "packet": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "packet"
+            ],
+            "type": "object"
+          },
+          "name": "ion_read_active_packet"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "limit": {
+                "maximum": 100,
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "name": "ion_receipt_hydrate"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "limit": {
+                "maximum": 50,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "query": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "name": "ion_receipt_search"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "confirmation": {
+                "type": "string"
+              },
+              "decision": {
+                "type": "string"
+              },
+              "rationale": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "decision",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_record_chatgpt_decision"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "max_bytes": {
+                "maximum": 262144,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "name": "ion_registry_read"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "confirmation": {
+                "type": "string"
+              },
+              "objective": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "objective",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_request_codex_work_packet"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {},
+            "type": "object"
+          },
+          "name": "ion_status"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": false,
+            "openWorldHint": false,
+            "readOnlyHint": false
+          },
+          "description": "ION bounded queue/receipt tool; requires explicit ION write confirmation.",
+          "inputSchema": {
+            "additionalProperties": true,
+            "properties": {
+              "confirmation": {
+                "type": "string"
+              },
+              "context_receipt": {
+                "type": "object"
+              },
+              "task_output_text": {
+                "type": "string"
+              },
+              "work_request_id": {
+                "type": "string"
+              },
+              "work_request_path": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "task_output_text",
+              "context_receipt",
+              "confirmation"
+            ],
+            "type": "object"
+          },
+          "name": "ion_submit_task_return"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "max_bytes": {
+                "maximum": 262144,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "name": "ion_template_read"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {},
+            "type": "object"
+          },
+          "name": "ion_tool_manifest"
+        },
+        {
+          "annotations": {
+            "destructiveHint": false,
+            "idempotentHint": true,
+            "openWorldHint": false,
+            "readOnlyHint": true
+          },
+          "description": "ION bounded status/read tool.",
+          "inputSchema": {
+            "additionalProperties": false,
+            "properties": {
+              "limit": {
+                "maximum": 1000,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "max_depth": {
+                "maximum": 6,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "path": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "name": "ion_tree_list"
+        }
+      ]
+    }
+  },
+  "status_code": 200,
+  "url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp"
+}

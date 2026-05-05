@@ -1,0 +1,83 @@
+# ION Kernel Schema: ContextPackage
+# Version: 1.0.0
+# Authority: A2_CONSTITUTIONAL
+# This file is machine-parseable. Human rationale is in T03_ContextPackageSchema.spec.md.
+
+schema_version: "1.0"
+
+types:
+  OpenQuestionRef:
+    type: string
+    description: question_id from T05_OpenQuestionSchema
+
+  TargetFile:
+    path: string
+    content: string
+    line_count: integer
+    language: string?
+
+  SemanticOverlay:
+    path: string
+    content: string
+
+  PriorFinding:
+    source: string
+    summary: string
+    confidence: float  # [0.0, 1.0]
+
+  DependencyInterface:
+    path: string
+    signatures_only: string  # 0% implementation per Art. 10
+
+  AgentIdentity:
+    personal_name: string
+    role: string
+    structural_identity: string
+    tier: integer
+    domain: string
+    specialty: string
+
+  CompilationTiers:
+    tier_1_doctrine:
+      constitution_excerpt: string
+      kernel_excerpt: string?
+      template_spec: string
+    tier_2_target:
+      target_files: list[TargetFile]
+    tier_3_mission:
+      task_payload: string
+      objective: string
+      output_schema: string?
+    tier_4_semantic:
+      semantic_overlays: list[SemanticOverlay]?
+      prior_findings: list[PriorFinding]?
+      open_question_refs: list[OpenQuestionRef]?
+    tier_5_dependencies:
+      dependency_interfaces: list[DependencyInterface]?
+
+  ContextPackage:
+    # Identity
+    context_package_id: string
+    context_version: string  # content hash for stale detection
+    compiled_at: string  # ISO 8601
+
+    # Binding
+    work_unit_id: string
+    protocol_id: string
+    transition_id: string
+
+    # Agent identity
+    agent_identity: AgentIdentity
+
+    # Compilation tiers (drop from bottom under budget pressure)
+    tiers: CompilationTiers
+
+    # Budget
+    token_budget: integer
+    actual_tokens: integer
+    tiers_dropped: list[string]
+
+    # Constraints (from WorkUnit)
+    allowed_writes: list[string]
+    allowed_next_actions: list[string]
+    must_not: list[string]?

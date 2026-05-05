@@ -1,0 +1,89 @@
+{
+  "created_at": "2026-05-03T14:10:32+00:00",
+  "current_verdict": "DEEP_CARTOGRAPHY_PREPARED_WITH_DISCONNECTED_SYSTEMS",
+  "line": "V105_DEEP_OPERATIONAL_CARTOGRAPHY_AND_CORE_SYSTEM_TELEMETRY",
+  "open_work": [
+    {
+      "exit_condition": "audit is regenerated before major branches and blocks false latest-state claims",
+      "id": "V105-OW-001",
+      "owner_role": "RUNTIME_CARTOGRAPHER+NEMESIS",
+      "priority": "P0",
+      "title": "Keep deep operational cartography as living status object"
+    },
+    {
+      "exit_condition": "lane timeline, receipt hydration mapper, and runtime debug overlay are visible/tested",
+      "id": "V105-OW-002",
+      "owner_role": "MASON+PERSONA_INTERFACE",
+      "priority": "P0",
+      "title": "Implement UI telemetry triad"
+    },
+    {
+      "exit_condition": "package generator distinguishes hot runtime from forensic history by policy",
+      "id": "V105-OW-003",
+      "owner_role": "MASON+ATLAS",
+      "priority": "P0",
+      "title": "Lifecycle-aware packaging"
+    },
+    {
+      "exit_condition": "each carrier has profile, mount proof, survey, command path, return intake, and no-theatre constraints",
+      "id": "V105-OW-004",
+      "owner_role": "RUNTIME_CARTOGRAPHER+STEWARD",
+      "priority": "P0",
+      "title": "Carrier setup for ChatGPT browser, Cursor, and Codex extension"
+    },
+    {
+      "exit_condition": "one operator message routes to Relay packet, Steward verdict, Persona output, and receipts",
+      "id": "V105-OW-005",
+      "owner_role": "RELAY+STEWARD+PERSONA_INTERFACE",
+      "priority": "P1",
+      "title": "Front-door runtime proof"
+    },
+    {
+      "exit_condition": "writeback proposals are summarized into accepted diffs/residues rather than full hot snapshots",
+      "id": "V105-OW-006",
+      "owner_role": "TEMPLATE_CURATOR+ATLAS",
+      "priority": "P1",
+      "title": "Template graph writeback metabolism"
+    }
+  ],
+  "phase_order": [
+    {
+      "exit_condition": "deep operational cartography audit runs and names disconnected systems without false production claims",
+      "phase": "P0_system_cartography_floor",
+      "status": "active"
+    },
+    {
+      "exit_condition": "full project, compact runtime, and forensic archive packages are emitted with lifecycle receipts and exclusions made explicit",
+      "phase": "P1_lifecycle_aware_packaging",
+      "status": "next"
+    },
+    {
+      "exit_condition": "operator messages have lane/organ timelines, requested/effective lane transitions, receipt hydration mapping, and debug timing overlays",
+      "phase": "P2_front_door_receipt_hydration_and_lane_telemetry",
+      "status": "next"
+    },
+    {
+      "exit_condition": "ChatGPT browser, Cursor, and Codex extension each have mount proof, capability survey, return intake, and stop conditions",
+      "phase": "P3_carrier_mounts_chatgpt_cursor_codex",
+      "status": "next"
+    },
+    {
+      "exit_condition": "external/local workers cannot return without context proof, template action proof, lifecycle check, and Steward integration",
+      "phase": "P4_bounded_worker_adapter",
+      "status": "blocked_until_P1_P3"
+    },
+    {
+      "exit_condition": "template graph writebacks and execution cycles produce compact residues and archive raw evidence without deleting proof",
+      "phase": "P5_template_graph_and_context_metabolism",
+      "status": "planned"
+    },
+    {
+      "exit_condition": "production gates are separate from branch versions and release verifier can explain all blocks",
+      "phase": "P6_release_candidate_and_production_namespace",
+      "status": "planned"
+    }
+  ],
+  "production_authority": false,
+  "schema_id": "ion.long_horizon_orchestration_plan.v105",
+  "true_north": "Make ION operational by proving every core system as wired runtime, not merely doctrine or isolated modules."
+}

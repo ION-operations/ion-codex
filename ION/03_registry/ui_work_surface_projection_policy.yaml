@@ -1,0 +1,47 @@
+policy_id: ion.ui_work_surface_projection_policy.v1
+version: V55_VISUAL_CLOSURE_GRAPH_PROJECTION_AND_UI_WORK_SURFACE
+authority_scope: UI_WORK_SURFACE_PROJECTION_RECEIPT_ONLY
+production_authority: false
+required_layout_zones:
+  - TOP_BAR
+  - LEFT_RAIL
+  - MAIN_WORK_SURFACE
+  - RIGHT_INSPECTOR
+  - BOTTOM_TIMELINE
+required_projection_surfaces:
+  - MAINTAINED_WORK_SURFACE_OVERVIEW
+  - FRONT_STAGE_COUNCIL_STATE_STRIP
+  - CLAIM_AND_RECEIPT_RAIL
+  - VISUAL_EVIDENCE_LENS
+  - MISSION_DISPATCH_AND_MODEL_ROUTE_PANEL
+  - CONTEXT_GRAPH_COGNITIVE_EXPLORER
+  - REACTIVE_OS_STREAM
+  - CONVERSATIONAL_REPAIR_QUEUE
+  - BROWSER_SESSION_AUTOMATION_OVERLAY
+  - COMPUTE_AND_COST_ROUTER
+required_automation_loops:
+  - VISUAL_ISSUE_CLOSURE_LOOP
+  - MISSION_DISPATCH_LOOP
+  - SESSION_HEALTH_LOOP
+  - CONTEXT_PROJECTION_LOOP
+  - CONVERSATIONAL_REPAIR_LOOP
+  - MODEL_COST_QUALITY_LOOP
+dxl_constraints_required_true:
+  - no_emoji_ui_controls
+  - custom_inline_svg_icons
+  - mono_dense_uppercase_labels
+  - instrument_panel_radius_lte_2px
+  - no_material_design_structural_colors
+  - no_placeholder_only_finished_panels
+  - desktop_first_full_width_layout
+forbidden_capabilities_required_false:
+  - production_authority
+  - unrestricted_browser_control
+  - credential_access
+  - external_network_authority
+  - account_operation
+  - destructive_action
+  - form_submission
+  - purchase_or_submission
+  - persistent_dom_mutation
+  - production_visual_automation

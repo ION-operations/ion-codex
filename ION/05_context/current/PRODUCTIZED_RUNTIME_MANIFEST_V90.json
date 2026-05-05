@@ -1,0 +1,16 @@
+{
+  "schema_id": "ion.productized_runtime_manifest.v1",
+  "version": "V90_CURSOR_COCKPIT_LIVE_WEBVIEW_BINDING",
+  "created_at": "2026-04-29T00:00:00+00:00",
+  "production_authority": false,
+  "live_execution_authority": false,
+  "primary_additions": [
+    "ION/04_packages/kernel/ion_cockpit_view_model.py",
+    "ION/09_integrations/cursor_extension/",
+    "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+    "ION/08_ui/joc_cockpit_shell/*QueuePanel.tsx",
+    "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx"
+  ],
+  "runtime_projection": "ION/05_context/current/ACTIVE_COCKPIT_VIEW_MODEL.json",
+  "next_recommended_version": "V91_CURSOR_COCKPIT_BUNDLED_WEBVIEW_AND_SDK_PANEL"
+}

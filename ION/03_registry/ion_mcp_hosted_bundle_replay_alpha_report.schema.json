@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion_mcp_hosted_bundle_replay_alpha_report.schema.json",
+  "title": "ION V72 Hosted MCP Bundle Replay Alpha Report",
+  "type": "object",
+  "required": [
+    "version",
+    "passed",
+    "bundle_id",
+    "workspace_id",
+    "state_root_id",
+    "manifest_hash",
+    "import_accepted",
+    "export_preview_verified",
+    "import_validation_verified",
+    "replay_preview_verified",
+    "tamper_refusal_verified",
+    "live_execution_authorized_seen",
+    "kernel_truth_mutation_seen"
+  ],
+  "properties": {
+    "version": {
+      "const": "V72_HOSTED_MCP_BUNDLE_IMPORT_EXPORT_AND_REPLAY_ALPHA"
+    },
+    "status": {
+      "enum": [
+        "ACCEPTED",
+        "REFUSED",
+        "DEGRADED"
+      ]
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "bundle_id": {
+      "type": "string"
+    },
+    "workspace_id": {
+      "type": "string"
+    },
+    "state_root_id": {
+      "type": "string"
+    },
+    "manifest_hash": {
+      "type": "string",
+      "pattern": "^sha256:"
+    },
+    "import_accepted": {
+      "type": "boolean"
+    },
+    "replay_step_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "export_preview_verified": {
+      "type": "boolean"
+    },
+    "import_validation_verified": {
+      "type": "boolean"
+    },
+    "replay_preview_verified": {
+      "type": "boolean"
+    },
+    "tamper_refusal_verified": {
+      "type": "boolean"
+    },
+    "production_bundle_certified": {
+      "const": false
+    },
+    "live_execution_authorized_seen": {
+      "const": false
+    },
+    "kernel_truth_mutation_seen": {
+      "const": false
+    },
+    "forbidden_resolution_seen": {
+      "const": false
+    },
+    "forbidden_event_seen": {
+      "const": false
+    },
+    "forbidden_replay_action_seen": {
+      "const": false
+    }
+  }
+}

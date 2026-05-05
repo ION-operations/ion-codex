@@ -1,0 +1,19 @@
+version: V68_OPERATOR_REVIEWED_EXPORT_HANDOFF_MANIFEST_PREVIEW
+execution_mode: HANDOFF_MANIFEST_PREVIEW_ONLY
+production_authority: false
+live_export_claim: false
+blocked_capabilities:
+  external_model_call: false
+  real_provider_output_claim: false
+  live_dispatch: false
+  browser_session_mutation: false
+  credential_access: false
+  memory_write: false
+  document_write: false
+  artifact_export: false
+  file_system_write: false
+  zip_creation: false
+  external_transfer: false
+  canonical_graph_write: false
+  source_summary_rewrite: false
+  production_authority: false

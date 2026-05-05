@@ -1,0 +1,17 @@
+{
+  "boundary_stage": "PERSONA_TO_USER",
+  "created_at": "2026-05-02T22:53:18+00:00",
+  "persona_role_ref": "role.persona_interface",
+  "relay_return_id": "fdreturn-fdsession-e3325d8e7fd2e91c61-steward-proof-99a27cc53338",
+  "response_id": "fdresponse-fdreturn-fdsession-e3325d8e7fd2e91c61-stewa-a2aab6e5f3e3",
+  "session_id": "fdsession-e3325d8e7fd2e91c61",
+  "style_notes": [
+    "deterministic proof trace",
+    "do not claim live autonomous Steward reasoning",
+    "do not grant production authority"
+  ],
+  "template_ref": "ION/07_templates/bindings/PERSONA_INTERFACE__USER_RESPONSE.md",
+  "user_facing_text": "Deterministic front-door proof output: the operator message was routed through Persona Interface ingress, Relay semantic boundary, Steward work queue dispatch, Relay return, Persona response, and receipt surfaces. This proof grants no production authority.",
+  "user_ref": "user.sovereign",
+  "visible_persona_name": null
+}

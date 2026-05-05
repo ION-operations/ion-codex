@@ -1,0 +1,11 @@
+{
+  "authority": "READ_ONLY",
+  "objective": "test deterministic spawn plan",
+  "purpose": "classify the task and prepare the scoped implementation route",
+  "reason": "required_policy: role.required is True",
+  "role": "steward",
+  "schema_id": "ion.role_session_packet.v1",
+  "spawn": true,
+  "spawn_policy": "required",
+  "workstream": "implementation"
+}

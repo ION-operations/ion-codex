@@ -1,0 +1,4 @@
+review_layer,trigger_kind,default_action,expected_artifact
+event_driven,stable insufficiency event,open review against thaw protocol,governance review note
+rolling_health,cluster of work-start experience,run health checks and decide keep/revise,health check record
+milestone,project era change or center reintegration,open milestone kernel review,milestone governance review

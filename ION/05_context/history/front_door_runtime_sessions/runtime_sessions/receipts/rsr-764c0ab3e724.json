@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-05-02T22:53:18.580102+00:00",
+  "detail": "context bound: fdctxv-fdsession-e3325d8e7fd2e91c61-fdrelay-fdmsg-99c8e5db6fe0",
+  "event": "CONTEXT_BOUND",
+  "receipt_id": "rsr-764c0ab3e724",
+  "session_id": "fdsession-e3325d8e7fd2e91c61",
+  "witness_paths": [
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/context_bindings/fdsession-e3325d8e7fd2e91c61.json"
+  ]
+}

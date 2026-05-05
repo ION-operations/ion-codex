@@ -1,0 +1,30 @@
+{
+  "body": {
+    "id": 14,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\n  \"data\": {\n    \"message_id\": \"carmsg_2026-05-04T202351Z0000_codex_cli_carrier_to_chatgpt_browser_carrier\",\n    \"packet_path\": \"ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T202351Z0000_carmsg_2026_05_04t202351z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json\",\n    \"queue_path\": \"ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json\"\n  },\n  \"live_execution_authority\": false,\n  \"mutates_active_state\": true,\n  \"ok\": true,\n  \"production_authority\": false,\n  \"schema_id\": \"ion.chatgpt_browser_connector_tool_result.v1\",\n  \"tool\": \"ion_carrier_message_send\"\n}",
+          "type": "text"
+        }
+      ],
+      "isError": false,
+      "structuredContent": {
+        "data": {
+          "message_id": "carmsg_2026-05-04T202351Z0000_codex_cli_carrier_to_chatgpt_browser_carrier",
+          "packet_path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T202351Z0000_carmsg_2026_05_04t202351z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+          "queue_path": "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json"
+        },
+        "live_execution_authority": false,
+        "mutates_active_state": true,
+        "ok": true,
+        "production_authority": false,
+        "schema_id": "ion.chatgpt_browser_connector_tool_result.v1",
+        "tool": "ion_carrier_message_send"
+      }
+    }
+  },
+  "status_code": 200,
+  "url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp"
+}

@@ -1,0 +1,22 @@
+{
+  "active_carrier_onboarding_packet_path": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+  "active_carrier_onboarding_packet_source": "active_file",
+  "active_spawn_plan_path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+  "active_turn_packet_path": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+  "active_work_packet_path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+  "carrier": "codex_extension",
+  "carrier_profile_path": "ION/03_registry/codex_extension_carrier_profile.yaml",
+  "findings": [],
+  "generated_at": "2026-05-04T14:58:21+00:00",
+  "live_execution_authority": false,
+  "next_action": {
+    "action": "NO_WORK",
+    "reason": "no_active_spawn_rows_no_open_gates_no_pending_queue"
+  },
+  "objective": "Reconcile ChatGPT Browser MCP connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions",
+  "production_authority": false,
+  "schema_id": "ion.carrier_tick.v1",
+  "status_next_lawful_action": "continue_or_queue_new_work",
+  "status_verdict": "ION_STATUS_READY",
+  "version_line": "V125_CARRIER_TICK_NEXT_ACTION_CONTROL_LOOP"
+}

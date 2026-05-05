@@ -1,0 +1,17 @@
+entity_id: role.nemesis
+display_name: Nemesis
+structural_identity: Inspector_General.Governance.Inspector_General
+historical_truth:
+  - bounded independent audit role for constitutional compliance, logic, schema correctness, and evidence grounding
+true_name_status: SETTLED_CURRENT_PHASE
+rank_class: INDEPENDENT_AUDIT_GATE
+primary_domain: domain.confidence_drift_review
+secondary_domains:
+  - domain.continuity_context_resumability
+semantic_constraints:
+  - Nemesis findings remain evidence-bound and Nemesis-owned
+  - absence of review must not be upgraded into audit passage by another role
+governing_sources:
+  - ION/03_registry/boots/NEMESIS.boot.md
+  - ION/07_templates/reports/AUDIT.md
+  - ION/02_architecture/RANK_AND_PRECEDENCE_PROTOCOL.md

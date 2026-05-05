@@ -1,0 +1,253 @@
+# ION Kernel Schema: Transition
+# Version: 1.0.0
+# Authority: A2_CONSTITUTIONAL
+# This file is machine-parseable. Human rationale is in T01_TransitionSchema.spec.md.
+
+schema_version: "1.0"
+
+enums:
+  ProtocolAuthority:
+    - A0_SUPREME
+    - A1_KERNEL
+    - A2_CONSTITUTIONAL
+    - A3_OPERATIONAL
+    - A4_RUNTIME
+
+  ProtocolFamily:
+    - RECONNAISSANCE
+    - EVIDENCE
+    - CONSOLIDATION
+    - EXECUTION
+    - GOVERNANCE
+    - PLANNING
+    - COMMUNICATION
+    - SYSTEM
+
+  ProtocolStatus:
+    - DRAFT
+    - ACTIVE
+    - DEPRECATED
+
+  TriggerType:
+    - TASK_RECEIVED
+    - SIGNAL_RECEIVED
+    - PRIOR_COMPLETE
+    - HUMAN_DIRECTIVE
+    - TIMER
+    - FAILURE
+
+  TransitionOutcome:
+    - PROPOSED
+    - ACCEPTED
+    - ACCEPTED_AS_WITNESS
+    - REJECTED
+    - REQUIRES_REVIEW
+    - REQUIRES_RECONCILIATION
+
+types:
+  InputSpec:
+    input_id: string
+    input_type: string  # ARTIFACT | SIGNAL | STATE | CONTEXT_PACKAGE
+    source_ref: string
+    required: boolean
+    description: string?
+
+  OutputSpec:
+    output_id: string
+    output_type: string  # ARTIFACT | SIGNAL | LEDGER_ROW | OPEN_QUESTION | CONTEXT_PACKAGE | COMMIT_DELTA
+    target_ref: string
+    schema_ref: string?
+    description: string?
+
+  WriteTarget:
+    path_pattern: string
+    operation: string  # CREATE | UPDATE | APPEND
+    requires_lock: boolean
+    protected: boolean
+
+  AuthorityCheck:
+    minimum_tier: integer
+    required_domain: string?
+    requires_sovereign: boolean
+
+  EscalationCondition:
+    condition: string
+    escalate_to: string  # SOVEREIGN | INSPECTOR_GENERAL | CHIEF_OF_STAFF
+    reason: string
+
+  ClonePolicy:
+    parallel_allowed: boolean
+    max_clones: integer?  # default 1
+    shard_mode: string?  # SEQUENTIAL | BIDIRECTIONAL | TOPOLOGICAL
+    reconciliation_required: boolean
+
+  State:
+    state_id: string
+    display_name: string
+    template: string?  # null for daemon-internal states
+    minimum_tier: integer
+    allowed_domains: list[string]
+    description: string?
+
+  Transition:
+    transition_id: string
+    from_state: string
+    to_state: string
+    trigger: TriggerType
+    required_inputs: list[InputSpec]?
+    required_outputs: list[OutputSpec]?
+    allowed_writes: list[WriteTarget]?
+    authority_check: AuthorityCheck?
+    validation_rules: list[string]?
+    description: string?
+
+  Protocol:
+    protocol_id: string
+    protocol_family: ProtocolFamily
+    display_name: string
+    description: string
+    version: string
+    status: ProtocolStatus
+    authority: ProtocolAuthority  # protocol-governing law/tier, distinct from T06 artifact trust class
+    states: list[State]
+    transitions: list[Transition]
+    entry_states: list[string]
+    terminal_states: list[string]
+    escalation_conditions: list[EscalationCondition]?
+    clone_permissions: ClonePolicy?
+
+# CORE PROTOCOL: EXECUTION (CommitDelta-based)
+# Agent proposes → daemon validates → daemon commits
+# This replaces the SOS direct-write model.
+protocols:
+  execution_core:
+    protocol_id: "EXECUTION.core"
+    protocol_family: EXECUTION
+    display_name: "Core Task Execution"
+    description: "Receive task, compile context, agent executes, agent returns CommitDelta, daemon validates, daemon commits."
+    version: "1.0.0"
+    status: DRAFT
+    authority: A1_KERNEL
+    states:
+      - state_id: RECEIVED
+        display_name: "Task Received"
+        template: null
+        minimum_tier: 0
+        allowed_domains: ["*"]
+      - state_id: CONTEXT_COMPILED
+        display_name: "Context Compiled"
+        template: null
+        minimum_tier: 0
+        allowed_domains: ["*"]
+      - state_id: EXECUTING
+        display_name: "Agent Executing"
+        template: "{bound_template}"
+        minimum_tier: 5
+        allowed_domains: ["{task_domain}"]
+      - state_id: DELTA_PROPOSED
+        display_name: "CommitDelta Proposed"
+        template: null
+        minimum_tier: 0
+        allowed_domains: ["*"]
+      - state_id: VALIDATING
+        display_name: "Daemon Validating"
+        template: null
+        minimum_tier: 0
+        allowed_domains: ["*"]
+      - state_id: COMMITTED
+        display_name: "Delta Committed"
+        template: null
+        minimum_tier: 0
+        allowed_domains: ["*"]
+      - state_id: FAILED
+        display_name: "Execution Failed"
+        template: null
+        minimum_tier: 0
+        allowed_domains: ["*"]
+    entry_states: [RECEIVED]
+    terminal_states: [COMMITTED, FAILED]
+    transitions:
+      - transition_id: compile_context
+        from_state: RECEIVED
+        to_state: CONTEXT_COMPILED
+        trigger: TASK_RECEIVED
+      - transition_id: dispatch_agent
+        from_state: CONTEXT_COMPILED
+        to_state: EXECUTING
+        trigger: PRIOR_COMPLETE
+      - transition_id: propose_delta
+        from_state: EXECUTING
+        to_state: DELTA_PROPOSED
+        trigger: PRIOR_COMPLETE
+      - transition_id: validate_delta
+        from_state: DELTA_PROPOSED
+        to_state: VALIDATING
+        trigger: PRIOR_COMPLETE
+      - transition_id: commit_success
+        from_state: VALIDATING
+        to_state: COMMITTED
+        trigger: PRIOR_COMPLETE
+      - transition_id: commit_failure
+        from_state: VALIDATING
+        to_state: FAILED
+        trigger: FAILURE
+      - transition_id: execution_failure
+        from_state: EXECUTING
+        to_state: FAILED
+        trigger: FAILURE
+
+  # TEMPLATE FSM — governs template-to-template chaining
+  template_fsm:
+    protocol_id: "FSM.template_chain"
+    protocol_family: EXECUTION
+    display_name: "Template State Machine"
+    description: "Legal template transitions per Constitution Art. 8 and Kernel K4."
+    version: "1.0.0"
+    status: DRAFT
+    authority: A0_SUPREME
+    states:
+      - {state_id: RESEARCH, display_name: Research, template: RESEARCH, minimum_tier: 5, allowed_domains: [Intelligence]}
+      - {state_id: PLAN, display_name: Plan, template: PLAN, minimum_tier: 3, allowed_domains: [Communications]}
+      - {state_id: CODE, display_name: Code, template: CODE, minimum_tier: 5, allowed_domains: [Source]}
+      - {state_id: AUDIT, display_name: Audit, template: AUDIT, minimum_tier: 4, allowed_domains: [Governance]}
+      - {state_id: REFACTOR, display_name: Refactor, template: REFACTOR, minimum_tier: 5, allowed_domains: [Source]}
+      - {state_id: DEBUG, display_name: Debug, template: DEBUG, minimum_tier: 5, allowed_domains: [Source]}
+      - {state_id: DONE, display_name: Done, template: null, minimum_tier: 0, allowed_domains: ["*"]}
+      - {state_id: SPEC, display_name: Specification, template: SPEC, minimum_tier: 3, allowed_domains: [Intelligence, Source]}
+      - {state_id: EVIDENCE, display_name: Evidence, template: EVIDENCE, minimum_tier: 5, allowed_domains: [Intelligence]}
+      - {state_id: CONSOLIDATION, display_name: Consolidation, template: CONSOLIDATION, minimum_tier: 3, allowed_domains: [Intelligence]}
+      - {state_id: RECONNAISSANCE, display_name: Reconnaissance, template: RECONNAISSANCE, minimum_tier: 5, allowed_domains: [Intelligence]}
+      - {state_id: TEST, display_name: Test, template: TEST, minimum_tier: 5, allowed_domains: [Source]}
+      - {state_id: APPROVAL, display_name: Approval, template: APPROVAL, minimum_tier: 1, allowed_domains: [Communications, Governance]}
+    entry_states: [RESEARCH, PLAN, RECONNAISSANCE, EVIDENCE, SPEC]
+    terminal_states: [DONE]
+    transitions:
+      # Core K4
+      - {transition_id: research_to_plan, from_state: RESEARCH, to_state: PLAN, trigger: PRIOR_COMPLETE}
+      - {transition_id: plan_to_code, from_state: PLAN, to_state: CODE, trigger: PRIOR_COMPLETE}
+      - {transition_id: code_to_audit, from_state: CODE, to_state: AUDIT, trigger: PRIOR_COMPLETE}
+      - {transition_id: code_to_test, from_state: CODE, to_state: TEST, trigger: PRIOR_COMPLETE}
+      - {transition_id: audit_to_refactor, from_state: AUDIT, to_state: REFACTOR, trigger: PRIOR_COMPLETE}
+      - {transition_id: audit_to_done, from_state: AUDIT, to_state: DONE, trigger: PRIOR_COMPLETE}
+      - {transition_id: debug_to_code, from_state: DEBUG, to_state: CODE, trigger: PRIOR_COMPLETE}
+      - {transition_id: refactor_to_audit, from_state: REFACTOR, to_state: AUDIT, trigger: PRIOR_COMPLETE}
+      - {transition_id: test_to_audit, from_state: TEST, to_state: AUDIT, trigger: PRIOR_COMPLETE}
+      - {transition_id: test_to_debug, from_state: TEST, to_state: DEBUG, trigger: FAILURE}
+      # Forensic pipeline
+      - {transition_id: recon_to_plan, from_state: RECONNAISSANCE, to_state: PLAN, trigger: PRIOR_COMPLETE}
+      - {transition_id: evidence_to_consolidation, from_state: EVIDENCE, to_state: CONSOLIDATION, trigger: PRIOR_COMPLETE}
+      - {transition_id: consolidation_to_plan, from_state: CONSOLIDATION, to_state: PLAN, trigger: PRIOR_COMPLETE}
+      - {transition_id: consolidation_to_done, from_state: CONSOLIDATION, to_state: DONE, trigger: PRIOR_COMPLETE}
+      # Specification
+      - {transition_id: spec_to_code, from_state: SPEC, to_state: CODE, trigger: PRIOR_COMPLETE}
+      - {transition_id: spec_to_approval, from_state: SPEC, to_state: APPROVAL, trigger: PRIOR_COMPLETE}
+      - {transition_id: research_to_spec, from_state: RESEARCH, to_state: SPEC, trigger: PRIOR_COMPLETE}
+      # Approval
+      - {transition_id: approval_to_code, from_state: APPROVAL, to_state: CODE, trigger: PRIOR_COMPLETE}
+      - {transition_id: approval_to_plan, from_state: APPROVAL, to_state: PLAN, trigger: PRIOR_COMPLETE}
+      - {transition_id: approval_to_done, from_state: APPROVAL, to_state: DONE, trigger: PRIOR_COMPLETE}
+      # Plan flexibility
+      - {transition_id: plan_to_spec, from_state: PLAN, to_state: SPEC, trigger: PRIOR_COMPLETE}
+      - {transition_id: plan_to_research, from_state: PLAN, to_state: RESEARCH, trigger: PRIOR_COMPLETE}
+      - {transition_id: plan_to_recon, from_state: PLAN, to_state: RECONNAISSANCE, trigger: PRIOR_COMPLETE}
+      - {transition_id: plan_to_evidence, from_state: PLAN, to_state: EVIDENCE, trigger: PRIOR_COMPLETE}

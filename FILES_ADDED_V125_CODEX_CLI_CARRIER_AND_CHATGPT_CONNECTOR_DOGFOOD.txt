@@ -1,0 +1,11 @@
+ION/00_BOOTSTRAP/V125_CODEX_CLI_CARRIER_AND_CHATGPT_CONNECTOR_DOGFOOD_LOCK.md
+ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md
+ION/03_registry/codex_cli_carrier_profile.yaml
+ION/04_packages/kernel/ion_codex_cli_carrier_audit.py
+ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md
+ION/docs/setup/CODEX_CLI_ION_DOGFOOD_SETUP_V125.md
+ION/docs/consolidation/ION_V125_CODEX_CLI_CARRIER_AND_CHATGPT_CONNECTOR_DOGFOOD_REPORT_20260504.md
+ION/tests/test_kernel_ion_codex_cli_carrier_audit.py
+ION/05_context/current/CODEX_CLI_CARRIER_AUDIT_V125.json
+ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.codex_cli.json
+ION/05_context/current/codex_cli/latest_prompt.md

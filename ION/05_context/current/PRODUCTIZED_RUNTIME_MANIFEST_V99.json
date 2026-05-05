@@ -1,0 +1,25 @@
+{
+  "schema_id": "ion.productized_runtime_manifest.v1",
+  "version": "V99",
+  "created_at": "2026-05-01T00:00:00Z",
+  "branch": "V99_AGENT_CONTEXT_CONTINUITY_AND_RUNTIME_SEPARATION_DESIGN",
+  "artifact_class": "overlay_update",
+  "production_ready": false,
+  "files_added": [
+    "ION/02_architecture/ION_AGENT_CONTEXT_CONTINUITY_TIMELINE_AND_ROUTE_MAP_PROTOCOL.md",
+    "ION/05_context/current/agent_context_systems/LEAD_DEV_CONTEXT_CONTROL_SURFACE.context_system.md",
+    "ION/docs/consolidation/ION_V99_AGENT_CONTEXT_CONTINUITY_AND_RUNTIME_SEPARATION_DESIGN_20260501.md",
+    "ION/05_context/current/ION_RUNTIME_SEPARATION_PLAN_V99.json",
+    "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V99.json",
+    "ION/05_context/signals/v99_agent_context_continuity_and_runtime_separation_receipt_20260501.txt",
+    "ION/00_BOOTSTRAP/V99_AGENT_CONTEXT_CONTINUITY_AND_RUNTIME_SEPARATION_LOCK.md",
+    "FILES_ADDED_V99_AGENT_CONTEXT_CONTINUITY_AND_RUNTIME_SEPARATION.txt"
+  ],
+  "does_not_include": [
+    "ion_autonomous_loop.py implementation",
+    "template action gate implementation",
+    "Steward integration executor implementation",
+    "cockpit survival loop implementation"
+  ],
+  "next_invariant": "Build and test host-independent local autonomous loop."
+}

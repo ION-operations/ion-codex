@@ -1,0 +1,26 @@
+version: V70_HOSTED_MCP_OAUTH_AND_STREAMABLE_HTTP_IMPLEMENTATION_PREVIEW_POLICY
+allowed_resolutions:
+  - READ_ONLY
+  - DRY_RUN
+  - APPROVAL_REQUIRED
+  - REFUSED
+forbidden_resolution: LIVE_EXECUTED
+oauth_certified: false
+hosted_cloud_certified: false
+public_endpoint_certified: false
+kubernetes_certified: false
+required_controls:
+  - PKCE S256 preview
+  - Bearer header required
+  - token_is_not_session
+  - transport_session_is_not_authority
+  - V69 hosted mount evaluator remains authoritative
+  - V64 local bridge remains execution-boundary delegate
+forbidden_capabilities:
+  - shell_execution
+  - browser_mutation
+  - provider_dispatch
+  - credential_access
+  - daemon_loop_activation
+  - direct_governed_write
+  - live_execution

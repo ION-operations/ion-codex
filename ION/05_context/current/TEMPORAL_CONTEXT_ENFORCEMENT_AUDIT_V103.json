@@ -1,0 +1,188 @@
+{
+  "autonomous_loop_binds_context_lifecycle": true,
+  "autonomous_loop_writes_context_lifecycle_report": true,
+  "context_lifecycle_tests_present": true,
+  "emitted_at": "2026-05-03T16:42:20+00:00",
+  "findings": [
+    "temporal_context_protocol_surfaces_present",
+    "temporal_context_kernel_surfaces_present",
+    "autonomous_loop_bound_to_context_lifecycle_audit",
+    "carrier_release_packaging_gate_bound_to_context_lifecycle",
+    "context_lifecycle_policy_and_tests_present"
+  ],
+  "kernel_surface_count": 16,
+  "kernel_surface_present_count": 16,
+  "lifecycle_policy_present": true,
+  "lifecycle_report_present": true,
+  "line": "V103_TEMPORAL_CONTEXT_ENFORCEMENT_RECONCILIATION",
+  "mutation_performed": false,
+  "packaging_gate_present": true,
+  "protocol_surface_count": 13,
+  "protocol_surface_present_count": 13,
+  "scanned_root": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION",
+  "schema_id": "ion.temporal_context_enforcement_audit.v1",
+  "surfaces": [
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/ORCHESTRATION_TEMPORAL_RELEVANCE_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/TEMPORAL_CONTEXT_LEASE_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/RUNTIME_REPORT_TEMPORAL_PROVENANCE_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/RUNTIME_REPORT_BIDIRECTIONAL_TEMPORAL_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/SCHEDULE_LINEAGE_AND_SUPERSESSION_ARCHIVAL_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/SCHEDULE_LINEAGE_REPLAY_AND_ACTIVE_CYCLE_RECONSTRUCTION_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/SCHEDULE_RESUME_BUNDLE_MATERIALIZATION_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/CONTEXT_PERFECT_CONTINUATION_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/ION_AGENT_CONTEXT_DYNAMICS_AND_CONTEXT_WINDOW_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/ION_COMPILED_ROLE_CONTEXT_BUNDLE_INVARIANT_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/ION_AGENT_CONTEXT_CONTINUITY_TIMELINE_AND_ROUTE_MAP_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/ION_CONTEXT_METABOLISM_AND_LIFECYCLE_PROTOCOL.md"
+    },
+    {
+      "category": "protocol",
+      "exists": true,
+      "rel_path": "ION/02_architecture/ION_TEMPORAL_CONTEXT_ENFORCEMENT_RECONCILIATION_PROTOCOL.md"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/temporal_evaluator.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/temporal_leases.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/temporal_model.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/temporal_object_adapters.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/temporal_receipts.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/temporal_reconciliation.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/temporal_relevance.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/schedule_lineage.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/schedule_lineage_replay.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/schedule_resume_bundle.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/schedule_resume_projection.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/context_compiler.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/ion_agent_context_dynamics.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/ion_compiled_role_context_bundle_audit.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/ion_context_lifecycle.py"
+    },
+    {
+      "category": "kernel",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/ion_autonomous_loop.py"
+    },
+    {
+      "category": "lifecycle_packaging_gate",
+      "exists": true,
+      "rel_path": "ION/04_packages/kernel/ion_lifecycle_packager.py"
+    },
+    {
+      "category": "lifecycle_packaging_gate",
+      "exists": true,
+      "rel_path": "ION/03_registry/ion_lifecycle_package_manifest.schema.json"
+    },
+    {
+      "category": "lifecycle_packaging_gate",
+      "exists": true,
+      "rel_path": "ION/tests/test_kernel_ion_lifecycle_packager.py"
+    }
+  ],
+  "temporal_tests_present_count": 1,
+  "verdict": "SYSTEM_PRESENT_AND_ENFORCED"
+}

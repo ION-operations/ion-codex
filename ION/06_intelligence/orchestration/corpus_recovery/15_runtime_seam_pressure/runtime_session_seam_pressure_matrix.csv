@@ -1,0 +1,7 @@
+case_id,counterexample,primary_false_move,required_boundary,expected_resolution,current_status
+RSP-01,scheduler creep,queue/dispatch treated as just local scheduler law,scheduler remains upstream horizon law while queue/dispatch remains session-bounded,keep queue mutation and dispatch receipts downstream of session authority,opened
+RSP-02,reporting creep,runtime reporting treated as authority because it sees state,runtime/session authority owns session identity and persistence,reporting remains witness-only,opened
+RSP-03,api shell creep,api entry treated as whole center because it is operationally visible,api entry binds carrier into center but does not replace it,keep api entry downstream of runtime/session authority,opened
+RSP-04,activation bleed,queue or api entry silently answers enactment permission,activation law remains outside Lane C center,explicitly preserve staging/entry versus enactment distinction,opened
+RSP-05,continuation annexation,continuation bundle treated as whole session identity,continuation preserves thread identity but not full session authority,keep continuation adjacent not substitutive,opened
+RSP-06,settlement annexation,settlement result treated as authority source,settlement classifies closure rather than creating runtime/session authority,keep closure logic downstream of lawful session path,opened

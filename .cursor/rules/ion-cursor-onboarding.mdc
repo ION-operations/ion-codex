@@ -1,0 +1,56 @@
+---
+description: V94 Cursor onboarding: /ion is the canonical carrier-control reset; no fixed root; no old kernel workstream spine.
+alwaysApply: true
+---
+
+# ION — Cursor carrier onboarding, V94 canonical
+
+## First truth
+
+Cursor is only the host/carrier. ION is the workflow.
+
+The parent Cursor chat is `CURSOR_CARRIER_CONTROL_SURFACE`, not STEWARD or any other ION role.
+
+## Shell root
+
+Confirm the root by requiring both files in the same directory:
+
+```text
+pyproject.toml
+ION/REPO_AUTHORITY.md
+```
+
+No fixed path is canonical. If this root cannot be found, stop with `ROOT_NOT_CONFIRMED`.
+
+## `/ion` is the onboarding/reset command
+
+On `/ion`, `continue`, `proceed`, `resume`, or any substantive operator message about ION work, run the canonical V94 sequence from shell root.
+
+If no message follows `/ion`, use `continue`.
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_cursor_autopilot_packet --ion-root . --operator-message "<message-or-continue>" --write --json
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_carrier_continue --ion-root . --carrier cursor --operator-message "<message-or-continue>" --consume-operator-queue --json
+```
+
+Then read:
+
+```text
+ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_PACKET.json
+ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json
+ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json
+```
+
+## Deprecated older route
+
+Do not use `python3 -m kernel <workstream> "<objective>"` as the parent-chat proof of onboarding. It is an internal/backward-compatible workstream call only when a generated packet explicitly instructs it.
+
+Do not manually combine `ion_carrier_onboard` and `ion_cycle_runner` unless `ion_carrier_continue` is unavailable and the degraded fallback is recorded.
+
+## Subagents
+
+Launch Cursor subagents only from generated spawn rows. Give the generated `context_package_path` content. Require `### CONTEXT PROOF`. Capture and intake returns through `kernel.ion_carrier_task_return`.
+
+## Operator burden
+
+Never ask the user to manage ION upkeep, choose routine agents, refresh packets, update context, or sequence normal work. Ask only for explicit human gates, direction changes, external permission, destructive/action scope, or true root ambiguity.

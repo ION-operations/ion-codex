@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.joc_operator_approval_queue.v1",
+  "title": "ION/JOC Operator Approval Queue View Model",
+  "type": "object",
+  "required": [
+    "version",
+    "mission_id",
+    "approval_verdict",
+    "authority_scope",
+    "execution_mode",
+    "production_authority",
+    "live_dispatch_claim"
+  ],
+  "properties": {
+    "version": {
+      "const": "V62_OPERATOR_APPROVAL_QUEUE_AND_DRY_RUN_HANDOFF"
+    },
+    "mission_id": {
+      "type": "string"
+    },
+    "approval_verdict": {
+      "enum": [
+        "QUEUED_FOR_OPERATOR_REVIEW",
+        "BLOCKED_AUTHORIZATION_NOT_APPROVABLE",
+        "BLOCKED_MISSING_AUTHORIZATION_EVIDENCE",
+        "BLOCKED_MISSING_OPERATOR_APPROVAL_EVIDENCE",
+        "OPERATOR_DENIED",
+        "DRY_RUN_HANDOFF_READY",
+        "EXPIRED_REQUIRES_REVIEW_REFRESH"
+      ]
+    },
+    "authority_scope": {
+      "const": "OPERATOR_APPROVAL_QUEUE_VIEW_MODEL_RECEIPT_ONLY"
+    },
+    "execution_mode": {
+      "enum": [
+        "DRY_RUN_HANDOFF_ONLY",
+        "VIEW_ONLY_BLOCKED"
+      ]
+    },
+    "production_authority": {
+      "const": false
+    },
+    "live_dispatch_claim": {
+      "const": false
+    },
+    "external_model_call_authorized": {
+      "const": false
+    }
+  }
+}

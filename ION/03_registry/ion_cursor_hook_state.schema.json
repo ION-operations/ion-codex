@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ION Cursor Hook State",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "created_at",
+    "status",
+    "cursor_hook_bridge_verdict",
+    "host_connection_state",
+    "live_hook_event_seen",
+    "production_authority",
+    "live_execution_authority"
+  ],
+  "properties": {
+    "schema_id": { "const": "ion.cursor_hook_state.v1" },
+    "status": {
+      "type": "string",
+      "enum": ["live_session_start_observed", "projected_not_connected", "blocked"]
+    },
+    "cursor_hook_bridge_verdict": { "type": ["string", "null"] },
+    "cursor_hook_bridge_ready": { "type": "boolean" },
+    "host_connection_state": {
+      "type": "string",
+      "enum": ["LIVE_HOOK_EVENT_OBSERVED", "NOT_CONNECTED_OR_NOT_OBSERVED"]
+    },
+    "live_hook_event_seen": { "type": "boolean" },
+    "production_authority": { "const": false },
+    "live_execution_authority": { "const": false }
+  }
+}

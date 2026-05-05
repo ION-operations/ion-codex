@@ -1,0 +1,77 @@
+{
+  "data": {
+    "actual_tokens": 13,
+    "agent_identity": {
+      "domain": "orchestration",
+      "personal_name": "Steward",
+      "role": "current-phase orchestration",
+      "specialty": "front-door semantic packet routing",
+      "structural_identity": "role.steward",
+      "tier": 1
+    },
+    "allowed_next_actions": [
+      "route_to_specialist_or_kernel_surface",
+      "ask_clarifying_question",
+      "prepare_persona_response",
+      "defer_without_fake_completion"
+    ],
+    "allowed_writes": [
+      "front_door_route_proposal",
+      "open_question",
+      "generated_state",
+      "controlled_system_return"
+    ],
+    "compiled_at": "2026-05-02T22:52:51+00:00",
+    "context_package_id": "fdctx-fdwu-v106-front-door-proof-trace-fdsteward-c218ca2f6615",
+    "context_version": "fdctxv-v106-front-door-proof-trace-fdrelay-fdmsg-v-97624a1971a0",
+    "must_not": [
+      "do_not_treat_raw_user_text_as_governed_write",
+      "do_not_route_persona_style_as_system_truth",
+      "do_not_collapse_persona_relay_steward_roles"
+    ],
+    "protocol_id": "ION/02_architecture/FRONT_DOOR_RUNTIME_ENTRY_PROTOCOL.md",
+    "tiers": {
+      "tier_1_doctrine": {
+        "constitution_excerpt": "Front-door runtime entry preserves Persona Interface, Relay, and Steward as separate role planes.",
+        "kernel_excerpt": "Relay emits a semantic-boundary packet; Steward routes from that packet without treating raw user wording or persona style as governed write authority.",
+        "template_spec": "ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md"
+      },
+      "tier_2_target": {
+        "target_files": [
+          {
+            "content": "Relay semantic-boundary packet; raw user wording is not direct system truth.",
+            "language": "json",
+            "line_count": 1,
+            "path": "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-a1af2bd9ee2c.json"
+          },
+          {
+            "content": "Steward routing envelope derived from Relay boundary packet.",
+            "language": "json",
+            "line_count": 1,
+            "path": "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-v106-front-door-proof-trace-u-129dac14513f.json"
+          }
+        ]
+      },
+      "tier_3_mission": {
+        "objective": "Route the Relay semantic-boundary packet to the lawful next system action while preserving role separation and authority limits.",
+        "output_schema": "front_door_steward_route_or_clarifying_question",
+        "task_payload": "V106 front-door proof trace: verify operator message through Relay, Steward, Persona, and receipts."
+      },
+      "tier_4_semantic": {
+        "open_questions": [],
+        "prior_findings": [],
+        "semantic_overlays": []
+      },
+      "tier_5_dependencies": {
+        "dependency_interfaces": []
+      }
+    },
+    "tiers_dropped": [],
+    "token_budget": 2400,
+    "transition_id": "front_door_relay_to_steward",
+    "work_unit_id": "fdwu-v106-front-door-proof-trace-fdsteward-fdrel-5b48cf69af2e"
+  },
+  "record_class": "ContextPackage",
+  "record_type": "context_package",
+  "stored_at": "2026-05-02T18:52:51-04:00"
+}

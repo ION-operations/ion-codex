@@ -1,0 +1,98 @@
+registry_id: reintegration.authority_registry
+display_name: Reintegration Authority Registry
+status: WORKING
+authority: A3_OPERATIONAL
+canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+decision_anchor: ION/06_intelligence/decisions/2026-04-17_workspace_root_authority_canonicalization_decision.md
+purpose: >-
+  Record the present authority partition required to operate lawfully during the
+  split-center reintegration period.
+authority_records:
+  - surface_domain: controlled_reintegration_orchestration
+    authority_root: ion_packaged_current_generation
+    current_state: SETTLED_PRIMARY_IN_RETAINED_DUAL_CENTER
+    confidence: high
+    notes: >-
+      Era 2 board truth, corpus recovery, foundry planning, and current
+      orchestration surfaces land here.
+  - surface_domain: corpus_recovery_and_foundry
+    authority_root: ion_packaged_current_generation
+    current_state: SETTLED_PRIMARY_IN_RETAINED_DUAL_CENTER
+    confidence: high
+    notes: >-
+      Recovery atlases, canonicalization packets, and export-planning surfaces
+      belong to the packaged center unless explicitly scoped otherwise.
+  - surface_domain: current_phase_template_governance
+    authority_root: ion_packaged_current_generation
+    current_state: SETTLED_PRIMARY_IN_RETAINED_DUAL_CENTER
+    confidence: high
+    notes: >-
+      Template-surface evolution and reintegration support templates are governed
+      from the packaged center.
+  - surface_domain: packaged_root_embedded_context_history_residue
+    authority_root: ion_packaged_current_generation
+    current_state: NON_ROOT_INTERNAL_WITNESS
+    confidence: high
+    notes: >-
+      The nested ION/ION/05_context lane inside the packaged root is governed
+      as embedded runtime/history residue under the packaged center. It is not
+      a second runnable root and must not be exposed as one in startup or
+      carrier surfaces.
+  - surface_domain: branch_shell_root_packaging_floor
+    authority_root: ion_packaged_current_generation
+    current_state: SETTLED_BRANCH_LOCAL_FLOOR__NO_TOP_LEVEL_PROMOTION_REQUIRED
+    confidence: high
+    notes: >-
+      The extracted branch already owns its shell-root packaging floor and
+      package-aware startup posture. Top-level production pyproject and
+      kernel.preflight_cli are not the missing first-wave floor for this
+      branch.
+  - surface_domain: external_transport_shell_and_service_surface
+    authority_root: ion_top_level_production
+    current_state: RETAINED_SUPPORT_WITNESS__OPTIONAL_LATER_PACKET
+    confidence: high
+    notes: >-
+      Top-level production pyproject, kernel.preflight_cli, ion_api, ion_*_mcp,
+      and their helper modules form one coupled external transport/service
+      shell. It is real and tested, but it is retained as support/witness-only
+      for the current phase unless a later bounded packet reopens it.
+  - surface_domain: docs_hub_runbook_and_ratification_surfaces
+    authority_root: ion_packaged_current_generation
+    current_state: SELECTIVE_EXTRACTION_LANDED__PACKAGED_PRIMARY
+    confidence: high
+    notes: >-
+      docs/README, PRODUCTION_RUNBOOK, and O1_RATIFICATION_CHECKLIST have now
+      been selectively re-anchored into the packaged root. The production-root
+      originals remain witness/support surfaces rather than primary startup law.
+  - surface_domain: docs_program_manual_stack
+    authority_root: ion_top_level_production
+    current_state: WITNESS_FIRST__SELECTIVE_EXTRACTION_LATER
+    confidence: medium
+    notes: >-
+      The broader docs/program stack is valuable witness matter but should not
+      be wholesale-promoted in the first wave because it is broad, older, and
+      partially stubbed.
+  - surface_domain: older_kernel_support_wrappers_and_generated_artifacts
+    authority_root: ion_top_level_production
+    current_state: WITNESS_FIRST__REGENERATE_OR_REVIEW_LATER
+    confidence: medium
+    notes: >-
+      comms_bus, memory_bus, persistence, build/, and egg-info remain witness
+      or regenerable matter until a later packet proves direct need.
+  - surface_domain: workspace_final_single_root
+    authority_root: RETAINED_DUAL_CENTER_SETTLEMENT
+    current_state: SINGLE_ROOT_NOT_AUTHORIZED__RETAINED_DUAL_CENTER_GOVERNS
+    confidence: high
+    notes: >-
+      q005 resolves the current answer: the workspace is governed as a retained
+      dual-center settlement for the present phase. Single-root ratification is
+      not authorized until real promotion packets reduce the top-level
+      production root's live extraction burden honestly.
+  - surface_domain: aim_pattern_guidance_and_witness_pack
+    authority_root: aim_ion_adjacent_family
+    current_state: ADJACENT_PATTERN_SOURCE_ONLY
+    confidence: high
+    notes: >-
+      AIM-ION may guide later bounded extraction packets as a witness pack and
+      pattern reservoir, but it does not hold direct canon authority over ION's
+      active line.

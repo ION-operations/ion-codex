@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-05-02T20:58:20+00:00",
+  "focused_validation": "13 passed: deep cartography, operational truth, context lifecycle, temporal enforcement, autonomous loop, cockpit view model",
+  "full_suite_claim": false,
+  "line": "V105_DEEP_OPERATIONAL_CARTOGRAPHY_AND_CORE_SYSTEM_TELEMETRY",
+  "next_gate": "lifecycle-aware packager plus UI/front-door telemetry implementation",
+  "primary_outputs": [
+    "ION/05_context/current/ION_DEEP_OPERATIONAL_CARTOGRAPHY_AUDIT_V105.json",
+    "ION/05_context/current/ION_LONG_HORIZON_ORCHESTRATION_PLAN_V105.json",
+    "ION/05_context/current/ION_CORE_SYSTEM_TELEMETRY_REQUIREMENTS_V105.json",
+    "ION/05_context/current/CARRIER_AGENT_SYSTEM_BUILD_PLAN_V105.json"
+  ],
+  "production_authority": false,
+  "pytest_command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest ION/tests/test_kernel_ion_deep_operational_cartography.py ION/tests/test_kernel_ion_operational_truth_audit.py ION/tests/test_kernel_ion_context_lifecycle.py ION/tests/test_kernel_ion_temporal_context_enforcement_audit.py ION/tests/test_kernel_ion_autonomous_loop.py ION/tests/test_kernel_ion_cockpit_view_model.py -q",
+  "schema_id": "ion.productized_runtime_manifest.v105",
+  "source_base": "ION_CURSOR_V104_FULL_PROJECT_CONSOLIDATED_20260502.zip",
+  "verdict": "DEEP_CARTOGRAPHY_PREPARED_WITH_DISCONNECTED_SYSTEMS"
+}

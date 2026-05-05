@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion://registry/joc_dispatch_authorization_view_model.schema.json",
+  "title": "JOC Dispatch Authorization Governor Verdict View Model",
+  "type": "object",
+  "required": [
+    "version",
+    "mission_id",
+    "route_preview_id",
+    "authorization_verdict",
+    "authority_scope",
+    "approval_mode",
+    "budget_governor_verdict",
+    "api_rate_governor_verdict",
+    "capability_policy_verdict",
+    "evidence_refs",
+    "production_authority",
+    "live_dispatch_claim"
+  ],
+  "properties": {
+    "version": { "const": "V61_DISPATCH_AUTHORIZATION_GOVERNOR_VERDICT_VIEW_MODEL" },
+    "mission_id": { "type": "string", "minLength": 1 },
+    "route_preview_id": { "type": "string", "minLength": 1 },
+    "authorization_verdict": {
+      "enum": [
+        "AUTHORIZATION_PREVIEW_READY",
+        "NEEDS_SUPERVISED_APPROVAL",
+        "BLOCKED_BY_BUDGET",
+        "BLOCKED_BY_API_RATE_LIMIT",
+        "BLOCKED_BY_FORBIDDEN_CAPABILITY",
+        "BLOCKED_BY_MISSING_GOVERNOR_EVIDENCE",
+        "BLOCKED_BY_CLAIM_REVIEW",
+        "BLOCKED_BY_PRODUCTION_BOUNDARY"
+      ]
+    },
+    "authority_scope": { "const": "DISPATCH_AUTHORIZATION_VIEW_MODEL_RECEIPT_ONLY" },
+    "approval_mode": { "enum": ["AUTO_FORBIDDEN", "SUPERVISED_REQUIRED", "MANUAL_ONLY", "VIEW_ONLY_BLOCKED"] },
+    "budget_governor_verdict": { "type": "string" },
+    "api_rate_governor_verdict": { "type": "string" },
+    "capability_policy_verdict": { "type": "string" },
+    "evidence_refs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "production_authority": { "const": false },
+    "live_dispatch_claim": { "const": false }
+  }
+}

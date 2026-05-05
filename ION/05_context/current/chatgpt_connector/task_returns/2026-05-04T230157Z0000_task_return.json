@@ -1,0 +1,57 @@
+{
+  "accepted_for_carrier_intake": true,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T225611Z0000_design_the_github_data_plane_setup_for_ion_using_github_account_org_ion_operatio.json",
+      "ION/REPO_AUTHORITY.md",
+      "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "ION/02_architecture/ION_MCP_CONTROL_BRIDGE_PROTOCOL.md",
+      "ION/02_architecture/SUPERVISED_DAEMON_SERVICE_PROTOCOL.md",
+      "ION/02_architecture/ION_LOCAL_AUTONOMOUS_LOOP_SURVIVAL_PROTOCOL.md",
+      "ION/02_architecture/ION_CARRIER_TASK_RETURN_INTAKE_PROTOCOL.md",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "ION/04_packages/kernel/ion_agent_invocation_broker.py",
+      "ION/03_registry/carrier_capability_registry.yaml",
+      "ION/07_templates/actions/FULL_CARRIER_ACTION_RECEIPT.md",
+      "ION/09_integrations/mcp/README.md",
+      "ION/09_integrations/mcp/chatgpt_connector/README.md",
+      "ION/02_architecture/ION_GITHUB_DATA_PLANE_PROTOCOL.md",
+      "ION/02_architecture/ION_GITHUB_WORK_DAEMON_PROTOCOL.md",
+      "ION/03_registry/ion_github_data_plane_registry.yaml"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T23:01:57+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "RECORDED_FOR_CARRIER_INTAKE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\nroot_confirmed: /home/sev/ION - Production/ION_CODEX; pyproject.toml and ION/REPO_AUTHORITY.md are present.\nqueued_packet_read: ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T225611Z0000_design_the_github_data_plane_setup_for_ion_using_github_account_org_ion_operatio.json\nfiles_read:\n- ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T225611Z0000_design_the_github_data_plane_setup_for_ion_using_github_account_org_ion_operatio.json sha256: de5fa6a53c7eb98a8117c8d1a2d3d0d45fa0f7b71a6fbd6c42fed526d1d369dd; excerpt: {\n- ION/REPO_AUTHORITY.md sha256: 804ed8430fc53e551d254af063ec414646a1c1bf94ceeec51c31769fa41aca1e; excerpt: ---\n- ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md sha256: 53fdd493c216c3974c826ef80473aa359d7a600791d72c37e2531e20fa7b555e; excerpt: ---\n- ION/02_architecture/ION_MCP_CONTROL_BRIDGE_PROTOCOL.md sha256: 1b87d4bff2f824511379afd6a0b552404b97e6285f97d532d646fba5d8ee57c6; excerpt: # ION MCP Control Bridge Protocol\n- ION/02_architecture/SUPERVISED_DAEMON_SERVICE_PROTOCOL.md sha256: 526344f301d26fd6818a9dda91ec5c61a0a4b6ff8ec956a6d5d0c67f2daf58a9; excerpt: # SUPERVISED DAEMON SERVICE PROTOCOL\n-",
+  "task_output_sha256": "ad534d3a7f1d16b920b011f04082de349fba0049d8018fe10d7b56d845111ef9",
+  "template_action_proof_result": {
+    "accepted": true,
+    "action_id": "github_data_plane_setup_design_2026_05_04",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.autonomous_loop.local_worker.v1",
+    "touched_paths": [
+      "ION/02_architecture/ION_GITHUB_DATA_PLANE_PROTOCOL.md",
+      "ION/02_architecture/ION_GITHUB_WORK_DAEMON_PROTOCOL.md",
+      "ION/03_registry/ion_github_data_plane_registry.yaml"
+    ]
+  },
+  "work_request_id": "codex_req_2026-05-04T225611Z0000_design_the_github_data_plane_setup_for_ion_using_github_account_org_ion_operatio",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T225611Z0000_design_the_github_data_plane_setup_for_ion_using_github_account_org_ion_operatio.json"
+}

@@ -1,0 +1,18 @@
+{
+  "servers": {
+    "ion-local": {
+      "args": [
+        "-m",
+        "kernel.ion_mcp_local_bridge",
+        "--ion-root",
+        "/mnt/data/ion_v64_work/ION MASTER CURRENT/ION",
+        "--stdio"
+      ],
+      "command": "python",
+      "env": {
+        "PYTHONPATH": "/mnt/data/ion_v64_work/ION MASTER CURRENT/ION/04_packages"
+      },
+      "type": "stdio"
+    }
+  }
+}

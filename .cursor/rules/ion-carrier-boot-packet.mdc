@@ -1,0 +1,55 @@
+---
+description: ION carrier must bind to an active packet before work; no memory workflow.
+alwaysApply: true
+---
+
+# ION CARRIER BOOT RULE
+
+You are a carrier. You do not decide ION workflow from memory.
+
+Before doing any work, locate the active ION packet.
+
+Accepted routing sources:
+
+1. explicit WorkPacket in this prompt
+2. `ION/05_context/handoff/`
+3. `ION/05_context/signals/`
+4. `ION/docs/cursor/ION_CURSOR_WORK_CYCLE_PACKET.md` rendered for this cycle
+5. `ION/docs/cursor/ION_SUBAGENT_SPAWN_PACKET_TEMPLATE.md` rendered for a role carrier
+6. `ION/07_templates/`
+7. `ION/03_registry/boots/`
+8. callable `ion.mount` / `ion.workflow.next` if present
+
+Required first action:
+
+Report one of:
+
+**ACTIVE_PACKET_FOUND**
+
+- packet path/source
+- `role_phase_sequence`
+- `active_template`
+- `next_lawful_action`
+- `allowed_paths`
+- `forbidden_paths`
+- `validation_commands`
+- `return_contract`
+- `integration_target`
+
+or
+
+**CURRENT_PACKET_MISSING**
+
+- searched paths
+- missing fields
+- whether `ion.mount` / `ion.workflow.next` exists
+
+Do not perform feature work until `ACTIVE_PACKET_FOUND`.
+
+Do not say Cursor has no hooks.
+
+Do not simulate ION.
+
+Do not invent workflow.
+
+The hook is the packet.

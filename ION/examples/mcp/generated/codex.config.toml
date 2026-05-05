@@ -1,0 +1,4 @@
+[mcp_servers.ion-local]
+command = "python"
+args = ["-m", "kernel.ion_mcp_local_bridge", "--ion-root", "/mnt/data/ion_v64_work/ION MASTER CURRENT/ION", "--stdio"]
+env = { PYTHONPATH = "/mnt/data/ion_v64_work/ION MASTER CURRENT/ION/04_packages" }

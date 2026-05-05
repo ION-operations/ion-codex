@@ -1,0 +1,12 @@
+surface,status,role,notes
+milestone1_completion_judgment.md,stable,trust_gate,Milestone 1 completion and limits
+atlas_base_usage_contract.md,stable,usage_contract,Non-final and conflict-preserving use contract
+atlas_control_card.md,stable,entry_card,Smallest practical work-start card
+future_work_control_defaults_matrix.csv,stable,defaults_matrix,Combined question-center-posture-output-landing defaults
+conflict_register.md,stable,conflict_gate,Must be checked before widening
+atlas_packet_gate_checklist.md,stable,packet_gate,Minimum work-start gate
+bounded_extension_vs_illegal_reinvention.md,stable,anti_reinvention,Illegal reinvention guard
+canonical_future_work_question_classes.md,stable,question_control,Question-class ontology
+canonical_future_work_answer_output_classes.md,stable,output_control,Answer/output-class ontology
+canonical_landing_boundary_classes.md,stable,landing_control,Landing-boundary ontology
+orchestration_horizon_and_completion_requirements.md,stable,horizon_control,Near/mid/far and completion discipline

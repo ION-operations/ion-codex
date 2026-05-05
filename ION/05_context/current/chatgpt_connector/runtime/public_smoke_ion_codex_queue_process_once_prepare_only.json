@@ -1,0 +1,120 @@
+{
+  "body": {
+    "id": 33,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\n  \"data\": {\n    \"context_receipt\": {\n      \"required_context_reads\": [\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion.json\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/04_packages/kernel/ion_carrier_task_return.py\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/04_packages/kernel/ion_carrier_continue.py\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/04_packages/kernel/ion_codex_queue_runner.py\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/03_registry/chatgpt_browser_carrier_profile.yaml\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/03_registry/codex_cli_carrier_profile.yaml\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/04_packages/kernel/ion_cockpit_view_model.py\",\n          \"required\": true\n        }\n      ],\n      \"schema_id\": \"ion.context_load_receipt.v1\"\n    },\n    \"live_execution_authority\": false,\n    \"ok\": true,\n    \"prepared_only\": true,\n    \"production_authority\": false,\n    \"run\": {\n      \"codex_command\": [\n        \"codex\",\n        \"exec\",\n        \"--sandbox\",\n        \"workspace-write\",\n        \"--output-last-message\",\n        \"ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/latest_return.md\"\n      ],\n      \"context_receipt_path\": \"ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/context_receipt.json\",\n      \"created_at\": \"2026-05-04T20:54:59+00:00\",\n      \"failure_classification\": null,\n      \"last_message_path\": \"ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/latest_return.md\",\n      \"live_execution_authority\": false,\n      \"production_authority\": false,\n      \"prompt_path\": \"ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/prompt.md\",\n      \"request_id\": \"codex_req_2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion\",\n      \"request_path\": \"ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion.json\",\n      \"run_dir\": \"ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_\",\n      \"run_id\": \"codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_\",\n      \"run_packet_path\": \"ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/run.json\",\n      \"schema_id\": \"ion.codex_queue_runner_run.v1\",\n      \"status\": \"PREPARED_NOT_STARTED\",\n      \"stderr_path\": \"ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/stderr.log\",\n      \"stdout_path\": \"ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/stdout.log\",\n      \"timeout_seconds\": 1800,\n      \"updated_at\": \"2026-05-04T20:54:59+00:00\"\n    },\n    \"schema_id\": \"ion.codex_queue_runner.v1\"\n  },\n  \"live_execution_authority\": false,\n  \"mutates_active_state\": true,\n  \"ok\": true,\n  \"production_authority\": false,\n  \"schema_id\": \"ion.chatgpt_browser_connector_tool_result.v1\",\n  \"tool\": \"ion_codex_queue_process_once\"\n}",
+          "type": "text"
+        }
+      ],
+      "isError": false,
+      "structuredContent": {
+        "data": {
+          "context_receipt": {
+            "required_context_reads": [
+              {
+                "kind": "file",
+                "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion.json",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/04_packages/kernel/ion_carrier_task_return.py",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/04_packages/kernel/ion_carrier_continue.py",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+                "required": true
+              },
+              {
+                "kind": "file",
+                "path": "ION/04_packages/kernel/ion_cockpit_view_model.py",
+                "required": true
+              }
+            ],
+            "schema_id": "ion.context_load_receipt.v1"
+          },
+          "live_execution_authority": false,
+          "ok": true,
+          "prepared_only": true,
+          "production_authority": false,
+          "run": {
+            "codex_command": [
+              "codex",
+              "exec",
+              "--sandbox",
+              "workspace-write",
+              "--output-last-message",
+              "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/latest_return.md"
+            ],
+            "context_receipt_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/context_receipt.json",
+            "created_at": "2026-05-04T20:54:59+00:00",
+            "failure_classification": null,
+            "last_message_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/latest_return.md",
+            "live_execution_authority": false,
+            "production_authority": false,
+            "prompt_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/prompt.md",
+            "request_id": "codex_req_2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion",
+            "request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion.json",
+            "run_dir": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_",
+            "run_id": "codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_",
+            "run_packet_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/run.json",
+            "schema_id": "ion.codex_queue_runner_run.v1",
+            "status": "PREPARED_NOT_STARTED",
+            "stderr_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/stderr.log",
+            "stdout_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/stdout.log",
+            "timeout_seconds": 1800,
+            "updated_at": "2026-05-04T20:54:59+00:00"
+          },
+          "schema_id": "ion.codex_queue_runner.v1"
+        },
+        "live_execution_authority": false,
+        "mutates_active_state": true,
+        "ok": true,
+        "production_authority": false,
+        "schema_id": "ion.chatgpt_browser_connector_tool_result.v1",
+        "tool": "ion_codex_queue_process_once"
+      }
+    }
+  },
+  "status_code": 200,
+  "url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp"
+}

@@ -1,0 +1,23 @@
+id: ion.visual_run_receipt_to_diagnosis_binding.policy.v1
+version: V54_VISUAL_RUN_RECEIPT_TO_DIAGNOSIS_BINDING
+authority_scope: VISUAL_RUN_TO_DIAGNOSIS_CLOSURE_RECEIPT_ONLY
+closure_requires:
+  - visual_diagnosis_receipt_lineage
+  - before_after_verification_lineage
+  - accepted_local_browser_execution_run_receipt_lineage
+  - observation_packet_lineage
+  - evidence_refs
+  - no_persistent_findings
+  - no_regression_findings
+  - steward_gate_approved
+forbidden_authorities:
+  unrestricted_browser_control: false
+  external_network_access: false
+  credential_or_session_import: false
+  account_operation: false
+  destructive_action: false
+  form_submission: false
+  purchase_or_submission: false
+  persistent_dom_mutation: false
+  production_visual_automation: false
+  production_authority: false

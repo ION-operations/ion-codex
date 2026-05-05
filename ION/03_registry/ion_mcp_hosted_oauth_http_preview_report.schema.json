@@ -1,0 +1,67 @@
+{
+  "$id": "https://ion.local/schemas/ion_mcp_hosted_oauth_http_preview_report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "forbidden_resolution_seen": {
+      "const": false
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "hosted_cloud_certified": {
+      "const": false
+    },
+    "hosted_streamable_http_previewed": {
+      "type": "boolean"
+    },
+    "kernel_truth_mutation_seen": {
+      "const": false
+    },
+    "kubernetes_certified": {
+      "const": false
+    },
+    "live_execution_authorized_seen": {
+      "const": false
+    },
+    "oauth_authorization_code_pkce_previewed": {
+      "type": "boolean"
+    },
+    "oauth_certified": {
+      "const": false
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "public_endpoint_certified": {
+      "const": false
+    },
+    "sequence": {
+      "type": "array"
+    },
+    "token_is_session": {
+      "const": false
+    },
+    "transport_session_is_authority": {
+      "const": false
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "generated_at",
+    "passed",
+    "oauth_authorization_code_pkce_previewed",
+    "hosted_streamable_http_previewed",
+    "oauth_certified",
+    "hosted_cloud_certified",
+    "live_execution_authorized_seen",
+    "kernel_truth_mutation_seen",
+    "forbidden_resolution_seen",
+    "sequence"
+  ],
+  "title": "ION V70 Hosted MCP OAuth HTTP Preview Report",
+  "type": "object"
+}

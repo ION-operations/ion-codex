@@ -1,0 +1,114 @@
+{
+  "agent_display_name": "NEMESIS",
+  "agent_invocation_id": "agent_inv_2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run",
+  "agent_invocation_path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run.json",
+  "agent_role_id": "role.nemesis",
+  "backend_carrier_id": "CODEX_CLI_CARRIER",
+  "backend_runner_owner": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+  "codex_queue_runner_runs": [
+    "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T214406Z0000_codex_req_agent_2026_05_04t214342z0000_nemesis_audit_the_newly_accepted_ion_agen/run.json"
+  ],
+  "created_at": "2026-05-04T21:43:42+00:00",
+  "declared_but_missing_context_paths": [
+    "ION/07_templates/reports/AUDIT.md",
+    "ION/agents/nemesis/MINI.md"
+  ],
+  "failure_classes": [
+    "AGENT_INVOCATION_FAILURE",
+    "BACKEND_CODEX_FAILURE",
+    "CARRIER_ADAPTER_FAILURE",
+    "DAEMON_FAILURE",
+    "ION_CORE_FAILURE"
+  ],
+  "failure_classification": "BACKEND_CODEX_FAILURE",
+  "latest_context_proof_accepted": false,
+  "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T214848Z0000_task_return.json",
+  "latest_template_action_proof_accepted": false,
+  "live_execution_authority": false,
+  "objective": "ION agent invocation for NEMESIS (role.nemesis) via Codex CLI backend.\n\nInvariant: ION has one core engine mounted by all carriers. ChatGPT Browser/Sev is a full ION carrier target, not an observer-only lane.\nDistinguish human sovereign Braden, Sev as delegated operator carrier/callsign, ION core engine, Steward integration membrane, and Codex-backed worker.\nThis is a role/context packet compiled by the ION agent invocation broker; it is not a separate agent system.\n\nInvocation packet: ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run.json\nRequested mode: queued\nOriginal objective: Audit the newly accepted ION agent invocation broker and Codex queue runner slice. Focus on whether Sev/GPT Browser can invoke Codex-backed role agents without creating a parallel agent authority, whether proof-gated intake remains intact, whether blocked runner state from the earlier process-once return is fully reconciled, and what the next safe swarm-control step should be. Do not mutate code unless explicitly required by the audit surface; produce findings and next lawful moves.\n\nBackend and proof rules:\n- Mount the requested role only through the supplied boot/context/template evidence.\n- Do not claim to be ION, sovereign authority, or production authority.\n- Do not let raw Codex output become ION state except through the existing task-return proof gates.\n- Return must include CONTEXT PROOF, TEMPLATE ACTION PROOF, VALIDATION, and RESULT sections.\n- Classify failures as AGENT_INVOCATION_FAILURE, BACKEND_CODEX_FAILURE, CARRIER_ADAPTER_FAILURE, DAEMON_FAILURE, or ION_CORE_FAILURE.",
+  "packet_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T214342Z0000_agent_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_que.json",
+  "production_authority": false,
+  "request_id": "codex_req_agent_2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run",
+  "requested_by": "ion_agent_invocation_broker",
+  "requested_by_callsign": "Sev",
+  "requested_by_carrier_id": "chatgpt_browser",
+  "required_context_reads": [
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/agent_roster_registry.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/agent_context_system_registry.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/agent_context_systems/NEMESIS.context_system.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/boots/NEMESIS.boot.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/semantic_identities/NEMESIS.semantic.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/bindings/NEMESIS__AUDIT.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+      "required": true
+    }
+  ],
+  "return_contract_sections": [
+    "### CONTEXT PROOF",
+    "### TEMPLATE ACTION PROOF",
+    "### VALIDATION",
+    "### RESULT"
+  ],
+  "return_packet_paths": [
+    "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T214848Z0000_task_return.json"
+  ],
+  "schema_id": "ion.chatgpt_browser_connector_codex_work_request.v1",
+  "status": "RETURN_RECORDED_PROOF_BLOCKED",
+  "updated_at": "2026-05-04T21:55:31+00:00"
+}

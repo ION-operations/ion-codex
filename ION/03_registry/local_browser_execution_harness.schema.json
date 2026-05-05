@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.local_browser_execution_harness.v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "harness_verdict",
+    "authority_scope"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.local_browser_execution_harness.v1"
+    },
+    "version": {
+      "const": "V52_LOCAL_BROWSER_EXECUTION_HARNESS_PROTOTYPE_GATED"
+    },
+    "authority_scope": {
+      "const": "LOCAL_DEV_BROWSER_EXECUTION_HARNESS_GATED_PROTOTYPE"
+    },
+    "live_browser_execution_authorized": {
+      "const": false
+    },
+    "external_network_authorized": {
+      "const": false
+    },
+    "production_authority": {
+      "const": false
+    }
+  }
+}

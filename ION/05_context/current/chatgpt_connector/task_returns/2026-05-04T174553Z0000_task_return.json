@@ -1,0 +1,44 @@
+{
+  "accepted_for_carrier_intake": false,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": false,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [
+      "missing_initial_context_proof_heading",
+      "empty_context_proof_section"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_TASK",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T17:45:53+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "BLOCKED_BY_PROOF_GATE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "For GPT Browser next time, it needs to call the MCP tool ion_request_codex_work_packet with that object as tool arguments. Sending the JSON as plain text will not write the packet.\n\n### CONTEXT PROOF\n\n- Root confirmed: /home/sev/ION - Production/ION_CODEX\n- Read: ION/REPO_AUTHORITY.md, ION/02_architecture/ION_MOUNT_CONTRACT.md, ION_CHATGPT_BROWSER_MCP_CONNECTOR_PROTOCOL.md, CODEX_CLI_CARRIER_PROTOCOL.md, V120 connector setup, connector write-tool implementation.\n- Confirmed failure mode: durable work packets are created by ion_request_codex_work_packet; raw JSON alone does not enqueue.\n\n### TEMPLATE ACTION PROOF\n\nCreated the draft planning artifact:\n\nION - Production/ION_CODEX/ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md\n\nIt covers:\n\n- one ION core engine mounted by all carriers;\n- V120 ChatGPT-browser bounded-management restrictions as MVP residue, not permanent core law;\n- ChatGPT browser as full carrier target with IDE-level parity;\n- adapter failure vs ION core failure classification;\n- full MCP/IDE-equivalent capability classes;\n- no-silent-loss and receipt principles;\n- proposed next artifacts: capability registry, full-carrier profile, mount proof template, ac",
+  "task_output_sha256": "69ef4c1a17aef264374a60599d62ff2887dcf071556a88bb269231db3bc6399a",
+  "template_action_proof_result": {
+    "accepted": false,
+    "action_id": null,
+    "findings": [
+      "missing_initial_context_proof_heading",
+      "missing_template_id",
+      "missing_action_id",
+      "missing_result",
+      "missing_touched_paths"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_OR_REPAIR",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": null,
+    "touched_paths": []
+  },
+  "work_request_id": "codex_req_2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it.json"
+}

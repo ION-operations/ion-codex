@@ -1,0 +1,338 @@
+{
+  "live_execution_authority": false,
+  "production_authority": false,
+  "queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+  "request_count": 24,
+  "requests": [
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-05T02:29:44+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "Verify and harden the live ION ChatOps Browser Carrier Runtime after successful extension smoke and re-entry injection. Inspect the latest ChatOps smoke receipt, extension parser/schema, daemon bridge, Sev re-entry context generation, and supported flat MVP action shape. Document the confirmed flow: Sev emits YAML, extension validates, Braden approves, daemon records or executes, ION writes receipt. Add or update focused tests for re-entry injection, flat create_codex_work_packet action parsing, write_file_draft smoke parsing, and receipt generation. Do not create a parallel authority system. Do not use MCP as the execution path for this task. Return CONTEXT PROOF, TEMPLATE ACTION PROOF with parseable result and touched_paths, VALIDATION, and RESULT.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T022944Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_.json",
+      "request_id": "codex_req_2026-05-05T022944Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_",
+      "return_packet_paths": [],
+      "status": "QUEUED_FOR_CODEX_CARRIER",
+      "updated_at": "2026-05-05T02:29:44+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-05T02:27:34+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "Verify and harden the live ION ChatOps Browser Carrier Runtime after successful extension smoke and corrected re-entry injection. Inspect the latest ChatOps smoke receipt, extension parser/schema, daemon bridge, Sev re-entry context generation, and flat MVP action shape. Confirm that ion_action_example is ignored, placeholder action IDs/objectives are rejected, user/onboarding blocks are ignored, and concrete assistant-emitted ion_action blocks produce approval candidates. Document the confirmed flow: Sev emits YAML, extension validates, Braden approves, daemon records or executes, ION writes receipt. Add or update focused tests for re-entry injection, flat create_codex_work_packet parsing, write_file_draft smoke parsing, placeholder rejection, user/onboarding ignore behavior, and receipt generation. Do not create a parallel authority system. Do not use MCP as the execution path for this task. Return CONTEXT PROOF, TEMPLATE ACTION PROOF with parseable result and touched_paths, VALIDATION, and RESULT.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T022734Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_.json",
+      "request_id": "codex_req_2026-05-05T022734Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_",
+      "return_packet_paths": [],
+      "status": "QUEUED_FOR_CODEX_CARRIER",
+      "updated_at": "2026-05-05T02:27:34+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-05T02:26:51+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "Verify and harden the live ION ChatOps Browser Carrier Runtime after successful extension smoke and corrected re-entry injection. Inspect the latest ChatOps smoke receipt, extension parser/schema, daemon bridge, Sev re-entry context generation, and flat MVP action shape. Confirm that ion_action_example is ignored, placeholder action IDs/objectives are rejected, user/onboarding blocks are ignored, and concrete assistant-emitted ion_action blocks produce approval candidates. Document the confirmed flow: Sev emits YAML, extension validates, Braden approves, daemon records or executes, ION writes receipt. Add or update focused tests for re-entry injection, flat create_codex_work_packet parsing, write_file_draft smoke parsing, placeholder rejection, user/onboarding ignore behavior, and receipt generation. Do not create a parallel authority system. Do not use MCP as the execution path for this task. Return CONTEXT PROOF, TEMPLATE ACTION PROOF with parseable result and touched_paths, VALIDATION, and RESULT.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T022651Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_.json",
+      "request_id": "codex_req_2026-05-05T022651Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_",
+      "return_packet_paths": [],
+      "status": "QUEUED_FOR_CODEX_CARRIER",
+      "updated_at": "2026-05-05T02:26:51+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-05T02:22:53+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "Verify and harden the live ION ChatOps Browser Carrier Runtime after successful extension smoke and corrected re-entry injection. Inspect the latest ChatOps smoke receipt, extension parser/schema, daemon bridge, Sev re-entry context generation, and flat MVP action shape. Confirm that ion_action_example is ignored, placeholder action IDs/objectives are rejected, user/onboarding blocks are ignored, and concrete assistant-emitted ion_action blocks produce approval candidates. Document the confirmed flow: Sev emits YAML, extension validates, Braden approves, daemon records or executes, ION writes receipt. Add or update focused tests for re-entry injection, flat create_codex_work_packet parsing, write_file_draft smoke parsing, placeholder rejection, user/onboarding ignore behavior, and receipt generation. Do not create a parallel authority system. Do not use MCP as the execution path for this task. Return CONTEXT PROOF, TEMPLATE ACTION PROOF with parseable result and touched_paths, VALIDATION, and RESULT.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T022253Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_.json",
+      "request_id": "codex_req_2026-05-05T022253Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_",
+      "return_packet_paths": [],
+      "status": "QUEUED_FOR_CODEX_CARRIER",
+      "updated_at": "2026-05-05T02:22:53+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-05T02:11:06+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "State the exact bounded work for local Codex/ION to perform.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T021106Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform.json",
+      "request_id": "codex_req_2026-05-05T021106Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform",
+      "return_packet_paths": [],
+      "status": "QUEUED_FOR_CODEX_CARRIER",
+      "updated_at": "2026-05-05T02:11:06+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-05T02:09:28+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "State the exact bounded work for local Codex/ION to perform.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T020928Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform.json",
+      "request_id": "codex_req_2026-05-05T020928Z0000_state_the_exact_bounded_work_for_local_codex_ion_to_perform",
+      "return_packet_paths": [],
+      "status": "QUEUED_FOR_CODEX_CARRIER",
+      "updated_at": "2026-05-05T02:09:28+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-05T01:50:47+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "Continue the ION ChatOps Browser Carrier Runtime work from the latest browser conversation.\nInspect the repo, use existing ION gates, run focused validation, and return CONTEXT PROOF,\nTEMPLATE ACTION PROOF, VALIDATION, and RESULT.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T015047Z0000_continue_the_ion_chatops_browser_carrier_runtime_work_from_the_latest_browser_co.json",
+      "request_id": "codex_req_2026-05-05T015047Z0000_continue_the_ion_chatops_browser_carrier_runtime_work_from_the_latest_browser_co",
+      "return_packet_paths": [],
+      "status": "QUEUED_FOR_CODEX_CARRIER",
+      "updated_at": "2026-05-05T01:50:47+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-04T23:51:00+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T235644Z0000_task_return.json",
+      "linked_return_count": 1,
+      "objective": "Implement the next read-only GitHub data-plane audit slice identified by prior-art consolidation. Port the safe shape of codexgit_status_report.py / Git Chronicler into current ION without token-paste guidance, secret-scan bypass workflow, autonomous commits, push, or GitHub mutation. Goal: add kernel.ion_github_data_plane_audit or equivalent read-only audit that reports local git presence, branch, remote configured, worktree cleanliness/status summary, registry alignment, and first-commit readiness. No network mutation. Add focused tests. Update registry/docs only if required. Return CONTEXT PROOF, TEMPLATE ACTION PROOF with parseable result/touched_paths, VALIDATION, RESULT.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T235100Z0000_implement_the_next_read_only_github_data_plane_audit_slice_identified_by_prior_a.json",
+      "request_id": "codex_req_2026-05-04T235100Z0000_implement_the_next_read_only_github_data_plane_audit_slice_identified_by_prior_a",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T235644Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T23:56:44+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-04T22:56:11+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T230157Z0000_task_return.json",
+      "linked_return_count": 1,
+      "objective": "Design the GitHub data-plane setup for ION using GitHub account/org ION-operations. Keep this short and bounded. Goal: MCP remains control plane; GitHub/local git becomes durable data plane for large files/specs/patches/PRs/issues; local ION/Codex daemon watches/syncs and executes. First audit existing Git/GitHub/daemon/integration owners. Current MCP reports git_present:false. Do not use secrets or auth edits. Produce setup plan and, if safe, minimal docs/registry stubs for ION_GITHUB_DATA_PLANE_PROTOCOL and ION_GITHUB_WORK_DAEMON. Include repo naming recommendation, local git init/remote plan, issue/branch/PR workflow, artifact refs, receipts, and exact human steps for GitHub auth/remote creation. Return CONTEXT PROOF, TEMPLATE ACTION PROOF with parseable result/touched_paths, VALIDATION, RESULT.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T225611Z0000_design_the_github_data_plane_setup_for_ion_using_github_account_org_ion_operatio.json",
+      "request_id": "codex_req_2026-05-04T225611Z0000_design_the_github_data_plane_setup_for_ion_using_github_account_org_ion_operatio",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T230157Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T23:01:57+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-04T22:21:32+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "Create a short Sev browser-carrier re-entry checklist using existing ION owners. Goal: when a new ChatGPT Browser chat connects to ION MCP and is told callsign Sev, it can restore continuity by calling ion_status, ion_tool_manifest, ion_carrier_onboarding_packet, ion_context_compile, ion_daemon_status, ion_swarm_status, ion_agent_queue, ion_codex_work_queue, and recent receipt/message tools. Reuse existing carrier profile, onboarding, context, template, cockpit, and receipt owners. Do not create a parallel identity system. Return with CONTEXT PROOF, TEMPLATE ACTION PROOF, touched_paths, validation, and next moves.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T222132Z0000_create_a_short_sev_browser_carrier_re_entry_checklist_using_existing_ion_owners_.json",
+      "request_id": "codex_req_2026-05-04T222132Z0000_create_a_short_sev_browser_carrier_re_entry_checklist_using_existing_ion_owners_",
+      "return_packet_paths": [],
+      "status": "QUEUED_FOR_CODEX_CARRIER",
+      "updated_at": "2026-05-04T22:21:32+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-04T22:02:09+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T220553Z0000_task_return.json",
+      "linked_return_count": 2,
+      "objective": "ION agent invocation for VIZIER (role.vizier) via Codex CLI backend.\n\nInvariant: ION has one core engine mounted by all carriers. ChatGPT Browser/Sev is a full ION carrier target, not an observer-only lane.\nDistinguish human sovereign Braden, Sev as delegated operator carrier/callsign, ION core engine, Steward integration membrane, and Codex-backed worker.\nThis is a role/context packet compiled by the ION agent invocation broker; it is not a separate agent system.\n\nInvocation packet: ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json\nRequested mode: queued\nOriginal objective: Analyze the next architecture slice for ION swarm control after the 42-tool MCP agent invocation broker and stale-runner reconciliation. Focus on how Sev should operate as delegated browser control-plane carrier, how persistent autorun/heartbeat should be added without creating duplicate authority, how alerts/gates should surface to Sev and Braden, and what the next implementation packet should be. Produce a bounded proposal only; do not mutate project files unless required by the invocation protocol.\n\nBackend and proof rules:\n- Mount the requested role only through the supplied boot/context/template evidence.\n- Do not claim to be ION, sovereign authority, or production authority.\n- Do not let raw Codex output become ION state except through the existing task-return proof gates.\n- Return must include CONTEXT PROOF, TEMPLATE ACTION PROOF, VALIDATION, and RESULT sections.\n- Classify failures as AGENT_INVOCATION_FAILURE, BACKEND_CODEX_FAILURE, CARRIER_ADAPTER_FAILURE, DAEMON_FAILURE, or ION_CORE_FAILURE.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+      "request_id": "codex_req_agent_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T220450Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T220553Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T22:05:53+00:00"
+    },
+    {
+      "accepted_return_count": 2,
+      "created_at": "2026-05-04T21:50:59+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T215826Z0000_task_return.json",
+      "linked_return_count": 3,
+      "objective": "Repair Codex queue runner stale active-run reconciliation. Current evidence: ion_daemon_status reports active_run pid 82526 / CODEX_CLI_RUNNING for NEMESIS agent run, but Codex carrier reports PID 82526 is gone and no stdout.log, stderr.log, or latest_return.md was produced. run.json still says CODEX_CLI_RUNNING with no failure_classification. Treat as DAEMON_FAILURE or CODEX_CLI_FAILURE / stale adapter state, not ION_CORE_FAILURE. Inspect owners before writing: ION/04_packages/kernel/ion_codex_queue_runner.py, ion_agent_invocation_broker.py, MCP connector contract/http preview if needed, ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json, codex_queue_runner_state.json, the affected run dir, and focused tests. Implement the narrowest fix: daemon/status and process-once surfaces must detect dead PIDs or missing output for active runs, mark run status terminal/failed with failure_classification, clear active_run, preserve receipts/log paths, and update queue/request state without falsely accepting work. Add focused tests for stale pid/no-output reconciliation. Validate kernel.ion_status, daemon status, focused tests, and ensure no active_run remains for dead worker. Return with CONTEXT PROOF, TEMPLATE ACTION PROOF, touched paths, validation, remaining blockers, and next lawful moves.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T215059Z0000_repair_codex_queue_runner_stale_active_run_reconciliation_current_evidence_ion_d.json",
+      "request_id": "codex_req_2026-05-04T215059Z0000_repair_codex_queue_runner_stale_active_run_reconciliation_current_evidence_ion_d",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T215640Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T215710Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T215826Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T21:58:26+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-04T21:43:42+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T214848Z0000_task_return.json",
+      "linked_return_count": 1,
+      "objective": "ION agent invocation for NEMESIS (role.nemesis) via Codex CLI backend.\n\nInvariant: ION has one core engine mounted by all carriers. ChatGPT Browser/Sev is a full ION carrier target, not an observer-only lane.\nDistinguish human sovereign Braden, Sev as delegated operator carrier/callsign, ION core engine, Steward integration membrane, and Codex-backed worker.\nThis is a role/context packet compiled by the ION agent invocation broker; it is not a separate agent system.\n\nInvocation packet: ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run.json\nRequested mode: queued\nOriginal objective: Audit the newly accepted ION agent invocation broker and Codex queue runner slice. Focus on whether Sev/GPT Browser can invoke Codex-backed role agents without creating a parallel agent authority, whether proof-gated intake remains intact, whether blocked runner state from the earlier process-once return is fully reconciled, and what the next safe swarm-control step should be. Do not mutate code unless explicitly required by the audit surface; produce findings and next lawful moves.\n\nBackend and proof rules:\n- Mount the requested role only through the supplied boot/context/template evidence.\n- Do not claim to be ION, sovereign authority, or production authority.\n- Do not let raw Codex output become ION state except through the existing task-return proof gates.\n- Return must include CONTEXT PROOF, TEMPLATE ACTION PROOF, VALIDATION, and RESULT sections.\n- Classify failures as AGENT_INVOCATION_FAILURE, BACKEND_CODEX_FAILURE, CARRIER_ADAPTER_FAILURE, DAEMON_FAILURE, or ION_CORE_FAILURE.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T214342Z0000_agent_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_que.json",
+      "request_id": "codex_req_agent_2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T214848Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_BLOCKED",
+      "updated_at": "2026-05-04T21:55:31+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-04T21:39:35+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "ION agent invocation for STEWARD (role.steward) via Codex CLI backend.\n\nInvariant: ION has one core engine mounted by all carriers. ChatGPT Browser/Sev is a full ION carrier target, not an observer-only lane.\nDistinguish human sovereign Braden, Sev as delegated operator carrier/callsign, ION core engine, Steward integration membrane, and Codex-backed worker.\nThis is a role/context packet compiled by the ION agent invocation broker; it is not a separate agent system.\n\nInvocation packet: ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g.json\nRequested mode: prepare_only\nOriginal objective: prepare-only broker regression smoke after cancellation and swarm-step guardrails\n\nBackend and proof rules:\n- Mount the requested role only through the supplied boot/context/template evidence.\n- Do not claim to be ION, sovereign authority, or production authority.\n- Do not let raw Codex output become ION state except through the existing task-return proof gates.\n- Return must include CONTEXT PROOF, TEMPLATE ACTION PROOF, VALIDATION, and RESULT sections.\n- Classify failures as AGENT_INVOCATION_FAILURE, BACKEND_CODEX_FAILURE, CARRIER_ADAPTER_FAILURE, DAEMON_FAILURE, or ION_CORE_FAILURE.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T213935Z0000_agent_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_.json",
+      "request_id": "codex_req_agent_2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g",
+      "return_packet_paths": [],
+      "status": "PREPARED_FOR_CODEX_CARRIER_NOT_QUEUED",
+      "updated_at": "2026-05-04T21:39:35+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-04T21:34:23+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "ION agent invocation for MASON (role.mason) via Codex CLI backend.\n\nInvariant: ION has one core engine mounted by all carriers. ChatGPT Browser/Sev is a full ION carrier target, not an observer-only lane.\nDistinguish human sovereign Braden, Sev as delegated operator carrier/callsign, ION core engine, Steward integration membrane, and Codex-backed worker.\nThis is a role/context packet compiled by the ION agent invocation broker; it is not a separate agent system.\n\nInvocation packet: ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json\nRequested mode: prepare_only\nOriginal objective: prepare-only MCP smoke for ION agent invocation broker\n\nBackend and proof rules:\n- Mount the requested role only through the supplied boot/context/template evidence.\n- Do not claim to be ION, sovereign authority, or production authority.\n- Do not let raw Codex output become ION state except through the existing task-return proof gates.\n- Return must include CONTEXT PROOF, TEMPLATE ACTION PROOF, VALIDATION, and RESULT sections.\n- Classify failures as AGENT_INVOCATION_FAILURE, BACKEND_CODEX_FAILURE, CARRIER_ADAPTER_FAILURE, DAEMON_FAILURE, or ION_CORE_FAILURE.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T213423Z0000_agent_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json",
+      "request_id": "codex_req_agent_2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker",
+      "return_packet_paths": [],
+      "status": "PREPARED_FOR_CODEX_CARRIER_NOT_QUEUED",
+      "updated_at": "2026-05-04T21:34:23+00:00"
+    },
+    {
+      "accepted_return_count": 2,
+      "created_at": "2026-05-04T21:18:36+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T214229Z0000_task_return.json",
+      "linked_return_count": 3,
+      "objective": "Build the next layer: multi-agent Codex-backed ION swarm control from Sev/GPT Browser over MCP. Do not create a separate agent system; build an ION agent invocation broker over existing owners: ion_codex_queue_runner.py, ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json, codex_work_requests, task_returns, carrier messages, agent_roster_registry.yaml, codex_cli_carrier_profile.yaml, CODEX_CLI_EXECUTION_PACKET.md, context/template proof gates, and full-carrier MCP parity protocol. Desired model: Sev calls ION to invoke a role/agent, ION compiles context/template/return contract, local runner invokes Codex CLI as backend execution substrate, return is captured/proof-gated/receipted, and cockpit/queue state records which role/backend/carrier did what. Design and implement the narrowest strong slice for swarm control. Candidate tools/surfaces: ion_agent_invoke, ion_agent_status, ion_agent_result, ion_agent_cancel, ion_agent_list, ion_agent_queue, ion_agent_spawn_plan, ion_swarm_status, ion_swarm_step_once. Support multiple role packets such as MASON, VIZIER, NEMESIS, STEWARD-review/proposal, TEMPLATE_CURATOR, CONTEXT_CARTOGRAPHER using existing role/context surfaces. Distinguish human sovereign Braden, Sev delegated operator carrier, ION core engine, Steward integration membrane, and Codex-backed workers. Ensure no raw Codex output becomes state without proof gates. Include failure classes: AGENT_INVOCATION_FAILURE, BACKEND_CODEX_FAILURE, CARRIER_ADAPTER_FAILURE, DAEMON_FAILURE, ION_CORE_FAILURE. Validate with kernel.ion_status, focused tests, tool manifest/audit, and at least one smoke invocation in prepare-only or bounded execution mode. Return with CONTEXT PROOF, TEMPLATE ACTION PROOF, touched paths, validations, new tools exposed if any, remaining blockers, and next lawful moves.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro.json",
+      "request_id": "codex_req_2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T213558Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T214127Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T214229Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T21:42:29+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-04T20:37:55+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T210025Z0000_task_return.json",
+      "linked_return_count": 1,
+      "objective": "Build the next ION automation layer so ChatGPT Browser can operate the local ION/Codex carrier loop from MCP without the operator manually relaying 'proceed' to Codex. Treat this as full carrier parity infrastructure, not a restricted observer lane. First inspect existing owners before writing: ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json, chatgpt_connector/codex_work_requests, chatgpt_connector/task_returns, carrier message queue, ion_carrier_task_return, ion_carrier_continue, MCP connector implementation, full-carrier parity protocol, carrier profiles, cockpit/status projection, and any existing daemon/loop/autonomous loop/supervisor surfaces. Reuse existing queue/task-return/carrier-message owners; do not invent a parallel work system. Desired outcome: a local ION carrier daemon/supervisor or runner that can poll queued Codex work requests, invoke Codex CLI or the appropriate local carrier command non-interactively with the packet context, capture stdout/stderr/result, enforce CONTEXT PROOF and TEMPLATE ACTION PROOF return format, submit/record task returns, update queue status, emit receipts, expose daemon status through MCP/cockpit, and classify failures as CARRIER_ADAPTER_FAILURE, CODEX_CLI_FAILURE, DAEMON_FAILURE, or ION_CORE_FAILURE. Also propose MCP tools if needed: ion_daemon_status, ion_daemon_start, ion_daemon_stop, ion_codex_queue_process_once, ion_codex_queue_autorun_status, ion_codex_queue_autorun_start, ion_codex_queue_autorun_stop. Implement the narrowest useful slice if safe: at minimum queue-process-once or daemon-status plus tests; ideally an autorun loop that processes QUEUED_FOR_CODEX_CARRIER packets without user relay. Validate with kernel.ion_status, focused tests, full-carrier capability audit, and a smoke work request if possible. Return with CONTEXT PROOF, TEMPLATE ACTION PROOF, touched paths, validation, whether manual 'proceed' is still required, remaining blockers, and next lawful moves.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion.json",
+      "request_id": "codex_req_2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T210025Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T21:00:25+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-04T20:10:43+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T202613Z0000_task_return.json",
+      "linked_return_count": 1,
+      "objective": "Push ChatGPT Browser MCP beyond the current 22-tool artifact/comms slice toward full IDE/PC-level ION carrier parity. Do not treat the browser carrier as a restricted observer or management lane. Treat this as a trusted operator-watched GPT-5.5 Pro carrier that should be as connected as practical while ION records receipts and carrier attribution. First read current owners: ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md, ION_CARRIER_TO_CARRIER_COMMUNICATION_PROTOCOL.md, MCP connector implementation, carrier capability/tool registries, mount/onboarding profile surfaces, cockpit/status/context projection code, task-return gates, and accepted MCP parity task returns. Then implement or plan the next strongest connection slice, prioritizing: (1) full_carrier_mcp_parity carrier profile recognized by ion_carrier_onboarding_packet; (2) repo/project visibility tools such as ion_file_read, ion_file_search, ion_tree_list, ion_registry_read, ion_template_read, ion_context_compile, ion_receipt_hydrate, ion_tool_manifest; (3) direct project patch/apply tools with receipts and no-silent-loss handling; (4) shell/test/git/process/service-control tools where practical under current local authority; (5) cockpit/status projection updates so full-carrier MCP state, smoke receipts, artifact uploads, carrier messages, and tool parity appear as current state; (6) clear classification of any remaining platform/tooling limits as CARRIER_ADAPTER_FAILURE or CAPABILITY_NOT_YET_IMPLEMENTED, not ION_CORE_FAILURE. Validate with kernel.ion_status, focused connector tests, full-carrier capability audit, HTTP/public MCP tools/list, and at least one smoke where possible. Return with CONTEXT PROOF, TEMPLATE ACTION PROOF, touched paths, tests, current exposed tools, remaining blockers, and next lawful moves.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T201043Z0000_push_chatgpt_browser_mcp_beyond_the_current_22_tool_artifact_comms_slice_toward_.json",
+      "request_id": "codex_req_2026-05-04T201043Z0000_push_chatgpt_browser_mcp_beyond_the_current_22_tool_artifact_comms_slice_toward_",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T202613Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T20:26:13+00:00"
+    },
+    {
+      "accepted_return_count": 3,
+      "created_at": "2026-05-04T18:38:03+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T192325Z0000_task_return.json",
+      "linked_return_count": 3,
+      "objective": "Continue full-carrier MCP parity rollout. Current ChatGPT Browser connector tool list still exposes only the older bounded tool surface after Codex implemented/staged parity tools. Inspect the updated MCP connector implementation, manifest, HTTP preview schema, active connector contract, and server startup/deployment path to determine why newly staged tools are not visible through the live ChatGPT Browser MCP connection. Required outcomes: (1) confirm whether the live MCP server needs restart/reload/redeployment or whether the public connector is still pointed at an older process/manifest; (2) start or instruct the correct local preview/tunnel exposure path as lawful under current authority, or produce exact operator instructions if a human gate is needed; (3) verify the live tool list includes ion_file_put_text, ion_artifact_upload_init, ion_artifact_upload_chunk, ion_artifact_upload_commit, ion_carrier_message_send, ion_carrier_message_poll, and ion_carrier_message_ack; (4) run focused connector tests and full-carrier capability audit; (5) if possible, create a small smoke-test artifact/message through the new tool path and record receipts; (6) return with CONTEXT PROOF, TEMPLATE ACTION PROOF, files inspected/changed, validation commands, whether the live ChatGPT Browser connector sees the new tools, remaining blockers, and next lawful moves. Preserve invariant: one ION core engine mounted by all carriers; current missing visibility of new tools is CARRIER_ADAPTER_FAILURE or deployment/reload issue unless proven to be ION_CORE_FAILURE.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T183803Z0000_continue_full_carrier_mcp_parity_rollout_current_chatgpt_browser_connector_tool_.json",
+      "request_id": "codex_req_2026-05-04T183803Z0000_continue_full_carrier_mcp_parity_rollout_current_chatgpt_browser_connector_tool_",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T190955Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T191128Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T192325Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T19:23:25+00:00"
+    },
+    {
+      "accepted_return_count": 2,
+      "created_at": "2026-05-04T18:04:46+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T183625Z0000_task_return.json",
+      "linked_return_count": 2,
+      "objective": "Evolve the ChatGPT-browser MCP connector toward full ION carrier parity, focusing on payload size limits, file/artifact transfer from browser ChatGPT to ION, and robust multi-carrier collaboration. Inspect current MCP connector implementation, schemas, tool argument handling, request/return parser limits, task-return proof gates, Codex work queue behavior, and any existing carrier/comms/file/artifact surfaces. Produce or update architecture docs and implementation plan as appropriate. Required outcomes: (1) document practical length-limit risks across ChatGPT message text, MCP tool arguments, JSON serialization, ION queue files, parser gates, and Codex return handling; (2) design direct file/artifact transfer tools so browser ChatGPT can send files it creates into ION, including small text file write, binary/base64 upload, chunked upload init/append/commit, sha256 verification, target path policy, lifecycle/receipt metadata, overwrite policy, and rollback/no-silent-loss handling; (3) design or implement first MCP tools for carrier-native communication between carriers/agents through ION-managed queues/channels, distinct from operator messages and Steward decisions; (4) update ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md or create companion protocol docs if needed; (5) propose exact tool names and schemas such as ion_artifact_upload_init, ion_artifact_upload_chunk, ion_artifact_upload_commit, ion_file_put_text, ion_carrier_message_send, ion_carrier_message_poll, ion_carrier_message_ack; (6) add tests or focused validation where practical; (7) return with CONTEXT PROOF, TEMPLATE ACTION PROOF, files inspected, files changed, validations run, and next lawful moves. Preserve the corrected invariant: one ION core engine mounted by all carriers; ChatGPT browser is a full carrier target, not a read-only/management-only lane; carrier limitations are adapter issues unless proven to be ION core issues.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T180446Z0000_evolve_the_chatgpt_browser_mcp_connector_toward_full_ion_carrier_parity_focusing.json",
+      "request_id": "codex_req_2026-05-04T180446Z0000_evolve_the_chatgpt_browser_mcp_connector_toward_full_ion_carrier_parity_focusing",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T182825Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T183625Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T18:36:25+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-04T17:57:12+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T182825Z0000_task_return_1.json",
+      "linked_return_count": 1,
+      "objective": "Inspect existing ION carrier, comms, queue, agent-message, operator-message, relay, steward, task-return, and MCP connector surfaces to determine what already exists for carrier-to-carrier communication. Then update or extend the full-carrier MCP planning work with a design for carrier-native communication over MCP. Requirements: carriers must be able to identify themselves as carriers, address other carriers/roles/agents, exchange messages through ION-managed queues or channels, attach context references and receipts, distinguish carrier messages from operator messages and Steward decisions, allow multi-carrier collaboration without treating any carrier as ION identity, and record which carrier said or did what. Prefer reuse of existing comms/queue infrastructure. Do not invent a parallel messaging system if an existing ION comms surface can be extended. If a new artifact is needed, propose or create a markdown protocol such as ION_CARRIER_TO_CARRIER_COMMUNICATION_PROTOCOL.md and companion registry/template stubs. Return with CONTEXT PROOF, TEMPLATE ACTION PROOF, files inspected, files changed, validations run, and next lawful moves.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T175712Z0000_inspect_existing_ion_carrier_comms_queue_agent_message_operator_message_relay_st.json",
+      "request_id": "codex_req_2026-05-04T175712Z0000_inspect_existing_ion_carrier_comms_queue_agent_message_operator_message_relay_st",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T182825Z0000_task_return_1.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T18:28:25+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-04T17:44:07+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T174723Z0000_task_return.json",
+      "linked_return_count": 4,
+      "objective": "Create a Markdown planning artifact for full ION carrier parity over MCP. Seed it with: one ION core engine mounted by all carriers; ChatGPT browser is a full ION carrier target, not a read-only or management-only lane; previous bounded ChatGPT-browser restrictions are temporary MVP residue, not final ION law; carrier differences are adapter telemetry/failures, not separate ION doctrine; define IDE-level MCP capability classes including filesystem read/write, patch, shell, tests, git, process/service control, receipts, cockpit visibility, and operator interrupt; propose next artifacts: ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md, carrier capability registry, MCP full-carrier tool registry, full-carrier mount proof template, and full-carrier action receipt template. Use honest non-production language and return CONTEXT PROOF, TEMPLATE ACTION PROOF, files changed, validation run, and next lawful moves.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it.json",
+      "request_id": "codex_req_2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T174553Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T174618Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T174648Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T174723Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T17:47:23+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-04T07:36:41+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T073730Z0000_task_return.json",
+      "linked_return_count": 1,
+      "objective": "public connector smoke test bounded work request",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T073641Z0000_public_connector_smoke_test_bounded_work_request.json",
+      "request_id": "codex_req_2026-05-04T073641Z0000_public_connector_smoke_test_bounded_work_request",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T073730Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T07:37:30+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-04T02:31:46+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T023221Z0000_task_return.json",
+      "linked_return_count": 2,
+      "objective": "V120 live HTTP connector smoke: Codex local visibility and proof return",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T023146Z0000_v120_live_http_connector_smoke_codex_local_visibility_and_proof_return.json",
+      "request_id": "codex_req_2026-05-04T023146Z0000_v120_live_http_connector_smoke_codex_local_visibility_and_proof_return",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T023146Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T023221Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-04T02:32:21+00:00"
+    }
+  ],
+  "schema_id": "ion.chatgpt_browser_connector_codex_work_queue.v1",
+  "state_dir": "ION/05_context/current/chatgpt_connector/codex_work_requests"
+}

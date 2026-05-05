@@ -1,0 +1,6 @@
+ION V80 Cursor Full Project Consolidation Receipt — 2026-04-28
+
+Base project: CURSOR- ION.zip
+Directly integrated patches: V77 carrier context proof gate; V79 ION context authority team.
+Donor/reference projects considered: V70 release-candidate preview; V72 recovery/hosted-MCP replay alpha.
+Result: full Cursor-root project zip updated in place; not an overlay-only handoff.

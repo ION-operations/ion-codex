@@ -1,0 +1,126 @@
+{
+  "agent_display_name": "STEWARD",
+  "agent_invocation_id": "agent_inv_2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g",
+  "agent_invocation_path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g.json",
+  "agent_role_id": "role.steward",
+  "backend_carrier_id": "CODEX_CLI_CARRIER",
+  "backend_runner_owner": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+  "created_at": "2026-05-04T21:39:35+00:00",
+  "declared_but_missing_context_paths": [
+    "ION/agents/steward/CAPSULE.md",
+    "ION/agents/steward/MINI.md"
+  ],
+  "failure_classes": [
+    "AGENT_INVOCATION_FAILURE",
+    "BACKEND_CODEX_FAILURE",
+    "CARRIER_ADAPTER_FAILURE",
+    "DAEMON_FAILURE",
+    "ION_CORE_FAILURE"
+  ],
+  "latest_return_packet_path": null,
+  "live_execution_authority": false,
+  "objective": "ION agent invocation for STEWARD (role.steward) via Codex CLI backend.\n\nInvariant: ION has one core engine mounted by all carriers. ChatGPT Browser/Sev is a full ION carrier target, not an observer-only lane.\nDistinguish human sovereign Braden, Sev as delegated operator carrier/callsign, ION core engine, Steward integration membrane, and Codex-backed worker.\nThis is a role/context packet compiled by the ION agent invocation broker; it is not a separate agent system.\n\nInvocation packet: ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g.json\nRequested mode: prepare_only\nOriginal objective: prepare-only broker regression smoke after cancellation and swarm-step guardrails\n\nBackend and proof rules:\n- Mount the requested role only through the supplied boot/context/template evidence.\n- Do not claim to be ION, sovereign authority, or production authority.\n- Do not let raw Codex output become ION state except through the existing task-return proof gates.\n- Return must include CONTEXT PROOF, TEMPLATE ACTION PROOF, VALIDATION, and RESULT sections.\n- Classify failures as AGENT_INVOCATION_FAILURE, BACKEND_CODEX_FAILURE, CARRIER_ADAPTER_FAILURE, DAEMON_FAILURE, or ION_CORE_FAILURE.",
+  "packet_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T213935Z0000_agent_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_.json",
+  "production_authority": false,
+  "request_id": "codex_req_agent_2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g",
+  "requested_by": "ion_agent_invocation_broker",
+  "requested_by_callsign": "Sev",
+  "requested_by_carrier_id": "CHATGPT_BROWSER_CARRIER",
+  "required_context_reads": [
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/agent_roster_registry.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/agent_context_system_registry.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/agent_context_systems/STEWARD.context_system.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/boots/STEWARD.boot.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/semantic_identities/STEWARD.semantic.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/bindings/STEWARD__TASK.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/bindings/STEWARD__STATUS_REPORT.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/bindings/STEWARD__PROPOSAL.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/bindings/STEWARD__TEMPLATE_SURFACE_CHANGE.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/domains/domain.current_phase_orchestration_management.domain.yaml",
+      "required": true
+    }
+  ],
+  "return_contract_sections": [
+    "### CONTEXT PROOF",
+    "### TEMPLATE ACTION PROOF",
+    "### VALIDATION",
+    "### RESULT"
+  ],
+  "return_packet_paths": [],
+  "schema_id": "ion.chatgpt_browser_connector_codex_work_request.v1",
+  "status": "PREPARED_FOR_CODEX_CARRIER_NOT_QUEUED",
+  "updated_at": "2026-05-04T21:39:35+00:00"
+}

@@ -1,0 +1,54 @@
+schema_id: ion.trunk_preservation_policy.v1
+version_line: V118_NO_SILENT_LOSS_AND_CONTAINMENT_PRESERVATION_GATE
+production_authority: false
+law: NO_PROJECT_FILE_MAY_BE_SILENTLY_LOST
+movement_law: FILES_MAY_LEAVE_HOT_STATE_THROUGH_HASH_PROVEN_CONTAINMENT
+protected_paths:
+  - AGENTS.md
+  - START_HERE_FOR_ANY_AGENT.md
+  - pyproject.toml
+  - ION/REPO_AUTHORITY.md
+  - ION/00_BOOTSTRAP/
+  - ION/01_doctrine/
+  - ION/02_architecture/
+  - ION/03_registry/
+  - ION/04_packages/kernel/
+  - ION/05_context/current/
+  - ION/07_templates/
+  - ION/08_ui/
+  - ION/09_integrations/
+  - ION/tests/
+allowed_removal_parts:
+  - __pycache__
+  - .pytest_cache
+  - .mypy_cache
+  - .ruff_cache
+allowed_removal_prefixes:
+  - _tmp
+  - tmp
+  - scratch
+  - ION/05_context/current/_tmp
+  - ION/05_context/current/tmp
+  - ION/05_context/current/scratch
+allowed_removal_suffixes:
+  - .pyc
+  - .pyo
+containment_move_prefixes:
+  - ION/05_context/archive/containment/
+  - ION/05_context/quarantine/
+  - ION/05_context/current/containment/
+  - ION/06_artifacts/containment/
+blocking_rule: protected_removed_files == 0 and unexpected_removed_files == 0
+required_report_fields:
+  - previous_full_zip
+  - new_full_zip
+  - files_before
+  - files_after
+  - added_files
+  - modified_files
+  - removed_files
+  - contained_removed_files
+  - unexpected_removed_files
+  - protected_removed_files
+  - containment_moves
+  - packaging_verdict

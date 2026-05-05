@@ -1,0 +1,27 @@
+version: V58_COGNITIVE_EXPLORER_AND_CONTEXT_ROUTE_VIEW_MODEL
+policy_id: joc_cognitive_explorer_route_view_model_policy
+production_authority: false
+live_ui_claim: false
+required_view_surfaces:
+  - COGNITIVE_EXPLORER
+  - INFINITE_CONTEXT_COMMAND_PALETTE
+  - SELECTED_CONTEXT_LENS
+  - STRUCTURAL_BLUEPRINT_VIEW
+  - DEPENDENCY_WEB_VIEW
+  - SOURCE_LINE_CITATION_RAIL
+  - ROUTE_REASONING_PANEL
+required_route_classes:
+  - EXACT_SYMBOL
+  - FILE_PATH
+  - DEPENDENCY_EDGE
+  - RECEIPT_FAMILY
+  - FALLBACK_BOUNDARY
+forbidden_capabilities:
+  production_authority: false
+  external_model_dispatch: false
+  browser_session_mutation: false
+  credential_access: false
+  source_summary_rewrite: false
+  canonical_graph_write: false
+  unrestricted_agent_activation: false
+  live_ui_claim: false

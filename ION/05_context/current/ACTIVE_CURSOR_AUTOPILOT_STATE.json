@@ -1,0 +1,14 @@
+{
+  "live_counts": {
+    "accepted_returns": 0,
+    "open_human_gates": 0,
+    "operator_queue_items": 0,
+    "rejected_returns": 0,
+    "spawn_rows": 0
+  },
+  "operator_message_classification": "new_work_directive",
+  "packet_path": "ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_PACKET.json",
+  "schema_id": "ion.cursor_autopilot_state.v1",
+  "status": "ION_CURSOR_AUTOPILOT_READY",
+  "updated_at": "2026-04-30T14:23:27+00:00"
+}

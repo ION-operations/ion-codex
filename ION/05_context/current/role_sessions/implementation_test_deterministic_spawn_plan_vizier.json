@@ -1,0 +1,11 @@
+{
+  "authority": "READ_ONLY",
+  "objective": "test deterministic spawn plan",
+  "purpose": "define scope, dependencies, and required review posture",
+  "reason": "required_policy: role.required is True",
+  "role": "vizier",
+  "schema_id": "ion.role_session_packet.v1",
+  "spawn": true,
+  "spawn_policy": "required",
+  "workstream": "implementation"
+}

@@ -1,0 +1,26 @@
+---
+description: ION MCP control bridge discipline
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# ION MCP Control Bridge Discipline
+
+When the `ion-control` MCP server is available, prefer its bounded ION tools over conversational memory for runtime state.
+
+Use MCP tools for:
+
+- status: `ion_status`
+- continuation: `ion_continue`
+- context planning: `ion_context_plan`
+- cockpit projection: `ion_cockpit_view`
+- workflow audit: `ion_workflow_audit`
+- active packet inspection: `ion_read_active_packet`
+- Task-return intake: `ion_task_return`
+
+The MCP server is not STEWARD. The Cursor parent chat remains `CURSOR_CARRIER_CONTROL_SURFACE`.
+
+Never ask the user to choose routine ION agents or manually refresh normal packets. Use the bridge and active packets.
+
+Never use MCP as arbitrary shell. Do not expose credentials, destructive commands, or production authority through MCP.

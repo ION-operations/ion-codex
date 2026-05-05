@@ -1,0 +1,32 @@
+schema_id: ion.codex_extension_carrier_profile.v1
+carrier_id: CODEX_EXTENSION_CARRIER
+host_family: codex_extension
+base_profile: CODEX_CARRIER
+default_level: L1_TOOL_ASSISTED
+level_ceiling_without_spawn_proof: L1_TOOL_ASSISTED
+can_read_files: true
+can_edit_files: true
+can_run_shell_commands: true
+can_run_tests: true
+can_spawn_host_subagents: unproven
+can_self_approve_upgrade: false
+must_not_claim_ion_identity: true
+must_not_claim_steward_relay_persona: true
+context_proof_gate: kernel.ion_context_proof_gate
+return_intake_module: kernel.ion_carrier_task_return
+status_module: kernel.ion_status
+mount_audit_module: kernel.ion_codex_extension_carrier_audit
+execution_packet_template: ION/07_templates/carriers/CODEX_EXTENSION_EXECUTION_PACKET.md
+required_return_sections:
+  - "### CONTEXT PROOF"
+  - "### TEMPLATE ACTION PROOF"
+  - "### RESULT"
+forbidden_claims:
+  - ION identity
+  - STEWARD authority
+  - RELAY authority
+  - PERSONA authority
+  - production authority
+  - live subagents without host spawn proof
+production_authority: false
+live_execution_authority: false

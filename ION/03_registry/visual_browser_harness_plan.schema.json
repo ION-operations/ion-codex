@@ -1,0 +1,37 @@
+{
+  "$id": "ion.visual_browser_harness_plan.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "allowed_capture_surfaces": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "authority_scope": {
+      "const": "BROWSER_HARNESS_PLAN_ONLY"
+    },
+    "forbidden_capabilities": {
+      "type": "object"
+    },
+    "plan_id": {
+      "type": "string"
+    },
+    "stage": {
+      "enum": [
+        "PLAN_ONLY",
+        "LOCAL_DEV_CAPTURE_DRAFT",
+        "STEWARD_REVIEW_REQUIRED"
+      ]
+    }
+  },
+  "required": [
+    "plan_id",
+    "stage",
+    "allowed_capture_surfaces",
+    "forbidden_capabilities",
+    "authority_scope"
+  ],
+  "title": "ION Visual Browser Harness Plan",
+  "type": "object"
+}

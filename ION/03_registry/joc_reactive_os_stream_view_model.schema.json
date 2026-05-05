@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.joc_reactive_os_stream_view_model.v1",
+  "title": "ION/JOC Reactive OS Stream View Model",
+  "type": "object",
+  "required": ["schema_id", "version", "surface_name", "events", "forbidden_capabilities", "source_receipt_ids"],
+  "properties": {
+    "schema_id": {"const": "ion.joc_reactive_os_stream_view_model.v1"},
+    "version": {"const": "V57_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL"},
+    "surface_name": {"type": "string", "minLength": 1},
+    "source_receipt_ids": {"type": "array", "items": {"type": "string"}},
+    "events": {"type": "array"},
+    "forbidden_capabilities": {"type": "object", "additionalProperties": {"type": "boolean"}}
+  }
+}

@@ -1,0 +1,15 @@
+V104 full project consolidation receipt
+line: V104_OPERATIONAL_TRUTH_AUDIT_AND_LONG_HORIZON_ORCHESTRATION
+source: ION_CURSOR_V103_FULL_PROJECT_CONSOLIDATED_20260502.zip
+artifact_class: full_consolidated_project_zip
+production_authority: false
+repairs_applied:
+  - created ION/docs/cursor/ION_CURSOR_WORK_CYCLE_PACKET.md
+  - refreshed stale context-window existence flags in ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json
+  - materialized IONOLOGIST.context_system.md
+new_audit_verdict: PARTIAL_OPERATIONAL_READY_WITH_OPEN_GATES
+open_blocker_count: 0
+warning_count: 1
+test_command: PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -m pytest ION/tests -q
+test_result: 31 passed in 8.90s
+next_lawful_move: V105 lifecycle-aware carrier/release packager

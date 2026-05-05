@@ -1,0 +1,362 @@
+registry_id: template_metadata_contract_registry
+status: current_phase_seed
+created: '2026-04-24'
+contract_status_enum:
+- NO_CONTRACT
+- DRAFT_CONTRACT
+- PROVISIONAL_CONTRACT
+- ACTIVE_CONTRACT
+- RETIRED_CONTRACT
+- QUARANTINED_CONTRACT
+required_contract_fields:
+- template_id
+- canonical_name
+- version
+- contract_status
+- file_class
+- graph_node_type
+- graph_region
+- authority_class
+- lifecycle
+- required_fields
+- completion_threshold
+- downstream_effects
+- reaction_hooks
+- review
+- receipts
+- safety
+contracts:
+- template_id: events.template_completion_event
+  canonical_name: Template Completion Event
+  version: '1.0'
+  contract_status: ACTIVE_CONTRACT
+  file_class: template_completion_event_witness
+  graph_node_type: node.template_completion_event
+  graph_region: region.evented_file_graph
+  authority_class: RUNTIME_PROOF_SURFACE
+  lifecycle:
+    allowed_statuses:
+    - WITNESS
+    - REFUSED
+    - HELD
+    draft_statuses: []
+    complete_statuses:
+    - WITNESS
+    terminal_statuses:
+    - WITNESS
+    - REFUSED
+    - HELD
+  required_fields:
+  - event_id
+  - source_file
+  - template_id
+  - graph_region
+  - authority_class
+  - completion_state
+  optional_fields:
+  - warnings
+  - notes
+  completion_threshold:
+    mode: all_required_fields
+    required_fields:
+    - event_id
+    - source_file
+    - template_id
+    - graph_region
+    - authority_class
+    - completion_state
+    additional_checks:
+    - contract_status_allows_eventing
+  graph_mapping:
+    node_id_strategy: field
+    node_id_field: event_id
+    edge_fields:
+    - source_file
+    dependency_fields: []
+    affected_region_fields:
+    - graph_region
+  downstream_effects:
+    allowed:
+    - reaction_selection_witness
+    forbidden:
+    - graph_commit
+    - registry_mutation
+    - agent_activation
+  reaction_hooks:
+    index_update_hooks: []
+    scheduler_hooks: []
+    agent_activation_hooks: []
+    registry_update_hooks: []
+    graph_writeback_hooks: []
+  review:
+    required_reviewers:
+    - Steward
+    review_depth: D2
+    approval_required: false
+  receipts:
+    receipt_required: true
+    receipt_classes:
+    - template_completion_scan_receipt
+  safety:
+    forbidden_reactions:
+    - direct_graph_mutation
+    - direct_registry_update
+    escalation_behavior: HOLD_OR_ESCALATE
+    stale_behavior: REFUSE_STALE_EVENT
+    contradiction_behavior: ESCALATE_CONTRADICTION
+- template_id: events.template_reaction_selection_witness
+  canonical_name: Template Reaction Selection Witness
+  version: '1.0'
+  contract_status: ACTIVE_CONTRACT
+  file_class: template_reaction_selection_witness
+  graph_node_type: node.template_reaction_selection
+  graph_region: region.evented_file_graph
+  authority_class: RUNTIME_PROOF_SURFACE
+  lifecycle:
+    allowed_statuses:
+    - WITNESS
+    - REFUSED
+    - HELD
+    draft_statuses: []
+    complete_statuses:
+    - WITNESS
+    terminal_statuses:
+    - WITNESS
+    - REFUSED
+    - HELD
+  required_fields:
+  - selection_id
+  - source_event_id
+  - selected_reactions
+  - deferred_reactions
+  completion_threshold:
+    mode: all_required_fields
+    required_fields:
+    - selection_id
+    - source_event_id
+    - selected_reactions
+    additional_checks:
+    - selected_reactions_must_be_allowed
+  optional_fields:
+  - notes
+  graph_mapping:
+    node_id_strategy: field
+    node_id_field: selection_id
+    edge_fields:
+    - source_event_id
+    dependency_fields:
+    - source_event_id
+    affected_region_fields:
+    - graph_region
+  downstream_effects:
+    allowed:
+    - index_projection
+    - writeback_proposal
+    forbidden:
+    - direct_graph_commit
+    - agent_activation
+  reaction_hooks:
+    index_update_hooks:
+    - template_event_index_projection
+    scheduler_hooks: []
+    agent_activation_hooks: []
+    registry_update_hooks: []
+    graph_writeback_hooks:
+    - proposal_only
+  review:
+    required_reviewers:
+    - Steward
+    review_depth: D2
+    approval_required: false
+  receipts:
+    receipt_required: true
+    receipt_classes:
+    - template_reaction_selection_receipt
+  safety:
+    forbidden_reactions:
+    - direct_graph_mutation
+    escalation_behavior: HOLD_OR_ESCALATE
+    stale_behavior: REFUSE_STALE_EVENT
+    contradiction_behavior: ESCALATE_CONTRADICTION
+- template_id: doctrine.evolution_packet
+  canonical_name: Doctrine Evolution Packet
+  version: '1.0'
+  contract_status: PROVISIONAL_CONTRACT
+  file_class: doctrine_evolution_packet
+  graph_node_type: node.file.template_instantiated
+  graph_region: region.doctrine_evolution
+  authority_class: A3_OPERATIONAL_PROPOSAL
+  lifecycle:
+    allowed_statuses:
+    - DRAFT
+    - COMPLETE_PROPOSAL
+    - HELD
+    - LANDED_PROVISIONAL
+    draft_statuses:
+    - DRAFT
+    complete_statuses:
+    - COMPLETE_PROPOSAL
+    terminal_statuses:
+    - LANDED_PROVISIONAL
+    - HELD
+  required_fields:
+  - packet_id
+  - statement
+  - depth_class
+  - authority_posture
+  - donor_line_search
+  - contradiction_review
+  - reexpression_validation
+  - runtime_mapping
+  - required_reviewers
+  completion_threshold:
+    mode: all_required_fields
+    required_fields:
+    - packet_id
+    - statement
+    - depth_class
+    - authority_posture
+    - donor_line_search
+    - contradiction_review
+    - reexpression_validation
+    - runtime_mapping
+    - required_reviewers
+    additional_checks:
+    - depth_reviewers_match_protocol
+  optional_fields:
+  - affected_graph_regions
+  - affected_laws
+  graph_mapping:
+    node_id_strategy: field
+    node_id_field: packet_id
+    edge_fields:
+    - affected_laws
+    - affected_protocols
+    dependency_fields:
+    - donor_line_search
+    affected_region_fields:
+    - affected_graph_regions
+  downstream_effects:
+    allowed:
+    - semantic_review
+    - contradiction_review
+    - registry_update_proposal
+    - approved_context_index_update
+    forbidden:
+    - silent_ratification
+    - direct_constitutional_write
+  reaction_hooks:
+    index_update_hooks:
+    - approved_context_index_update
+    scheduler_hooks:
+    - required_review_scheduling
+    agent_activation_hooks:
+    - Nemesis
+    - Vestige
+    registry_update_hooks:
+    - proposal_only
+    graph_writeback_hooks:
+    - proposal_only
+  review:
+    required_reviewers:
+    - Steward
+    - Nemesis
+    review_depth: D3_TO_D5
+    approval_required: true
+  receipts:
+    receipt_required: true
+    receipt_classes:
+    - doctrine_evolution_receipt
+  safety:
+    forbidden_reactions:
+    - silent_ratification
+    - direct_constitutional_write
+    escalation_behavior: ESCALATE_IF_D4_D5_UNREVIEWED
+    stale_behavior: HOLD_FOR_RECONFIRMATION
+    contradiction_behavior: ESCALATE_CONTRADICTION
+
+- template_id: demo.summary_refresh_request
+  canonical_name: Summary Refresh Demo Request
+  version: '1.0'
+  contract_status: ACTIVE_CONTRACT
+  file_class: summary_refresh_demo_request
+  graph_node_type: node.file.template_instantiated
+  graph_region: region.product_surface
+  authority_class: A3_OPERATIONAL_PROPOSAL
+  lifecycle:
+    allowed_statuses:
+    - READY
+    - HELD
+    - REFUSED
+    draft_statuses: []
+    complete_statuses:
+    - READY
+    terminal_statuses:
+    - READY
+    - HELD
+    - REFUSED
+  required_fields:
+  - type
+  - status
+  - summary_target
+  - downstream_effects
+  optional_fields:
+  - session_id
+  - demo_id
+  - front_door_work_unit_id
+  - relay_packet_id
+  - steward_envelope_id
+  completion_threshold:
+    mode: all_required_fields
+    required_fields:
+    - type
+    - status
+    - summary_target
+    - downstream_effects
+    additional_checks:
+    - contract_status_allows_eventing
+  graph_mapping:
+    node_id_strategy: field
+    node_id_field: demo_id
+    edge_fields:
+    - relay_packet_id
+    - steward_envelope_id
+    dependency_fields:
+    - front_door_work_unit_id
+    affected_region_fields:
+    - graph_region
+  downstream_effects:
+    allowed:
+    - update_index
+    - refresh_context_package_source
+    forbidden:
+    - direct_graph_commit
+    - direct_source_summary_rewrite
+    - agent_activation
+    - registry_mutation
+  reaction_hooks:
+    index_update_hooks:
+    - summary_refresh_index_projection
+    scheduler_hooks: []
+    agent_activation_hooks: []
+    registry_update_hooks: []
+    graph_writeback_hooks:
+    - proposal_only
+  review:
+    required_reviewers:
+    - Steward
+    - Nemesis
+    review_depth: D3
+    approval_required: false
+  receipts:
+    receipt_required: true
+    receipt_classes:
+    - summary_refresh_demo_receipt
+  safety:
+    forbidden_reactions:
+    - direct_graph_mutation
+    - direct_source_summary_rewrite
+    - direct_registry_update
+    escalation_behavior: HOLD_OR_ESCALATE
+    stale_behavior: HOLD_FOR_RECONFIRMATION
+    contradiction_behavior: ESCALATE_CONTRADICTION

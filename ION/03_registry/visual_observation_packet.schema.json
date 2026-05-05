@@ -1,0 +1,35 @@
+{
+  "$id": "ion.visual_observation_packet.v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "packet_id",
+    "mode",
+    "target",
+    "findings",
+    "recommended_actions",
+    "production_authority"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.visual_observation_packet.v1"
+    },
+    "version": {
+      "const": "V44_VISUAL_OBSERVATION_PACKET_SCHEMA"
+    },
+    "mode": {
+      "enum": [
+        "OBSERVE",
+        "DIAGNOSE",
+        "COMPARE",
+        "EXPLAIN",
+        "PATCH_REQUEST",
+        "VERIFY"
+      ]
+    },
+    "production_authority": {
+      "const": false
+    }
+  }
+}

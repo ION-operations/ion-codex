@@ -1,0 +1,10 @@
+{
+  "latest_codex_work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+  "latest_invocation_id": "agent_inv_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+  "latest_invocation_path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json",
+  "latest_requested_agent": "role.vizier",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.agent_invocation_broker_state.v1",
+  "updated_at": "2026-05-04T22:02:09+00:00"
+}

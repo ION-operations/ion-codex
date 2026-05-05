@@ -1,0 +1,57 @@
+registry_id: reintegration.root_manifest
+display_name: Reintegration Root Manifest
+status: WORKING
+authority: A3_OPERATIONAL
+canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+decision_anchor: ION/06_intelligence/decisions/2026-04-17_workspace_root_authority_canonicalization_decision.md
+purpose: >-
+  Record the first bounded set of workspace roots required for current
+  root-authority adjudication and immediate follow-up packets.
+root_records:
+  - id: ion_packaged_current_generation
+    path: ION most recent/ion_current_canonical_runtime_fleet_temporal_2026-04-16/ION
+    family: ion_current_generation_packaged
+    kind: packaged_candidate_root
+    current_state: PRIMARY_CENTER_IN_RETAINED_DUAL_CENTER_SETTLEMENT
+    authority_class: SETTLED_PRIMARY
+    canonicality: PACKAGE_INTERNAL_CANON__WORKSPACE_PRIMARY_IN_SETTLEMENT
+    confidence: high
+    notes: >-
+      Primary center for Era 2 controlled reintegration, corpus recovery,
+      canon foundry, orchestration indices, and current-phase template
+      governance. q006 also fixes the nested-path hazard here: the internal
+      ION/ION/05_context lane is embedded residue under this root, not a second
+      packaged center. q005 then settles this root as the primary center inside
+      the current retained dual-center workspace posture.
+  - id: ion_top_level_production
+    path: ION
+    family: ion_production_runtime_root
+    kind: production_root
+    current_state: RETAINED_SECONDARY_EXTRACTION_AND_PROMOTION_CENTER
+    authority_class: RETAINED_SECONDARY
+    canonicality: NOT_RETIRED__NOT_FINAL_PRIMARY
+    confidence: high
+    decision_anchor: ION/06_intelligence/decisions/2026-04-17_top_level_production_surface_promotion_map_canonicalization_decision.md
+    notes: >-
+      Retains the optional external transport/service shell
+      (pyproject, preflight, ion_api, ion_*_mcp, and helpers), docs/program,
+      and other production-facing witness surfaces not absorbed into the
+      packaged center. Class C operator docs have been selectively extracted
+      and re-anchored into the packaged center, while the external transport
+      shell is retained as support/witness-only for the current phase unless a
+      later bounded packet reopens it. q005 settles this root as retained
+      secondary center rather than stale archive.
+  - id: aim_ion_adjacent_family
+    path: AIM-ION
+    family: aim_os_adjacent_sibling
+    kind: sibling_universe_root
+    current_state: ADJACENT_SIBLING_PATTERN_RESERVOIR
+    authority_class: ADJACENT_WITNESS_PATTERN_SOURCE
+    canonicality: NOT_ION_CANON__SELECTIVE_PATTERN_EXTRACTION_ONLY
+    confidence: high
+    decision_anchor: ION/06_intelligence/decisions/2026-04-17_aim_ion_aim_os_classification_canonicalization_decision.md
+    upstream_reference: AIM-OS proper is referenced by local self-description but is not a separate checked-out root here
+    notes: >-
+      Classified as a curated local witness pack and selective pattern
+      reservoir, not as active ION canon and not as a current dedicated
+      reintegration lane.

@@ -1,0 +1,37 @@
+{
+  "accepted_for_carrier_intake": true,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T18:36:25+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "RECORDED_FOR_CARRIER_INTAKE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\nroot_confirmed: yes, /home/sev/ION - Production/ION_CODEX\nfiles_read: ION/REPO_AUTHORITY.md, mount/carrier contracts, full-carrier parity protocol, MCP connector code/schema/policy, ChatGPT work queue, operator queue, Steward queue, task-return ledger, carrier registries, templates, signal/inbox/comms surfaces.\nowner_surfaces_found: ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md, ION/09_integrations/mcp/chatgpt_connector/, ION/04_packages/kernel/ion_chatgpt_browser_mcp_*, ION/03_registry/, ION/07_templates/.\nexisting_comms_surfaces_found: ACTIVE_OPERATOR_MESSAGE_QUEUE.json, ACTIVE_STEWARD_INTEGRATION_QUEUE.json, ACTIVE_CARRIER_TASK_RETURN_LEDGER.json, chatgpt_connector/codex_work_requests, chatgpt_connector/task_returns, ION/05_context/signals, ION/05_context/inbox, ION/05_context/comms.\nassumptions_or_missing_evidence: no production/live authority; public ChatGPT connector deployment was not started; direct shell/git/process parity remains CARRIER_ADAPTER_FAILURE / CAPABILITY_NOT_YET_IMPLEMENTED, not ION_CORE_FAILURE.\n\n### TEMPLATE ACTION PROOF\ntemplate_id: ion.template.patch_proposal.v1\naction_id: full_carrier_mcp_parity_step_2026_05_04\nresult: impl",
+  "task_output_sha256": "d81f09ba189d319ca525ba2421d912909416c594f4e302b5a5f7140500ee2f70",
+  "template_action_proof_result": {
+    "accepted": true,
+    "action_id": "full_carrier_mcp_parity_step_2026_05_04",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.patch_proposal.v1",
+    "touched_paths": [
+      "parity protocol, carrier-to-carrier comms protocol, capability/tool registries, full-carrier templates, connector contract, HTTP preview schema, connector manifest, new capability audit, connector tests, refreshed connector contract JSON, ChatGPT MCP task-return receipts."
+    ]
+  },
+  "work_request_id": "codex_req_2026-05-04T180446Z0000_evolve_the_chatgpt_browser_mcp_connector_toward_full_ion_carrier_parity_focusing",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T180446Z0000_evolve_the_chatgpt_browser_mcp_connector_toward_full_ion_carrier_parity_focusing.json"
+}

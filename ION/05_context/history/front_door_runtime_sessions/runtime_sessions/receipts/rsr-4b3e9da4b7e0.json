@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-05-02T22:52:19.686457+00:00",
+  "detail": "dispatched work unit fdwu-v106-front-door-proof-trace-fdsteward-fdrel-11468163c5b1 from session queue item fdq-v106-front-door-proof-trace-fdwu-v106-front-811b10ad218b",
+  "event": "DISPATCHED_WORK_UNIT",
+  "receipt_id": "rsr-4b3e9da4b7e0",
+  "session_id": "v106-front-door-proof-trace",
+  "witness_paths": [
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime/dispatch_packets/fdwu-v106-front-door-proof-trace-fdsteward-fdrel-11468163c5b1.dispatch_packet.json"
+  ]
+}

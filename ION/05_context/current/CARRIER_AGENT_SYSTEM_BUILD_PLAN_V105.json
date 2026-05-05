@@ -1,0 +1,48 @@
+{
+  "carriers": [
+    {
+      "carrier": "CHATGPT_BROWSER",
+      "current_floor": "L1 in this session only if file inspection and zip creation are proven; no real subagents claimed",
+      "needed_next": [
+        "active-session mount proof",
+        "one-artifact full project zip return rule",
+        "lead-dev context control surface update after each pass",
+        "explicit no-real-subagent claim unless host exposes and proves them"
+      ]
+    },
+    {
+      "carrier": "CURSOR_IDE",
+      "current_floor": "L1/L2 candidate: command/rules/subagent slot surfaces exist but require live host proof",
+      "needed_next": [
+        "run /ion health/audit from actual Cursor root",
+        "capture spawn row transcript or subagent result packet",
+        "return intake through kernel.ion_carrier_task_return",
+        "JOC cockpit refresh proof"
+      ]
+    },
+    {
+      "carrier": "CODEX_EXTENSION_IN_CURSOR",
+      "current_floor": "L1/L2 candidate: Codex profile exists; extension-specific mount proof not yet complete",
+      "needed_next": [
+        "Codex extension command path inventory",
+        "Codex bounded execution packet template",
+        "Codex return-to-current-carrier receipt",
+        "test/diff proof capture"
+      ]
+    },
+    {
+      "carrier": "MCP_RUNTIME",
+      "current_floor": "L4 candidate only when callable ION MCP tools prove operation schemas and receipts",
+      "needed_next": [
+        "tool schema proof",
+        "call proof",
+        "journal/receipt path",
+        "manual fallback template"
+      ]
+    }
+  ],
+  "created_at": "2026-05-03T14:10:32+00:00",
+  "principle": "Carrier powers scale only with proof. ChatGPT browser, Cursor, Codex, and MCP are transport hosts, not ION identity.",
+  "production_authority": false,
+  "schema_id": "ion.carrier_agent_system_build_plan.v105"
+}

@@ -1,0 +1,17 @@
+V81_AGENT_CONTEXT_SYSTEMS_REPAIR_RECEIPT
+
+Accepted design repair:
+- Agents are context systems, not boot-file personas.
+- MINI/CAPSULE are witness inputs, not primary context authority.
+- Active packages are operative context for a run.
+- One-file-per-step template introduced for package evolution and automation projection.
+- Per-agent context-system cards created for live roles and context specialists.
+
+Primary files:
+- ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+- ION/03_registry/agent_context_system_registry.yaml
+- ION/05_context/current/agent_context_systems/AGENT_CONTEXT_SYSTEMS_INDEX.md
+- ION/07_templates/context/AGENT_CONTEXT_SYSTEM_CARD.md
+- ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+- ION/07_templates/context/AGENT_CONTEXT_PACKAGE_INDEX.md
+- ION/04_packages/kernel/ion_agent_context_system_audit.py

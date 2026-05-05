@@ -1,0 +1,18 @@
+{
+  "allowed_consumers": [
+    "role.steward"
+  ],
+  "boundary_stage": "RELAY_TO_STEWARD",
+  "created_at": "2026-05-02T22:53:18+00:00",
+  "envelope_id": "fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63",
+  "payload_class": "RELAY_SEMANTIC_BOUNDARY_PACKET",
+  "prohibited_actions": [
+    "do_not_treat_raw_user_text_as_governed_write",
+    "do_not_route_persona_style_as_system_truth",
+    "do_not_bypass_relay_boundary_packet"
+  ],
+  "relay_packet_id": "fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a",
+  "route_purpose": "front_door_user_intake",
+  "session_id": "fdsession-e3325d8e7fd2e91c61",
+  "target_role_ref": "role.steward"
+}

@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "created_at": "2026-05-02T22:53:18+00:00",
+      "item_id": "fdq-fdsession-e3325d8e7fd2e91c61-fdwu-fdsession-2cf3a5471deb",
+      "payload": {
+        "front_door_envelope_id": "fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63",
+        "payload_class": "RELAY_SEMANTIC_BOUNDARY_PACKET",
+        "persona_ingress_id": "fdmsg-fdsession-e3325d8e7fd2e91c61-user-sovereign-e30502b0d5c8",
+        "relay_packet_id": "fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a",
+        "route_purpose": "front_door_user_intake"
+      },
+      "status": "DISPATCHED",
+      "work_unit_id": "fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff"
+    }
+  ],
+  "session_id": "fdsession-e3325d8e7fd2e91c61",
+  "updated_at": "2026-05-02T22:53:18.584716+00:00"
+}

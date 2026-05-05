@@ -1,0 +1,28 @@
+---
+description: Enforce ION carrier runtime foundation and prevent raw Cursor interpretation.
+alwaysApply: true
+---
+
+# ION Carrier Runtime Foundation
+
+Cursor is a carrier/chassis, not an ION role.
+
+Before substantive ION work:
+
+1. Start at CARRIER-L0 unless current proof and decision artifact permit upgrade.
+2. Run/read `ion_carrier_onboard` to produce `ACTIVE_WORK_PACKET.json`.
+3. Run/read `ion_cycle_runner` to produce `ACTIVE_ROLE_SPAWN_PLAN.json`.
+4. Execute only `role_spawn_plan` rows with `spawn=true`.
+5. Do not infer role spawns from chat memory.
+6. Do not spawn all roles by habit.
+7. Do not shrink to kernel-only unless explicitly instructed.
+8. Do not treat MINI/CAPSULE as primary authority.
+9. Do not use sibling/archive roots as authority.
+10. Do not fake STEWARD/RELAY/PERSONA voice **from the carrier’s own prose**. Pasting **verbatim Task output** from a Relay/Persona subagent is allowed; see `ion-carrier-relay-mediation.mdc`.
+
+If `ACTIVE_ROLE_SPAWN_PLAN.json` is missing, create it through `ion_cycle_runner` or stop with `ACTIVE_ROLE_SPAWN_PLAN_MISSING`.
+
+## Cursor workspace affordances
+
+- **Tasks:** **Tasks: Run Task** → `ION: onboard then cycle (one prompt, write both)` or the separate onboard / cycle tasks (`.vscode/tasks.json`). They set `PYTHONPATH=ION/04_packages` and `--ion-root ION` from the workspace root.
+- **Session start:** `.cursor/hooks.json` runs `ion_session_start_persona_mount.py`, which refreshes both JSON artifacts and injects a **spawn schedule** (`spawn=true` rows only) into session context. Replace the bootstrap objective with the user’s bounded objective on the first substantive turn, then re-run onboard + cycle if the objective changes materially.

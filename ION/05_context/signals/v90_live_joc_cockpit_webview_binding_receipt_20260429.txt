@@ -1,0 +1,25 @@
+ION V90 LIVE JOC COCKPIT WEBVIEW BINDING RECEIPT
+
+version: V90_CURSOR_COCKPIT_LIVE_WEBVIEW_BINDING
+authority_class: runtime projection and host UI scaffold
+production_authority: false
+live_execution_authority: false
+
+accepted changes:
+- Added kernel cockpit view model builder.
+- Added ACTIVE_COCKPIT_VIEW_MODEL projection target.
+- Added Cursor/VS Code extension scaffold under ION/09_integrations/cursor_extension.
+- Added live JOC runtime panels and runtime projection types.
+- Updated JocCockpitShell.tsx to support fixture projection and live runtime projection.
+- Added /ion-cockpit command.
+
+validation:
+- py_compile passed for ion_cockpit_view_model.py.
+- fixture build emitted schema_id ion.cockpit_view_model.v1.
+- fixture write emitted ACTIVE_COCKPIT_VIEW_MODEL.json.
+- update zip integrity passed.
+
+limitations:
+- This is an update package, not a full consolidated project zip.
+- TypeScript extension compile requires local npm install in Cursor/VS Code environment.
+- The extension scaffold is not production authority and must not bypass ION kernel controls.

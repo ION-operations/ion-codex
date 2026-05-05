@@ -1,0 +1,332 @@
+{
+  "active_packets": [
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+      "sha256": "42bdb20582ed9ec9aafef01d704d93b0ad911cb202366ed25123ccd379f88719"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+      "sha256": "4610c7bcb3a95148ab4becb594a47bf92e55a9f8186d2a839acba7a619e70bf5"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+      "sha256": "d2f42fb8c553cdfc08ad2e2eab1e53d86e8264e1fac8156a32b98d65cd641f16"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json",
+      "sha256": "d4c2c6a632c3bebf43386353573b8ad7f49ed445df5cecce5c80d255ee49b2be"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json",
+      "sha256": "ad8e46bb9858e963867d441548a14c61523a10743e727dfdc0d80e4902e87df5"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+      "sha256": "71b4ff39948133692bc8aebbbf24d4b66aa47fdc5026abf0f666e6a169a6257b"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+      "sha256": "16ffd2622c96bee2b6de91f91e83b8634cfb6c32194efe2e07656dd527c85796"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json",
+      "sha256": "cdba77a726f28bdf4753adf74d4ef6a3339ecd62378a70fe66f70cb7a1be7165"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_FRONT_DOOR_TEAM_PLAN.json",
+      "sha256": "9393bc5ee5139ba5853b689d293b9e6c99669757282ad950ef214a46296a587a"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/ACTIVE_COCKPIT_VIEW_MODEL.json",
+      "sha256": "790abd587e7a6daa4c2f4b4ed6ada4c72b7fdf5d9176691719159e37d3f56bed"
+    }
+  ],
+  "carrier_id": "sev",
+  "carrier_profile": {
+    "exists": true,
+    "is_file": true,
+    "path": "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+    "sha256": "74d56f18f94b0b92d289f6f063717fc8c1cc5702b6c7c0e6aec161df4e949181"
+  },
+  "carrier_profile_metadata": {
+    "callsign_authority": "carrier_continuity_label_only_not_ion_authority",
+    "callsign_decision_receipt": "ION/05_context/current/chatgpt_connector/decisions/2026-05-04T202947Z0000_use_sev_as_the_project_facing_callsign_for_the_chatgpt_browser_gpt_5_5_carrier_w.json",
+    "carrier_id": "CHATGPT_BROWSER_CARRIER",
+    "live_execution_authority": false,
+    "production_authority": false,
+    "project_facing_callsign": "Sev"
+  },
+  "compiled_context_bundles": [
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/execution_cycles/2026-05-04T145720Z0000_carrier_continue_reconcile_chatgpt_browser_mcp_connector_transport_truth_health_check_carrier_spe/03_COMPILED_MASON_CONTEXT_BUNDLE.md",
+      "sha256": "6775bfa193e77b7c5fa2181c0865647d088bdef1c0a177a3f89af3919b9ee5a2"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/execution_cycles/2026-05-04T145640Z0000_carrier_continue_reconcile_chatgpt_browser_mcp_connector_transport_truth_health_check_carrier_spe/02_COMPILED_VIZIER_CONTEXT_BUNDLE.md",
+      "sha256": "6ad0ff6a500dadf4e3b7c67a7b9322674d51d3abba5fca2c5c0e5b0187d34be3"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/execution_cycles/2026-05-04T135201Z0000_carrier_continue_reconcile_chatgpt_browser_mcp_connector_transport_truth_health_check_carrier_spe/01_COMPILED_STEWARD_CONTEXT_BUNDLE.md",
+      "sha256": "4df21b9439a465737aac41638d0544c77da8c6bc229792f68bf75b7fad71d438"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/execution_cycles/2026-05-04T073300Z0000_carrier_continue_operator_authorized_host_setup_install_cloudflared_if_needed_and_start_bounded_c/03_COMPILED_MASON_CONTEXT_BUNDLE.md",
+      "sha256": "089177b2b6d34a4a1234a00775c1a5d31a5a7114bd3acd5b554ef9b0ee60af76"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/execution_cycles/2026-05-04T072951Z0000_carrier_continue_operator_authorized_host_setup_install_cloudflared_if_needed_and_start_bounded_c/02_COMPILED_VIZIER_CONTEXT_BUNDLE.md",
+      "sha256": "82b83ed2b4fb392a5d70c9a959ccad8e074d3c76bc203ea5fb156a944cbc0a24"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/execution_cycles/2026-05-04T072531Z0000_carrier_continue_operator_authorized_host_setup_install_cloudflared_if_needed_and_start_bounded_c/01_COMPILED_STEWARD_CONTEXT_BUNDLE.md",
+      "sha256": "0484c1b8bebefca6917d0eb6a8adad9d6b04d201818f3d82100f723f0a661745"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/execution_cycles/2026-05-04T071009Z0000_carrier_continue_v120_cloudflare_connector_host_setup_readiness_receipt/03_COMPILED_MASON_CONTEXT_BUNDLE.md",
+      "sha256": "f0eaa5d98458fa55668a80634e0cbd15b53157aecadd3129852c50dd9959da5f"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/execution_cycles/2026-05-04T070646Z0000_carrier_continue_v120_cloudflare_connector_host_setup_readiness_receipt/02_COMPILED_VIZIER_CONTEXT_BUNDLE.md",
+      "sha256": "74de7114a529afcaca5eff60f5c4e53282d563530c2ef50a21bf30645ad23b37"
+    }
+  ],
+  "correct_onboarding_order": [
+    "confirm_shell_root",
+    "read_current_operating_packet",
+    "resolve_carrier_identity_from_profile",
+    "load_mount_contract",
+    "load_active_packets",
+    "load_role_context_surfaces_and_compiled_bundles",
+    "load_execution_packet_templates",
+    "execute_context_proof_template_action_proof_task_return_receipt_flow"
+  ],
+  "current_operating_packet": {
+    "exists": true,
+    "is_file": true,
+    "path": "ION/docs/setup/ION_CURRENT_OPERATING_PACKET_V119.md",
+    "sha256": "510f6b00b1e0b4cb565318a76485e0c674ffb3aa9198cbef6eb25922038f8820"
+  },
+  "deployment_authority": false,
+  "execution_packet_templates": [
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/07_templates/carriers/CARRIER_MOUNT_PROOF.md",
+      "sha256": "a46b5b48e9ed1058ada6df001f0572ee72973a438a688f27a50b2ec30803d2af"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/07_templates/carriers/CARRIER_CAPABILITY_SURVEY.md",
+      "sha256": "bd84ea1822b0e8efd86ef6d6ccd053b393e441eba163083885d49f6ef1aaea29"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/07_templates/carriers/CARRIER_SESSION_PACKET.md",
+      "sha256": "b6cd0adc402441d95d3129894086e6e38816509416b045f45bd5afd4b7f73438"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md",
+      "sha256": "d244861a24393b65f6c66fd33e4d65e1c6858044864a531ef369fa02795e93d0"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md",
+      "sha256": "463c8d944f4c29b1f0b9edc9dcdc23085d2ac39c4d2805bea1e21032cace3891"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/07_templates/carriers/CODEX_EXTENSION_EXECUTION_PACKET.md",
+      "sha256": "719951c97c7f90f598cc68699440bf7df718e72494c801a1f15fd0de210575d0"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/07_templates/carriers/FULL_CARRIER_MOUNT_PROOF.md",
+      "sha256": "2cfa201f82a456d91d5a6ac7e5c9b7189bf207aa1bd07fde67af8a33ae27d61c"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/07_templates/actions/FULL_CARRIER_ACTION_RECEIPT.md",
+      "sha256": "574cc709f5ca856305f730cc9fa48aab68c42ff5587e8dbbc32159a6a1d696c1"
+    }
+  ],
+  "findings": [
+    "shell_root_confirmed",
+    "root_markdown_absent_from_hot_onboarding",
+    "current_operating_packet_loaded",
+    "carrier_profile_loaded",
+    "mount_contract_loaded",
+    "ion_native_carrier_onboarding_ready"
+  ],
+  "generated_at": "2026-05-04T20:37:32+00:00",
+  "live_execution_authority": false,
+  "mount_contract": {
+    "exists": true,
+    "is_file": true,
+    "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+    "sha256": "468bbf85e8fa0f38e0cf9347fedb615dd68f59b77cfbb8ed94cadae79ee0f891"
+  },
+  "next_lawful_action": "Use this packet as carrier onboarding input, then execute only through proof-gated task return and receipt flow.",
+  "onboarding_verdict": "ION_CARRIER_ONBOARDING_PACKET_READY",
+  "production_authority": false,
+  "proof_flow": [
+    {
+      "required_section": "### CONTEXT PROOF",
+      "step": "context_proof",
+      "surface": "kernel.ion_context_proof_gate"
+    },
+    {
+      "required_section": "### TEMPLATE ACTION PROOF",
+      "step": "template_action_proof",
+      "surface": "kernel.ion_template_action_gate"
+    },
+    {
+      "required_section": "### RESULT",
+      "step": "task_return_intake",
+      "surface": "kernel.ion_carrier_task_return"
+    },
+    {
+      "required_section": "receipt_or_return_record",
+      "step": "receipt_flow",
+      "surface": "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json"
+    }
+  ],
+  "role_boot_surfaces": [
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/03_registry/boots/RELAY.boot.md",
+      "sha256": "93d80e353b48cd37c1620bb2fa04994569b3b98b256079b7c83dd4d852e83b57"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/03_registry/boots/STEWARD.boot.md",
+      "sha256": "a8558d06f7e5a1829b8eb362597ccd9064889eb7cca1af990f94f62e177729b4"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/03_registry/boots/PERSONA_INTERFACE.boot.md",
+      "sha256": "9b1875264da2f289fbac304bf13dd269851a18edffbafc561e5dc4b94dff3a4a"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/03_registry/boots/MASON.boot.md",
+      "sha256": "3a550a6e00a87faa710b42145448536e3f8da045ddf61fe3b4682139ae0aaf1a"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/03_registry/boots/NEMESIS.boot.md",
+      "sha256": "5c163168bb48c7001f3119b66b7141cb4bf99875d72ab7a1e334612707ebca83"
+    }
+  ],
+  "role_context_surfaces": [
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/agent_context_systems/RELAY.context_system.md",
+      "sha256": "3b5d2a6c17af3f1c0ffffedf30dbe4d424aea23d2c315331b3146417976f00ea"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/agent_context_systems/STEWARD.context_system.md",
+      "sha256": "29f4f7d4d5e0aa895a74500e651cae04b3f0b8eb8d09726a7f6d546b0de6e310"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/agent_context_systems/PERSONA_INTERFACE.context_system.md",
+      "sha256": "3b2d27f3e2a75d0f8df6009ba1406279a99a09633c8914f3f6170184a0dccbe4"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/agent_context_systems/MASON.context_system.md",
+      "sha256": "2ecce43cf5f758b5d937b85df2782aa6d381867c5d16cd748b8bf78641423b8a"
+    },
+    {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/agent_context_systems/NEMESIS.context_system.md",
+      "sha256": "685127814d47c9312b944de43c33a4f0e8d0301ca4e19be03a7a4e6b2d041382"
+    }
+  ],
+  "root_confirmed": true,
+  "root_markdown_onboarding_authority": false,
+  "root_markdown_status": {
+    "AGENTS.md": {
+      "authority": false,
+      "exists": false,
+      "path": "AGENTS.md"
+    },
+    "START_HERE_FOR_ANY_AGENT.md": {
+      "authority": false,
+      "exists": false,
+      "path": "START_HERE_FOR_ANY_AGENT.md"
+    }
+  },
+  "root_proof": {
+    "pyproject_toml": {
+      "exists": true,
+      "is_file": true,
+      "path": "pyproject.toml",
+      "sha256": "4f10e16ddcb4080855b88ec1dce9afffcb02a9274d38e13a54e1dc228e3eaeb8"
+    },
+    "repo_authority": {
+      "exists": true,
+      "is_file": true,
+      "path": "ION/REPO_AUTHORITY.md",
+      "sha256": "804ed8430fc53e551d254af063ec414646a1c1bf94ceeec51c31769fa41aca1e"
+    },
+    "shell_root": "/home/sev/ION - Production/ION_CODEX"
+  },
+  "schema_id": "ion.carrier_onboarding_packet.v1",
+  "version_line": "V120_CHATGPT_BROWSER_MCP_CONNECTOR_AND_CORRECT_CARRIER_ONBOARDING"
+}

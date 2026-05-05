@@ -1,0 +1,442 @@
+{
+  "accepted": true,
+  "allowed_tools": [
+    "ion_agent_cancel",
+    "ion_agent_invoke",
+    "ion_agent_list",
+    "ion_agent_queue",
+    "ion_agent_result",
+    "ion_agent_spawn_plan",
+    "ion_agent_status",
+    "ion_artifact_manifest",
+    "ion_artifact_upload_chunk",
+    "ion_artifact_upload_commit",
+    "ion_artifact_upload_init",
+    "ion_carrier_message_ack",
+    "ion_carrier_message_poll",
+    "ion_carrier_message_send",
+    "ion_carrier_onboarding_packet",
+    "ion_cockpit_view",
+    "ion_codex_queue_autorun_status",
+    "ion_codex_queue_process_once",
+    "ion_codex_work_queue",
+    "ion_context_compile",
+    "ion_context_plan",
+    "ion_create_containment_receipt",
+    "ion_current_operating_packet",
+    "ion_daemon_status",
+    "ion_file_put_text",
+    "ion_file_read",
+    "ion_file_search",
+    "ion_git_status_summary",
+    "ion_queue_operator_message",
+    "ion_read_active_packet",
+    "ion_receipt_hydrate",
+    "ion_receipt_search",
+    "ion_record_chatgpt_decision",
+    "ion_registry_read",
+    "ion_request_codex_work_packet",
+    "ion_status",
+    "ion_submit_task_return",
+    "ion_swarm_status",
+    "ion_swarm_step_once",
+    "ion_template_read",
+    "ion_tool_manifest",
+    "ion_tree_list"
+  ],
+  "bounded_queue_receipt_tools": [
+    "ion_agent_cancel",
+    "ion_agent_invoke",
+    "ion_artifact_upload_chunk",
+    "ion_artifact_upload_commit",
+    "ion_artifact_upload_init",
+    "ion_carrier_message_ack",
+    "ion_carrier_message_send",
+    "ion_codex_queue_process_once",
+    "ion_create_containment_receipt",
+    "ion_file_put_text",
+    "ion_queue_operator_message",
+    "ion_record_chatgpt_decision",
+    "ion_request_codex_work_packet",
+    "ion_submit_task_return",
+    "ion_swarm_step_once"
+  ],
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "connector_state": "CONTRACT_READY_NOT_DEPLOYED",
+  "deployment_authority": false,
+  "findings": [],
+  "forbidden_tools": [
+    "arbitrary_file_write",
+    "arbitrary_shell",
+    "browser_computer_control",
+    "credential_access",
+    "direct_accept_unproofed_worker_output",
+    "direct_delete",
+    "git_push",
+    "production_deployment",
+    "provider_api_calls",
+    "unbounded_local_filesystem_access"
+  ],
+  "generated_at": "2026-05-04T21:57:52+00:00",
+  "live_execution_authority": false,
+  "must_not_claim_ion_identity": true,
+  "must_not_claim_steward_relay_persona": true,
+  "production_authority": false,
+  "schema_id": "ion.chatgpt_browser_mcp_connector_contract.v1",
+  "source_paths": {
+    "agent_invocation_broker": "ION/04_packages/kernel/ion_agent_invocation_broker.py",
+    "carrier_capability_registry": "ION/03_registry/carrier_capability_registry.yaml",
+    "codex_queue_runner": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+    "full_carrier_protocol": "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+    "full_carrier_tool_registry": "ION/03_registry/mcp_full_carrier_tool_registry.yaml",
+    "integration_dir": "ION/09_integrations/mcp/chatgpt_connector",
+    "manifest": "ION/09_integrations/mcp/chatgpt_connector/connector_manifest.json",
+    "policy": "ION/03_registry/ion_chatgpt_browser_mcp_tool_policy.yaml",
+    "protocol": "ION/02_architecture/ION_CHATGPT_BROWSER_MCP_CONNECTOR_PROTOCOL.md",
+    "schema": "ION/03_registry/ion_chatgpt_browser_mcp_connector.schema.json",
+    "setup": "ION/docs/setup/CHATGPT_BROWSER_MCP_CONNECTOR_SETUP_V120.md",
+    "wrapper": "ION/09_integrations/mcp/chatgpt_connector/ion_chatgpt_browser_connector.py"
+  },
+  "status_read_tools": [
+    "ion_agent_list",
+    "ion_agent_queue",
+    "ion_agent_result",
+    "ion_agent_spawn_plan",
+    "ion_agent_status",
+    "ion_artifact_manifest",
+    "ion_carrier_message_poll",
+    "ion_carrier_onboarding_packet",
+    "ion_cockpit_view",
+    "ion_codex_queue_autorun_status",
+    "ion_codex_work_queue",
+    "ion_context_compile",
+    "ion_context_plan",
+    "ion_current_operating_packet",
+    "ion_daemon_status",
+    "ion_file_read",
+    "ion_file_search",
+    "ion_git_status_summary",
+    "ion_read_active_packet",
+    "ion_receipt_hydrate",
+    "ion_receipt_search",
+    "ion_registry_read",
+    "ion_status",
+    "ion_swarm_status",
+    "ion_template_read",
+    "ion_tool_manifest",
+    "ion_tree_list"
+  ],
+  "tool_descriptors": [
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_agent_list",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_agent_queue",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_agent_result",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_agent_spawn_plan",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_agent_status",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_artifact_manifest",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_carrier_message_poll",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_carrier_onboarding_packet",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_cockpit_view",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_codex_queue_autorun_status",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_codex_work_queue",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_context_compile",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_context_plan",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_current_operating_packet",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_daemon_status",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_file_read",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_file_search",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_git_status_summary",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_read_active_packet",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_receipt_hydrate",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_receipt_search",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_registry_read",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_status",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_swarm_status",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_template_read",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_tool_manifest",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "status_read",
+      "mutates_active_state": false,
+      "name": "ion_tree_list",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_agent_cancel",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_agent_invoke",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_artifact_upload_chunk",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_artifact_upload_commit",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_artifact_upload_init",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_carrier_message_ack",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_carrier_message_send",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_codex_queue_process_once",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_create_containment_receipt",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_file_put_text",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_queue_operator_message",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_record_chatgpt_decision",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_request_codex_work_packet",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_submit_task_return",
+      "requires_context_proof": true,
+      "requires_template_action_proof": true,
+      "writes_bounded_packet_only": true
+    },
+    {
+      "family": "bounded_queue_receipt",
+      "mutates_active_state": true,
+      "name": "ion_swarm_step_once",
+      "requires_context_proof": false,
+      "requires_template_action_proof": false,
+      "writes_bounded_packet_only": true
+    }
+  ],
+  "verdict": "ION_CHATGPT_BROWSER_MCP_CONNECTOR_CONTRACT_READY",
+  "version_line": "V120_CHATGPT_BROWSER_MCP_CONNECTOR_AND_CORRECT_CARRIER_ONBOARDING"
+}

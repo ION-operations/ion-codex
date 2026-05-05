@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Pytest ION kernel (carrier + cycle)",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-q", "ION/tests/test_kernel_ion_carrier_onboard.py", "ION/tests/test_kernel_ion_cycle_runner.py"],
+      "cwd": "${workspaceFolder}",
+      "env": { "PYTHONPATH": "${workspaceFolder}/ION/04_packages" },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: ion_carrier_onboard (JSON)",
+      "type": "python",
+      "request": "launch",
+      "module": "kernel.ion_carrier_onboard",
+      "args": ["--ion-root", "ION", "--carrier", "cursor", "--objective", "debug onboard", "--write-current", "--json"],
+      "cwd": "${workspaceFolder}",
+      "env": { "PYTHONPATH": "${workspaceFolder}/ION/04_packages" },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: ion_cycle_runner (JSON)",
+      "type": "python",
+      "request": "launch",
+      "module": "kernel.ion_cycle_runner",
+      "args": [
+        "--ion-root",
+        "ION",
+        "--carrier",
+        "cursor",
+        "--workstream",
+        "implementation",
+        "--objective",
+        "debug cycle",
+        "--spawn-policy",
+        "required",
+        "--write-current",
+        "--json"
+      ],
+      "cwd": "${workspaceFolder}",
+      "env": { "PYTHONPATH": "${workspaceFolder}/ION/04_packages" },
+      "console": "integratedTerminal"
+    }
+  ]
+}

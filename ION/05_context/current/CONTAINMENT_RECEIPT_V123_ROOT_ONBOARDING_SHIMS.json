@@ -1,0 +1,35 @@
+{
+  "schema_id": "ion.containment_receipt.v1",
+  "receipt_id": "CONTAINMENT_RECEIPT_V123_ROOT_ONBOARDING_SHIMS",
+  "line": "V123_ROOT_ONBOARDING_SHIM_RETIREMENT",
+  "created_at": "2026-05-03T22:04:00+00:00",
+  "classification": "RETIRE_TO_CONTAINMENT",
+  "reason": "Root-visible markdown files had become de facto carrier onboarding authority. ION-native onboarding authority lives in repo authority, mount contract, carrier registries, execution packet templates, active packets, context packages, and proof gates.",
+  "source_policy": "NO_SILENT_LOSS_PLUS_CONTAINMENT_PRESERVATION",
+  "production_authority": false,
+  "live_execution_authority": false,
+  "moves": [
+    {
+      "from_path": "AGENTS.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/AGENTS.md",
+      "sha256": "cbf437330e35b58beb5f8068bd602df3d5faef46ae5c5f6092e0d801df279d69",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "START_HERE_FOR_ANY_AGENT.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/START_HERE_FOR_ANY_AGENT.md",
+      "sha256": "fa92e38097d872d4fc005b1980b763fc09c425511d4e142485e2de0b989c9a38",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    }
+  ],
+  "hot_root_after_transition": {
+    "AGENTS.md": "absent",
+    "START_HERE_FOR_ANY_AGENT.md": "absent"
+  },
+  "required_followup_gates": [
+    "carrier_onboarding_authority_audit_must_block_procedural_root_onboarding",
+    "active_hooks_must_not_require_retired_root_onboarding_files",
+    "compact_runtime_packaging_must_not_promote_retired_root_shims",
+    "safe_full_project_packaging_must_report_containment_moves"
+  ]
+}

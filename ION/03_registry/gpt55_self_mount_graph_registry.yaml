@@ -1,0 +1,20 @@
+registry_id: gpt55_self_mount_graph_registry
+schema_id: ion.self_mount_graph_registry.v1
+branch: ION-GPT55-SELF-MOUNT
+authority: A3_BRANCH_LOCAL_GRAPH_PROJECTION
+production_authority: false
+global_graph_canon: false
+node_classes_added:
+  - node.mounted_agent_identity_envelope
+  - node.self_surface_drift_assessment
+  - node.agent_succession_packet
+  - node.self_mount_branch
+  - node.production_readiness_blocker
+edge_classes_added:
+  - edge.mounts_agent_as
+  - edge.constrained_by_drift_gate
+  - edge.evaluates_self_claim
+  - edge.succeeds_without_identity_equivalence
+  - edge.inherits_evidence_from
+  - edge.blocked_by_production_readiness
+projection_path: ION/05_context/graph/self_mount_graph_state/

@@ -1,0 +1,29 @@
+domain_id: domain.confidence_drift_review
+display_name: Confidence, Drift, and Review
+true_name_status: SETTLED_CURRENT_PHASE
+status: ACTIVE_FIRST_PASS
+authority: A3_OPERATIONAL
+mission: >-
+  Hold the first explicit review organ for confidence reporting, drift pressure,
+  contradiction surfacing, and bounded independent audit in the live ION root.
+scope:
+  - confidence-state reporting
+  - drift and recursion pressure
+  - internal contradiction pressure
+  - bounded independent audit and review gating
+primary_roles:
+  - VICE
+  - NEMESIS
+secondary_roles:
+  - CODEX
+  - VESTIGE
+owned_or_stewarded_surfaces:
+  - ION/07_templates/confidence/CSR.md
+  - ION/06_intelligence/specs/T08_ConfidenceAndDriftSchema.spec.md
+  - ION/06_intelligence/audits/
+  - ION/06_intelligence/daimon/vizier/
+open_edges:
+  - cross-model calibration remains a later bridge surface, not yet active runtime enforcement
+  - this domain does not silently become release-total authority or constitutional ratifier
+activation_witness:
+  - ION/03_registry/domains/activation_witness/2026-04-07_confidence_drift_review.activation.yaml

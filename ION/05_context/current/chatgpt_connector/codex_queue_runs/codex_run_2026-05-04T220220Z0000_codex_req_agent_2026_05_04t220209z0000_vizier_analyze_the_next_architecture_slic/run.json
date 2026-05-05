@@ -1,0 +1,60 @@
+{
+  "codex_command": [
+    "codex",
+    "exec",
+    "--sandbox",
+    "workspace-write",
+    "--output-last-message",
+    "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/latest_return.md"
+  ],
+  "completed_at": "2026-05-04T22:04:50+00:00",
+  "context_receipt_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/context_receipt.json",
+  "created_at": "2026-05-04T22:02:20+00:00",
+  "failure_classification": "BACKEND_CODEX_FAILURE",
+  "last_message_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/latest_return.md",
+  "live_execution_authority": false,
+  "pid": 86048,
+  "production_authority": false,
+  "prompt_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/prompt.md",
+  "request_id": "codex_req_agent_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+  "request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+  "returncode": 0,
+  "run_dir": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic",
+  "run_id": "codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic",
+  "run_packet_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/run.json",
+  "schema_id": "ion.codex_queue_runner_run.v1",
+  "started_at": "2026-05-04T22:02:20+00:00",
+  "status": "RETURN_RECORDED_PROOF_BLOCKED",
+  "stderr_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/stderr.log",
+  "stdout_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/stdout.log",
+  "submit_result": {
+    "accepted_for_carrier_intake": false,
+    "codex_work_queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+    "codex_work_queue_request_count": 14,
+    "context_proof_accepted": false,
+    "findings": [
+      "missing_required_read_path:ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+      "missing_required_read_path:ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json",
+      "missing_result",
+      "missing_touched_paths"
+    ],
+    "packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T220450Z0000_task_return.json",
+    "template_action_proof_accepted": false,
+    "work_request_id": "codex_req_agent_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+    "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+    "work_request_updated": true
+  },
+  "timeout_seconds": 600,
+  "updated_at": "2026-05-04T22:04:50+00:00",
+  "worker_command": [
+    "/home/sev/miniconda/bin/python3",
+    "-S",
+    "-m",
+    "kernel.ion_codex_queue_runner",
+    "--ion-root",
+    "/home/sev/ION - Production/ION_CODEX",
+    "--worker-run",
+    "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/run.json",
+    "--json"
+  ]
+}

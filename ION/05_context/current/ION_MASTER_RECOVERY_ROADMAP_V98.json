@@ -1,0 +1,112 @@
+{
+  "schema_id": "ion.master_recovery_roadmap.v98",
+  "created_at": "2026-05-01",
+  "status": "non_production_recovery_plan",
+  "lead_dev_verdict": "ION is worth one serious survival sprint only if the next work proves the host-independent autonomous loop and UI proof surface.",
+  "survival_laws": [
+    "no_user_upkeep",
+    "one_command_survival",
+    "template_gate_required",
+    "steward_integration_executable",
+    "ui_proof_required",
+    "no_expansion_before_survival_proof"
+  ],
+  "immediate_blockers": [
+    "legacy_MINI_CAPSULE_required_by_sequential_kernel",
+    "test_surface_shrinkage_in_productized_runtime",
+    "no_minimal_autonomous_loop_command",
+    "template_enforcement_not_universal",
+    "steward_integration_not_yet_consuming_executor",
+    "cockpit_not_yet_survival_loop_proof_surface",
+    "production_readiness_lineage_drift",
+    "cursor_auto_mode_overrepresented"
+  ],
+  "required_next_modules": [
+    "ION/04_packages/kernel/ion_autonomous_loop.py",
+    "ION/04_packages/kernel/ion_template_action_gate.py",
+    "ION/04_packages/kernel/ion_steward_integrate.py"
+  ],
+  "required_next_tests": [
+    "ION/tests/test_kernel_ion_autonomous_loop.py",
+    "ION/tests/test_kernel_ion_template_action_gate.py",
+    "ION/tests/test_kernel_ion_steward_integrate.py",
+    "ION/tests/test_kernel_sequential_kernel_context_system_primary.py",
+    "ION/tests/test_kernel_ion_cockpit_view_model_survival_loop.py"
+  ],
+  "roadmap": [
+    {
+      "version": "V98",
+      "name": "MASTER_ORCHESTRATION_AUTOMATION_AND_UI_RECOVERY_PLAN",
+      "status": "plan_locked",
+      "exit_condition": "internal recovery plan recorded and UI made mandatory proof surface"
+    },
+    {
+      "version": "V99",
+      "name": "MINIMAL_AUTONOMOUS_LOOP_SURVIVAL_PROOF",
+      "status": "next_required_implementation",
+      "exit_condition": "one command runs one complete template-bound loop and writes receipt"
+    },
+    {
+      "version": "V100",
+      "name": "LEGACY_CONTEXT_REPAIR_AND_TEST_RESTORATION",
+      "status": "required",
+      "exit_condition": "cycle plan valid without legacy ION/agents MINI/CAPSULE and required tests restored"
+    },
+    {
+      "version": "V101",
+      "name": "COCKPIT_SURVIVAL_MVP",
+      "status": "required",
+      "exit_condition": "ACTIVE_COCKPIT_VIEW_MODEL exposes autonomous loop, template gate, Steward integration, and stop reason"
+    },
+    {
+      "version": "V102",
+      "name": "FRONT_DOOR_PERSONA_RELAY_RUNTIME",
+      "status": "planned",
+      "exit_condition": "user message routes through operator queue, Relay grounding, Steward authority, and Persona output from accepted state"
+    },
+    {
+      "version": "V103",
+      "name": "CONTEXT_TIMELINE_AND_DELTA_RECEIPTS",
+      "status": "planned",
+      "exit_condition": "agent context systems emit accepted context deltas and timeline entries"
+    },
+    {
+      "version": "V104",
+      "name": "GRAPH_TEMPLATE_RUNTIME_RECONCILIATION",
+      "status": "planned",
+      "exit_condition": "evented template graph path operates inside autonomous loop"
+    },
+    {
+      "version": "V105",
+      "name": "MCP_API_WORKER_ADAPTER_AFTER_LOCAL_PROOF",
+      "status": "blocked_until_local_loop_proof",
+      "exit_condition": "external/model workers cannot bypass context/template/Steward gates"
+    },
+    {
+      "version": "V106",
+      "name": "PRODUCTION_READINESS_NAMESPACE_REPAIR",
+      "status": "planned",
+      "exit_condition": "production readiness report separates branch lineage and production-gate namespace"
+    },
+    {
+      "version": "V107",
+      "name": "RELEASE_CANDIDATE_VERIFIER_REVIVAL",
+      "status": "planned",
+      "exit_condition": "productized runtime release candidate verifies root, tests, receipts, cockpit state, and boundaries"
+    }
+  ],
+  "ui_required_surfaces": [
+    "current_objective",
+    "autonomous_loop_state",
+    "operator_queue",
+    "human_gates",
+    "active_plan_spawn_rows",
+    "agent_context_window_plan",
+    "template_action_gate",
+    "task_return_ledger",
+    "steward_integration_queue",
+    "receipt_timeline",
+    "why_ion_stopped",
+    "next_recommended_action"
+  ]
+}

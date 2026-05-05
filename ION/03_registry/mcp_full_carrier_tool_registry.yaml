@@ -1,0 +1,171 @@
+schema_id: ion.mcp_full_carrier_tool_registry.v1
+status: draft_non_production
+production_authority: false
+live_execution_authority: false
+core_invariant: "MCP tools are carrier adapter surfaces over the same ION core engine."
+transport_limits:
+  practical_risks:
+    - ChatGPT message length can truncate pasted artifacts before a tool call is made.
+    - MCP JSON arguments can exceed host or gateway request limits.
+    - HTTP request bodies can exceed local preview, tunnel, proxy, or hosted limits.
+    - Queue JSON files can grow large enough to become slow or brittle.
+    - Context-proof and template-action gates can reject long or malformed returns.
+    - Codex return formatting can fail if proof headings are not first-class sections.
+  staging_limits:
+    max_text_put_bytes: 524288
+    max_upload_chunk_bytes: 524288
+    max_upload_bytes: 4194304
+tools:
+  ion_file_put_text:
+    family: file_artifact_transfer
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    target_policy: bounded_artifact_transfer_roots_only
+    no_silent_loss: block_existing_target
+  ion_artifact_upload_init:
+    family: file_artifact_transfer
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    purpose: open chunked upload session
+  ion_artifact_upload_chunk:
+    family: file_artifact_transfer
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    purpose: store one base64 chunk with optional sha256 verification
+  ion_artifact_upload_commit:
+    family: file_artifact_transfer
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    purpose: assemble chunks, verify sha256, write artifact, emit receipt
+  ion_carrier_message_send:
+    family: carrier_to_carrier_comms
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    queue_owner: ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json
+  ion_carrier_message_poll:
+    family: carrier_to_carrier_comms
+    mutates_state: false
+    confirmation_required: false
+    queue_owner: ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json
+  ion_carrier_message_ack:
+    family: carrier_to_carrier_comms
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    queue_owner: ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json
+  ion_file_read:
+    family: bounded_project_visibility
+    mutates_state: false
+    confirmation_required: false
+    path_policy: repo_relative_no_secret_or_git_paths
+    max_read_bytes: 262144
+  ion_file_search:
+    family: bounded_project_visibility
+    mutates_state: false
+    confirmation_required: false
+    path_policy: bounded_search_roots_no_secret_or_git_paths
+    max_scanned_files: 500
+  ion_tree_list:
+    family: bounded_project_visibility
+    mutates_state: false
+    confirmation_required: false
+    path_policy: repo_relative_no_secret_or_git_paths
+  ion_registry_read:
+    family: bounded_project_visibility
+    mutates_state: false
+    confirmation_required: false
+    read_root: ION/03_registry/
+  ion_template_read:
+    family: bounded_project_visibility
+    mutates_state: false
+    confirmation_required: false
+    read_root: ION/07_templates/
+  ion_context_compile:
+    family: bounded_context_projection
+    mutates_state: false
+    confirmation_required: false
+    purpose: compile bounded full-carrier MCP context surfaces with sha256 proof
+  ion_receipt_hydrate:
+    family: receipt_visibility
+    mutates_state: false
+    confirmation_required: false
+    core_owner: kernel.ion_receipt_hydration_mapper
+  ion_tool_manifest:
+    family: tool_visibility
+    mutates_state: false
+    confirmation_required: false
+    purpose: expose current connector tool contract and capability classes
+  ion_daemon_status:
+    family: codex_queue_automation
+    mutates_state: false
+    confirmation_required: false
+    purpose: expose bounded local Codex queue runner status and failure classes
+  ion_codex_queue_autorun_status:
+    family: codex_queue_automation
+    mutates_state: false
+    confirmation_required: false
+    purpose: expose whether queued work can be processed without operator relay
+  ion_codex_queue_process_once:
+    family: codex_queue_automation
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    command_policy: fixed_codex_cli_carrier_command_only
+    queue_owner: ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json
+    run_record_root: ION/05_context/current/chatgpt_connector/codex_queue_runs/
+    no_arbitrary_shell: true
+  ion_agent_list:
+    family: agent_invocation_broker
+    mutates_state: false
+    confirmation_required: false
+    purpose: list invocable ION role/context-system packets and Codex backend binding
+    owner: ION/04_packages/kernel/ion_agent_invocation_broker.py
+  ion_agent_status:
+    family: agent_invocation_broker
+    mutates_state: false
+    confirmation_required: false
+    purpose: expose broker state, owner surfaces, queued agent work, and failure classes
+  ion_agent_result:
+    family: agent_invocation_broker
+    mutates_state: false
+    confirmation_required: false
+    purpose: read proof-gated result state for an agent invocation
+  ion_agent_queue:
+    family: agent_invocation_broker
+    mutates_state: false
+    confirmation_required: false
+    queue_owner: ION/05_context/current/chatgpt_connector/agent_invocations/
+  ion_agent_spawn_plan:
+    family: agent_invocation_broker
+    mutates_state: false
+    confirmation_required: false
+    purpose: propose a bounded role/backend plan without spawning a separate agent system
+  ion_swarm_status:
+    family: agent_invocation_broker
+    mutates_state: false
+    confirmation_required: false
+    purpose: project current Codex-backed agent/swarm control status
+  ion_agent_invoke:
+    family: agent_invocation_broker
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    purpose: compile a role/context packet into a bounded Codex work request
+    invocation_owner: ION/05_context/current/chatgpt_connector/agent_invocations/
+    backend_owner: ION/04_packages/kernel/ion_codex_queue_runner.py
+    no_raw_backend_state: true
+  ion_agent_cancel:
+    family: agent_invocation_broker
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    purpose: cancel a prepared or queued invocation without killing an active backend process
+  ion_swarm_step_once:
+    family: agent_invocation_broker
+    mutates_state: true
+    confirmation_required: ION_BOUNDED_WRITE_CONFIRMED
+    purpose: prepare or start one queued agent Codex work request through the existing queue runner
+    command_policy: fixed_codex_cli_carrier_command_only
+    no_arbitrary_shell: true
+non_goals:
+  - no arbitrary shell bridge
+  - no direct production deployment
+  - no credential transport or storage
+  - no direct delete
+  - no silent overwrite

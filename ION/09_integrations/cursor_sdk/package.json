@@ -1,0 +1,16 @@
+{
+  "name": "ion-cursor-sdk-carrier-adapter",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "carrier:continue": "tsx src/ion_cursor_sdk_carrier.ts"
+  },
+  "dependencies": {
+    "@cursor/sdk": "latest"
+  },
+  "devDependencies": {
+    "tsx": "latest",
+    "typescript": "latest"
+  }
+}

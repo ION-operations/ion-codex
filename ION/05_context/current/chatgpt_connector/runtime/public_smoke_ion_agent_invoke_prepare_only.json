@@ -1,0 +1,202 @@
+{
+  "id": 2,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "{\n  \"data\": {\n    \"codex_work_queue_path\": \"ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json\",\n    \"codex_work_queue_request_count\": 10,\n    \"codex_work_request_id\": \"codex_req_agent_2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker\",\n    \"codex_work_request_path\": \"ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T213423Z0000_agent_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json\",\n    \"codex_work_request_status\": \"PREPARED_FOR_CODEX_CARRIER_NOT_QUEUED\",\n    \"invocation\": {\n      \"agent\": {\n        \"activation_owner\": \"STEWARD_OR_ACTIVE_CARRIER_OR_VIZIER_VIA_BOUNDED_IMPLEMENTATION_PACKET\",\n        \"adapter_surface\": \"ChatGPT Browser MCP -> ION agent invocation broker -> Codex queue runner\",\n        \"agent_id\": \"role.mason\",\n        \"aliases\": [\n          \"MASON\",\n          \"mason\",\n          \"role.mason\"\n        ],\n        \"audit_relation\": \"NO_INDEPENDENT_AUDIT_OR_RELEASE_AUTHORITY\",\n        \"backend_carrier_id\": \"CODEX_CLI_CARRIER\",\n        \"band\": \"LIVE_SUPPORT_FIELD\",\n        \"base_sources\": [\n          \"ION/03_registry/boots/MASON.boot.md\",\n          \"ION/agents/mason/MINI.md\",\n          \"ION/agents/mason/CAPSULE.md\"\n        ],\n        \"context_paths\": [\n          \"ION/05_context/current/agent_context_systems/MASON.context_system.md\",\n          \"ION/03_registry/boots/MASON.boot.md\",\n          \"ION/07_templates/bindings/MASON__CODE.md\",\n          \"ION/07_templates/actions/CODE.md\",\n          \"ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md\",\n          \"ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md\"\n        ],\n        \"context_registry_path\": \"ION/03_registry/agent_context_system_registry.yaml\",\n        \"context_registry_section\": \"agents\",\n        \"context_system_card\": \"ION/05_context/current/agent_context_systems/MASON.context_system.md\",\n        \"default_active_package_class\": \"MISSION_ACTIVE_CONTEXT_PACKAGE\",\n        \"display_name\": \"MASON\",\n        \"invocable\": true,\n        \"live_execution_authority\": false,\n        \"live_status\": \"ACTIVE_CURRENT_PHASE\",\n        \"missing_declared_context_paths\": [\n          \"ION/agents/mason/MINI.md\",\n          \"ION/agents/mason/CAPSULE.md\"\n        ],\n        \"package_strategy\": \"bounded implementation package with explicit allowed paths, exact files, tests, and no architecture expansion unless routed\",\n        \"primary_templates\": [\n          \"ION/07_templates/bindings/MASON__CODE.md\",\n          \"ION/07_templates/actions/CODE.md\",\n          \"ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md\"\n        ],\n        \"production_authority\": false,\n        \"rank_class\": \"UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE\",\n        \"role_id\": \"role.mason\",\n        \"roster_registry_path\": \"ION/03_registry/agent_roster_registry.yaml\",\n        \"source_refs\": [\n          \"ION/03_registry/boots/MASON.boot.md\",\n          \"ION/07_templates/bindings/MASON__CODE.md\",\n          \"ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md\"\n        ],\n        \"standing_class\": \"LIVE_BOUNDED_EXECUTION_SPECIALIST\",\n        \"structural_identity\": \"Operative.Source.Software_Architect\",\n        \"template_bindings\": [\n          \"ION/07_templates/bindings/MASON__CODE.md\"\n        ]\n      },\n      \"backend_carrier_id\": \"CODEX_CLI_CARRIER\",\n      \"backend_runner_owner\": \"ION/04_packages/kernel/ion_codex_queue_runner.py\",\n      \"codex_work_request_id\": \"codex_req_agent_2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker\",\n      \"codex_work_request_path\": \"ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T213423Z0000_agent_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json\",\n      \"context_refs\": [],\n      \"created_at\": \"2026-05-04T21:34:23+00:00\",\n      \"declared_but_missing_context_paths\": [\n        \"ION/agents/mason/CAPSULE.md\",\n        \"ION/agents/mason/MINI.md\"\n      ],\n      \"delegated_operator_carrier\": {\n        \"carrier_id\": \"CHATGPT_BROWSER_CARRIER\",\n        \"project_facing_callsign\": \"Sev\"\n      },\n      \"failure_classes\": [\n        \"AGENT_INVOCATION_FAILURE\",\n        \"BACKEND_CODEX_FAILURE\",\n        \"CARRIER_ADAPTER_FAILURE\",\n        \"DAEMON_FAILURE\",\n        \"ION_CORE_FAILURE\"\n      ],\n      \"human_sovereign\": \"Braden\",\n      \"invocation_id\": \"agent_inv_2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker\",\n      \"ion_core_engine\": \"ONE_CORE_ENGINE_MOUNTED_BY_ALL_CARRIERS\",\n      \"live_execution_authority\": false,\n      \"mode\": \"prepare_only\",\n      \"objective\": \"prepare-only MCP smoke for ION agent invocation broker\",\n      \"production_authority\": false,\n      \"raw_backend_output_state_policy\": \"RAW_CODEX_OUTPUT_NOT_ACCEPTED_WITHOUT_TASK_RETURN_PROOF_GATES\",\n      \"requested_agent\": \"MASON\",\n      \"required_context_reads\": [\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/03_registry/agent_roster_registry.yaml\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/03_registry/agent_context_system_registry.yaml\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/03_registry/codex_cli_carrier_profile.yaml\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/04_packages/kernel/ion_codex_queue_runner.py\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/05_context/current/agent_context_systems/MASON.context_system.md\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/03_registry/boots/MASON.boot.md\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/07_templates/bindings/MASON__CODE.md\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/07_templates/actions/CODE.md\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md\",\n          \"required\": true\n        },\n        {\n          \"kind\": \"file\",\n          \"path\": \"ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md\",\n          \"required\": true\n        }\n      ],\n      \"schema_id\": \"ion.agent_invocation.v1\",\n      \"status\": \"PREPARED_NOT_QUEUED\",\n      \"steward_integration_membrane\": \"proof_gated_task_return_and_steward_review_surfaces\",\n      \"updated_at\": \"2026-05-04T21:34:23+00:00\"\n    },\n    \"invocation_path\": \"ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json\",\n    \"live_execution_authority\": false,\n    \"ok\": true,\n    \"production_authority\": false,\n    \"queued_for_codex_carrier\": false,\n    \"result\": \"PREPARED_NOT_QUEUED\",\n    \"schema_id\": \"ion.agent_invocation_broker.v1\",\n    \"start_result\": null\n  },\n  \"live_execution_authority\": false,\n  \"mutates_active_state\": true,\n  \"ok\": true,\n  \"production_authority\": false,\n  \"schema_id\": \"ion.chatgpt_browser_connector_tool_result.v1\",\n  \"tool\": \"ion_agent_invoke\"\n}",
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": {
+      "data": {
+        "codex_work_queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+        "codex_work_queue_request_count": 10,
+        "codex_work_request_id": "codex_req_agent_2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker",
+        "codex_work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T213423Z0000_agent_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json",
+        "codex_work_request_status": "PREPARED_FOR_CODEX_CARRIER_NOT_QUEUED",
+        "invocation": {
+          "agent": {
+            "activation_owner": "STEWARD_OR_ACTIVE_CARRIER_OR_VIZIER_VIA_BOUNDED_IMPLEMENTATION_PACKET",
+            "adapter_surface": "ChatGPT Browser MCP -> ION agent invocation broker -> Codex queue runner",
+            "agent_id": "role.mason",
+            "aliases": [
+              "MASON",
+              "mason",
+              "role.mason"
+            ],
+            "audit_relation": "NO_INDEPENDENT_AUDIT_OR_RELEASE_AUTHORITY",
+            "backend_carrier_id": "CODEX_CLI_CARRIER",
+            "band": "LIVE_SUPPORT_FIELD",
+            "base_sources": [
+              "ION/03_registry/boots/MASON.boot.md",
+              "ION/agents/mason/MINI.md",
+              "ION/agents/mason/CAPSULE.md"
+            ],
+            "context_paths": [
+              "ION/05_context/current/agent_context_systems/MASON.context_system.md",
+              "ION/03_registry/boots/MASON.boot.md",
+              "ION/07_templates/bindings/MASON__CODE.md",
+              "ION/07_templates/actions/CODE.md",
+              "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+              "ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md"
+            ],
+            "context_registry_path": "ION/03_registry/agent_context_system_registry.yaml",
+            "context_registry_section": "agents",
+            "context_system_card": "ION/05_context/current/agent_context_systems/MASON.context_system.md",
+            "default_active_package_class": "MISSION_ACTIVE_CONTEXT_PACKAGE",
+            "display_name": "MASON",
+            "invocable": true,
+            "live_execution_authority": false,
+            "live_status": "ACTIVE_CURRENT_PHASE",
+            "missing_declared_context_paths": [
+              "ION/agents/mason/MINI.md",
+              "ION/agents/mason/CAPSULE.md"
+            ],
+            "package_strategy": "bounded implementation package with explicit allowed paths, exact files, tests, and no architecture expansion unless routed",
+            "primary_templates": [
+              "ION/07_templates/bindings/MASON__CODE.md",
+              "ION/07_templates/actions/CODE.md",
+              "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md"
+            ],
+            "production_authority": false,
+            "rank_class": "UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE",
+            "role_id": "role.mason",
+            "roster_registry_path": "ION/03_registry/agent_roster_registry.yaml",
+            "source_refs": [
+              "ION/03_registry/boots/MASON.boot.md",
+              "ION/07_templates/bindings/MASON__CODE.md",
+              "ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md"
+            ],
+            "standing_class": "LIVE_BOUNDED_EXECUTION_SPECIALIST",
+            "structural_identity": "Operative.Source.Software_Architect",
+            "template_bindings": [
+              "ION/07_templates/bindings/MASON__CODE.md"
+            ]
+          },
+          "backend_carrier_id": "CODEX_CLI_CARRIER",
+          "backend_runner_owner": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+          "codex_work_request_id": "codex_req_agent_2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker",
+          "codex_work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T213423Z0000_agent_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json",
+          "context_refs": [],
+          "created_at": "2026-05-04T21:34:23+00:00",
+          "declared_but_missing_context_paths": [
+            "ION/agents/mason/CAPSULE.md",
+            "ION/agents/mason/MINI.md"
+          ],
+          "delegated_operator_carrier": {
+            "carrier_id": "CHATGPT_BROWSER_CARRIER",
+            "project_facing_callsign": "Sev"
+          },
+          "failure_classes": [
+            "AGENT_INVOCATION_FAILURE",
+            "BACKEND_CODEX_FAILURE",
+            "CARRIER_ADAPTER_FAILURE",
+            "DAEMON_FAILURE",
+            "ION_CORE_FAILURE"
+          ],
+          "human_sovereign": "Braden",
+          "invocation_id": "agent_inv_2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker",
+          "ion_core_engine": "ONE_CORE_ENGINE_MOUNTED_BY_ALL_CARRIERS",
+          "live_execution_authority": false,
+          "mode": "prepare_only",
+          "objective": "prepare-only MCP smoke for ION agent invocation broker",
+          "production_authority": false,
+          "raw_backend_output_state_policy": "RAW_CODEX_OUTPUT_NOT_ACCEPTED_WITHOUT_TASK_RETURN_PROOF_GATES",
+          "requested_agent": "MASON",
+          "required_context_reads": [
+            {
+              "kind": "file",
+              "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/03_registry/agent_roster_registry.yaml",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/03_registry/agent_context_system_registry.yaml",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/05_context/current/agent_context_systems/MASON.context_system.md",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/03_registry/boots/MASON.boot.md",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/07_templates/bindings/MASON__CODE.md",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/07_templates/actions/CODE.md",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+              "required": true
+            },
+            {
+              "kind": "file",
+              "path": "ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md",
+              "required": true
+            }
+          ],
+          "schema_id": "ion.agent_invocation.v1",
+          "status": "PREPARED_NOT_QUEUED",
+          "steward_integration_membrane": "proof_gated_task_return_and_steward_review_surfaces",
+          "updated_at": "2026-05-04T21:34:23+00:00"
+        },
+        "invocation_path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213423Z0000_mason_prepare_only_mcp_smoke_for_ion_agent_invocation_broker.json",
+        "live_execution_authority": false,
+        "ok": true,
+        "production_authority": false,
+        "queued_for_codex_carrier": false,
+        "result": "PREPARED_NOT_QUEUED",
+        "schema_id": "ion.agent_invocation_broker.v1",
+        "start_result": null
+      },
+      "live_execution_authority": false,
+      "mutates_active_state": true,
+      "ok": true,
+      "production_authority": false,
+      "schema_id": "ion.chatgpt_browser_connector_tool_result.v1",
+      "tool": "ion_agent_invoke"
+    }
+  }
+}

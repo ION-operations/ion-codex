@@ -1,0 +1,39 @@
+{
+  "conversation_status": "RATIFIED",
+  "emitted_at": "2026-05-02T22:52:19+00:00",
+  "events": [
+    {
+      "claim_class": "C2",
+      "council_receipt_id": "fsc-27a1a8398ae020b89d",
+      "event_type": "PROVISIONAL_UTTERANCE",
+      "provisional": true,
+      "repair_of": null,
+      "text": "Deterministic front-door proof output: the operator message was routed through Persona Interface ingress, Relay semantic boundary, Steward work queue dispatch, Relay return, Persona response, and receipt surfaces. This proof grants no production authority.",
+      "timestamp": "2026-05-02T22:52:19+00:00"
+    },
+    {
+      "claim_class": "C2",
+      "council_receipt_id": "fsc-27a1a8398ae020b89d",
+      "event_type": "RATIFICATION",
+      "provisional": false,
+      "repair_of": null,
+      "text": "Deterministic front-door proof output: the operator message was routed through Persona Interface ingress, Relay semantic boundary, Steward work queue dispatch, Relay return, Persona response, and receipt surfaces. This proof grants no production authority.",
+      "timestamp": "2026-05-02T22:52:19+00:00"
+    }
+  ],
+  "final_claim": "Deterministic front-door proof output: the operator message was routed through Persona Interface ingress, Relay semantic boundary, Steward work queue dispatch, Relay return, Persona response, and receipt surfaces. This proof grants no production authority.",
+  "forbidden_claims": {
+    "hidden_memory_claim": false,
+    "persona_total_ion_identity": false,
+    "production_authority": false,
+    "provisional_speech_is_ratified_truth": false,
+    "unrestricted_live_persona_speech": false
+  },
+  "production_authority": false,
+  "provisional_events_open": 0,
+  "receipt_id": "2cdb4920b2dc401d7cd84c79",
+  "repair_obligations": [],
+  "repair_required": false,
+  "schema_id": "ion.conversational_receipt.v1",
+  "version": "V42_CONVERSATIONAL_RECEIPTS_AND_LIVE_REPAIR"
+}

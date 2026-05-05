@@ -1,0 +1,142 @@
+{
+  "schema_id": "ion.carrier_registry.v1",
+  "version": "1",
+  "authority_class": "CARRIER_REGISTRY",
+  "default_start_level": "L0",
+  "default_active_agent": "CURRENT_CARRIER",
+  "default_return_agent": "CURRENT_CARRIER",
+  "upgrade_decision_required": true,
+  "upgrade_decision_paths": [
+    "ION/05_context/signals/CARRIER_LEVEL_DECISION.json",
+    "ION/05_context/signals/YYYYMMDD_CARRIER_LEVEL_DECISION.signal.md"
+  ],
+  "primary_boot_protocol": "ION/04_agents/carriers/CARRIER_AGENT.boot.md",
+  "meta_evolution_protocol": "ION/04_agents/carriers/META_CARRIER_EVOLUTION_PROTOCOL.md",
+  "capability_registry": "ION/03_registry/capabilities/capability_registry.json",
+  "capability_survey_template": "ION/07_templates/carriers/CARRIER_CAPABILITY_SURVEY.md",
+  "mount_proof_template": "ION/07_templates/carriers/CARRIER_MOUNT_PROOF.md",
+  "levels": {
+    "L0": {
+      "name": "Manual Carrier",
+      "summary": "Universal fallback. No assumed tools, automation, file writes, shell, or subagents.",
+      "may_claim_subagents": false,
+      "may_use_tools_without_proof": false,
+      "may_self_approve": false,
+      "manual_fallback_required": true
+    },
+    "L1": {
+      "name": "Tool-assisted Carrier",
+      "summary": "Proven tools only. Tool use must produce proof. No real subagent claim.",
+      "may_claim_subagents": false,
+      "may_use_tools_without_proof": false,
+      "may_self_approve": false,
+      "manual_fallback_required": true
+    },
+    "L2": {
+      "name": "Host-native Subagent Carrier",
+      "summary": "Host-native workers may be used only through spawn request/result artifacts.",
+      "may_claim_subagents": true,
+      "subagent_claim_requires": [
+        "host_spawn_transcript_or_artifact",
+        "agent_spawn_request",
+        "agent_result_packet"
+      ],
+      "may_self_approve": false,
+      "manual_fallback_required": true
+    },
+    "L3": {
+      "name": "ION-native Orchestrated Carrier",
+      "summary": "Bound to ION deterministic spawn law.",
+      "binds_to": [
+        "ion_cycle_runner",
+        "ACTIVE_ROLE_SPAWN_PLAN.json",
+        "active packet state"
+      ],
+      "may_self_approve": false,
+      "manual_fallback_required": true
+    },
+    "L4": {
+      "name": "API/MCP Runtime Carrier",
+      "summary": "Formal API/MCP runtime operations with call proofs.",
+      "requires": [
+        "runtime_api_contract",
+        "call_proof",
+        "journal_or_receipt"
+      ],
+      "may_self_approve": false,
+      "manual_fallback_required": true
+    }
+  },
+  "carrier_profiles": {
+    "MANUAL_CARRIER": {
+      "path": "ION/04_agents/carriers/MANUAL_CARRIER.profile.md",
+      "host_family": "manual_or_unknown",
+      "default_level": "L0",
+      "can_request_upgrade": false,
+      "can_spawn_agents": false,
+      "default_mode": "manual_single_carrier"
+    },
+    "CHATGPT_CARRIER": {
+      "path": "ION/04_agents/carriers/CHATGPT_CARRIER.profile.md",
+      "host_family": "chatgpt",
+      "default_level": "L0",
+      "can_request_upgrade": true,
+      "can_spawn_agents": false,
+      "default_mode": "manual_or_tool_assisted_single_carrier"
+    },
+    "CURSOR_CARRIER": {
+      "path": "ION/04_agents/carriers/CURSOR_CARRIER.profile.md",
+      "host_family": "cursor",
+      "default_level": "L0",
+      "can_request_upgrade": true,
+      "can_spawn_agents": "host_dependent",
+      "default_mode": "tool_assisted_or_host_native_spawn_when_proven"
+    },
+    "CODEX_CARRIER": {
+      "path": "ION/04_agents/carriers/CODEX_CARRIER.profile.md",
+      "host_family": "codex",
+      "default_level": "L0",
+      "can_request_upgrade": true,
+      "can_spawn_agents": "host_dependent",
+      "default_mode": "execution_agent_when_proven"
+    },
+    "CLAUDE_CARRIER": {
+      "path": "ION/04_agents/carriers/CLAUDE_CARRIER.profile.md",
+      "host_family": "claude",
+      "default_level": "L0",
+      "can_request_upgrade": true,
+      "can_spawn_agents": "host_dependent",
+      "default_mode": "manual_or_tool_assisted_single_carrier"
+    },
+    "GEMINI_CARRIER": {
+      "path": "ION/04_agents/carriers/GEMINI_CARRIER.profile.md",
+      "host_family": "gemini",
+      "default_level": "L0",
+      "can_request_upgrade": true,
+      "can_spawn_agents": "host_dependent",
+      "default_mode": "manual_or_tool_assisted_single_carrier"
+    },
+    "MCP_CARRIER": {
+      "path": "ION/04_agents/carriers/MCP_CARRIER.profile.md",
+      "host_family": "mcp",
+      "default_level": "L0",
+      "can_request_upgrade": true,
+      "can_spawn_agents": "runtime_dependent",
+      "default_mode": "api_runtime_when_proven"
+    }
+  },
+  "spawn_reality_labels": [
+    "manual_phase",
+    "host_native_spawn",
+    "ion_native_spawn",
+    "api_runtime_call",
+    "unproven"
+  ],
+  "required_profile_keys": [
+    "host_family",
+    "default_level",
+    "can_request_upgrade",
+    "can_spawn_agents",
+    "default_mode"
+  ]
+}

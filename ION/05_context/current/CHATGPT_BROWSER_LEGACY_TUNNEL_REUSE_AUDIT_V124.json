@@ -1,0 +1,237 @@
+{
+  "accepted": true,
+  "cloudflared_found": true,
+  "cloudflared_path": "/home/sev/.local/bin/cloudflared",
+  "connector_state": "DONOR_TRANSPORT_READY_TO_RUN",
+  "current_connector_url_shape": "https://<cloudflare-host>/mcp",
+  "current_forbidden_pattern_count": 0,
+  "current_required_pattern_count": 4,
+  "current_required_pattern_present_count": 4,
+  "current_tunnel_check": {
+    "exists": true,
+    "forbidden_patterns": [
+      {
+        "name": "legacy_sse_endpoint",
+        "patterns": [
+          "/sse"
+        ],
+        "present": false
+      },
+      {
+        "name": "aimos_identity",
+        "patterns": [
+          "AIM-OS",
+          "AIMOS"
+        ],
+        "present": false
+      },
+      {
+        "name": "legacy_status_path",
+        "patterns": [
+          "data/mcp/active_tunnel.json"
+        ],
+        "present": false
+      }
+    ],
+    "rel_path": "ION/04_packages/kernel/ion_chatgpt_browser_cloudflare_tunnel.py",
+    "required_patterns": [
+      {
+        "name": "current_mcp_endpoint",
+        "patterns": [
+          "DEFAULT_ENDPOINT_PATH",
+          "/mcp"
+        ],
+        "present": true
+      },
+      {
+        "name": "current_cloudflared_quick_tunnel_command",
+        "patterns": [
+          "tunnel",
+          "--url"
+        ],
+        "present": true
+      },
+      {
+        "name": "current_active_tunnel_status_path",
+        "patterns": [
+          "ACTIVE_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL.json"
+        ],
+        "present": true
+      },
+      {
+        "name": "current_non_authority_fields",
+        "patterns": [
+          "production_authority",
+          "live_execution_authority",
+          "deployment_authority"
+        ],
+        "present": true
+      }
+    ]
+  },
+  "deployment_authority": false,
+  "donor_forbidden_pattern_count": 8,
+  "donor_reusable_pattern_count": 6,
+  "donor_script_checks": [
+    {
+      "exists": true,
+      "forbidden_current_authority_patterns": [
+        {
+          "name": "legacy_sse_endpoint",
+          "patterns": [
+            "/sse"
+          ],
+          "present": true
+        },
+        {
+          "name": "aimos_identity",
+          "patterns": [
+            "AIM-OS",
+            "AIMOS"
+          ],
+          "present": false
+        },
+        {
+          "name": "legacy_status_path",
+          "patterns": [
+            "data/mcp"
+          ],
+          "present": true
+        },
+        {
+          "name": "legacy_default_port",
+          "patterns": [
+            "8000"
+          ],
+          "present": true
+        },
+        {
+          "name": "host_level_auto_install_hint",
+          "patterns": [
+            "winget",
+            "install_cloudflared"
+          ],
+          "present": true
+        }
+      ],
+      "path": "/home/sev/AIM-OS/scripts/cloudflare_tunnel.py",
+      "reusable_patterns": [
+        {
+          "name": "cloudflared_quick_tunnel_command",
+          "patterns": [
+            "cloudflared",
+            "tunnel",
+            "--url"
+          ],
+          "present": true
+        },
+        {
+          "name": "trycloudflare_public_url_capture",
+          "patterns": [
+            "trycloudflare.com"
+          ],
+          "present": true
+        },
+        {
+          "name": "status_json_written",
+          "patterns": [
+            "active_tunnel.json"
+          ],
+          "present": true
+        }
+      ],
+      "sha256": "aa441fb95a2ef0fa749e3b5dfd25f33ddd5088ddd308c96b51a9b22ddefeb0d3"
+    },
+    {
+      "exists": true,
+      "forbidden_current_authority_patterns": [
+        {
+          "name": "legacy_sse_endpoint",
+          "patterns": [
+            "/sse"
+          ],
+          "present": true
+        },
+        {
+          "name": "aimos_identity",
+          "patterns": [
+            "AIM-OS",
+            "AIMOS"
+          ],
+          "present": false
+        },
+        {
+          "name": "legacy_status_path",
+          "patterns": [
+            "data/mcp"
+          ],
+          "present": true
+        },
+        {
+          "name": "legacy_default_port",
+          "patterns": [
+            "8000"
+          ],
+          "present": true
+        },
+        {
+          "name": "host_level_auto_install_hint",
+          "patterns": [
+            "winget",
+            "install_cloudflared"
+          ],
+          "present": true
+        }
+      ],
+      "path": "/home/sev/ION - Production/AIM-ION/scripts/cloudflare_tunnel.py",
+      "reusable_patterns": [
+        {
+          "name": "cloudflared_quick_tunnel_command",
+          "patterns": [
+            "cloudflared",
+            "tunnel",
+            "--url"
+          ],
+          "present": true
+        },
+        {
+          "name": "trycloudflare_public_url_capture",
+          "patterns": [
+            "trycloudflare.com"
+          ],
+          "present": true
+        },
+        {
+          "name": "status_json_written",
+          "patterns": [
+            "active_tunnel.json"
+          ],
+          "present": true
+        }
+      ],
+      "sha256": "aa441fb95a2ef0fa749e3b5dfd25f33ddd5088ddd308c96b51a9b22ddefeb0d3"
+    }
+  ],
+  "donor_scripts_found": 2,
+  "emitted_at": "2026-05-04T14:55:16+00:00",
+  "endpoint_path": "/mcp",
+  "findings": [
+    "shell_root_confirmed",
+    "legacy_cloudflare_tunnel_donor_scripts_found",
+    "reusable_cloudflared_quick_tunnel_transport_found",
+    "legacy_aimos_sse_patterns_classified_donor_only",
+    "current_tunnel_uses_mcp_endpoint_and_non_authority_status",
+    "current_tunnel_excludes_legacy_sse_and_aimos_authority",
+    "cloudflared_available_on_path"
+  ],
+  "legacy_endpoint_status": "legacy_/sse_is_forbidden_for_current_chatgpt_connector",
+  "line": "V124_LEGACY_CLOUDFLARE_TUNNEL_REUSE",
+  "live_execution_authority": false,
+  "mutation_performed": false,
+  "production_authority": false,
+  "root_confirmed": true,
+  "root_missing_files": [],
+  "scanned_root": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION",
+  "schema_id": "ion.chatgpt_browser_legacy_tunnel_reuse_audit.v1",
+  "verdict": "ION_CHATGPT_BROWSER_LEGACY_TUNNEL_REUSE_READY"
+}

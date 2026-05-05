@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-05-04T20:10:43+00:00",
+  "latest_context_proof_accepted": true,
+  "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T202613Z0000_task_return.json",
+  "latest_template_action_proof_accepted": true,
+  "live_execution_authority": false,
+  "objective": "Push ChatGPT Browser MCP beyond the current 22-tool artifact/comms slice toward full IDE/PC-level ION carrier parity. Do not treat the browser carrier as a restricted observer or management lane. Treat this as a trusted operator-watched GPT-5.5 Pro carrier that should be as connected as practical while ION records receipts and carrier attribution. First read current owners: ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md, ION_CARRIER_TO_CARRIER_COMMUNICATION_PROTOCOL.md, MCP connector implementation, carrier capability/tool registries, mount/onboarding profile surfaces, cockpit/status/context projection code, task-return gates, and accepted MCP parity task returns. Then implement or plan the next strongest connection slice, prioritizing: (1) full_carrier_mcp_parity carrier profile recognized by ion_carrier_onboarding_packet; (2) repo/project visibility tools such as ion_file_read, ion_file_search, ion_tree_list, ion_registry_read, ion_template_read, ion_context_compile, ion_receipt_hydrate, ion_tool_manifest; (3) direct project patch/apply tools with receipts and no-silent-loss handling; (4) shell/test/git/process/service-control tools where practical under current local authority; (5) cockpit/status projection updates so full-carrier MCP state, smoke receipts, artifact uploads, carrier messages, and tool parity appear as current state; (6) clear classification of any remaining platform/tooling limits as CARRIER_ADAPTER_FAILURE or CAPABILITY_NOT_YET_IMPLEMENTED, not ION_CORE_FAILURE. Validate with kernel.ion_status, focused connector tests, full-carrier capability audit, HTTP/public MCP tools/list, and at least one smoke where possible. Return with CONTEXT PROOF, TEMPLATE ACTION PROOF, touched paths, tests, current exposed tools, remaining blockers, and next lawful moves.",
+  "packet_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T201043Z0000_push_chatgpt_browser_mcp_beyond_the_current_22_tool_artifact_comms_slice_toward_.json",
+  "production_authority": false,
+  "request_id": "codex_req_2026-05-04T201043Z0000_push_chatgpt_browser_mcp_beyond_the_current_22_tool_artifact_comms_slice_toward_",
+  "requested_by": "chatgpt_browser_connector",
+  "return_packet_paths": [
+    "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T202613Z0000_task_return.json"
+  ],
+  "schema_id": "ion.chatgpt_browser_connector_codex_work_request.v1",
+  "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+  "updated_at": "2026-05-04T20:26:13+00:00"
+}

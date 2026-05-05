@@ -1,0 +1,47 @@
+policy_id: ion_mcp_client_certification_policy
+version: V66_LOCAL_MCP_SDK_COMPATIBILITY_AND_CLIENT_CERTIFICATION
+status: active_protocolized
+scope: local_contract_certification_only
+allowed_resolutions:
+  - READ_ONLY
+  - DRY_RUN
+  - APPROVAL_REQUIRED
+  - REFUSED
+forbidden_resolutions:
+  - LIVE_EXECUTED
+certified_profile_class:
+  - generic_stdio
+  - cursor_local_stdio
+  - vscode_local_stdio
+  - codex_local_stdio
+required_tools:
+  - ion.mount
+  - ion.status
+  - ion.boot_packet
+  - ion.horizon.current
+  - ion.receipts.list
+  - ion.approvals.list
+  - ion.job.plan
+  - ion.job.submit_dry_run
+  - ion.daemon.dry_run_step
+  - ion.bundle.export_preview
+forbidden_tools:
+  - ion.execute
+  - ion.job.execute_live
+  - ion.daemon.run
+  - ion.daemon.loop
+  - ion.shell.run
+  - ion.browser.mutate
+  - ion.provider.dispatch
+  - ion.secrets.read
+  - ion.secrets.write
+  - ion.governed_write.direct
+non_goals:
+  - hosted_chatgpt_app_certification
+  - oauth
+  - streamable_http_production
+  - provider_dispatch
+  - browser_mutation
+  - shell_execution
+  - kubernetes
+  - live_execution

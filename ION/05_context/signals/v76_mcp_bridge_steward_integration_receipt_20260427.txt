@@ -1,0 +1,12 @@
+type: steward_integration_receipt
+mission: V76_CURSOR_CAPABILITY_INVENTORY_AND_ION_MCP_BRIDGE_ACCELERATION
+date: 2026-04-27
+
+steward_integration_decision: ACCEPT_WITNESS_DEMOS_MASON_AND_NEMESIS_MCP_SPRINT
+notes:
+  - MASON proposal (scaffold review) accepted as witness documentation.
+  - NEMESIS AUDITOR-lane proposal (mcp pytest selection) accepted as witness; re-run in CI for canonical timing.
+  - Tier 2 MCP writes remain disabled.
+
+relay_report_required: true
+next_step: EMIT_RELAY_REPORT

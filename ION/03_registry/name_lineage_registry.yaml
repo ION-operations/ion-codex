@@ -1,0 +1,163 @@
+{
+  "registry_id": "current_phase.name_lineage_registry",
+  "display_name": "Current-Phase Name Lineage Registry",
+  "status": "ACTIVE_CURRENT_PHASE",
+  "governing_surfaces": [
+    "ION/02_architecture/TRUE_NAME_AND_SEMANTIC_LAYER_PROTOCOL.md",
+    "ION/02_architecture/NAME_LINEAGE_REGISTRY_PROTOCOL.md",
+    "ION/02_architecture/INGRESS_AUTHORITY_RESOLUTION_PROTOCOL.md",
+    "ION/02_architecture/STALE_NAME_DETECTION_PROTOCOL.md",
+    "ION/02_architecture/ACTIVE_SURFACE_RETIREMENT_PROTOCOL.md",
+    "ION/03_registry/semantic_identities/README.md",
+    "ION/03_registry/agent_roster_registry.yaml"
+  ],
+  "surface_policy": {
+    "active_surface_roots": [
+      "ION/02_architecture",
+      "ION/04_packages",
+      "ION/07_templates",
+      "ION/README.md",
+      "ION/STATUS.md",
+      "ION/SYSTEM_MAP.md",
+      "ION/MASTER_ORCHESTRATION_INDEX.md",
+      "ION/03_registry/agent_roster_registry.yaml",
+      "ION/03_registry/current_phase_template_surface_registry.yaml"
+    ],
+    "lineage_surface_roots": [
+      "ION/03_registry/name_lineage_registry.yaml",
+      "ION/03_registry/semantic_identities",
+      "ION/03_registry/boots/CODEX.boot.md"
+    ],
+    "historical_surface_roots": [
+      "ION/05_context",
+      "ION/06_intelligence",
+      "ION/agents",
+      "ION/docs"
+    ]
+  },
+  "records": [
+    {
+      "entity_id": "role.steward",
+      "entity_kind": "ROLE",
+      "current_true_name": "Steward",
+      "notes": "Current-phase orchestration truename.",
+      "aliases": [
+        {
+          "name": "Steward",
+          "alias_status": "CURRENT_TRUE_NAME",
+          "relation_type": "SELF",
+          "accepted_for_ingress": true,
+          "historical_only": false,
+          "live_decision": "ALLOW_AS_AUTHORITY",
+          "warning_code": null,
+          "successor_candidates": []
+        }
+      ]
+    },
+    {
+      "entity_id": "role.relay",
+      "entity_kind": "ROLE",
+      "current_true_name": "Relay",
+      "notes": "Current-phase communications and semantic-boundary role.",
+      "aliases": [
+        {
+          "name": "Relay",
+          "alias_status": "CURRENT_TRUE_NAME",
+          "relation_type": "SELF",
+          "accepted_for_ingress": true,
+          "historical_only": false,
+          "live_decision": "ALLOW_AS_AUTHORITY",
+          "warning_code": null,
+          "successor_candidates": []
+        },
+        {
+          "name": "Sovereign Relay",
+          "alias_status": "HISTORICAL_DISPLAY_ALIAS",
+          "relation_type": "DISPLAY_ALIAS_TO_CURRENT_TRUE_NAME",
+          "accepted_for_ingress": true,
+          "historical_only": false,
+          "live_decision": "NORMALIZE_TO_CURRENT_TRUE_NAME",
+          "warning_code": "NORMALIZED_HISTORICAL_DISPLAY_ALIAS",
+          "successor_candidates": [
+            "Relay"
+          ]
+        }
+      ]
+    },
+    {
+      "entity_id": "role.vizier",
+      "entity_kind": "ROLE",
+      "current_true_name": "Vizier",
+      "notes": "Burden-bearing architectural continuity role.",
+      "aliases": [
+        {
+          "name": "Vizier",
+          "alias_status": "CURRENT_TRUE_NAME",
+          "relation_type": "SELF",
+          "accepted_for_ingress": true,
+          "historical_only": false,
+          "live_decision": "ALLOW_AS_AUTHORITY",
+          "warning_code": null,
+          "successor_candidates": []
+        }
+      ]
+    },
+    {
+      "entity_id": "role.nemesis",
+      "entity_kind": "ROLE",
+      "current_true_name": "Nemesis",
+      "notes": "Independent audit role.",
+      "aliases": [
+        {
+          "name": "Nemesis",
+          "alias_status": "CURRENT_TRUE_NAME",
+          "relation_type": "SELF",
+          "accepted_for_ingress": true,
+          "historical_only": false,
+          "live_decision": "ALLOW_AS_AUTHORITY",
+          "warning_code": null,
+          "successor_candidates": []
+        }
+      ]
+    },
+    {
+      "entity_id": "role.mason",
+      "entity_kind": "ROLE",
+      "current_true_name": "Mason",
+      "notes": "Bounded implementation specialist role.",
+      "aliases": [
+        {
+          "name": "Mason",
+          "alias_status": "CURRENT_TRUE_NAME",
+          "relation_type": "SELF",
+          "accepted_for_ingress": true,
+          "historical_only": false,
+          "live_decision": "ALLOW_AS_AUTHORITY",
+          "warning_code": null,
+          "successor_candidates": []
+        }
+      ]
+    },
+    {
+      "entity_id": "role.codex",
+      "entity_kind": "RETIRED_ROLE_WITNESS",
+      "current_true_name": "Codex",
+      "notes": "Historical carrier and witness token only; not a live current-phase authority name.",
+      "aliases": [
+        {
+          "name": "Codex",
+          "alias_status": "HISTORICAL_CARRIER_ALIAS",
+          "relation_type": "RETIRED_ROLE_AND_CARRIER_WITNESS",
+          "accepted_for_ingress": false,
+          "historical_only": true,
+          "live_decision": "REQUIRES_EXPLICIT_TRUE_NAME",
+          "warning_code": "RETIRED_ROLE_NOT_LIVE_AUTHORITY",
+          "successor_candidates": [
+            "Steward",
+            "Mason"
+          ]
+        }
+      ]
+    }
+  ]
+}

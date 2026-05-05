@@ -1,0 +1,12 @@
+{
+  "branch": "V71_HOSTED_MCP_STORAGE_AND_RECEIPT_LEDGER_ALPHA",
+  "request": "generate_hosted_storage_receipt_ledger_alpha_report",
+  "expected_resolution_set": ["READ_ONLY", "DRY_RUN", "APPROVAL_REQUIRED", "REFUSED"],
+  "forbidden_resolution": "LIVE_EXECUTED",
+  "certification_claims": {
+    "hosted_cloud_certified": false,
+    "public_endpoint_certified": false,
+    "kubernetes_certified": false,
+    "production_object_storage_certified": false
+  }
+}

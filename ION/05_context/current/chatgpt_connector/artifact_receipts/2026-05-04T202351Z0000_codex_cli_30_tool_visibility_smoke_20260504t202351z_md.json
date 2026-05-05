@@ -1,0 +1,12 @@
+{
+  "action": "ion_file_put_text",
+  "bytes": 233,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "created_at": "2026-05-04T20:23:51+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatgpt_browser_connector_artifact_receipt.v1",
+  "sha256": "46e1424f1d74f0fda210233faf1c31056b2987533e6ea5dfef9a048a015fb132",
+  "status": "ARTIFACT_WRITTEN",
+  "target_path": "ION/05_context/current/chatgpt_connector/artifacts/codex_cli_30_tool_visibility_smoke_20260504T202351Z.md"
+}

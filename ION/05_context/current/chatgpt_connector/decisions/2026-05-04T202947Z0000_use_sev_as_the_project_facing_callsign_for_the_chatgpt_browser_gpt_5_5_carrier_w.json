@@ -1,0 +1,10 @@
+{
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "created_at": "2026-05-04T20:29:47+00:00",
+  "decision": "Use `Sev` as the project-facing callsign for the ChatGPT Browser GPT-5.5 carrier when operating with Braden on ION. This is a carrier callsign / continuity label only. It does not claim ION identity, Steward authority, Relay authority, Persona authority, production authority, or live execution authority.",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "rationale": "Braden restored the long-used `Sev` name for aligned high-trust GPT agents on ION. Recording it as a bounded carrier callsign preserves continuity while maintaining carrier/role/authority separation.",
+  "schema_id": "ion.chatgpt_browser_connector_decision.v1",
+  "status": "RECORDED_NOT_AUTHORITY_BY_ITSELF"
+}

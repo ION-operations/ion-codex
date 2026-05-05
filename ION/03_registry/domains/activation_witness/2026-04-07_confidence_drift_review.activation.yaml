@@ -1,0 +1,15 @@
+witness_id: witness.domain.confidence_drift_review.2026-04-07
+subject_domain: domain.confidence_drift_review
+status: ACTIVATED_FIRST_PASS
+activated_on: 2026-04-07
+basis:
+  - confidence/drift foundation surfaces now exist in live root form via CSR, CODEX__CSR, and T08_ConfidenceAndDriftSchema
+  - existing Vice and Nemesis lanes already carry contradiction pressure and independent audit functions that now need explicit domain placement
+supporting_sources:
+  - ION/03_registry/boots/VICE.boot.md
+  - ION/03_registry/boots/NEMESIS.boot.md
+  - ION/07_templates/confidence/CSR.md
+  - ION/06_intelligence/specs/T08_ConfidenceAndDriftSchema.spec.md
+constraints:
+  - activation does not imply full calibration runtime or automated gate enforcement
+  - Codex may emit review-adjacent witness through CSR but does not become the review authority

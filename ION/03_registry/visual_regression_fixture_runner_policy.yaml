@@ -1,0 +1,28 @@
+schema_id: ion.visual_regression_fixture_runner_policy.v1
+version: V49_VISUAL_REGRESSION_FIXTURE_RUNNER_PLAN
+authority_scope: LOCAL_DEV_VISUAL_FIXTURE_PLAN_AND_REPORT_ONLY
+production_authority: false
+permitted_modes:
+  - STATIC_ARTIFACT_REFERENCE_CHECK
+  - PRECAPTURED_BEFORE_AFTER_VERIFICATION
+  - HARNESS_PLAN_ONLY
+  - STEWARD_REVIEW_REQUIRED
+forbidden_capabilities:
+  unrestricted_browser_control: false
+  browser_execution: false
+  network_side_effects: false
+  credential_sensitive_action: false
+  account_operation: false
+  destructive_action: false
+  form_submission: false
+  purchase_or_submission: false
+  persistent_dom_mutation: false
+  production_visual_automation: false
+  production_authority: false
+review_required_for:
+  - unexpected_actual_verdict
+  - regression_verdict
+  - missing_actual_verdict
+  - steward_required_fixture
+  - blocked_gate
+next_required_surface: V50_VISUAL_FIXTURE_RUNNER_LOCAL_SANDBOX_REVIEW

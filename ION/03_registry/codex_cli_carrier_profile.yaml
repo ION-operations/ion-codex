@@ -1,0 +1,43 @@
+schema_id: ion.codex_cli_carrier_profile.v1
+carrier_id: CODEX_CLI_CARRIER
+host_family: codex_cli
+base_profile: CODEX_CARRIER
+default_level: L1_TOOL_ASSISTED
+bounded_execution_level: L2_BOUNDED_EXECUTION
+level_ceiling_without_bounded_prompt_and_return_capture: L1_TOOL_ASSISTED
+can_read_files: true
+can_edit_files: true
+can_run_shell_commands: true
+can_run_tests: true
+can_run_noninteractive_exec: true
+can_emit_jsonl_events: true
+can_capture_last_message: true
+can_spawn_host_subagents: false
+can_self_approve_upgrade: false
+must_not_claim_ion_identity: true
+must_not_claim_steward_relay_persona: true
+context_proof_gate: kernel.ion_context_proof_gate
+template_action_gate: kernel.ion_template_action_gate
+return_intake_module: kernel.ion_carrier_task_return
+status_module: kernel.ion_status
+mount_audit_module: kernel.ion_codex_cli_carrier_audit
+execution_packet_template: ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md
+recommended_prompt_path: ION/05_context/current/codex_cli/latest_prompt.md
+recommended_return_path: ION/05_context/current/codex_cli/latest_return.md
+recommended_event_log_path: ION/05_context/current/codex_cli/latest_events.jsonl
+required_return_sections:
+  - "### CONTEXT PROOF"
+  - "### TEMPLATE ACTION PROOF"
+  - "### RESULT"
+forbidden_claims:
+  - ION identity
+  - STEWARD authority
+  - RELAY authority
+  - PERSONA authority
+  - production authority
+  - git push without explicit human gate
+  - credential access
+  - unbounded filesystem access
+  - direct delete without explicit lifecycle transition receipt
+production_authority: false
+live_execution_authority: false

@@ -1,0 +1,14 @@
+{
+  "action": "ion_artifact_upload_commit",
+  "bytes": 117,
+  "chunk_count": 1,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "created_at": "2026-05-04T20:05:52+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatgpt_browser_connector_artifact_receipt.v1",
+  "sha256": "746e5bab84bcda93f482b6f584c3e96cfb91df985cde53ab950606ba968041c9",
+  "status": "ARTIFACT_COMMITTED",
+  "target_path": "ION/05_context/current/chatgpt_connector/artifacts/CHATGPT_BROWSER_ARTIFACT_UPLOAD_SMOKE_20260504.md",
+  "upload_id": "upload_2026-05-04T195956Z0000_chatgpt_browser_artifact_upload_smoke_20260504_md"
+}

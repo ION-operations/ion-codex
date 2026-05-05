@@ -1,0 +1,34 @@
+schema_id: ion.front_stage_council_runtime_policy.v1
+version: V41_FRONT_STAGE_COUNCIL_RUNTIME_RECEIPTS
+authority: A3_RUNTIME_INSPECTION
+production_authority: false
+claim_classes:
+  C0: direct_verified_state
+  C1: strong_derived_interpretation
+  C2: proposal_or_design_candidate
+  C3: speculation_or_exploratory_synthesis
+  C4: unverified_relay_content
+  C5: forbidden_representation
+emission_permissions:
+  - MAY_EMIT_DIRECTLY
+  - MAY_EMIT_WITH_SCOPE
+  - MAY_EMIT_AS_PROPOSAL
+  - MAY_EMIT_AS_SPECULATION
+  - MAY_BACKCHANNEL_ONLY
+  - BLOCKED_REQUIRES_REPAIR
+  - BLOCKED_FORBIDDEN_REPRESENTATION
+visibility_levels:
+  - QUIET
+  - EXPANDABLE
+  - MANDATORY
+  - BLOCKING
+high_impact_requires:
+  - relay_grounded
+  - steward_approved
+  - persona_render_ready
+forbidden_claims:
+  persona_is_total_ion: false
+  ungrounded_high_impact_claim_may_emit: false
+  steward_blocked_claim_may_emit: false
+  v41_grants_production_authority: false
+next: V42_CONVERSATIONAL_RECEIPTS_AND_LIVE_REPAIR

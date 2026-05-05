@@ -1,0 +1,5 @@
+example_id,carrier_start,carrier_end,activation_outcome,lifecycle_path,continuation_mode,main_boundary_under_test,current_judgment
+manual_immediate,manual,manual,ALLOW,CLAIM>READY>ENTER>RETURN,none,operator request does not grant enactment,stable first-form witness
+service_deferred,daemon_service,daemon_service,DEFER then ALLOW,CLAIM>READY>ENTER,none,service readiness does not grant enactment,stable first-form witness
+api_escalated,external_api,external_api,ESCALATE then ALLOW,CLAIM>READY>ENTER,none,transport availability does not grant enactment,stable first-form witness
+carrier_change_resume,manual,daemon_service,preserved authority or fresh activation depending on continuity,SUSPEND>RESUME or fresh CLAIM>READY>ENTER,continuation_cross_carrier,continuation does not mint hidden second activation,stable with explicit revalidation rule

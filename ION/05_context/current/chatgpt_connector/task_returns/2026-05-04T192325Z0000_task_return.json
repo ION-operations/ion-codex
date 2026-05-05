@@ -1,0 +1,37 @@
+{
+  "accepted_for_carrier_intake": true,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T19:23:25+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "RECORDED_FOR_CARRIER_INTAKE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\nroot_confirmed: /home/sev/ION - Production/ION_CODEX\nqueued_packet_read: ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T183803Z0000_continue_full_carrier_mcp_parity_rollout_current_chatgpt_browser_connector_tool_.json\nfiles_read: connector contract, HTTP preview, Cloudflare tunnel bridge, connector wrapper/manifest, active V120/V121/V122 connector state, full-carrier protocol, carrier-comms protocol, tool/capability registries, runtime tool snapshots.\nlive_connector_state: stale local preview process exposed 15 old tools; refreshed public /mcp now exposes 22 tools. Active URL: https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp\nowner_surfaces_found: ION/04_packages/kernel/ion_chatgpt_browser_mcp_*, ION/09_integrations/mcp/chatgpt_connector/, ION/03_registry/*carrier*/*mcp*, ION/05_context/current/chatgpt_connector/.\nassumptions_or_missing_evidence: ChatGPT UI may still cache old connector schema until refreshed/re-added. No ION_CORE_FAILURE found; this was a stale carrier adapter/runtime reload issue.\n\n### TEMPLATE ACTION PROOF\ntemplate_id: ion.template.patch_proposal.v1\naction_id: full_carrier_mcp_visibility_restart_2026_05_04",
+  "task_output_sha256": "91e955d209df487704d8e6a7ca9320042e3c2502efa393d43a15b4d056b89657",
+  "template_action_proof_result": {
+    "accepted": true,
+    "action_id": "full_carrier_mcp_visibility_restart_2026_05_04_final",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.patch_proposal.v1",
+    "touched_paths": [
+      "connector metadata patch, refreshed V120/V121/V122 state JSON, runtime PID/log/tool snapshots, smoke artifact/message receipts, active carrier message queue, accepted task return packet."
+    ]
+  },
+  "work_request_id": "codex_req_2026-05-04T183803Z0000_continue_full_carrier_mcp_parity_rollout_current_chatgpt_browser_connector_tool_",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T183803Z0000_continue_full_carrier_mcp_parity_rollout_current_chatgpt_browser_connector_tool_.json"
+}

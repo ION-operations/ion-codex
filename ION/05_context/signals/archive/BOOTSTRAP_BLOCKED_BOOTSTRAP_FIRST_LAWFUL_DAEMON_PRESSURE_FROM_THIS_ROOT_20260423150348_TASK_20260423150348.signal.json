@@ -1,0 +1,29 @@
+{
+  "consumed_at": "2026-04-23T15:06:58+00:00",
+  "consumed_by": "DAEMON",
+  "created_at": "2026-04-23T15:03:48+00:00",
+  "expired_at": null,
+  "expired_by": null,
+  "payload": {
+    "blocker": "Mint the first lawful bootstrap packet so the visible packet lane, canonical signal lane, and supervised daemon can activate without hidden runtime state.",
+    "bootstrap_packet_path": "ION/05_context/inbox/bootstrap/bootstrap_first_lawful_daemon_pressure_from_this_root_20260423150348.task.md",
+    "delta_id": "delta-bootstrap-bootstrap-first-lawful-daemon-pressure-from-this-root-20260423150348-task",
+    "needed_from": "Vizier",
+    "receipt_path": "ION/05_context/inbox/bootstrap/bootstrap_first_lawful_daemon_pressure_from_this_root_20260423150348.task.md",
+    "summary": "Mint the first lawful bootstrap packet so the visible packet lane, canonical signal lane, and supervised daemon can activate without hidden runtime state.",
+    "task_from": "Operator",
+    "task_target": "ION/05_context/signals",
+    "work_unit_id": "wu-bootstrap-bootstrap-first-lawful-daemon-pressure-from-this-root-20260423150348-task"
+  },
+  "priority": "P1_HIGH",
+  "related_artifacts": [
+    "ION/05_context/inbox/bootstrap/bootstrap_first_lawful_daemon_pressure_from_this_root_20260423150348.task.md"
+  ],
+  "signal_id": "sig-bootstrap-bootstrap-first-lawful-daemon-pressure-from-this-root-20260423150348-task-20260423t1503480000",
+  "signal_type": "BLOCKED",
+  "source_agent": "Codex",
+  "source_role": "Codex",
+  "source_work_unit": "wu-bootstrap-bootstrap-first-lawful-daemon-pressure-from-this-root-20260423150348-task",
+  "status": "ARCHIVED",
+  "target": "DAEMON"
+}

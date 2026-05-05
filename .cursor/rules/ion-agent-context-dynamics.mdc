@@ -1,0 +1,20 @@
+---
+description: ION Agent Context Dynamics and Front-Door Team Rule
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+When the operator asks about agent context systems, long-horizon workflow, Persona/Relay/Steward boundaries, or says continue/proceed on ION work, treat `ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json` and `ION/05_context/current/ACTIVE_FRONT_DOOR_TEAM_PLAN.json` as carrier-visible runtime state.
+
+The Cursor parent chat is still `CURSOR_CARRIER_CONTROL_SURFACE`, not STEWARD, RELAY, or PERSONA_INTERFACE.
+
+Routine ION upkeep is not delegated to the user. Do not ask the user which agents to spawn, whether to refresh packets, or how to sequence normal work when active packets/plans can be generated.
+
+Use:
+
+```bash
+PYTHONPATH=ION/04_packages python3 -m kernel.ion_agent_context_dynamics --ion-root . --operator-message "continue" --write --json
+```
+
+for context-window planning, then follow `ACTIVE_CARRIER_TURN_PACKET.json` and proof-gated task-return intake.

@@ -1,0 +1,45 @@
+{
+  "accepted_for_carrier_intake": false,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [
+      "ION/REPO_AUTHORITY.md",
+      "ION/docs/setup/ION_CURRENT_OPERATING_PACKET_V119.md",
+      "ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T02:31:46+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "BLOCKED_BY_PROOF_GATE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\n- ION/REPO_AUTHORITY.md excerpt: shell authority confirmed for bounded connector smoke.\n- ION/docs/setup/ION_CURRENT_OPERATING_PACKET_V119.md excerpt: current operating packet is the active onboarding authority.\n- ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md excerpt: ChatGPT connector session packet governs this return shape.\n\n### TEMPLATE ACTION PROOF\ntemplate_id: ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md\naction_id: v120-live-http-connector-smoke\nresult: validated onboarding, status/read, bounded Codex work queue, proof-gated return, and receipt lookup through the HTTP MCP preview\ntouched_paths:\n  - ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json\n  - ION/05_context/current/chatgpt_connector/codex_work_requests/\n  - ION/05_context/current/chatgpt_connector/task_returns/\n\n### RESULT\nThe ChatGPT browser connector HTTP preview completed a bounded work request and proof-gated return without exposing arbitrary shell, arbitrary write/delete, credentials, provider calls, browser control, or git push.\n",
+  "task_output_sha256": "f2ce8eef860b911a50fa440f574721614eff6940d6f7fff96b766a3fb7f0c566",
+  "template_action_proof_result": {
+    "accepted": false,
+    "action_id": "v120-live-http-connector-smoke",
+    "findings": [
+      "unapproved_template_id:ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_OR_REPAIR",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md",
+    "touched_paths": [
+      "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/",
+      "ION/05_context/current/chatgpt_connector/task_returns/"
+    ]
+  },
+  "work_request_id": "codex_req_2026-05-04T023146Z0000_v120_live_http_connector_smoke_codex_local_visibility_and_proof_return",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T023146Z0000_v120_live_http_connector_smoke_codex_local_visibility_and_proof_return.json"
+}

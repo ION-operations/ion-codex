@@ -1,0 +1,65 @@
+{
+  "accepted_for_carrier_intake": false,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": false,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [
+      "missing_required_read_path:ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T214342Z0000_agent_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_que.json",
+      "missing_required_read_path:ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run.json"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_TASK",
+    "live_execution_authority": false,
+    "missing_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T214342Z0000_agent_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_que.json",
+      "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run.json"
+    ],
+    "production_authority": false,
+    "required_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T214342Z0000_agent_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_que.json",
+      "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run.json",
+      "ION/03_registry/agent_roster_registry.yaml",
+      "ION/03_registry/agent_context_system_registry.yaml",
+      "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md",
+      "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/05_context/current/agent_context_systems/NEMESIS.context_system.md",
+      "ION/03_registry/boots/NEMESIS.boot.md",
+      "ION/03_registry/semantic_identities/NEMESIS.semantic.yaml",
+      "ION/07_templates/bindings/NEMESIS__AUDIT.md",
+      "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+      "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+      "ION/04_packages/kernel/ion_carrier_task_return.py",
+      "ION/04_packages/kernel/ion_carrier_continue.py",
+      "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+      "ION/04_packages/kernel/ion_cockpit_view_model.py"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T21:48:48+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "BLOCKED_BY_PROOF_GATE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\n\nAudit root: `/home/sev/ION - Production/ION_CODEX`. I did not claim ION/Steward/Relay/Persona/sovereign authority.\n\nRequired context read ledger:\n\n| Path | Line/excerpt proof | sha256 |\n|---|---|---|\n| `...codex_work_requests/2026-05-04T214342Z0000_agent_nemesis...que.json` | lines 23-25 require proof-gated return; lines 99-103 require sections | `1dca576684d36a96e5c454df8c1786009fddf942c492715ee1f8cced5e8393fa` |\n| `...codex_queue_runs/.../context_receipt.json` | lines 2-103 list every required read | `8c6dab269c2d0efa68849b90aa58cd11797abfa7518e09d6fe746d54a8d84a98` |\n| `...agent_invocations/2026-05-04T214342Z0000_nemesis...json` | lines 87-92 one core/raw-output policy; lines 160-164 schema/status | `b5a8cc098d87096aab07a504067dbed728f9a409fc4792c7640406ca466eb78f` |\n| `ION/03_registry/agent_roster_registry.yaml` | lines 113-140 define Nemesis audit lane/no source landing | `92f8852b1ebff1916c5313d6e82a6cd01569135f73f0ec7ce6a8f4aa3418f6d6` |\n| `ION/03_registry/agent_context_system_registry.yaml` | lines 17-21 MINI/CAPSULE not primary; lines 63-75 Nemesis package | `0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12` |\n| `ION/03_registry/codex_cli",
+  "task_output_sha256": "41c17520e78712a4420133de34eaf8c26022b2ac1a1360b93171460911b9cdcf",
+  "template_action_proof_result": {
+    "accepted": false,
+    "action_id": "codex_queue_runner_process_once",
+    "findings": [
+      "missing_result",
+      "missing_touched_paths"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_OR_REPAIR",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.autonomous_loop.local_worker.v1",
+    "touched_paths": []
+  },
+  "work_request_id": "codex_req_agent_2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T214342Z0000_agent_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_que.json"
+}

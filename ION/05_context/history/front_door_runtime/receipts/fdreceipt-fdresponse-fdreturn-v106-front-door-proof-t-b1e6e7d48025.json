@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-05-02T22:52:51+00:00",
+  "detail": "system output prepared through Relay -> Persona Interface return boundary",
+  "receipt_id": "fdreceipt-fdresponse-fdreturn-v106-front-door-proof-t-b1e6e7d48025",
+  "session_id": "v106-front-door-proof-trace",
+  "stage": "PERSONA_TO_USER",
+  "status": "ACCEPTED",
+  "witness_paths": [
+    "ION/05_context/history/front_door_runtime/relay_return_packages/fdreturn-v106-front-door-proof-trace-steward-proof-t-2fdd60e1bd98.json",
+    "ION/05_context/history/front_door_runtime/persona_response_packages/fdresponse-fdreturn-v106-front-door-proof-trace-stewar-092bc3cb2479.json",
+    "ION/05_context/history/front_door_runtime/receipts/fdreceipt-fdresponse-fdreturn-v106-front-door-proof-t-b1e6e7d48025.json"
+  ]
+}

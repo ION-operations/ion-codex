@@ -1,0 +1,52 @@
+{
+  "created_at": "2026-04-23T15:52:35+00:00",
+  "loaded_reads": [
+    {
+      "bundle_relative_path": "ION/05_context/continuation_bundles/bootstrap_vm_continuation/reads/ION/05_context/inbox/bootstrap/archive/bootstrap_first_lawful_daemon_pressure_from_this_root_20260423150348.task.md",
+      "byte_count": 1223,
+      "checksum": "d485b04b6f2d2d844a2b108c96959312fca2c65f0d1cdfa61f9cf75f7c45cc11",
+      "line_count": 44,
+      "source_path": "/mnt/data/ion_runtime_mission_run/ION/05_context/inbox/bootstrap/archive/bootstrap_first_lawful_daemon_pressure_from_this_root_20260423150348.task.md",
+      "source_relative_path": "ION/05_context/inbox/bootstrap/archive/bootstrap_first_lawful_daemon_pressure_from_this_root_20260423150348.task.md"
+    },
+    {
+      "bundle_relative_path": "ION/05_context/continuation_bundles/bootstrap_vm_continuation/reads/ION/05_context/history/kernel_store/open_questions/signal-followup-sig-bootstrap-bootstrap-first-lawful-daemon-pressure-from-this-root-20260423150348-task-20260423t1503480000.json",
+      "byte_count": 1662,
+      "checksum": "bdab4c0e17a0ab237bd670ffc095d22638cb3595175f7ca0d50727eee89032c1",
+      "line_count": 31,
+      "source_path": "/mnt/data/ion_runtime_mission_run/ION/05_context/history/kernel_store/open_questions/signal-followup-sig-bootstrap-bootstrap-first-lawful-daemon-pressure-from-this-root-20260423150348-task-20260423t1503480000.json",
+      "source_relative_path": "ION/05_context/history/kernel_store/open_questions/signal-followup-sig-bootstrap-bootstrap-first-lawful-daemon-pressure-from-this-root-20260423150348-task-20260423t1503480000.json"
+    },
+    {
+      "bundle_relative_path": "ION/05_context/continuation_bundles/bootstrap_vm_continuation/reads/ION/01_doctrine/CANONICAL_WORKFLOW.md",
+      "byte_count": 3629,
+      "checksum": "290d7d54c01c90003169735c96375418270de38167c22deee49cefb4091f3955",
+      "line_count": 101,
+      "source_path": "/mnt/data/ion_runtime_mission_run/ION/01_doctrine/CANONICAL_WORKFLOW.md",
+      "source_relative_path": "ION/01_doctrine/CANONICAL_WORKFLOW.md"
+    },
+    {
+      "bundle_relative_path": "ION/05_context/continuation_bundles/bootstrap_vm_continuation/reads/ION/06_intelligence/orchestration/2026-04-10_bootstrap_init_protocol_next_packet.md",
+      "byte_count": 1816,
+      "checksum": "ebe5f634b82840d2292c3f8a153401e0f68ec91e38e691f7b95d4d01e6394726",
+      "line_count": 65,
+      "source_path": "/mnt/data/ion_runtime_mission_run/ION/06_intelligence/orchestration/2026-04-10_bootstrap_init_protocol_next_packet.md",
+      "source_relative_path": "ION/06_intelligence/orchestration/2026-04-10_bootstrap_init_protocol_next_packet.md"
+    }
+  ],
+  "next_action": "Continue one bounded next step from the archived bootstrap task by reading the named governing artifacts, reviewing the open question raised by the daemon, and preparing the next lawful bounded response without widening scope.",
+  "objective": "Continue the first lawful bootstrap pressure from this root through bounded review and next-step preparation.",
+  "packet_path": "/mnt/data/ion_runtime_mission_run/ION/05_context/inbox/takeover/bootstrap_first_lawful_daemon_pressure__manual_takeover.role_session.md",
+  "packet_relative_path": "ION/05_context/inbox/takeover/bootstrap_first_lawful_daemon_pressure__manual_takeover.role_session.md",
+  "packet_type": "role_session",
+  "proof_kind": "CONTEXT_PERFECT_CONTINUATION",
+  "required_reads": [
+    "ION/05_context/inbox/bootstrap/archive/bootstrap_first_lawful_daemon_pressure_from_this_root_20260423150348.task.md",
+    "ION/05_context/history/kernel_store/open_questions/signal-followup-sig-bootstrap-bootstrap-first-lawful-daemon-pressure-from-this-root-20260423150348-task-20260423t1503480000.json",
+    "ION/01_doctrine/CANONICAL_WORKFLOW.md",
+    "ION/06_intelligence/orchestration/2026-04-10_bootstrap_init_protocol_next_packet.md"
+  ],
+  "role_session_relative_path": "ION/05_context/continuation_bundles/bootstrap_vm_continuation/01_role_session.md",
+  "scope_ref": "wu-bootstrap-bootstrap-first-lawful-daemon-pressure-from-this-root-20260423150348-task",
+  "scope_type": "WORK_UNIT"
+}

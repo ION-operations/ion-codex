@@ -1,0 +1,224 @@
+import json
+from pathlib import Path
+
+from kernel.ion_codex_queue_runner import (
+    build_codex_queue_runner_status,
+    prepare_codex_queue_run,
+    process_codex_queue_once,
+    reconcile_codex_queue_runner_state,
+)
+
+
+def _seed_root(root: Path) -> None:
+    (root / "pyproject.toml").write_text("[project]\nname = \"ion-test\"\n", encoding="utf-8")
+    (root / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True)
+    (root / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
+
+
+def _seed_request(root: Path) -> str:
+    rel = "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T000000Z0000_runner_test.json"
+    path = root / rel
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "schema_id": "ion.chatgpt_browser_connector_codex_work_request.v1",
+        "request_id": "codex_req_runner_test",
+        "objective": "Runner test objective",
+        "requested_by": "chatgpt_browser_connector",
+        "status": "QUEUED_FOR_CODEX_CARRIER",
+        "created_at": "2026-05-04T00:00:00+00:00",
+        "updated_at": "2026-05-04T00:00:00+00:00",
+        "return_packet_paths": [],
+        "latest_return_packet_path": None,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    return rel
+
+
+def _valid_task_return(required_paths: list[str]) -> str:
+    proof_lines = ["### CONTEXT PROOF"]
+    proof_lines.extend(f"- {path} sha256: test line evidence." for path in required_paths)
+    return "\n".join([
+        *proof_lines,
+        "",
+        "### TEMPLATE ACTION PROOF",
+        "template_id: ion.template.autonomous_loop.local_worker.v1",
+        "action_id: codex_queue_runner_test",
+        "result: validated queue runner task return",
+        "touched_paths:",
+        "  - ION/04_packages/kernel/ion_codex_queue_runner.py",
+        "",
+        "### VALIDATION",
+        "commands_run:",
+        "  - focused queue runner unit test",
+        "tests_passed: queue runner proof gate smoke",
+        "tests_failed: none",
+        "",
+        "### RESULT",
+        "implementation_result: queue runner smoke accepted",
+        "remaining_blockers: none for unit test",
+        "next_lawful_moves: continue",
+        "",
+    ])
+
+
+def test_codex_queue_runner_status_reports_pending_request(tmp_path):
+    _seed_root(tmp_path)
+    request_rel = _seed_request(tmp_path)
+
+    status = build_codex_queue_runner_status(tmp_path)
+
+    assert status["schema_id"] == "ion.codex_queue_runner.v1"
+    assert status["queued_request_count"] == 1
+    assert status["next_request_path"] == request_rel
+    assert status["manual_proceed_relay_required"] is False
+
+
+def test_prepare_codex_queue_run_writes_prompt_and_receipt_without_claiming(tmp_path):
+    _seed_root(tmp_path)
+    request_rel = _seed_request(tmp_path)
+
+    prepared = prepare_codex_queue_run(tmp_path)
+
+    assert prepared["ok"] is True
+    assert prepared["prepared_only"] is True
+    run = prepared["run"]
+    assert (tmp_path / run["prompt_path"]).exists()
+    assert (tmp_path / run["context_receipt_path"]).exists()
+    assert request_rel in (tmp_path / run["prompt_path"]).read_text(encoding="utf-8")
+    request = json.loads((tmp_path / request_rel).read_text(encoding="utf-8"))
+    assert request["status"] == "QUEUED_FOR_CODEX_CARRIER"
+
+
+def test_process_once_inline_records_proof_gated_task_return(tmp_path):
+    _seed_root(tmp_path)
+    request_rel = _seed_request(tmp_path)
+    prepared = prepare_codex_queue_run(tmp_path)
+    required_paths = [item["path"] for item in prepared["context_receipt"]["required_context_reads"]]
+    task_output = _valid_task_return(required_paths)
+
+    result = process_codex_queue_once(
+        tmp_path,
+        request_path=request_rel,
+        start=True,
+        background=False,
+        task_output_override=task_output,
+    )
+
+    assert result["ok"] is True
+    assert result["result"] == "RETURN_RECORDED_PROOF_ACCEPTED"
+    request = json.loads((tmp_path / request_rel).read_text(encoding="utf-8"))
+    assert request["status"] == "RETURN_RECORDED_PROOF_ACCEPTED"
+    assert request["latest_context_proof_accepted"] is True
+    assert request["latest_template_action_proof_accepted"] is True
+    assert (tmp_path / request["latest_return_packet_path"]).exists()
+
+
+def test_process_once_inline_reports_proof_blocked_return_as_backend_failure(tmp_path):
+    _seed_root(tmp_path)
+    request_rel = _seed_request(tmp_path)
+
+    result = process_codex_queue_once(
+        tmp_path,
+        request_path=request_rel,
+        start=True,
+        background=False,
+        task_output_override="### RESULT\nmissing required proof sections\n",
+    )
+
+    assert result["ok"] is False
+    assert result["result"] == "RETURN_RECORDED_PROOF_BLOCKED"
+    assert result["run"]["failure_classification"] == "BACKEND_CODEX_FAILURE"
+    request = json.loads((tmp_path / request_rel).read_text(encoding="utf-8"))
+    assert request["status"] == "RETURN_RECORDED_PROOF_BLOCKED"
+    assert request["failure_classification"] == "BACKEND_CODEX_FAILURE"
+    assert request["latest_context_proof_accepted"] is False
+    assert request["latest_template_action_proof_accepted"] is False
+
+
+def test_reconcile_marks_dead_active_worker_failed_and_clears_state(tmp_path):
+    _seed_root(tmp_path)
+    request_rel = _seed_request(tmp_path)
+    prepared = prepare_codex_queue_run(tmp_path, request_path=request_rel, claim=True)
+    run = dict(prepared["run"])
+    run_path = tmp_path / run["run_packet_path"]
+    run["status"] = "CODEX_CLI_RUNNING"
+    run["pid"] = 999999999
+    run_path.write_text(json.dumps(run, indent=2), encoding="utf-8")
+    state_path = tmp_path / "ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json"
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    state_path.write_text(
+        json.dumps(
+            {
+                "schema_id": "ion.codex_queue_runner_state.v1",
+                "active_run": {
+                    "run_id": run["run_id"],
+                    "pid": 999999999,
+                    "run_packet_path": run["run_packet_path"],
+                    "request_path": request_rel,
+                    "started_at": "2026-05-04T00:00:00+00:00",
+                },
+                "latest_run": run["run_packet_path"],
+                "production_authority": False,
+                "live_execution_authority": False,
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    result = reconcile_codex_queue_runner_state(tmp_path, write=True)
+
+    assert result["ok"] is True
+    assert result["stale_active_run_detected"] is True
+    assert result["action"] == "mark_daemon_failure_and_clear_active"
+    updated_run = json.loads(run_path.read_text(encoding="utf-8"))
+    assert updated_run["status"] == "DAEMON_WORKER_EXITED_WITHOUT_FINALIZATION"
+    assert updated_run["failure_classification"] == "DAEMON_FAILURE"
+    assert updated_run["daemon_reconciliation"]["output_presence"] == {
+        "stdout_exists": False,
+        "stderr_exists": False,
+        "last_message_exists": False,
+    }
+    updated_request = json.loads((tmp_path / request_rel).read_text(encoding="utf-8"))
+    assert updated_request["status"] == "CODEX_QUEUE_RUNNER_FAILED"
+    assert updated_request["failure_classification"] == "DAEMON_FAILURE"
+    runner_state = json.loads(state_path.read_text(encoding="utf-8"))
+    assert runner_state["active_run"] is None
+
+
+def test_status_classifies_latest_proof_blocked_run_without_accepting(tmp_path):
+    _seed_root(tmp_path)
+    request_rel = _seed_request(tmp_path)
+    prepared = prepare_codex_queue_run(tmp_path, request_path=request_rel, claim=True)
+    run = dict(prepared["run"])
+    run_path = tmp_path / run["run_packet_path"]
+    run["status"] = "RETURN_RECORDED_PROOF_BLOCKED"
+    run["failure_classification"] = None
+    run_path.write_text(json.dumps(run, indent=2), encoding="utf-8")
+    state_path = tmp_path / "ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json"
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    state_path.write_text(
+        json.dumps(
+            {
+                "schema_id": "ion.codex_queue_runner_state.v1",
+                "active_run": None,
+                "latest_run": run["run_packet_path"],
+                "production_authority": False,
+                "live_execution_authority": False,
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    status = build_codex_queue_runner_status(tmp_path)
+
+    assert status["reconciliation"]["latest_run_failure_classification_updated"] is True
+    updated_run = json.loads(run_path.read_text(encoding="utf-8"))
+    assert updated_run["status"] == "RETURN_RECORDED_PROOF_BLOCKED"
+    assert updated_run["failure_classification"] == "BACKEND_CODEX_FAILURE"
+    updated_request = json.loads((tmp_path / request_rel).read_text(encoding="utf-8"))
+    assert updated_request["status"] == "RETURN_RECORDED_PROOF_BLOCKED"
+    assert updated_request["failure_classification"] == "BACKEND_CODEX_FAILURE"

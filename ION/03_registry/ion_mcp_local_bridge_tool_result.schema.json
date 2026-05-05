@@ -1,0 +1,77 @@
+{
+  "$id": "https://ion.local/schemas/ion_mcp_local_bridge_tool_result.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "blocked_capabilities": {
+      "type": "object"
+    },
+    "browser_mutation_authorized": {
+      "const": false,
+      "type": "boolean"
+    },
+    "canonical_write_authorized": {
+      "const": false,
+      "type": "boolean"
+    },
+    "credential_access_authorized": {
+      "const": false,
+      "type": "boolean"
+    },
+    "execution_resolution": {
+      "enum": [
+        "READ_ONLY",
+        "DRY_RUN",
+        "APPROVAL_REQUIRED",
+        "REFUSED"
+      ],
+      "type": "string"
+    },
+    "external_model_call_authorized": {
+      "const": false,
+      "type": "boolean"
+    },
+    "kernel_truth_mutated": {
+      "const": false,
+      "type": "boolean"
+    },
+    "live_execution_authorized": {
+      "const": false,
+      "type": "boolean"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "session_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "OK",
+        "BLOCKED",
+        "ERROR"
+      ],
+      "type": "string"
+    },
+    "tool_name": {
+      "type": "string"
+    },
+    "version": {
+      "const": "V64_LOCAL_MCP_BRIDGE_TO_ION_KERNEL_AND_SUPERVISED_DAEMON",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "tool_name",
+    "status",
+    "execution_resolution",
+    "payload",
+    "blocked_capabilities"
+  ],
+  "title": "IonMcpLocalBridgeToolResult",
+  "type": "object"
+}

@@ -1,0 +1,45 @@
+{
+  "accepted_for_carrier_intake": true,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [
+      "ION/REPO_AUTHORITY.md",
+      "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+      "ION/02_architecture/ION_CHATGPT_BROWSER_MCP_CONNECTOR_PROTOCOL.md",
+      "ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md",
+      "ION/docs/setup/CHATGPT_BROWSER_MCP_CONNECTOR_SETUP_V120.md",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T17:47:23+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "RECORDED_FOR_CARRIER_INTAKE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\n- Root confirmed: `/home/sev/ION - Production/ION_CODEX`; `pyproject.toml` and `ION/REPO_AUTHORITY.md` are present.\n- Browser-origin work request used: `ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it.json`; request id `codex_req_2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it`.\n- `ION/REPO_AUTHORITY.md` sha256: `804ed8430fc53e551d254af063ec414646a1c1bf94ceeec51c31769fa41aca1e`; heading/line evidence recorded for connector task return.\n- `ION/02_architecture/ION_MOUNT_CONTRACT.md` sha256: `468bbf85e8fa0f38e0cf9347fedb615dd68f59b77cfbb8ed94cadae79ee0f891`; heading/line evidence recorded for connector task return.\n- `ION/02_architecture/ION_CHATGPT_BROWSER_MCP_CONNECTOR_PROTOCOL.md` sha256: `9c8931029cc7df778d04c62238c0f63db65d5955705e437696cc55f457cfea27`; heading/line evidence recorded for connector task return.\n- `ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md` sha256: `540b09f8d7f53d31675f719c780d1a71ad9f646d00f035658238b497432874f8`; heading/line evidence recorded for connector task retur",
+  "task_output_sha256": "a7b35c54fe12c21f051478344a1607bd98a862b8f07cc4d65136a506b32f664c",
+  "template_action_proof_result": {
+    "accepted": true,
+    "action_id": "chatgpt_browser_full_carrier_mcp_parity_protocol_seed_2026_05_04",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.patch_proposal.v1",
+    "touched_paths": [
+      "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md"
+    ]
+  },
+  "work_request_id": "codex_req_2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it.json"
+}

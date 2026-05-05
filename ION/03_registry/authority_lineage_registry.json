@@ -1,0 +1,74 @@
+{
+  "registry_id": "authority.lineage.registry",
+  "display_name": "Authority Lineage and Stale Name Resolution Registry",
+  "status": "PROVISIONAL_CURRENT_PHASE",
+  "purpose": "Track current authority truth, stale aliases, surface-specific resolution, and active-surface audit paths so older names remain legible without silently governing fresh runtime defaults.",
+  "names": {
+    "Steward": {
+      "status": "CURRENT_PHASE_TRUE_NAME",
+      "historical_summary": [
+        "Current-phase orchestration truename for active routing and bounded execution.",
+        "Successor for stale bootstrap-oriented Codex defaults in fresh runtime entry surfaces."
+      ]
+    },
+    "Codex": {
+      "status": "HISTORICAL_CARRIER_ALIAS",
+      "routes_to": "Steward",
+      "historical_summary": [
+        "Historical IDE-native carrier/chassis witness.",
+        "May remain explicit in lineage, replay, bindings, and archaeology without silently governing fresh authority defaults."
+      ]
+    },
+    "Vizier": {
+      "status": "ACTIVE_SPECIALIST_ROLE",
+      "historical_summary": [
+        "Active architectural / continuity burden-bearer in the broader organism.",
+        "Not the default bootstrap-blocked escalation target unless a narrower surface explicitly routes there."
+      ]
+    }
+  },
+  "surfaces": {
+    "bootstrap_packet_agent": {
+      "current_authority": "Steward",
+      "route_aliases": {
+        "Codex": "Steward"
+      },
+      "description": "Fresh bootstrap packets should be authored under current orchestration truth while preserving older carrier requests in provenance."
+    },
+    "bootstrap_blocked_escalation": {
+      "current_authority": "Steward",
+      "route_aliases": {
+        "Codex": "Steward",
+        "Vizier": "Steward"
+      },
+      "description": "Blocked bootstrap default escalation should route to Steward in the current branch. Older Codex/Vizier defaults remain lineage evidence and should be witnessed then resolved."
+    },
+    "runtime_status_report_from": {
+      "current_authority": "Steward",
+      "route_aliases": {
+        "Codex": "Steward"
+      },
+      "description": "Runtime status reports should name current-phase orchestration truth by default while preserving older Codex authorship as lineage witness when explicitly requested."
+    },
+    "continuation_target_executor": {
+      "current_authority": "Steward",
+      "route_aliases": {
+        "Codex": "Steward"
+      },
+      "description": "Explicit continuation role targets may route stale Codex authority aliases to Steward while leaving concrete executor identifiers untouched unless explicitly overridden."
+    }
+  },
+  "active_surface_scan_paths": [
+    "ION/04_packages/kernel/bootstrap_init.py",
+    "ION/04_packages/kernel/bootstrap_bridge.py",
+    "ION/04_packages/kernel/bootstrap_activation.py",
+    "ION/04_packages/kernel/operator_cli.py",
+    "ION/04_packages/kernel/continuation.py",
+    "ION/04_packages/kernel/runtime_reporting.py",
+    "ION/04_packages/kernel/schedule_resume_projection.py",
+    "ION/04_packages/kernel/schedule_resume_bundle.py",
+    "ION/04_packages/kernel/schedule_takeover_activation.py",
+    "ION/04_packages/kernel/schedule_handoff_capsule.py",
+    "ION/04_packages/kernel/schedule_executor_start_packet.py"
+  ]
+}

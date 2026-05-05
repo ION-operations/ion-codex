@@ -1,0 +1,22 @@
+{
+  "acked_by": [],
+  "body": "Public MCP connector now exposes the full-carrier parity tool list.",
+  "channel": "full_carrier_mcp_parity_smoke",
+  "context_refs": [
+    "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md"
+  ],
+  "created_at": "2026-05-04T19:08:47+00:00",
+  "live_execution_authority": false,
+  "message_id": "carmsg_2026-05-04T190847Z0000_codex_cli_carrier_to_chatgpt_browser_carrier",
+  "message_type": "smoke_test",
+  "packet_path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-04T190847Z0000_carmsg_2026_05_04t190847z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+  "production_authority": false,
+  "receipt_refs": [
+    "ION/05_context/current/chatgpt_connector/runtime/public_mcp_tools_list_after_restart.json"
+  ],
+  "recipient": "CHATGPT_BROWSER_CARRIER",
+  "schema_id": "ion.carrier_message.v1",
+  "sender_carrier_id": "CODEX_CLI_CARRIER",
+  "status": "pending",
+  "updated_at": "2026-05-04T19:08:47+00:00"
+}

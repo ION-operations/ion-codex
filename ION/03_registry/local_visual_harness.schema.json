@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.local_visual_harness_capture.v1",
+  "title": "ION Local Visual Harness Capture",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "capture_id",
+    "emitted_at",
+    "target",
+    "target_kind",
+    "capture_modes",
+    "artifacts",
+    "authority_scope",
+    "steward_gate_status",
+    "harness_verdict",
+    "production_authority",
+    "forbidden_capabilities"
+  ],
+  "properties": {
+    "schema_id": {"const": "ion.local_visual_harness_capture.v1"},
+    "version": {"const": "V46_LOCAL_VISUAL_HARNESS_PROTOTYPE"},
+    "capture_id": {"type": "string"},
+    "emitted_at": {"type": "string"},
+    "target": {"type": "string"},
+    "target_kind": {"type": "string"},
+    "viewport": {"type": ["string", "null"]},
+    "capture_modes": {"type": "array", "items": {"type": "string"}},
+    "artifacts": {"type": "array", "items": {"type": "object"}},
+    "visual_observation_packet_id": {"type": ["string", "null"]},
+    "visual_diagnosis_receipt_id": {"type": ["string", "null"]},
+    "authority_scope": {"const": "LOCAL_DEV_CAPTURE_ONLY"},
+    "steward_gate_required": {"type": "boolean"},
+    "steward_gate_status": {"type": "string"},
+    "harness_verdict": {"type": "string"},
+    "production_authority": {"const": false},
+    "forbidden_capabilities": {"type": "object"}
+  }
+}

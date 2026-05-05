@@ -1,0 +1,10 @@
+{
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "created_at": "2026-05-04T21:04:13+00:00",
+  "decision": "Record the current ION dogfooding model: GPT-5.5 Pro / Sev is best used as a high-quality operator-approved oversight, guidance, context, and control-plane carrier; local ION, daemon/supervisor, Codex-backed workers, and other carrier adapters should perform routine execution, automation, file/test/build work, and agent calls through ION. The goal is not to force GPT Pro to power every ION worker directly, but to let Sev steer, inspect, invoke, evaluate, and integrate through MCP while ION automates local agents and surfaces alerts/gates.",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "rationale": "Braden identified that this is likely the strongest practical dogfooding path: use the best LLM as the supervisory/operator carrier while local ION agents and automation handle parallel execution. This preserves full-carrier parity direction without requiring GPT Pro to run every worker in parallel.",
+  "schema_id": "ion.chatgpt_browser_connector_decision.v1",
+  "status": "RECORDED_NOT_AUTHORITY_BY_ITSELF"
+}

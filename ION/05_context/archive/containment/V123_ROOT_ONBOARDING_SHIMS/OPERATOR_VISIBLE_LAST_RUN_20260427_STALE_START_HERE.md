@@ -1,0 +1,164 @@
+# ION — operator-visible last gate run
+
+- **stamped_at_utc:** 2026-04-27T20:38:58.998352+00:00
+- **shell_root:** `/home/sev/ION - Production/ION most recent/CURSOR- ION/IONcursorbuild/ION_MASTER_CURRENT_3_V69_HANDOFF_PACKAGE_ASSEMBLY_PLAN_AND_CHECKSUM_PREVIEW_FULL_PROJECT_20260426/ION MASTER CURRENT`
+- **objective:** invoke full ION tool chain not one-shot
+
+Open this file in the IDE to verify the carrier actually ran commands — not chat claims.
+
+## `two_file_gate`
+
+```text
+TWO_FILE_GATE_OK
+exit_code: 0
+```
+
+## `ion_carrier_onboard`
+
+```text
+{
+  "active_template": "ION/docs/cursor/ION_WORK_PACKET_TEMPLATE.md",
+  "active_work_packet_path": "/home/sev/ION - Production/ION most recent/CURSOR- ION/IONcursorbuild/ION_MASTER_CURRENT_3_V69_HANDOFF_PACKAGE_ASSEMBLY_PLAN_AND_CHECKSUM_PREVIEW_FULL_PROJECT_20260426/ION MASTER CURRENT/ION/05_context/current/ACTIVE_WORK_PACKET.json",
+  "allowed_paths": [
+    "ION/**"
+  ],
+  "carrier": "cursor",
+  "context_package_paths": [
+    "START_HERE_FOR_ANY_AGENT.md",
+    "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+    "ION/05_context/exports/2026-04-17_root_authority_bundle/START_HERE.md",
+    "ION/05_context/exports/2026-04-17_root_authority_bundle/CURSOR_CODEX_READ_MODE.md",
+    "ION/REPO_AUTHORITY.md",
+    "ION/02_architecture/ION_OVER_CURSOR_PROTOCOL.md"
+  ],
+  "emitted_at": "2026-04-27T20:38:59+00:00",
+  "first_pass_kernel_required_reads": [
+    "ION/03_registry/boots/STEWARD.boot.md",
+    "ION/agents/steward/MINI.md",
+    "ION/agents/steward/CAPSULE.md",
+    "ION/05_context/inbox/steward_*",
+    "ION/05_context/signals",
+    "ION/MINI.md",
+    "ION/STATUS.md",
+    "ION/CAPSULE.md"
+  ],
+  "first_pass_role": "steward",
+  "forbidden_paths": [
+    "secrets/**",
+    "**/.env",
+    "**/*credentials*",
+    "production live execution outside bounded packet"
+  ],
+  "integration_target": "STEWARD_mounted_parent_when_applicable",
+  "manual_automation_symmetry": "ION/02_architecture/MANUAL_AUTOMATION_FALLBACK_PROTOCOL.md",
+  "missing_required_surfaces": {},
+  "next_lawful_action": "After required_read_order, run: python3 -m kernel implementation \"invoke full ION tool chain not one-shot\"; require required_surfaces_ok: True in the printed trace. Then execute the first role pass (steward) using only required_reads for that pass.",
+  "objective": "invoke full ION tool chain not one-shot",
+  "required_read_order": [
+    "START_HERE_FOR_ANY_AGENT.md",
+    "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+    "ION/05_context/exports/2026-04-17_root_authority_bundle/START_HERE.md",
+    "ION/05_context/exports/2026-04-17_root_authority_bundle/CURSOR_CODEX_READ_MODE.md",
+    "ION/REPO_AUTHORITY.md",
+    "ION/02_architecture/ION_OVER_CURSOR_PROTOCOL.md",
+    "ION/docs/cursor/ION_WORK_PACKET_TEMPLATE.md"
+  ],
+  "required_surfaces_ok": true,
+  "return_contract": "Carrier returns a proposal: findings, touched paths, diffs or patch intent, risks, and receipt fields per ION_WORK_PACKET_TEMPLATE until Steward integrates.",
+  "role_phase_sequence": [
+    {
+      "purpose": "classify the task and prepare the scoped implementation route",
+      "required": true,
+      "role": "steward"
+    },
+    {
+      "purpose": "define scope, dependencies, and required review posture",
+      "required": true,
+      "role": "vizier"
+    },
+    {
+      "purpose": "execute the bounded implementation slice",
+      "required": true,
+      "role": "mason"
+    },
+    {
+      "purpose": "apply risk pressure if the slice affects continuity or governance",
+      "required": false,
+      "role": "vice"
+    },
+    {
+      "purpose": "audit or verify when the slice becomes release-sensitive",
+      "required": false,
+      "role": "nemesis"
+    }
+  ],
+  "schema_id": "ion.active_work_packet.v1",
+  "sequential_kernel_trace_text": "workstream: implementation\nobjective: invoke full ION tool chain not one-shot\nrequired_surfaces_ok: True\n\n1. steward \u2014 classify the task and prepare the scoped implementation route\n   - steward.boot: ION/03_registry/boots/STEWARD.boot.md\n   - steward.private_mini: ION/agents/steward/MINI.md\n   - steward.private_capsule: ION/agents/steward/CAPSULE.md\n   - steward.inbox: ION/05_context/inbox/steward_* [optional]\n   - steward.signals: ION/05_context/signals\n   - steward.projection.MINI.md: ION/MINI.md [optional]\n   - steward.projection.STATUS.md: ION/STATUS.md [optional]\n   - steward.projection.CAPSULE.md: ION/CAPSULE.md [optional]\n\n2. vizier \u2014 define scope, dependencies, and required review posture\n   - vizier.boot: ION/03_registry/boots/VIZIER.boot.md\n   - vizier.private_mini: ION/agents/vizier/MINI.md\n   - vizier.private_capsule: ION/agents/vizier/CAPSULE.md\n   - vizier.inbox: ION/05_context/inbox/vizier* [optional]\n   - vizier.signals: ION/05_context/signals\n   - vizier.projection.MINI.md: ION/MINI.md [optional]\n   - vizier.projection.STATUS.md: ION/STATUS.md [optional]\n   - vizier.projection.CAPSULE.md: ION/CAPSULE.md [optional]\n\n3. mason \u2014 execute the bounded implementation slice\n   - mason.boot: ION/03_registry/boots/MASON.boot.md\n   - mason.private_mini: ION/agents/mason/MINI.md\n   - mason.private_capsule: ION/agents/mason/CAPSULE.md\n   - mason.inbox: ION/05_context/inbox/mason_* [optional]\n   - mason.signals: ION/05_context/signals\n   - mason.projection.MINI.md: ION/MINI.md [optional]\n   - mason.projection.STATUS.md: ION/STATUS.md [optional]\n   - mason.projection.CAPSULE.md: ION/CAPSULE.md [optional]\n\n4. vice \u2014 apply risk pressure if the slice affects continuity or governance\n   - vice.boot: ION/03_registry/boots/VICE.boot.md\n   - vice.private_mini: ION/agents/vice/MINI.md\n   - vice.private_capsule: ION/agents/vice/CAPSULE.md\n   - vice.signals: ION/05_context/signals\n   - vice.projection.MINI.md: ION/MINI.md [optional]\n   - vice.projection.STATUS.md: ION/STATUS.md [optional]\n   - vice.projection.CAPSULE.md: ION/CAPSULE.md [optional]\n\n5. nemesis \u2014 audit or verify when the slice becomes release-sensitive\n   - nemesis.boot: ION/03_registry/boots/NEMESIS.boot.md\n   - nemesis.private_mini: ION/agents/nemesis/MINI.md\n   - nemesis.private_capsule: ION/agents/nemesis/CAPSULE.md [optional]\n   - nemesis.signals: ION/05_context/signals\n   - nemesis.projection.MINI.md: ION/MINI.md [optional]\n   - nemesis.projection.STATUS.md: ION/STATUS.md [optional]\n   - nemesis.projection.CAPSULE.md: ION/CAPSULE.md [optional]",
+  "shell_root": "/home/sev/ION - Production/ION most recent/CURSOR- ION/IONcursorbuild/ION_MASTER_CURRENT_3_V69_HANDOFF_PACKAGE_ASSEMBLY_PLAN_AND_CHECKSUM_PREVIEW_FULL_PROJECT_20260426/ION MASTER CURRENT",
+  "validation_commands": [
+    "test -f pyproject.toml && test -f ION/REPO_AUTHORITY.md",
+    "python3 -m kernel implementation \"invoke full ION tool chain not one-shot\""
+  ],
+  "visible_report_target": "ION/05_context/signals and relay lane per workstream closure",
+  "workstream": "implementation"
+}
+exit_code: 0
+```
+
+## `kernel_implementation`
+
+```text
+workstream: implementation
+objective: invoke full ION tool chain not one-shot
+required_surfaces_ok: True
+
+1. steward — classify the task and prepare the scoped implementation route
+   - steward.boot: ION/03_registry/boots/STEWARD.boot.md
+   - steward.private_mini: ION/agents/steward/MINI.md
+   - steward.private_capsule: ION/agents/steward/CAPSULE.md
+   - steward.inbox: ION/05_context/inbox/steward_* [optional]
+   - steward.signals: ION/05_context/signals
+   - steward.projection.MINI.md: ION/MINI.md [optional]
+   - steward.projection.STATUS.md: ION/STATUS.md [optional]
+   - steward.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+
+2. vizier — define scope, dependencies, and required review posture
+   - vizier.boot: ION/03_registry/boots/VIZIER.boot.md
+   - vizier.private_mini: ION/agents/vizier/MINI.md
+   - vizier.private_capsule: ION/agents/vizier/CAPSULE.md
+   - vizier.inbox: ION/05_context/inbox/vizier* [optional]
+   - vizier.signals: ION/05_context/signals
+   - vizier.projection.MINI.md: ION/MINI.md [optional]
+   - vizier.projection.STATUS.md: ION/STATUS.md [optional]
+   - vizier.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+
+3. mason — execute the bounded implementation slice
+   - mason.boot: ION/03_registry/boots/MASON.boot.md
+   - mason.private_mini: ION/agents/mason/MINI.md
+   - mason.private_capsule: ION/agents/mason/CAPSULE.md
+   - mason.inbox: ION/05_context/inbox/mason_* [optional]
+   - mason.signals: ION/05_context/signals
+   - mason.projection.MINI.md: ION/MINI.md [optional]
+   - mason.projection.STATUS.md: ION/STATUS.md [optional]
+   - mason.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+
+4. vice — apply risk pressure if the slice affects continuity or governance
+   - vice.boot: ION/03_registry/boots/VICE.boot.md
+   - vice.private_mini: ION/agents/vice/MINI.md
+   - vice.private_capsule: ION/agents/vice/CAPSULE.md
+   - vice.signals: ION/05_context/signals
+   - vice.projection.MINI.md: ION/MINI.md [optional]
+   - vice.projection.STATUS.md: ION/STATUS.md [optional]
+   - vice.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+
+5. nemesis — audit or verify when the slice becomes release-sensitive
+   - nemesis.boot: ION/03_registry/boots/NEMESIS.boot.md
+   - nemesis.private_mini: ION/agents/nemesis/MINI.md
+   - nemesis.private_capsule: ION/agents/nemesis/CAPSULE.md [optional]
+   - nemesis.signals: ION/05_context/signals
+   - nemesis.projection.MINI.md: ION/MINI.md [optional]
+   - nemesis.projection.STATUS.md: ION/STATUS.md [optional]
+   - nemesis.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+exit_code: 0
+```
+

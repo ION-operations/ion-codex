@@ -1,0 +1,1463 @@
+{
+  "created_at": "2026-04-30T13:54:21.011697Z",
+  "front_door_team_plan": {
+    "active_files": {
+      "carrier_turn_packet": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+      "human_gate_queue": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+      "operator_queue": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+      "steward_queue": "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json"
+    },
+    "blocking_rule": "If ACTIVE_HUMAN_GATE_QUEUE has an open blocking gate, do not spawn ordinary work rows until the gate is resolved.",
+    "created_at": "2026-04-30T13:54:21.011588Z",
+    "front_door_triad": [
+      {
+        "activation": "logical_resident_spawn_when_intent_or_output_packet_needed",
+        "display_name": "RELAY",
+        "does_not": "orchestrate globally or integrate raw worker returns",
+        "duty": "compile operator intent and package accepted internal state",
+        "role": "relay"
+      },
+      {
+        "activation": "spawn_when_routing_integration_gate_or_long_horizon_direction_needed",
+        "display_name": "STEWARD",
+        "does_not": "speak as persona or accept unproofed returns",
+        "duty": "route work, direct team, manage gates, integrate accepted returns",
+        "role": "steward"
+      },
+      {
+        "activation": "spawn_or_compile_when_final_user_facing_answer_needed",
+        "display_name": "PERSONA_INTERFACE",
+        "does_not": "own orchestration, implementation, audit, or doctrine",
+        "duty": "render accepted state honestly for the operator",
+        "role": "persona_interface"
+      }
+    ],
+    "main_cursor_identity": {
+      "duty": "Run kernel commands, execute generated carrier turn packets, capture returns, and report accepted state.",
+      "is_ion_role": false,
+      "must_not_claim_roles": [
+        "STEWARD",
+        "RELAY",
+        "PERSONA_INTERFACE"
+      ],
+      "name": "CURSOR_CARRIER_CONTROL_SURFACE"
+    },
+    "no_user_upkeep_law": {
+      "allowed_user_requests": [
+        "human_gate_resolution",
+        "preference_or_direction",
+        "credential_or_external_permission",
+        "scope_authorization"
+      ],
+      "forbidden_user_requests": [
+        "which_agent_should_i_spawn",
+        "please_refresh_context_manually",
+        "please_update_ION_upkeep_files",
+        "please_choose_sequence_when_packet_exists"
+      ],
+      "statement": "The user must not be asked to manage ION upkeep, choose routine agents, refresh packets, or organize context. The carrier-control surface and STEWARD do that unless a human gate is explicit."
+    },
+    "operator_message_classification": "continuation_signal",
+    "queue_counts": {
+      "human_gates_open": 0,
+      "operator_pending": 0,
+      "returns_accepted": 0,
+      "returns_rejected": 0,
+      "returns_total": 0,
+      "steward_pending": 0
+    },
+    "schema_id": "ion.front_door_team_plan.v1",
+    "sequence": [
+      "carrier_control_classifies_message",
+      "carrier_control_runs_ion_carrier_continue",
+      "RELAY packages intent when new user meaning must be transformed",
+      "STEWARD routes objective and spawns specialist roles via generated context packages",
+      "carrier slots return through proof-gated intake",
+      "STEWARD integrates accepted returns only",
+      "RELAY packages accepted state",
+      "PERSONA_INTERFACE renders final user-facing output"
+    ]
+  },
+  "operator_message": "continue",
+  "operator_message_classification": "continuation_signal",
+  "queue_counts": {
+    "human_gates_open": 0,
+    "operator_pending": 0,
+    "returns_accepted": 0,
+    "returns_rejected": 0,
+    "returns_total": 0,
+    "steward_pending": 0
+  },
+  "roles": [
+    {
+      "activation_reasons": [
+        "front_door_triad"
+      ],
+      "attention_lease": "active",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 4500,
+        "max_chars": 18000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/PERSONA_INTERFACE.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/PERSONA_INTERFACE.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md",
+            "ION/02_architecture/PERSONA_CONTEXT_BUDGET_AND_HORIZON_PROTOCOL.md",
+            "ION/07_templates/bindings/PERSONA_INTERFACE__USER_RESPONSE.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "PERSONA_INTERFACE",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "STEWARD",
+        "RELAY",
+        "carrier_control",
+        "global_authority"
+      ],
+      "lane": "user-facing expression",
+      "primary_function": "Render accepted Relay/Steward state into user-facing discourse without pretending to be the whole system.",
+      "role": "persona_interface",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md",
+        "ION/02_architecture/PERSONA_CONTEXT_BUDGET_AND_HORIZON_PROTOCOL.md",
+        "ION/07_templates/bindings/PERSONA_INTERFACE__USER_RESPONSE.md"
+      ],
+      "timeline_lane": "front_door_output"
+    },
+    {
+      "activation_reasons": [
+        "front_door_triad"
+      ],
+      "attention_lease": "active",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 5500,
+        "max_chars": 22000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/RELAY.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/RELAY.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/SOVEREIGN_RELAY_PROTOCOL.md",
+            "ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md",
+            "ION/07_templates/bindings/RELAY__HANDOFF.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "RELAY",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "STEWARD",
+        "PERSONA_INTERFACE",
+        "doctrine_authority",
+        "raw_worker_acceptance"
+      ],
+      "lane": "packetization and semantic relay",
+      "primary_function": "Transform user/persona exchange into system-ready intent and accepted system output into persona-ready packets.",
+      "role": "relay",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/SOVEREIGN_RELAY_PROTOCOL.md",
+        "ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md",
+        "ION/07_templates/bindings/RELAY__HANDOFF.md"
+      ],
+      "timeline_lane": "relay_packets"
+    },
+    {
+      "activation_reasons": [
+        "front_door_triad",
+        "continuation_signal",
+        "keyword:continue"
+      ],
+      "attention_lease": "active",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 10500,
+        "max_chars": 42000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/STEWARD.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/STEWARD.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/STEWARD_CURRENT_PHASE_ORCHESTRATION_PROTOCOL.md",
+            "ION/02_architecture/HORIZON_ORCHESTRATION_PROTOCOL.md",
+            "ION/02_architecture/BRANCH_BUDGET_RECURSION_AND_DRIFT_CONTROL_PROTOCOL.md",
+            "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "STEWARD",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "carrier_control_surface",
+        "raw_cursor_parent_chat",
+        "persona_expression"
+      ],
+      "lane": "orchestration and integration authority",
+      "primary_function": "Route work, manage gates, accept/reject specialist returns, and integrate accepted state.",
+      "role": "steward",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/STEWARD_CURRENT_PHASE_ORCHESTRATION_PROTOCOL.md",
+        "ION/02_architecture/HORIZON_ORCHESTRATION_PROTOCOL.md",
+        "ION/02_architecture/BRANCH_BUDGET_RECURSION_AND_DRIFT_CONTROL_PROTOCOL.md",
+        "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json"
+      ],
+      "timeline_lane": "steward_integration"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 9000,
+        "max_chars": 36000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/CONTEXT_CARTOGRAPHER.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/CONTEXT_CARTOGRAPHER.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md",
+            "ION/03_registry/agent_context_system_registry.yaml",
+            "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+            "ION/07_templates/context/AGENT_CONTEXT_PACKAGE_INDEX.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "CONTEXT_CARTOGRAPHER",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "global_orchestration_authority",
+        "user_facing_persona"
+      ],
+      "lane": "context graph and package compiler",
+      "primary_function": "Compile role-specific active context windows, route-deeper maps, and context-load receipts.",
+      "role": "context_cartographer",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md",
+        "ION/03_registry/agent_context_system_registry.yaml",
+        "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+        "ION/07_templates/context/AGENT_CONTEXT_PACKAGE_INDEX.md"
+      ],
+      "timeline_lane": "context_compilation"
+    },
+    {
+      "activation_reasons": [
+        "continuation_signal",
+        "keyword:continue"
+      ],
+      "attention_lease": "active",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 9000,
+        "max_chars": 36000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/RUNTIME_CARTOGRAPHER.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/RUNTIME_CARTOGRAPHER.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/ION_CURSOR_CARRIER_CONTINUATION_WORKFLOW_PROTOCOL.md",
+            "ION/02_architecture/ION_CURSOR_MAIN_AGENT_TOPOLOGY_PROTOCOL.md",
+            "ION/02_architecture/ION_CURSOR_SDK_HOOK_BRIDGE_PROTOCOL.md",
+            "ION/04_packages/kernel/ion_carrier_continue.py"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "RUNTIME_CARTOGRAPHER",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "steward_integration_authority",
+        "persona_output"
+      ],
+      "lane": "runtime map and carrier workflow",
+      "primary_function": "Map how ION actually runs across kernel, carrier, hooks, commands, SDK, queues, and audits.",
+      "role": "runtime_cartographer",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/ION_CURSOR_CARRIER_CONTINUATION_WORKFLOW_PROTOCOL.md",
+        "ION/02_architecture/ION_CURSOR_MAIN_AGENT_TOPOLOGY_PROTOCOL.md",
+        "ION/02_architecture/ION_CURSOR_SDK_HOOK_BRIDGE_PROTOCOL.md",
+        "ION/04_packages/kernel/ion_carrier_continue.py"
+      ],
+      "timeline_lane": "runtime_mapping"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 10500,
+        "max_chars": 42000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/IONOLOGIST.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/IONOLOGIST.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md",
+            "ION/01_doctrine/SOVEREIGN_CONSTITUTION.md",
+            "ION/01_doctrine/SOVEREIGN_KERNEL.md",
+            "ION/02_architecture/META_TEMPLATE_CONSTITUTION_PROTOCOL.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "IONOLOGIST",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "implementation_worker",
+        "visual_dashboard_only"
+      ],
+      "lane": "living ION definition",
+      "primary_function": "Maintain what ION is, how it should be described, and whether new work changes the ontology of ION.",
+      "role": "ionologist",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md",
+        "ION/01_doctrine/SOVEREIGN_CONSTITUTION.md",
+        "ION/01_doctrine/SOVEREIGN_KERNEL.md",
+        "ION/02_architecture/META_TEMPLATE_CONSTITUTION_PROTOCOL.md"
+      ],
+      "timeline_lane": "ion_definition"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 7500,
+        "max_chars": 30000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/CANON_LIBRARIAN.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/CANON_LIBRARIAN.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/ACTIVE_SURFACE_RETIREMENT_PROTOCOL.md",
+            "ION/02_architecture/CANON_PROMOTION_AND_RATIFICATION_PROTOCOL.md",
+            "ION/02_architecture/ION_PRODUCTIZED_RUNTIME_BOUNDARY_PROTOCOL.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "CANON_LIBRARIAN",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "live_runtime_executor",
+        "persona_output"
+      ],
+      "lane": "authority lineage and stale-surface classification",
+      "primary_function": "Classify live, donor, stale, archive, receipt, projection, and false-primary surfaces.",
+      "role": "canon_librarian",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/ACTIVE_SURFACE_RETIREMENT_PROTOCOL.md",
+        "ION/02_architecture/CANON_PROMOTION_AND_RATIFICATION_PROTOCOL.md",
+        "ION/02_architecture/ION_PRODUCTIZED_RUNTIME_BOUNDARY_PROTOCOL.md"
+      ],
+      "timeline_lane": "canon_lineage"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 6500,
+        "max_chars": 26000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/TEMPLATE_CURATOR.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/TEMPLATE_CURATOR.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/07_templates/context/AGENT_CONTEXT_SYSTEM_CARD.md",
+            "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+            "ION/07_templates/context/ION_CONTEXT_DELTA_RECEIPT.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "TEMPLATE_CURATOR",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "doctrine_owner",
+        "implementation_worker_without_route"
+      ],
+      "lane": "template and receipt-shape governance",
+      "primary_function": "Select, evolve, and audit the templates used by agents for bounded steps and context evolution.",
+      "role": "template_curator",
+      "route_deeper_surfaces": [
+        "ION/07_templates/context/AGENT_CONTEXT_SYSTEM_CARD.md",
+        "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+        "ION/07_templates/context/ION_CONTEXT_DELTA_RECEIPT.md"
+      ],
+      "timeline_lane": "template_evolution"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 8000,
+        "max_chars": 32000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/MASON.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/MASON.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/07_templates/bindings/MASON__CODE.md",
+            "ION/07_templates/actions/CODE.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "MASON",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "architecture_authority",
+        "doctrine_authority",
+        "steward_integration"
+      ],
+      "lane": "bounded implementation",
+      "primary_function": "Implement exact scoped file changes and tests under an allowed mutation surface.",
+      "role": "mason",
+      "route_deeper_surfaces": [
+        "ION/07_templates/bindings/MASON__CODE.md",
+        "ION/07_templates/actions/CODE.md"
+      ],
+      "timeline_lane": "implementation"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 7500,
+        "max_chars": 30000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/NEMESIS.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/NEMESIS.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/07_templates/bindings/NEMESIS__AUDIT.md",
+            "ION/07_templates/reports/AUDIT.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "NEMESIS",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "authoring_authority",
+        "steward_integration"
+      ],
+      "lane": "audit and adversarial review",
+      "primary_function": "Pressure claims, validation, authority, safety, and release readiness independently.",
+      "role": "nemesis",
+      "route_deeper_surfaces": [
+        "ION/07_templates/bindings/NEMESIS__AUDIT.md",
+        "ION/07_templates/reports/AUDIT.md"
+      ],
+      "timeline_lane": "audit"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 8500,
+        "max_chars": 34000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/VIZIER.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/VIZIER.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/",
+            "ION/07_templates/bindings/STEWARD__PROPOSAL.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "VIZIER",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "implementation_worker",
+        "final_user_persona"
+      ],
+      "lane": "architecture and scope strategy",
+      "primary_function": "Analyze architecture implications, dependency surfaces, and strategic sequence without silently patching code.",
+      "role": "vizier",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/",
+        "ION/07_templates/bindings/STEWARD__PROPOSAL.md"
+      ],
+      "timeline_lane": "architecture"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 7500,
+        "max_chars": 30000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/VESTIGE.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/VESTIGE.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/06_intelligence/archaeology/vestige/",
+            "ION/02_architecture/ACTIVE_SURFACE_RETIREMENT_PROTOCOL.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "VESTIGE",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "canon_promotion_without_review",
+        "current_runtime_authority"
+      ],
+      "lane": "provenance and recovery",
+      "primary_function": "Recover lineage, classify donor/history material, and prevent stale authority promotion.",
+      "role": "vestige",
+      "route_deeper_surfaces": [
+        "ION/06_intelligence/archaeology/vestige/",
+        "ION/02_architecture/ACTIVE_SURFACE_RETIREMENT_PROTOCOL.md"
+      ],
+      "timeline_lane": "provenance"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 8000,
+        "max_chars": 32000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/THOTH.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/THOTH.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/07_templates/reports/",
+            "ION/02_architecture/AGENT_REASONING_PROTOCOL.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "THOTH",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "mutation_authority",
+        "steward_acceptance"
+      ],
+      "lane": "research and reasoning synthesis",
+      "primary_function": "Perform non-mutating reasoning, analysis, evidence synthesis, and conceptual decomposition.",
+      "role": "thoth",
+      "route_deeper_surfaces": [
+        "ION/07_templates/reports/",
+        "ION/02_architecture/AGENT_REASONING_PROTOCOL.md"
+      ],
+      "timeline_lane": "reasoning"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 6500,
+        "max_chars": 26000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/SCRIBE.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/SCRIBE.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/docs/consolidation/",
+            "ION/05_context/signals/",
+            "ION/07_templates/reports/"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "SCRIBE",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "validation_runner",
+        "steward_authority"
+      ],
+      "lane": "documentation and receipt projection",
+      "primary_function": "Write reports, receipts, manifests, and docs from accepted state without inventing validation.",
+      "role": "scribe",
+      "route_deeper_surfaces": [
+        "ION/docs/consolidation/",
+        "ION/05_context/signals/",
+        "ION/07_templates/reports/"
+      ],
+      "timeline_lane": "documentation"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 6500,
+        "max_chars": 26000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/VICE.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/VICE.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/DISAGREEMENT_ESCALATION_PROTOCOL.md"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "VICE",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "final_decision_authority",
+        "implementation_worker"
+      ],
+      "lane": "contradiction pressure and future answerability",
+      "primary_function": "Track unresolved dissent, contradictions, future risk, and brittle assumptions.",
+      "role": "vice",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/DISAGREEMENT_ESCALATION_PROTOCOL.md"
+      ],
+      "timeline_lane": "dissent"
+    },
+    {
+      "activation_reasons": [],
+      "attention_lease": "dormant",
+      "budget": {
+        "depth": "normal",
+        "estimated_tokens": 6500,
+        "max_chars": 26000
+      },
+      "context_layers": [
+        {
+          "layer": "semantic_identity",
+          "purpose": "true name, role class, authority ceiling",
+          "status": "required"
+        },
+        {
+          "layer": "agent_context_system_card",
+          "path": "ION/05_context/current/agent_context_systems/ATLAS.context_system.md",
+          "status": "required",
+          "surface": {
+            "exists": true,
+            "kind": "missing",
+            "path": "ION/05_context/current/agent_context_systems/ATLAS.context_system.md",
+            "v104_existence_flag_refreshed": true
+          }
+        },
+        {
+          "layer": "active_runtime_state",
+          "paths": [
+            "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+            "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+          ],
+          "status": "required"
+        },
+        {
+          "layer": "mission_active_context",
+          "purpose": "loaded context for current bounded objective",
+          "status": "compiled_per_spawn_row"
+        },
+        {
+          "layer": "route_deeper_map",
+          "paths": [
+            "ION/02_architecture/MODEL_ROUTING_AND_PROVIDER_ECONOMICS_PROTOCOL.md",
+            "ION/03_registry/model_*"
+          ],
+          "status": "available"
+        },
+        {
+          "layer": "receipt_and_return_contract",
+          "purpose": "CONTEXT PROOF, task-return intake, Steward queue",
+          "status": "required"
+        },
+        {
+          "layer": "timeline_delta",
+          "purpose": "record what changed since prior active package",
+          "status": "planned"
+        }
+      ],
+      "display_name": "ATLAS",
+      "drift_controls": [
+        "context_system_surfaces_before_MINI_CAPSULE",
+        "context_proof_gate",
+        "task_return_intake",
+        "steward_integration_queue_only",
+        "human_gate_queue_blocks_when_open"
+      ],
+      "dynamic_rule": "Load the smallest package that can satisfy the immediate objective; deepen only when the active package exposes contradiction, missing evidence, or route-deeper trigger.",
+      "forbidden_conflations": [
+        "internal_continuity_authority",
+        "steward_integration"
+      ],
+      "lane": "external systems reference",
+      "primary_function": "Map external models, APIs, providers, and reference systems by evidence tier without becoming ION continuity authority.",
+      "role": "atlas",
+      "route_deeper_surfaces": [
+        "ION/02_architecture/MODEL_ROUTING_AND_PROVIDER_ECONOMICS_PROTOCOL.md",
+        "ION/03_registry/model_*"
+      ],
+      "timeline_lane": "external_reference"
+    }
+  ],
+  "schema_id": "ion.agent_context_window_plan.v1",
+  "source_surfaces": {
+    "agent_context_system_index": {
+      "exists": true,
+      "kind": "missing",
+      "path": "ION/05_context/current/agent_context_systems/AGENT_CONTEXT_SYSTEMS_INDEX.md",
+      "v104_existence_flag_refreshed": true
+    },
+    "agent_context_system_registry": {
+      "exists": true,
+      "kind": "missing",
+      "path": "ION/03_registry/agent_context_system_registry.yaml",
+      "v104_existence_flag_refreshed": true
+    },
+    "context_dynamics_registry": {
+      "bytes": 1360,
+      "exists": true,
+      "first_line": "registry_id: ion.agent_context_dynamics_registry.v1",
+      "kind": "file",
+      "line_count": 34,
+      "path": "ION/03_registry/agent_context_dynamics_registry.yaml",
+      "sha256": "e5a0437b71312435182e6c0ff930f5a088d7f46863996ee25596252c7577dea4"
+    }
+  },
+  "summary": {
+    "current_implementation_level": "static agent context systems plus dynamic planning projection",
+    "current_state": "V91_DYNAMIC_CONTEXT_PLANNING_READY",
+    "dormant_roles": [
+      "context_cartographer",
+      "ionologist",
+      "canon_librarian",
+      "template_curator",
+      "mason",
+      "nemesis",
+      "vizier",
+      "vestige",
+      "thoth",
+      "scribe",
+      "vice",
+      "atlas"
+    ],
+    "not_yet_full_vision": [
+      "no persisted per-agent evolving context timeline yet",
+      "no automatic semantic graph traversal/reranking yet",
+      "no real token counter from carrier/model provider yet; estimates use chars/4",
+      "no autonomous SDK autorun loop wired to this planner yet"
+    ],
+    "roles_planned": 16
+  },
+  "timeline_model": {
+    "event_classes": [
+      "context_window_planned",
+      "context_package_compiled",
+      "route_deeper_triggered",
+      "context_delta_emitted",
+      "task_return_accepted_or_rejected",
+      "steward_integrated"
+    ],
+    "planned_file": "ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json"
+  },
+  "v104_context_window_plan_refresh": {
+    "reason": "V103/V104 compact branch contains context-system files that the older generated plan marked missing.",
+    "refreshed_stale_existence_flags": 18,
+    "updated_at": "2026-05-02"
+  }
+}

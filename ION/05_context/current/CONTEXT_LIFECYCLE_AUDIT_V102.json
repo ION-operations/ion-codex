@@ -1,0 +1,510 @@
+{
+  "artifact_count": 54,
+  "artifacts": [
+    {
+      "bytes": 52061,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json"
+    },
+    {
+      "bytes": 440,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json"
+    },
+    {
+      "bytes": 5457,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
+    },
+    {
+      "bytes": 7768,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_COCKPIT_VIEW_MODEL.json"
+    },
+    {
+      "bytes": 3036,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_PACKET.json"
+    },
+    {
+      "bytes": 432,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_STATE.json"
+    },
+    {
+      "bytes": 3186,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_FRONT_DOOR_TEAM_PLAN.json"
+    },
+    {
+      "bytes": 2451,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json"
+    },
+    {
+      "bytes": 911,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_MCP_BRIDGE_STATE.json"
+    },
+    {
+      "bytes": 5271,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json"
+    },
+    {
+      "bytes": 14897,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json"
+    },
+    {
+      "bytes": 437,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json"
+    },
+    {
+      "bytes": 12756,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ACTIVE_WORK_PACKET.json"
+    },
+    {
+      "bytes": 3025,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/CARRIER_CAPABILITY_SURVEY_20260427_CURSOR_L0.md"
+    },
+    {
+      "bytes": 1072,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/CARRIER_RUN_20260427.md"
+    },
+    {
+      "bytes": 20560,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/CONTEXT_LIFECYCLE_AUDIT_V102.json"
+    },
+    {
+      "bytes": 963,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/CONTEXT_METABOLISM_MANIFEST_V102.json"
+    },
+    {
+      "bytes": 6492,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/CURSOR_AGENT_HANDOFF_20260428_WORKSPACE_AND_CARRIER_FOUNDATION.md"
+    },
+    {
+      "bytes": 4458,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/ION_LIVING_ENCYCLOPEDIA_MANIFEST_V100.json"
+    },
+    {
+      "bytes": 4142,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/ION_MASTER_RECOVERY_ROADMAP_V98.json"
+    },
+    {
+      "bytes": 2187,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/ION_RUNTIME_SEPARATION_PLAN_V99.json"
+    },
+    {
+      "bytes": 2859,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/LAST_CARRIER_CONTINUE_RESULT_V84.json"
+    },
+    {
+      "bytes": 3191,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/LAST_CARRIER_CONTINUE_RESULT_V85.json"
+    },
+    {
+      "bytes": 450,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/LAST_CARRIER_WORKFLOW_AUDIT_V84.json"
+    },
+    {
+      "bytes": 658,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/LAST_CARRIER_WORKFLOW_AUDIT_V85.json"
+    },
+    {
+      "bytes": 6523,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/LAST_KERNEL_ONBOARD_RAW.json"
+    },
+    {
+      "bytes": 2551,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/LAST_KERNEL_TRACE.txt"
+    },
+    {
+      "bytes": 601,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/LAST_SUBAGENT_SPAWN_RUN.txt"
+    },
+    {
+      "bytes": 6385,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/LAST_TOOL_CHAIN.txt"
+    },
+    {
+      "bytes": 2688,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/OPERATOR_MECHANICAL_REPORT_20260427.md"
+    },
+    {
+      "bytes": 9547,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/OPERATOR_VISIBLE_LAST_RUN.md"
+    },
+    {
+      "bytes": 747,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V101.json"
+    },
+    {
+      "bytes": 1527,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V84.json"
+    },
+    {
+      "bytes": 1274,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V85.json"
+    },
+    {
+      "bytes": 688,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V90.json"
+    },
+    {
+      "bytes": 616,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V91.json"
+    },
+    {
+      "bytes": 705,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V92.json"
+    },
+    {
+      "bytes": 338,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V93.json"
+    },
+    {
+      "bytes": 706,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V94.json"
+    },
+    {
+      "bytes": 206,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V95.json"
+    },
+    {
+      "bytes": 1730,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V96.json"
+    },
+    {
+      "bytes": 1160,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V97.json"
+    },
+    {
+      "bytes": 943,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V98.json"
+    },
+    {
+      "bytes": 1266,
+      "carrier_default": "INCLUDE",
+      "file_count": 1,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V99.json"
+    },
+    {
+      "bytes": 1195,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/STEWARD_INTEGRATION_RECEIPT_20260427.txt"
+    },
+    {
+      "bytes": 1678,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/TASK_RUN_CORRECTNESS_AUDIT_20260427.md"
+    },
+    {
+      "bytes": 5205,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/TEMPORAL_CONTEXT_ENFORCEMENT_AUDIT_V103.json"
+    },
+    {
+      "bytes": 2578,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/_tmp_kernel.txt"
+    },
+    {
+      "bytes": 6431,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/_tmp_onboard.json"
+    },
+    {
+      "bytes": 35743,
+      "carrier_default": "INCLUDE",
+      "file_count": 19,
+      "lifecycle_class": "HOT_RUNTIME_STATE",
+      "reason": "active runtime or role-context state needed for lawful next-run resumption",
+      "recommended_action": "KEEP_HOT",
+      "rel_path": "ION/05_context/current/agent_context_systems"
+    },
+    {
+      "bytes": 65355,
+      "carrier_default": "REVIEW",
+      "file_count": 2,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/backups"
+    },
+    {
+      "bytes": 13627277,
+      "carrier_default": "EXCLUDE_AFTER_RESIDUE_EXISTS",
+      "file_count": 1037,
+      "lifecycle_class": "WARM_EXECUTION_EVIDENCE",
+      "reason": "execution cycles are valid proof-of-work but should metabolize into compact residues for routine carrier packages",
+      "recommended_action": "DIGEST_TO_RESIDUE_THEN_ARCHIVE_COLD",
+      "rel_path": "ION/05_context/current/execution_cycles"
+    },
+    {
+      "bytes": 1052,
+      "carrier_default": "REVIEW",
+      "file_count": 3,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/role_sessions"
+    },
+    {
+      "bytes": 42,
+      "carrier_default": "REVIEW",
+      "file_count": 1,
+      "lifecycle_class": "CURRENT_CONTEXT_UNCLASSIFIED",
+      "reason": "current context artifact needs an explicit lifecycle class before growth is trusted",
+      "recommended_action": "CLASSIFY_OR_DIGEST_TO_RESIDUE",
+      "rel_path": "ION/05_context/current/task_returns"
+    }
+  ],
+  "cold_bytes": 0,
+  "emitted_at": "2026-05-02T20:12:18+00:00",
+  "execution_cycle_bytes": 13627277,
+  "file_count": 2126,
+  "findings": [
+    "context_lifecycle_within_current_branch_soft_limits"
+  ],
+  "hot_bytes": 172620,
+  "lifecycle_report_id": "context-lifecycle-report-f72ac3c95f1d6a4a",
+  "mutation_performed": false,
+  "policy_path": "ION/03_registry/context_lifecycle_policy.yaml",
+  "protocol_path": "ION/02_architecture/ION_CONTEXT_METABOLISM_AND_LIFECYCLE_PROTOCOL.md",
+  "quarantine_candidate_bytes": 0,
+  "scanned_root": "/mnt/data/ion_v102_work/CURSOR- ION",
+  "schema_id": "ion.context_lifecycle_report.v1",
+  "template_proposal_bytes": 0,
+  "total_context_bytes": 15629683,
+  "verdict": "PASS_WITH_LIFECYCLE_MODEL",
+  "warm_bytes": 13627277
+}

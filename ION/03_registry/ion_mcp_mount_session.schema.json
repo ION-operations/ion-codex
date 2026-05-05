@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.mcp_mount_session.v1",
+  "title": "ION MCP Mount Session",
+  "type": "object",
+  "required": [
+    "version",
+    "session_id",
+    "workspace_id",
+    "subject",
+    "granted_scopes",
+    "execution_mode",
+    "state_root",
+    "created_at",
+    "policy_version"
+  ],
+  "properties": {
+    "version": {
+      "const": "ion.mcp_mount_session.v1"
+    },
+    "session_id": {
+      "type": "string"
+    },
+    "transport_session_id": {
+      "type": "string"
+    },
+    "workspace_id": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "object",
+      "required": [
+        "user_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "org_id": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "granted_scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "denied_scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "execution_mode": {
+      "enum": [
+        "READ_ONLY",
+        "DRY_RUN",
+        "APPROVAL_REQUIRED",
+        "REFUSED"
+      ]
+    },
+    "state_root": {
+      "type": "string"
+    },
+    "event_cursor": {
+      "type": "string"
+    },
+    "approval_queue_ref": {
+      "type": "string"
+    },
+    "receipts_resource_uri": {
+      "type": "string"
+    },
+    "jobs_resource_uri": {
+      "type": "string"
+    },
+    "resource_uris": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "tool_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "prompt_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "last_seen_at": {
+      "type": "string"
+    },
+    "expires_at": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "production_authority": {
+      "const": false
+    },
+    "live_execution_authorized": {
+      "const": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "V66 Synthetic Synthesis Route Result View Model",
+  "type": "object",
+  "required": [
+    "version",
+    "mission_id",
+    "capture_ref",
+    "synthesis_verdict",
+    "authority_scope",
+    "execution_mode",
+    "synthesis_preview",
+    "route_result_preview",
+    "view_surfaces",
+    "blocked_capabilities",
+    "production_authority",
+    "live_dispatch_claim",
+    "external_model_call_authorized",
+    "memory_write_authorized",
+    "canonical_graph_write_authorized",
+    "real_provider_output_claim",
+    "consensus_truth_claim"
+  ],
+  "properties": {
+    "version": { "const": "V66_SYNTHETIC_SYNTHESIS_AND_ROUTE_RESULT_PREVIEW" },
+    "authority_scope": { "const": "SYNTHETIC_SYNTHESIS_ROUTE_RESULT_VIEW_MODEL_RECEIPT_ONLY" },
+    "execution_mode": { "enum": ["SYNTHESIS_ROUTE_PREVIEW_ONLY", "VIEW_ONLY_BLOCKED"] },
+    "synthesis_verdict": {
+      "enum": [
+        "SYNTHETIC_SYNTHESIS_PREVIEW_READY",
+        "BLOCKED_CAPTURE_NOT_READY",
+        "BLOCKED_MISSING_SYNTHESIS_EVIDENCE",
+        "BLOCKED_FORBIDDEN_ROUTE_CAPABILITY",
+        "BLOCKED_LIVE_SYNTHESIS_REQUESTED",
+        "BLOCKED_ROUTE_RESULT_MUTATION_REQUESTED",
+        "BLOCKED_INVALID_SYNTHETIC_RECEIPT"
+      ]
+    },
+    "production_authority": { "const": false },
+    "live_dispatch_claim": { "const": false },
+    "external_model_call_authorized": { "const": false },
+    "memory_write_authorized": { "const": false },
+    "canonical_graph_write_authorized": { "const": false },
+    "real_provider_output_claim": { "const": false },
+    "consensus_truth_claim": { "const": false }
+  }
+}

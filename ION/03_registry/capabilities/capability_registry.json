@@ -1,0 +1,54 @@
+{
+  "schema_id": "ion.capability_registry.v1",
+  "version": "1",
+  "capabilities": {
+    "file_read": {
+      "manual_mirror": "CARRIER_CAPABILITY_SURVEY.md",
+      "required_proof": "path/read evidence"
+    },
+    "file_write": {
+      "manual_mirror": "proposed patch packet",
+      "required_proof": "diff or created file"
+    },
+    "shell": {
+      "manual_mirror": "manual validation checklist",
+      "required_proof": "command output"
+    },
+    "python": {
+      "manual_mirror": "manual computation/template fill",
+      "required_proof": "command output or artifact"
+    },
+    "host_native_spawn": {
+      "manual_mirror": "manual phase",
+      "required_proof": "spawn transcript + result packet"
+    },
+    "ion_native_spawn": {
+      "manual_mirror": "manual spawn request",
+      "required_proof": "ion_cycle_runner + ACTIVE_ROLE_SPAWN_PLAN.json"
+    },
+    "active_work_packet": {
+      "manual_mirror": "ACTIVE_WORK_PACKET.json via ion_carrier_onboard",
+      "required_proof": "packet JSON with objective, allowed_paths, return_contract"
+    },
+    "active_role_spawn_plan": {
+      "manual_mirror": "ACTIVE_ROLE_SPAWN_PLAN.json via ion_cycle_runner",
+      "required_proof": "role_spawn_plan with spawn flags and session paths"
+    },
+    "kernel_implementation_trace": {
+      "manual_mirror": "route_sessions / sequential_kernel trace excerpt",
+      "required_proof": "route_source excerpt tied to ACTIVE_WORK_PACKET"
+    },
+    "python_toolchain": {
+      "manual_mirror": "pytest or python -m kernel.* from shell root",
+      "required_proof": "command output or test summary"
+    },
+    "host_subagent": {
+      "manual_mirror": "manual subagent spawn packet",
+      "required_proof": "spawn transcript + bounded result"
+    },
+    "mcp_runtime": {
+      "manual_mirror": "MCP host capability declaration or survey",
+      "required_proof": "tool transcript or MCP receipt"
+    }
+  }
+}

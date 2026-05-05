@@ -1,0 +1,42 @@
+# Local/editor/runtime noise
+.pytest_cache/
+__pycache__/
+*.py[cod]
+.DS_Store
+.vscode/.ropeproject/
+
+# Python environments and build output
+.venv/
+venv/
+env/
+build/
+dist/
+!ION/09_integrations/browser_extension/ion_chatops_bridge/dist/
+!ION/09_integrations/browser_extension/ion_chatops_bridge/dist/*.js
+*.egg-info/
+
+# Node dependencies and generated bundles
+node_modules/
+out/
+
+# Logs and local process state
+*.log
+*.pid
+ION/05_context/current/chatgpt_connector/runtime/*.log
+ION/05_context/current/chatgpt_connector/runtime/*.pid
+
+# Secrets and local auth material
+.env
+.env.*
+*.pem
+*.key
+*token*
+*secret*
+*credential*
+
+# Large local packages/archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z

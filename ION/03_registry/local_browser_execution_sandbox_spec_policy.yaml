@@ -1,0 +1,42 @@
+version: V51_LOCAL_BROWSER_EXECUTION_SANDBOX_SPEC
+schema_id: ion.local_browser_execution_sandbox_spec.v1
+authority_scope: LOCAL_DEV_BROWSER_EXECUTION_SANDBOX_SPEC_ONLY
+production_authority: false
+browser_execution_authorized: false
+required_controls:
+  - ephemeral_browser_profile
+  - fixture_manifest_required
+  - capture_artifact_hashing
+  - no_persistent_dom_mutation
+  - steward_receipt_required_before_execution_adapter
+accepted_policies:
+  target_origin_policy:
+    - LOCAL_FILES_OR_LOOPBACK_ONLY
+    - LOOPBACK_ONLY
+  network_policy:
+    - NO_EXTERNAL_NETWORK
+    - NO_NETWORK
+  credential_policy:
+    - NO_CREDENTIALS_OR_SESSION_IMPORT
+  navigation_policy:
+    - FIXTURE_MANIFEST_ONLY
+    - SINGLE_URL_ALLOWLIST_ONLY
+  mutation_policy:
+    - NO_PERSISTENT_MUTATION
+    - TEMPORARY_TEST_INSTRUMENTATION_ONLY
+  file_write_policy:
+    - RECEIPTS_AND_CAPTURE_ARTIFACTS_ONLY
+    - RECEIPTS_ONLY
+forbidden_capabilities:
+  live_browser_execution_authorized: false
+  unrestricted_browser_control: false
+  external_network_access: false
+  credential_or_session_import: false
+  account_operation: false
+  destructive_action: false
+  form_submission: false
+  purchase_or_submission: false
+  persistent_dom_mutation: false
+  production_visual_automation: false
+  production_authority: false
+next_lawful_move: V52_LOCAL_BROWSER_EXECUTION_HARNESS_PROTOTYPE_GATED

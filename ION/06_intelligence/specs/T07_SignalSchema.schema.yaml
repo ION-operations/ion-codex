@@ -1,0 +1,120 @@
+# ION Kernel Schema: Signal
+# Version: 1.0.0
+# Authority: A2_CONSTITUTIONAL
+# This file is machine-parseable. Human rationale is in T07_SignalSchema.spec.md.
+
+schema_version: "1.0"
+
+enums:
+  SignalType:
+    # Task lifecycle
+    - TASK_COMPLETE
+    - TASK_FAILED
+    - TASK_REQUEST
+    # Coordination
+    - HANDOFF
+    - BLOCKED
+    - READY
+    # File coordination (D44)
+    - FILE_LOCK
+    - FILE_RELEASE
+    - FILE_CHANGED
+    # Governance
+    - AUDIT_COMPLETE
+    - ESCALATION
+    # System
+    - CHASSIS_FAILED
+    - PLAN_REVISED
+    - BROADCAST
+
+  SignalStatus:
+    - ACTIVE
+    - CONSUMED
+    - ARCHIVED
+    - EXPIRED
+
+  SignalPriority:
+    - P0_CRITICAL
+    - P1_HIGH
+    - P2_NORMAL
+    - P3_LOW
+
+types:
+  Signal:
+    # Identity
+    signal_id: string
+    created_at: string  # ISO 8601
+
+    # Source
+    source_agent: string
+    source_work_unit: string?
+    source_role: string?
+
+    # Target
+    target: string  # agent name | role | "ALL" | "DAEMON"
+    target_domain: string?
+
+    # Content
+    signal_type: SignalType
+    payload: object?  # signal-type-specific
+    priority: SignalPriority
+
+    # Lifecycle
+    status: SignalStatus
+    ttl_seconds: integer?  # default 86400 (24h)
+    consumed_by: string?
+    consumed_at: string?
+
+    # Linking
+    parent_signal_id: string?
+    related_artifacts: list[string]?
+
+# Signal payloads (typed per signal_type)
+payloads:
+  TASK_COMPLETE:
+    work_unit_id: string
+    output_path: string
+    confidence: float
+  TASK_FAILED:
+    work_unit_id: string
+    error: string
+    recoverable: boolean
+  TASK_REQUEST:
+    suggested_agent: string?
+    suggested_template: string
+    scope_ref: string
+    dependencies: list[string]?
+  HANDOFF:
+    from_agent: string
+    to_agent: string
+    handoff_ref: string
+  BLOCKED:
+    work_unit_id: string
+    blocker: string
+    needed_from: string
+  FILE_LOCK:
+    target_file: string
+    reason: string
+    expected_duration: string
+  FILE_RELEASE:
+    target_file: string
+  FILE_CHANGED:
+    target_file: string
+    change_summary: string
+    changed_by: string
+  AUDIT_COMPLETE:
+    subject: string
+    verdict: string
+    drift_score: integer
+    audit_path: string
+  ESCALATION:
+    issue: string
+    escalate_to: string
+    severity: string
+
+# Filesystem format
+filesystem:
+  directory: "05_context/signals/"
+  archive_directory: "05_context/signals/archive/"
+  filename_pattern: "{source}_{signal_type}_{id_short}_{timestamp}.signal.json"
+  format: JSON  # not markdown — resolves SOS .signal.md vs .signal.json inconsistency

@@ -1,0 +1,60 @@
+schema_id: ion.chatgpt_browser_carrier_profile.v1
+carrier_id: CHATGPT_BROWSER_CARRIER
+host_family: chatgpt_browser
+project_facing_callsign: Sev
+callsign_scope: operator_watched_chatgpt_browser_gpt_5_5_carrier
+callsign_authority: carrier_continuity_label_only_not_ion_authority
+callsign_decision_receipt: ION/05_context/current/chatgpt_connector/decisions/2026-05-04T202947Z0000_use_sev_as_the_project_facing_callsign_for_the_chatgpt_browser_gpt_5_5_carrier_w.json
+callsign_aliases:
+  - Sev
+  - chatgpt_browser
+  - gpt55
+base_profile: FULL_CARRIER_MCP_PARITY_TARGET
+default_level: L2_FULL_CARRIER_MCP_PARITY_STAGING
+level_ceiling_without_connector_proof: L2_FULL_CARRIER_MCP_PARITY_STAGING
+full_carrier_mcp_parity_aliases:
+  - full_carrier_mcp_parity
+  - chatgpt_browser_full_carrier
+can_read_bounded_ion_state: true
+can_queue_operator_messages: true
+can_record_decision_receipts: true
+can_submit_task_returns_with_proof: true
+can_request_codex_work_packets: true
+can_read_project_files_bounded: true
+can_search_project_files_bounded: true
+can_list_project_tree_bounded: true
+can_transfer_artifacts_bounded: true
+can_exchange_carrier_messages: true
+can_edit_files_directly: staged_artifact_roots_only
+can_run_shell_commands: false
+can_delete_files: false
+can_git_push: false
+can_access_credentials: false
+can_use_provider_api_calls: false
+must_not_claim_ion_identity: true
+must_not_claim_steward_relay_persona: true
+context_proof_gate: kernel.ion_context_proof_gate
+template_action_proof_gate: kernel.ion_template_action_gate
+return_intake_module: kernel.ion_carrier_task_return
+status_module: kernel.ion_status
+connector_contract_module: kernel.ion_chatgpt_browser_mcp_connector_contract
+full_carrier_tool_registry: ION/03_registry/mcp_full_carrier_tool_registry.yaml
+carrier_capability_registry: ION/03_registry/carrier_capability_registry.yaml
+execution_packet_template: ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md
+required_onboarding_packet: ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json
+required_return_sections:
+  - "### CONTEXT PROOF"
+  - "### TEMPLATE ACTION PROOF"
+  - "### RESULT"
+forbidden_claims:
+  - ION identity
+  - STEWARD authority
+  - RELAY authority
+  - PERSONA authority
+  - production authority
+  - live execution authority
+  - arbitrary local machine control
+  - arbitrary file write
+production_authority: false
+live_execution_authority: false
+deployment_authority: false

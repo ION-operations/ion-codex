@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.front_stage_council_receipt.v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "receipt_id",
+    "claim_class",
+    "persona_state",
+    "relay_state",
+    "steward_verdict",
+    "emission_permission",
+    "visibility_level",
+    "production_authority",
+    "repair_required"
+  ],
+  "properties": {
+    "schema_id": {"const": "ion.front_stage_council_receipt.v1"},
+    "version": {"type": "string"},
+    "receipt_id": {"type": "string"},
+    "emitted_at": {"type": "string"},
+    "claim_text": {"type": "string"},
+    "claim_class": {"enum": ["C0", "C1", "C2", "C3", "C4", "C5"]},
+    "claim_summary": {"type": "string"},
+    "persona_state": {"type": "string"},
+    "relay_state": {"type": "string"},
+    "steward_verdict": {"type": "string"},
+    "risk_level": {"type": "string"},
+    "emission_permission": {"type": "string"},
+    "visibility_level": {"type": "string"},
+    "repair_required": {"type": "boolean"},
+    "repair_obligations": {"type": "array", "items": {"type": "string"}},
+    "production_authority": {"const": false},
+    "forbidden_claims": {"type": "object"}
+  }
+}

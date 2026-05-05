@@ -1,0 +1,54 @@
+{
+  "body": {
+    "id": 12,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\n  \"data\": {\n    \"limit\": 10,\n    \"match_count\": 1,\n    \"matches\": [\n      {\n        \"bytes\": 2028,\n        \"line_hits\": [\n          {\n            \"line\": 4,\n            \"text\": \"base_profile: FULL_CARRIER_MCP_PARITY_TARGET\"\n          },\n          {\n            \"line\": 5,\n            \"text\": \"default_level: L2_FULL_CARRIER_MCP_PARITY_STAGING\"\n          },\n          {\n            \"line\": 6,\n            \"text\": \"level_ceiling_without_connector_proof: L2_FULL_CARRIER_MCP_PARITY_STAGING\"\n          }\n        ],\n        \"name_hit\": false,\n        \"path\": \"ION/03_registry/chatgpt_browser_carrier_profile.yaml\",\n        \"sha256\": \"26bf7b374ff27143535e0d256a6c5d7bf016e8c758fb8075166726e3f78d9acc\"\n      }\n    ],\n    \"max_files\": 100,\n    \"query\": \"full_carrier_mcp_parity\",\n    \"scanned_files\": 100\n  },\n  \"live_execution_authority\": false,\n  \"mutates_active_state\": false,\n  \"ok\": true,\n  \"production_authority\": false,\n  \"schema_id\": \"ion.chatgpt_browser_connector_tool_result.v1\",\n  \"tool\": \"ion_file_search\"\n}",
+          "type": "text"
+        }
+      ],
+      "isError": false,
+      "structuredContent": {
+        "data": {
+          "limit": 10,
+          "match_count": 1,
+          "matches": [
+            {
+              "bytes": 2028,
+              "line_hits": [
+                {
+                  "line": 4,
+                  "text": "base_profile: FULL_CARRIER_MCP_PARITY_TARGET"
+                },
+                {
+                  "line": 5,
+                  "text": "default_level: L2_FULL_CARRIER_MCP_PARITY_STAGING"
+                },
+                {
+                  "line": 6,
+                  "text": "level_ceiling_without_connector_proof: L2_FULL_CARRIER_MCP_PARITY_STAGING"
+                }
+              ],
+              "name_hit": false,
+              "path": "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+              "sha256": "26bf7b374ff27143535e0d256a6c5d7bf016e8c758fb8075166726e3f78d9acc"
+            }
+          ],
+          "max_files": 100,
+          "query": "full_carrier_mcp_parity",
+          "scanned_files": 100
+        },
+        "live_execution_authority": false,
+        "mutates_active_state": false,
+        "ok": true,
+        "production_authority": false,
+        "schema_id": "ion.chatgpt_browser_connector_tool_result.v1",
+        "tool": "ion_file_search"
+      }
+    }
+  },
+  "status_code": 200,
+  "url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp"
+}

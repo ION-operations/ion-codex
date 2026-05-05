@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ION Receipt Hydration View Model",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "generated_at",
+    "adapter_state",
+    "recency_attachment_allowed",
+    "receipt_count",
+    "unresolved_count",
+    "hydration_conflict_count",
+    "records",
+    "production_authority"
+  ],
+  "properties": {
+    "schema_id": { "const": "ion.receipt_hydration_view_model.v1" },
+    "recency_attachment_allowed": { "const": false },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["receipt_id", "resolution_method", "confidence", "latest_effective"],
+        "properties": {
+          "resolution_method": {
+            "type": "string",
+            "enum": ["utterance_id", "atom_id", "utterance_atom_agree", "supersession", "unresolved", "conflict"]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low", "blocked"]
+          },
+          "latest_effective": { "type": "boolean" }
+        }
+      }
+    },
+    "production_authority": { "const": false }
+  }
+}

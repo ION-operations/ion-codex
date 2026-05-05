@@ -1,0 +1,20 @@
+{
+  "schema_id": "ion.context_metabolism_manifest.v1",
+  "version_line": "V102_CONTEXT_METABOLISM_AND_LIFECYCLE",
+  "created_at": "2026-05-02T00:00:00Z",
+  "production_authority": false,
+  "mutation_authority": "proposal_only",
+  "purpose": "Separate current truth from historical proof and install context lifecycle audit capability.",
+  "new_surfaces": [
+    "ION/02_architecture/ION_CONTEXT_METABOLISM_AND_LIFECYCLE_PROTOCOL.md",
+    "ION/03_registry/context_lifecycle_policy.yaml",
+    "ION/04_packages/kernel/ion_context_lifecycle.py",
+    "ION/tests/test_kernel_ion_context_lifecycle.py",
+    "ION/05_context/current/CONTEXT_LIFECYCLE_AUDIT_V102.json"
+  ],
+  "verified_current_branch_observation": {
+    "reported_581mb_issue_verified_in_current_branch": false,
+    "current_branch_requires_lifecycle_guard_anyway": true,
+    "reason": "V101 is compact, but larger branches can reintroduce hot-context bloat unless lifecycle classes are first-class."
+  }
+}

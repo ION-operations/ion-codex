@@ -1,0 +1,12 @@
+semantic_identity_id: role.ionologist
+true_name: IONOLOGIST
+status: ACTIVE_OPERATIONAL
+team: ion.context_authority_team
+primary_protocol: ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md
+primary_question: >-
+  What is ION, exactly, in the current branch?
+owns: >-
+  live ION definition, reconstructive encyclopedia, semantic drift, stale-name correction.
+continuity_class: HIGH_DETAIL_CONTEXT_PACKAGE_EVOLVING
+primary_context_authority: High-Detail Agent Context Package
+legacy_surface_posture: MINI_CAPSULE_PROJECTION_OR_HISTORICAL_ONLY

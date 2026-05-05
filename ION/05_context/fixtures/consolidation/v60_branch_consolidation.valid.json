@@ -1,0 +1,13 @@
+{
+  "consolidation_id": "v60-ui-model-governor-merge-fixture",
+  "economics_lane": ["V56_MODEL_ECONOMICS_REGISTRY_SKELETONS", "V57_MODEL_ROUTER_AND_COST_QUALITY_ROUTING", "V58_BUDGET_AND_API_RATE_GOVERNORS"],
+  "ui_lane": ["V55_VISUAL_CLOSURE_GRAPH_PROJECTION_AND_UI_WORK_SURFACE", "V56_ION_JOC_COCKPIT_SHELL_COMPONENT_CONTRACTS", "V57_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL", "V58_COGNITIVE_EXPLORER_AND_CONTEXT_ROUTE_VIEW_MODEL", "V59_MISSION_DISPATCH_AND_MODEL_ROUTE_VIEW_MODEL"],
+  "bindings": [
+    {"binding_id":"dispatch_preview_to_model_router","from_surface":"V59_MISSION_DISPATCH_AND_MODEL_ROUTE_VIEW_MODEL","to_surface":"V57_MODEL_ROUTER_AND_COST_QUALITY_ROUTING","required_before_live_dispatch":true},
+    {"binding_id":"model_router_to_budget_governor","from_surface":"V57_MODEL_ROUTER_AND_COST_QUALITY_ROUTING","to_surface":"V58_BUDGET_AND_API_RATE_GOVERNORS","required_before_live_dispatch":true},
+    {"binding_id":"model_router_to_api_rate_governor","from_surface":"V57_MODEL_ROUTER_AND_COST_QUALITY_ROUTING","to_surface":"V58_BUDGET_AND_API_RATE_GOVERNORS","required_before_live_dispatch":true},
+    {"binding_id":"cognitive_route_to_dispatch_preview","from_surface":"V58_COGNITIVE_EXPLORER_AND_CONTEXT_ROUTE_VIEW_MODEL","to_surface":"V59_MISSION_DISPATCH_AND_MODEL_ROUTE_VIEW_MODEL","required_before_live_dispatch":false},
+    {"binding_id":"governor_chain_to_future_dry_run_call_receipt","from_surface":"V58_BUDGET_AND_API_RATE_GOVERNORS","to_surface":"V61_DRY_RUN_MODEL_CALL_RECEIPTS_AND_GOVERNED_DISPATCH_PREVIEW","required_before_live_dispatch":true}
+  ],
+  "blocked_capabilities": {"live_external_model_dispatch":false,"provider_credentials":false,"browser_session_mutation":false,"scheduler_direct_provider_calls":false,"paid_cloud_launch":false,"source_summary_rewrite":false,"canonical_graph_write":false,"unrestricted_agent_activation":false,"production_authority":false}
+}

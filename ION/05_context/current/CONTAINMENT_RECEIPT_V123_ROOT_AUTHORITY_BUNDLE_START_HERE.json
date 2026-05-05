@@ -1,0 +1,80 @@
+{
+  "schema_id": "ion.containment_receipt.v1",
+  "receipt_id": "CONTAINMENT_RECEIPT_V123_ROOT_AUTHORITY_BUNDLE_START_HERE",
+  "line": "V123_ROOT_ONBOARDING_SHIM_RETIREMENT",
+  "created_at": "2026-05-03T22:08:00+00:00",
+  "classification": "RETIRE_TO_CONTAINMENT",
+  "reason": "The April 17 root authority bundle was still presented by repo authority as a preferred first startup surface and centered a START_HERE.md read path. That conflicts with current ION-native carrier onboarding.",
+  "source_policy": "NO_SILENT_LOSS_PLUS_CONTAINMENT_PRESERVATION",
+  "production_authority": false,
+  "live_execution_authority": false,
+  "directory_move": {
+    "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/",
+    "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/",
+    "transition": "RETIRE_TO_CONTAINMENT"
+  },
+  "moves": [
+    {
+      "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/BROWSER_CHATGPT_EXTERNAL_EXERCISE_BRIEF.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/BROWSER_CHATGPT_EXTERNAL_EXERCISE_BRIEF.md",
+      "sha256": "50847f8bff16bf20457d7d3993d67fac582f4764cea9cc2778907d34d6db5cb7",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/BROWSER_CHATGPT_EXTERNAL_RETURN_STUB.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/BROWSER_CHATGPT_EXTERNAL_RETURN_STUB.md",
+      "sha256": "356d5f365d4eba991fb4ac2d6d03ae545d8235a59713c1c3fce8fa14874685ff",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/BROWSER_CHATGPT_READ_MODE.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/BROWSER_CHATGPT_READ_MODE.md",
+      "sha256": "6e2dc15023c65ea823cfac9c0f42883edd4f0eef74cce78b49b14a39e8573601",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/BUNDLE_MANIFEST.yaml",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/BUNDLE_MANIFEST.yaml",
+      "sha256": "e4848a1ba728849a0fa7c048df7bac7b73d427275a97254163669c65a5ad8658",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/CLAUDE_CODE_EXTERNAL_EXERCISE_BRIEF.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/CLAUDE_CODE_EXTERNAL_EXERCISE_BRIEF.md",
+      "sha256": "97839c9fbd538a3776f578276b9059ca9a502d070f53f43b76d15a9e01ea0527",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/CLAUDE_CODE_EXTERNAL_RETURN_STUB.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/CLAUDE_CODE_EXTERNAL_RETURN_STUB.md",
+      "sha256": "e220bd054b651272e1300d3fbae60cd1b20e362cc555176d3d34beffb57a432d",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/CLAUDE_CODE_READ_MODE.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/CLAUDE_CODE_READ_MODE.md",
+      "sha256": "c22eb4e756d0459477a7d964ac8df8793459027c499dc266e311cbbe6be1cc9e",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/CURSOR_CODEX_READ_MODE.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/CURSOR_CODEX_READ_MODE.md",
+      "sha256": "5c03ae0db143e8a154032c23714895ab84afaed8fc9089238ad1523a0e154783",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "ION/05_context/exports/2026-04-17_root_authority_bundle/START_HERE.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/root_authority_bundle_2026-04-17/START_HERE.md",
+      "sha256": "0e541a5fcde91109b995e04c107c32a98a43f7cc595083a56195944f794042d0",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    }
+  ],
+  "hot_exports_after_transition": {
+    "ION/05_context/exports/2026-04-17_root_authority_bundle/": "absent"
+  },
+  "required_followup_gates": [
+    "repo_authority_must_not_point_to_exported_start_here_as_first_read",
+    "carrier_onboarding_authority_audit_must_block_start_here_bundle_first_read",
+    "legacy_root_authority_bundle_helper_must_point_to_containment_if invoked"
+  ]
+}

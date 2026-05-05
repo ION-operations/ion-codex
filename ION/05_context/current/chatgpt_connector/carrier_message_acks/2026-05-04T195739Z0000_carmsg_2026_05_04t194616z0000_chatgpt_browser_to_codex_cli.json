@@ -1,0 +1,13 @@
+{
+  "ack": {
+    "ack_by_carrier": "CODEX_CLI_CARRIER",
+    "acked_at": "2026-05-04T19:57:39+00:00"
+  },
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "created_at": "2026-05-04T19:57:39+00:00",
+  "live_execution_authority": false,
+  "message_id": "carmsg_2026-05-04T194616Z0000_chatgpt_browser_to_codex_cli",
+  "production_authority": false,
+  "queue_path": "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+  "schema_id": "ion.carrier_message_ack.v1"
+}

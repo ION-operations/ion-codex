@@ -1,0 +1,66 @@
+{
+  "accepted_for_carrier_intake": false,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": false,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [
+      "missing_required_read_path:ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+      "missing_required_read_path:ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_TASK",
+    "live_execution_authority": false,
+    "missing_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+      "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json"
+    ],
+    "production_authority": false,
+    "required_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+      "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json",
+      "ION/03_registry/agent_roster_registry.yaml",
+      "ION/03_registry/agent_context_system_registry.yaml",
+      "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md",
+      "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/05_context/current/agent_context_systems/VIZIER.context_system.md",
+      "ION/03_registry/boots/VIZIER.boot.md",
+      "ION/03_registry/semantic_identities/VIZIER.semantic.yaml",
+      "ION/07_templates/bindings/STEWARD__PROPOSAL.md",
+      "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+      "ION/03_registry/daimon_matrix.yaml",
+      "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+      "ION/04_packages/kernel/ion_carrier_task_return.py",
+      "ION/04_packages/kernel/ion_carrier_continue.py",
+      "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+      "ION/04_packages/kernel/ion_cockpit_view_model.py"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T22:04:50+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "BLOCKED_BY_PROOF_GATE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\n\nCarrier stance: Codex-backed worker only; no ION, Steward, Relay, Persona, sovereign, production, or live-execution authority claimed.\n\nReceipt read: `ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/context_receipt.json` lines 2-107 list required reads; sha256 `648adbfdda6b7561fdec5b5a5c6b8cae36759da98e91744cbf6005dc4ffb4152`.\n\nRequired path evidence:\n\n| Path | Evidence |\n|---|---|\n| `.../codex_work_requests/2026-05-04T220209Z0000_agent_vizier...json` | lines 2-7 VIZIER/Codex owner; lines 23-31 no production/live; sha256 `374821cb4085125a3b381a7558063c05370836523e9d4de5410420cdd87695bc` |\n| `.../agent_invocations/2026-05-04T220209Z0000_vizier...json` | lines 72-90 distinguish Sev, Braden, one core, proof-gated raw output; sha256 `76d4d371b814da7d17f7c995584c6667097ffea218a53927827c20258feafc7f` |\n| `ION/03_registry/agent_roster_registry.yaml` | lines 58-81 VIZIER role, activation owner, write scope; sha256 `92f8852b1ebff1916c5313d6e82a6cd01569135f73f0ec7ce6a8f4aa3418f6d6` |\n| `ION/03_registry/agent_context_system_registry.yaml` | lines 37-49",
+  "task_output_sha256": "6ba9a780122d487f135bbb8ebed807ce86648669ab095a7ac06fe8ae541a7056",
+  "template_action_proof_result": {
+    "accepted": false,
+    "action_id": "codex_queue_runner_process_once",
+    "findings": [
+      "missing_result",
+      "missing_touched_paths"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_OR_REPAIR",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.autonomous_loop.local_worker.v1",
+    "touched_paths": []
+  },
+  "work_request_id": "codex_req_agent_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json"
+}

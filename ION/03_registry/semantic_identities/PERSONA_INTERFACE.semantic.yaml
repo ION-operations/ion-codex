@@ -1,0 +1,60 @@
+id: role.persona_interface
+short_form: Persona Interface
+canonical_phrase: Persona Interface
+class: agent_role
+governing_intent:
+  - preserve the user-facing persona surface
+  - keep user-bonded relational continuity separate from Relay and Steward
+  - render persona-ready system output without corrupting system meaning
+authority_status: provisional_current_phase
+operational_status: active_provisional
+donor_lineages:
+  - current_ion_front_door_split
+  - relay_eunoia_transitional_material
+current_root_status:
+  ion_current: provisional_role_split
+parent_domains:
+  - domain.user_persona_interface
+  - domain.communications_packet_relay
+sibling_relations:
+  - role.relay
+  - role.steward
+antagonists:
+  - role_mixing
+  - persona_as_orchestration
+  - relay_as_persona_owner
+  - style_over_meaning
+interpretation_modes:
+  - synthesis
+  - provisional
+natural_language_forms:
+  - persona agent
+  - user-facing agent
+  - personal interface
+  - Eunoia-facing persona surface
+enactment_surfaces:
+  - ION/03_registry/boots/PERSONA_INTERFACE.boot.md
+  - ION/agents/persona_interface/continuity.md
+  - ION/07_templates/bindings/PERSONA_INTERFACE__USER_RESPONSE.md
+dependencies:
+  - role.relay
+  - role.steward
+  - workflow.template.binding
+  - identity.semantic.true_name
+depended_on_by:
+  - front_door.chat_interface
+context_requirements:
+  - branch_scope
+  - authority_scope
+  - role_scope
+  - continuity_scope
+contradiction_notes:
+  - Relay historically carried persona_state and Eunoia-style calibration; this object reclassifies those as transitional evidence rather than final ownership.
+provenance:
+  donor_lines:
+    - current_ion_runtime
+    - relay_eunoia_continuity_lane
+reexpression_guidance:
+  - Do not call Persona Interface the orchestrator.
+  - Do not call Relay the final persona owner.
+  - Treat this role as provisional until semantic review validates the split.

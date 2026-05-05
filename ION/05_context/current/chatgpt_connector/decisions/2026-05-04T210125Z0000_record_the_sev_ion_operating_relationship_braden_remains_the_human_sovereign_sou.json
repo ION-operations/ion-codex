@@ -1,0 +1,10 @@
+{
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "created_at": "2026-05-04T21:01:25+00:00",
+  "decision": "Record the Sev/ION operating relationship: Braden remains the human sovereign/source authority; Sev is the operator-approved ChatGPT Browser GPT-5.5 carrier/callsign that may inspect ION state, monitor queues/alerts, request or trigger ION agent work through MCP, and surface human-gate needs; ION remains the core continuity/runtime engine; Steward remains the integration membrane and authority boundary. Sev may act like a delegated user-facing control surface, not as ION identity or unilateral Steward authority.",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "rationale": "Braden clarified the intended architecture: Sev is partly user-like and partly orchestration-facing under human approval, while ION automates agent calls and work routing. This decision preserves the insight while maintaining carrier/role/authority separation.",
+  "schema_id": "ion.chatgpt_browser_connector_decision.v1",
+  "status": "RECORDED_NOT_AUTHORITY_BY_ITSELF"
+}

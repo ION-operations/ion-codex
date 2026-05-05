@@ -1,0 +1,4 @@
+system,total_files,python_files,markdown_files,yaml_files,top_level_markdown,doctrine_files,architecture_files,registry_files,template_files,test_python_files,context_files,intelligence_files,kernel_python_files
+current_branch,1747,189,1508,22,8,4,87,30,39,99,823,521,89
+production_ion,907,43,829,8,4,3,10,13,21,20,574,156,22
+ionv2,65,57,2,0,0,0,0,0,0,20,0,0,37

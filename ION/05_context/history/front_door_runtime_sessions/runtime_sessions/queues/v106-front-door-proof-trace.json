@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "created_at": "2026-05-02T22:52:19+00:00",
+      "item_id": "fdq-v106-front-door-proof-trace-fdwu-v106-front-811b10ad218b",
+      "payload": {
+        "front_door_envelope_id": "fdsteward-fdrelay-fdmsg-v106-front-door-proof-trace-u-8a98a48a44d3",
+        "payload_class": "RELAY_SEMANTIC_BOUNDARY_PACKET",
+        "persona_ingress_id": "fdmsg-v106-front-door-proof-trace-user-sovereign-9266b5943379",
+        "relay_packet_id": "fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-f1dc5baef7bc",
+        "route_purpose": "front_door_user_intake"
+      },
+      "status": "DISPATCHED",
+      "work_unit_id": "fdwu-v106-front-door-proof-trace-fdsteward-fdrel-11468163c5b1"
+    },
+    {
+      "created_at": "2026-05-02T22:52:51+00:00",
+      "item_id": "fdq-v106-front-door-proof-trace-fdwu-v106-front-2bf3561b0c34",
+      "payload": {
+        "front_door_envelope_id": "fdsteward-fdrelay-fdmsg-v106-front-door-proof-trace-u-129dac14513f",
+        "payload_class": "RELAY_SEMANTIC_BOUNDARY_PACKET",
+        "persona_ingress_id": "fdmsg-v106-front-door-proof-trace-user-sovereign-fe357c69b2f6",
+        "relay_packet_id": "fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-a1af2bd9ee2c",
+        "route_purpose": "front_door_user_intake"
+      },
+      "status": "DISPATCHED",
+      "work_unit_id": "fdwu-v106-front-door-proof-trace-fdsteward-fdrel-5b48cf69af2e"
+    }
+  ],
+  "session_id": "v106-front-door-proof-trace",
+  "updated_at": "2026-05-02T22:52:51.430782+00:00"
+}

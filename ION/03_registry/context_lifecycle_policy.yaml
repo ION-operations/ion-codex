@@ -1,0 +1,42 @@
+schema_id: ion.context_lifecycle_policy.v1
+version_line: V102_CONTEXT_METABOLISM_AND_LIFECYCLE
+production_authority: false
+mutation_authority: proposal_only
+hot_runtime_surface:
+  roots:
+    - ION/05_context/current
+  keep_hot_patterns:
+    - ION/05_context/current/ACTIVE_*.json
+    - ION/05_context/current/LAST_*.json
+    - ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_*.json
+    - ION/05_context/current/ION_RUNTIME_SEPARATION_PLAN_*.json
+    - ION/05_context/current/agent_context_systems/*.md
+warm_evidence:
+  roots:
+    - ION/05_context/current/execution_cycles
+  default_action: DIGEST_TO_RESIDUE_THEN_ARCHIVE_COLD
+cold_history:
+  roots:
+    - ION/05_context/history
+    - ION/05_context/archive
+  default_action: KEEP_OUT_OF_HOT_CARRIER_PACKAGE
+quarantine_candidates:
+  name_contains:
+    - _tmp_multi_root_session
+    - tmp_multi_root
+    - unpacked_previous_root
+    - foreign_root
+large_artifact_thresholds:
+  current_truth_soft_mb: 10
+  execution_cycles_soft_mb: 50
+  template_graph_proposal_soft_mb: 25
+  tmp_session_soft_mb: 25
+required_receipt_fields:
+  - lifecycle_report_id
+  - emitted_at
+  - scanned_root
+  - hot_bytes
+  - warm_bytes
+  - cold_bytes
+  - quarantine_candidate_bytes
+  - mutation_performed

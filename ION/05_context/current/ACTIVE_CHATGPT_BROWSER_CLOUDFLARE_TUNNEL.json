@@ -1,0 +1,16 @@
+{
+  "connector_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp",
+  "deployment_authority": false,
+  "endpoint_path": "/mcp",
+  "error": null,
+  "live_execution_authority": false,
+  "local_url": "http://127.0.0.1:8765",
+  "method": "cloudflare_tunnel",
+  "process_id": 38274,
+  "production_authority": false,
+  "running": true,
+  "schema_id": "ion.chatgpt_browser_cloudflare_tunnel_status.v1",
+  "tunnel_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com",
+  "updated_at": "2026-05-04T16:54:17.750003+00:00",
+  "version_line": "V122_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL"
+}

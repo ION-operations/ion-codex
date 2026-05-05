@@ -1,0 +1,6 @@
+change_class,meaning,default_scope,widening_default,re_freeze_requirement
+clarification_only,wording or naming clarification with no control-logic change,kernel docs only,non-widening,new freeze note if accepted
+ordering_correction,control sequence reordered without adding new primitive,kernel docs and control card,non-widening,new freeze judgment if accepted
+defaults_correction,authority/posture/output/landing defaults corrected from evidence,defaults matrices and related docs,non-widening or compare-centers,new freeze judgment and defaults diff note
+new_control_primitive,new stable kernel primitive added because current kernel is insufficient,00_program plus linked control surfaces,limited widening,full thaw record and re-freeze judgment
+freeze_rollback,prior freeze judged premature or harmful,kernel boundary itself,compare-centers or recover-first,explicit rollback judgment and new freeze decision

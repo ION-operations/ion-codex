@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "tools/call",
+  "params": {
+    "name": "ion.mount",
+    "arguments": {
+      "client_name": "local-streamable-http-preview",
+      "transport": "streamable-http-preview",
+      "requested_mode": "dry_run"
+    }
+  }
+}

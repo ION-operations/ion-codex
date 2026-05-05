@@ -1,0 +1,19 @@
+{
+  "schema_id": "ion.chatgpt_browser_connector_manifest.v1",
+  "version_line": "V120_CHATGPT_BROWSER_MCP_CONNECTOR_AND_CORRECT_CARRIER_ONBOARDING",
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "connector_state": "CONTRACT_READY_NOT_DEPLOYED",
+  "full_carrier_parity_extension": "DRAFT_NON_PRODUCTION_STAGING",
+  "transport_target": "HTTPS_MCP_OR_CHATGPT_CUSTOM_CONNECTOR",
+  "local_contract_module": "kernel.ion_chatgpt_browser_mcp_connector_contract",
+  "tool_policy_path": "ION/03_registry/ion_chatgpt_browser_mcp_tool_policy.yaml",
+  "full_carrier_tool_registry_path": "ION/03_registry/mcp_full_carrier_tool_registry.yaml",
+  "carrier_capability_registry_path": "ION/03_registry/carrier_capability_registry.yaml",
+  "protocol_path": "ION/02_architecture/ION_CHATGPT_BROWSER_MCP_CONNECTOR_PROTOCOL.md",
+  "full_carrier_protocol_path": "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+  "carrier_comms_protocol_path": "ION/02_architecture/ION_CARRIER_TO_CARRIER_COMMUNICATION_PROTOCOL.md",
+  "setup_guide_path": "ION/docs/setup/CHATGPT_BROWSER_MCP_CONNECTOR_SETUP_V120.md",
+  "production_authority": false,
+  "live_execution_authority": false,
+  "deployment_authority": false
+}

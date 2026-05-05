@@ -1,0 +1,16 @@
+{
+  "adapter_state": "JSON_FIXTURE_OR_DB_ADAPTER_INPUT",
+  "assistant_bubble_count": 0,
+  "generated_at": "2026-05-02T22:28:35+00:00",
+  "hydration_conflict_count": 0,
+  "production_authority": false,
+  "receipt_count": 0,
+  "recency_attachment_allowed": false,
+  "records": [],
+  "schema_id": "ion.receipt_hydration_view_model.v1",
+  "source_paths": {
+    "assistant_bubbles": "ION/05_context/current/ACTIVE_ASSISTANT_BUBBLES.json",
+    "receipt_rows": "ION/05_context/current/ACTIVE_RECEIPT_SOURCE_ROWS.json"
+  },
+  "unresolved_count": 0
+}

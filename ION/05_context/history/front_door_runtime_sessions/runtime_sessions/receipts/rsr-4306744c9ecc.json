@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-05-02T22:53:18.584127+00:00",
+  "detail": "queue item added: fdq-fdsession-e3325d8e7fd2e91c61-fdwu-fdsession-2cf3a5471deb",
+  "event": "QUEUE_ITEM_ADDED",
+  "receipt_id": "rsr-4306744c9ecc",
+  "session_id": "fdsession-e3325d8e7fd2e91c61",
+  "witness_paths": [
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/queues/fdsession-e3325d8e7fd2e91c61.json"
+  ]
+}

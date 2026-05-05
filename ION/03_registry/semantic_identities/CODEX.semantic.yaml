@@ -1,0 +1,18 @@
+entity_id: role.codex
+display_name: Codex
+structural_identity: Operative.Interface.Implementation_Synthesis
+historical_truth:
+  - historical and common IDE-native carrier name for earlier branch construction/orchestration work
+  - preserved as witness for older Codex-named bindings, packets, and research artifacts
+true_name_status: HISTORICAL_ONLY
+rank_class: HISTORICAL_CARRIER_ALIAS
+primary_domain: NONE__HISTORICAL_WITNESS_ONLY
+secondary_domains: []
+semantic_constraints:
+  - do not mount Codex as a live current-phase role or boot
+  - do not treat IDE, browser, API, or other carrier differences as grounds for a separate roster entity
+  - do not silently flatten Steward orchestration truth into Codex as active role truth
+governing_sources:
+  - ION/06_intelligence/orchestration/2026-04-22_codex_current_phase_role_and_boot_retirement_note.md
+  - ION/02_architecture/TRUE_NAME_AND_SEMANTIC_LAYER_PROTOCOL.md
+  - ION/03_registry/boots/CODEX.boot.md

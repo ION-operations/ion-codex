@@ -1,0 +1,33 @@
+{
+  "$id": "ion.model_economics_registry_skeleton_report.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "forbidden_authority_flags": {
+      "type": "object"
+    },
+    "registry_count": {
+      "type": "integer"
+    },
+    "required_work_classes_present": {
+      "type": "boolean"
+    },
+    "schema_id": {
+      "const": "ion.model_economics_registry_skeleton_report.v1"
+    },
+    "verdict": {
+      "type": "string"
+    },
+    "version": {
+      "const": "V56_MODEL_ECONOMICS_REGISTRY_SKELETONS"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "verdict",
+    "registry_count",
+    "required_work_classes_present",
+    "forbidden_authority_flags"
+  ],
+  "type": "object"
+}

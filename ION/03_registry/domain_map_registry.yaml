@@ -1,0 +1,17 @@
+registry_id: domain_map_registry
+status: current_phase_seed
+domains:
+- domain_id: domain.self_documentation
+  graph_region: region.self_documenting_context
+  owner_agent_family: Scribe
+  reviewer_agent_family: Nemesis
+  systems:
+  - system.self_documenting_context_graph
+  upstream_domains:
+  - domain.context_graph_substrate
+  downstream_domains:
+  - domain.approved_context_packages
+  active_protocols:
+  - ION/02_architecture/SELF_DOCUMENTING_CONTEXT_GRAPH_PROTOCOL.md
+  - ION/02_architecture/APPROVED_CONTEXT_INDEX_PROTOCOL.md
+  - ION/02_architecture/ION_FILE_RECORD_SCHEMA_PROTOCOL.md

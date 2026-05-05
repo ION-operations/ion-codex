@@ -1,0 +1,21 @@
+---
+description: ION carrier task-return intake
+alwaysApply: true
+---
+
+# ION Carrier Task-Return Intake
+
+When acting as the parent Cursor chat for ION, do not integrate Task worker output directly.
+
+Required sequence:
+
+1. Run or read the result of `kernel.ion_carrier_continue`.
+2. Follow `ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json`.
+3. Spawn only `spawn_queue` rows.
+4. Give each Task worker the generated `context_package_path`.
+5. Capture the full Task worker output.
+6. Record each output with `kernel.ion_carrier_task_return`.
+7. Integrate only records accepted into `ACTIVE_STEWARD_INTEGRATION_QUEUE.json`.
+8. Rerun rejected roles; do not summarize rejected returns as accepted work.
+
+A return that does not begin with `### CONTEXT PROOF` is not onboarded evidence.

@@ -1,0 +1,145 @@
+=== 2026-04-27T20:38:58+00:00 TWO_FILE ===
+OK
+=== ONBOARD ===
+required_surfaces_ok True first steward
+=== KERNEL implementation (full) ===
+workstream: implementation
+objective: invoke full ION tool chain not one-shot
+required_surfaces_ok: True
+
+1. steward — classify the task and prepare the scoped implementation route
+   - steward.boot: ION/03_registry/boots/STEWARD.boot.md
+   - steward.private_mini: ION/agents/steward/MINI.md
+   - steward.private_capsule: ION/agents/steward/CAPSULE.md
+   - steward.inbox: ION/05_context/inbox/steward_* [optional]
+   - steward.signals: ION/05_context/signals
+   - steward.projection.MINI.md: ION/MINI.md [optional]
+   - steward.projection.STATUS.md: ION/STATUS.md [optional]
+   - steward.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+
+2. vizier — define scope, dependencies, and required review posture
+   - vizier.boot: ION/03_registry/boots/VIZIER.boot.md
+   - vizier.private_mini: ION/agents/vizier/MINI.md
+   - vizier.private_capsule: ION/agents/vizier/CAPSULE.md
+   - vizier.inbox: ION/05_context/inbox/vizier* [optional]
+   - vizier.signals: ION/05_context/signals
+   - vizier.projection.MINI.md: ION/MINI.md [optional]
+   - vizier.projection.STATUS.md: ION/STATUS.md [optional]
+   - vizier.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+
+3. mason — execute the bounded implementation slice
+   - mason.boot: ION/03_registry/boots/MASON.boot.md
+   - mason.private_mini: ION/agents/mason/MINI.md
+   - mason.private_capsule: ION/agents/mason/CAPSULE.md
+   - mason.inbox: ION/05_context/inbox/mason_* [optional]
+   - mason.signals: ION/05_context/signals
+   - mason.projection.MINI.md: ION/MINI.md [optional]
+   - mason.projection.STATUS.md: ION/STATUS.md [optional]
+   - mason.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+
+4. vice — apply risk pressure if the slice affects continuity or governance
+   - vice.boot: ION/03_registry/boots/VICE.boot.md
+   - vice.private_mini: ION/agents/vice/MINI.md
+   - vice.private_capsule: ION/agents/vice/CAPSULE.md
+   - vice.signals: ION/05_context/signals
+   - vice.projection.MINI.md: ION/MINI.md [optional]
+   - vice.projection.STATUS.md: ION/STATUS.md [optional]
+   - vice.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+
+5. nemesis — audit or verify when the slice becomes release-sensitive
+   - nemesis.boot: ION/03_registry/boots/NEMESIS.boot.md
+   - nemesis.private_mini: ION/agents/nemesis/MINI.md
+   - nemesis.private_capsule: ION/agents/nemesis/CAPSULE.md [optional]
+   - nemesis.signals: ION/05_context/signals
+   - nemesis.projection.MINI.md: ION/MINI.md [optional]
+   - nemesis.projection.STATUS.md: ION/STATUS.md [optional]
+   - nemesis.projection.CAPSULE.md: ION/CAPSULE.md [optional]
+=== KERNEL schedule snapshot ===
+{
+  "candidates": [
+    {
+      "actionable": true,
+      "blocking_refs": [],
+      "candidate_id": "fdwu-v29-project-certification-smoke-project-roo-9c8064af0c45",
+      "candidate_summary": "Work unit fdwu-v29-project-certification-smoke-project-roo-9c8064af0c45 is currently PENDING.",
+      "candidate_title": "Execute front-door-session:v29-project-certification-smoke-project-root",
+      "capability_basis": [
+        "selected capability cap_vm_manual_01 for executor OAI_VM",
+        "carrier IDE_MANUAL is bound through the executor capability registry",
+        "availability AVAILABLE with concurrency 0/1",
+        "trust class HUMAN_SUPERVISED",
+        "preferred carrier IDE_MANUAL matched directly",
+        "side-effect constraints: SUPERVISED_ONLY"
+      ],
+      "carrier_binding_source": "EXECUTOR_CAPABILITY_REGISTRY",
+      "commitment": "COMMITTED",
+      "created_at": "2026-04-25T18:30:00-04:00",
+      "priority": "P2_NORMAL",
+      "reason": "DISPATCHABLE",
+      "requested_reads": [
+        "front-door-session:v29-project-certification-smoke-project-root"
+      ],
+      "scheduler_state": "READY",
+      "scope_ref": "front-door-session:v29-project-certification-smoke-project-root",
+      "scope_type": "PROJECT",
+      "selected_capability_id": "cap_vm_manual_01",
+      "selected_carrier": "IDE_MANUAL",
+      "selected_executor_id": "OAI_VM",
+      "source_kind": "WORK_UNIT",
+      "source_layer": null,
+      "source_record_id": "fdwu-v29-project-certification-smoke-project-roo-9c8064af0c45",
+      "warnings": []
+    },
+    {
+      "actionable": true,
+      "blocking_refs": [],
+      "candidate_id": "fdwu-v30-project-evidence-bundle-smoke-project-r-bc3f4313d2c9",
+      "candidate_summary": "Work unit fdwu-v30-project-evidence-bundle-smoke-project-r-bc3f4313d2c9 is currently PENDING.",
+      "candidate_title": "Execute front-door-session:v30-project-evidence-bundle-smoke-project-root",
+      "capability_basis": [
+        "selected capability cap_vm_manual_01 for executor OAI_VM",
+        "carrier IDE_MANUAL is bound through the executor capability registry",
+        "availability AVAILABLE with concurrency 0/1",
+        "trust class HUMAN_SUPERVISED",
+        "preferred carrier IDE_MANUAL matched directly",
+        "side-effect constraints: SUPERVISED_ONLY"
+      ],
+      "carrier_binding_source": "EXECUTOR_CAPABILITY_REGISTRY",
+      "commitment": "COMMITTED",
+      "created_at": "2026-04-25T19:30:00-04:00",
+      "priority": "P2_NORMAL",
+      "reason": "DISPATCHABLE",
+      "requested_reads": [
+        "front-door-session:v30-project-evidence-bundle-smoke-project-root"
+      ],
+      "scheduler_state": "READY",
+      "scope_ref": "front-door-session:v30-project-evidence-bundle-smoke-project-root",
+      "scope_type": "PROJECT",
+=== KERNEL status (json head) ===
+{
+  "command": "status",
+  "executor_capability_snapshot": {
+    "available_capabilities": 2,
+    "by_availability": {
+      "AVAILABLE": 2
+    },
+    "by_carrier": {
+      "IDE_MANUAL": 1,
+      "SUPERVISED_RUNTIME": 1
+    },
+    "by_trust_class": {
+      "HUMAN_SUPERVISED": 1,
+      "SUPERVISED_AUTOMATION": 1
+    },
+    "capabilities": [
+      {
+        "active_assignments": 0,
+        "aliases": [
+          "OPERATOR",
+          "CODEX"
+        ],
+        "availability": "AVAILABLE",
+        "capability_id": "cap_vm_manual_01",
+        "carrier": "IDE_MANUAL",
+=== STAMP ===
+/home/sev/ION - Production/ION most recent/CURSOR- ION/IONcursorbuild/ION_MASTER_CURRENT_3_V69_HANDOFF_PACKAGE_ASSEMBLY_PLAN_AND_CHECKSUM_PREVIEW_FULL_PROJECT_20260426/ION MASTER CURRENT/ION/05_context/current/OPERATOR_VISIBLE_LAST_RUN.md

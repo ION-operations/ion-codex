@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.v72_mcp_donor_reconciliation_audit.schema.json",
+  "title": "ION V72 MCP Donor Reconciliation Audit",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version_line",
+    "donor_branch",
+    "required_donor_surface_count",
+    "restored_donor_surface_count",
+    "missing_donor_surface_count",
+    "forbidden_runtime_file_count",
+    "live_execution_authority",
+    "production_authority",
+    "reconciliation_verdict"
+  ],
+  "properties": {
+    "schema_id": {"const": "ion.v72_mcp_donor_reconciliation_audit.v1"},
+    "version_line": {"const": "V108_V72_MCP_DONOR_RECONCILIATION"},
+    "donor_branch": {"type": "string"},
+    "missing_donor_surface_count": {"type": "integer", "minimum": 0},
+    "forbidden_runtime_file_count": {"type": "integer", "minimum": 0},
+    "live_execution_authority": {"const": false},
+    "production_authority": {"const": false},
+    "reconciliation_verdict": {
+      "enum": [
+        "V72_MCP_DONOR_RECONCILIATION_PASS",
+        "V72_MCP_DONOR_RECONCILIATION_REVIEW_REQUIRED"
+      ]
+    }
+  }
+}

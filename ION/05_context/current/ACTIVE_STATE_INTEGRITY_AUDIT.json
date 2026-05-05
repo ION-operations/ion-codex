@@ -1,0 +1,31 @@
+{
+  "accepted": true,
+  "checked_files": [
+    "ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json",
+    "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json",
+    "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+    "ION/05_context/current/ACTIVE_COCKPIT_VIEW_MODEL.json",
+    "ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_PACKET.json",
+    "ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_STATE.json",
+    "ION/05_context/current/ACTIVE_CURSOR_HOOK_STATE.json",
+    "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+    "ION/05_context/current/ACTIVE_FRONT_DOOR_TEAM_PLAN.json",
+    "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+    "ION/05_context/current/ACTIVE_LANE_TIMELINE_VIEW_MODEL.json",
+    "ION/05_context/current/ACTIVE_MCP_BRIDGE_STATE.json",
+    "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+    "ION/05_context/current/ACTIVE_RECEIPT_HYDRATION_VIEW_MODEL.json",
+    "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+    "ION/05_context/current/ACTIVE_RUNTIME_DEBUG_OVERLAY.json",
+    "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json",
+    "ION/05_context/current/ACTIVE_WORK_PACKET.json"
+  ],
+  "finding_count": 0,
+  "findings": [],
+  "generated_at": "2026-05-02T23:00:16+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.active_state_integrity_audit.v1",
+  "self_audit_path": "ION/05_context/current/ACTIVE_STATE_INTEGRITY_AUDIT.json",
+  "verdict": "ION_ACTIVE_STATE_INTEGRITY_READY"
+}

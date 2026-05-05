@@ -1,0 +1,120 @@
+schema_id: ion.chatgpt_browser_mcp_tool_policy.v1
+version: V120_CHATGPT_BROWSER_MCP_CONNECTOR_AND_CORRECT_CARRIER_ONBOARDING
+connector_id: ION_CHATGPT_BROWSER_CONNECTOR
+host_family: chatgpt_browser
+authority_scope: BOUNDED_COORDINATOR_AND_CONTINUITY_LANE
+full_carrier_parity_extension: DRAFT_NON_PRODUCTION_STAGING
+transport_target: HTTPS_MCP_OR_CHATGPT_CUSTOM_CONNECTOR
+default_connector_state: CONTRACT_READY_NOT_DEPLOYED
+allowed_status_read_tools:
+  - ion_status
+  - ion_current_operating_packet
+  - ion_carrier_onboarding_packet
+  - ion_read_active_packet
+  - ion_context_plan
+  - ion_cockpit_view
+  - ion_artifact_manifest
+  - ion_receipt_search
+  - ion_git_status_summary
+  - ion_codex_work_queue
+  - ion_carrier_message_poll
+  - ion_file_read
+  - ion_file_search
+  - ion_tree_list
+  - ion_registry_read
+  - ion_template_read
+  - ion_context_compile
+  - ion_receipt_hydrate
+  - ion_tool_manifest
+  - ion_daemon_status
+  - ion_codex_queue_autorun_status
+  - ion_agent_list
+  - ion_agent_status
+  - ion_agent_result
+  - ion_agent_queue
+  - ion_agent_spawn_plan
+  - ion_swarm_status
+allowed_bounded_queue_receipt_tools:
+  - ion_queue_operator_message
+  - ion_request_codex_work_packet
+  - ion_submit_task_return
+  - ion_record_chatgpt_decision
+  - ion_create_containment_receipt
+  - ion_file_put_text
+  - ion_artifact_upload_init
+  - ion_artifact_upload_chunk
+  - ion_artifact_upload_commit
+  - ion_carrier_message_send
+  - ion_carrier_message_ack
+  - ion_codex_queue_process_once
+  - ion_agent_invoke
+  - ion_agent_cancel
+  - ion_swarm_step_once
+forbidden_tools:
+  - arbitrary_shell
+  - arbitrary_file_write
+  - direct_delete
+  - git_push
+  - credential_access
+  - browser_computer_control
+  - provider_api_calls
+  - unbounded_local_filesystem_access
+  - production_deployment
+  - direct_accept_unproofed_worker_output
+required_task_return_sections:
+  - "### CONTEXT PROOF"
+  - "### TEMPLATE ACTION PROOF"
+  - "### RESULT"
+bounded_write_roots:
+  - ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json
+  - ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json
+  - ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json
+  - ION/05_context/current/chatgpt_connector/
+  - ION/05_context/current/CHATGPT_BROWSER_MCP_CONNECTOR_CONTRACT_V120.json
+artifact_transfer_roots:
+  - ION/05_context/current/chatgpt_connector/artifacts/
+  - ION/05_context/inbox/
+  - ION/05_context/signals/
+first_full_carrier_tool_surfaces:
+  - ion_file_put_text
+  - ion_artifact_upload_init
+  - ion_artifact_upload_chunk
+  - ion_artifact_upload_commit
+  - ion_carrier_message_send
+  - ion_carrier_message_poll
+  - ion_carrier_message_ack
+next_visibility_tool_surfaces:
+  - ion_file_read
+  - ion_file_search
+  - ion_tree_list
+  - ion_registry_read
+  - ion_template_read
+  - ion_context_compile
+  - ion_receipt_hydrate
+  - ion_tool_manifest
+automation_tool_surfaces:
+  - ion_daemon_status
+  - ion_codex_queue_autorun_status
+  - ion_codex_queue_process_once
+agent_invocation_broker_tool_surfaces:
+  - ion_agent_list
+  - ion_agent_status
+  - ion_agent_result
+  - ion_agent_queue
+  - ion_agent_spawn_plan
+  - ion_swarm_status
+  - ion_agent_invoke
+  - ion_agent_cancel
+  - ion_swarm_step_once
+staging_notes:
+  - "V120 bounded-management restrictions remain current safety guardrails only."
+  - "Full-carrier parity tools must distinguish CARRIER_ADAPTER_FAILURE from ION_CORE_FAILURE."
+  - "File/artifact transfer tools stage into ION custody roots and preserve no-silent-loss."
+  - "Codex queue automation must use fixed local carrier commands over queued work packets only; no arbitrary shell bridge."
+  - "Agent invocation broker tools must reuse the Codex work queue, task-return proof gates, carrier messages, agent roster, and context-system registries."
+  - "Raw Codex output must not become state without context proof and template action proof acceptance."
+must_not_claim_ion_identity: true
+must_not_claim_steward_relay_persona: true
+production_authority: false
+live_execution_authority: false
+deployment_authority: false

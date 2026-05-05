@@ -1,0 +1,22 @@
+{
+  "note": "Example only. V69 does not certify a public endpoint or OAuth.",
+  "request": {
+    "account_id": "acct_local_founder",
+    "client_name": "hosted-alpha-client",
+    "requested_mode": "dry_run",
+    "requested_scopes": [
+      "ion.mount.basic",
+      "ion.state.read",
+      "ion.receipts.read",
+      "ion.approvals.read",
+      "ion.jobs.plan",
+      "ion.jobs.execute.dry_run",
+      "ion.bundles.export"
+    ],
+    "subject_id": "subj_braden_operator",
+    "token_audience": "ion-mcp-hosted-alpha",
+    "transport": "streamable-http-alpha",
+    "workspace_id": "wsp_ion_production"
+  },
+  "version": "V69_HOSTED_MCP_AUTH_AND_ACCOUNT_WORKSPACE_ALPHA_PROTOCOL"
+}

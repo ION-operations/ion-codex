@@ -1,0 +1,110 @@
+{
+  "required_context_reads": [
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/agent_roster_registry.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/agent_context_system_registry.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/agent_context_systems/VIZIER.context_system.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/boots/VIZIER.boot.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/semantic_identities/VIZIER.semantic.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/bindings/STEWARD__PROPOSAL.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/daimon_matrix.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_carrier_task_return.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_carrier_continue.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_cockpit_view_model.py",
+      "required": true
+    }
+  ],
+  "schema_id": "ion.context_load_receipt.v1"
+}

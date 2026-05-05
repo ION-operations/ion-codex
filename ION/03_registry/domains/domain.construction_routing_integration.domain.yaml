@@ -1,0 +1,29 @@
+domain_id: domain.construction_routing_integration
+display_name: Construction, Routing, and Integration
+true_name_status: SETTLED_CURRENT_PHASE
+status: ACTIVE_FIRST_PASS
+authority: A3_OPERATIONAL
+mission: >-
+  Hold the current build-facing burden for bounded implementation, sequential routing,
+  integration synthesis, and truthful execution inside the live ION root without
+  tying that burden to any one IDE-, browser-, or API-specific roster identity.
+scope:
+  - bounded implementation
+  - sequential kernel routing
+  - integration synthesis
+  - implementation verification
+primary_roles:
+  - STEWARD
+secondary_roles:
+  - MASON
+  - SCRIBE
+  - THOTH
+owned_or_stewarded_surfaces:
+  - ION/04_packages/kernel/
+  - ION/07_templates/bindings/MASON__CODE.md
+  - ION/05_context/inbox/
+open_edges:
+  - review-domain oversight remains external until Confidence, Drift, and Review is activated
+  - runtime enforcement parity remains partial until threshold/governed-write/capsule targets land
+activation_witness:
+  - ION/03_registry/domains/activation_witness/2026-04-07_construction_routing_integration.activation.yaml

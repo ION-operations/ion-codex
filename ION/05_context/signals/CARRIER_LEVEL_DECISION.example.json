@@ -1,0 +1,17 @@
+{
+  "schema_id": "ion.carrier_level_decision.v1",
+  "decision_id": "CLD-EXAMPLE",
+  "authority_class": "KERNEL_SCHEDULER_DECISION",
+  "carrier_session_id": "ION-SESSION-EXAMPLE",
+  "carrier_profile": "CURSOR_CARRIER",
+  "requested_level": "L1",
+  "decision": "example_not_active",
+  "approved_level": "L0",
+  "approved_capabilities": [],
+  "denied_capabilities": [
+    "file_write",
+    "host_native_spawn"
+  ],
+  "decision_note": "Example only. Real decisions must be created for the current session.",
+  "return_target": "CURRENT_CARRIER"
+}

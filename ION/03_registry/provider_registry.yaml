@@ -1,0 +1,50 @@
+schema_id: ion.provider_registry.v1
+version: V56_MODEL_ECONOMICS_REGISTRY_SKELETONS
+authority_scope: A3_STEWARD_MODEL_ECONOMICS_REGISTRY_SKELETON
+production_authority: false
+live_provider_calls_authorized: false
+provider_credentials_authorized: false
+scheduler_direct_provider_calls_authorized: false
+providers:
+  openai:
+    provider_id: openai
+    display_name: OpenAI
+    adapter_id: openai_adapter
+    enabled_for_live_calls: false
+    dry_run_supported: true
+    credential_source_allowed: false
+    default_data_handling_profile: no_retention_preferred
+    notes: live model ids and current pricing must be verified before production use
+  anthropic:
+    provider_id: anthropic
+    display_name: Anthropic
+    adapter_id: anthropic_adapter
+    enabled_for_live_calls: false
+    dry_run_supported: true
+    credential_source_allowed: false
+    default_data_handling_profile: no_retention_preferred
+  gemini:
+    provider_id: gemini
+    display_name: Google Gemini
+    adapter_id: gemini_adapter
+    enabled_for_live_calls: false
+    dry_run_supported: true
+    credential_source_allowed: false
+    default_data_handling_profile: no_retention_preferred
+  cerebras:
+    provider_id: cerebras
+    display_name: Cerebras
+    adapter_id: cerebras_adapter
+    enabled_for_live_calls: false
+    dry_run_supported: true
+    credential_source_allowed: false
+    default_data_handling_profile: no_retention_preferred
+  local:
+    provider_id: local
+    display_name: Local Model Lane
+    adapter_id: local_model_adapter
+    enabled_for_live_calls: false
+    dry_run_supported: true
+    credential_source_allowed: false
+    default_data_handling_profile: local_only
+

@@ -1,0 +1,34 @@
+bundle_id: root_authority_bundle_2026_04_17
+display_name: Root Authority Bundle
+status: READ_TESTED_STABLE_STARTUP_EXPORT
+authority: A3_OPERATIONAL
+canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+purpose: >-
+  Provide one carrier-facing startup bundle for the current retained
+  dual-center settlement so fresh executors do not have to infer root truth
+  from competing STATUS files or ambiguous ION paths.
+shared_entry: START_HERE.md
+carrier_entries:
+  cursor_codex: CURSOR_CODEX_READ_MODE.md
+  browser_chatgpt: BROWSER_CHATGPT_READ_MODE.md
+  claude_code: CLAUDE_CODE_READ_MODE.md
+supersedes_as_first_startup_surface:
+  - ION/STATUS.md
+  - ../../ION/STATUS.md
+root_terms:
+  packaged_current_generation_shell_root: .
+  packaged_current_generation_root: ION
+  top_level_production_root: ../../ION
+  embedded_residue_lane: ION/05_context
+decision_anchors:
+  - ION/06_intelligence/decisions/2026-04-17_workspace_root_authority_canonicalization_decision.md
+  - ION/06_intelligence/decisions/2026-04-17_retained_dual_center_settlement_canonicalization_decision.md
+  - ION/06_intelligence/decisions/2026-04-17_top_level_production_surface_promotion_map_canonicalization_decision.md
+  - ION/06_intelligence/decisions/2026-04-17_packaged_root_nested_path_disambiguation_canonicalization_decision.md
+  - ION/06_intelligence/decisions/2026-04-17_external_transport_shell_current_phase_disposition_decision.md
+forward_path_anchor: ION/06_intelligence/orchestration/2026-04-17_post_reintegration_canonicalization_state_forward_path_and_codex_handoff.md
+notes: >-
+  This bundle is the read-tested stable startup export for the current retained
+  dual-center settlement. It does not claim final single-root canon.
+  Package-aware shell commands use the shell root one level above the packaged
+  content root.

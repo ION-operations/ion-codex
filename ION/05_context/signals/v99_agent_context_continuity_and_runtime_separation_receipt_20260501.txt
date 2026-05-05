@@ -1,0 +1,11 @@
+ION V99 receipt — Agent Context Continuity and Runtime Separation Design
+Date: 2026-05-01
+Authority posture: design lock / overlay update / not production-ready
+
+Added protocol for agent context continuity, route maps, rolling context windows, context timelines, and template-driven context evolution.
+Added carrier-side LEAD_DEV_CONTEXT_CONTROL_SURFACE card for GPT-5.5 lead-dev continuity discipline without creating a new ordinary ION worker role.
+Added runtime separation plan distinguishing runtime core, runtime state, execution cycles, UI surface, archive, and release overlays.
+
+Proven: design surfaces written.
+Not proven: autonomous loop execution, code-level template gate, Steward integration executor, cockpit survival-loop view.
+Next required pass: implement ion_autonomous_loop.py, ion_template_action_gate.py, ion_steward_integrate.py, and focused tests.

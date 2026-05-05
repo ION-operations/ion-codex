@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ION Front-Door Proof Trace",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "trace_id",
+    "generated_at",
+    "projection_mode",
+    "session_id",
+    "boundary_proof",
+    "steward_verdict",
+    "receipts",
+    "stage_sequence",
+    "witness_paths",
+    "missing_witness_paths",
+    "proof_complete",
+    "verdict",
+    "production_authority",
+    "live_execution_authority"
+  ],
+  "properties": {
+    "schema_id": { "const": "ion.front_door_proof_trace.v1" },
+    "projection_mode": { "const": "DETERMINISTIC_FRONT_DOOR_PROOF_TRACE" },
+    "boundary_proof": {
+      "type": "object",
+      "required": [
+        "persona_ingress_id",
+        "relay_packet_id",
+        "steward_envelope_id",
+        "steward_work_unit_id",
+        "context_package_id",
+        "queue_item_id",
+        "dispatch_packet_path",
+        "relay_return_id",
+        "persona_response_id",
+        "front_stage_receipt_id",
+        "conversational_receipt_id"
+      ]
+    },
+    "steward_verdict": {
+      "type": "object",
+      "required": ["verdict", "mode", "claim_class", "emission_permission", "repair_required", "live_steward_reasoning"],
+      "properties": {
+        "live_steward_reasoning": { "const": false }
+      }
+    },
+    "stage_sequence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["sequence", "stage", "organ", "status"],
+        "properties": {
+          "organ": {
+            "type": "string",
+            "enum": ["operator", "persona", "relay", "steward", "kernel", "ui", "db", "carrier", "worker"]
+          }
+        }
+      }
+    },
+    "witness_paths": { "type": "array", "items": { "type": "string" } },
+    "missing_witness_paths": { "type": "array", "items": { "type": "string" } },
+    "proof_complete": { "type": "boolean" },
+    "production_authority": { "const": false },
+    "live_execution_authority": { "const": false }
+  }
+}

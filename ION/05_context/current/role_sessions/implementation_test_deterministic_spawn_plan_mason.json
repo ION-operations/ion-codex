@@ -1,0 +1,11 @@
+{
+  "authority": "WRITE_BOUNDED_ION",
+  "objective": "test deterministic spawn plan",
+  "purpose": "execute the bounded implementation slice",
+  "reason": "required_policy: role.required is True",
+  "role": "mason",
+  "schema_id": "ion.role_session_packet.v1",
+  "spawn": true,
+  "spawn_policy": "required",
+  "workstream": "implementation"
+}

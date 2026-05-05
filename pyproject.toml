@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ion-kernel"
+version = "0.0.0"
+description = "ION kernel (extracted working branch; install for import/CLI without PYTHONPATH)."
+readme = "ION/README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["ION/04_packages"]
+include = ["kernel*"]
+
+[tool.pytest.ini_options]
+testpaths = ["ION/tests"]
+pythonpath = ["ION/04_packages"]

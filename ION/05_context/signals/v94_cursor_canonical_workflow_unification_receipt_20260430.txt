@@ -1,0 +1,25 @@
+ION V94 Cursor Canonical Workflow Unification Receipt
+
+Problem:
+- Cursor-facing instructions contradicted each other on shell root, CLI entrypoint, parent-chat identity, and subagent spawn rigor.
+- The contradiction allowed Cursor Auto mode to believe it had followed ION while bypassing the intended /ion carrier-control path.
+
+Repair:
+- Added ION_CURSOR_CANONICAL_WORKFLOW_UNIFICATION_PROTOCOL.md.
+- Rewrote AGENTS.md and START_HERE_FOR_ANY_AGENT.md around one V94 story.
+- Rewrote ion-carrier-mount.mdc and ion-cursor-onboarding.mdc to remove fixed-root and old kernel-workstream spine.
+- Made /ion the canonical reset-and-run command.
+- Added ion-canonical-workflow-unification.mdc.
+- Strengthened ion-spawn-row-slot.md into a strict generated-context-package carrier slot.
+- Added kernel.ion_cursor_canonical_workflow_audit.
+
+Canonical rule:
+- Shell root = directory containing pyproject.toml and ION/REPO_AUTHORITY.md.
+- /ion = reset carrier-control, build autopilot packet, run carrier continuation, follow active packets.
+- Parent Cursor chat = CURSOR_CARRIER_CONTROL_SURFACE, not STEWARD.
+- Subagents = carrier slots mounted from generated spawn rows only.
+- Worker returns require ### CONTEXT PROOF and task-return intake.
+
+Validation:
+- py_compile passed for ion_cursor_canonical_workflow_audit.py in update workspace.
+- Static grep passed: update package no longer contains the fixed-root phrase or old parent-chat kernel-workstream spine in patched surfaces.

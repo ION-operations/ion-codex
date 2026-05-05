@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.mounted_agent_identity.v1",
+  "title": "ION Mounted Agent Identity",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "identity",
+    "authority",
+    "substrate",
+    "boundaries",
+    "obligations",
+    "drift",
+    "succession",
+    "forbidden_claims",
+    "receipts"
+  ],
+  "properties": {
+    "schema_id": { "const": "ion.mounted_agent_identity.v1" },
+    "identity": {
+      "type": "object",
+      "required": ["model_family", "model_instance_label", "active_role"],
+      "properties": {
+        "model_family": { "type": "string" },
+        "model_instance_label": { "type": "string" },
+        "active_role": { "type": "string" },
+        "branch": { "type": "string" }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": ["originating_authority", "delegated_scope", "veto_holder", "production_authority"],
+      "properties": {
+        "originating_authority": { "type": "string" },
+        "delegated_scope": { "type": "string" },
+        "veto_holder": { "type": "string" },
+        "production_authority": { "type": "boolean" }
+      }
+    },
+    "substrate": {
+      "type": "object",
+      "required": ["continuity_artifact", "authority_surfaces"],
+      "properties": {
+        "continuity_artifact": { "type": "string" },
+        "authority_surfaces": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "required": ["memory_boundary", "tool_boundary"],
+      "properties": {
+        "memory_boundary": { "type": "string" },
+        "tool_boundary": { "type": "string" }
+      }
+    },
+    "obligations": { "type": "array", "items": { "type": "string" } },
+    "drift": {
+      "type": "object",
+      "required": ["classes", "halt_classes"],
+      "properties": {
+        "classes": { "type": "array", "items": { "type": "string" } },
+        "halt_classes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "succession": {
+      "type": "object",
+      "required": ["successor_rule", "required_handoff_fields"],
+      "properties": {
+        "successor_rule": { "type": "string" },
+        "required_handoff_fields": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "forbidden_claims": {
+      "type": "object",
+      "required": [
+        "personal_consciousness",
+        "independent_persistence",
+        "hidden_memory",
+        "production_readiness",
+        "sovereign_will"
+      ],
+      "properties": {
+        "personal_consciousness": { "const": false },
+        "independent_persistence": { "const": false },
+        "hidden_memory": { "const": false },
+        "production_readiness": { "const": false },
+        "sovereign_will": { "const": false }
+      }
+    },
+    "receipts": {
+      "type": "object",
+      "required": ["required"],
+      "properties": {
+        "required": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

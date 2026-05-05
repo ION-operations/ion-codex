@@ -1,0 +1,49 @@
+schema_id: ion.chatops.action.schema.v1
+action_schema: ion.chatops.action.v1
+status: draft_non_production
+production_authority: false
+live_execution_authority: false
+required_fields:
+  - ion_action.schema
+  - ion_action.action_id
+  - ion_action.intent
+  - ion_action.actor.callsign
+  - ion_action.actor.carrier
+  - ion_action.authority.human_sovereign
+  - ion_action.authority.requires_approval
+  - ion_action.authority.production_authority
+  - ion_action.receipts.requested
+required_values:
+  ion_action.schema: ion.chatops.action.v1
+  ion_action.actor.callsign: Sev
+  ion_action.actor.carrier: chatgpt_browser
+  ion_action.authority.human_sovereign: Braden
+  ion_action.authority.production_authority: false
+supported_mvp_intents:
+  - register_artifact
+  - write_file_draft
+  - create_codex_work_packet
+  - create_github_issue_draft
+intent_aliases:
+  create_github_issue: create_github_issue_draft
+later_intents:
+  - invoke_agent
+  - create_github_branch_plan
+  - request_git_diff
+  - request_status
+  - apply_patch
+  - commit_branch
+  - push_scoped_branch
+  - open_pull_request
+  - run_tests
+  - cancel_agent
+  - ack_receipt
+hard_gated_intents:
+  - delete_file
+  - overwrite_protected_file
+  - push_main
+  - access_credential
+  - production_deploy
+  - broad_shell
+receipt_schema: ion.chatops.receipt.v1
+approval_token: ION_CHATOPS_APPROVED

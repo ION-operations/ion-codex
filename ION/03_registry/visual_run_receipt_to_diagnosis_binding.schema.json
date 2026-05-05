@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.visual_run_receipt_to_diagnosis_binding.v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "binding_id",
+    "authority_scope",
+    "closure_verdict",
+    "issue_closed",
+    "review_required",
+    "production_authority"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.visual_run_receipt_to_diagnosis_binding.v1"
+    },
+    "version": {
+      "const": "V54_VISUAL_RUN_RECEIPT_TO_DIAGNOSIS_BINDING"
+    },
+    "authority_scope": {
+      "const": "VISUAL_RUN_TO_DIAGNOSIS_CLOSURE_RECEIPT_ONLY"
+    },
+    "closure_verdict": {
+      "enum": [
+        "VISUAL_ISSUE_CLOSED_WITH_RUN_EVIDENCE",
+        "VISUAL_ISSUE_CLOSURE_NEEDS_REVIEW",
+        "VISUAL_ISSUE_CLOSURE_NEEDS_FOLLOWUP",
+        "VISUAL_ISSUE_CLOSURE_REGRESSION_REQUIRES_REVIEW",
+        "VISUAL_ISSUE_CLOSURE_REJECTED_FOR_FORBIDDEN_EVENT",
+        "VISUAL_ISSUE_CLOSURE_BLOCKED_BY_STEWARD"
+      ]
+    },
+    "issue_closed": {
+      "type": "boolean"
+    },
+    "review_required": {
+      "type": "boolean"
+    },
+    "production_authority": {
+      "const": false
+    },
+    "forbidden_capabilities": {
+      "type": "object"
+    }
+  }
+}

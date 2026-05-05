@@ -1,0 +1,55 @@
+{
+  "accepted_for_carrier_intake": false,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": false,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [
+      "missing_read_evidence_near_path:ION/REPO_AUTHORITY.md",
+      "missing_read_evidence_near_path:ION/02_architecture/ION_MOUNT_CONTRACT.md",
+      "missing_read_evidence_near_path:ION/02_architecture/ION_CHATGPT_BROWSER_MCP_CONNECTOR_PROTOCOL.md",
+      "missing_read_evidence_near_path:ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md",
+      "missing_read_evidence_near_path:ION/docs/setup/CHATGPT_BROWSER_MCP_CONNECTOR_SETUP_V120.md",
+      "missing_read_evidence_near_path:ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "missing_read_evidence_near_path:ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_TASK",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [
+      "ION/REPO_AUTHORITY.md",
+      "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+      "ION/02_architecture/ION_CHATGPT_BROWSER_MCP_CONNECTOR_PROTOCOL.md",
+      "ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md",
+      "ION/docs/setup/CHATGPT_BROWSER_MCP_CONNECTOR_SETUP_V120.md",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-04T17:46:48+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "BLOCKED_BY_PROOF_GATE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\n- Root confirmed: `/home/sev/ION - Production/ION_CODEX`; `pyproject.toml` and `ION/REPO_AUTHORITY.md` are present.\n- Browser-origin work request used: `ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it.json`.\n- Required context read: `ION/REPO_AUTHORITY.md`, `ION/02_architecture/ION_MOUNT_CONTRACT.md`, `ION/02_architecture/ION_CHATGPT_BROWSER_MCP_CONNECTOR_PROTOCOL.md`, `ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md`, `ION/docs/setup/CHATGPT_BROWSER_MCP_CONNECTOR_SETUP_V120.md`, and `ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py`.\n- Artifact read after creation: `ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md`.\n- Authority posture: draft non-production planning artifact only; no ION identity claim, no STEWARD/RELAY/PERSONA authority claim, no production authority, no live execution authority.\n\n### TEMPLATE ACTION PROOF\ntemplate_id: ion.template.planning_artifact.v1\naction_id: chatgpt_browser_full_carrier_mcp_parity_protocol_seed_2026_05_04\nresult: created_markdown_planning_artifact_for_corrected_full_carrier_mc",
+  "task_output_sha256": "b1b2ee1d0722e736145fbd59e283d267d105bc5e781c0d13f68eb0b35e6e2ed5",
+  "template_action_proof_result": {
+    "accepted": false,
+    "action_id": "chatgpt_browser_full_carrier_mcp_parity_protocol_seed_2026_05_04",
+    "findings": [
+      "unapproved_template_id:ion.template.planning_artifact.v1"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_OR_REPAIR",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.planning_artifact.v1",
+    "touched_paths": [
+      "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md"
+    ]
+  },
+  "work_request_id": "codex_req_2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T174407Z0000_create_a_markdown_planning_artifact_for_full_ion_carrier_parity_over_mcp_seed_it.json"
+}

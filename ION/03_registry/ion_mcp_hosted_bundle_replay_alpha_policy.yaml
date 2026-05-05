@@ -1,0 +1,28 @@
+version: V72_HOSTED_MCP_BUNDLE_IMPORT_EXPORT_AND_REPLAY_ALPHA
+mode: HOSTED_BUNDLE_IMPORT_EXPORT_REPLAY_ALPHA_ONLY
+allowed_resolutions:
+  - READ_ONLY
+  - DRY_RUN
+  - APPROVAL_REQUIRED
+  - REFUSED
+forbidden_resolutions:
+  - LIVE_EXECUTED
+allowed_replay_actions:
+  - READ_EVENT
+  - VERIFY_EVENT
+  - PROJECT_STATE_ROOT
+  - PROJECT_BUNDLE
+  - QUEUE_APPROVAL_PREVIEW
+  - REFUSE
+forbidden_replay_actions:
+  - EXECUTE
+  - SHELL_RUN
+  - BROWSER_MUTATE
+  - PROVIDER_DISPATCH
+  - GOVERNED_WRITE_DIRECT
+  - DAEMON_LOOP
+certification_claims:
+  hosted_cloud_certified: false
+  public_endpoint_certified: false
+  kubernetes_certified: false
+  production_bundle_certified: false

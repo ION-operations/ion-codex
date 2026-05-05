@@ -1,0 +1,69 @@
+registry_id: template_completion_watch_registry
+status: PROPOSED_SEED_NOT_YET_RATIFIED
+created: 2026-04-24
+authority: A2_PRODUCTION_GOVERNANCE_CANDIDATE
+purpose: Seed watched paths for evented template file graph operation.
+
+watch_seed:
+  context_graph_inbox:
+    path: ION/05_context/inbox/context_graph
+    file_glob: "*.task.md"
+    expected_template_classes:
+      - task
+      - ratification_task
+      - context_graph_restoration_task
+    owner_family: Steward
+    classification_policy: front_matter_or_packet_family
+    completion_policy: required_status_agent_objective_authority_fields
+    event_policy: emit_template_completion_event_when_validated_complete
+    index_projection: context_graph_event_pressure
+    receipt_directory: ION/05_context/history/template_completion_events
+
+  architecture_protocols:
+    path: ION/02_architecture
+    file_glob: "*_PROTOCOL.md"
+    expected_template_classes:
+      - architecture_protocol
+    owner_family: Scribe
+    classification_policy: filename_and_protocol_header
+    completion_policy: status_authority_purpose_non_loss_clauses
+    event_policy: emit_witness_or_ratification_ready_event
+    index_projection: protocol_surface_coverage
+    receipt_directory: ION/05_context/history/template_completion_events
+
+  event_templates:
+    path: ION/07_templates/events
+    file_glob: "*.md"
+    expected_template_classes:
+      - event_template
+      - receipt_template
+      - registry_template
+    owner_family: Templar_CANDIDATE_OR_Steward
+    classification_policy: front_matter_template_id
+    completion_policy: template_metadata_and_required_sections
+    event_policy: emit_template_completion_event_for_review_only
+    index_projection: event_template_coverage
+    receipt_directory: ION/05_context/history/template_completion_events
+
+phase1_implementation:
+  status: IMPLEMENTED_WITNESS_ONLY_SLICE
+  kernel_module: ION/04_packages/kernel/template_completion_events.py
+  protocol: ION/02_architecture/TEMPLATE_COMPLETION_EVENT_WITNESS_PHASE_PROTOCOL.md
+  tests: ION/tests/test_kernel_template_completion_events.py
+  witness_output_directory: ION/05_context/history/template_completion_event_witnesses
+  scan_receipt_output_directory: ION/05_context/history/template_completion_scan_receipts
+  first_scan:
+    emitted_at: 2026-04-24T02:10:00-04:00
+    watch_rule: watch.context_graph_inbox_tasks.phase1
+    candidates: 1
+    completed: 1
+    refused: 0
+    witnesses: 1
+    witness_path: ION/05_context/history/template_completion_event_witnesses/template-completion-event-56d5858fc514609a.template_completion_event_witness.json
+    receipt_path: ION/05_context/history/template_completion_scan_receipts/template-completion-scan-06026a9380932986.template_completion_scan_receipt.json
+  hard_boundary:
+    - no_source_file_mutation
+    - no_graph_writeback
+    - no_registry_promotion
+    - no_schedule_followup
+    - no_agent_activation

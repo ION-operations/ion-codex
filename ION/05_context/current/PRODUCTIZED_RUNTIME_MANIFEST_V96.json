@@ -1,0 +1,39 @@
+{
+  "applied_updates": [
+    "V87 hook bridge/cursor_sdk restored from ION_CURSOR_CONSOLIDATED_V87_CURSOR_SDK_HOOK_BRIDGE_20260429.zip because hooks.json referenced ion_carrier_session_start.py but the file was absent in supplied stack.",
+    "V90 live JOC cockpit webview binding",
+    "V91 agent context dynamics and front-door team planning",
+    "V92 MCP control bridge",
+    "V93 /ion autopilot command and subagent surface",
+    "V94 canonical workflow unification",
+    "V95 compiled role context bundle invariant",
+    "pyproject.toml and ION/REPO_AUTHORITY.md restored from V82 full project to satisfy shell-root invariant."
+  ],
+  "authority": {
+    "canonical_command": "/ion",
+    "cursor_parent_identity": "CURSOR_CARRIER_CONTROL_SURFACE",
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "base": "ION_CURSOR_CONSOLIDATED_V88_OPERATOR_QUEUE_AND_STATUS_20260429.zip",
+  "created_at": "2026-04-30T21:12:52+00:00",
+  "description": "Full consolidated productized runtime integrating V88 base plus V87 hook bridge restoration and V90-V95 update layers.",
+  "schema_id": "ion.productized_runtime_manifest.v96",
+  "shell_root_invariant": {
+    "present": true,
+    "required_files": [
+      "pyproject.toml",
+      "ION/REPO_AUTHORITY.md"
+    ]
+  },
+  "validation": {
+    "autopilot_audit": "ION_CURSOR_AUTOPILOT_READY",
+    "canonical_workflow_audit": "ION_CURSOR_CANONICAL_WORKFLOW_READY",
+    "carrier_workflow_audit": "ION_CARRIER_WORKFLOW_READY",
+    "compiled_role_context_bundle_audit": "ION_COMPILED_ROLE_CONTEXT_BUNDLE_READY",
+    "cursor_hook_audit": "findings_empty",
+    "full_pytest": "not_run_in_chat_container",
+    "py_compile_key_modules": "passed"
+  },
+  "version": "V96"
+}

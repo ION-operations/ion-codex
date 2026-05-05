@@ -1,0 +1,24 @@
+schema_id: ion.model_data_handling_registry.v1
+version: V56_MODEL_ECONOMICS_REGISTRY_SKELETONS
+authority_scope: A3_STEWARD_MODEL_ECONOMICS_REGISTRY_SKELETON
+production_authority: false
+profiles:
+  normal:
+    description: ordinary non-sensitive work
+    allowed_provider_profiles: [normal, no_retention_preferred, local_only]
+  sensitive:
+    description: sensitive project/user data requiring stricter handling
+    allowed_provider_profiles: [no_retention_preferred, local_only]
+  local_only:
+    description: content that must remain local/private
+    allowed_provider_profiles: [local_only]
+  no_retention_preferred:
+    description: prefer providers/settings that minimize retention and training use
+    allowed_provider_profiles: [no_retention_preferred, local_only]
+provider_profiles:
+  openai: no_retention_preferred
+  anthropic: no_retention_preferred
+  gemini: no_retention_preferred
+  cerebras: normal
+  local: local_only
+

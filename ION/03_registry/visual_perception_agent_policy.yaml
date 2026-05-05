@@ -1,0 +1,23 @@
+schema_id: ion.visual_perception_agent_policy.v1
+authority: A3_DOCTRINE_AND_RUNTIME_PLANNING
+production_authority: false
+modes:
+  - OBSERVE
+  - DIAGNOSE
+  - COMPARE
+  - NAVIGATE
+  - TEST
+  - EXPLAIN
+  - PATCH_REQUEST
+  - VERIFY
+allowed_initial_scope:
+  - screenshot_analysis
+  - dom_read_inspection
+  - local_dev_ui_navigation
+  - before_after_visual_receipts
+forbidden_without_explicit_authorization:
+  destructive_action: false
+  credential_sensitive_action: false
+  purchase_or_submission: false
+  deletion_or_irreversible_mutation: false
+  arbitrary_account_operation: false

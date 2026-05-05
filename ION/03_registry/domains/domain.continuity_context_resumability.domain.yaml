@@ -1,0 +1,28 @@
+domain_id: domain.continuity_context_resumability
+display_name: Continuity, Context, and Resumability
+true_name_status: SETTLED_CURRENT_PHASE
+status: ACTIVE_FIRST_PASS
+authority: A3_OPERATIONAL
+mission: >-
+  Hold the burden for continuity law, context discipline, resumability, and burden-bearing
+  architectural state so the organism can recover, resume, and govern itself truthfully.
+scope:
+  - continuity law
+  - context discipline
+  - resumability
+  - architectural burden-bearing
+primary_roles:
+  - VIZIER
+secondary_roles:
+  - VESTIGE
+  - RELAY
+owned_or_stewarded_surfaces:
+  - ION/02_architecture/CONTINUITY_ARCHITECTURE.md
+  - ION/02_architecture/CONTEXT_PLANES.md
+  - ION/01_doctrine/SOVEREIGN_CONSTITUTION.md
+  - ION/06_intelligence/roundtable/continuity_crisis/
+open_edges:
+  - compiled context and automation-state bridge surfaces remain incomplete
+  - review authority remains distinct and should not be collapsed into continuity burden
+activation_witness:
+  - ION/03_registry/domains/activation_witness/2026-04-07_continuity_context_resumability.activation.yaml

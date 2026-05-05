@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ION: cursor hooks audit",
+      "type": "shell",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_cursor_hooks_audit --ion-root . --json",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "ION: canonical workflow audit",
+      "type": "shell",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_cursor_canonical_workflow_audit --ion-root . --json",
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

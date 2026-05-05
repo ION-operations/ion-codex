@@ -1,0 +1,40 @@
+{
+  "approval": {
+    "approval_token": "ION_CHATOPS_APPROVED",
+    "approved": true,
+    "approved_by": "Braden"
+  },
+  "created_at": "2026-05-05T02:29:44+00:00",
+  "ion_action": {
+    "action_id": "sev-20260505-021500-chatops-reentry-hardening",
+    "actor": {
+      "callsign": "Sev",
+      "carrier": "chatgpt_browser"
+    },
+    "authority": {
+      "human_sovereign": "Braden",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true
+    },
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser",
+    "human_sovereign": "Braden",
+    "intent": "create_codex_work_packet",
+    "live_execution_authority": false,
+    "objective": "Verify and harden the live ION ChatOps Browser Carrier Runtime after successful extension smoke and re-entry injection. Inspect the latest ChatOps smoke receipt, extension parser/schema, daemon bridge, Sev re-entry context generation, and supported flat MVP action shape. Document the confirmed flow: Sev emits YAML, extension validates, Braden approves, daemon records or executes, ION writes receipt. Add or update focused tests for re-entry injection, flat create_codex_work_packet action parsing, write_file_draft smoke parsing, and receipt generation. Do not create a parallel authority system. Do not use MCP as the execution path for this task. Return CONTEXT PROOF, TEMPLATE ACTION PROOF with parseable result and touched_paths, VALIDATION, and RESULT.",
+    "production_authority": false,
+    "receipts": {
+      "requested": [
+        "codex_work_packet_receipt",
+        "action_receipt"
+      ]
+    },
+    "requires_approval": true,
+    "schema": "ion.chatops.action.v1"
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatops.action_packet.v1",
+  "source": "ion_chatops_bridge"
+}

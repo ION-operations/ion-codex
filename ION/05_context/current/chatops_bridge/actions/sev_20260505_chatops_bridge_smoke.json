@@ -1,0 +1,43 @@
+{
+  "approval": {
+    "approval_token": "ION_CHATOPS_APPROVED",
+    "approved": true,
+    "approved_by": "Braden"
+  },
+  "created_at": "2026-05-05T00:53:55+00:00",
+  "ion_action": {
+    "action_id": "sev-20260505-chatops-bridge-smoke",
+    "actor": {
+      "callsign": "Sev",
+      "carrier": "chatgpt_browser"
+    },
+    "authority": {
+      "human_sovereign": "Braden",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true
+    },
+    "content": {
+      "encoding": "utf-8",
+      "text": "ION ChatOps Bridge smoke artifact.\n"
+    },
+    "intent": "write_file_draft",
+    "receipts": {
+      "requested": [
+        "file_write_receipt",
+        "sha256_receipt"
+      ]
+    },
+    "schema": "ion.chatops.action.v1",
+    "target": {
+      "overwrite": false,
+      "path": "ION/05_context/current/chatops_bridge/artifacts/smoke/sev_chatops_bridge_smoke.txt",
+      "provider": "local_ion",
+      "root": "ION_CODEX"
+    }
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatops.action_packet.v1",
+  "source": "ion_chatops_bridge"
+}

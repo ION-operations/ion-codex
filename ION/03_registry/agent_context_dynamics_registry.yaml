@@ -1,0 +1,34 @@
+registry_id: ion.agent_context_dynamics_registry.v1
+status: ACTIVE_PLANNING_LAYER
+rank: A2_CONTEXT_AUTHORITY
+created: 2026-04-29
+primary_protocol: ION/02_architecture/ION_AGENT_CONTEXT_DYNAMICS_AND_CONTEXT_WINDOW_PROTOCOL.md
+primary_runtime_builder: ION/04_packages/kernel/ion_agent_context_dynamics.py
+active_outputs:
+  - ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json
+  - ION/05_context/current/ACTIVE_FRONT_DOOR_TEAM_PLAN.json
+principles:
+  - smallest_sufficient_context
+  - context_system_surfaces_before_legacy_witnesses
+  - route_deeper_by_trigger_not_chat_habit
+  - attention_lease_not_permanent_context_load
+  - no_user_upkeep_law
+  - proof_gated_returns_before_steward_integration
+budget_estimation:
+  estimate: chars_divided_by_4
+  note: replace with provider/model token counters when SDK/model-router integration is active
+front_door_team:
+  carrier_control_surface:
+    is_ion_role: false
+    duties:
+      - classify operator message
+      - run ion_carrier_continue
+      - execute generated carrier turn packet
+      - capture worker returns
+      - run task-return intake
+      - report accepted state
+  logical_roles:
+    - role.relay
+    - role.steward
+    - role.persona_interface
+  law: The user does not manage ION upkeep, agent choice, context refresh, or routine sequencing. Only explicit human gates ask for user action.

@@ -1,0 +1,15 @@
+{
+  "schema_id": "ion.productized_runtime_manifest.v1",
+  "version": "V94",
+  "name": "V94_CURSOR_CANONICAL_WORKFLOW_UNIFICATION",
+  "created_at": "2026-04-30",
+  "purpose": "Align Cursor rules, commands, skills, subagent slot, and operator docs around one canonical /ion workflow so Auto mode cannot choose contradictory shell root or CLI instructions.",
+  "canonical_command": "/ion",
+  "canonical_shell_root_rule": "directory containing pyproject.toml and ION/REPO_AUTHORITY.md",
+  "canonical_cli_spine": [
+    "kernel.ion_cursor_autopilot_packet",
+    "kernel.ion_carrier_continue",
+    "kernel.ion_carrier_task_return for worker returns"
+  ],
+  "audit": "kernel.ion_cursor_canonical_workflow_audit"
+}

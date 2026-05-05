@@ -1,0 +1,17 @@
+{
+  "schema_id": "ion.productized_runtime_manifest.v98",
+  "version": "V98_MASTER_ORCHESTRATION_AUTOMATION_AND_UI_RECOVERY_PLAN",
+  "created_at": "2026-05-01",
+  "production_ready": false,
+  "autonomous_loop_implemented": false,
+  "ui_required_as_proof_surface": true,
+  "primary_document": "ION/docs/consolidation/ION_V98_MASTER_ORCHESTRATION_AUTOMATION_AND_UI_RECOVERY_PLAN_20260501.md",
+  "receipt": "ION/05_context/signals/v98_master_orchestration_automation_and_ui_recovery_receipt_20260501.txt",
+  "roadmap": "ION/05_context/current/ION_MASTER_RECOVERY_ROADMAP_V98.json",
+  "next_required_target": "V99_MINIMAL_AUTONOMOUS_LOOP_SURVIVAL_PROOF",
+  "notes": [
+    "This manifest records a planning/recovery lock, not an implementation proof.",
+    "The next implementation must create ion_autonomous_loop.py, ion_template_action_gate.py, and ion_steward_integrate.py.",
+    "UI/cockpit visibility is mandatory for the recovery plan."
+  ]
+}

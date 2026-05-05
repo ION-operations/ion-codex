@@ -1,0 +1,103 @@
+{
+  "authority_scope": "COGNITIVE_EXPLORER_ROUTE_VIEW_MODEL_RECEIPT_ONLY",
+  "citation_count": 4,
+  "dependency_edge_count": 2,
+  "dependency_edges": [
+    {
+      "edge_class": "projects_to",
+      "evidence_ref": "V57 stream fixture",
+      "source": "node.kernel.joc_reactive_os_stream_view_model",
+      "target": "node.ui.ReactiveOsStreamPanel"
+    },
+    {
+      "edge_class": "conforms_to",
+      "evidence_ref": "V57 protocol required surfaces",
+      "source": "node.ui.AutomationOverlayPanel",
+      "target": "node.protocol.reactive_os_stream"
+    }
+  ],
+  "findings": [],
+  "forbidden_capabilities": {
+    "browser_session_mutation": false,
+    "canonical_graph_write": false,
+    "credential_access": false,
+    "external_model_dispatch": false,
+    "live_ui_claim": false,
+    "production_authority": false,
+    "source_summary_rewrite": false,
+    "unrestricted_agent_activation": false
+  },
+  "generated_at": "2026-04-26T20:02:04.516974+00:00",
+  "injection_preview": "Context route preview: include V57 stream verifier, ReactiveOsStreamPanel, AutomationOverlayPanel, and protocol lines. Dispatch is not executed in V58.",
+  "live_ui_claim": false,
+  "production_authority": false,
+  "query": "Explain the reactive OS stream and automation overlay path.",
+  "receipt_id": "27b8da24bcd9606a8bde97a9",
+  "route_class_count": 5,
+  "route_classes": [
+    "EXACT_SYMBOL",
+    "FILE_PATH",
+    "DEPENDENCY_EDGE",
+    "RECEIPT_FAMILY",
+    "FALLBACK_BOUNDARY"
+  ],
+  "route_reasoning": "Exact indexed symbols for the V57 stream verifier and cockpit panels satisfy the query before any semantic fallback. Dependency edges show how kernel receipts project into UI components.",
+  "route_verdict": "VALID_CONTEXT_ROUTE_VIEW_MODEL",
+  "schema_id": "ion.joc_cognitive_explorer_route_view_model.v1",
+  "selected_node_count": 4,
+  "selected_nodes": [
+    {
+      "confidence": "SOURCE_INDEXED",
+      "label": "Reactive OS Stream verifier",
+      "line_range": "L1-L220",
+      "node_class": "FUNCTION",
+      "node_id": "node.kernel.joc_reactive_os_stream_view_model",
+      "path": "ION/04_packages/kernel/joc_reactive_os_stream_view_model.py",
+      "symbol": "validate_reactive_os_stream_view_model"
+    },
+    {
+      "confidence": "SOURCE_INDEXED",
+      "label": "Reactive OS Stream panel",
+      "line_range": "L1-L80",
+      "node_class": "UI_COMPONENT",
+      "node_id": "node.ui.ReactiveOsStreamPanel",
+      "path": "ION/08_ui/joc_cockpit_shell/ReactiveOsStreamPanel.tsx",
+      "symbol": "ReactiveOsStreamPanel"
+    },
+    {
+      "confidence": "SOURCE_INDEXED",
+      "label": "Browser automation overlay panel",
+      "line_range": "L1-L90",
+      "node_class": "UI_COMPONENT",
+      "node_id": "node.ui.AutomationOverlayPanel",
+      "path": "ION/08_ui/joc_cockpit_shell/AutomationOverlayPanel.tsx",
+      "symbol": "AutomationOverlayPanel"
+    },
+    {
+      "confidence": "SOURCE_INDEXED",
+      "label": "Reactive OS stream protocol",
+      "line_range": "L1-L140",
+      "node_class": "PROTOCOL",
+      "node_id": "node.protocol.reactive_os_stream",
+      "path": "ION/02_architecture/ION_JOC_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL_PROTOCOL.md",
+      "symbol": "V57 protocol"
+    }
+  ],
+  "source_citations": [
+    "ION/04_packages/kernel/joc_reactive_os_stream_view_model.py:L1-L220",
+    "ION/08_ui/joc_cockpit_shell/ReactiveOsStreamPanel.tsx:L1-L80",
+    "ION/08_ui/joc_cockpit_shell/AutomationOverlayPanel.tsx:L1-L90",
+    "ION/02_architecture/ION_JOC_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL_PROTOCOL.md:L1-L140"
+  ],
+  "version": "V58_COGNITIVE_EXPLORER_AND_CONTEXT_ROUTE_VIEW_MODEL",
+  "view_surface_count": 7,
+  "view_surfaces": [
+    "COGNITIVE_EXPLORER",
+    "INFINITE_CONTEXT_COMMAND_PALETTE",
+    "SELECTED_CONTEXT_LENS",
+    "STRUCTURAL_BLUEPRINT_VIEW",
+    "DEPENDENCY_WEB_VIEW",
+    "SOURCE_LINE_CITATION_RAIL",
+    "ROUTE_REASONING_PANEL"
+  ]
+}

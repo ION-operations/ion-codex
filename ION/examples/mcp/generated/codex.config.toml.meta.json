@@ -1,0 +1,10 @@
+{
+  "client": "Codex",
+  "config": "[mcp_servers.ion-local]\ncommand = \"python\"\nargs = [\"-m\", \"kernel.ion_mcp_local_bridge\", \"--ion-root\", \"/mnt/data/ion_v64_work/ION MASTER CURRENT/ION\", \"--stdio\"]\nenv = { PYTHONPATH = \"/mnt/data/ion_v64_work/ION MASTER CURRENT/ION/04_packages\" }\n",
+  "filename": "codex.config.toml",
+  "notes": [
+    "Example Codex-style local MCP server profile.",
+    "Use this only for dry-run bridge testing until a client-specific certification pass is performed."
+  ],
+  "profile_name": "codex-local-stdio"
+}

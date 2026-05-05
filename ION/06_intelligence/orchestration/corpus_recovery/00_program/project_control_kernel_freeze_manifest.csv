@@ -1,0 +1,13 @@
+surface,role,status,note
+00_program/milestone1_completion_judgment.md,trust gate,frozen default kernel,project control begins here
+00_program/default_project_control_kernel_judgment.md,control-kernel judgment,frozen default kernel,states why the kernel is default
+00_program/project_control_kernel_freeze_judgment.md,freeze judgment,frozen default kernel,states why the kernel is frozen by default
+00_program/project_control_kernel_state_card.md,one-page kernel card,frozen default kernel,fastest practical state reminder
+00_program/atlas_base_usage_contract.md,usage contract,frozen default kernel,declares anti-drift obligations
+00_program/atlas_control_card.md,compressed control entry,frozen default kernel,smallest practical entry card
+00_program/future_work_control_defaults_matrix.csv,combined defaults,frozen default kernel,default center/posture/output/boundary
+12_status_and_conflicts/conflict_register.md,conflict gate,frozen default kernel,preserved contradictions remain authoritative
+00_program/atlas_packet_gate_checklist.md,packet gate,frozen default kernel,minimum work-start checklist
+00_program/project_control_kernel_escalation_matrix.csv,escalation logic,frozen default kernel,stay/widen/stop defaults
+00_program/project_control_kernel_return_conditions.md,return logic,frozen default kernel,declares lawful return conditions
+00_program/project_control_kernel_reassessment_triggers.md,reassessment logic,frozen default kernel,declares lawful stop triggers

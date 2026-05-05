@@ -1,0 +1,14 @@
+schema_id=ion.active_work_packet.v1
+objective=execute ION carrier workflow through packet-assigned role phases with bounded implementation authority
+emitted_at=2026-04-27T21:31:42+00:00
+integration_status=INTEGRATED_CARRIER_RUN_20260427
+integrated_at=2026-04-27T21:34:00Z
+packet_path=/home/sev/ION - Production/ION most recent/CURSOR- ION/IONcursorbuild/ION_MASTER_CURRENT_3_V69_HANDOFF_PACKAGE_ASSEMBLY_PLAN_AND_CHECKSUM_PREVIEW_FULL_PROJECT_20260426/ION MASTER CURRENT/ION/05_context/current/ACTIVE_WORK_PACKET.json
+validation_commands=test -f pyproject.toml && test -f ION/REPO_AUTHORITY.md
+validation_commands=python3 -m kernel implementation "execute ION carrier workflow through packet-assigned role phases with bounded implementation authority"
+task_steward_agent_id=b560faa4-4237-4263-b472-c9af9a09bbed
+task_vizier_agent_id=4ff7cb99-05f9-4a48-bfaa-c0c874cefdf1
+task_mason_agent_id=08b3e26b-341b-4628-9749-0340ac75979a
+task_vice_agent_id=73c03552-743f-4b4e-8ea3-de57955ba80f
+task_nemesis_agent_id=0034f7dc-f3b2-4a7e-b304-538b3321a1cc
+carrier_role_pass_ids=steward:82fbcf32-75cd-495d-915e-c8a1cc939c5a,vizier:fb085929-97eb-4a54-abef-5ea5833b6a84,mason:a76f994f-57d0-4ff0-80e1-bbef7281012c
