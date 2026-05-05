@@ -153,6 +153,10 @@ The Artifacts tab includes the first guarded file lane:
 
 - `Attachables`: lists files the daemon considers safe to present for browser
   attachment from bounded package/inbox roots.
+- `Preview Target`: draws a temporary green ring around the exact ChatGPT
+  attach/add-file control the extension currently sees.
+- `Dry Run Attach`: prepares the selected artifact and asks the daemon to
+  validate target geometry/backend state without moving the pointer.
 - `Drop Latest`: asks Braden for approval, asks the daemon for a one-use-ish
   localhost download ticket, fetches the file as a browser `File`, and attempts
   visible `dragenter`/`dragover`/`drop` events against the ChatGPT composer.
@@ -162,6 +166,10 @@ The Artifacts tab includes the first guarded file lane:
   `xdotool`-first on Linux, uses extension-provided screen coordinates, and
   fails closed if the active window is not a browser/ChatGPT surface, the attach
   target is stale/missing, or the file picker is not detected.
+
+`Local Attach` performs a daemon dry run before any mouse movement. If geometry
+is missing, stale, near the screen origin, outside the display, or not near the
+composer, the daemon blocks with `LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID`.
 
 `Attachables` intentionally shows a compact selected-artifact summary rather
 than dumping the full daemon JSON. The selected artifact is the same latest

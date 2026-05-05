@@ -6,6 +6,7 @@
   const PANEL_ID = "ion-chatops-bridge-panel";
   const MODAL_ID = "ion-chatops-bridge-approval";
   const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
+  const ATTACH_PREVIEW_ID = "ion-chatops-attach-target-preview";
   const SAFE_MODE_KEY = "ION_CHATOPS_SAFE_MODE";
   const SCAN_DEBOUNCE_MS = 450;
   const ION_ACTION_LINE = /(^|\n)\s*ion_action:\s*(\n|$)/;
@@ -215,11 +216,20 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     [data-ion-control-role="send_button"] {
       box-shadow: 0 0 0 1px rgba(251,191,36,0.42), 0 0 0 4px rgba(251,191,36,0.07) !important;
     }
-    [data-ion-control-role="source_plane"],
-    [data-ion-control-role="uploaded_attachment"] {
-      box-shadow: 0 0 0 1px rgba(129,140,248,0.40), 0 0 0 4px rgba(129,140,248,0.07) !important;
-    }
-  `;
+      [data-ion-control-role="source_plane"],
+      [data-ion-control-role="uploaded_attachment"] {
+        box-shadow: 0 0 0 1px rgba(129,140,248,0.40), 0 0 0 4px rgba(129,140,248,0.07) !important;
+      }
+      #${ATTACH_PREVIEW_ID} {
+        position: fixed;
+        z-index: 2147483645;
+        pointer-events: none;
+        border: 2px solid rgba(52,211,153,0.98);
+        border-radius: 12px;
+        box-shadow: 0 0 0 5px rgba(52,211,153,0.18), 0 0 28px rgba(52,211,153,0.55);
+        background: rgba(52,211,153,0.08);
+      }
+    `;
     document.documentElement.appendChild(style);
   }
 
@@ -1298,11 +1308,13 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
           <div class="ion-tab-panel" data-panel="automation"><div class="ion-detail" data-field="automation"></div></div>
           <div class="ion-tab-panel" data-panel="artifacts">
             <div class="ion-detail" data-field="artifacts"></div>
-            <div class="ion-toolbar-actions">
-              <button type="button" class="ion-tool" data-tool="artifact-attachables">Attachables</button>
-              <button type="button" class="ion-tool" data-tool="artifact-drop-latest">Drop Latest</button>
-              <button type="button" class="ion-tool" data-tool="artifact-local-attach">Local Attach</button>
-            </div>
+          <div class="ion-toolbar-actions">
+            <button type="button" class="ion-tool" data-tool="artifact-attachables">Attachables</button>
+            <button type="button" class="ion-tool" data-tool="artifact-preview-attach">Preview Target</button>
+            <button type="button" class="ion-tool" data-tool="artifact-dry-run-attach">Dry Run Attach</button>
+            <button type="button" class="ion-tool" data-tool="artifact-drop-latest">Drop Latest</button>
+            <button type="button" class="ion-tool" data-tool="artifact-local-attach">Local Attach</button>
+          </div>
           </div>
           <div class="ion-tab-panel" data-panel="diagnostics">
             <div class="ion-detail" data-field="diagnostics"></div>
@@ -1397,12 +1409,18 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.querySelector('[data-tool="artifact-attachables"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-artifact-attachables"));
     });
-    panel.querySelector('[data-tool="artifact-drop-latest"]')?.addEventListener("click", () => {
-      window.dispatchEvent(new CustomEvent("ion-chatops-artifact-drop-latest"));
-    });
-    panel.querySelector('[data-tool="artifact-local-attach"]')?.addEventListener("click", () => {
-      window.dispatchEvent(new CustomEvent("ion-chatops-artifact-local-attach"));
-    });
+  panel.querySelector('[data-tool="artifact-drop-latest"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-drop-latest"));
+  });
+  panel.querySelector('[data-tool="artifact-preview-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-preview-attach"));
+  });
+  panel.querySelector('[data-tool="artifact-dry-run-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-dry-run-attach"));
+  });
+  panel.querySelector('[data-tool="artifact-local-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-local-attach"));
+  });
     panel.querySelector('[data-tool="collapse"]')?.addEventListener("click", () => {
       panel.dataset.expanded = "false";
       renderPanel(panel);
@@ -1979,6 +1997,15 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return composer?.getBoundingClientRect() ?? null;
   }
 
+  function rectPayload(rect) {
+    return {
+      x: Math.round(rect.left),
+      y: Math.round(rect.top),
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+    };
+  }
+
   function controlLabel(node) {
     return `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""} ${node.textContent ?? ""}`.replace(/\s+/g, " ").trim();
   }
@@ -1988,16 +2015,20 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
   }
 
-  function findAttachControlRect() {
+  function findAttachControlElement() {
     const rect = composerRect();
     const nodes = Array.from(document.querySelectorAll("button, [role='button'], input[type='file']"));
-    const candidate = nodes.find((node) => {
+    return nodes.find((node) => {
       if (!visibleElement(node)) return false;
       const label = controlLabel(node).toLowerCase();
       const bounds = node.getBoundingClientRect();
       const nearComposer = rect ? Math.abs(bounds.top - rect.top) < 220 || Math.abs(bounds.bottom - rect.bottom) < 220 : bounds.top > window.innerHeight * 0.45;
       return nearComposer && /attach|upload|file|plus|add/.test(label);
-    });
+    }) ?? null;
+  }
+
+  function findAttachControlRect() {
+    const candidate = findAttachControlElement();
     if (!candidate) return null;
     const bounds = candidate.getBoundingClientRect();
     const borderX = Math.max(0, (window.outerWidth - window.innerWidth) / 2);
@@ -2017,6 +2048,50 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       screen_rect: screenRect,
       coordinate_space: "viewport_css_pixels",
     };
+  }
+
+  function localAttachPayload() {
+    const targetRect = findAttachControlRect();
+    const composer = composerRect();
+    if (!targetRect || !composer) return null;
+    return {
+      target_kind: "attach_button",
+      target_rect: targetRect,
+      target_screen_rect: targetRect.screen_rect,
+      composer_rect: rectPayload(composer),
+      viewport: {
+        width: Math.round(window.innerWidth),
+        height: Math.round(window.innerHeight),
+      },
+      device_pixel_ratio: window.devicePixelRatio || 1,
+      page_url: window.location.href,
+      captured_at_ms: Date.now(),
+    };
+  }
+
+  function previewAttachTarget() {
+    ensureDomRegistryStyle();
+    const target = findAttachControlElement();
+    document.getElementById(ATTACH_PREVIEW_ID)?.remove();
+    if (!target) {
+      const detail = "attach_control_not_detected\nNo target ring was drawn.";
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Attach target missing", detail, "error");
+      return;
+    }
+    const rect = target.getBoundingClientRect();
+    const overlay = document.createElement("div");
+    overlay.id = ATTACH_PREVIEW_ID;
+    overlay.style.left = `${Math.round(rect.left - 5)}px`;
+    overlay.style.top = `${Math.round(rect.top - 5)}px`;
+    overlay.style.width = `${Math.round(rect.width + 10)}px`;
+    overlay.style.height = `${Math.round(rect.height + 10)}px`;
+    document.documentElement.appendChild(overlay);
+    window.setTimeout(() => overlay.remove(), 4000);
+    const payload = localAttachPayload();
+    const detail = payload ? compactJson(payload, 1200) : "attach_target_payload_unavailable";
+    setBridgeArtifactDetail(`preview_attach_target\n${detail}`);
+    setBridgeStatus("Attach target previewed", "Green ring marks the exact attach target. Reject Local Attach if the ring is wrong.", "success");
   }
 
   function uploadedAttachmentCount() {
@@ -2115,21 +2190,19 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   }
 
   function requestArtifactLocalAttachLatest() {
-    const targetRect = findAttachControlRect();
+    const payload = localAttachPayload();
     const beforeCount = uploadedAttachmentCount();
-    if (!targetRect) {
-      const detail = "attach_control_not_detected\nOpen ChatGPT composer and use Diagnostics to confirm ION sees the attach/add-file control.";
+    if (!payload) {
+      const detail = "attach_control_or_composer_not_detected\nUse Preview Attach Target first and confirm Diagnostics sees the attach/add-file control.";
       setBridgeArtifactDetail(detail);
       setBridgeStatus("Local attach blocked", detail, "error");
       return;
     }
-    setBridgeStatus("Local attach latest", "Requesting approval for local operator artifact attachment. No Send click will occur.", "working");
+    previewAttachTarget();
+    setBridgeStatus("Local attach latest", "Requesting approval after local geometry capture. The daemon will dry-run before any mouse movement.", "working");
     chrome.runtime.sendMessage({
       type: "ion_chatops_artifact_local_attach_latest",
-      payload: {
-        target_rect: targetRect,
-        target_screen_rect: targetRect.screen_rect,
-      },
+      payload,
     }, async (response) => {
       const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
       setBridgeArtifactDetail(detail);
@@ -2139,6 +2212,27 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       }
       await copyBridgeResult("Local artifact attach", detail);
       waitForUploadChip(beforeCount, "Local attach", detail);
+    });
+  }
+
+  function requestArtifactLocalAttachDryRun() {
+    const payload = localAttachPayload();
+    if (!payload) {
+      const detail = "attach_control_or_composer_not_detected\nUse Preview Attach Target and confirm the green ring is on the attach button.";
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Dry run blocked", detail, "error");
+      return;
+    }
+    previewAttachTarget();
+    setBridgeStatus("Dry run attach", "Requesting daemon geometry validation. No mouse movement will occur.", "working");
+    chrome.runtime.sendMessage({
+      type: "ion_chatops_artifact_local_attach_dry_run",
+      payload,
+    }, async (response) => {
+      const detail = response?.ok ? compactJson(response.result, 2200) : blockedDetail(response);
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus(response?.ok ? "Dry run passed" : "Dry run blocked", detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+      if (response?.ok) await copyBridgeResult("Local attach dry run", detail);
     });
   }
 
@@ -2371,6 +2465,8 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     updateDomActionRegistry,
     submitActionText,
     refreshBridgePosition,
+    previewAttachTarget,
+    requestArtifactLocalAttachDryRun,
     rescan: () => {
       seen.clear();
       return scan("manual");
@@ -2439,6 +2535,12 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   });
   window.addEventListener("ion-chatops-artifact-drop-latest", () => {
     requestArtifactDropLatest();
+  });
+  window.addEventListener("ion-chatops-artifact-preview-attach", () => {
+    previewAttachTarget();
+  });
+  window.addEventListener("ion-chatops-artifact-dry-run-attach", () => {
+    requestArtifactLocalAttachDryRun();
   });
   window.addEventListener("ion-chatops-artifact-local-attach", () => {
     requestArtifactLocalAttachLatest();

@@ -1,4 +1,5 @@
 import json
+import time
 from pathlib import Path
 
 from kernel.ion_chatops_bridge import (
@@ -441,8 +442,27 @@ def test_chatops_local_operator_attachment_requires_approval_and_blocks_send_cli
         _approved({
             "download_token": prepared["download_token"],
             "dry_run": True,
+            "target_kind": "attach_button",
             "target_rect": {"x": 100, "y": 200, "width": 40, "height": 20},
             "target_screen_rect": {"x": 300, "y": 400, "width": 60, "height": 30},
+            "composer_rect": {"x": 80, "y": 180, "width": 400, "height": 80},
+            "viewport": {"width": 1200, "height": 900},
+            "page_url": "https://chatgpt.com/c/test",
+            "captured_at_ms": int(time.time() * 1000),
+        }),
+    )
+    invalid_geometry = attach_chatops_artifact_with_local_operator(
+        tmp_path,
+        _approved({
+            "download_token": prepared["download_token"],
+            "dry_run": True,
+            "target_kind": "attach_button",
+            "target_rect": {"x": 0, "y": 0, "width": 1, "height": 1},
+            "target_screen_rect": {"x": 0, "y": 0, "width": 1, "height": 1},
+            "composer_rect": {"x": 800, "y": 800, "width": 200, "height": 80},
+            "viewport": {"width": 1200, "height": 900},
+            "page_url": "https://chatgpt.com/c/test",
+            "captured_at_ms": int(time.time() * 1000),
         }),
     )
     status = build_chatops_local_operator_status(tmp_path)
@@ -455,7 +475,10 @@ def test_chatops_local_operator_attachment_requires_approval_and_blocks_send_cli
     assert dry_run["dry_run"] is True
     assert dry_run["no_send_click_performed"] is True
     assert dry_run["target_center"] == (330, 415)
+    assert dry_run["geometry"]["ok"] is True
     assert (tmp_path / dry_run["receipt_path"]).exists()
+    assert invalid_geometry["ok"] is False
+    assert invalid_geometry["finding"] == "LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID"
     assert status["send_click_authority"] is False
 
 

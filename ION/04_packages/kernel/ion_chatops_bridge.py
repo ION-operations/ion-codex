@@ -903,6 +903,25 @@ def _operator_active_window_title() -> str:
     return str(title.get("stdout") or "").strip() if title.get("ok") else ""
 
 
+def _operator_display_geometry() -> dict[str, Any]:
+    tools = _operator_tool_paths()
+    xdotool = tools.get("xdotool")
+    if not xdotool:
+        return {"ok": False, "finding": "xdotool_missing"}
+    result = _operator_run([xdotool, "getdisplaygeometry"], timeout=1.0)
+    if not result.get("ok"):
+        return {"ok": False, "finding": "display_geometry_unavailable", "result": result}
+    parts = str(result.get("stdout") or "").split()
+    if len(parts) < 2:
+        return {"ok": False, "finding": "display_geometry_parse_failed", "result": result}
+    try:
+        width = int(float(parts[0]))
+        height = int(float(parts[1]))
+    except ValueError:
+        return {"ok": False, "finding": "display_geometry_parse_failed", "result": result}
+    return {"ok": True, "width": width, "height": height}
+
+
 def build_chatops_local_operator_status(root: str | Path | None = None) -> dict[str, Any]:
     _resolve_root(root)
     tools = _operator_tool_paths()
@@ -914,6 +933,7 @@ def build_chatops_local_operator_status(root: str | Path | None = None) -> dict[
         "backend": "linux_desktop_automation",
         "tools": tools,
         "active_window_title": _operator_active_window_title() if xdotool_ready else "",
+        "display_geometry": _operator_display_geometry() if xdotool_ready else {"ok": False, "finding": "xdotool_missing"},
         "supported_operations": ["attach_approved_artifact"] if xdotool_ready else [],
         "requires_operator_presence": True,
         "silent_upload_authority": False,
@@ -939,9 +959,103 @@ def _target_center(packet: Mapping[str, Any]) -> tuple[int, int] | None:
     return int(round(x + width / 2)), int(round(y + height / 2))
 
 
+def _rect_payload(packet: Mapping[str, Any], key: str) -> Mapping[str, Any] | None:
+    rect = packet.get(key)
+    return rect if isinstance(rect, Mapping) else None
+
+
+def _rect_numbers(rect: Mapping[str, Any] | None) -> dict[str, float] | None:
+    if not rect:
+        return None
+    try:
+        x = float(rect.get("x") if rect.get("x") is not None else rect.get("left"))
+        y = float(rect.get("y") if rect.get("y") is not None else rect.get("top"))
+        width = float(rect.get("width") or 0)
+        height = float(rect.get("height") or 0)
+    except (TypeError, ValueError):
+        return None
+    return {"x": x, "y": y, "width": width, "height": height, "center_x": x + width / 2, "center_y": y + height / 2}
+
+
 def _operator_active_window_allowed(title: str) -> bool:
     lowered = title.lower()
     return bool(re.search(r"chatgpt|google chrome|chromium|chrome", lowered))
+
+
+def _validate_operator_attach_geometry(packet: Mapping[str, Any], status: Mapping[str, Any]) -> dict[str, Any]:
+    findings: list[str] = []
+    target = _rect_numbers(_rect_payload(packet, "target_rect"))
+    screen_target = _rect_numbers(_rect_payload(packet, "target_screen_rect"))
+    composer = _rect_numbers(_rect_payload(packet, "composer_rect"))
+    viewport = packet.get("viewport") if isinstance(packet.get("viewport"), Mapping) else {}
+    display = status.get("display_geometry") if isinstance(status.get("display_geometry"), Mapping) else {}
+    now_ms = int(time.time() * 1000)
+
+    if str(packet.get("target_kind") or "") != "attach_button":
+        findings.append("target_kind_must_be_attach_button")
+    if not target:
+        findings.append("target_rect_required")
+    elif target["width"] <= 1 or target["height"] <= 1:
+        findings.append("target_rect_too_small")
+    if not screen_target:
+        findings.append("target_screen_rect_required")
+    elif screen_target["width"] <= 1 or screen_target["height"] <= 1:
+        findings.append("target_screen_rect_too_small")
+
+    if screen_target:
+        if screen_target["center_x"] < 40 or screen_target["center_y"] < 40:
+            findings.append("target_screen_center_implausibly_near_origin")
+        if display.get("ok") is True:
+            width = float(display.get("width") or 0)
+            height = float(display.get("height") or 0)
+            if width > 0 and height > 0 and not (0 <= screen_target["center_x"] <= width and 0 <= screen_target["center_y"] <= height):
+                findings.append("target_screen_center_outside_display")
+
+    if target and viewport:
+        try:
+            viewport_width = float(viewport.get("width") or 0)
+            viewport_height = float(viewport.get("height") or 0)
+        except (TypeError, ValueError):
+            viewport_width = 0
+            viewport_height = 0
+        if viewport_width > 0 and viewport_height > 0:
+            if not (0 <= target["center_x"] <= viewport_width and 0 <= target["center_y"] <= viewport_height):
+                findings.append("target_viewport_center_outside_viewport")
+
+    if target and composer:
+        near_x = composer["x"] - 96 <= target["center_x"] <= composer["x"] + composer["width"] + 96
+        near_y = composer["y"] - 96 <= target["center_y"] <= composer["y"] + composer["height"] + 96
+        if not (near_x and near_y):
+            findings.append("target_not_near_composer_rect")
+    else:
+        findings.append("composer_rect_required")
+
+    page_url = str(packet.get("page_url") or "")
+    if page_url and not page_url.startswith("https://chatgpt.com/"):
+        findings.append("page_url_not_chatgpt")
+
+    try:
+        captured_at = int(float(packet.get("captured_at_ms") or 0))
+    except (TypeError, ValueError):
+        captured_at = 0
+    if not captured_at:
+        findings.append("capture_timestamp_required")
+    elif abs(now_ms - captured_at) > 60000:
+        findings.append("target_geometry_stale")
+
+    return {
+        "ok": not findings,
+        "findings": findings,
+        "target_rect": target,
+        "target_screen_rect": screen_target,
+        "composer_rect": composer,
+        "viewport": dict(viewport),
+        "display_geometry": dict(display),
+        "planned_click": _target_center(packet),
+        "page_url": page_url,
+        "captured_at_ms": captured_at,
+        "age_ms": abs(now_ms - captured_at) if captured_at else None,
+    }
 
 
 def _operator_failure(root: Path, packet: Mapping[str, Any], *, finding: str, result: Mapping[str, Any], status: str = "failed") -> dict[str, Any]:
@@ -998,9 +1112,18 @@ def attach_chatops_artifact_with_local_operator(root: str | Path | None, packet:
     if not artifact_path:
         return _operator_failure(shell_root, packet, finding=str(validation.get("finding") or "artifact_ticket_invalid"), result={"ticket_validation": validation})
     center = _target_center(packet)
-    if center is None and not bool(packet.get("dry_run")):
-        return _operator_failure(shell_root, packet, finding="attach_target_rect_required", result={"artifact": validation.get("artifact")})
     status = build_chatops_local_operator_status(shell_root)
+    geometry = _validate_operator_attach_geometry(packet, status)
+    if not geometry.get("ok"):
+        return _operator_failure(
+            shell_root,
+            packet,
+            finding="LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID",
+            result={"artifact": validation.get("artifact"), "geometry": geometry, "operator_status": status},
+            status="blocked",
+        )
+    if center is None:
+        return _operator_failure(shell_root, packet, finding="attach_target_rect_required", result={"artifact": validation.get("artifact"), "geometry": geometry})
     if bool(packet.get("dry_run")):
         result = {
             "ok": True,
@@ -1008,6 +1131,7 @@ def attach_chatops_artifact_with_local_operator(root: str | Path | None, packet:
             "operation": operation,
             "artifact": validation.get("artifact"),
             "target_center": center,
+            "geometry": geometry,
             "operator_status": status,
             "no_send_click_performed": True,
         }
@@ -1060,6 +1184,7 @@ def attach_chatops_artifact_with_local_operator(root: str | Path | None, packet:
         "operation": operation,
         "artifact": validation.get("artifact"),
         "target_center": center,
+        "geometry": geometry,
         "active_window_before": before_title,
         "active_window_after_click": picker_title,
         "command_results": command_results,

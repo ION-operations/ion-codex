@@ -720,6 +720,8 @@ function ensurePanel(): HTMLElement {
           <div class="ion-detail" data-field="artifacts"></div>
           <div class="ion-toolbar-actions">
             <button type="button" class="ion-tool" data-tool="artifact-attachables">Attachables</button>
+            <button type="button" class="ion-tool" data-tool="artifact-preview-attach">Preview Target</button>
+            <button type="button" class="ion-tool" data-tool="artifact-dry-run-attach">Dry Run Attach</button>
             <button type="button" class="ion-tool" data-tool="artifact-drop-latest">Drop Latest</button>
             <button type="button" class="ion-tool" data-tool="artifact-local-attach">Local Attach</button>
           </div>
@@ -819,6 +821,12 @@ function ensurePanel(): HTMLElement {
   });
   panel.querySelector('[data-tool="artifact-drop-latest"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-artifact-drop-latest"));
+  });
+  panel.querySelector('[data-tool="artifact-preview-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-preview-attach"));
+  });
+  panel.querySelector('[data-tool="artifact-dry-run-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-dry-run-attach"));
   });
   panel.querySelector('[data-tool="artifact-local-attach"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-artifact-local-attach"));

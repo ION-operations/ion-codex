@@ -53,10 +53,10 @@ Implemented local-operator lane:
 
 ```text
 Artifacts tab
--> Local Attach
+-> Preview Target / Dry Run Attach / Local Attach
 -> Braden approval
 -> daemon upload ticket
--> local operator target check
+-> local operator geometry check
 -> active ChatGPT window check
 -> approved file-picker assistance
 -> no Send click
@@ -73,6 +73,10 @@ is not detected.
 
 `Local Attach` is still operator-present automation. It does not grant silent
 upload authority and does not click Send.
+
+`Local Attach` must dry-run before moving the pointer. Geometry failures are
+classified as `LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID` and no mouse movement is
+allowed.
 
 ## Candidate Artifact Roots
 
@@ -125,6 +129,21 @@ desktop automation and retains viewport coordinates as evidence. It verifies
 the artifact ticket, rejects `send_after_attach`, records a receipt for
 success/failure, and returns `verification: extension_should_confirm_upload_chip`
 because ChatGPT upload completion must be observed in the browser surface.
+
+Required geometry evidence:
+
+```text
+target_kind: attach_button
+target_rect: viewport coordinates
+target_screen_rect: desktop/screen coordinates
+composer_rect: viewport coordinates
+viewport: browser viewport dimensions
+page_url: https://chatgpt.com/...
+captured_at_ms: current capture timestamp
+```
+
+The daemon must reject missing, stale, out-of-viewport, out-of-display,
+near-origin, or not-near-composer geometry before any desktop action.
 
 ## Non-Authority
 

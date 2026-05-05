@@ -60,3 +60,8 @@ to select the exact approved artifact in the OS file picker. Screen coordinates
 from the extension are preferred for the desktop click; viewport coordinates are
 retained as evidence. The browser extension still verifies whether an upload
 chip appears. No Send click is performed.
+
+Before a real attach, the extension calls the same endpoint with `dry_run: true`.
+The daemon validates target kind, viewport rect, screen rect, composer proximity,
+ChatGPT page URL, capture freshness, and display bounds. Geometry failures return
+`LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID` and do not move the pointer.

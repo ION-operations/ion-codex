@@ -180,22 +180,116 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
       const operatorResult = await postJson("/operator/attach-artifact", approvedPayload({
         download_token: prepared.download_token,
+        target_kind: message.payload?.target_kind ?? "attach_button",
         target_rect: message.payload?.target_rect ?? null,
         target_screen_rect: message.payload?.target_screen_rect ?? null,
+        composer_rect: message.payload?.composer_rect ?? null,
+        viewport: message.payload?.viewport ?? null,
+        device_pixel_ratio: message.payload?.device_pixel_ratio ?? null,
+        page_url: message.payload?.page_url ?? "",
+        captured_at_ms: message.payload?.captured_at_ms ?? null,
+        selected_artifact: candidate,
+        dry_run: true,
+        active_window_required: true,
+        file_picker_title_check: true,
+        send_after_attach: false
+      }));
+      if (!operatorResult?.ok) {
+        sendResponse({
+          ok: false,
+          stage: "artifact_local_attach_dry_run",
+          result: {
+            prepared,
+            operator: operatorResult
+          }
+        });
+        return;
+      }
+      const attachResult = await postJson("/operator/attach-artifact", approvedPayload({
+        download_token: prepared.download_token,
+        target_kind: message.payload?.target_kind ?? "attach_button",
+        target_rect: message.payload?.target_rect ?? null,
+        target_screen_rect: message.payload?.target_screen_rect ?? null,
+        composer_rect: message.payload?.composer_rect ?? null,
+        viewport: message.payload?.viewport ?? null,
+        device_pixel_ratio: message.payload?.device_pixel_ratio ?? null,
+        page_url: message.payload?.page_url ?? "",
+        captured_at_ms: message.payload?.captured_at_ms ?? null,
+        selected_artifact: candidate,
+        active_window_required: true,
+        file_picker_title_check: true,
+        send_after_attach: false
+      }));
+      sendResponse({
+        ok: Boolean(attachResult?.ok),
+        stage: "artifact_local_attach_latest",
+        result: {
+          prepared,
+          dry_run: operatorResult,
+          operator: attachResult
+        }
+      });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "artifact_local_attach_latest_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_artifact_local_attach_dry_run") {
+    (async () => {
+      const attachables = await getJson("/artifacts/attachables");
+      const rows = Array.isArray(attachables?.candidates) ? attachables.candidates : [];
+      const candidate = rows.find((row: any) => row?.attachable && typeof row.path === "string");
+      if (!attachables?.ok || !candidate) {
+        sendResponse({
+          ok: false,
+          stage: "artifact_local_attach_dry_run",
+          finding: attachables?.ok ? "no_attachable_artifact" : "attachables_unavailable",
+          result: attachables
+        });
+        return;
+      }
+      const approved = await requestBridgeApproval(
+        sender,
+        "local_operator_attach_artifact_dry_run",
+        `Dry-run local attach geometry for ${candidate.name ?? candidate.path}. This will not move the mouse or click Send.`,
+        "local_operator_geometry_dry_run"
+      );
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED", candidate });
+        return;
+      }
+      const prepared = await postJson("/artifacts/prepare-upload", approvedPayload({ artifact_path: candidate.path }));
+      if (!prepared?.ok) {
+        sendResponse({ ok: false, stage: "artifact_prepare_latest", result: prepared });
+        return;
+      }
+      const operatorResult = await postJson("/operator/attach-artifact", approvedPayload({
+        download_token: prepared.download_token,
+        target_kind: message.payload?.target_kind ?? "attach_button",
+        target_rect: message.payload?.target_rect ?? null,
+        target_screen_rect: message.payload?.target_screen_rect ?? null,
+        composer_rect: message.payload?.composer_rect ?? null,
+        viewport: message.payload?.viewport ?? null,
+        device_pixel_ratio: message.payload?.device_pixel_ratio ?? null,
+        page_url: message.payload?.page_url ?? "",
+        captured_at_ms: message.payload?.captured_at_ms ?? null,
+        selected_artifact: candidate,
+        dry_run: true,
         active_window_required: true,
         file_picker_title_check: true,
         send_after_attach: false
       }));
       sendResponse({
         ok: Boolean(operatorResult?.ok),
-        stage: "artifact_local_attach_latest",
+        stage: "artifact_local_attach_dry_run",
         result: {
           prepared,
           operator: operatorResult
         }
       });
     })().catch((error: Error) => {
-      sendResponse({ ok: false, stage: "artifact_local_attach_latest_exception", error: error.message });
+      sendResponse({ ok: false, stage: "artifact_local_attach_dry_run_exception", error: error.message });
     });
     return true;
   }
