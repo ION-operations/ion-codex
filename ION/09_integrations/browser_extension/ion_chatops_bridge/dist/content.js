@@ -57,10 +57,15 @@
     anchor: {
       mode: "topbar_fallback",
       rect: null,
+      element: null,
       health: "degraded",
       detail: "Composer anchor has not been evaluated yet.",
+      source: "none",
+      attachmentsDetected: 0,
     },
   };
+  let composerResizeObserver = null;
+  let observedComposerElement = null;
   let scanTimer = null;
   let scanRunning = false;
   let scanQueued = false;
@@ -153,45 +158,66 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     style.textContent = `
     .ion-dom-badge {
       position: absolute;
-      top: 2px;
-      left: 2px;
+      top: 6px;
+      left: 8px;
       z-index: 7;
       height: 18px;
-      max-width: 180px;
-      padding: 0 5px;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 6px;
-      background: rgba(32,33,35,0.88);
-      color: rgba(255,255,255,0.72);
-      font: 10px/17px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 220px;
+      padding: 0 7px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      background: rgba(12,12,12,0.68);
+      color: rgba(255,255,255,0.62);
+      font: 10px/18px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       pointer-events: none;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.16);
     }
     .ion-dom-badge[data-tone="valid"] {
       border-color: rgba(16,185,129,0.45);
-      color: rgba(209,250,229,0.94);
+      color: rgba(190,255,230,0.92);
     }
-    .ion-dom-badge[data-tone="invalid"],
+    .ion-dom-badge[data-tone="blocked"],
     .ion-dom-badge[data-tone="duplicate"] {
       border-color: rgba(251,191,36,0.45);
-      color: rgba(254,243,199,0.94);
+      color: rgba(255,236,180,0.92);
+    }
+    .ion-dom-badge[data-tone="duplicate"] {
+      border-color: rgba(248,113,113,0.50);
+      color: rgba(255,210,210,0.92);
     }
     [data-ion-code-index] {
-      outline: 1px solid rgba(255,255,255,0.06);
-      outline-offset: 2px;
+      outline: 1px solid rgba(255,255,255,0.05);
+      outline-offset: 3px;
     }
     [data-ion-yaml-status="valid"] {
       outline-color: rgba(16,185,129,0.42);
     }
-    [data-ion-yaml-status="invalid"],
+    [data-ion-yaml-status="blocked"],
     [data-ion-yaml-status="duplicate"] {
       outline-color: rgba(251,191,36,0.42);
     }
     [data-ion-control-role] {
-      box-shadow: 0 0 0 1px rgba(16,185,129,0.18), 0 0 0 4px rgba(16,185,129,0.05) !important;
+      position: relative;
+      box-shadow: 0 0 0 1px rgba(255,112,28,0.34), 0 0 0 4px rgba(255,112,28,0.07) !important;
+      border-radius: 10px !important;
+    }
+    [data-ion-control-role="composer_input"] {
+      box-shadow: 0 0 0 1px rgba(255,112,28,0.36), 0 0 0 5px rgba(255,112,28,0.06) !important;
+    }
+    [data-ion-control-role="attach_button"],
+    [data-ion-control-role="voice_button"] {
+      box-shadow: 0 0 0 1px rgba(52,211,153,0.28), 0 0 0 4px rgba(52,211,153,0.06) !important;
+    }
+    [data-ion-control-role="send_button"] {
+      box-shadow: 0 0 0 1px rgba(251,191,36,0.42), 0 0 0 4px rgba(251,191,36,0.07) !important;
+    }
+    [data-ion-control-role="source_plane"],
+    [data-ion-control-role="uploaded_attachment"] {
+      box-shadow: 0 0 0 1px rgba(129,140,248,0.40), 0 0 0 4px rgba(129,140,248,0.07) !important;
     }
   `;
     document.documentElement.appendChild(style);
@@ -205,6 +231,12 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
 
   function registryRectVisible(node) {
     if (shouldIgnoreScanNode(node)) return false;
+    const rect = node.getBoundingClientRect();
+    return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+  }
+
+  function captureRectVisible(node) {
+    if (node.closest(`#${PANEL_ID}`) || node.closest(`#${MODAL_ID}`)) return false;
     const rect = node.getBoundingClientRect();
     return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
   }
@@ -223,6 +255,17 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     badge.dataset.tone = tone;
     if (badge.textContent !== text) badge.textContent = text;
     if (!existing) host.appendChild(badge);
+  }
+
+  function captureLabel(node) {
+    return `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""} ${node.textContent ?? ""}`.replace(/\s+/g, " ").trim();
+  }
+
+  function noteCapture(stats, node, role, status = "healthy", label = "") {
+    node.dataset.ionControlRole = role;
+    node.dataset.ionCaptureStatus = status;
+    if (label) node.dataset.ionCaptureLabel = label.slice(0, 80);
+    stats.composerCapture[role] = (stats.composerCapture[role] ?? 0) + 1;
   }
 
   function uniqueElements(selectors) {
@@ -263,7 +306,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     const actionIds = new Set();
     const hosts = codeBlockHosts();
     hosts.forEach((host, index) => {
-      const label = `ION code ${index + 1}`;
+      const label = `ION CODE #${index + 1}`;
       host.dataset.ionCodeIndex = String(index + 1);
       host.dataset.ionYamlStatus = "none";
       let tone = "idle";
@@ -276,14 +319,14 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         const actionId = packet?.ion_action?.action_id;
         if (!packet) {
           stats.invalidActions += 1;
-          tone = "invalid";
-          badge = `ION YAML ${index + 1} blocked`;
-          host.dataset.ionYamlStatus = "invalid";
+          tone = "blocked";
+          badge = `ION YAML #${index + 1} · blocked`;
+          host.dataset.ionYamlStatus = "blocked";
           host.dataset.ionYamlFinding = parsed.finding ?? "parse_failed";
         } else if (actionId && actionIds.has(actionId)) {
           stats.duplicateActions += 1;
           tone = "duplicate";
-          badge = `ION YAML ${index + 1} duplicate`;
+          badge = `ION YAML #${index + 1} · duplicate`;
           host.dataset.ionYamlStatus = "duplicate";
           host.dataset.ionActionId = actionId;
         } else {
@@ -293,17 +336,18 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
           if (local.accepted) {
             stats.validActions += 1;
             tone = "valid";
-            badge = `ION YAML ${index + 1} ok`;
+            badge = `ION YAML #${index + 1} · valid`;
             host.dataset.ionYamlStatus = "valid";
           } else {
             stats.invalidActions += 1;
-            tone = "invalid";
-            badge = `ION YAML ${index + 1} blocked`;
-            host.dataset.ionYamlStatus = "invalid";
+            tone = "blocked";
+            badge = `ION YAML #${index + 1} · blocked`;
+            host.dataset.ionYamlStatus = "blocked";
             host.dataset.ionYamlFinding = local.findings.join("|");
           }
         }
       }
+      if (!ION_ACTION_LINE.test(text) && extractIonActionYaml(text) === null) badge = `ION CODE #${index + 1}`;
       ensureRegistryBadge(host, "code", badge, tone);
     });
     stats.codeBlocks = hosts.length;
@@ -312,18 +356,53 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   function annotateComposerControls(stats) {
     const composer = findComposer();
     const composerRect = composer?.getBoundingClientRect();
-    const controls = uniqueElements("button, input[type='file']").filter((node) => {
+    if (composer && captureRectVisible(composer)) {
+      noteCapture(stats, composer, "composer_input", "healthy", "composer input");
+    }
+    const controls = Array.from(document.querySelectorAll("button, [role='button'], input[type='file']")).filter((node) => {
+      if (!captureRectVisible(node)) return false;
       const rect = node.getBoundingClientRect();
       const nearComposer = composerRect ? Math.abs(rect.top - composerRect.top) < 180 || Math.abs(rect.bottom - composerRect.bottom) < 180 : false;
-      const label = `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""}`.toLowerCase();
+      const label = captureLabel(node).toLowerCase();
       return nearComposer || /send|attach|upload|file|voice|mic|stop|plus/.test(label);
     });
     controls.forEach((node) => {
-      const label = `${node.getAttribute("aria-label") ?? node.getAttribute("data-testid") ?? node.tagName}`.toLowerCase();
-      const role = label.includes("send") ? "send" : label.includes("attach") || label.includes("upload") || label.includes("file") || label.includes("plus") ? "attach" : label.includes("mic") || label.includes("voice") ? "voice" : label.includes("stop") ? "stop" : "composer";
-      node.dataset.ionControlRole = role;
+      const label = captureLabel(node).toLowerCase();
+      const role =
+        label.includes("send") ? "send_button" :
+        label.includes("attach") || label.includes("upload") || label.includes("file") || label.includes("plus") ? "attach_button" :
+        label.includes("mic") || label.includes("voice") ? "voice_button" :
+        label.includes("stop") ? "stop_button" :
+        /model|thinking|source|tool|github|drive/.test(label) ? "source_plane" :
+        "composer_control";
+      noteCapture(stats, node, role, role === "send_button" ? "approval_required" : "healthy", captureLabel(node));
     });
-    stats.composerControls = controls.length;
+    const chips = Array.from(
+      document.querySelectorAll(
+        "img, [data-testid*='attachment' i], [data-testid*='upload' i], [data-testid*='file' i], [data-testid*='image' i], [aria-label*='remove' i], [aria-label*='file' i], [aria-label*='image' i], [class*='attachment' i]",
+      ),
+    ).filter((node) => {
+      if (!captureRectVisible(node)) return false;
+      const rect = node.getBoundingClientRect();
+      return composerRect ? rect.bottom >= composerRect.top - 260 && rect.top <= composerRect.bottom + 120 : rect.top > window.innerHeight * 0.45;
+    });
+    chips.forEach((node) => {
+      noteCapture(stats, node, "uploaded_attachment", "composer_expanded", captureLabel(node) || node.tagName.toLowerCase());
+    });
+    const sources = Array.from(
+      document.querySelectorAll("button, [role='button'], [aria-label], [data-testid], [class*='chip' i], [class*='pill' i]"),
+    ).filter((node) => {
+      if (!captureRectVisible(node)) return false;
+      const label = captureLabel(node);
+      return /github|drive|source|tool|connector|memory|search/i.test(label) && (!composerRect || Math.abs(node.getBoundingClientRect().bottom - composerRect.bottom) < 320);
+    });
+    sources.forEach((node) => {
+      const label = captureLabel(node) || "source";
+      noteCapture(stats, node, "source_plane", "source_plane_only", label);
+      if (!stats.selectedSources.includes(label)) stats.selectedSources.push(label);
+    });
+    stats.uploadedAttachments = chips.length;
+    stats.composerControls = Object.values(stats.composerCapture).reduce((sum, count) => sum + count, 0);
   }
 
   function updateDomActionRegistry(mode = "manual") {
@@ -336,6 +415,9 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       invalidActions: 0,
       duplicateActions: 0,
       composerControls: 0,
+      composerCapture: {},
+      selectedSources: [],
+      uploadedAttachments: 0,
       lastUpdated: new Date().toLocaleTimeString(),
     };
     if (mode === "manual") annotateMessages(stats);
@@ -351,6 +433,9 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       `invalid_actions: ${stats.invalidActions}`,
       `duplicate_actions: ${stats.duplicateActions}`,
       `composer_controls: ${stats.composerControls}`,
+      `uploaded_attachments: ${stats.uploadedAttachments}`,
+      `capture_roles: ${Object.entries(stats.composerCapture).map(([role, count]) => `${role}=${count}`).join(", ") || "none"}`,
+      `selected_sources: ${stats.selectedSources.join(", ") || "none"}`,
       `scan_mode: ${mode}`,
       `last_updated: ${stats.lastUpdated}`,
         "",
@@ -983,57 +1068,150 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return null;
   }
 
+  function elementContains(parent, child) {
+    let current = child;
+    while (current) {
+      if (current === parent) return true;
+      current = current.parentElement;
+    }
+    return false;
+  }
+
+  function lowerViewportElement(element) {
+    const rect = visibleRect(element);
+    if (!rect) return false;
+    return rect.bottom > viewportHeight() * 0.58 && rect.top > viewportHeight() * 0.25;
+  }
+
+  function composerButtonCount(element) {
+    return Array.from(element.querySelectorAll("button, [role='button']")).filter((node) => {
+      const rect = visibleRect(node);
+      if (!rect) return false;
+      const label = `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""} ${node.textContent ?? ""}`.toLowerCase();
+      return /send|attach|upload|file|voice|mic|audio|plus|stop|model|tool|source|github|drive/.test(label);
+    }).length;
+  }
+
+  function composerAttachmentNodes(input) {
+    const inputRect = input.getBoundingClientRect();
+    const selectors = [
+      "img",
+      "video",
+      "[data-testid*='attachment' i]",
+      "[data-testid*='upload' i]",
+      "[data-testid*='file' i]",
+      "[data-testid*='image' i]",
+      "[aria-label*='remove' i]",
+      "[aria-label*='attachment' i]",
+      "[aria-label*='uploaded' i]",
+      "[aria-label*='file' i]",
+      "[aria-label*='image' i]",
+      "[class*='attachment' i]",
+      "[class*='file' i]",
+    ].join(",");
+    const nodes = [];
+    const seen = new Set();
+    document.querySelectorAll(selectors).forEach((node) => {
+      if (seen.has(node) || isBridgeElement(node)) return;
+      seen.add(node);
+      const rect = visibleRect(node);
+      if (!rect) return;
+      const nearInputX = rect.right >= inputRect.left - 80 && rect.left <= inputRect.right + 80;
+      const nearInputY = rect.bottom >= inputRect.top - 260 && rect.top <= inputRect.bottom + 80;
+      if (lowerViewportElement(node) && nearInputX && nearInputY) nodes.push(node);
+    });
+    return nodes;
+  }
+
   function candidateComposerContainer(input) {
     let best = null;
     let current = input;
     let depth = 0;
     const leftBoundary = detectLeftBoundary();
-    while (current?.parentElement && depth < 10) {
+    const attachmentNodes = composerAttachmentNodes(input);
+    while (current?.parentElement && depth < 14) {
       current = current.parentElement;
       depth += 1;
       if (isBridgeElement(current)) break;
       const rect = visibleRect(current);
       if (!rect) continue;
-      const bottomHalf = rect.top > viewportHeight() * 0.38;
+      const bottomHalf = rect.bottom > viewportHeight() * 0.58 && rect.top > viewportHeight() * 0.22;
       const respectsSidebar = rect.left >= Math.max(0, leftBoundary - 12);
       const plausibleWidth =
         rect.width >= Math.min(320, window.innerWidth * 0.42) &&
         rect.width <= Math.min(window.innerWidth * 0.90, window.innerWidth - leftBoundary - 16);
-      const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(220, viewportHeight() * 0.30);
+      const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(420, viewportHeight() * 0.48);
       if (!bottomHalf || !respectsSidebar || !plausibleWidth || !plausibleHeight) continue;
-      const buttons = Array.from(current.querySelectorAll("button")).filter((button) => visibleRect(button)).length;
+      const containsAttachments = attachmentNodes.every((node) => elementContains(current, node));
+      if (attachmentNodes.length && !containsAttachments) continue;
+      const buttons = composerButtonCount(current);
       const radius = Number.parseFloat(window.getComputedStyle(current).borderRadius || "0") || 0;
-      const score = (buttons >= 2 ? 0 : 60) + (radius >= 10 ? 0 : 16) + rect.width / 100 + rect.height / 40 + depth * 0.4;
+      const score =
+        (buttons >= 2 ? 0 : 60) +
+        (radius >= 10 ? 0 : 16) +
+        (attachmentNodes.length ? 0 : 6) +
+        rect.width / 100 +
+        rect.height / 44 +
+        depth * 0.35;
       if (!best || score < best.score) best = { element: current, score };
     }
     return best?.element ?? input;
   }
 
+  function observeComposerAnchor(element) {
+    if (typeof ResizeObserver === "undefined") return;
+    if (observedComposerElement === element) return;
+    composerResizeObserver?.disconnect();
+    observedComposerElement = element;
+    if (!element) return;
+    composerResizeObserver = new ResizeObserver(() => {
+      window.requestAnimationFrame?.(() => refreshBridgePosition()) ?? window.setTimeout(() => refreshBridgePosition(), 0);
+    });
+    composerResizeObserver.observe(element);
+  }
+
   function detectComposerAnchor() {
     const input = findComposerInput();
     if (!input) {
+      observeComposerAnchor(null);
       return {
         mode: "topbar_fallback",
         rect: null,
+        element: null,
         health: "degraded",
         detail: "Composer anchor not found; using top-bar fallback layout.",
+        source: "not_found",
+        attachmentsDetected: 0,
       };
     }
+    const attachments = composerAttachmentNodes(input);
     const container = candidateComposerContainer(input);
     const rect = container.getBoundingClientRect();
     if (!rectIsVisible(rect)) {
+      observeComposerAnchor(null);
       return {
         mode: "topbar_fallback",
         rect: null,
+        element: null,
         health: "degraded",
         detail: "Composer candidate was not visible; using top-bar fallback layout.",
+        source: "candidate_not_visible",
+        attachmentsDetected: attachments.length,
       };
     }
+    observeComposerAnchor(container);
     return {
       mode: "composer",
       rect,
+      element: container,
       health: "ready",
-      detail: `Composer anchor ready: ${Math.round(rect.left)},${Math.round(rect.top)} ${Math.round(rect.width)}x${Math.round(rect.height)}.`,
+      source: attachments.length ? "full_composer_shell_with_attachments" : "full_composer_shell",
+      attachmentsDetected: attachments.length,
+      detail: [
+        `Composer anchor ready: ${Math.round(rect.left)},${Math.round(rect.top)} ${Math.round(rect.width)}x${Math.round(rect.height)}.`,
+        `source: ${attachments.length ? "full_composer_shell_with_attachments" : "full_composer_shell"}`,
+        `attachments_detected: ${attachments.length}`,
+      ].join("\n"),
     };
   }
 

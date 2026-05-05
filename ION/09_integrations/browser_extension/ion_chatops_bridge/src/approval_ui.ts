@@ -18,8 +18,11 @@ const COMPOSER_PANEL_MAX_WIDTH = 920;
 type AnchorInfo = {
   mode: "composer" | "topbar_fallback";
   rect: DOMRect | null;
+  element?: HTMLElement | null;
   health: "ready" | "degraded";
   detail: string;
+  source?: string;
+  attachmentsDetected?: number;
 };
 
 const bridgeState = {
@@ -39,10 +42,16 @@ const bridgeState = {
   anchor: {
     mode: "topbar_fallback",
     rect: null,
+    element: null,
     health: "degraded",
     detail: "Composer anchor has not been evaluated yet.",
+    source: "none",
+    attachmentsDetected: 0,
   } as AnchorInfo,
 };
+
+let composerResizeObserver: ResizeObserver | null = null;
+let observedComposerElement: HTMLElement | null = null;
 
 function ensureStyle(): void {
   if (document.getElementById(STYLE_ID)) return;
@@ -478,58 +487,151 @@ function findComposerInput(): HTMLElement | null {
   return null;
 }
 
+function elementContains(parent: Element, child: Element): boolean {
+  let current: Element | null = child;
+  while (current) {
+    if (current === parent) return true;
+    current = current.parentElement;
+  }
+  return false;
+}
+
+function lowerViewportElement(element: Element): boolean {
+  const rect = visibleRect(element);
+  if (!rect) return false;
+  return rect.bottom > viewportHeight() * 0.58 && rect.top > viewportHeight() * 0.25;
+}
+
+function composerButtonCount(element: Element): number {
+  return Array.from(element.querySelectorAll("button, [role='button']")).filter((node) => {
+    const rect = visibleRect(node);
+    if (!rect) return false;
+    const label = `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""} ${node.textContent ?? ""}`.toLowerCase();
+    return /send|attach|upload|file|voice|mic|audio|plus|stop|model|tool|source|github|drive/.test(label);
+  }).length;
+}
+
+function composerAttachmentNodes(input: HTMLElement): HTMLElement[] {
+  const inputRect = input.getBoundingClientRect();
+  const selectors = [
+    "img",
+    "video",
+    "[data-testid*='attachment' i]",
+    "[data-testid*='upload' i]",
+    "[data-testid*='file' i]",
+    "[data-testid*='image' i]",
+    "[aria-label*='remove' i]",
+    "[aria-label*='attachment' i]",
+    "[aria-label*='uploaded' i]",
+    "[aria-label*='file' i]",
+    "[aria-label*='image' i]",
+    "[class*='attachment' i]",
+    "[class*='file' i]",
+  ].join(",");
+  const nodes: HTMLElement[] = [];
+  const seen = new Set<Element>();
+  document.querySelectorAll<HTMLElement>(selectors).forEach((node) => {
+    if (seen.has(node) || isBridgeElement(node)) return;
+    seen.add(node);
+    const rect = visibleRect(node);
+    if (!rect) return;
+    const nearInputX = rect.right >= inputRect.left - 80 && rect.left <= inputRect.right + 80;
+    const nearInputY = rect.bottom >= inputRect.top - 260 && rect.top <= inputRect.bottom + 80;
+    if (lowerViewportElement(node) && nearInputX && nearInputY) nodes.push(node);
+  });
+  return nodes;
+}
+
 function candidateComposerContainer(input: HTMLElement): HTMLElement {
   type ScoredCandidate = { element: HTMLElement; score: number };
   let best: ScoredCandidate | null = null;
   let current: HTMLElement | null = input;
   let depth = 0;
   const leftBoundary = detectLeftBoundary();
-  while (current?.parentElement && depth < 10) {
+  const attachmentNodes = composerAttachmentNodes(input);
+  while (current?.parentElement && depth < 14) {
     current = current.parentElement;
     depth += 1;
     if (isBridgeElement(current)) break;
     const rect = visibleRect(current);
     if (!rect) continue;
-    const bottomHalf = rect.top > viewportHeight() * 0.38;
+    const bottomHalf = rect.bottom > viewportHeight() * 0.58 && rect.top > viewportHeight() * 0.22;
     const respectsSidebar = rect.left >= Math.max(0, leftBoundary - 12);
     const plausibleWidth =
       rect.width >= Math.min(320, window.innerWidth * 0.42) &&
       rect.width <= Math.min(window.innerWidth * 0.90, window.innerWidth - leftBoundary - 16);
-    const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(220, viewportHeight() * 0.30);
+    const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(420, viewportHeight() * 0.48);
     if (!bottomHalf || !respectsSidebar || !plausibleWidth || !plausibleHeight) continue;
-    const buttons = Array.from(current.querySelectorAll("button")).filter((button) => visibleRect(button)).length;
+    const containsAttachments = attachmentNodes.every((node) => elementContains(current as HTMLElement, node));
+    if (attachmentNodes.length && !containsAttachments) continue;
+    const buttons = composerButtonCount(current);
     const radius = Number.parseFloat(window.getComputedStyle(current).borderRadius || "0") || 0;
-    const score = (buttons >= 2 ? 0 : 60) + (radius >= 10 ? 0 : 16) + rect.width / 100 + rect.height / 40 + depth * 0.4;
+    const score =
+      (buttons >= 2 ? 0 : 60) +
+      (radius >= 10 ? 0 : 16) +
+      (attachmentNodes.length ? 0 : 6) +
+      rect.width / 100 +
+      rect.height / 44 +
+      depth * 0.35;
     if (!best || score < best.score) best = { element: current, score };
   }
   return best?.element ?? input;
 }
 
+function observeComposerAnchor(element: HTMLElement | null): void {
+  if (typeof ResizeObserver === "undefined") return;
+  if (observedComposerElement === element) return;
+  composerResizeObserver?.disconnect();
+  observedComposerElement = element;
+  if (!element) return;
+  composerResizeObserver = new ResizeObserver(() => {
+    window.requestAnimationFrame?.(() => refreshBridgePosition()) ?? window.setTimeout(() => refreshBridgePosition(), 0);
+  });
+  composerResizeObserver.observe(element);
+}
+
 function detectComposerAnchor(): AnchorInfo {
   const input = findComposerInput();
   if (!input) {
+    observeComposerAnchor(null);
     return {
       mode: "topbar_fallback",
       rect: null,
+      element: null,
       health: "degraded",
       detail: "Composer anchor not found; using top-bar fallback layout.",
+      source: "not_found",
+      attachmentsDetected: 0,
     };
   }
+  const attachments = composerAttachmentNodes(input);
   const container = candidateComposerContainer(input);
   const rect = container.getBoundingClientRect();
   if (!rectIsVisible(rect)) {
+    observeComposerAnchor(null);
     return {
       mode: "topbar_fallback",
       rect: null,
+      element: null,
       health: "degraded",
       detail: "Composer candidate was not visible; using top-bar fallback layout.",
+      source: "candidate_not_visible",
+      attachmentsDetected: attachments.length,
     };
   }
+  observeComposerAnchor(container);
   return {
     mode: "composer",
     rect,
+    element: container,
     health: "ready",
-    detail: `Composer anchor ready: ${Math.round(rect.left)},${Math.round(rect.top)} ${Math.round(rect.width)}x${Math.round(rect.height)}.`,
+    source: attachments.length ? "full_composer_shell_with_attachments" : "full_composer_shell",
+    attachmentsDetected: attachments.length,
+    detail: [
+      `Composer anchor ready: ${Math.round(rect.left)},${Math.round(rect.top)} ${Math.round(rect.width)}x${Math.round(rect.height)}.`,
+      `source: ${attachments.length ? "full_composer_shell_with_attachments" : "full_composer_shell"}`,
+      `attachments_detected: ${attachments.length}`,
+    ].join("\n"),
   };
 }
 

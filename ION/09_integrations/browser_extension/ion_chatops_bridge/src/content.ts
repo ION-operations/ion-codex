@@ -130,6 +130,9 @@ type DomRegistryStats = {
   invalidActions: number;
   duplicateActions: number;
   composerControls: number;
+  composerCapture: Record<string, number>;
+  selectedSources: string[];
+  uploadedAttachments: number;
   lastUpdated: string;
 };
 
@@ -155,45 +158,66 @@ function ensureDomRegistryStyle(): void {
   style.textContent = `
     .ion-dom-badge {
       position: absolute;
-      top: 2px;
-      left: 2px;
+      top: 6px;
+      left: 8px;
       z-index: 7;
       height: 18px;
-      max-width: 180px;
-      padding: 0 5px;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 6px;
-      background: rgba(32,33,35,0.88);
-      color: rgba(255,255,255,0.72);
-      font: 10px/17px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 220px;
+      padding: 0 7px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      background: rgba(12,12,12,0.68);
+      color: rgba(255,255,255,0.62);
+      font: 10px/18px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       pointer-events: none;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.16);
     }
     .ion-dom-badge[data-tone="valid"] {
       border-color: rgba(16,185,129,0.45);
-      color: rgba(209,250,229,0.94);
+      color: rgba(190,255,230,0.92);
     }
-    .ion-dom-badge[data-tone="invalid"],
+    .ion-dom-badge[data-tone="blocked"],
     .ion-dom-badge[data-tone="duplicate"] {
       border-color: rgba(251,191,36,0.45);
-      color: rgba(254,243,199,0.94);
+      color: rgba(255,236,180,0.92);
+    }
+    .ion-dom-badge[data-tone="duplicate"] {
+      border-color: rgba(248,113,113,0.50);
+      color: rgba(255,210,210,0.92);
     }
     [data-ion-code-index] {
-      outline: 1px solid rgba(255,255,255,0.06);
-      outline-offset: 2px;
+      outline: 1px solid rgba(255,255,255,0.05);
+      outline-offset: 3px;
     }
     [data-ion-yaml-status="valid"] {
       outline-color: rgba(16,185,129,0.42);
     }
-    [data-ion-yaml-status="invalid"],
+    [data-ion-yaml-status="blocked"],
     [data-ion-yaml-status="duplicate"] {
       outline-color: rgba(251,191,36,0.42);
     }
     [data-ion-control-role] {
-      box-shadow: 0 0 0 1px rgba(16,185,129,0.18), 0 0 0 4px rgba(16,185,129,0.05) !important;
+      position: relative;
+      box-shadow: 0 0 0 1px rgba(255,112,28,0.34), 0 0 0 4px rgba(255,112,28,0.07) !important;
+      border-radius: 10px !important;
+    }
+    [data-ion-control-role="composer_input"] {
+      box-shadow: 0 0 0 1px rgba(255,112,28,0.36), 0 0 0 5px rgba(255,112,28,0.06) !important;
+    }
+    [data-ion-control-role="attach_button"],
+    [data-ion-control-role="voice_button"] {
+      box-shadow: 0 0 0 1px rgba(52,211,153,0.28), 0 0 0 4px rgba(52,211,153,0.06) !important;
+    }
+    [data-ion-control-role="send_button"] {
+      box-shadow: 0 0 0 1px rgba(251,191,36,0.42), 0 0 0 4px rgba(251,191,36,0.07) !important;
+    }
+    [data-ion-control-role="source_plane"],
+    [data-ion-control-role="uploaded_attachment"] {
+      box-shadow: 0 0 0 1px rgba(129,140,248,0.40), 0 0 0 4px rgba(129,140,248,0.07) !important;
     }
   `;
   document.documentElement.appendChild(style);
@@ -207,6 +231,12 @@ function registryText(node: Element, mode: ScanMode): string {
 
 function registryRectVisible(node: Element): boolean {
   if (shouldIgnoreScanNode(node)) return false;
+  const rect = node.getBoundingClientRect();
+  return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+}
+
+function captureRectVisible(node: Element): boolean {
+  if (node.closest(`#${PANEL_ID}`) || node.closest(`#${MODAL_ID}`)) return false;
   const rect = node.getBoundingClientRect();
   return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
 }
@@ -225,6 +255,17 @@ function ensureRegistryBadge(host: HTMLElement, kind: string, text: string, tone
   badge.dataset.tone = tone;
   if (badge.textContent !== text) badge.textContent = text;
   if (!existing) host.appendChild(badge);
+}
+
+function captureLabel(node: HTMLElement): string {
+  return `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""} ${node.textContent ?? ""}`.replace(/\s+/g, " ").trim();
+}
+
+function noteCapture(stats: DomRegistryStats, node: HTMLElement, role: string, status = "healthy", label = ""): void {
+  node.dataset.ionControlRole = role;
+  node.dataset.ionCaptureStatus = status;
+  if (label) node.dataset.ionCaptureLabel = label.slice(0, 80);
+  stats.composerCapture[role] = (stats.composerCapture[role] ?? 0) + 1;
 }
 
 function uniqueElements(selectors: string): HTMLElement[] {
@@ -265,7 +306,7 @@ function annotateCodeBlocks(stats: DomRegistryStats, mode: ScanMode): void {
   const actionIds = new Set<string>();
   const hosts = codeBlockHosts();
   hosts.forEach((host, index) => {
-    const label = `ION code ${index + 1}`;
+    const label = `ION CODE #${index + 1}`;
     host.dataset.ionCodeIndex = String(index + 1);
     host.dataset.ionYamlStatus = "none";
     let tone = "idle";
@@ -278,14 +319,14 @@ function annotateCodeBlocks(stats: DomRegistryStats, mode: ScanMode): void {
       const actionId = packet?.ion_action?.action_id;
       if (!packet) {
         stats.invalidActions += 1;
-        tone = "invalid";
-        badge = `ION YAML ${index + 1} blocked`;
-        host.dataset.ionYamlStatus = "invalid";
+        tone = "blocked";
+        badge = `ION YAML #${index + 1} · blocked`;
+        host.dataset.ionYamlStatus = "blocked";
         host.dataset.ionYamlFinding = parsed.finding ?? "parse_failed";
       } else if (actionId && actionIds.has(actionId)) {
         stats.duplicateActions += 1;
         tone = "duplicate";
-        badge = `ION YAML ${index + 1} duplicate`;
+        badge = `ION YAML #${index + 1} · duplicate`;
         host.dataset.ionYamlStatus = "duplicate";
         host.dataset.ionActionId = actionId;
       } else {
@@ -295,17 +336,18 @@ function annotateCodeBlocks(stats: DomRegistryStats, mode: ScanMode): void {
         if (local.accepted) {
           stats.validActions += 1;
           tone = "valid";
-          badge = `ION YAML ${index + 1} ok`;
+          badge = `ION YAML #${index + 1} · valid`;
           host.dataset.ionYamlStatus = "valid";
         } else {
           stats.invalidActions += 1;
-          tone = "invalid";
-          badge = `ION YAML ${index + 1} blocked`;
-          host.dataset.ionYamlStatus = "invalid";
+          tone = "blocked";
+          badge = `ION YAML #${index + 1} · blocked`;
+          host.dataset.ionYamlStatus = "blocked";
           host.dataset.ionYamlFinding = local.findings.join("|");
         }
       }
     }
+    if (!ION_ACTION_LINE.test(text) && extractIonActionYaml(text) === null) badge = `ION CODE #${index + 1}`;
     ensureRegistryBadge(host, "code", badge, tone);
   });
   stats.codeBlocks = hosts.length;
@@ -314,23 +356,53 @@ function annotateCodeBlocks(stats: DomRegistryStats, mode: ScanMode): void {
 function annotateComposerControls(stats: DomRegistryStats): void {
   const composer = findComposer();
   const composerRect = composer?.getBoundingClientRect();
-  const controls = uniqueElements("button, input[type='file']").filter((node) => {
+  if (composer && captureRectVisible(composer)) {
+    noteCapture(stats, composer as HTMLElement, "composer_input", "healthy", "composer input");
+  }
+  const controls = Array.from(document.querySelectorAll<HTMLElement>("button, [role='button'], input[type='file']")).filter((node) => {
+    if (!captureRectVisible(node)) return false;
     const rect = node.getBoundingClientRect();
     const nearComposer = composerRect ? Math.abs(rect.top - composerRect.top) < 180 || Math.abs(rect.bottom - composerRect.bottom) < 180 : false;
-    const label = `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""}`.toLowerCase();
+    const label = captureLabel(node).toLowerCase();
     return nearComposer || /send|attach|upload|file|voice|mic|stop|plus/.test(label);
   });
   controls.forEach((node) => {
-    const label = `${node.getAttribute("aria-label") ?? node.getAttribute("data-testid") ?? node.tagName}`.toLowerCase();
+    const label = captureLabel(node).toLowerCase();
     const role =
-      label.includes("send") ? "send" :
-      label.includes("attach") || label.includes("upload") || label.includes("file") || label.includes("plus") ? "attach" :
-      label.includes("mic") || label.includes("voice") ? "voice" :
-      label.includes("stop") ? "stop" :
-      "composer";
-    node.dataset.ionControlRole = role;
+      label.includes("send") ? "send_button" :
+      label.includes("attach") || label.includes("upload") || label.includes("file") || label.includes("plus") ? "attach_button" :
+      label.includes("mic") || label.includes("voice") ? "voice_button" :
+      label.includes("stop") ? "stop_button" :
+      /model|thinking|source|tool|github|drive/.test(label) ? "source_plane" :
+      "composer_control";
+    noteCapture(stats, node, role, role === "send_button" ? "approval_required" : "healthy", captureLabel(node));
   });
-  stats.composerControls = controls.length;
+  const chips = Array.from(
+    document.querySelectorAll<HTMLElement>(
+      "img, [data-testid*='attachment' i], [data-testid*='upload' i], [data-testid*='file' i], [data-testid*='image' i], [aria-label*='remove' i], [aria-label*='file' i], [aria-label*='image' i], [class*='attachment' i]",
+    ),
+  ).filter((node) => {
+    if (!captureRectVisible(node)) return false;
+    const rect = node.getBoundingClientRect();
+    return composerRect ? rect.bottom >= composerRect.top - 260 && rect.top <= composerRect.bottom + 120 : rect.top > window.innerHeight * 0.45;
+  });
+  chips.forEach((node) => {
+    noteCapture(stats, node, "uploaded_attachment", "composer_expanded", captureLabel(node) || node.tagName.toLowerCase());
+  });
+  const sources = Array.from(
+    document.querySelectorAll<HTMLElement>("button, [role='button'], [aria-label], [data-testid], [class*='chip' i], [class*='pill' i]"),
+  ).filter((node) => {
+    if (!captureRectVisible(node)) return false;
+    const label = captureLabel(node);
+    return /github|drive|source|tool|connector|memory|search/i.test(label) && (!composerRect || Math.abs(node.getBoundingClientRect().bottom - composerRect.bottom) < 320);
+  });
+  sources.forEach((node) => {
+    const label = captureLabel(node) || "source";
+    noteCapture(stats, node, "source_plane", "source_plane_only", label);
+    if (!stats.selectedSources.includes(label)) stats.selectedSources.push(label);
+  });
+  stats.uploadedAttachments = chips.length;
+  stats.composerControls = Object.values(stats.composerCapture).reduce((sum, count) => sum + count, 0);
 }
 
 function updateDomActionRegistry(mode: ScanMode = "manual"): DomRegistryStats {
@@ -343,6 +415,9 @@ function updateDomActionRegistry(mode: ScanMode = "manual"): DomRegistryStats {
     invalidActions: 0,
     duplicateActions: 0,
     composerControls: 0,
+    composerCapture: {},
+    selectedSources: [],
+    uploadedAttachments: 0,
     lastUpdated: new Date().toLocaleTimeString(),
   };
   if (mode === "manual") annotateMessages(stats);
@@ -358,6 +433,9 @@ function updateDomActionRegistry(mode: ScanMode = "manual"): DomRegistryStats {
       `invalid_actions: ${stats.invalidActions}`,
       `duplicate_actions: ${stats.duplicateActions}`,
       `composer_controls: ${stats.composerControls}`,
+      `uploaded_attachments: ${stats.uploadedAttachments}`,
+      `capture_roles: ${Object.entries(stats.composerCapture).map(([role, count]) => `${role}=${count}`).join(", ") || "none"}`,
+      `selected_sources: ${stats.selectedSources.join(", ") || "none"}`,
       `scan_mode: ${mode}`,
       `last_updated: ${stats.lastUpdated}`,
       "",

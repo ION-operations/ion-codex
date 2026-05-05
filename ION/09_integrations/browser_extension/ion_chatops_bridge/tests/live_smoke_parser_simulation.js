@@ -240,6 +240,18 @@ if (!String(cockpit?.style.bottom || "").endsWith("px")) {
 if (!String(topRail?.style.top || "").endsWith("px")) {
   throw new Error("top status rail did not set top offset");
 }
+const attachment = new Element("img");
+attachment.rect = { top: 780, left: 230, right: 300, bottom: 835, width: 70, height: 55 };
+composerContainer.rect = { top: 760, left: 190, right: 810, bottom: 910, width: 620, height: 150 };
+composerContainer.appendChild(attachment);
+context.document.querySelectorAll = (selector) => {
+  if (selector.includes("img")) return [attachment];
+  return [];
+};
+context.window.__ION_CHATOPS_BRIDGE_DEBUG__.refreshBridgePosition();
+if (!String(cockpit?.style.bottom || "").includes("239")) {
+  throw new Error("composer cockpit did not track expanded attachment shell");
+}
 if (!sent || sent.type !== "ion_chatops_candidate") {
   throw new Error("candidate was not sent");
 }
@@ -334,16 +346,17 @@ context.document.querySelector = (selector) => (selector === "#prompt-textarea" 
 context.document.querySelectorAll = (selector) => {
   if (selector === "[data-message-author-role], article") return [registryMessage];
   if (selector === "pre, pre code, code, [class*='font-mono'], [class*='whitespace-pre'], [class*='overflow-x-auto']") return [registryCode];
-  if (selector === "button, input[type='file']") return [registryButton];
+  if (selector === "button, [role='button'], input[type='file']") return [registryButton];
   return [];
 };
 const registryStats = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.updateDomActionRegistry();
 if (registryStats.messages !== 1) throw new Error("DOM registry did not count messages");
 if (registryStats.codeBlocks !== 1) throw new Error("DOM registry did not count code blocks");
 if (registryStats.validActions !== 1) throw new Error("DOM registry did not mark valid YAML action");
-if (registryStats.composerControls !== 1) throw new Error("DOM registry did not mark composer controls");
+if (registryStats.composerControls < 2) throw new Error("DOM registry did not mark composer controls");
 if (registryCode.dataset.ionYamlStatus !== "valid") throw new Error("DOM registry did not set valid YAML status");
-if (registryButton.dataset.ionControlRole !== "send") throw new Error("DOM registry did not classify send control");
+if (registryButton.dataset.ionControlRole !== "send_button") throw new Error("DOM registry did not classify send control");
+if (composer.dataset.ionControlRole !== "composer_input") throw new Error("DOM registry did not classify composer input");
 
 byId.clear();
 let disabledSent = null;

@@ -14,6 +14,12 @@ MVP behavior:
   paste it into ChatGPT;
 - render composer-attached tabs and an upward drawer for Status, Action, Agent,
   Packages, Sandbox, Automation, Artifacts, Diagnostics, and Log views;
+- anchor composer tabs to the full visible composer shell, including uploaded
+  image/file thumbnails when ChatGPT expands the composer;
+- show subtle visual capture borders for composer input, attach/send/voice
+  controls, selected source chips such as GitHub, and uploaded thumbnails;
+- annotate rendered code/YAML blocks with compact workflow badges such as
+  `ION CODE #N` and `ION YAML #N · valid`;
 - show Codex queue runner status/queue and approval-gated prepare/start controls
   backed by `kernel.ion_codex_queue_runner`;
 - request pasteable context packs and approval-gated package ZIPs backed by the
@@ -118,6 +124,12 @@ The Agent tab is the local Codex carrier cockpit. `Status` and `Queue` are
 read/status projections. `Prepare Next` writes a prepared run packet but does
 not start Codex. `Start One` starts one bounded queue-runner worker after
 Braden approval.
+
+The Diagnostics tab includes the DOM capture registry. It shows whether the
+extension sees the composer input, send/attach/voice controls, selected source
+planes such as GitHub, uploaded thumbnails, and YAML/code block status. These
+markers are visual perception aids only; they do not click, send, upload, or
+mutate ION state.
 
 The Packages tab is for moving context into ChatGPT or another carrier sandbox.
 `Context Pack` pastes a compact current-state packet into the composer.
