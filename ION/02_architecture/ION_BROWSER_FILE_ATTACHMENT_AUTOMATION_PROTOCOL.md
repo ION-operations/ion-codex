@@ -42,12 +42,18 @@ Artifacts tab
 -> daemon upload ticket
 -> localhost artifact download
 -> visible browser drag/drop attempt
+-> best-effort drag overlay cleanup
 ```
 
 This lane is intentionally allowed to fail closed. Browsers and ChatGPT may
 reject synthetic drag/drop events. When that happens, the extension must show the
 file name, size, sha256, and receipt path so Braden can use the manual attach
 picker or a stronger future local macro lane.
+
+After a synthetic drop attempt, the extension must dispatch best-effort cleanup
+events such as `dragleave`, `dragend`, and a delayed Escape key event. This is
+to clear ChatGPT's full-page drag overlay if the file attaches but the overlay
+state remains latched. Cleanup must not click Send.
 
 ChatGPT accepts ordinary user drag/drop over broad page regions, so the primary
 browser target is a page/composer drop zone rather than the attach/add-file

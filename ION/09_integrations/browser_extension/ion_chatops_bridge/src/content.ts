@@ -1272,6 +1272,45 @@ function waitForUploadChip(previousCount: number, label: string, baseDetail: str
   poll();
 }
 
+function dispatchDropCleanupEvents(target: HTMLElement, transfer: DataTransfer): void {
+  const cleanupTargets: EventTarget[] = [
+    target,
+    document.body,
+    document.documentElement,
+    document,
+    window,
+  ].filter(Boolean) as EventTarget[];
+  const dispatchDrag = (eventName: string) => {
+    cleanupTargets.forEach((eventTarget) => {
+      try {
+        const event = new DragEvent(eventName, {
+          bubbles: true,
+          cancelable: true,
+          composed: true,
+          dataTransfer: transfer,
+        });
+        eventTarget.dispatchEvent(event);
+      } catch (_error) {
+        // Some event targets may reject synthetic DragEvent dispatch.
+      }
+    });
+  };
+  const dispatchEscape = () => {
+    [document, window].forEach((eventTarget) => {
+      try {
+        eventTarget.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", code: "Escape", bubbles: true, cancelable: true }));
+        eventTarget.dispatchEvent(new KeyboardEvent("keyup", { key: "Escape", code: "Escape", bubbles: true, cancelable: true }));
+      } catch (_error) {
+        // Escape cleanup is best-effort only.
+      }
+    });
+  };
+  ["dragleave", "dragend"].forEach(dispatchDrag);
+  window.setTimeout(() => ["dragleave", "dragend"].forEach(dispatchDrag), 120);
+  window.setTimeout(dispatchEscape, 260);
+  window.setTimeout(() => document.getElementById(DROP_PREVIEW_ID)?.remove(), 500);
+}
+
 async function attemptPreparedArtifactDrop(result: any): Promise<void> {
   const downloadUrl = String(result?.download_url ?? "").trim();
   const filename = String(result?.filename ?? result?.artifact?.name ?? "ion-artifact.bin").trim();
@@ -1300,12 +1339,14 @@ async function attemptPreparedArtifactDrop(result: any): Promise<void> {
       });
       target.dispatchEvent(event);
     }
+    dispatchDropCleanupEvents(target, transfer);
     const detail = [
       "visible_browser_drop_attempted",
       `filename: ${filename}`,
       `size_bytes: ${file.size}`,
       `sha256: ${result?.sha256 ?? ""}`,
       `receipt_path: ${result?.receipt_path ?? ""}`,
+      "drop_overlay_cleanup: dragleave_dragend_escape_attempted",
       "",
       "If ChatGPT ignored the synthetic drop, use the manifest/hash above with the manual attach picker or the future native macro lane.",
       "No Send click was performed.",

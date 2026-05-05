@@ -169,7 +169,9 @@ The Artifacts tab includes the first guarded file lane:
 - `Drop Latest`: asks Braden for approval, asks the daemon for a one-use-ish
   localhost download ticket, fetches the file as a browser `File`, and attempts
   visible `dragenter`/`dragover`/`drop` events against the calibrated
-  page/composer drop zone.
+  page/composer drop zone. After dispatching the drop, it sends best-effort
+  `dragleave`/`dragend`/Escape cleanup events so ChatGPT's full-page "Add
+  anything" overlay does not remain latched.
 - `Local Attach`: asks Braden for approval, prepares a daemon upload ticket, and
   asks the local operator helper to open the ChatGPT attach control and select
   the exact approved artifact through the OS file picker. This path is
