@@ -40,7 +40,6 @@
   const PANEL_PREFERRED_WIDTH = 640;
   const PANEL_MIN_WIDTH = 320;
   const PANEL_TINY_WIDTH = 230;
-  const COMPOSER_GAP = 8;
   const COMPOSER_PANEL_MAX_WIDTH = 920;
   const bridgeState = {
     title: "Monitoring ChatGPT",
@@ -562,36 +561,42 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       }
       #${PANEL_ID} {
         position: fixed;
-        top: auto;
-        left: 58px;
-        right: auto;
-        bottom: 82px;
         z-index: 2147483646;
-        width: min(640px, calc(100vw - 86px));
-        max-width: none;
+        inset: 0;
         box-sizing: border-box;
-        border: 1px solid rgba(255,255,255,0.10);
-        border-radius: 10px;
-        background: rgba(33, 33, 33, 0.94);
-        box-shadow: 0 8px 28px rgba(0,0,0,0.22);
-        padding: 4px;
-        backdrop-filter: blur(12px);
+        pointer-events: none;
       }
-      #${PANEL_ID}[data-anchor-mode="composer"] {
-        border-radius: 12px;
-        box-shadow: 0 12px 34px rgba(0,0,0,0.28);
+      #${PANEL_ID} .ion-top-rail,
+      #${PANEL_ID} .ion-composer-cockpit {
+        position: fixed;
+        box-sizing: border-box;
+        pointer-events: auto;
       }
-      #${PANEL_ID}[data-anchor-health="degraded"] {
-        border-color: rgba(251,191,36,0.30);
-      }
-      #${PANEL_ID}[data-expanded="true"] {
-        max-width: none;
-      }
-      #${PANEL_ID} .ion-toolbar {
+      #${PANEL_ID} .ion-top-rail {
         display: flex;
         align-items: center;
         gap: 6px;
-        min-height: 34px;
+        min-height: 30px;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 10px;
+        background: rgba(33, 33, 33, 0.78);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        padding: 2px 4px;
+        backdrop-filter: blur(12px);
+      }
+      #${PANEL_ID}[data-anchor-health="degraded"] .ion-top-rail {
+        border-color: rgba(251,191,36,0.28);
+      }
+      #${PANEL_ID} .ion-composer-cockpit {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        max-width: calc(100vw - 24px);
+        pointer-events: none;
+      }
+      #${PANEL_ID}[data-anchor-mode="topbar_fallback"] .ion-composer-cockpit {
+        pointer-events: auto;
       }
       #${PANEL_ID} .ion-row {
         display: flex;
@@ -633,9 +638,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       #${PANEL_ID} .ion-tool,
       #${PANEL_ID} .ion-tab {
         flex: 0 0 auto;
-        height: 28px;
         border: 1px solid transparent;
-        border-radius: 8px;
         color: rgba(255,255,255,0.82);
         background: transparent;
         padding: 0 8px;
@@ -644,11 +647,10 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         line-height: 1;
         cursor: pointer;
       }
-      #${PANEL_ID} .ion-toggle {
-        min-width: 32px;
-        margin-left: 2px;
+      #${PANEL_ID} .ion-tool {
+        height: 26px;
+        border-radius: 8px;
       }
-      #${PANEL_ID} .ion-toggle:hover,
       #${PANEL_ID} .ion-tool:hover,
       #${PANEL_ID} .ion-tab:hover {
         background: rgba(255,255,255,0.08);
@@ -697,33 +699,60 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       }
       #${PANEL_ID} .ion-tabs {
         display: flex;
-        gap: 4px;
-        align-items: center;
+        gap: 3px;
+        align-items: flex-end;
         overflow-x: auto;
         scrollbar-width: none;
-        border-top: 1px solid rgba(255,255,255,0.07);
-        margin: 2px 2px 0;
-        padding: 4px 2px 0;
+        margin: 0;
+        padding: 0 0 0 8px;
+        pointer-events: auto;
       }
       #${PANEL_ID} .ion-tabs::-webkit-scrollbar {
         display: none;
       }
       #${PANEL_ID}[data-expanded="true"] .ion-expanded {
         display: block;
-        border-top: 1px solid rgba(255,255,255,0.08);
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-        margin: 2px 2px 4px;
-        padding: 8px 8px 9px;
+        border: 1px solid rgba(255,112,28,0.82);
+        border-bottom: 0;
+        border-radius: 14px 14px 0 0;
+        background: rgba(24, 24, 24, 0.96);
+        box-shadow: 0 -16px 46px rgba(0,0,0,0.34), 0 -1px 12px rgba(255,112,28,0.15);
+        backdrop-filter: blur(14px);
+        margin: 0;
+        padding: 10px 10px 11px;
         max-height: min(54vh, 520px);
         overflow: auto;
+        pointer-events: auto;
       }
       #${PANEL_ID}[data-expanded="true"] .ion-tab-panel[data-active="true"] {
         display: flex;
       }
+      #${PANEL_ID}[data-anchor-mode="topbar_fallback"][data-expanded="true"] .ion-expanded {
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 10px 28px rgba(0,0,0,0.26);
+      }
+      #${PANEL_ID} .ion-tab {
+        height: 22px;
+        max-width: 118px;
+        border: 1px solid rgba(255,112,28,0.70);
+        border-bottom: 0;
+        border-radius: 8px 8px 0 0;
+        background: rgba(32,32,32,0.96);
+        color: #ffb27a;
+        padding: 0 9px;
+        font-size: 11px;
+        line-height: 21px;
+        box-shadow: 0 -1px 8px rgba(255,112,28,0.16);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        pointer-events: auto;
+      }
       #${PANEL_ID} .ion-tab[data-active="true"] {
-        color: rgba(255,255,255,0.96);
-        background: rgba(255,255,255,0.11);
-        border-color: rgba(255,255,255,0.10);
+        color: #ffd2b0;
+        background: rgba(255,112,28,0.16);
+        border-color: rgba(255,112,28,0.95);
       }
       #${PANEL_ID} .ion-detail {
         margin-top: 0;
@@ -739,9 +768,8 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         margin-top: 9px;
       }
       #${PANEL_ID}[data-layout="compact"] .ion-tab {
-        height: 26px;
         padding: 0 6px;
-        font-size: 11px;
+        max-width: 94px;
       }
       #${PANEL_ID}[data-layout="tiny"] .ion-tabs {
         display: none;
@@ -879,22 +907,55 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return Math.max(boundary, 160);
   }
 
-  function applyTopBarLayout(panel) {
+  function topRail(panel) {
+    return panel.querySelector(".ion-top-rail");
+  }
+
+  function composerCockpit(panel) {
+    return panel.querySelector(".ion-composer-cockpit");
+  }
+
+  function topBarGeometry() {
     const left = Math.ceil(detectLeftBoundary() + TOP_BAR_GAP);
     const right = Math.floor(detectRightBoundary() - TOP_BAR_GAP);
     const available = Math.max(PANEL_TINY_WIDTH, right - left);
     const preferred = Math.min(PANEL_PREFERRED_WIDTH, Math.floor(window.innerWidth * 0.58));
     const width = Math.max(Math.min(preferred, available), Math.min(PANEL_MIN_WIDTH, available));
     const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 430 ? "compact" : "normal";
+    return { left, available, width, layout };
+  }
+
+  function applyTopRailLayout(panel) {
+    const { left, available, width } = topBarGeometry();
+    const rail = topRail(panel);
+    if (!rail) return;
+    rail.style.top = `${PANEL_TOP}px`;
+    rail.style.left = `${left}px`;
+    rail.style.right = "auto";
+    rail.style.bottom = "auto";
+    rail.style.width = `${width}px`;
+    rail.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+    if (typeof panel.style.setProperty === "function") {
+      panel.style.setProperty("--ion-chatops-modal-left", `${left}px`);
+      panel.style.setProperty("--ion-chatops-modal-width", `${Math.min(420, available)}px`);
+    }
+  }
+
+  function applyTopBarLayout(panel) {
+    const { left, available, width, layout } = topBarGeometry();
+    const cockpit = composerCockpit(panel);
     panel.dataset.anchorMode = "topbar_fallback";
     panel.dataset.anchorHealth = "degraded";
     panel.dataset.layout = layout;
-    panel.style.top = `${PANEL_TOP}px`;
-    panel.style.left = `${left}px`;
-    panel.style.right = "auto";
-    panel.style.bottom = "auto";
-    panel.style.width = `${width}px`;
-    panel.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+    applyTopRailLayout(panel);
+    if (cockpit) {
+      cockpit.style.top = `${PANEL_TOP + 36}px`;
+      cockpit.style.left = `${left}px`;
+      cockpit.style.right = "auto";
+      cockpit.style.bottom = "auto";
+      cockpit.style.width = `${width}px`;
+      cockpit.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+    }
     if (typeof panel.style.setProperty === "function") {
       panel.style.setProperty("--ion-chatops-modal-left", `${left}px`);
       panel.style.setProperty("--ion-chatops-modal-width", `${Math.min(420, available)}px`);
@@ -923,9 +984,10 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   }
 
   function candidateComposerContainer(input) {
-    let best = input;
+    let best = null;
     let current = input;
     let depth = 0;
+    const leftBoundary = detectLeftBoundary();
     while (current?.parentElement && depth < 10) {
       current = current.parentElement;
       depth += 1;
@@ -933,11 +995,18 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       const rect = visibleRect(current);
       if (!rect) continue;
       const bottomHalf = rect.top > viewportHeight() * 0.38;
-      const plausibleWidth = rect.width >= Math.min(360, window.innerWidth * 0.62) && rect.width <= window.innerWidth - 12;
-      const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(260, viewportHeight() * 0.38);
-      if (bottomHalf && plausibleWidth && plausibleHeight) best = current;
+      const respectsSidebar = rect.left >= Math.max(0, leftBoundary - 12);
+      const plausibleWidth =
+        rect.width >= Math.min(320, window.innerWidth * 0.42) &&
+        rect.width <= Math.min(window.innerWidth * 0.90, window.innerWidth - leftBoundary - 16);
+      const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(220, viewportHeight() * 0.30);
+      if (!bottomHalf || !respectsSidebar || !plausibleWidth || !plausibleHeight) continue;
+      const buttons = Array.from(current.querySelectorAll("button")).filter((button) => visibleRect(button)).length;
+      const radius = Number.parseFloat(window.getComputedStyle(current).borderRadius || "0") || 0;
+      const score = (buttons >= 2 ? 0 : 60) + (radius >= 10 ? 0 : 16) + rect.width / 100 + rect.height / 40 + depth * 0.4;
+      if (!best || score < best.score) best = { element: current, score };
     }
-    return best;
+    return best?.element ?? input;
   }
 
   function detectComposerAnchor() {
@@ -976,17 +1045,20 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     const left = Math.max(margin, Math.round(rect.left));
     const available = Math.max(PANEL_TINY_WIDTH, Math.min(Math.round(rect.width), window.innerWidth - left - margin));
     const width = Math.min(COMPOSER_PANEL_MAX_WIDTH, Math.max(PANEL_MIN_WIDTH, available));
-    const bottom = Math.max(10, Math.round(viewport - rect.top + COMPOSER_GAP));
+    const bottom = Math.max(4, Math.round(viewport - rect.top - 1));
     const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 520 ? "compact" : "normal";
+    const cockpit = composerCockpit(panel);
     panel.dataset.anchorMode = "composer";
     panel.dataset.anchorHealth = anchor.health;
     panel.dataset.layout = layout;
-    panel.style.top = "auto";
-    panel.style.left = `${left}px`;
-    panel.style.right = "auto";
-    panel.style.bottom = `${bottom}px`;
-    panel.style.width = `${Math.min(width, available)}px`;
-    panel.style.maxWidth = `${available}px`;
+    if (cockpit) {
+      cockpit.style.top = "auto";
+      cockpit.style.left = `${left}px`;
+      cockpit.style.right = "auto";
+      cockpit.style.bottom = `${bottom}px`;
+      cockpit.style.width = `${Math.min(width, available)}px`;
+      cockpit.style.maxWidth = `${available}px`;
+    }
     positionApprovalModal();
     return true;
   }
@@ -1001,48 +1073,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.dataset.expanded = "false";
     panel.dataset.tab = "status";
     panel.innerHTML = `
-      <div class="ion-expanded">
-        <div class="ion-tab-panel" data-panel="status"><div class="ion-detail" data-field="status"></div></div>
-        <div class="ion-tab-panel" data-panel="action"><div class="ion-detail" data-field="action"></div></div>
-        <div class="ion-tab-panel" data-panel="agent">
-          <div class="ion-detail" data-field="agent"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="agent-status">Status</button>
-            <button type="button" class="ion-tool" data-tool="agent-queue">Queue</button>
-            <button type="button" class="ion-tool" data-tool="agent-preview">Preview Next</button>
-            <button type="button" class="ion-tool" data-tool="agent-latest">Latest Runs</button>
-            <button type="button" class="ion-tool" data-tool="agent-prepare">Prepare Next</button>
-            <button type="button" class="ion-tool" data-tool="agent-start">Start One</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="packages">
-          <div class="ion-detail" data-field="packages"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="context-pack">Context Pack</button>
-            <button type="button" class="ion-tool" data-tool="compact-zip">Compact ZIP</button>
-            <button type="button" class="ion-tool" data-tool="safe-full-zip">Safe Full ZIP</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="sandbox">
-          <div class="ion-detail" data-field="sandbox"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="sandbox-returns">Returns</button>
-            <button type="button" class="ion-tool" data-tool="sandbox-diff">Diff Preview</button>
-            <button type="button" class="ion-tool" data-tool="sandbox-review">Queue Review</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="automation"><div class="ion-detail" data-field="automation"></div></div>
-        <div class="ion-tab-panel" data-panel="artifacts"><div class="ion-detail" data-field="artifacts"></div></div>
-        <div class="ion-tab-panel" data-panel="diagnostics">
-          <div class="ion-detail" data-field="diagnostics"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="insert-smoke">Submit Smoke Test</button>
-            <button type="button" class="ion-tool" data-tool="insert-codex">Queue Codex Test Work</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
-      </div>
-      <div class="ion-toolbar">
+      <div class="ion-top-rail">
         <div class="ion-row">
           <span class="ion-dot"></span>
           <div>
@@ -1053,26 +1084,64 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         <div class="ion-toolbar-actions">
           <button type="button" class="ion-tool" data-tool="rescan">Rescan</button>
           <button type="button" class="ion-tool" data-tool="insert-reentry">Onboard</button>
-          <button type="button" class="ion-toggle" title="Expand ION ChatOps details">+</button>
         </div>
       </div>
-      <div class="ion-tabs">
-        <button type="button" class="ion-tab" data-tab="status">Status</button>
-        <button type="button" class="ion-tab" data-tab="action">Action</button>
-        <button type="button" class="ion-tab" data-tab="agent">Agent</button>
-        <button type="button" class="ion-tab" data-tab="packages">Packages</button>
-        <button type="button" class="ion-tab" data-tab="sandbox">Sandbox</button>
-        <button type="button" class="ion-tab" data-tab="automation">Automation</button>
-        <button type="button" class="ion-tab" data-tab="artifacts">Artifacts</button>
-        <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
-        <button type="button" class="ion-tab" data-tab="tools">Logs</button>
+      <div class="ion-composer-cockpit">
+        <div class="ion-expanded">
+          <div class="ion-tab-panel" data-panel="status"><div class="ion-detail" data-field="status"></div></div>
+          <div class="ion-tab-panel" data-panel="action"><div class="ion-detail" data-field="action"></div></div>
+          <div class="ion-tab-panel" data-panel="agent">
+            <div class="ion-detail" data-field="agent"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="agent-status">Status</button>
+              <button type="button" class="ion-tool" data-tool="agent-queue">Queue</button>
+              <button type="button" class="ion-tool" data-tool="agent-preview">Preview Next</button>
+              <button type="button" class="ion-tool" data-tool="agent-latest">Latest Runs</button>
+              <button type="button" class="ion-tool" data-tool="agent-prepare">Prepare Next</button>
+              <button type="button" class="ion-tool" data-tool="agent-start">Start One</button>
+            </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="packages">
+            <div class="ion-detail" data-field="packages"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="context-pack">Context Pack</button>
+              <button type="button" class="ion-tool" data-tool="compact-zip">Compact ZIP</button>
+              <button type="button" class="ion-tool" data-tool="safe-full-zip">Safe Full ZIP</button>
+            </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="sandbox">
+            <div class="ion-detail" data-field="sandbox"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="sandbox-returns">Returns</button>
+              <button type="button" class="ion-tool" data-tool="sandbox-diff">Diff Preview</button>
+              <button type="button" class="ion-tool" data-tool="sandbox-review">Queue Review</button>
+            </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="automation"><div class="ion-detail" data-field="automation"></div></div>
+          <div class="ion-tab-panel" data-panel="artifacts"><div class="ion-detail" data-field="artifacts"></div></div>
+          <div class="ion-tab-panel" data-panel="diagnostics">
+            <div class="ion-detail" data-field="diagnostics"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="insert-smoke">Submit Smoke Test</button>
+              <button type="button" class="ion-tool" data-tool="insert-codex">Queue Codex Test Work</button>
+            </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
+        </div>
+        <div class="ion-tabs">
+          <button type="button" class="ion-tab" data-tab="status">Status</button>
+          <button type="button" class="ion-tab" data-tab="action">Action</button>
+          <button type="button" class="ion-tab" data-tab="agent">Agent</button>
+          <button type="button" class="ion-tab" data-tab="packages">Packages</button>
+          <button type="button" class="ion-tab" data-tab="sandbox">Sandbox</button>
+          <button type="button" class="ion-tab" data-tab="automation">Automation</button>
+          <button type="button" class="ion-tab" data-tab="artifacts">Artifacts</button>
+          <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
+          <button type="button" class="ion-tab" data-tab="tools">Logs</button>
+        </div>
       </div>
     `;
     document.documentElement.appendChild(panel);
-    panel.querySelector(".ion-toggle")?.addEventListener("click", () => {
-      panel.dataset.expanded = panel.dataset.expanded === "true" ? "false" : "true";
-      renderPanel(panel);
-    });
     panel.querySelectorAll(".ion-tab").forEach((tab) => {
       tab.addEventListener("click", () => {
         const nextTab = tab.dataset.tab ?? "status";
@@ -1151,13 +1220,18 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   function positionPanelAboveComposer(panel = ensurePanel()) {
     const anchor = detectComposerAnchor();
     bridgeState.anchor = anchor;
+    applyTopRailLayout(panel);
     if (!applyComposerLayout(panel, anchor)) applyTopBarLayout(panel);
   }
 
   function positionApprovalModal(modal = document.getElementById(MODAL_ID)) {
     const panel = document.getElementById(PANEL_ID);
     if (!modal || !panel) return;
-    const rect = panel.getBoundingClientRect();
+    const anchorElement =
+      panel.dataset.expanded === "true"
+        ? composerCockpit(panel) ?? topRail(panel)
+        : topRail(panel) ?? composerCockpit(panel);
+    const rect = (anchorElement ?? panel).getBoundingClientRect();
     const available = Math.max(PANEL_TINY_WIDTH, window.innerWidth - rect.left - TOP_BAR_GAP);
     modal.style.left = `${rect.left}px`;
     modal.style.width = `${Math.min(420, available)}px`;
@@ -1176,8 +1250,6 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     positionPanelAboveComposer(panel);
     const titleNode = panel.querySelector(".ion-title");
     if (titleNode) titleNode.textContent = bridgeState.title;
-    const toggle = panel.querySelector(".ion-toggle");
-    if (toggle) toggle.textContent = panel.dataset.expanded === "true" ? "-" : "+";
     const activeTab = panel.dataset.tab ?? "status";
     panel.querySelectorAll(".ion-tab").forEach((tab) => {
       tab.dataset.active = String(tab.dataset.tab === activeTab);

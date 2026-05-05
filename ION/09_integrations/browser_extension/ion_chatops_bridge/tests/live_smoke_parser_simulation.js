@@ -232,8 +232,13 @@ const panel = byId.get("ion-chatops-bridge-panel");
 if (panel.dataset.anchorMode !== "composer") {
   throw new Error("composer anchor layout did not activate");
 }
-if (!String(panel.style.bottom || "").endsWith("px")) {
-  throw new Error("composer anchored panel did not set bottom offset");
+const cockpit = panel.querySelector(".ion-composer-cockpit");
+const topRail = panel.querySelector(".ion-top-rail");
+if (!String(cockpit?.style.bottom || "").endsWith("px")) {
+  throw new Error("composer cockpit did not set bottom offset");
+}
+if (!String(topRail?.style.top || "").endsWith("px")) {
+  throw new Error("top status rail did not set top offset");
 }
 if (!sent || sent.type !== "ion_chatops_candidate") {
   throw new Error("candidate was not sent");

@@ -8,12 +8,12 @@ MVP behavior:
 - parse the strict `ion.chatops.action.v1` subset, including simple YAML lists;
 - send candidates to the background worker;
 - validate actions against the localhost daemon;
-- show a compact in-page toolbar near the ChatGPT header controls;
-- show Rescan and Onboard controls in the toolbar;
+- show a compact top status rail near the ChatGPT header controls;
+- show Rescan and Onboard controls in the top rail;
 - fetch a compact Sev carrier onboarding/context brief from the local daemon and
   paste it into ChatGPT;
-- expand downward into tabbed Status, Action, Agent, Packages, Sandbox,
-  Diagnostics, and Log views;
+- render composer-attached tabs and an upward drawer for Status, Action, Agent,
+  Packages, Sandbox, Automation, Artifacts, Diagnostics, and Log views;
 - show Codex queue runner status/queue and approval-gated prepare/start controls
   backed by `kernel.ion_codex_queue_runner`;
 - request pasteable context packs and approval-gated package ZIPs backed by the
@@ -126,3 +126,26 @@ projection. `Diff Preview` runs the bounded preview/check path for the latest
 return after Braden approval. `Queue Review` creates a focused Codex review
 packet after Braden approval. None of these controls apply patches to live
 source.
+
+## File And ZIP Attachment Direction
+
+The extension should eventually support sending approved local packages or ZIPs
+to ChatGPT, but not as a silent upload path. Browsers do not allow ordinary page
+scripts to set local file inputs to arbitrary paths, and synthetic drag/drop may
+be rejected by ChatGPT or the browser.
+
+The intended ION path is:
+
+1. local daemon creates or exposes a public-safe package with manifest and
+   sha256;
+2. extension shows exact file path, size, hash, and intended chat target;
+3. Braden approves the attach/send operation;
+4. extension uses the most reliable available browser path:
+   - user-visible attach picker guidance;
+   - approved downloaded package handoff;
+   - future Chrome-extension/native or debugger-mediated upload lane if
+     explicitly gated;
+5. ION records the package/export receipt and any returned sandbox artifact.
+
+No file should be uploaded without explicit user approval, a manifest, and a
+receipt when ION state is touched.
