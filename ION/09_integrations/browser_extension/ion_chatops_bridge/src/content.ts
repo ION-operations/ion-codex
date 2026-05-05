@@ -767,6 +767,75 @@ function findDropTarget(): HTMLElement | null {
   ) as HTMLElement | null;
 }
 
+function composerRect(): DOMRect | null {
+  const composer = findComposer();
+  return composer?.getBoundingClientRect() ?? null;
+}
+
+function controlLabel(node: HTMLElement): string {
+  return `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""} ${node.textContent ?? ""}`.replace(/\s+/g, " ").trim();
+}
+
+function visibleElement(node: HTMLElement): boolean {
+  const rect = node.getBoundingClientRect();
+  return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+}
+
+function findAttachControlRect(): Record<string, unknown> | null {
+  const rect = composerRect();
+  const nodes = Array.from(document.querySelectorAll<HTMLElement>("button, [role='button'], input[type='file']"));
+  const candidate = nodes.find((node) => {
+    if (!visibleElement(node)) return false;
+    const label = controlLabel(node).toLowerCase();
+    const bounds = node.getBoundingClientRect();
+    const nearComposer = rect ? Math.abs(bounds.top - rect.top) < 220 || Math.abs(bounds.bottom - rect.bottom) < 220 : bounds.top > window.innerHeight * 0.45;
+    return nearComposer && /attach|upload|file|plus|add/.test(label);
+  });
+  if (!candidate) return null;
+  const bounds = candidate.getBoundingClientRect();
+  return {
+    x: Math.round(bounds.left),
+    y: Math.round(bounds.top),
+    width: Math.round(bounds.width),
+    height: Math.round(bounds.height),
+    label: controlLabel(candidate),
+  };
+}
+
+function uploadedAttachmentCount(): number {
+  const rect = composerRect();
+  return Array.from(
+    document.querySelectorAll<HTMLElement>(
+      "img, [data-testid*='attachment' i], [data-testid*='upload' i], [data-testid*='file' i], [data-testid*='image' i], [aria-label*='remove' i], [aria-label*='file' i], [aria-label*='image' i], [class*='attachment' i]",
+    ),
+  ).filter((node) => {
+    if (!visibleElement(node)) return false;
+    const bounds = node.getBoundingClientRect();
+    return rect ? bounds.bottom >= rect.top - 300 && bounds.top <= rect.bottom + 160 : bounds.top > window.innerHeight * 0.45;
+  }).length;
+}
+
+function waitForUploadChip(previousCount: number, label: string, baseDetail: string): void {
+  const started = Date.now();
+  const poll = () => {
+    const count = uploadedAttachmentCount();
+    if (count > previousCount) {
+      const detail = `${baseDetail}\n\nupload_chip_verified: true\nuploaded_attachment_count: ${count}`;
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus(`${label} verified`, "Upload chip/thumbnail detected. No Send click was performed.", "success");
+      return;
+    }
+    if (Date.now() - started > 15000) {
+      const detail = `${baseDetail}\n\nupload_chip_verified: false\nuploaded_attachment_count: ${count}\nfinding: upload_chip_not_observed_after_operator_attempt`;
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus(`${label} unverified`, "Local helper returned, but no upload chip was observed yet. No Send click was performed.", "error");
+      return;
+    }
+    window.setTimeout(poll, 600);
+  };
+  poll();
+}
+
 async function attemptPreparedArtifactDrop(result: any): Promise<void> {
   const downloadUrl = String(result?.download_url ?? "").trim();
   const filename = String(result?.filename ?? result?.artifact?.name ?? "ion-artifact.bin").trim();
@@ -825,6 +894,28 @@ function requestArtifactDropLatest(): void {
     }
     setBridgeStatus("Artifact ticket ready", "Attempting visible ChatGPT drag/drop. No Send click will occur.", "working");
     await attemptPreparedArtifactDrop(response.result);
+  });
+}
+
+function requestArtifactLocalAttachLatest(): void {
+  const targetRect = findAttachControlRect();
+  const beforeCount = uploadedAttachmentCount();
+  if (!targetRect) {
+    const detail = "attach_control_not_detected\nOpen ChatGPT composer and use Diagnostics to confirm ION sees the attach/add-file control.";
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Local attach blocked", detail, "error");
+    return;
+  }
+  setBridgeStatus("Local attach latest", "Requesting approval for local operator artifact attachment. No Send click will occur.", "working");
+  chrome.runtime.sendMessage({ type: "ion_chatops_artifact_local_attach_latest", payload: { target_rect: targetRect } }, async (response) => {
+    const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+    setBridgeArtifactDetail(detail);
+    if (!response?.ok) {
+      setBridgeStatus("Local attach blocked", detail.split("\n")[0] ?? "", "error");
+      return;
+    }
+    await copyBridgeResult("Local artifact attach", detail);
+    waitForUploadChip(beforeCount, "Local attach", detail);
   });
 }
 
@@ -1125,6 +1216,9 @@ window.addEventListener("ion-chatops-artifact-attachables", () => {
 });
 window.addEventListener("ion-chatops-artifact-drop-latest", () => {
   requestArtifactDropLatest();
+});
+window.addEventListener("ion-chatops-artifact-local-attach", () => {
+  requestArtifactLocalAttachLatest();
 });
 
 if (safeModeDisabled()) {

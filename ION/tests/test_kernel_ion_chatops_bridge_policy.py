@@ -5,11 +5,13 @@ from kernel.ion_chatops_bridge import (
     APPROVAL_TOKEN,
     ACTION_SCHEMA,
     READY_VERDICT,
+    attach_chatops_artifact_with_local_operator,
     build_chatops_attachable_artifacts,
     build_chatops_policy,
     build_chatops_agent_queue,
     build_chatops_agent_status,
     build_chatops_context_pack,
+    build_chatops_local_operator_status,
     build_sev_context_brief,
     classify_chatops_action,
     prepare_chatops_artifact_upload,
@@ -26,6 +28,7 @@ def _seed_root(root: Path) -> None:
     (root / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
     for rel in [
         "ION/02_architecture/ION_BROWSER_CARRIER_RUNTIME_PROTOCOL.md",
+        "ION/02_architecture/ION_BROWSER_FILE_ATTACHMENT_AUTOMATION_PROTOCOL.md",
         "ION/02_architecture/ION_CHATOPS_YAML_ACTION_PROTOCOL.md",
         "ION/02_architecture/ION_CHATGPT_SANDBOX_RETURN_INTAKE_PROTOCOL.md",
         "ION/02_architecture/ION_MOUNT_CONTRACT.md",
@@ -109,6 +112,8 @@ def test_chatops_policy_owner_surfaces_ready(tmp_path):
     assert result["artifact_upload_surface"]["silent_upload_authority"] is False
     assert result["artifact_upload_surface"]["send_click_authority"] is False
     assert result["artifact_upload_surface"]["prepare_upload"] == "POST /artifacts/prepare-upload"
+    assert result["local_operator_surface"]["attach_artifact"] == "POST /operator/attach-artifact"
+    assert result["local_operator_surface"]["send_click_authority"] is False
     assert result["sandbox_return_surface"]["owner"] == "ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py"
     assert result["sandbox_return_surface"]["direct_apply_authority"] is False
     assert result["main_policy"]["main_auto_push_allowed"] is False
@@ -383,6 +388,7 @@ def test_chatops_context_pack_includes_agent_and_package_controls(tmp_path):
     assert result["pack"]["bridge_tools"]["compact_zip"] == "POST /exports/lifecycle-zip with package_class=COMPACT_RUNTIME and Braden approval"
     assert result["pack"]["bridge_tools"]["attachable_artifacts"] == "GET /artifacts/attachables"
     assert result["pack"]["bridge_tools"]["prepare_artifact_upload"] == "POST /artifacts/prepare-upload with Braden approval"
+    assert result["pack"]["bridge_tools"]["local_operator_attach_artifact"] == "POST /operator/attach-artifact with Braden approval"
     assert result["pack"]["bridge_tools"]["sandbox_returns"] == "GET /sandbox/returns"
     assert result["pack"]["sandbox_returns"]["inbox_root"] == "ION/05_context/inbox/chatgpt_sandbox_returns"
     assert "ION local context pack" in result["prompt"]
@@ -413,6 +419,43 @@ def test_chatops_artifact_upload_prepare_requires_approval_and_ticket(tmp_path):
     assert (tmp_path / prepared["receipt_path"]).exists()
     assert resolved_path == zip_path.resolve()
     assert validation["ok"] is True
+
+
+def test_chatops_local_operator_attachment_requires_approval_and_blocks_send_click(tmp_path):
+    _seed_root(tmp_path)
+    zip_path = tmp_path / "ION/06_artifacts/packages/demo.zip"
+    zip_path.parent.mkdir(parents=True, exist_ok=True)
+    zip_path.write_bytes(b"PK\x03\x04demo")
+    prepared = prepare_chatops_artifact_upload(
+        tmp_path,
+        _approved({"artifact_path": "ION/06_artifacts/packages/demo.zip"}),
+    )
+
+    blocked = attach_chatops_artifact_with_local_operator(tmp_path, {"download_token": prepared["download_token"]})
+    send_blocked = attach_chatops_artifact_with_local_operator(
+        tmp_path,
+        _approved({"download_token": prepared["download_token"], "send_after_attach": True, "dry_run": True}),
+    )
+    dry_run = attach_chatops_artifact_with_local_operator(
+        tmp_path,
+        _approved({
+            "download_token": prepared["download_token"],
+            "dry_run": True,
+            "target_rect": {"x": 100, "y": 200, "width": 40, "height": 20},
+        }),
+    )
+    status = build_chatops_local_operator_status(tmp_path)
+
+    assert blocked["ok"] is False
+    assert blocked["finding"] == "approval_failed"
+    assert send_blocked["ok"] is False
+    assert send_blocked["finding"] == "send_click_not_authorized"
+    assert dry_run["ok"] is True
+    assert dry_run["dry_run"] is True
+    assert dry_run["no_send_click_performed"] is True
+    assert dry_run["target_center"] == (120, 210)
+    assert (tmp_path / dry_run["receipt_path"]).exists()
+    assert status["send_click_authority"] is False
 
 
 def test_chatops_submit_rejects_mutating_action_without_policy_approval_even_if_action_says_no_approval(tmp_path):

@@ -30,6 +30,8 @@ MVP behavior:
   browser drop tickets from the local daemon;
 - attempt a visible ChatGPT drag/drop for an approved artifact without clicking
   Send;
+- request approval-gated local operator attachment of an approved artifact
+  through the daemon without clicking Send;
 - show an approval modal for Braden;
 - insert a known-good Sev re-entry prompt into the ChatGPT composer;
 - keep fabricated smoke/Codex work-packet actions under Diagnostics as local bridge tests;
@@ -154,11 +156,17 @@ The Artifacts tab includes the first guarded file lane:
 - `Drop Latest`: asks Braden for approval, asks the daemon for a one-use-ish
   localhost download ticket, fetches the file as a browser `File`, and attempts
   visible `dragenter`/`dragover`/`drop` events against the ChatGPT composer.
+- `Local Attach`: asks Braden for approval, prepares a daemon upload ticket, and
+  asks the local operator helper to open the ChatGPT attach control and select
+  the exact approved artifact through the OS file picker. This path is
+  `xdotool`-first on Linux and fails closed if the active window is not ChatGPT,
+  the attach target is stale/missing, or the file picker is not detected.
 
 Browsers do not allow ordinary page scripts to set local file inputs to
 arbitrary paths. ChatGPT or the browser may also reject synthetic drag/drop.
 When that happens, the panel still provides the manifest/hash/receipt so Braden
-can use the manual attach picker or a future native/debugger macro lane.
+can use `Local Attach`, the manual attach picker, or a future native/debugger
+lane.
 
 The intended ION path is:
 
@@ -168,6 +176,7 @@ The intended ION path is:
 3. Braden approves the attach operation;
 4. extension uses the most reliable available browser path:
    - approved visible synthetic drag/drop where accepted;
+   - approved local operator file-picker assistance where available;
    - user-visible attach picker guidance;
    - approved downloaded package handoff;
    - future Chrome-extension/native or debugger-mediated upload lane if

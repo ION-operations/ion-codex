@@ -147,6 +147,56 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
 
+  if (message.type === "ion_chatops_artifact_local_attach_latest") {
+    (async () => {
+      const attachables = await getJson("/artifacts/attachables");
+      const rows = Array.isArray(attachables?.candidates) ? attachables.candidates : [];
+      const candidate = rows.find((row) => row?.attachable && typeof row.path === "string");
+      if (!attachables?.ok || !candidate) {
+        sendResponse({
+          ok: false,
+          stage: "artifact_local_attach_latest",
+          finding: attachables?.ok ? "no_attachable_artifact" : "attachables_unavailable",
+          result: attachables
+        });
+        return;
+      }
+      const approved = await requestBridgeApproval(
+        sender,
+        "local_operator_attach_artifact",
+        `Let the local ION operator helper attach ${candidate.name ?? candidate.path} (${candidate.size_bytes ?? "unknown"} bytes) to the active ChatGPT composer. This will not click Send.`,
+        "local_operator_artifact_attach_approval_required"
+      );
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED", candidate });
+        return;
+      }
+      const prepared = await postJson("/artifacts/prepare-upload", approvedPayload({ artifact_path: candidate.path }));
+      if (!prepared?.ok) {
+        sendResponse({ ok: false, stage: "artifact_prepare_latest", result: prepared });
+        return;
+      }
+      const operatorResult = await postJson("/operator/attach-artifact", approvedPayload({
+        download_token: prepared.download_token,
+        target_rect: message.payload?.target_rect ?? null,
+        active_window_required: true,
+        file_picker_title_check: true,
+        send_after_attach: false
+      }));
+      sendResponse({
+        ok: Boolean(operatorResult?.ok),
+        stage: "artifact_local_attach_latest",
+        result: {
+          prepared,
+          operator: operatorResult
+        }
+      });
+    })().catch((error) => {
+      sendResponse({ ok: false, stage: "artifact_local_attach_latest_exception", error: error.message });
+    });
+    return true;
+  }
+
   if (message.type === "ion_chatops_sandbox_diff_latest") {
     (async () => {
       const returnId = String(message.payload?.return_id ?? "").trim();

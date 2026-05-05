@@ -721,6 +721,7 @@ function ensurePanel(): HTMLElement {
           <div class="ion-toolbar-actions">
             <button type="button" class="ion-tool" data-tool="artifact-attachables">Attachables</button>
             <button type="button" class="ion-tool" data-tool="artifact-drop-latest">Drop Latest</button>
+            <button type="button" class="ion-tool" data-tool="artifact-local-attach">Local Attach</button>
           </div>
         </div>
         <div class="ion-tab-panel" data-panel="diagnostics">
@@ -818,6 +819,9 @@ function ensurePanel(): HTMLElement {
   });
   panel.querySelector('[data-tool="artifact-drop-latest"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-artifact-drop-latest"));
+  });
+  panel.querySelector('[data-tool="artifact-local-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-local-attach"));
   });
   panel.querySelector('[data-tool="collapse"]')?.addEventListener("click", () => {
     panel.dataset.expanded = "false";

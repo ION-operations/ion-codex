@@ -25,7 +25,9 @@ GET  /sandbox/returns
 GET  /sandbox/returns/{return_id}
 GET  /artifacts/attachables
 GET  /artifacts/download/{download_token}
+GET  /operator/status
 POST /artifacts/prepare-upload
+POST /operator/attach-artifact
 POST /sandbox/returns/register
 POST /sandbox/returns/file
 POST /sandbox/returns/commit
@@ -48,3 +50,11 @@ bounded ION roots. `prepare-upload` requires Braden approval, writes a download
 ticket receipt, and serves a localhost file stream for the browser extension to
 attempt a visible ChatGPT drag/drop. It does not click Send, apply patches, or
 upload anything silently.
+
+The local operator endpoints expose bounded desktop-assist status and approved
+artifact attachment only. `/operator/attach-artifact` validates a prepared
+upload ticket, rejects any send-after-attach request, requires an extension
+target rectangle, checks the active window is ChatGPT by default, and uses the
+available local helper, currently `xdotool` on Linux/X11, to select the exact
+approved artifact in the OS file picker. The browser extension still verifies
+whether an upload chip appears. No Send click is performed.
