@@ -159,8 +159,13 @@ The Artifacts tab includes the first guarded file lane:
 - `Local Attach`: asks Braden for approval, prepares a daemon upload ticket, and
   asks the local operator helper to open the ChatGPT attach control and select
   the exact approved artifact through the OS file picker. This path is
-  `xdotool`-first on Linux and fails closed if the active window is not ChatGPT,
-  the attach target is stale/missing, or the file picker is not detected.
+  `xdotool`-first on Linux, uses extension-provided screen coordinates, and
+  fails closed if the active window is not a browser/ChatGPT surface, the attach
+  target is stale/missing, or the file picker is not detected.
+
+`Attachables` intentionally shows a compact selected-artifact summary rather
+than dumping the full daemon JSON. The selected artifact is the same latest
+candidate used by `Drop Latest` and `Local Attach`.
 
 Browsers do not allow ordinary page scripts to set local file inputs to
 arbitrary paths. ChatGPT or the browser may also reject synthetic drag/drop.

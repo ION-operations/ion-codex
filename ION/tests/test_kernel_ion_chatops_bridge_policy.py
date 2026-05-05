@@ -442,6 +442,7 @@ def test_chatops_local_operator_attachment_requires_approval_and_blocks_send_cli
             "download_token": prepared["download_token"],
             "dry_run": True,
             "target_rect": {"x": 100, "y": 200, "width": 40, "height": 20},
+            "target_screen_rect": {"x": 300, "y": 400, "width": 60, "height": 30},
         }),
     )
     status = build_chatops_local_operator_status(tmp_path)
@@ -453,7 +454,7 @@ def test_chatops_local_operator_attachment_requires_approval_and_blocks_send_cli
     assert dry_run["ok"] is True
     assert dry_run["dry_run"] is True
     assert dry_run["no_send_click_performed"] is True
-    assert dry_run["target_center"] == (120, 210)
+    assert dry_run["target_center"] == (330, 415)
     assert (tmp_path / dry_run["receipt_path"]).exists()
     assert status["send_click_authority"] is False
 

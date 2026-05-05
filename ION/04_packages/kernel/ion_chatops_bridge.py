@@ -924,7 +924,7 @@ def build_chatops_local_operator_status(root: str | Path | None = None) -> dict[
 
 
 def _target_center(packet: Mapping[str, Any]) -> tuple[int, int] | None:
-    rect = packet.get("target_rect")
+    rect = packet.get("target_screen_rect") or packet.get("target_rect")
     if not isinstance(rect, Mapping):
         return None
     try:
@@ -937,6 +937,11 @@ def _target_center(packet: Mapping[str, Any]) -> tuple[int, int] | None:
     if width <= 0 or height <= 0:
         return None
     return int(round(x + width / 2)), int(round(y + height / 2))
+
+
+def _operator_active_window_allowed(title: str) -> bool:
+    lowered = title.lower()
+    return bool(re.search(r"chatgpt|google chrome|chromium|chrome", lowered))
 
 
 def _operator_failure(root: Path, packet: Mapping[str, Any], *, finding: str, result: Mapping[str, Any], status: str = "failed") -> dict[str, Any]:
@@ -1028,7 +1033,7 @@ def attach_chatops_artifact_with_local_operator(root: str | Path | None, packet:
     if not xdotool:
         return _operator_failure(shell_root, packet, finding="desktop_automation_tool_missing", result={"operator_status": status, "required_tool": "xdotool"})
     before_title = _operator_active_window_title()
-    if bool(packet.get("active_window_required", True)) and "chatgpt" not in before_title.lower():
+    if bool(packet.get("active_window_required", True)) and not _operator_active_window_allowed(before_title):
         return _operator_failure(shell_root, packet, finding="active_window_not_chatgpt", result={"active_window_title": before_title})
     assert center is not None
     click = _operator_run([xdotool, "mousemove", "--sync", str(center[0]), str(center[1]), "click", "1"], timeout=2.0)
@@ -1643,7 +1648,7 @@ def build_chatops_policy(root: str | Path | None = None) -> dict[str, Any]:
             "attach_artifact": "POST /operator/attach-artifact",
             "backend": "xdotool_first_linux_desktop_helper",
             "operator_present_required": True,
-            "active_chatgpt_window_required": True,
+            "active_browser_or_chatgpt_window_required": True,
             "file_picker_title_check": True,
             "send_click_authority": False,
             "silent_upload_authority": False,

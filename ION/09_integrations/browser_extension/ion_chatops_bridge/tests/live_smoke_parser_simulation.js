@@ -249,7 +249,8 @@ context.document.querySelectorAll = (selector) => {
   return [];
 };
 context.window.__ION_CHATOPS_BRIDGE_DEBUG__.refreshBridgePosition();
-if (!String(cockpit?.style.bottom || "").includes("239")) {
+const expandedBottom = Number.parseInt(String(cockpit?.style.bottom || ""), 10);
+if (!Number.isFinite(expandedBottom) || expandedBottom < 239 || expandedBottom > 243) {
   throw new Error("composer cockpit did not track expanded attachment shell");
 }
 if (!sent || sent.type !== "ion_chatops_candidate") {

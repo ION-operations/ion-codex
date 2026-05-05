@@ -65,10 +65,11 @@ Artifacts tab
 
 This lane uses a local desktop automation helper when available. The first
 Linux implementation is `xdotool`-first: it can click the approved attach
-control, paste/type the exact approved artifact path into the file picker, and
-confirm the picker. It must fail closed if the desktop tool is unavailable, the
-active window is not ChatGPT, the attach target is stale/missing, or the file
-picker is not detected.
+control using extension-provided screen coordinates, paste/type the exact
+approved artifact path into the file picker, and confirm the picker. It must
+fail closed if the desktop tool is unavailable, the active window is not a
+browser/ChatGPT surface, the attach target is stale/missing, or the file picker
+is not detected.
 
 `Local Attach` is still operator-present automation. It does not grant silent
 upload authority and does not click Send.
@@ -118,11 +119,12 @@ GET  /operator/status
 POST /operator/attach-artifact
 ```
 
-`/operator/attach-artifact` accepts only an approved daemon upload ticket and an
-extension-provided attach target rectangle. It verifies the artifact ticket,
-rejects `send_after_attach`, records a receipt for success/failure, and returns
-`verification: extension_should_confirm_upload_chip` because ChatGPT upload
-completion must be observed in the browser surface.
+`/operator/attach-artifact` accepts only an approved daemon upload ticket and
+extension-provided attach target rectangles. It prefers screen coordinates for
+desktop automation and retains viewport coordinates as evidence. It verifies
+the artifact ticket, rejects `send_after_attach`, records a receipt for
+success/failure, and returns `verification: extension_should_confirm_upload_chip`
+because ChatGPT upload completion must be observed in the browser surface.
 
 ## Non-Authority
 

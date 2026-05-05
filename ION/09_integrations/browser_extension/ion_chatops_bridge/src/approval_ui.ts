@@ -224,7 +224,7 @@ function ensureStyle(): void {
       backdrop-filter: blur(14px);
       margin: 0;
       padding: 10px 10px 11px;
-      max-height: min(54vh, 520px);
+      max-height: min(38vh, 360px);
       overflow: auto;
       pointer-events: auto;
     }
@@ -642,8 +642,8 @@ function applyComposerLayout(panel: HTMLElement, anchor: AnchorInfo): boolean {
   const margin = 12;
   const left = Math.max(margin, Math.round(rect.left));
   const available = Math.max(PANEL_TINY_WIDTH, Math.min(Math.round(rect.width), window.innerWidth - left - margin));
-  const width = Math.min(COMPOSER_PANEL_MAX_WIDTH, Math.max(PANEL_MIN_WIDTH, available));
-  const bottom = Math.max(4, Math.round(viewport - rect.top - 1));
+  const width = available;
+  const bottom = Math.max(4, Math.round(viewport - rect.top + 2));
   const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 520 ? "compact" : "normal";
   const cockpit = composerCockpit(panel);
   panel.dataset.anchorMode = "composer";
@@ -654,7 +654,7 @@ function applyComposerLayout(panel: HTMLElement, anchor: AnchorInfo): boolean {
     cockpit.style.left = `${left}px`;
     cockpit.style.right = "auto";
     cockpit.style.bottom = `${bottom}px`;
-    cockpit.style.width = `${Math.min(width, available)}px`;
+    cockpit.style.width = `${width}px`;
     cockpit.style.maxWidth = `${available}px`;
   }
   positionApprovalModal();

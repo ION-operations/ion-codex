@@ -181,6 +181,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       const operatorResult = await postJson("/operator/attach-artifact", approvedPayload({
         download_token: prepared.download_token,
         target_rect: message.payload?.target_rect ?? null,
+        target_screen_rect: message.payload?.target_screen_rect ?? null,
         active_window_required: true,
         file_picker_title_check: true,
         send_after_attach: false

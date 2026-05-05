@@ -587,6 +587,37 @@ function compactJson(value: unknown, max = 1800): string {
   return text.length > max ? `${text.slice(0, max)}\n...` : text;
 }
 
+function formatBytes(value: unknown): string {
+  const bytes = Number(value);
+  if (!Number.isFinite(bytes) || bytes < 0) return "unknown size";
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KiB`;
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MiB`;
+}
+
+function summarizeAttachables(result: any): string {
+  const rows = Array.isArray(result?.candidates) ? result.candidates : [];
+  const attachables = rows.filter((row: any) => row?.attachable && typeof row.path === "string");
+  if (!attachables.length) return "No attachable package or sandbox-return artifact is available.";
+  const selected = attachables[0];
+  const lines = [
+    `attachable_count: ${attachables.length}`,
+    "selected_latest:",
+    `  name: ${selected.name ?? "unknown"}`,
+    `  path: ${selected.path}`,
+    `  size: ${formatBytes(selected.size_bytes)}`,
+    `  sha256: ${selected.sha256 ?? ""}`,
+  ];
+  if (attachables.length > 1) {
+    lines.push("", "other_attachables:");
+    attachables.slice(1, 4).forEach((row: any, index: number) => {
+      lines.push(`  ${index + 2}. ${row.name ?? row.path} (${formatBytes(row.size_bytes)})`);
+    });
+  }
+  lines.push("", "Use Local Attach for OS file-picker assist, or Drop Latest for browser synthetic drop. Neither clicks Send.");
+  return lines.join("\n");
+}
+
 async function copyBridgeResult(label: string, detail: string): Promise<void> {
   await copyReceiptSummary(`${label}\n${detail}`);
 }
@@ -749,7 +780,7 @@ function requestSandboxMutation(type: "ion_chatops_sandbox_diff_latest" | "ion_c
 function requestArtifactAttachables(): void {
   setBridgeStatus("Attachables", "Reading local packages and sandbox return artifacts.", "working");
   chrome.runtime.sendMessage({ type: "ion_chatops_artifact_attachables" }, async (response) => {
-    const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+    const detail = response?.ok ? summarizeAttachables(response.result) : blockedDetail(response);
     setBridgeArtifactDetail(detail);
     setBridgeStatus(response?.ok ? "Attachables ready" : "Attachables blocked", detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
     if (response?.ok) await copyBridgeResult("Attachable artifacts", detail);
@@ -793,12 +824,22 @@ function findAttachControlRect(): Record<string, unknown> | null {
   });
   if (!candidate) return null;
   const bounds = candidate.getBoundingClientRect();
+  const borderX = Math.max(0, (window.outerWidth - window.innerWidth) / 2);
+  const chromeY = Math.max(0, window.outerHeight - window.innerHeight - borderX);
+  const screenRect = {
+    x: Math.round(window.screenX + borderX + bounds.left),
+    y: Math.round(window.screenY + chromeY + bounds.top),
+    width: Math.round(bounds.width),
+    height: Math.round(bounds.height),
+  };
   return {
     x: Math.round(bounds.left),
     y: Math.round(bounds.top),
     width: Math.round(bounds.width),
     height: Math.round(bounds.height),
     label: controlLabel(candidate),
+    screen_rect: screenRect,
+    coordinate_space: "viewport_css_pixels",
   };
 }
 
@@ -907,7 +948,13 @@ function requestArtifactLocalAttachLatest(): void {
     return;
   }
   setBridgeStatus("Local attach latest", "Requesting approval for local operator artifact attachment. No Send click will occur.", "working");
-  chrome.runtime.sendMessage({ type: "ion_chatops_artifact_local_attach_latest", payload: { target_rect: targetRect } }, async (response) => {
+  chrome.runtime.sendMessage({
+    type: "ion_chatops_artifact_local_attach_latest",
+    payload: {
+      target_rect: targetRect,
+      target_screen_rect: targetRect["screen_rect"],
+    },
+  }, async (response) => {
     const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
     setBridgeArtifactDetail(detail);
     if (!response?.ok) {
