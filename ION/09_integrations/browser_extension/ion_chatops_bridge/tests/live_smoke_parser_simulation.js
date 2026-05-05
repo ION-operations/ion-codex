@@ -161,9 +161,18 @@ const context = {
       this.type = type;
     }
   },
+  Element,
+  Node: { ELEMENT_NODE: 1 },
   window: {
     innerHeight: 1000,
     innerWidth: 1000,
+    localStorage: { getItem: () => null },
+    sessionStorage: { getItem: () => null },
+    setTimeout(callback) {
+      callback();
+      return 1;
+    },
+    clearTimeout() {},
     getComputedStyle() {
       return { display: "block", visibility: "visible", opacity: "1" };
     },
@@ -172,12 +181,16 @@ const context = {
   },
   document: {
     documentElement,
+    body: null,
     getElementById: (id) => byId.get(id) || null,
     createElement: (tag) => new Element(tag),
     querySelector: () => null,
     querySelectorAll: (selector) => (selector === "pre code" ? [{ textContent: liveSmokeYaml }] : []),
   },
   MutationObserver: class {
+    constructor(callback) {
+      this.callback = callback;
+    }
     observe() {}
   },
   chrome: {
@@ -191,6 +204,12 @@ const context = {
   },
   navigator: { clipboard: { writeText: async () => {} } },
 };
+context.window.window = context.window;
+context.window.document = context.document;
+context.window.localStorage = context.window.localStorage;
+context.window.sessionStorage = context.window.sessionStorage;
+context.window.setTimeout = context.window.setTimeout;
+context.window.clearTimeout = context.window.clearTimeout;
 
 vm.createContext(context);
 vm.runInContext(
@@ -321,6 +340,67 @@ if (registryStats.composerControls !== 1) throw new Error("DOM registry did not 
 if (registryCode.dataset.ionYamlStatus !== "valid") throw new Error("DOM registry did not set valid YAML status");
 if (registryButton.dataset.ionControlRole !== "send") throw new Error("DOM registry did not classify send control");
 
+byId.clear();
+let disabledSent = null;
+const disabledDocumentElement = new Element("html");
+const disabledContext = {
+  console: { ...console, info() {} },
+  CustomEvent: context.CustomEvent,
+  Element,
+  Node: { ELEMENT_NODE: 1 },
+  window: {
+    innerHeight: 1000,
+    innerWidth: 1000,
+    localStorage: { getItem: (key) => (key === "ION_CHATOPS_SAFE_MODE" ? "disabled" : null) },
+    sessionStorage: { getItem: () => null },
+    setTimeout() {
+      throw new Error("safe mode should not schedule scans");
+    },
+    clearTimeout() {},
+    getComputedStyle() {
+      return { display: "block", visibility: "visible", opacity: "1" };
+    },
+    addEventListener() {},
+    dispatchEvent() {},
+  },
+  document: {
+    documentElement: disabledDocumentElement,
+    body: null,
+    getElementById: (id) => byId.get(id) || null,
+    createElement: (tag) => new Element(tag),
+    querySelector() {
+      throw new Error("safe mode should not query DOM");
+    },
+    querySelectorAll() {
+      throw new Error("safe mode should not scan DOM");
+    },
+  },
+  MutationObserver: class {
+    observe() {
+      throw new Error("safe mode should not observe DOM");
+    }
+  },
+  chrome: {
+    runtime: {
+      sendMessage(message, callback) {
+        disabledSent = message;
+        callback({ ok: false, stage: "safe_mode_unexpected_send" });
+      },
+      onMessage: { addListener() {} },
+    },
+  },
+  navigator: { clipboard: { writeText: async () => {} } },
+};
+disabledContext.window.window = disabledContext.window;
+disabledContext.window.document = disabledContext.document;
+vm.createContext(disabledContext);
+vm.runInContext(
+  fs.readFileSync(path.join(REPO_ROOT, "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js"), "utf8"),
+  disabledContext,
+);
+if (byId.has("ion-chatops-bridge-panel")) throw new Error("safe mode rendered the status panel");
+if (disabledSent) throw new Error("safe mode sent an action candidate");
+
 console.log(JSON.stringify({
   ok: true,
   panel: true,
@@ -333,4 +413,5 @@ console.log(JSON.stringify({
   rendered_dom_detected: renderedBlocks.length,
   page_fallback_blocks: pageFallbackBlocks.length,
   dom_registry: registryStats,
+  safe_mode_disabled: true,
 }));

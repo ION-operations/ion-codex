@@ -47,6 +47,30 @@ changes.
 The extension icon assets live in `icons/` and are wired into both the manifest
 extension icon set and the toolbar action icon.
 
+## Emergency Safe Mode
+
+If ChatGPT fails to load with the extension enabled, disable the content script
+without uninstalling the extension:
+
+```js
+localStorage.setItem("ION_CHATOPS_SAFE_MODE", "disabled")
+```
+
+Then reload ChatGPT. The content script exits early and prints a compact console
+message. To re-enable it:
+
+```js
+localStorage.removeItem("ION_CHATOPS_SAFE_MODE")
+sessionStorage.removeItem("ION_CHATOPS_SAFE_MODE")
+```
+
+Reload the page after removing the flag.
+
+Automatic scanning is deliberately throttled. MutationObserver events schedule a
+single debounced scan over code/YAML-bearing surfaces, ignore the extension's own
+panel/modal updates, and avoid broad whole-page scans. Use the manual `Rescan`
+button after ChatGPT finishes rendering a YAML block.
+
 ## YAML Subset
 
 The MVP parser supports the canonical `ion.chatops.action.v1` shape used by Sev:

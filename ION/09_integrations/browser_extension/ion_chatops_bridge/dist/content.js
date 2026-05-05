@@ -3,29 +3,34 @@
   const inFlightActionIds = new Set();
   const submittedActionIds = new Set();
   const reportedBlockedActionIds = new Set();
+  const PANEL_ID = "ion-chatops-bridge-panel";
+  const MODAL_ID = "ion-chatops-bridge-approval";
+  const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
+  const SAFE_MODE_KEY = "ION_CHATOPS_SAFE_MODE";
+  const SCAN_DEBOUNCE_MS = 450;
   const ION_ACTION_LINE = /(^|\n)\s*ion_action:\s*(\n|$)/;
-  const ACTION_SCAN_SELECTORS = [
+  const AUTO_SCAN_SELECTORS = [
     "pre code",
     "pre",
     "code",
-    "[data-message-author-role='assistant']",
-    "[data-message-author-role='assistant'] .markdown",
     "[data-message-author-role='assistant'] pre",
     "[data-message-author-role='assistant'] code",
     "[data-message-author-role='assistant'] [class*='font-mono']",
     "[data-message-author-role='assistant'] [class*='whitespace-pre']",
     "[data-message-author-role='assistant'] [class*='overflow-x-auto']",
-    "article .markdown",
     "article pre",
     "article pre code",
     "article [class*='font-mono']",
     "article [class*='whitespace-pre']",
     "article [class*='overflow-x-auto']",
+  ];
+  const MANUAL_SCAN_SELECTORS = [
+    ...AUTO_SCAN_SELECTORS,
+    "[data-message-author-role='assistant']",
+    "[data-message-author-role='assistant'] .markdown",
+    "article .markdown",
     "main",
   ];
-  const PANEL_ID = "ion-chatops-bridge-panel";
-  const MODAL_ID = "ion-chatops-bridge-approval";
-  const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
   const STYLE_ID = "ion-chatops-bridge-style";
   const LOG_LIMIT = 12;
   const TOP_BAR_GAP = 8;
@@ -57,6 +62,17 @@
       detail: "Composer anchor has not been evaluated yet.",
     },
   };
+  let scanTimer = null;
+  let scanRunning = false;
+  let scanQueued = false;
+  function safeModeDisabled() {
+    try {
+      const value = window.localStorage?.getItem(SAFE_MODE_KEY) ?? window.sessionStorage?.getItem(SAFE_MODE_KEY);
+      return ["1", "true", "disabled", "off"].includes(String(value ?? "").trim().toLowerCase());
+    } catch (_error) {
+      return false;
+    }
+  }
   const SEV_REENTRY_PROMPT = `You are Sev, Braden's ION browser carrier.
 
 You do not have direct local repo context unless ION provides it. Use ION ChatOps action blocks to ask the local bridge/Codex for durable work.
@@ -182,7 +198,8 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     document.documentElement.appendChild(style);
   }
 
-  function registryText(node) {
+  function registryText(node, mode) {
+    if (mode === "auto") return node.textContent ?? "";
     const inner = typeof node.innerText === "string" ? node.innerText : "";
     return inner || node.textContent || "";
   }
@@ -243,7 +260,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return hosts;
   }
 
-  function annotateCodeBlocks(stats) {
+  function annotateCodeBlocks(stats, mode) {
     const actionIds = new Set();
     const hosts = codeBlockHosts();
     hosts.forEach((host, index) => {
@@ -252,7 +269,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       host.dataset.ionYamlStatus = "none";
       let tone = "idle";
       let badge = label;
-      const text = registryText(host);
+      const text = registryText(host, mode);
       if (ION_ACTION_LINE.test(text) || extractIonActionYaml(text) !== null) {
         stats.yamlBlocks += 1;
         const parsed = parseIonActionYamlWithDiagnostics(text);
@@ -310,7 +327,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     stats.composerControls = controls.length;
   }
 
-  function updateDomActionRegistry() {
+  function updateDomActionRegistry(mode = "manual") {
     ensureDomRegistryStyle();
     const stats = {
       messages: 0,
@@ -322,9 +339,9 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       composerControls: 0,
       lastUpdated: new Date().toLocaleTimeString(),
     };
-    annotateMessages(stats);
-    annotateCodeBlocks(stats);
-    annotateComposerControls(stats);
+    if (mode === "manual") annotateMessages(stats);
+    annotateCodeBlocks(stats, mode);
+    if (mode === "manual") annotateComposerControls(stats);
     setBridgeDiagnosticsDetail(
       [
         "DOM action registry",
@@ -332,10 +349,11 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         `code_blocks: ${stats.codeBlocks}`,
         `ion_yaml_blocks: ${stats.yamlBlocks}`,
         `valid_actions: ${stats.validActions}`,
-        `invalid_actions: ${stats.invalidActions}`,
-        `duplicate_actions: ${stats.duplicateActions}`,
-        `composer_controls: ${stats.composerControls}`,
-        `last_updated: ${stats.lastUpdated}`,
+      `invalid_actions: ${stats.invalidActions}`,
+      `duplicate_actions: ${stats.duplicateActions}`,
+      `composer_controls: ${stats.composerControls}`,
+      `scan_mode: ${mode}`,
+      `last_updated: ${stats.lastUpdated}`,
         "",
         "Automation markers are visual only. They do not click, submit, upload, or mutate ION state.",
       ].join("\n"),
@@ -1344,10 +1362,11 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     );
   }
 
-  function candidateBlocks() {
+  function candidateBlocks(mode = "manual") {
+    const selectors = mode === "auto" ? AUTO_SCAN_SELECTORS : MANUAL_SCAN_SELECTORS;
     const nodes = [];
     const seenNodes = new Set();
-    for (const selector of ACTION_SCAN_SELECTORS) {
+    for (const selector of selectors) {
       document.querySelectorAll(selector).forEach((node) => {
         if (seenNodes.has(node) || shouldIgnoreScanNode(node)) return;
         seenNodes.add(node);
@@ -1359,7 +1378,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     for (const node of nodes) {
       const rawCandidates = [
         node.textContent ?? "",
-        typeof node.innerText === "string" ? node.innerText : "",
+        mode === "manual" && typeof node.innerText === "string" ? node.innerText : "",
       ];
       for (const text of rawCandidates) {
         if (!(ION_ACTION_LINE.test(text) || extractIonActionYaml(text) !== null)) continue;
@@ -1704,62 +1723,136 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     submitPacket(label, parsed.packet);
   }
 
-  function scan() {
-    refreshBridgePosition();
-    updateDomActionRegistry();
-    let processed = 0;
-    for (const block of candidateBlocks()) {
-      const key = `${block.length}:${block.slice(0, 160)}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      processed += 1;
-      const parsed = parseIonActionYamlWithDiagnostics(block);
-      const packet = parsed.packet;
-      if (!packet) {
-        setBridgeStatus("YAML detected but not parsed", parsed.finding ?? "unknown_parse_failure", "error");
-        setBridgeActionDetail((parsed.extracted_yaml ?? block).slice(0, 1200));
-        continue;
-      }
-      if (shouldSkipAction(packet)) continue;
-      const local = localValidate(packet);
-      if (!local.accepted) {
-        if (!markBlockedOnce(packet, local.findings)) continue;
-        setBridgeStatus("YAML blocked locally", local.findings.join("\n"), "error");
-        setBridgeActionDetail(JSON.stringify(packet.ion_action, null, 2));
-        console.warn("ION ChatOps candidate failed local validation", local);
-        continue;
-      }
-      setBridgeActionDetail(actionSummary(packet));
-      const actionId = packet.ion_action.action_id;
-      if (actionId) inFlightActionIds.add(actionId);
-      setBridgeStatus("ION action detected", `${packet.ion_action.intent}: ${packet.ion_action.action_id}\nValidating with local daemon.`, "working");
-      chrome.runtime.sendMessage({ type: "ion_chatops_candidate", packet }, async (response) => {
-        if (!response?.ok || !response?.result) {
-          if (actionId) inFlightActionIds.delete(actionId);
-          setBridgeStatus(
-            "ION action blocked",
-            blockedDetail(response),
-            "error",
-          );
-          return;
-        }
-        if (actionId) {
-          inFlightActionIds.delete(actionId);
-          submittedActionIds.add(actionId);
-        }
-        const result = response.result;
-        const summary = [
-          "ION ChatOps receipt",
-          `action_id: ${packet.ion_action.action_id}`,
-          `intent: ${packet.ion_action.intent}`,
-          `receipt_path: ${result.receipt_path ?? ""}`,
-          `status: ${result.verdict ?? ""}`
-        ].join("\n");
-        await copyReceiptSummary(summary);
-        setBridgeStatus("ION action submitted", summary, "success");
-      });
+  function scan(mode = "manual") {
+    if (scanRunning) {
+      scanQueued = true;
+      return 0;
     }
-    return processed;
+    scanRunning = true;
+    refreshBridgePosition();
+    try {
+      updateDomActionRegistry(mode);
+      let processed = 0;
+      for (const block of candidateBlocks(mode)) {
+        const key = `${block.length}:${block.slice(0, 160)}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        processed += 1;
+        const parsed = parseIonActionYamlWithDiagnostics(block);
+        const packet = parsed.packet;
+        if (!packet) {
+          setBridgeStatus("YAML detected but not parsed", parsed.finding ?? "unknown_parse_failure", "error");
+          setBridgeActionDetail((parsed.extracted_yaml ?? block).slice(0, 1200));
+          continue;
+        }
+        if (shouldSkipAction(packet)) continue;
+        const local = localValidate(packet);
+        if (!local.accepted) {
+          if (!markBlockedOnce(packet, local.findings)) continue;
+          setBridgeStatus("YAML blocked locally", local.findings.join("\n"), "error");
+          setBridgeActionDetail(JSON.stringify(packet.ion_action, null, 2));
+          console.warn("ION ChatOps candidate failed local validation", local);
+          continue;
+        }
+        setBridgeActionDetail(actionSummary(packet));
+        const actionId = packet.ion_action.action_id;
+        if (actionId) inFlightActionIds.add(actionId);
+        setBridgeStatus("ION action detected", `${packet.ion_action.intent}: ${packet.ion_action.action_id}\nValidating with local daemon.`, "working");
+        chrome.runtime.sendMessage({ type: "ion_chatops_candidate", packet }, async (response) => {
+          if (!response?.ok || !response?.result) {
+            if (actionId) inFlightActionIds.delete(actionId);
+            setBridgeStatus(
+              "ION action blocked",
+              blockedDetail(response),
+              "error",
+            );
+            return;
+          }
+          if (actionId) {
+            inFlightActionIds.delete(actionId);
+            submittedActionIds.add(actionId);
+          }
+          const result = response.result;
+          const summary = [
+            "ION ChatOps receipt",
+            `action_id: ${packet.ion_action.action_id}`,
+            `intent: ${packet.ion_action.intent}`,
+            `receipt_path: ${result.receipt_path ?? ""}`,
+            `status: ${result.verdict ?? ""}`
+          ].join("\n");
+          await copyReceiptSummary(summary);
+          setBridgeStatus("ION action submitted", summary, "success");
+        });
+      }
+      return processed;
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : String(error);
+      console.warn("ION ChatOps scan failed", error);
+      setBridgeStatus("ION scan degraded", detail, "error");
+      setBridgeDiagnosticsDetail(`Scan failed in ${mode} mode.\n${detail}`);
+      return 0;
+    } finally {
+      scanRunning = false;
+      if (scanQueued) {
+        scanQueued = false;
+        scheduleScan("auto");
+      }
+    }
+  }
+
+  function mutationTouchesIonUi(mutation) {
+    const isIonNode = (node) => {
+      if (node.nodeType !== Node.ELEMENT_NODE) return false;
+      const element = node;
+      return Boolean(
+        element.closest(`#${PANEL_ID}`) ||
+          element.closest(`#${MODAL_ID}`) ||
+          element.closest(`#${DOM_REGISTRY_STYLE_ID}`) ||
+          element.id === PANEL_ID ||
+          element.id === MODAL_ID ||
+          element.id === DOM_REGISTRY_STYLE_ID ||
+          element.closest(".ion-dom-badge")
+      );
+    };
+    if (isIonNode(mutation.target)) return true;
+    return Array.from(mutation.addedNodes).some(isIonNode) || Array.from(mutation.removedNodes).some(isIonNode);
+  }
+
+  function scheduleScan(mode = "auto") {
+    if (scanTimer !== null) return;
+    scanTimer = window.setTimeout(() => {
+      scanTimer = null;
+      scan(mode);
+    }, SCAN_DEBOUNCE_MS);
+  }
+
+  function initializeBridge() {
+    const observerRoot = document.body ?? document.documentElement;
+    const observer = new MutationObserver((mutations) => {
+      if (mutations.length && mutations.every(mutationTouchesIonUi)) return;
+      scheduleScan("auto");
+    });
+    observer.observe(observerRoot, { childList: true, subtree: true });
+    window.addEventListener("resize", () => refreshBridgePosition());
+    if (typeof document.addEventListener === "function") {
+      document.addEventListener("transitionend", (event) => {
+        const target = event.target;
+        if (target instanceof Element && shouldIgnoreScanNode(target)) return;
+        refreshBridgePosition();
+      }, true);
+      document.addEventListener(
+        "click",
+        (event) => {
+          const target = event.target;
+          if (target instanceof Element && shouldIgnoreScanNode(target)) return;
+          window.setTimeout(() => refreshBridgePosition(), 60);
+          window.setTimeout(() => refreshBridgePosition(), 260);
+        },
+        true,
+      );
+    }
+    setBridgeStatus("Monitoring ChatGPT", "Waiting for ion_action YAML blocks.", "idle");
+    scheduleScan("auto");
   }
 
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
@@ -1789,28 +1882,14 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     refreshBridgePosition,
     rescan: () => {
       seen.clear();
-      return scan();
+      return scan("manual");
     },
+    scheduleScan,
   };
-
-  const observer = new MutationObserver(() => scan());
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-  window.addEventListener("resize", () => refreshBridgePosition());
-  if (typeof document.addEventListener === "function") {
-    document.addEventListener("transitionend", () => refreshBridgePosition(), true);
-    document.addEventListener(
-      "click",
-      () => {
-        window.setTimeout(() => refreshBridgePosition(), 60);
-        window.setTimeout(() => refreshBridgePosition(), 260);
-      },
-      true,
-    );
-  }
   window.addEventListener("ion-chatops-rescan", () => {
     seen.clear();
     setBridgeStatus("Manual rescan", "Scanning rendered ChatGPT code blocks.", "working");
-    const found = scan();
+    const found = scan("manual");
     if (!found) {
       setBridgeStatus(
         "No action block found",
@@ -1864,6 +1943,9 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   window.addEventListener("ion-chatops-sandbox-review", () => {
     requestSandboxMutation("ion_chatops_sandbox_queue_latest", "Sandbox queue review");
   });
-  setBridgeStatus("Monitoring ChatGPT", "Waiting for ion_action YAML blocks.", "idle");
-  scan();
+  if (safeModeDisabled()) {
+    console.info(`ION ChatOps Bridge disabled by ${SAFE_MODE_KEY}. Remove the flag and reload to re-enable.`);
+  } else {
+    initializeBridge();
+  }
 })();
