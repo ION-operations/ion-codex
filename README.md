@@ -122,16 +122,23 @@ prompts. It evolves them by evolving the governed structure they act inside.
 A role is a bounded ION function. A carrier is the host executing it. They are
 not the same thing.
 
-| Role | Function |
-| --- | --- |
-| `STEWARD` | Integration, acceptance, rejection, closure. |
-| `RELAY` | Intake, packet formation, handoff. |
-| `VIZIER` | Strategy and route intelligence. |
-| `MASON` | Build coordination and implementation. |
-| `NEMESIS` | Adversarial audit and failure-mode attack. |
-| `VESTIGE` | Memory, archaeology, residue interpretation. |
-| `SCRIBE` | Structured capture and documentation. |
-| `VICE` | Discipline, critique, hardening pressure. |
+The names below are ION true names: stable role labels used by packets,
+registries, templates, and receipts. They are paired with operational titles so
+the public interface stays legible.
+
+| True name | Operational title | Function |
+| --- | --- | --- |
+| `STEWARD` | Orchestration manager | Integration, acceptance, rejection, closure. |
+| `RELAY` | Communications relay | Intake, packet formation, handoff. |
+| `VIZIER` | Chief architect | Strategy and route intelligence. |
+| `MASON` | Software architect | Build coordination and implementation. |
+| `NEMESIS` | Inspector general | Adversarial audit and failure-mode attack. |
+| `VESTIGE` | Systems archaeologist | Memory, archaeology, residue interpretation. |
+| `SCRIBE` | Archivist / utility | Structured capture and documentation. |
+| `VICE` | Contradiction pressure | Discipline, critique, hardening pressure. |
+
+See [Agents, Roles, And Carriers](ION/docs/AGENTS_ROLES_CARRIERS.md) for rank,
+domain, and identity boundaries.
 
 | Carrier | Role in the system |
 | --- | --- |

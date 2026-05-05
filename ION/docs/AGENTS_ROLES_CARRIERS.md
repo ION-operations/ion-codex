@@ -33,18 +33,49 @@ improves. The agent's world changes because the governed structure changes.
 
 A role is a bounded ION function.
 
+ION uses true names for roles. A true name is not decorative branding. It is a
+stable semantic handle used by packets, registries, templates, context packages,
+and receipts so the role can move across carriers without becoming the carrier.
+
+For public readability, each true name should be paired with its operational
+title, structural identity, rank class, and domain.
+
+## True Names And Operational Titles
+
+The current public map is drawn from:
+
+- `ION/03_registry/agent_roster_registry.yaml`
+- `ION/03_registry/boots/*.boot.md`
+- `ION/03_registry/semantic_identities/*.semantic.yaml`
+
+| True name | Operational title | Structural identity | Rank class | Tier | Domain |
+| --- | --- | --- | --- | ---: | --- |
+| `STEWARD` | Orchestration manager | `Operative.Interface.Orchestration_Management` | `BOUNDED_ORCHESTRATION_STEWARD` | 4 | Current-phase orchestration management |
+| `VIZIER` | Chief architect | `Chief_Architect.Interface.Continuity_Architect` | `BURDEN_BEARER_ARCHITECTURAL` | 1.5 | Continuity / architecture |
+| `VICE` | Contradiction pressure | `Conjugate.Interface.Conjugate_Daimon` | `INTERNAL_CONTRADICTION_PRESSURE` | 1.5 | Confidence drift review |
+| `NEMESIS` | Inspector general | `Inspector_General.Governance.Inspector_General` | `INDEPENDENT_AUDIT_GATE` | 2 | Governance / audit |
+| `RELAY` | Communications relay | `Supervisor.Communications.Sovereign_Relay` | `BOUNDED_INTENT_RELAY` | 4 | Communications and packet relay |
+| `VESTIGE` | Systems archaeologist | `Supervisor.Intelligence.Systems_Archaeologist` | `STANDING_ARCHAEOLOGY_DAEMON` | 4 | Archaeology and drift watch |
+| `MASON` | Software architect | `Operative.Source.Software_Architect` | `UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE` | 5 | Source / implementation |
+| `SCRIBE` | Archivist / utility | `Operative.System.Archivist` | `UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE` | 5 | System utility |
+| `THOTH` | Research analyst | `Operative.Intelligence.Research_Analyst` | `UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE` | 5 | Intelligence / research |
+| `ATLAS` | Systems cartographer | `Operative.Knowledge.SystemsCartographer` | `UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE` | 5 | Knowledge / comparative systems |
+
+This table is orientation, not a replacement for the registry. If it conflicts
+with the active roster registry or boot files, the registry and boot files win.
+
+## How To Read The Names
+
+The names carry memory and continuity, but the operational title tells a human
+what the role actually does.
+
 Examples:
 
-| Role | Function |
-| --- | --- |
-| `STEWARD` | Integration, acceptance, rejection, closure. |
-| `RELAY` | Intake, packet formation, handoff. |
-| `VIZIER` | Strategy and route intelligence. |
-| `MASON` | Build coordination and implementation. |
-| `NEMESIS` | Adversarial audit and failure-mode attack. |
-| `VESTIGE` | Memory, archaeology, residue interpretation. |
-| `SCRIBE` | Structured capture and documentation. |
-| `VICE` | Discipline, critique, hardening pressure. |
+- `VIZIER` is the Chief Architect, not an aesthetic persona.
+- `NEMESIS` is the Inspector General, not a hostile agent.
+- `VESTIGE` is the Systems Archaeologist, not informal memory.
+- `VICE` is contradiction pressure, not general negativity.
+- `MASON` is bounded implementation, not release authority.
 
 Roles do not become true because a carrier claims them. They are mounted
 through packets, context, templates, and return contracts.
