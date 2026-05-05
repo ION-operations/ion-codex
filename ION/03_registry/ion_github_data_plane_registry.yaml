@@ -6,7 +6,8 @@ github_account_or_org: ION-operations
 recommended_repository:
   owner: ION-operations
   name: ion-codex
-  visibility: private
+  visibility: public
+  visibility_policy: public_collaboration_repo_private_production_builds_later
   remote_ssh: git@github.com:ION-operations/ion-codex.git
   remote_https: https://github.com/ION-operations/ion-codex.git
 local_root:
@@ -16,8 +17,10 @@ local_root:
   active_branch: main
   active_remote: https://github.com/ION-operations/ion-codex.git
   auth_path: gh_browser_login_with_git_credential_helper
-  first_commit_pushed: false
-  setup_state: CONFIGURED_LOCAL_REMOTE_READY_NO_COMMIT_PUSH
+  first_commit_pushed: true
+  setup_state: CONFIGURED_INITIAL_BOOTSTRAP_PUSH_COMPLETE_PUBLIC_COLLABORATION_REPO
+  bootstrap_commit: 6edea5f9ad843ad8526c4272d07885fca8065217
+  bootstrap_push_receipt: ION/05_context/current/github_data_plane/BOOTSTRAP_PUSH_RECEIPT_2026-05-05T041453Z.json
 control_plane:
   owner: ION/09_integrations/mcp/chatgpt_connector/
   summary: MCP remains the carrier control plane for status, packets, queues, and proof-gated returns.
@@ -106,7 +109,7 @@ human_setup_commands:
   - git init
   - git branch -M main
   - gh auth login --hostname github.com --git-protocol https --scopes repo
-  - gh repo create ION-operations/ion-codex --private --description "ION Codex carrier workspace and data plane" --disable-wiki
+  - gh repo create ION-operations/ion-codex --public --description "ION Codex carrier workspace and data plane" --disable-wiki
   - git remote add origin https://github.com/ION-operations/ion-codex.git
   - git remote -v
 guardrails:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
 import re
 import subprocess
@@ -93,6 +94,12 @@ def _parse_registry_bool(value: str | None) -> bool | None:
     if normalized in {"false", "no", "0"}:
         return False
     return None
+
+
+def _matches_any_pattern(value: str | None, patterns: list[str]) -> bool:
+    if not value:
+        return False
+    return any(fnmatch.fnmatchcase(value, pattern) for pattern in patterns)
 
 
 def _registry_scalar(text: str, key: str) -> str | None:
@@ -263,7 +270,13 @@ def audit_github_data_plane(root: str | Path | None = None) -> dict[str, Any]:
     remote_alignment = "NOT_EVALUATED"
     branch_alignment = "NOT_EVALUATED"
     if git.get("git_present"):
-        branch_alignment = "MATCHES_REGISTRY" if git.get("current_branch") == expected_branch else "MISMATCH"
+        current_branch = git.get("current_branch")
+        if current_branch == expected_branch:
+            branch_alignment = "MATCHES_REGISTRY"
+        elif _matches_any_pattern(current_branch, DEFAULT_ALLOWED_PUSH_BRANCH_PATTERNS):
+            branch_alignment = "ALLOWED_WORK_BRANCH"
+        else:
+            branch_alignment = "MISMATCH"
         if branch_alignment == "MISMATCH":
             findings.append("active_branch_mismatch")
 
