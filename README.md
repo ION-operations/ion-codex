@@ -50,6 +50,9 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages PYTEST_DISABLE_PLUGIN_AUTOL
 ## Main Directory Map
 
 ```text
+.github               public issue and pull request templates
+.cursor               Cursor carrier configuration and rules
+.vscode               editor launch/settings recommendations
 ION/00_BOOTSTRAP      bootstrap and historical mount surfaces
 ION/01_doctrine       doctrine floor and workflow law
 ION/02_architecture   protocols and architecture authority
@@ -64,7 +67,12 @@ ION/09_integrations   MCP, browser extension, daemon, Cursor integrations
 ION/docs              setup guides, consolidation reports, public docs
 ION/examples          examples and harness inputs
 ION/tests             pytest suite
+pyproject.toml        Python package/test configuration
 ```
+
+Historical root witness files such as `FILES_ADDED_V*.txt` and
+`FULL_PROJECT_CONSOLIDATION_RECEIPT_*.txt` are archived under
+`ION/05_context/archive/root_witness_manifests/` to keep this root readable.
 
 ## GitHub Data Plane
 
@@ -82,4 +90,3 @@ See:
 - `ION/02_architecture/ION_GITHUB_DATA_PLANE_PROTOCOL.md`
 - `ION/02_architecture/ION_GITHUB_WORK_DAEMON_PROTOCOL.md`
 - `ION/03_registry/ion_github_data_plane_registry.yaml`
-

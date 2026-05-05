@@ -55,6 +55,15 @@ system.
   - `ION/05_context/`;
   - `ION/06_intelligence/`.
 
+## Implemented Third Slice
+
+- Move root-level witness files into:
+  `ION/05_context/archive/root_witness_manifests/`.
+- Add a directory README explaining the lifecycle relocation.
+- Add a relocation receipt under `ION/05_context/current/github_data_plane/`.
+- Keep historical manifests unchanged where they reference old root paths,
+  because those references describe prior repository state.
+
 ## Proposed Next Slices
 
 1. Add directory-local README files for:
@@ -65,9 +74,9 @@ system.
 2. Add a generated or checked navigation index for high-value kernel modules.
 3. Add a public-safe issue template for proof returns or task returns if GitHub
    issues become a durable return surface.
-4. Add a lifecycle proposal for root-level `FILES_ADDED_V*.txt` witness files:
-   keep them tracked, but consider moving future witness manifests under
-   `ION/docs/consolidation/` or `ION/05_context/archive/` with receipts.
+4. Decide where future witness manifests should land by default:
+   `ION/docs/consolidation/` for public report indexes, or
+   `ION/05_context/archive/` for lifecycle evidence.
 5. Add a public/private split plan for future production infrastructure repos.
 6. Refine `kernel.ion_github_commit_proposal_receipt` so small follow-up
    proposals can emit a changed-path manifest instead of the whole repository

@@ -27,6 +27,17 @@ Because this repository is public, do not place secrets, tokens, private logs,
 production infrastructure state, browser profiles, or sensitive user data in
 context files.
 
+## Archive Notes
+
+Root-level witness files from the initial public upload were moved to:
+
+```text
+archive/root_witness_manifests/
+```
+
+That move is a lifecycle relocation, not deletion. Historical manifests may
+still reference the old root paths as prior-state evidence.
+
 ## Useful Current Paths
 
 - `current/ACTIVE_WORK_PACKET.json`
@@ -35,4 +46,3 @@ context files.
 - `current/github_data_plane/`
 - `current/chatops_bridge/`
 - `current/chatgpt_connector/`
-
