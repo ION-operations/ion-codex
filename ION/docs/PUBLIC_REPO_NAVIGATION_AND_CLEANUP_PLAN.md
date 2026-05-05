@@ -64,6 +64,13 @@ system.
 - Keep historical manifests unchanged where they reference old root paths,
   because those references describe prior repository state.
 
+## Implemented Fourth Slice
+
+- Replace the short root README with a full public landing-page README.
+- Keep `ION/README.md` as the content-root navigation index.
+- Point `pyproject.toml` package metadata at the root `README.md` so the public
+  landing page is the package readme.
+
 ## Proposed Next Slices
 
 1. Add directory-local README files for:
