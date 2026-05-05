@@ -25,8 +25,18 @@
   ];
   const PANEL_ID = "ion-chatops-bridge-panel";
   const MODAL_ID = "ion-chatops-bridge-approval";
+  const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
   const STYLE_ID = "ion-chatops-bridge-style";
   const LOG_LIMIT = 12;
+  const TOP_BAR_GAP = 8;
+  const PANEL_TOP = 2;
+  const DEFAULT_LEFT_BOUNDARY = 50;
+  const DEFAULT_RIGHT_RESERVE = 250;
+  const PANEL_PREFERRED_WIDTH = 640;
+  const PANEL_MIN_WIDTH = 320;
+  const PANEL_TINY_WIDTH = 230;
+  const COMPOSER_GAP = 8;
+  const COMPOSER_PANEL_MAX_WIDTH = 920;
   const bridgeState = {
     title: "Monitoring ChatGPT",
     detail: "Waiting for ion_action YAML blocks.",
@@ -34,9 +44,18 @@
     action: "No action detected yet.",
     agent: "Codex-backed agent status has not been requested yet.",
     packages: "No context pack or ZIP export has been requested yet.",
+    sandbox: "No ChatGPT sandbox returns have been requested yet.",
+    automation: "Automation controls are staged only. This packet does not execute macros.",
+    artifacts: "Artifact detection is staged only. No upload or local file movement occurs in this shell slice.",
     diagnostics: "Normal carrier flow: Sev emits an ion_action YAML block in ChatGPT, the extension detects it, Braden approves it, the local daemon records/executes it, and ION writes a receipt.\n\nThe buttons below are local diagnostics only. They fabricate known-good test actions so the extension/daemon path can be checked without waiting on ChatGPT to emit YAML.",
     tools: "Daemon: http://127.0.0.1:8767\nUse Rescan after ChatGPT finishes rendering a YAML block.",
     logs: [],
+    anchor: {
+      mode: "topbar_fallback",
+      rect: null,
+      health: "degraded",
+      detail: "Composer anchor has not been evaluated yet.",
+    },
   };
   const SEV_REENTRY_PROMPT = `You are Sev, Braden's ION browser carrier.
 
@@ -111,6 +130,218 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     requested:
       - codex_work_packet_receipt
       - action_receipt`;
+
+  function ensureDomRegistryStyle() {
+    if (document.getElementById(DOM_REGISTRY_STYLE_ID)) return;
+    const style = document.createElement("style");
+    style.id = DOM_REGISTRY_STYLE_ID;
+    style.textContent = `
+    .ion-dom-badge {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      z-index: 7;
+      height: 18px;
+      max-width: 180px;
+      padding: 0 5px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      background: rgba(32,33,35,0.88);
+      color: rgba(255,255,255,0.72);
+      font: 10px/17px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+    .ion-dom-badge[data-tone="valid"] {
+      border-color: rgba(16,185,129,0.45);
+      color: rgba(209,250,229,0.94);
+    }
+    .ion-dom-badge[data-tone="invalid"],
+    .ion-dom-badge[data-tone="duplicate"] {
+      border-color: rgba(251,191,36,0.45);
+      color: rgba(254,243,199,0.94);
+    }
+    [data-ion-code-index] {
+      outline: 1px solid rgba(255,255,255,0.06);
+      outline-offset: 2px;
+    }
+    [data-ion-yaml-status="valid"] {
+      outline-color: rgba(16,185,129,0.42);
+    }
+    [data-ion-yaml-status="invalid"],
+    [data-ion-yaml-status="duplicate"] {
+      outline-color: rgba(251,191,36,0.42);
+    }
+    [data-ion-control-role] {
+      box-shadow: 0 0 0 1px rgba(16,185,129,0.18), 0 0 0 4px rgba(16,185,129,0.05) !important;
+    }
+  `;
+    document.documentElement.appendChild(style);
+  }
+
+  function registryText(node) {
+    const inner = typeof node.innerText === "string" ? node.innerText : "";
+    return inner || node.textContent || "";
+  }
+
+  function registryRectVisible(node) {
+    if (shouldIgnoreScanNode(node)) return false;
+    const rect = node.getBoundingClientRect();
+    return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+  }
+
+  function allowRegistryBadge(host) {
+    const currentPosition = window.getComputedStyle(host).position;
+    if (!currentPosition || currentPosition === "static") host.style.position = "relative";
+  }
+
+  function ensureRegistryBadge(host, kind, text, tone = "idle") {
+    allowRegistryBadge(host);
+    const existing = Array.from(host.children).find((child) => child.dataset?.ionBadge === kind);
+    const badge = existing ?? document.createElement("span");
+    badge.className = "ion-dom-badge";
+    badge.dataset.ionBadge = kind;
+    badge.dataset.tone = tone;
+    if (badge.textContent !== text) badge.textContent = text;
+    if (!existing) host.appendChild(badge);
+  }
+
+  function uniqueElements(selectors) {
+    const elements = [];
+    const seenElements = new Set();
+    document.querySelectorAll(selectors).forEach((node) => {
+      if (seenElements.has(node) || shouldIgnoreScanNode(node) || !registryRectVisible(node)) return;
+      seenElements.add(node);
+      elements.push(node);
+    });
+    return elements;
+  }
+
+  function annotateMessages(stats) {
+    const nodes = uniqueElements("[data-message-author-role], article");
+    nodes.forEach((node, index) => {
+      const role = node.getAttribute("data-message-author-role") || "message";
+      node.dataset.ionMessageIndex = String(index + 1);
+      ensureRegistryBadge(node, "message", `ION msg ${index + 1} ${role}`, "idle");
+    });
+    stats.messages = nodes.length;
+  }
+
+  function codeBlockHosts() {
+    const hosts = [];
+    const seenHosts = new Set();
+    document.querySelectorAll("pre, pre code, code, [class*='font-mono'], [class*='whitespace-pre'], [class*='overflow-x-auto']").forEach((node) => {
+      if (shouldIgnoreScanNode(node) || !registryRectVisible(node)) return;
+      const host = node.closest("pre") ?? node;
+      if (seenHosts.has(host) || shouldIgnoreScanNode(host) || !registryRectVisible(host)) return;
+      seenHosts.add(host);
+      hosts.push(host);
+    });
+    return hosts;
+  }
+
+  function annotateCodeBlocks(stats) {
+    const actionIds = new Set();
+    const hosts = codeBlockHosts();
+    hosts.forEach((host, index) => {
+      const label = `ION code ${index + 1}`;
+      host.dataset.ionCodeIndex = String(index + 1);
+      host.dataset.ionYamlStatus = "none";
+      let tone = "idle";
+      let badge = label;
+      const text = registryText(host);
+      if (ION_ACTION_LINE.test(text) || extractIonActionYaml(text) !== null) {
+        stats.yamlBlocks += 1;
+        const parsed = parseIonActionYamlWithDiagnostics(text);
+        const packet = parsed.packet;
+        const actionId = packet?.ion_action?.action_id;
+        if (!packet) {
+          stats.invalidActions += 1;
+          tone = "invalid";
+          badge = `ION YAML ${index + 1} blocked`;
+          host.dataset.ionYamlStatus = "invalid";
+          host.dataset.ionYamlFinding = parsed.finding ?? "parse_failed";
+        } else if (actionId && actionIds.has(actionId)) {
+          stats.duplicateActions += 1;
+          tone = "duplicate";
+          badge = `ION YAML ${index + 1} duplicate`;
+          host.dataset.ionYamlStatus = "duplicate";
+          host.dataset.ionActionId = actionId;
+        } else {
+          if (actionId) actionIds.add(actionId);
+          const local = localValidate(packet);
+          host.dataset.ionActionId = actionId ?? "";
+          if (local.accepted) {
+            stats.validActions += 1;
+            tone = "valid";
+            badge = `ION YAML ${index + 1} ok`;
+            host.dataset.ionYamlStatus = "valid";
+          } else {
+            stats.invalidActions += 1;
+            tone = "invalid";
+            badge = `ION YAML ${index + 1} blocked`;
+            host.dataset.ionYamlStatus = "invalid";
+            host.dataset.ionYamlFinding = local.findings.join("|");
+          }
+        }
+      }
+      ensureRegistryBadge(host, "code", badge, tone);
+    });
+    stats.codeBlocks = hosts.length;
+  }
+
+  function annotateComposerControls(stats) {
+    const composer = findComposer();
+    const composerRect = composer?.getBoundingClientRect();
+    const controls = uniqueElements("button, input[type='file']").filter((node) => {
+      const rect = node.getBoundingClientRect();
+      const nearComposer = composerRect ? Math.abs(rect.top - composerRect.top) < 180 || Math.abs(rect.bottom - composerRect.bottom) < 180 : false;
+      const label = `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""}`.toLowerCase();
+      return nearComposer || /send|attach|upload|file|voice|mic|stop|plus/.test(label);
+    });
+    controls.forEach((node) => {
+      const label = `${node.getAttribute("aria-label") ?? node.getAttribute("data-testid") ?? node.tagName}`.toLowerCase();
+      const role = label.includes("send") ? "send" : label.includes("attach") || label.includes("upload") || label.includes("file") || label.includes("plus") ? "attach" : label.includes("mic") || label.includes("voice") ? "voice" : label.includes("stop") ? "stop" : "composer";
+      node.dataset.ionControlRole = role;
+    });
+    stats.composerControls = controls.length;
+  }
+
+  function updateDomActionRegistry() {
+    ensureDomRegistryStyle();
+    const stats = {
+      messages: 0,
+      codeBlocks: 0,
+      yamlBlocks: 0,
+      validActions: 0,
+      invalidActions: 0,
+      duplicateActions: 0,
+      composerControls: 0,
+      lastUpdated: new Date().toLocaleTimeString(),
+    };
+    annotateMessages(stats);
+    annotateCodeBlocks(stats);
+    annotateComposerControls(stats);
+    setBridgeDiagnosticsDetail(
+      [
+        "DOM action registry",
+        `messages: ${stats.messages}`,
+        `code_blocks: ${stats.codeBlocks}`,
+        `ion_yaml_blocks: ${stats.yamlBlocks}`,
+        `valid_actions: ${stats.validActions}`,
+        `invalid_actions: ${stats.invalidActions}`,
+        `duplicate_actions: ${stats.duplicateActions}`,
+        `composer_controls: ${stats.composerControls}`,
+        `last_updated: ${stats.lastUpdated}`,
+        "",
+        "Automation markers are visual only. They do not click, submit, upload, or mutate ION state.",
+      ].join("\n"),
+    );
+    return stats;
+  }
 
   function scalar(raw) {
     const value = raw.trim().replace(/\s+#.*$/, "");
@@ -313,13 +544,14 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       }
       #${PANEL_ID} {
         position: fixed;
-        top: 2px;
+        top: auto;
         left: 58px;
         right: auto;
-        bottom: auto;
+        bottom: 82px;
         z-index: 2147483646;
-        width: clamp(430px, 56vw, 640px);
-        max-width: calc(100vw - 380px);
+        width: min(640px, calc(100vw - 86px));
+        max-width: none;
+        box-sizing: border-box;
         border: 1px solid rgba(255,255,255,0.10);
         border-radius: 10px;
         background: rgba(33, 33, 33, 0.94);
@@ -327,9 +559,15 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         padding: 4px;
         backdrop-filter: blur(12px);
       }
+      #${PANEL_ID}[data-anchor-mode="composer"] {
+        border-radius: 12px;
+        box-shadow: 0 12px 34px rgba(0,0,0,0.28);
+      }
+      #${PANEL_ID}[data-anchor-health="degraded"] {
+        border-color: rgba(251,191,36,0.30);
+      }
       #${PANEL_ID}[data-expanded="true"] {
-        width: clamp(430px, 56vw, 640px);
-        max-width: calc(100vw - 380px);
+        max-width: none;
       }
       #${PANEL_ID} .ion-toolbar {
         display: flex;
@@ -361,6 +599,10 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         font-size: 12px;
         font-weight: 600;
         line-height: 1.25;
+        max-width: 220px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         overflow-wrap: anywhere;
         color: rgba(255,255,255,0.88);
       }
@@ -400,6 +642,32 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         gap: 2px;
         flex: 0 0 auto;
       }
+      #${PANEL_ID}[data-layout="compact"] .ion-title {
+        max-width: 150px;
+      }
+      #${PANEL_ID}[data-layout="compact"] .ion-label {
+        display: none;
+      }
+      #${PANEL_ID}[data-layout="compact"] .ion-tool,
+      #${PANEL_ID}[data-layout="compact"] .ion-toggle {
+        height: 27px;
+        padding: 0 6px;
+        font-size: 11px;
+      }
+      #${PANEL_ID}[data-layout="tiny"] .ion-row > div {
+        display: none;
+      }
+      #${PANEL_ID}[data-layout="tiny"] .ion-tool {
+        padding: 0 5px;
+        font-size: 0;
+      }
+      #${PANEL_ID}[data-layout="tiny"] .ion-tool::first-letter,
+      #${PANEL_ID}[data-layout="tiny"] .ion-toggle {
+        font-size: 11px;
+      }
+      #${PANEL_ID}[data-layout="tiny"] [data-tool="insert-reentry"] {
+        display: none;
+      }
       #${PANEL_ID} .ion-tab-panel .ion-toolbar-actions {
         flex-wrap: wrap;
         gap: 6px;
@@ -409,21 +677,30 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       #${PANEL_ID} .ion-expanded {
         display: none;
       }
+      #${PANEL_ID} .ion-tabs {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        overflow-x: auto;
+        scrollbar-width: none;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        margin: 2px 2px 0;
+        padding: 4px 2px 0;
+      }
+      #${PANEL_ID} .ion-tabs::-webkit-scrollbar {
+        display: none;
+      }
       #${PANEL_ID}[data-expanded="true"] .ion-expanded {
         display: block;
         border-top: 1px solid rgba(255,255,255,0.08);
-        margin: 4px 2px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        margin: 2px 2px 4px;
         padding: 8px 8px 9px;
-      }
-      #${PANEL_ID}[data-expanded="true"] .ion-tabs {
-        display: flex;
+        max-height: min(54vh, 520px);
+        overflow: auto;
       }
       #${PANEL_ID}[data-expanded="true"] .ion-tab-panel[data-active="true"] {
         display: flex;
-      }
-      #${PANEL_ID} .ion-tabs {
-        gap: 6px;
-        margin-top: 0;
       }
       #${PANEL_ID} .ion-tab[data-active="true"] {
         color: rgba(255,255,255,0.96);
@@ -442,6 +719,14 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         flex-direction: column;
         gap: 8px;
         margin-top: 9px;
+      }
+      #${PANEL_ID}[data-layout="compact"] .ion-tab {
+        height: 26px;
+        padding: 0 6px;
+        font-size: 11px;
+      }
+      #${PANEL_ID}[data-layout="tiny"] .ion-tabs {
+        display: none;
       }
       #${MODAL_ID} {
         position: fixed;
@@ -503,6 +788,191 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     document.documentElement.appendChild(style);
   }
 
+  function rectIsVisible(rect) {
+    return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+  }
+
+  function isBridgeElement(element) {
+    return Boolean(element.closest(`#${PANEL_ID}`) ?? element.closest(`#${MODAL_ID}`));
+  }
+
+  function visibleRect(element) {
+    if (isBridgeElement(element)) return null;
+    const style = window.getComputedStyle(element);
+    if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) return null;
+    const rect = element.getBoundingClientRect();
+    return rectIsVisible(rect) ? rect : null;
+  }
+
+  function detectLeftBoundary() {
+    const selectors = [
+      "nav",
+      "aside",
+      "[role='navigation']",
+      "[aria-label*='sidebar' i]",
+      "[aria-label*='side bar' i]",
+      "[data-testid*='sidebar' i]",
+      "[data-testid*='left' i]",
+      "[class*='sidebar' i]",
+      "[class*='side-bar' i]",
+    ];
+    let boundary = DEFAULT_LEFT_BOUNDARY;
+    document.querySelectorAll(selectors.join(",")).forEach((element) => {
+      const rect = visibleRect(element);
+      if (!rect) return;
+      const plausibleLeftSurface =
+        rect.left <= 24 &&
+        rect.top <= 92 &&
+        rect.bottom >= 34 &&
+        rect.width >= 38 &&
+        rect.width <= window.innerWidth * 0.72;
+      if (plausibleLeftSurface) boundary = Math.max(boundary, rect.right);
+    });
+    return Math.min(Math.max(boundary, DEFAULT_LEFT_BOUNDARY), window.innerWidth - 120);
+  }
+
+  function detectRightBoundary() {
+    let boundary = window.innerWidth - TOP_BAR_GAP;
+    const selectors = [
+      "header button",
+      "header a[role='button']",
+      "[role='banner'] button",
+      "[role='banner'] a[role='button']",
+      "button[aria-label*='share' i]",
+      "button[aria-label*='more' i]",
+      "button[aria-label*='memory' i]",
+      "[data-testid*='share' i]",
+      "[data-testid*='more' i]",
+    ];
+    document.querySelectorAll(selectors.join(",")).forEach((element) => {
+      const rect = visibleRect(element);
+      if (!rect) return;
+      const plausibleRightTopControl =
+        rect.top <= 82 &&
+        rect.bottom >= 16 &&
+        rect.left >= window.innerWidth * 0.48 &&
+        rect.width <= 180 &&
+        rect.height <= 56;
+      if (plausibleRightTopControl) boundary = Math.min(boundary, rect.left);
+    });
+    if (boundary === window.innerWidth - TOP_BAR_GAP) {
+      boundary = Math.max(TOP_BAR_GAP, window.innerWidth - DEFAULT_RIGHT_RESERVE);
+    }
+    return Math.max(boundary, 160);
+  }
+
+  function applyTopBarLayout(panel) {
+    const left = Math.ceil(detectLeftBoundary() + TOP_BAR_GAP);
+    const right = Math.floor(detectRightBoundary() - TOP_BAR_GAP);
+    const available = Math.max(PANEL_TINY_WIDTH, right - left);
+    const preferred = Math.min(PANEL_PREFERRED_WIDTH, Math.floor(window.innerWidth * 0.58));
+    const width = Math.max(Math.min(preferred, available), Math.min(PANEL_MIN_WIDTH, available));
+    const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 430 ? "compact" : "normal";
+    panel.dataset.anchorMode = "topbar_fallback";
+    panel.dataset.anchorHealth = "degraded";
+    panel.dataset.layout = layout;
+    panel.style.top = `${PANEL_TOP}px`;
+    panel.style.left = `${left}px`;
+    panel.style.right = "auto";
+    panel.style.bottom = "auto";
+    panel.style.width = `${width}px`;
+    panel.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+    if (typeof panel.style.setProperty === "function") {
+      panel.style.setProperty("--ion-chatops-modal-left", `${left}px`);
+      panel.style.setProperty("--ion-chatops-modal-width", `${Math.min(420, available)}px`);
+    }
+    positionApprovalModal();
+  }
+
+  function viewportHeight() {
+    return Math.floor(window.visualViewport?.height ?? window.innerHeight);
+  }
+
+  function findComposerInput() {
+    const selectors = [
+      "#prompt-textarea",
+      "textarea",
+      "[contenteditable='true'][role='textbox']",
+      "[contenteditable='true']",
+    ];
+    for (const selector of selectors) {
+      const node = document.querySelector(selector);
+      if (!node || isBridgeElement(node)) continue;
+      const rect = visibleRect(node);
+      if (rect && rect.top > viewportHeight() * 0.45) return node;
+    }
+    return null;
+  }
+
+  function candidateComposerContainer(input) {
+    let best = input;
+    let current = input;
+    let depth = 0;
+    while (current?.parentElement && depth < 10) {
+      current = current.parentElement;
+      depth += 1;
+      if (isBridgeElement(current)) break;
+      const rect = visibleRect(current);
+      if (!rect) continue;
+      const bottomHalf = rect.top > viewportHeight() * 0.38;
+      const plausibleWidth = rect.width >= Math.min(360, window.innerWidth * 0.62) && rect.width <= window.innerWidth - 12;
+      const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(260, viewportHeight() * 0.38);
+      if (bottomHalf && plausibleWidth && plausibleHeight) best = current;
+    }
+    return best;
+  }
+
+  function detectComposerAnchor() {
+    const input = findComposerInput();
+    if (!input) {
+      return {
+        mode: "topbar_fallback",
+        rect: null,
+        health: "degraded",
+        detail: "Composer anchor not found; using top-bar fallback layout.",
+      };
+    }
+    const container = candidateComposerContainer(input);
+    const rect = container.getBoundingClientRect();
+    if (!rectIsVisible(rect)) {
+      return {
+        mode: "topbar_fallback",
+        rect: null,
+        health: "degraded",
+        detail: "Composer candidate was not visible; using top-bar fallback layout.",
+      };
+    }
+    return {
+      mode: "composer",
+      rect,
+      health: "ready",
+      detail: `Composer anchor ready: ${Math.round(rect.left)},${Math.round(rect.top)} ${Math.round(rect.width)}x${Math.round(rect.height)}.`,
+    };
+  }
+
+  function applyComposerLayout(panel, anchor) {
+    if (anchor.mode !== "composer" || !anchor.rect) return false;
+    const rect = anchor.rect;
+    const viewport = viewportHeight();
+    const margin = 12;
+    const left = Math.max(margin, Math.round(rect.left));
+    const available = Math.max(PANEL_TINY_WIDTH, Math.min(Math.round(rect.width), window.innerWidth - left - margin));
+    const width = Math.min(COMPOSER_PANEL_MAX_WIDTH, Math.max(PANEL_MIN_WIDTH, available));
+    const bottom = Math.max(10, Math.round(viewport - rect.top + COMPOSER_GAP));
+    const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 520 ? "compact" : "normal";
+    panel.dataset.anchorMode = "composer";
+    panel.dataset.anchorHealth = anchor.health;
+    panel.dataset.layout = layout;
+    panel.style.top = "auto";
+    panel.style.left = `${left}px`;
+    panel.style.right = "auto";
+    panel.style.bottom = `${bottom}px`;
+    panel.style.width = `${Math.min(width, available)}px`;
+    panel.style.maxWidth = `${available}px`;
+    positionApprovalModal();
+    return true;
+  }
+
   function ensurePanel() {
     ensureStyle();
     let panel = document.getElementById(PANEL_ID);
@@ -513,6 +983,47 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.dataset.expanded = "false";
     panel.dataset.tab = "status";
     panel.innerHTML = `
+      <div class="ion-expanded">
+        <div class="ion-tab-panel" data-panel="status"><div class="ion-detail" data-field="status"></div></div>
+        <div class="ion-tab-panel" data-panel="action"><div class="ion-detail" data-field="action"></div></div>
+        <div class="ion-tab-panel" data-panel="agent">
+          <div class="ion-detail" data-field="agent"></div>
+          <div class="ion-toolbar-actions">
+            <button type="button" class="ion-tool" data-tool="agent-status">Status</button>
+            <button type="button" class="ion-tool" data-tool="agent-queue">Queue</button>
+            <button type="button" class="ion-tool" data-tool="agent-preview">Preview Next</button>
+            <button type="button" class="ion-tool" data-tool="agent-latest">Latest Runs</button>
+            <button type="button" class="ion-tool" data-tool="agent-prepare">Prepare Next</button>
+            <button type="button" class="ion-tool" data-tool="agent-start">Start One</button>
+          </div>
+        </div>
+        <div class="ion-tab-panel" data-panel="packages">
+          <div class="ion-detail" data-field="packages"></div>
+          <div class="ion-toolbar-actions">
+            <button type="button" class="ion-tool" data-tool="context-pack">Context Pack</button>
+            <button type="button" class="ion-tool" data-tool="compact-zip">Compact ZIP</button>
+            <button type="button" class="ion-tool" data-tool="safe-full-zip">Safe Full ZIP</button>
+          </div>
+        </div>
+        <div class="ion-tab-panel" data-panel="sandbox">
+          <div class="ion-detail" data-field="sandbox"></div>
+          <div class="ion-toolbar-actions">
+            <button type="button" class="ion-tool" data-tool="sandbox-returns">Returns</button>
+            <button type="button" class="ion-tool" data-tool="sandbox-diff">Diff Preview</button>
+            <button type="button" class="ion-tool" data-tool="sandbox-review">Queue Review</button>
+          </div>
+        </div>
+        <div class="ion-tab-panel" data-panel="automation"><div class="ion-detail" data-field="automation"></div></div>
+        <div class="ion-tab-panel" data-panel="artifacts"><div class="ion-detail" data-field="artifacts"></div></div>
+        <div class="ion-tab-panel" data-panel="diagnostics">
+          <div class="ion-detail" data-field="diagnostics"></div>
+          <div class="ion-toolbar-actions">
+            <button type="button" class="ion-tool" data-tool="insert-smoke">Submit Smoke Test</button>
+            <button type="button" class="ion-tool" data-tool="insert-codex">Queue Codex Test Work</button>
+          </div>
+        </div>
+        <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
+      </div>
       <div class="ion-toolbar">
         <div class="ion-row">
           <span class="ion-dot"></span>
@@ -527,42 +1038,16 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
           <button type="button" class="ion-toggle" title="Expand ION ChatOps details">+</button>
         </div>
       </div>
-      <div class="ion-expanded">
-        <div class="ion-tabs">
-          <button type="button" class="ion-tab" data-tab="status">Status</button>
-          <button type="button" class="ion-tab" data-tab="action">Action</button>
-          <button type="button" class="ion-tab" data-tab="agent">Agent</button>
-          <button type="button" class="ion-tab" data-tab="packages">Packages</button>
-          <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
-          <button type="button" class="ion-tab" data-tab="tools">Log</button>
-        </div>
-        <div class="ion-tab-panel" data-panel="status"><div class="ion-detail" data-field="status"></div></div>
-        <div class="ion-tab-panel" data-panel="action"><div class="ion-detail" data-field="action"></div></div>
-        <div class="ion-tab-panel" data-panel="agent">
-          <div class="ion-detail" data-field="agent"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="agent-status">Status</button>
-            <button type="button" class="ion-tool" data-tool="agent-queue">Queue</button>
-            <button type="button" class="ion-tool" data-tool="agent-prepare">Prepare Next</button>
-            <button type="button" class="ion-tool" data-tool="agent-start">Start One</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="packages">
-          <div class="ion-detail" data-field="packages"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="context-pack">Context Pack</button>
-            <button type="button" class="ion-tool" data-tool="compact-zip">Compact ZIP</button>
-            <button type="button" class="ion-tool" data-tool="safe-full-zip">Safe Full ZIP</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="diagnostics">
-          <div class="ion-detail" data-field="diagnostics"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="insert-smoke">Submit Smoke Test</button>
-            <button type="button" class="ion-tool" data-tool="insert-codex">Queue Codex Test Work</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
+      <div class="ion-tabs">
+        <button type="button" class="ion-tab" data-tab="status">Status</button>
+        <button type="button" class="ion-tab" data-tab="action">Action</button>
+        <button type="button" class="ion-tab" data-tab="agent">Agent</button>
+        <button type="button" class="ion-tab" data-tab="packages">Packages</button>
+        <button type="button" class="ion-tab" data-tab="sandbox">Sandbox</button>
+        <button type="button" class="ion-tab" data-tab="automation">Automation</button>
+        <button type="button" class="ion-tab" data-tab="artifacts">Artifacts</button>
+        <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
+        <button type="button" class="ion-tab" data-tab="tools">Logs</button>
       </div>
     `;
     document.documentElement.appendChild(panel);
@@ -572,10 +1057,23 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     });
     panel.querySelectorAll(".ion-tab").forEach((tab) => {
       tab.addEventListener("click", () => {
-        panel.dataset.tab = tab.dataset.tab ?? "status";
+        const nextTab = tab.dataset.tab ?? "status";
+        if (panel.dataset.expanded === "true" && panel.dataset.tab === nextTab) {
+          panel.dataset.expanded = "false";
+        } else {
+          panel.dataset.expanded = "true";
+          panel.dataset.tab = nextTab;
+        }
         renderPanel(panel);
       });
     });
+    if (typeof document.addEventListener === "function") {
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        panel.dataset.expanded = "false";
+        renderPanel(panel);
+      });
+    }
     panel.querySelector('[data-tool="rescan"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-rescan"));
     });
@@ -594,6 +1092,12 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.querySelector('[data-tool="agent-queue"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-agent-queue"));
     });
+    panel.querySelector('[data-tool="agent-preview"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-agent-preview"));
+    });
+    panel.querySelector('[data-tool="agent-latest"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-agent-latest"));
+    });
     panel.querySelector('[data-tool="agent-prepare"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-agent-prepare"));
     });
@@ -609,6 +1113,15 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.querySelector('[data-tool="safe-full-zip"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-safe-full-zip"));
     });
+    panel.querySelector('[data-tool="sandbox-returns"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-returns"));
+    });
+    panel.querySelector('[data-tool="sandbox-diff"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-diff"));
+    });
+    panel.querySelector('[data-tool="sandbox-review"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-review"));
+    });
     panel.querySelector('[data-tool="collapse"]')?.addEventListener("click", () => {
       panel.dataset.expanded = "false";
       renderPanel(panel);
@@ -618,10 +1131,26 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   }
 
   function positionPanelAboveComposer(panel = ensurePanel()) {
-    panel.style.top = "2px";
-    panel.style.left = "58px";
-    panel.style.right = "auto";
-    panel.style.bottom = "auto";
+    const anchor = detectComposerAnchor();
+    bridgeState.anchor = anchor;
+    if (!applyComposerLayout(panel, anchor)) applyTopBarLayout(panel);
+  }
+
+  function positionApprovalModal(modal = document.getElementById(MODAL_ID)) {
+    const panel = document.getElementById(PANEL_ID);
+    if (!modal || !panel) return;
+    const rect = panel.getBoundingClientRect();
+    const available = Math.max(PANEL_TINY_WIDTH, window.innerWidth - rect.left - TOP_BAR_GAP);
+    modal.style.left = `${rect.left}px`;
+    modal.style.width = `${Math.min(420, available)}px`;
+    modal.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+    if (panel.dataset.anchorMode === "composer") {
+      modal.style.top = "auto";
+      modal.style.bottom = `${Math.max(12, viewportHeight() - rect.top + TOP_BAR_GAP)}px`;
+    } else {
+      modal.style.bottom = "auto";
+      modal.style.top = `${Math.max(48, rect.bottom + TOP_BAR_GAP)}px`;
+    }
   }
 
   function renderPanel(panel = ensurePanel()) {
@@ -642,13 +1171,19 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     const actionNode = panel.querySelector('[data-field="action"]');
     const agentNode = panel.querySelector('[data-field="agent"]');
     const packagesNode = panel.querySelector('[data-field="packages"]');
+    const sandboxNode = panel.querySelector('[data-field="sandbox"]');
+    const automationNode = panel.querySelector('[data-field="automation"]');
+    const artifactsNode = panel.querySelector('[data-field="artifacts"]');
     const diagnosticsNode = panel.querySelector('[data-field="diagnostics"]');
     const toolsNode = panel.querySelector('[data-field="tools"]');
     if (statusNode) statusNode.textContent = bridgeState.detail;
     if (actionNode) actionNode.textContent = bridgeState.action;
     if (agentNode) agentNode.textContent = bridgeState.agent;
     if (packagesNode) packagesNode.textContent = bridgeState.packages;
-    if (diagnosticsNode) diagnosticsNode.textContent = bridgeState.diagnostics;
+    if (sandboxNode) sandboxNode.textContent = bridgeState.sandbox;
+    if (automationNode) automationNode.textContent = bridgeState.automation;
+    if (artifactsNode) artifactsNode.textContent = bridgeState.artifacts;
+    if (diagnosticsNode) diagnosticsNode.textContent = `${bridgeState.anchor.detail}\n\n${bridgeState.diagnostics}`;
     if (toolsNode) {
       toolsNode.textContent = `${bridgeState.tools}\n\nRecent:\n${bridgeState.logs.join("\n") || "No events yet."}`;
     }
@@ -679,6 +1214,16 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
 
   function setBridgePackageDetail(detail) {
     bridgeState.packages = detail;
+    renderPanel();
+  }
+
+  function setBridgeSandboxDetail(detail) {
+    bridgeState.sandbox = detail;
+    renderPanel();
+  }
+
+  function setBridgeDiagnosticsDetail(detail) {
+    bridgeState.diagnostics = detail;
     renderPanel();
   }
 
@@ -733,6 +1278,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       modal.querySelector('[data-choice="reject"]')?.addEventListener("click", () => finish(false));
       modal.querySelector('[data-choice="approve"]')?.addEventListener("click", () => finish(true));
       document.documentElement.appendChild(modal);
+      positionApprovalModal(modal);
     });
   }
 
@@ -774,6 +1320,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       modal.querySelector('[data-choice="reject"]')?.addEventListener("click", () => finish(false));
       modal.querySelector('[data-choice="approve"]')?.addEventListener("click", () => finish(true));
       document.documentElement.appendChild(modal);
+      positionApprovalModal(modal);
     });
   }
 
@@ -950,6 +1497,74 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     });
   }
 
+  function inactiveQueueStatus(status) {
+    return /SUPERSEDED|FULFILLED|INVALID|ARCHIVE_ONLY|SETTLED|DUPLICATE|BLOCKED|CANCELLED/i.test(status);
+  }
+
+  function firstActionableRequest(queue) {
+    const rows = Array.isArray(queue?.requests) ? queue.requests : [];
+    return rows.find((row) => !inactiveQueueStatus(String(row?.status ?? ""))) ?? null;
+  }
+
+  function requestAgentPreview() {
+    setBridgeStatus("Agent preview", "Reading queue/status before any Codex mutation.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_agent_status" }, (statusResponse) => {
+      chrome.runtime.sendMessage({ type: "ion_chatops_agent_queue" }, async (queueResponse) => {
+        if (!statusResponse?.ok || !queueResponse?.ok) {
+          const detail = !statusResponse?.ok ? blockedDetail(statusResponse) : blockedDetail(queueResponse);
+          setBridgeAgentDetail(detail);
+          setBridgeStatus("Agent preview blocked", detail, "error");
+          return;
+        }
+        const status = statusResponse.result;
+        const queue = queueResponse.result;
+        const request = firstActionableRequest(queue);
+        const detail = [
+          "Codex agent preview",
+          `runner_verdict: ${status?.verdict ?? ""}`,
+          `queued_request_count: ${status?.queued_request_count ?? 0}`,
+          `active_process_running: ${Boolean(status?.active_process_running)}`,
+          `next_request_path: ${status?.next_request_path ?? "none"}`,
+          request
+            ? `next_actionable_request: ${request.request_id ?? ""}\nstatus: ${request.status ?? ""}\nobjective: ${request.objective ?? ""}`
+            : "next_actionable_request: none",
+          "",
+          "Preview only. No Codex worker was prepared or started.",
+        ].join("\n");
+        setBridgeAgentDetail(detail);
+        setBridgeStatus("Agent preview ready", detail.split("\n")[1] ?? "", "success");
+        await copyBridgeResult("Agent preview", detail);
+      });
+    });
+  }
+
+  function requestAgentLatestRuns() {
+    setBridgeStatus("Latest Codex runs", "Reading latest Codex queue runner receipts.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_agent_status" }, async (response) => {
+      if (!response?.ok) {
+        const detail = blockedDetail(response);
+        setBridgeAgentDetail(detail);
+        setBridgeStatus("Latest Codex runs blocked", detail, "error");
+        return;
+      }
+      const runs = Array.isArray(response.result?.latest_runs) ? response.result.latest_runs : [];
+      const detail = runs.length
+        ? runs
+          .slice(0, 6)
+          .map((run, index) => [
+            `#${index + 1} ${run.status ?? ""}`,
+            `run_id: ${run.run_id ?? ""}`,
+            `request_id: ${run.request_id ?? ""}`,
+            `path: ${run.path ?? ""}`,
+          ].join("\n"))
+          .join("\n\n")
+        : "No Codex queue runs found.";
+      setBridgeAgentDetail(detail);
+      setBridgeStatus("Latest Codex runs ready", runs[0]?.status ?? "No runs found.", "success");
+      await copyBridgeResult("Latest Codex runs", detail);
+    });
+  }
+
   function requestContextPack() {
     setBridgeStatus("Context pack", "Fetching current ION/agent context from local daemon.", "working");
     chrome.runtime.sendMessage({ type: "ion_chatops_context_pack" }, (response) => {
@@ -979,6 +1594,41 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       setBridgePackageDetail(response?.ok ? `${detail}\n\n${compactJson(result, 1400)}` : detail);
       setBridgeStatus(response?.ok ? `${label} ready` : `${label} blocked`, detail, response?.ok ? "success" : "error");
       if (response?.ok) await copyBridgeResult(label, detail);
+    });
+  }
+
+  function latestSandboxReturnId(result) {
+    const rows = Array.isArray(result?.returns) ? result.returns : [];
+    const first = rows.find((row) => typeof row?.return_id === "string" && row.return_id.trim());
+    return first?.return_id ?? null;
+  }
+
+  function requestSandboxReturns() {
+    setBridgeStatus("Sandbox returns", "Fetching ChatGPT sandbox return queue.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_sandbox_returns" }, async (response) => {
+      const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+      setBridgeSandboxDetail(detail);
+      setBridgeStatus(response?.ok ? "Sandbox returns ready" : "Sandbox returns blocked", detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+      if (response?.ok) await copyBridgeResult("Sandbox returns", detail);
+    });
+  }
+
+  function requestSandboxMutation(type, label) {
+    setBridgeStatus(label, "Requesting latest sandbox return projection before approval.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_sandbox_returns" }, (queueResponse) => {
+      const returnId = latestSandboxReturnId(queueResponse?.result);
+      if (!queueResponse?.ok || !returnId) {
+        const detail = queueResponse?.ok ? "No sandbox returns are available." : blockedDetail(queueResponse);
+        setBridgeSandboxDetail(detail);
+        setBridgeStatus(`${label} blocked`, detail, "error");
+        return;
+      }
+      chrome.runtime.sendMessage({ type, payload: { return_id: returnId } }, async (response) => {
+        const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+        setBridgeSandboxDetail(detail);
+        setBridgeStatus(response?.ok ? `${label} submitted` : `${label} blocked`, detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+        if (response?.ok) await copyBridgeResult(label, detail);
+      });
     });
   }
 
@@ -1056,6 +1706,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
 
   function scan() {
     refreshBridgePosition();
+    updateDomActionRegistry();
     let processed = 0;
     for (const block of candidateBlocks()) {
       const key = `${block.length}:${block.slice(0, 160)}`;
@@ -1133,7 +1784,9 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     parseStrictIonActionYaml,
     localValidate,
     candidateBlocks,
+    updateDomActionRegistry,
     submitActionText,
+    refreshBridgePosition,
     rescan: () => {
       seen.clear();
       return scan();
@@ -1143,6 +1796,17 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   const observer = new MutationObserver(() => scan());
   observer.observe(document.documentElement, { childList: true, subtree: true });
   window.addEventListener("resize", () => refreshBridgePosition());
+  if (typeof document.addEventListener === "function") {
+    document.addEventListener("transitionend", () => refreshBridgePosition(), true);
+    document.addEventListener(
+      "click",
+      () => {
+        window.setTimeout(() => refreshBridgePosition(), 60);
+        window.setTimeout(() => refreshBridgePosition(), 260);
+      },
+      true,
+    );
+  }
   window.addEventListener("ion-chatops-rescan", () => {
     seen.clear();
     setBridgeStatus("Manual rescan", "Scanning rendered ChatGPT code blocks.", "working");
@@ -1170,6 +1834,12 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   window.addEventListener("ion-chatops-agent-queue", () => {
     requestAgentRead("ion_chatops_agent_queue", "Agent queue");
   });
+  window.addEventListener("ion-chatops-agent-preview", () => {
+    requestAgentPreview();
+  });
+  window.addEventListener("ion-chatops-agent-latest", () => {
+    requestAgentLatestRuns();
+  });
   window.addEventListener("ion-chatops-agent-prepare", () => {
     requestAgentMutation("ion_chatops_agent_prepare_next", "Agent prepare next");
   });
@@ -1184,6 +1854,15 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   });
   window.addEventListener("ion-chatops-safe-full-zip", () => {
     requestZip("ion_chatops_safe_full_zip", "Safe full project ZIP");
+  });
+  window.addEventListener("ion-chatops-sandbox-returns", () => {
+    requestSandboxReturns();
+  });
+  window.addEventListener("ion-chatops-sandbox-diff", () => {
+    requestSandboxMutation("ion_chatops_sandbox_diff_latest", "Sandbox diff preview");
+  });
+  window.addEventListener("ion-chatops-sandbox-review", () => {
+    requestSandboxMutation("ion_chatops_sandbox_queue_latest", "Sandbox queue review");
   });
   setBridgeStatus("Monitoring ChatGPT", "Waiting for ion_action YAML blocks.", "idle");
   scan();

@@ -5,7 +5,9 @@ import {
   refreshBridgePosition,
   setBridgeActionDetail,
   setBridgeAgentDetail,
+  setBridgeDiagnosticsDetail,
   setBridgePackageDetail,
+  setBridgeSandboxDetail,
   setBridgeStatus,
 } from "./approval_ui";
 import { extractIonActionYaml, localValidate, parseIonActionYamlWithDiagnostics, parseStrictIonActionYaml } from "./schema";
@@ -14,6 +16,9 @@ const seen = new Set<string>();
 const inFlightActionIds = new Set<string>();
 const submittedActionIds = new Set<string>();
 const reportedBlockedActionIds = new Set<string>();
+const PANEL_ID = "ion-chatops-bridge-panel";
+const MODAL_ID = "ion-chatops-bridge-approval";
+const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
 const ION_ACTION_LINE = /(^|\n)\s*ion_action:\s*(\n|$)/;
 const ACTION_SCAN_SELECTORS = [
   "pre code",
@@ -110,6 +115,233 @@ const CODEX_WORK_ACTION = `ion_action:
     requested:
       - codex_work_packet_receipt
       - action_receipt`;
+
+type DomRegistryStats = {
+  messages: number;
+  codeBlocks: number;
+  yamlBlocks: number;
+  validActions: number;
+  invalidActions: number;
+  duplicateActions: number;
+  composerControls: number;
+  lastUpdated: string;
+};
+
+function ensureDomRegistryStyle(): void {
+  if (document.getElementById(DOM_REGISTRY_STYLE_ID)) return;
+  const style = document.createElement("style");
+  style.id = DOM_REGISTRY_STYLE_ID;
+  style.textContent = `
+    .ion-dom-badge {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      z-index: 7;
+      height: 18px;
+      max-width: 180px;
+      padding: 0 5px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      background: rgba(32,33,35,0.88);
+      color: rgba(255,255,255,0.72);
+      font: 10px/17px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+    .ion-dom-badge[data-tone="valid"] {
+      border-color: rgba(16,185,129,0.45);
+      color: rgba(209,250,229,0.94);
+    }
+    .ion-dom-badge[data-tone="invalid"],
+    .ion-dom-badge[data-tone="duplicate"] {
+      border-color: rgba(251,191,36,0.45);
+      color: rgba(254,243,199,0.94);
+    }
+    [data-ion-code-index] {
+      outline: 1px solid rgba(255,255,255,0.06);
+      outline-offset: 2px;
+    }
+    [data-ion-yaml-status="valid"] {
+      outline-color: rgba(16,185,129,0.42);
+    }
+    [data-ion-yaml-status="invalid"],
+    [data-ion-yaml-status="duplicate"] {
+      outline-color: rgba(251,191,36,0.42);
+    }
+    [data-ion-control-role] {
+      box-shadow: 0 0 0 1px rgba(16,185,129,0.18), 0 0 0 4px rgba(16,185,129,0.05) !important;
+    }
+  `;
+  document.documentElement.appendChild(style);
+}
+
+function registryText(node: Element): string {
+  const inner = typeof (node as HTMLElement).innerText === "string" ? (node as HTMLElement).innerText : "";
+  return inner || node.textContent || "";
+}
+
+function registryRectVisible(node: Element): boolean {
+  if (shouldIgnoreScanNode(node)) return false;
+  const rect = node.getBoundingClientRect();
+  return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+}
+
+function allowRegistryBadge(host: HTMLElement): void {
+  const currentPosition = window.getComputedStyle(host).position;
+  if (!currentPosition || currentPosition === "static") host.style.position = "relative";
+}
+
+function ensureRegistryBadge(host: HTMLElement, kind: string, text: string, tone = "idle"): void {
+  allowRegistryBadge(host);
+  const existing = Array.from(host.children).find((child) => (child as HTMLElement).dataset?.ionBadge === kind) as HTMLElement | undefined;
+  const badge = existing ?? document.createElement("span");
+  badge.className = "ion-dom-badge";
+  badge.dataset.ionBadge = kind;
+  badge.dataset.tone = tone;
+  if (badge.textContent !== text) badge.textContent = text;
+  if (!existing) host.appendChild(badge);
+}
+
+function uniqueElements(selectors: string): HTMLElement[] {
+  const elements: HTMLElement[] = [];
+  const seenElements = new Set<Element>();
+  document.querySelectorAll<HTMLElement>(selectors).forEach((node) => {
+    if (seenElements.has(node) || shouldIgnoreScanNode(node) || !registryRectVisible(node)) return;
+    seenElements.add(node);
+    elements.push(node);
+  });
+  return elements;
+}
+
+function annotateMessages(stats: DomRegistryStats): void {
+  const nodes = uniqueElements("[data-message-author-role], article");
+  nodes.forEach((node, index) => {
+    const role = node.getAttribute("data-message-author-role") || "message";
+    node.dataset.ionMessageIndex = String(index + 1);
+    ensureRegistryBadge(node, "message", `ION msg ${index + 1} ${role}`, "idle");
+  });
+  stats.messages = nodes.length;
+}
+
+function codeBlockHosts(): HTMLElement[] {
+  const hosts: HTMLElement[] = [];
+  const seenHosts = new Set<Element>();
+  document.querySelectorAll<HTMLElement>("pre, pre code, code, [class*='font-mono'], [class*='whitespace-pre'], [class*='overflow-x-auto']").forEach((node) => {
+    if (shouldIgnoreScanNode(node) || !registryRectVisible(node)) return;
+    const host = (node.closest("pre") as HTMLElement | null) ?? node;
+    if (seenHosts.has(host) || shouldIgnoreScanNode(host) || !registryRectVisible(host)) return;
+    seenHosts.add(host);
+    hosts.push(host);
+  });
+  return hosts;
+}
+
+function annotateCodeBlocks(stats: DomRegistryStats): void {
+  const actionIds = new Set<string>();
+  codeBlockHosts().forEach((host, index) => {
+    const label = `ION code ${index + 1}`;
+    host.dataset.ionCodeIndex = String(index + 1);
+    host.dataset.ionYamlStatus = "none";
+    let tone = "idle";
+    let badge = label;
+    const text = registryText(host);
+    if (ION_ACTION_LINE.test(text) || extractIonActionYaml(text) !== null) {
+      stats.yamlBlocks += 1;
+      const parsed = parseIonActionYamlWithDiagnostics(text);
+      const packet = parsed.packet;
+      const actionId = packet?.ion_action?.action_id;
+      if (!packet) {
+        stats.invalidActions += 1;
+        tone = "invalid";
+        badge = `ION YAML ${index + 1} blocked`;
+        host.dataset.ionYamlStatus = "invalid";
+        host.dataset.ionYamlFinding = parsed.finding ?? "parse_failed";
+      } else if (actionId && actionIds.has(actionId)) {
+        stats.duplicateActions += 1;
+        tone = "duplicate";
+        badge = `ION YAML ${index + 1} duplicate`;
+        host.dataset.ionYamlStatus = "duplicate";
+        host.dataset.ionActionId = actionId;
+      } else {
+        if (actionId) actionIds.add(actionId);
+        const local = localValidate(packet);
+        host.dataset.ionActionId = actionId ?? "";
+        if (local.accepted) {
+          stats.validActions += 1;
+          tone = "valid";
+          badge = `ION YAML ${index + 1} ok`;
+          host.dataset.ionYamlStatus = "valid";
+        } else {
+          stats.invalidActions += 1;
+          tone = "invalid";
+          badge = `ION YAML ${index + 1} blocked`;
+          host.dataset.ionYamlStatus = "invalid";
+          host.dataset.ionYamlFinding = local.findings.join("|");
+        }
+      }
+    }
+    ensureRegistryBadge(host, "code", badge, tone);
+  });
+  stats.codeBlocks = codeBlockHosts().length;
+}
+
+function annotateComposerControls(stats: DomRegistryStats): void {
+  const composer = findComposer();
+  const composerRect = composer?.getBoundingClientRect();
+  const controls = uniqueElements("button, input[type='file']").filter((node) => {
+    const rect = node.getBoundingClientRect();
+    const nearComposer = composerRect ? Math.abs(rect.top - composerRect.top) < 180 || Math.abs(rect.bottom - composerRect.bottom) < 180 : false;
+    const label = `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""}`.toLowerCase();
+    return nearComposer || /send|attach|upload|file|voice|mic|stop|plus/.test(label);
+  });
+  controls.forEach((node) => {
+    const label = `${node.getAttribute("aria-label") ?? node.getAttribute("data-testid") ?? node.tagName}`.toLowerCase();
+    const role =
+      label.includes("send") ? "send" :
+      label.includes("attach") || label.includes("upload") || label.includes("file") || label.includes("plus") ? "attach" :
+      label.includes("mic") || label.includes("voice") ? "voice" :
+      label.includes("stop") ? "stop" :
+      "composer";
+    node.dataset.ionControlRole = role;
+  });
+  stats.composerControls = controls.length;
+}
+
+function updateDomActionRegistry(): DomRegistryStats {
+  ensureDomRegistryStyle();
+  const stats: DomRegistryStats = {
+    messages: 0,
+    codeBlocks: 0,
+    yamlBlocks: 0,
+    validActions: 0,
+    invalidActions: 0,
+    duplicateActions: 0,
+    composerControls: 0,
+    lastUpdated: new Date().toLocaleTimeString(),
+  };
+  annotateMessages(stats);
+  annotateCodeBlocks(stats);
+  annotateComposerControls(stats);
+  setBridgeDiagnosticsDetail(
+    [
+      "DOM action registry",
+      `messages: ${stats.messages}`,
+      `code_blocks: ${stats.codeBlocks}`,
+      `ion_yaml_blocks: ${stats.yamlBlocks}`,
+      `valid_actions: ${stats.validActions}`,
+      `invalid_actions: ${stats.invalidActions}`,
+      `duplicate_actions: ${stats.duplicateActions}`,
+      `composer_controls: ${stats.composerControls}`,
+      `last_updated: ${stats.lastUpdated}`,
+      "",
+      "Automation markers are visual only. They do not click, submit, upload, or mutate ION state.",
+    ].join("\n"),
+  );
+  return stats;
+}
 
 function shouldIgnoreScanNode(node: Element): boolean {
   if (typeof node.closest !== "function") return false;
@@ -276,6 +508,74 @@ function requestAgentMutation(type: "ion_chatops_agent_prepare_next" | "ion_chat
   });
 }
 
+function inactiveQueueStatus(status: string): boolean {
+  return /SUPERSEDED|FULFILLED|INVALID|ARCHIVE_ONLY|SETTLED|DUPLICATE|BLOCKED|CANCELLED/i.test(status);
+}
+
+function firstActionableRequest(queue: any): any | null {
+  const rows = Array.isArray(queue?.requests) ? queue.requests : [];
+  return rows.find((row: any) => !inactiveQueueStatus(String(row?.status ?? ""))) ?? null;
+}
+
+function requestAgentPreview(): void {
+  setBridgeStatus("Agent preview", "Reading queue/status before any Codex mutation.", "working");
+  chrome.runtime.sendMessage({ type: "ion_chatops_agent_status" }, (statusResponse) => {
+    chrome.runtime.sendMessage({ type: "ion_chatops_agent_queue" }, async (queueResponse) => {
+      if (!statusResponse?.ok || !queueResponse?.ok) {
+        const detail = !statusResponse?.ok ? blockedDetail(statusResponse) : blockedDetail(queueResponse);
+        setBridgeAgentDetail(detail);
+        setBridgeStatus("Agent preview blocked", detail, "error");
+        return;
+      }
+      const status = statusResponse.result;
+      const queue = queueResponse.result;
+      const request = firstActionableRequest(queue);
+      const detail = [
+        "Codex agent preview",
+        `runner_verdict: ${status?.verdict ?? ""}`,
+        `queued_request_count: ${status?.queued_request_count ?? 0}`,
+        `active_process_running: ${Boolean(status?.active_process_running)}`,
+        `next_request_path: ${status?.next_request_path ?? "none"}`,
+        request
+          ? `next_actionable_request: ${request.request_id ?? ""}\nstatus: ${request.status ?? ""}\nobjective: ${request.objective ?? ""}`
+          : "next_actionable_request: none",
+        "",
+        "Preview only. No Codex worker was prepared or started.",
+      ].join("\n");
+      setBridgeAgentDetail(detail);
+      setBridgeStatus("Agent preview ready", detail.split("\n")[1] ?? "", "success");
+      await copyBridgeResult("Agent preview", detail);
+    });
+  });
+}
+
+function requestAgentLatestRuns(): void {
+  setBridgeStatus("Latest Codex runs", "Reading latest Codex queue runner receipts.", "working");
+  chrome.runtime.sendMessage({ type: "ion_chatops_agent_status" }, async (response) => {
+    if (!response?.ok) {
+      const detail = blockedDetail(response);
+      setBridgeAgentDetail(detail);
+      setBridgeStatus("Latest Codex runs blocked", detail, "error");
+      return;
+    }
+    const runs = Array.isArray(response.result?.latest_runs) ? response.result.latest_runs : [];
+    const detail = runs.length
+      ? runs
+          .slice(0, 6)
+          .map((run: any, index: number) => [
+            `#${index + 1} ${run.status ?? ""}`,
+            `run_id: ${run.run_id ?? ""}`,
+            `request_id: ${run.request_id ?? ""}`,
+            `path: ${run.path ?? ""}`,
+          ].join("\n"))
+          .join("\n\n")
+      : "No Codex queue runs found.";
+    setBridgeAgentDetail(detail);
+    setBridgeStatus("Latest Codex runs ready", runs[0]?.status ?? "No runs found.", "success");
+    await copyBridgeResult("Latest Codex runs", detail);
+  });
+}
+
 function requestContextPack(): void {
   setBridgeStatus("Context pack", "Fetching current ION/agent context from local daemon.", "working");
   chrome.runtime.sendMessage({ type: "ion_chatops_context_pack" }, (response) => {
@@ -305,6 +605,41 @@ function requestZip(type: "ion_chatops_compact_zip" | "ion_chatops_safe_full_zip
     setBridgePackageDetail(response?.ok ? `${detail}\n\n${compactJson(result, 1400)}` : detail);
     setBridgeStatus(response?.ok ? `${label} ready` : `${label} blocked`, detail, response?.ok ? "success" : "error");
     if (response?.ok) await copyBridgeResult(label, detail);
+  });
+}
+
+function latestSandboxReturnId(result: any): string | null {
+  const rows = Array.isArray(result?.returns) ? result.returns : [];
+  const first = rows.find((row: any) => typeof row?.return_id === "string" && row.return_id.trim());
+  return first?.return_id ?? null;
+}
+
+function requestSandboxReturns(): void {
+  setBridgeStatus("Sandbox returns", "Fetching ChatGPT sandbox return queue.", "working");
+  chrome.runtime.sendMessage({ type: "ion_chatops_sandbox_returns" }, async (response) => {
+    const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+    setBridgeSandboxDetail(detail);
+    setBridgeStatus(response?.ok ? "Sandbox returns ready" : "Sandbox returns blocked", detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+    if (response?.ok) await copyBridgeResult("Sandbox returns", detail);
+  });
+}
+
+function requestSandboxMutation(type: "ion_chatops_sandbox_diff_latest" | "ion_chatops_sandbox_queue_latest", label: string): void {
+  setBridgeStatus(label, "Requesting latest sandbox return projection before approval.", "working");
+  chrome.runtime.sendMessage({ type: "ion_chatops_sandbox_returns" }, (queueResponse) => {
+    const returnId = latestSandboxReturnId(queueResponse?.result);
+    if (!queueResponse?.ok || !returnId) {
+      const detail = queueResponse?.ok ? "No sandbox returns are available." : blockedDetail(queueResponse);
+      setBridgeSandboxDetail(detail);
+      setBridgeStatus(`${label} blocked`, detail, "error");
+      return;
+    }
+    chrome.runtime.sendMessage({ type, payload: { return_id: returnId } }, async (response) => {
+      const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+      setBridgeSandboxDetail(detail);
+      setBridgeStatus(response?.ok ? `${label} submitted` : `${label} blocked`, detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+      if (response?.ok) await copyBridgeResult(label, detail);
+    });
   });
 }
 
@@ -382,6 +717,7 @@ function submitActionText(label: string, text: string): void {
 
 function scan(): number {
   refreshBridgePosition();
+  updateDomActionRegistry();
   let processed = 0;
   for (const block of candidateBlocks()) {
     const key = `${block.length}:${block.slice(0, 160)}`;
@@ -459,7 +795,9 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   parseStrictIonActionYaml,
   localValidate,
   candidateBlocks,
+  updateDomActionRegistry,
   submitActionText,
+  refreshBridgePosition,
   rescan: () => {
     seen.clear();
     return scan();
@@ -469,6 +807,17 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 const observer = new MutationObserver(() => scan());
 observer.observe(document.documentElement, { childList: true, subtree: true });
 window.addEventListener("resize", () => refreshBridgePosition());
+if (typeof document.addEventListener === "function") {
+  document.addEventListener("transitionend", () => refreshBridgePosition(), true);
+  document.addEventListener(
+    "click",
+    () => {
+      window.setTimeout(() => refreshBridgePosition(), 60);
+      window.setTimeout(() => refreshBridgePosition(), 260);
+    },
+    true,
+  );
+}
 window.addEventListener("ion-chatops-rescan", () => {
   seen.clear();
   setBridgeStatus("Manual rescan", "Scanning rendered ChatGPT code blocks.", "working");
@@ -496,6 +845,12 @@ window.addEventListener("ion-chatops-agent-status", () => {
 window.addEventListener("ion-chatops-agent-queue", () => {
   requestAgentRead("ion_chatops_agent_queue", "Agent queue");
 });
+window.addEventListener("ion-chatops-agent-preview", () => {
+  requestAgentPreview();
+});
+window.addEventListener("ion-chatops-agent-latest", () => {
+  requestAgentLatestRuns();
+});
 window.addEventListener("ion-chatops-agent-prepare", () => {
   requestAgentMutation("ion_chatops_agent_prepare_next", "Agent prepare next");
 });
@@ -510,6 +865,15 @@ window.addEventListener("ion-chatops-compact-zip", () => {
 });
 window.addEventListener("ion-chatops-safe-full-zip", () => {
   requestZip("ion_chatops_safe_full_zip", "Safe full project ZIP");
+});
+window.addEventListener("ion-chatops-sandbox-returns", () => {
+  requestSandboxReturns();
+});
+window.addEventListener("ion-chatops-sandbox-diff", () => {
+  requestSandboxMutation("ion_chatops_sandbox_diff_latest", "Sandbox diff preview");
+});
+window.addEventListener("ion-chatops-sandbox-review", () => {
+  requestSandboxMutation("ion_chatops_sandbox_queue_latest", "Sandbox queue review");
 });
 setBridgeStatus("Monitoring ChatGPT", "Waiting for ion_action YAML blocks.", "idle");
 scan();

@@ -6,6 +6,22 @@ const PANEL_ID = "ion-chatops-bridge-panel";
 const MODAL_ID = "ion-chatops-bridge-approval";
 const STYLE_ID = "ion-chatops-bridge-style";
 const LOG_LIMIT = 12;
+const TOP_BAR_GAP = 8;
+const PANEL_TOP = 2;
+const DEFAULT_LEFT_BOUNDARY = 50;
+const DEFAULT_RIGHT_RESERVE = 250;
+const PANEL_PREFERRED_WIDTH = 640;
+const PANEL_MIN_WIDTH = 320;
+const PANEL_TINY_WIDTH = 230;
+const COMPOSER_GAP = 8;
+const COMPOSER_PANEL_MAX_WIDTH = 920;
+
+type AnchorInfo = {
+  mode: "composer" | "topbar_fallback";
+  rect: DOMRect | null;
+  health: "ready" | "degraded";
+  detail: string;
+};
 
 const bridgeState = {
   title: "Monitoring ChatGPT",
@@ -14,10 +30,19 @@ const bridgeState = {
   action: "No action detected yet.",
   agent: "Codex-backed agent status has not been requested yet.",
   packages: "No context pack or ZIP export has been requested yet.",
+  sandbox: "No ChatGPT sandbox returns have been requested yet.",
+  automation: "Automation controls are staged only. This packet does not execute macros.",
+  artifacts: "Artifact detection is staged only. No upload or local file movement occurs in this shell slice.",
   diagnostics:
     "Normal carrier flow: Sev emits an ion_action YAML block in ChatGPT, the extension detects it, Braden approves it, the local daemon records/executes it, and ION writes a receipt.\n\nThe buttons below are local diagnostics only. They fabricate known-good test actions so the extension/daemon path can be checked without waiting on ChatGPT to emit YAML.",
   tools: "Daemon: http://127.0.0.1:8767\nUse Rescan after ChatGPT finishes rendering a YAML block.",
   logs: [] as string[],
+  anchor: {
+    mode: "topbar_fallback",
+    rect: null,
+    health: "degraded",
+    detail: "Composer anchor has not been evaluated yet.",
+  } as AnchorInfo,
 };
 
 function ensureStyle(): void {
@@ -32,13 +57,14 @@ function ensureStyle(): void {
     }
     #${PANEL_ID} {
       position: fixed;
-      top: 2px;
+      top: auto;
       left: 58px;
       right: auto;
-      bottom: auto;
+      bottom: 82px;
       z-index: 2147483646;
-      width: clamp(430px, 56vw, 640px);
-      max-width: calc(100vw - 380px);
+      width: min(640px, calc(100vw - 86px));
+      max-width: none;
+      box-sizing: border-box;
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 10px;
       background: rgba(33, 33, 33, 0.94);
@@ -46,9 +72,15 @@ function ensureStyle(): void {
       padding: 4px;
       backdrop-filter: blur(12px);
     }
+    #${PANEL_ID}[data-anchor-mode="composer"] {
+      border-radius: 12px;
+      box-shadow: 0 12px 34px rgba(0,0,0,0.28);
+    }
+    #${PANEL_ID}[data-anchor-health="degraded"] {
+      border-color: rgba(251,191,36,0.30);
+    }
     #${PANEL_ID}[data-expanded="true"] {
-      width: clamp(430px, 56vw, 640px);
-      max-width: calc(100vw - 380px);
+      max-width: none;
     }
     #${PANEL_ID} .ion-toolbar {
       display: flex;
@@ -80,6 +112,10 @@ function ensureStyle(): void {
       font-size: 12px;
       font-weight: 600;
       line-height: 1.25;
+      max-width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       overflow-wrap: anywhere;
       color: rgba(255,255,255,0.88);
     }
@@ -119,6 +155,32 @@ function ensureStyle(): void {
       gap: 2px;
       flex: 0 0 auto;
     }
+    #${PANEL_ID}[data-layout="compact"] .ion-title {
+      max-width: 150px;
+    }
+    #${PANEL_ID}[data-layout="compact"] .ion-label {
+      display: none;
+    }
+    #${PANEL_ID}[data-layout="compact"] .ion-tool,
+    #${PANEL_ID}[data-layout="compact"] .ion-toggle {
+      height: 27px;
+      padding: 0 6px;
+      font-size: 11px;
+    }
+    #${PANEL_ID}[data-layout="tiny"] .ion-row > div {
+      display: none;
+    }
+    #${PANEL_ID}[data-layout="tiny"] .ion-tool {
+      padding: 0 5px;
+      font-size: 0;
+    }
+    #${PANEL_ID}[data-layout="tiny"] .ion-tool::first-letter,
+    #${PANEL_ID}[data-layout="tiny"] .ion-toggle {
+      font-size: 11px;
+    }
+    #${PANEL_ID}[data-layout="tiny"] [data-tool="insert-reentry"] {
+      display: none;
+    }
     #${PANEL_ID} .ion-tab-panel .ion-toolbar-actions {
       flex-wrap: wrap;
       gap: 6px;
@@ -128,21 +190,30 @@ function ensureStyle(): void {
     #${PANEL_ID} .ion-expanded {
       display: none;
     }
+    #${PANEL_ID} .ion-tabs {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 2px 2px 0;
+      padding: 4px 2px 0;
+    }
+    #${PANEL_ID} .ion-tabs::-webkit-scrollbar {
+      display: none;
+    }
     #${PANEL_ID}[data-expanded="true"] .ion-expanded {
       display: block;
       border-top: 1px solid rgba(255,255,255,0.08);
-      margin: 4px 2px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin: 2px 2px 4px;
       padding: 8px 8px 9px;
-    }
-    #${PANEL_ID}[data-expanded="true"] .ion-tabs {
-      display: flex;
+      max-height: min(54vh, 520px);
+      overflow: auto;
     }
     #${PANEL_ID}[data-expanded="true"] .ion-tab-panel[data-active="true"] {
       display: flex;
-    }
-    #${PANEL_ID} .ion-tabs {
-      gap: 6px;
-      margin-top: 0;
     }
     #${PANEL_ID} .ion-tab[data-active="true"] {
       color: rgba(255,255,255,0.96);
@@ -161,6 +232,14 @@ function ensureStyle(): void {
       flex-direction: column;
       gap: 8px;
       margin-top: 9px;
+    }
+    #${PANEL_ID}[data-layout="compact"] .ion-tab {
+      height: 26px;
+      padding: 0 6px;
+      font-size: 11px;
+    }
+    #${PANEL_ID}[data-layout="tiny"] .ion-tabs {
+      display: none;
     }
     #${MODAL_ID} {
       position: fixed;
@@ -222,6 +301,191 @@ function ensureStyle(): void {
   document.documentElement.appendChild(style);
 }
 
+function rectIsVisible(rect: DOMRect): boolean {
+  return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+}
+
+function isBridgeElement(element: Element): boolean {
+  return Boolean(element.closest(`#${PANEL_ID}`) ?? element.closest(`#${MODAL_ID}`));
+}
+
+function visibleRect(element: Element): DOMRect | null {
+  if (isBridgeElement(element)) return null;
+  const style = window.getComputedStyle(element);
+  if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) return null;
+  const rect = element.getBoundingClientRect();
+  return rectIsVisible(rect) ? rect : null;
+}
+
+function detectLeftBoundary(): number {
+  const selectors = [
+    "nav",
+    "aside",
+    "[role='navigation']",
+    "[aria-label*='sidebar' i]",
+    "[aria-label*='side bar' i]",
+    "[data-testid*='sidebar' i]",
+    "[data-testid*='left' i]",
+    "[class*='sidebar' i]",
+    "[class*='side-bar' i]",
+  ];
+  let boundary = DEFAULT_LEFT_BOUNDARY;
+  document.querySelectorAll<Element>(selectors.join(",")).forEach((element) => {
+    const rect = visibleRect(element);
+    if (!rect) return;
+    const plausibleLeftSurface =
+      rect.left <= 24 &&
+      rect.top <= 92 &&
+      rect.bottom >= 34 &&
+      rect.width >= 38 &&
+      rect.width <= window.innerWidth * 0.72;
+    if (plausibleLeftSurface) boundary = Math.max(boundary, rect.right);
+  });
+  return Math.min(Math.max(boundary, DEFAULT_LEFT_BOUNDARY), window.innerWidth - 120);
+}
+
+function detectRightBoundary(): number {
+  let boundary = window.innerWidth - TOP_BAR_GAP;
+  const selectors = [
+    "header button",
+    "header a[role='button']",
+    "[role='banner'] button",
+    "[role='banner'] a[role='button']",
+    "button[aria-label*='share' i]",
+    "button[aria-label*='more' i]",
+    "button[aria-label*='memory' i]",
+    "[data-testid*='share' i]",
+    "[data-testid*='more' i]",
+  ];
+  document.querySelectorAll<Element>(selectors.join(",")).forEach((element) => {
+    const rect = visibleRect(element);
+    if (!rect) return;
+    const plausibleRightTopControl =
+      rect.top <= 82 &&
+      rect.bottom >= 16 &&
+      rect.left >= window.innerWidth * 0.48 &&
+      rect.width <= 180 &&
+      rect.height <= 56;
+    if (plausibleRightTopControl) boundary = Math.min(boundary, rect.left);
+  });
+  if (boundary === window.innerWidth - TOP_BAR_GAP) {
+    boundary = Math.max(TOP_BAR_GAP, window.innerWidth - DEFAULT_RIGHT_RESERVE);
+  }
+  return Math.max(boundary, 160);
+}
+
+function applyTopBarLayout(panel: HTMLElement): void {
+  const left = Math.ceil(detectLeftBoundary() + TOP_BAR_GAP);
+  const right = Math.floor(detectRightBoundary() - TOP_BAR_GAP);
+  const available = Math.max(PANEL_TINY_WIDTH, right - left);
+  const preferred = Math.min(PANEL_PREFERRED_WIDTH, Math.floor(window.innerWidth * 0.58));
+  const width = Math.max(Math.min(preferred, available), Math.min(PANEL_MIN_WIDTH, available));
+  const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 430 ? "compact" : "normal";
+  panel.dataset.anchorMode = "topbar_fallback";
+  panel.dataset.anchorHealth = "degraded";
+  panel.dataset.layout = layout;
+  panel.style.top = `${PANEL_TOP}px`;
+  panel.style.left = `${left}px`;
+  panel.style.right = "auto";
+  panel.style.bottom = "auto";
+  panel.style.width = `${width}px`;
+  panel.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+  if (typeof panel.style.setProperty === "function") {
+    panel.style.setProperty("--ion-chatops-modal-left", `${left}px`);
+    panel.style.setProperty("--ion-chatops-modal-width", `${Math.min(420, available)}px`);
+  }
+  positionApprovalModal();
+}
+
+function viewportHeight(): number {
+  return Math.floor(window.visualViewport?.height ?? window.innerHeight);
+}
+
+function findComposerInput(): HTMLElement | null {
+  const selectors = [
+    "#prompt-textarea",
+    "textarea",
+    "[contenteditable='true'][role='textbox']",
+    "[contenteditable='true']",
+  ];
+  for (const selector of selectors) {
+    const node = document.querySelector<HTMLElement>(selector);
+    if (!node || isBridgeElement(node)) continue;
+    const rect = visibleRect(node);
+    if (rect && rect.top > viewportHeight() * 0.45) return node;
+  }
+  return null;
+}
+
+function candidateComposerContainer(input: HTMLElement): HTMLElement {
+  let best: HTMLElement = input;
+  let current: HTMLElement | null = input;
+  let depth = 0;
+  while (current?.parentElement && depth < 10) {
+    current = current.parentElement;
+    depth += 1;
+    if (isBridgeElement(current)) break;
+    const rect = visibleRect(current);
+    if (!rect) continue;
+    const bottomHalf = rect.top > viewportHeight() * 0.38;
+    const plausibleWidth = rect.width >= Math.min(360, window.innerWidth * 0.62) && rect.width <= window.innerWidth - 12;
+    const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(260, viewportHeight() * 0.38);
+    if (bottomHalf && plausibleWidth && plausibleHeight) best = current;
+  }
+  return best;
+}
+
+function detectComposerAnchor(): AnchorInfo {
+  const input = findComposerInput();
+  if (!input) {
+    return {
+      mode: "topbar_fallback",
+      rect: null,
+      health: "degraded",
+      detail: "Composer anchor not found; using top-bar fallback layout.",
+    };
+  }
+  const container = candidateComposerContainer(input);
+  const rect = container.getBoundingClientRect();
+  if (!rectIsVisible(rect)) {
+    return {
+      mode: "topbar_fallback",
+      rect: null,
+      health: "degraded",
+      detail: "Composer candidate was not visible; using top-bar fallback layout.",
+    };
+  }
+  return {
+    mode: "composer",
+    rect,
+    health: "ready",
+    detail: `Composer anchor ready: ${Math.round(rect.left)},${Math.round(rect.top)} ${Math.round(rect.width)}x${Math.round(rect.height)}.`,
+  };
+}
+
+function applyComposerLayout(panel: HTMLElement, anchor: AnchorInfo): boolean {
+  if (anchor.mode !== "composer" || !anchor.rect) return false;
+  const rect = anchor.rect;
+  const viewport = viewportHeight();
+  const margin = 12;
+  const left = Math.max(margin, Math.round(rect.left));
+  const available = Math.max(PANEL_TINY_WIDTH, Math.min(Math.round(rect.width), window.innerWidth - left - margin));
+  const width = Math.min(COMPOSER_PANEL_MAX_WIDTH, Math.max(PANEL_MIN_WIDTH, available));
+  const bottom = Math.max(10, Math.round(viewport - rect.top + COMPOSER_GAP));
+  const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 520 ? "compact" : "normal";
+  panel.dataset.anchorMode = "composer";
+  panel.dataset.anchorHealth = anchor.health;
+  panel.dataset.layout = layout;
+  panel.style.top = "auto";
+  panel.style.left = `${left}px`;
+  panel.style.right = "auto";
+  panel.style.bottom = `${bottom}px`;
+  panel.style.width = `${Math.min(width, available)}px`;
+  panel.style.maxWidth = `${available}px`;
+  positionApprovalModal();
+  return true;
+}
+
 function ensurePanel(): HTMLElement {
   ensureStyle();
   let panel = document.getElementById(PANEL_ID);
@@ -232,6 +496,47 @@ function ensurePanel(): HTMLElement {
   panel.dataset.expanded = "false";
   panel.dataset.tab = "status";
   panel.innerHTML = `
+    <div class="ion-expanded">
+      <div class="ion-tab-panel" data-panel="status"><div class="ion-detail" data-field="status"></div></div>
+      <div class="ion-tab-panel" data-panel="action"><div class="ion-detail" data-field="action"></div></div>
+      <div class="ion-tab-panel" data-panel="agent">
+        <div class="ion-detail" data-field="agent"></div>
+        <div class="ion-toolbar-actions">
+          <button type="button" class="ion-tool" data-tool="agent-status">Status</button>
+          <button type="button" class="ion-tool" data-tool="agent-queue">Queue</button>
+          <button type="button" class="ion-tool" data-tool="agent-preview">Preview Next</button>
+          <button type="button" class="ion-tool" data-tool="agent-latest">Latest Runs</button>
+          <button type="button" class="ion-tool" data-tool="agent-prepare">Prepare Next</button>
+          <button type="button" class="ion-tool" data-tool="agent-start">Start One</button>
+        </div>
+      </div>
+      <div class="ion-tab-panel" data-panel="packages">
+        <div class="ion-detail" data-field="packages"></div>
+        <div class="ion-toolbar-actions">
+          <button type="button" class="ion-tool" data-tool="context-pack">Context Pack</button>
+          <button type="button" class="ion-tool" data-tool="compact-zip">Compact ZIP</button>
+          <button type="button" class="ion-tool" data-tool="safe-full-zip">Safe Full ZIP</button>
+        </div>
+      </div>
+      <div class="ion-tab-panel" data-panel="sandbox">
+        <div class="ion-detail" data-field="sandbox"></div>
+        <div class="ion-toolbar-actions">
+          <button type="button" class="ion-tool" data-tool="sandbox-returns">Returns</button>
+          <button type="button" class="ion-tool" data-tool="sandbox-diff">Diff Preview</button>
+          <button type="button" class="ion-tool" data-tool="sandbox-review">Queue Review</button>
+        </div>
+      </div>
+      <div class="ion-tab-panel" data-panel="automation"><div class="ion-detail" data-field="automation"></div></div>
+      <div class="ion-tab-panel" data-panel="artifacts"><div class="ion-detail" data-field="artifacts"></div></div>
+      <div class="ion-tab-panel" data-panel="diagnostics">
+        <div class="ion-detail" data-field="diagnostics"></div>
+        <div class="ion-toolbar-actions">
+          <button type="button" class="ion-tool" data-tool="insert-smoke">Submit Smoke Test</button>
+          <button type="button" class="ion-tool" data-tool="insert-codex">Queue Codex Test Work</button>
+        </div>
+      </div>
+      <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
+    </div>
     <div class="ion-toolbar">
       <div class="ion-row">
         <span class="ion-dot"></span>
@@ -246,42 +551,16 @@ function ensurePanel(): HTMLElement {
         <button type="button" class="ion-toggle" title="Expand ION ChatOps details">+</button>
       </div>
     </div>
-    <div class="ion-expanded">
-      <div class="ion-tabs">
-        <button type="button" class="ion-tab" data-tab="status">Status</button>
-        <button type="button" class="ion-tab" data-tab="action">Action</button>
-        <button type="button" class="ion-tab" data-tab="agent">Agent</button>
-        <button type="button" class="ion-tab" data-tab="packages">Packages</button>
-        <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
-        <button type="button" class="ion-tab" data-tab="tools">Log</button>
-      </div>
-      <div class="ion-tab-panel" data-panel="status"><div class="ion-detail" data-field="status"></div></div>
-      <div class="ion-tab-panel" data-panel="action"><div class="ion-detail" data-field="action"></div></div>
-      <div class="ion-tab-panel" data-panel="agent">
-        <div class="ion-detail" data-field="agent"></div>
-        <div class="ion-toolbar-actions">
-          <button type="button" class="ion-tool" data-tool="agent-status">Status</button>
-          <button type="button" class="ion-tool" data-tool="agent-queue">Queue</button>
-          <button type="button" class="ion-tool" data-tool="agent-prepare">Prepare Next</button>
-          <button type="button" class="ion-tool" data-tool="agent-start">Start One</button>
-        </div>
-      </div>
-      <div class="ion-tab-panel" data-panel="packages">
-        <div class="ion-detail" data-field="packages"></div>
-        <div class="ion-toolbar-actions">
-          <button type="button" class="ion-tool" data-tool="context-pack">Context Pack</button>
-          <button type="button" class="ion-tool" data-tool="compact-zip">Compact ZIP</button>
-          <button type="button" class="ion-tool" data-tool="safe-full-zip">Safe Full ZIP</button>
-        </div>
-      </div>
-      <div class="ion-tab-panel" data-panel="diagnostics">
-        <div class="ion-detail" data-field="diagnostics"></div>
-        <div class="ion-toolbar-actions">
-          <button type="button" class="ion-tool" data-tool="insert-smoke">Submit Smoke Test</button>
-          <button type="button" class="ion-tool" data-tool="insert-codex">Queue Codex Test Work</button>
-        </div>
-      </div>
-      <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
+    <div class="ion-tabs">
+      <button type="button" class="ion-tab" data-tab="status">Status</button>
+      <button type="button" class="ion-tab" data-tab="action">Action</button>
+      <button type="button" class="ion-tab" data-tab="agent">Agent</button>
+      <button type="button" class="ion-tab" data-tab="packages">Packages</button>
+      <button type="button" class="ion-tab" data-tab="sandbox">Sandbox</button>
+      <button type="button" class="ion-tab" data-tab="automation">Automation</button>
+      <button type="button" class="ion-tab" data-tab="artifacts">Artifacts</button>
+      <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
+      <button type="button" class="ion-tab" data-tab="tools">Logs</button>
     </div>
   `;
   document.documentElement.appendChild(panel);
@@ -291,10 +570,23 @@ function ensurePanel(): HTMLElement {
   });
   panel.querySelectorAll<HTMLElement>(".ion-tab").forEach((tab) => {
     tab.addEventListener("click", () => {
-      panel.dataset.tab = tab.dataset.tab ?? "status";
+      const nextTab = tab.dataset.tab ?? "status";
+      if (panel.dataset.expanded === "true" && panel.dataset.tab === nextTab) {
+        panel.dataset.expanded = "false";
+      } else {
+        panel.dataset.expanded = "true";
+        panel.dataset.tab = nextTab;
+      }
       renderPanel(panel);
     });
   });
+  if (typeof document.addEventListener === "function") {
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      panel.dataset.expanded = "false";
+      renderPanel(panel);
+    });
+  }
   panel.querySelector('[data-tool="rescan"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-rescan"));
   });
@@ -313,6 +605,12 @@ function ensurePanel(): HTMLElement {
   panel.querySelector('[data-tool="agent-queue"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-agent-queue"));
   });
+  panel.querySelector('[data-tool="agent-preview"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-agent-preview"));
+  });
+  panel.querySelector('[data-tool="agent-latest"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-agent-latest"));
+  });
   panel.querySelector('[data-tool="agent-prepare"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-agent-prepare"));
   });
@@ -327,6 +625,15 @@ function ensurePanel(): HTMLElement {
   });
   panel.querySelector('[data-tool="safe-full-zip"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-safe-full-zip"));
+  });
+  panel.querySelector('[data-tool="sandbox-returns"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-returns"));
+  });
+  panel.querySelector('[data-tool="sandbox-diff"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-diff"));
+  });
+  panel.querySelector('[data-tool="sandbox-review"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-review"));
   });
   panel.querySelector('[data-tool="collapse"]')?.addEventListener("click", () => {
     panel.dataset.expanded = "false";
@@ -354,21 +661,43 @@ function renderPanel(panel = ensurePanel()): void {
   const actionNode = panel.querySelector<HTMLElement>('[data-field="action"]');
   const agentNode = panel.querySelector<HTMLElement>('[data-field="agent"]');
   const packagesNode = panel.querySelector<HTMLElement>('[data-field="packages"]');
+  const sandboxNode = panel.querySelector<HTMLElement>('[data-field="sandbox"]');
+  const automationNode = panel.querySelector<HTMLElement>('[data-field="automation"]');
+  const artifactsNode = panel.querySelector<HTMLElement>('[data-field="artifacts"]');
   const diagnosticsNode = panel.querySelector<HTMLElement>('[data-field="diagnostics"]');
   const toolsNode = panel.querySelector<HTMLElement>('[data-field="tools"]');
   if (statusNode) statusNode.textContent = bridgeState.detail;
   if (actionNode) actionNode.textContent = bridgeState.action;
   if (agentNode) agentNode.textContent = bridgeState.agent;
   if (packagesNode) packagesNode.textContent = bridgeState.packages;
-  if (diagnosticsNode) diagnosticsNode.textContent = bridgeState.diagnostics;
+  if (sandboxNode) sandboxNode.textContent = bridgeState.sandbox;
+  if (automationNode) automationNode.textContent = bridgeState.automation;
+  if (artifactsNode) artifactsNode.textContent = bridgeState.artifacts;
+  if (diagnosticsNode) diagnosticsNode.textContent = `${bridgeState.anchor.detail}\n\n${bridgeState.diagnostics}`;
   if (toolsNode) toolsNode.textContent = `${bridgeState.tools}\n\nRecent:\n${bridgeState.logs.join("\n") || "No events yet."}`;
 }
 
 function positionPanelAboveComposer(panel = ensurePanel()): void {
-  panel.style.top = "2px";
-  panel.style.left = "58px";
-  panel.style.right = "auto";
-  panel.style.bottom = "auto";
+  const anchor = detectComposerAnchor();
+  bridgeState.anchor = anchor;
+  if (!applyComposerLayout(panel, anchor)) applyTopBarLayout(panel);
+}
+
+function positionApprovalModal(modal = document.getElementById(MODAL_ID)): void {
+  const panel = document.getElementById(PANEL_ID) as HTMLElement | null;
+  if (!modal || !panel) return;
+  const rect = panel.getBoundingClientRect();
+  const available = Math.max(PANEL_TINY_WIDTH, window.innerWidth - rect.left - TOP_BAR_GAP);
+  modal.style.left = `${rect.left}px`;
+  modal.style.width = `${Math.min(420, available)}px`;
+  modal.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+  if (panel.dataset.anchorMode === "composer") {
+    modal.style.top = "auto";
+    modal.style.bottom = `${Math.max(12, viewportHeight() - rect.top + TOP_BAR_GAP)}px`;
+  } else {
+    modal.style.bottom = "auto";
+    modal.style.top = `${Math.max(48, rect.bottom + TOP_BAR_GAP)}px`;
+  }
 }
 
 export function setBridgeStatus(title: string, detail = "", tone: BridgeTone = "idle"): void {
@@ -391,6 +720,16 @@ export function setBridgeAgentDetail(detail: string): void {
 
 export function setBridgePackageDetail(detail: string): void {
   bridgeState.packages = detail;
+  renderPanel();
+}
+
+export function setBridgeSandboxDetail(detail: string): void {
+  bridgeState.sandbox = detail;
+  renderPanel();
+}
+
+export function setBridgeDiagnosticsDetail(detail: string): void {
+  bridgeState.diagnostics = detail;
   renderPanel();
 }
 
@@ -450,6 +789,7 @@ export async function requestApproval(packet: IonActionPacket, validation: Valid
     modal.querySelector('[data-choice="reject"]')?.addEventListener("click", () => finish(false));
     modal.querySelector('[data-choice="approve"]')?.addEventListener("click", () => finish(true));
     document.documentElement.appendChild(modal);
+    positionApprovalModal(modal);
   });
 }
 
@@ -491,6 +831,7 @@ export async function requestBridgeApproval(operation: string, summary: string, 
     modal.querySelector('[data-choice="reject"]')?.addEventListener("click", () => finish(false));
     modal.querySelector('[data-choice="approve"]')?.addEventListener("click", () => finish(true));
     document.documentElement.appendChild(modal);
+    positionApprovalModal(modal);
   });
 }
 

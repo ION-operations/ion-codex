@@ -1,0 +1,51 @@
+{
+  "schema_id": "ion.chatops.extension_packet_receipt.v1",
+  "receipt_id": "chatops_receipt_20260505t154049z_extension_dom_cockpit_registry",
+  "created_at": "2026-05-05T15:40:49Z",
+  "actor": {
+    "carrier": "codex_cli",
+    "callsign": "CODEX_CLI_CARRIER"
+  },
+  "source_packets": [
+    "ION/05_context/current/chatops_bridge/work_packets/2026-05-05_ion_extension_evolution/ION_EXT_DOM_COCKPIT_SHELL_PACKET.md",
+    "ION/05_context/current/chatops_bridge/work_packets/2026-05-05_ion_extension_evolution/ION_EXT_DOM_ACTION_REGISTRY_PACKET.md",
+    "ION/05_context/current/chatops_bridge/work_packets/2026-05-05_ion_extension_evolution/ION_EXT_CODEX_AGENT_COCKPIT_PACKET.md"
+  ],
+  "status": "completed_with_manual_browser_reload_pending",
+  "implemented_slices": [
+    "composer-anchored ChatGPT cockpit shell",
+    "upward-expanding tab panel",
+    "Status/Action/Agent/Packages/Sandbox/Automation/Artifacts/Diagnostics/Logs tabs",
+    "composer anchor diagnostics and fallback layout",
+    "visual-only DOM action registry",
+    "message/code/YAML/control annotations",
+    "duplicate and invalid YAML status markers",
+    "read-only Codex agent preview",
+    "latest Codex run projection"
+  ],
+  "files_touched": [
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/approval_ui.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/tests/live_smoke_parser_simulation.js"
+  ],
+  "validation": {
+    "node_bundle_syntax": "passed",
+    "browser_parser_registry_simulation": "passed",
+    "focused_pytest": "30 passed",
+    "full_pytest": "272 passed",
+    "ascii_check": "passed"
+  },
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "macro_execution_added": false,
+    "file_upload_automation_added": false
+  },
+  "manual_checks_pending": [
+    "reload unpacked Chrome extension",
+    "verify cockpit is attached to the ChatGPT composer pill",
+    "verify tabs open upward and close/switch correctly",
+    "verify DOM labels and halos are visually acceptable on the live ChatGPT page"
+  ]
+}
