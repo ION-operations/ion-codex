@@ -79,6 +79,12 @@ system.
 - Correct the landing-page verified test count to the current `265 passed`
   validation evidence.
 
+## Implemented Sixth Slice
+
+- Revise the landing README language for tighter public positioning.
+- Add a full-encyclopedia link with an authority caution so the encyclopedia is
+  discoverable without becoming the active mount source.
+
 ## Proposed Next Slices
 
 1. Add directory-local README files for:
