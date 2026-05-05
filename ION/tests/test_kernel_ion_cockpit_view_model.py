@@ -11,6 +11,9 @@ def write_json(root: Path, rel: str, payload: dict):
 
 
 def seed_runtime(root: Path):
+    (root / "pyproject.toml").write_text("[project]\nname = \"ion-cockpit-test\"\n", encoding="utf-8")
+    (root / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
+    (root / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
     current = "ION/05_context/current"
     write_json(root, f"{current}/ACTIVE_CURSOR_HOOK_STATE.json", {"schema_id": "ion.cursor_hook_state.v1", "status": "ready"})
     write_json(root, f"{current}/ACTIVE_WORK_PACKET.json", {"carrier": "cursor", "objective": "test cockpit"})
@@ -58,6 +61,7 @@ def test_build_cockpit_view_model_summarizes_v88_runtime(tmp_path):
     assert model["top_bar"]["spawn_rows_total"] == 2
     assert model["top_bar"]["return_counts"]["accepted"] == 1
     assert model["top_bar"]["operator_queue_pending"] == 1
+    assert model["top_bar"]["sandbox_return_count"] == 0
     assert model["top_bar"]["gate_count"] == 0
     assert model["agents"]["spawn_rows"][0]["role"] == "STEWARD"
     assert model["agents"]["spawn_rows"][0]["return_recorded"] is True
@@ -158,3 +162,25 @@ def test_cockpit_projects_chatgpt_browser_callsign(tmp_path):
     assert summary["project_facing_callsign"] == "Sev"
     assert summary["callsign_authority"] == "carrier_continuity_label_only_not_ion_authority"
     assert summary["codex_queue_runner"]["schema_id"] == "ion.codex_queue_runner.v1"
+
+
+def test_cockpit_projects_chatgpt_sandbox_returns(tmp_path):
+    seed_runtime(tmp_path)
+    return_root = tmp_path / "ION/05_context/inbox/chatgpt_sandbox_returns/sev-20260505-041500-chatops-ui-return"
+    return_root.mkdir(parents=True)
+    (return_root / "SANDBOX_RETURN_MANIFEST.json").write_text(
+        json.dumps(
+            {
+                "schema_id": "ion.chatgpt_sandbox_return.v1",
+                "return_id": "sev-20260505-041500-chatops-ui-return",
+                "changed_paths": ["ION/09_integrations/browser_extension/ion_chatops_bridge/README.md"],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    model = build_cockpit_view_model(tmp_path)
+
+    assert model["top_bar"]["sandbox_return_count"] == 1
+    assert model["chatgpt_sandbox_returns"]["return_count"] == 1
+    assert model["chatgpt_sandbox_returns"]["direct_apply_authority"] is False

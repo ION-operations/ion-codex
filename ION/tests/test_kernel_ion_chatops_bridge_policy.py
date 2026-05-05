@@ -24,14 +24,17 @@ def _seed_root(root: Path) -> None:
     for rel in [
         "ION/02_architecture/ION_BROWSER_CARRIER_RUNTIME_PROTOCOL.md",
         "ION/02_architecture/ION_CHATOPS_YAML_ACTION_PROTOCOL.md",
+        "ION/02_architecture/ION_CHATGPT_SANDBOX_RETURN_INTAKE_PROTOCOL.md",
         "ION/02_architecture/ION_MOUNT_CONTRACT.md",
         "ION/03_registry/ion_chatops_action.schema.yaml",
         "ION/03_registry/ion_chatops_extension_policy.yaml",
         "ION/03_registry/ion_chatops_local_daemon_policy.yaml",
         "ION/03_registry/ion_github_data_plane_registry.yaml",
+        "ION/03_registry/ion_chatgpt_sandbox_return.schema.json",
         "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
         "ION/docs/setup/ION_CURRENT_OPERATING_PACKET_V119.md",
         "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+        "ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py",
         "ION/04_packages/kernel/ion_codex_queue_runner.py",
         "ION/04_packages/kernel/ion_lifecycle_packager.py",
         "ION/04_packages/kernel/ion_safe_full_project_packager.py",
@@ -100,6 +103,8 @@ def test_chatops_policy_owner_surfaces_ready(tmp_path):
     assert "write_file_draft" in result["supported_mvp_intents"]
     assert result["agent_surface"]["backend_owner"] == "ION/04_packages/kernel/ion_codex_queue_runner.py"
     assert "compact_runtime_zip" in result["export_surface"]
+    assert result["sandbox_return_surface"]["owner"] == "ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py"
+    assert result["sandbox_return_surface"]["direct_apply_authority"] is False
     assert result["main_policy"]["main_auto_push_allowed"] is False
     assert all(owner["exists"] for owner in result["owner_paths"].values())
 
@@ -370,6 +375,8 @@ def test_chatops_context_pack_includes_agent_and_package_controls(tmp_path):
     assert result["pack"]["callsign"] == "Sev"
     assert result["pack"]["bridge_tools"]["agent_prepare_next"] == "POST /agent/prepare-next with Braden approval"
     assert result["pack"]["bridge_tools"]["compact_zip"] == "POST /exports/lifecycle-zip with package_class=COMPACT_RUNTIME and Braden approval"
+    assert result["pack"]["bridge_tools"]["sandbox_returns"] == "GET /sandbox/returns"
+    assert result["pack"]["sandbox_returns"]["inbox_root"] == "ION/05_context/inbox/chatgpt_sandbox_returns"
     assert "ION local context pack" in result["prompt"]
 
 

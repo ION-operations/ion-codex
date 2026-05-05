@@ -20,6 +20,14 @@ from typing import Any, Mapping
 from .ion_carrier_onboard import resolve_shell_root_from_ion_root
 from .ion_carrier_onboarding_packet import build_carrier_onboarding_packet
 from .ion_chatgpt_browser_mcp_connector_contract import call_chatgpt_connector_tool
+from .ion_chatgpt_sandbox_return_intake import (
+    build_sandbox_return_diff_preview,
+    build_sandbox_return_queue_projection,
+    commit_sandbox_return,
+    queue_sandbox_return_codex_review,
+    register_sandbox_return,
+    write_sandbox_return_file,
+)
 from .ion_codex_queue_runner import (
     build_codex_queue_runner_status,
     prepare_codex_queue_run,
@@ -53,6 +61,9 @@ POLICY_PATHS = {
     "extension_policy": "ION/03_registry/ion_chatops_extension_policy.yaml",
     "daemon_policy": "ION/03_registry/ion_chatops_local_daemon_policy.yaml",
     "github_data_plane_registry": "ION/03_registry/ion_github_data_plane_registry.yaml",
+    "sandbox_return_protocol": "ION/02_architecture/ION_CHATGPT_SANDBOX_RETURN_INTAKE_PROTOCOL.md",
+    "sandbox_return_schema": "ION/03_registry/ion_chatgpt_sandbox_return.schema.json",
+    "sandbox_return_intake": "ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py",
     "connector_contract": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
     "codex_queue_runner": "ION/04_packages/kernel/ion_codex_queue_runner.py",
     "lifecycle_packager": "ION/04_packages/kernel/ion_lifecycle_packager.py",
@@ -867,6 +878,7 @@ def build_chatops_context_pack(root: str | Path | None = None) -> dict[str, Any]
     sev_context = build_sev_context_brief(shell_root)
     agent_status = build_chatops_agent_status(shell_root)
     agent_queue = build_chatops_agent_queue(shell_root)
+    sandbox_returns = build_sandbox_return_queue_projection(shell_root)
     latest_receipts = _latest_chatops_files(shell_root, RECEIPTS_DIR, limit=8)
     pack = {
         "schema": "ion.chatops.context_pack.v1",
@@ -887,6 +899,12 @@ def build_chatops_context_pack(root: str | Path | None = None) -> dict[str, Any]
             "request_count": agent_queue.get("request_count"),
             "requests": agent_queue.get("requests"),
         },
+        "sandbox_returns": {
+            "queue_path": sandbox_returns.get("queue_path"),
+            "inbox_root": sandbox_returns.get("inbox_root"),
+            "return_count": sandbox_returns.get("return_count"),
+            "returns": sandbox_returns.get("returns"),
+        },
         "latest_chatops_receipts": latest_receipts,
         "bridge_tools": {
             "onboard": "GET /context/sev/onboarding",
@@ -895,6 +913,9 @@ def build_chatops_context_pack(root: str | Path | None = None) -> dict[str, Any]
             "agent_prepare_next": "POST /agent/prepare-next with Braden approval",
             "agent_start_one": "POST /agent/process-one with start=true and Braden approval",
             "compact_zip": "POST /exports/lifecycle-zip with package_class=COMPACT_RUNTIME and Braden approval",
+            "sandbox_returns": "GET /sandbox/returns",
+            "sandbox_diff_preview": "POST /sandbox/returns/diff-preview with Braden approval",
+            "sandbox_queue_review": "POST /sandbox/returns/queue-review with Braden approval",
         },
         "authority": {
             "production_authority": False,
@@ -1046,6 +1067,101 @@ def create_chatops_safe_full_zip(root: str | Path | None, packet: Mapping[str, A
         return {"schema_id": "ion.chatops.export_result.v1", "ok": False, "finding": "package_failed", "error": str(exc), "receipt_path": receipt_path}
 
 
+def _sandbox_approval_or_reject(root: Path, packet: Mapping[str, Any], operation: str) -> dict[str, Any] | None:
+    approval = _validate_bridge_operation_approval(packet)
+    if approval["accepted"]:
+        return None
+    receipt_path = _write_operation_receipt(
+        root,
+        operation=operation,
+        status="rejected",
+        packet=packet,
+        result=approval,
+        failure_classification="USER_APPROVAL_REJECTED",
+    )
+    return {
+        "schema_id": "ion.chatops.sandbox_return_operation_result.v1",
+        "ok": False,
+        "finding": "approval_failed",
+        "approval": approval,
+        "receipt_path": receipt_path,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def _sandbox_return_detail(root: Path, return_id: str) -> dict[str, Any]:
+    projection = build_sandbox_return_queue_projection(root)
+    rows = [row for row in projection.get("returns", []) if isinstance(row, Mapping) and row.get("return_id") == return_id]
+    if not rows:
+        return {
+            "schema_id": "ion.chatops.sandbox_return_detail.v1",
+            "ok": False,
+            "finding": "return_not_found",
+            "return_id": return_id,
+            "production_authority": False,
+            "live_execution_authority": False,
+        }
+    base = root / "ION/05_context/inbox/chatgpt_sandbox_returns" / return_id
+    manifest = _read_json(base / "SANDBOX_RETURN_MANIFEST.json") or {}
+    diff_preview = _read_json(base / "DIFF_PREVIEW.json") or {}
+    summary = ""
+    if (base / "SUMMARY.md").exists():
+        summary = (base / "SUMMARY.md").read_text(encoding="utf-8", errors="replace")[:4000]
+    return {
+        "schema_id": "ion.chatops.sandbox_return_detail.v1",
+        "ok": True,
+        "return": rows[0],
+        "manifest": manifest,
+        "summary": summary,
+        "diff_preview": diff_preview,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def register_chatops_sandbox_return(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_register")
+    if rejected:
+        return rejected
+    return register_sandbox_return(shell_root, packet)
+
+
+def write_chatops_sandbox_return_file(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_file")
+    if rejected:
+        return rejected
+    return_id = str(packet.get("return_id") or "").strip()
+    rel_path = str(packet.get("path") or packet.get("rel_path") or "").strip()
+    return write_sandbox_return_file(shell_root, return_id, rel_path, packet)
+
+
+def commit_chatops_sandbox_return(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_commit")
+    if rejected:
+        return rejected
+    return commit_sandbox_return(shell_root, str(packet.get("return_id") or "").strip())
+
+
+def preview_chatops_sandbox_return_diff(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_diff_preview")
+    if rejected:
+        return rejected
+    return build_sandbox_return_diff_preview(shell_root, str(packet.get("return_id") or "").strip())
+
+
+def queue_chatops_sandbox_return_review(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_queue_review")
+    if rejected:
+        return rejected
+    return queue_sandbox_return_codex_review(shell_root, str(packet.get("return_id") or "").strip())
+
+
 def build_chatops_policy(root: str | Path | None = None) -> dict[str, Any]:
     shell_root = _resolve_root(root)
     owner_paths = {
@@ -1083,6 +1199,19 @@ def build_chatops_policy(root: str | Path | None = None) -> dict[str, Any]:
                 "ION/04_packages/kernel/ion_lifecycle_packager.py",
                 "ION/04_packages/kernel/ion_safe_full_project_packager.py",
             ],
+        },
+        "sandbox_return_surface": {
+            "queue": "GET /sandbox/returns",
+            "detail": "GET /sandbox/returns/{return_id}",
+            "register": "POST /sandbox/returns/register",
+            "file": "POST /sandbox/returns/file",
+            "commit": "POST /sandbox/returns/commit",
+            "diff_preview": "POST /sandbox/returns/diff-preview",
+            "queue_review": "POST /sandbox/returns/queue-review",
+            "inbox_root": "ION/05_context/inbox/chatgpt_sandbox_returns/",
+            "owner": "ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py",
+            "direct_apply_authority": False,
+            "git_push_authority": False,
         },
         "main_policy": {
             "main_auto_push_allowed": False,
@@ -1297,6 +1426,14 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
             if path == "/exports/context-pack":
                 _http_response(self, 200, build_chatops_context_pack(root))
                 return
+            if path == "/sandbox/returns":
+                _http_response(self, 200, build_sandbox_return_queue_projection(root))
+                return
+            if path.startswith("/sandbox/returns/"):
+                return_id = path.rsplit("/", 1)[-1]
+                payload = _sandbox_return_detail(root, return_id)
+                _http_response(self, 200 if payload.get("ok") else 404, payload)
+                return
             if path.startswith("/actions/"):
                 action_id = path.rsplit("/", 1)[-1]
                 payload = _read_json(_action_path(root, action_id))
@@ -1342,6 +1479,26 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 return
             if path == "/exports/safe-full-zip":
                 result = create_chatops_safe_full_zip(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/register":
+                result = register_chatops_sandbox_return(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/file":
+                result = write_chatops_sandbox_return_file(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/commit":
+                result = commit_chatops_sandbox_return(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/diff-preview":
+                result = preview_chatops_sandbox_return_diff(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/queue-review":
+                result = queue_chatops_sandbox_return_review(root, packet)
                 _http_response(self, 200 if result.get("ok") else 409, result)
                 return
             _http_response(self, 404, {"ok": False, "finding": "not_found"})

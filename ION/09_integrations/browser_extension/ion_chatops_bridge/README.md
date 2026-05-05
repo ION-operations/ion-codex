@@ -12,11 +12,14 @@ MVP behavior:
 - show Rescan and Onboard controls in the toolbar;
 - fetch a compact Sev carrier onboarding/context brief from the local daemon and
   paste it into ChatGPT;
-- expand downward into tabbed Status, Action, Agent, Packages, Diagnostics, and Log views;
+- expand downward into tabbed Status, Action, Agent, Packages, Sandbox,
+  Diagnostics, and Log views;
 - show Codex queue runner status/queue and approval-gated prepare/start controls
   backed by `kernel.ion_codex_queue_runner`;
 - request pasteable context packs and approval-gated package ZIPs backed by the
   existing lifecycle and safe full-project packagers;
+- list ChatGPT sandbox returns and request approval-gated diff preview or
+  Codex review queueing through the sandbox return intake owner;
 - show an approval modal for Braden;
 - insert a known-good Sev re-entry prompt into the ChatGPT composer;
 - keep fabricated smoke/Codex work-packet actions under Diagnostics as local bridge tests;
@@ -92,3 +95,10 @@ The Packages tab is for moving context into ChatGPT or another carrier sandbox.
 `Context Pack` pastes a compact current-state packet into the composer.
 `Compact ZIP` and `Safe Full ZIP` create local package artifacts through the
 existing ION packagers and copy the resulting path, sha256, and receipt summary.
+
+The Sandbox tab projects returns under
+`ION/05_context/inbox/chatgpt_sandbox_returns/`. `Returns` is a read-only queue
+projection. `Diff Preview` runs the bounded preview/check path for the latest
+return after Braden approval. `Queue Review` creates a focused Codex review
+packet after Braden approval. None of these controls apply patches to live
+source.

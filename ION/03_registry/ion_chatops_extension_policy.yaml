@@ -25,6 +25,13 @@ approval_policy:
   require_preview_for_mutation: true
   require_braden_approval_for_submit: true
   approval_token: ION_CHATOPS_APPROVED
+sandbox_tab_policy:
+  read_queue: GET /sandbox/returns
+  diff_preview_requires_braden_approval: true
+  queue_review_requires_braden_approval: true
+  direct_patch_apply_allowed: false
+  git_push_allowed: false
+  inbox_root: ION/05_context/inbox/chatgpt_sandbox_returns/
 blocked_extension_behaviors:
   - direct_filesystem_access
   - silent_auto_approval

@@ -97,6 +97,48 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
 
+  if (message.type === "ion_chatops_sandbox_returns") {
+    (async () => {
+      const result = await getJson("/sandbox/returns");
+      sendResponse({ ok: Boolean(result?.ok), stage: "sandbox_returns", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "sandbox_returns_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_sandbox_diff_latest") {
+    (async () => {
+      const returnId = String(message.payload?.return_id ?? "").trim();
+      const approved = await requestBridgeApproval(sender, "sandbox_return_diff_preview", `Build a read-only diff preview for sandbox return ${returnId}.`);
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED" });
+        return;
+      }
+      const result = await postJson("/sandbox/returns/diff-preview", approvedPayload({ return_id: returnId }));
+      sendResponse({ ok: Boolean(result?.ok), stage: "sandbox_diff_preview", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "sandbox_diff_preview_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_sandbox_queue_latest") {
+    (async () => {
+      const returnId = String(message.payload?.return_id ?? "").trim();
+      const approved = await requestBridgeApproval(sender, "sandbox_return_queue_review", `Queue a bounded Codex review packet for sandbox return ${returnId}.`);
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED" });
+        return;
+      }
+      const result = await postJson("/sandbox/returns/queue-review", approvedPayload({ return_id: returnId }));
+      sendResponse({ ok: Boolean(result?.ok), stage: "sandbox_queue_review", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "sandbox_queue_review_exception", error: error.message });
+    });
+    return true;
+  }
+
   if (message.type === "ion_chatops_agent_prepare_next") {
     (async () => {
       const approved = await requestBridgeApproval(sender, "agent_prepare_next", "Create a prepared Codex queue run packet for the next queued ION work request.");
