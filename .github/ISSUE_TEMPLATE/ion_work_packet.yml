@@ -1,0 +1,69 @@
+name: ION work packet
+description: Propose a bounded ION work item with proof and authority boundaries.
+title: "[ION Work] "
+labels:
+  - ion-work
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for public, non-secret work proposals. GitHub issues are discussion and data-plane evidence; they do not directly become accepted ION state.
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What should change or be investigated?
+      placeholder: Build, fix, audit, document, or analyze a bounded ION surface.
+    validations:
+      required: true
+  - type: textarea
+    id: owner_surfaces
+    attributes:
+      label: Existing owner surfaces
+      description: List files or directories that should own this work.
+      placeholder: |
+        ION/02_architecture/...
+        ION/03_registry/...
+        ION/04_packages/kernel/...
+        ION/tests/...
+    validations:
+      required: true
+  - type: dropdown
+    id: output_type
+    attributes:
+      label: Output type
+      options:
+        - protocol/docs
+        - registry/template update
+        - bounded implementation patch
+        - tests/validation
+        - receipt/evidence
+        - question/review
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Authority boundaries
+      options:
+        - label: This does not request production deployment.
+          required: true
+        - label: This does not request secrets, credentials, or private logs.
+          required: true
+        - label: This does not request direct push to main.
+          required: true
+        - label: This should preserve ION packet, receipt, and proof-gate principles.
+          required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Expected validation
+      placeholder: |
+        PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_status --ion-root . --json
+        PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest ION/tests -q
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes, links, or receipts
+      description: Add non-secret context, GitHub refs, ION receipt paths, or prior discussion links.
+

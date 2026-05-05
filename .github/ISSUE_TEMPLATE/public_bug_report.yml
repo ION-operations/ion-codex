@@ -1,0 +1,45 @@
+name: Public bug report
+description: Report a non-sensitive problem in the public ION Codex repo.
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secrets, credentials, private logs, tokens, or production-only state. Use a security advisory for sensitive reports.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction or evidence
+      description: Include commands, paths, screenshots, or public logs when safe.
+      placeholder: |
+        Command:
+        Expected:
+        Actual:
+    validations:
+      required: true
+  - type: textarea
+    id: affected_paths
+    attributes:
+      label: Affected paths
+      placeholder: |
+        ION/04_packages/kernel/...
+        ION/09_integrations/...
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I did not include secrets, credentials, tokens, private logs, or production-only state.
+          required: true
+        - label: I understand this issue is public.
+          required: true
+

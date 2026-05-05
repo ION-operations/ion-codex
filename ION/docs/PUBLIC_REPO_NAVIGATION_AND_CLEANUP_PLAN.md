@@ -42,15 +42,29 @@ system.
 - Add `ION/04_packages/README.md` and `ION/09_integrations/README.md` for
   package and integration orientation.
 
+## Implemented Second Slice
+
+- Add public-safe GitHub issue templates for:
+  - bounded ION work packets;
+  - non-sensitive bug reports.
+- Add a pull request template that requires touched paths, validation, receipts,
+  and authority boundaries.
+- Add directory-local README indexes for:
+  - `ION/02_architecture/`;
+  - `ION/03_registry/`;
+  - `ION/05_context/`;
+  - `ION/06_intelligence/`.
+
 ## Proposed Next Slices
 
 1. Add directory-local README files for:
-   - `ION/02_architecture/`
-   - `ION/03_registry/`
-   - `ION/05_context/`
-   - `ION/06_intelligence/`
+   - `ION/00_BOOTSTRAP/`
+   - `ION/04_agents/`
+   - `ION/07_templates/actions/`
+   - `ION/07_templates/carriers/`
 2. Add a generated or checked navigation index for high-value kernel modules.
-3. Add a public-safe issue template for work packets and proof returns.
+3. Add a public-safe issue template for proof returns or task returns if GitHub
+   issues become a durable return surface.
 4. Add a lifecycle proposal for root-level `FILES_ADDED_V*.txt` witness files:
    keep them tracked, but consider moving future witness manifests under
    `ION/docs/consolidation/` or `ION/05_context/archive/` with receipts.
