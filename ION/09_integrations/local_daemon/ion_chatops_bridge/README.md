@@ -23,6 +23,9 @@ GET  /actions/{action_id}
 GET  /receipts/{receipt_id}
 GET  /sandbox/returns
 GET  /sandbox/returns/{return_id}
+GET  /artifacts/attachables
+GET  /artifacts/download/{download_token}
+POST /artifacts/prepare-upload
 POST /sandbox/returns/register
 POST /sandbox/returns/file
 POST /sandbox/returns/commit
@@ -39,3 +42,9 @@ The sandbox return endpoints land review material only under
 `ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py`. They do not apply
 patches to live source; `queue-review` only creates a bounded Codex review work
 packet.
+
+The artifact endpoints expose only approved package/inbox candidates from
+bounded ION roots. `prepare-upload` requires Braden approval, writes a download
+ticket receipt, and serves a localhost file stream for the browser extension to
+attempt a visible ChatGPT drag/drop. It does not click Send, apply patches, or
+upload anything silently.

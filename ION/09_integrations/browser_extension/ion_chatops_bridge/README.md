@@ -20,6 +20,10 @@ MVP behavior:
   existing lifecycle and safe full-project packagers;
 - list ChatGPT sandbox returns and request approval-gated diff preview or
   Codex review queueing through the sandbox return intake owner;
+- list attachable local package/inbox artifacts and request approval-gated
+  browser drop tickets from the local daemon;
+- attempt a visible ChatGPT drag/drop for an approved artifact without clicking
+  Send;
 - show an approval modal for Braden;
 - insert a known-good Sev re-entry prompt into the ChatGPT composer;
 - keep fabricated smoke/Codex work-packet actions under Diagnostics as local bridge tests;
@@ -127,20 +131,31 @@ return after Braden approval. `Queue Review` creates a focused Codex review
 packet after Braden approval. None of these controls apply patches to live
 source.
 
-## File And ZIP Attachment Direction
+## File And ZIP Attachment Lane
 
-The extension should eventually support sending approved local packages or ZIPs
-to ChatGPT, but not as a silent upload path. Browsers do not allow ordinary page
-scripts to set local file inputs to arbitrary paths, and synthetic drag/drop may
-be rejected by ChatGPT or the browser.
+Protocol owner: `ION/02_architecture/ION_BROWSER_FILE_ATTACHMENT_AUTOMATION_PROTOCOL.md`
+
+The Artifacts tab includes the first guarded file lane:
+
+- `Attachables`: lists files the daemon considers safe to present for browser
+  attachment from bounded package/inbox roots.
+- `Drop Latest`: asks Braden for approval, asks the daemon for a one-use-ish
+  localhost download ticket, fetches the file as a browser `File`, and attempts
+  visible `dragenter`/`dragover`/`drop` events against the ChatGPT composer.
+
+Browsers do not allow ordinary page scripts to set local file inputs to
+arbitrary paths. ChatGPT or the browser may also reject synthetic drag/drop.
+When that happens, the panel still provides the manifest/hash/receipt so Braden
+can use the manual attach picker or a future native/debugger macro lane.
 
 The intended ION path is:
 
 1. local daemon creates or exposes a public-safe package with manifest and
    sha256;
 2. extension shows exact file path, size, hash, and intended chat target;
-3. Braden approves the attach/send operation;
+3. Braden approves the attach operation;
 4. extension uses the most reliable available browser path:
+   - approved visible synthetic drag/drop where accepted;
    - user-visible attach picker guidance;
    - approved downloaded package handoff;
    - future Chrome-extension/native or debugger-mediated upload lane if
@@ -148,4 +163,4 @@ The intended ION path is:
 5. ION records the package/export receipt and any returned sandbox artifact.
 
 No file should be uploaded without explicit user approval, a manifest, and a
-receipt when ION state is touched.
+receipt when ION state is touched. This MVP does not click Send.

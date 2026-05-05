@@ -5,13 +5,16 @@ from kernel.ion_chatops_bridge import (
     APPROVAL_TOKEN,
     ACTION_SCHEMA,
     READY_VERDICT,
+    build_chatops_attachable_artifacts,
     build_chatops_policy,
     build_chatops_agent_queue,
     build_chatops_agent_status,
     build_chatops_context_pack,
     build_sev_context_brief,
     classify_chatops_action,
+    prepare_chatops_artifact_upload,
     prepare_chatops_agent_next,
+    resolve_chatops_artifact_download,
     submit_chatops_action,
     validate_chatops_action,
 )
@@ -103,6 +106,9 @@ def test_chatops_policy_owner_surfaces_ready(tmp_path):
     assert "write_file_draft" in result["supported_mvp_intents"]
     assert result["agent_surface"]["backend_owner"] == "ION/04_packages/kernel/ion_codex_queue_runner.py"
     assert "compact_runtime_zip" in result["export_surface"]
+    assert result["artifact_upload_surface"]["silent_upload_authority"] is False
+    assert result["artifact_upload_surface"]["send_click_authority"] is False
+    assert result["artifact_upload_surface"]["prepare_upload"] == "POST /artifacts/prepare-upload"
     assert result["sandbox_return_surface"]["owner"] == "ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py"
     assert result["sandbox_return_surface"]["direct_apply_authority"] is False
     assert result["main_policy"]["main_auto_push_allowed"] is False
@@ -375,9 +381,38 @@ def test_chatops_context_pack_includes_agent_and_package_controls(tmp_path):
     assert result["pack"]["callsign"] == "Sev"
     assert result["pack"]["bridge_tools"]["agent_prepare_next"] == "POST /agent/prepare-next with Braden approval"
     assert result["pack"]["bridge_tools"]["compact_zip"] == "POST /exports/lifecycle-zip with package_class=COMPACT_RUNTIME and Braden approval"
+    assert result["pack"]["bridge_tools"]["attachable_artifacts"] == "GET /artifacts/attachables"
+    assert result["pack"]["bridge_tools"]["prepare_artifact_upload"] == "POST /artifacts/prepare-upload with Braden approval"
     assert result["pack"]["bridge_tools"]["sandbox_returns"] == "GET /sandbox/returns"
     assert result["pack"]["sandbox_returns"]["inbox_root"] == "ION/05_context/inbox/chatgpt_sandbox_returns"
     assert "ION local context pack" in result["prompt"]
+
+
+def test_chatops_artifact_upload_prepare_requires_approval_and_ticket(tmp_path):
+    _seed_root(tmp_path)
+    zip_path = tmp_path / "ION/06_artifacts/packages/demo.zip"
+    zip_path.parent.mkdir(parents=True, exist_ok=True)
+    zip_path.write_bytes(b"PK\x03\x04demo")
+
+    listing = build_chatops_attachable_artifacts(tmp_path)
+    blocked = prepare_chatops_artifact_upload(tmp_path, {"artifact_path": "ION/06_artifacts/packages/demo.zip"})
+    prepared = prepare_chatops_artifact_upload(
+        tmp_path,
+        _approved({"artifact_path": "ION/06_artifacts/packages/demo.zip"}),
+    )
+    resolved_path, validation = resolve_chatops_artifact_download(tmp_path, prepared.get("download_token", ""))
+
+    assert listing["ok"] is True
+    assert any(row["path"] == "ION/06_artifacts/packages/demo.zip" for row in listing["candidates"])
+    assert blocked["ok"] is False
+    assert blocked["finding"] == "approval_failed"
+    assert prepared["ok"] is True
+    assert prepared["download_url"].endswith(f"/artifacts/download/{prepared['download_token']}")
+    assert prepared["filename"] == "demo.zip"
+    assert (tmp_path / prepared["ticket_path"]).exists()
+    assert (tmp_path / prepared["receipt_path"]).exists()
+    assert resolved_path == zip_path.resolve()
+    assert validation["ok"] is True
 
 
 def test_chatops_submit_rejects_mutating_action_without_policy_approval_even_if_action_says_no_approval(tmp_path):

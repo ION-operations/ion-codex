@@ -105,6 +105,48 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
 
+  if (message.type === "ion_chatops_artifact_attachables") {
+    (async () => {
+      const result = await getJson("/artifacts/attachables");
+      sendResponse({ ok: Boolean(result?.ok), stage: "artifact_attachables", result });
+    })().catch((error) => {
+      sendResponse({ ok: false, stage: "artifact_attachables_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_artifact_prepare_latest") {
+    (async () => {
+      const attachables = await getJson("/artifacts/attachables");
+      const rows = Array.isArray(attachables?.candidates) ? attachables.candidates : [];
+      const candidate = rows.find((row) => row?.attachable && typeof row.path === "string");
+      if (!attachables?.ok || !candidate) {
+        sendResponse({
+          ok: false,
+          stage: "artifact_prepare_latest",
+          finding: attachables?.ok ? "no_attachable_artifact" : "attachables_unavailable",
+          result: attachables
+        });
+        return;
+      }
+      const approved = await requestBridgeApproval(
+        sender,
+        "artifact_prepare_browser_drop",
+        `Prepare ${candidate.name ?? candidate.path} (${candidate.size_bytes ?? "unknown"} bytes) for a visible ChatGPT file drop. This will not click Send.`,
+        "browser_file_upload_approval_required"
+      );
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED", candidate });
+        return;
+      }
+      const result = await postJson("/artifacts/prepare-upload", approvedPayload({ artifact_path: candidate.path }));
+      sendResponse({ ok: Boolean(result?.ok), stage: "artifact_prepare_latest", result });
+    })().catch((error) => {
+      sendResponse({ ok: false, stage: "artifact_prepare_latest_exception", error: error.message });
+    });
+    return true;
+  }
+
   if (message.type === "ion_chatops_sandbox_diff_latest") {
     (async () => {
       const returnId = String(message.payload?.return_id ?? "").trim();

@@ -5,6 +5,7 @@ import {
   refreshBridgePosition,
   setBridgeActionDetail,
   setBridgeAgentDetail,
+  setBridgeArtifactDetail,
   setBridgeDiagnosticsDetail,
   setBridgePackageDetail,
   setBridgeSandboxDetail,
@@ -667,6 +668,88 @@ function requestSandboxMutation(type: "ion_chatops_sandbox_diff_latest" | "ion_c
   });
 }
 
+function requestArtifactAttachables(): void {
+  setBridgeStatus("Attachables", "Reading local packages and sandbox return artifacts.", "working");
+  chrome.runtime.sendMessage({ type: "ion_chatops_artifact_attachables" }, async (response) => {
+    const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus(response?.ok ? "Attachables ready" : "Attachables blocked", detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+    if (response?.ok) await copyBridgeResult("Attachable artifacts", detail);
+  });
+}
+
+function findDropTarget(): HTMLElement | null {
+  const composer = findComposer();
+  if (!composer) return null;
+  return (
+    composer.closest("form") ??
+    composer.closest("[data-testid*='composer']") ??
+    composer.closest("main") ??
+    composer
+  ) as HTMLElement | null;
+}
+
+async function attemptPreparedArtifactDrop(result: any): Promise<void> {
+  const downloadUrl = String(result?.download_url ?? "").trim();
+  const filename = String(result?.filename ?? result?.artifact?.name ?? "ion-artifact.bin").trim();
+  const contentType = String(result?.content_type ?? result?.artifact?.content_type ?? "application/octet-stream").trim();
+  const target = findDropTarget();
+  if (!downloadUrl || !target) {
+    const detail = !downloadUrl ? "download_url_missing" : "chatgpt_drop_target_not_found";
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Artifact drop blocked", detail, "error");
+    return;
+  }
+  try {
+    const response = await fetch(downloadUrl);
+    if (!response.ok) throw new Error(`download_failed_${response.status}`);
+    const blob = await response.blob();
+    const file = new File([blob], filename, { type: contentType || blob.type || "application/octet-stream" });
+    const transfer = new DataTransfer();
+    transfer.items.add(file);
+    for (const eventName of ["dragenter", "dragover", "drop"]) {
+      const event = new DragEvent(eventName, {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        dataTransfer: transfer,
+      });
+      target.dispatchEvent(event);
+    }
+    const detail = [
+      "visible_browser_drop_attempted",
+      `filename: ${filename}`,
+      `size_bytes: ${file.size}`,
+      `sha256: ${result?.sha256 ?? ""}`,
+      `receipt_path: ${result?.receipt_path ?? ""}`,
+      "",
+      "If ChatGPT ignored the synthetic drop, use the manifest/hash above with the manual attach picker or the future native macro lane.",
+      "No Send click was performed.",
+    ].join("\n");
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Artifact drop attempted", `${filename}\nNo Send click was performed.`, "success");
+    await copyBridgeResult("Artifact drop receipt", detail);
+  } catch (error) {
+    const detail = `artifact_drop_failed: ${error instanceof Error ? error.message : String(error)}`;
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Artifact drop failed", detail, "error");
+  }
+}
+
+function requestArtifactDropLatest(): void {
+  setBridgeStatus("Artifact drop latest", "Requesting Braden approval before preparing a browser drop ticket.", "working");
+  chrome.runtime.sendMessage({ type: "ion_chatops_artifact_prepare_latest" }, async (response) => {
+    const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+    setBridgeArtifactDetail(detail);
+    if (!response?.ok) {
+      setBridgeStatus("Artifact drop blocked", detail.split("\n")[0] ?? "", "error");
+      return;
+    }
+    setBridgeStatus("Artifact ticket ready", "Attempting visible ChatGPT drag/drop. No Send click will occur.", "working");
+    await attemptPreparedArtifactDrop(response.result);
+  });
+}
+
 function actionSummary(packet: ReturnType<typeof parseStrictIonActionYaml>): string {
   if (!packet) return "packet_parse_failed";
   return JSON.stringify({
@@ -958,6 +1041,12 @@ window.addEventListener("ion-chatops-sandbox-diff", () => {
 });
 window.addEventListener("ion-chatops-sandbox-review", () => {
   requestSandboxMutation("ion_chatops_sandbox_queue_latest", "Sandbox queue review");
+});
+window.addEventListener("ion-chatops-artifact-attachables", () => {
+  requestArtifactAttachables();
+});
+window.addEventListener("ion-chatops-artifact-drop-latest", () => {
+  requestArtifactDropLatest();
 });
 
 if (safeModeDisabled()) {

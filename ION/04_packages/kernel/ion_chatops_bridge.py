@@ -11,11 +11,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import mimetypes
 import re
+import secrets
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Mapping
+from urllib.parse import unquote
 
 from .ion_carrier_onboard import resolve_shell_root_from_ion_root
 from .ion_carrier_onboarding_packet import build_carrier_onboarding_packet
@@ -53,6 +56,8 @@ RECEIPTS_DIR = BASE_DIR / "receipts"
 RUNTIME_DIR = BASE_DIR / "runtime"
 ARTIFACTS_DIR = BASE_DIR / "artifacts"
 EXPORTS_DIR = BASE_DIR / "exports"
+ARTIFACT_TICKETS_DIR = RUNTIME_DIR / "artifact_upload_tickets"
+MAX_BROWSER_UPLOAD_BYTES = 25 * 1024 * 1024
 
 POLICY_PATHS = {
     "runtime_protocol": "ION/02_architecture/ION_BROWSER_CARRIER_RUNTIME_PROTOCOL.md",
@@ -104,6 +109,22 @@ PROTECTED_PATH_TOKENS = (
     "token",
     "credential",
     "vault",
+)
+
+ATTACHABLE_FILE_SUFFIXES = (
+    ".zip",
+    ".md",
+    ".txt",
+    ".json",
+    ".diff",
+    ".patch",
+)
+
+ATTACHABLE_ROOTS = (
+    "ION/05_context/current/chatops_bridge/exports/",
+    "ION/05_context/current/chatops_bridge/artifacts/",
+    "ION/05_context/inbox/chatgpt_sandbox_returns/",
+    "ION/06_artifacts/packages/",
 )
 
 FAILURE_CLASSES = (
@@ -662,6 +683,193 @@ def _rel_if_inside_root(root: Path, value: str | Path | None) -> str | None:
         return path.as_posix()
 
 
+def _path_from_repo_rel(root: Path, rel_value: str | Path | None) -> Path | None:
+    if rel_value is None:
+        return None
+    rel = str(rel_value).replace("\\", "/").strip()
+    if not rel or rel.startswith("/") or rel.startswith("../") or "/../" in rel or rel.endswith("/.."):
+        return None
+    path = (root / rel).resolve()
+    try:
+        path.relative_to(root)
+    except ValueError:
+        return None
+    return path
+
+
+def _is_attachable_rel_path(rel: str) -> bool:
+    lowered = f"/{rel.lower()}"
+    if any(token in lowered for token in PROTECTED_PATH_TOKENS):
+        return False
+    return any(rel.startswith(prefix) for prefix in ATTACHABLE_ROOTS)
+
+
+def _artifact_record(root: Path, path: Path) -> dict[str, Any] | None:
+    if not path.is_file():
+        return None
+    rel = _repo_rel(path, root)
+    if not _is_attachable_rel_path(rel):
+        return None
+    suffix = path.suffix.lower()
+    if suffix not in ATTACHABLE_FILE_SUFFIXES:
+        return None
+    stat = path.stat()
+    if stat.st_size > MAX_BROWSER_UPLOAD_BYTES:
+        return {
+            "path": rel,
+            "name": path.name,
+            "size_bytes": stat.st_size,
+            "sha256": None,
+            "mtime": datetime.fromtimestamp(stat.st_mtime, timezone.utc).replace(microsecond=0).isoformat(),
+            "content_type": mimetypes.guess_type(path.name)[0] or "application/octet-stream",
+            "attachable": False,
+            "finding": "file_exceeds_browser_upload_limit",
+        }
+    return {
+        "path": rel,
+        "name": path.name,
+        "size_bytes": stat.st_size,
+        "sha256": _sha256_file(path),
+        "mtime": datetime.fromtimestamp(stat.st_mtime, timezone.utc).replace(microsecond=0).isoformat(),
+        "content_type": mimetypes.guess_type(path.name)[0] or "application/octet-stream",
+        "attachable": True,
+        "finding": None,
+    }
+
+
+def build_chatops_attachable_artifacts(root: str | Path | None = None, *, limit: int = 30) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    candidates: list[dict[str, Any]] = []
+    for rel_root in ATTACHABLE_ROOTS:
+        base = shell_root / rel_root
+        if not base.exists():
+            continue
+        for suffix in ATTACHABLE_FILE_SUFFIXES:
+            for path in base.rglob(f"*{suffix}"):
+                record = _artifact_record(shell_root, path)
+                if record:
+                    candidates.append(record)
+    candidates.sort(key=lambda row: str(row.get("mtime") or ""), reverse=True)
+    return {
+        "schema_id": "ion.chatops.attachable_artifacts.v1",
+        "ok": True,
+        "verdict": READY_VERDICT,
+        "max_browser_upload_bytes": MAX_BROWSER_UPLOAD_BYTES,
+        "candidate_count": len(candidates),
+        "candidates": candidates[:limit],
+        "allowed_roots": list(ATTACHABLE_ROOTS),
+        "supported_suffixes": list(ATTACHABLE_FILE_SUFFIXES),
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def prepare_chatops_artifact_upload(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    approval = _validate_bridge_operation_approval(packet)
+    operation = "artifact_prepare_browser_drop"
+    if not approval["accepted"]:
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="rejected",
+            packet=packet,
+            result=approval,
+            failure_classification="USER_APPROVAL_REJECTED",
+        )
+        return {
+            "schema_id": "ion.chatops.artifact_upload_prepare_result.v1",
+            "ok": False,
+            "finding": "approval_failed",
+            "approval": approval,
+            "receipt_path": receipt_path,
+            "production_authority": False,
+            "live_execution_authority": False,
+        }
+    artifact_path = _path_from_repo_rel(shell_root, packet.get("artifact_path") or packet.get("path"))
+    if artifact_path is None or not artifact_path.exists():
+        result = {"ok": False, "finding": "artifact_not_found"}
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="failed",
+            packet=packet,
+            result=result,
+            failure_classification="POLICY_BLOCK_WORKING_AS_DESIGNED",
+        )
+        return {**result, "schema_id": "ion.chatops.artifact_upload_prepare_result.v1", "receipt_path": receipt_path}
+    record = _artifact_record(shell_root, artifact_path)
+    if not record or not record.get("attachable"):
+        result = {"ok": False, "finding": (record or {}).get("finding") or "artifact_not_attachable", "artifact": record}
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="failed",
+            packet=packet,
+            result=result,
+            failure_classification="POLICY_BLOCK_WORKING_AS_DESIGNED",
+        )
+        return {**result, "schema_id": "ion.chatops.artifact_upload_prepare_result.v1", "receipt_path": receipt_path}
+    token = secrets.token_urlsafe(24)
+    ticket = {
+        "schema_id": "ion.chatops.artifact_upload_ticket.v1",
+        "created_at": _now(),
+        "token": token,
+        "artifact": record,
+        "operation": operation,
+        "approved_by": approval.get("approved_by"),
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+    ticket_path = shell_root / ARTIFACT_TICKETS_DIR / f"{_safe_slug(token)}.json"
+    _write_json(ticket_path, ticket)
+    result = {
+        "ok": True,
+        "artifact": record,
+        "download_token": token,
+        "download_url": f"http://127.0.0.1:{DEFAULT_PORT}/artifacts/download/{token}",
+        "ticket_path": _repo_rel(ticket_path, shell_root),
+        "content_type": record.get("content_type"),
+        "filename": record.get("name"),
+        "size_bytes": record.get("size_bytes"),
+        "sha256": record.get("sha256"),
+    }
+    receipt_path = _write_operation_receipt(
+        shell_root,
+        operation=operation,
+        status="completed",
+        packet=packet,
+        result=result,
+        files_touched=[_repo_rel(ticket_path, shell_root)],
+        target_refs=[{"provider": "local_ion", "path": record["path"], "role": "browser_attachment_candidate"}],
+    )
+    return {
+        "schema_id": "ion.chatops.artifact_upload_prepare_result.v1",
+        "ok": True,
+        "verdict": READY_VERDICT,
+        "receipt_path": receipt_path,
+        **result,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def resolve_chatops_artifact_download(root: str | Path | None, token: str) -> tuple[Path | None, dict[str, Any]]:
+    shell_root = _resolve_root(root)
+    ticket_path = shell_root / ARTIFACT_TICKETS_DIR / f"{_safe_slug(token)}.json"
+    ticket = _read_json(ticket_path)
+    if not ticket:
+        return None, {"ok": False, "finding": "ticket_not_found"}
+    artifact = ticket.get("artifact") if isinstance(ticket.get("artifact"), Mapping) else {}
+    path = _path_from_repo_rel(shell_root, artifact.get("path"))
+    if path is None or not path.exists() or not path.is_file():
+        return None, {"ok": False, "finding": "artifact_not_found", "ticket": ticket}
+    record = _artifact_record(shell_root, path)
+    if not record or not record.get("attachable") or record.get("sha256") != artifact.get("sha256"):
+        return None, {"ok": False, "finding": "artifact_ticket_validation_failed", "ticket": ticket, "current": record}
+    return path, {"ok": True, "ticket": ticket, "artifact": record}
+
+
 def _operation_receipt_path(root: Path, receipt_id: str) -> Path:
     return root / RECEIPTS_DIR / f"{_safe_slug(receipt_id)}.json"
 
@@ -913,6 +1121,8 @@ def build_chatops_context_pack(root: str | Path | None = None) -> dict[str, Any]
             "agent_prepare_next": "POST /agent/prepare-next with Braden approval",
             "agent_start_one": "POST /agent/process-one with start=true and Braden approval",
             "compact_zip": "POST /exports/lifecycle-zip with package_class=COMPACT_RUNTIME and Braden approval",
+            "attachable_artifacts": "GET /artifacts/attachables",
+            "prepare_artifact_upload": "POST /artifacts/prepare-upload with Braden approval",
             "sandbox_returns": "GET /sandbox/returns",
             "sandbox_diff_preview": "POST /sandbox/returns/diff-preview with Braden approval",
             "sandbox_queue_review": "POST /sandbox/returns/queue-review with Braden approval",
@@ -1195,10 +1405,23 @@ def build_chatops_policy(root: str | Path | None = None) -> dict[str, Any]:
             "context_pack": "GET /exports/context-pack",
             "compact_runtime_zip": "POST /exports/lifecycle-zip",
             "safe_full_project_zip": "POST /exports/safe-full-zip",
+            "attachable_artifacts": "GET /artifacts/attachables",
+            "prepare_artifact_upload": "POST /artifacts/prepare-upload",
+            "browser_upload_limit_bytes": MAX_BROWSER_UPLOAD_BYTES,
             "packager_owners": [
                 "ION/04_packages/kernel/ion_lifecycle_packager.py",
                 "ION/04_packages/kernel/ion_safe_full_project_packager.py",
             ],
+        },
+        "artifact_upload_surface": {
+            "list": "GET /artifacts/attachables",
+            "prepare_upload": "POST /artifacts/prepare-upload",
+            "download_ticket": "GET /artifacts/download/{token}",
+            "allowed_roots": list(ATTACHABLE_ROOTS),
+            "supported_suffixes": list(ATTACHABLE_FILE_SUFFIXES),
+            "max_browser_upload_bytes": MAX_BROWSER_UPLOAD_BYTES,
+            "silent_upload_authority": False,
+            "send_click_authority": False,
         },
         "sandbox_return_surface": {
             "queue": "GET /sandbox/returns",
@@ -1398,6 +1621,23 @@ def _http_response(handler: BaseHTTPRequestHandler, status: int, payload: Mappin
     handler.wfile.write(body)
 
 
+def _http_file_response(handler: BaseHTTPRequestHandler, path: Path, artifact: Mapping[str, Any]) -> None:
+    size = path.stat().st_size
+    content_type = str(artifact.get("content_type") or mimetypes.guess_type(path.name)[0] or "application/octet-stream")
+    filename = re.sub(r'["\r\n]+', "_", path.name)
+    handler.send_response(200)
+    handler.send_header("Content-Type", content_type)
+    handler.send_header("Content-Length", str(size))
+    handler.send_header("Content-Disposition", f'attachment; filename="{filename}"')
+    handler.send_header("Access-Control-Allow-Origin", "https://chatgpt.com")
+    handler.send_header("Access-Control-Allow-Headers", "Content-Type")
+    handler.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    handler.end_headers()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            handler.wfile.write(chunk)
+
+
 def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
     class ChatOpsHandler(BaseHTTPRequestHandler):
         def log_message(self, format: str, *args: Any) -> None:  # noqa: A002 - stdlib signature
@@ -1425,6 +1665,18 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 return
             if path == "/exports/context-pack":
                 _http_response(self, 200, build_chatops_context_pack(root))
+                return
+            if path == "/artifacts/attachables":
+                _http_response(self, 200, build_chatops_attachable_artifacts(root))
+                return
+            if path.startswith("/artifacts/download/"):
+                token = unquote(path.rsplit("/", 1)[-1])
+                artifact_path, validation = resolve_chatops_artifact_download(root, token)
+                if not artifact_path:
+                    _http_response(self, 404, validation)
+                    return
+                artifact = validation.get("artifact") if isinstance(validation.get("artifact"), Mapping) else {}
+                _http_file_response(self, artifact_path, artifact)
                 return
             if path == "/sandbox/returns":
                 _http_response(self, 200, build_sandbox_return_queue_projection(root))
@@ -1479,6 +1731,10 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 return
             if path == "/exports/safe-full-zip":
                 result = create_chatops_safe_full_zip(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/artifacts/prepare-upload":
+                result = prepare_chatops_artifact_upload(root, packet)
                 _http_response(self, 200 if result.get("ok") else 409, result)
                 return
             if path == "/sandbox/returns/register":

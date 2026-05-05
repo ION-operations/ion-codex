@@ -614,7 +614,13 @@ function ensurePanel(): HTMLElement {
           </div>
         </div>
         <div class="ion-tab-panel" data-panel="automation"><div class="ion-detail" data-field="automation"></div></div>
-        <div class="ion-tab-panel" data-panel="artifacts"><div class="ion-detail" data-field="artifacts"></div></div>
+        <div class="ion-tab-panel" data-panel="artifacts">
+          <div class="ion-detail" data-field="artifacts"></div>
+          <div class="ion-toolbar-actions">
+            <button type="button" class="ion-tool" data-tool="artifact-attachables">Attachables</button>
+            <button type="button" class="ion-tool" data-tool="artifact-drop-latest">Drop Latest</button>
+          </div>
+        </div>
         <div class="ion-tab-panel" data-panel="diagnostics">
           <div class="ion-detail" data-field="diagnostics"></div>
           <div class="ion-toolbar-actions">
@@ -704,6 +710,12 @@ function ensurePanel(): HTMLElement {
   });
   panel.querySelector('[data-tool="sandbox-review"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-review"));
+  });
+  panel.querySelector('[data-tool="artifact-attachables"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-attachables"));
+  });
+  panel.querySelector('[data-tool="artifact-drop-latest"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-drop-latest"));
   });
   panel.querySelector('[data-tool="collapse"]')?.addEventListener("click", () => {
     panel.dataset.expanded = "false";
@@ -798,6 +810,11 @@ export function setBridgePackageDetail(detail: string): void {
 
 export function setBridgeSandboxDetail(detail: string): void {
   bridgeState.sandbox = detail;
+  renderPanel();
+}
+
+export function setBridgeArtifactDetail(detail: string): void {
+  bridgeState.artifacts = detail;
   renderPanel();
 }
 
