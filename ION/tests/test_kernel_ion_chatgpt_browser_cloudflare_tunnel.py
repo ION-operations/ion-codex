@@ -11,6 +11,7 @@ from kernel.ion_chatgpt_browser_cloudflare_tunnel import (
     TRANSPORT_TUNNEL_RUNNING_VERIFIED,
     audit_cloudflare_tunnel,
     build_cloudflared_command,
+    build_cloudflared_route_dns_command,
     connector_url_from_tunnel_url,
     extract_tunnel_url,
     find_cloudflared,
@@ -49,6 +50,36 @@ def test_build_cloudflared_command_targets_local_preview_root():
     command = build_cloudflared_command(local_url="http://127.0.0.1:8765", cloudflared_binary="/usr/bin/cloudflared")
 
     assert command == ["/usr/bin/cloudflared", "tunnel", "--url", "http://127.0.0.1:8765"]
+
+
+def test_build_named_cloudflared_command_targets_local_preview_root():
+    command = build_cloudflared_command(
+        local_url="http://127.0.0.1:8765",
+        cloudflared_binary="/usr/bin/cloudflared",
+        tunnel_name="ion-browser",
+        credentials_file="/home/sev/.cloudflared/ion-browser.json",
+    )
+
+    assert command == [
+        "/usr/bin/cloudflared",
+        "tunnel",
+        "run",
+        "--credentials-file",
+        "/home/sev/.cloudflared/ion-browser.json",
+        "--url",
+        "http://127.0.0.1:8765",
+        "ion-browser",
+    ]
+
+
+def test_build_named_tunnel_route_dns_command():
+    command = build_cloudflared_route_dns_command(
+        cloudflared_binary="/usr/bin/cloudflared",
+        tunnel_name="ion-browser",
+        hostname="ion.helixion.net",
+    )
+
+    assert command == ["/usr/bin/cloudflared", "tunnel", "route", "dns", "ion-browser", "ion.helixion.net"]
 
 
 def test_audit_reports_setup_required_when_cloudflared_missing():
@@ -201,3 +232,47 @@ def test_write_tunnel_status_records_non_authority_fields(tmp_path):
     assert status["production_authority"] is False
     assert status["live_execution_authority"] is False
     assert status["deployment_authority"] is False
+
+
+def test_audit_reports_stable_hostname_plan_without_treating_it_as_active(tmp_path, monkeypatch):
+    fake_cloudflared = tmp_path / "cloudflared"
+    fake_cloudflared.write_text("#!/bin/sh\n", encoding="utf-8")
+    fake_cloudflared.chmod(0o755)
+    (tmp_path / "pyproject.toml").write_text("[project]\nname = \"ion-test\"\n", encoding="utf-8")
+    (tmp_path / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
+    (tmp_path / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
+    monkeypatch.setattr(tunnel, "audit_http_mcp_preview", lambda _root: {"verdict": tunnel.HTTP_PREVIEW_READY_VERDICT})
+    monkeypatch.setattr(
+        tunnel,
+        "check_connector_health",
+        lambda *, local_url, connector_url=None, timeout=3.0: {
+            "local_http_preview": {"ok": True, "status_code": 200, "error": None},
+            "local_mcp_tools_list": {"ok": True},
+            "public_mcp_tools_list": {"ok": False},
+            "public_write_confirmation_required": {"ok": False},
+        },
+    )
+
+    result = audit_cloudflare_tunnel(
+        tmp_path,
+        cloudflared_binary=str(fake_cloudflared),
+        tunnel_name="ion-browser",
+        stable_hostname="https://ion.helixion.net/mcp",
+    )
+
+    assert result["stable_hostname"] == "ion.helixion.net"
+    assert result["stable_connector_url"] == "https://ion.helixion.net/mcp"
+    assert result["stable_connector_active"] is False
+    assert result["active_connector_url"] is None
+    assert result["verdict"] == SETUP_REQUIRED_VERDICT
+    assert result["connector_state"] == "STABLE_HOSTNAME_NOT_ACTIVE"
+    assert result["named_tunnel_route_dns_command"] == [
+        str(fake_cloudflared),
+        "tunnel",
+        "route",
+        "dns",
+        "ion-browser",
+        "ion.helixion.net",
+    ]
+    assert "named_tunnel_credentials_or_config_not_found_locally" in result["findings"]
+    assert "stable_connector_url_not_active" in result["findings"]
