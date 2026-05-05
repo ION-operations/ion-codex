@@ -3,6 +3,26 @@
 This repository is public for collaboration, but ION state is still governed by
 packets, receipts, proof gates, and bounded carrier authority.
 
+## Start Here
+
+Read the public landing page first:
+
+- `README.md`
+
+Then use the docs layer for the shape of the system:
+
+- `ION/docs/README.md`
+- `ION/docs/ION_FUNDAMENTALS.md`
+- `ION/docs/TEMPLATE_LAW.md`
+- `ION/docs/CONTEXT_SYSTEM.md`
+- `ION/docs/AGENTS_ROLES_CARRIERS.md`
+
+Use the encyclopedia for broad history and architecture:
+
+- `ION/docs/encyclopedia/ION_Production_Encyclopedia_v4_0_LIVE_V96_V100_CONTEXT_SYSTEM_AND_AUTONOMOUS_LOOP_RECOVERY.md`
+
+The encyclopedia is reference material, not active runtime authority.
+
 ## Before You Change Files
 
 1. Read `ION/REPO_AUTHORITY.md`.
@@ -14,6 +34,20 @@ packets, receipts, proof gates, and bounded carrier authority.
 3. Keep changes narrow and explain the owner surface you reused.
 4. Run the smallest meaningful validation for the change.
 5. Open a pull request with evidence.
+
+## Contribution Lanes
+
+Use the smallest lane that matches the work:
+
+| Lane | Good for |
+| --- | --- |
+| Docs | README, guides, explanation, public navigation. |
+| Kernel | Python runtime, tests, audits, gates, queue projections. |
+| Integration | MCP, browser extension, daemon, Cursor, Codex carrier surfaces. |
+| Context evidence | Receipts, work packets, queue settlement, lifecycle records. |
+
+Keep public docs, runtime implementation, and active-state evidence in separate
+pull requests when possible. That makes review and future indexing cleaner.
 
 ## Pull Request Evidence
 
@@ -44,3 +78,10 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_st
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest ION/tests -q
 ```
 
+## GitHub Is A Data Plane
+
+GitHub issues and pull requests are collaboration surfaces. They do not grant
+runtime authority, production authority, secret authority, or Steward
+acceptance by themselves. Accepted state still requires the ION proof path:
+packet, context, template, proof-bearing return, gate, Steward decision, and
+receipt.

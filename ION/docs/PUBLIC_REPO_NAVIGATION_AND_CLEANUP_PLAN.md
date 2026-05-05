@@ -76,14 +76,38 @@ system.
 - Replace the long catalog-style public README with a sharper landing page
   centered on ION as a continuity substrate.
 - Keep detailed navigation in `ION/README.md` and directory-local README files.
-- Correct the landing-page verified test count to the current `265 passed`
-  validation evidence.
+- Remove fixed landing-page test-count claims. Public prose should point readers
+  to live validation commands instead of freezing a number that can go stale.
 
 ## Implemented Sixth Slice
 
 - Revise the landing README language for tighter public positioning.
 - Add a full-encyclopedia link with an authority caution so the encyclopedia is
   discoverable without becoming the active mount source.
+
+## Implemented Seventh Slice
+
+- Split public landing prose from deeper doctrine references:
+  - `README.md` stays concise.
+  - `ION/docs/ION_FUNDAMENTALS.md` carries fundamentals.
+  - `ION/docs/TEMPLATE_LAW.md` carries template law.
+  - `ION/docs/CONTEXT_SYSTEM.md` carries context inheritance.
+  - `ION/docs/AGENTS_ROLES_CARRIERS.md` carries role/carrier boundaries.
+- Record the dirty-branch landing split plan at
+  `ION/05_context/current/BRANCH_LANDING_PLAN_20260505_CHATOPS_PUBLIC_GITHUB.md`.
+- Preserve generated runtime receipts and queue hygiene evidence as a separate
+  evidence slice rather than mixing them into the public docs slice.
+
+## Implemented Eighth Slice
+
+- Align the GitHub community-health tab surfaces:
+  - `README.md` stays the short public landing page.
+  - `CONTRIBUTING.md` carries lawful public collaboration and PR evidence
+    expectations.
+  - `SECURITY.md` carries the public/private boundary and sensitive report
+    path.
+  - `ION/docs/README.md` indexes the deeper orientation docs and encyclopedia.
+- Keep GitHub framed as collaboration/data plane, not runtime authority.
 
 ## Proposed Next Slices
 
