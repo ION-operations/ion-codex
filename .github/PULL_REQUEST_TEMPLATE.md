@@ -8,6 +8,7 @@ Describe the bounded change and the owner surfaces reused.
 - Live external execution authority: false
 - Secrets or credentials included: no
 - Direct `main` push requested: no
+- Branch trust class: review | volatile / not trusted | stable promotion
 
 ## Touched Paths
 
@@ -30,4 +31,3 @@ Describe the bounded change and the owner surfaces reused.
 ## Notes
 
 List known blockers, skipped checks, or follow-up work.
-

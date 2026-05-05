@@ -33,6 +33,7 @@ Setup and carrier operation:
 Public repo stewardship:
 
 - `PUBLIC_REPO_NAVIGATION_AND_CLEANUP_PLAN.md`
+- `GITHUB_BRANCHING_AND_LIVE_STATE_POLICY.md`
 
 Long-form reference:
 

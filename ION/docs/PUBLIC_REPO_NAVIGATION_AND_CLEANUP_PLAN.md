@@ -109,6 +109,16 @@ system.
   - `ION/docs/README.md` indexes the deeper orientation docs and encyclopedia.
 - Keep GitHub framed as collaboration/data plane, not runtime authority.
 
+## Implemented Ninth Slice
+
+- Add `ION/docs/GITHUB_BRANCHING_AND_LIVE_STATE_POLICY.md` for the volatile
+  live-state branch lane.
+- Update `CONTRIBUTING.md` so `volatile/live-YYYYMMDD-<topic>` branches are
+  explicitly allowed as public collaboration mirrors, not trusted ION state.
+- Update the pull request template with a branch trust class field.
+- Preserve the rule that volatile branches still exclude secrets, private
+  connector auth state, and sensitive live tunnel material by default.
+
 ## Proposed Next Slices
 
 1. Add directory-local README files for:

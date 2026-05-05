@@ -12,6 +12,7 @@ Read the public landing page first:
 Then use the docs layer for the shape of the system:
 
 - `ION/docs/README.md`
+- `ION/docs/GITHUB_BRANCHING_AND_LIVE_STATE_POLICY.md`
 - `ION/docs/ION_FUNDAMENTALS.md`
 - `ION/docs/TEMPLATE_LAW.md`
 - `ION/docs/CONTEXT_SYSTEM.md`
@@ -31,6 +32,8 @@ The encyclopedia is reference material, not active runtime authority.
    - `work/<short-topic>`
    - `agent/<short-topic>`
    - `data-plane/<short-topic>`
+   - `volatile/live-YYYYMMDD-<short-topic>` for public live-state snapshots
+     that are useful for collaboration but not yet trusted ION state.
 3. Keep changes narrow and explain the owner surface you reused.
 4. Run the smallest meaningful validation for the change.
 5. Open a pull request with evidence.
@@ -48,6 +51,27 @@ Use the smallest lane that matches the work:
 
 Keep public docs, runtime implementation, and active-state evidence in separate
 pull requests when possible. That makes review and future indexing cleaner.
+
+## Volatile Live Branches
+
+ION can use `volatile/*` branches to show the real local project posture to
+other humans and AI carriers. These branches may move quickly and may contain
+still-settling code, docs, and non-secret evidence.
+
+They must be labeled as:
+
+```text
+VOLATILE / NOT TRUSTED ION STATE
+```
+
+Do not treat a volatile branch as Steward acceptance, production authority, or
+runtime truth. It is visibility for collaboration. Promotion still requires the
+normal packet, proof, gate, review, and receipt path.
+
+Never commit secrets, credentials, private connector auth state, private browser
+profiles, or sensitive live tunnel material to a volatile branch. Live connector
+URLs and logs should stay local unless they are intentionally public-safe and
+useful as redacted evidence.
 
 ## Pull Request Evidence
 
