@@ -29,6 +29,17 @@ It should make explicit:
 
 This is different from relying on a model's ambient recall.
 
+## Context Graph
+
+ION context is not a pile of files. It is a graph of governed context nodes.
+
+A file becomes context only when its identity, authority, status, lineage, and
+retrieval role are known. The system does not ask which files to dump into a
+model. It asks which governed graph objects are lawful for this role, template,
+domain, and authority class.
+
+See `ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md`.
+
 ## Inherited Context
 
 In ION, the next context is inherited from accepted movement.

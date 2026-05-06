@@ -14,6 +14,9 @@ Then use the docs layer for the shape of the system:
 - `ION/docs/README.md`
 - `ION/docs/GITHUB_BRANCHING_AND_LIVE_STATE_POLICY.md`
 - `ION/docs/ION_FUNDAMENTALS.md`
+- `ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md`
+- `ION/docs/ION_PARALLEL_SETTLEMENT.md`
+- `ION/docs/ION_PROJECT_INGESTION.md`
 - `ION/docs/TEMPLATE_LAW.md`
 - `ION/docs/CONTEXT_SYSTEM.md`
 - `ION/docs/AGENTS_ROLES_CARRIERS.md`
@@ -48,6 +51,7 @@ Use the smallest lane that matches the work:
 | Kernel | Python runtime, tests, audits, gates, queue projections. |
 | Integration | MCP, browser extension, daemon, Cursor, Codex carrier surfaces. |
 | Context evidence | Receipts, work packets, queue settlement, lifecycle records. |
+| Project ingestion | Quarantine, manifests, cartography, domain partition, first context packages. |
 
 Keep public docs, runtime implementation, and active-state evidence in separate
 pull requests when possible. That makes review and future indexing cleaner.

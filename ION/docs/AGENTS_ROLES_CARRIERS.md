@@ -29,6 +29,12 @@ The domain defines the agent. Prompt text alone does not.
 As the domain matures, templates sharpen, receipts accumulate, and context
 improves. The agent's world changes because the governed structure changes.
 
+An ION agent is best understood as domain-local intelligence: an LLM carrier
+moving through a governed graph region under template law, proof obligations,
+authority ceilings, and receipt requirements.
+
+See `ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md`.
+
 ## Role
 
 A role is a bounded ION function.

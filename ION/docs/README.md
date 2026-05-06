@@ -18,6 +18,10 @@ setup/           current setup and operating packets
 Public orientation:
 
 - `ION_FUNDAMENTALS.md`
+- `ION_CONTINUITY_SUBSTRATE_EXPLAINER.md`
+- `ION_DOMAIN_GRAPH_AND_FISSION.md`
+- `ION_PARALLEL_SETTLEMENT.md`
+- `ION_PROJECT_INGESTION.md`
 - `TEMPLATE_LAW.md`
 - `CONTEXT_SYSTEM.md`
 - `AGENTS_ROLES_CARRIERS.md`

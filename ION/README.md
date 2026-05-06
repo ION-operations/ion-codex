@@ -18,6 +18,16 @@ Important starting points:
 - `ION/01_doctrine/CANONICAL_WORKFLOW.md`
 - `ION/07_templates/README.md`
 
+## Public Orientation Docs
+
+For the public conceptual spine, start here:
+
+- `ION/docs/ION_FUNDAMENTALS.md`
+- `ION/docs/ION_CONTINUITY_SUBSTRATE_EXPLAINER.md`
+- `ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md`
+- `ION/docs/ION_PARALLEL_SETTLEMENT.md`
+- `ION/docs/ION_PROJECT_INGESTION.md`
+
 ## Directory Map
 
 ```text
@@ -39,6 +49,14 @@ tests             pytest suite
 
 ## Carrier And Integration Entry Points
 
+- Public docs index:
+  `ION/docs/README.md`
+- Domain graph and fission:
+  `ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md`
+- Project ingestion:
+  `ION/docs/ION_PROJECT_INGESTION.md`
+- Parallel settlement:
+  `ION/docs/ION_PARALLEL_SETTLEMENT.md`
 - Codex CLI carrier:
   `ION/docs/setup/CODEX_CLI_ION_DOGFOOD_SETUP_V125.md`
 - ChatGPT Browser MCP connector:
@@ -58,4 +76,3 @@ Run from the repository root:
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_status --ion-root . --json
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest ION/tests -q
 ```
-

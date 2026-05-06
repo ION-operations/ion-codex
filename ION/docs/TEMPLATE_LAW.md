@@ -21,6 +21,27 @@ It defines:
 
 Templates prevent untyped cognition from becoming state.
 
+## Templates As Cognitive I/O
+
+Templates are one of ION's main ways of exposing, organizing, and improving AI
+reasoning without requiring raw chain-of-thought.
+
+A template asks the carrier to externalize:
+
+- what kind of act it is performing
+- what domain the act belongs to
+- what context it is relying on
+- what assumptions it is making
+- what proof it owes
+- what output class it is producing
+- what it is not allowed to change
+- what route follows
+- what receipt future work should inherit
+
+The user does not need the model's private stream of consciousness. The user
+needs a trustworthy account of why the act is valid, what it depends on, what
+it can change, what proof it has, and what should happen next.
+
 ## Work Types Are Not Interchangeable
 
 ```text

@@ -4,13 +4,13 @@
 
 *Local-first. Template-governed. Context-bound. Proof-gated. Stewarded. Carrier-agnostic.*
 
-> *ION is the law by which AI work becomes state.*
+> *AI output is not state. ION is the law by which AI work becomes state.*
 
 ---
 
-Most AI sessions produce outputs.
+Most AI systems produce outputs.
 
-ION produces **state**.
+ION is built to produce **state**.
 
 The difference is this: an output exists because a model generated it. State
 exists because a bounded act, governed by a template, situated by a compiled
@@ -20,19 +20,105 @@ result, passed a gate, and earned a receipt that the next worker can inherit.
 That chain is not ceremony. It is the only thing that separates continuation
 from reconstruction.
 
+Prompting tries to make a model behave. ION designs the world the model acts
+inside.
+
 ---
 
-## The Primitive
+## The Problem
+
+Most AI agent systems are prompt-first.
+
+They give an agent a role, a task, and a tool list, then expect the agent to
+find or reconstruct the context required to perform the work:
+
+```text
+prompt
++ vague role
++ tool access
++ agent searches for context
++ agent reconstructs workflow
+```
+
+That is fragile. The agent spends intelligence on orientation before it can do
+the real work. It has to discover the domain, decide what matters, infer
+authority, identify relevant sources, avoid stale context, and guess which
+workflow applies.
+
+The result is predictable:
+
+```text
+context drift
+stale source use
+role confusion
+duplicated work
+unverified assumptions
+weak audit trails
+tool calls without durable meaning
+output becoming state by accident
+```
+
+A larger context window does not solve this by itself. A large window can still
+be stale, contradictory, overloaded, expensive, and unclear about authority.
+
+ION improves the conditions under which an answer may become state.
+
+---
+
+## The Central Question
+
+ION begins with a question most AI systems answer informally:
+
+```text
+What is an AI output allowed to change?
+```
+
+A normal agent workflow often allows this collapse:
+
+```text
+model output -> useful-looking text -> user trust -> operational action -> state
+```
+
+ION refuses that collapse.
+
+In ION, an AI output is not truth. It is a **candidate state transition**.
+
+A candidate transition may become:
+
+```text
+warning
+patch
+queue item
+report
+handoff
+rejected witness
+accepted state delta
+receipt
+future context
+```
+
+but only through declared law:
+
+```text
+No proof -> no landing.
+No Steward decision -> no state.
+No receipt -> no inheritance.
+```
+
+---
+
+## The Lawful Act
 
 The primitive in ION is not the agent. It is not the chat. It is not memory.
 
-It is the **lawful act**.
+It is the **lawful act**:
 
 ```text
 intent
 -> work packet
--> compiled context package
+-> domain
 -> governing template
+-> compiled context package
 -> mounted role
 -> carrier execution
 -> proof-bearing return
@@ -42,8 +128,8 @@ intent
 -> next state
 ```
 
-Output that cannot show its packet, its context, its template, its proof path,
-and its receipt is not yet ION state. It is a candidate.
+Output that cannot show its packet, domain, context, template, proof path, and
+receipt is not yet ION state. It is a candidate.
 
 ---
 
@@ -58,8 +144,7 @@ and its receipt is not yet ION state. It is a candidate.
 6. Every receipt must improve the next context, or the system has not continued.
 ```
 
-These are anti-failure constraints, not slogans. They prevent one specific
-collapse:
+These are anti-failure constraints. They prevent one specific collapse:
 
 ```text
 model said something -> treated as truth
@@ -71,49 +156,404 @@ and replace it with:
 candidate -> proof -> decision -> receipt -> inheritable state
 ```
 
-In ION, the next context is not merely assembled. It is inherited from prior
-accepted template movements.
-
 ---
 
-## Templates
+## Complexity Reduction
 
-A template in ION is not a markdown form. It is the **action type** of the work.
+ION is not valuable because it is complex.
 
-A template defines what kind of act is happening, what context is required,
-what output is valid, what authority is exercised, what state may be touched,
-what proof is owed, and how the result becomes future context.
+Complexity alone is cheap.
 
-This matters because untyped cognition is where drift enters.
+ION is valuable because it reduces the operational complexity of long-horizon
+AI work.
+
+A large AI workflow quickly exceeds what a model, a chat transcript, or a human
+operator can safely hold in active memory. ION turns that mass into bounded
+state transitions:
 
 ```text
-AUDIT is not BUILD.
-BUILD is not HANDOFF.
-HANDOFF is not RATIFICATION.
-COMPLETION is not ACCEPTANCE.
+unbounded project complexity -> bounded executable movement
 ```
 
-ION agents do not improvise workflows. They move through proven templates,
-evolve templates under governed law, or create new ones through a meta-template
-path. The same movement that governs current work builds the context future
-workers inherit.
+ION assumes humans and models both drift. It externalizes continuity into
+packets, templates, context packages, gates, receipts, and Steward decisions so
+neither the model nor the operator has to carry the entire system in memory.
 
-ION can expand into new domains because template creation is itself governed.
+```text
+ION increases intelligence not by making the model larger,
+but by reducing the complexity of the state the model must safely act upon.
+```
 
 ---
 
-## Agents
+## Context-First Domains
 
-In ION, an agent is not a personality assigned to a model.
+ION is context-first.
 
-An agent is a **domain-bound threshold**: the point where intent, compiled
+The agent does not enter a blank field and hunt for meaning. It enters a
+governed contextual domain where relevant sources, relationships, templates,
+authority boundaries, receipts, and neighboring-domain routes are already part
+of its working surface.
+
+```text
+governed domain
++ bounded context package
++ governing template
++ known neighboring domains
++ proof obligation
++ receipt path
++ carrier
+```
+
+The agent can ask:
+
+```text
+What domain am I inside?
+What context is live here?
+What template governs this movement?
+Which neighboring domains are implicated?
+Which specialist should I route to if the work crosses a boundary?
+What proof do I owe before this can land?
+```
+
+This is the difference between an agent improvising its own map and a carrier
+operating inside mapped territory.
+
+---
+
+## Agents As Domain Interfaces
+
+The point of agents in ION is not to create more personalities.
+
+An ION agent is a **domain-bound threshold**: the point where intent, compiled
 context, mounted role, governing template, and carrier execution align into a
 lawful act.
 
-The domain defines the agent, not the other way around. As the project's
-domains mature, templates sharpen, receipts accumulate, and context improves,
-the agent's world changes with it. ION does not evolve agents by editing their
-prompts. It evolves them by evolving the governed structure they act inside.
+The domain defines the agent, not the other way around. As domains mature,
+templates sharpen, receipts accumulate, and context improves, the agent's world
+changes with it. ION does not evolve agents by editing prompts. It evolves them
+by evolving the governed structure they act inside.
+
+```text
+contextual domain
++ specialist role
++ governing templates
++ bounded context package
++ proof return
++ receipt
+= lawful domain movement
+```
+
+A trustworthy agent is not created by prompting a model into obedience. It is
+created by placing a capable model inside a governed domain where valid work is
+easier than drift.
+
+---
+
+## Roleplay Becomes Role Execution
+
+A prompt says:
+
+```text
+Act like this.
+```
+
+ION says:
+
+```text
+You are inside this domain.
+These are the live context objects.
+These templates govern movement here.
+These routes are available.
+This is the authority ceiling.
+This is the proof owed.
+This is how the result can land.
+```
+
+The role is not merely instructed. It emerges from the structure of the domain.
+
+```text
+The role is not a costume placed on the model.
+The role is the shape of movement permitted by the domain.
+```
+
+ION turns AI roleplay into governed role execution.
+
+---
+
+## Templates As Cognitive I/O
+
+A template in ION is not a markdown form. It is the **action type** of the work.
+
+It defines:
+
+```text
+the kind of act being attempted
+the domain where the act belongs
+the context that must be loaded
+the authority ceiling
+the evidence required
+the output class
+the allowed next routes
+the receipt shape
+```
+
+Templates are ION's type system for work. They also expose the structure of AI
+reasoning without needing to expose private chain-of-thought.
+
+The user does not need the model's private stream of consciousness. The user
+needs a trustworthy account of:
+
+```text
+what act is being performed
+why it is allowed
+what context it depends on
+what proof it owes
+what state it can touch
+what happens next
+```
+
+Templates turn private improvisation into public, checkable workflow structure.
+
+---
+
+## Context Packages
+
+A context package is not a summary, memory dump, boot file, or list of paths.
+
+It is the bounded world a mounted role is allowed to act inside for one lawful
+step.
+
+```text
+bounded context package + governing template = lawful execution substrate
+```
+
+A template without context is formalized ignorance.
+
+A context package without a template is informed improvisation.
+
+The template bounds the movement. The context package bounds the world.
+
+ION context is not merely selected. It is inherited from prior accepted acts:
+
+```text
+prior audits
+prior builds
+prior refusals
+prior acceptances
+prior receipts
+prior handoffs
+prior containment decisions
+prior context deltas
+prior template evolutions
+prior domain-route decisions
+```
+
+ION does not merely store context. ION manufactures lawful context through
+template-governed movement.
+
+---
+
+## The Context Graph
+
+ION is not a pile of files.
+
+ION is a living context graph operated through lawful templates.
+
+A meaningful file should be classifiable by:
+
+```text
+identity
+template or schema
+graph node type
+graph region
+system family
+authority status
+operational status
+epistemic status
+owner or reviewer role
+lineage posture
+approved context status
+retrieval zone
+dependencies
+downstream dependents
+receipts
+```
+
+A file is not context because it exists.
+
+A file becomes context when its identity, authority, status, lineage, and
+retrieval role are known.
+
+```text
+ION does not retrieve files.
+ION retrieves governed graph objects.
+```
+
+See [Domain Graph And Fission](ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md).
+
+---
+
+## Domain Fission
+
+A domain is a governed graph region, not a topic folder.
+
+Domains should be able to split when their relationship complexity exceeds one
+agent's lawful context-management capacity.
+
+The split point is not size alone. The split point is context manageability.
+
+A domain may need fission when:
+
+```text
+too many unrelated templates compete inside one domain
+the same agent must carry incompatible burdens
+context packages become too broad or noisy
+neighboring-domain routes become more frequent than local work
+receipts show recurring confusion about ownership
+failure analysis repeatedly points to mixed context
+proof obligations diverge into different classes
+one authority ceiling no longer fits the whole domain
+```
+
+Domain fission is graph maintenance. It prevents ION's own domains from
+becoming prompt-stuffing in disguise.
+
+---
+
+## Receipts And Failure
+
+Receipts are not logs.
+
+A log says:
+
+```text
+Something happened.
+```
+
+A receipt says:
+
+```text
+This happened,
+under this authority,
+from this context,
+through this template,
+with this proof,
+with this result,
+and this is what future work may inherit.
+```
+
+Most agent workflows can detect that something went wrong. They usually cannot
+answer where the failure entered:
+
+```text
+wrong context
+stale source
+wrong role
+wrong template
+missing proof
+bad tool call
+missing approval
+bad handoff
+duplicate action
+unsettled branch conflict
+```
+
+ION makes these stages explicit so failures can be classified at the point of
+entry.
+
+```text
+Prompt patching treats the symptom.
+ION locates the mechanism.
+```
+
+---
+
+## Parallelism Requires Settlement
+
+Fan-out is easy.
+
+Fan-in is where agent systems usually fail.
+
+ION's parallelism is not a swarm free-for-all. Parallel work is one lawful
+parent scope temporarily partitioned into bounded branches. Each branch return
+is a proposal, not truth. The organism is not settled until the parent scope
+performs an explicit settlement act.
+
+Settlement asks:
+
+```text
+Which branch returns were considered?
+Which conflicts were observed?
+Which returns can be accepted independently?
+Which need synthesis?
+Which require escalation?
+What receipt makes the settlement inheritable?
+```
+
+LLMs may draft settlement analysis. ION decides whether that analysis is
+admissible. Steward or human authority decides whether it lands.
+
+See [Parallel Settlement](ION/docs/ION_PARALLEL_SETTLEMENT.md).
+
+---
+
+## Project Ingestion
+
+ION must not assume it only governs itself.
+
+If ION is to help another project, company, workflow, or codebase, it needs a
+lawful way to ingest that external project and organize it into ION-manageable
+form.
+
+This is not the same as uploading a ZIP and asking an AI to understand it.
+
+```text
+external project
+-> quarantine
+-> manifest
+-> structural cartography
+-> context graph genesis
+-> domain partition
+-> template binding
+-> capability map
+-> risk and authority classification
+-> first context packages
+-> receipts
+-> governed work loop
+```
+
+```text
+A project is not ION-manageable because it has been uploaded.
+A project becomes ION-manageable when its structure, authority, domains,
+context nodes, templates, risks, and first receipts have been established.
+```
+
+See [Project Ingestion](ION/docs/ION_PROJECT_INGESTION.md).
+
+---
+
+## Time And Commitment
+
+ION treats time as a governance surface.
+
+Future work is not simply "later." Future work has posture:
+
+```text
+SPECULATIVE
+EMERGING
+LIKELY
+PRECOMMITTED
+COMMITTED
+ENACTED
+COMPLETED
+```
+
+The future schedule is neither fully precomputed nor improvised. It is
+progressively compiled as evidence, readiness, authority, and dependencies
+change.
+
+Memory is not enough. Commitments need lifecycle.
 
 ---
 
@@ -158,17 +598,85 @@ No carrier becomes ION identity.
 
 ---
 
+## The Extension, Daemon, And CLI Runtime
+
+The browser extension is not ION. It is a carrier surface and relay organ.
+
+It gives ChatGPT Browser:
+
+```text
+DOM perception
+YAML/action detection
+artifact attachment
+local daemon connection
+Codex queue visibility
+status rail
+package handling
+return capture
+operator approval UI
+```
+
+The extension is the cockpit. The daemon is the local bridge. Codex is the
+bounded local worker. ION is the law.
+
+The stronger runtime loop is:
+
+```text
+work packet
+-> role profile
+-> context package
+-> rendered prompt
+-> Codex CLI invocation
+-> event log
+-> return
+-> diff
+-> tests
+-> proof gate
+-> receipt
+```
+
+One work packet should create one bounded worker invocation.
+
+---
+
+## GitHub As Data Plane
+
+Git made software safer by making code history inspectable, reversible,
+branchable, and reviewable.
+
+ION applies that principle to AI-mediated work.
+
+| Git | ION |
+| --- | --- |
+| Commit | Receipt |
+| Diff | Proposed state delta |
+| Branch | Alternate work trajectory |
+| Merge | Steward integration |
+| Revert | Rejection / rollback / containment |
+| Blame | Provenance / context proof |
+| Tag | Ratified milestone / accepted state |
+| Pull request | Candidate transition awaiting review |
+| CI check | Proof gate / template action gate |
+| Repository history | Continuity ledger |
+
+GitHub is extremely useful for ION, but it is not ION authority. GitHub is a
+durable mirror and coordination plane. Local ION law, gates, receipts, and
+runtime state remain the authority membrane.
+
+---
+
 ## What Runs
 
 The executable kernel lives at `ION/04_packages/kernel/`. Its job is to make
-state, authority, and transitions **inspectable**.
+state, authority, and transitions inspectable.
 
 Core surfaces:
 
 `ion_status` - `ion_carrier_onboard` - `ion_carrier_continue` -
 `ion_cycle_runner` - `ion_context_proof_gate` - `ion_template_action_gate` -
 `ion_steward_integrate` - `ion_agent_invocation_broker` -
-`ion_codex_queue_runner` - `ion_cockpit_view_model`
+`ion_codex_queue_runner` - `ion_chatops_bridge` -
+`ion_cockpit_view_model`
 
 Active state lives at `ION/05_context/current/`: packets, queues, ledgers,
 receipts, handoffs, and projections maintained as explicit runtime objects,
@@ -178,9 +686,13 @@ not chat transcripts.
 
 ## Full Reference
 
-The deeper public orientation layer lives under `ION/docs/`:
+The public orientation layer lives under `ION/docs/`:
 
 - [ION Fundamentals](ION/docs/ION_FUNDAMENTALS.md)
+- [Continuity Substrate Explainer](ION/docs/ION_CONTINUITY_SUBSTRATE_EXPLAINER.md)
+- [Domain Graph And Fission](ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md)
+- [Parallel Settlement](ION/docs/ION_PARALLEL_SETTLEMENT.md)
+- [Project Ingestion](ION/docs/ION_PROJECT_INGESTION.md)
 - [Template Law](ION/docs/TEMPLATE_LAW.md)
 - [Context System](ION/docs/CONTEXT_SYSTEM.md)
 - [Agents, Roles, And Carriers](ION/docs/AGENTS_ROLES_CARRIERS.md)
@@ -192,7 +704,9 @@ The long-form system reference is the living encyclopedia:
 Use it for wider system history, context architecture, recovery lineage, and
 the larger map. It is not the active startup authority. For live work, mount
 through `ION/REPO_AUTHORITY.md`, `ION/02_architecture/ION_MOUNT_CONTRACT.md`,
-current packets, registries, templates, and receipts.
+current packets, registries, templates, gates, receipts, manifests, and tests.
+
+---
 
 ## Public Collaboration
 
@@ -245,20 +759,49 @@ What receipt, gate, manifest, or test proves the claim?
 
 ---
 
-## Why This Exists
+## AI-Built Provenance
 
-AI work is becoming serious faster than its continuity machinery.
+ION is not only a continuity substrate for AI work. It is also a live artifact
+of that problem.
 
-There are many systems that act alive for a few minutes. Fewer can tell you
-what packet opened the work, what context was compiled, what template governed
-the act, what proof passed, what Steward accepted, what receipt was emitted,
-and what the next worker may inherit.
+To the operator's knowledge, the project artifacts in this repository were
+generated by ChatGPT/Codex carriers under human direction. The human operator
+supplied intent, correction, pressure, taste, review, and authority boundaries.
+The AI carriers produced the written system.
 
-ION is built to make that chain explicit, inspectable, and durable across
-models, tools, sessions, and carriers.
+That matters because ION was built inside the same failure mode it addresses.
+Long-horizon AI work repeatedly encountered context loss, drift, stale
+authority, weak handoff, and uncertainty about what output was allowed to
+change. ION emerged as the governance substrate required to make that work
+continue.
+
+```text
+AI-built.
+Human-steered.
+Proof-gated.
+Receipted.
+```
 
 ---
 
-*A model can answer.*
+## Final Compression
 
-*ION is built to continue.*
+```text
+Prompting tries to make the model behave.
+ION designs the world the model acts inside.
+```
+
+```text
+Git made code safe to evolve.
+ION is trying to make AI work safe to evolve.
+```
+
+```text
+The goal is not to build an AI that never drifts.
+The goal is to build a system where drift has nowhere important to land.
+```
+
+```text
+A model can answer.
+ION is built to continue.
+```
