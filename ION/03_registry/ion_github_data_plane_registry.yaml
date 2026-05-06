@@ -5,17 +5,17 @@ live_execution_authority: false
 github_account_or_org: ION-operations
 recommended_repository:
   owner: ION-operations
-  name: ion-codex
+  name: ION
   visibility: public
   visibility_policy: public_collaboration_repo_private_production_builds_later
-  remote_ssh: git@github.com:ION-operations/ion-codex.git
-  remote_https: https://github.com/ION-operations/ion-codex.git
+  remote_ssh: git@github.com:ION-operations/ION.git
+  remote_https: https://github.com/ION-operations/ION.git
 local_root:
   path: /home/sev/ION - Production/ION_CODEX
   current_mcp_git_present: true
   local_git_required_before_data_plane: false
   active_branch: main
-  active_remote: https://github.com/ION-operations/ion-codex.git
+  active_remote: https://github.com/ION-operations/ION.git
   auth_path: gh_browser_login_with_git_credential_helper
   first_commit_pushed: true
   setup_state: CONFIGURED_INITIAL_BOOTSTRAP_PUSH_COMPLETE_PUBLIC_COLLABORATION_REPO
@@ -109,8 +109,8 @@ human_setup_commands:
   - git init
   - git branch -M main
   - gh auth login --hostname github.com --git-protocol https --scopes repo
-  - gh repo create ION-operations/ion-codex --public --description "ION Codex carrier workspace and data plane" --disable-wiki
-  - git remote add origin https://github.com/ION-operations/ion-codex.git
+  - gh repo create ION-operations/ION --public --description "ION continuity substrate and data plane" --disable-wiki
+  - git remote add origin https://github.com/ION-operations/ION.git
   - git remote -v
 guardrails:
   - no_secret_or_token_storage

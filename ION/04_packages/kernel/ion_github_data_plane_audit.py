@@ -18,6 +18,8 @@ READY_VERDICT = "ION_GITHUB_DATA_PLANE_AUDIT_READY"
 BLOCKED_VERDICT = "ION_GITHUB_DATA_PLANE_AUDIT_BLOCKED"
 
 EXPECTED_REMOTE_URLS = {
+    "https://github.com/ION-operations/ION.git",
+    "git@github.com:ION-operations/ION.git",
     "https://github.com/ION-operations/ion-codex.git",
     "git@github.com:ION-operations/ion-codex.git",
 }
