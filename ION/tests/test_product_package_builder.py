@@ -29,8 +29,15 @@ def test_product_package_builder_creates_required_shape(tmp_path: Path):
     assert (out / "SOURCE_PROVENANCE.json").exists()
     assert (out / "PRODUCT_SOURCE_MAP.json").exists()
     assert (out / "BUILD_RECEIPT.json").exists()
+    assert (out / "ION_ENGINE_COVERAGE_MANIFEST.json").exists()
     assert (out / "ION_ENGINE/doctrine/ION_CORE.md").exists()
     assert (out / "ION_ENGINE/reference/ION_FUNDAMENTALS.md").exists()
+    assert (out / "ION_ENGINE/roles/STEWARD.md").exists()
+    assert (out / "ION_ENGINE/roles/VIZIER.md").exists()
+    assert (out / "ION_ENGINE/templates/PROJECT_INGESTION.md").exists()
+    assert (out / "ION_ENGINE/templates/BUILD.md").exists()
+    assert (out / "ION_ENGINE/runtime_modes/CUSTOM_GPT_SANDBOX.md").exists()
+    assert (out / "ION_ENGINE/runtime_modes/GITHUB_DATA_PLANE.md").exists()
     assert (out / "ION_DATA_SCHEMA/schemas/ion_data_manifest.schema.json").exists()
     assert (out / "ION_CUSTOM_GPT_ADAPTER/GPT_INSTRUCTIONS.md").exists()
     assert (out / "ION_CUSTOM_GPT_ADAPTER/STARTUP_BEHAVIOR.md").exists()
@@ -46,6 +53,8 @@ def test_product_package_builder_creates_required_shape(tmp_path: Path):
     assert (out / "ION_DATA_SCHEMA/schemas/persona_interface.schema.json").exists()
     assert (out / "tools/validate_data_package.py").exists()
     assert (out / "tools/build_starter_zip.py").exists()
+    assert (out / "tests/test_engine_coverage_manifest.py").exists()
+    assert (out / "ION_PRODUCT_DOCS/RUNTIME_BOUNDARY_MATRIX.md").exists()
     assert (out / "dist/ION_CONTINUITY_DATA_BLANK_v1.zip").exists()
 
     provenance = json.loads((out / "SOURCE_PROVENANCE.json").read_text(encoding="utf-8"))
@@ -105,3 +114,26 @@ def test_product_package_starter_zip_uses_data_package_root(tmp_path: Path):
     assert "ION_DATA_MANIFEST.json" in names
     assert "PERSONA/persona_state.json" in names
     assert "ION_STARTER_DATA/ION_DATA_MANIFEST.json" not in names
+
+
+def test_product_package_engine_coverage_manifest_paths_exist(tmp_path: Path):
+    builder = load_builder()
+    out = tmp_path / "ION_PRODUCT_PACKAGE"
+    builder.build_package(out, REPO_ROOT)
+
+    manifest = json.loads((out / "ION_ENGINE_COVERAGE_MANIFEST.json").read_text(encoding="utf-8"))
+    assert manifest["schema_id"] == "ion.product_engine_coverage_manifest.v1"
+    assert manifest["counts"]["role_dossiers"] == len(builder.ROLE_DOSSIERS)
+    assert manifest["counts"]["template_dossiers"] == len(builder.TEMPLATE_DOCS)
+    assert manifest["counts"]["runtime_modes"] == len(builder.RUNTIME_MODES)
+    for paths in manifest["required_groups"].values():
+        for rel in paths:
+            assert (out / rel).exists(), rel
+
+    role_text = (out / "ION_ENGINE/roles/VIZIER.md").read_text(encoding="utf-8")
+    assert "Chief Architect" in role_text
+    assert "Chief_Architect.Interface.Continuity_Architect" in role_text
+
+    boundary = (out / "ION_PRODUCT_DOCS/RUNTIME_BOUNDARY_MATRIX.md").read_text(encoding="utf-8")
+    assert "CUSTOM_GPT_SANDBOX" in boundary
+    assert "not the full local ION runtime" in boundary

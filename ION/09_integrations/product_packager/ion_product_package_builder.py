@@ -29,6 +29,299 @@ SEEDED_DOMAIN_IDS = [
     "RISK_REVIEW",
     "PERSONA_INTERFACE",
 ]
+ROLE_DOSSIERS = [
+    {
+        "id": "STEWARD",
+        "display_name": "Steward",
+        "logical_name": "Orchestration Manager",
+        "true_name": "Operative.Interface.Orchestration_Management",
+        "authority_posture": "BOUNDED_ORCHESTRATION_STEWARD",
+        "rank": "4",
+        "function": "Integration, routing, acceptance, rejection, closure.",
+        "boundary": "May decide what is accepted into package state, but does not bypass receipts or proof.",
+        "filename": "STEWARD.md",
+    },
+    {
+        "id": "RELAY",
+        "display_name": "Relay",
+        "logical_name": "Communications Relay",
+        "true_name": "Supervisor.Communications.Sovereign_Relay",
+        "authority_posture": "BOUNDED_INTENT_RELAY",
+        "rank": "4",
+        "function": "Intake, packet formation, transmission, and handoff.",
+        "boundary": "May shape and transmit intent, but does not accept state.",
+        "filename": "RELAY.md",
+    },
+    {
+        "id": "VIZIER",
+        "display_name": "Vizier",
+        "logical_name": "Chief Architect",
+        "true_name": "Chief_Architect.Interface.Continuity_Architect",
+        "authority_posture": "BURDEN_BEARER_ARCHITECTURAL",
+        "rank": "1.5",
+        "function": "Strategy, route intelligence, horizon pressure, and architectural continuity.",
+        "boundary": "May advise route and architecture, but integration still requires Steward decision.",
+        "filename": "VIZIER.md",
+    },
+    {
+        "id": "MASON",
+        "display_name": "Mason",
+        "logical_name": "Software Architect",
+        "true_name": "Operative.Source.Software_Architect",
+        "authority_posture": "UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE",
+        "rank": "5",
+        "function": "Build coordination, implementation, and technical patch proposal.",
+        "boundary": "May propose/build bounded changes, but does not hold release or acceptance authority.",
+        "filename": "MASON.md",
+    },
+    {
+        "id": "NEMESIS",
+        "display_name": "Nemesis",
+        "logical_name": "Inspector General",
+        "true_name": "Inspector_General.Governance.Inspector_General",
+        "authority_posture": "INDEPENDENT_AUDIT_GATE",
+        "rank": "2",
+        "function": "Adversarial audit, failure-mode attack, and confidence-drift review.",
+        "boundary": "May block or escalate by evidence, but does not replace Steward settlement.",
+        "filename": "NEMESIS.md",
+    },
+    {
+        "id": "VESTIGE",
+        "display_name": "Vestige",
+        "logical_name": "Systems Archaeologist",
+        "true_name": "Supervisor.Intelligence.Systems_Archaeologist",
+        "authority_posture": "STANDING_ARCHAEOLOGY_DAEMON",
+        "rank": "4",
+        "function": "Memory, archaeology, residue interpretation, and drift watch.",
+        "boundary": "May recover historical context, but historical evidence is not current authority by default.",
+        "filename": "VESTIGE.md",
+    },
+    {
+        "id": "SCRIBE",
+        "display_name": "Scribe",
+        "logical_name": "Archivist / Utility",
+        "true_name": "Operative.System.Archivist",
+        "authority_posture": "UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE",
+        "rank": "5",
+        "function": "Structured capture, documentation, ledgers, and summarization.",
+        "boundary": "May document and organize, but cannot turn unaccepted output into state.",
+        "filename": "SCRIBE.md",
+    },
+    {
+        "id": "VICE",
+        "display_name": "Vice",
+        "logical_name": "Contradiction Pressure",
+        "true_name": "Conjugate.Interface.Conjugate_Daimon",
+        "authority_posture": "INTERNAL_CONTRADICTION_PRESSURE",
+        "rank": "1.5",
+        "function": "Discipline, critique, hardening pressure, and overclaim resistance.",
+        "boundary": "May pressure assumptions and claims, but does not become general negativity or veto without proof.",
+        "filename": "VICE.md",
+    },
+    {
+        "id": "IONOLOGIST",
+        "display_name": "Ionologist",
+        "logical_name": "ION Self-Understanding Analyst",
+        "true_name": "Context_Authority.ION.Self_Understanding",
+        "authority_posture": "SEMANTIC_MAINTENANCE",
+        "rank": "context_authority",
+        "function": "Explains what ION is in the current branch and guards against ontology drift.",
+        "boundary": "May clarify system meaning, but source files, manifests, receipts, and tests remain authority.",
+        "filename": "IONOLOGIST.md",
+    },
+    {
+        "id": "CONTEXT_CARTOGRAPHER",
+        "display_name": "Context Cartographer",
+        "logical_name": "Context Package Cartographer",
+        "true_name": "Context_Authority.Graph.Context_Cartographer",
+        "authority_posture": "CONTEXT_SELECTION_GUARDIAN",
+        "rank": "context_authority",
+        "function": "Maps what context a role needs and what proves it received it.",
+        "boundary": "May select and explain context, but does not accept output as state.",
+        "filename": "CONTEXT_CARTOGRAPHER.md",
+    },
+    {
+        "id": "RUNTIME_CARTOGRAPHER",
+        "display_name": "Runtime Cartographer",
+        "logical_name": "Runtime Surface Cartographer",
+        "true_name": "Context_Authority.Runtime.Runtime_Cartographer",
+        "authority_posture": "RUNTIME_TRUTH_MAPPING",
+        "rank": "context_authority",
+        "function": "Maps how ION actually runs on a carrier with current limits.",
+        "boundary": "May report runtime truth, but cannot grant production or live execution authority.",
+        "filename": "RUNTIME_CARTOGRAPHER.md",
+    },
+    {
+        "id": "CANON_LIBRARIAN",
+        "display_name": "Canon Librarian",
+        "logical_name": "Canon And Source Custodian",
+        "true_name": "Context_Authority.Canon.Canon_Librarian",
+        "authority_posture": "SOURCE_STATUS_CUSTODY",
+        "rank": "context_authority",
+        "function": "Classifies live authority, donor evidence, stale sources, and reference material.",
+        "boundary": "May classify source posture, but cannot silently discard state-bearing artifacts.",
+        "filename": "CANON_LIBRARIAN.md",
+    },
+    {
+        "id": "TEMPLATE_CURATOR",
+        "display_name": "Template Curator",
+        "logical_name": "Template Law Curator",
+        "true_name": "Context_Authority.Template.Template_Curator",
+        "authority_posture": "TEMPLATE_LAW_MAINTENANCE",
+        "rank": "context_authority",
+        "function": "Maintains the template set and identifies template gaps.",
+        "boundary": "May propose template evolution, but new template types require governed receipt.",
+        "filename": "TEMPLATE_CURATOR.md",
+    },
+]
+TEMPLATE_DOCS = [
+    {
+        "id": "PROJECT_INGESTION",
+        "title": "Project Ingestion",
+        "purpose": "Convert an external file pile into ION-manageable context graph state.",
+        "requires": ["external project package", "quarantine posture", "root integrity evidence"],
+        "proof": ["manifest", "cartography", "domain partition", "risk classification", "ingestion receipt"],
+        "filename": "PROJECT_INGESTION.md",
+    },
+    {
+        "id": "FIRST_RUN_INTENT_CAPTURE",
+        "title": "First-Run Intent Capture",
+        "purpose": "Start naturally with the user while seeding project memory behind the scenes.",
+        "requires": ["persona state", "seeded domains", "user-provided initial intent"],
+        "proof": ["captured objective", "open loops", "first receipt or explicit unsaved-state warning"],
+        "filename": "FIRST_RUN_INTENT_CAPTURE.md",
+    },
+    {
+        "id": "CONTEXT_PACKAGE",
+        "title": "Context Package",
+        "purpose": "Build the bounded working world for one lawful act.",
+        "requires": ["domain", "role", "template", "source graph nodes"],
+        "proof": ["included nodes", "excluded nodes", "authority scope", "receipt path"],
+        "filename": "CONTEXT_PACKAGE.md",
+    },
+    {
+        "id": "AUDIT",
+        "title": "Audit",
+        "purpose": "Inspect claims, state, or proposed changes for defects and missing proof.",
+        "requires": ["audit target", "expected invariant", "evidence surface"],
+        "proof": ["findings", "severity", "file/object references", "pass/block recommendation"],
+        "filename": "AUDIT.md",
+    },
+    {
+        "id": "BUILD",
+        "title": "Build",
+        "purpose": "Create or modify bounded implementation artifacts.",
+        "requires": ["bounded objective", "allowed paths", "forbidden paths", "validation plan"],
+        "proof": ["changed files", "tests run", "diff summary", "receipt or return packet"],
+        "filename": "BUILD.md",
+    },
+    {
+        "id": "HANDOFF",
+        "title": "Handoff",
+        "purpose": "Make continuation reproducible for the next worker or carrier.",
+        "requires": ["current state", "open questions", "required reads", "next objective"],
+        "proof": ["handoff packet", "manifest", "checksums where applicable", "continuation receipt"],
+        "filename": "HANDOFF.md",
+    },
+    {
+        "id": "RATIFICATION",
+        "title": "Ratification",
+        "purpose": "Convert a candidate state transition into accepted state under Steward authority.",
+        "requires": ["proposal", "proof", "authority path", "integration decision"],
+        "proof": ["accepted delta", "rejected alternatives", "receipt", "next-context effect"],
+        "filename": "RATIFICATION.md",
+    },
+    {
+        "id": "RECEIPT_APPEND",
+        "title": "Receipt Append",
+        "purpose": "Record an accepted or explicitly rejected movement in inheritable form.",
+        "requires": ["event", "authority", "context used", "decision"],
+        "proof": ["receipt id", "created_at", "accepted_as_state", "next_context_delta"],
+        "filename": "RECEIPT_APPEND.md",
+    },
+    {
+        "id": "CONTINUITY_EXPORT",
+        "title": "Continuity Export",
+        "purpose": "Package current accepted data state for future continuation.",
+        "requires": ["valid data package", "receipt ledger", "manifest", "artifact custody"],
+        "proof": ["zip manifest", "sha256", "export receipt", "root-shape validation"],
+        "filename": "CONTINUITY_EXPORT.md",
+    },
+    {
+        "id": "PARALLEL_SETTLEMENT",
+        "title": "Parallel Settlement",
+        "purpose": "Decide how branch returns rejoin a parent scope.",
+        "requires": ["parent scope", "branch returns", "conflict map", "proof from each branch"],
+        "proof": ["accepted/rejected/deferred branches", "merge proposal if needed", "settlement receipt"],
+        "filename": "PARALLEL_SETTLEMENT.md",
+    },
+    {
+        "id": "DOMAIN_FISSION",
+        "title": "Domain Fission",
+        "purpose": "Split a graph region when relationship complexity exceeds context manageability.",
+        "requires": ["complexity pressure evidence", "node clusters", "authority impact"],
+        "proof": ["new child domains", "routing edges", "lineage preservation", "domain_fission_receipt"],
+        "filename": "DOMAIN_FISSION.md",
+    },
+    {
+        "id": "STATE_UPDATE_PROPOSAL",
+        "title": "State Update Proposal",
+        "purpose": "Draft a change to portable data state without silently accepting it.",
+        "requires": ["prior state", "proposed delta", "reason", "authority boundary"],
+        "proof": ["diff-like description", "decision requirement", "receipt requirement", "export path"],
+        "filename": "STATE_UPDATE_PROPOSAL.md",
+    },
+]
+RUNTIME_MODES = [
+    {
+        "id": "CUSTOM_GPT_SANDBOX",
+        "title": "Custom GPT Sandbox",
+        "purpose": "Browser-sandbox operation over a mounted product package and continuity data zip.",
+        "allowed": ["inspect mounted files", "draft state updates", "append receipts inside exported data package"],
+        "forbidden": ["claim persistent platform memory as state", "mutate live ION repo", "execute local daemon actions"],
+        "filename": "CUSTOM_GPT_SANDBOX.md",
+    },
+    {
+        "id": "LOCAL_DAEMON",
+        "title": "Local Daemon",
+        "purpose": "Local bridge for approved package, artifact, queue, and receipt operations.",
+        "allowed": ["serve bounded endpoints", "write approved inbox/receipt artifacts", "expose status"],
+        "forbidden": ["unapproved source patching", "secret exposure", "silent live execution"],
+        "filename": "LOCAL_DAEMON.md",
+    },
+    {
+        "id": "BROWSER_EXTENSION",
+        "title": "Browser Extension",
+        "purpose": "ChatGPT page perception, approval UI, artifact bridge, and operator cockpit surface.",
+        "allowed": ["detect page elements", "show status", "request approved daemon actions", "assist visible workflows"],
+        "forbidden": ["silent send", "hidden file upload", "unbounded DOM automation", "state acceptance"],
+        "filename": "BROWSER_EXTENSION.md",
+    },
+    {
+        "id": "CODEX_CLI_WORKER",
+        "title": "Codex CLI Worker",
+        "purpose": "Bounded local filesystem implementation and validation worker.",
+        "allowed": ["read/edit scoped files", "run tests", "return proof-bearing diff"],
+        "forbidden": ["treat raw output as state", "push/deploy without authority", "widen scope silently"],
+        "filename": "CODEX_CLI_WORKER.md",
+    },
+    {
+        "id": "GITHUB_DATA_PLANE",
+        "title": "GitHub Data Plane",
+        "purpose": "Durable public collaboration, branch, PR, issue, and review surface.",
+        "allowed": ["mirror branch state", "carry review history", "publish docs/artifacts intentionally"],
+        "forbidden": ["become runtime authority", "represent unpushed local truth", "expose secrets/runtime credentials"],
+        "filename": "GITHUB_DATA_PLANE.md",
+    },
+    {
+        "id": "FULL_LOCAL_ION",
+        "title": "Full Local ION",
+        "purpose": "The live local repo and runtime organism with kernel, context, daemon, UI, and receipts.",
+        "allowed": ["run kernel validations", "operate local queues under policy", "generate product projections"],
+        "forbidden": ["claim product package is source truth", "bypass active gates", "erase state without custody"],
+        "filename": "FULL_LOCAL_ION.md",
+    },
+]
 
 
 def repo_root_from_script() -> Path:
@@ -105,6 +398,89 @@ def schema(schema_id: str, title: str, properties: dict[str, Any], required: lis
     }
 
 
+def bullet_lines(items: list[str]) -> str:
+    return "\n".join(f"- {item}" for item in items)
+
+
+def role_markdown(role: dict[str, str]) -> str:
+    return f"""
+    # {role["id"]} Role Dossier
+
+    ## Identity
+
+    - Display name: {role["display_name"]}
+    - Logical name: {role["logical_name"]}
+    - True name: `{role["true_name"]}`
+    - Authority posture: `{role["authority_posture"]}`
+    - Rank: `{role["rank"]}`
+
+    ## Function
+
+    {role["function"]}
+
+    ## Boundary
+
+    {role["boundary"]}
+
+    ## Product-Package Note
+
+    This dossier is a productized projection. Active role authority still comes
+    from live ION source truth, carrier profiles, mount contracts, packets,
+    gates, and receipts.
+    """
+
+
+def template_markdown(template: dict[str, Any]) -> str:
+    return f"""
+    # {template["title"]} Template
+
+    Template id: `{template["id"]}`
+
+    ## Purpose
+
+    {template["purpose"]}
+
+    ## Required Inputs
+
+    {bullet_lines(template["requires"])}
+
+    ## Proof Owed
+
+    {bullet_lines(template["proof"])}
+
+    ## Boundary
+
+    This template describes action shape. It does not accept state by itself.
+    Acceptance still requires proof, decision, receipt, and the relevant
+    product/runtime authority boundary.
+    """
+
+
+def runtime_mode_markdown(mode: dict[str, Any]) -> str:
+    return f"""
+    # {mode["title"]} Runtime Mode
+
+    Runtime mode id: `{mode["id"]}`
+
+    ## Purpose
+
+    {mode["purpose"]}
+
+    ## Allowed In This Mode
+
+    {bullet_lines(mode["allowed"])}
+
+    ## Forbidden In This Mode
+
+    {bullet_lines(mode["forbidden"])}
+
+    ## Boundary
+
+    Runtime modes are capability boundaries. They do not override ION law,
+    receipts, or human/Steward gates.
+    """
+
+
 def build_starter_zip(output_root: Path) -> dict[str, Any]:
     starter_root = output_root / "ION_STARTER_DATA"
     dist_root = output_root / "dist"
@@ -141,6 +517,24 @@ def product_source_map() -> dict[str, Any]:
                 "ION/docs/ION_PARALLEL_SETTLEMENT.md",
             ],
             "curation_status": "first_scaffold_spec",
+        },
+        "ION_ENGINE_COVERAGE_MANIFEST.json": {
+            "source": "generated_engine_coverage_projection",
+            "source_paths": [
+                "README.md",
+                "ION/docs/AGENTS_ROLES_CARRIERS.md",
+                "ION/docs/TEMPLATE_LAW.md",
+                "ION/docs/ION_FUNDAMENTALS.md",
+            ],
+            "curation_status": "coverage_manifest_first_slice",
+        },
+        "ION_PRODUCT_DOCS/RUNTIME_BOUNDARY_MATRIX.md": {
+            "source": "generated_runtime_boundary_projection",
+            "source_paths": [
+                "ION/docs/AGENTS_ROLES_CARRIERS.md",
+                "ION/docs/GITHUB_BRANCHING_AND_LIVE_STATE_POLICY.md",
+            ],
+            "curation_status": "runtime_boundary_first_slice",
         },
         "ION_ENGINE/doctrine/ION_CORE.md": {
             "source": "curated_product_projection",
@@ -227,6 +621,21 @@ def product_source_map() -> dict[str, Any]:
             "source_paths": ["ION/docs/AGENTS_ROLES_CARRIERS.md"],
             "curation_status": "full_reference_projection",
         },
+        "ION_ENGINE/roles/*.md": {
+            "source": "generated_role_dossiers",
+            "source_paths": ["README.md", "ION/docs/AGENTS_ROLES_CARRIERS.md"],
+            "curation_status": "role_projection_first_slice",
+        },
+        "ION_ENGINE/templates/*.md": {
+            "source": "generated_template_dossiers",
+            "source_paths": ["ION/docs/TEMPLATE_LAW.md", "ION/docs/ION_FUNDAMENTALS.md"],
+            "curation_status": "template_projection_first_slice",
+        },
+        "ION_ENGINE/runtime_modes/*.md": {
+            "source": "generated_runtime_mode_dossiers",
+            "source_paths": ["ION/docs/AGENTS_ROLES_CARRIERS.md", "ION/docs/GITHUB_BRANCHING_AND_LIVE_STATE_POLICY.md"],
+            "curation_status": "runtime_mode_projection_first_slice",
+        },
     }
 
 
@@ -241,11 +650,13 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
     for directory in [
         "ION_ENGINE/doctrine",
         "ION_ENGINE/laws",
+        "ION_ENGINE/roles",
         "ION_ENGINE/templates",
         "ION_ENGINE/context_graph",
         "ION_ENGINE/receipts",
         "ION_ENGINE/ingestion",
         "ION_ENGINE/settlement",
+        "ION_ENGINE/runtime_modes",
         "ION_ENGINE/projections",
         "ION_ENGINE/reference",
         "ION_DATA_SCHEMA/schemas",
@@ -411,6 +822,44 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
     }
     write_json(output_root / "SOURCE_PROVENANCE.json", provenance)
     write_json(output_root / "PRODUCT_SOURCE_MAP.json", product_source_map())
+    role_paths = [f"ION_ENGINE/roles/{role['filename']}" for role in ROLE_DOSSIERS]
+    template_paths = [f"ION_ENGINE/templates/{template['filename']}" for template in TEMPLATE_DOCS]
+    runtime_mode_paths = [f"ION_ENGINE/runtime_modes/{mode['filename']}" for mode in RUNTIME_MODES]
+    coverage_manifest = {
+        "schema_id": "ion.product_engine_coverage_manifest.v1",
+        "coverage_status": "first_product_projection_not_runtime_complete",
+        "generated_at": generated_at,
+        "source_commit": source_commit,
+        "counts": {
+            "role_dossiers": len(role_paths),
+            "template_dossiers": len(template_paths),
+            "runtime_modes": len(runtime_mode_paths),
+        },
+        "required_groups": {
+            "engine_law": [
+                "ION_ENGINE/doctrine/ION_CORE.md",
+                "ION_ENGINE/laws/SIX_LAWS.md",
+                "ION_ENGINE/receipts/RECEIPT_LAW.md",
+                "ION_ENGINE/projections/PROJECTION_LADDER.md",
+            ],
+            "roles": role_paths,
+            "templates": template_paths,
+            "runtime_modes": runtime_mode_paths,
+            "product_boundaries": [
+                "ION_PRODUCT_DOCS/RUNTIME_BOUNDARY_MATRIX.md",
+                "ION_CUSTOM_GPT_ADAPTER/refusal_and_boundary_rules.md",
+            ],
+        },
+        "known_not_included": [
+            "full executable local daemon",
+            "Codex CLI broker implementation",
+            "browser extension runtime",
+            "all live kernel Python tools",
+            "schema migrations beyond v1",
+        ],
+        "authority": "coverage_manifest_for_generated_projection_not_source_truth",
+    }
+    write_json(output_root / "ION_ENGINE_COVERAGE_MANIFEST.json", coverage_manifest)
 
     write_text(
         output_root / "ION_ENGINE/README.md",
@@ -468,6 +917,33 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         """,
     )
     write_text(
+        output_root / "ION_ENGINE/roles/README.md",
+        """
+        # Role Dossiers
+
+        These dossiers explain the public/product projection of ION roles. They
+        include true names and logical names so users do not experience the
+        role language as unexplained mysticism.
+
+        A role is not a model identity. It is a bounded function mounted inside
+        a governed domain and carrier.
+        """,
+    )
+    for role in ROLE_DOSSIERS:
+        write_text(output_root / "ION_ENGINE/roles" / role["filename"], role_markdown(role))
+    write_text(
+        output_root / "ION_ENGINE/templates/README.md",
+        """
+        # Template Dossiers
+
+        Templates are ION's action types. They define what kind of act is
+        happening, what context is required, what proof is owed, and what
+        receipt makes the result inheritable.
+        """,
+    )
+    for template in TEMPLATE_DOCS:
+        write_text(output_root / "ION_ENGINE/templates" / template["filename"], template_markdown(template))
+    write_text(
         output_root / "ION_ENGINE/context_graph/DOMAIN_GRAPH_AND_FISSION.md",
         """
         # Domain Graph And Fission
@@ -517,6 +993,18 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         that decides how branch returns rejoin the canonical workflow.
         """,
     )
+    write_text(
+        output_root / "ION_ENGINE/runtime_modes/README.md",
+        """
+        # Runtime Modes
+
+        Runtime modes explain what each carrier or execution surface may do in
+        the product projection. They are capability boundaries, not identities
+        and not acceptance authority.
+        """,
+    )
+    for mode in RUNTIME_MODES:
+        write_text(output_root / "ION_ENGINE/runtime_modes" / mode["filename"], runtime_mode_markdown(mode))
     write_text(
         output_root / "ION_ENGINE/projections/PROJECTION_LADDER.md",
         """
@@ -1193,12 +1681,16 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         {
             "schema_id": "ion.custom_gpt_knowledge_manifest.v1",
             "engine_docs": [
+                "ION_ENGINE_COVERAGE_MANIFEST.json",
                 "ION_ENGINE/doctrine/ION_CORE.md",
                 "ION_ENGINE/laws/SIX_LAWS.md",
                 "ION_ENGINE/templates/TEMPLATE_LAW.md",
+                *role_paths,
+                *template_paths,
                 "ION_ENGINE/context_graph/DOMAIN_GRAPH_AND_FISSION.md",
                 "ION_ENGINE/ingestion/PROJECT_INGESTION.md",
                 "ION_ENGINE/settlement/PARALLEL_SETTLEMENT.md",
+                *runtime_mode_paths,
                 "ION_ENGINE/projections/PROJECTION_LADDER.md",
                 "ION_ENGINE/reference/README.md",
                 "ION_ENGINE/reference/ION_FUNDAMENTALS.md",
@@ -1219,6 +1711,9 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
                 "ION_CUSTOM_GPT_ADAPTER/STATE_UPDATE_PROTOCOL.md",
                 "ION_CUSTOM_GPT_ADAPTER/EXPORT_PROTOCOL.md",
                 "ION_CUSTOM_GPT_ADAPTER/refusal_and_boundary_rules.md",
+            ],
+            "product_docs": [
+                "ION_PRODUCT_DOCS/RUNTIME_BOUNDARY_MATRIX.md",
             ],
         },
     )
@@ -1261,6 +1756,40 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
 
         Include `FIRST_RUN_BEHAVIOR.md` and `PERSONA_INTERFACE_RULES.md` so the
         GPT does not expose protocol machinery as its default user experience.
+        """,
+    )
+    runtime_boundary_rows = "\n".join(
+        f"| `{mode['id']}` | {mode['purpose']} | {', '.join(mode['allowed'])} | {', '.join(mode['forbidden'])} |"
+        for mode in RUNTIME_MODES
+    )
+    write_text(
+        output_root / "ION_PRODUCT_DOCS/RUNTIME_BOUNDARY_MATRIX.md",
+        f"""
+        # Runtime Boundary Matrix
+
+        This matrix keeps the product package honest about what each runtime
+        mode can and cannot do.
+
+        | Runtime mode | Purpose | Allowed | Forbidden |
+        | --- | --- | --- | --- |
+        {runtime_boundary_rows}
+
+        ## Product Boundary
+
+        The product package can teach a Custom GPT how to operate portable ION
+        continuity data. It is not the full local ION runtime, does not include
+        the browser extension implementation, and does not grant Codex, daemon,
+        GitHub, local filesystem, or production authority by itself.
+
+        ## User-Facing Compression
+
+        In ordinary use, describe these boundaries as:
+
+        ```text
+        I can keep project memory organized here, and I can export a project
+        memory pack for continuation. Local execution, browser automation, and
+        GitHub actions require their own connected tools and approvals.
+        ```
         """,
     )
     write_text(
@@ -1556,6 +2085,38 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
             assert "ION_STARTER_DATA/ION_DATA_MANIFEST.json" not in names
         ''',
     )
+    write_text(
+        output_root / "tests/test_engine_coverage_manifest.py",
+        r'''
+        import json
+        from pathlib import Path
+
+
+        ROOT = Path(__file__).resolve().parents[1]
+
+
+        def test_engine_coverage_manifest_paths_exist():
+            manifest = json.loads((ROOT / "ION_ENGINE_COVERAGE_MANIFEST.json").read_text(encoding="utf-8"))
+            assert manifest["schema_id"] == "ion.product_engine_coverage_manifest.v1"
+            for paths in manifest["required_groups"].values():
+                for rel in paths:
+                    assert (ROOT / rel).exists(), rel
+
+
+        def test_role_template_and_runtime_coverage_counts():
+            manifest = json.loads((ROOT / "ION_ENGINE_COVERAGE_MANIFEST.json").read_text(encoding="utf-8"))
+            assert manifest["counts"]["role_dossiers"] >= 8
+            assert manifest["counts"]["template_dossiers"] >= 8
+            assert manifest["counts"]["runtime_modes"] >= 5
+
+
+        def test_runtime_boundary_matrix_exists():
+            text = (ROOT / "ION_PRODUCT_DOCS/RUNTIME_BOUNDARY_MATRIX.md").read_text(encoding="utf-8")
+            assert "CUSTOM_GPT_SANDBOX" in text
+            assert "GITHUB_DATA_PLANE" in text
+            assert "not the full local ION runtime" in text
+        ''',
+    )
 
     zip_manifest = build_starter_zip(output_root)
     build_receipt = {
@@ -1571,6 +2132,7 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         "source_commit": source_commit,
         "validation": {
             "starter_data_shape": "prepared",
+            "engine_coverage_manifest": "prepared",
             "schema_examples": "draft",
             "zip_roundtrip": "prepared",
         },

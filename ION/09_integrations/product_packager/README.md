@@ -26,6 +26,7 @@ Required generated provenance files:
 - `SOURCE_PROVENANCE.json`
 - `PRODUCT_SOURCE_MAP.json`
 - `BUILD_RECEIPT.json`
+- `ION_ENGINE_COVERAGE_MANIFEST.json`
 
 Run from the repo root:
 
@@ -39,3 +40,7 @@ builder under `tools/`.
 The source folder remains `ION_STARTER_DATA/`, but the generated continuity
 zip places `ION_DATA_MANIFEST.json` at zip root so a browser AI sandbox can
 mount it without searching through an extra wrapper directory.
+
+The engine coverage manifest tracks generated role dossiers, template dossiers,
+runtime-mode dossiers, and the runtime boundary matrix so the package is
+auditable as a product projection instead of a hand-curated folder.
