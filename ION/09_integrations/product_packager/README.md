@@ -18,7 +18,7 @@ The first scaffold separates:
 - `ION_ENGINE/` - stable law and method projection
 - `ION_DATA_SCHEMA/` - portable data zip compatibility contract
 - `ION_CUSTOM_GPT_ADAPTER/` - browser-sandbox carrier behavior
-- `ION_STARTER_DATA/` - blank portable continuity state
+- `ION_STARTER_DATA/` - seeded portable continuity state
 - `ION_PRODUCT_DOCS/` - operator-facing product instructions
 
 Required generated provenance files:
@@ -35,3 +35,7 @@ python3 ION/09_integrations/product_packager/ion_product_package_builder.py --ou
 
 The generated package includes its own lightweight validator and starter zip
 builder under `tools/`.
+
+The source folder remains `ION_STARTER_DATA/`, but the generated continuity
+zip places `ION_DATA_MANIFEST.json` at zip root so a browser AI sandbox can
+mount it without searching through an extra wrapper directory.

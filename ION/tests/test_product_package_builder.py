@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import zipfile
 from pathlib import Path
 
 
@@ -33,12 +34,16 @@ def test_product_package_builder_creates_required_shape(tmp_path: Path):
     assert (out / "ION_DATA_SCHEMA/schemas/ion_data_manifest.schema.json").exists()
     assert (out / "ION_CUSTOM_GPT_ADAPTER/GPT_INSTRUCTIONS.md").exists()
     assert (out / "ION_CUSTOM_GPT_ADAPTER/STARTUP_BEHAVIOR.md").exists()
+    assert (out / "ION_CUSTOM_GPT_ADAPTER/FIRST_RUN_BEHAVIOR.md").exists()
+    assert (out / "ION_CUSTOM_GPT_ADAPTER/PERSONA_INTERFACE_RULES.md").exists()
     assert (out / "ION_CUSTOM_GPT_ADAPTER/STATE_UPDATE_PROTOCOL.md").exists()
     assert (out / "ION_CUSTOM_GPT_ADAPTER/templates/MOUNT_REPORT_TEMPLATE.md").exists()
     assert (out / "ION_STARTER_DATA/ION_DATA_MANIFEST.json").exists()
     assert (out / "ION_STARTER_DATA/PACKETS/open_packets.json").exists()
     assert (out / "ION_STARTER_DATA/DECISIONS/decision_ledger.json").exists()
     assert (out / "ION_STARTER_DATA/ARTIFACTS/artifact_manifest.json").exists()
+    assert (out / "ION_STARTER_DATA/PERSONA/persona_state.json").exists()
+    assert (out / "ION_DATA_SCHEMA/schemas/persona_interface.schema.json").exists()
     assert (out / "tools/validate_data_package.py").exists()
     assert (out / "tools/build_starter_zip.py").exists()
     assert (out / "dist/ION_CONTINUITY_DATA_BLANK_v1.zip").exists()
@@ -67,6 +72,36 @@ def test_product_package_starter_manifest_is_candidate_state(tmp_path: Path):
     packets = json.loads((out / "ION_STARTER_DATA/PACKETS/open_packets.json").read_text(encoding="utf-8"))
     decisions = json.loads((out / "ION_STARTER_DATA/DECISIONS/decision_ledger.json").read_text(encoding="utf-8"))
     artifacts = json.loads((out / "ION_STARTER_DATA/ARTIFACTS/artifact_manifest.json").read_text(encoding="utf-8"))
+    persona = json.loads((out / "ION_STARTER_DATA/PERSONA/persona_state.json").read_text(encoding="utf-8"))
     assert packets["schema_id"] == "ion.open_packets.v1"
     assert decisions["schema_id"] == "ion.decision_ledger.v1"
     assert artifacts["schema_id"] == "ion.artifact_manifest.v1"
+    assert persona["schema_id"] == "ion.persona_interface.v1"
+
+
+def test_product_package_starter_state_is_seeded_for_first_run(tmp_path: Path):
+    builder = load_builder()
+    out = tmp_path / "ION_PRODUCT_PACKAGE"
+    builder.build_package(out, REPO_ROOT)
+
+    domains = json.loads((out / "ION_STARTER_DATA/DOMAINS/domain_registry.json").read_text(encoding="utf-8"))
+    domain_ids = {domain["domain_id"] for domain in domains["domains"]}
+    assert set(builder.SEEDED_DOMAIN_IDS) <= domain_ids
+
+    first_run = (out / "ION_CUSTOM_GPT_ADAPTER/FIRST_RUN_BEHAVIOR.md").read_text(encoding="utf-8")
+    assert "What are we working on?" in first_run
+    assert "No continuity package is mounted" in first_run
+    assert "Do not open with" in first_run
+
+
+def test_product_package_starter_zip_uses_data_package_root(tmp_path: Path):
+    builder = load_builder()
+    out = tmp_path / "ION_PRODUCT_PACKAGE"
+    result = builder.build_package(out, REPO_ROOT)
+
+    assert result["zip_manifest"]["zip_root"] == "data_package_root"
+    with zipfile.ZipFile(out / "dist/ION_CONTINUITY_DATA_BLANK_v1.zip") as archive:
+        names = set(archive.namelist())
+    assert "ION_DATA_MANIFEST.json" in names
+    assert "PERSONA/persona_state.json" in names
+    assert "ION_STARTER_DATA/ION_DATA_MANIFEST.json" not in names

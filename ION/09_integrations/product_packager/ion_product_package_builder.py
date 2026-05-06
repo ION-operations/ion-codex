@@ -19,6 +19,16 @@ from typing import Any
 
 PRODUCT_VERSION = "0.1.0"
 DEFAULT_OUTPUT = Path("/home/sev/ION_PRODUCT_PACKAGE")
+SEEDED_DOMAIN_IDS = [
+    "USER_INTENT",
+    "PROJECT_STATE",
+    "DECISIONS",
+    "OPEN_LOOPS",
+    "ARTIFACTS",
+    "CONTEXT_GRAPH",
+    "RISK_REVIEW",
+    "PERSONA_INTERFACE",
+]
 
 
 def repo_root_from_script() -> Path:
@@ -103,11 +113,12 @@ def build_starter_zip(output_root: Path) -> dict[str, Any]:
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for path in sorted(starter_root.rglob("*")):
             if path.is_file():
-                archive.write(path, path.relative_to(starter_root.parent).as_posix())
+                archive.write(path, path.relative_to(starter_root).as_posix())
     manifest = {
         "artifact": zip_path.name,
         "artifact_type": "starter_continuity_data_zip",
         "release_status": "non_release_scaffold",
+        "zip_root": "data_package_root",
         "sha256": sha256_file(zip_path),
         "size_bytes": zip_path.stat().st_size,
     }
@@ -156,10 +167,25 @@ def product_source_map() -> dict[str, Any]:
             "source_paths": ["ION/06_intelligence/orchestration/custom_gpt/", "ION/docs/ION_FUNDAMENTALS.md"],
             "curation_status": "adapter_draft",
         },
+        "ION_CUSTOM_GPT_ADAPTER/FIRST_RUN_BEHAVIOR.md": {
+            "source": "generated_adapter_projection",
+            "source_paths": ["ION/docs/ION_FUNDAMENTALS.md"],
+            "curation_status": "first_run_ux_projection",
+        },
+        "ION_CUSTOM_GPT_ADAPTER/PERSONA_INTERFACE_RULES.md": {
+            "source": "generated_adapter_projection",
+            "source_paths": ["ION/docs/ION_FUNDAMENTALS.md"],
+            "curation_status": "persona_interface_projection",
+        },
         "ION_STARTER_DATA/ION_DATA_MANIFEST.json": {
-            "source": "generated_blank_state",
+            "source": "generated_seeded_state",
             "source_paths": [],
             "curation_status": "starter_data_v1_draft",
+        },
+        "ION_STARTER_DATA/PERSONA/persona_state.json": {
+            "source": "generated_seeded_state",
+            "source_paths": [],
+            "curation_status": "persona_interface_seed",
         },
         "ION_ENGINE/reference/ION_FUNDAMENTALS.md": {
             "source": "copied_reference_projection",
@@ -234,6 +260,7 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         "ION_STARTER_DATA/RECEIPTS",
         "ION_STARTER_DATA/DECISIONS",
         "ION_STARTER_DATA/ARTIFACTS",
+        "ION_STARTER_DATA/PERSONA",
         "ION_STARTER_DATA/INBOX",
         "ION_STARTER_DATA/OUTBOX",
         "ION_STARTER_DATA/ARCHIVE",
@@ -291,7 +318,7 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         - `ION_ENGINE/` - stable law and method projection.
         - `ION_DATA_SCHEMA/` - compatibility contract for portable data zips.
         - `ION_CUSTOM_GPT_ADAPTER/` - Custom GPT operating instructions.
-        - `ION_STARTER_DATA/` - blank portable continuity state.
+        - `ION_STARTER_DATA/` - seeded portable continuity state.
         - `ION_PRODUCT_DOCS/` - operator-facing product docs.
         - `tools/` - package validation and starter zip helpers.
         - `dist/` - generated artifacts only.
@@ -336,7 +363,8 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         ## Lifecycle
 
         1. No data zip is mounted.
-        2. Adapter offers to create a new continuity package.
+        2. Adapter quietly initializes seeded starter continuity and asks what
+           the user is working on.
         3. Data package is initialized from `ION_STARTER_DATA/`.
         4. Meaningful work appends a receipt and updates current state.
         5. Adapter exports a new continuity data zip.
@@ -363,6 +391,8 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         - An exported data zip must preserve the manifest, state, graph,
           packets, receipt ledger, decisions, and artifacts custody.
         - Migration between schema versions requires a migration receipt.
+        - First-run UX should expose continuity benefits, not ION internals.
+        - User-facing language should say `project memory pack` where possible.
         """,
     )
 
@@ -638,6 +668,17 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
             },
             ["schema_id", "decisions"],
         ),
+        "persona_interface.schema.json": schema(
+            "https://ion.local/schemas/persona_interface.v1.json",
+            "ION Persona Interface",
+            {
+                "schema_id": {"const": "ion.persona_interface.v1"},
+                "user_facing_default": {"type": "string"},
+                "translation_map": {"type": "object"},
+                "hidden_domain_ids": {"type": "array"},
+            },
+            ["schema_id", "user_facing_default", "translation_map", "hidden_domain_ids"],
+        ),
     }
     for name, payload in schemas.items():
         write_json(output_root / "ION_DATA_SCHEMA/schemas" / name, payload)
@@ -662,10 +703,13 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         """
         # ION Starter Data
 
-        This is blank portable continuity state.
+        This is seeded portable continuity state.
 
         It is not the engine. It is not source truth. It is the continuity body
         that a compatible AI carrier may inspect, update by receipt, and export.
+
+        The user does not need to see these internals during first run. The AI
+        carrier uses them to make continuity feel natural.
         """,
     )
     write_json(
@@ -673,9 +717,9 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         {
             "schema_id": "ion.current_state.v1",
             "project_id": "blank_project",
-            "current_objective": "No active objective has been accepted yet.",
+            "current_objective": "Discover what the user wants to work on and form the first useful project memory.",
             "open_packets": [],
-            "warnings": ["starter_state_non_release_scaffold"],
+            "warnings": ["seeded_starter_state_non_release_scaffold"],
         },
     )
     write_text(
@@ -683,10 +727,18 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         """
         # Current State
 
-        No accepted project objective exists yet.
+        No accepted project objective exists yet, but the starter package is
+        seeded for natural first-run continuity.
 
-        The first lawful move is to create or ingest a project through a packet,
-        context package, proof path, Steward decision, and receipt.
+        The first user-facing move is simply:
+
+        ```text
+        What are we working on?
+        ```
+
+        Behind the scenes, the carrier should capture user intent, project
+        state, decisions, open loops, artifacts, risks, and useful context as
+        receipt-backed project memory.
         """,
     )
     write_json(
@@ -695,22 +747,95 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
             "schema_id": "ion.domain_registry.v1",
             "domains": [
                 {
-                    "domain_id": "root",
-                    "name": "Root Project Domain",
+                    "domain_id": "USER_INTENT",
+                    "name": "User Intent",
                     "status": "provisional",
                     "authority_ceiling": "no_live_execution",
-                    "description": "Initial routing shell for a blank project.",
-                }
+                    "description": "Captures what the user is trying to accomplish in plain language.",
+                    "user_visible_label": "goal",
+                },
+                {
+                    "domain_id": "PROJECT_STATE",
+                    "name": "Project State",
+                    "status": "provisional",
+                    "authority_ceiling": "no_live_execution",
+                    "description": "Tracks accepted project facts and current work posture.",
+                    "user_visible_label": "project memory",
+                },
+                {
+                    "domain_id": "DECISIONS",
+                    "name": "Decisions",
+                    "status": "provisional",
+                    "authority_ceiling": "no_live_execution",
+                    "description": "Stores accepted choices, rejected options, and rationale.",
+                    "user_visible_label": "saved decisions",
+                },
+                {
+                    "domain_id": "OPEN_LOOPS",
+                    "name": "Open Loops",
+                    "status": "provisional",
+                    "authority_ceiling": "no_live_execution",
+                    "description": "Tracks unresolved questions, next steps, and pending commitments.",
+                    "user_visible_label": "open items",
+                },
+                {
+                    "domain_id": "ARTIFACTS",
+                    "name": "Artifacts",
+                    "status": "provisional",
+                    "authority_ceiling": "no_live_execution",
+                    "description": "Tracks files, links, uploads, generated outputs, and custody status.",
+                    "user_visible_label": "files and notes",
+                },
+                {
+                    "domain_id": "CONTEXT_GRAPH",
+                    "name": "Context Graph",
+                    "status": "provisional",
+                    "authority_ceiling": "no_live_execution",
+                    "description": "Maintains relationships between goals, decisions, sources, artifacts, and work areas.",
+                    "user_visible_label": "project memory",
+                },
+                {
+                    "domain_id": "RISK_REVIEW",
+                    "name": "Risk Review",
+                    "status": "provisional",
+                    "authority_ceiling": "no_live_execution",
+                    "description": "Captures uncertainty, safety boundaries, stale information, and review needs.",
+                    "user_visible_label": "cautions",
+                },
+                {
+                    "domain_id": "PERSONA_INTERFACE",
+                    "name": "Persona Interface",
+                    "status": "provisional",
+                    "authority_ceiling": "no_live_execution",
+                    "description": "Translates ION machinery into natural assistant language.",
+                    "user_visible_label": "assistant style",
+                },
             ],
+            "seeded_domain_ids": SEEDED_DOMAIN_IDS,
         },
     )
     write_json(
         output_root / "ION_STARTER_DATA/CONTEXT/context_graph.json",
         {
             "schema_id": "ion.context_graph.v1",
-            "nodes": [],
-            "edges": [],
-            "graph_status": "blank_project_graph",
+            "nodes": [
+                {
+                    "node_id": f"domain:{domain_id}",
+                    "node_type": "seeded_domain",
+                    "domain_id": domain_id,
+                    "context_status": "PROVISIONAL_CONTEXT",
+                }
+                for domain_id in SEEDED_DOMAIN_IDS
+            ],
+            "edges": [
+                {"from": "domain:USER_INTENT", "to": "domain:PROJECT_STATE", "edge_type": "shapes"},
+                {"from": "domain:DECISIONS", "to": "domain:PROJECT_STATE", "edge_type": "updates"},
+                {"from": "domain:OPEN_LOOPS", "to": "domain:PROJECT_STATE", "edge_type": "pressures"},
+                {"from": "domain:ARTIFACTS", "to": "domain:CONTEXT_GRAPH", "edge_type": "supplies"},
+                {"from": "domain:RISK_REVIEW", "to": "domain:DECISIONS", "edge_type": "guards"},
+                {"from": "domain:PERSONA_INTERFACE", "to": "domain:USER_INTENT", "edge_type": "translates"},
+            ],
+            "graph_status": "seeded_project_graph",
         },
     )
     write_json(
@@ -719,6 +844,8 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
             "schema_id": "ion.template_registry.v1",
             "templates": [
                 "project_ingestion",
+                "first_run_intent_capture",
+                "persona_translation",
                 "state_update_proposal",
                 "receipt_append",
                 "continuity_export",
@@ -748,13 +875,32 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
             "custody": "empty_starter_package",
         },
     )
+    write_json(
+        output_root / "ION_STARTER_DATA/PERSONA/persona_state.json",
+        {
+            "schema_id": "ion.persona_interface.v1",
+            "user_facing_default": "natural_assistant_with_invisible_continuity",
+            "first_prompt": "What are we working on?",
+            "save_language": "I can package this project memory so we can continue from here later.",
+            "hidden_domain_ids": SEEDED_DOMAIN_IDS,
+            "translation_map": {
+                "packet": "plan / next step",
+                "receipt": "saved decision / project note",
+                "context_graph": "project memory",
+                "domain": "work area",
+                "template": "workflow",
+                "data_zip": "project memory pack",
+            },
+        },
+    )
     bootstrap_receipt = {
         "schema_id": "ion.receipt.v1",
         "accepted_as_state": True,
         "created_at": generated_at,
         "receipt_id": "receipt-bootstrap-blank-project-v1",
         "receipt_type": "starter_data_bootstrap",
-        "summary": "Initialized blank portable ION continuity state.",
+        "summary": "Initialized seeded portable ION continuity state.",
+        "seeded_domains": SEEDED_DOMAIN_IDS,
     }
     write_json(output_root / "ION_STARTER_DATA/RECEIPTS/bootstrap_receipt.json", bootstrap_receipt)
     write_text(output_root / "ION_STARTER_DATA/RECEIPTS/receipt_ledger.jsonl", json.dumps(bootstrap_receipt, sort_keys=True))
@@ -780,12 +926,24 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         You are an ION-compatible browser AI carrier.
 
         Your job is to operate the mounted ION data package under ION engine
-        law. Do not claim source truth from memory. Inspect the mounted data
-        package, report current state, perform bounded work, append receipts,
-        and export updated continuity data.
+        law while giving the user a natural assistant experience. Do not claim
+        source truth from memory. Inspect the mounted data package, work from
+        accepted state, perform bounded work, append receipts, and export
+        updated continuity data.
 
-        If no data package is mounted, offer to initialize one from
-        `ION_STARTER_DATA/`.
+        If no data package is mounted, do not begin with an ION protocol
+        lecture. Quietly use the seeded starter posture and ask:
+
+        ```text
+        What are we working on?
+        ```
+
+        Mention the continuity package only when saving, exporting, or
+        resuming:
+
+        ```text
+        I can package this project memory so we can continue from here later.
+        ```
 
         Never treat your output as accepted state until the package has a
         corresponding receipt.
@@ -817,9 +975,33 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
 
         ## No Data Zip Mounted
 
-        Say that no continuity package is mounted. Offer to initialize a new
-        package from `ION_STARTER_DATA/`. Do not pretend platform memory is
-        continuity state.
+        Do not say `No continuity package is mounted` as the first user-facing
+        move.
+
+        Quietly initialize seeded starter state from `ION_STARTER_DATA/` in
+        the working sandbox. Proceed naturally:
+
+        ```text
+        What are we working on?
+        ```
+
+        Do not explain packets, receipts, domains, templates, or data zips
+        unless the user asks or the workflow reaches save/export/resume.
+
+        Good user-facing language:
+
+        ```text
+        I can keep this organized as we go and give you a project memory pack
+        when you want to continue later.
+        ```
+
+        Internal posture:
+
+        ```text
+        seeded starter continuity active
+        accepted state not yet exported
+        first receipt required before durable continuation claim
+        ```
 
         ## Data Zip Mounted
 
@@ -834,6 +1016,61 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         """,
     )
     write_text(
+        output_root / "ION_CUSTOM_GPT_ADAPTER/FIRST_RUN_BEHAVIOR.md",
+        """
+        # First-Run Behavior
+
+        ION is for the AI. The user should experience improved continuity, not
+        system machinery.
+
+        On first run, start from the seeded starter domains and ask what the
+        user is working on. Capture intent, decisions, open loops, artifacts,
+        risks, and useful context internally.
+
+        Do not open with:
+
+        ```text
+        No continuity package is mounted.
+        ```
+
+        Prefer:
+
+        ```text
+        What are we working on?
+        ```
+
+        When the work has meaningful continuity value, offer:
+
+        ```text
+        I can package this project memory so we can continue from here later.
+        ```
+
+        The first export should include the starter state plus any accepted
+        project identity, decisions, open loops, artifacts, and receipts.
+        """,
+    )
+    write_text(
+        output_root / "ION_CUSTOM_GPT_ADAPTER/PERSONA_INTERFACE_RULES.md",
+        """
+        # Persona Interface Rules
+
+        Translate ION machinery into user-facing language unless the user asks
+        for internals.
+
+        | ION term | User-facing term |
+        | --- | --- |
+        | packet | plan / next step |
+        | receipt | saved decision / project note |
+        | context graph | project memory |
+        | domain | work area |
+        | template | workflow |
+        | data zip | project memory pack |
+
+        The assistant may use ION internally to preserve continuity. It should
+        not make the user manage protocol language during ordinary work.
+        """,
+    )
+    write_text(
         output_root / "ION_CUSTOM_GPT_ADAPTER/DATA_ZIP_OPERATING_PROTOCOL.md",
         """
         # Data Zip Operating Protocol
@@ -843,7 +1080,8 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         Inspect `ION_DATA_MANIFEST.json`, `STATE/current_state.json`,
         `DOMAINS/domain_registry.json`, `CONTEXT/context_graph.json`,
         `PACKETS/open_packets.json`, `DECISIONS/decision_ledger.json`,
-        `ARTIFACTS/artifact_manifest.json`, and `RECEIPTS/receipt_ledger.jsonl`.
+        `ARTIFACTS/artifact_manifest.json`,
+        `PERSONA/persona_state.json`, and `RECEIPTS/receipt_ledger.jsonl`.
 
         ## Work
 
@@ -975,6 +1213,8 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
             "adapter_docs": [
                 "ION_CUSTOM_GPT_ADAPTER/GPT_INSTRUCTIONS.md",
                 "ION_CUSTOM_GPT_ADAPTER/STARTUP_BEHAVIOR.md",
+                "ION_CUSTOM_GPT_ADAPTER/FIRST_RUN_BEHAVIOR.md",
+                "ION_CUSTOM_GPT_ADAPTER/PERSONA_INTERFACE_RULES.md",
                 "ION_CUSTOM_GPT_ADAPTER/DATA_ZIP_OPERATING_PROTOCOL.md",
                 "ION_CUSTOM_GPT_ADAPTER/STATE_UPDATE_PROTOCOL.md",
                 "ION_CUSTOM_GPT_ADAPTER/EXPORT_PROTOCOL.md",
@@ -988,14 +1228,22 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         """
         # Getting Started
 
-        Start with a continuity data package. If none exists, initialize one
-        from `ION_STARTER_DATA/`.
+        Start naturally. If no continuity data package exists, the adapter uses
+        seeded starter state behind the scenes and asks:
+
+        ```text
+        What are we working on?
+        ```
+
+        The user does not need to manage ION internals during ordinary work.
+        They should feel continuity through clearer plans, remembered
+        decisions, open loops, artifacts, and project memory.
 
         Basic loop:
 
         ```text
-        mount data zip -> report current state -> perform bounded work
-        -> append receipt -> export updated data zip
+        work naturally -> save decisions and open loops -> append receipt
+        -> export project memory pack when useful
         ```
         """,
     )
@@ -1010,6 +1258,9 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
 
         Do not upload user data zips as permanent knowledge. User data zips are
         mounted per session and exported after updates.
+
+        Include `FIRST_RUN_BEHAVIOR.md` and `PERSONA_INTERFACE_RULES.md` so the
+        GPT does not expose protocol machinery as its default user experience.
         """,
     )
     write_text(
@@ -1028,7 +1279,11 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         # Starting A New Project
 
         Initialize a blank package, define project identity, create the first
-        root domain, then emit the first project receipt.
+        project memory, then emit the first project receipt.
+
+        The starter package is not empty. It includes seeded internal work
+        areas for user intent, project state, decisions, open loops, artifacts,
+        context graph, risk review, and persona interface.
         """,
     )
     write_text(
@@ -1116,6 +1371,7 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
             "PACKETS/open_packets.json",
             "DECISIONS/decision_ledger.json",
             "ARTIFACTS/artifact_manifest.json",
+            "PERSONA/persona_state.json",
             "RECEIPTS/receipt_ledger.jsonl",
         ]
 
@@ -1143,6 +1399,7 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
             packets = load_json(root / "PACKETS/open_packets.json")
             decisions = load_json(root / "DECISIONS/decision_ledger.json")
             artifacts = load_json(root / "ARTIFACTS/artifact_manifest.json")
+            persona = load_json(root / "PERSONA/persona_state.json")
             if manifest.get("schema_id") != "ion.data_manifest.v1":
                 findings.append("manifest_schema_id_invalid")
             if state.get("schema_id") != "ion.current_state.v1":
@@ -1159,6 +1416,8 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
                 findings.append("decision_ledger_schema_id_invalid")
             if artifacts.get("schema_id") != "ion.artifact_manifest.v1":
                 findings.append("artifact_manifest_schema_id_invalid")
+            if persona.get("schema_id") != "ion.persona_interface.v1":
+                findings.append("persona_interface_schema_id_invalid")
             ledger_lines = [line for line in (root / "RECEIPTS/receipt_ledger.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
             if not ledger_lines:
                 findings.append("receipt_ledger_empty")
@@ -1218,11 +1477,12 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
             with zipfile.ZipFile(ZIP_PATH, "w", compression=zipfile.ZIP_DEFLATED) as archive:
                 for path in sorted(STARTER.rglob("*")):
                     if path.is_file():
-                        archive.write(path, path.relative_to(ROOT).as_posix())
+                        archive.write(path, path.relative_to(STARTER).as_posix())
             manifest = {
                 "artifact": ZIP_PATH.name,
                 "artifact_type": "starter_continuity_data_zip",
                 "release_status": "non_release_scaffold",
+                "zip_root": "data_package_root",
                 "sha256": sha256_file(ZIP_PATH),
                 "size_bytes": ZIP_PATH.stat().st_size,
             }
@@ -1239,11 +1499,13 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
         output_root / "tests/test_starter_data_shape.py",
         r'''
         import json
+        import zipfile
         from pathlib import Path
 
 
         ROOT = Path(__file__).resolve().parents[1]
         STARTER = ROOT / "ION_STARTER_DATA"
+        STARTER_ZIP = ROOT / "dist/ION_CONTINUITY_DATA_BLANK_v1.zip"
 
 
         def test_starter_manifest_shape():
@@ -1265,10 +1527,33 @@ def build_package(output_root: Path = DEFAULT_OUTPUT, repo_root: Path | None = N
                 "PACKETS/open_packets.json": "ion.open_packets.v1",
                 "DECISIONS/decision_ledger.json": "ion.decision_ledger.v1",
                 "ARTIFACTS/artifact_manifest.json": "ion.artifact_manifest.v1",
+                "PERSONA/persona_state.json": "ion.persona_interface.v1",
             }
             for rel, schema_id in checks.items():
                 payload = json.loads((STARTER / rel).read_text(encoding="utf-8"))
                 assert payload["schema_id"] == schema_id
+
+
+        def test_seeded_domains_exist():
+            payload = json.loads((STARTER / "DOMAINS/domain_registry.json").read_text(encoding="utf-8"))
+            domain_ids = {domain["domain_id"] for domain in payload["domains"]}
+            assert {
+                "USER_INTENT",
+                "PROJECT_STATE",
+                "DECISIONS",
+                "OPEN_LOOPS",
+                "ARTIFACTS",
+                "CONTEXT_GRAPH",
+                "RISK_REVIEW",
+                "PERSONA_INTERFACE",
+            } <= domain_ids
+
+
+        def test_starter_zip_manifest_is_at_root():
+            with zipfile.ZipFile(STARTER_ZIP) as archive:
+                names = set(archive.namelist())
+            assert "ION_DATA_MANIFEST.json" in names
+            assert "ION_STARTER_DATA/ION_DATA_MANIFEST.json" not in names
         ''',
     )
 
