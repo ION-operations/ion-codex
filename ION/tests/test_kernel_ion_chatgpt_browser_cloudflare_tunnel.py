@@ -139,6 +139,7 @@ def test_audit_classifies_stale_status_url_when_tunnel_process_not_running(tmp_p
     fake_cloudflared = tmp_path / "cloudflared"
     fake_cloudflared.write_text("#!/bin/sh\n", encoding="utf-8")
     fake_cloudflared.chmod(0o755)
+    monkeypatch.setenv("HOME", str(tmp_path / "home"))
     (tmp_path / "pyproject.toml").write_text("[project]\nname = \"ion-test\"\n", encoding="utf-8")
     (tmp_path / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
     (tmp_path / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
@@ -238,6 +239,7 @@ def test_audit_reports_stable_hostname_plan_without_treating_it_as_active(tmp_pa
     fake_cloudflared = tmp_path / "cloudflared"
     fake_cloudflared.write_text("#!/bin/sh\n", encoding="utf-8")
     fake_cloudflared.chmod(0o755)
+    monkeypatch.setenv("HOME", str(tmp_path / "home"))
     (tmp_path / "pyproject.toml").write_text("[project]\nname = \"ion-test\"\n", encoding="utf-8")
     (tmp_path / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
     (tmp_path / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")

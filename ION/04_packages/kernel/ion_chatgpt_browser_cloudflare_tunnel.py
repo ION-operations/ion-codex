@@ -159,7 +159,7 @@ def _http_json_request(
     payload: Mapping[str, Any] | None = None,
     timeout: float = 3.0,
 ) -> dict[str, Any]:
-    headers = {"Accept": "application/json"}
+    headers = {"Accept": "application/json", "User-Agent": "ION-Connector-Health/1.0"}
     data: bytes | None = None
     if payload is not None:
         data = json.dumps(payload).encode("utf-8")
