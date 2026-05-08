@@ -1,0 +1,76 @@
+{
+  "schema": "ion.ai_assistant_work.next_packet.v0_1",
+  "packet_id": "AI_ASSISTANT_WORK_NEXT_PACKET_CANDIDATE_DOMAIN_OPERATION_PROTOCOL",
+  "status": "candidate_next_packet",
+  "created_at": "2026-05-08T18:39:06Z",
+  "objective": "Turn assistant-work candidate domains, agents, templates, and routes into an operational candidate lifecycle system without promoting them into accepted ION canon.",
+  "planning_artifact": "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_candidate_domain_operation_protocol_plan.md",
+  "inputs": [
+    "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_5.json",
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_DOMAIN_REGISTRY_CANDIDATE_V0_2.yaml",
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_AGENT_REGISTRY_CANDIDATE_V0_2.yaml",
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_TEMPLATE_REGISTRY_CANDIDATE_V0_2.yaml",
+    "ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_MAP_20260508T175230Z.json",
+    "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_phase4_product_reconciliation_matrix.md"
+  ],
+  "deliverables": [
+    "active provisional candidate-domain operation protocol draft",
+    "candidate lifecycle registry under ION/05_context/current/ai_assistant_work/",
+    "scorecard schema and first scorecards for safe candidates",
+    "route compiler lifecycle-state gate for inactive or rejected candidates",
+    "promotion proposal for one safe template or domain after scorecard review"
+  ],
+  "candidate_lifecycle_ladder": [
+    "L0_raw_observation",
+    "L1_candidate_draft",
+    "L2_operational_candidate",
+    "L3_proof_gated_candidate",
+    "L4_promotion_candidate",
+    "A3_accepted_operational_domain",
+    "A2_A1_canonical_domain_or_law"
+  ],
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "external_execution_allowed": false,
+    "allowed_candidate_paths": [
+      "ION/05_context/current/ai_assistant_work/",
+      "ION/06_intelligence/research/sandbox_agent_package_evolution/",
+      "ION/06_intelligence/evidence/sandbox_agent_package_evolution/",
+      "ION/tests/"
+    ],
+    "forbidden_paths_without_explicit_acceptance": [
+      "ION/03_registry/",
+      "product front-door surfaces",
+      "production deployment surfaces",
+      "live connector authority surfaces"
+    ]
+  },
+  "acceptance_gates": [
+    "candidate lifecycle record exists",
+    "source evidence is mapped",
+    "allowed and forbidden uses are explicit",
+    "scorecard records route accuracy, proof usefulness, drift, and user burden impact",
+    "validator or machine-checkable instances exist where applicable",
+    "Steward/human acceptance names exact accepted paths before any promotion",
+    "receipt names all touched paths and non-claims"
+  ],
+  "recommended_first_calibration_targets": [
+    "screen_state_matrix_packet",
+    "terminal_proof_receipt_packet",
+    "api_docs_example_validation_packet",
+    "ui_ux_domain",
+    "documentation_writing_domain",
+    "ide_work_domain"
+  ],
+  "non_claims": [
+    "This packet does not accept candidate domains into ION canon.",
+    "This packet does not create an MCP tool-contract expansion.",
+    "This packet does not grant candidate specialist agents sovereign ION role identity.",
+    "This packet does not approve production, live execution, secrets, deployment, Git push, or arbitrary shell authority."
+  ]
+}

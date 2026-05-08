@@ -1,0 +1,127 @@
+{
+  "authority_boundary": {
+    "candidate_only": true,
+    "live_execution_authority": false,
+    "mutated_ION_03_registry": false,
+    "mutated_active_onboarding_packets": false,
+    "production_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "checked_surfaces": [
+    {
+      "bytes": 4074,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_OVERLAY_V0_2.json",
+      "sha256": "74556991f13e5b9a619dbef66a6d5532be99f4006b8e94c4ee9dda656bd28cd2"
+    },
+    {
+      "bytes": 1696,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/02_architecture/ION_SELF_KNOWLEDGE_ONBOARDING_WIRING_PROTOCOL.md",
+      "sha256": "45a30444a1af28011777ec710fb4d21c57a903c4f57274eadde1adc604f9f06a"
+    },
+    {
+      "bytes": 1815,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/ONBOARDING_WIRING_PROPOSAL_V0_3.md",
+      "sha256": "86a0142da161dafba83c81d08295c28503cd815c77605704fe2d0c909b360d0a"
+    },
+    {
+      "bytes": 19398,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/simulate_self_knowledge_onboarding_wiring.py",
+      "sha256": "896a9b0d29be6ca7f0508220ea6fb1ea1394ee0636a9b62688af1bd62007d790"
+    },
+    {
+      "bytes": 24979,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json",
+      "sha256": "7abcb7ccdd641dbe645067e66e8eb193ac0067815e2b68482bbb22236d88efc4"
+    },
+    {
+      "bytes": 4760,
+      "exists": true,
+      "path": "ION/tests/test_kernel_ion_self_knowledge_onboarding_wiring.py",
+      "sha256": "5d0b7f41baa0393c12a4017b82333c2aa5c000231982ca49c768cd5b55ab6d4d"
+    },
+    {
+      "bytes": 3445,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATION_NOTE_20260508T045721Z.json",
+      "sha256": "cffd31176491e28b431865cb4f3c3b143f9cb67b76908a95f73e67cf31dc287c"
+    },
+    {
+      "bytes": 5962,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_RECEIPT_20260508T045721Z.json",
+      "sha256": "91e059ecc2452805ea66644bf6a0b031bf53d350271780dd4293cfdc29d1c68a"
+    },
+    {
+      "bytes": 4822,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ACCEPTANCE_GATE_STATUS_V0_2.json",
+      "sha256": "3a5fa1cc9014aa4cabd3b915cc9877bfd2c3ae9fe2aa1dee9179ef49f55fef6c"
+    },
+    {
+      "bytes": 7510,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/PROMOTION_CANDIDATE_MANIFEST_V0_2.json",
+      "sha256": "3b9e65ee114a56377373429f1df3afbf6a8198fa14c2c3e1da58930d90c9ca19"
+    },
+    {
+      "bytes": 28859,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+      "sha256": "9f73adfc4f6001bae5d8a2a7fff6f25c62bab4211c3eb2d921d0f7442d9b74f2"
+    },
+    {
+      "bytes": 2967,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T045721Z.json",
+      "sha256": "a536466cbc73ec5e3e00e2f6d8bbde77e57b97dcd2e0d836f6471ee12ca9977d"
+    }
+  ],
+  "consistency_checks": [
+    {
+      "check": "gate criterion 11 ready_candidate",
+      "passed": true
+    },
+    {
+      "check": "promotion manifest references onboarding evidence",
+      "passed": true
+    },
+    {
+      "check": "onboarding simulation report accepted",
+      "passed": true
+    },
+    {
+      "check": "focused tests passed",
+      "passed": true
+    },
+    {
+      "check": "no target registry mutation",
+      "passed": true
+    },
+    {
+      "check": "no active onboarding mutation claimed",
+      "passed": true
+    },
+    {
+      "check": "domain state index references onboarding wiring report",
+      "passed": true
+    },
+    {
+      "check": "next packet exists and keeps non-acceptance boundary",
+      "passed": true
+    }
+  ],
+  "generated_at": "2026-05-08T04:57:21+00:00",
+  "non_claims": [
+    "No accepted onboarding law was mutated.",
+    "No self-knowledge registry was landed.",
+    "No external carrier was invoked.",
+    "Simulation traces are candidate evidence, not canon."
+  ],
+  "schema_id": "ion.self_knowledge.state_surface_sync_report.v0_2",
+  "status": "passed"
+}

@@ -1,0 +1,42 @@
+{
+  "$id": "https://ion.local/schemas/ion_mcp_transport_preview_report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ION MCP Transport Preview Report",
+  "type": "object",
+  "required": [
+    "version",
+    "bridge_version",
+    "protocol_version",
+    "passed",
+    "transports",
+    "steps",
+    "allowed_resolutions",
+    "forbidden_resolution_seen",
+    "live_execution_authorized_seen",
+    "kernel_truth_mutation_seen",
+    "streamable_http_preview_only",
+    "hosted_cloud_certified",
+    "oauth_certified",
+    "official_sdk_runtime_required"
+  ],
+  "properties": {
+    "version": { "const": "V67_OFFICIAL_MCP_SDK_ADAPTER_AND_STREAMABLE_HTTP_PREVIEW" },
+    "bridge_version": { "type": "string" },
+    "protocol_version": { "type": "string" },
+    "passed": { "type": "boolean" },
+    "transports": { "type": "array", "items": { "enum": ["stdio", "streamable_http_preview"] } },
+    "steps": { "type": "array" },
+    "allowed_resolutions": {
+      "type": "array",
+      "items": { "enum": ["READ_ONLY", "DRY_RUN", "APPROVAL_REQUIRED", "REFUSED"] }
+    },
+    "forbidden_resolution_seen": { "const": false },
+    "live_execution_authorized_seen": { "const": false },
+    "kernel_truth_mutation_seen": { "const": false },
+    "streamable_http_preview_only": { "const": true },
+    "hosted_cloud_certified": { "const": false },
+    "oauth_certified": { "const": false },
+    "official_sdk_runtime_required": { "const": false }
+  },
+  "additionalProperties": true
+}

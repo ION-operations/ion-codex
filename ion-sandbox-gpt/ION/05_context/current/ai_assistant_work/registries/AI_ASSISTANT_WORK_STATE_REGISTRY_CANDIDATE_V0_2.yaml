@@ -1,0 +1,1498 @@
+schema: ion.ai_assistant_work.state_registry.v0_2
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T15:00:56Z'
+purpose: Candidate state-family taxonomy for AI-assisted chat/IDE work.
+state_family_count: 94
+state_families:
+- state_family_id: acceptance_criteria_state
+  owned_or_used_by_domains:
+  - planning_and_task_breakdown_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: acceptance_state
+  owned_or_used_by_domains:
+  - product_requirements_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: accessibility_state
+  owned_or_used_by_domains:
+  - ui_ux_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: agent_gap_state
+  owned_or_used_by_domains:
+  - assistant_learning_dataset_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: allowed_write_scope_state
+  owned_or_used_by_domains:
+  - implementation_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: analysis_method_state
+  owned_or_used_by_domains:
+  - data_analysis_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: approval_state
+  owned_or_used_by_domains:
+  - workflow_automation_tool_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: architecture_summary_state
+  owned_or_used_by_domains:
+  - codebase_understanding_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: artifact_state
+  owned_or_used_by_domains:
+  - chat_work_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: assistant_session_state
+  owned_or_used_by_domains:
+  - ai_assistant_identity_embodiment
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: authority_boundary_state
+  owned_or_used_by_domains:
+  - ai_assistant_identity_embodiment
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: automation_plan_state
+  owned_or_used_by_domains:
+  - workflow_automation_tool_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: branch_return_state
+  owned_or_used_by_domains:
+  - cross_domain_settlement_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: build_state
+  owned_or_used_by_domains:
+  - devops_release_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: ci_state
+  owned_or_used_by_domains:
+  - devops_release_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: claim_evidence_state
+  owned_or_used_by_domains:
+  - data_analysis_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: component_contract_state
+  owned_or_used_by_domains:
+  - ui_ux_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: conflict_state
+  owned_or_used_by_domains:
+  - cross_domain_settlement_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: context_package_state
+  owned_or_used_by_domains:
+  - knowledge_context_memory_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: continuity_bundle_state
+  owned_or_used_by_domains:
+  - knowledge_context_memory_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: continuity_state
+  owned_or_used_by_domains:
+  - chat_work_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: conversation_intent_state
+  owned_or_used_by_domains:
+  - chat_work_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: dataset_state
+  owned_or_used_by_domains:
+  - data_analysis_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: dependency_graph_state
+  owned_or_used_by_domains:
+  - codebase_understanding_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: dependency_state
+  owned_or_used_by_domains:
+  - planning_and_task_breakdown_domain
+  - dependency_package_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: deployment_risk_state
+  owned_or_used_by_domains:
+  - devops_release_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: design_system_state
+  owned_or_used_by_domains:
+  - ui_ux_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: diagnostic_state
+  owned_or_used_by_domains:
+  - ide_work_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: diff_state
+  owned_or_used_by_domains:
+  - implementation_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: documentation_surface_state
+  owned_or_used_by_domains:
+  - documentation_writing_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: failure_mode_state
+  owned_or_used_by_domains:
+  - assistant_learning_dataset_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: git_state
+  owned_or_used_by_domains:
+  - ide_work_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: horizon_state
+  owned_or_used_by_domains:
+  - planning_and_task_breakdown_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: host_capability_profile
+  owned_or_used_by_domains:
+  - ai_assistant_identity_embodiment
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: hypothesis_state
+  owned_or_used_by_domains:
+  - debugging_observability_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: intent_taxonomy_state
+  owned_or_used_by_domains:
+  - assistant_learning_dataset_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: license_state
+  owned_or_used_by_domains:
+  - dependency_package_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: local_convention_state
+  owned_or_used_by_domains:
+  - codebase_understanding_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: lockfile_state
+  owned_or_used_by_domains:
+  - dependency_package_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: memory_state
+  owned_or_used_by_domains:
+  - knowledge_context_memory_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: merge_proposal_state
+  owned_or_used_by_domains:
+  - cross_domain_settlement_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: non_goal_state
+  owned_or_used_by_domains:
+  - product_requirements_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: open_buffer_state
+  owned_or_used_by_domains:
+  - ide_work_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: patch_state
+  owned_or_used_by_domains:
+  - implementation_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: pending_acceptance_state
+  owned_or_used_by_domains:
+  - chat_work_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: prompt_injection_surface_state
+  owned_or_used_by_domains:
+  - review_security_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: quality_gate_state
+  owned_or_used_by_domains:
+  - testing_quality_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: reader_model_state
+  owned_or_used_by_domains:
+  - documentation_writing_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: regression_risk_state
+  owned_or_used_by_domains:
+  - testing_quality_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: release_candidate_state
+  owned_or_used_by_domains:
+  - devops_release_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: repo_map_state
+  owned_or_used_by_domains:
+  - codebase_understanding_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: reproduction_state
+  owned_or_used_by_domains:
+  - debugging_observability_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: requirement_state
+  owned_or_used_by_domains:
+  - product_requirements_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: review_state
+  owned_or_used_by_domains:
+  - review_security_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: schema_state
+  owned_or_used_by_domains:
+  - data_analysis_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: screen_state
+  owned_or_used_by_domains:
+  - ui_ux_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: secret_exposure_state
+  owned_or_used_by_domains:
+  - review_security_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: security_risk_state
+  owned_or_used_by_domains:
+  - review_security_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: settlement_receipt_state
+  owned_or_used_by_domains:
+  - cross_domain_settlement_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: source_authority_state
+  owned_or_used_by_domains:
+  - documentation_writing_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: source_ranking_state
+  owned_or_used_by_domains:
+  - knowledge_context_memory_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: symptom_state
+  owned_or_used_by_domains:
+  - debugging_observability_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: task_graph_state
+  owned_or_used_by_domains:
+  - planning_and_task_breakdown_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: template_gap_state
+  owned_or_used_by_domains:
+  - assistant_learning_dataset_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: terminal_state
+  owned_or_used_by_domains:
+  - ide_work_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: test_plan_state
+  owned_or_used_by_domains:
+  - testing_quality_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: test_result_state
+  owned_or_used_by_domains:
+  - testing_quality_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: tool_receipt_state
+  owned_or_used_by_domains:
+  - workflow_automation_tool_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: tool_surface_state
+  owned_or_used_by_domains:
+  - ai_assistant_identity_embodiment
+  - workflow_automation_tool_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: trace_state
+  owned_or_used_by_domains:
+  - debugging_observability_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: usage_pattern_state
+  owned_or_used_by_domains:
+  - assistant_learning_dataset_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: user_flow_state
+  owned_or_used_by_domains:
+  - ui_ux_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: user_story_state
+  owned_or_used_by_domains:
+  - product_requirements_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: validation_state
+  owned_or_used_by_domains:
+  - implementation_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: versioned_claim_state
+  owned_or_used_by_domains:
+  - documentation_writing_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: vulnerability_state
+  owned_or_used_by_domains:
+  - dependency_package_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: workspace_state
+  owned_or_used_by_domains:
+  - ide_work_domain
+  candidate_fields:
+  - state_id
+  - created_at
+  - source_context
+  - authority_class
+  - freshness
+  - owner_agent
+  - valid_transitions
+  - proof_required
+  - receipt_refs
+  - candidate_vs_accepted_boundary
+  non_claims:
+  - presence of a state object does not imply acceptance
+  - model memory is not sufficient proof of state
+  - tool output requires receipt before inheritance
+- state_family_id: command_receipt_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: command
+    receipt state.'
+  owned_or_used_by_domains:
+  - terminal_proof_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: dataset_entry_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: dataset
+    entry state.'
+  owned_or_used_by_domains:
+  - assistant_work_observation_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: escalation_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: escalation
+    state.'
+  owned_or_used_by_domains:
+  - incident_triage_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: example_run_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: example
+    run state.'
+  owned_or_used_by_domains:
+  - documentation_example_validation_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: incident_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: incident
+    state.'
+  owned_or_used_by_domains:
+  - incident_triage_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: lineage_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: lineage
+    state.'
+  owned_or_used_by_domains:
+  - assistant_work_observation_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: migration_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: migration
+    state.'
+  owned_or_used_by_domains:
+  - migration_work_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: queue_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: queue
+    state.'
+  owned_or_used_by_domains:
+  - background_queue_intake_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: receipt_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: receipt
+    state.'
+  owned_or_used_by_domains:
+  - background_queue_intake_domain
+  - assistant_work_observation_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: release_gate_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: release
+    gate state.'
+  owned_or_used_by_domains:
+  - release_evidence_domain
+  - migration_work_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: release_note_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: release
+    note state.'
+  owned_or_used_by_domains:
+  - documentation_example_validation_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: review_comment_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: review
+    comment state.'
+  owned_or_used_by_domains:
+  - pr_agent_work_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: risk_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: risk
+    state.'
+  owned_or_used_by_domains:
+  - release_evidence_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: rollback_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: rollback
+    state.'
+  owned_or_used_by_domains:
+  - migration_work_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: terminal_session_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: terminal
+    session state.'
+  owned_or_used_by_domains:
+  - terminal_proof_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: tool_result_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: tool
+    result state.'
+  owned_or_used_by_domains:
+  - background_queue_intake_domain
+  status: candidate_state_family_from_dataset_mining
+- state_family_id: untrusted_input_state
+  summary: 'Candidate state family surfaced by dataset-mining domain fission: untrusted
+    input state.'
+  owned_or_used_by_domains:
+  - untrusted_input_tool_guard_domain
+  status: candidate_state_family_from_dataset_mining

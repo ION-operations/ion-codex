@@ -1,0 +1,11 @@
+{
+  "active_spawn_plan_path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+  "completed_records": [],
+  "created_at": "2026-05-08T14:14:06+00:00",
+  "execution_bundle_root": "ION/05_context/current/execution_cycles/2026-05-08T141406Z0000_carrier_continue_activate_ai_assistant_ide_work_domain_state_define_ai_assistant_embodiment_ide_a",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "records": [],
+  "schema_id": "ion.carrier_task_return_ledger.v1",
+  "updated_at": "2026-05-08T14:14:06+00:00"
+}

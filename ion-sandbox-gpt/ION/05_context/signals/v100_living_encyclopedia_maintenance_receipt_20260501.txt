@@ -1,0 +1,38 @@
+receipt_id: v100_living_encyclopedia_maintenance_receipt_20260501
+receipt_class: documentation_context_process_integration
+created: 2026-05-01
+branch: V100_LIVING_ENCYCLOPEDIA_AND_CONTEXT_SYSTEM_INTEGRATION
+production_ready: false
+autonomous_loop_implemented_claim: false
+full_suite_claim: false
+
+source_artifacts:
+  - artifact: ION_CURSOR_CONSOLIDATED_V96_FULL_RUNTIME_20260430(1).zip
+    size_bytes: 6752404
+    sha256: bf13db3a16168b47db57c39a470c0331a1adc1fd118ce79cb4281b0be8d47385
+  - artifact: ION_CURSOR_V97_LEAD_DEV_SURVIVAL_AUDIT_UPDATE_20260501(3).zip
+    size_bytes: 13487
+    sha256: 63ebf011b922a43cf61ba76fe48985498280d722b2f1639d86ec4efc0aa1bf6c
+  - artifact: ION_CURSOR_V98_MASTER_ORCHESTRATION_AUTOMATION_AND_UI_RECOVERY_UPDATE_20260501(2).zip
+    size_bytes: 15777
+    sha256: 408be1c1c1a340c4b4d213f675bb2a1400c06e107bf11dc9efd47e6ce1829ea7
+  - artifact: ION_CURSOR_V99_AGENT_CONTEXT_CONTINUITY_AND_RUNTIME_SEPARATION_DESIGN_UPDATE_20260501.zip
+    size_bytes: 17483
+    sha256: 838f0af2e3095b1bf1dbff6d5cd96fbf203c1e1b635240443f95bb94a6677584
+  - artifact: ION_Production_Encyclopedia_v3_1_NEAR_FINISHED_RELEASE_CANDIDATE(2).md
+    size_bytes: 483404
+    sha256: 0095277cecdbda1014ee3fdb1cc2b85fb8b50c0e60c0cd70ef082aaca10791d6
+
+files_written:
+  - ION/docs/encyclopedia/ION_Production_Encyclopedia_v4_0_LIVE_V96_V100_CONTEXT_SYSTEM_AND_AUTONOMOUS_LOOP_RECOVERY.md
+  - ION/02_architecture/ION_LIVING_ENCYCLOPEDIA_MAINTENANCE_PROTOCOL.md
+  - ION/00_BOOTSTRAP/V100_LIVING_ENCYCLOPEDIA_AND_CONTEXT_SYSTEM_INTEGRATION_LOCK.md
+  - ION/05_context/current/ION_LIVING_ENCYCLOPEDIA_MANIFEST_V100.json
+  - ION/05_context/signals/v100_living_encyclopedia_maintenance_receipt_20260501.txt
+  - FILES_ADDED_V100_LIVING_ENCYCLOPEDIA_AND_CONTEXT_SYSTEM_INTEGRATION.txt
+
+settlement:
+  - v3.1 encyclopedia body preserved as historical/foundational master body.
+  - v4.0 supplement added as current-state override for V96/V100 line.
+  - encyclopedia maintenance protocol added to keep this artifact part of ION process.
+  - next required enforcement remains host-independent autonomous loop survival proof.

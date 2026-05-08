@@ -1,0 +1,109 @@
+{
+  "adapter_docs": [
+    "product/custom_gpt_adapter/CUSTOM_GPT_INSTRUCTIONS_8000.md",
+    "product/custom_gpt_adapter/GPT_INSTRUCTIONS.md",
+    "product/custom_gpt_adapter/STARTUP_BEHAVIOR.md",
+    "product/custom_gpt_adapter/FIRST_RUN_BEHAVIOR.md",
+    "product/custom_gpt_adapter/PERSONA_INTERFACE_RULES.md",
+    "product/custom_gpt_adapter/DATA_ZIP_OPERATING_PROTOCOL.md",
+    "product/custom_gpt_adapter/STATE_UPDATE_PROTOCOL.md",
+    "product/custom_gpt_adapter/EXPORT_PROTOCOL.md",
+    "product/custom_gpt_adapter/refusal_and_boundary_rules.md",
+    "product/custom_gpt_adapter/templates/MOUNT_REPORT_TEMPLATE.md",
+    "product/custom_gpt_adapter/templates/RECEIPT_APPEND_TEMPLATE.md"
+  ],
+  "added_surfaces": [
+    "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+    "ION/07_templates/carriers/GPT_SANDBOX_CARRIER_SESSION_PACKET.md",
+    "ION/tests/test_product_gpt_sandbox_package_readiness.py",
+    "product/package_guides/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE.md",
+    "ION/02_architecture/ION_GPT_SANDBOX_ENVIRONMENT_CONTRACT.md",
+    "ION/04_packages/kernel/ion_sandbox_preflight.py",
+    "ION/tests/test_kernel_ion_sandbox_preflight.py",
+    "ION/02_architecture/SINGLE_CARRIER_SEQUENTIAL_RUNTIME_PROTOCOL.md",
+    "ION/07_templates/carriers/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
+    "ION/07_templates/receipts/SINGLE_CARRIER_SEQUENCE_RECEIPT.md",
+    "ION/04_packages/kernel/ion_single_carrier_sequence_runner.py",
+    "ION/tests/test_kernel_single_carrier_sequence_runner.py",
+    "ION/04_packages/kernel/ion_template_action_gate.py",
+    "ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_PACKET.md",
+    "ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_RECEIPT.json",
+    "ION/05_context/current/PERSONA_RELAY_SINGLE_CARRIER_RECOVERY_RECEIPT_20260507T124719Z.json",
+    "ION/docs/consolidation/PERSONA_RELAY_SINGLE_CARRIER_RECOVERY_REPORT_20260507T124719Z.md",
+    "ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md",
+    "ION/04_packages/kernel/ion_stale_surface_audit.py",
+    "ION/tests/test_kernel_ion_stale_surface_audit.py",
+    "ION/05_context/current/workqueue/HYBRID_CUSTOM_GPT_V13_AND_STALE_SURFACE_RECOVERY_QUEUE_20260507T134502Z.md"
+  ],
+  "distinguish_mcp_42_tool_lane": "external_local_or_vm_ion_codex_lane_optional_not_required_for_sandbox_runtime",
+  "operational_root_surfaces": [
+    "pyproject.toml",
+    "ION/REPO_AUTHORITY.md",
+    "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+    "ION/docs/setup/ION_CURRENT_OPERATING_PACKET_V119.md",
+    "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+    "ION/07_templates/carriers/GPT_SANDBOX_CARRIER_SESSION_PACKET.md",
+    "ION/04_packages/kernel/ion_carrier_onboarding_packet.py",
+    "ION/04_packages/kernel/ion_status.py",
+    "ION/02_architecture/ION_GPT_SANDBOX_ENVIRONMENT_CONTRACT.md",
+    "ION/04_packages/kernel/ion_sandbox_preflight.py",
+    "ION/02_architecture/SINGLE_CARRIER_SEQUENTIAL_RUNTIME_PROTOCOL.md",
+    "ION/07_templates/carriers/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
+    "ION/07_templates/receipts/SINGLE_CARRIER_SEQUENCE_RECEIPT.md",
+    "ION/04_packages/kernel/ion_single_carrier_sequence_runner.py",
+    "ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md",
+    "ION/04_packages/kernel/ion_stale_surface_audit.py"
+  ],
+  "package_mode": "full_ion_gpt_sandbox_agent_package",
+  "primary_runtime_loop": [
+    "PERSONA_INTERFACE ingress",
+    "RELAY",
+    "STEWARD",
+    "VIZIER",
+    "MASON",
+    "NEMESIS / VICE when required",
+    "SCRIBE",
+    "STEWARD FINAL",
+    "PERSONA_INTERFACE response",
+    "RECEIPT / NEXT STATE"
+  ],
+  "product_docs": [
+    "product/package_guides/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE.md",
+    "product/package_guides/CUSTOM_GPT_PRODUCT_USE.md",
+    "product/package_guides/FULL_PRODUCT_COPY_POLICY.md"
+  ],
+  "recommended_custom_gpt_instruction_file": "product/custom_gpt_adapter/CUSTOM_GPT_INSTRUCTIONS_8000.md",
+  "schema_id": "ion.custom_gpt_knowledge_manifest.v1_1",
+  "source_reference_docs": [
+    "product/source_inputs/current_uploads/ION_Continuity_Substrate_Explainer_v7.md",
+    "product/source_inputs/current_uploads/ION_ONTOLOGICAL_JOURNAL_GPT55_ENTRIES_0_39_CURRENT_ROOT_ENHANCED.md"
+  ],
+  "starter_data": [
+    "product/starter_data/ION_DATA_MANIFEST.json",
+    "product/starter_data/DOMAINS/domain_registry.json",
+    "product/starter_data/CONTEXT/context_graph.json",
+    "product/starter_data/PERSONA/persona_state.json",
+    "product/starter_data/STATE/current_state.json",
+    "product/starter_data/RECEIPTS/bootstrap_receipt.json"
+  ],
+  "validation_expectations": {
+    "github_data_plane": "optional_for_gpt_sandbox_package_absent_by_policy_unless_local_git_variant",
+    "gpt_sandbox_profile_resolves_by_alias": true,
+    "gpt_sandbox_session_packet_listed_in_onboarding": true,
+    "ion_status": "ION_STATUS_READY",
+    "single_carrier_phase_order_ends_with_persona_response": true,
+    "single_carrier_phase_order_starts_with_persona_then_relay": true,
+    "single_carrier_sequence_runner": "emits Persona/Relay-bound packet with receipt candidate",
+    "starter_domain_count": 13
+  },
+  "manifest_repair": {
+    "repair_id": "v1_4_prune_pass_4_manifest_repair_20260507",
+    "repair_intent": "remove stale/missing knowledge_manifest paths and bind available uploaded source witness docs",
+    "authority": "non_production_candidate_package_patch",
+    "non_claims": [
+      "does_not_claim_steward_acceptance",
+      "does_not_claim_production_readiness",
+      "does_not_mutate_original_uploaded_zip"
+    ]
+  }
+}

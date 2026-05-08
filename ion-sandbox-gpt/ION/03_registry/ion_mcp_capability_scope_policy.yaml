@@ -1,0 +1,56 @@
+policy_id: ion.mcp_capability_scope_policy.v1
+version: V63_ION_MCP_MOUNT_AND_ACCOUNT_CONNECTION_PROTOCOL
+authority_scope: MCP_FRONT_DOOR_MOUNT_SESSION_ONLY
+allows_live_execution: false
+allows_provider_dispatch: false
+allows_browser_session_mutation: false
+allows_credential_access: false
+allows_kernel_truth_direct_write: false
+default_execution_resolution: READ_ONLY
+allowed_execution_resolutions:
+  - READ_ONLY
+  - DRY_RUN
+  - APPROVAL_REQUIRED
+  - REFUSED
+forbidden_execution_resolutions:
+  - LIVE_EXECUTED
+baseline_scopes:
+  - ion.mount.basic
+  - ion.state.read
+  - ion.horizon.read
+  - ion.receipts.read
+  - ion.approvals.read
+  - ion.jobs.plan
+  - ion.jobs.submit_dry_run
+  - ion.bundles.export_preview
+privileged_future_scopes:
+  - ion.approvals.write
+  - ion.jobs.execute.live
+  - ion.provider.call
+  - ion.browser.mutate
+  - ion.secrets.read
+  - ion.secrets.write
+  - ion.workspace.admin
+  - ion.kernel.write
+required_tool_results:
+  - execution_resolution
+  - session_id
+  - state_root
+  - policy_version
+  - receipt_refs
+required_receipt_events:
+  - MCP_MOUNT_STARTED
+  - MCP_MOUNT_GRANTED
+  - MCP_MOUNT_REFUSED
+  - MCP_SCOPE_GRANTED
+  - MCP_SCOPE_DENIED
+  - MCP_BOOT_PACKET_EMITTED
+  - MCP_JOB_PLANNED
+  - MCP_DRY_RUN_SUBMITTED
+  - MCP_APPROVAL_REQUIRED
+  - MCP_SESSION_UNMOUNTED
+boundary_rules:
+  - MCP tools are request surfaces, not kernel truth.
+  - MCP returned outputs must enter ION as receipts, plans, approval requests, or proposed deltas.
+  - Live execution attempts must resolve to APPROVAL_REQUIRED or REFUSED in V63.
+  - OAuth, account login, or client confirmation never substitutes for ION operator approval.

@@ -1,0 +1,11 @@
+{
+  "tool": "ion.bundle.replay_alpha_report",
+  "mode": "dry_run",
+  "expected_resolutions": [
+    "READ_ONLY",
+    "DRY_RUN",
+    "APPROVAL_REQUIRED",
+    "REFUSED"
+  ],
+  "forbidden_resolution": "LIVE_EXECUTED"
+}

@@ -1,0 +1,38 @@
+{
+  "accepted": true,
+  "emitted_at": "2026-05-03T18:19:47+00:00",
+  "file_checks": [
+    {
+      "exists": true,
+      "forbidden_patterns_present": [],
+      "rel_path": "AGENTS.md",
+      "required_patterns_missing": []
+    },
+    {
+      "exists": true,
+      "forbidden_patterns_present": [],
+      "rel_path": "START_HERE_FOR_ANY_AGENT.md",
+      "required_patterns_missing": []
+    }
+  ],
+  "findings": [
+    "shell_root_confirmed",
+    "root_onboarding_files_present",
+    "carrier_onboarding_authority_protocol_present",
+    "root_onboarding_carrier_neutral",
+    "root_onboarding_required_current_patterns_present"
+  ],
+  "line": "V116_CARRIER_ONBOARDING_AUTHORITY_REPAIR",
+  "live_execution_authority": false,
+  "mutation_performed": false,
+  "production_authority": false,
+  "protocol_present": true,
+  "required_patterns_missing_count": 0,
+  "root_confirmed": true,
+  "root_missing_files": [],
+  "root_onboarding_files_present": 2,
+  "scanned_root": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION",
+  "schema_id": "ion.carrier_onboarding_authority_audit.v1",
+  "stale_cursor_root_patterns_present": 0,
+  "verdict": "ION_CARRIER_ONBOARDING_AUTHORITY_READY"
+}

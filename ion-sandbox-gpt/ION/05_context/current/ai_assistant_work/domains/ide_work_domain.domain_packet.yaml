@@ -1,0 +1,57 @@
+schema: ion.ai_assistant_work.domain_packet.v0_1
+domain_id: ide_work_domain
+title: IDE Work Domain
+state_class: candidate_current_state
+status: seed_candidate
+purpose: Define work inside an IDE where chat, file tree, editor buffers, terminal,
+  diagnostics, git, tests, and extensions meet.
+burden: Make IDE-agent work explicit instead of letting one generic coding agent improvise
+  from whatever context is visible.
+primary_questions:
+- Which workspace surfaces are active?
+- What files and diagnostics are relevant?
+- What actions require diff/test/proof/human review?
+specialist_agents:
+- IDE_CARTOGRAPHER
+- WORKSPACE_STEWARD
+- EDITOR_BUFFER_SCOUT
+- TERMINAL_RUNNER
+state_families:
+- workspace_state
+- open_buffer_state
+- diagnostic_state
+- terminal_state
+- git_state
+template_families:
+- ide_workspace_mount
+- editor_context_packet
+- terminal_command_packet
+- workspace_diff_receipt
+protocols:
+- workspace_surface_inventory
+- ide_mutation_boundary
+- diagnostic_feedback_loop
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+  level_1_summary:
+    max_tokens: 500
+  level_2_working:
+    max_tokens: 1500
+  level_3_operational:
+    max_tokens: 4000
+  level_4_deep:
+    max_tokens: 12000
+  level_5_implementation:
+    includes_paths: true
+anti_drift_notes:
+- Do not let a generic coding assistant absorb this domain without domain-specific
+  context and proof obligations.
+- Do not treat templates as enough; a domain needs specialist agents to maintain,
+  route, validate, and settle the work.
+- Do not promote this candidate into active canon without explicit acceptance and
+  receipt.
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_only_until_accepted: true

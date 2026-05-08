@@ -1,0 +1,14 @@
+witness_id: witness.domain.construction_routing_integration.2026-04-07
+subject_domain: domain.construction_routing_integration
+status: ACTIVATED_FIRST_PASS
+activated_on: 2026-04-07
+basis:
+  - live root already contains Codex-led orchestration, kernel slices, and bounded implementation surfaces
+  - migration packet A1 makes the domain explicit rather than leaving it implicit in boots and research
+supporting_sources:
+  - ION/03_registry/boots/CODEX.boot.md
+  - ION/02_architecture/CODEX_LEAD_ORCHESTRATION_PROTOCOL.md
+  - ION/05_context/comms/migration_ledgers/domain_semantic_runtime_migration.md
+constraints:
+  - activation does not imply complete runtime enforcement
+  - review authority remains outside this domain until the review organ is activated

@@ -1,0 +1,14 @@
+{
+  "authority_status": "LANDED_BY_REVIEW",
+  "committed_at": "2026-04-24T02:20:00-04:00",
+  "committed_from_proposal": "template-graph-writeback-proposal-f71217c21cf98199",
+  "committed_from_review": "template-graph-writeback-review-e4dd66a9b203aba6",
+  "event_id": "template-completion-event-0be6359ea0311f62",
+  "graph_state_status": "COMMITTED",
+  "node_id": "ctx-template-event-node-e2ae3524b04fc459",
+  "node_type": "TEMPLATE_COMPLETION_EVENT_REACTION_NODE",
+  "reaction_family": "index_update",
+  "requested_effect": "update_index",
+  "selection_id": "template-reaction-selection-697a927373d379ce",
+  "source_path": "ION/05_context/inbox/context_graph/template_reaction_selection_phase2_review_20260424.task.md"
+}

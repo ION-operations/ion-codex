@@ -1,0 +1,628 @@
+{
+  "schema_id": "ion.context_graph.v1",
+  "graph_status": "BASE_OPERATING_GRAPH_ACTIVE",
+  "nodes": [
+    {
+      "node_id": "domain.persona_interface",
+      "true_name": "PERSONA_INTERFACE",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "PERSONA_INTERFACE"
+        ],
+        "specialist_roles": [
+          "RELAY"
+        ]
+      },
+      "templates": [
+        "first_run_intent_capture",
+        "persona_response_render",
+        "continuity_save_offer"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "User-facing ingress and egress; translate ION internals into natural assistant behavior."
+    },
+    {
+      "node_id": "domain.user_intent",
+      "true_name": "USER_INTENT",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "RELAY",
+          "STEWARD"
+        ],
+        "specialist_roles": [
+          "PERSONA_INTERFACE",
+          "VIZIER"
+        ]
+      },
+      "templates": [
+        "intent_capture",
+        "work_packet_draft",
+        "clarification_request"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Capture, clarify, preserve, and route user intent without forcing the user to learn ION internals."
+    },
+    {
+      "node_id": "domain.project_workspace",
+      "true_name": "PROJECT_WORKSPACE",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "VIZIER",
+          "CONTEXT_CARTOGRAPHER"
+        ],
+        "specialist_roles": [
+          "STEWARD",
+          "SCRIBE"
+        ]
+      },
+      "templates": [
+        "project_overview",
+        "workspace_state_update",
+        "next_step_plan"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Maintain active project/workspace understanding before and after project-specific ingestion."
+    },
+    {
+      "node_id": "domain.domain_cartography",
+      "true_name": "DOMAIN_CARTOGRAPHY",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "CONTEXT_CARTOGRAPHER",
+          "IONOLOGIST"
+        ],
+        "specialist_roles": [
+          "STEWARD",
+          "TEMPLATE_CURATOR"
+        ]
+      },
+      "templates": [
+        "domain_map",
+        "domain_health_review",
+        "domain_fission_candidate"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Map work into domains, detect boundaries, and propose fission when context manageability fails."
+    },
+    {
+      "node_id": "domain.context_graph",
+      "true_name": "CONTEXT_GRAPH",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "CONTEXT_CARTOGRAPHER",
+          "CANON_LIBRARIAN"
+        ],
+        "specialist_roles": [
+          "IONOLOGIST",
+          "STEWARD"
+        ]
+      },
+      "templates": [
+        "context_node_record",
+        "context_package_build",
+        "context_graph_update"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Maintain context nodes, edges, authority status, lineage, and route-deeper relationships."
+    },
+    {
+      "node_id": "domain.template_governance",
+      "true_name": "TEMPLATE_GOVERNANCE",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "TEMPLATE_CURATOR",
+          "STEWARD"
+        ],
+        "specialist_roles": [
+          "NEMESIS"
+        ]
+      },
+      "templates": [
+        "template_selection",
+        "template_gap",
+        "template_evolution"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Select, apply, evolve, or flag gaps in templates that govern state-bearing work."
+    },
+    {
+      "node_id": "domain.build_implementation",
+      "true_name": "BUILD_IMPLEMENTATION",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "MASON"
+        ],
+        "specialist_roles": [
+          "VIZIER",
+          "NEMESIS"
+        ]
+      },
+      "templates": [
+        "build_plan",
+        "patch_proposal",
+        "implementation_report"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Plan and propose implementation work, patches, artifacts, and build steps."
+    },
+    {
+      "node_id": "domain.test_verification",
+      "true_name": "TEST_VERIFICATION",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "MASON",
+          "NEMESIS"
+        ],
+        "specialist_roles": [
+          "STEWARD"
+        ]
+      },
+      "templates": [
+        "test_plan",
+        "validation_report",
+        "proof_check"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Define checks, validations, test plans, proof requirements, and verification results."
+    },
+    {
+      "node_id": "domain.risk_and_failure_review",
+      "true_name": "RISK_AND_FAILURE_REVIEW",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "NEMESIS",
+          "VICE"
+        ],
+        "specialist_roles": [
+          "STEWARD",
+          "CANON_LIBRARIAN"
+        ]
+      },
+      "templates": [
+        "failure_mechanism_analysis",
+        "risk_review",
+        "contradiction_audit"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Detect drift, stale context, contradictions, failure mechanisms, and unsafe authority expansion."
+    },
+    {
+      "node_id": "domain.documentation_and_scribe",
+      "true_name": "DOCUMENTATION_AND_SCRIBE",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "SCRIBE"
+        ],
+        "specialist_roles": [
+          "PERSONA_INTERFACE",
+          "STEWARD"
+        ]
+      },
+      "templates": [
+        "summary_capture",
+        "decision_note",
+        "continuity_note"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Capture decisions, user-facing summaries, project notes, and continuity documents."
+    },
+    {
+      "node_id": "domain.receipts_and_state",
+      "true_name": "RECEIPTS_AND_STATE",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "STEWARD",
+          "SCRIBE"
+        ],
+        "specialist_roles": [
+          "CANON_LIBRARIAN"
+        ]
+      },
+      "templates": [
+        "receipt_append",
+        "state_update_proposal",
+        "continuity_export"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Maintain accepted state, receipts, decision ledger, exports, and continuity inheritance."
+    },
+    {
+      "node_id": "domain.project_ingestion",
+      "true_name": "PROJECT_INGESTION",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "CONTEXT_CARTOGRAPHER",
+          "TEMPLATE_CURATOR",
+          "STEWARD"
+        ],
+        "specialist_roles": [
+          "NEMESIS",
+          "MASON"
+        ]
+      },
+      "templates": [
+        "project_ingestion",
+        "structural_cartography",
+        "domain_partition",
+        "risk_classification"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Convert uploaded projects, files, or workflows into governed domains, context nodes, and starter packets."
+    },
+    {
+      "node_id": "domain.self_maintenance",
+      "true_name": "SELF_MAINTENANCE",
+      "node_type": "BASE_OPERATING_DOMAIN",
+      "authority": "BASE_ENGINE_SEED",
+      "status": "ACTIVE",
+      "owned_by": {
+        "manager_roles": [
+          "IONOLOGIST",
+          "CANON_LIBRARIAN",
+          "STEWARD"
+        ],
+        "specialist_roles": [
+          "NEMESIS",
+          "SCRIBE"
+        ]
+      },
+      "templates": [
+        "self_audit",
+        "state_repair_proposal",
+        "schema_migration_proposal"
+      ],
+      "drift_risk": "LOW_WHILE_ENGINE_SEED_CURRENT",
+      "body": "Allow ION to inspect, repair, and improve its own state package without confusing generated proposals with accepted state."
+    }
+  ],
+  "edges": [
+    {
+      "from": "domain.persona_interface",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.persona_interface",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.persona_interface",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.persona_interface",
+      "to": "domain.context_graph",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.user_intent",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.user_intent",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.user_intent",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.user_intent",
+      "to": "domain.context_graph",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.project_workspace",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.project_workspace",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.project_workspace",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.project_workspace",
+      "to": "domain.context_graph",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.domain_cartography",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.domain_cartography",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.domain_cartography",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.domain_cartography",
+      "to": "domain.context_graph",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.context_graph",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.context_graph",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.context_graph",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.context_graph",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.template_governance",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.template_governance",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.template_governance",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.template_governance",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.build_implementation",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.build_implementation",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.build_implementation",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.build_implementation",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.test_verification",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.test_verification",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.test_verification",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.test_verification",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.risk_and_failure_review",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.risk_and_failure_review",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.risk_and_failure_review",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.risk_and_failure_review",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.documentation_and_scribe",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.documentation_and_scribe",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.documentation_and_scribe",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.documentation_and_scribe",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.receipts_and_state",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.receipts_and_state",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.receipts_and_state",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.receipts_and_state",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.project_ingestion",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.project_ingestion",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.project_ingestion",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.project_ingestion",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.self_maintenance",
+      "to": "domain.persona_interface",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.self_maintenance",
+      "to": "domain.user_intent",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.self_maintenance",
+      "to": "domain.project_workspace",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "from": "domain.self_maintenance",
+      "to": "domain.domain_cartography",
+      "edge_type": "ROUTE_DEEPER",
+      "status": "ACTIVE_BASE"
+    }
+  ]
+}

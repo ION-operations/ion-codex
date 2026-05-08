@@ -1,0 +1,51 @@
+{
+  "agent_coverage_count": 47,
+  "agent_coverage_missing": [],
+  "agent_domain_gap_count": 12,
+  "coverage_requirements": {
+    "minimum_entries": 25,
+    "note": "background_agent is represented by cloud/background branch-return patterns in this seed; a dedicated local background-agent entry is added below if absent.",
+    "required_embodiments": [
+      "chat",
+      "ide",
+      "cli",
+      "cloud_agent",
+      "pr_agent",
+      "background_agent",
+      "hybrid"
+    ]
+  },
+  "created_at": "2026-05-08T14:32:05Z",
+  "dataset_path": "ION/05_context/current/ai_assistant_work/dataset/AI_ASSISTANT_WORK_DATASET_GENESIS_V0_1.jsonl",
+  "domain_coverage_count": 19,
+  "domain_coverage_missing": [],
+  "embodiment_counts": {
+    "chat": 11,
+    "cli": 2,
+    "cloud_agent": 2,
+    "hybrid": 4,
+    "ide": 12,
+    "pr_agent": 4
+  },
+  "entry_count": 35,
+  "failure_mode_count": 66,
+  "non_claims": [
+    "Dataset genesis is a seed corpus, not a statistically representative survey.",
+    "Entries are candidate observations used for taxonomy/template/agent mining only.",
+    "No registry landing or product-front-door mutation is claimed."
+  ],
+  "protocol_coverage_count": 57,
+  "route_counts": {
+    "route.assistant_identity_definition": 1,
+    "route.assistant_work_dataset_build": 2,
+    "route.cross_domain_feature_delivery": 13,
+    "route.documentation_specialist_work": 5,
+    "route.ide_agent_work_map": 10,
+    "route.ui_specialist_work": 4
+  },
+  "schema": "ion.ai_assistant_work.dataset_genesis_summary.v0_1",
+  "state_surface_coverage_count": 70,
+  "status": "accepted_candidate_evidence",
+  "template_coverage_count": 67,
+  "template_gap_count": 12
+}

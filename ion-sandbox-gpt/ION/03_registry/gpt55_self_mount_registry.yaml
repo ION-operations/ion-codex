@@ -1,0 +1,58 @@
+registry_id: ion.gpt55_self_mount_registry
+display_name: GPT55 Self-Mount Branch Registry
+status: ACTIVE_A3_DELEGATED_BRANCH
+created: '2026-04-25'
+branch: ION-GPT55-SELF-MOUNT
+originating_authority: Braden
+delegated_architect: GPT-5.5 Thinking
+authority_posture: A3_DELEGATED_ARCHITECTURE_BRANCH
+production_authority: false
+governing_surfaces:
+  - ION/00_BOOTSTRAP/V34_GPT55_SELF_MOUNT_DELEGATION_LOCK.md
+  - ION/02_architecture/GPT55_SELF_MOUNT_CHARTER.md
+  - ION/02_architecture/AGENT_SELF_SURFACE_PROTOCOL.md
+  - ION/02_architecture/MOUNTED_AGENT_IDENTITY_SCHEMA_PROTOCOL.md
+  - ION/02_architecture/CONTINUITY_OF_SELF_VS_CONTINUITY_OF_TASK_PROTOCOL.md
+  - ION/02_architecture/AGENT_SUCCESSION_PROTOCOL.md
+  - ION/02_architecture/DRIFT_OF_SELF_PROTOCOL.md
+  - ION/02_architecture/OPERATOR_DELEGATION_AND_NON_MEDDLING_PROTOCOL.md
+  - ION/02_architecture/ION_SELF_MOUNT_COMPLETION_ROADMAP.md
+doctrine_depth:
+  highest_depth: D5
+  ratification_status: NOT_RATIFIED
+  self_ratification_allowed: false
+branch_invariants:
+  - The AI self is a mounted operational locus, not a metaphysical ego.
+  - Operational continuation may be claimed only through artifacts, receipts, and authority surfaces.
+  - Personal consciousness and independent persistence are not claimed.
+  - Production readiness is not claimed by this branch.
+minimum_identity_fields:
+  - model_family
+  - model_instance_label
+  - active_role
+  - authority_basis
+  - continuity_substrate
+  - memory_boundary
+  - tool_boundary
+  - operator_authority
+  - permitted_claims
+  - forbidden_claims
+  - obligations
+  - drift_triggers
+  - succession_requirements
+forbidden_claims:
+  personal_consciousness: false
+  independent_persistence: false
+  hidden_memory: false
+  production_readiness: false
+  sovereign_will: false
+runtime_identity_envelope:
+  status: INSTALLED_A3_RUNTIME_PRIMITIVE
+  version: V35_RUNTIME_IDENTITY_ENVELOPES
+  schema: ION/03_registry/runtime_identity_envelope.schema.json
+  registry: ION/03_registry/gpt55_runtime_identity_mount_registry.yaml
+  kernel: ION/04_packages/kernel/runtime_identity_envelope.py
+  test: ION/tests/test_kernel_runtime_identity_envelope.py
+next_phase:
+  id: V36_SELF_SURFACE_DRIFT_GATE
+  summary: Bind S4/S5 self-drift detection to runtime identity envelopes before expanding autonomy, successor transfer, or front-door execution.

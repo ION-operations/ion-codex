@@ -1,0 +1,186 @@
+{
+  "counts": {
+    "candidate_files_created_or_updated": 31,
+    "domains_seeded": 14,
+    "nodes_seeded": 42,
+    "organ_groups_inventory": 13,
+    "routes_seeded": 6
+  },
+  "generated_at": "2026-05-08T03:55:50+00:00",
+  "mount_proof": {
+    "content_root": "ION/",
+    "internal_root": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE",
+    "live_execution_authority": false,
+    "outer_zip_name": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_4_MANIFEST_REPAIRED_CANDIDATE_20260507.zip",
+    "production_authority": false,
+    "resume_posture": "clean_sandbox_mount_for_candidate_work",
+    "root_name_warning": "outer zip says PRUNE_PASS_4_MANIFEST_REPAIRED_CANDIDATE; internal root says PRUNE_PASS_3_STARTER_STATE_CANDIDATE; proceeded conservatively because REPO_AUTHORITY, mount contract, status, and preflight passed.",
+    "shell_root": "/mnt/data/ion_mount/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE",
+    "zip_path": "/mnt/data/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_4_MANIFEST_REPAIRED_CANDIDATE_20260507.zip",
+    "zip_sha256": "97ea37658af076c7c64aab266ea35c11be13070dcacc9d817453f0b728fe6245"
+  },
+  "next_packet": {
+    "acceptance_gate": "human_or_steward_explicit_acceptance_required",
+    "allowed_path_request": [
+      "ION/03_registry/self_knowledge/",
+      "ION/05_context/current/self_knowledge/",
+      "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+      "ION/tests/test_self_knowledge_*.py",
+      "ION/02_architecture/ION_MOUNT_CONTRACT.md or onboarding protocol surfaces if explicitly accepted"
+    ],
+    "objective": "After acceptance, promote candidate self-knowledge registries into ION/03_registry/self_knowledge, add focused tests, and wire carrier onboarding for ION-about-ION questions.",
+    "packet_id": "self_knowledge_promote_registry_and_tests_v0_3"
+  },
+  "non_claims": [
+    "This receipt does not promote candidate registries into ION/03_registry/self_knowledge.",
+    "This receipt does not claim production authority or live external execution authority.",
+    "This receipt does not claim external agents were spawned.",
+    "This receipt does not settle self-knowledge as final canon beyond sandbox current-state candidate integration."
+  ],
+  "objective": "Mount ION and start the self-knowledge domain-state workpack: recover existing self-knowledge organs, classify/rank them, seed routable self-knowledge domain state, and export candidate bundle without production/live authority.",
+  "receipt_id": "self_knowledge_activation_candidate_20260508T035105Z",
+  "schema_id": "ion.self_knowledge.activation_receipt_candidate.v0_2",
+  "source_workpack": {
+    "canvas": "ION/05_context/current/self_knowledge/source_inputs/ion_self_knowledge_domain_architecture_canvas_v_0.md",
+    "context_engineering_white_paper": "ION/05_context/current/self_knowledge/source_inputs/context_engineering_white_paper_v_0_1.md",
+    "continuity_explainer": "ION/05_context/current/self_knowledge/source_inputs/ION_Continuity_Substrate_Explainer_v7.md"
+  },
+  "status": "CANDIDATE_STATE_INTEGRATED_IN_SANDBOX_QUEUE_NOT_CANONICAL_PROMOTION",
+  "validation": {
+    "context_proof_gates": {
+      "steward": {
+        "accepted": true,
+        "context_proof_heading": "### CONTEXT PROOF",
+        "findings": [],
+        "integration_decision": "ALLOW_STEWARD_REVIEW",
+        "live_execution_authority": false,
+        "missing_paths": [],
+        "production_authority": false,
+        "receipt_path": "ION/05_context/current/execution_cycles/2026-05-08T034831Z0000_carrier_continue_mount_ion_and_start_the_self_knowledge_domain_state_workpack_recover_existing_se/01_steward_context_load_receipt.json",
+        "required_paths": [
+          "ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md",
+          "ION/03_registry/agent_context_system_registry.yaml",
+          "ION/05_context/current/agent_context_systems/STEWARD.context_system.md",
+          "ION/03_registry/boots/STEWARD.boot.md"
+        ],
+        "schema_id": "ion.context_proof_return_evaluation.v1",
+        "task_output_path": "ION/05_context/current/execution_cycles/2026-05-08T034831Z0000_carrier_continue_mount_ion_and_start_the_self_knowledge_domain_state_workpack_recover_existing_se/01_steward_return.md"
+      },
+      "vestige": {
+        "accepted": true,
+        "context_proof_heading": "### CONTEXT PROOF",
+        "findings": [],
+        "integration_decision": "ALLOW_STEWARD_REVIEW",
+        "live_execution_authority": false,
+        "missing_paths": [],
+        "production_authority": false,
+        "receipt_path": "ION/05_context/current/execution_cycles/2026-05-08T034831Z0000_carrier_continue_mount_ion_and_start_the_self_knowledge_domain_state_workpack_recover_existing_se/02_vestige_context_load_receipt.json",
+        "required_paths": [
+          "ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md",
+          "ION/03_registry/agent_context_system_registry.yaml",
+          "ION/05_context/current/agent_context_systems/VESTIGE.context_system.md",
+          "ION/03_registry/boots/VESTIGE.boot.md",
+          "ION/06_intelligence/archaeology/vestige/continuity.md",
+          "ION/06_intelligence/archaeology/vestige/watchlist.md"
+        ],
+        "schema_id": "ion.context_proof_return_evaluation.v1",
+        "task_output_path": "ION/05_context/current/execution_cycles/2026-05-08T034831Z0000_carrier_continue_mount_ion_and_start_the_self_knowledge_domain_state_workpack_recover_existing_se/02_vestige_return.md"
+      }
+    },
+    "final_status": {
+      "ion_status_verdict": "ION_STATUS_READY",
+      "live_execution_authority": false,
+      "next_lawful_action": "continue_or_queue_new_work",
+      "production_authority": false,
+      "steward_queue_pending_count": 0,
+      "steward_queue_rejected_count": 0,
+      "task_return_counts": {
+        "accepted": 2,
+        "rejected": 0,
+        "total": 2
+      }
+    },
+    "self_knowledge_candidate_validation": {
+      "accepted": true,
+      "domain_count": 14,
+      "findings": [],
+      "live_execution_authority": false,
+      "parsed_files_count": 22,
+      "production_authority": false,
+      "route_count": 6,
+      "schema_id": "ion.self_knowledge_candidate_validation.v0_2"
+    },
+    "steward_queue_integration": {
+      "accepted_count": 2,
+      "pending_count": 0,
+      "receipt_paths": [
+        "ION/05_context/current/steward_integrations/queue_01_steward_9a59116938c2_steward_integration.json",
+        "ION/05_context/current/steward_integrations/queue_02_vestige_e3e54ab13d2a_steward_integration.json"
+      ],
+      "rejected_count": 0,
+      "verdict": "ION_STEWARD_QUEUE_INTEGRATION_COMPLETE"
+    },
+    "task_return_intake": {
+      "steward": "ION_TASK_RETURN_ACCEPTED_FOR_STEWARD",
+      "vestige": "ION_TASK_RETURN_ACCEPTED_FOR_STEWARD"
+    },
+    "template_action_gates": {
+      "steward": {
+        "accepted": true,
+        "action_id": "self_knowledge_steward_route_and_acceptance_boundary_20260508T035105Z",
+        "findings": [],
+        "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+        "live_external_execution_authority": false,
+        "production_authority": false,
+        "schema_id": "ion.template_action_gate_result.v1",
+        "template_id": "ion.template.audit_observation.v1",
+        "touched_paths": [
+          "ION/05_context/current/SELF_KNOWLEDGE_ORGAN_INVENTORY_V0_2.json",
+          "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+          "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+          "ION/05_context/current/self_knowledge/candidate_registries/domain_registry.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/node_registry.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/state_classification.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/authority_ranking.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/node_schema.candidate.yaml",
+          "ION/05_context/current/self_knowledge/domains/",
+          "ION/05_context/current/self_knowledge/validate_self_knowledge_candidate.py",
+          "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_VALIDATION_NOTE_20260508T035105Z.json"
+        ]
+      },
+      "vestige": {
+        "accepted": true,
+        "action_id": "self_knowledge_vestige_organ_inventory_and_false_authority_review_20260508T035105Z",
+        "findings": [],
+        "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+        "live_external_execution_authority": false,
+        "production_authority": false,
+        "schema_id": "ion.template_action_gate_result.v1",
+        "template_id": "ion.template.audit_observation.v1",
+        "touched_paths": [
+          "ION/05_context/current/SELF_KNOWLEDGE_ORGAN_INVENTORY_V0_2.json",
+          "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+          "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+          "ION/05_context/current/self_knowledge/candidate_registries/domain_registry.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/node_registry.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/state_classification.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/authority_ranking.candidate.yaml",
+          "ION/05_context/current/self_knowledge/candidate_registries/node_schema.candidate.yaml",
+          "ION/05_context/current/self_knowledge/domains/",
+          "ION/05_context/current/self_knowledge/validate_self_knowledge_candidate.py",
+          "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_VALIDATION_NOTE_20260508T035105Z.json"
+        ]
+      }
+    }
+  },
+  "work_completed": {
+    "domain_state_index": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+    "phase_0_inventory": "ION/05_context/current/SELF_KNOWLEDGE_ORGAN_INVENTORY_V0_2.json",
+    "phase_1_candidate_registries": "ION/05_context/current/self_knowledge/candidate_registries/",
+    "phase_2_domain_packets": "ION/05_context/current/self_knowledge/domains/",
+    "phase_3_mount_packet": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+    "validation_note": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_VALIDATION_NOTE_20260508T035105Z.json"
+  }
+}

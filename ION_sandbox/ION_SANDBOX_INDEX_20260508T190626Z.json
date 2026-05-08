@@ -1,0 +1,49 @@
+{
+  "schema": "ion.root_source_lane.sandbox_index.v0_1",
+  "created_at": "2026-05-08T19:06:26Z",
+  "status": "source_reference_product_sandbox_not_active_runtime",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "lane": "ION_sandbox",
+  "lane_policy": {
+    "active_authority_root": "ION/",
+    "candidate_source_lane": true,
+    "accepted_canon": false,
+    "mutates_active_runtime": false,
+    "requires_receipted_promotion": true
+  },
+  "snapshots": [
+    {
+      "snapshot_id": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z",
+      "path": "ION_sandbox/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z",
+      "primary_package_root": "ION_sandbox/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE",
+      "file_count": 3756,
+      "size_summary": "26M",
+      "key_hashes": {
+        "PRODUCT_MANIFEST.json": "400687641ac70aabce5546bf143624c89832ed5b6ebea7770ca721d17319c8d8",
+        "VALIDATION_REPORT.json": "ffba5069afdf300f3dd1092c0b4d3f517e4b75f565347c4c78fe9c081c0c6138",
+        "SOURCE_PROVENANCE.json": "32fdbf5eefd42095f5e103619e6d151ec9c04611849564159cf3c4ab97f770ca",
+        "PACKAGE_BUILD_RECEIPT.json": "3ff3b3e2d6d8502c723b16c797b2fdc778ae15a064b38a6e57facbf5a738e10f"
+      },
+      "known_metadata_caveat": "outer package label carries v1.4 assistant-work evolution while product manifest metadata may identify an earlier package lineage",
+      "current_integration_status": "selected ai_assistant_work surfaces imported under ION/05_context/current/ai_assistant_work/ as candidate context",
+      "github_release_strategy": "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_ion_sandbox_github_release_strategy.md",
+      "github_release_readiness": {
+        "recommendation": "prepare dedicated release branch with curated product root before publication",
+        "recommended_branch": "release/ion-sandbox-gpt-v1",
+        "curated_release_root": "ion-sandbox-gpt/",
+        "focused_product_tests": "13 passed",
+        "known_blockers": [
+          "branch not created",
+          "staged file list not reviewed",
+          "not pushed"
+        ],
+        "release_root_prep_receipt": "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_ROOT_PREP_RECEIPT_20260508T192928Z.json"
+      }
+    }
+  ],
+  "non_claims": [
+    "This index does not promote sandbox contents into active ION canon.",
+    "This index does not mutate ION/03_registry.",
+    "This index does not make ION_sandbox the active runtime root."
+  ]
+}

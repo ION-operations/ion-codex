@@ -40,3 +40,10 @@ ION/05_context/current/chatgpt_connector/runtime/*.pid
 *.tar.gz
 *.tgz
 *.7z
+
+# Local sandbox package snapshots stay beside the active build, but are not
+# tracked wholesale unless explicitly promoted into source-controlled surfaces.
+ION_sandbox/**
+!ION_sandbox/
+!ION_sandbox/README.md
+!ION_sandbox/ION_SANDBOX_INDEX_*.json

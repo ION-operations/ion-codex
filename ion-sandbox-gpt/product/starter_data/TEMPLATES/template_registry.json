@@ -1,0 +1,205 @@
+{
+  "schema_id": "ion.template_registry.v1",
+  "templates": [
+    {
+      "template_id": "first_run_intent_capture",
+      "domain": "domain.persona_interface",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "persona_response_render",
+      "domain": "domain.persona_interface",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "continuity_save_offer",
+      "domain": "domain.persona_interface",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "intent_capture",
+      "domain": "domain.user_intent",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "work_packet_draft",
+      "domain": "domain.user_intent",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "clarification_request",
+      "domain": "domain.user_intent",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "project_overview",
+      "domain": "domain.project_workspace",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "workspace_state_update",
+      "domain": "domain.project_workspace",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "next_step_plan",
+      "domain": "domain.project_workspace",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "domain_map",
+      "domain": "domain.domain_cartography",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "domain_health_review",
+      "domain": "domain.domain_cartography",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "domain_fission_candidate",
+      "domain": "domain.domain_cartography",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "context_node_record",
+      "domain": "domain.context_graph",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "context_package_build",
+      "domain": "domain.context_graph",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "context_graph_update",
+      "domain": "domain.context_graph",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "template_selection",
+      "domain": "domain.template_governance",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "template_gap",
+      "domain": "domain.template_governance",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "template_evolution",
+      "domain": "domain.template_governance",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "build_plan",
+      "domain": "domain.build_implementation",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "patch_proposal",
+      "domain": "domain.build_implementation",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "implementation_report",
+      "domain": "domain.build_implementation",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "test_plan",
+      "domain": "domain.test_verification",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "validation_report",
+      "domain": "domain.test_verification",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "proof_check",
+      "domain": "domain.test_verification",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "failure_mechanism_analysis",
+      "domain": "domain.risk_and_failure_review",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "risk_review",
+      "domain": "domain.risk_and_failure_review",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "contradiction_audit",
+      "domain": "domain.risk_and_failure_review",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "summary_capture",
+      "domain": "domain.documentation_and_scribe",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "decision_note",
+      "domain": "domain.documentation_and_scribe",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "continuity_note",
+      "domain": "domain.documentation_and_scribe",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "receipt_append",
+      "domain": "domain.receipts_and_state",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "state_update_proposal",
+      "domain": "domain.receipts_and_state",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "continuity_export",
+      "domain": "domain.receipts_and_state",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "project_ingestion",
+      "domain": "domain.project_ingestion",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "structural_cartography",
+      "domain": "domain.project_ingestion",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "domain_partition",
+      "domain": "domain.project_ingestion",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "risk_classification",
+      "domain": "domain.project_ingestion",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "self_audit",
+      "domain": "domain.self_maintenance",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "state_repair_proposal",
+      "domain": "domain.self_maintenance",
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "template_id": "schema_migration_proposal",
+      "domain": "domain.self_maintenance",
+      "status": "ACTIVE_BASE"
+    }
+  ]
+}

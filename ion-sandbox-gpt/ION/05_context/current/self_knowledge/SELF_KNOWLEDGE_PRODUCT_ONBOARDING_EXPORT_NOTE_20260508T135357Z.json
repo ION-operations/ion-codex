@@ -1,0 +1,31 @@
+{
+  "export_class": "product_onboarding_audited_candidate",
+  "generated_at": "2026-05-08T13:53:57+00:00",
+  "included_updates": [
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_AUDIT_REPORT_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_OVERLAY_V0_2.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PATCHSET_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PROPOSAL_20260508T135357Z.md",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_VALIDATION_NOTE_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_RECEIPT_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_PRODUCT_ONBOARDING_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/audit_self_knowledge_product_onboarding.py",
+    "ION/tests/test_kernel_ion_self_knowledge_product_onboarding.py"
+  ],
+  "non_claims": [
+    "No product/front-door target surface was mutated.",
+    "No ION/03_registry/self_knowledge landing occurred.",
+    "No active onboarding law mutation occurred.",
+    "No production or live execution authority was used."
+  ],
+  "schema_id": "ion.self_knowledge.export_note.v0_2",
+  "source_full_package": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATED_CANDIDATE_20260508T045721Z.zip",
+  "status": "candidate_export_ready",
+  "validation": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "candidate_validation": "accepted",
+    "focused_tests": "25 passed",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+  }
+}

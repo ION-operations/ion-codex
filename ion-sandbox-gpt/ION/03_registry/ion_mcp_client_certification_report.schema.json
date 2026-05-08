@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion://registry/ion_mcp_client_certification_report.schema.json",
+  "title": "ION MCP Client Certification Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "bridge_version", "created_at", "ion_root", "state_store_root", "passed", "profiles", "allowed_resolutions", "forbidden_resolution_seen", "live_execution_authorized_seen", "kernel_truth_mutation_seen", "certification_scope", "live_client_attestation", "hosted_chatgpt_certified"],
+  "properties": {
+    "version": { "type": "string" },
+    "bridge_version": { "type": "string" },
+    "created_at": { "type": "string" },
+    "ion_root": { "type": "string" },
+    "state_store_root": { "type": "string" },
+    "passed": { "type": "boolean" },
+    "profiles": { "type": "array" },
+    "allowed_resolutions": { "type": "array", "items": { "type": "string", "enum": ["READ_ONLY", "DRY_RUN", "APPROVAL_REQUIRED", "REFUSED"] } },
+    "forbidden_resolution_seen": { "type": "boolean", "const": false },
+    "live_execution_authorized_seen": { "type": "boolean", "const": false },
+    "kernel_truth_mutation_seen": { "type": "boolean", "const": false },
+    "certification_scope": { "type": "string" },
+    "live_client_attestation": { "type": "boolean", "const": false },
+    "hosted_chatgpt_certified": { "type": "boolean", "const": false }
+  }
+}

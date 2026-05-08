@@ -1,0 +1,32 @@
+ION V92 MCP CONTROL BRIDGE RECEIPT
+
+Decision:
+- Add local Cursor MCP server named ion-control.
+- Use MCP tools as carrier-control helpers, not as STEWARD and not as arbitrary shell.
+
+Primary files:
+- .cursor/mcp.json
+- ION/09_integrations/mcp/ion_mcp_server.py
+- ION/04_packages/kernel/ion_mcp_bridge_audit.py
+- ION/02_architecture/ION_MCP_CONTROL_BRIDGE_PROTOCOL.md
+- ION/05_context/current/ACTIVE_MCP_BRIDGE_STATE.json
+
+Tools exposed:
+- ion_status
+- ion_continue
+- ion_context_plan
+- ion_cockpit_view
+- ion_workflow_audit
+- ion_read_active_packet
+- ion_task_return
+
+Critical limitation:
+- Local stdio MCP gives Cursor tools. It does not automatically give hosted ChatGPT access to the user's private Cursor process.
+- ChatGPT direct control requires remote HTTPS MCP deployment and connection through ChatGPT Apps/developer/workspace surfaces.
+
+Safety boundary:
+- no arbitrary shell
+- no credentials
+- no destructive actions
+- no production authority
+- no unrestricted network access

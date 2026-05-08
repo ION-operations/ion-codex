@@ -1,0 +1,18 @@
+schema_id: ion.live_repair_policy.v1
+version: V42_CONVERSATIONAL_RECEIPTS_AND_LIVE_REPAIR
+production_authority: false
+allowed_event_types:
+  - BACKCHANNEL
+  - PROVISIONAL_UTTERANCE
+  - SELF_INTERRUPTION
+  - CORRECTION
+  - RETRACTION
+  - RATIFICATION
+  - BLOCK
+forbidden_claims:
+  provisional_speech_is_ratified_truth: false
+  unrestricted_live_persona_speech: false
+  hidden_memory_claim: false
+  persona_total_ion_identity: false
+  production_authority: false
+

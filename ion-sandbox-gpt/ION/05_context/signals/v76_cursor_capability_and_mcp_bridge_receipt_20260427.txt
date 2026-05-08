@@ -1,0 +1,13 @@
+type: mission_receipt
+mission: V76_CURSOR_CAPABILITY_INVENTORY_AND_ION_MCP_BRIDGE_ACCELERATION
+date: 2026-04-27
+
+hazard_fixed: nested_pytest_mcp_keyword_removed_from_allowlist_and_tests
+verdict: ION_CURSOR_MCP_ACCELERATION_READY_WITH_GAPS
+
+report: ION/docs/consolidation/V76_CURSOR_CAPABILITY_AND_MCP_BRIDGE_ACCELERATION_REPORT_20260427.md
+mcp_scaffold: ION/mcp_server/
+
+notes:
+  - Prior hang: pytest -k mcp + MCP test invoking pytest on same selection caused nested pytest / host freeze.
+  - Remediation: allowlist uses explicit file slices + python_bytecode_smoke; ion.test_status defaults to pytest_v76_work_cycle.

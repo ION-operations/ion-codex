@@ -1,0 +1,133 @@
+schema_id: ion.github_data_plane_registry.v1
+status: draft_non_production
+production_authority: false
+live_execution_authority: false
+github_account_or_org: ION-operations
+recommended_repository:
+  owner: ION-operations
+  name: ION
+  visibility: public
+  visibility_policy: public_collaboration_repo_private_production_builds_later
+  remote_ssh: git@github.com:ION-operations/ION.git
+  remote_https: https://github.com/ION-operations/ION.git
+local_root:
+  path: /home/sev/ION - Production/ION_CODEX
+  current_mcp_git_present: true
+  local_git_required_before_data_plane: false
+  active_branch: main
+  active_remote: https://github.com/ION-operations/ION.git
+  auth_path: gh_browser_login_with_git_credential_helper
+  first_commit_pushed: true
+  setup_state: CONFIGURED_INITIAL_BOOTSTRAP_PUSH_COMPLETE_PUBLIC_COLLABORATION_REPO
+  bootstrap_commit: 6edea5f9ad843ad8526c4272d07885fca8065217
+  bootstrap_push_receipt: ION/05_context/current/github_data_plane/BOOTSTRAP_PUSH_RECEIPT_2026-05-05T041453Z.json
+control_plane:
+  owner: ION/09_integrations/mcp/chatgpt_connector/
+  summary: MCP remains the carrier control plane for status, packets, queues, and proof-gated returns.
+data_plane:
+  protocol: ION/02_architecture/ION_GITHUB_DATA_PLANE_PROTOCOL.md
+  durable_objects:
+    - issues
+    - branches
+    - commits
+    - pull_requests
+    - releases_or_lfs_artifacts
+    - artifact_refs_in_receipts
+work_daemon:
+  protocol: ION/02_architecture/ION_GITHUB_WORK_DAEMON_PROTOCOL.md
+  status: NOT_CONFIGURED
+  disabled_by_default: true
+  existing_owners_reused:
+    - ION/04_packages/kernel/ion_codex_queue_runner.py
+    - ION/04_packages/kernel/ion_agent_invocation_broker.py
+    - ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json
+    - ION/05_context/current/chatgpt_connector/codex_work_requests/
+    - ION/05_context/current/chatgpt_connector/task_returns/
+    - ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json
+prior_art:
+  consolidation_artifact: ION/05_context/current/github_data_plane/PRIOR_ART_CONSOLIDATION_2026-05-04.md
+  sources:
+    - path: /home/sev/ION - Production/AIM-ION/docs/agents/CodexGit/
+      decision: adapt_as_git_operations_capability
+    - path: /home/sev/ION - Production/AIM-ION/scripts/git/codexgit_status_report.py
+      decision: port_safe_read_only_report_shape
+    - path: /home/sev/ION - Production/AIM-ION/scripts/git/quintet_pre_commit_gate.py
+      decision: adapt_later_policy_gate_pattern_only
+    - path: /home/sev/ION - Production/AIM-ION/docs/CODEXGIT_RELEASE_SLICING_PLAN_2026-03-03.md
+      decision: adopt_sliced_commit_and_exclude_by_default_policy
+    - path: /home/sev/ION - Production/AIM-ION/docs/GIT_HYGIENE_RECOVERY_PACKET_2026-03-04.md
+      decision: adopt_dirty_tree_hygiene_decision_model
+    - path: /home/sev/ION - Production/AIM-ION/archive/GITHUB_AUTH_ISSUE.md
+      decision: reject_token_paste_guidance
+    - path: /home/sev/ION - Production/AIM-ION/archive/GITHUB_PUSH_FINAL_OPTIONS.md
+      decision: retain_as_secret_scanning_warning_only
+    - path: /home/sev/ION - Production/SOS-OPUS/04_packages/spawner/src/git_chronicler.py
+      decision: adapt_provenance_fields_reject_autonomous_commit_first_slice
+    - path: /home/sev/ION - Production/SOS-OPUS/06_intelligence/opus_git_chronicler_spec.md
+      decision: adapt_commit_metadata_and_reject_non_volitional_git_writes
+    - path: /home/sev/ION - Production/Project-Gemini/ion-core/ion/git_integration.py
+      decision: adapt_commit_ref_as_evidence_concept_only
+next_implementation_slices:
+  - id: github_audit_read_only
+    status: implemented_read_only
+    output: kernel.ion_github_data_plane_audit
+    source_prior_art: codexgit_status_report.py
+    requires_network: false
+    mutates_git_or_github: false
+    module_path: ION/04_packages/kernel/ion_github_data_plane_audit.py
+    test_path: ION/tests/test_kernel_ion_github_data_plane_audit.py
+  - id: commit_proposal_receipt
+    status: implemented_non_authorizing_review_receipt
+    output: kernel.ion_github_commit_proposal_receipt
+    requires_secret_scan: true
+    mutates_git_or_github: false
+    authorization_model: ion_runtime_policy_not_per_push_human_gate
+    module_path: ION/04_packages/kernel/ion_github_commit_proposal_receipt.py
+    test_path: ION/tests/test_kernel_ion_github_commit_proposal_receipt.py
+    receipt_output_dir: ION/05_context/current/github_data_plane/commit_proposals/
+  - id: github_issue_dry_run_import
+    status: planned_after_commit_receipts
+    output: proposed ION work packets from issue metadata
+    requires_network: true
+    mutates_git_or_github: false
+  - id: runtime_commit_push_authority
+    status: planned_after_commit_receipts
+    output: ION runtime git commit/push authority profile and daemon execution slice
+    requires_secret_scan: true
+    mutates_git_or_github: true
+    authorization_model: ion_policy_gated_runtime_capability
+    default_allowed_push_branch_patterns:
+      - work/*
+      - docs/*
+      - agent/*
+      - data-plane/*
+    main_auto_push_allowed: false
+    main_update_path: pull_request_or_merge_gate
+human_setup_commands:
+  - cd "/home/sev/ION - Production/ION_CODEX"
+  - test -f pyproject.toml && test -f ION/REPO_AUTHORITY.md
+  - git init
+  - git branch -M main
+  - gh auth login --hostname github.com --git-protocol https --scopes repo
+  - gh repo create ION-operations/ION --public --description "ION continuity substrate and data plane" --disable-wiki
+  - git remote add origin https://github.com/ION-operations/ION.git
+  - git remote -v
+guardrails:
+  - no_secret_or_token_storage
+  - no_default_carrier_git_push_without_ion_runtime_push_authority
+  - no_production_deployment
+  - no_direct_merge_or_issue_close_by_daemon
+  - no_duplicate_ion_queue
+  - raw_codex_output_requires_existing_task_return_proof_gates
+  - no_secret_scanning_bypass_as_normal_workflow
+  - no_non_volitional_autonomous_commits_first_slice
+  - git_push_is_runtime_data_plane_capability_after_policy_profile
+receipt_requirements:
+  - action_id
+  - actor_or_carrier_id
+  - issue_branch_pr_commit_refs
+  - artifact_sha256_or_url
+  - ion_packet_path
+  - ion_receipt_path
+  - validations_run
+  - failure_classification

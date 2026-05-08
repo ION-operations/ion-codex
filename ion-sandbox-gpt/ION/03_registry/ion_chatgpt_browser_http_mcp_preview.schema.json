@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.chatgpt_browser_http_mcp_preview.schema.v1",
+  "title": "ION ChatGPT Browser HTTP MCP Preview",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version_line",
+    "verdict",
+    "connector_state",
+    "write_confirmation_required",
+    "production_authority",
+    "live_execution_authority",
+    "deployment_authority"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.chatgpt_browser_http_mcp_preview.v1"
+    },
+    "version_line": {
+      "const": "V121_CHATGPT_BROWSER_HTTP_MCP_PREVIEW"
+    },
+    "verdict": {
+      "enum": [
+        "ION_CHATGPT_BROWSER_HTTP_MCP_PREVIEW_READY",
+        "ION_CHATGPT_BROWSER_HTTP_MCP_PREVIEW_BLOCKED"
+      ]
+    },
+    "connector_state": {
+      "enum": [
+        "LOCAL_HTTP_PREVIEW_NOT_PUBLIC_CONNECTOR",
+        "BLOCKED"
+      ]
+    },
+    "write_confirmation_required": {
+      "const": true
+    },
+    "write_confirmation_token": {
+      "const": "ION_BOUNDED_WRITE_CONFIRMED"
+    },
+    "allowed_tools": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "forbidden_tools": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "production_authority": {
+      "const": false
+    },
+    "live_execution_authority": {
+      "const": false
+    },
+    "deployment_authority": {
+      "const": false
+    }
+  },
+  "additionalProperties": true
+}
+

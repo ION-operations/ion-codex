@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-05-07T12:42:01.601179+00:00",
+  "detail": "queue item added: fdq-fdsession-11e2a9a0cbc8dad6bc-fdwu-fdsession-5d82461e89dd",
+  "event": "QUEUE_ITEM_ADDED",
+  "receipt_id": "rsr-747867693153",
+  "session_id": "fdsession-11e2a9a0cbc8dad6bc",
+  "witness_paths": [
+    "/mnt/data/ion_persona_relay_work/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_1/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/queues/fdsession-11e2a9a0cbc8dad6bc.json"
+  ]
+}

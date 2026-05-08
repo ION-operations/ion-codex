@@ -1,0 +1,124 @@
+schema: ion.ai_assistant_work.template_spec.v0_1
+template_id: pr_review_packet
+title: PR Review Packet
+status: candidate_machine_checkable_template_spec_not_accepted_canon
+created_at: '2026-05-08T15:19:39Z'
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  external_execution_authority: false
+  requires_explicit_acceptance_to_land: true
+owned_by_domain: pr_agent_work_domain
+primary_agent: PR_REVIEW_STEWARD
+supporting_agents:
+- PR_COMMENT_SCRIBE
+- PR_MERGE_SETTLEMENT_AUDITOR
+- CI_EVIDENCE_TRIAGER
+- LOCKFILE_AUDITOR
+- SECURITY_NEMESIS
+purpose: Convert a PR diff and evidence into bounded review findings and candidate
+  comments.
+intent_class: specialist_domain_template
+state_inputs:
+- diff_state
+- ci_state
+- review_policy_state
+- lockfile_state
+state_outputs:
+- review_comment_candidate_state
+- merge_blocker_state
+- pr_settlement_request_state
+required_context:
+- bounded objective
+- source context
+- authority boundary
+- known state surfaces
+- available proof
+machine_required_sections:
+- name: PR_SCOPE
+  type: string
+  min_length: 20
+- name: DIFF_SUMMARY
+  type: list
+  min_items: 1
+- name: RISK_AREAS
+  type: list
+  min_items: 1
+- name: CI_EVIDENCE
+  type: list
+  min_items: 1
+- name: REVIEW_COMMENTS
+  type: list
+  min_items: 1
+- name: MERGE_BLOCKERS
+  type: list
+  min_items: 0
+- name: NON_CLAIMS
+  type: list
+  min_items: 1
+- name: SETTLEMENT_ROUTE
+  type: string
+  min_length: 5
+proof_gates:
+- gate_id: candidate_boundary_named
+  description: Output states it is candidate/not accepted unless explicit acceptance
+    exists
+  machine_check:
+    requires_non_claim: accepted_state
+- gate_id: required_sections_present
+  description: Every machine_required_sections item is present and non-empty according
+    to rule
+  machine_check:
+    type: schema_section_presence
+- gate_id: settlement_route_named
+  description: Return includes route for review/settlement/inheritance
+  machine_check:
+    section_any:
+    - SETTLEMENT_ROUTE
+    - RECEIPT_TARGET
+- gate_id: proof_or_missing_context_named
+  description: Proof, command receipts, or missing context are stated
+  machine_check:
+    requires_any:
+    - PROOF
+    - COMMAND_RECEIPTS
+    - TEST_AND_PROOF_PLAN
+    - PROOF_NORMALIZATION
+    - CI_EVIDENCE
+- gate_id: draft_gate_1
+  description: authority boundary declared
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_2
+  description: candidate vs accepted boundary preserved
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_3
+  description: proof or non-proof status explicit
+  machine_check:
+    type: human_or_script_check
+reject_if:
+- review comments are treated as accepted changes
+- CI status is missing but review claims merge readiness
+- lockfile/security changes are ignored when present
+output_contract: PR Review Packet result with evidence, non-claims, and settlement
+  route
+completion_class: review_candidate_return
+settlement_route: PR_REVIEW_STEWARD
+route_binding:
+  dispatch_before_generic_implementation: true
+  trigger_patterns:
+  - pr review packet
+  - pr review
+  - pr review steward
+  fallback_agent_forbidden_until_specialist_check: true
+minimal_valid_instance_shape:
+  template_id: pr_review_packet
+  sections: must match machine_required_sections
+  non_claims_required: true
+  settlement_route_or_receipt_target_required: true
+status_notes:
+- This spec is machine-checkable structure for candidate current-context use; it is
+  not active template law.

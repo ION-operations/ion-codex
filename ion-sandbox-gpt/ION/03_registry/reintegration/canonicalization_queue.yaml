@@ -1,0 +1,114 @@
+registry_id: reintegration.canonicalization_queue
+display_name: Reintegration Canonicalization Queue
+status: WORKING
+authority: A3_OPERATIONAL
+canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+purpose: >-
+  Track the smallest ordered set of next canonicalization questions required to
+  move from split-center awareness toward lawful reintegration.
+queue_records:
+  - id: q001_workspace_root_authority
+    title: Workspace root authority
+    status: WORKING_PROVISIONAL_DECISION_EMITTED
+    priority: P0
+    anchor: ION/06_intelligence/decisions/2026-04-17_workspace_root_authority_canonicalization_decision.md
+    next_action: retained_dual_center_settlement_governs_until_real_promotion_packets_land
+    notes: >-
+      Operational ambiguity is now bounded and the current truthful answer has
+      been settled by q005 as retained dual-center governance for the present
+      phase.
+  - id: q002_aim_ion_and_aim_os_classification
+    title: AIM-ION / AIM-OS classification
+    status: WORKING_CLASSIFICATION_EMITTED
+    priority: P0
+    blocked_by:
+      - q001_workspace_root_authority
+    preferred_authoring_subject: Codex
+    preferred_witness_subject: historical_bridge_mission_004_witness_only
+    anchor: ION/06_intelligence/decisions/2026-04-17_aim_ion_aim_os_classification_canonicalization_decision.md
+    notes: >-
+      Working decision emitted: AIM-ION is classified as an adjacent sibling
+      witness pack and selective pattern reservoir, not as active ION canon and
+      not as a current dedicated reintegration lane. Historical bridge Mission
+      004 remains cited as witness evidence only; no active Opus/Composer
+      review dependency remains after architect deactivation of that field.
+  - id: q003_top_level_production_surface_promotion_map
+    title: Top-level production MCP/API/docs promotion map
+    status: CURRENT_PHASE_SELECTION_EMITTED__CLASS_C_LANDED
+    priority: P1
+    blocked_by:
+      - q002_aim_ion_and_aim_os_classification
+    risk_class: HIGH_VARIANCE
+    preferred_authoring_subject: Codex
+    preferred_witness_subject: production_root_surface_census
+    anchor: ION/06_intelligence/decisions/2026-04-17_top_level_production_surface_promotion_map_canonicalization_decision.md
+    notes: >-
+      Working map emitted and corrected: the extracted branch already owns a
+      minimal shell-root packaging floor. Top-level production pyproject.toml
+      and preflight_cli.py are not standalone first-wave promotion surfaces;
+      they belong to the retained top-level external transport shell. The
+      extracted branch already owns internal API runtime-entry law, so that
+      top-level service family is not the branch's missing API-entry core.
+      The low-risk Class C selective extraction packet has now landed under
+      ION/docs/. The external transport shell current-phase disposition has
+      also now landed: retain it as support/witness-only unless a later
+      bounded packet reopens it deliberately. Docs/program plus generated/build
+      matter remain witness-first.
+  - id: q006_packaged_nested_path_disambiguation
+    title: Packaged-root nested path disambiguation
+    status: WORKING_DISAMBIGUATION_EMITTED
+    priority: P1
+    blocked_by:
+      - q002_aim_ion_and_aim_os_classification
+    anchor: ION/06_intelligence/decisions/2026-04-17_packaged_root_nested_path_disambiguation_canonicalization_decision.md
+    preferred_authoring_subject: Codex
+    notes: >-
+      Working disambiguation emitted: the nested ION/ION directory inside the
+      packaged root is classified as embedded context/history residue, not a
+      second runnable root. Workspace-level surfaces must now distinguish the
+      packaged current-generation root, the embedded residue lane, and the
+      top-level production root explicitly.
+  - id: q004_root_authority_export_bundle
+    title: Root-authority carrier export bundle
+    status: CURRENT_CARRIER_EXERCISED_WITH_RECEIPT
+    priority: P1
+    inputs_ready_from:
+      - q003_top_level_production_surface_promotion_map
+      - q006_packaged_nested_path_disambiguation
+    anchor: ION/06_intelligence/decisions/2026-04-17_root_authority_carrier_export_bundle_canonicalization_decision.md
+    preferred_authoring_subject: Codex
+    preferred_review_subject: read_test_across_multiple_carriers
+    notes: >-
+      Working carrier bundle emitted under
+      ION/05_context/exports/2026-04-17_root_authority_bundle/. It encodes
+      per-carrier read modes for Cursor/Codex, browser ChatGPT, and Claude
+      Code, supersedes raw STATUS-first onboarding for this split-center
+      question, distinguishes packaged root, top-level production root, and
+      embedded residue lane explicitly, has now been read-tested across the
+      modeled carrier modes, is operator-CLI inspectable via the `bundle`
+      surface, now carries one durable current-carrier exercise receipt under
+      branch-local editable-install posture, now refuses unproven external
+      carrier receipts, and now ships explicit browser/Claude external
+      exercise briefs plus fillable `EXTERNAL_RETURN` stubs under the bundle
+      root, and can now ingest completed external returns as durable
+      q004-scoped external-return receipts without fabricating parity claims.
+      Those ingested returns are now archived as immutable witness copies
+      alongside the receipt path. The emitted bundle now uses portable root
+      terms rather than frozen host-absolute paths and validates from a
+      relocated extract. It functions as the stable startup surface for the
+      retained dual-center settlement. Live external carrier parity remains
+      unproven until one of those external exercises returns real proof.
+  - id: q005_single_root_ratification_or_retained_dual_center
+    title: Single-root ratification or retained dual-center settlement
+    status: RESOLVED_RETAINED_DUAL_CENTER_SETTLEMENT
+    priority: P2
+    inputs_ready_from:
+      - q003_top_level_production_surface_promotion_map
+      - q004_root_authority_export_bundle
+    anchor: ION/06_intelligence/decisions/2026-04-17_retained_dual_center_settlement_canonicalization_decision.md
+    notes: >-
+      Settlement resolved: single-root ratification is not authorized in the
+      current phase. The truthful governing posture is retained dual-center
+      settlement with the packaged current-generation root as primary center and
+      top-level production ION as retained secondary extraction/promotion
+      center.

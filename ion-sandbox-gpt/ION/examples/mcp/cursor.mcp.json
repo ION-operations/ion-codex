@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "ion-local": {
+      "command": "python",
+      "args": [
+        "-m",
+        "kernel.ion_mcp_local_bridge",
+        "--ion-root",
+        "<ION_ROOT>",
+        "--stdio"
+      ],
+      "env": {
+        "PYTHONPATH": "<ION_ROOT>/04_packages"
+      }
+    }
+  }
+}
+

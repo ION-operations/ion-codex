@@ -1,0 +1,23 @@
+{
+  "schema_id": "ion.productized_runtime_manifest.v1",
+  "version": "V104_OPERATIONAL_TRUTH_AUDIT_AND_LONG_HORIZON_ORCHESTRATION",
+  "created_at": "2026-05-02",
+  "production_authority": false,
+  "runtime_surfaces_added": [
+    "ION/04_packages/kernel/ion_operational_truth_audit.py"
+  ],
+  "test_surfaces_added": [
+    "ION/tests/test_kernel_ion_operational_truth_audit.py"
+  ],
+  "state_surfaces_added": [
+    "ION/05_context/current/ION_OPERATIONAL_TRUTH_AUDIT_V104.json",
+    "ION/05_context/current/ION_MASTER_OPERATIONAL_ROADMAP_V104.json",
+    "ION/05_context/current/ION_OPEN_WORK_REGISTER_V104.json"
+  ],
+  "conservative_repairs": [
+    "created missing active Cursor work-cycle template",
+    "refreshed stale context-window existence flags",
+    "materialized empty IONOLOGIST context-system card"
+  ],
+  "next_lawful_move": "V105 lifecycle-aware carrier/release packager."
+}

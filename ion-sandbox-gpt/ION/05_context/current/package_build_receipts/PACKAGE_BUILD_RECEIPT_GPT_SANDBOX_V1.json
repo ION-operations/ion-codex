@@ -1,0 +1,14 @@
+{
+  "action": "build_package_projection",
+  "decision": "Created main GPT sandbox operational package and forensic companion; no external ION/MCP/GitHub state mutated.",
+  "generated_at": "2026-05-07T02:01:34Z",
+  "live_execution_authority": false,
+  "overlays": [
+    "ION_SINGLE_CARRIER_SANDBOX_PATCHED.zip",
+    "ION_PRODUCTIZED_FULL_COPY(1).zip",
+    "ION_PRODUCT_PACKAGE_SEEDED_BASE_DOMAINS_BUNDLE(2).zip"
+  ],
+  "production_authority": false,
+  "schema_id": "ion.full_gpt_sandbox_package.build_receipt.v1",
+  "source_root": "ION_CODEX 10.zip"
+}

@@ -1,0 +1,16 @@
+witness_id: witness.domain.communications_packet_relay.2026-04-22
+subject_domain: domain.communications_packet_relay
+status: ACTIVATED_CURRENT_PHASE
+activated_on: 2026-04-22
+basis:
+  - Relay now has a settled semantic identity, explicit role protocol, explicit boot law, a live binding, and a recurring packet lane
+  - current front-door composition needs a real communications / packet-relay domain rather than continuing to use placeholder registry text
+supporting_sources:
+  - ION/02_architecture/SOVEREIGN_RELAY_PROTOCOL.md
+  - ION/03_registry/boots/RELAY.boot.md
+  - ION/03_registry/semantic_identities/RELAY.semantic.yaml
+  - ION/07_templates/bindings/RELAY__HANDOFF.md
+  - ION/06_intelligence/relay/relay/continuity.md
+constraints:
+  - activation does not widen Relay into orchestration, ratification, or release authority
+  - communications-domain truth remains compatible with later continuity-home normalization

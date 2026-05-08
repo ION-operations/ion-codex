@@ -1,0 +1,339 @@
+registry_id: current_phase.agent_roster_registry
+display_name: Current-Phase Agent Roster Registry
+status: ACTIVE_CURRENT_PHASE
+authority: A3_OPERATIONAL
+canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+settlement_anchor: ION/06_intelligence/orchestration/2026-04-22_current_phase_agent_roster_settlement_packet.md
+purpose: >-
+  Unify the current-phase agent roster across semantic identities, boot records,
+  continuity law, orchestration law, and current template/binding truth without
+  pretending the entire field is already final canon.
+governing_surfaces:
+  - ION/06_intelligence/orchestration/2026-04-22_current_phase_agent_roster_settlement_packet.md
+  - ION/06_intelligence/orchestration/2026-04-22_codex_current_phase_role_and_boot_retirement_note.md
+  - ION/06_intelligence/research/2026-04-22_codex_canonical_agent_roster_and_evolution_dynamics_proposal.md
+  - ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md
+  - ION/02_architecture/TRUE_NAME_AND_SEMANTIC_LAYER_PROTOCOL.md
+  - ION/02_architecture/RANK_AND_PRECEDENCE_PROTOCOL.md
+  - ION/02_architecture/ROLE_CHASSIS_MOUNT_PROTOCOL.md
+  - ION/02_architecture/CONTINUITY_ARCHITECTURE.md
+  - ION/02_architecture/STEWARD_CURRENT_PHASE_ORCHESTRATION_PROTOCOL.md
+  - ION/02_architecture/TEMPLATE_BINDING_PROTOCOL.md
+  - ION/02_architecture/TEMPLATE_SURFACE_EVOLUTION_PROTOCOL.md
+  - ION/03_registry/semantic_identities/README.md
+  - ION/03_registry/current_phase_template_surface_registry.yaml
+roster_records:
+  - entity_id: role.steward
+    display_name: Steward
+    band: SETTLED_CORE
+    standing_class: CURRENT_PHASE_ORCHESTRATION_CORE
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: SETTLED_CURRENT_PHASE
+    rank_class: BOUNDED_ORCHESTRATION_STEWARD
+    structural_identity: Operative.Interface.Orchestration_Management
+    tier: 4
+    role_domain_label: Current-Phase Orchestration Management
+    registry_primary_domain: domain.current_phase_orchestration_management
+    registry_secondary_domains:
+      - domain.construction_routing_integration
+    continuity_class: SEMANTIC_AND_PROTOCOL_ANCHORED
+    continuity_home: NOT_SEPARATELY_DECLARED__SEMANTIC_AND_PROTOCOL_SURFACES
+    default_mount_posture: CARRIER_AGNOSTIC__VARIABLE_EXECUTION_CHASSIS
+    template_bindings:
+      - ION/07_templates/bindings/STEWARD__TASK.md
+      - ION/07_templates/bindings/STEWARD__STATUS_REPORT.md
+      - ION/07_templates/bindings/STEWARD__PROPOSAL.md
+      - ION/07_templates/bindings/STEWARD__TEMPLATE_SURFACE_CHANGE.md
+    semantic_promotion_state: NOT_APPLICABLE__SETTLED_CORE
+    activation_owner: SELF_FOR_ORCHESTRATION_SURFACES__UNDER_HIGHER_LAW
+    audit_relation: AUDITABLE_BY_NEMESIS__PRESSURE_BOUND_BY_VICE
+    write_scope_summary: >-
+      current-phase routing, startup/status clarity, proposal surfaces, and
+      governed support-role activation; must not silently mutate template law
+      or constitutional truth
+    source_refs:
+      - ION/03_registry/boots/STEWARD.boot.md
+      - ION/03_registry/semantic_identities/STEWARD.semantic.yaml
+      - ION/03_registry/domains/domain.current_phase_orchestration_management.domain.yaml
+  - entity_id: role.vizier
+    display_name: Vizier
+    band: SETTLED_CORE
+    standing_class: ARCHITECTURAL_CONTINUITY_CORE
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: SETTLED_CURRENT_PHASE
+    rank_class: BURDEN_BEARER_ARCHITECTURAL
+    structural_identity: Chief_Architect.Interface.Continuity_Architect
+    tier: 1.5
+    role_domain_label: Interface
+    registry_primary_domain: domain.continuity_context_resumability
+    registry_secondary_domains:
+      - domain.construction_routing_integration
+    continuity_class: AGENT_PRIVATE
+    continuity_home: ION/agents/vizier/
+    default_mount_posture: VARIABLE_HIGH_JUDGMENT_CHASSIS
+    template_bindings: []
+    semantic_promotion_state: NOT_APPLICABLE__SETTLED_CORE
+    activation_owner: SOVEREIGN_OR_EXPLICIT_BOUND_PACKET
+    audit_relation: PRIMARY_CONSTRUCTIVE_LINE__AUDITABLE_BY_NEMESIS__PRESSURED_BY_VICE
+    write_scope_summary: >-
+      architecture, plan-bearing, inbox dispatch, continuity/governance
+      artifacts, and curated projections; may not silently mutate doctrine or
+      registry without authorization
+    source_refs:
+      - ION/03_registry/boots/VIZIER.boot.md
+      - ION/03_registry/semantic_identities/VIZIER.semantic.yaml
+      - ION/03_registry/daimon_matrix.yaml
+  - entity_id: role.vice
+    display_name: Vice
+    band: SETTLED_CORE
+    standing_class: CONTRADICTION_PRESSURE_CORE
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: SETTLED_CURRENT_PHASE
+    rank_class: INTERNAL_CONTRADICTION_PRESSURE
+    structural_identity: Conjugate.Interface.Conjugate_Daimon
+    tier: 1.5
+    role_domain_label: Interface
+    registry_primary_domain: domain.confidence_drift_review
+    registry_secondary_domains:
+      - domain.continuity_context_resumability
+    continuity_class: AGENT_PRIVATE
+    continuity_home: ION/agents/vice/
+    default_mount_posture: SELECTIVE_CONJUGATE_HIGH_JUDGMENT_CHASSIS
+    template_bindings: []
+    semantic_promotion_state: NOT_APPLICABLE__SETTLED_CORE
+    activation_owner: SOVEREIGN_VIZIER_OR_EXPLICIT_CONJUGATE_PACKET
+    audit_relation: INTERNAL_COUNTERFORCE__SERIOUS_UNANSWERED_DISSENT_BLOCKS_CLEAN_RELEASE
+    write_scope_summary: >-
+      contradiction pressure, dissent notes, future-answerability witness, and
+      daimon lane artifacts only; does not rewrite primary artifacts directly
+    source_refs:
+      - ION/03_registry/boots/VICE.boot.md
+      - ION/03_registry/semantic_identities/VICE.semantic.yaml
+      - ION/03_registry/daimon_matrix.yaml
+  - entity_id: role.nemesis
+    display_name: Nemesis
+    band: SETTLED_CORE
+    standing_class: INDEPENDENT_AUDIT_CORE
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: SETTLED_CURRENT_PHASE
+    rank_class: INDEPENDENT_AUDIT_GATE
+    structural_identity: Inspector_General.Governance.Inspector_General
+    tier: 2
+    role_domain_label: Governance
+    registry_primary_domain: domain.confidence_drift_review
+    registry_secondary_domains:
+      - domain.continuity_context_resumability
+    continuity_class: AGENT_PRIVATE
+    continuity_home: ION/agents/nemesis/
+    default_mount_posture: INDEPENDENT_REVIEW_CHASSIS
+    template_bindings:
+      - ION/07_templates/bindings/NEMESIS__AUDIT.md
+    semantic_promotion_state: NOT_APPLICABLE__SETTLED_CORE
+    activation_owner: EXPLICIT_AUDIT_PACKET_OR_REVIEW_GATE
+    audit_relation: SELF_OWNS_INDEPENDENT_AUDIT_JUDGMENT
+    write_scope_summary: >-
+      audit artifacts and signals only; no source landing, no doctrine mutation,
+      no silent operational commands
+    source_refs:
+      - ION/03_registry/boots/NEMESIS.boot.md
+      - ION/03_registry/semantic_identities/NEMESIS.semantic.yaml
+      - ION/07_templates/bindings/NEMESIS__AUDIT.md
+  - entity_id: role.relay
+    display_name: Relay
+    band: LIVE_SUPPORT_FIELD
+    standing_class: LIVE_PERSISTENT_SUPPORT_ROLE
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: SETTLED_CURRENT_PHASE
+    rank_class: BOUNDED_INTENT_RELAY
+    structural_identity: Supervisor.Communications.Sovereign_Relay
+    tier: 4
+    role_domain_label: Communications and Packet Relay
+    registry_primary_domain: domain.communications_packet_relay
+    registry_secondary_domains:
+      - domain.current_phase_orchestration_management
+      - domain.continuity_context_resumability
+    continuity_class: LANE_NATIVE_PERSISTENT
+    continuity_home: ION/06_intelligence/relay/relay/
+    continuity_normalization_state: LANE_NATIVE_SOURCE_HOME_CURRENT_PHASE__NO_PARALLEL_AGENT_PRIVATE_HOME
+    default_mount_posture: PERSISTENT_LOW_COST_USER_FACING_RELAY_CHASSIS
+    template_bindings:
+      - ION/07_templates/bindings/RELAY__HANDOFF.md
+    semantic_promotion_state: PROMOTED_CURRENT_PHASE
+    activation_owner: STEWARD_OR_EXPLICIT_RELAY_PACKET
+    audit_relation: NO_INDEPENDENT_AUDIT_AUTHORITY__MAY_PACKAGE_FOR_REVIEW
+    write_scope_summary: >-
+      relay lane only; courier, packetization, digest, and sovereign-facing
+      communication surfaces; no doctrine, registry, source code, or root
+      projection ownership
+    source_refs:
+      - ION/03_registry/boots/RELAY.boot.md
+      - ION/03_registry/semantic_identities/RELAY.semantic.yaml
+      - ION/03_registry/domains/domain.communications_packet_relay.domain.yaml
+      - ION/07_templates/bindings/RELAY__HANDOFF.md
+      - ION/06_intelligence/orchestration/2026-04-22_relay_semantic_promotion_review_note.md
+      - ION/06_intelligence/orchestration/2026-04-22_promoted_support_role_rank_refinement_note.md
+      - ION/06_intelligence/orchestration/2026-04-22_promoted_lane_native_support_role_continuity_normalization_note.md
+  - entity_id: role.vestige
+    display_name: Vestige
+    band: LIVE_SUPPORT_FIELD
+    standing_class: LIVE_PERSISTENT_SUPPORT_ROLE
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: SETTLED_CURRENT_PHASE
+    rank_class: STANDING_ARCHAEOLOGY_DAEMON
+    structural_identity: Supervisor.Intelligence.Systems_Archaeologist
+    tier: 4
+    role_domain_label: Archaeology and Drift Watch
+    registry_primary_domain: domain.archaeology_drift_watch
+    registry_secondary_domains:
+      - domain.continuity_context_resumability
+      - domain.confidence_drift_review
+    continuity_class: LANE_NATIVE_PERSISTENT
+    continuity_home: ION/06_intelligence/archaeology/vestige/
+    continuity_normalization_state: LANE_NATIVE_SOURCE_HOME_CURRENT_PHASE__NO_PARALLEL_AGENT_PRIVATE_HOME
+    default_mount_posture: PERSISTENT_LOW_COST_ARCHAEOLOGY_CHASSIS
+    template_bindings:
+      - ION/07_templates/bindings/VESTIGE__EVIDENCE.md
+    semantic_promotion_state: PROMOTED_CURRENT_PHASE
+    activation_owner: STEWARD_OR_ACTIVE_CARRIER_OR_VIZIER_VIA_BOUNDED_ARCHAEOLOGY_PACKET
+    audit_relation: NO_INDEPENDENT_AUDIT_AUTHORITY__MAY_SUPPLY_EVIDENCE_TO_VICE_OR_NEMESIS
+    write_scope_summary: >-
+      archaeology lane only; broad read, narrow write; stale-surface detection,
+      lineage watch, and evidence-bound reports without architecture or audit
+      ownership
+    source_refs:
+      - ION/03_registry/boots/VESTIGE.boot.md
+      - ION/03_registry/semantic_identities/VESTIGE.semantic.yaml
+      - ION/03_registry/domains/domain.archaeology_drift_watch.domain.yaml
+      - ION/07_templates/bindings/VESTIGE__EVIDENCE.md
+      - ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md
+      - ION/06_intelligence/orchestration/2026-04-22_vestige_semantic_promotion_review_note.md
+      - ION/06_intelligence/orchestration/2026-04-22_promoted_support_role_rank_refinement_note.md
+      - ION/06_intelligence/orchestration/2026-04-22_promoted_lane_native_support_role_continuity_normalization_note.md
+  - entity_id: role.mason
+    display_name: Mason
+    band: LIVE_SUPPORT_FIELD
+    standing_class: LIVE_BOUNDED_EXECUTION_SPECIALIST
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: BOOT_PLUS_MOUNT__NOT_SEMANTICALLY_SETTLED
+    rank_class: UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE
+    structural_identity: Operative.Source.Software_Architect
+    tier: 5
+    role_domain_label: Source
+    registry_primary_domain: NONE_DECLARED__IMPLEMENTATION_NOT_YET_DOMAINIZED
+    registry_secondary_domains:
+      - domain.construction_routing_integration
+    continuity_class: AGENT_PRIVATE
+    continuity_home: ION/agents/mason/
+    default_mount_posture: ECONOMICAL_IMPLEMENTATION_CHASSIS
+    template_bindings:
+      - ION/07_templates/bindings/MASON__CODE.md
+    semantic_promotion_state: HOLD__BOOT_PLUS_MOUNT_SUFFICIENT
+    activation_owner: STEWARD_OR_ACTIVE_CARRIER_OR_VIZIER_VIA_BOUNDED_IMPLEMENTATION_PACKET
+    audit_relation: NO_INDEPENDENT_AUDIT_OR_RELEASE_AUTHORITY
+    write_scope_summary: >-
+      bounded implementation and tests only when explicitly tasked; no doctrine,
+      template, registry, or architecture authorship
+    source_refs:
+      - ION/03_registry/boots/MASON.boot.md
+      - ION/07_templates/bindings/MASON__CODE.md
+      - ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md
+  - entity_id: role.scribe
+    display_name: Scribe
+    band: LIVE_SUPPORT_FIELD
+    standing_class: LIVE_BOUNDED_EXECUTION_SPECIALIST
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: BOOT_PLUS_MOUNT__NOT_SEMANTICALLY_SETTLED
+    rank_class: UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE
+    structural_identity: Operative.System.Archivist
+    tier: 5
+    role_domain_label: System
+    registry_primary_domain: NONE_DECLARED__SYSTEM_UTILITY_NOT_YET_DOMAINIZED
+    registry_secondary_domains: []
+    continuity_class: AGENT_PRIVATE
+    continuity_home: ION/agents/scribe/
+    default_mount_posture: ECONOMICAL_UTILITY_CHASSIS
+    template_bindings: []
+    semantic_promotion_state: HOLD__BOOT_PLUS_MOUNT_SUFFICIENT
+    activation_owner: STEWARD_OR_ACTIVE_CARRIER_OR_VIZIER_VIA_BOUNDED_MECHANICAL_PACKET
+    audit_relation: NO_INDEPENDENT_AUDIT_AUTHORITY
+    write_scope_summary: >-
+      archive, git hygiene, tests, bulk file work, and mechanical system
+      surgery; no doctrine, template, registry, or architecture authorship
+    source_refs:
+      - ION/03_registry/boots/SCRIBE.boot.md
+  - entity_id: role.thoth
+    display_name: Thoth
+    band: LIVE_SUPPORT_FIELD
+    standing_class: LIVE_BOUNDED_RESEARCH_SPECIALIST
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: BOOT_PLUS_MOUNT__NOT_SEMANTICALLY_SETTLED
+    rank_class: UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE
+    structural_identity: Operative.Intelligence.Research_Analyst
+    tier: 5
+    role_domain_label: Intelligence
+    registry_primary_domain: NONE_DECLARED__RESEARCH_NOT_YET_DOMAINIZED
+    registry_secondary_domains:
+      - domain.current_phase_orchestration_management
+    continuity_class: AGENT_PRIVATE
+    continuity_home: ION/agents/thoth/
+    default_mount_posture: ECONOMICAL_OR_READ_HEAVY_RESEARCH_CHASSIS
+    template_bindings:
+      - ION/07_templates/bindings/THOTH__RESEARCH.md
+    semantic_promotion_state: HOLD__BOOT_PLUS_MOUNT_SUFFICIENT
+    activation_owner: STEWARD_OR_ACTIVE_CARRIER_OR_VIZIER_VIA_BOUNDED_RESEARCH_PACKET
+    audit_relation: NO_INDEPENDENT_AUDIT_AUTHORITY__MAY_SUPPLY_EVIDENCE_SURFACES
+    write_scope_summary: >-
+      research and evidence products only unless explicitly scoped otherwise; no
+      silent drift into architecture ownership or free-form mutation
+    source_refs:
+      - ION/03_registry/boots/THOTH.boot.md
+      - ION/07_templates/bindings/THOTH__RESEARCH.md
+      - ION/06_intelligence/orchestration/2026-04-13_staffing_and_semantic_identity_steward_consolidation_proposal.md
+  - entity_id: role.atlas
+    display_name: Atlas
+    band: LIVE_SUPPORT_FIELD
+    standing_class: LIVE_BOUNDED_COMPARATIVE_SPECIALIST
+    live_status: ACTIVE_CURRENT_PHASE
+    true_name_status: BOOT_PLUS_MOUNT__NOT_SEMANTICALLY_SETTLED
+    rank_class: UNSETTLED_CURRENT_PHASE__SUPPORT_ROLE
+    structural_identity: Operative.Knowledge.SystemsCartographer
+    tier: 5
+    role_domain_label: Knowledge / comparative OS, platform, agent, and protocol systems
+    registry_primary_domain: NONE_DECLARED__COMPARATIVE_REFERENCE_NOT_YET_DOMAINIZED
+    registry_secondary_domains: []
+    continuity_class: AGENT_PRIVATE
+    continuity_home: ION/agents/atlas/
+    default_mount_posture: ECONOMICAL_OR_READ_HEAVY_COMPARATIVE_CHASSIS
+    template_bindings: []
+    semantic_promotion_state: HOLD__BOOT_PLUS_MOUNT_SUFFICIENT
+    activation_owner: STEWARD_OR_ACTIVE_CARRIER_OR_VIZIER_VIA_BOUNDED_COMPARATIVE_PACKET
+    audit_relation: NO_INDEPENDENT_AUDIT_AUTHORITY__REFERENCE_PRODUCER_ONLY
+    write_scope_summary: >-
+      comparative/reference production and atlas maintenance only; does not
+      replace architecture or audit authority
+    source_refs:
+      - ION/03_registry/boots/ATLAS.boot.md
+unresolved_positions:
+  - display_name: Weaver
+    current_state: RESERVED_OPTIONAL_SUPPORT_LABEL__NOT_LIVE_CURRENT_PHASE
+    standing_question: >-
+      whether UI/presentation implementation deserves a real current-phase role
+      with boot, continuity home, and bindings, or should be removed from active
+      orchestration prose until that burden becomes persistent
+    recommended_next_action: INSTANTIATE_ONLY_AFTER_REAL_UI_PRESENTATION_WORKLOAD
+    source_refs:
+      - ION/06_intelligence/orchestration/2026-04-22_codex_current_phase_role_and_boot_retirement_note.md
+      - ION/06_intelligence/orchestration/2026-04-22_weaver_current_phase_disposition_clarification.md
+excluded_entities:
+  - identifier: role.codex
+    reason: RETIRED_CURRENT_PHASE_ROLE__CARRIER_DIFFERENCES_NOW_HANDLED_BY_MOUNT_LAW
+  - identifier: ION/03_registry/boots/CODEX.boot.md
+    reason: RETIRED_CURRENT_PHASE_BOOT__HISTORICAL_WITNESS_ONLY
+  - identifier: ION/03_registry/semantic_identities/CODEX.semantic.yaml
+    reason: HISTORICAL_CARRIER_ALIAS_RECORD_ONLY__NOT_LIVE_ROLE_TRUTH
+  - identifier: VIZIER_DAIMON_GPT.boot.md
+    reason: SUPERSEDED_HISTORICAL_BOOT_ARTIFACT__NOT_LIVE_ROLE
+  - identifier: VIZIER_DAIMON_OPUS.boot.md
+    reason: SUPERSEDED_HISTORICAL_BOOT_ARTIFACT__NOT_LIVE_ROLE
+  - identifier: browser_ChatGPT_default_mount
+    reason: EXTERNAL_UNMOUNTED_BY_DEFAULT__NOT_INTERNAL_LIVE_ROLE

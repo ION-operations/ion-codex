@@ -1,0 +1,18 @@
+{
+  "schema_id": "ion.productized_runtime_manifest.v1",
+  "version": "V92",
+  "name": "ION MCP Control Bridge",
+  "added_surfaces": [
+    ".cursor/mcp.json",
+    ".cursor/commands/ion-mcp-status.md",
+    ".cursor/rules/ion-mcp-control-bridge.mdc",
+    "ION/09_integrations/mcp/ion_mcp_server.py",
+    "ION/09_integrations/mcp/README.md",
+    "ION/04_packages/kernel/ion_mcp_bridge_audit.py",
+    "ION/02_architecture/ION_MCP_CONTROL_BRIDGE_PROTOCOL.md",
+    "ION/05_context/current/ACTIVE_MCP_BRIDGE_STATE.json"
+  ],
+  "bridge_type": "local Cursor stdio MCP bridge",
+  "server_label": "ion-control",
+  "remote_chatgpt_control": "requires separate remote HTTPS MCP deployment and ChatGPT app connection"
+}

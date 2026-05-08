@@ -1,0 +1,38 @@
+schema: ion.ai_assistant_work.candidate_lifecycle_scorecard_schema.v0_1
+status: candidate_schema_not_accepted_canon
+created_at: '2026-05-08T18:50:31Z'
+purpose: Minimum scorecard shape for deciding whether candidate domains, agents,
+  templates, routes, or protocols should be promoted, revised, deferred, archived,
+  or rejected.
+required_fields:
+  - candidate_id
+  - candidate_type
+  - lifecycle_state
+  - source_evidence
+  - allowed_uses
+  - forbidden_uses
+  - route_accuracy
+  - proof_usefulness
+  - user_burden_reduction
+  - drift_or_confusion_risk
+  - validation_evidence
+  - conflicts_with_accepted_law
+  - promotion_recommendation
+score_scale:
+  0: no_evidence_or_failed
+  1: weak_candidate_signal
+  2: useful_but_incomplete
+  3: strong_candidate_signal
+  4: promotion_ready_with_review
+promotion_recommendations:
+  - ACCEPT_AS_OPERATIONAL_DOMAIN
+  - ACCEPT_AS_TEMPLATE_ONLY
+  - ACCEPT_AS_ROUTE_ONLY
+  - REVISE_AND_RETEST
+  - DEFER
+  - ARCHIVE_AS_WITNESS
+  - REJECT
+authority_boundary:
+  scorecard_is_witness_not_acceptance: true
+  human_acceptance_required_for_promotion: true
+  mutates_ION_03_registry: false

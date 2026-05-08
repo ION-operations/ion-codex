@@ -1,0 +1,23 @@
+ION default carrier onboarding front door receipt — 2026-04-27
+
+Verdict: ION_DEFAULT_CARRIER_ONBOARDING_READY by direct check.
+
+Canonical command:
+PYTHONPATH=ION/04_packages python3 -m kernel.ion_carrier_onboard --ion-root ION --carrier cursor --objective "stabilize ION carrier onboarding" --json
+
+Canonical active packet:
+ION/05_context/current/ACTIVE_WORK_PACKET.json
+
+Created/updated:
+ION/02_architecture/ION_DEFAULT_CARRIER_ONBOARDING_PROTOCOL.md
+ION/docs/cursor/ION_CURSOR_WORK_CYCLE_PACKET.md
+ION/04_packages/kernel/ion_carrier_onboard.py
+ION/tests/test_kernel_ion_carrier_onboard.py
+ION/docs/consolidation/ION_DEFAULT_CARRIER_ONBOARDING_FRONT_DOOR_REPORT_20260427.md
+ION/05_context/signals/ion_default_carrier_onboarding_receipt_20260427.txt
+ION/05_context/signals/ion_default_carrier_onboarding_sample_20260427.json
+ION_MASTER_CURRENT_3_V73_DEFAULT_CARRIER_ONBOARDING_DIRECT_CHECK_OUTPUT_20260427.json
+
+Authority boundary:
+production_authority=false
+live_execution_authority=false

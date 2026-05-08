@@ -1,0 +1,28 @@
+registry_id: self_documentation_watch_registry
+status: current_phase_seed
+watched_paths:
+- path_glob: ION/02_architecture/*.md
+  default_graph_region: region.doctrine_protocols
+  default_owner_agent_family: Steward
+  required_record: true
+- path_glob: ION/03_registry/*.yaml
+  default_graph_region: region.registries
+  default_owner_agent_family: Steward
+  required_record: true
+- path_glob: ION/07_templates/**/*.md
+  default_graph_region: region.templates
+  default_owner_agent_family: Scribe
+  required_record: true
+- path_glob: ION/04_packages/kernel/*.py
+  default_graph_region: region.kernel_runtime
+  default_owner_agent_family: Mason
+  required_record: true
+allowed_reactions:
+- approved_context_projection_update
+- metadata_gap_warning
+- specialist_review_request
+- system_card_update_proposal
+forbidden_reactions:
+- silent_canon_promotion
+- source_file_rewrite
+- unreviewed_registry_mutation

@@ -1,0 +1,32 @@
+{
+  "manifest_exists": true,
+  "manifest_at_zip_root": true,
+  "domain_count": 13,
+  "context_node_count": 13,
+  "context_edge_count": 52,
+  "persona_exists": true,
+  "required_domains_present": true,
+  "zip_names_sample": [
+    "ION_DATA_MANIFEST.json",
+    "README_FOR_AI.md",
+    "PERSONA/persona_state.json",
+    "STATE/current_state.json",
+    "STATE/current_state.md",
+    "DOMAINS/domain_registry.json",
+    "CONTEXT/context_graph.json",
+    "TEMPLATES/template_registry.json",
+    "PACKETS/.gitkeep",
+    "PACKETS/open_packets.json",
+    "RECEIPTS/bootstrap_receipt.json",
+    "RECEIPTS/receipt_ledger.jsonl",
+    "ARTIFACTS/.gitkeep",
+    "ARTIFACTS/artifact_manifest.json",
+    "INBOX/.gitkeep",
+    "INBOX/README.md",
+    "OUTBOX/.gitkeep",
+    "OUTBOX/README.md",
+    "ARCHIVE/.gitkeep",
+    "ARCHIVE/README.md"
+  ],
+  "ok": true
+}

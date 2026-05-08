@@ -1,0 +1,27 @@
+# V85 Carrier Task-Return Intake Receipt
+
+- Version: V85
+- Date: 2026-04-29
+- Base: ION_CURSOR_CONSOLIDATED_V84_PRODUCTIZED_RUNTIME_20260429.zip
+- Result: V85 adds a closed-loop Task-return intake ledger and Steward integration queue.
+
+## Direct validation performed
+
+- Kernel module compile succeeded for:
+  - `kernel.ion_carrier_continue`
+  - `kernel.ion_carrier_workflow_audit`
+  - `kernel.ion_carrier_task_return`
+- Direct function validation succeeded:
+  - `continue_carrier(...)` => `ION_CARRIER_CONTINUE_READY`
+  - `audit_carrier_workflow(...)` => `ION_CARRIER_WORKFLOW_READY`
+  - valid synthetic STEWARD Task return => accepted
+  - generic context acknowledgment => rejected
+
+## Known validation limitation
+
+A focused pytest subprocess timed out in this execution environment. Full pytest completion is not claimed in this receipt.
+
+## New active control files
+
+- `ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json`
+- `ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json`

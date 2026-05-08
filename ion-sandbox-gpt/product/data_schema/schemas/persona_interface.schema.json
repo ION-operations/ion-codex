@@ -1,0 +1,27 @@
+{
+  "$id": "https://ion.local/schemas/persona_interface.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "hidden_domain_ids": {
+      "type": "array"
+    },
+    "schema_id": {
+      "const": "ion.persona_interface.v1"
+    },
+    "translation_map": {
+      "type": "object"
+    },
+    "user_facing_default": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_id",
+    "user_facing_default",
+    "translation_map",
+    "hidden_domain_ids"
+  ],
+  "title": "ION Persona Interface",
+  "type": "object"
+}

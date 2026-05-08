@@ -1,0 +1,31 @@
+version: V66_SYNTHETIC_SYNTHESIS_AND_ROUTE_RESULT_PREVIEW
+policy_class: non_executing_cockpit_view_model
+authority_scope: SYNTHETIC_SYNTHESIS_ROUTE_RESULT_VIEW_MODEL_RECEIPT_ONLY
+allowed_preview_actions:
+  - SHOW_SYNTHESIS_PREVIEW
+  - SHOW_DISAGREEMENT_PLACEHOLDER
+  - CREATE_FOLLOWUP_DRAFT_PREVIEW
+  - ROUTE_TO_OPERATOR_REVIEW_PREVIEW
+  - STORE_MEMORY_DRY_RUN_PREVIEW
+forbidden_capabilities:
+  live_external_model_dispatch: false
+  real_provider_output_claim: false
+  consensus_truth_claim: false
+  memory_write: false
+  canonical_graph_write: false
+  source_summary_rewrite: false
+  browser_session_mutation: false
+  credential_access: false
+  form_submission: false
+  paid_cloud_launch: false
+  unrestricted_agent_activation: false
+  production_authority: false
+required_view_surfaces:
+  - SYNTHETIC_SYNTHESIS_PREVIEW_PANEL
+  - ROUTE_RESULT_PREVIEW_RAIL
+  - EXTRACTION_RECEIPT_LINK
+  - NO_CONSENSUS_TRUTH_STRIP
+  - NO_MEMORY_WRITE_STRIP
+  - NO_GRAPH_COMMIT_STRIP
+  - FOLLOWUP_DRAFT_PREVIEW
+  - OPERATOR_REVIEW_NEXT_ACTION

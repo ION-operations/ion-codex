@@ -1,0 +1,48 @@
+{
+  "actions_performed": [
+    "Prepared apply-tree mirror for ION/03_registry/self_knowledge under current-context promotion_candidate namespace.",
+    "Added focused self-knowledge candidate pytest coverage under ION/tests.",
+    "Validated candidate registries/domain packets/mount packet with no-site validation script.",
+    "Ran focused pytest with no-site startup isolation: 6 passed.",
+    "Ran ION status and GPT sandbox preflight: ready.",
+    "Updated acceptance gate, state-surface sync, and domain-state index.",
+    "Prepared next packet for explicit promotion or route-usage validation."
+  ],
+  "authority": {
+    "human_sovereign": "operator",
+    "live_execution_authority": false,
+    "operator_message": "continue",
+    "operator_message_interpretation": "continue next bounded step, not explicit acceptance",
+    "production_authority": false,
+    "requires_approval_for_registry_landing": true
+  },
+  "files_changed": [
+    "ION/05_context/current/self_knowledge/promotion_candidate/",
+    "ION/tests/test_kernel_ion_self_knowledge_candidate.py",
+    "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json"
+  ],
+  "generated_at": "2026-05-08T04:11:12+00:00",
+  "next_packet": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T040908Z.json",
+  "non_claims": [
+    "No explicit human/Steward acceptance was inferred from the word continue.",
+    "No files were written to ION/03_registry/self_knowledge.",
+    "The promotion mirror is not accepted canon.",
+    "No external Codex, MCP, GitHub, daemon, or production action was performed.",
+    "Full monolithic test suite was not run; focused tests, status, and preflight passed."
+  ],
+  "objective": "Continue the ION self-knowledge workpack by preparing registry promotion mirror, onboarding wiring proposal, acceptance gate status, focused tests, and validation evidence.",
+  "receipt_id": "SELF_KNOWLEDGE_PROMOTION_CANDIDATE_RECEIPT_20260508T041112Z",
+  "schema_id": "ion.self_knowledge.promotion_candidate_receipt.v0_2",
+  "status": "candidate_receipt_not_accepted_state",
+  "validation": {
+    "latest_validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PROMOTION_READINESS_VALIDATION_NOTE_20260508T041044Z.json",
+    "results": {
+      "candidate_validation_passed": true,
+      "focused_pytest_passed": true,
+      "focused_tests_count": 6,
+      "ion_status_ready": true,
+      "sandbox_preflight_ready": true
+    },
+    "status": "accepted_as_promotion_ready_candidate"
+  }
+}

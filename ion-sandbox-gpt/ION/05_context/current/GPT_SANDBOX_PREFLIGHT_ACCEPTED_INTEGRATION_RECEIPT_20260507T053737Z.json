@@ -1,0 +1,36 @@
+{
+  "accepted_delta": [
+    "ION/02_architecture/ION_GPT_SANDBOX_ENVIRONMENT_CONTRACT.md",
+    "ION/04_packages/kernel/ion_sandbox_preflight.py",
+    "ION/tests/test_kernel_ion_sandbox_preflight.py",
+    "ION/tests/test_product_gpt_sandbox_package_readiness.py",
+    "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+    "ION/05_context/current/ACTIVE_GPT_SANDBOX_PREFLIGHT.json",
+    "PRODUCT_MANIFEST.json",
+    "VALIDATION_REPORT.json",
+    "product/custom_gpt_adapter/knowledge_manifest.json",
+    "ION/docs/consolidation/GPT_SANDBOX_PREFLIGHT_ACCEPTED_INTEGRATION_REPORT_20260507T053737Z.md",
+    "ION/05_context/current/GPT_SANDBOX_PREFLIGHT_ACCEPTED_INTEGRATION_RECEIPT_20260507T053737Z.json"
+  ],
+  "carrier": "GPT_SANDBOX_CARRIER",
+  "created_at": "2026-05-07T05:37:37+00:00",
+  "live_execution_authority": false,
+  "non_claims": [
+    "No live repository was patched.",
+    "No GitHub push was performed.",
+    "No MCP connector was used.",
+    "No external agents were spawned.",
+    "The historical archive was not promoted into current authority.",
+    "Monolithic pytest was not used as proof in this sandbox export because the host showed timeout instability."
+  ],
+  "preflight_verdict": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+  "production_authority": false,
+  "schema_id": "ion.sandbox_preflight_accepted_integration_receipt.v1",
+  "source_package": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_1_SANDBOX_LIMITS_PATCH_20260507T035919Z.zip",
+  "status": "ACCEPTED_BY_OPERATOR_FOR_PACKAGE_LINEAGE",
+  "validation_summary": {
+    "passed": 19,
+    "status": "passed",
+    "total": 19
+  }
+}

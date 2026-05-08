@@ -1,0 +1,9 @@
+{
+  "version": "V66_LOCAL_MCP_SDK_COMPATIBILITY_AND_CLIENT_CERTIFICATION",
+  "certification_scope": "contract-level local bridge certification",
+  "profiles": ["generic_stdio", "cursor_local_stdio", "vscode_local_stdio", "codex_local_stdio"],
+  "allowed_resolutions": ["READ_ONLY", "DRY_RUN", "APPROVAL_REQUIRED", "REFUSED"],
+  "forbidden_resolution": "LIVE_EXECUTED",
+  "live_client_attestation": false,
+  "hosted_chatgpt_certified": false
+}

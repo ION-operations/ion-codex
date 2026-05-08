@@ -1,0 +1,31 @@
+{
+  "$id": "https://ion.local/schemas/receipt.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "accepted_as_state": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "receipt_id": {
+      "type": "string"
+    },
+    "receipt_type": {
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "ion.receipt.v1"
+    }
+  },
+  "required": [
+    "schema_id",
+    "receipt_id",
+    "receipt_type",
+    "created_at",
+    "accepted_as_state"
+  ],
+  "title": "ION Receipt",
+  "type": "object"
+}

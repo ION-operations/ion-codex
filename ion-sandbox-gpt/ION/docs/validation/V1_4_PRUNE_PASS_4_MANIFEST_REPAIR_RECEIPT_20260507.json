@@ -1,0 +1,25 @@
+{
+  "patched_at_utc": "2026-05-07T22:53:38Z",
+  "action_id": "repair_v1_4_knowledge_manifest_paths_and_rezip_20260507",
+  "source_zip": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE_20260507.zip",
+  "patch_scope": [
+    "product/custom_gpt_adapter/knowledge_manifest.json",
+    "product/source_inputs/current_uploads/*"
+  ],
+  "removed_missing_paths": {
+    "added_surfaces": [
+      "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+      "ION/05_context/current/workqueue/HYBRID_CUSTOM_GPT_V13_AND_STALE_SURFACE_RECOVERY_QUEUE_20260507T134257Z.md"
+    ],
+    "source_reference_docs": [
+      "product/source_inputs/current_uploads/Pasted text(51).txt",
+      "product/source_inputs/current_uploads/ION_Continuity_Substrate_Explainer_v7(1).md",
+      "product/source_inputs/current_uploads/ION_ONTOLOGICAL_JOURNAL_GPT55_ENTRIES_0_39_CURRENT_ROOT_ENHANCED(1).md",
+      "product/source_inputs/current_uploads/ION-deep-research-report-2.md"
+    ]
+  },
+  "added_source_reference_docs": [
+    "product/source_inputs/current_uploads/ION_Continuity_Substrate_Explainer_v7.md",
+    "product/source_inputs/current_uploads/ION_ONTOLOGICAL_JOURNAL_GPT55_ENTRIES_0_39_CURRENT_ROOT_ENHANCED.md"
+  ]
+}

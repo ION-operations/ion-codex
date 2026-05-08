@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-05-08T03:56:32+00:00",
+  "included_current_state": [
+    "ION/05_context/current/SELF_KNOWLEDGE_ORGAN_INVENTORY_V0_2.json",
+    "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+    "ION/05_context/current/self_knowledge/",
+    "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json",
+    "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json",
+    "ION/05_context/current/steward_integrations/"
+  ],
+  "known_warning": "Validation subprocess emitted unrelated artifact_tool spreadsheet warmup traceback on stderr, but returned rc=0 and accepted=true JSON. Core ION status/preflight commands ran with python -S and no stderr.",
+  "non_claims": [
+    "This receipt does not promote candidate registries into ION/03_registry/self_knowledge.",
+    "This receipt does not claim production authority or live external execution authority.",
+    "This receipt does not claim external agents were spawned.",
+    "This receipt does not settle self-knowledge as final canon beyond sandbox current-state candidate integration."
+  ],
+  "objective": "Mount ION and start the self-knowledge domain-state workpack: recover existing self-knowledge organs, classify/rank them, seed routable self-knowledge domain state, and export candidate bundle without production/live authority.",
+  "schema_id": "ion.self_knowledge.export_note.v0_2",
+  "status": "candidate_export_prepared",
+  "validation_summary": {
+    "candidate_validation_accepted": true,
+    "ion_status_verdict": "ION_STATUS_READY",
+    "sandbox_preflight_verdict": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+    "steward_pending": 0,
+    "task_returns_accepted": 2
+  }
+}

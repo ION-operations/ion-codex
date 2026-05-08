@@ -1,0 +1,25 @@
+id: domain.user_persona_interface
+display_name: User Persona Interface
+status: ACTIVE_PROVISIONAL
+authority: A3_OPERATIONAL
+canon_status: NOT_FINAL_CANON
+purpose: >-
+  Preserve user-facing persona, relationship continuity, style, gesture,
+  pacing, and final response rendering as a separate role domain from Relay
+  courier/semantic-boundary work and Steward orchestration.
+role_owner: role.persona_interface
+sibling_domains:
+  - domain.communications_packet_relay
+  - domain.current_phase_orchestration_management
+allowed_surfaces:
+  - ION/03_registry/boots/PERSONA_INTERFACE.boot.md
+  - ION/agents/persona_interface/continuity.md
+  - ION/07_templates/bindings/PERSONA_INTERFACE__USER_RESPONSE.md
+forbidden_surfaces:
+  - doctrine_write
+  - registry_write
+  - source_code_write
+  - independent_audit_settlement
+  - global_orchestration_route
+continuity_notes:
+  - Earlier Relay persona files are transitional source evidence, not final persona ownership.

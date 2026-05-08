@@ -1,0 +1,19 @@
+{
+  "$id": "https://ion.local/schemas/template_registry.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "schema_id": {
+      "const": "ion.template_registry.v1"
+    },
+    "templates": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_id",
+    "templates"
+  ],
+  "title": "ION Template Registry",
+  "type": "object"
+}

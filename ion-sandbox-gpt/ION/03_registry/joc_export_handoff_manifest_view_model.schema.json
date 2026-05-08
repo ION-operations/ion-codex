@@ -1,0 +1,18 @@
+{
+  "title": "V68 Export Handoff Manifest Preview View Model",
+  "type": "object",
+  "required": ["version", "mission_id", "handoff_manifest_verdict", "authority_scope", "execution_mode", "manifest_sections"],
+  "properties": {
+    "version": {"const": "V68_OPERATOR_REVIEWED_EXPORT_HANDOFF_MANIFEST_PREVIEW"},
+    "mission_id": {"type": "string"},
+    "handoff_manifest_verdict": {"type": "string"},
+    "authority_scope": {"const": "EXPORT_HANDOFF_MANIFEST_PREVIEW_RECEIPT_ONLY"},
+    "execution_mode": {"enum": ["HANDOFF_MANIFEST_PREVIEW_ONLY", "VIEW_ONLY_BLOCKED"]},
+    "manifest_sections": {"type": "array"},
+    "production_authority": {"const": false},
+    "live_export_claim": {"const": false},
+    "file_system_write_authorized": {"const": false},
+    "zip_creation_authorized": {"const": false},
+    "external_transfer_authorized": {"const": false}
+  }
+}

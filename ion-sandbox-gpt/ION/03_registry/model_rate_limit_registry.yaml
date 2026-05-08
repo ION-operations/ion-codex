@@ -1,0 +1,38 @@
+schema_id: ion.model_rate_limit_registry.v1
+version: V56_MODEL_ECONOMICS_REGISTRY_SKELETONS
+authority_scope: A3_STEWARD_MODEL_ECONOMICS_REGISTRY_SKELETON
+production_authority: false
+rate_limits_currentness: placeholder_requires_runtime_measurement
+limits_are_authoritative: false
+capacity_states:
+  openai/gpt-class-frontier:
+    rpm_limit: unknown
+    tpm_limit: unknown
+    rpd_limit: unknown
+    safe_parallelism_max: 1
+    backoff_state: normal
+  anthropic/claude-class-frontier:
+    rpm_limit: unknown
+    tpm_limit: unknown
+    rpd_limit: unknown
+    safe_parallelism_max: 1
+    backoff_state: normal
+  gemini/gemini-class-frontier:
+    rpm_limit: unknown
+    tpm_limit: unknown
+    rpd_limit: unknown
+    safe_parallelism_max: 1
+    backoff_state: normal
+  cerebras/cerebras-fast-lane:
+    rpm_limit: unknown
+    tpm_limit: unknown
+    rpd_limit: unknown
+    safe_parallelism_max: 1
+    backoff_state: normal
+  local/local-private-lane:
+    rpm_limit: local_resource_bound
+    tpm_limit: local_resource_bound
+    rpd_limit: local_resource_bound
+    safe_parallelism_max: 1
+    backoff_state: normal
+

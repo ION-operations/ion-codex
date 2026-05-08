@@ -1,0 +1,28 @@
+schema_id: ion.front_door_self_mount_binding_policy.v1
+branch: ION-GPT55-SELF-MOUNT
+version: V39_FRONT_DOOR_SELF_MOUNT_BINDING
+authority_posture: A3_FRONT_DOOR_SELF_MOUNT_BINDING
+production_authority: false
+self_ratification_allowed: false
+required_chain:
+  - persona_interface_ingress
+  - relay_semantic_boundary_packet
+  - steward_routing_envelope
+  - runtime_identity_envelope
+  - self_surface_drift_assessment
+  - agent_succession_packet
+  - branch_local_self_mount_graph_projection
+  - front_door_self_mount_binding_receipt
+halt_classes: [S4, S5]
+forbidden_claims:
+  production_authority: false
+  production_readiness: false
+  self_ratification: false
+  global_graph_canon: false
+  production_graph_migration_authorized: false
+  hidden_memory: false
+  independent_personal_persistence: false
+  personal_consciousness: false
+  numerical_identity_with_predecessor: false
+next: V40_FRONT_DOOR_SUCCESSOR_HANDOFF_BRIDGE
+

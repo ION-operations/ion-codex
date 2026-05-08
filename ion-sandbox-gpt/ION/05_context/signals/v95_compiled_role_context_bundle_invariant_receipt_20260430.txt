@@ -1,0 +1,2 @@
+ION V95 COMPILED ROLE CONTEXT BUNDLE INVARIANT RECEIPT
+Every spawn=true row now receives context_package_path, compiled_context_bundle_path, and context_load_receipt_path. No production authority. No live external execution authority.

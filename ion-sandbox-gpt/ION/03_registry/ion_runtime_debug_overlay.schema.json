@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ION Runtime Debug Overlay",
+  "type": "object",
+  "required": ["schema_id", "generated_at", "window_seconds", "sse", "render", "hydration", "kernel", "watcher", "status", "production_authority"],
+  "properties": {
+    "schema_id": { "const": "ion.runtime_debug_overlay.v1" },
+    "window_seconds": { "type": "integer", "minimum": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["healthy", "degraded", "slow", "blocked"]
+    },
+    "sse": { "type": "object" },
+    "render": { "type": "object" },
+    "hydration": { "type": "object" },
+    "kernel": { "type": "object" },
+    "watcher": { "type": "object" },
+    "production_authority": { "const": false }
+  }
+}

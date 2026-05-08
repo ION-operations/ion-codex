@@ -1,0 +1,116 @@
+{
+  "acceptance_criteria": [
+    {
+      "criterion": "self-knowledge domains exist and parse",
+      "evidence": "14 domain packets under ION/05_context/current/self_knowledge/domains/",
+      "id": 1,
+      "status": "ready_candidate"
+    },
+    {
+      "criterion": "each domain declares state class and authority posture",
+      "evidence": "domain_registry candidate + domain packet YAML",
+      "id": 2,
+      "status": "ready_candidate"
+    },
+    {
+      "criterion": "carrier can mount a self-knowledge packet",
+      "evidence": "ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+      "id": 3,
+      "status": "ready_candidate"
+    },
+    {
+      "criterion": "full multi-agent/API ION route exists and blocks single-carrier reduction",
+      "evidence": "route.full_local_codex_api_ion",
+      "id": 4,
+      "status": "ready_candidate"
+    },
+    {
+      "criterion": "GPT sandbox route exists and blocks product reduction",
+      "evidence": "route.gpt_sandbox_adaptation",
+      "id": 5,
+      "status": "ready_candidate"
+    },
+    {
+      "criterion": "stale/donor domain exists and prevents false authority",
+      "evidence": "ion_stale_donor_historical + no_donor_as_active_authority guard",
+      "id": 6,
+      "status": "ready_candidate"
+    },
+    {
+      "criterion": "at least one Codex/local workpacket uses the self-knowledge route",
+      "evidence": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json: 7 route cases accepted; 7 candidate routes exercised; all 14 domains loaded across simulation; external Codex not claimed.",
+      "id": 7,
+      "status": "ready_candidate"
+    },
+    {
+      "criterion": "package audit confirms self-knowledge included in GPT package",
+      "evidence": "exported package includes self_knowledge directory and mount packet",
+      "id": 8,
+      "status": "ready_candidate"
+    },
+    {
+      "criterion": "tests pass",
+      "evidence": "ION/tests/test_kernel_ion_self_knowledge_candidate.py + ION/tests/test_kernel_ion_self_knowledge_route_usage.py: 11 passed with python3 -S + explicit site-packages path injection.",
+      "id": 9,
+      "status": "focused_tests_passed"
+    },
+    {
+      "criterion": "no source is silently promoted to accepted state without Steward/receipt",
+      "evidence": "promotion mirror only; target registry not mutated",
+      "id": 10,
+      "status": "preserved"
+    },
+    {
+      "criterion": "future carriers select self-knowledge route before answering ION-about-ION questions",
+      "evidence": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json: 8 onboarding trace cases accepted; 7 ION-about-ION cases mounted self-knowledge before answer/action; all 7 candidate routes matched; non-ION bypass preserved; external carrier invocation not claimed.",
+      "id": 11,
+      "status": "ready_candidate"
+    },
+    {
+      "criterion": "product/front-door onboarding overlay routes ION-about-ION tasks through self-knowledge mount-first behavior",
+      "evidence": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_AUDIT_REPORT_20260508T135357Z.json: product audit completed; package contains self-knowledge candidate surfaces; current front-door docs lack explicit route; candidate patchset prepared at ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PATCHSET_20260508T135357Z.json; product files not mutated.",
+      "id": 12,
+      "status": "ready_candidate_overlay_prepared_not_landed"
+    }
+  ],
+  "generated_at": "2026-05-08T13:54:49+00:00",
+  "landing_blockers": [
+    "No explicit human/Steward acceptance in this turn.",
+    "No direct authority to mutate ION/03_registry/ under active sandbox packet.",
+    "No direct authority to mutate active onboarding law from a candidate simulation alone."
+  ],
+  "last_validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_VALIDATION_NOTE_20260508T135357Z.json",
+  "schema_id": "ion.self_knowledge.acceptance_gate_status.v0_2",
+  "status": "promotion_ready_candidate_blocked_on_explicit_acceptance_only",
+  "summary": "Promotion-ready candidate remains blocked on explicit acceptance; product/front-door audit now has candidate overlay evidence but no product-law landing.",
+  "validation_summary": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "all_14_domains_loaded_across_simulation": true,
+    "candidate_validation_passed": true,
+    "external_codex_claimed": false,
+    "final_validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATION_NOTE_20260508T045721Z.json",
+    "focused_pytest_passed": true,
+    "focused_tests_count": 25,
+    "ion_status_ready": true,
+    "loaded_domain_count": 14,
+    "onboarding_wiring_carriers_exercised": [
+      "CODEX_CLI_CARRIER",
+      "GPT_SANDBOX_CARRIER"
+    ],
+    "onboarding_wiring_case_count": 8,
+    "onboarding_wiring_ion_cases": 7,
+    "onboarding_wiring_loaded_domain_count": 14,
+    "onboarding_wiring_non_ion_bypass_cases": 1,
+    "onboarding_wiring_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json",
+    "onboarding_wiring_simulation_passed": true,
+    "product_onboarding_audit_passed": true,
+    "product_onboarding_existing_frontdoor_explicit_self_knowledge_surface_count": 0,
+    "product_onboarding_overlay_prepared": true,
+    "product_onboarding_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_AUDIT_REPORT_20260508T135357Z.json",
+    "product_onboarding_validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_VALIDATION_NOTE_20260508T135357Z.json",
+    "route_count": 7,
+    "route_usage_case_count": 7,
+    "route_usage_simulation_passed": true,
+    "sandbox_preflight_ready": true
+  }
+}

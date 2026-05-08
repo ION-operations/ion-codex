@@ -1,0 +1,114 @@
+registry_id: context_graph_node_class_registry
+status: current_phase_seed
+created: '2026-04-24'
+node_classes:
+- id: node.work_unit
+  mapping_class: ENACTED_KERNEL_RECORD
+  enacted_by:
+  - ION/04_packages/kernel/model.py
+  notes: Kernel work unit record family.
+- id: node.context_package
+  mapping_class: ENACTED_KERNEL_RECORD
+  enacted_by:
+  - ION/04_packages/kernel/model.py
+  notes: Bounded context package record family.
+- id: node.receipt
+  mapping_class: ENACTED_KERNEL_RECORD
+  enacted_by:
+  - ION/04_packages/kernel/model.py
+  - ION/05_context/history/
+  notes: Receipt families are enacted across kernel records and history files.
+- id: node.horizon
+  mapping_class: ENACTED_KERNEL_RECORD
+  enacted_by:
+  - ION/04_packages/kernel/horizon_state.py
+  notes: Horizon record family.
+- id: node.packet
+  mapping_class: ENACTED_FILE_SURFACE
+  enacted_by:
+  - ION/05_context/inbox/
+  - ION/07_templates/
+  notes: Packets exist as template-governed file surfaces.
+- id: node.template
+  mapping_class: ENACTED_TEMPLATE_SURFACE
+  enacted_by:
+  - ION/07_templates/
+  notes: Template surfaces exist; metadata contract still needs hardening.
+- id: node.registry_entry
+  mapping_class: ENACTED_REGISTRY_SURFACE
+  enacted_by:
+  - ION/03_registry/
+  notes: Registry entries exist as YAML/JSON surfaces.
+- id: node.semantic_identity
+  mapping_class: ENACTED_REGISTRY_SURFACE
+  enacted_by:
+  - ION/03_registry/semantic_identities/
+  notes: Semantic identity surfaces where present.
+- id: node.template_completion_event
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  enacted_by:
+  - ION/04_packages/kernel/template_completion_events.py
+  - ION/05_context/history/template_completion_event_witnesses/
+  notes: V10 phase 1 event witness.
+- id: node.graph_writeback_proposal
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  enacted_by:
+  - ION/04_packages/kernel/template_graph_writeback_proposals.py
+  notes: V10 phase 4 proposal surface.
+- id: node.graph_commit
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  enacted_by:
+  - ION/04_packages/kernel/template_graph_commit.py
+  - ION/05_context/graph/template_event_graph_state/
+  notes: V10 phase 6 bounded graph state.
+- id: node.approved_context_entry
+  mapping_class: ENACTED_REGISTRY_SURFACE
+  enacted_by:
+  - ION/03_registry/approved_context_index.yaml
+  notes: V12 approved context seed.
+- id: node.ion_file_record
+  mapping_class: ENACTED_TEMPLATE_SURFACE
+  enacted_by:
+  - ION/07_templates/self_documentation/ION_FILE_RECORD.md
+  - ION/03_registry/ion_file_record_schema.yaml
+  notes: V12 schema/template; repository-wide extraction not yet complete.
+- id: node.system_card
+  mapping_class: ENACTED_TEMPLATE_SURFACE
+  enacted_by:
+  - ION/07_templates/self_documentation/SYSTEM_CARD.md
+  - ION/03_registry/system_card_registry.yaml
+  notes: V12 seed system card registry.
+- id: node.user_interaction
+  mapping_class: ADAPTER_REQUIRED
+  enacted_by: []
+  notes: Front-door runtime chain not yet implemented.
+- id: node.agent.role
+  mapping_class: ENACTED_REGISTRY_SURFACE
+  enacted_by:
+  - ION/03_registry/
+  - ION/agents/
+  notes: Role surfaces exist, but jurisdiction lattice still needs hardening.
+- id: node.archive_capsule
+  mapping_class: ENACTED_FILE_SURFACE
+  enacted_by:
+  - '*.zip'
+  notes: Continuity capsules exist as archive artifacts; registry mapping still needed.
+
+- id: node.mounted_agent_identity_envelope
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  enacted_by:
+  - ION/04_packages/kernel/runtime_identity_envelope.py
+  - ION/04_packages/kernel/self_mount_graph_integration.py
+  notes: Runtime self-mount identity envelope projected into branch-local graph state.
+- id: node.self_surface_drift_assessment
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  enacted_by:
+  - ION/04_packages/kernel/self_surface_drift_gate.py
+  - ION/04_packages/kernel/self_mount_graph_integration.py
+  notes: Drift assessment node for AI self-reference claims.
+- id: node.agent_succession_packet
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  enacted_by:
+  - ION/04_packages/kernel/agent_succession_packet.py
+  - ION/04_packages/kernel/self_mount_graph_integration.py
+  notes: Succession packet carrying evidence and obligations without identity equivalence.

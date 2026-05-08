@@ -1,0 +1,10 @@
+{
+  "packet_id": "v78_canonical_mount_demo_20260427",
+  "carrier_id": "CURSOR_PARENT",
+  "one_carrier_traverses_all_phases": true,
+  "subagent_required": false,
+  "role_phase_flow": ["RELAY", "STEWARD", "MASON", "STEWARD", "RELAY"],
+  "narrative": "Single carrier executes RELAY intake, STEWARD route, MASON proposal work, STEWARD integration, RELAY final report. No Cursor Task subagent is required.",
+  "workcycle_packet_ref": "ION/docs/cursor/ION_CURSOR_WORK_CYCLE_PACKET.md",
+  "mount_contract_ref": "ION/02_architecture/ION_MOUNT_CONTRACT.md"
+}

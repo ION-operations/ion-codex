@@ -1,0 +1,60 @@
+schema_id: ion.self_knowledge.state_classification.v0_2
+status: candidate_current_state_not_accepted_canon
+generated_at: '2026-05-08T03:51:05+00:00'
+classes:
+- id: canonical_active
+  meaning: Accepted law/root authority or settled state with explicit authority/receipt.
+  may_be_inherited_as: law
+  requires:
+  - authority_surface
+  - acceptance_or_receipt
+- id: current_operational
+  meaning: Operational surface active in the mounted package/root and validated for current lane.
+  may_be_inherited_as: operational_context
+  requires:
+  - current_path
+  - status_or_validation
+- id: product_projection
+  meaning: Product/package/adaptor projection of ION law into a host body.
+  may_be_inherited_as: product_context
+  requires:
+  - package_manifest_or_guide
+- id: implementation_surface
+  meaning: Code/script/schema/test surface that can provide runtime evidence.
+  may_be_inherited_as: proof_or_implementation_context
+  requires:
+  - path
+  - test_or_status_when_claiming readiness
+- id: candidate_current_state
+  meaning: Generated or edited in this workpack as candidate current-state material; proposal until accepted.
+  may_be_inherited_as: candidate_only
+  requires:
+  - receipt_candidate
+  - human_or_steward_acceptance_for_landing
+- id: draft
+  meaning: Unaccepted proposal/draft text; may guide work but not govern.
+  may_be_inherited_as: proposal
+  requires:
+  - source_path
+- id: witness
+  meaning: Explainer, journal, report, or user correction that witnesses meaning/history but does not
+    govern alone.
+  may_be_inherited_as: evidence
+  requires:
+  - classification
+- id: donor
+  meaning: Historical/external/prior branch material preserved for recovery or comparison only.
+  may_be_inherited_as: donor_evidence
+  requires:
+  - donor_boundary
+- id: deprecated
+  meaning: Retired surface; should not be used for active authority except to explain lineage.
+  may_be_inherited_as: historical_note
+  requires:
+  - deprecation_or_stale_evidence
+- id: quarantined
+  meaning: Untrusted/conflicting surface held out of active routing until classified.
+  may_be_inherited_as: none_without_review
+  requires:
+  - quarantine_reason
+

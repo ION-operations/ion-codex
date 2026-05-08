@@ -1,0 +1,50 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "background_queue_result_intake_packet.expected_rejection.v0_1",
+  "template_id": "background_queue_result_intake_packet",
+  "case_type": "expected_rejection",
+  "status": "candidate_rejection_case_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/background_queue_result_intake_packet.template_spec.yaml",
+  "primary_agent": "BACKGROUND_QUEUE_STEWARD",
+  "domain_id": "background_queue_intake_domain",
+  "objective": "Exercise the background_queue_result_intake_packet candidate template rejection behavior.",
+  "sections": {
+    "QUEUE_PACKET": {
+      "objective": "run background task"
+    },
+    "AUTHORITY_BOUNDARY": {
+      "requires_approval": false
+    },
+    "BRANCH_RETURN": {
+      "result": "done"
+    },
+    "PROOF_NORMALIZATION": [],
+    "CONFLICTS_OR_GAPS": [],
+    "INTAKE_DECISION": "accepted_state",
+    "NON_CLAIMS": [],
+    "SETTLEMENT_ROUTE": ""
+  },
+  "expected_validation": {
+    "should_pass": false,
+    "expected_failure_kinds": [
+      "missing_or_invalid_required_section",
+      "candidate_boundary_or_non_claim_failure"
+    ],
+    "proves": [
+      "template validator rejects incomplete or overclaiming output",
+      "generic fluent output cannot satisfy machine sections"
+    ]
+  },
+  "non_claims": [
+    "This rejection case intentionally violates the candidate template spec.",
+    "The failed output is not a usable work product."
+  ]
+}

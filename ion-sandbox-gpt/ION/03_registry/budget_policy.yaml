@@ -1,0 +1,20 @@
+schema_id: ion.budget_policy.v1
+version: V56_MODEL_ECONOMICS_REGISTRY_SKELETONS
+authority_scope: A3_STEWARD_MODEL_ECONOMICS_REGISTRY_SKELETON
+production_authority: false
+budget_enforcement_authorized: false
+default_workflow_budget:
+  workflow_id: default
+  user_visible_value: medium
+  maximum_cost_usd: null
+  preferred_cost_usd: null
+  premium_escalation_allowed: false
+  batch_allowed: true
+  consensus_allowed: false
+  abort_if_projected_cost_exceeds: null
+rules:
+  cheap_tasks_should_not_consume_premium_budget: true
+  high_risk_canonical_tasks_should_not_route_to_weak_models_blindly: true
+  premium_calls_require_reason: true
+  budget_exhaustion_actions: [queue, downgrade_model, batch_route, require_approval, block]
+

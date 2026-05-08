@@ -1,0 +1,7 @@
+{
+  "boundary_id": "acb-847548dfe713",
+  "boundary_note": "API runtime entry binds an external carrier into an existing runtime/session center without implying scheduler sovereignty, queue sovereignty, or activation authority.",
+  "carrier_ref": "api://front-door-proof-trace",
+  "created_at": "2026-05-02T22:53:18.580191+00:00",
+  "session_id": "fdsession-e3325d8e7fd2e91c61"
+}

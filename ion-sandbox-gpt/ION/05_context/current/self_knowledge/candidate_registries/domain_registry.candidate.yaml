@@ -1,0 +1,245 @@
+schema_id: ion.self_knowledge.domain_registry.v0_2
+status: candidate_current_state_not_accepted_canon
+generated_at: '2026-05-08T03:51:05+00:00'
+root_domain: ION_SELF_KNOWLEDGE_SYSTEM
+purpose: Route questions/actions about ION itself into authority-ranked self-knowledge domains instead
+  of requiring archaeological reconstruction.
+source_canvas: ION/05_context/current/self_knowledge/source_inputs/ion_self_knowledge_domain_architecture_canvas_v_0.md
+domains:
+- domain_id: ion_identity
+  title: ION Identity Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_identity.domain_packet.yaml
+  primary_questions:
+  - What is ION?
+  - What problem does ION solve?
+  - What is ION not?
+  specialist_roles:
+  - IONOLOGIST
+  - CANON_LIBRARIAN
+  required_nodes:
+  - ion.identity.definition
+  - ion.identity.core_law
+  - ion.identity.not_state
+- domain_id: ion_canon_authority
+  title: ION Canon and Authority Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_canon_authority.domain_packet.yaml
+  primary_questions:
+  - Which sources are authoritative?
+  - Which source outranks which?
+  - What is witness/donor/stale only?
+  specialist_roles:
+  - CANON_LIBRARIAN
+  - NEMESIS
+  - STEWARD
+  required_nodes:
+  - ion.authority.repo
+  - ion.authority.mount_contract
+  - ion.authority.state_classes
+- domain_id: ion_architecture
+  title: ION Architecture Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_architecture.domain_packet.yaml
+  primary_questions:
+  - How is ION structured?
+  - How do domains/templates/context packages/receipts relate?
+  - Where does settlement occur?
+  specialist_roles:
+  - IONOLOGIST
+  - CONTEXT_CARTOGRAPHER
+  - TEMPLATE_CURATOR
+  required_nodes:
+  - ion.architecture.context_graph
+  - ion.architecture.templates
+  - ion.architecture.receipts
+- domain_id: ion_agent_role
+  title: ION Agent and Role Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_agent_role.domain_packet.yaml
+  primary_questions:
+  - What is a role versus a carrier?
+  - What is an ION agent?
+  - What proves a role was mounted?
+  specialist_roles:
+  - CONTEXT_CARTOGRAPHER
+  - RUNTIME_CARTOGRAPHER
+  - CANON_LIBRARIAN
+  required_nodes:
+  - ion.agent.role_vs_carrier
+  - ion.agent.context_system
+  - ion.agent.return_contract
+- domain_id: ion_full_multi_agent_runtime
+  title: ION Full Multi-Agent Runtime Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_full_multi_agent_runtime.domain_packet.yaml
+  primary_questions:
+  - How does full local/API ION run?
+  - What is fan-out/fan-in settlement?
+  - Why is single-carrier fallback not conceptual base?
+  specialist_roles:
+  - RUNTIME_CARTOGRAPHER
+  - STEWARD
+  - NEMESIS
+  required_nodes:
+  - ion.runtime.multi_invocation
+  - ion.runtime.codex_cli
+  - ion.runtime.settlement
+- domain_id: ion_carrier_embodiment
+  title: ION Carrier Embodiment Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_carrier_embodiment.domain_packet.yaml
+  primary_questions:
+  - What body is ION running in?
+  - Which capabilities are available?
+  - What authority and side effects are allowed?
+  specialist_roles:
+  - RUNTIME_CARTOGRAPHER
+  - STEWARD
+  required_nodes:
+  - ion.carrier.gpt_sandbox
+  - ion.carrier.codex_cli
+  - ion.carrier.capability_profile
+- domain_id: ion_context_system
+  title: ION Context System Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_context_system.domain_packet.yaml
+  primary_questions:
+  - What context is live?
+  - What does a context package prove?
+  - How does context inherit?
+  specialist_roles:
+  - CONTEXT_CARTOGRAPHER
+  - IONOLOGIST
+  - CANON_LIBRARIAN
+  required_nodes:
+  - ion.context.package
+  - ion.context.proof
+  - ion.context.inheritance
+- domain_id: ion_template_law
+  title: ION Template Law Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_template_law.domain_packet.yaml
+  primary_questions:
+  - What template governs this act?
+  - What proof does the template require?
+  - What receipt follows?
+  specialist_roles:
+  - TEMPLATE_CURATOR
+  - CANON_LIBRARIAN
+  required_nodes:
+  - ion.template.action_type
+  - ion.template.bindings
+  - ion.template.receipt_shape
+- domain_id: ion_state_steward_receipt
+  title: ION State, Steward, and Receipt Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_state_steward_receipt.domain_packet.yaml
+  primary_questions:
+  - When does output become state?
+  - What does a receipt prove?
+  - Who accepts/rejects candidate transitions?
+  specialist_roles:
+  - STEWARD
+  - SCRIBE
+  - CANON_LIBRARIAN
+  required_nodes:
+  - ion.state.candidate_transition
+  - ion.receipt.inheritance
+  - ion.steward.acceptance_gate
+- domain_id: ion_product_package
+  title: ION Product Package Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_product_package.domain_packet.yaml
+  primary_questions:
+  - What is the GPT sandbox package?
+  - What belongs in product package?
+  - What is excluded or optional?
+  specialist_roles:
+  - RUNTIME_CARTOGRAPHER
+  - CANON_LIBRARIAN
+  - NEMESIS
+  required_nodes:
+  - ion.product.gpt_sandbox_package
+  - ion.product.starter_data
+  - ion.product.package_audit
+- domain_id: ion_workpacket
+  title: ION Workpacket Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_workpacket.domain_packet.yaml
+  primary_questions:
+  - What is the active packet?
+  - What may this packet touch?
+  - What validation/return proves completion?
+  specialist_roles:
+  - STEWARD
+  - CONTEXT_CARTOGRAPHER
+  - SCRIBE
+  required_nodes:
+  - ion.workpacket.active
+  - ion.workpacket.allowed_paths
+  - ion.workpacket.return_contract
+- domain_id: ion_stale_donor_historical
+  title: ION Stale, Donor, and Historical Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_stale_donor_historical.domain_packet.yaml
+  primary_questions:
+  - Is this donor/historical/stale/current?
+  - Can this archive inform a route?
+  - What prevents false authority?
+  specialist_roles:
+  - VESTIGE
+  - CANON_LIBRARIAN
+  - NEMESIS
+  required_nodes:
+  - ion.history.donor
+  - ion.history.stale_surface
+  - ion.history.containment
+- domain_id: ion_recovery_anti_regression
+  title: ION Recovery and Anti-Regression Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_recovery_anti_regression.domain_packet.yaml
+  primary_questions:
+  - What failure is recurring?
+  - What gate prevents silent loss?
+  - What must not regress?
+  specialist_roles:
+  - NEMESIS
+  - VESTIGE
+  - STEWARD
+  required_nodes:
+  - ion.recovery.no_silent_loss
+  - ion.recovery.stale_gate
+  - ion.recovery.regression_tests
+- domain_id: ion_operations_build
+  title: ION Operations and Build Domain
+  state_class: candidate_current_state
+  authority_rank: 6
+  packet_path: ION/05_context/current/self_knowledge/domains/ion_operations_build.domain_packet.yaml
+  primary_questions:
+  - Which build lane is active?
+  - What test/preflight gate applies?
+  - What output/export proves continuation?
+  specialist_roles:
+  - RUNTIME_CARTOGRAPHER
+  - MASON
+  - STEWARD
+  - NEMESIS
+  required_nodes:
+  - ion.ops.build_lane
+  - ion.ops.preflight
+  - ion.ops.export
+

@@ -1,0 +1,31 @@
+{
+  "claim_class": "C2",
+  "claim_summary": "Deterministic front-door path proof output.",
+  "claim_text": "Deterministic front-door proof output: the operator message was routed through Persona Interface ingress, Relay semantic boundary, Steward work queue dispatch, Relay return, Persona response, and receipt surfaces. This proof grants no production authority.",
+  "emission_permission": "MAY_EMIT_AS_PROPOSAL",
+  "emitted_at": "2026-05-02T22:52:51+00:00",
+  "forbidden_claims": {
+    "persona_is_total_ion": false,
+    "provisional_speech_is_ratified_truth": false,
+    "steward_blocked_claim_may_emit": false,
+    "ungrounded_high_impact_claim_may_emit": false,
+    "v41_grants_production_authority": false
+  },
+  "notes": [
+    "V106 proof trace only; Steward verdict is deterministic test projection.",
+    "No production authority or live model-provider authority is granted."
+  ],
+  "persona_state": "RENDER_READY",
+  "production_authority": false,
+  "receipt_id": "fsc-b3e8eb0f49710e6013",
+  "relay_state": "GROUNDED",
+  "repair_obligations": [
+    "frame_as_proposal_not_fact"
+  ],
+  "repair_required": false,
+  "risk_level": "LOW",
+  "schema_id": "ion.front_stage_council_receipt.v1",
+  "steward_verdict": "APPROVED_WITH_SCOPE",
+  "version": "V41_FRONT_STAGE_COUNCIL_RUNTIME_RECEIPTS",
+  "visibility_level": "QUIET"
+}

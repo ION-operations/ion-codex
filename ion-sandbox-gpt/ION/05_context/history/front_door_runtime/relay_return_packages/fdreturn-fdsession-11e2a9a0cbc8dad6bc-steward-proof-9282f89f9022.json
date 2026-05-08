@@ -1,0 +1,17 @@
+{
+  "boundary_stage": "STEWARD_TO_RELAY",
+  "controlled_reexpression": "Persona and Relay are bound into the single-carrier sequential runtime as front-door ingress and final user-facing response boundaries. This is a sandbox package proof and grants no production authority.",
+  "created_at": "2026-05-07T12:45:00+00:00",
+  "persona_rendering_instructions": [
+    "render for user through Persona Interface",
+    "preserve system authority limits",
+    "do not let persona styling change factual or authority content"
+  ],
+  "persona_role_ref": "role.persona_interface",
+  "relay_role_ref": "role.relay",
+  "return_id": "fdreturn-fdsession-11e2a9a0cbc8dad6bc-steward-proof-9282f89f9022",
+  "session_id": "fdsession-11e2a9a0cbc8dad6bc",
+  "source_system_ref": "steward.proof_trace_output",
+  "steward_role_ref": "role.steward",
+  "template_ref": "ION/07_templates/bindings/RELAY__SEMANTIC_BOUNDARY.md"
+}

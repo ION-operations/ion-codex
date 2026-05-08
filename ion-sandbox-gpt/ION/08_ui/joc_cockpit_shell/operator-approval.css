@@ -1,0 +1,16 @@
+.ion-operator-approval-panel, .ion-dry-run-handoff-panel {
+  background: #0e0e0e;
+  border: 1px solid #1e1e1e;
+  padding: 10px;
+  color: #cccccc;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+}
+.ion-dry-run-handoff-panel pre {
+  max-height: 220px;
+  overflow: auto;
+  background: #090909;
+  border: 1px solid #1e1e1e;
+  padding: 8px;
+  font-size: 9px;
+  color: #aaaaaa;
+}

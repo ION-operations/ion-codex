@@ -1,0 +1,46 @@
+{
+  "schema": "ion.ai_assistant_work.phase4_product_reconciliation_receipt.v0_1",
+  "created_at": "2026-05-08T18:22:28Z",
+  "status": "candidate_product_reconciliation_documented_not_accepted_canon",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "matrix": "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_phase4_product_reconciliation_matrix.md",
+  "reconciled_lanes": [
+    "Codex Capsule Chat",
+    "Custom GPT Action Gateway",
+    "MCP JSON-RPC Custom GPT Action",
+    "Browser Data-Zip Custom GPT Product",
+    "Local Cockpit",
+    "Full ION Role Pipeline"
+  ],
+  "source_evidence": [
+    "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+    "ION/09_integrations/custom_gpt_action_gateway/README.md",
+    "ION/09_integrations/chatgpt_browser_mcp_action/README.md",
+    "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
+    "ION/docs/setup/ION_LOCAL_USER_SERVICES_SYSTEMD_RUNBOOK.md",
+    "/home/sev/ION - Production/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE/product/custom_gpt_adapter/DATA_ZIP_OPERATING_PROTOCOL.md",
+    "/home/sev/ION - Production/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE/product/package_guides/seeded_base_domains_reference/ION_PRODUCT_DOCS/RUNTIME_BOUNDARY_MATRIX.md"
+  ],
+  "core_finding": "The active full build is the live local connector/runtime lane; the package product is the portable browser-sandbox continuity lane; Codex Capsule Chat is the local operator engineering chat; full ION remains the governed proof-settlement workflow.",
+  "recommended_next_packets": [
+    "Add candidate route metadata to Action Gateway validation responses.",
+    "Add read-only MCP tool for assistant-work route surface and route preview.",
+    "Add cockpit route-distribution visibility across recent Codex chat turns.",
+    "Draft Custom GPT instructions distinguishing live Actions from data-zip continuity.",
+    "Prepare promotion proposal for terminal proof receipt, screen state matrix, and API docs example validation templates."
+  ],
+  "non_claims": [
+    "This receipt does not accept the v1.4 package as ION canon.",
+    "This receipt does not promote package product adapter state into active product law.",
+    "This receipt does not mutate ION/03_registry or product front-door surfaces.",
+    "This receipt does not claim live tunnel/service status."
+  ]
+}

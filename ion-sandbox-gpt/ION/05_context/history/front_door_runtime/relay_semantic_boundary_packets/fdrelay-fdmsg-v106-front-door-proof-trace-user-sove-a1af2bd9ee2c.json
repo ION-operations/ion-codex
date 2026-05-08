@@ -1,0 +1,62 @@
+{
+  "boundary_stage": "PERSONA_TO_RELAY",
+  "created_at": "2026-05-02T22:52:51+00:00",
+  "forbidden_role_collapses": [
+    "persona_interface_may_not_route_or_orchestrate",
+    "relay_may_not_own_persona_or_orchestrate",
+    "steward_may_not_claim_user_bonded_persona_context",
+    "raw_user_text_may_not_be_treated_as_system_truth_without_relay_boundary_packet"
+  ],
+  "normalized_intent": "V106 front-door proof trace: verify operator message through Relay, Steward, Persona, and receipts.",
+  "packet_id": "fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-a1af2bd9ee2c",
+  "persona_role_ref": "role.persona_interface",
+  "raw_user_text_ref": "ION/05_context/history/front_door_runtime/persona_ingress/fdmsg-v106-front-door-proof-trace-user-sovereign-fe357c69b2f6.json",
+  "relay_role_ref": "role.relay",
+  "semantic_packet": {
+    "semantic_packet": {
+      "ambiguity_notes": [
+        "Raw user language remains user intent until Relay boundary translation and Steward routing.",
+        "Visible persona names and style signals are persona-surface data, not system truth by themselves."
+      ],
+      "context_bindings": {
+        "authority_scope": "user_intent_projection__not_governed_write",
+        "branch_scope": "current_runtime_front_door",
+        "horizon_scope": "front_door_intake_to_orchestration",
+        "relation_context_refs": [
+          "ION/02_architecture/FRONT_DOOR_RUNTIME_ENTRY_PROTOCOL.md"
+        ],
+        "role_scope": "Persona Interface -> Relay -> Steward",
+        "session_id": "v106-front-door-proof-trace",
+        "temporal_scope": "2026-05-02T22:52:51+00:00",
+        "user_ref": "user.sovereign"
+      },
+      "contradiction_notes": [],
+      "donor_line_notes": [
+        "Aletheion translation discipline governs meaning-before-wording and true-name preservation.",
+        "Relay is a semantic-boundary/courier role, not final persona owner or orchestrator."
+      ],
+      "intake": "V106 front-door proof trace: verify operator message through Relay, Steward, Persona, and receipts.",
+      "loss_notes": [
+        "This runtime adapter emits a first-pass semantic packet; deeper true-name resolution may refine it."
+      ],
+      "provisional_objects": [
+        "user_intent.true_name_resolution_pending",
+        "persona_visible_name.absent"
+      ],
+      "recommended_followups": [
+        "Steward should route only from the Relay semantic-boundary packet, not from raw user text alone."
+      ],
+      "resolved_objects": [
+        "role.persona_interface",
+        "role.relay",
+        "role.steward",
+        "context.packet.semantic_payload",
+        "identity.semantic.true_name"
+      ]
+    }
+  },
+  "session_id": "v106-front-door-proof-trace",
+  "source_message_id": "fdmsg-v106-front-door-proof-trace-user-sovereign-fe357c69b2f6",
+  "steward_role_ref": "role.steward",
+  "template_ref": "ION/07_templates/bindings/RELAY__SEMANTIC_BOUNDARY.md"
+}

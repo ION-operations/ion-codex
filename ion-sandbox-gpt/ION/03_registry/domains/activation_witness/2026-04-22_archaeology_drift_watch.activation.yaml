@@ -1,0 +1,16 @@
+witness_id: witness.domain.archaeology_drift_watch.2026-04-22
+subject_domain: domain.archaeology_drift_watch
+status: ACTIVATED_CURRENT_PHASE
+activated_on: 2026-04-22
+basis:
+  - Vestige now has a settled semantic identity, explicit archaeology protocol and contract law, and a persistent evidence-bearing lane
+  - archaeology burden is now specific enough that placeholder domain language is less truthful than an explicit domain record
+supporting_sources:
+  - ION/02_architecture/ARCHAEOLOGY_DAEMON_PROTOCOL.md
+  - ION/02_architecture/ARCHAEOLOGY_DAEMON_CONTRACT.md
+  - ION/03_registry/boots/VESTIGE.boot.md
+  - ION/03_registry/semantic_identities/VESTIGE.semantic.yaml
+  - ION/06_intelligence/archaeology/vestige/continuity.md
+constraints:
+  - activation does not convert archaeology into audit verdict, doctrine mutation, or architecture authority
+  - future archaeology binding hardening may sharpen output grammar without changing the core domain burden

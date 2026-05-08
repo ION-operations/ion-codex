@@ -1,0 +1,234 @@
+{
+  "schema": "ion.ai_assistant_work.route_compiler_candidate_map.v0_1",
+  "created_at": "2026-05-08T17:52:30Z",
+  "status": "candidate_current_context_not_accepted_canon",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "inputs": [
+    "ION/05_context/current/ai_assistant_work/next/AI_ASSISTANT_WORK_NEXT_PACKET_ROUTE_COMPILER_AND_PROMOTION_PLAN_20260508T154333Z.json",
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_ROUTE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "ION/03_registry/ion_skill_registry.yaml",
+    "ION/03_registry/ion_native_lens_registry.yaml"
+  ],
+  "active_surface_targets": [
+    "Codex capsule chat",
+    "Custom GPT Action Gateway",
+    "MCP JSON-RPC Action",
+    "local cockpit",
+    "full ION role pipeline",
+    "browser Custom GPT data-zip product lane"
+  ],
+  "route_mappings": [
+    {
+      "route_id": "route.assistant_identity_definition",
+      "candidate_domains": [
+        "ai_assistant_identity_embodiment",
+        "chat_work_domain",
+        "ide_work_domain",
+        "knowledge_context_memory_domain"
+      ],
+      "candidate_agents": [
+        "ASSISTANT_ONTOLOGIST",
+        "EMBODIMENT_CARTOGRAPHER",
+        "SOURCE_RANKER"
+      ],
+      "active_skill_candidates": [
+        "codex-chat-answer",
+        "context-mount",
+        "template-curation"
+      ],
+      "active_lens_candidates": [
+        "persona",
+        "ionologist",
+        "context_cartographer",
+        "thoth"
+      ],
+      "active_behavior": "answer/explain from accepted context; preserve assistant embodiment, authority, state/proof/receipt boundaries",
+      "promotion_target": "assistant-work route compiler only; no registry landing until accepted"
+    },
+    {
+      "route_id": "route.ide_agent_work_map",
+      "candidate_domains": [
+        "ide_work_domain",
+        "codebase_understanding_domain",
+        "planning_and_task_breakdown_domain",
+        "implementation_domain",
+        "testing_quality_domain",
+        "review_security_domain"
+      ],
+      "candidate_agents": [
+        "IDE_CARTOGRAPHER",
+        "CODEBASE_CARTOGRAPHER",
+        "TASK_PLANNER",
+        "PATCH_MASON",
+        "TEST_RUNNER",
+        "SECURITY_NEMESIS"
+      ],
+      "active_skill_candidates": [
+        "codex-solo-work",
+        "codex-recovery",
+        "context-mount"
+      ],
+      "active_lens_candidates": [
+        "relay",
+        "steward",
+        "context_cartographer",
+        "mason_codex",
+        "nemesis"
+      ],
+      "active_behavior": "map workspace/context before mutation; require bounded write scope and command/test receipt before implementation claims",
+      "promotion_target": "Codex chat route metadata and work packet classification"
+    },
+    {
+      "route_id": "route.ui_specialist_work",
+      "candidate_domains": [
+        "ui_ux_domain",
+        "product_requirements_domain",
+        "implementation_domain",
+        "testing_quality_domain"
+      ],
+      "candidate_agents": [
+        "UI_ARCHITECT",
+        "UX_FLOW_DESIGNER",
+        "COMPONENT_BUILDER",
+        "ACCESSIBILITY_AUDITOR"
+      ],
+      "active_skill_candidates": [
+        "codex-solo-work",
+        "template-curation"
+      ],
+      "active_lens_candidates": [
+        "vizier",
+        "mason_codex",
+        "nemesis",
+        "persona"
+      ],
+      "template_spec_candidates": [
+        "screen_state_matrix_packet"
+      ],
+      "active_behavior": "force UI tasks through state matrix, user-flow, component-contract, and a11y proof before implementation/polish",
+      "promotion_target": "new accepted UI specialist route after human review"
+    },
+    {
+      "route_id": "route.documentation_specialist_work",
+      "candidate_domains": [
+        "documentation_writing_domain",
+        "knowledge_context_memory_domain",
+        "codebase_understanding_domain"
+      ],
+      "candidate_agents": [
+        "DOCS_ARCHITECT",
+        "TECHNICAL_WRITER",
+        "API_DOCS_SCRIBE",
+        "DOCS_NEMESIS"
+      ],
+      "active_skill_candidates": [
+        "codex-chat-answer",
+        "codex-solo-work",
+        "template-curation"
+      ],
+      "active_lens_candidates": [
+        "thoth",
+        "scribe",
+        "context_cartographer",
+        "nemesis"
+      ],
+      "template_spec_candidates": [
+        "api_docs_example_validation_packet"
+      ],
+      "active_behavior": "docs require reader model, source authority, claim map, and example validation when applicable",
+      "promotion_target": "docs route metadata and API-docs validation template review"
+    },
+    {
+      "route_id": "route.assistant_work_dataset_build",
+      "candidate_domains": [
+        "assistant_learning_dataset_domain",
+        "ide_work_domain",
+        "chat_work_domain",
+        "knowledge_context_memory_domain",
+        "cross_domain_settlement_domain"
+      ],
+      "candidate_agents": [
+        "WORK_PATTERN_ETHNOGRAPHER",
+        "STATE_TAXONOMIST",
+        "TEMPLATE_MINER",
+        "FAILURE_CLASSIFIER",
+        "SETTLEMENT_STEWARD"
+      ],
+      "active_skill_candidates": [
+        "template-curation",
+        "context-mount",
+        "receipt-post"
+      ],
+      "active_lens_candidates": [
+        "template_curator",
+        "context_cartographer",
+        "vestige",
+        "scribe"
+      ],
+      "active_behavior": "build observation corpus and mine state/template/agent gaps with lineage; do not canonize anecdotes without source class",
+      "promotion_target": "candidate dataset expansion lane"
+    },
+    {
+      "route_id": "route.cross_domain_feature_delivery",
+      "candidate_domains": [
+        "product_requirements_domain",
+        "planning_and_task_breakdown_domain",
+        "ui_ux_domain",
+        "implementation_domain",
+        "testing_quality_domain",
+        "documentation_writing_domain",
+        "devops_release_domain",
+        "cross_domain_settlement_domain"
+      ],
+      "candidate_agents": [
+        "PRODUCT_ANALYST",
+        "TASK_PLANNER",
+        "UI_ARCHITECT",
+        "PATCH_MASON",
+        "TEST_ARCHITECT",
+        "TECHNICAL_WRITER",
+        "RELEASE_MANAGER",
+        "SETTLEMENT_STEWARD"
+      ],
+      "active_skill_candidates": [
+        "ion-full-workflow-handoff",
+        "codex-solo-work",
+        "receipt-post"
+      ],
+      "active_lens_candidates": [
+        "relay",
+        "steward",
+        "vizier",
+        "mason_codex",
+        "nemesis",
+        "scribe",
+        "persona"
+      ],
+      "active_behavior": "fan out by domain, gather proof per branch, then settle into receipt-backed next state",
+      "promotion_target": "full ION workflow handoff classifier and cockpit route view"
+    }
+  ],
+  "fission_route_backlog": [
+    "pr_agent_work_domain -> pr_review_packet",
+    "background_queue_intake_domain -> background_queue_result_intake_packet",
+    "terminal_proof_domain -> terminal_proof_receipt_packet",
+    "release_evidence_domain -> release_readiness_matrix_packet",
+    "migration_work_domain -> migration_plan_and_rollback_packet",
+    "documentation_example_validation_domain -> api_docs_example_validation_packet",
+    "ui_state_modeling_domain -> screen_state_matrix_packet"
+  ],
+  "non_claims": [
+    "This map does not create an active route compiler.",
+    "This map does not mutate active skill or native lens registries.",
+    "This map does not make candidate assistant-work domains or agents accepted ION law.",
+    "This map is a review scaffold for the next implementation packet."
+  ]
+}
+

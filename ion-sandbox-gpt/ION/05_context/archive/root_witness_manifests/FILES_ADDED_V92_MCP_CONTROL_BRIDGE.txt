@@ -1,0 +1,12 @@
+.cursor/mcp.json
+.cursor/commands/ion-mcp-status.md
+.cursor/rules/ion-mcp-control-bridge.mdc
+ION/09_integrations/mcp/ion_mcp_server.py
+ION/09_integrations/mcp/README.md
+ION/04_packages/kernel/ion_mcp_bridge_audit.py
+ION/tests/test_kernel_ion_mcp_bridge_audit.py
+ION/02_architecture/ION_MCP_CONTROL_BRIDGE_PROTOCOL.md
+ION/05_context/current/ACTIVE_MCP_BRIDGE_STATE.json
+ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V92.json
+ION/docs/consolidation/ION_V92_MCP_CONTROL_BRIDGE_REPORT_20260430.md
+ION/05_context/signals/v92_mcp_control_bridge_receipt_20260430.txt

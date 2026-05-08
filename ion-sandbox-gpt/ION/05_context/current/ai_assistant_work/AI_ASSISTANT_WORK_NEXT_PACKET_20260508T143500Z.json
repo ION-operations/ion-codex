@@ -1,0 +1,38 @@
+{
+  "schema": "ion.next_packet.v1",
+  "packet_id": "AI_ASSISTANT_WORK_NEXT_PACKET_20260508T143500Z",
+  "created_at": "2026-05-08T14:35:00Z",
+  "status": "candidate_next_packet",
+  "objective": "Build the first structured dataset of AI-assisted work observations and use it to refine domain/state/template/agent registries.",
+  "recommended_next_action": "Run assistant-work dataset genesis: create observation schema examples for chat, IDE, UI, docs, tests, review, cloud agent, PR agent, and background execution.",
+  "allowed_paths": [
+    "ION/05_context/current/ai_assistant_work/",
+    "ION/tests/"
+  ],
+  "inputs": [
+    "AI_ASSISTANT_WORK_DATASET_ENTRY_SCHEMA_V0_1.yaml",
+    "AI_ASSISTANT_WORK_DOMAIN_REGISTRY_CANDIDATE_V0_1.yaml",
+    "AI_ASSISTANT_WORK_AGENT_REGISTRY_CANDIDATE_V0_1.yaml",
+    "AI_ASSISTANT_WORK_SOURCE_EVIDENCE_MAP_20260508T143500Z.json",
+    "User correction: specialist DOMAINS and agents are needed for UI, docs, IDE-agent work, and mass AI coding workflows."
+  ],
+  "deliverables": [
+    "AI_ASSISTANT_WORK_DATASET_GENESIS_V0_1.jsonl",
+    "AI_ASSISTANT_WORK_FAILURE_MODE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "AI_ASSISTANT_WORK_SKILL_TO_AGENT_BINDING_MAP_V0_1.yaml",
+    "assistant-work route simulation covering dataset entries",
+    "focused tests and receipt"
+  ],
+  "acceptance_criteria": [
+    "At least 25 observation entries covering chat, IDE, CLI, cloud/background, PR/review, UI, docs, tests, debug, release, data, dependency, and security workflows.",
+    "Every observation maps to domains, state surfaces, protocols, templates, specialist agents, proof, and settlement path.",
+    "At least 10 failure modes are classified.",
+    "At least 10 template gaps and 10 agent/domain gaps are proposed.",
+    "No accepted canon, registry, or product-front-door mutation occurs without explicit acceptance."
+  ],
+  "non_claims": [
+    "This next packet is candidate-only.",
+    "It does not authorize registry landing or product mutation.",
+    "It does not claim external telemetry or private user data collection."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.maintained_work_surface.v1",
+  "type": "object",
+  "required": ["schema_id", "version", "verdict", "production_authority", "components", "forbidden_claims"],
+  "properties": {
+    "schema_id": {"const": "ion.maintained_work_surface.v1"},
+    "version": {"type": "string"},
+    "emitted_at": {"type": "string"},
+    "verdict": {"type": "string"},
+    "production_authority": {"const": false},
+    "components": {"type": "array", "items": {"type": "string"}},
+    "required_surfaces": {"type": "array", "items": {"type": "string"}},
+    "missing_surfaces": {"type": "array", "items": {"type": "string"}},
+    "forbidden_claims": {"type": "object"}
+  }
+}

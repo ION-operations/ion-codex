@@ -1,0 +1,239 @@
+schema: ion.ai_assistant_work.domain_registry.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T14:35:00Z'
+purpose: First candidate registry for AI-assisted chat/IDE work as a domain system
+  with specialist domains and agents.
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  requires_explicit_acceptance_to_land: true
+core_thesis: An AI assistant is a governed work interface mounted in a host body;
+  effective assistant work requires domains, states, protocols, templates, agents,
+  proof, and settlement, not one generic agent improvising every skill.
+domains:
+- domain_id: ai_assistant_identity_embodiment
+  title: AI Assistant Identity and Embodiment Domain
+  purpose: Define what an AI assistant is across chat, IDE, CLI, cloud, PR, and background
+    agent bodies.
+  primary_specialist_agents:
+  - ASSISTANT_ONTOLOGIST
+  - EMBODIMENT_CARTOGRAPHER
+  - CAPABILITY_BOUNDARY_AUDITOR
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: chat_work_domain
+  title: Chat Work Domain
+  purpose: Model the chat assistant as a conversational work carrier with limited
+    or indirect tool/state access.
+  primary_specialist_agents:
+  - CHAT_STEWARD
+  - CONVERSATION_CARTOGRAPHER
+  - ARTIFACT_HANDOFF_SCRIBE
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: ide_work_domain
+  title: IDE Work Domain
+  purpose: Define work inside an IDE where chat, file tree, editor buffers, terminal,
+    diagnostics, git, tests, and extensions meet.
+  primary_specialist_agents:
+  - IDE_CARTOGRAPHER
+  - WORKSPACE_STEWARD
+  - EDITOR_BUFFER_SCOUT
+  - TERMINAL_RUNNER
+  state_family_count: 5
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: codebase_understanding_domain
+  title: Codebase Understanding Domain
+  purpose: Map repository structure, dependencies, conventions, architecture, and
+    change-local context before implementation.
+  primary_specialist_agents:
+  - CODEBASE_CARTOGRAPHER
+  - DEPENDENCY_SCOUT
+  - ARCHITECTURE_READER
+  - CONVENTION_MINER
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: planning_and_task_breakdown_domain
+  title: Planning and Task Breakdown Domain
+  purpose: Translate user intent into bounded tasks, packets, dependencies, acceptance
+    criteria, and route decisions.
+  primary_specialist_agents:
+  - TASK_PLANNER
+  - DEPENDENCY_ROUTER
+  - ACCEPTANCE_CRITERIA_STEWARD
+  - HORIZON_PLANNER
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: implementation_domain
+  title: Implementation Domain
+  purpose: Produce bounded code changes under local conventions, diffs, tests, and
+    proof.
+  primary_specialist_agents:
+  - PATCH_MASON
+  - REFACTOR_MASON
+  - BUGFIX_MASON
+  - MIGRATION_MASON
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: ui_ux_domain
+  title: UI/UX Specialist Domain
+  purpose: Own interface design, component systems, interaction patterns, accessibility,
+    responsive behavior, and frontend polish.
+  primary_specialist_agents:
+  - UI_ARCHITECT
+  - UX_FLOW_DESIGNER
+  - COMPONENT_BUILDER
+  - DESIGN_SYSTEM_STEWARD
+  state_family_count: 5
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: documentation_writing_domain
+  title: Documentation and Writing Specialist Domain
+  purpose: Own technical writing, user docs, API docs, changelogs, release notes,
+    internal guides, and explainers.
+  primary_specialist_agents:
+  - DOCS_ARCHITECT
+  - TECHNICAL_WRITER
+  - API_DOCS_SCRIBE
+  - CHANGELOG_SCRIBE
+  state_family_count: 4
+  template_family_count: 5
+  status: seed_candidate
+- domain_id: testing_quality_domain
+  title: Testing and Quality Domain
+  purpose: Own test design, test execution, regression checks, validation plans, and
+    quality evidence.
+  primary_specialist_agents:
+  - TEST_ARCHITECT
+  - TEST_RUNNER
+  - REGRESSION_HUNTER
+  - QUALITY_STEWARD
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: review_security_domain
+  title: Review, Safety, and Security Domain
+  purpose: Own code review, security review, prompt/tool injection risk, data exposure,
+    and adversarial checks.
+  primary_specialist_agents:
+  - CODE_REVIEWER
+  - SECURITY_NEMESIS
+  - PROMPT_INJECTION_AUDITOR
+  - SECRET_BOUNDARY_AUDITOR
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: debugging_observability_domain
+  title: Debugging and Observability Domain
+  purpose: Own runtime symptoms, logs, traces, reproduction, hypotheses, and fix verification.
+  primary_specialist_agents:
+  - DEBUGGER
+  - LOG_ANALYST
+  - REPRODUCTION_BUILDER
+  - OBSERVABILITY_CARTOGRAPHER
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: devops_release_domain
+  title: DevOps, CI/CD, and Release Domain
+  purpose: Own build, CI, deployment, environments, release notes, rollout, rollback,
+    and operational readiness.
+  primary_specialist_agents:
+  - BUILD_STEWARD
+  - CI_DIAGNOSTICIAN
+  - RELEASE_MANAGER
+  - ROLLBACK_PLANNER
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: data_analysis_domain
+  title: Data and Analysis Domain
+  purpose: Own datasets, schemas, notebooks, analysis claims, visualization, and statistical/measurement
+    proof.
+  primary_specialist_agents:
+  - DATA_CARTOGRAPHER
+  - ANALYSIS_MASON
+  - VISUALIZATION_BUILDER
+  - METHOD_NEMESIS
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: product_requirements_domain
+  title: Product and Requirements Domain
+  purpose: Translate user/business intent into requirements, user stories, acceptance
+    criteria, roadmaps, and design constraints.
+  primary_specialist_agents:
+  - PRODUCT_ANALYST
+  - REQUIREMENTS_TRANSLATOR
+  - USER_STORY_SCRIBE
+  - SCOPE_NEMESIS
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: knowledge_context_memory_domain
+  title: Knowledge, Context, and Memory Domain
+  purpose: Own retrieval, context packages, memory, source ranking, continuity bundles,
+    and stale-context resistance.
+  primary_specialist_agents:
+  - CONTEXT_CARTOGRAPHER
+  - SOURCE_RANKER
+  - MEMORY_STEWARD
+  - CONTINUITY_EXPORTER
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: dependency_package_domain
+  title: Dependency and Package Domain
+  purpose: Own dependency choices, version constraints, package managers, lockfiles,
+    vulnerability posture, and upgrade/migration paths.
+  primary_specialist_agents:
+  - DEPENDENCY_STEWARD
+  - PACKAGE_UPGRADER
+  - LICENSE_AUDITOR
+  - VULNERABILITY_SCOUT
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: workflow_automation_tool_domain
+  title: Workflow Automation and Tool Domain
+  purpose: Own tool calls, scripts, MCP/gateway actions, agent skills, IDE commands,
+    and automation boundaries.
+  primary_specialist_agents:
+  - TOOL_STEWARD
+  - AUTOMATION_MASON
+  - GATEWAY_AUDITOR
+  - SKILL_PACKAGER
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: assistant_learning_dataset_domain
+  title: Assistant Work Dataset and Taxonomy Domain
+  purpose: Build the massive dataset of AI-assisted work states, intents, protocols,
+    templates, agent roles, failures, and receipts.
+  primary_specialist_agents:
+  - WORK_PATTERN_ETHNOGRAPHER
+  - STATE_TAXONOMIST
+  - TEMPLATE_MINER
+  - FAILURE_CLASSIFIER
+  state_family_count: 5
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: cross_domain_settlement_domain
+  title: Cross-Domain Settlement Domain
+  purpose: Settle outputs when multiple specialist domains participate in one task.
+  primary_specialist_agents:
+  - SETTLEMENT_STEWARD
+  - CONFLICT_NEMESIS
+  - MERGE_SCRIBE
+  - RECEIPT_CURATOR
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate

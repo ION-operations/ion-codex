@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.trunk_preservation_report.schema.json",
+  "title": "ION Trunk Preservation Report",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version_line",
+    "report_id",
+    "generated_at",
+    "previous_full_zip",
+    "new_full_zip",
+    "containment_move_prefixes",
+    "files_before",
+    "files_after",
+    "added_files",
+    "modified_files",
+    "removed_files",
+    "contained_removed_files",
+    "unexpected_removed_files",
+    "protected_removed_files",
+    "containment_moves",
+    "packaging_verdict",
+    "accepted",
+    "production_authority"
+  ],
+  "properties": {
+    "schema_id": { "const": "ion.trunk_preservation_report.v1" },
+    "version_line": {
+      "enum": [
+        "V107_NO_SILENT_DELETION_AND_TRUNK_PRESERVATION_GATE",
+        "V118_NO_SILENT_LOSS_AND_CONTAINMENT_PRESERVATION_GATE"
+      ]
+    },
+    "report_id": { "type": "string", "minLength": 1 },
+    "generated_at": { "type": "string", "minLength": 1 },
+    "source_root": { "type": ["string", "null"] },
+    "previous_full_zip": { "type": ["string", "null"] },
+    "new_full_zip": { "type": ["string", "null"] },
+    "baseline_manifest_path": { "type": ["string", "null"] },
+    "post_manifest_path": { "type": ["string", "null"] },
+    "policy_version": { "type": "string" },
+    "protected_paths": { "type": "array", "items": { "type": "string" } },
+    "allowed_removal_parts": { "type": "array", "items": { "type": "string" } },
+    "allowed_removal_prefixes": { "type": "array", "items": { "type": "string" } },
+    "containment_move_prefixes": { "type": "array", "items": { "type": "string" } },
+    "files_before": { "type": "integer", "minimum": 0 },
+    "files_after": { "type": "integer", "minimum": 0 },
+    "added_files": { "type": "integer", "minimum": 0 },
+    "modified_files": { "type": "integer", "minimum": 0 },
+    "removed_files": { "type": "integer", "minimum": 0 },
+    "allowed_removed_files": { "type": "integer", "minimum": 0 },
+    "contained_removed_files": { "type": "integer", "minimum": 0 },
+    "unexpected_removed_files": { "type": "integer", "minimum": 0 },
+    "protected_removed_files": { "type": "integer", "minimum": 0 },
+    "added_paths": { "type": "array", "items": { "type": "string" } },
+    "modified_paths": { "type": "array", "items": { "type": "string" } },
+    "allowed_removed_paths": { "type": "array", "items": { "type": "string" } },
+    "contained_removed_paths": { "type": "array", "items": { "type": "string" } },
+    "containment_moves": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from_path", "to_path", "sha256", "movement_class"],
+        "properties": {
+          "from_path": { "type": "string" },
+          "to_path": { "type": "string" },
+          "sha256": { "type": "string" },
+          "movement_class": { "const": "CONTAINMENT_MOVE" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "unexpected_removed_paths": { "type": "array", "items": { "type": "string" } },
+    "protected_removed_paths": { "type": "array", "items": { "type": "string" } },
+    "root_confirmed_before": { "type": "boolean" },
+    "root_confirmed_after": { "type": "boolean" },
+    "packaging_verdict": { "enum": ["PASS", "FAIL"] },
+    "accepted": { "type": "boolean" },
+    "production_authority": { "const": false },
+    "findings": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

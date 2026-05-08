@@ -1,0 +1,25 @@
+schema_id: ion.maintained_work_surface_canon.v1
+version: V40_MAINTAINED_WORK_SURFACE_AND_PERSONA_SYSTEM_CANON
+authority: A3_DOCTRINE_AND_RUNTIME_PLANNING
+production_authority: false
+universal_grammar:
+  - pressure
+  - synthesis
+  - evidence
+  - recognition
+  - formalization
+  - receipt
+  - continuation
+applies_to:
+  - ion_self_construction
+  - software_builds
+  - research
+  - design
+  - creative_worlds
+  - simulations
+  - business_operations
+  - education
+  - visual_projects
+forbidden_claims:
+  canon_is_production_runtime: false
+  unreceipted_output_is_continuity: false

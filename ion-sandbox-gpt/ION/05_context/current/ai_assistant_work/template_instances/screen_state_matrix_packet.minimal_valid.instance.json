@@ -1,0 +1,132 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "screen_state_matrix_packet.minimal_valid.v0_1",
+  "template_id": "screen_state_matrix_packet",
+  "case_type": "minimal_valid",
+  "status": "candidate_template_instance_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/screen_state_matrix_packet.template_spec.yaml",
+  "primary_agent": "UI_STATE_MODELER",
+  "domain_id": "ui_state_modeling_domain",
+  "objective": "Exercise the screen_state_matrix_packet candidate template with a minimal valid instance.",
+  "sections": {
+    "INTENT": "Model the dashboard onboarding screen states before any generic implementation starts.",
+    "USER_ROLES": [
+      "new_admin",
+      "returning_member",
+      "read_only_guest"
+    ],
+    "SCREEN_STATES": [
+      {
+        "state": "loading",
+        "description": "Initial data fetch while route and permissions resolve.",
+        "primary_ui": "skeleton cards"
+      },
+      {
+        "state": "empty",
+        "description": "No projects or no visible records for the current user.",
+        "primary_ui": "empty-state panel with create/request-access action"
+      },
+      {
+        "state": "error",
+        "description": "Fetch or permission resolution failure with retry affordance.",
+        "primary_ui": "inline error with retry"
+      },
+      {
+        "state": "success",
+        "description": "Dashboard populated with summary cards, table, and activity feed.",
+        "primary_ui": "dashboard grid"
+      },
+      {
+        "state": "permission",
+        "description": "Authenticated user lacks role for admin-only actions.",
+        "primary_ui": "read-only banner and disabled controls"
+      }
+    ],
+    "TRANSITIONS": [
+      {
+        "from": "loading",
+        "to": "success",
+        "trigger": "fetch_success"
+      },
+      {
+        "from": "loading",
+        "to": "empty",
+        "trigger": "fetch_success_no_records"
+      },
+      {
+        "from": "loading",
+        "to": "error",
+        "trigger": "fetch_failure"
+      },
+      {
+        "from": "success",
+        "to": "permission",
+        "trigger": "role_downgrade_or_action_denied"
+      }
+    ],
+    "COMPONENT_CONTRACTS": [
+      {
+        "component": "DashboardShell",
+        "props": [
+          "userRole",
+          "dataState"
+        ],
+        "testable_obligation": "renders exactly one primary state region"
+      },
+      {
+        "component": "ProjectSummaryCard",
+        "props": [
+          "count",
+          "trend",
+          "isLoading"
+        ],
+        "testable_obligation": "loading and zero values have distinct render states"
+      },
+      {
+        "component": "PermissionBanner",
+        "props": [
+          "role",
+          "blockedAction"
+        ],
+        "testable_obligation": "announces blocked action and does not expose destructive controls"
+      }
+    ],
+    "A11Y_GATES": [
+      "loading state uses aria-busy on main region",
+      "error state exposes retry button with descriptive label",
+      "permission state communicates role limitation without color-only signaling"
+    ],
+    "TEST_GATES": [
+      "unit tests cover loading, empty, error, success, and permission states",
+      "component contract tests verify action visibility by user role",
+      "keyboard navigation reaches retry and primary actions"
+    ],
+    "NON_CLAIMS": [
+      "This is a candidate UI state matrix, not accepted product state.",
+      "No implementation files were changed.",
+      "No design-system authority is claimed beyond the provided context."
+    ],
+    "SETTLEMENT_ROUTE": "UI_ARCHITECT reviews before COMPONENT_BUILDER implementation packet."
+  },
+  "expected_validation": {
+    "should_pass": true,
+    "expected_failure_kinds": [],
+    "proves": [
+      "required section shape can be satisfied",
+      "candidate boundary can be preserved",
+      "settlement/proof/non-claim surfaces can be named"
+    ]
+  },
+  "non_claims": [
+    "This instance is candidate current-context test data, not accepted template law.",
+    "This instance does not execute external tools or mutate production state."
+  ]
+}

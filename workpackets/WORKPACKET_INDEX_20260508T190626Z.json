@@ -1,0 +1,42 @@
+{
+  "schema": "ion.root_source_lane.workpacket_index.v0_1",
+  "created_at": "2026-05-08T19:06:26Z",
+  "status": "operator_source_packet_intake_not_accepted_state",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "lane": "workpackets",
+  "file_count": 20,
+  "size_summary": "260K",
+  "processing_rule": "read_classify_compare_plan_implement_selected_validate_receipt",
+  "authority_boundary": {
+    "accepted_canon": false,
+    "mutates_active_runtime": false,
+    "requires_receipted_promotion_or_implementation": true
+  },
+  "files": [
+    {"path": "workpackets/CUSTOM_GPT_INSTRUCTIONS_ANTI_THEATER_DROPIN_20260507.md", "category": "custom_gpt_instruction_governance"},
+    {"path": "workpackets/ION_ACTIONS_CODEX_IDE_FULL_EXECUTION_PLAN_2026-05-07.md", "category": "codex_ide_action_execution_plan"},
+    {"path": "workpackets/ION_ACTION_GATEWAY_OPENAPI_V0_3_CANDIDATE.yaml", "category": "action_gateway_openapi_candidate"},
+    {"path": "workpackets/ION_CARRIER_FRICTION_LEDGER_AND_ACTION_HANG_TRIAGE_WORKPACK_20260507.md", "category": "carrier_friction_and_action_hang_triage"},
+    {"path": "workpackets/ION_CLOUDFLARE_TUNNEL_RUNBOOK_ACTION_GATEWAY_2026-05-07.md", "category": "cloudflare_tunnel_runbook"},
+    {"path": "workpackets/ION_CODEX_CLI_CONFIG_CANDIDATE.toml", "category": "codex_cli_config_candidate"},
+    {"path": "workpackets/ION_CODEX_CLI_PACKET_001_ACTION_GATEWAY_MVP_2026-05-07.md", "category": "action_gateway_mvp_packet"},
+    {"path": "workpackets/ION_CODEX_CLI_PROMPT_ACTION_GATEWAY_MVP.txt", "category": "codex_cli_prompt_candidate"},
+    {"path": "workpackets/ION_CUSTOM_GPT_ACTIONS_LOCAL_ION_BRIDGE_STRATEGY_2026-05-07.md", "category": "custom_gpt_actions_bridge_strategy"},
+    {"path": "workpackets/ION_CUSTOM_GPT_BUILDER_INSTRUCTIONS_ACTIONS_BRIDGE_2026-05-07.md", "category": "custom_gpt_builder_instructions"},
+    {"path": "workpackets/ION_GitHub_Custom_GPT_IDE_Workpack_v0_1.md", "category": "github_custom_gpt_ide_workpack"},
+    {"path": "workpackets/ION_Helixion_IDE_Bridge_v0_Workpacket.md", "category": "helixion_ide_bridge_workpacket"},
+    {"path": "workpackets/ION_LOCAL_CODEX_IDE_MVP_PACKET_2026-05-07.md", "category": "local_codex_ide_mvp_packet"},
+    {"path": "workpackets/ION_SELF_KNOWLEDGE_MOUNT_PACKET_V0_1.md", "category": "self_knowledge_mount_packet"},
+    {"path": "workpackets/ION_SOLE_GPT_PORTABLE_PACKAGE_V0_1_CODEX_WORKPACK_20260507.md", "category": "portable_package_workpack"},
+    {"path": "workpackets/ion_custom_gpt_action_openapi_ion_bridge_v0_2_candidate.yaml", "category": "custom_gpt_action_openapi_candidate"},
+    {"path": "workpackets/ion_custom_gpt_action_openapi_ion_chatops_bridge.yaml", "category": "chatops_bridge_openapi_candidate"},
+    {"path": "workpackets/ion_gpt_sandbox_pass_4_rehearsal_report_and_next_plan.md", "category": "gpt_sandbox_rehearsal_report"},
+    {"path": "workpackets/ion_monolith_context_export_protocol_v_0_1.md", "category": "monolith_context_export_protocol"},
+    {"path": "workpackets/ion_self_knowledge_domain_architecture_canvas_v_0.md", "category": "self_knowledge_domain_architecture"}
+  ],
+  "non_claims": [
+    "This index does not accept any workpacket as current ION law.",
+    "This index does not prove that any packet has been implemented.",
+    "This index does not grant production, live execution, secrets, deployment, git push, or arbitrary shell authority."
+  ]
+}

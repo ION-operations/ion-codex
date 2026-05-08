@@ -1,0 +1,39 @@
+{
+  "$id": "ion.self_mount_graph_projection.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "authority": {
+      "type": "object"
+    },
+    "edges": {
+      "type": "array"
+    },
+    "nodes": {
+      "type": "array"
+    },
+    "production_authority": {
+      "const": false
+    },
+    "projection_id": {
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "ion.self_mount_graph_projection.v1"
+    },
+    "verdict": {
+      "enum": [
+        "VALID_SELF_MOUNT_GRAPH_PROJECTION",
+        "INVALID_SELF_MOUNT_GRAPH_PROJECTION"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "projection_id",
+    "nodes",
+    "edges",
+    "authority",
+    "verdict"
+  ],
+  "type": "object"
+}

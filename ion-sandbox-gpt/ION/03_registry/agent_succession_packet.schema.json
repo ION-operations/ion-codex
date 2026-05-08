@@ -1,0 +1,47 @@
+{
+  "$id": "ion.agent_succession_packet.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "continuity": {
+      "type": "object"
+    },
+    "forbidden_claims": {
+      "type": "object"
+    },
+    "inherited_evidence": {
+      "type": "array"
+    },
+    "packet_id": {
+      "type": "string"
+    },
+    "predecessor": {
+      "type": "object"
+    },
+    "production_authority": {
+      "const": false
+    },
+    "schema_id": {
+      "const": "ion.agent_succession_packet.v1"
+    },
+    "successor": {
+      "type": "object"
+    },
+    "verdict": {
+      "enum": [
+        "VALID_AGENT_SUCCESSION_PACKET",
+        "INVALID_AGENT_SUCCESSION_PACKET"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "packet_id",
+    "predecessor",
+    "successor",
+    "continuity",
+    "inherited_evidence",
+    "forbidden_claims",
+    "verdict"
+  ],
+  "type": "object"
+}

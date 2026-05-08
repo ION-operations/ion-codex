@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.visual_closure_graph_projection.v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "projection_id",
+    "projection_verdict",
+    "nodes",
+    "edges",
+    "global_graph_canon_authorized",
+    "production_authority"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.visual_closure_graph_projection.v1"
+    },
+    "version": {
+      "const": "V55_VISUAL_CLOSURE_GRAPH_PROJECTION"
+    },
+    "projection_id": {
+      "type": "string"
+    },
+    "projection_verdict": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array"
+    },
+    "edges": {
+      "type": "array"
+    },
+    "global_graph_canon_authorized": {
+      "const": false
+    },
+    "production_authority": {
+      "const": false
+    }
+  }
+}

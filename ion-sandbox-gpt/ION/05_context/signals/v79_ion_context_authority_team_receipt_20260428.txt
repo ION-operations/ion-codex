@@ -1,0 +1,17 @@
+ION V79 receipt — ION Context Authority Team installed.
+
+Core invariant:
+Every ION agent receives a unique, high-detail, role-evolving context package compiled for its mission and authority ceiling; path lists and stale mini/capsule onboarding are nonconformant.
+
+New authority surfaces:
+- ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md
+- ION/03_registry/ion_context_authority_team_registry.yaml
+- ION/07_templates/context/AGENT_CONTEXT_PACKAGE.md
+- ION/04_packages/kernel/ion_context_authority_team_audit.py
+
+Specialists:
+- IONOLOGIST
+- CONTEXT_CARTOGRAPHER
+- RUNTIME_CARTOGRAPHER
+- CANON_LIBRARIAN
+- TEMPLATE_CURATOR

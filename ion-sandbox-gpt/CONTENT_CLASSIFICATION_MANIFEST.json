@@ -1,0 +1,59 @@
+{
+  "classification_counts": {
+    "companion_archive_or_nested_package": 3,
+    "companion_codex_run_evidence": 27,
+    "companion_execution_cycle_evidence": 2023,
+    "companion_external_mcp_runtime_evidence": 59,
+    "companion_large_generated_manifest": 7,
+    "exclude_cache_or_repo_internal": 6419,
+    "exclude_generated_package_metadata": 4,
+    "hot_operational": 3539
+  },
+  "companion_tree_stats_before_zip": {
+    "bytes": 72246947,
+    "file_count": 2148
+  },
+  "generated_at": "2026-05-07T02:01:34Z",
+  "main_tree_stats_before_validation": {
+    "bytes": 15291783,
+    "file_count": 3653
+  },
+  "overlay_records": [
+    {
+      "after_sha256": "dba14b5a4eea579196eaae45982cfc6b8abae7f958f30c9d865f0b801ee4fdbb",
+      "before_sha256": "468bbf85e8fa0f38e0cf9347fedb615dd68f59b77cfbb8ed94cadae79ee0f891",
+      "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+      "source": "ION_SINGLE_CARRIER_SANDBOX_PATCHED.zip"
+    },
+    {
+      "after_sha256": "12a9f771164ec524ebb9c8f106dc5629b30cae227fe6fddb44b224d3bccbc6d2",
+      "before_sha256": "761797140d37a38fd1ca2a3c2da5239a4e2e08169d825af9f50c9f01c05bb72f",
+      "path": "ION/04_packages/kernel/ion_carrier_continue.py",
+      "source": "ION_SINGLE_CARRIER_SANDBOX_PATCHED.zip"
+    },
+    {
+      "after_sha256": "19637cdecb4160aadd6d60a0c6e83be95935529ce6ab2cb39a58115dd6a4123d",
+      "before_sha256": "3d38b76ce4f6e9eee6b9487571b546c3f0d7c8ae24fe2274c43986cbc23428c5",
+      "path": "ION/04_packages/kernel/ion_cycle_runner.py",
+      "source": "ION_SINGLE_CARRIER_SANDBOX_PATCHED.zip"
+    },
+    {
+      "after_sha256": "7d29964420ce8fed4cb37eddd4dbb0dd75378e4c9522005505190868efcdc42e",
+      "before_sha256": "516e39db4f44d5aaf85023b7fa94713f8d2fb018597f01e86c6dc9c82f0e8a28",
+      "path": "ION/04_packages/kernel/ion_carrier_task_return.py",
+      "source": "ION_SINGLE_CARRIER_SANDBOX_PATCHED.zip"
+    },
+    {
+      "after_sha256": "801c49469873ff463efc2e46e74db694eb81f2b1b10dc2cc8dde43e72a7d688d",
+      "before_sha256": "d244861a24393b65f6c66fd33e4d65e1c6858044864a531ef369fa02795e93d0",
+      "path": "ION/07_templates/carriers/CHATGPT_BROWSER_CONNECTOR_SESSION_PACKET.md",
+      "source": "ION_SINGLE_CARRIER_SANDBOX_PATCHED.zip"
+    }
+  ],
+  "policy": {
+    "companion_*": "preserved in forensic companion, not hot authority by default",
+    "exclude_*": "excluded as cache/generated/repo-internal residue",
+    "hot_operational": "included in main package"
+  },
+  "schema_id": "ion.full_gpt_sandbox_package.content_classification_manifest.v1"
+}

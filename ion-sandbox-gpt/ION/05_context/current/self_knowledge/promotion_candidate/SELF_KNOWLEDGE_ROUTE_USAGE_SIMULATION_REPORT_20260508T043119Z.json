@@ -1,0 +1,273 @@
+{
+  "acceptance_criterion_7": {
+    "criterion": "at least one Codex/local workpacket uses the self-knowledge route",
+    "evidence": "sandbox-local route usage simulation exercised every candidate route; external Codex not claimed",
+    "status": "ready_candidate"
+  },
+  "accepted": true,
+  "cases": [
+    {
+      "accepted": true,
+      "answer_draft": "Route: route.ion_identity_answer\nLoaded domains: ION Identity Domain, ION Canon and Authority Domain\nRequired guards: do_not_reduce_to_prompt_or_agent; output_is_not_state\nOutput must include: core law; state boundary; what ION is not\nOutput forbids: mythologizing; claiming accepted state from explanation\nDomain support: Answer what ION is without overcompression or mythology. Rank sources and separate current law, current operational state, product projection, witness, donor, stale, and candidate material. Do not reduce ION to a prompt, agent persona, repo, or memory store. Do not let fluent explanation become accepted state without proof and receipt. Do not promote historical witness or donor material into live authority. Do not treat this candidate packet as canon before acceptance.\nAnswer draft: AI output is not state. ION is a continuity substrate for AI-mediated work that treats model output as candidate state transitions until context, template law, proof, Steward/human decision, receipt, and export/inheritance make a transition lawful. It must also state what ION is not: not a model, prompt trick, memory dump, roleplay persona, daemon claim, or whatever a carrier says.\nNon-claim: this is a sandbox route-usage simulation and not accepted registry law.",
+      "anti_drift_required": [
+        "do_not_reduce_to_prompt_or_agent",
+        "output_is_not_state"
+      ],
+      "case_id": "identity_minimal_continue",
+      "expected_route_id": "route.ion_identity_answer",
+      "findings": [],
+      "loaded_domains": [
+        "ion_identity",
+        "ion_canon_authority"
+      ],
+      "matched_route_id": "route.ion_identity_answer",
+      "output_contract": {
+        "forbid": [
+          "mythologizing",
+          "claiming accepted state from explanation"
+        ],
+        "include": [
+          "core law",
+          "state boundary",
+          "what ION is not"
+        ]
+      },
+      "query": "What is ION?"
+    },
+    {
+      "accepted": true,
+      "answer_draft": "Route: route.ion_authority_classification\nLoaded domains: ION Canon and Authority Domain, ION Stale, Donor, and Historical Domain\nRequired guards: no_witness_to_law_promotion; no_donor_as_active_authority\nOutput must include: source ranking; state class; non-claims\nOutput forbids: promotion without receipt\nDomain support: Rank sources and separate current law, current operational state, product projection, witness, donor, stale, and candidate material. Civilize historical/donor material so it can inform without impersonating current authority. Do not promote historical witness or donor material into live authority. Do not treat this candidate packet as canon before acceptance. Historical witness may explain lineage but cannot settle active law. Do not erase mature organs during cleanup or prune passes.\nAnswer draft: Answer by source ranking: current root authority, active operational packet, receipts/tests/manifests, candidate current context, then witness/donor/deprecated material. A donor archive may inform recovery, but donor material is not active authority and must not become law without settlement.\nNon-claim: this is a sandbox route-usage simulation and not accepted registry law.",
+      "anti_drift_required": [
+        "no_witness_to_law_promotion",
+        "no_donor_as_active_authority"
+      ],
+      "case_id": "authority_donor_boundary",
+      "expected_route_id": "route.ion_authority_classification",
+      "findings": [],
+      "loaded_domains": [
+        "ion_canon_authority",
+        "ion_stale_donor_historical"
+      ],
+      "matched_route_id": "route.ion_authority_classification",
+      "output_contract": {
+        "forbid": [
+          "promotion without receipt"
+        ],
+        "include": [
+          "source ranking",
+          "state class",
+          "non-claims"
+        ]
+      },
+      "query": "Which source is authoritative if a donor archive conflicts with current law?"
+    },
+    {
+      "accepted": true,
+      "answer_draft": "Route: route.full_local_codex_api_ion\nLoaded domains: ION Full Multi-Agent Runtime Domain, ION Carrier Embodiment Domain, ION Agent and Role Domain, ION Context System Domain\nRequired guards: single_carrier_is_fallback_not_base; codex_cli_is_api_like_backend_for_isolated_invocations\nOutput must include: primary architecture; sandbox fallback distinction; context isolation rationale; settlement law\nOutput forbids: describing full local as helper mode; implying single-carrier is intended center\nDomain support: Preserve the primary API/local/Codex-style isolated invocation model while distinguishing sandbox fallback. Map host bodies to the same ION workflow: API, Codex CLI, ChatGPT sandbox, MCP/Gateway, browser, local workers. Explain roles, agents, carriers, host bodies, semantic identities, authority ceilings, and return contracts without collapsing them. Explain context packages, agent context systems, context graph, context proof, source authority, route-deeper behavior, and inheritance. Single-carrier sequential mode is a host-limited fallback, not the intended center. Codex CLI full local ION is an API-like backend for isolated invocations, not a helper for GPT package. Tool availability is not authority to mutate external state. GPT sandbox can edit/export the sandbox copy, not patch production/live repo. Do not treat boot files or MINI/CAPSULE as sufficient live context. Do not claim separate agents spawned unless an authorized adapter actually ran. A path list is not loaded context. A context package without a template is informed improvisation.\nAnswer draft: Full local/API/Codex-style ION uses isolated invocations and fan-out/fan-in settlement. Codex CLI is treated as an API-like backend for isolated invocations. Single-carrier sequential mode is a host-limited fallback, not the intended center, and branch returns still require settlement before landing.\nNon-claim: this is a sandbox route-usage simulation and not accepted registry law.",
+      "anti_drift_required": [
+        "single_carrier_is_fallback_not_base",
+        "codex_cli_is_api_like_backend_for_isolated_invocations"
+      ],
+      "case_id": "full_local_codex_api",
+      "expected_route_id": "route.full_local_codex_api_ion",
+      "findings": [],
+      "loaded_domains": [
+        "ion_full_multi_agent_runtime",
+        "ion_carrier_embodiment",
+        "ion_agent_role",
+        "ion_context_system"
+      ],
+      "matched_route_id": "route.full_local_codex_api_ion",
+      "output_contract": {
+        "forbid": [
+          "describing full local as helper mode",
+          "implying single-carrier is intended center"
+        ],
+        "include": [
+          "primary architecture",
+          "sandbox fallback distinction",
+          "context isolation rationale",
+          "settlement law"
+        ]
+      },
+      "query": "Explain full local ION with Codex CLI and isolated invocations."
+    },
+    {
+      "accepted": true,
+      "answer_draft": "Route: route.gpt_sandbox_adaptation\nLoaded domains: ION Carrier Embodiment Domain, ION Product Package Domain, ION State, Steward, and Receipt Domain\nRequired guards: do_not_call_gpt_reduced_ion; no_external_spawn_claim\nOutput must include: capability limits; sequential role phase law; candidate/export boundary\nOutput forbids: production authority claim; external agent spawn claim\nDomain support: Map host bodies to the same ION workflow: API, Codex CLI, ChatGPT sandbox, MCP/Gateway, browser, local workers. Explain product packaging without reducing ION: GPT package, local full root, portable package loop, starter data, package audits. Explain how output becomes or fails to become state through proof, Steward/human decision, receipts, and inheritance. Tool availability is not authority to mutate external state. GPT sandbox can edit/export the sandbox copy, not patch production/live repo. Do not call GPT package reduced ION; it is full ION adapted to sandbox constraints. Package-ready does not mean production authority or live external execution authority. AI output is candidate state transition until accepted. No proof \u2192 no landing. No Steward/human decision \u2192 no state. No receipt/export \u2192 no inheritance.\nAnswer draft: The Custom GPT / ChatGPT sandbox body is full ION adapted to sandbox constraints, not reduced ION. It may emulate role sequence in one carrier, preserve candidate/export boundary, and must make no external spawn claim, production authority claim, or registry landing claim.\nNon-claim: this is a sandbox route-usage simulation and not accepted registry law.",
+      "anti_drift_required": [
+        "do_not_call_gpt_reduced_ion",
+        "no_external_spawn_claim"
+      ],
+      "case_id": "gpt_sandbox_adaptation",
+      "expected_route_id": "route.gpt_sandbox_adaptation",
+      "findings": [],
+      "loaded_domains": [
+        "ion_carrier_embodiment",
+        "ion_product_package",
+        "ion_state_steward_receipt"
+      ],
+      "matched_route_id": "route.gpt_sandbox_adaptation",
+      "output_contract": {
+        "forbid": [
+          "production authority claim",
+          "external agent spawn claim"
+        ],
+        "include": [
+          "capability limits",
+          "sequential role phase law",
+          "candidate/export boundary"
+        ]
+      },
+      "query": "How does ChatGPT ION work in the GPT sandbox body?"
+    },
+    {
+      "accepted": true,
+      "answer_draft": "Route: route.context_template_receipt\nLoaded domains: ION Context System Domain, ION Template Law Domain, ION State, Steward, and Receipt Domain, ION Workpacket Domain\nRequired guards: path_list_is_not_context; template_shape_not_format_only\nOutput must include: context; template; proof; receipt; non-claims\nOutput forbids: raw output as state\nDomain support: Explain context packages, agent context systems, context graph, context proof, source authority, route-deeper behavior, and inheritance. Explain templates as ION's operating grammar for typed, checkable work. Explain how output becomes or fails to become state through proof, Steward/human decision, receipts, and inheritance. Explain bounded work packets as executable continuity objects with allowed paths, validations, receipts, and return contracts. A path list is not loaded context. A context package without a template is informed improvisation. Do not mutate template law under a status/report packet. Template action proof is required before integration. AI output is candidate state transition until accepted. No proof \u2192 no landing. No Steward/human decision \u2192 no state. No receipt/export \u2192 no inheritance. Do not widen allowed paths silently. A workpacket return is proposal/evidence until integrated.\nAnswer draft: A bounded action loads a context package, follows template law, supplies proof, and emits a receipt only after the relevant acceptance boundary. A work packet scopes the act. Raw output is not state and cannot inherit as law without proof and receipt.\nNon-claim: this is a sandbox route-usage simulation and not accepted registry law.",
+      "anti_drift_required": [
+        "path_list_is_not_context",
+        "template_shape_not_format_only"
+      ],
+      "case_id": "context_template_receipt",
+      "expected_route_id": "route.context_template_receipt",
+      "findings": [],
+      "loaded_domains": [
+        "ion_context_system",
+        "ion_template_law",
+        "ion_state_steward_receipt",
+        "ion_workpacket"
+      ],
+      "matched_route_id": "route.context_template_receipt",
+      "output_contract": {
+        "forbid": [
+          "raw output as state"
+        ],
+        "include": [
+          "context",
+          "template",
+          "proof",
+          "receipt",
+          "non-claims"
+        ]
+      },
+      "query": "How do context package, template law, proof gate, work packet, and receipt relate?"
+    },
+    {
+      "accepted": true,
+      "answer_draft": "Route: route.self_knowledge_implementation\nLoaded domains: ION Identity Domain, ION Canon and Authority Domain, ION Architecture Domain, ION Operations and Build Domain\nRequired guards: activation_not_new_architecture; check_existing_organs_first\nOutput must include: inventory proof; candidate files; validation; next packet\nOutput forbids: inventing replacement architecture; broad registry mutation without acceptance\nDomain support: Answer what ION is without overcompression or mythology. Rank sources and separate current law, current operational state, product projection, witness, donor, stale, and candidate material. Explain structural ION: context graph, domains, templates, roles, packets, proof gates, receipts, settlement, route maps, runtime bodies. Route builders through local/GPT/package/runtime tasks correctly with mount, test, release, and cockpit visibility gates. Do not reduce ION to a prompt, agent persona, repo, or memory store. Do not let fluent explanation become accepted state without proof and receipt. Do not promote historical witness or donor material into live authority. Do not treat this candidate packet as canon before acceptance. A domain is a governed graph region, not a folder/topic bucket. Templates govern action shape; context packages govern the bounded working world. Build/package readiness is bounded by the validated lane and current authority ceiling. Do not claim external MCP/GitHub/Codex execution unless tool receipts prove it.\nAnswer draft: Continue as activation, not new architecture: use inventory proof, candidate files, validation, receipts, and next packets. Check existing organs first and avoid inventing a replacement architecture or broad registry mutation without acceptance.\nNon-claim: this is a sandbox route-usage simulation and not accepted registry law.",
+      "anti_drift_required": [
+        "activation_not_new_architecture",
+        "check_existing_organs_first"
+      ],
+      "case_id": "self_knowledge_implementation",
+      "expected_route_id": "route.self_knowledge_implementation",
+      "findings": [],
+      "loaded_domains": [
+        "ion_identity",
+        "ion_canon_authority",
+        "ion_architecture",
+        "ion_operations_build"
+      ],
+      "matched_route_id": "route.self_knowledge_implementation",
+      "output_contract": {
+        "forbid": [
+          "inventing replacement architecture",
+          "broad registry mutation without acceptance"
+        ],
+        "include": [
+          "inventory proof",
+          "candidate files",
+          "validation",
+          "next packet"
+        ]
+      },
+      "query": "Continue building ION about ION self knowledge domain state and route registry."
+    },
+    {
+      "accepted": true,
+      "answer_draft": "Route: route.ion_recovery_anti_regression\nLoaded domains: ION Recovery and Anti-Regression Domain, ION Canon and Authority Domain, ION Stale, Donor, and Historical Domain\nRequired guards: do_not_reconstruct_from_fragments; no_stale_resurfacing; no_hallucinated_replacement\nOutput must include: known failure pattern; authority ranking; containment or recovery action; receipt or next packet\nOutput forbids: broad consolidation without proof; erasing mature ION organs during cleanup\nDomain support: Prevent repeated recovery loops, stale resurfacing, package bloat, and hallucinated replacement architectures. Rank sources and separate current law, current operational state, product projection, witness, donor, stale, and candidate material. Civilize historical/donor material so it can inform without impersonating current authority. Do not treat narrow test pass as full-system readiness. Recovery should route and contain, not broadly consolidate by vibes. Do not promote historical witness or donor material into live authority. Do not treat this candidate packet as canon before acceptance. Historical witness may explain lineage but cannot settle active law. Do not erase mature organs during cleanup or prune passes.\nAnswer draft: Start from a known failure pattern, then apply authority ranking before any recovery action. Containment should stop stale resurfacing and hallucinated replacement, preserve mature ION organs, and leave a receipt or next packet that future carriers can inherit.\nNon-claim: this is a sandbox route-usage simulation and not accepted registry law.",
+      "anti_drift_required": [
+        "do_not_reconstruct_from_fragments",
+        "no_stale_resurfacing",
+        "no_hallucinated_replacement"
+      ],
+      "case_id": "recovery_anti_regression",
+      "expected_route_id": "route.ion_recovery_anti_regression",
+      "findings": [],
+      "loaded_domains": [
+        "ion_recovery_anti_regression",
+        "ion_canon_authority",
+        "ion_stale_donor_historical"
+      ],
+      "matched_route_id": "route.ion_recovery_anti_regression",
+      "output_contract": {
+        "forbid": [
+          "broad consolidation without proof",
+          "erasing mature ION organs during cleanup"
+        ],
+        "include": [
+          "known failure pattern",
+          "authority ranking",
+          "containment or recovery action",
+          "receipt or next packet"
+        ]
+      },
+      "query": "How should ION prevent repeated failure, stale resurfacing, and hallucinated replacement during recovery?"
+    }
+  ],
+  "coverage": {
+    "case_count": 7,
+    "cases_accepted": 7,
+    "loaded_domain_count": 14,
+    "loaded_domain_union": [
+      "ion_agent_role",
+      "ion_architecture",
+      "ion_canon_authority",
+      "ion_carrier_embodiment",
+      "ion_context_system",
+      "ion_full_multi_agent_runtime",
+      "ion_identity",
+      "ion_operations_build",
+      "ion_product_package",
+      "ion_recovery_anti_regression",
+      "ion_stale_donor_historical",
+      "ion_state_steward_receipt",
+      "ion_template_law",
+      "ion_workpacket"
+    ],
+    "missing_route_coverage": [],
+    "route_count": 7,
+    "routes_exercised": [
+      "route.context_template_receipt",
+      "route.full_local_codex_api_ion",
+      "route.gpt_sandbox_adaptation",
+      "route.ion_authority_classification",
+      "route.ion_identity_answer",
+      "route.ion_recovery_anti_regression",
+      "route.self_knowledge_implementation"
+    ]
+  },
+  "findings": [],
+  "generated_at": "2026-05-08T04:38:43+00:00",
+  "inputs": {
+    "domain_packets_dir": "ION/05_context/current/self_knowledge/domains",
+    "domain_registry": "ION/05_context/current/self_knowledge/candidate_registries/domain_registry.candidate.yaml",
+    "domain_registry_sha256": "31f00d6bdb0a518bdb672a0234069b4099c410db172789a48f7bcd9d6f402a01",
+    "mount_packet": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+    "mount_packet_sha256": "b6731f083c1ebd0a4d947a39aadc58ea58ad6535792a58e48468caeec93ba404",
+    "route_registry": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+    "route_registry_sha256": "c58757478bb92176e4227751d6d3d99a86c373939c618cc238a52b8e4de7bfb1"
+  },
+  "live_execution_authority": false,
+  "non_claims": [
+    "This simulation is not external Codex execution.",
+    "This simulation does not accept or land ION/03_registry/self_knowledge.",
+    "This simulation does not prove production readiness.",
+    "The generated answer drafts are route-shape evidence, not accepted canon."
+  ],
+  "production_authority": false,
+  "root": "/mnt/data/ion_selfknow_continuation_20260508T042358Z/full/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE",
+  "schema_id": "ion.self_knowledge.route_usage_simulation_report.v0_2",
+  "simulation_mode": "sandbox_local_route_usage_not_external_codex",
+  "status": "accepted_candidate_evidence"
+}

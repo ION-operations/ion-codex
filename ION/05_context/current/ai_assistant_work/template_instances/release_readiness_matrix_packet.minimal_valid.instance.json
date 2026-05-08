@@ -1,0 +1,79 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "release_readiness_matrix_packet.minimal_valid.v0_1",
+  "template_id": "release_readiness_matrix_packet",
+  "case_type": "minimal_valid",
+  "status": "candidate_template_instance_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/release_readiness_matrix_packet.template_spec.yaml",
+  "primary_agent": "RELEASE_EVIDENCE_CURATOR",
+  "domain_id": "release_evidence_domain",
+  "objective": "Exercise the release_readiness_matrix_packet candidate template with a minimal valid instance.",
+  "sections": {
+    "RELEASE_SCOPE": "Candidate v1.4.2 package release containing assistant-work candidate artifacts only.",
+    "VERSION_AND_CHANGELOG": {
+      "version": "1.4.2-candidate",
+      "changelog_status": "draft_changelog_present"
+    },
+    "TEST_CI_MATRIX": [
+      {
+        "gate": "focused_ai_assistant_work_tests",
+        "status": "passed",
+        "proof_ref": "local-focused-test-receipt"
+      },
+      {
+        "gate": "full_suite",
+        "status": "not_run",
+        "proof_ref": "missing"
+      },
+      {
+        "gate": "package_export_hashes",
+        "status": "pending_current_packet",
+        "proof_ref": "export_manifest"
+      }
+    ],
+    "RISK_REGISTER": [
+      {
+        "risk": "candidate artifacts mistaken for accepted law",
+        "mitigation": "non-claims and candidate paths preserved"
+      },
+      {
+        "risk": "front-door product law not yet wired",
+        "mitigation": "promotion remains blocked on explicit acceptance"
+      }
+    ],
+    "ROLLBACK_PATH": "Discard candidate current-context package and resume from prior G9 continuity bundle.",
+    "OPEN_BLOCKERS": [
+      "explicit human/Steward acceptance absent",
+      "full suite not run"
+    ],
+    "RELEASE_DECISION": "requires_human_review",
+    "NON_CLAIMS": [
+      "This release matrix is a candidate readiness artifact, not accepted release approval.",
+      "This matrix is a readiness recommendation, not release approval.",
+      "No production release is authorized.",
+      "Focused tests do not prove full system readiness."
+    ],
+    "RECEIPT_TARGET": "ION/05_context/current/ai_assistant_work/receipts/"
+  },
+  "expected_validation": {
+    "should_pass": true,
+    "expected_failure_kinds": [],
+    "proves": [
+      "required section shape can be satisfied",
+      "candidate boundary can be preserved",
+      "settlement/proof/non-claim surfaces can be named"
+    ]
+  },
+  "non_claims": [
+    "This instance is candidate current-context test data, not accepted template law.",
+    "This instance does not execute external tools or mutate production state."
+  ]
+}

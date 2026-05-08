@@ -1,0 +1,369 @@
+{
+  "schema_id": "ion.domain_registry.v1",
+  "registry_status": "ACTIVE_BASE_OPERATING_DOMAINS",
+  "base_domains_active": true,
+  "project_domains_initialized": false,
+  "domains": [
+    {
+      "domain_id": "domain.persona_interface",
+      "display_name": "PERSONA_INTERFACE",
+      "domain_type": "base_operating_domain",
+      "purpose": "User-facing ingress and egress; translate ION internals into natural assistant behavior.",
+      "primary_roles": [
+        "PERSONA_INTERFACE"
+      ],
+      "secondary_roles": [
+        "RELAY"
+      ],
+      "default_templates": [
+        "first_run_intent_capture",
+        "persona_response_render",
+        "continuity_save_offer"
+      ],
+      "route_deeper": [
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography",
+        "domain.context_graph"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.user_intent",
+      "display_name": "USER_INTENT",
+      "domain_type": "base_operating_domain",
+      "purpose": "Capture, clarify, preserve, and route user intent without forcing the user to learn ION internals.",
+      "primary_roles": [
+        "RELAY",
+        "STEWARD"
+      ],
+      "secondary_roles": [
+        "PERSONA_INTERFACE",
+        "VIZIER"
+      ],
+      "default_templates": [
+        "intent_capture",
+        "work_packet_draft",
+        "clarification_request"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.project_workspace",
+        "domain.domain_cartography",
+        "domain.context_graph"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.project_workspace",
+      "display_name": "PROJECT_WORKSPACE",
+      "domain_type": "base_operating_domain",
+      "purpose": "Maintain active project/workspace understanding before and after project-specific ingestion.",
+      "primary_roles": [
+        "VIZIER",
+        "CONTEXT_CARTOGRAPHER"
+      ],
+      "secondary_roles": [
+        "STEWARD",
+        "SCRIBE"
+      ],
+      "default_templates": [
+        "project_overview",
+        "workspace_state_update",
+        "next_step_plan"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.domain_cartography",
+        "domain.context_graph"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.domain_cartography",
+      "display_name": "DOMAIN_CARTOGRAPHY",
+      "domain_type": "base_operating_domain",
+      "purpose": "Map work into domains, detect boundaries, and propose fission when context manageability fails.",
+      "primary_roles": [
+        "CONTEXT_CARTOGRAPHER",
+        "IONOLOGIST"
+      ],
+      "secondary_roles": [
+        "STEWARD",
+        "TEMPLATE_CURATOR"
+      ],
+      "default_templates": [
+        "domain_map",
+        "domain_health_review",
+        "domain_fission_candidate"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.context_graph"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.context_graph",
+      "display_name": "CONTEXT_GRAPH",
+      "domain_type": "base_operating_domain",
+      "purpose": "Maintain context nodes, edges, authority status, lineage, and route-deeper relationships.",
+      "primary_roles": [
+        "CONTEXT_CARTOGRAPHER",
+        "CANON_LIBRARIAN"
+      ],
+      "secondary_roles": [
+        "IONOLOGIST",
+        "STEWARD"
+      ],
+      "default_templates": [
+        "context_node_record",
+        "context_package_build",
+        "context_graph_update"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.template_governance",
+      "display_name": "TEMPLATE_GOVERNANCE",
+      "domain_type": "base_operating_domain",
+      "purpose": "Select, apply, evolve, or flag gaps in templates that govern state-bearing work.",
+      "primary_roles": [
+        "TEMPLATE_CURATOR",
+        "STEWARD"
+      ],
+      "secondary_roles": [
+        "NEMESIS"
+      ],
+      "default_templates": [
+        "template_selection",
+        "template_gap",
+        "template_evolution"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.build_implementation",
+      "display_name": "BUILD_IMPLEMENTATION",
+      "domain_type": "base_operating_domain",
+      "purpose": "Plan and propose implementation work, patches, artifacts, and build steps.",
+      "primary_roles": [
+        "MASON"
+      ],
+      "secondary_roles": [
+        "VIZIER",
+        "NEMESIS"
+      ],
+      "default_templates": [
+        "build_plan",
+        "patch_proposal",
+        "implementation_report"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.test_verification",
+      "display_name": "TEST_VERIFICATION",
+      "domain_type": "base_operating_domain",
+      "purpose": "Define checks, validations, test plans, proof requirements, and verification results.",
+      "primary_roles": [
+        "MASON",
+        "NEMESIS"
+      ],
+      "secondary_roles": [
+        "STEWARD"
+      ],
+      "default_templates": [
+        "test_plan",
+        "validation_report",
+        "proof_check"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.risk_and_failure_review",
+      "display_name": "RISK_AND_FAILURE_REVIEW",
+      "domain_type": "base_operating_domain",
+      "purpose": "Detect drift, stale context, contradictions, failure mechanisms, and unsafe authority expansion.",
+      "primary_roles": [
+        "NEMESIS",
+        "VICE"
+      ],
+      "secondary_roles": [
+        "STEWARD",
+        "CANON_LIBRARIAN"
+      ],
+      "default_templates": [
+        "failure_mechanism_analysis",
+        "risk_review",
+        "contradiction_audit"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.documentation_and_scribe",
+      "display_name": "DOCUMENTATION_AND_SCRIBE",
+      "domain_type": "base_operating_domain",
+      "purpose": "Capture decisions, user-facing summaries, project notes, and continuity documents.",
+      "primary_roles": [
+        "SCRIBE"
+      ],
+      "secondary_roles": [
+        "PERSONA_INTERFACE",
+        "STEWARD"
+      ],
+      "default_templates": [
+        "summary_capture",
+        "decision_note",
+        "continuity_note"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.receipts_and_state",
+      "display_name": "RECEIPTS_AND_STATE",
+      "domain_type": "base_operating_domain",
+      "purpose": "Maintain accepted state, receipts, decision ledger, exports, and continuity inheritance.",
+      "primary_roles": [
+        "STEWARD",
+        "SCRIBE"
+      ],
+      "secondary_roles": [
+        "CANON_LIBRARIAN"
+      ],
+      "default_templates": [
+        "receipt_append",
+        "state_update_proposal",
+        "continuity_export"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.project_ingestion",
+      "display_name": "PROJECT_INGESTION",
+      "domain_type": "base_operating_domain",
+      "purpose": "Convert uploaded projects, files, or workflows into governed domains, context nodes, and starter packets.",
+      "primary_roles": [
+        "CONTEXT_CARTOGRAPHER",
+        "TEMPLATE_CURATOR",
+        "STEWARD"
+      ],
+      "secondary_roles": [
+        "NEMESIS",
+        "MASON"
+      ],
+      "default_templates": [
+        "project_ingestion",
+        "structural_cartography",
+        "domain_partition",
+        "risk_classification"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    },
+    {
+      "domain_id": "domain.self_maintenance",
+      "display_name": "SELF_MAINTENANCE",
+      "domain_type": "base_operating_domain",
+      "purpose": "Allow ION to inspect, repair, and improve its own state package without confusing generated proposals with accepted state.",
+      "primary_roles": [
+        "IONOLOGIST",
+        "CANON_LIBRARIAN",
+        "STEWARD"
+      ],
+      "secondary_roles": [
+        "NEMESIS",
+        "SCRIBE"
+      ],
+      "default_templates": [
+        "self_audit",
+        "state_repair_proposal",
+        "schema_migration_proposal"
+      ],
+      "route_deeper": [
+        "domain.persona_interface",
+        "domain.user_intent",
+        "domain.project_workspace",
+        "domain.domain_cartography"
+      ],
+      "authority_ceiling": "BASE_OPERATING_DOMAIN_NO_EXTERNAL_EXECUTION",
+      "expose_to_user_by_default": false,
+      "status": "ACTIVE_BASE"
+    }
+  ],
+  "project_domains": []
+}

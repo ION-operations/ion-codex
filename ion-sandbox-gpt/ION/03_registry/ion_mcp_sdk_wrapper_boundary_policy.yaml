@@ -1,0 +1,32 @@
+version: V68_OFFICIAL_MCP_SDK_WRAPPER_OR_HOSTED_HTTP_ALPHA_BOUNDARY
+decision: KEEP_NO_DEPENDENCY_LOCAL_BRIDGE_CANONICAL_AND_WRAP_SDK_OPTIONALLY
+local_bridge:
+  canonical_for_founder_local: true
+  official_sdk_required: false
+official_mcp_sdk:
+  allowed_as_optional_wrapper: true
+  allowed_as_kernel_authority: false
+  allowed_as_scheduler_authority: false
+  allowed_as_receipt_authority: false
+hosted_http_alpha:
+  contract_preview_only: true
+  public_endpoint_certified: false
+  hosted_cloud_certified: false
+  oauth_certified: false
+  tls_required_before_public_exposure: true
+  reverse_proxy_required_before_public_exposure: true
+allowed_resolutions:
+  - READ_ONLY
+  - DRY_RUN
+  - APPROVAL_REQUIRED
+  - REFUSED
+forbidden_resolutions:
+  - LIVE_EXECUTED
+forbidden_capabilities:
+  - live_execution
+  - shell_execution
+  - provider_dispatch
+  - browser_mutation
+  - credential_access
+  - direct_governed_write
+  - daemon_loop_activation

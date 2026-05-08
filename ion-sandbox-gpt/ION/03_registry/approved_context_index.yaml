@@ -1,0 +1,49 @@
+registry_id: approved_context_index
+status: current_phase_seed
+created: '2026-04-24'
+entries:
+- entry_id: approved-context-doctrine-evolution-protocol
+  file_path: ION/02_architecture/DOCTRINE_EVOLUTION_PROTOCOL.md
+  graph_node_id: protocol.doctrine_evolution
+  context_scope:
+  - doctrine_evolution
+  approved_for:
+  - doctrine_read
+  - template_execution
+  - implementation_mapping
+  approved_context_status: PROVISIONAL_CONTEXT
+  authority_status: A3_OPERATIONAL_PROPOSAL
+  operational_status: ACTIVE
+  epistemic_status: TESTED
+  retrieval_zone: L1_ROOT_LAW
+  owner_agent_family: Steward
+  reviewer_agent_family: Nemesis
+  approval_basis: V11 doctrine governance test and receipt
+  approval_receipt: doctrine-evolution-governance-creation-20260424
+  stale_after: null
+  contradictions: []
+  notes:
+  - Provisional governance surface; not final ratified law.
+- entry_id: approved-context-context-graph-substrate-registry
+  file_path: ION/03_registry/context_graph_substrate_registry.yaml
+  graph_node_id: registry.context_graph_substrate
+  context_scope:
+  - context_graph_substrate
+  - evented_template_file_graph
+  approved_for:
+  - doctrine_read
+  - implementation_mapping
+  - template_execution
+  approved_context_status: PROVISIONAL_CONTEXT
+  authority_status: A3_OPERATIONAL_PROPOSAL
+  operational_status: ACTIVE
+  epistemic_status: RUNTIME_PROOF_SURFACE
+  retrieval_zone: L3_MISSION_CANON_IDENTITY
+  owner_agent_family: Steward
+  reviewer_agent_family: Nemesis
+  approval_basis: V10 evented graph runtime chain
+  approval_receipt: V10 graph commit receipts
+  stale_after: null
+  contradictions: []
+  notes:
+  - Tracks restored root invariant and evented graph candidates.

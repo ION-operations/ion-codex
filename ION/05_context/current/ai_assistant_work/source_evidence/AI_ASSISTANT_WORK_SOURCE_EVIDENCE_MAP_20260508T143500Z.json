@@ -1,0 +1,72 @@
+{
+  "schema": "ion.ai_assistant_work.external_evidence_map.v0_1",
+  "status": "research_context_not_accepted_canon",
+  "created_at": "2026-05-08T14:35:00Z",
+  "purpose": "External evidence that AI-assisted developer work is now a broad IDE/chat/CLI/cloud practice requiring explicit work domains.",
+  "evidence": [
+    {
+      "source_ref": "Stack Overflow Developer Survey 2025 AI",
+      "source_id": "turn561483search0",
+      "claims": [
+        "84% of respondents are using or planning to use AI tools in development.",
+        "51% of professional developers report daily AI-tool use."
+      ],
+      "implication_for_ion": "AI-assisted development is a mass work practice, not an edge case; ION needs a first-class assistant-work domain taxonomy."
+    },
+    {
+      "source_ref": "GitHub Copilot cloud agent docs",
+      "source_id": "turn979971search0",
+      "claims": [
+        "GitHub distinguishes synchronous IDE assistant work from cloud-agent work.",
+        "The docs name a tracking gap in local IDE assistant sessions unless decisions are committed."
+      ],
+      "implication_for_ion": "ION should model local IDE sessions, cloud agents, commits/PRs, and lost-decision risk as separate state surfaces."
+    },
+    {
+      "source_ref": "VS Code Copilot agent mode blog",
+      "source_id": "turn979971search12",
+      "claims": [
+        "Agent mode can analyze a codebase, read files, propose edits, run commands/tests, monitor output, and iterate on errors."
+      ],
+      "implication_for_ion": "IDE-agent work spans codebase understanding, implementation, terminal/test loops, diagnostics, and validation domains."
+    },
+    {
+      "source_ref": "Windsurf Cascade docs",
+      "source_id": "turn979971search2",
+      "claims": [
+        "Cascade is described with Code/Chat modes, tool calling, checkpoints, awareness, and linter integration."
+      ],
+      "implication_for_ion": "Modern IDE assistants have multiple modes and state surfaces; route and checkpoint protocols matter."
+    },
+    {
+      "source_ref": "Claude Code overview/product docs",
+      "source_id": "turn979971search3,turn979971search15",
+      "claims": [
+        "Claude Code is described as an assistant/system that understands a codebase, works across files/tools, runs tests, and delivers committed code."
+      ],
+      "implication_for_ion": "Assistant domains must include multi-file work, tool use, test proof, and commit/receipt boundaries."
+    },
+    {
+      "source_ref": "OpenAI Codex docs",
+      "source_id": "turn424188search2,turn424188search8,turn424188search10",
+      "claims": [
+        "Codex is described as a coding agent that reads, edits, and runs code.",
+        "Codex cloud can work in background/parallel in its own environment; the IDE extension supports side-by-side IDE use and cloud delegation."
+      ],
+      "implication_for_ion": "ION should distinguish side-by-side IDE, local CLI, cloud/background, and parallel execution embodiments."
+    },
+    {
+      "source_ref": "OpenAI Codex Agent Skills docs",
+      "source_id": "turn424188search7",
+      "claims": [
+        "Agent skills package instructions, resources, and optional scripts for task-specific workflows."
+      ],
+      "implication_for_ion": "ION should bind skill-like packages to domains, templates, protocols, and specialist agents rather than treating them as isolated prompts."
+    }
+  ],
+  "non_claims": [
+    "This evidence map is not a full market survey.",
+    "The source list is a starting research context, not accepted ION canon.",
+    "External product claims are used only to shape the taxonomy, not to endorse any product."
+  ]
+}

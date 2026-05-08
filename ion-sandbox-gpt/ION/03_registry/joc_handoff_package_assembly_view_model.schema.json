@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JOC Handoff Package Assembly Plan View Model",
+  "type": "object",
+  "required": ["version", "mission_id", "package_plan_verdict", "authority_scope", "execution_mode", "package_plan_id", "package_items", "checksum_preview_records"],
+  "properties": {
+    "version": {"const": "V69_HANDOFF_PACKAGE_ASSEMBLY_PLAN_AND_CHECKSUM_PREVIEW"},
+    "mission_id": {"type": "string"},
+    "package_plan_verdict": {"type": "string"},
+    "authority_scope": {"const": "HANDOFF_PACKAGE_ASSEMBLY_PLAN_PREVIEW_RECEIPT_ONLY"},
+    "execution_mode": {"enum": ["PACKAGE_ASSEMBLY_PLAN_PREVIEW_ONLY", "VIEW_ONLY_BLOCKED"]},
+    "package_plan_id": {"type": "string"},
+    "package_items": {"type": "array"},
+    "checksum_preview_records": {"type": "array"},
+    "production_authority": {"const": false},
+    "zip_creation_authorized": {"const": false},
+    "file_system_write_authorized": {"const": false}
+  }
+}

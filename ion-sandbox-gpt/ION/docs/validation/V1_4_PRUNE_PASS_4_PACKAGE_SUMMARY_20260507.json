@@ -1,0 +1,16 @@
+{
+  "created_at_utc": "2026-05-07T22:56:02Z",
+  "package_name": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_4_MANIFEST_REPAIRED_CANDIDATE_20260507.zip",
+  "source_package": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE_20260507.zip",
+  "patch_id": "v1_4_prune_pass_4_manifest_repaired_candidate_20260507",
+  "validation_reports": [
+    "ION/docs/validation/V1_4_PRUNE_PASS_4_MANIFEST_REPAIR_RECEIPT_20260507.json",
+    "ION/docs/validation/V1_4_PRUNE_PASS_4_VALIDATION_REPORT_20260507.json"
+  ],
+  "status": "candidate_zip_created_after_bounded_custom_gpt_gates_passed",
+  "non_claims": [
+    "not_steward_accepted_state",
+    "not_production_certified",
+    "not_full_dev_root_cursor_gate_certified"
+  ]
+}

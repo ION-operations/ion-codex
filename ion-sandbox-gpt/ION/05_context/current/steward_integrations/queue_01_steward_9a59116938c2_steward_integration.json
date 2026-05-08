@@ -1,0 +1,39 @@
+{
+  "accepted": true,
+  "created_at": "2026-05-08T03:55:35+00:00",
+  "decision": "INTEGRATED_AS_ACCEPTED_STATE_DELTA",
+  "external_execution_authority": false,
+  "gate": {
+    "accepted": true,
+    "action_id": "self_knowledge_steward_route_and_acceptance_boundary_20260508T035105Z",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.audit_observation.v1",
+    "touched_paths": [
+      "ION/05_context/current/SELF_KNOWLEDGE_ORGAN_INVENTORY_V0_2.json",
+      "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+      "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+      "ION/05_context/current/self_knowledge/candidate_registries/domain_registry.candidate.yaml",
+      "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+      "ION/05_context/current/self_knowledge/candidate_registries/node_registry.candidate.yaml",
+      "ION/05_context/current/self_knowledge/candidate_registries/state_classification.candidate.yaml",
+      "ION/05_context/current/self_knowledge/candidate_registries/authority_ranking.candidate.yaml",
+      "ION/05_context/current/self_knowledge/candidate_registries/node_schema.candidate.yaml",
+      "ION/05_context/current/self_knowledge/domains/",
+      "ION/05_context/current/self_knowledge/validate_self_knowledge_candidate.py",
+      "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_VALIDATION_NOTE_20260508T035105Z.json"
+    ]
+  },
+  "index": 1,
+  "production_authority": false,
+  "receipt_id": "queue_01_steward_9a59116938c2_steward_integration",
+  "role": "steward",
+  "schema_id": "ion.steward_queue_integration_receipt.v1",
+  "source": "active_steward_integration_queue",
+  "task_output_path": "ION/05_context/current/execution_cycles/2026-05-08T034831Z0000_carrier_continue_mount_ion_and_start_the_self_knowledge_domain_state_workpack_recover_existing_se/01_steward_return.md",
+  "task_output_sha256": "27ab0d8c4cb41f4052e0adeaada7bbf4e1c12cf554567fd8ac4fdb9b086e7a49",
+  "worker_output_preview": "### CONTEXT PROOF\n- path: `ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md` | kind: `file` | required: `True` | status: `file_present` | line_count/EOF: `97` | sha256: `37c4f30751a51a4da5d3de74b1d8cf9eb879e10c6fbf4dee398a8c227dad4aca` | excerpt: '---'\n- path: `ION/03_registry/agent_context_system_registry.yaml` | kind: `file` | required: `True` | status: `file_present` | line_count/EOF: `176` | sha256: `0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12` | excerpt: 'registry_id: ion.agent_context_system_registry.v1'\n- path: `ION/05_context/current/agent_context_systems/AGENT_CONTEXT_SYSTEMS_INDEX.md` | kind: `file` | required: `False` | status: `file_present` | line_count/EOF: `34` | sha256: `392cfa8eea6444d0a3f1dd36428c5905dadb32a4b75b76dcd5da3895fa9021ad` | excerpt: '# Agent Context Systems Index \u2014 V81'\n- path: `ION/05_context/current/agent_context_systems/STEWARD.context_system.md` | kind: `file` | required: `True` | status: `file_present` | line_count/EOF: `44` | sha256: `29f4f7d4d5e0aa895a74500e651cae04b3f0b8eb8d09726a7f6d546b0de6e310` | excerpt: '# STEWARD \u2014 Agent Context System Card'\n- path: `ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md` | kind: `file` | required: `False` | status: `file_present` | line_count/EOF: `74` | sha256: `931da654a6a9c1625da5e5348088c009004c09d2c70dda061d1534ae54437e6d` | excerpt: '# AGENT_CONTEXT_BUILD_STEP'\n- path: `ION/07_templates/context/AGENT_CONTEXT_PACKAGE_INDEX.md` | kind: `file` | required: `False` | status: `file_present` | line_count/EOF: `14` | sha256: `2090d6b38fe93452000d3e3d3df48659df125117ebb16"
+}

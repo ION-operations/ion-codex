@@ -1,0 +1,56 @@
+registry_id: reintegration.lineage_registry
+display_name: Reintegration Lineage Registry
+status: WORKING
+authority: A3_OPERATIONAL
+canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+decision_anchor: ION/06_intelligence/decisions/2026-04-17_workspace_root_authority_canonicalization_decision.md
+purpose: >-
+  Preserve the minimal lineage and relationship edges required for the current
+  root-authority packet without flattening witness matter into a single line.
+lineage_records:
+  - id: ion_workspace_split_center
+    subject: workspace_primary_center
+    roots:
+      - ion_packaged_current_generation
+      - ion_top_level_production
+    relation: SPLIT_CENTER_COMPETITION
+    current_state: SETTLED_RETAINED_DUAL_CENTER
+    supersession: NONE
+    evidence:
+      - ION/06_intelligence/orchestration/2026-04-17_reintegration_state_and_canonical_root_assessment.md
+      - ION/06_intelligence/orchestration/corpus_recovery/26_constitutional_reintegration_foundry/02_ion_estate_build_lines_and_root_status_assessment.md
+      - ION/06_intelligence/decisions/2026-04-17_retained_dual_center_settlement_canonicalization_decision.md
+    notes: >-
+      The packaged root is the later orchestration/recovery center, while the
+      top-level production root remains live for MCP/API/docs extraction. q005
+      settles this as retained dual-center governance for the present phase
+      rather than leaving it as a merely provisional split.
+  - id: aim_adjacent_line
+    subject: adjacent_sibling_family
+    roots:
+      - aim_ion_adjacent_family
+    relation: CURATED_WITNESS_OF_ADJACENT_UPSTREAM
+    current_state: CLASSIFIED_ADJACENT_SIBLING_PATTERN_RESERVOIR
+    supersession: NONE
+    evidence:
+      - ION/06_intelligence/orchestration/corpus_recovery/26_constitutional_reintegration_foundry/03_aim_os_and_aim_ion_comparative_integration_report.md
+      - ION/06_intelligence/decisions/2026-04-17_aim_ion_aim_os_classification_canonicalization_decision.md
+    notes: >-
+      AIM-ION is a curated local mirror/witness object over a broader AIM-OS
+      organism and is retained as an adjacent sibling pattern reservoir rather
+      than promoted into active ION canon.
+  - id: ion_packaged_embedded_residue_lane
+    subject: packaged_root_internal_residue
+    roots:
+      - ion_packaged_current_generation
+    relation: EMBEDDED_WITNESS_WITHIN_PRIMARY_ROOT
+    current_state: CLASSIFIED_NON_ROOT_INTERNAL_RESIDUE
+    supersession: NONE
+    evidence:
+      - ION/06_intelligence/decisions/2026-04-17_packaged_root_nested_path_disambiguation_canonicalization_decision.md
+      - ION/ION/05_context/history/daemon_service_ledger.json
+      - ION/ION/05_context/history/system_ledger.json
+    notes: >-
+      The packaged root contains an embedded ION/ION/05_context residue lane
+      produced by prior local runtime activity. It remains witness matter
+      inside the packaged root rather than a separate workspace center.

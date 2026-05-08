@@ -1,0 +1,18 @@
+{
+  "schema_id": "ion.productized_runtime_manifest.v1",
+  "version": "V101_LOCAL_AUTONOMOUS_LOOP_SURVIVAL_SLICE",
+  "created_at": "2026-05-01",
+  "production_authority": false,
+  "external_execution_authority": false,
+  "runtime_surfaces_added": [
+    "ION/04_packages/kernel/ion_template_action_gate.py",
+    "ION/04_packages/kernel/ion_steward_integrate.py",
+    "ION/04_packages/kernel/ion_autonomous_loop.py"
+  ],
+  "test_surfaces_added": [
+    "ION/tests/test_kernel_ion_template_action_gate.py",
+    "ION/tests/test_kernel_ion_steward_integrate.py",
+    "ION/tests/test_kernel_ion_autonomous_loop.py"
+  ],
+  "next_lawful_move": "Replace deterministic local worker with bounded worker-adapter interface only after V101 focused tests pass."
+}

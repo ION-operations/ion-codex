@@ -1,0 +1,207 @@
+{
+  "accepted": true,
+  "authority_boundary": {
+    "explicit_acceptance_observed": false,
+    "live_execution_authority": false,
+    "mutated_ION_03_registry": false,
+    "mutated_custom_gpt_instructions": false,
+    "mutated_product_manifest": false,
+    "mutated_product_surfaces": false,
+    "production_authority": false
+  },
+  "candidate_patchset_path": "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PATCHSET_20260508T135357Z.json",
+  "candidate_proposal_path": "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PROPOSAL_20260508T135357Z.md",
+  "coverage": {
+    "candidate_product_overlay_prepared": true,
+    "existing_frontdoor_explicit_self_knowledge_surface_count": 0,
+    "frontdoor_surface_count": 13,
+    "patch_operation_count": 8,
+    "patch_targets": [
+      "START_HERE.md",
+      "README.md",
+      "product/custom_gpt_adapter/CUSTOM_GPT_INSTRUCTIONS_8000.md",
+      "product/custom_gpt_adapter/GPT_INSTRUCTIONS.md",
+      "product/custom_gpt_adapter/STARTUP_BEHAVIOR.md",
+      "product/package_guides/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE.md",
+      "product/custom_gpt_adapter/knowledge_manifest.json",
+      "PRODUCT_MANIFEST.json"
+    ],
+    "required_package_surfaces_present": true
+  },
+  "findings": [
+    {
+      "evidence": {
+        "active_self_knowledge_mount_packet_exists": true,
+        "candidate_domain_count": 14,
+        "candidate_domain_dir_exists": true,
+        "candidate_route_registry_exists": true,
+        "promotion_apply_tree_exists": true,
+        "self_knowledge_current_dir_exists": true
+      },
+      "finding": "Self-knowledge candidate package surfaces are included in the exported GPT package.",
+      "id": "SK_PRODUCT_AUDIT_001",
+      "severity": "info"
+    },
+    {
+      "evidence": {
+        "frontdoor_explicit_count": 0
+      },
+      "finding": "Product/front-door surfaces do not yet explicitly mount the self-knowledge route for ION-about-ION requests.",
+      "id": "SK_PRODUCT_AUDIT_002",
+      "resolution": "Candidate patchset prepared at ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PATCHSET_20260508T135357Z.json; not applied without explicit acceptance.",
+      "severity": "candidate_blocker_for_product_front_door_landing"
+    }
+  ],
+  "frontdoor_explicit_self_knowledge_surface_count": 0,
+  "frontdoor_surfaces": [
+    {
+      "bytes": 883,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "START_HERE.md",
+      "sha256": "0005be534a280296448218142acc9a88700b236fbf67dce5e70f25f46556c700"
+    },
+    {
+      "bytes": 790,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "README.md",
+      "sha256": "9e5c2a6276545c46d114978732166e9605f5bf444a09214f5f3c157e8f17bb2f"
+    },
+    {
+      "bytes": 4277,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "PRODUCT_MANIFEST.json",
+      "sha256": "400687641ac70aabce5546bf143624c89832ed5b6ebea7770ca721d17319c8d8"
+    },
+    {
+      "bytes": 7640,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/custom_gpt_adapter/CUSTOM_GPT_INSTRUCTIONS_8000.md",
+      "sha256": "3c8146dd9bbf4b4cf814322f8dcdea45cbe86800488a8cd3eb1754721d232a81"
+    },
+    {
+      "bytes": 1211,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/custom_gpt_adapter/GPT_INSTRUCTIONS.md",
+      "sha256": "b4b54bc1d1a0fbeb2ac4072d095316fe2d4c0512d30e8dd6b41fdce1617eba40"
+    },
+    {
+      "bytes": 1002,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/custom_gpt_adapter/STARTUP_BEHAVIOR.md",
+      "sha256": "75fa4b977080c61443194bb869aa8d03b8753037d46098f16485138aa4614baa"
+    },
+    {
+      "bytes": 674,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/custom_gpt_adapter/FIRST_RUN_BEHAVIOR.md",
+      "sha256": "e5f67f01c4f8f19af843aba89e9597fd6959fa632e72b75c4d9577fc25732608"
+    },
+    {
+      "bytes": 5537,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/custom_gpt_adapter/knowledge_manifest.json",
+      "sha256": "77f57b255b83c891a3f9aabfbbe577ebcdfded17bdaf74c043876a465c0b2632"
+    },
+    {
+      "bytes": 213,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/custom_gpt_adapter/README.md",
+      "sha256": "4582a98c92fc034a2dcfa71a42df1b0ed3b5960553df4df07f7c1ef7b3dc0bac"
+    },
+    {
+      "bytes": 1588,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/package_guides/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE.md",
+      "sha256": "1d9e0e3c7563629972d08d12422e43f934b0c81d39f684d8e1a2aac046007efa"
+    },
+    {
+      "bytes": 413,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/package_guides/CUSTOM_GPT_PRODUCT_USE.md",
+      "sha256": "5cfaa5f2443738912b216b88471ef634a8a729e645fbba9a0123fed2bee3e0cf"
+    },
+    {
+      "bytes": 331,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/starter_data/README_FOR_AI.md",
+      "sha256": "8d9cc78c0e10dae05e6b93d6436dcd3b05498d3f53b04eae0c4c77d361bdcb46"
+    },
+    {
+      "bytes": 850,
+      "contains_active_self_knowledge_mount_packet": false,
+      "contains_ion_about_ion_phrase": false,
+      "contains_route_registry_reference": false,
+      "contains_self_knowledge_keyword": false,
+      "exists": true,
+      "path": "product/starter_data/ION_DATA_MANIFEST.json",
+      "sha256": "4e9314fbc8fd993bdcb38a531bac73a1a3181799dd54522ae3020fff5173b3ad"
+    }
+  ],
+  "generated_at": "2026-05-08T13:54:49+00:00",
+  "non_claims": [
+    "This audit does not apply the candidate patchset to product/front-door surfaces.",
+    "This audit does not change Custom GPT instructions.",
+    "This audit does not accept self-knowledge registry or onboarding law.",
+    "This audit is sandbox-local evidence, not external Codex/MCP/daemon execution."
+  ],
+  "objective": "Audit GPT package/product onboarding front-door surfaces for self-knowledge mount-first behavior and prepare candidate overlay without mutating product law.",
+  "package_inclusion": {
+    "active_self_knowledge_mount_packet_exists": true,
+    "candidate_domain_count": 14,
+    "candidate_domain_dir_exists": true,
+    "candidate_route_registry_exists": true,
+    "promotion_apply_tree_exists": true,
+    "self_knowledge_current_dir_exists": true
+  },
+  "schema_id": "ion.self_knowledge.product_onboarding_audit_report.v0_2",
+  "simulation_mode": "sandbox_local_product_frontdoor_audit_not_product_mutation",
+  "status": "accepted_candidate_evidence_product_overlay_prepared"
+}

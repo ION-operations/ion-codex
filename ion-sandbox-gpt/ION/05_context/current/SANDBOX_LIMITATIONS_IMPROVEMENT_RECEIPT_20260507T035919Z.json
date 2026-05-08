@@ -1,0 +1,89 @@
+{
+  "action_id": "gpt_sandbox_limitations_foundation_improvement_20260507T035919Z",
+  "candidate_patch_paths": [
+    "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+    "ION/04_packages/kernel/ion_carrier_onboard.py",
+    "ION/04_packages/kernel/ion_carrier_continue.py",
+    "ION/tests/test_product_gpt_sandbox_package_readiness.py"
+  ],
+  "captured_ambiguities": [
+    "gpt_profile_vs_active_packet_capability_mismatch",
+    "generic_can_use_mcp_true_for_self_contained_sandbox",
+    "manual_cursor_mode_label_for_gpt_sandbox",
+    "shell_root_content_root_nested_ion_residue",
+    "tool_read_proof_meaning_in_chatgpt_sandbox",
+    "design_discussion_mutates_runtime_ambiguity",
+    "allowed_paths_excluded_registry_for_capability_repair",
+    "startup_report_initial_status_verdict_capture_bug"
+  ],
+  "carrier": "GPT_SANDBOX_CARRIER",
+  "created_at": "2026-05-07T03:59:19+00:00",
+  "file_hashes": {
+    "ION/03_registry/gpt_sandbox_carrier_profile.yaml": "41f5042a36acb6d17c005851aa5869dc29cc34acbf291e34fcf1a67be7469aa2",
+    "ION/04_packages/kernel/ion_carrier_continue.py": "217ec749dc13d1d915bb3c71c516eba6c010b0182d57295d551ecc6da96b8efe",
+    "ION/04_packages/kernel/ion_carrier_onboard.py": "9722d7c9b2b04c5e38df7977ffa83bfc03eb0f3da347c61c53b9f52575a6ffd2",
+    "ION/05_context/current/SANDBOX_LIMITATIONS_IMPROVEMENT_PATCH_20260507T035919Z.diff": "b86504db0f906c29220ae21bc115c4114e0b9dbf2b8483cd5302a6e5c9a9b311",
+    "ION/docs/consolidation/ION_GPT_SANDBOX_LIMITATIONS_AND_FUNDAMENTALS_IMPROVEMENT_PACKET_20260507T035919Z.md": "c4e6821e47d7192c0835e89f04e5e2dcc1462d3f4c7ceb1842e8fd682cefeb5a",
+    "ION/tests/test_product_gpt_sandbox_package_readiness.py": "13c39ee62cf5c67d0e9d48947bf6317d925f9bc3e9ad3716b7f7d1f05e5f1ba1"
+  },
+  "live_execution_authority": false,
+  "non_claims": [
+    "not_production",
+    "not_live_external_execution",
+    "not_final_ion_law",
+    "not_historical_archive_promotion"
+  ],
+  "observed_limitations": [
+    "no_background_execution",
+    "bounded_tool_execution_window",
+    "zip_requires_filesystem_mount",
+    "single_carrier_sequential_only",
+    "exports_are_candidate_state",
+    "no_hidden_persistence",
+    "no_live_mcp_or_git_authority"
+  ],
+  "production_authority": false,
+  "proposal_artifacts": [
+    "ION/docs/consolidation/ION_GPT_SANDBOX_LIMITATIONS_AND_FUNDAMENTALS_IMPROVEMENT_PACKET_20260507T035919Z.md",
+    "ION/05_context/current/SANDBOX_LIMITATIONS_IMPROVEMENT_PATCH_20260507T035919Z.diff"
+  ],
+  "schema_id": "ion.sandbox_limitations_improvement_receipt.v1",
+  "source_package": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_1_TESTED_20260507T034311Z.zip",
+  "status": "PROPOSAL_WITH_SANDBOX_PATCH_EVIDENCE",
+  "steward_decision_needed": "REVIEW_PATCH_FOR_ACCEPTANCE",
+  "template_id": "ion.template.patch_proposal.v1",
+  "updated_at": "2026-05-07T04:00:38+00:00",
+  "validation": [
+    {
+      "command": "python3 -m pytest ION/tests/test_product_gpt_sandbox_package_readiness.py ION/tests/test_kernel_ion_carrier_continue.py ION/tests/test_kernel_ion_carrier_onboarding_packet.py -q",
+      "result": "28 passed in 0.69s",
+      "returncode": 0,
+      "stderr_note": "host emitted unrelated spreadsheet runtime warmup failure; pytest exit code remained 0"
+    },
+    {
+      "command": "python3 -S -m kernel.ion_carrier_onboard --carrier GPT_SANDBOX_CARRIER --force --json",
+      "result": "capability projection shows can_edit_files/can_run_tests true, can_use_mcp false, production/live false",
+      "returncode": 0
+    },
+    {
+      "command": "python3 -S -m kernel.ion_carrier_continue --carrier GPT_SANDBOX_CARRIER --operator-message status --max-spawn-rows 0 --json",
+      "result": "mode gpt-sandbox, no spawn queue",
+      "returncode": 0
+    },
+    {
+      "command": "python3 -S -m kernel.ion_status --json",
+      "result": "ION_STATUS_READY",
+      "returncode": 0
+    },
+    {
+      "command": "python3 -S -m kernel.ion_carrier_continue --carrier GPT_SANDBOX_CARRIER --operator-message <sandbox limitations objective> --max-spawn-rows 0 --json",
+      "result": "mode gpt-sandbox, objective refreshed, spawn_queue_count 0",
+      "returncode": 0
+    },
+    {
+      "command": "python3 -S -m kernel.ion_status --json",
+      "result": "ION_STATUS_READY with sandbox limitations objective and spawn_queue_count 0",
+      "returncode": 0
+    }
+  ]
+}

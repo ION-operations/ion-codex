@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ion.local/registry/cursor_subagent_role_mount.schema.json",
+  "title": "ION Cursor subagent role mount (spawn packet)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "spawn_packet_id",
+    "parent_mount",
+    "child_mount",
+    "mission_packet",
+    "integration"
+  ],
+  "properties": {
+    "spawn_packet_id": { "type": "string", "minLength": 1 },
+    "parent_mount": {
+      "type": "object",
+      "required": ["carrier", "mounted_role", "relay_packet_id", "authority_level"],
+      "properties": {
+        "carrier": { "const": "cursor_parent_chat" },
+        "mounted_role": { "const": "STEWARD" },
+        "relay_packet_id": { "type": "string", "minLength": 1 },
+        "authority_level": { "const": "TASK_SCOPED_LOCAL_ORCHESTRATION" }
+      },
+      "additionalProperties": true
+    },
+    "child_mount": {
+      "type": "object",
+      "required": [
+        "carrier",
+        "agent_name",
+        "role_boot",
+        "mounted_identity",
+        "mounted_by",
+        "authority_level",
+        "production_authority",
+        "live_execution_authority"
+      ],
+      "properties": {
+        "carrier": { "const": "cursor_subagent" },
+        "agent_name": { "type": "string", "minLength": 1 },
+        "role_boot": { "type": "string", "pattern": "^ION/03_registry/boots/.+\\.boot\\.md$" },
+        "mounted_identity": { "type": "string", "minLength": 1 },
+        "mounted_by": { "const": "local_STEWARD_carrier" },
+        "authority_level": { "type": "string", "minLength": 1 },
+        "production_authority": { "type": "boolean", "const": false },
+        "live_execution_authority": { "type": "boolean", "const": false }
+      },
+      "additionalProperties": true
+    },
+    "mission_packet": {
+      "type": "object",
+      "required": [
+        "objective",
+        "workstream",
+        "context_package",
+        "required_reads",
+        "active_template",
+        "allowed_paths",
+        "forbidden_paths",
+        "blocked_actions",
+        "validation_commands",
+        "return_contract",
+        "receipt_requirement"
+      ],
+      "properties": {
+        "objective": { "type": "string", "minLength": 1 },
+        "workstream": { "type": "string", "minLength": 1 },
+        "context_package": { "type": "string", "minLength": 1 },
+        "required_reads": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "active_template": { "type": "string", "minLength": 1 },
+        "allowed_paths": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "forbidden_paths": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "blocked_actions": { "type": "array", "items": { "type": "string" } },
+        "validation_commands": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "return_contract": {
+          "oneOf": [
+            { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "receipt_requirement": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    },
+    "integration": {
+      "type": "object",
+      "required": [
+        "proposal_status",
+        "steward_integration_required",
+        "relay_report_required",
+        "persona_visible_update_required"
+      ],
+      "properties": {
+        "proposal_status": { "type": "string", "minLength": 1 },
+        "steward_integration_required": { "type": "boolean", "const": true },
+        "relay_report_required": { "type": "boolean", "const": true },
+        "persona_visible_update_required": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

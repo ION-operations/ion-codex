@@ -1,0 +1,142 @@
+--- a/ION/03_registry/gpt_sandbox_carrier_profile.yaml
++++ b/ION/03_registry/gpt_sandbox_carrier_profile.yaml
+@@ -10,6 +10,11 @@
+ can_mount_portable_data_zip: true
+ can_initialize_seeded_starter_domains: true
+ can_read_bounded_ion_state: true
++can_read_files: true
++can_edit_files: true
++can_run_tests: true
++can_spawn_carrier_slots: false
++can_use_mcp: false
+ can_run_python_validation_in_sandbox: true
+ can_write_updated_package_artifacts_in_sandbox: true
+ can_execute_ion_role_phases_sequentially: true
+--- a/ION/04_packages/kernel/ion_carrier_onboard.py
++++ b/ION/04_packages/kernel/ion_carrier_onboard.py
+@@ -19,6 +19,19 @@
+ DEFAULT_TEMPLATE_PATH = "ION/docs/cursor/ION_CURSOR_WORK_CYCLE_PACKET.md"
+ DEFAULT_MODE = "MANUAL_TEMPLATE_BOUND_WORKFLOW"
+ PROFILE_BY_CARRIER_ALIAS = {
++    # Self-contained uploaded-zip / GPT sandbox carrier lane.
++    # Keep this in parity with ion_carrier_onboarding_packet.CARRIER_PROFILE_BY_ALIAS.
++    "gpt_sandbox": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "gpt_sandbox_carrier": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "gpt_sandbox_runtime": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "gpt_uploaded_zip": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "gpt_full_ion_package": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "ion_gpt": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "ion_gpt_sandbox": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "single_carrier_sandbox": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "self_contained_sandbox": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "gpt-5.5 thinking": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
++    "gpt-5.5": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
+     "codex": Path("ION/03_registry/codex_extension_carrier_profile.yaml"),
+     "codex_extension": Path("ION/03_registry/codex_extension_carrier_profile.yaml"),
+     "cursor": Path("ION/03_registry/codex_extension_carrier_profile.yaml"),
+--- a/ION/04_packages/kernel/ion_carrier_continue.py
++++ b/ION/04_packages/kernel/ion_carrier_continue.py
+@@ -69,6 +69,26 @@
+     "proceed.",
+     "resume.",
+ }
++
++
++def _default_mode_for_carrier(carrier: str) -> str:
++    """Return the operator-facing carrier mode label without granting authority."""
++    normalized = (carrier or "").lower().strip()
++    if normalized in {
++        "gpt_sandbox",
++        "gpt_sandbox_carrier",
++        "gpt_sandbox_runtime",
++        "gpt_uploaded_zip",
++        "gpt_full_ion_package",
++        "ion_gpt",
++        "ion_gpt_sandbox",
++        "single_carrier_sandbox",
++        "self_contained_sandbox",
++        "gpt-5.5 thinking",
++        "gpt-5.5",
++    }:
++        return "gpt-sandbox"
++    return "manual-cursor"
+ 
+ 
+ def _iso_now() -> str:
+@@ -497,10 +517,11 @@
+     force_new_objective: bool = False,
+     consume_operator_queue: bool = False,
+     max_spawn_rows: int | None = None,
+-    mode: str = "manual-cursor",
++    mode: str | None = None,
+ ) -> dict[str, Any]:
+     """Refresh active carrier state and return the next lawful carrier packet."""
+ 
++    mode = mode or _default_mode_for_carrier(carrier)
+     shell_root = resolve_shell_root_from_ion_root(root)
+     active_packet_path = shell_root / ACTIVE_PACKET_RELATIVE_PATH
+     previous_packet = _read_json(active_packet_path)
+@@ -692,7 +713,7 @@
+     parser.add_argument("--force-new-objective", action="store_true")
+     parser.add_argument("--consume-operator-queue", action="store_true")
+     parser.add_argument("--max-spawn-rows", type=int, default=None)
+-    parser.add_argument("--mode", default="manual-cursor", choices=("plan-only", "manual-cursor", "cursor-sdk"))
++    parser.add_argument("--mode", default=None, choices=("plan-only", "manual-cursor", "cursor-sdk", "gpt-sandbox"))
+     parser.add_argument("--json", action="store_true")
+     args = parser.parse_args(argv)
+ 
+--- a/ION/tests/test_product_gpt_sandbox_package_readiness.py
++++ b/ION/tests/test_product_gpt_sandbox_package_readiness.py
+@@ -1,6 +1,8 @@
+ import json
+ from pathlib import Path
+ 
++from kernel.ion_carrier_onboard import onboard_carrier
++from kernel.ion_carrier_continue import continue_carrier
+ from kernel.ion_carrier_onboarding_packet import build_carrier_onboarding_packet
+ from kernel.ion_github_data_plane_audit import audit_github_data_plane
+ from kernel.ion_status import build_ion_status
+@@ -50,6 +52,43 @@
+     assert "ION/07_templates/carriers/GPT_SANDBOX_CARRIER_SESSION_PACKET.md" in template_paths
+ 
+ 
++def test_gpt_sandbox_active_work_packet_uses_registry_capabilities(tmp_path):
++    root = _repo_root()
++
++    result = onboard_carrier(
++        root,
++        carrier="GPT_SANDBOX_CARRIER",
++        objective="verify GPT sandbox capability projection",
++        force=True,
++    )
++
++    caps = result["packet"]["carrier_capabilities"]
++    assert result["onboarding_verdict"] == "ION_DEFAULT_CARRIER_ONBOARDING_READY"
++    assert caps["carrier"] == "GPT_SANDBOX_CARRIER"
++    assert caps["can_read_files"] is True
++    assert caps["can_edit_files"] is True
++    assert caps["can_run_tests"] is True
++    assert caps["can_spawn_carrier_slots"] is False
++    assert caps["can_use_mcp"] is False
++    assert caps["production_authority"] is False
++    assert caps["live_execution_authority"] is False
++
++
++def test_gpt_sandbox_continue_defaults_to_sandbox_mode_label():
++    root = _repo_root()
++
++    result = continue_carrier(
++        root,
++        carrier="GPT_SANDBOX_CARRIER",
++        operator_message="status",
++        max_spawn_rows=0,
++    )
++
++    assert result["mode"] == "gpt-sandbox"
++    assert result["production_authority"] is False
++    assert result["live_execution_authority"] is False
++
++
+ def test_starter_data_seeded_domains_validate():
+     root = _repo_root()
+     manifest = json.loads((root / "product/starter_data/ION_DATA_MANIFEST.json").read_text(encoding="utf-8"))

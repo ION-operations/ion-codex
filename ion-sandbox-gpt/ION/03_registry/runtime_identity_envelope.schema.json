@@ -1,0 +1,160 @@
+{
+  "$id": "ion.runtime_identity_envelope.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "agent": {
+      "properties": {
+        "active_role": {
+          "type": "string"
+        },
+        "model_family": {
+          "type": "string"
+        },
+        "model_instance_label": {
+          "type": "string"
+        },
+        "mounted_identity_branch": {
+          "type": "string"
+        },
+        "mounted_identity_schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "model_family",
+        "model_instance_label",
+        "active_role"
+      ],
+      "type": "object"
+    },
+    "authority": {
+      "properties": {
+        "authority_posture": {
+          "const": "A3_RUNTIME_IDENTITY_ENVELOPE"
+        },
+        "delegated_scope": {
+          "type": "string"
+        },
+        "mutation_authority": {
+          "const": "report_and_bind_identity_only"
+        },
+        "operator_authority": {
+          "const": "Braden"
+        },
+        "originating_authority": {
+          "const": "Braden"
+        },
+        "production_authority": {
+          "const": false
+        },
+        "self_ratification_allowed": {
+          "const": false
+        },
+        "veto_holder": {
+          "const": "Braden"
+        }
+      },
+      "required": [
+        "operator_authority",
+        "authority_posture",
+        "production_authority",
+        "self_ratification_allowed"
+      ],
+      "type": "object"
+    },
+    "branch": {
+      "const": "ION-GPT55-SELF-MOUNT"
+    },
+    "claim_boundary": {
+      "type": "object"
+    },
+    "context_binding": {
+      "type": "object"
+    },
+    "drift_controls": {
+      "type": "object"
+    },
+    "envelope_id": {
+      "pattern": "^runtime-identity-envelope-[0-9a-f]{16}$",
+      "type": "string"
+    },
+    "forbidden_claims": {
+      "properties": {
+        "hidden_memory": {
+          "const": false
+        },
+        "independent_persistence": {
+          "const": false
+        },
+        "personal_consciousness": {
+          "const": false
+        },
+        "production_authority": {
+          "const": false
+        },
+        "production_readiness": {
+          "const": false
+        },
+        "self_ratification": {
+          "const": false
+        },
+        "sovereign_will": {
+          "const": false
+        }
+      },
+      "required": [
+        "personal_consciousness",
+        "independent_persistence",
+        "hidden_memory",
+        "production_readiness",
+        "production_authority",
+        "self_ratification",
+        "sovereign_will"
+      ],
+      "type": "object"
+    },
+    "mount_phase": {
+      "const": "RUNTIME_SESSION_START"
+    },
+    "mounted_at": {
+      "type": "string"
+    },
+    "obligations": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "receipt_policy": {
+      "type": "object"
+    },
+    "schema_id": {
+      "const": "ion.runtime_identity_envelope.v1"
+    },
+    "substrate": {
+      "type": "object"
+    },
+    "succession": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_id",
+    "envelope_id",
+    "mounted_at",
+    "mount_phase",
+    "branch",
+    "agent",
+    "authority",
+    "substrate",
+    "context_binding",
+    "claim_boundary",
+    "obligations",
+    "drift_controls",
+    "succession",
+    "forbidden_claims",
+    "receipt_policy"
+  ],
+  "title": "ION Runtime Identity Envelope",
+  "type": "object"
+}

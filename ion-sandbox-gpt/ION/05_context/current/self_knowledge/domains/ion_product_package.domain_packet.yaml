@@ -1,0 +1,88 @@
+schema: ion.self_knowledge.domain_packet.v0_2
+domain_id: ion_product_package
+title: ION Product Package Domain
+state_class: candidate_current_state
+authority_rank: 6
+status: draft_candidate_seed
+generated_at: '2026-05-08T03:51:05+00:00'
+purpose: 'Explain product packaging without reducing ION: GPT package, local full root, portable package
+  loop, starter data, package audits.'
+primary_questions:
+- What is the GPT sandbox package?
+- What belongs in product package?
+- What is excluded or optional?
+required_nodes:
+- ion.product.gpt_sandbox_package
+- ion.product.starter_data
+- ion.product.package_audit
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+    loads:
+    - domain_header
+    - anti_drift_notes
+  level_1_summary:
+    max_tokens: 500
+    loads:
+    - domain_header
+    - evidence_sources
+    - core claims
+  level_2_working:
+    max_tokens: 1500
+    loads:
+    - domain_packet
+    - selected nodes
+    - source ranking
+  level_3_operational:
+    max_tokens: 4000
+    loads:
+    - domain_packet
+    - node evidence
+    - active packet/state surfaces
+  level_4_deep:
+    max_tokens: 12000
+    loads:
+    - domain_packet
+    - node registry
+    - source files
+    - contradictions
+  level_5_implementation:
+    includes_paths: true
+    loads:
+    - source paths
+    - tests/proofs
+    - candidate deltas
+evidence_sources:
+- path: PRODUCT_MANIFEST.json
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: VALIDATION_REPORT.json
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: PACKAGE_BUILD_RECEIPT.json
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: product/custom_gpt_adapter/README.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: product/package_guides/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: product/starter_data/ION_DATA_MANIFEST.json
+  exists: true
+  state_class_hint: current_operational_or_witness
+anti_drift_notes:
+- Do not call GPT package reduced ION; it is full ION adapted to sandbox constraints.
+- Package-ready does not mean production authority or live external execution authority.
+specialist_roles:
+- RUNTIME_CARTOGRAPHER
+- CANON_LIBRARIAN
+- NEMESIS
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_namespace: ION/05_context/current/self_knowledge/
+non_claims:
+- This domain packet is not accepted canon.
+- This domain packet does not mutate ION/03_registry/self_knowledge unless separately promoted.
+

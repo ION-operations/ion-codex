@@ -1,0 +1,13 @@
+{
+  "schema_id": "ion.productized_runtime_manifest.v1",
+  "version": "V93",
+  "name": "Cursor /ion Autopilot Command and Subagent Surface",
+  "adds": [
+    "/ion command",
+    "ion-autopilot skill",
+    "ion-autopilot always-on rule",
+    "project subagent carrier-slot files",
+    "autopilot packet builder",
+    "autopilot audit"
+  ]
+}

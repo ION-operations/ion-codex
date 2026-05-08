@@ -1,0 +1,181 @@
+schema: ion.ai_assistant_work.route_registry.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T14:35:00Z'
+purpose: Candidate route registry for AI-assisted work and specialist-domain dispatch.
+routes:
+- route_id: route.assistant_identity_definition
+  trigger_patterns:
+  - what is an ai assistant
+  - chat assistant
+  - ide assistant
+  - agentic coding assistant
+  - assistant ontology
+  required_domains:
+  - ai_assistant_identity_embodiment
+  - chat_work_domain
+  - ide_work_domain
+  - knowledge_context_memory_domain
+  primary_agents:
+  - ASSISTANT_ONTOLOGIST
+  - EMBODIMENT_CARTOGRAPHER
+  - SOURCE_RANKER
+  output_contract:
+    include:
+    - host body
+    - context surfaces
+    - authority boundary
+    - state/proof/receipt distinction
+    forbid:
+    - assistant = model alone
+    - assistant = prompt alone
+    - assistant = autonomous authority
+- route_id: route.ide_agent_work_map
+  trigger_patterns:
+  - ide agent work
+  - cursor work
+  - copilot agent
+  - windsurf cascade
+  - claude code
+  - codex ide
+  - developer ai workflow
+  required_domains:
+  - ide_work_domain
+  - codebase_understanding_domain
+  - planning_and_task_breakdown_domain
+  - implementation_domain
+  - testing_quality_domain
+  - review_security_domain
+  primary_agents:
+  - IDE_CARTOGRAPHER
+  - CODEBASE_CARTOGRAPHER
+  - TASK_PLANNER
+  - PATCH_MASON
+  - TEST_RUNNER
+  - SECURITY_NEMESIS
+  output_contract:
+    include:
+    - workspace surfaces
+    - task decomposition
+    - write boundaries
+    - validation loop
+    - review/security gate
+    forbid:
+    - coding before workspace/context map
+    - test claims without command evidence
+- route_id: route.ui_specialist_work
+  trigger_patterns:
+  - make ui
+  - build interface
+  - frontend component
+  - design system
+  - accessibility
+  - ux flow
+  required_domains:
+  - ui_ux_domain
+  - product_requirements_domain
+  - implementation_domain
+  - testing_quality_domain
+  primary_agents:
+  - UI_ARCHITECT
+  - UX_FLOW_DESIGNER
+  - COMPONENT_BUILDER
+  - ACCESSIBILITY_AUDITOR
+  output_contract:
+    include:
+    - user flow
+    - screen states
+    - component contract
+    - a11y obligations
+    - implementation handoff
+    forbid:
+    - generic coder guesses UI
+    - visual polish without state/a11y proof
+- route_id: route.documentation_specialist_work
+  trigger_patterns:
+  - write docs
+  - document this
+  - technical writing
+  - api docs
+  - readme
+  - changelog
+  required_domains:
+  - documentation_writing_domain
+  - knowledge_context_memory_domain
+  - codebase_understanding_domain
+  primary_agents:
+  - DOCS_ARCHITECT
+  - TECHNICAL_WRITER
+  - API_DOCS_SCRIBE
+  - DOCS_NEMESIS
+  output_contract:
+    include:
+    - reader model
+    - doc surface
+    - source authority
+    - version boundary
+    - claim map
+    forbid:
+    - docs as implementation afterthought
+    - unsupported claims
+- route_id: route.assistant_work_dataset_build
+  trigger_patterns:
+  - massive dataset
+  - states and domains
+  - ai coding workflows
+  - what people are doing with ai
+  - assistant taxonomy
+  required_domains:
+  - assistant_learning_dataset_domain
+  - ide_work_domain
+  - chat_work_domain
+  - knowledge_context_memory_domain
+  - cross_domain_settlement_domain
+  primary_agents:
+  - WORK_PATTERN_ETHNOGRAPHER
+  - STATE_TAXONOMIST
+  - TEMPLATE_MINER
+  - FAILURE_CLASSIFIER
+  - SETTLEMENT_STEWARD
+  output_contract:
+    include:
+    - observation schema
+    - state taxonomy
+    - template gaps
+    - agent gaps
+    - dataset lineage
+    forbid:
+    - canonizing anecdotes without lineage
+    - aggregating usage without authority/source class
+- route_id: route.cross_domain_feature_delivery
+  trigger_patterns:
+  - build feature
+  - ship this
+  - full stack task
+  - from idea to release
+  required_domains:
+  - product_requirements_domain
+  - planning_and_task_breakdown_domain
+  - ui_ux_domain
+  - implementation_domain
+  - testing_quality_domain
+  - documentation_writing_domain
+  - devops_release_domain
+  - cross_domain_settlement_domain
+  primary_agents:
+  - PRODUCT_ANALYST
+  - TASK_PLANNER
+  - UI_ARCHITECT
+  - PATCH_MASON
+  - TEST_ARCHITECT
+  - TECHNICAL_WRITER
+  - RELEASE_MANAGER
+  - SETTLEMENT_STEWARD
+  output_contract:
+    include:
+    - requirements
+    - domain fan-out
+    - proof per branch
+    - settlement
+    - receipt
+    forbid:
+    - single generic agent pretending to own every domain without fan-out/fan-in

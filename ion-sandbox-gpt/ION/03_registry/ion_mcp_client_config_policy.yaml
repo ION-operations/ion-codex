@@ -1,0 +1,24 @@
+policy_id: ion_mcp_client_config_policy.v1
+branch: V65_LOCAL_MCP_CLIENT_CONFIG_AND_SMOKE_HARNESS
+allowed_transport_for_v65:
+  - stdio
+allowed_command_shape:
+  module: kernel.ion_mcp_local_bridge
+  required_args:
+    - --ion-root
+    - --stdio
+required_environment:
+  - PYTHONPATH
+forbidden_client_profile_behaviors:
+  - install_automatically_without_operator_review
+  - expose_live_execution_tool
+  - expose_shell_execution_tool
+  - expose_provider_dispatch_tool
+  - expose_browser_mutation_tool
+  - expose_secret_read_or_write_tool
+promotion_requirements:
+  - smoke_harness_passed
+  - live_execution_refused
+  - kernel_truth_mutation_absent
+  - client_specific_certification_required_before_claiming_support
+

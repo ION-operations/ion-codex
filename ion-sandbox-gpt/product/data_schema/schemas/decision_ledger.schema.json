@@ -1,0 +1,19 @@
+{
+  "$id": "https://ion.local/schemas/decision_ledger.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "decisions": {
+      "type": "array"
+    },
+    "schema_id": {
+      "const": "ion.decision_ledger.v1"
+    }
+  },
+  "required": [
+    "schema_id",
+    "decisions"
+  ],
+  "title": "ION Decision Ledger",
+  "type": "object"
+}

@@ -1,0 +1,11 @@
+policy_id: gpt55_local_browser_execution_harness_v1
+version: V52_LOCAL_BROWSER_EXECUTION_HARNESS_PROTOTYPE_GATED
+authority_scope: LOCAL_DEV_BROWSER_EXECUTION_HARNESS_GATED_PROTOTYPE
+forbidden:
+  unrestricted_browser_control: true
+  external_network_access: true
+  credential_or_session_import: true
+  form_submission: true
+  persistent_dom_mutation: true
+  production_authority: true
+next: V53_LOCAL_BROWSER_EXECUTION_RUN_RECEIPTS

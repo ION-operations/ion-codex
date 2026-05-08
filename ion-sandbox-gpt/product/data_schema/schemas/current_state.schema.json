@@ -1,0 +1,31 @@
+{
+  "$id": "https://ion.local/schemas/current_state.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "current_objective": {
+      "type": "string"
+    },
+    "open_packets": {
+      "type": "array"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "ion.current_state.v1"
+    },
+    "warnings": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_id",
+    "project_id",
+    "current_objective",
+    "open_packets",
+    "warnings"
+  ],
+  "title": "ION Current State",
+  "type": "object"
+}

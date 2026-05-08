@@ -1,0 +1,29 @@
+{
+  "active_state": [
+    "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+    "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+    "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+    "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json",
+    "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json"
+  ],
+  "base": "ION_CURSOR_CONSOLIDATED_V84_PRODUCTIZED_RUNTIME_20260429.zip",
+  "created_at": "2026-04-29T15:04:00Z",
+  "direct_validation": {
+    "audit_carrier_workflow": "ION_CARRIER_WORKFLOW_READY",
+    "continue_carrier": "ION_CARRIER_CONTINUE_READY",
+    "generic_context_acknowledgment": "rejected in direct function validation",
+    "py_compile": "passed for changed kernel modules",
+    "pytest_subprocess": "not claimed; timed out in execution environment",
+    "valid_synthetic_task_return": "accepted in direct function validation"
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "productized_runtime_boundary": "archive/history donor bodies excluded from live runtime package",
+  "runtime_entrypoints": [
+    "kernel.ion_carrier_continue",
+    "kernel.ion_carrier_workflow_audit",
+    "kernel.ion_carrier_task_return"
+  ],
+  "schema_id": "ion.productized_runtime_manifest.v85",
+  "version": "V85"
+}

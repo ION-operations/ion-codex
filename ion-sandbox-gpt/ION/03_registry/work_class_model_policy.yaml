@@ -1,0 +1,159 @@
+schema_id: ion.work_class_model_policy.v1
+version: V56_MODEL_ECONOMICS_REGISTRY_SKELETONS
+authority_scope: A3_STEWARD_MODEL_ECONOMICS_REGISTRY_SKELETON
+production_authority: false
+work_classes:
+  cheap_classification:
+    minimum_quality: low
+    default_routing_mode: cheapest_good_enough
+    allowed_lanes: [interactive, checked, background, batch, local]
+    consensus_required_by_default: false
+    premium_allowed_by_default: false
+    privacy_floor: normal
+    max_default_parallelism: 4
+    required_capabilities: [classification]
+  graph_indexing:
+    minimum_quality: medium
+    default_routing_mode: batch_preferred
+    allowed_lanes: [background, batch, local]
+    consensus_required_by_default: false
+    premium_allowed_by_default: false
+    privacy_floor: sensitive
+    max_default_parallelism: 2
+    required_capabilities: [classification, extraction]
+  source_summary_rewrite_draft:
+    minimum_quality: medium
+    default_routing_mode: balanced
+    allowed_lanes: [checked, background]
+    consensus_required_by_default: false
+    premium_allowed_by_default: true
+    privacy_floor: sensitive
+    max_default_parallelism: 1
+    required_capabilities: [reasoning, long_context]
+  source_summary_rewrite_review:
+    minimum_quality: high
+    default_routing_mode: highest_quality
+    allowed_lanes: [checked]
+    consensus_required_by_default: true
+    premium_allowed_by_default: true
+    privacy_floor: sensitive
+    max_default_parallelism: 1
+    required_capabilities: [reasoning, long_context]
+  code_patch:
+    minimum_quality: high
+    default_routing_mode: balanced
+    allowed_lanes: [checked, human_ide_carrier]
+    consensus_required_by_default: false
+    premium_allowed_by_default: true
+    privacy_floor: sensitive
+    max_default_parallelism: 1
+    required_capabilities: [code, reasoning]
+  code_review:
+    minimum_quality: high
+    default_routing_mode: highest_quality
+    allowed_lanes: [checked]
+    consensus_required_by_default: true
+    premium_allowed_by_default: true
+    privacy_floor: sensitive
+    max_default_parallelism: 1
+    required_capabilities: [code, reasoning]
+  architecture_design:
+    minimum_quality: supreme
+    default_routing_mode: highest_quality
+    allowed_lanes: [checked]
+    consensus_required_by_default: true
+    premium_allowed_by_default: true
+    privacy_floor: sensitive
+    max_default_parallelism: 1
+    required_capabilities: [reasoning, long_context]
+  visual_diagnosis:
+    minimum_quality: high
+    default_routing_mode: balanced
+    allowed_lanes: [interactive, checked]
+    consensus_required_by_default: false
+    premium_allowed_by_default: true
+    privacy_floor: sensitive
+    max_default_parallelism: 1
+    required_capabilities: [vision, reasoning]
+  claim_audit:
+    minimum_quality: high
+    default_routing_mode: consensus_required
+    allowed_lanes: [checked]
+    consensus_required_by_default: true
+    premium_allowed_by_default: true
+    privacy_floor: sensitive
+    max_default_parallelism: 1
+    required_capabilities: [reasoning]
+  adversarial_review:
+    minimum_quality: supreme
+    default_routing_mode: consensus_required
+    allowed_lanes: [checked]
+    consensus_required_by_default: true
+    premium_allowed_by_default: true
+    privacy_floor: sensitive
+    max_default_parallelism: 1
+    required_capabilities: [reasoning]
+  user_facing_answer:
+    minimum_quality: medium
+    default_routing_mode: fastest_safe
+    allowed_lanes: [interactive, checked]
+    consensus_required_by_default: false
+    premium_allowed_by_default: true
+    privacy_floor: normal
+    max_default_parallelism: 1
+    required_capabilities: [reasoning]
+  front_stage_claim_classification:
+    minimum_quality: medium
+    default_routing_mode: fastest_safe
+    allowed_lanes: [realtime, interactive, checked]
+    consensus_required_by_default: false
+    premium_allowed_by_default: false
+    privacy_floor: normal
+    max_default_parallelism: 2
+    required_capabilities: [classification, reasoning]
+  conversation_repair:
+    minimum_quality: high
+    default_routing_mode: balanced
+    allowed_lanes: [interactive, checked]
+    consensus_required_by_default: false
+    premium_allowed_by_default: true
+    privacy_floor: normal
+    max_default_parallelism: 1
+    required_capabilities: [reasoning]
+  long_context_digest:
+    minimum_quality: high
+    default_routing_mode: batch_preferred
+    allowed_lanes: [background, batch]
+    consensus_required_by_default: false
+    premium_allowed_by_default: true
+    privacy_floor: sensitive
+    max_default_parallelism: 2
+    required_capabilities: [long_context, reasoning]
+  batch_corpus_processing:
+    minimum_quality: medium
+    default_routing_mode: batch_preferred
+    allowed_lanes: [batch]
+    consensus_required_by_default: false
+    premium_allowed_by_default: false
+    privacy_floor: sensitive
+    max_default_parallelism: 8
+    required_capabilities: [classification, extraction]
+  embedding_generation:
+    minimum_quality: low
+    default_routing_mode: cheapest_good_enough
+    allowed_lanes: [background, batch, local]
+    consensus_required_by_default: false
+    premium_allowed_by_default: false
+    privacy_floor: sensitive
+    max_default_parallelism: 8
+    required_capabilities: [embedding]
+  local_private_tagging:
+    minimum_quality: low
+    default_routing_mode: cheapest_good_enough
+    allowed_lanes: [local]
+    consensus_required_by_default: false
+    premium_allowed_by_default: false
+    privacy_floor: local_only
+    max_default_parallelism: 2
+    required_capabilities: [local_private_tagging]
+

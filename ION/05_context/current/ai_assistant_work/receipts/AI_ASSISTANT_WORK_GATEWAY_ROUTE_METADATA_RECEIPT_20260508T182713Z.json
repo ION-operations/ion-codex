@@ -1,0 +1,66 @@
+{
+  "schema": "ion.ai_assistant_work.gateway_route_metadata_receipt.v0_1",
+  "created_at": "2026-05-08T18:27:13Z",
+  "status": "candidate_route_metadata_added_to_gateway_validation_not_accepted_canon",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "implemented_surfaces": [
+    {
+      "path": "ION/04_packages/kernel/ion_custom_gpt_action_gateway.py",
+      "role": "Action Gateway validation now attaches assistant_work_route candidate metadata for validate-only route preview"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_custom_gpt_action_gateway.py",
+      "role": "focused validation test for route preview attachment and non-promotion authority boundary"
+    }
+  ],
+  "held_surfaces": [
+    {
+      "surface": "MCP read-only assistant-work route tool",
+      "reason": "would require MCP tool policy registry and Custom GPT Action schema/front-door update; held for explicit tool-contract gate"
+    }
+  ],
+  "validation": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_custom_gpt_action_gateway.py ION/tests/test_kernel_ion_custom_gpt_action_gateway_policy.py",
+      "result": "15 passed"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_assistant_work_route_compiler.py ION/tests/test_kernel_ion_custom_gpt_action_gateway.py ION/tests/test_kernel_ion_custom_gpt_action_gateway_policy.py ION/tests/test_kernel_ion_codex_chat_engine.py ION/tests/test_kernel_ion_dual_codex_chat.py",
+      "result": "39 passed"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_status",
+      "result": "ION_STATUS_READY"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_active_state_integrity_audit",
+      "result": "ION_ACTIVE_STATE_INTEGRITY_READY"
+    },
+    {
+      "command": "systemctl --user restart ion-cockpit-app.service ion-action-gateway.service",
+      "result": "restart issued"
+    },
+    {
+      "command": "curl -fsS http://127.0.0.1:8788/health",
+      "result": "ION_LOCAL_COCKPIT_APP_READY"
+    },
+    {
+      "command": "curl -fsS http://127.0.0.1:8777/health",
+      "result": "ION_CUSTOM_GPT_ACTION_GATEWAY_READY"
+    }
+  ],
+  "non_claims": [
+    "This receipt does not accept assistant-work routes as ION canon.",
+    "This receipt does not change Custom GPT OpenAPI schemas.",
+    "This receipt does not add MCP tools.",
+    "This receipt does not grant production, live execution, secret, deployment, or external tool authority."
+  ]
+}

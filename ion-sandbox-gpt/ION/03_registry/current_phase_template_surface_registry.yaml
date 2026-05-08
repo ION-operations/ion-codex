@@ -1,0 +1,690 @@
+registry_id: current_phase.template_surface_registry
+display_name: Current-Phase Template Surface Registry
+status: COMPLETE
+authority: A3_OPERATIONAL
+canon_status: NOT_FINAL_CANON
+purpose: >-
+  Track the active, recovered, stale-for-startup, and required provisional
+  template/protocol surfaces that governed and now record the completed
+  first-pass Phase 1 template-governance rollout.
+extension_post_phase1_note: >-
+  Rows with origin_status LANE_A_BRIDGE_REPAIR_LANDING_2026_04_18 or
+  CARRIED_FORWARD_FROM_ION_BUILD_2026_04_18 extend this registry after the
+  first-pass Phase 1 rollout. They add lawful tracking for Lane A bridge-repair
+  landings without claiming the Phase 1 rollout was incomplete at closure time.
+active_spine:
+  - ION/01_doctrine/CANONICAL_WORKFLOW.md
+  - ION/AGENT_CONTRACT.md
+  - ION/02_architecture/TEMPLATE_BINDING_PROTOCOL.md
+  - ION/02_architecture/PACKET_AND_HANDOFF_STANDARDIZATION_PROTOCOL.md
+  - ION/03_registry/boots/MASON.boot.md
+  - ION/03_registry/boots/VESTIGE.boot.md
+  - ION/03_registry/boots/STEWARD.boot.md
+  - ION/02_architecture/TEMPLATE_SURFACE_EVOLUTION_PROTOCOL.md
+  - ION/02_architecture/META_TEMPLATE_CONSTITUTION_PROTOCOL.md
+  - ION/02_architecture/SINGLE_CARRIER_FULL_SPECTRUM_CHAT_PROTOCOL.md
+  - ION/02_architecture/STEWARD_CURRENT_PHASE_ORCHESTRATION_PROTOCOL.md
+  - ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md
+  - ION/02_architecture/ROLE_MIXING_AND_ROLE_SPLIT_GUARD_PROTOCOL.md
+  - ION/03_registry/boots/PERSONA_INTERFACE.boot.md
+  - ION/03_registry/semantic_identities/PERSONA_INTERFACE.semantic.yaml
+  - ION/03_registry/domains/domain.user_persona_interface.domain.yaml
+  - ION/07_templates/bindings/RELAY__SEMANTIC_BOUNDARY.md
+  - ION/07_templates/bindings/PERSONA_INTERFACE__USER_RESPONSE.md
+  - ION/02_architecture/FRONT_DOOR_RUNTIME_ENTRY_PROTOCOL.md
+  - ION/04_packages/kernel/front_door_runtime_entry.py
+  - ION/02_architecture/FRONT_DOOR_CHAT_ORCHESTRATION_ADAPTER_PROTOCOL.md
+  - ION/04_packages/kernel/front_door_chat_orchestration.py
+  - ION/02_architecture/SUMMARY_REFRESH_DEMO_RUNTIME_PROTOCOL.md
+  - ION/07_templates/product_mvp/SUMMARY_REFRESH_REQUEST.md
+  - ION/04_packages/kernel/summary_refresh_demo.py
+  - ION/tests/test_kernel_summary_refresh_demo.py
+  - ION/02_architecture/SUMMARY_REFRESH_PROJECTION_DEMO_PROTOCOL.md
+  - ION/02_architecture/SUMMARY_REFRESH_GRAPH_PROPOSAL_DEMO_PROTOCOL.md
+  - ION/02_architecture/SUMMARY_REFRESH_REVIEW_DEMO_PROTOCOL.md
+  - ION/02_architecture/SUMMARY_REFRESH_BOUNDED_COMMIT_DEMO_PROTOCOL.md
+  - ION/02_architecture/SUMMARY_REFRESH_DEMO_REPLAY_CLI_PROTOCOL.md
+  - ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_REPLAY_REPORT.md
+  - ION/04_packages/kernel/summary_refresh_demo_replay.py
+  - ION/tests/test_kernel_summary_refresh_demo_replay.py
+  - ION/02_architecture/SUMMARY_REFRESH_DEMO_REPLAY_DOCTOR_PROTOCOL.md
+  - ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_REPLAY_DOCTOR_REPORT.md
+  - ION/04_packages/kernel/summary_refresh_demo_doctor.py
+  - ION/tests/test_kernel_summary_refresh_demo_doctor.py
+  - ION/02_architecture/SUMMARY_REFRESH_DEMO_CERTIFICATION_GATE_PROTOCOL.md
+  - ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_CERTIFICATION_REPORT.md
+  - ION/04_packages/kernel/summary_refresh_demo_certification.py
+  - ION/tests/test_kernel_summary_refresh_demo_certification.py
+  - ION/02_architecture/SUMMARY_REFRESH_DEMO_EVIDENCE_BUNDLE_PROTOCOL.md
+  - ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_EVIDENCE_BUNDLE_MANIFEST.md
+  - ION/04_packages/kernel/summary_refresh_demo_evidence_bundle.py
+  - ION/tests/test_kernel_summary_refresh_demo_evidence_bundle.py
+  - ION/02_architecture/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_CAPSULE_PROTOCOL.md
+  - ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_MANIFEST.md
+  - ION/04_packages/kernel/summary_refresh_demo_release_candidate.py
+  - ION/tests/test_kernel_summary_refresh_demo_release_candidate.py
+  - ION/02_architecture/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_VERIFIER_PROTOCOL.md
+  - ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_VERIFICATION_REPORT.md
+  - ION/04_packages/kernel/summary_refresh_demo_release_candidate_verify.py
+  - ION/tests/test_kernel_summary_refresh_demo_release_candidate_verify.py
+  - ION/00_BOOTSTRAP/V32_CERTIFIED_DEMO_BASELINE_LOCK.md
+  - ION/02_architecture/PRODUCT_READINESS_CHARTER.md
+  - ION/02_architecture/PRODUCTION_RATIFICATION_MATRIX_PROTOCOL.md
+  - ION/02_architecture/PRODUCTION_READINESS_GAP_REGISTER.md
+  - ION/07_templates/product_mvp/PRODUCTION_READINESS_RATIFICATION_REPORT.md
+  - ION/04_packages/kernel/production_readiness.py
+  - ION/tests/test_kernel_production_readiness.py
+surface_records:
+  - surface: ION/01_doctrine/CANONICAL_WORKFLOW.md
+    surface_kind: doctrine
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: workflow_law
+  - surface: ION/AGENT_CONTRACT.md
+    surface_kind: contract
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: executor_input_output_law
+  - surface: ION/02_architecture/TEMPLATE_BINDING_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: template_binding_law
+  - surface: ION/02_architecture/PACKET_AND_HANDOFF_STANDARDIZATION_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: canonical_packet_floor
+  - surface: ION/02_architecture/BRIDGE_PACKET_STATUS_CLARIFICATION.md
+    surface_kind: clarification_note
+    current_state: ACTIVE_SUPPORTING
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: bridge_packet_status_boundary
+  - surface: ION/02_architecture/EXTERNAL_EXECUTION_MCP_BRIDGE_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: generic_external_bridge_law
+  - surface: ION/02_architecture/ION_OVER_CURSOR_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE_SUPPORTING
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: context_package_shape_for_cursor_chassis
+  - surface: ION/02_architecture/MULTI_CHAT_COORDINATION.md
+    surface_kind: protocol
+    current_state: STALE_FOR_STARTUP
+    origin_status: LIVE_BRANCH_TARGET_MODEL
+    canon_status: NOT_FINAL_CANON
+    phase1_function: wider_field_witness_only
+  - surface: ION/03_registry/boots/MASON.boot.md
+    surface_kind: boot
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: mason_mount_anchor
+  - surface: ION/03_registry/boots/VESTIGE.boot.md
+    surface_kind: boot
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: vestige_mount_anchor
+  - surface: ION/07_templates/actions/TASK.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: packetization
+  - surface: ION/07_templates/actions/ROLE_SESSION.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: bounded_role_pass
+  - surface: ION/07_templates/actions/HANDOFF.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: RECOVERED_FROM_ESTATE
+    canon_status: NOT_FINAL_CANON
+    phase1_function: bounded_transfer
+  - surface: ION/07_templates/actions/CURSOR_HANDOFF.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: RECOVERED_FROM_ESTATE
+    canon_status: NOT_FINAL_CANON
+    phase1_function: ide_targeted_transfer
+  - surface: ION/07_templates/actions/AGENT_SPAWN.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: RECOVERED_FROM_ESTATE
+    canon_status: NOT_FINAL_CANON
+    phase1_function: bounded_auxiliary_activation
+  - surface: ION/07_templates/actions/PATCH_PACKAGE.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: bounded_external_or_cross_lane_patch_return
+  - surface: ION/07_templates/actions/SIGNAL.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: state_change_pointer
+  - surface: ION/07_templates/reports/AUDIT.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: disagreement_audit_component
+  - surface: ION/07_templates/reports/RESEARCH.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: disagreement_research_component
+  - surface: ION/07_templates/reports/PROPOSAL.md
+    surface_kind: template
+    current_state: ACTIVE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: disagreement_proposal_component
+  - surface: ION/07_templates/reports/SYSTEM_LINEAGE_PROFILE.md
+    surface_kind: template
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: reintegration_lineage_profiling
+  - surface: ION/07_templates/reports/CANONICALIZATION_DECISION.md
+    surface_kind: template
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: reintegration_adjudication
+  - surface: ION/02_architecture/ROLE_CHASSIS_MOUNT_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: RESTATED_FROM_LIVE_AND_ESTATE
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: lawful_role_mount
+  - surface: ION/07_templates/actions/ROLE_CHASSIS_MOUNT.md
+    surface_kind: template
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: RESTATED_FROM_LIVE_AND_ESTATE
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: lawful_role_mount
+  - surface: ION/06_intelligence/research/2026-04-12_role_chassis_mount_provenance_note.md
+    surface_kind: provenance_note
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: CREATED_FROM_ESTATE_SEARCH
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: lawful_role_mount
+  - surface: ION/02_architecture/DISAGREEMENT_ESCALATION_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: RESTATED_FROM_LIVE_AND_ESTATE
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: contradiction_preserving_escalation
+  - surface: ION/07_templates/actions/DISAGREEMENT_ESCALATION.md
+    surface_kind: template
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: RESTATED_FROM_LIVE_AND_ESTATE
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: contradiction_preserving_escalation
+  - surface: ION/06_intelligence/research/2026-04-12_disagreement_escalation_provenance_note.md
+    surface_kind: provenance_note
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: CREATED_FROM_ESTATE_SEARCH
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: contradiction_preserving_escalation
+  - surface: ION/02_architecture/EXTERNAL_ZIP_RETURN_BRIDGE_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: RESTATED_FROM_LIVE_AND_ESTATE
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: browser_zip_return
+  - surface: ION/07_templates/actions/EXTERNAL_RETURN.md
+    surface_kind: template
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: RESTATED_FROM_LIVE_AND_ESTATE
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: browser_zip_return
+  - surface: ION/06_intelligence/research/2026-04-12_external_zip_return_bridge_provenance_note.md
+    surface_kind: provenance_note
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: CREATED_FROM_ESTATE_SEARCH
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: browser_zip_return
+  - surface: ION/07_templates/bindings/CODEX__TASK.md
+    surface_kind: template_binding
+    current_state: HISTORICAL_WITNESS_ONLY
+    origin_status: LIVE_BRANCH_RETIRED_CURRENT_PHASE_2026_04_22
+    canon_status: NOT_FINAL_CANON
+    phase1_function: historical_carrier_compatibility_witness
+  - surface: ION/07_templates/bindings/CODEX__STATUS_REPORT.md
+    surface_kind: template_binding
+    current_state: HISTORICAL_WITNESS_ONLY
+    origin_status: LIVE_BRANCH_RETIRED_CURRENT_PHASE_2026_04_22
+    canon_status: NOT_FINAL_CANON
+    phase1_function: historical_carrier_compatibility_witness
+  - surface: ION/07_templates/bindings/CODEX__PROPOSAL.md
+    surface_kind: template_binding
+    current_state: HISTORICAL_WITNESS_ONLY
+    origin_status: LIVE_BRANCH_RETIRED_CURRENT_PHASE_2026_04_22
+    canon_status: NOT_FINAL_CANON
+    phase1_function: historical_carrier_compatibility_witness
+  - surface: ION/07_templates/bindings/RELAY__HANDOFF.md
+    surface_kind: template_binding
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: front_door_packet_relay
+  - surface: ION/07_templates/bindings/VESTIGE__EVIDENCE.md
+    surface_kind: template_binding
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: archaeology_evidence_surface
+
+  - surface: ION/03_registry/boots/CODEX.boot.md
+    surface_kind: boot
+    current_state: HISTORICAL_WITNESS_ONLY
+    origin_status: LIVE_BRANCH_RETIRED_CURRENT_PHASE_2026_04_22
+    canon_status: NOT_FINAL_CANON
+    phase1_function: retired_carrier_boot_witness
+  - surface: ION/03_registry/semantic_identities/CODEX.semantic.yaml
+    surface_kind: semantic_identity
+    current_state: HISTORICAL_WITNESS_ONLY
+    origin_status: LIVE_BRANCH_RETIRED_CURRENT_PHASE_2026_04_22
+    canon_status: NOT_FINAL_CANON
+    phase1_function: retired_carrier_semantic_witness
+  - surface: ION/03_registry/boots/STEWARD.boot.md
+    surface_kind: boot
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: current_phase_orchestration_truename_anchor
+  - surface: ION/03_registry/semantic_identities/STEWARD.semantic.yaml
+    surface_kind: semantic_identity
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: current_phase_orchestration_truename_semantic_layer
+  - surface: ION/02_architecture/TEMPLATE_SURFACE_EVOLUTION_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: template_surface_governance
+  - surface: ION/02_architecture/STEWARD_CURRENT_PHASE_ORCHESTRATION_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: current_phase_orchestration_truename_law
+  - surface: ION/07_templates/actions/TEMPLATE_SURFACE_CHANGE.md
+    surface_kind: template
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+    phase1_function: template_surface_governance
+  - surface: ION/07_templates/bindings/STEWARD__TASK.md
+    surface_kind: template_binding
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: orchestration_packet_binding
+  - surface: ION/07_templates/bindings/STEWARD__STATUS_REPORT.md
+    surface_kind: template_binding
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: orchestration_status_visibility
+  - surface: ION/07_templates/bindings/STEWARD__PROPOSAL.md
+    surface_kind: template_binding
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: orchestration_change_proposal
+  - surface: ION/07_templates/bindings/STEWARD__TEMPLATE_SURFACE_CHANGE.md
+    surface_kind: template_binding
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LIVE_BRANCH
+    canon_status: NOT_FINAL_CANON
+    phase1_function: template_surface_governance
+  - surface: ION/02_architecture/META_TEMPLATE_CONSTITUTION_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LANE_A_BRIDGE_REPAIR_LANDING_2026_04_18
+    canon_status: NOT_FINAL_CANON
+    phase1_function: meta_template_constitution_reconstruction
+  - surface: ION/07_templates/actions/TEMPLATE_DEVELOPMENT.md
+    surface_kind: template
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: CARRIED_FORWARD_FROM_ION_BUILD_2026_04_18
+    canon_status: NOT_FINAL_CANON
+    phase1_function: template_development_action_surface_restoration
+  - surface: ION/02_architecture/SINGLE_CARRIER_FULL_SPECTRUM_CHAT_PROTOCOL.md
+    surface_kind: protocol
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: LANE_A_A4_SINGLE_CARRIER_FULL_SPECTRUM_LANDING_2026_04_24
+    canon_status: NOT_FINAL_CANON
+    phase1_function: single_carrier_role_persona_traversal
+  - surface: ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/02_architecture/ROLE_MIXING_AND_ROLE_SPLIT_GUARD_PROTOCOL.md
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/03_registry/boots/PERSONA_INTERFACE.boot.md
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/03_registry/semantic_identities/PERSONA_INTERFACE.semantic.yaml
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/03_registry/domains/domain.user_persona_interface.domain.yaml
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/07_templates/bindings/RELAY__SEMANTIC_BOUNDARY.md
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/07_templates/bindings/PERSONA_INTERFACE__USER_RESPONSE.md
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/02_architecture/FRONT_DOOR_RUNTIME_ENTRY_PROTOCOL.md
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/04_packages/kernel/front_door_runtime_entry.py
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/tests/test_kernel_front_door_runtime_entry.py
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/02_architecture/FRONT_DOOR_CHAT_ORCHESTRATION_ADAPTER_PROTOCOL.md
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/04_packages/kernel/front_door_chat_orchestration.py
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/tests/test_kernel_front_door_chat_orchestration.py
+    surface_kind: front_door_runtime_or_registry_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V17_DEMO_SPINE_DONOR_MERGED_IN_V21
+    canon_status: NOT_FINAL_CANON
+    phase1_function: persona_relay_steward_demo_spine
+  - surface: ION/02_architecture/SUMMARY_REFRESH_DEMO_RUNTIME_PROTOCOL.md
+    surface_kind: product_mvp_demo_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V22_SUMMARY_REFRESH_DEMO
+    canon_status: NOT_FINAL_CANON
+    phase1_function: summary_refresh_release_demo_path
+  - surface: ION/07_templates/product_mvp/SUMMARY_REFRESH_REQUEST.md
+    surface_kind: product_mvp_demo_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V22_SUMMARY_REFRESH_DEMO
+    canon_status: NOT_FINAL_CANON
+    phase1_function: summary_refresh_release_demo_path
+  - surface: ION/04_packages/kernel/summary_refresh_demo.py
+    surface_kind: product_mvp_demo_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V22_SUMMARY_REFRESH_DEMO
+    canon_status: NOT_FINAL_CANON
+    phase1_function: summary_refresh_release_demo_path
+  - surface: ION/tests/test_kernel_summary_refresh_demo.py
+    surface_kind: product_mvp_demo_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V22_SUMMARY_REFRESH_DEMO
+    canon_status: NOT_FINAL_CANON
+    phase1_function: summary_refresh_release_demo_path
+  - surface: ION/02_architecture/SUMMARY_REFRESH_PROJECTION_DEMO_PROTOCOL.md
+    surface_kind: product_mvp_demo_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V23_SUMMARY_REFRESH_PROJECTION_DEMO
+    canon_status: NOT_FINAL_CANON
+    phase1_function: summary_refresh_projection_demo_path
+  - surface: ION/02_architecture/SUMMARY_REFRESH_GRAPH_PROPOSAL_DEMO_PROTOCOL.md
+    surface_kind: product_mvp_demo_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V24_SUMMARY_REFRESH_GRAPH_PROPOSAL_DEMO
+    canon_status: NOT_FINAL_CANON
+    phase1_function: summary_refresh_graph_proposal_demo_path
+  - surface: ION/02_architecture/SUMMARY_REFRESH_REVIEW_DEMO_PROTOCOL.md
+    surface_kind: product_mvp_demo_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V25_SUMMARY_REFRESH_REVIEW_DEMO
+    canon_status: NOT_FINAL_CANON
+    phase1_function: summary_refresh_review_demo_path
+  - surface: ION/02_architecture/SUMMARY_REFRESH_BOUNDED_COMMIT_DEMO_PROTOCOL.md
+    surface_kind: product_mvp_demo_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V26_SUMMARY_REFRESH_BOUNDED_COMMIT_DEMO
+    canon_status: BOUNDED_DEMO_GRAPH_STATE_ONLY
+    phase1_function: summary_refresh_bounded_commit_demo_path
+  - surface: ION/02_architecture/SUMMARY_REFRESH_DEMO_REPLAY_CLI_PROTOCOL.md
+    surface_kind: product_mvp_demo_replay_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V27_SUMMARY_REFRESH_DEMO_REPLAY_CLI
+    canon_status: CURRENT_DEMO_REPLAY_SURFACE
+    phase1_function: summary_refresh_demo_replay_cli
+  - surface: ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_REPLAY_REPORT.md
+    surface_kind: product_mvp_demo_replay_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V27_SUMMARY_REFRESH_DEMO_REPLAY_CLI
+    canon_status: CURRENT_DEMO_REPLAY_SURFACE
+    phase1_function: summary_refresh_demo_replay_cli
+  - surface: ION/04_packages/kernel/summary_refresh_demo_replay.py
+    surface_kind: product_mvp_demo_replay_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V27_SUMMARY_REFRESH_DEMO_REPLAY_CLI
+    canon_status: CURRENT_DEMO_REPLAY_SURFACE
+    phase1_function: summary_refresh_demo_replay_cli
+  - surface: ION/tests/test_kernel_summary_refresh_demo_replay.py
+    surface_kind: product_mvp_demo_replay_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V27_SUMMARY_REFRESH_DEMO_REPLAY_CLI
+    canon_status: CURRENT_DEMO_REPLAY_SURFACE
+    phase1_function: summary_refresh_demo_replay_cli
+  - surface: ION/02_architecture/SUMMARY_REFRESH_DEMO_REPLAY_DOCTOR_PROTOCOL.md
+    surface_kind: product_mvp_demo_replay_doctor_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V28_SUMMARY_REFRESH_DEMO_REPLAY_DOCTOR
+    canon_status: CURRENT_DEMO_REPLAY_DOCTOR_SURFACE
+    phase1_function: summary_refresh_demo_replay_doctor
+  - surface: ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_REPLAY_DOCTOR_REPORT.md
+    surface_kind: product_mvp_demo_replay_doctor_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V28_SUMMARY_REFRESH_DEMO_REPLAY_DOCTOR
+    canon_status: CURRENT_DEMO_REPLAY_DOCTOR_SURFACE
+    phase1_function: summary_refresh_demo_replay_doctor
+  - surface: ION/04_packages/kernel/summary_refresh_demo_doctor.py
+    surface_kind: product_mvp_demo_replay_doctor_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V28_SUMMARY_REFRESH_DEMO_REPLAY_DOCTOR
+    canon_status: CURRENT_DEMO_REPLAY_DOCTOR_SURFACE
+    phase1_function: summary_refresh_demo_replay_doctor
+  - surface: ION/tests/test_kernel_summary_refresh_demo_doctor.py
+    surface_kind: product_mvp_demo_replay_doctor_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V28_SUMMARY_REFRESH_DEMO_REPLAY_DOCTOR
+    canon_status: CURRENT_DEMO_REPLAY_DOCTOR_SURFACE
+    phase1_function: summary_refresh_demo_replay_doctor
+  - surface: ION/02_architecture/SUMMARY_REFRESH_DEMO_CERTIFICATION_GATE_PROTOCOL.md
+    surface_kind: product_mvp_demo_certification_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V29_SUMMARY_REFRESH_DEMO_CERTIFICATION_GATE
+    canon_status: CURRENT_DEMO_CERTIFICATION_SURFACE
+    phase1_function: summary_refresh_demo_certification_gate
+  - surface: ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_CERTIFICATION_REPORT.md
+    surface_kind: product_mvp_demo_certification_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V29_SUMMARY_REFRESH_DEMO_CERTIFICATION_GATE
+    canon_status: CURRENT_DEMO_CERTIFICATION_SURFACE
+    phase1_function: summary_refresh_demo_certification_gate
+  - surface: ION/04_packages/kernel/summary_refresh_demo_certification.py
+    surface_kind: product_mvp_demo_certification_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V29_SUMMARY_REFRESH_DEMO_CERTIFICATION_GATE
+    canon_status: CURRENT_DEMO_CERTIFICATION_SURFACE
+    phase1_function: summary_refresh_demo_certification_gate
+  - surface: ION/tests/test_kernel_summary_refresh_demo_certification.py
+    surface_kind: product_mvp_demo_certification_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V29_SUMMARY_REFRESH_DEMO_CERTIFICATION_GATE
+    canon_status: CURRENT_DEMO_CERTIFICATION_SURFACE
+    phase1_function: summary_refresh_demo_certification_gate
+  - surface: ION/02_architecture/SUMMARY_REFRESH_DEMO_EVIDENCE_BUNDLE_PROTOCOL.md
+    surface_kind: product_mvp_demo_evidence_bundle_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V30_SUMMARY_REFRESH_DEMO_EVIDENCE_BUNDLE
+    canon_status: CURRENT_DEMO_EVIDENCE_BUNDLE_SURFACE
+    phase1_function: summary_refresh_demo_evidence_bundle
+  - surface: ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_EVIDENCE_BUNDLE_MANIFEST.md
+    surface_kind: product_mvp_demo_evidence_bundle_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V30_SUMMARY_REFRESH_DEMO_EVIDENCE_BUNDLE
+    canon_status: CURRENT_DEMO_EVIDENCE_BUNDLE_SURFACE
+    phase1_function: summary_refresh_demo_evidence_bundle
+  - surface: ION/04_packages/kernel/summary_refresh_demo_evidence_bundle.py
+    surface_kind: product_mvp_demo_evidence_bundle_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V30_SUMMARY_REFRESH_DEMO_EVIDENCE_BUNDLE
+    canon_status: CURRENT_DEMO_EVIDENCE_BUNDLE_SURFACE
+    phase1_function: summary_refresh_demo_evidence_bundle
+  - surface: ION/tests/test_kernel_summary_refresh_demo_evidence_bundle.py
+    surface_kind: product_mvp_demo_evidence_bundle_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V30_SUMMARY_REFRESH_DEMO_EVIDENCE_BUNDLE
+    canon_status: CURRENT_DEMO_EVIDENCE_BUNDLE_SURFACE
+    phase1_function: summary_refresh_demo_evidence_bundle
+  - surface: ION/02_architecture/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_CAPSULE_PROTOCOL.md
+    surface_kind: product_mvp_demo_release_candidate_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V31_SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE
+    canon_status: CURRENT_DEMO_RELEASE_CANDIDATE_SURFACE
+    phase1_function: summary_refresh_demo_release_candidate_capsule
+  - surface: ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_MANIFEST.md
+    surface_kind: product_mvp_demo_release_candidate_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V31_SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE
+    canon_status: CURRENT_DEMO_RELEASE_CANDIDATE_SURFACE
+    phase1_function: summary_refresh_demo_release_candidate_capsule
+  - surface: ION/04_packages/kernel/summary_refresh_demo_release_candidate.py
+    surface_kind: product_mvp_demo_release_candidate_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V31_SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE
+    canon_status: CURRENT_DEMO_RELEASE_CANDIDATE_SURFACE
+    phase1_function: summary_refresh_demo_release_candidate_capsule
+  - surface: ION/tests/test_kernel_summary_refresh_demo_release_candidate.py
+    surface_kind: product_mvp_demo_release_candidate_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V31_SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE
+    canon_status: CURRENT_DEMO_RELEASE_CANDIDATE_SURFACE
+    phase1_function: summary_refresh_demo_release_candidate_capsule
+  - surface: ION/02_architecture/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_VERIFIER_PROTOCOL.md
+    surface_kind: product_mvp_demo_release_candidate_verifier_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V32_SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_VERIFIER
+    canon_status: CURRENT_DEMO_RELEASE_CANDIDATE_VERIFIER_SURFACE
+    phase1_function: summary_refresh_demo_release_candidate_verifier
+  - surface: ION/07_templates/product_mvp/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_VERIFICATION_REPORT.md
+    surface_kind: product_mvp_demo_release_candidate_verifier_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V32_SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_VERIFIER
+    canon_status: CURRENT_DEMO_RELEASE_CANDIDATE_VERIFIER_SURFACE
+    phase1_function: summary_refresh_demo_release_candidate_verifier
+  - surface: ION/04_packages/kernel/summary_refresh_demo_release_candidate_verify.py
+    surface_kind: product_mvp_demo_release_candidate_verifier_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V32_SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_VERIFIER
+    canon_status: CURRENT_DEMO_RELEASE_CANDIDATE_VERIFIER_SURFACE
+    phase1_function: summary_refresh_demo_release_candidate_verifier
+  - surface: ION/tests/test_kernel_summary_refresh_demo_release_candidate_verify.py
+    surface_kind: product_mvp_demo_release_candidate_verifier_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V32_SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_VERIFIER
+    canon_status: CURRENT_DEMO_RELEASE_CANDIDATE_VERIFIER_SURFACE
+    phase1_function: summary_refresh_demo_release_candidate_verifier
+  - surface: ION/00_BOOTSTRAP/V32_CERTIFIED_DEMO_BASELINE_LOCK.md
+    surface_kind: production_readiness_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V33_PRODUCTION_READINESS_CHARTER_AND_RATIFICATION_MATRIX
+    canon_status: NOT_PRODUCTION_AUTHORITY_UNTIL_RATIFIED
+    phase1_function: production_readiness_ratification_planning
+  - surface: ION/02_architecture/PRODUCT_READINESS_CHARTER.md
+    surface_kind: production_readiness_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V33_PRODUCTION_READINESS_CHARTER_AND_RATIFICATION_MATRIX
+    canon_status: NOT_PRODUCTION_AUTHORITY_UNTIL_RATIFIED
+    phase1_function: production_readiness_ratification_planning
+  - surface: ION/02_architecture/PRODUCTION_RATIFICATION_MATRIX_PROTOCOL.md
+    surface_kind: production_readiness_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V33_PRODUCTION_READINESS_CHARTER_AND_RATIFICATION_MATRIX
+    canon_status: NOT_PRODUCTION_AUTHORITY_UNTIL_RATIFIED
+    phase1_function: production_readiness_ratification_planning
+  - surface: ION/02_architecture/PRODUCTION_READINESS_GAP_REGISTER.md
+    surface_kind: production_readiness_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V33_PRODUCTION_READINESS_CHARTER_AND_RATIFICATION_MATRIX
+    canon_status: NOT_PRODUCTION_AUTHORITY_UNTIL_RATIFIED
+    phase1_function: production_readiness_ratification_planning
+  - surface: ION/07_templates/product_mvp/PRODUCTION_READINESS_RATIFICATION_REPORT.md
+    surface_kind: production_readiness_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V33_PRODUCTION_READINESS_CHARTER_AND_RATIFICATION_MATRIX
+    canon_status: NOT_PRODUCTION_AUTHORITY_UNTIL_RATIFIED
+    phase1_function: production_readiness_ratification_planning
+  - surface: ION/04_packages/kernel/production_readiness.py
+    surface_kind: production_readiness_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V33_PRODUCTION_READINESS_CHARTER_AND_RATIFICATION_MATRIX
+    canon_status: NOT_PRODUCTION_AUTHORITY_UNTIL_RATIFIED
+    phase1_function: production_readiness_ratification_planning
+  - surface: ION/tests/test_kernel_production_readiness.py
+    surface_kind: production_readiness_surface
+    current_state: ACTIVE_CURRENT_PHASE
+    origin_status: V33_PRODUCTION_READINESS_CHARTER_AND_RATIFICATION_MATRIX
+    canon_status: NOT_PRODUCTION_AUTHORITY_UNTIL_RATIFIED
+    phase1_function: production_readiness_ratification_planning

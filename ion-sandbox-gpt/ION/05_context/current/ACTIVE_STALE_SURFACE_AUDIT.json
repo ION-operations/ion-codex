@@ -1,0 +1,208 @@
+{
+  "active_packet_path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+  "active_template": "ION/07_templates/carriers/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
+  "carrier": "GPT_SANDBOX_CARRIER",
+  "created_at": "2026-05-08T19:31:48+00:00",
+  "findings": [],
+  "legacy_reference_count": 1484,
+  "legacy_references_sample": [
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "5. the relevant private MINI/CAPSULE",
+      "line": 88,
+      "path": "ION/01_doctrine/SOVEREIGN_KERNEL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "Root `ION/MINI.md`, `ION/CAPSULE.md`, and `ION/STATUS.md` are shared projections.",
+      "line": 36,
+      "path": "ION/01_doctrine/SOVEREIGN_CONSTITUTION.md"
+    },
+    {
+      "allowed_classified_reference": true,
+      "excerpt": "- The parent chat must not treat MINI/CAPSULE or boot-file acknowledgment as a context proof.",
+      "line": 39,
+      "path": "ION/02_architecture/ION_CARRIER_TASK_RETURN_INTAKE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "### 2. Capsule PRE binding",
+      "line": 36,
+      "path": "ION/02_architecture/RUNTIME_STATE_BINDING_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "### 3. Capsule POST binding",
+      "line": 44,
+      "path": "ION/02_architecture/RUNTIME_STATE_BINDING_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": true,
+      "excerpt": "V81/V82 made ION agents into governed context systems and forced generated Cursor Task packages to prepend Agent Context System authority before legacy MINI/CAPSULE witness material. V91 adds the missing dynamic layer: the runtime must plan",
+      "line": 19,
+      "path": "ION/02_architecture/ION_AGENT_CONTEXT_DYNAMICS_AND_CONTEXT_WINDOW_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "- Agent Context System surfaces before MINI/CAPSULE;",
+      "line": 128,
+      "path": "ION/02_architecture/ION_AGENT_CONTEXT_DYNAMICS_AND_CONTEXT_WINDOW_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": true,
+      "excerpt": "7. Host shortcuts, saved agent definitions, contained shell-root markdown, MINI/CAPSULE, and chat memory as witness context only",
+      "line": 27,
+      "path": "ION/02_architecture/ION_CARRIER_ONBOARDING_AUTHORITY_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "# SUMMARY REFRESH DEMO RELEASE CANDIDATE CAPSULE PROTOCOL",
+      "line": 1,
+      "path": "ION/02_architecture/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_CAPSULE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "## 4. Capsule location",
+      "line": 44,
+      "path": "ION/02_architecture/SUMMARY_REFRESH_DEMO_RELEASE_CANDIDATE_CAPSULE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "- `ION/CAPSULE.md` for its own work-log entries",
+      "line": 66,
+      "path": "ION/02_architecture/ARCHAEOLOGY_DAEMON_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "`MINI` and `CAPSULE` may appear as role-private continuity reads in generated sessions. They are not active packet authority. The active authority is the carrier-cycle plan plus the generated role-session packet.",
+      "line": 30,
+      "path": "ION/02_architecture/ION_CARRIER_CYCLE_PLAN_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": true,
+      "excerpt": "MINI/CAPSULE witness surfaces.",
+      "line": 42,
+      "path": "ION/02_architecture/ION_PRODUCTIZED_RUNTIME_BOUNDARY_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": true,
+      "excerpt": "2. legacy Mini/Capsule terminology reappearing as active context authority.",
+      "line": 15,
+      "path": "ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "### Mini and Capsule",
+      "line": 37,
+      "path": "ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": true,
+      "excerpt": "`MINI.md`, `CAPSULE.md`, mini, and capsule may remain as historical witnesses, release artifacts, source-input terms, or migration donors.",
+      "line": 39,
+      "path": "ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": true,
+      "excerpt": "A live role must use a current ContextPackage. If Mini/Capsule material is useful, it must be mined into a current context package and leave a receipt.",
+      "line": 53,
+      "path": "ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": true,
+      "excerpt": "- Mini/Capsule terms are not used as live primary context authority.",
+      "line": 68,
+      "path": "ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "- `ION/MINI.md`",
+      "line": 122,
+      "path": "ION/02_architecture/MANIFEST_AND_ROUTE_STATE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "- that every MINI update must also mutate manifest state",
+      "line": 167,
+      "path": "ION/02_architecture/MANIFEST_AND_ROUTE_STATE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "1. its boot + private `MINI.md`",
+      "line": 26,
+      "path": "ION/02_architecture/WORKING_AGENT_SELF_USE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "2. its private `CAPSULE.md`",
+      "line": 27,
+      "path": "ION/02_architecture/WORKING_AGENT_SELF_USE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "1. updated private continuity (`agents/{role}/MINI.md`, `agents/{role}/CAPSULE.md`)",
+      "line": 57,
+      "path": "ION/02_architecture/WORKING_AGENT_SELF_USE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "Root projections such as `ION/MINI.md`, `ION/CAPSULE.md`, and `ION/STATUS.md`",
+      "line": 64,
+      "path": "ION/02_architecture/CONTEXT_MODE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "- `ION/agents/{role}/MINI.md`",
+      "line": 82,
+      "path": "ION/02_architecture/CONTEXT_MODE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "- `ION/agents/{role}/CAPSULE.md`",
+      "line": 83,
+      "path": "ION/02_architecture/CONTEXT_MODE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "- `ION/MINI.md`",
+      "line": 84,
+      "path": "ION/02_architecture/CONTEXT_MODE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "- `ION/CAPSULE.md`",
+      "line": 85,
+      "path": "ION/02_architecture/CONTEXT_MODE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "- a role MINI update that names the operating mode change",
+      "line": 142,
+      "path": "ION/02_architecture/CONTEXT_MODE_PROTOCOL.md"
+    },
+    {
+      "allowed_classified_reference": false,
+      "excerpt": "\u2502 MINI.md    - routing\u2502",
+      "line": 72,
+      "path": "ION/02_architecture/MULTI_CHAT_COORDINATION.md"
+    }
+  ],
+  "non_claims": [
+    "Historical/source/forensic references are allowed when classified.",
+    "Cursor adapter support is not removed.",
+    "Mini/Capsule material may be mined into ContextPackages but is not primary live context."
+  ],
+  "phase_sequence": [
+    "PERSONA_INTERFACE_INGRESS",
+    "RELAY",
+    "STEWARD",
+    "VIZIER",
+    "MASON",
+    "NEMESIS_OR_VICE_REVIEW",
+    "SCRIBE",
+    "STEWARD_FINAL",
+    "PERSONA_INTERFACE_RESPONSE"
+  ],
+  "schema_id": "ion.stale_surface_audit.v1",
+  "verdict": "ION_STALE_SURFACE_AUDIT_READY"
+}

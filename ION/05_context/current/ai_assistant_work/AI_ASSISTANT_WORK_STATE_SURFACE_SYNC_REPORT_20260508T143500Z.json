@@ -1,0 +1,35 @@
+{
+  "schema": "ion.ai_assistant_work.state_surface_sync_report.v0_1",
+  "created_at": "2026-05-08T14:35:00Z",
+  "status": "accepted_candidate_evidence",
+  "accepted": true,
+  "checked_surfaces": [
+    "overview",
+    "domain registry",
+    "agent registry",
+    "state registry",
+    "template registry",
+    "protocol registry",
+    "route registry",
+    "dataset entry schema",
+    "domain packets",
+    "route simulation report",
+    "validation note",
+    "receipt",
+    "next packet",
+    "focused tests"
+  ],
+  "alignment": {
+    "candidate_only_boundary_consistent": true,
+    "domain_count_consistent": true,
+    "agent_count_consistent": true,
+    "route_count_consistent": true,
+    "no_registry_landing_claim": true,
+    "next_packet_points_to_dataset_genesis": true
+  },
+  "findings": [],
+  "non_claims": [
+    "State-surface sync is candidate evidence only.",
+    "It does not accept the AI assistant work domain system into permanent law."
+  ]
+}

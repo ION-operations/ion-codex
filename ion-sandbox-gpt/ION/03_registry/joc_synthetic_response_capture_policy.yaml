@@ -1,0 +1,32 @@
+version: V65_SYNTHETIC_RESPONSE_CAPTURE_AND_EXTRACTION_RECEIPT_PREVIEW
+authority_scope: SYNTHETIC_RESPONSE_CAPTURE_VIEW_MODEL_RECEIPT_ONLY
+execution_mode: CAPTURE_PREVIEW_ONLY
+production_authority: false
+live_dispatch_claim: false
+external_model_call_authorized: false
+browser_session_mutation_authorized: false
+credential_access_authorized: false
+paid_cloud_launch_authorized: false
+allowed_upstream_readiness_verdicts:
+  - PROVIDER_ADAPTER_READY_FOR_DRY_RUN_SELECTION
+allowed_upstream_execution_modes:
+  - READINESS_VIEW_ONLY
+required_view_surfaces:
+  - SYNTHETIC_RESPONSE_CAPTURE_PANEL
+  - EXTRACTION_RECEIPT_PREVIEW_RAIL
+  - NO_LIVE_PROVIDER_CALL_STRIP
+  - QUALITY_FLAG_LEDGER
+  - PROVIDER_READY_LINK
+  - TRACE_LINEAGE_LINKS
+  - RAW_PAYLOAD_PREVIEW
+  - NEXT_ACTION_CALLOUT
+forbidden_capabilities:
+  live_external_model_dispatch: false
+  browser_session_mutation: false
+  credential_access: false
+  form_submission: false
+  paid_cloud_launch: false
+  source_summary_rewrite: false
+  canonical_graph_write: false
+  unrestricted_agent_activation: false
+  production_authority: false

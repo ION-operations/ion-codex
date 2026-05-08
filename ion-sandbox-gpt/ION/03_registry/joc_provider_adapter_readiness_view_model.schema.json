@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion://schemas/joc_provider_adapter_readiness_view_model.v64.json",
+  "title": "V64 Provider Adapter Readiness View Model",
+  "type": "object",
+  "required": [
+    "version",
+    "mission_id",
+    "dry_run_trace_ref",
+    "provider_id",
+    "provider_adapter",
+    "access_method",
+    "compute_ring",
+    "readiness_verdict",
+    "authority_scope",
+    "execution_mode",
+    "view_surfaces",
+    "blocked_capabilities",
+    "production_authority",
+    "live_dispatch_claim"
+  ],
+  "properties": {
+    "version": { "const": "V64_PROVIDER_ADAPTER_READINESS_AND_SELECTOR_HEALTH_VIEW_MODEL" },
+    "authority_scope": { "const": "PROVIDER_ADAPTER_READINESS_VIEW_MODEL_RECEIPT_ONLY" },
+    "execution_mode": { "enum": ["READINESS_VIEW_ONLY", "VIEW_ONLY_BLOCKED"] },
+    "readiness_verdict": {
+      "enum": [
+        "PROVIDER_ADAPTER_READY_FOR_DRY_RUN_SELECTION",
+        "BLOCKED_TRACE_NOT_READY",
+        "BLOCKED_MISSING_PROVIDER_EVIDENCE",
+        "BLOCKED_PROVIDER_OR_SESSION_NOT_READY",
+        "BLOCKED_FORBIDDEN_CAPABILITY",
+        "BLOCKED_UNSUPPORTED_ACCESS_METHOD",
+        "BLOCKED_LIVE_EXECUTION_REQUESTED"
+      ]
+    },
+    "production_authority": { "const": false },
+    "live_dispatch_claim": { "const": false },
+    "external_model_call_authorized": { "const": false },
+    "browser_session_mutation_authorized": { "const": false },
+    "credential_access_authorized": { "const": false }
+  }
+}

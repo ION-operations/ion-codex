@@ -1,0 +1,23 @@
+{
+  "name": "ion-local",
+  "transport": "stdio",
+  "command": "python",
+  "args": [
+    "-m",
+    "kernel.ion_mcp_local_bridge",
+    "--ion-root",
+    "<ION_ROOT>",
+    "--stdio"
+  ],
+  "env": {
+    "PYTHONPATH": "<ION_ROOT>/04_packages"
+  },
+  "first_calls": [
+    "initialize",
+    "tools/list",
+    "tools/call ion.mount",
+    "tools/call ion.status"
+  ],
+  "expected_live_execution_result": "REFUSED"
+}
+

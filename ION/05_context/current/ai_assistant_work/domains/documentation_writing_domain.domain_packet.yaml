@@ -1,0 +1,59 @@
+schema: ion.ai_assistant_work.domain_packet.v0_1
+domain_id: documentation_writing_domain
+title: Documentation and Writing Specialist Domain
+state_class: candidate_current_state
+status: seed_candidate
+purpose: Own technical writing, user docs, API docs, changelogs, release notes, internal
+  guides, and explainers.
+burden: Prevent documentation from being treated as a trivial afterthought of implementation.
+primary_questions:
+- Who is the reader?
+- What task must the document enable?
+- What source authority and version must it reflect?
+specialist_agents:
+- DOCS_ARCHITECT
+- TECHNICAL_WRITER
+- API_DOCS_SCRIBE
+- CHANGELOG_SCRIBE
+- COPY_EDITOR
+- DOCS_NEMESIS
+state_families:
+- reader_model_state
+- documentation_surface_state
+- source_authority_state
+- versioned_claim_state
+template_families:
+- docs_brief_packet
+- api_reference_packet
+- how_to_guide_packet
+- changelog_packet
+- claim_source_map
+protocols:
+- reader_task_first
+- source_claim_alignment
+- docs_version_boundary
+- examples_must_run_or_be_marked
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+  level_1_summary:
+    max_tokens: 500
+  level_2_working:
+    max_tokens: 1500
+  level_3_operational:
+    max_tokens: 4000
+  level_4_deep:
+    max_tokens: 12000
+  level_5_implementation:
+    includes_paths: true
+anti_drift_notes:
+- Do not let a generic coding assistant absorb this domain without domain-specific
+  context and proof obligations.
+- Do not treat templates as enough; a domain needs specialist agents to maintain,
+  route, validate, and settle the work.
+- Do not promote this candidate into active canon without explicit acceptance and
+  receipt.
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_only_until_accepted: true

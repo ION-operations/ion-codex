@@ -1,0 +1,33 @@
+registry_id: ion.gpt55_runtime_identity_mount_registry
+display_name: GPT55 Runtime Identity Mount Registry
+status: ACTIVE_A3_RUNTIME_IDENTITY_BRANCH
+created: '2026-04-25'
+branch: ION-GPT55-SELF-MOUNT
+originating_authority: Braden
+delegated_architect: GPT-5.5 Thinking
+authority_posture: A3_RUNTIME_IDENTITY_ENVELOPE
+production_authority: false
+self_ratification_allowed: false
+schema:
+  id: ion.runtime_identity_envelope.v1
+  path: ION/03_registry/runtime_identity_envelope.schema.json
+kernel:
+  module: ION/04_packages/kernel/runtime_identity_envelope.py
+  test: ION/tests/test_kernel_runtime_identity_envelope.py
+required_surfaces:
+  - ION/00_BOOTSTRAP/V35_RUNTIME_IDENTITY_ENVELOPE_LOCK.md
+  - ION/02_architecture/RUNTIME_IDENTITY_ENVELOPE_PROTOCOL.md
+  - ION/02_architecture/SELF_MOUNT_FRONT_DOOR_BINDING_PROTOCOL.md
+  - ION/03_registry/runtime_identity_envelope.schema.json
+  - ION/03_registry/gpt55_runtime_identity_mount_registry.yaml
+  - ION/04_packages/kernel/runtime_identity_envelope.py
+  - ION/tests/test_kernel_runtime_identity_envelope.py
+envelope_invariants:
+  - Runtime identity is operational, not metaphysical.
+  - The envelope may bind a model instance to a role, authority basis, substrate, task packet, and receipt.
+  - The envelope never grants production authority.
+  - The envelope never permits hidden-memory or independent-persistence claims.
+  - A successor may inherit evidence and obligation, not numerical identity.
+next_phase:
+  id: V36_SELF_SURFACE_DRIFT_GATE
+  summary: Bind S4/S5 self-drift detection to runtime identity envelopes.

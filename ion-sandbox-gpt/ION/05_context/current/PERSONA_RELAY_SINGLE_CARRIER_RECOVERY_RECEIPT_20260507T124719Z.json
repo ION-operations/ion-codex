@@ -1,0 +1,76 @@
+{
+  "accepted_delta": [
+    "ION/02_architecture/SINGLE_CARRIER_SEQUENTIAL_RUNTIME_PROTOCOL.md",
+    "ION/07_templates/carriers/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
+    "ION/07_templates/receipts/SINGLE_CARRIER_SEQUENCE_RECEIPT.md",
+    "ION/04_packages/kernel/ion_single_carrier_sequence_runner.py",
+    "ION/tests/test_kernel_single_carrier_sequence_runner.py",
+    "ION/04_packages/kernel/ion_template_action_gate.py",
+    "ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_PACKET.md",
+    "ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_RECEIPT.json",
+    "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+    "PRODUCT_MANIFEST.json",
+    "VALIDATION_REPORT.json",
+    "product/custom_gpt_adapter/knowledge_manifest.json",
+    "ION/05_context/current/PERSONA_RELAY_SINGLE_CARRIER_RECOVERY_RECEIPT_20260507T124719Z.json",
+    "ION/docs/consolidation/PERSONA_RELAY_SINGLE_CARRIER_RECOVERY_REPORT_20260507T124719Z.md"
+  ],
+  "action_id": "persona_relay_single_carrier_recovery_20260507T124719Z",
+  "active_single_carrier_sequence": {
+    "packet_path": "ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_PACKET.md",
+    "receipt_path": "ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_RECEIPT.json",
+    "receipt_status": "SEQUENCE_PACKET_READY_AWAITING_CARRIER_OUTPUT",
+    "steward_review_required": true
+  },
+  "carrier": "GPT_SANDBOX_CARRIER",
+  "core_recovered_invariant": "ION baseline is one capable LLM carrier executing role phases sequentially, with Persona as ingress/egress and Relay as semantic boundary.",
+  "created_at": "2026-05-07T12:47:19+00:00",
+  "front_door_proof_trace": {
+    "path": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+    "proof_complete": true,
+    "verdict": "ION_FRONT_DOOR_PROOF_TRACE_READY",
+    "witness_count": 19
+  },
+  "live_execution_authority": false,
+  "non_claims": [
+    "No production authority was granted.",
+    "No live external execution authority was granted.",
+    "No external agents were spawned.",
+    "No MCP connector was used.",
+    "No GitHub mutation or push was performed.",
+    "No daemon or browser extension dependency was introduced.",
+    "The active single-carrier receipt is a candidate awaiting carrier output / Steward review, not accepted project state.",
+    "The historical archive was not promoted into current authority."
+  ],
+  "phase_order": [
+    "PERSONA_INTERFACE_INGRESS",
+    "RELAY",
+    "STEWARD",
+    "VIZIER",
+    "MASON",
+    "NEMESIS_OR_VICE_REVIEW",
+    "SCRIBE",
+    "STEWARD_FINAL",
+    "PERSONA_INTERFACE_RESPONSE"
+  ],
+  "production_authority": false,
+  "schema_id": "ion.persona_relay_single_carrier_recovery_receipt.v1",
+  "source_package": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_1_SANDBOX_PREFLIGHT_ACCEPTED_20260507T053737Z.zip",
+  "status": "ACCEPTED_BY_OPERATOR_FOR_PACKAGE_LINEAGE",
+  "template_id": "ion.template.accepted_patch_integration.v1",
+  "user_branch_continuity_source": "Pasted text.txt",
+  "validation": {
+    "direct_validation": {
+      "passed": 9,
+      "status": "passed",
+      "total": 9
+    },
+    "ion_status": "ION_STATUS_READY",
+    "single_carrier_sequence_packet": "ION_SINGLE_CARRIER_SEQUENCE_PACKET_READY",
+    "targeted_pytest": {
+      "command": "python -m pytest ION/tests/test_kernel_single_carrier_sequence_runner.py -q",
+      "result": "6 passed",
+      "returncode": 0
+    }
+  }
+}

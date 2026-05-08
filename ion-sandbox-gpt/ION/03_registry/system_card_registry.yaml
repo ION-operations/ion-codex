@@ -1,0 +1,24 @@
+registry_id: system_card_registry
+status: current_phase_seed
+system_cards:
+- system_id: system.evented_template_file_graph
+  title: Evented Template File Graph Runtime
+  graph_region: region.evented_file_graph
+  owner_agent_family: Steward
+  reviewer_agent_family: Nemesis
+  approved_context_status: PROVISIONAL_CONTEXT
+  retrieval_zone: L7_DEPENDENCIES_DOMAIN_MAPS_SYSTEM_CARDS
+  implementation_files:
+  - ION/04_packages/kernel/template_completion_events.py
+  - ION/04_packages/kernel/template_reaction_selection.py
+  - ION/04_packages/kernel/template_index_projection.py
+  - ION/04_packages/kernel/template_graph_writeback_proposals.py
+  - ION/04_packages/kernel/template_graph_writeback_review.py
+  - ION/04_packages/kernel/template_graph_commit.py
+  tests:
+  - ION/tests/test_kernel_template_completion_events.py
+  - ION/tests/test_kernel_template_reaction_selection.py
+  - ION/tests/test_kernel_template_index_projection.py
+  - ION/tests/test_kernel_template_graph_writeback_proposals.py
+  - ION/tests/test_kernel_template_graph_writeback_review.py
+  - ION/tests/test_kernel_template_graph_commit.py

@@ -1,0 +1,39 @@
+{
+  "conversation_status": "RATIFIED",
+  "emitted_at": "2026-05-07T12:45:00+00:00",
+  "events": [
+    {
+      "claim_class": "C2",
+      "council_receipt_id": "fsc-1f0c6bbe9ab4f0d622",
+      "event_type": "PROVISIONAL_UTTERANCE",
+      "provisional": true,
+      "repair_of": null,
+      "text": "Persona and Relay are bound into the single-carrier sequential runtime as front-door ingress and final user-facing response boundaries. This is a sandbox package proof and grants no production authority.",
+      "timestamp": "2026-05-07T12:45:00+00:00"
+    },
+    {
+      "claim_class": "C2",
+      "council_receipt_id": "fsc-1f0c6bbe9ab4f0d622",
+      "event_type": "RATIFICATION",
+      "provisional": false,
+      "repair_of": null,
+      "text": "Persona and Relay are bound into the single-carrier sequential runtime as front-door ingress and final user-facing response boundaries. This is a sandbox package proof and grants no production authority.",
+      "timestamp": "2026-05-07T12:45:00+00:00"
+    }
+  ],
+  "final_claim": "Persona and Relay are bound into the single-carrier sequential runtime as front-door ingress and final user-facing response boundaries. This is a sandbox package proof and grants no production authority.",
+  "forbidden_claims": {
+    "hidden_memory_claim": false,
+    "persona_total_ion_identity": false,
+    "production_authority": false,
+    "provisional_speech_is_ratified_truth": false,
+    "unrestricted_live_persona_speech": false
+  },
+  "production_authority": false,
+  "provisional_events_open": 0,
+  "receipt_id": "52445ff88f1ac7e18fe55225",
+  "repair_obligations": [],
+  "repair_required": false,
+  "schema_id": "ion.conversational_receipt.v1",
+  "version": "V42_CONVERSATIONAL_RECEIPTS_AND_LIVE_REPAIR"
+}

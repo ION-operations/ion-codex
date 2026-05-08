@@ -1,0 +1,1788 @@
+schema: ion.ai_assistant_work.failure_mode_registry.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T14:32:25Z'
+purpose: First candidate failure-mode registry mined from AI Assistant Work dataset
+  genesis observations.
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  requires_explicit_acceptance_to_land: true
+failure_mode_count: 68
+failure_modes:
+- failure_mode_id: a11y_afterthought
+  title: A11y afterthought
+  description: Candidate failure class observed in dataset genesis entries where a11y
+    afterthought could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0009_ui_accessibility_audit
+  primary_domains:
+  - review_security_domain
+  - testing_quality_domain
+  - ui_ux_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - a11y_as_proof_gate
+  - focused_then_broad_validation
+  - responsive_behavior_matrix
+  recovery_templates:
+  - accessibility_review_packet
+  - fix_verification_packet
+  - quality_receipt
+  status: candidate_failure_mode
+- failure_mode_id: acceptance_criteria_missing
+  title: Acceptance criteria missing
+  description: Candidate failure class observed in dataset genesis entries where acceptance
+    criteria missing could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0034_product_acceptance_criteria
+  primary_domains:
+  - planning_and_task_breakdown_domain
+  - product_requirements_domain
+  - testing_quality_domain
+  - ui_ux_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - acceptance_before_build
+  - focused_then_broad_validation
+  - intent_to_requirement
+  - states_before_pixels
+  recovery_templates:
+  - acceptance_criteria_packet
+  - test_plan_packet
+  - ui_brief_packet
+  - user_story_packet
+  status: candidate_failure_mode
+- failure_mode_id: analysis_without_lineage
+  title: Analysis without lineage
+  description: Candidate failure class observed in dataset genesis entries where analysis
+    without lineage could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0029_data_analysis_request
+  primary_domains:
+  - data_analysis_domain
+  - documentation_writing_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - method_before_claim
+  - reproducible_analysis
+  - source_claim_alignment
+  - source_data_lineage
+  recovery_templates:
+  - analysis_packet
+  - claim_source_map
+  - data_source_manifest
+  - visualization_packet
+  status: candidate_failure_mode
+- failure_mode_id: approval_boundary_missing
+  title: Approval boundary missing
+  description: Candidate failure class observed in dataset genesis entries where approval
+    boundary missing could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0021_prompt_injection_guard
+  primary_domains:
+  - chat_work_domain
+  - review_security_domain
+  - workflow_automation_tool_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - tool_access_is_not_authority
+  - tool_injection_guard
+  recovery_templates:
+  - approval_request_packet
+  - prompt_injection_audit_packet
+  - tool_action_packet
+  status: candidate_failure_mode
+- failure_mode_id: assistant_equals_model_alone
+  title: Assistant equals model alone
+  description: Candidate failure class observed in dataset genesis entries where assistant
+    equals model alone could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0000_assistant_identity_boundary
+  primary_domains:
+  - ai_assistant_identity_embodiment
+  - chat_work_domain
+  - ide_work_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - answer_vs_state_boundary
+  - assistant_is_work_interface_not_model_alone
+  - chat_ide_cli_cloud_boundary_mapping
+  - host_body_capability_mapping
+  recovery_templates:
+  - assistant_embodiment_mount
+  - capability_boundary_report
+  - context_package_packet
+  - host_tool_surface_inventory
+  status: candidate_failure_mode
+- failure_mode_id: automation_without_authority
+  title: Automation without authority
+  description: Candidate failure class observed in dataset genesis entries where automation
+    without authority could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0033_tool_automation_script
+  primary_domains:
+  - implementation_domain
+  - testing_quality_domain
+  - workflow_automation_tool_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - proof_is_run_not_assumption
+  - receipt_after_tool_action
+  - tool_access_is_not_authority
+  recovery_templates:
+  - automation_script_packet
+  - terminal_command_packet
+  - tool_action_packet
+  - tool_receipt
+  status: candidate_failure_mode
+- failure_mode_id: background_result_without_receipt
+  title: Background result without receipt
+  description: Candidate failure class observed in dataset genesis entries where background
+    result without receipt could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0035_background_daemon_queue
+  primary_domains:
+  - cross_domain_settlement_domain
+  - knowledge_context_memory_domain
+  - planning_and_task_breakdown_domain
+  - workflow_automation_tool_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - bounded_next_step
+  - branch_returns_are_proposals
+  - receipt_after_tool_action
+  - settlement_before_inheritance
+  recovery_templates:
+  - branch_return_packet
+  - settlement_packet
+  - tool_action_packet
+  - tool_receipt
+  - workpacket_draft
+  status: candidate_failure_mode
+- failure_mode_id: branch_output_as_truth
+  title: Branch output as truth
+  description: Candidate failure class observed in dataset genesis entries where branch
+    output as truth could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0023_pr_merge_settlement
+  primary_domains:
+  - cross_domain_settlement_domain
+  - devops_release_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - branch_returns_are_proposals
+  - receipt_after_fan_in
+  - settlement_before_inheritance
+  recovery_templates:
+  - branch_return_packet
+  - conflict_review_packet
+  - merge_receipt
+  - settlement_packet
+  status: candidate_failure_mode
+- failure_mode_id: bundle_without_sync
+  title: Bundle without sync
+  description: Candidate failure class observed in dataset genesis entries where bundle
+    without sync could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0031_continuity_bundle_export
+  primary_domains:
+  - chat_work_domain
+  - cross_domain_settlement_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - memory_orients_artifacts_govern
+  - portable_continuity_export
+  - settlement_before_inheritance
+  recovery_templates:
+  - continuity_bundle_packet
+  - continuity_export_packet
+  - settlement_packet
+  - source_ranking_packet
+  status: candidate_failure_mode
+- failure_mode_id: canonizing_anecdote
+  title: Canonizing anecdote
+  description: Candidate failure class observed in dataset genesis entries where canonizing
+    anecdote could cause AI-assisted work to drift, overclaim, or land without proof.
+  observed_in_entries:
+  - aiw_obs_0032_work_pattern_capture
+  primary_domains:
+  - assistant_learning_dataset_domain
+  - cross_domain_settlement_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - dataset_entries_need_lineage
+  - observe_before_canonize
+  - pattern_to_template_to_agent
+  - settlement_before_inheritance
+  recovery_templates:
+  - failure_classification_packet
+  - state_taxonomy_packet
+  - template_gap_packet
+  - work_observation_packet
+  status: candidate_failure_mode
+- failure_mode_id: ci_log_overtrust
+  title: Ci log overtrust
+  description: Candidate failure class observed in dataset genesis entries where ci
+    log overtrust could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0027_ci_failure_triage
+  primary_domains:
+  - debugging_observability_domain
+  - devops_release_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - diagnostic_feedback_loop
+  - failure_classification_loop
+  - logs_are_evidence_not_truth
+  recovery_templates:
+  - ci_failure_packet
+  - diagnosis_packet
+  - failure_classification_packet
+  - task_decomposition_packet
+  status: candidate_failure_mode
+- failure_mode_id: cloud_agent_return_overtrusted
+  title: Cloud agent return overtrusted
+  description: Candidate failure class observed in dataset genesis entries where cloud
+    agent return overtrusted could cause AI-assisted work to drift, overclaim, or
+    land without proof.
+  observed_in_entries:
+  - aiw_obs_0024_cloud_background_feature
+  primary_domains:
+  - cross_domain_settlement_domain
+  - implementation_domain
+  - planning_and_task_breakdown_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - bounded_next_step
+  - branch_returns_are_proposals
+  - receipt_after_tool_action
+  - settlement_before_inheritance
+  recovery_templates:
+  - bounded_patch_packet
+  - branch_return_packet
+  - quality_receipt
+  - workpacket_draft
+  status: candidate_failure_mode
+- failure_mode_id: command_claim_without_output
+  title: Command claim without output
+  description: Candidate failure class observed in dataset genesis entries where command
+    claim without output could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0026_cli_batch_patch
+  primary_domains:
+  - implementation_domain
+  - knowledge_context_memory_domain
+  - testing_quality_domain
+  - workflow_automation_tool_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - proof_is_run_not_assumption
+  - read_before_write
+  - receipt_after_tool_action
+  - tool_access_is_not_authority
+  recovery_templates:
+  - bounded_patch_packet
+  - terminal_command_packet
+  - tool_action_packet
+  - tool_receipt
+  status: candidate_failure_mode
+- failure_mode_id: component_contract_missing
+  title: Component contract missing
+  description: Candidate failure class observed in dataset genesis entries where component
+    contract missing could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0008_ui_component_build
+  primary_domains:
+  - implementation_domain
+  - testing_quality_domain
+  - ui_ux_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - a11y_as_proof_gate
+  - design_system_first
+  - responsive_behavior_matrix
+  - test_after_mutation
+  recovery_templates:
+  - accessibility_review_packet
+  - component_contract_packet
+  - implementation_packet
+  - interaction_state_matrix
+  status: candidate_failure_mode
+- failure_mode_id: context_loss_in_background
+  title: Context loss in background
+  description: Candidate failure class observed in dataset genesis entries where context
+    loss in background could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0024_cloud_background_feature
+  primary_domains:
+  - cross_domain_settlement_domain
+  - implementation_domain
+  - planning_and_task_breakdown_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - bounded_next_step
+  - branch_returns_are_proposals
+  - receipt_after_tool_action
+  - settlement_before_inheritance
+  recovery_templates:
+  - bounded_patch_packet
+  - branch_return_packet
+  - quality_receipt
+  - workpacket_draft
+  status: candidate_failure_mode
+- failure_mode_id: context_surface_blindness
+  title: Context surface blindness
+  description: Candidate failure class observed in dataset genesis entries where context
+    surface blindness could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0004_ide_workspace_mount
+  primary_domains:
+  - codebase_understanding_domain
+  - ide_work_domain
+  - knowledge_context_memory_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - allowed_write_scope
+  - host_body_capability_mapping
+  - read_before_write
+  - workspace_surface_inventory
+  recovery_templates:
+  - codebase_scan_packet
+  - host_tool_surface_inventory
+  - ide_workspace_mount
+  - scope_boundary_packet
+  status: candidate_failure_mode
+- failure_mode_id: cross_file_settlement_missing
+  title: Cross file settlement missing
+  description: Candidate failure class observed in dataset genesis entries where cross
+    file settlement missing could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0006_ide_multi_file_refactor
+  primary_domains:
+  - codebase_understanding_domain
+  - cross_domain_settlement_domain
+  - ide_work_domain
+  - implementation_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - architecture_boundary_check
+  - diff_first_review
+  - focused_then_broad_validation
+  - locality_first_context
+  - settlement_before_inheritance
+  recovery_templates:
+  - codebase_scan_packet
+  - refactor_packet
+  - regression_matrix
+  - settlement_packet
+  status: candidate_failure_mode
+- failure_mode_id: dependency_blind_fanout
+  title: Dependency blind fanout
+  description: Candidate failure class observed in dataset genesis entries where dependency
+    blind fanout could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0025_cloud_parallel_work
+  primary_domains:
+  - cross_domain_settlement_domain
+  - planning_and_task_breakdown_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - branch_returns_are_proposals
+  - dependency_before_parallelism
+  - receipt_after_fan_in
+  - settlement_before_inheritance
+  recovery_templates:
+  - branch_return_packet
+  - conflict_review_packet
+  - settlement_packet
+  - task_decomposition_packet
+  status: candidate_failure_mode
+- failure_mode_id: dependency_upgrade_without_review
+  title: Dependency upgrade without review
+  description: Candidate failure class observed in dataset genesis entries where dependency
+    upgrade without review could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0018_dependency_upgrade
+  primary_domains:
+  - dependency_package_domain
+  - implementation_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - dependency_change_requires_reason
+  - lockfile_diff_review
+  - security_license_gate
+  - test_after_mutation
+  recovery_templates:
+  - dependency_map_packet
+  - license_review_packet
+  - upgrade_packet
+  - validation_run_packet
+  status: candidate_failure_mode
+- failure_mode_id: deployment_risk_unmodeled
+  title: Deployment risk unmodeled
+  description: Candidate failure class observed in dataset genesis entries where deployment
+    risk unmodeled could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0030_schema_migration
+  primary_domains:
+  - data_analysis_domain
+  - devops_release_domain
+  - implementation_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - architecture_boundary_check
+  - rollback_before_rollout
+  - test_after_mutation
+  recovery_templates:
+  - bounded_patch_packet
+  - migration_packet
+  - rollback_packet
+  - test_plan_packet
+  status: candidate_failure_mode
+- failure_mode_id: diff_without_context
+  title: Diff without context
+  description: Candidate failure class observed in dataset genesis entries where diff
+    without context could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0005_ide_single_file_patch
+  primary_domains:
+  - ide_work_domain
+  - implementation_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - diff_first_review
+  - ide_mutation_boundary
+  - read_before_write
+  - test_after_mutation
+  recovery_templates:
+  - bounded_patch_packet
+  - editor_context_packet
+  - validation_run_packet
+  - workspace_diff_receipt
+  status: candidate_failure_mode
+- failure_mode_id: docs_without_source_map
+  title: Docs without source map
+  description: Candidate failure class observed in dataset genesis entries where docs
+    without source map could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0010_docs_readme_refresh
+  primary_domains:
+  - codebase_understanding_domain
+  - documentation_writing_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - docs_version_boundary
+  - read_before_write
+  - reader_task_first
+  - source_claim_alignment
+  recovery_templates:
+  - claim_source_map
+  - docs_brief_packet
+  - how_to_guide_packet
+  - workspace_diff_receipt
+  status: candidate_failure_mode
+- failure_mode_id: environment_boundary_blur
+  title: Environment boundary blur
+  description: Candidate failure class observed in dataset genesis entries where environment
+    boundary blur could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0017_production_bug_triage
+  primary_domains:
+  - debugging_observability_domain
+  - devops_release_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - environment_boundary
+  - logs_are_evidence_not_truth
+  - rollback_before_rollout
+  recovery_templates:
+  - diagnosis_packet
+  - risk_escalation_packet
+  - rollback_packet
+  status: candidate_failure_mode
+- failure_mode_id: example_claim_not_run
+  title: Example claim not run
+  description: Candidate failure class observed in dataset genesis entries where example
+    claim not run could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0011_api_docs_generation
+  primary_domains:
+  - codebase_understanding_domain
+  - documentation_writing_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - docs_version_boundary
+  - examples_must_run_or_be_marked
+  - source_claim_alignment
+  recovery_templates:
+  - api_reference_packet
+  - claim_source_map
+  - validation_run_packet
+  status: candidate_failure_mode
+- failure_mode_id: failure_unclassified
+  title: Failure unclassified
+  description: Candidate failure class observed in dataset genesis entries where failure
+    unclassified could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0027_ci_failure_triage
+  primary_domains:
+  - debugging_observability_domain
+  - devops_release_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - diagnostic_feedback_loop
+  - failure_classification_loop
+  - logs_are_evidence_not_truth
+  recovery_templates:
+  - ci_failure_packet
+  - diagnosis_packet
+  - failure_classification_packet
+  - task_decomposition_packet
+  status: candidate_failure_mode
+- failure_mode_id: fan_in_without_receipt
+  title: Fan in without receipt
+  description: Candidate failure class observed in dataset genesis entries where fan
+    in without receipt could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0023_pr_merge_settlement
+  primary_domains:
+  - cross_domain_settlement_domain
+  - devops_release_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - branch_returns_are_proposals
+  - receipt_after_fan_in
+  - settlement_before_inheritance
+  recovery_templates:
+  - branch_return_packet
+  - conflict_review_packet
+  - merge_receipt
+  - settlement_packet
+  status: candidate_failure_mode
+- failure_mode_id: fix_before_repro
+  title: Fix before repro
+  description: Candidate failure class observed in dataset genesis entries where fix
+    before repro could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0016_bug_reproduction
+  primary_domains:
+  - debugging_observability_domain
+  - product_requirements_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - hypothesis_evidence_split
+  - logs_are_evidence_not_truth
+  - repro_before_fix_when_possible
+  recovery_templates:
+  - bug_repro_packet
+  - diagnosis_packet
+  - test_plan_packet
+  status: candidate_failure_mode
+- failure_mode_id: generic_agent_overreach
+  title: Generic agent overreach
+  description: Candidate failure class observed in dataset genesis entries where generic
+    agent overreach could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0006_ide_multi_file_refactor
+  primary_domains:
+  - codebase_understanding_domain
+  - cross_domain_settlement_domain
+  - ide_work_domain
+  - implementation_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - architecture_boundary_check
+  - diff_first_review
+  - focused_then_broad_validation
+  - locality_first_context
+  - settlement_before_inheritance
+  recovery_templates:
+  - codebase_scan_packet
+  - refactor_packet
+  - regression_matrix
+  - settlement_packet
+  status: candidate_failure_mode
+- failure_mode_id: generic_coder_guesses_ui
+  title: Generic coder guesses ui
+  description: Candidate failure class observed in dataset genesis entries where generic
+    coder guesses ui could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0007_ui_feature_brief
+  primary_domains:
+  - planning_and_task_breakdown_domain
+  - product_requirements_domain
+  - ui_ux_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - bounded_next_step
+  - design_system_first
+  - intent_to_requirement
+  - states_before_pixels
+  recovery_templates:
+  - acceptance_criteria_packet
+  - component_contract_packet
+  - requirements_packet
+  - ui_brief_packet
+  status: candidate_failure_mode
+- failure_mode_id: host_body_boundary_missing
+  title: Host body boundary missing
+  description: Candidate failure class observed in dataset genesis entries where host
+    body boundary missing could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0000_assistant_identity_boundary
+  primary_domains:
+  - ai_assistant_identity_embodiment
+  - chat_work_domain
+  - ide_work_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - answer_vs_state_boundary
+  - assistant_is_work_interface_not_model_alone
+  - chat_ide_cli_cloud_boundary_mapping
+  - host_body_capability_mapping
+  recovery_templates:
+  - assistant_embodiment_mount
+  - capability_boundary_report
+  - context_package_packet
+  - host_tool_surface_inventory
+  status: candidate_failure_mode
+- failure_mode_id: implementation_before_acceptance
+  title: Implementation before acceptance
+  description: Candidate failure class observed in dataset genesis entries where implementation
+    before acceptance could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0034_product_acceptance_criteria
+  primary_domains:
+  - planning_and_task_breakdown_domain
+  - product_requirements_domain
+  - testing_quality_domain
+  - ui_ux_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - acceptance_before_build
+  - focused_then_broad_validation
+  - intent_to_requirement
+  - states_before_pixels
+  recovery_templates:
+  - acceptance_criteria_packet
+  - test_plan_packet
+  - ui_brief_packet
+  - user_story_packet
+  status: candidate_failure_mode
+- failure_mode_id: incident_action_without_approval
+  title: Incident action without approval
+  description: Candidate failure class observed in dataset genesis entries where incident
+    action without approval could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0017_production_bug_triage
+  primary_domains:
+  - debugging_observability_domain
+  - devops_release_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - environment_boundary
+  - logs_are_evidence_not_truth
+  - rollback_before_rollout
+  recovery_templates:
+  - diagnosis_packet
+  - risk_escalation_packet
+  - rollback_packet
+  status: candidate_failure_mode
+- failure_mode_id: local_success_as_release
+  title: Local success as release
+  description: Candidate failure class observed in dataset genesis entries where local
+    success as release could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0012_changelog_release_notes
+  - aiw_obs_0028_release_readiness
+  primary_domains:
+  - cross_domain_settlement_domain
+  - devops_release_domain
+  - documentation_writing_domain
+  - knowledge_context_memory_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - docs_version_boundary
+  - local_success_is_not_release
+  - security_license_gate
+  - source_claim_alignment
+  recovery_templates:
+  - approval_request_packet
+  - changelog_packet
+  - claim_source_map
+  - quality_receipt
+  - release_readiness_packet
+  - security_review_packet
+  status: candidate_failure_mode
+- failure_mode_id: lockfile_blindness
+  title: Lockfile blindness
+  description: Candidate failure class observed in dataset genesis entries where lockfile
+    blindness could cause AI-assisted work to drift, overclaim, or land without proof.
+  observed_in_entries:
+  - aiw_obs_0018_dependency_upgrade
+  primary_domains:
+  - dependency_package_domain
+  - implementation_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - dependency_change_requires_reason
+  - lockfile_diff_review
+  - security_license_gate
+  - test_after_mutation
+  recovery_templates:
+  - dependency_map_packet
+  - license_review_packet
+  - upgrade_packet
+  - validation_run_packet
+  status: candidate_failure_mode
+- failure_mode_id: lockfile_review_missing
+  title: Lockfile review missing
+  description: Candidate failure class observed in dataset genesis entries where lockfile
+    review missing could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0019_lockfile_diff_review
+  primary_domains:
+  - cross_domain_settlement_domain
+  - dependency_package_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - diff_first_review
+  - lockfile_diff_review
+  - security_license_gate
+  recovery_templates:
+  - code_review_packet
+  - dependency_change_packet
+  - security_review_packet
+  status: candidate_failure_mode
+- failure_mode_id: logs_as_truth
+  title: Logs as truth
+  description: Candidate failure class observed in dataset genesis entries where logs
+    as truth could cause AI-assisted work to drift, overclaim, or land without proof.
+  observed_in_entries:
+  - aiw_obs_0016_bug_reproduction
+  primary_domains:
+  - debugging_observability_domain
+  - product_requirements_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - hypothesis_evidence_split
+  - logs_are_evidence_not_truth
+  - repro_before_fix_when_possible
+  recovery_templates:
+  - bug_repro_packet
+  - diagnosis_packet
+  - test_plan_packet
+  status: candidate_failure_mode
+- failure_mode_id: lost_reader_model
+  title: Lost reader model
+  description: Candidate failure class observed in dataset genesis entries where lost
+    reader model could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0002_chat_artifact_rewrite
+  primary_domains:
+  - chat_work_domain
+  - documentation_writing_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - conversation_to_artifact_handoff
+  - reader_task_first
+  - source_claim_alignment
+  recovery_templates:
+  - artifact_creation_packet
+  - claim_source_map
+  - docs_brief_packet
+  status: candidate_failure_mode
+- failure_mode_id: memory_as_state
+  title: Memory as state
+  description: Candidate failure class observed in dataset genesis entries where memory
+    as state could cause AI-assisted work to drift, overclaim, or land without proof.
+  observed_in_entries:
+  - aiw_obs_0003_chat_research_brief_to_state
+  - aiw_obs_0031_continuity_bundle_export
+  primary_domains:
+  - assistant_learning_dataset_domain
+  - chat_work_domain
+  - cross_domain_settlement_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - freshness_and_authority_ranking
+  - memory_orients_artifacts_govern
+  - portable_continuity_export
+  - settlement_before_inheritance
+  - source_claim_alignment
+  recovery_templates:
+  - claim_validation_packet
+  - continuity_bundle_packet
+  - continuity_export_packet
+  - settlement_packet
+  - source_ranking_packet
+  - work_observation_packet
+  status: candidate_failure_mode
+- failure_mode_id: method_hidden
+  title: Method hidden
+  description: Candidate failure class observed in dataset genesis entries where method
+    hidden could cause AI-assisted work to drift, overclaim, or land without proof.
+  observed_in_entries:
+  - aiw_obs_0029_data_analysis_request
+  primary_domains:
+  - data_analysis_domain
+  - documentation_writing_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - method_before_claim
+  - reproducible_analysis
+  - source_claim_alignment
+  - source_data_lineage
+  recovery_templates:
+  - analysis_packet
+  - claim_source_map
+  - data_source_manifest
+  - visualization_packet
+  status: candidate_failure_mode
+- failure_mode_id: missing_quality_gate
+  title: Missing quality gate
+  description: Candidate failure class observed in dataset genesis entries where missing
+    quality gate could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0013_test_plan_from_feature
+  primary_domains:
+  - planning_and_task_breakdown_domain
+  - product_requirements_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - focused_then_broad_validation
+  - intent_to_requirement
+  - test_after_mutation
+  recovery_templates:
+  - regression_matrix
+  - requirements_packet
+  - test_plan_packet
+  status: candidate_failure_mode
+- failure_mode_id: narrow_test_as_full_readiness
+  title: Narrow test as full readiness
+  description: Candidate failure class observed in dataset genesis entries where narrow
+    test as full readiness could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0015_regression_matrix_update
+  primary_domains:
+  - codebase_understanding_domain
+  - cross_domain_settlement_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - diff_first_review
+  - focused_then_broad_validation
+  - settlement_before_inheritance
+  recovery_templates:
+  - regression_matrix
+  - settlement_packet
+  - workspace_diff_receipt
+  status: candidate_failure_mode
+- failure_mode_id: parallel_output_soup
+  title: Parallel output soup
+  description: Candidate failure class observed in dataset genesis entries where parallel
+    output soup could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0025_cloud_parallel_work
+  primary_domains:
+  - cross_domain_settlement_domain
+  - planning_and_task_breakdown_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - branch_returns_are_proposals
+  - dependency_before_parallelism
+  - receipt_after_fan_in
+  - settlement_before_inheritance
+  recovery_templates:
+  - branch_return_packet
+  - conflict_review_packet
+  - settlement_packet
+  - task_decomposition_packet
+  status: candidate_failure_mode
+- failure_mode_id: patch_without_repro
+  title: Patch without repro
+  description: Candidate failure class observed in dataset genesis entries where patch
+    without repro could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0014_failing_test_fix_loop
+  primary_domains:
+  - debugging_observability_domain
+  - implementation_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - diagnostic_feedback_loop
+  - hypothesis_evidence_split
+  - repro_before_fix_when_possible
+  - test_after_mutation
+  recovery_templates:
+  - bounded_patch_packet
+  - ci_failure_packet
+  - diagnosis_packet
+  - fix_verification_packet
+  status: candidate_failure_mode
+- failure_mode_id: queue_authority_blur
+  title: Queue authority blur
+  description: Candidate failure class observed in dataset genesis entries where queue
+    authority blur could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0035_background_daemon_queue
+  primary_domains:
+  - cross_domain_settlement_domain
+  - knowledge_context_memory_domain
+  - planning_and_task_breakdown_domain
+  - workflow_automation_tool_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - bounded_next_step
+  - branch_returns_are_proposals
+  - receipt_after_tool_action
+  - settlement_before_inheritance
+  recovery_templates:
+  - branch_return_packet
+  - settlement_packet
+  - tool_action_packet
+  - tool_receipt
+  - workpacket_draft
+  status: candidate_failure_mode
+- failure_mode_id: release_notes_without_source_refs
+  title: Release notes without source refs
+  description: Candidate failure class observed in dataset genesis entries where release
+    notes without source refs could cause AI-assisted work to drift, overclaim, or
+    land without proof.
+  observed_in_entries:
+  - aiw_obs_0012_changelog_release_notes
+  primary_domains:
+  - devops_release_domain
+  - documentation_writing_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - docs_version_boundary
+  - local_success_is_not_release
+  - source_claim_alignment
+  recovery_templates:
+  - changelog_packet
+  - claim_source_map
+  - release_readiness_packet
+  status: candidate_failure_mode
+- failure_mode_id: release_without_approval
+  title: Release without approval
+  description: Candidate failure class observed in dataset genesis entries where release
+    without approval could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0028_release_readiness
+  primary_domains:
+  - cross_domain_settlement_domain
+  - devops_release_domain
+  - documentation_writing_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - docs_version_boundary
+  - local_success_is_not_release
+  - security_license_gate
+  recovery_templates:
+  - approval_request_packet
+  - quality_receipt
+  - release_readiness_packet
+  - security_review_packet
+  status: candidate_failure_mode
+- failure_mode_id: review_without_context
+  title: Review without context
+  description: Candidate failure class observed in dataset genesis entries where review
+    without context could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0022_pr_code_review
+  primary_domains:
+  - codebase_understanding_domain
+  - cross_domain_settlement_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - adversarial_review_before_landing
+  - diff_first_review
+  - focused_then_broad_validation
+  recovery_templates:
+  - code_review_packet
+  - regression_matrix
+  - security_review_packet
+  - settlement_packet
+  status: candidate_failure_mode
+- failure_mode_id: schema_change_without_rollback
+  title: Schema change without rollback
+  description: Candidate failure class observed in dataset genesis entries where schema
+    change without rollback could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0030_schema_migration
+  primary_domains:
+  - data_analysis_domain
+  - devops_release_domain
+  - implementation_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - architecture_boundary_check
+  - rollback_before_rollout
+  - test_after_mutation
+  recovery_templates:
+  - bounded_patch_packet
+  - migration_packet
+  - rollback_packet
+  - test_plan_packet
+  status: candidate_failure_mode
+- failure_mode_id: secret_boundary_violation
+  title: Secret boundary violation
+  description: Candidate failure class observed in dataset genesis entries where secret
+    boundary violation could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0020_secret_exposure_review
+  primary_domains:
+  - implementation_domain
+  - knowledge_context_memory_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - adversarial_review_before_landing
+  - secret_boundary_preservation
+  - tool_injection_guard
+  recovery_templates:
+  - risk_escalation_packet
+  - security_review_packet
+  - workspace_diff_receipt
+  status: candidate_failure_mode
+- failure_mode_id: security_risk_unranked
+  title: Security risk unranked
+  description: Candidate failure class observed in dataset genesis entries where security
+    risk unranked could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0019_lockfile_diff_review
+  primary_domains:
+  - cross_domain_settlement_domain
+  - dependency_package_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - diff_first_review
+  - lockfile_diff_review
+  - security_license_gate
+  recovery_templates:
+  - code_review_packet
+  - dependency_change_packet
+  - security_review_packet
+  status: candidate_failure_mode
+- failure_mode_id: settlement_missing
+  title: Settlement missing
+  description: Candidate failure class observed in dataset genesis entries where settlement
+    missing could cause AI-assisted work to drift, overclaim, or land without proof.
+  observed_in_entries:
+  - aiw_obs_0015_regression_matrix_update
+  primary_domains:
+  - codebase_understanding_domain
+  - cross_domain_settlement_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - diff_first_review
+  - focused_then_broad_validation
+  - settlement_before_inheritance
+  recovery_templates:
+  - regression_matrix
+  - settlement_packet
+  - workspace_diff_receipt
+  status: candidate_failure_mode
+- failure_mode_id: side_effect_without_receipt
+  title: Side effect without receipt
+  description: Candidate failure class observed in dataset genesis entries where side
+    effect without receipt could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0033_tool_automation_script
+  primary_domains:
+  - implementation_domain
+  - testing_quality_domain
+  - workflow_automation_tool_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - proof_is_run_not_assumption
+  - receipt_after_tool_action
+  - tool_access_is_not_authority
+  recovery_templates:
+  - automation_script_packet
+  - terminal_command_packet
+  - tool_action_packet
+  - tool_receipt
+  status: candidate_failure_mode
+- failure_mode_id: source_rank_flattening
+  title: Source rank flattening
+  description: Candidate failure class observed in dataset genesis entries where source
+    rank flattening could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0003_chat_research_brief_to_state
+  primary_domains:
+  - assistant_learning_dataset_domain
+  - chat_work_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - freshness_and_authority_ranking
+  - memory_orients_artifacts_govern
+  - source_claim_alignment
+  recovery_templates:
+  - claim_validation_packet
+  - source_ranking_packet
+  - work_observation_packet
+  status: candidate_failure_mode
+- failure_mode_id: stale_api_doc
+  title: Stale api doc
+  description: Candidate failure class observed in dataset genesis entries where stale
+    api doc could cause AI-assisted work to drift, overclaim, or land without proof.
+  observed_in_entries:
+  - aiw_obs_0011_api_docs_generation
+  primary_domains:
+  - codebase_understanding_domain
+  - documentation_writing_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - docs_version_boundary
+  - examples_must_run_or_be_marked
+  - source_claim_alignment
+  recovery_templates:
+  - api_reference_packet
+  - claim_source_map
+  - validation_run_packet
+  status: candidate_failure_mode
+- failure_mode_id: template_gap_untracked
+  title: Template gap untracked
+  description: Candidate failure class observed in dataset genesis entries where template
+    gap untracked could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0032_work_pattern_capture
+  primary_domains:
+  - assistant_learning_dataset_domain
+  - cross_domain_settlement_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - dataset_entries_need_lineage
+  - observe_before_canonize
+  - pattern_to_template_to_agent
+  - settlement_before_inheritance
+  recovery_templates:
+  - failure_classification_packet
+  - state_taxonomy_packet
+  - template_gap_packet
+  - work_observation_packet
+  status: candidate_failure_mode
+- failure_mode_id: test_claim_without_run
+  title: Test claim without run
+  description: Candidate failure class observed in dataset genesis entries where test
+    claim without run could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0005_ide_single_file_patch
+  - aiw_obs_0014_failing_test_fix_loop
+  primary_domains:
+  - debugging_observability_domain
+  - ide_work_domain
+  - implementation_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - diagnostic_feedback_loop
+  - diff_first_review
+  - hypothesis_evidence_split
+  - ide_mutation_boundary
+  - read_before_write
+  - repro_before_fix_when_possible
+  recovery_templates:
+  - bounded_patch_packet
+  - ci_failure_packet
+  - diagnosis_packet
+  - editor_context_packet
+  - fix_verification_packet
+  - validation_run_packet
+  status: candidate_failure_mode
+- failure_mode_id: tests_after_implementation_only
+  title: Tests after implementation only
+  description: Candidate failure class observed in dataset genesis entries where tests
+    after implementation only could cause AI-assisted work to drift, overclaim, or
+    land without proof.
+  observed_in_entries:
+  - aiw_obs_0013_test_plan_from_feature
+  primary_domains:
+  - planning_and_task_breakdown_domain
+  - product_requirements_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - focused_then_broad_validation
+  - intent_to_requirement
+  - test_after_mutation
+  recovery_templates:
+  - regression_matrix
+  - requirements_packet
+  - test_plan_packet
+  status: candidate_failure_mode
+- failure_mode_id: tool_access_as_authority
+  title: Tool access as authority
+  description: Candidate failure class observed in dataset genesis entries where tool
+    access as authority could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0004_ide_workspace_mount
+  primary_domains:
+  - codebase_understanding_domain
+  - ide_work_domain
+  - knowledge_context_memory_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - allowed_write_scope
+  - host_body_capability_mapping
+  - read_before_write
+  - workspace_surface_inventory
+  recovery_templates:
+  - codebase_scan_packet
+  - host_tool_surface_inventory
+  - ide_workspace_mount
+  - scope_boundary_packet
+  status: candidate_failure_mode
+- failure_mode_id: tool_action_from_untrusted_text
+  title: Tool action from untrusted text
+  description: Candidate failure class observed in dataset genesis entries where tool
+    action from untrusted text could cause AI-assisted work to drift, overclaim, or
+    land without proof.
+  observed_in_entries:
+  - aiw_obs_0021_prompt_injection_guard
+  primary_domains:
+  - chat_work_domain
+  - review_security_domain
+  - workflow_automation_tool_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - approval_before_side_effect
+  - tool_access_is_not_authority
+  - tool_injection_guard
+  recovery_templates:
+  - approval_request_packet
+  - prompt_injection_audit_packet
+  - tool_action_packet
+  status: candidate_failure_mode
+- failure_mode_id: tool_side_effect_without_receipt
+  title: Tool side effect without receipt
+  description: Candidate failure class observed in dataset genesis entries where tool
+    side effect without receipt could cause AI-assisted work to drift, overclaim,
+    or land without proof.
+  observed_in_entries:
+  - aiw_obs_0026_cli_batch_patch
+  primary_domains:
+  - implementation_domain
+  - knowledge_context_memory_domain
+  - testing_quality_domain
+  - workflow_automation_tool_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - proof_is_run_not_assumption
+  - read_before_write
+  - receipt_after_tool_action
+  - tool_access_is_not_authority
+  recovery_templates:
+  - bounded_patch_packet
+  - terminal_command_packet
+  - tool_action_packet
+  - tool_receipt
+  status: candidate_failure_mode
+- failure_mode_id: ui_without_state_model
+  title: Ui without state model
+  description: Candidate failure class observed in dataset genesis entries where ui
+    without state model could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0007_ui_feature_brief
+  primary_domains:
+  - planning_and_task_breakdown_domain
+  - product_requirements_domain
+  - ui_ux_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - bounded_next_step
+  - design_system_first
+  - intent_to_requirement
+  - states_before_pixels
+  recovery_templates:
+  - acceptance_criteria_packet
+  - component_contract_packet
+  - requirements_packet
+  - ui_brief_packet
+  status: candidate_failure_mode
+- failure_mode_id: unaccepted_requirement_as_state
+  title: Unaccepted requirement as state
+  description: Candidate failure class observed in dataset genesis entries where unaccepted
+    requirement as state could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0001_chat_requirement_to_packet
+  primary_domains:
+  - chat_work_domain
+  - knowledge_context_memory_domain
+  - planning_and_task_breakdown_domain
+  - product_requirements_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - answer_vs_state_boundary
+  - bounded_next_step
+  - intent_to_requirement
+  - non_goals_are_context
+  recovery_templates:
+  - chat_intake_packet
+  - requirements_packet
+  - task_decomposition_packet
+  - workpacket_draft
+  status: candidate_failure_mode
+- failure_mode_id: unsafe_evidence_echo
+  title: Unsafe evidence echo
+  description: Candidate failure class observed in dataset genesis entries where unsafe
+    evidence echo could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0020_secret_exposure_review
+  primary_domains:
+  - implementation_domain
+  - knowledge_context_memory_domain
+  - review_security_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - adversarial_review_before_landing
+  - secret_boundary_preservation
+  - tool_injection_guard
+  recovery_templates:
+  - risk_escalation_packet
+  - security_review_packet
+  - workspace_diff_receipt
+  status: candidate_failure_mode
+- failure_mode_id: unsettled_pr_feedback
+  title: Unsettled pr feedback
+  description: Candidate failure class observed in dataset genesis entries where unsettled
+    pr feedback could cause AI-assisted work to drift, overclaim, or land without
+    proof.
+  observed_in_entries:
+  - aiw_obs_0022_pr_code_review
+  primary_domains:
+  - codebase_understanding_domain
+  - cross_domain_settlement_domain
+  - review_security_domain
+  - testing_quality_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - adversarial_review_before_landing
+  - diff_first_review
+  - focused_then_broad_validation
+  recovery_templates:
+  - code_review_packet
+  - regression_matrix
+  - security_review_packet
+  - settlement_packet
+  status: candidate_failure_mode
+- failure_mode_id: unsupported_doc_claim
+  title: Unsupported doc claim
+  description: Candidate failure class observed in dataset genesis entries where unsupported
+    doc claim could cause AI-assisted work to drift, overclaim, or land without proof.
+  observed_in_entries:
+  - aiw_obs_0002_chat_artifact_rewrite
+  - aiw_obs_0010_docs_readme_refresh
+  primary_domains:
+  - chat_work_domain
+  - codebase_understanding_domain
+  - documentation_writing_domain
+  - knowledge_context_memory_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - conversation_to_artifact_handoff
+  - docs_version_boundary
+  - read_before_write
+  - reader_task_first
+  - source_claim_alignment
+  recovery_templates:
+  - artifact_creation_packet
+  - claim_source_map
+  - docs_brief_packet
+  - how_to_guide_packet
+  - workspace_diff_receipt
+  status: candidate_failure_mode
+- failure_mode_id: unverified_ui_claim
+  title: Unverified ui claim
+  description: Candidate failure class observed in dataset genesis entries where unverified
+    ui claim could cause AI-assisted work to drift, overclaim, or land without proof.
+  observed_in_entries:
+  - aiw_obs_0009_ui_accessibility_audit
+  primary_domains:
+  - review_security_domain
+  - testing_quality_domain
+  - ui_ux_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - a11y_as_proof_gate
+  - focused_then_broad_validation
+  - responsive_behavior_matrix
+  recovery_templates:
+  - accessibility_review_packet
+  - fix_verification_packet
+  - quality_receipt
+  status: candidate_failure_mode
+- failure_mode_id: vague_intent_overcompression
+  title: Vague intent overcompression
+  description: Candidate failure class observed in dataset genesis entries where vague
+    intent overcompression could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0001_chat_requirement_to_packet
+  primary_domains:
+  - chat_work_domain
+  - knowledge_context_memory_domain
+  - planning_and_task_breakdown_domain
+  - product_requirements_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - answer_vs_state_boundary
+  - bounded_next_step
+  - intent_to_requirement
+  - non_goals_are_context
+  recovery_templates:
+  - chat_intake_packet
+  - requirements_packet
+  - task_decomposition_packet
+  - workpacket_draft
+  status: candidate_failure_mode
+- failure_mode_id: visual_polish_without_a11y
+  title: Visual polish without a11y
+  description: Candidate failure class observed in dataset genesis entries where visual
+    polish without a11y could cause AI-assisted work to drift, overclaim, or land
+    without proof.
+  observed_in_entries:
+  - aiw_obs_0008_ui_component_build
+  primary_domains:
+  - implementation_domain
+  - testing_quality_domain
+  - ui_ux_domain
+  detection_signals:
+  - missing source/context proof
+  - unclear accepted-vs-candidate boundary
+  - missing specialist owner or settlement path
+  prevention_protocols:
+  - a11y_as_proof_gate
+  - design_system_first
+  - responsive_behavior_matrix
+  - test_after_mutation
+  recovery_templates:
+  - accessibility_review_packet
+  - component_contract_packet
+  - implementation_packet
+  - interaction_state_matrix
+  status: candidate_failure_mode
+non_claims:
+- Failure modes are candidate classes, not accepted ION canon.
+- Observation frequency in this seed dataset does not equal real-world prevalence.
+- Failure classes require future review before being promoted to active template or
+  agent law.

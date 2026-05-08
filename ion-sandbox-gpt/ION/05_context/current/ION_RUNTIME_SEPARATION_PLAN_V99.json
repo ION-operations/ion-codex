@@ -1,0 +1,59 @@
+{
+  "schema_id": "ion.runtime_separation_plan.v1",
+  "created_at": "2026-05-01T00:00:00Z",
+  "branch": "V99_AGENT_CONTEXT_CONTINUITY_AND_RUNTIME_SEPARATION_DESIGN",
+  "authority_posture": "design_lock_not_production",
+  "base_artifact_assumption": {
+    "full_base": "ION_CURSOR_CONSOLIDATED_V96_FULL_RUNTIME_20260430",
+    "overlays_after_base": [
+      "ION_CURSOR_V97_LEAD_DEV_SURVIVAL_AUDIT_UPDATE_20260501",
+      "ION_CURSOR_V98_MASTER_ORCHESTRATION_AUTOMATION_AND_UI_RECOVERY_UPDATE_20260501",
+      "ION_CURSOR_V99_AGENT_CONTEXT_CONTINUITY_AND_RUNTIME_SEPARATION_DESIGN_UPDATE_20260501"
+    ],
+    "note": "V97, V98, and V99 are overlays, not standalone full runtime roots."
+  },
+  "target_productized_runtime_shape": {
+    "runtime_core": [
+      "pyproject.toml",
+      "ION/REPO_AUTHORITY.md",
+      "ION/02_architecture/",
+      "ION/03_registry/",
+      "ION/04_packages/kernel/",
+      "ION/07_templates/"
+    ],
+    "runtime_state": [
+      "ION/05_context/current/ACTIVE_*.json",
+      "ION/05_context/current/agent_context_systems/",
+      "ION/05_context/signals/"
+    ],
+    "execution_cycles": [
+      "ION/05_context/current/execution_cycles/"
+    ],
+    "ui_surface": [
+      "ION/08_ui/joc_cockpit_shell/",
+      "ION/09_integrations/cursor_extension/",
+      "ION/05_context/current/ACTIVE_COCKPIT_VIEW_MODEL.json"
+    ],
+    "historical_archive": [
+      "older branch reports",
+      "donor context",
+      "obsolete receipts",
+      "prior full zips"
+    ],
+    "release_overlay": [
+      "FILES_ADDED_*.txt",
+      "changed files only"
+    ]
+  },
+  "next_required_enforcement_pass": {
+    "module": "ION/04_packages/kernel/ion_autonomous_loop.py",
+    "must_also_add": [
+      "ION/04_packages/kernel/ion_template_action_gate.py",
+      "ION/04_packages/kernel/ion_steward_integrate.py",
+      "ION/tests/test_kernel_ion_autonomous_loop.py",
+      "ION/tests/test_kernel_ion_template_action_gate.py",
+      "ION/tests/test_kernel_ion_steward_integrate.py"
+    ],
+    "exit_condition": "one local deterministic loop runs from goal to explicit stop reason with context proof, template action proof, Steward integration receipt, and cockpit-visible state"
+  }
+}

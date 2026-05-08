@@ -1,0 +1,101 @@
+{
+  "$id": "https://ion.local/schemas/ion_mcp_hosted_http_alpha_boundary_report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "allowed_resolutions": {
+      "items": {
+        "enum": [
+          "READ_ONLY",
+          "DRY_RUN",
+          "APPROVAL_REQUIRED",
+          "REFUSED"
+        ]
+      },
+      "type": "array"
+    },
+    "bridge_version": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "forbidden_resolution_seen": {
+      "type": "boolean"
+    },
+    "hosted_cloud_certified": {
+      "const": false,
+      "type": "boolean"
+    },
+    "hosted_http_alpha_profile": {
+      "type": "object"
+    },
+    "ion_root": {
+      "type": "string"
+    },
+    "kernel_truth_mutation_seen": {
+      "const": false,
+      "type": "boolean"
+    },
+    "live_execution_authorized_seen": {
+      "const": false,
+      "type": "boolean"
+    },
+    "oauth_certified": {
+      "const": false,
+      "type": "boolean"
+    },
+    "official_sdk_runtime_required": {
+      "const": false,
+      "type": "boolean"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "protocol_version": {
+      "type": "string"
+    },
+    "public_endpoint_certified": {
+      "const": false,
+      "type": "boolean"
+    },
+    "sdk_decision": {
+      "type": "object"
+    },
+    "state_store_root": {
+      "type": "string"
+    },
+    "steps": {
+      "type": "array"
+    },
+    "tool_contracts": {
+      "type": "array"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "bridge_version",
+    "protocol_version",
+    "created_at",
+    "ion_root",
+    "state_store_root",
+    "passed",
+    "sdk_decision",
+    "hosted_http_alpha_profile",
+    "tool_contracts",
+    "steps",
+    "allowed_resolutions",
+    "forbidden_resolution_seen",
+    "live_execution_authorized_seen",
+    "kernel_truth_mutation_seen",
+    "official_sdk_runtime_required",
+    "hosted_cloud_certified",
+    "oauth_certified",
+    "public_endpoint_certified"
+  ],
+  "title": "IonMcpHostedHttpAlphaBoundaryReport",
+  "type": "object"
+}

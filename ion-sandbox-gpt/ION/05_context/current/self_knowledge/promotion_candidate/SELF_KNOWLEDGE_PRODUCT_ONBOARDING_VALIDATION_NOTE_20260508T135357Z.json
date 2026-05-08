@@ -1,0 +1,51 @@
+{
+  "authority_boundary": {
+    "explicit_acceptance_observed": false,
+    "live_execution_authority": false,
+    "mutated_active_onboarding_law": false,
+    "mutated_product_surfaces": false,
+    "mutated_registry": false,
+    "production_authority": false
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_carrier_continue --ion-root . --carrier GPT_SANDBOX_CARRIER --operator-message \"continue self-knowledge product/package onboarding audit without acceptance\" --json",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_status --ion-root . --json",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_sandbox_preflight --ion-root . --json",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages:/opt/pyvenv/lib/python3.13/site-packages python3 -S ION/05_context/current/self_knowledge/validate_self_knowledge_candidate.py --ion-root . --json",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages:/opt/pyvenv/lib/python3.13/site-packages python3 -S -m pytest ION/tests/test_kernel_ion_self_knowledge_candidate.py ION/tests/test_kernel_ion_self_knowledge_route_usage.py ION/tests/test_kernel_ion_self_knowledge_onboarding_wiring.py ION/tests/test_kernel_ion_self_knowledge_product_onboarding.py -q"
+  ],
+  "generated_at": "2026-05-08T13:53:57+00:00",
+  "non_claims": [
+    "This validation note does not accept product-law changes.",
+    "This validation note does not accept ION/03_registry/self_knowledge landing.",
+    "This validation note does not claim external Codex/MCP/daemon execution."
+  ],
+  "results": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "candidate_validation": {
+      "accepted": true,
+      "domain_count": 14,
+      "findings": [],
+      "live_execution_authority": false,
+      "parsed_files_count": 22,
+      "production_authority": false,
+      "route_count": 7,
+      "schema_id": "ion.self_knowledge_candidate_validation.v0_2"
+    },
+    "focused_pytest": "25 passed",
+    "focused_test_files": [
+      "ION/tests/test_kernel_ion_self_knowledge_candidate.py",
+      "ION/tests/test_kernel_ion_self_knowledge_route_usage.py",
+      "ION/tests/test_kernel_ion_self_knowledge_onboarding_wiring.py",
+      "ION/tests/test_kernel_ion_self_knowledge_product_onboarding.py"
+    ],
+    "ion_status_verdict": "ION_STATUS_READY",
+    "product_onboarding_audit_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_AUDIT_REPORT_20260508T135357Z.json",
+    "product_onboarding_overlay": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_OVERLAY_V0_2.json",
+    "product_onboarding_patchset": "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PATCHSET_20260508T135357Z.json",
+    "product_onboarding_proposal": "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PROPOSAL_20260508T135357Z.md",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+  },
+  "schema_id": "ion.self_knowledge.product_onboarding_validation_note.v0_2",
+  "status": "passed_candidate_validation"
+}

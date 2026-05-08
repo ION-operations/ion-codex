@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-05-02T22:53:18+00:00",
+  "detail": "system output prepared through Relay -> Persona Interface return boundary",
+  "receipt_id": "fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160",
+  "session_id": "fdsession-e3325d8e7fd2e91c61",
+  "stage": "PERSONA_TO_USER",
+  "status": "ACCEPTED",
+  "witness_paths": [
+    "ION/05_context/history/front_door_runtime/relay_return_packages/fdreturn-fdsession-e3325d8e7fd2e91c61-steward-proof-99a27cc53338.json",
+    "ION/05_context/history/front_door_runtime/persona_response_packages/fdresponse-fdreturn-fdsession-e3325d8e7fd2e91c61-stewa-a2aab6e5f3e3.json",
+    "ION/05_context/history/front_door_runtime/receipts/fdreceipt-fdresponse-fdreturn-fdsession-e3325d8e7fd2e-79ca4f6cb160.json"
+  ]
+}

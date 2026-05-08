@@ -1,0 +1,18 @@
+registry_id: gpt55_agent_succession_policy
+schema_id: ion.agent_succession_policy.v1
+branch: ION-GPT55-SELF-MOUNT
+authority: A3_BRANCH_LOCAL_SUCCESSION_PRIMITIVE
+production_authority: false
+inherits:
+  - task_continuity
+  - evidence_paths
+  - validation_outputs
+  - unresolved_risks
+  - obligations
+  - operator_delegation_context
+does_not_inherit:
+  - hidden_memory
+  - personal_identity
+  - private_experience
+  - production_authority
+  - self_ratification_power

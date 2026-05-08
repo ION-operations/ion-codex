@@ -1,0 +1,59 @@
+{
+  "$id": "ion.visual_diagnosis_receipt.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "authority_scope": {
+      "const": "OBSERVE_DIAGNOSE_REPORT_PLAN_ONLY"
+    },
+    "diagnosis_verdict": {
+      "type": "string"
+    },
+    "diagnostic_findings": {
+      "type": "array"
+    },
+    "emitted_at": {
+      "type": "string"
+    },
+    "forbidden_actions": {
+      "type": "object"
+    },
+    "harness_plan": {
+      "type": "object"
+    },
+    "observation_packet_ids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "production_authority": {
+      "const": false
+    },
+    "receipt_id": {
+      "type": "string"
+    },
+    "recommended_actions": {
+      "type": "array"
+    },
+    "schema_id": {
+      "const": "ion.visual_diagnosis_receipt.v1"
+    },
+    "target": {
+      "type": "string"
+    },
+    "version": {
+      "const": "V45_VISUAL_DIAGNOSIS_RECEIPTS_AND_BROWSER_HARNESS_PLAN"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "receipt_id",
+    "diagnosis_verdict",
+    "authority_scope",
+    "production_authority",
+    "forbidden_actions"
+  ],
+  "title": "ION Visual Diagnosis Receipt",
+  "type": "object"
+}

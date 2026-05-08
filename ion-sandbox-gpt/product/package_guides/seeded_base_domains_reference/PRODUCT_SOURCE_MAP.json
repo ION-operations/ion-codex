@@ -1,0 +1,178 @@
+{
+  "ION_CUSTOM_GPT_ADAPTER/FIRST_RUN_BEHAVIOR.md": {
+    "curation_status": "first_run_ux_projection",
+    "source": "generated_adapter_projection",
+    "source_paths": [
+      "ION/docs/ION_FUNDAMENTALS.md"
+    ]
+  },
+  "ION_CUSTOM_GPT_ADAPTER/GPT_INSTRUCTIONS.md": {
+    "curation_status": "adapter_draft",
+    "source": "generated_adapter_projection",
+    "source_paths": [
+      "ION/06_intelligence/orchestration/custom_gpt/",
+      "ION/docs/ION_FUNDAMENTALS.md"
+    ]
+  },
+  "ION_CUSTOM_GPT_ADAPTER/PERSONA_INTERFACE_RULES.md": {
+    "curation_status": "persona_interface_projection",
+    "source": "generated_adapter_projection",
+    "source_paths": [
+      "ION/docs/ION_FUNDAMENTALS.md"
+    ]
+  },
+  "ION_ENGINE/context_graph/DOMAIN_GRAPH_AND_FISSION.md": {
+    "curation_status": "engine_law_projection",
+    "source": "curated_product_projection",
+    "source_paths": [
+      "ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md"
+    ]
+  },
+  "ION_ENGINE/doctrine/ION_CORE.md": {
+    "curation_status": "engine_law_projection",
+    "source": "curated_product_projection",
+    "source_paths": [
+      "README.md",
+      "ION/docs/ION_FUNDAMENTALS.md"
+    ]
+  },
+  "ION_ENGINE/ingestion/PROJECT_INGESTION.md": {
+    "curation_status": "engine_law_projection",
+    "source": "curated_product_projection",
+    "source_paths": [
+      "ION/docs/ION_PROJECT_INGESTION.md"
+    ]
+  },
+  "ION_ENGINE/reference/AGENTS_ROLES_CARRIERS.md": {
+    "curation_status": "full_reference_projection",
+    "source": "copied_reference_projection",
+    "source_paths": [
+      "ION/docs/AGENTS_ROLES_CARRIERS.md"
+    ]
+  },
+  "ION_ENGINE/reference/CONTEXT_SYSTEM.md": {
+    "curation_status": "full_reference_projection",
+    "source": "copied_reference_projection",
+    "source_paths": [
+      "ION/docs/CONTEXT_SYSTEM.md"
+    ]
+  },
+  "ION_ENGINE/reference/ION_CONTINUITY_SUBSTRATE_EXPLAINER.md": {
+    "curation_status": "full_reference_projection",
+    "source": "copied_reference_projection",
+    "source_paths": [
+      "ION/docs/ION_CONTINUITY_SUBSTRATE_EXPLAINER.md"
+    ]
+  },
+  "ION_ENGINE/reference/ION_DOMAIN_GRAPH_AND_FISSION.md": {
+    "curation_status": "full_reference_projection",
+    "source": "copied_reference_projection",
+    "source_paths": [
+      "ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md"
+    ]
+  },
+  "ION_ENGINE/reference/ION_FUNDAMENTALS.md": {
+    "curation_status": "full_reference_projection",
+    "source": "copied_reference_projection",
+    "source_paths": [
+      "ION/docs/ION_FUNDAMENTALS.md"
+    ]
+  },
+  "ION_ENGINE/reference/ION_PARALLEL_SETTLEMENT.md": {
+    "curation_status": "full_reference_projection",
+    "source": "copied_reference_projection",
+    "source_paths": [
+      "ION/docs/ION_PARALLEL_SETTLEMENT.md"
+    ]
+  },
+  "ION_ENGINE/reference/ION_PROJECT_INGESTION.md": {
+    "curation_status": "full_reference_projection",
+    "source": "copied_reference_projection",
+    "source_paths": [
+      "ION/docs/ION_PROJECT_INGESTION.md"
+    ]
+  },
+  "ION_ENGINE/reference/TEMPLATE_LAW.md": {
+    "curation_status": "full_reference_projection",
+    "source": "copied_reference_projection",
+    "source_paths": [
+      "ION/docs/TEMPLATE_LAW.md"
+    ]
+  },
+  "ION_ENGINE/roles/*.md": {
+    "curation_status": "role_projection_first_slice",
+    "source": "generated_role_dossiers",
+    "source_paths": [
+      "README.md",
+      "ION/docs/AGENTS_ROLES_CARRIERS.md"
+    ]
+  },
+  "ION_ENGINE/runtime_modes/*.md": {
+    "curation_status": "runtime_mode_projection_first_slice",
+    "source": "generated_runtime_mode_dossiers",
+    "source_paths": [
+      "ION/docs/AGENTS_ROLES_CARRIERS.md",
+      "ION/docs/GITHUB_BRANCHING_AND_LIVE_STATE_POLICY.md"
+    ]
+  },
+  "ION_ENGINE/settlement/PARALLEL_SETTLEMENT.md": {
+    "curation_status": "engine_law_projection",
+    "source": "curated_product_projection",
+    "source_paths": [
+      "ION/docs/ION_PARALLEL_SETTLEMENT.md"
+    ]
+  },
+  "ION_ENGINE/templates/*.md": {
+    "curation_status": "template_projection_first_slice",
+    "source": "generated_template_dossiers",
+    "source_paths": [
+      "ION/docs/TEMPLATE_LAW.md",
+      "ION/docs/ION_FUNDAMENTALS.md"
+    ]
+  },
+  "ION_ENGINE_COVERAGE_MANIFEST.json": {
+    "curation_status": "coverage_manifest_first_slice",
+    "source": "generated_engine_coverage_projection",
+    "source_paths": [
+      "README.md",
+      "ION/docs/AGENTS_ROLES_CARRIERS.md",
+      "ION/docs/TEMPLATE_LAW.md",
+      "ION/docs/ION_FUNDAMENTALS.md"
+    ]
+  },
+  "ION_PRODUCT_DOCS/RUNTIME_BOUNDARY_MATRIX.md": {
+    "curation_status": "runtime_boundary_first_slice",
+    "source": "generated_runtime_boundary_projection",
+    "source_paths": [
+      "ION/docs/AGENTS_ROLES_CARRIERS.md",
+      "ION/docs/GITHUB_BRANCHING_AND_LIVE_STATE_POLICY.md"
+    ]
+  },
+  "ION_STARTER_DATA/ION_DATA_MANIFEST.json": {
+    "curation_status": "starter_data_v1_draft",
+    "source": "generated_seeded_state",
+    "source_paths": []
+  },
+  "ION_STARTER_DATA/PERSONA/persona_state.json": {
+    "curation_status": "persona_interface_seed",
+    "source": "generated_seeded_state",
+    "source_paths": []
+  },
+  "PRODUCT_PACKAGE_SPEC.md": {
+    "curation_status": "first_scaffold_spec",
+    "source": "generated_from_user_codex_settlement",
+    "source_paths": [
+      "ION/docs/ION_PROJECT_INGESTION.md",
+      "ION/docs/ION_DOMAIN_GRAPH_AND_FISSION.md",
+      "ION/docs/ION_PARALLEL_SETTLEMENT.md"
+    ]
+  },
+  "README.md": {
+    "curation_status": "productized_projection",
+    "source": "curated_product_projection",
+    "source_paths": [
+      "README.md",
+      "ION/docs/ION_FUNDAMENTALS.md"
+    ]
+  }
+}

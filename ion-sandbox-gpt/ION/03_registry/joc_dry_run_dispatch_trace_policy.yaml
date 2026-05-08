@@ -1,0 +1,47 @@
+version: V63_DRY_RUN_DISPATCH_EXECUTION_TRACE_VIEW_MODEL
+authority_scope: DRY_RUN_DISPATCH_TRACE_VIEW_MODEL_RECEIPT_ONLY
+production_authority: false
+live_dispatch_claim: false
+external_model_call_authorized: false
+
+required_upstream:
+  - V59_MISSION_DISPATCH_AND_MODEL_ROUTE_VIEW_MODEL
+  - V61_DISPATCH_AUTHORIZATION_GOVERNOR_VERDICT_VIEW_MODEL
+  - V62_OPERATOR_APPROVAL_QUEUE_AND_DRY_RUN_HANDOFF
+
+required_operator_approval_verdicts:
+  - DRY_RUN_HANDOFF_READY
+
+allowed_execution_modes:
+  - DRY_RUN_HANDOFF_ONLY
+
+required_view_surfaces:
+  - DRY_RUN_EXECUTION_TRACE
+  - PROVIDER_ADAPTER_NOOP_LANE
+  - CONTEXT_INJECTION_PREVIEW
+  - GOVERNOR_RECHECK_SNAPSHOT
+  - TIMELINE_EVENT_RAIL
+  - NON_EXECUTION_BOUNDARY_STRIP
+  - OPERATOR_HANDOFF_LINK
+  - RECEIPT_PREVIEW
+
+trace_phases:
+  - VALIDATE_OPERATOR_HANDOFF
+  - RECHECK_GOVERNORS
+  - COMPILE_CONTEXT_PREVIEW
+  - BUILD_PROVIDER_ADAPTER_NOOP
+  - SIMULATE_PROMPT_INJECTION
+  - SIMULATE_RESPONSE_WAIT
+  - SIMULATE_EXTRACTION_RECEIPT
+  - EMIT_TRACE_RECEIPT
+
+forbidden_capabilities:
+  live_external_model_dispatch: false
+  browser_session_mutation: false
+  credential_access: false
+  form_submission: false
+  paid_cloud_launch: false
+  source_summary_rewrite: false
+  canonical_graph_write: false
+  unrestricted_agent_activation: false
+  production_authority: false

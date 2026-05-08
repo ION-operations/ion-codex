@@ -1,0 +1,45 @@
+{
+  "$id": "https://ion.local/schemas/ion_mcp_local_smoke_report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IonMcpLocalSmokeReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "bridge_version",
+    "created_at",
+    "ion_root",
+    "state_store_root",
+    "passed",
+    "steps",
+    "forbidden_resolution_seen",
+    "live_execution_authorized_seen",
+    "kernel_truth_mutation_seen"
+  ],
+  "properties": {
+    "version": { "type": "string" },
+    "bridge_version": { "type": "string" },
+    "created_at": { "type": "string" },
+    "ion_root": { "type": "string" },
+    "state_store_root": { "type": "string" },
+    "passed": { "type": "boolean" },
+    "forbidden_resolution_seen": { "type": "boolean", "const": false },
+    "live_execution_authorized_seen": { "type": "boolean", "const": false },
+    "kernel_truth_mutation_seen": { "type": "boolean", "const": false },
+    "steps": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "object",
+        "required": ["step", "ok", "detail"],
+        "properties": {
+          "step": { "type": "string" },
+          "ok": { "type": "boolean" },
+          "detail": { "type": "string" },
+          "response": {}
+        }
+      }
+    }
+  }
+}
+

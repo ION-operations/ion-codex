@@ -1,0 +1,11 @@
+ION V91 receipt: Agent Context Dynamics and Front-Door Team planning layer added.
+
+Primary additions:
+- ion.agent_context_window_plan.v1
+- ion.front_door_team_plan.v1
+- no-user-upkeep law
+- attention leases: active/warm/dormant
+- per-role context budgets and route-deeper surfaces
+- Persona/Relay/Steward logical front-door team clarified beneath Cursor carrier-control
+
+V91 does not claim full autonomous semantic graph/reranking implementation. It makes that target explicit and emits durable active plans for the next implementation layer.

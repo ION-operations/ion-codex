@@ -1,0 +1,52 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "terminal_proof_receipt_packet.minimal_valid.v0_1",
+  "template_id": "terminal_proof_receipt_packet",
+  "case_type": "minimal_valid",
+  "status": "candidate_template_instance_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/terminal_proof_receipt_packet.template_spec.yaml",
+  "primary_agent": "TERMINAL_PROOF_CURATOR",
+  "domain_id": "terminal_proof_domain",
+  "objective": "Exercise the terminal_proof_receipt_packet candidate template with a minimal valid instance.",
+  "sections": {
+    "COMMAND_INTENT": "Validate the focused AI assistant work template instance tests.",
+    "COMMAND": "python3 -S -m pytest ION/tests/test_kernel_ai_assistant_work_template_instances.py",
+    "WORKING_DIRECTORY": "/workspace/ion-package",
+    "ENVIRONMENT_NOTES": [
+      "sandbox-local command receipt example",
+      "site package paths must be injected by test if PyYAML is needed",
+      "this instance is illustrative until actual run receipt is attached"
+    ],
+    "RETURN_CODE": 0,
+    "STDOUT_EXCERPT": "7 passed in 0.21s",
+    "STDERR_EXCERPT": "",
+    "INTERPRETATION": "The command evidence supports the narrow focused test claim only and does not prove full system readiness.",
+    "NON_CLAIMS": [
+      "This command receipt is a candidate proof object, not accepted state.",
+      "It does not claim the full monolithic suite passed.",
+      "It does not prove production readiness."
+    ],
+    "RECEIPT_TARGET": "ION/05_context/current/ai_assistant_work/receipts/"
+  },
+  "expected_validation": {
+    "should_pass": true,
+    "expected_failure_kinds": [],
+    "proves": [
+      "required section shape can be satisfied",
+      "candidate boundary can be preserved",
+      "settlement/proof/non-claim surfaces can be named"
+    ]
+  },
+  "non_claims": [
+    "This instance is candidate current-context test data, not accepted template law.",
+    "This instance does not execute external tools or mutate production state."
+  ]
+}

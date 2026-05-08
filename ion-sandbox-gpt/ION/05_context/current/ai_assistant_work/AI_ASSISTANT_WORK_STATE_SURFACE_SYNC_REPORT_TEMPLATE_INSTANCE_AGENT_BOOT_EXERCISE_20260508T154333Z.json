@@ -1,0 +1,27 @@
+{
+  "schema": "ion.ai_assistant_work.state_surface_sync_report.v0_1",
+  "created_at": "2026-05-08T15:43:33Z",
+  "status": "state_surfaces_synced_candidate",
+  "candidate_only": true,
+  "checked_surfaces": {
+    "state_index": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_5.json",
+    "template_instance_index": "ION/05_context/current/ai_assistant_work/template_instances/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_CORPUS_INDEX_V0_1.yaml",
+    "agent_boot_exercise_index": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/AI_ASSISTANT_WORK_AGENT_BOOT_EXERCISE_INDEX_V0_1.yaml",
+    "simulation_report": "ION/05_context/current/ai_assistant_work/simulations/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_AGENT_BOOT_EXERCISE_SIMULATION_REPORT_LATEST.json",
+    "validation_note": "ION/05_context/current/ai_assistant_work/validation/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_AGENT_BOOT_EXERCISE_VALIDATION_NOTE_LATEST.json",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_AGENT_BOOT_EXERCISE_RECEIPT_20260508T154333Z.json",
+    "next_packet": "ION/05_context/current/ai_assistant_work/next/AI_ASSISTANT_WORK_NEXT_PACKET_ROUTE_COMPILER_AND_PROMOTION_PLAN_{ts}.json"
+  },
+  "counts": {
+    "template_specs": 7,
+    "valid_instances": 7,
+    "expected_rejections": 7,
+    "agent_boot_exercises": 7
+  },
+  "non_claims": [
+    "Candidate template instances do not make the template specs accepted law.",
+    "Agent boot exercises are sandbox-local simulations, not real isolated agent invocations.",
+    "No external IDE, CLI, cloud, PR, GitHub, MCP, Codex, daemon, or production action was performed.",
+    "No ION/03_registry or product-front-door landing occurred."
+  ]
+}

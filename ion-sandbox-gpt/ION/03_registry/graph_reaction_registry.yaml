@@ -1,0 +1,134 @@
+registry_id: graph_reaction_registry
+status: PROPOSED_SEED_NOT_YET_RATIFIED
+created: 2026-04-24
+authority: A2_PRODUCTION_GOVERNANCE_CANDIDATE
+purpose: Define allowed downstream reactions for Template Completion Events.
+
+reaction_families:
+  index_update:
+    class: projection_reaction
+    executor_family: daemon_or_indexer
+    required_authority: WITNESS_OR_PROJECTION_UPDATE
+    allowed_effects:
+      - projection_update
+      - coverage_marker
+      - stale_marker
+    forbidden_effects:
+      - source_law_mutation
+      - registry_promotion
+    receipt_type: index_update_receipt
+    audit_owner: Nemesis
+
+  graph_node_create:
+    class: source_graph_reaction
+    executor_family: graph_writer_or_mason_schema
+    required_authority: GOVERNED_WRITE_OR_RATIFIED_SOURCE_UPDATE
+    allowed_effects:
+      - node_record_proposal
+      - source_reference_binding
+    forbidden_effects:
+      - silent_canon_promotion
+      - authority_class_escalation
+    receipt_type: graph_writeback_receipt
+    audit_owner: Nemesis
+
+  graph_edge_update:
+    class: source_graph_reaction
+    executor_family: graph_writer_or_atlas_topology
+    required_authority: GOVERNED_WRITE_OR_RATIFIED_SOURCE_UPDATE
+    allowed_effects:
+      - edge_record_proposal
+      - relation_status_update
+    forbidden_effects:
+      - contradiction_deletion_without_settlement
+      - supersession_without_authority
+    receipt_type: graph_writeback_receipt
+    audit_owner: Nemesis
+
+  schedule_followup:
+    class: scheduling_reaction
+    executor_family: scheduler_or_steward
+    required_authority: SCHEDULER_GATE
+    allowed_effects:
+      - horizon_item_proposal
+      - work_unit_proposal
+    forbidden_effects:
+      - direct_execution_without_gate
+    receipt_type: schedule_reaction_receipt
+    audit_owner: Steward
+
+  agent_activation_request:
+    class: fanout_reaction
+    executor_family: steward_or_relay
+    required_authority: ROLE_ACTIVATION_REVIEW
+    allowed_effects:
+      - specialist_request
+      - fan_out_packet
+    forbidden_effects:
+      - unreviewed_new_top_level_role
+      - unbounded_subagent_swarm
+    receipt_type: agent_activation_request_receipt
+    audit_owner: Nemesis
+
+  contradiction_mark:
+    class: review_reaction
+    executor_family: vice_or_nemesis
+    required_authority: CONTRADICTION_PRESERVATION
+    allowed_effects:
+      - contested_claim_marker
+      - review_question
+    forbidden_effects:
+      - contradiction_smoothing
+      - false_settlement
+    receipt_type: contradiction_mark_receipt
+    audit_owner: Vice
+
+  registry_update_proposal:
+    class: registry_reaction
+    executor_family: steward_or_registrar_candidate
+    required_authority: REGISTRY_DELTA_REVIEW
+    allowed_effects:
+      - registry_delta_proposal
+    forbidden_effects:
+      - direct_registry_mutation_without_verdict
+      - name_promotion_without_lineage
+    receipt_type: registry_update_proposal_receipt
+    audit_owner: Nemesis
+
+phase1_boundary:
+  status: WITNESS_ONLY_IMPLEMENTED
+  implemented_module: ION/04_packages/kernel/template_completion_events.py
+  allowed_reaction_families_in_phase1:
+    - witness_event_emit
+    - scan_receipt_emit
+  forbidden_reaction_families_in_phase1:
+    - index_update
+    - graph_node_create
+    - graph_edge_update
+    - schedule_followup
+    - agent_activation_request
+    - contradiction_mark
+    - registry_update_proposal
+  next_phase_candidate: DRY_RUN_REACTION_SELECTION_ONLY
+
+phase2_boundary:
+  status: DRY_RUN_REACTION_SELECTION_IMPLEMENTED
+  implemented_module: ION/04_packages/kernel/template_reaction_selection.py
+  allowed_reaction_families_in_phase2:
+    - index_update
+    - graph_node_create
+    - graph_edge_update
+    - schedule_followup
+    - agent_activation_request
+    - contradiction_mark
+    - registry_update_proposal
+  allowed_effects_in_phase2:
+    - dry_run_selection_witness
+    - scan_receipt_emit
+  forbidden_effects_in_phase2:
+    - source_graph_mutation
+    - schedule_mutation
+    - registry_mutation
+    - agent_activation
+    - index_projection_mutation
+  next_phase_candidate: PROJECTION_ONLY_INDEX_UPDATE_RECEIPTS

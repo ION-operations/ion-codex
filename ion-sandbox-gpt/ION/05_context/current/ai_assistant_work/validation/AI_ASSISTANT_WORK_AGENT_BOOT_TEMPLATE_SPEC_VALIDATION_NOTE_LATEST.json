@@ -1,0 +1,35 @@
+{
+  "authority_boundary": {
+    "candidate_only": true,
+    "external_execution_performed": false,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false
+  },
+  "checks": [
+    "agent boot drafts exist and preserve candidate boundary",
+    "template specs exist and include machine_required_sections",
+    "agent boot to template spec bindings resolve",
+    "dispatch simulation blocks generic implementation before specialist check",
+    "no ION/03_registry or product-front-door landing detected"
+  ],
+  "created_at": "2026-05-08T15:19:39Z",
+  "findings": [],
+  "result": "accepted",
+  "schema": "ion.ai_assistant_work.agent_boot_template_spec_validation.v0_1",
+  "status": "accepted_candidate_validation",
+  "test_results": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "ai_assistant_work_focused_tests": "29 passed",
+    "ion_status": "ION_STATUS_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+    "status_preflight_integrity_tests": "12 passed"
+  },
+  "validated_artifacts": {
+    "agent_boot_count": 7,
+    "focused_test_count": 29,
+    "simulation_accepted_count": 8,
+    "simulation_case_count": 8,
+    "status_preflight_integrity_test_count": 12,
+    "template_spec_count": 7
+  }
+}

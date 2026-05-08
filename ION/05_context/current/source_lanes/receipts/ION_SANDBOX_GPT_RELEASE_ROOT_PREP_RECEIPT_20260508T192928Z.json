@@ -1,0 +1,73 @@
+{
+  "schema": "ion.sandbox_gpt.release_root_prep_receipt.v0_1",
+  "created_at": "2026-05-08T19:29:28Z",
+  "status": "release_root_prepared_not_published",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "release_root": "ion-sandbox-gpt/",
+  "source_snapshot": "ION_sandbox/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE",
+  "prepared_release_identity": {
+    "name": "ION Sandbox GPT",
+    "version": "v1.4-public-candidate",
+    "release_track": "custom_gpt_portable_sandbox",
+    "recommended_branch": "release/ion-sandbox-gpt-v1"
+  },
+  "implemented_surfaces": [
+    "ion-sandbox-gpt/",
+    "ion-sandbox-gpt/README.md",
+    "ion-sandbox-gpt/START_HERE.md",
+    "ion-sandbox-gpt/PRODUCT_MANIFEST.json",
+    "ion-sandbox-gpt/VALIDATION_REPORT.json",
+    "ion-sandbox-gpt/RELEASE_MANIFEST.json",
+    "ion-sandbox-gpt/RELEASE_READINESS.md",
+    "ion-sandbox-gpt/ION/05_context/current/ACTIVE_WORK_PACKET.json",
+    "ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py"
+  ],
+  "sanitization": {
+    "excluded_during_copy": [
+      "__pycache__/",
+      "*.pyc",
+      ".pytest_cache/",
+      "*.log",
+      "*.pid"
+    ],
+    "generated_cache_removed_after_test": true,
+    "file_count_after_cleanup": 3740,
+    "size_summary": "26M"
+  },
+  "release_repairs": [
+    "active work packet rebound from stale Cursor work-cycle template to SINGLE_CARRIER_SEQUENTIAL_PACKET",
+    "PRODUCT_MANIFEST renamed package to ION_SANDBOX_GPT_v1_4_PUBLIC_CANDIDATE while preserving lineage package name",
+    "VALIDATION_REPORT updated to release-root ready verdict after focused tests",
+    "Cursor IDE lane marked optional/not included for portable Custom GPT release",
+    "stale-surface audit test made conditional for absent Cursor rule in Custom GPT portable track"
+  ],
+  "validation": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_sandbox_preflight.py ION/tests/test_kernel_single_carrier_sequence_runner.py ION/tests/test_kernel_ion_stale_surface_audit.py",
+      "result": "13 passed"
+    },
+    {
+      "command": "rg --no-ignore high-confidence secret pattern scan ion-sandbox-gpt",
+      "result": "no findings"
+    },
+    {
+      "command": "find ion-sandbox-gpt generated cache/bytecode/log/pid check",
+      "result": "clean"
+    }
+  ],
+  "authority_boundary": {
+    "published": false,
+    "branch_created": false,
+    "git_push_performed": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "next_gate": "review staged file list, then create/switch release branch and push only after explicit operator approval",
+  "non_claims": [
+    "This receipt does not publish the release root.",
+    "This receipt does not push to GitHub.",
+    "This receipt does not claim production readiness.",
+    "This receipt does not grant live execution, secrets, deployment, git push, or arbitrary shell authority."
+  ]
+}

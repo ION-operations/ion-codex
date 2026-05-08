@@ -1,0 +1,24 @@
+{
+  "created_at": "2026-05-08T15:19:39Z",
+  "export_label": "AI_ASSISTANT_WORK_AGENT_BOOT_TEMPLATE_SPECS_CANDIDATE",
+  "non_claims": [
+    "Agent boot drafts are not active runtime agents.",
+    "Template specs are not accepted template law.",
+    "No ION/03_registry landing occurred.",
+    "No product/front-door mutation occurred.",
+    "No external IDE, CLI, cloud, PR, GitHub, MCP, Codex, daemon, or production action occurred."
+  ],
+  "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_AGENT_BOOT_TEMPLATE_SPEC_RECEIPT_20260508T151939Z.json",
+  "schema": "ion.ai_assistant_work.export_note.v0_1",
+  "source_state_index": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_4.json",
+  "status": "candidate_export_note",
+  "validation": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "candidate_validation": "accepted_candidate_validation",
+    "dispatch_simulation": "accepted",
+    "focused_tests": "29 passed",
+    "ion_status": "ION_STATUS_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+    "status_preflight_integrity_tests": "12 passed"
+  }
+}

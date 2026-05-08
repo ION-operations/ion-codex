@@ -1,0 +1,51 @@
+{
+  "authority_options": [
+    {
+      "option": "human_acceptance_to_land_registry_onboarding_and_product_overlay",
+      "requires": [
+        "explicit operator acceptance using acceptance language, not just continue",
+        "settle whether product overlay patchset may mutate target product/front-door surfaces",
+        "copy/apply promotion registry mirror only under authority",
+        "emit settlement receipt",
+        "rerun focused tests, status, preflight, route usage, onboarding wiring, and product onboarding tests"
+      ]
+    },
+    {
+      "option": "revise_candidate_overlay_before_acceptance",
+      "requires": [
+        "operator names revision target or continue with next validation lane",
+        "update candidate surfaces only under current-context namespace unless explicitly authorized",
+        "rerun focused tests and emit candidate receipt"
+      ]
+    },
+    {
+      "option": "more_validation_before_acceptance",
+      "requires": [
+        "run source-ranking/canon contradiction audit across self-knowledge domains and product overlay",
+        "do not mutate active registry, onboarding, or product law",
+        "emit canon-audit receipt"
+      ]
+    }
+  ],
+  "generated_at": "2026-05-08T13:53:57+00:00",
+  "inputs": [
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_AUDIT_REPORT_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_OVERLAY_V0_2.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PATCHSET_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PROPOSAL_20260508T135357Z.md",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_VALIDATION_NOTE_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_RECEIPT_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_PRODUCT_ONBOARDING_20260508T135357Z.json"
+  ],
+  "non_claims": [
+    "This packet is not approval to mutate product/front-door surfaces.",
+    "This packet is not approval to mutate ION/03_registry.",
+    "This packet is not production readiness.",
+    "This packet does not claim external Codex execution."
+  ],
+  "objective": "After product/package onboarding audit, either explicitly accept/reject/revise the self-knowledge promotion and product overlay candidates, or continue with a deeper source-ranking/canon audit before acceptance.",
+  "packet_id": "SELF_KNOWLEDGE_PACKET_ACCEPT_REVISE_OR_PRODUCT_OVERLAY_APPLICATION_20260508T135357Z",
+  "recommended_next_action": "If no explicit acceptance is given, run a source-ranking/canon audit over the self-knowledge domain packets and product overlay to identify contradictions before any landing.",
+  "schema_id": "ion.self_knowledge.next_packet.v0_2",
+  "status": "queued_candidate"
+}

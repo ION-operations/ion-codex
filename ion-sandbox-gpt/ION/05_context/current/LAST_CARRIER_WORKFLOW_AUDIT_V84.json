@@ -1,0 +1,11 @@
+{
+  "accepted": true,
+  "active_spawn_plan_path": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+  "active_turn_packet_path": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+  "active_work_packet_path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+  "findings": [],
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.carrier_workflow_audit.v1",
+  "verdict": "ION_CARRIER_WORKFLOW_READY"
+}

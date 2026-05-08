@@ -1,0 +1,48 @@
+{
+  "artifacts": {
+    "acceptance_gate": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ACCEPTANCE_GATE_STATUS_V0_2.json",
+    "domain_state_index": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+    "next_packet": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T043119Z.json",
+    "route_usage_receipt": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_RECEIPT_20260508T043119Z.json",
+    "route_usage_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json"
+  },
+  "checks": {
+    "candidate_validation": {
+      "returncode": 0,
+      "stdout_excerpt": "{\n  \"accepted\": true,\n  \"domain_count\": 14,\n  \"findings\": [],\n  \"live_execution_authority\": false,\n  \"parsed_files_count\": 22,\n  \"production_authority\": false,\n  \"route_count\": 7,\n  \"schema_id\": \"ion.self_knowledge_candidate_validation.v0_2\"\n}\n",
+      "summary": "accepted=true; domain_count=14; route_count=7; findings=[]"
+    },
+    "focused_pytest": {
+      "returncode": 0,
+      "stdout_excerpt": "\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m                                                              [100%]\u001b[0m\n\u001b[32m\u001b[32m\u001b[1m11 passed\u001b[0m\u001b[32m in 1.89s\u001b[0m\u001b[0m\n",
+      "summary": "11 passed"
+    },
+    "ion_status": {
+      "returncode": 0,
+      "summary": "ION_ACTIVE_STATE_INTEGRITY_READY"
+    },
+    "route_usage_simulation": {
+      "returncode": 0,
+      "stdout_excerpt": "{\n  \"accepted\": true,\n  \"case_count\": 7,\n  \"cases_accepted\": 7,\n  \"missing_route_coverage\": [],\n  \"out\": \"ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json\",\n  \"route_count\": 7,\n  \"status\": \"accepted_candidate_evidence\"\n}\n",
+      "summary": "accepted=true; 7 route cases accepted; all route coverage; all 14 domains loaded across simulation"
+    },
+    "sandbox_preflight": {
+      "returncode": 0,
+      "summary": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+    },
+    "state_surface_sync": {
+      "report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_20260508T043708Z.json",
+      "status": "passed"
+    }
+  },
+  "generated_at": "2026-05-08T04:39:24+00:00",
+  "live_execution_authority": false,
+  "non_claims": [
+    "This final validation note does not accept or land registry state.",
+    "This final validation note does not claim external Codex execution.",
+    "This final validation note does not claim production readiness."
+  ],
+  "production_authority": false,
+  "schema_id": "ion.self_knowledge.final_validation_note.v0_2",
+  "status": "passed_candidate_validation"
+}

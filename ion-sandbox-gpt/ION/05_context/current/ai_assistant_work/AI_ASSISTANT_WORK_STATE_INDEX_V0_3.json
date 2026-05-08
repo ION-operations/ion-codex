@@ -1,0 +1,61 @@
+{
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "created_at": "2026-05-08T15:00:56Z",
+  "current_state": "ai_assistant_work_dataset_mined_to_domain_fission_agent_expansion_and_template_packet_drafts_as_candidate_current_context",
+  "inherits_from": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_2.json",
+  "key_files": {
+    "agent_registry_v0_2": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_AGENT_REGISTRY_CANDIDATE_V0_2.yaml",
+    "dataset": "ION/05_context/current/ai_assistant_work/dataset/AI_ASSISTANT_WORK_DATASET_GENESIS_V0_1.jsonl",
+    "dataset_mining_report": "ION/05_context/current/ai_assistant_work/analysis/AI_ASSISTANT_WORK_DATASET_MINING_REPORT_20260508T150056Z.json",
+    "domain_fission_candidates": "ION/05_context/current/ai_assistant_work/fission/AI_ASSISTANT_WORK_DOMAIN_FISSION_CANDIDATES_V0_1.yaml",
+    "domain_registry_v0_2": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_DOMAIN_REGISTRY_CANDIDATE_V0_2.yaml",
+    "next_packet": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_NEXT_PACKET_TEMPLATE_IMPLEMENTATION_AND_AGENT_BOOT_DRAFTS_20260508T150056Z.json",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_DATASET_MINING_TO_DOMAIN_FISSION_RECEIPT_20260508T150056Z.json",
+    "route_simulation": "ION/05_context/current/ai_assistant_work/simulations/AI_ASSISTANT_WORK_DOMAIN_FISSION_ROUTE_SIMULATION_REPORT_LATEST.json",
+    "state_surface_sync": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_SURFACE_SYNC_REPORT_DOMAIN_FISSION_20260508T150056Z.json",
+    "template_packet_drafts": "ION/05_context/current/ai_assistant_work/template_packets/AI_ASSISTANT_WORK_CONCRETE_TEMPLATE_PACKET_DRAFTS_V0_1.yaml",
+    "template_registry_v0_2": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_TEMPLATE_REGISTRY_CANDIDATE_V0_2.yaml",
+    "validation_note": "ION/05_context/current/ai_assistant_work/validation/AI_ASSISTANT_WORK_DATASET_MINING_DOMAIN_FISSION_VALIDATION_NOTE_LATEST.json"
+  },
+  "non_claims": [
+    "Candidate fission does not equal accepted domain split.",
+    "New agents are candidate specialist definitions, not active runtime carriers.",
+    "Template packet drafts are not active template law.",
+    "No external execution occurred."
+  ],
+  "open_decisions": [
+    "Which candidate child domains should be accepted, revised, or collapsed back into parent domains.",
+    "Which new specialist agents deserve full boot/context-package drafts.",
+    "Which concrete template packet drafts should become machine-checkable templates first.",
+    "Whether the AI assistant work domain should become a permanent registry namespace after acceptance."
+  ],
+  "recommended_next_packet": "AI_ASSISTANT_WORK_NEXT_PACKET_TEMPLATE_IMPLEMENTATION_AND_AGENT_BOOT_DRAFTS",
+  "root": "ION/05_context/current/ai_assistant_work/",
+  "schema": "ion.ai_assistant_work.state_index.v0_3",
+  "status": "candidate_current_state_not_accepted_canon",
+  "summary": {
+    "agent_registry_v0_2_count": 71,
+    "base_agent_count": 47,
+    "base_domain_count": 19,
+    "candidate_child_domain_count": 10,
+    "concrete_template_packet_draft_count": 31,
+    "domain_registry_v0_2_count": 29,
+    "new_specialist_agent_candidate_count": 24,
+    "simulation_cases": 10,
+    "simulation_cases_accepted": 10,
+    "source_dataset_entry_count": 36,
+    "template_registry_v0_2_count": 100,
+    "validation_findings": 0
+  },
+  "validation": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "focused_tests": "23 passed",
+    "ion_status": "ION_STATUS_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+  }
+}

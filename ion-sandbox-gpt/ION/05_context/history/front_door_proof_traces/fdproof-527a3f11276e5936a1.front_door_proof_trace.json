@@ -1,0 +1,189 @@
+{
+  "boundary_proof": {
+    "api_entry_intent_id": "arei-1c18ac0764e0",
+    "api_entry_receipt_id": "arer-01e3c1d927aa",
+    "context_package_id": "fdctx-fdwu-v106-front-door-proof-trace-fdsteward-c218ca2f6615",
+    "conversational_receipt_id": "7116638c9d43023d44c6efe4",
+    "dispatch_packet_path": "ION/05_context/history/front_door_runtime/dispatch_packets/fdwu-v106-front-door-proof-trace-fdsteward-fdrel-5b48cf69af2e.dispatch_packet.json",
+    "front_stage_receipt_id": "fsc-b3e8eb0f49710e6013",
+    "persona_ingress_id": "fdmsg-v106-front-door-proof-trace-user-sovereign-fe357c69b2f6",
+    "persona_response_id": "fdresponse-fdreturn-v106-front-door-proof-trace-stewar-092bc3cb2479",
+    "queue_item_id": "fdq-v106-front-door-proof-trace-fdwu-v106-front-2bf3561b0c34",
+    "relay_packet_id": "fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-a1af2bd9ee2c",
+    "relay_return_id": "fdreturn-v106-front-door-proof-trace-steward-proof-t-2fdd60e1bd98",
+    "steward_envelope_id": "fdsteward-fdrelay-fdmsg-v106-front-door-proof-trace-u-129dac14513f",
+    "steward_work_unit_id": "fdwu-v106-front-door-proof-trace-fdsteward-fdrel-5b48cf69af2e"
+  },
+  "controlled_system_output": "Deterministic front-door proof output: the operator message was routed through Persona Interface ingress, Relay semantic boundary, Steward work queue dispatch, Relay return, Persona response, and receipt surfaces. This proof grants no production authority.",
+  "generated_at": "2026-05-02T22:52:51+00:00",
+  "live_execution_authority": false,
+  "missing_witness_paths": [],
+  "mutation_scope": "front_door_proof_trace_artifacts_only",
+  "operator_message": "V106 front-door proof trace: verify operator message through Relay, Steward, Persona, and receipts.",
+  "production_authority": false,
+  "projection_mode": "DETERMINISTIC_FRONT_DOOR_PROOF_TRACE",
+  "proof_complete": true,
+  "proof_trace_path": "ION/05_context/history/front_door_proof_traces/fdproof-527a3f11276e5936a1.front_door_proof_trace.json",
+  "receipts": {
+    "conversational_receipt_id": "7116638c9d43023d44c6efe4",
+    "front_door_ingress_receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-v106-front-door-pro-88300a5c737c",
+    "front_door_return_receipt_id": "fdreceipt-fdresponse-fdreturn-v106-front-door-proof-t-b1e6e7d48025",
+    "front_stage_council_receipt_id": "fsc-b3e8eb0f49710e6013",
+    "runtime_session_dispatch_receipt_id": "rsr-92a7b76c067a"
+  },
+  "role_chain": {
+    "persona_interface": "role.persona_interface",
+    "relay": "role.relay",
+    "steward": "role.steward"
+  },
+  "schema_id": "ion.front_door_proof_trace.v1",
+  "session_id": "v106-front-door-proof-trace",
+  "stage_sequence": [
+    {
+      "artifact_id": "fdmsg-v106-front-door-proof-trace-user-sovereign-fe357c69b2f6",
+      "detail": "Operator message entered Persona Interface ingress.",
+      "organ": "operator",
+      "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-v106-front-door-pro-88300a5c737c",
+      "sequence": 10,
+      "stage": "operator_message_received",
+      "status": "accepted",
+      "witness_path": "ION/05_context/history/front_door_runtime/persona_ingress/fdmsg-v106-front-door-proof-trace-user-sovereign-fe357c69b2f6.json"
+    },
+    {
+      "artifact_id": "fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-a1af2bd9ee2c",
+      "detail": "Relay normalized the user text into a semantic boundary packet.",
+      "organ": "relay",
+      "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-v106-front-door-pro-88300a5c737c",
+      "sequence": 20,
+      "stage": "relay_semantic_boundary_packet",
+      "status": "accepted",
+      "witness_path": "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-a1af2bd9ee2c.json"
+    },
+    {
+      "artifact_id": "fdsteward-fdrelay-fdmsg-v106-front-door-proof-trace-u-129dac14513f",
+      "detail": "Steward routing envelope was derived from the Relay packet.",
+      "organ": "steward",
+      "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-v106-front-door-pro-88300a5c737c",
+      "sequence": 30,
+      "stage": "steward_routing_envelope",
+      "status": "accepted",
+      "witness_path": "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-v106-front-door-proof-trace-u-129dac14513f.json"
+    },
+    {
+      "artifact_id": "arei-1c18ac0764e0",
+      "detail": "runtime session already bound to context fdctxv-v106-front-door-proof-trace-fdrelay-fdmsg-v-6072e99bf58f: ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-f1dc5baef7bc.json",
+      "organ": "kernel",
+      "receipt_id": "arer-01e3c1d927aa",
+      "sequence": 40,
+      "stage": "runtime_session_entry",
+      "status": "REFUSED",
+      "witness_path": null
+    },
+    {
+      "artifact_id": "fdwu-v106-front-door-proof-trace-fdsteward-fdrel-5b48cf69af2e",
+      "detail": "Steward work unit and context package were persisted to kernel store.",
+      "organ": "steward",
+      "receipt_id": null,
+      "sequence": 50,
+      "stage": "steward_work_unit_created",
+      "status": "DISPATCHED",
+      "witness_path": "ION/05_context/history/kernel_store/work_units/fdwu-v106-front-door-proof-trace-fdsteward-fdrel-5b48cf69af2e.json"
+    },
+    {
+      "artifact_id": "fdctx-fdwu-v106-front-door-proof-trace-fdsteward-c218ca2f6615",
+      "detail": "Front-door Steward context package was persisted.",
+      "organ": "kernel",
+      "receipt_id": null,
+      "sequence": 60,
+      "stage": "context_package_created",
+      "status": "accepted",
+      "witness_path": "ION/05_context/history/kernel_store/context_packages/fdctx-fdwu-v106-front-door-proof-trace-fdsteward-c218ca2f6615.json"
+    },
+    {
+      "artifact_id": "fdq-v106-front-door-proof-trace-fdwu-v106-front-2bf3561b0c34",
+      "detail": "Runtime session queue item was dispatched to kernel packet path.",
+      "organ": "kernel",
+      "receipt_id": "rsr-92a7b76c067a",
+      "sequence": 70,
+      "stage": "queue_item_dispatched",
+      "status": "DISPATCHED",
+      "witness_path": "ION/05_context/history/front_door_runtime/dispatch_packets/fdwu-v106-front-door-proof-trace-fdsteward-fdrel-5b48cf69af2e.dispatch_packet.json"
+    },
+    {
+      "artifact_id": "steward.proof_trace_output",
+      "detail": "Deterministic proof output stands in for live Steward return.",
+      "organ": "steward",
+      "receipt_id": "fsc-b3e8eb0f49710e6013",
+      "sequence": 80,
+      "stage": "controlled_steward_output",
+      "status": "approved_with_scope",
+      "witness_path": null
+    },
+    {
+      "artifact_id": "fdreturn-v106-front-door-proof-trace-steward-proof-t-2fdd60e1bd98",
+      "detail": "Relay prepared controlled reexpression for Persona Interface.",
+      "organ": "relay",
+      "receipt_id": "fdreceipt-fdresponse-fdreturn-v106-front-door-proof-t-b1e6e7d48025",
+      "sequence": 90,
+      "stage": "relay_return_package",
+      "status": "accepted",
+      "witness_path": "ION/05_context/history/front_door_runtime/relay_return_packages/fdreturn-v106-front-door-proof-trace-steward-proof-t-2fdd60e1bd98.json"
+    },
+    {
+      "artifact_id": "fdresponse-fdreturn-v106-front-door-proof-trace-stewar-092bc3cb2479",
+      "detail": "Persona response package was materialized for user-facing render.",
+      "organ": "persona",
+      "receipt_id": "fdreceipt-fdresponse-fdreturn-v106-front-door-proof-t-b1e6e7d48025",
+      "sequence": 100,
+      "stage": "persona_response_package",
+      "status": "accepted",
+      "witness_path": "ION/05_context/history/front_door_runtime/persona_response_packages/fdresponse-fdreturn-v106-front-door-proof-trace-stewar-092bc3cb2479.json"
+    },
+    {
+      "artifact_id": "fsc-b3e8eb0f49710e6013",
+      "detail": "Front-stage council classified the proof output as scoped proposal emission.",
+      "organ": "steward",
+      "receipt_id": "fsc-b3e8eb0f49710e6013",
+      "sequence": 110,
+      "stage": "front_stage_council_receipt",
+      "status": "may_emit_as_proposal",
+      "witness_path": "ION/05_context/history/front_stage_council_receipts/fsc-b3e8eb0f49710e6013.front_stage_council_receipt.json"
+    },
+    {
+      "artifact_id": "7116638c9d43023d44c6efe4",
+      "detail": "Conversational receipt ratified the deterministic proof response.",
+      "organ": "persona",
+      "receipt_id": "7116638c9d43023d44c6efe4",
+      "sequence": 120,
+      "stage": "conversational_receipt",
+      "status": "ratified",
+      "witness_path": "ION/05_context/history/conversational_receipts/7116638c9d43023d44c6efe4.conversational_receipt.json"
+    }
+  ],
+  "steward_verdict": {
+    "claim_class": "C2",
+    "emission_permission": "MAY_EMIT_AS_PROPOSAL",
+    "live_steward_reasoning": false,
+    "mode": "DETERMINISTIC_FRONT_DOOR_PROOF_TRACE",
+    "repair_required": false,
+    "verdict": "APPROVED_WITH_SCOPE"
+  },
+  "trace_id": "fdproof-527a3f11276e5936a1",
+  "validation_errors": [],
+  "verdict": "ION_FRONT_DOOR_PROOF_TRACE_READY",
+  "witness_paths": [
+    "ION/05_context/history/front_door_runtime/persona_ingress/fdmsg-v106-front-door-proof-trace-user-sovereign-fe357c69b2f6.json",
+    "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-a1af2bd9ee2c.json",
+    "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-v106-front-door-proof-trace-u-129dac14513f.json",
+    "ION/05_context/history/front_door_runtime/receipts/fdreceipt-fdsteward-fdrelay-fdmsg-v106-front-door-pro-88300a5c737c.json",
+    "ION/05_context/history/front_door_runtime_sessions/runtime_sessions/api_entry_receipts/arer-01e3c1d927aa.json",
+    "ION/05_context/history/kernel_store/work_units/fdwu-v106-front-door-proof-trace-fdsteward-fdrel-5b48cf69af2e.json",
+    "ION/05_context/history/kernel_store/context_packages/fdctx-fdwu-v106-front-door-proof-trace-fdsteward-c218ca2f6615.json",
+    "ION/05_context/history/front_door_runtime/dispatch_packets/fdwu-v106-front-door-proof-trace-fdsteward-fdrel-5b48cf69af2e.dispatch_packet.json",
+    "ION/05_context/history/front_door_runtime/relay_return_packages/fdreturn-v106-front-door-proof-trace-steward-proof-t-2fdd60e1bd98.json",
+    "ION/05_context/history/front_door_runtime/persona_response_packages/fdresponse-fdreturn-v106-front-door-proof-trace-stewar-092bc3cb2479.json",
+    "ION/05_context/history/front_door_runtime/receipts/fdreceipt-fdresponse-fdreturn-v106-front-door-proof-t-b1e6e7d48025.json",
+    "ION/05_context/history/front_stage_council_receipts/fsc-b3e8eb0f49710e6013.front_stage_council_receipt.json",
+    "ION/05_context/history/conversational_receipts/7116638c9d43023d44c6efe4.conversational_receipt.json"
+  ]
+}

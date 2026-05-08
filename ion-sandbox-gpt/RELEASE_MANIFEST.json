@@ -1,0 +1,59 @@
+{
+  "schema_id": "ion.sandbox_gpt.release_manifest.v0_1",
+  "name": "ION Sandbox GPT",
+  "version": "v1.4-public-candidate",
+  "release_track": "custom_gpt_portable_sandbox",
+  "prepared_at": "2026-05-08T19:28:00Z",
+  "release_root_file_count": 3740,
+  "source_snapshot": "ION_sandbox/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z",
+  "authority_boundary": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "deployment_authority": false,
+    "git_push_authority": false,
+    "arbitrary_shell_authority": false
+  },
+  "primary_runtime": {
+    "carrier": "GPT_SANDBOX_CARRIER",
+    "mode": "single_carrier_sequential_role_phase",
+    "active_template": "ION/07_templates/carriers/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
+    "starter_prompt": "What are we working on?"
+  },
+  "optional_lanes": {
+    "mcp_42_tool_lane": {
+      "included": "documentation_and_optional_adapter_only",
+      "required": false
+    },
+    "cursor_ide_lane": {
+      "included": false,
+      "required": false
+    },
+    "codex_cli_lane": {
+      "included": "documentation_and_optional_external_lane_only",
+      "required": false
+    }
+  },
+  "sanitization": {
+    "excluded_patterns": [
+      "__pycache__/",
+      "*.pyc",
+      ".pytest_cache/",
+      "*.log",
+      "*.pid"
+    ],
+    "high_confidence_secret_scan": "no findings",
+    "generated_cache_check": "clean after focused test run"
+  },
+  "release_tests": [
+    "ION/tests/test_kernel_ion_sandbox_preflight.py",
+    "ION/tests/test_kernel_single_carrier_sequence_runner.py",
+    "ION/tests/test_kernel_ion_stale_surface_audit.py"
+  ],
+  "release_test_result": "13 passed",
+  "non_claims": [
+    "This release candidate is not production-ready.",
+    "This release candidate does not grant live execution authority.",
+    "This release candidate does not require local MCP, Codex CLI, Cursor, Cloudflare, or GitHub mutation."
+  ]
+}

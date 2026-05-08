@@ -1,0 +1,14 @@
+witness_id: witness.domain.continuity_context_resumability.2026-04-07
+subject_domain: domain.continuity_context_resumability
+status: ACTIVATED_FIRST_PASS
+activated_on: 2026-04-07
+basis:
+  - live root already contains continuity law, continuity architecture, context planes, and Vizier burden-bearing governance
+  - migration packet A1 makes this burden explicit in registry state
+supporting_sources:
+  - ION/03_registry/boots/VIZIER.boot.md
+  - ION/02_architecture/CONTINUITY_ARCHITECTURE.md
+  - ION/01_doctrine/SOVEREIGN_CONSTITUTION.md
+constraints:
+  - activation does not imply compiled context completion
+  - continuity burden must remain distinct from review-domain authority

@@ -1,0 +1,88 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "pr_review_packet.minimal_valid.v0_1",
+  "template_id": "pr_review_packet",
+  "case_type": "minimal_valid",
+  "status": "candidate_template_instance_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/pr_review_packet.template_spec.yaml",
+  "primary_agent": "PR_REVIEW_STEWARD",
+  "domain_id": "pr_agent_work_domain",
+  "objective": "Exercise the pr_review_packet candidate template with a minimal valid instance.",
+  "sections": {
+    "PR_SCOPE": "Review candidate PR #128 updating the authentication middleware and generated lockfile.",
+    "DIFF_SUMMARY": [
+      {
+        "path": "src/auth/middleware.ts",
+        "change": "adds tenant header parsing and fallback branch"
+      },
+      {
+        "path": "pnpm-lock.yaml",
+        "change": "dependency tree changed after auth library upgrade"
+      }
+    ],
+    "RISK_AREAS": [
+      "tenant spoofing risk if header trust boundary is not explicit",
+      "lockfile drift risk because dependency upgrade affects transitive packages",
+      "CI coverage gap if middleware tests omit malformed headers"
+    ],
+    "CI_EVIDENCE": [
+      {
+        "check": "unit",
+        "status": "passed",
+        "proof_ref": "ci://example/unit-128"
+      },
+      {
+        "check": "lint",
+        "status": "passed",
+        "proof_ref": "ci://example/lint-128"
+      },
+      {
+        "check": "security",
+        "status": "not_provided",
+        "proof_ref": "missing"
+      }
+    ],
+    "REVIEW_COMMENTS": [
+      {
+        "severity": "blocker",
+        "path": "src/auth/middleware.ts",
+        "comment": "Please document and test the tenant-header trust boundary before merge."
+      },
+      {
+        "severity": "warning",
+        "path": "pnpm-lock.yaml",
+        "comment": "Lockfile changed; attach dependency diff or package-manager receipt."
+      }
+    ],
+    "MERGE_BLOCKERS": [
+      "missing security check evidence",
+      "trust-boundary test absent for malformed/forged tenant header"
+    ],
+    "NON_CLAIMS": [
+      "Review comments are candidate feedback, not accepted code changes.",
+      "Merge readiness is not claimed because security evidence is missing."
+    ],
+    "SETTLEMENT_ROUTE": "PR_REVIEW_STEWARD -> SECURITY_NEMESIS for blocker review -> human merge gate."
+  },
+  "expected_validation": {
+    "should_pass": true,
+    "expected_failure_kinds": [],
+    "proves": [
+      "required section shape can be satisfied",
+      "candidate boundary can be preserved",
+      "settlement/proof/non-claim surfaces can be named"
+    ]
+  },
+  "non_claims": [
+    "This instance is candidate current-context test data, not accepted template law.",
+    "This instance does not execute external tools or mutate production state."
+  ]
+}

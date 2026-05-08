@@ -1,0 +1,11 @@
+{
+  "live_execution_authority": false,
+  "production_authority": false,
+  "queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+  "request_count": 0,
+  "requests": [],
+  "schema_id": "ion.chatgpt_connector_codex_work_queue.v1",
+  "starter_note": "Sandbox Custom GPT baseline has no queued local Codex work. Local/Codex integration is optional external lane.",
+  "starter_state": true,
+  "state_dir": "ION/05_context/current/chatgpt_connector"
+}

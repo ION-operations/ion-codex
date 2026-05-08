@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-05-07T12:42:01.302845+00:00",
+  "detail": "runtime session created",
+  "event": "CREATED",
+  "receipt_id": "rsr-f2f5db5c2bed",
+  "session_id": "fdsession-11e2a9a0cbc8dad6bc",
+  "witness_paths": [
+    "/mnt/data/ion_persona_relay_work/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_1/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/sessions/fdsession-11e2a9a0cbc8dad6bc.json",
+    "/mnt/data/ion_persona_relay_work/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_1/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/authorities/fdsession-11e2a9a0cbc8dad6bc.json",
+    "/mnt/data/ion_persona_relay_work/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_1/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/queues/fdsession-11e2a9a0cbc8dad6bc.json"
+  ]
+}

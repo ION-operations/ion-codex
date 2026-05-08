@@ -1,0 +1,70 @@
+{
+  "$id": "ion.front_door_self_mount_binding.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "authority": {
+      "type": "object"
+    },
+    "binding_id": {
+      "pattern": "^front-door-self-mount-binding-",
+      "type": "string"
+    },
+    "blocked_claims": {
+      "type": "object"
+    },
+    "branch": {
+      "const": "ION-GPT55-SELF-MOUNT"
+    },
+    "continuable": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "front_door": {
+      "type": "object"
+    },
+    "production_authority": {
+      "const": false
+    },
+    "schema_id": {
+      "const": "ion.front_door_self_mount_binding.v1"
+    },
+    "self_mount": {
+      "type": "object"
+    },
+    "session_id": {
+      "type": "string"
+    },
+    "verdict": {
+      "enum": [
+        "VALID_FRONT_DOOR_SELF_MOUNT_BINDING",
+        "BLOCKED_BY_SELF_SURFACE_DRIFT",
+        "INVALID_FRONT_DOOR_SELF_MOUNT_BINDING"
+      ]
+    },
+    "witness_paths": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_id",
+    "binding_id",
+    "created_at",
+    "session_id",
+    "branch",
+    "authority",
+    "front_door",
+    "self_mount",
+    "witness_paths",
+    "blocked_claims",
+    "continuable",
+    "production_authority",
+    "verdict"
+  ],
+  "title": "ION Front-Door Self-Mount Binding",
+  "type": "object"
+}

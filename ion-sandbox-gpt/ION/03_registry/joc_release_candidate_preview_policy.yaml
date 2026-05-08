@@ -1,0 +1,18 @@
+version: V70_RELEASE_CANDIDATE_PREVIEW_AND_PREFLIGHT_VERIFIER_VIEW_MODEL
+policy_class: ui_runtime_preview_boundary
+upstream_required:
+  package_plan_verdict: PACKAGE_ASSEMBLY_PLAN_PREVIEW_READY
+  execution_mode: PACKAGE_ASSEMBLY_PLAN_PREVIEW_ONLY
+forbidden:
+  release_archive_creation: true
+  file_system_write: true
+  zip_creation: true
+  real_checksum_claim: true
+  checksum_file_write: true
+  artifact_export: true
+  external_transfer: true
+  memory_write: true
+  canonical_graph_write: true
+  source_summary_rewrite: true
+  live_dispatch: true
+  production_authority: true

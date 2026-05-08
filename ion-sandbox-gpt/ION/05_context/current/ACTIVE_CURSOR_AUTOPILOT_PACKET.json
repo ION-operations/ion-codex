@@ -1,0 +1,86 @@
+{
+  "command_semantics": {
+    "/ion": "continue when no argument; otherwise queue/classify argument and run carrier workflow",
+    "continue/proceed/resume": "aliases for /ion in an ION shell root"
+  },
+  "cursor_parent_identity": "CURSOR_CARRIER_CONTROL_SURFACE",
+  "extension_direction": {
+    "future_primary_user_surface": "ION Cursor cockpit/persona extension",
+    "parent_chat_future_role": "mostly host automation lane triggered by /ion or extension command"
+  },
+  "generated_at": "2026-04-30T14:23:27+00:00",
+  "live_counts": {
+    "accepted_returns": 0,
+    "open_human_gates": 0,
+    "operator_queue_items": 0,
+    "rejected_returns": 0,
+    "spawn_rows": 0
+  },
+  "mandatory_sequence": [
+    "resolve_shell_root",
+    "build_autopilot_packet",
+    "run_ion_carrier_continue",
+    "read_active_carrier_turn_packet",
+    "execute_spawn_true_rows_only",
+    "capture_full_worker_returns",
+    "run_ion_carrier_task_return_for_each_return",
+    "queue_accepted_returns_for_steward",
+    "report_accepted_state_or_human_gate"
+  ],
+  "mcp": {
+    "preferred_tools": [
+      "ion_status",
+      "ion_continue",
+      "ion_context_plan",
+      "ion_cockpit_view",
+      "ion_workflow_audit",
+      "ion_read_active_packet",
+      "ion_task_return"
+    ],
+    "project_server": "ion-control",
+    "state_present": false
+  },
+  "no_user_upkeep_law": "Do not ask the user to choose routine agents, refresh packets, organize context, update files, or sequence normal ION work.",
+  "not_ion_roles": [
+    "STEWARD",
+    "RELAY",
+    "PERSONA_INTERFACE",
+    "MASON",
+    "NEMESIS",
+    "CONTEXT_CARTOGRAPHER",
+    "RUNTIME_CARTOGRAPHER"
+  ],
+  "operator_message": "/ion continue building cockpit",
+  "operator_message_classification": "new_work_directive",
+  "paths": {
+    "autopilot_packet": "ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_PACKET.json",
+    "carrier_turn_packet": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+    "human_gate_queue": "ION/05_context/current/ACTIVE_HUMAN_GATE_QUEUE.json",
+    "operator_queue": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+    "role_spawn_plan": "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+    "steward_queue": "ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json",
+    "task_return_ledger": "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json"
+  },
+  "schema_id": "ion.cursor_autopilot_packet.v1",
+  "stop_conditions": [
+    "open_human_gate",
+    "workflow_audit_findings",
+    "rejected_return_without_safe_rerun",
+    "missing_required_tooling",
+    "no_open_work_and_no_self_audit_or_evolution_task"
+  ],
+  "subagents": {
+    "policy": "Cursor subagents are carrier slots only and must receive generated ION context packages.",
+    "project_agents": [
+      "ion-steward",
+      "ion-relay",
+      "ion-persona-interface",
+      "ion-mason",
+      "ion-nemesis",
+      "ion-context-cartographer",
+      "ion-runtime-cartographer",
+      "ion-scribe"
+    ],
+    "required_first_output_heading": "### CONTEXT PROOF"
+  }
+}

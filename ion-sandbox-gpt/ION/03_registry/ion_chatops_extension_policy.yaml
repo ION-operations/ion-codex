@@ -1,0 +1,41 @@
+schema_id: ion.chatops_extension_policy.v1
+status: draft_non_production
+production_authority: false
+live_execution_authority: false
+extension_name: ION ChatOps Bridge
+carrier_callsign: Sev
+carrier_id: CHATGPT_BROWSER_CARRIER
+human_sovereign: Braden
+permissions_minimum:
+  - storage
+  - activeTab
+  - scripting
+  - notifications
+  - clipboardWrite
+host_permissions:
+  - https://chatgpt.com/*
+  - http://127.0.0.1:*/*
+  - http://localhost:*/*
+parse_policy:
+  only_fenced_yaml_blocks: true
+  require_ion_action_key: true
+  assistant_message_preferred: true
+  duplicate_action_id_blocked: true
+approval_policy:
+  require_preview_for_mutation: true
+  require_braden_approval_for_submit: true
+  approval_token: ION_CHATOPS_APPROVED
+sandbox_tab_policy:
+  read_queue: GET /sandbox/returns
+  diff_preview_requires_braden_approval: true
+  queue_review_requires_braden_approval: true
+  direct_patch_apply_allowed: false
+  git_push_allowed: false
+  inbox_root: ION/05_context/inbox/chatgpt_sandbox_returns/
+blocked_extension_behaviors:
+  - direct_filesystem_access
+  - silent_auto_approval
+  - credential_storage_in_repo
+  - production_deploy
+  - push_main
+  - broad_shell

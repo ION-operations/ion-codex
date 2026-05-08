@@ -1,0 +1,22 @@
+{
+  "body": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "arguments": {
+        "client_name": "v68-example",
+        "requested_mode": "dry_run",
+        "transport": "streamable-http-alpha-boundary"
+      },
+      "name": "ion.mount"
+    }
+  },
+  "description": "V68 hosted HTTP alpha boundary request example. Contract preview only.",
+  "headers": {
+    "content-type": "application/json",
+    "origin": "http://localhost"
+  },
+  "method": "POST",
+  "path": "/mcp"
+}

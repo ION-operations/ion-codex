@@ -1,0 +1,134 @@
+schema: ion.ai_assistant_work.template_spec.v0_1
+template_id: migration_plan_and_rollback_packet
+title: Migration Plan and Rollback Packet
+status: candidate_machine_checkable_template_spec_not_accepted_canon
+created_at: '2026-05-08T15:19:39Z'
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  external_execution_authority: false
+  requires_explicit_acceptance_to_land: true
+owned_by_domain: migration_work_domain
+primary_agent: MIGRATION_MASON
+supporting_agents:
+- SCHEMA_DRIFT_AUDITOR
+- PATCH_MASON
+- TEST_RUNNER
+- SETTLEMENT_STEWARD
+purpose: Plan schema/data migrations with forward path, rollback boundary, fixtures,
+  tests, deployment notes, and release evidence.
+intent_class: specialist_domain_template
+state_inputs:
+- current_schema_state
+- target_schema_state
+- data_surface_state
+- compatibility_state
+state_outputs:
+- migration_plan_state
+- rollback_plan_state
+- migration_proof_plan_state
+- approval_request_state
+required_context:
+- schema diff
+- data contract
+- migration target
+- test fixtures
+- deployment/release constraints
+machine_required_sections:
+- name: MIGRATION_INTENT
+  type: string
+  min_length: 20
+- name: CURRENT_SCHEMA_OR_STATE
+  type: string
+  min_length: 10
+- name: TARGET_SCHEMA_OR_STATE
+  type: string
+  min_length: 10
+- name: AFFECTED_SURFACES
+  type: list
+  min_items: 1
+- name: FORWARD_PLAN
+  type: list
+  min_items: 1
+- name: ROLLBACK_PLAN
+  type: list
+  min_items: 1
+- name: COMPATIBILITY_GATES
+  type: list
+  min_items: 1
+- name: TEST_AND_PROOF_PLAN
+  type: list
+  min_items: 1
+- name: RISK_AND_APPROVAL_BOUNDARY
+  type: object
+  required_keys:
+  - destructive
+  - approval_required
+- name: NON_CLAIMS
+  type: list
+  min_items: 1
+- name: SETTLEMENT_ROUTE
+  type: string
+  min_length: 5
+proof_gates:
+- gate_id: candidate_boundary_named
+  description: Output states it is candidate/not accepted unless explicit acceptance
+    exists
+  machine_check:
+    requires_non_claim: accepted_state
+- gate_id: required_sections_present
+  description: Every machine_required_sections item is present and non-empty according
+    to rule
+  machine_check:
+    type: schema_section_presence
+- gate_id: settlement_route_named
+  description: Return includes route for review/settlement/inheritance
+  machine_check:
+    section_any:
+    - SETTLEMENT_ROUTE
+    - RECEIPT_TARGET
+- gate_id: proof_or_missing_context_named
+  description: Proof, command receipts, or missing context are stated
+  machine_check:
+    requires_any:
+    - PROOF
+    - COMMAND_RECEIPTS
+    - TEST_AND_PROOF_PLAN
+    - PROOF_NORMALIZATION
+    - CI_EVIDENCE
+- gate_id: draft_gate_1
+  description: rollback boundary named
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_2
+  description: fixtures/tests identified
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_3
+  description: release gate not bypassed
+  machine_check:
+    type: human_or_script_check
+reject_if:
+- destructive migration lacks explicit approval boundary
+- rollback plan is empty
+- compatibility gates are absent
+output_contract: migration work packet and release evidence requirements
+completion_class: migration_ready_for_review_or_execution
+settlement_route: SCHEMA_DRIFT_AUDITOR then RELEASE_EVIDENCE_CURATOR
+route_binding:
+  dispatch_before_generic_implementation: true
+  trigger_patterns:
+  - migration plan and rollback packet
+  - migration plan and rollback
+  - migration mason
+  fallback_agent_forbidden_until_specialist_check: true
+minimal_valid_instance_shape:
+  template_id: migration_plan_and_rollback_packet
+  sections: must match machine_required_sections
+  non_claims_required: true
+  settlement_route_or_receipt_target_required: true
+status_notes:
+- This spec is machine-checkable structure for candidate current-context use; it is
+  not active template law.

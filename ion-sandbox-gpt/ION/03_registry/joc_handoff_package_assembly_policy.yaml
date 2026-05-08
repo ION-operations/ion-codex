@@ -1,0 +1,15 @@
+version: V69_HANDOFF_PACKAGE_ASSEMBLY_PLAN_AND_CHECKSUM_PREVIEW
+production_authority: false
+live_export_authority: false
+package_materialization_authority: false
+required_upstream_verdict: HANDOFF_MANIFEST_PREVIEW_READY
+required_upstream_execution_mode: HANDOFF_MANIFEST_PREVIEW_ONLY
+required_boundaries:
+  - no_file_write
+  - no_zip_creation
+  - no_checksum_file_write
+  - no_artifact_export
+  - no_external_transfer
+  - no_memory_write
+  - no_graph_commit
+  - no_source_summary_rewrite

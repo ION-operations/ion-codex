@@ -1,0 +1,21 @@
+registry_id: retrieval_zone_registry
+status: current_phase_seed
+zones:
+- id: L1_ROOT_LAW
+  default_load: only_when_law_required
+- id: L2_BOOT_ROUTE_EMBODIMENT
+  default_load: boot_or_role_activation
+- id: L3_MISSION_CANON_IDENTITY
+  default_load: mission_or_identity_context
+- id: L4_CURRENT_STATE
+  default_load: current_runtime_context
+- id: L5_ACTIVE_PLAN_OBJECTIVE
+  default_load: active_work_context
+- id: L6_CONTRADICTIONS_RISKS
+  default_load: when_risk_or_review_relevant
+- id: L7_DEPENDENCIES_DOMAIN_MAPS_SYSTEM_CARDS
+  default_load: when_system_topology_needed
+- id: L8_HISTORICAL_LINEAGE_ARCHIVE
+  default_load: donor_or_recovery_only
+- id: L9_QUARANTINE_NEVER_DEFAULT
+  default_load: never_default

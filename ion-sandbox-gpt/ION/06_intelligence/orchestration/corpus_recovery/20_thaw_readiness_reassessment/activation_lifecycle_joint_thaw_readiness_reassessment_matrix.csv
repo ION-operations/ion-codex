@@ -1,0 +1,11 @@
+criterion,status,evidence,notes
+semantic separation,pass,activation/lifecycle paired review drafts + interface review,activation and lifecycle meanings are now explicitly distinct
+interface contract,pass,Pass 41 interface review,shared crossing contract is now named directly
+counterexample resilience,pass with residual caution,Pass 43 counterexample review,major boundary-collapse cases are now enumerated and answered
+carrier invariance,pass,Pass 44 worked examples,crossing semantics now survive manual daemon external and continuation carriers
+receipt and settlement linkage,pass,Pass 45 worked examples,closure semantics no longer overwrite prior activation lawfulness
+install-path clarity,pass,Pass 46 install-path mapping,active landing targets and non-replacement boundaries are now explicit
+adjacent-file touch plan,partial,install-path mapping only,exact staged edit set is still not separately frozen
+promotion coupling discipline,pass with condition,Passes 39-46,activation and lifecycle must remain coupled through thaw review
+ready for bounded thaw review,yes conditional,this reassessment,eligible to enter thaw review but not for direct installation
+ready for active installation,no,this reassessment,requires bounded thaw packet and staged active edit plan first

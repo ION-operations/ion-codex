@@ -1,0 +1,72 @@
+registry_id: context_graph_edge_class_registry
+status: current_phase_seed
+created: '2026-04-24'
+edge_classes:
+- id: edge.emits
+  mapping_class: ENACTED_KERNEL_EDGE
+  kernel_edge_candidates:
+  - EMITS_DELTA
+  notes: Existing kernel graph has emitted-delta semantics.
+- id: edge.blocks
+  mapping_class: ENACTED_KERNEL_EDGE
+  kernel_edge_candidates:
+  - BLOCKS_WORK
+  notes: Existing kernel graph has blocking semantics for open questions.
+- id: edge.answers
+  mapping_class: ENACTED_KERNEL_EDGE
+  kernel_edge_candidates:
+  - ANSWERS_QUESTION
+  notes: Existing kernel graph has question answer semantics.
+- id: edge.instantiates
+  mapping_class: ADAPTER_REQUIRED
+  kernel_edge_candidates: []
+  notes: Template/file instantiation is semantically present but needs adapter edge.
+- id: edge.proves
+  mapping_class: ADAPTER_REQUIRED
+  kernel_edge_candidates: []
+  notes: Receipts prove actions; explicit graph edge adapter needed.
+- id: edge.mutates
+  mapping_class: ADAPTER_REQUIRED
+  kernel_edge_candidates: []
+  notes: Governed writes and V10 graph commits imply mutation; adapter needed.
+- id: edge.routes_to
+  mapping_class: SEMANTIC_ONLY_CURRENTLY
+  kernel_edge_candidates: []
+  notes: Routing exists in packets/protocols; unified graph edge not yet enacted.
+- id: edge.triggers_candidate_event
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  kernel_edge_candidates: []
+  notes: V10 template completion event surfaces enact this in bounded event graph state.
+- id: edge.triggers_allowed_reaction
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  kernel_edge_candidates: []
+  notes: V10 reaction selection witnesses enact this in dry-run form.
+- id: edge.approves_context
+  mapping_class: ENACTED_REGISTRY_SURFACE
+  kernel_edge_candidates: []
+  notes: V12 approved context index creates this as registry projection.
+- id: edge.classifies_file
+  mapping_class: ENACTED_TEMPLATE_SURFACE
+  kernel_edge_candidates: []
+  notes: V12 file record schema/template creates this as self-documentation surface.
+
+- id: edge.constrained_by_drift_gate
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  kernel_edge_candidates: []
+  notes: Self-mount identity envelopes are constrained by the drift gate.
+- id: edge.evaluates_self_claim
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  kernel_edge_candidates: []
+  notes: Drift assessments evaluate first-person and authority-bearing claims.
+- id: edge.succeeds_without_identity_equivalence
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  kernel_edge_candidates: []
+  notes: Succession packets connect predecessor and successor agents without numerical identity.
+- id: edge.inherits_evidence_from
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  kernel_edge_candidates: []
+  notes: Succession packets inherit evidence paths from prior receipts and envelopes.
+- id: edge.blocked_by_production_readiness
+  mapping_class: ENACTED_EVENTED_GRAPH_STATE
+  kernel_edge_candidates: []
+  notes: Self-mount projections remain constrained by production-readiness blockers.

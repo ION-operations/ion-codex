@@ -1,0 +1,36 @@
+version: V59_MISSION_DISPATCH_AND_MODEL_ROUTE_VIEW_MODEL
+policy_class: ui_runtime_view_model
+production_authority: false
+live_dispatch_authority: false
+required_compute_rings:
+  - RING_1_BROWSER_SESSION
+  - RING_2_API_CLI_LOCAL
+  - RING_3_CLOUD_COMPUTE
+required_route_factors:
+  - TASK_CLASS
+  - CONTEXT_SIZE
+  - QUALITY_REQUIREMENT
+  - LATENCY_REQUIREMENT
+  - COST_SENSITIVITY
+  - CAPABILITY_MATCH
+  - RISK_CLASS
+  - FALLBACK_AVAILABILITY
+required_view_surfaces:
+  - MISSION_DISPATCH_PANEL
+  - MODEL_ROUTE_MATRIX
+  - COMPUTE_RING_SELECTOR
+  - COST_LATENCY_QUALITY_BAND
+  - CAPABILITY_MATCH_PANEL
+  - FALLBACK_CHAIN_PANEL
+  - HUMAN_APPROVAL_GATE
+  - DISPATCH_RECEIPT_PREVIEW
+blocked_capabilities:
+  production_authority: false
+  live_external_model_dispatch: false
+  browser_session_mutation: false
+  credential_access: false
+  form_submission: false
+  paid_cloud_launch: false
+  source_summary_rewrite: false
+  canonical_graph_write: false
+  unrestricted_agent_activation: false

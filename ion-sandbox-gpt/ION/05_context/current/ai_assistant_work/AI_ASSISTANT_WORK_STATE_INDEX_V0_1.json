@@ -1,0 +1,52 @@
+{
+  "schema": "ion.ai_assistant_work.state_index.v0_1",
+  "status": "candidate_current_state_not_accepted_canon",
+  "created_at": "2026-05-08T14:35:00Z",
+  "current_state": "ai_assistant_work_domain_system_seeded_and_validated_as_candidate_current_context",
+  "root": "ION/05_context/current/ai_assistant_work/",
+  "summary": {
+    "domain_count": 19,
+    "agent_count": 47,
+    "route_count": 6,
+    "state_family_count": 77,
+    "template_family_count": 69,
+    "protocol_count": 59,
+    "focused_tests": "9 passed"
+  },
+  "key_files": {
+    "domain_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_DOMAIN_REGISTRY_CANDIDATE_V0_1.yaml",
+    "agent_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_AGENT_REGISTRY_CANDIDATE_V0_1.yaml",
+    "route_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_ROUTE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "state_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_STATE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "template_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_TEMPLATE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "protocol_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_PROTOCOL_REGISTRY_CANDIDATE_V0_1.yaml",
+    "domain_packets_dir": "ION/05_context/current/ai_assistant_work/domains/",
+    "protocols_dir": "ION/05_context/current/ai_assistant_work/protocols/",
+    "template_families": "ION/05_context/current/ai_assistant_work/templates/AI_ASSISTANT_WORK_TEMPLATE_FAMILIES_V0_1.md",
+    "dataset_entry_schema": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_DATASET_ENTRY_SCHEMA_V0_1.yaml",
+    "source_evidence_map": "ION/05_context/current/ai_assistant_work/source_evidence/AI_ASSISTANT_WORK_SOURCE_EVIDENCE_MAP_20260508T143500Z.json",
+    "overview": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_DOMAIN_SYSTEM_OVERVIEW_V0_1.md",
+    "route_simulation_report": "ION/05_context/current/ai_assistant_work/simulations/AI_ASSISTANT_WORK_ROUTE_SIMULATION_REPORT_20260508T143500Z.json",
+    "validation_note": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_VALIDATION_NOTE_20260508T143500Z.json",
+    "receipt": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_ACTIVATION_RECEIPT_20260508T143500Z.json",
+    "next_packet": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_NEXT_PACKET_20260508T143500Z.json"
+  },
+  "candidate_decisions": [
+    "Treat AI assistant work as a superdomain spanning chat, IDE, CLI, cloud, PR, and background agent bodies.",
+    "Define assistant identity as host-body mounted work interface, not model/prompt/autocomplete alone.",
+    "Create first candidate specialist-domain system rather than routing UI/docs/IDE work to a generic coder.",
+    "Bind templates to specialist domains and specialist agents.",
+    "Preserve candidate-only boundary until explicit acceptance."
+  ],
+  "blockers": [
+    "Explicit acceptance required before landing any AI assistant work registry under ION/03_registry.",
+    "A dataset genesis packet is needed before treating the taxonomy as mature.",
+    "External evidence map is initial and incomplete; broader source collection is required."
+  ],
+  "non_claims": [
+    "This receipt does not accept the domain system into ION canon.",
+    "No external IDE, Codex, GitHub, MCP, daemon, or cloud-agent execution occurred.",
+    "No registry, product-front-door, or production mutation occurred.",
+    "External product docs/survey data are research evidence, not ION law."
+  ]
+}

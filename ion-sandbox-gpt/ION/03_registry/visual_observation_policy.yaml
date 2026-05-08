@@ -1,0 +1,19 @@
+schema_id: ion.visual_observation_policy.v1
+version: V44_VISUAL_OBSERVATION_PACKET_SCHEMA
+production_authority: false
+authority_scope: observe_diagnose_report_only
+allowed_modes:
+  - OBSERVE
+  - DIAGNOSE
+  - COMPARE
+  - EXPLAIN
+  - PATCH_REQUEST
+  - VERIFY
+forbidden_actions:
+  unrestricted_computer_control: false
+  credential_sensitive_action: false
+  destructive_action: false
+  purchase_or_submission: false
+  persistent_dom_mutation_without_authority: false
+  production_authority: false
+

@@ -1,0 +1,102 @@
+{
+  "schema": "ion.ai_assistant_work.candidate_domain_lifecycle_implementation_receipt.v0_1",
+  "created_at": "2026-05-08T18:51:04Z",
+  "status": "candidate_domain_lifecycle_gate_implemented_not_accepted_canon",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "implemented_surfaces": [
+    {
+      "path": "ION/02_architecture/ION_CANDIDATE_DOMAIN_OPERATION_PROTOCOL.md",
+      "role": "provisional candidate-operational protocol defining lifecycle states, allowed/forbidden uses, candidate agent semantics, scorecards, and promotion gates"
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/CANDIDATE_DOMAIN_LIFECYCLE_REGISTRY_V0_1.yaml",
+      "role": "candidate-only lifecycle registry for route compiler gating and promotion preparation"
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/CANDIDATE_LIFECYCLE_SCORECARD_SCHEMA_V0_1.yaml",
+      "role": "candidate scorecard schema for promotion/revision/archive decisions"
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/scorecards/ui_ux_domain_scorecard_v0_1.yaml",
+      "role": "first domain scorecard for UI/UX candidate calibration"
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/scorecards/screen_state_matrix_packet_scorecard_v0_1.yaml",
+      "role": "first UI template scorecard for state-matrix proof calibration"
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/scorecards/terminal_proof_receipt_packet_scorecard_v0_1.yaml",
+      "role": "first promotion-candidate template scorecard for command/test proof discipline"
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/promotion_proposals/terminal_proof_receipt_packet_PROMOTION_PROPOSAL_DRAFT_20260508T185031Z.md",
+      "role": "draft promotion proposal for template-only review; not landed"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+      "role": "route compiler now reads lifecycle registry and refuses explicit inactive/rejected/archived/draft route candidates"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
+      "role": "focused tests for lifecycle-enabled route selection and disabled-route filtering"
+    }
+  ],
+  "lifecycle_gate_behavior": {
+    "enabled_states": [
+      "operational_candidate",
+      "proof_gated_candidate",
+      "promotion_candidate",
+      "accepted_operational_domain",
+      "canonical_domain_or_law"
+    ],
+    "refused_states": [
+      "raw_observation",
+      "candidate_draft",
+      "deferred",
+      "rejected",
+      "archived"
+    ],
+    "missing_lifecycle_record_behavior": "allowed_for_compatibility_as_unrecorded_candidate",
+    "promotion_still_requires_lifecycle_record": true
+  },
+  "validation": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
+      "result": "3 passed"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_assistant_work_route_compiler.py ION/tests/test_kernel_ion_codex_chat_engine.py ION/tests/test_kernel_ion_dual_codex_chat.py ION/tests/test_kernel_ion_custom_gpt_action_gateway.py ION/tests/test_kernel_ion_custom_gpt_action_gateway_policy.py",
+      "result": "40 passed"
+    },
+    {
+      "command": "python3 -c \"from pathlib import Path; import yaml; paths=list(Path('ION/05_context/current/ai_assistant_work/candidate_lifecycle').rglob('*.yaml')); [yaml.safe_load(p.read_text(encoding='utf-8')) for p in paths]; print(f'parsed {len(paths)} lifecycle yaml files')\"",
+      "result": "parsed 5 lifecycle yaml files"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ai_assistant_work_domain_candidate.py ION/tests/test_kernel_ai_assistant_work_dataset_genesis.py ION/tests/test_kernel_ai_assistant_work_domain_fission_candidate.py ION/tests/test_kernel_ai_assistant_work_agent_boot_template_specs.py ION/tests/test_kernel_ai_assistant_work_template_instances.py ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
+      "result": "39 passed"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_status",
+      "result": "ION_STATUS_READY"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_active_state_integrity_audit",
+      "result": "ION_ACTIVE_STATE_INTEGRITY_READY"
+    }
+  ],
+  "non_claims": [
+    "This implementation does not promote any candidate domain, agent, route, template, or protocol into accepted ION canon.",
+    "This implementation does not mutate ION/03_registry.",
+    "This implementation does not change Custom GPT OpenAPI schemas or MCP tool contracts.",
+    "This implementation does not grant production, live execution, secrets, deployment, git push, or arbitrary shell authority."
+  ]
+}

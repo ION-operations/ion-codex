@@ -1,0 +1,65 @@
+{
+  "schema": "ion.sandbox_github_release_strategy_receipt.v0_1",
+  "created_at": "2026-05-08T19:16:12Z",
+  "status": "release_strategy_documented_not_published",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "sandbox_snapshot": "ION_sandbox/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z",
+  "strategy": "dedicated_release_branch_with_curated_product_root_before_publication",
+  "recommended_branch": "release/ion-sandbox-gpt-v1",
+  "recommended_product_root": "ion-sandbox-gpt/",
+  "implemented_surfaces": [
+    "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_ion_sandbox_github_release_strategy.md"
+  ],
+  "audit_findings": {
+    "file_count": 3756,
+    "size_summary": "26M",
+    "largest_file_summary": "about 719K",
+    "files_over_5M_found": false,
+    "credential_filename_findings": 0,
+    "high_confidence_secret_pattern_findings": 0,
+    "generated_cache_present": true,
+    "metadata_version_drift_present": true,
+    "cursor_rule_test_boundary_issue_present": true
+  },
+  "validation": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_sandbox_preflight.py ION/tests/test_kernel_single_carrier_sequence_runner.py",
+      "result": "10 passed"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_sandbox_preflight.py ION/tests/test_kernel_single_carrier_sequence_runner.py ION/tests/test_kernel_ion_stale_surface_audit.py",
+      "result": "10 passed, 3 failed; stale surface audit expects missing .cursor/rules/ion-carrier-relay-mediation.mdc"
+    },
+    {
+      "command": "rg --no-ignore high-confidence secret pattern scan",
+      "result": "no high-confidence private key, API key, OAuth client secret, or bearer token findings"
+    }
+  ],
+  "release_gates": [
+    "sanitize generated/cache files",
+    "fix package name/version metadata",
+    "decide Cursor/IDE test boundary",
+    "run focused release tests",
+    "run high-confidence secret scan",
+    "write release receipt",
+    "create branch",
+    "stage only curated release files",
+    "review staged file list",
+    "push only after explicit operator approval"
+  ],
+  "authority_boundary": {
+    "published": false,
+    "branch_created": false,
+    "raw_sandbox_unignored": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "git_push_authority": false
+  },
+  "non_claims": [
+    "This receipt does not publish the sandbox package.",
+    "This receipt does not stage raw sandbox contents.",
+    "This receipt does not claim production readiness.",
+    "This receipt does not grant live execution, secrets, deployment, git push, or arbitrary shell authority."
+  ]
+}

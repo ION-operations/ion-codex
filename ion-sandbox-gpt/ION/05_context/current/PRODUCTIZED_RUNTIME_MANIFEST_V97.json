@@ -1,0 +1,22 @@
+{
+  "authority_posture": "survival_audit_not_production",
+  "base_artifact": "ION_CURSOR_CONSOLIDATED_V96_FULL_RUNTIME_20260430.zip",
+  "core_verdict": "ION is worth saving only through a minimal autonomous loop survival proof; freeze expansion until proof passes.",
+  "created_at": "2026-05-01",
+  "created_files": [
+    "ION/docs/consolidation/ION_V97_LEAD_DEV_SURVIVAL_AUDIT_AND_AUTONOMOUS_LOOP_RECOVERY_PLAN_20260501.md",
+    "ION/00_BOOTSTRAP/V97_LEAD_DEV_SURVIVAL_AUDIT_AND_AUTONOMOUS_LOOP_RECOVERY_LOCK.md",
+    "ION/05_context/signals/v97_lead_dev_survival_audit_and_autonomous_loop_recovery_receipt_20260501.txt",
+    "FILES_ADDED_V97_LEAD_DEV_SURVIVAL_AUDIT_AND_AUTONOMOUS_LOOP_RECOVERY.txt",
+    "ION/05_context/current/PRODUCTIZED_RUNTIME_MANIFEST_V97.json"
+  ],
+  "explicit_non_claims": [
+    "production_ready",
+    "full_test_suite_passed",
+    "host_independent_autonomous_loop_proven",
+    "Cursor Auto mode restored as primary carrier"
+  ],
+  "next_required_branch": "V98_MINIMAL_AUTONOMOUS_LOOP_SURVIVAL_PROOF",
+  "schema_id": "ion.productized_runtime_manifest.v97",
+  "version": "V97_LEAD_DEV_SURVIVAL_AUDIT_AND_AUTONOMOUS_LOOP_RECOVERY"
+}

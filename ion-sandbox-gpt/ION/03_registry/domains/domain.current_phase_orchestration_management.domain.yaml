@@ -1,0 +1,26 @@
+domain_id: domain.current_phase_orchestration_management
+display_name: Current-Phase Orchestration Management
+status: ACTIVE_CURRENT_PHASE
+canon_status: NOT_FINAL_CANON
+purpose: >-
+  Hold truthful current-phase orchestration, bounded routing, startup/status clarity,
+  and proposal/state consolidation for the active branch.
+primary_roles:
+  - STEWARD
+supporting_roles:
+  - RELAY
+  - VESTIGE
+  - THOTH
+protocol_surfaces:
+  - ION/02_architecture/TEMPLATE_BINDING_PROTOCOL.md
+  - ION/02_architecture/TEMPLATE_SURFACE_EVOLUTION_PROTOCOL.md
+  - ION/02_architecture/PACKET_AND_HANDOFF_STANDARDIZATION_PROTOCOL.md
+  - ION/02_architecture/TRUE_NAME_AND_SEMANTIC_LAYER_PROTOCOL.md
+  - ION/02_architecture/RANK_AND_PRECEDENCE_PROTOCOL.md
+  - ION/02_architecture/STEWARD_CURRENT_PHASE_ORCHESTRATION_PROTOCOL.md
+template_surfaces:
+  - ION/07_templates/bindings/STEWARD__TASK.md
+  - ION/07_templates/bindings/STEWARD__STATUS_REPORT.md
+  - ION/07_templates/bindings/STEWARD__PROPOSAL.md
+  - ION/07_templates/actions/TEMPLATE_SURFACE_CHANGE.md
+  - ION/07_templates/bindings/STEWARD__TEMPLATE_SURFACE_CHANGE.md

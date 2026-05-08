@@ -1,0 +1,39 @@
+{
+  "$id": "https://ion.local/schemas/ion_data_manifest.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "authority": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "data_schema_version": {
+      "type": "integer"
+    },
+    "engine_version": {
+      "type": "string"
+    },
+    "package_id": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "ion.data_manifest.v1"
+    }
+  },
+  "required": [
+    "schema_id",
+    "data_schema_version",
+    "engine_version",
+    "package_id",
+    "project_id",
+    "created_at",
+    "authority"
+  ],
+  "title": "ION Data Manifest",
+  "type": "object"
+}

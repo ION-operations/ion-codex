@@ -1,0 +1,77 @@
+{
+  "active_packet_path": "ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_PACKET.md",
+  "carrier": "GPT_SANDBOX_CARRIER",
+  "completed_output_path": null,
+  "context_proof_required": true,
+  "created_at": "2026-05-08T19:16:07+00:00",
+  "live_execution_authority": false,
+  "next_state_projection": "none_written_without_steward_or_human_acceptance",
+  "objective": "write sequence packet test",
+  "output_evaluation": null,
+  "packet_path": "ION/05_context/current/single_carrier_sequences/scseq-5291f8f0f4603e70ab/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
+  "phase_order": [
+    {
+      "phase_id": "PERSONA_INTERFACE_INGRESS",
+      "purpose": "Receive human language, preserve intent, and render it into ION-admissible intent without overexposing machinery.",
+      "required": "true",
+      "role": "PERSONA_INTERFACE"
+    },
+    {
+      "phase_id": "RELAY",
+      "purpose": "Preserve signal integrity and package the intent for Steward/internal routing.",
+      "required": "true",
+      "role": "RELAY"
+    },
+    {
+      "phase_id": "STEWARD",
+      "purpose": "Classify authority, decide route, and prevent output from becoming state without review.",
+      "required": "true",
+      "role": "STEWARD"
+    },
+    {
+      "phase_id": "VIZIER",
+      "purpose": "Strategic route analysis and context-aware sequencing.",
+      "required": "true",
+      "role": "VIZIER"
+    },
+    {
+      "phase_id": "MASON",
+      "purpose": "Implementation or concrete construction phase within sandbox limits.",
+      "required": "true",
+      "role": "MASON"
+    },
+    {
+      "phase_id": "NEMESIS_OR_VICE_REVIEW",
+      "purpose": "Risk/adversarial review; explicitly mark not required only with reason.",
+      "required": "true",
+      "role": "NEMESIS_OR_VICE"
+    },
+    {
+      "phase_id": "SCRIBE",
+      "purpose": "Documentation and receipt synthesis.",
+      "required": "true",
+      "role": "SCRIBE"
+    },
+    {
+      "phase_id": "STEWARD_FINAL",
+      "purpose": "Final integration recommendation; still proposal-only unless separately accepted.",
+      "required": "true",
+      "role": "STEWARD"
+    },
+    {
+      "phase_id": "PERSONA_INTERFACE_RESPONSE",
+      "purpose": "Render the internal result back to the user clearly, hiding machinery unless useful/requested.",
+      "required": "true",
+      "role": "PERSONA_INTERFACE"
+    }
+  ],
+  "phase_section_validation": "ready",
+  "production_authority": false,
+  "receipt_id": "screceipt-32295285931279b29c",
+  "receipt_status": "SEQUENCE_PACKET_READY_AWAITING_CARRIER_OUTPUT",
+  "schema_id": "ion.single_carrier_sequence_receipt.v1",
+  "sequence_id": "scseq-5291f8f0f4603e70ab",
+  "steward_review_required": true,
+  "template_action_proof_required": true,
+  "template_id": "ion.template.single_carrier_sequence_receipt.v1"
+}

@@ -1,0 +1,7 @@
+{
+  "binding_id": "rctx-394a580cd7e4",
+  "bound_at": "2026-05-02T22:52:19+00:00",
+  "context_ref": "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-f1dc5baef7bc.json",
+  "context_version": "fdctxv-v106-front-door-proof-trace-fdrelay-fdmsg-v-6072e99bf58f",
+  "session_id": "v106-front-door-proof-trace"
+}

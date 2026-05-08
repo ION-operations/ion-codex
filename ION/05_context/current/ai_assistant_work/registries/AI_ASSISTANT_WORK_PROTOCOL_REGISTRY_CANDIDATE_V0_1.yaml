@@ -1,0 +1,596 @@
+schema: ion.ai_assistant_work.protocol_registry.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T14:35:00Z'
+purpose: Candidate protocol registry for AI-assisted chat/IDE work.
+protocol_count: 59
+protocols:
+- protocol_id: a11y_as_proof_gate
+  applies_to_domains:
+  - ui_ux_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: acceptance_before_build
+  applies_to_domains:
+  - product_requirements_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: acceptance_before_execution
+  applies_to_domains:
+  - planning_and_task_breakdown_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: adversarial_review_before_landing
+  applies_to_domains:
+  - review_security_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: allowed_write_scope
+  applies_to_domains:
+  - implementation_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: answer_vs_state_boundary
+  applies_to_domains:
+  - chat_work_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: approval_before_side_effect
+  applies_to_domains:
+  - workflow_automation_tool_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: architecture_boundary_check
+  applies_to_domains:
+  - codebase_understanding_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: assistant_is_work_interface_not_model_alone
+  applies_to_domains:
+  - ai_assistant_identity_embodiment
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: bounded_next_step
+  applies_to_domains:
+  - planning_and_task_breakdown_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: branch_returns_are_proposals
+  applies_to_domains:
+  - cross_domain_settlement_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: chat_ide_cli_cloud_boundary_mapping
+  applies_to_domains:
+  - ai_assistant_identity_embodiment
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: context_is_bounded
+  applies_to_domains:
+  - knowledge_context_memory_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: conversation_to_artifact_handoff
+  applies_to_domains:
+  - chat_work_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: dataset_entries_need_lineage
+  applies_to_domains:
+  - assistant_learning_dataset_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: dependency_before_parallelism
+  applies_to_domains:
+  - planning_and_task_breakdown_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: dependency_change_requires_reason
+  applies_to_domains:
+  - dependency_package_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: design_system_first
+  applies_to_domains:
+  - ui_ux_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: diagnostic_feedback_loop
+  applies_to_domains:
+  - ide_work_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: diff_first_review
+  applies_to_domains:
+  - implementation_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: docs_version_boundary
+  applies_to_domains:
+  - documentation_writing_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: environment_boundary
+  applies_to_domains:
+  - devops_release_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: examples_must_run_or_be_marked
+  applies_to_domains:
+  - documentation_writing_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: failure_classification_loop
+  applies_to_domains:
+  - testing_quality_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: focused_then_broad_validation
+  applies_to_domains:
+  - testing_quality_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: freshness_and_authority_ranking
+  applies_to_domains:
+  - knowledge_context_memory_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: host_body_capability_mapping
+  applies_to_domains:
+  - ai_assistant_identity_embodiment
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: hypothesis_evidence_split
+  applies_to_domains:
+  - debugging_observability_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: ide_mutation_boundary
+  applies_to_domains:
+  - ide_work_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: intent_to_requirement
+  applies_to_domains:
+  - product_requirements_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: local_success_is_not_release
+  applies_to_domains:
+  - devops_release_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: locality_first_context
+  applies_to_domains:
+  - codebase_understanding_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: lockfile_diff_review
+  applies_to_domains:
+  - dependency_package_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: logs_are_evidence_not_truth
+  applies_to_domains:
+  - debugging_observability_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: memory_orients_artifacts_govern
+  applies_to_domains:
+  - knowledge_context_memory_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: method_before_claim
+  applies_to_domains:
+  - data_analysis_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: non_goals_are_context
+  applies_to_domains:
+  - product_requirements_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: observe_before_canonize
+  applies_to_domains:
+  - assistant_learning_dataset_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: pattern_to_template_to_agent
+  applies_to_domains:
+  - assistant_learning_dataset_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: portable_continuity_export
+  applies_to_domains:
+  - chat_work_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: proof_is_run_not_assumption
+  applies_to_domains:
+  - testing_quality_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: read_before_write
+  applies_to_domains:
+  - codebase_understanding_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: reader_task_first
+  applies_to_domains:
+  - documentation_writing_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: receipt_after_fan_in
+  applies_to_domains:
+  - cross_domain_settlement_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: receipt_after_tool_action
+  applies_to_domains:
+  - workflow_automation_tool_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: repro_before_fix_when_possible
+  applies_to_domains:
+  - debugging_observability_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: reproducible_analysis
+  applies_to_domains:
+  - data_analysis_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: responsive_behavior_matrix
+  applies_to_domains:
+  - ui_ux_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: rollback_before_rollout
+  applies_to_domains:
+  - devops_release_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: secret_boundary_preservation
+  applies_to_domains:
+  - review_security_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: security_license_gate
+  applies_to_domains:
+  - dependency_package_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: settlement_before_inheritance
+  applies_to_domains:
+  - cross_domain_settlement_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: source_claim_alignment
+  applies_to_domains:
+  - documentation_writing_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: source_data_lineage
+  applies_to_domains:
+  - data_analysis_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: states_before_pixels
+  applies_to_domains:
+  - ui_ux_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: test_after_mutation
+  applies_to_domains:
+  - implementation_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: tool_access_is_not_authority
+  applies_to_domains:
+  - workflow_automation_tool_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: tool_injection_guard
+  applies_to_domains:
+  - review_security_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.
+- protocol_id: workspace_surface_inventory
+  applies_to_domains:
+  - ide_work_domain
+  minimum_obligations:
+  - declare action type
+  - declare authority boundary
+  - load required context
+  - name proof owed
+  - return candidate result with non-claims
+  landing_rule: No active canon landing without explicit acceptance and receipt.

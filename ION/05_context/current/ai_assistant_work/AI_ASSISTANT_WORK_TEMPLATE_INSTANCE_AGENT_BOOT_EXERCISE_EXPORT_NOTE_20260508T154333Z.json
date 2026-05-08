@@ -1,0 +1,36 @@
+{
+  "schema": "ion.ai_assistant_work.export_note.v0_1",
+  "created_at": "2026-05-08T15:43:33Z",
+  "status": "candidate_export_ready",
+  "candidate_only": true,
+  "packet_id": "AI_ASSISTANT_WORK_NEXT_PACKET_TEMPLATE_INSTANCE_CORPUS_AND_AGENT_BOOT_EXERCISES",
+  "non_claims": [
+    "Candidate template instances do not make the template specs accepted law.",
+    "Agent boot exercises are sandbox-local simulations, not real isolated agent invocations.",
+    "No external IDE, CLI, cloud, PR, GitHub, MCP, Codex, daemon, or production action was performed.",
+    "No ION/03_registry or product-front-door landing occurred."
+  ],
+  "validation": {
+    "template_spec_count": 7,
+    "valid_instance_count": 7,
+    "expected_rejection_count": 7,
+    "agent_boot_exercise_count": 7,
+    "valid_instances_accepted": 7,
+    "expected_rejections_accepted": 7,
+    "agent_boot_exercises_accepted": 7,
+    "findings": 0,
+    "focused_tests": "48 passed",
+    "ion_status": "ION_STATUS_READY",
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+  },
+  "state_index": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_5.json",
+  "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_AGENT_BOOT_EXERCISE_RECEIPT_20260508T154333Z.json",
+  "next_packet": "ION/05_context/current/ai_assistant_work/next/AI_ASSISTANT_WORK_NEXT_PACKET_ROUTE_COMPILER_AND_PROMOTION_PLAN_20260508T154333Z.json",
+  "artifact_files": {
+    "full_package": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z.zip",
+    "working_continuity_bundle_g10": "ION_AI_ASSISTANT_WORKING_CONTINUITY_BUNDLE_G10_20260508T154333Z.zip",
+    "compact_candidate_bundle": "ION_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_v0_1_20260508T154333Z.zip",
+    "export_artifact_manifest": "ION_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_EXPORT_ARTIFACT_MANIFEST_20260508T154333Z.json"
+  }
+}

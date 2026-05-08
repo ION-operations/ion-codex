@@ -1,0 +1,20 @@
+version: V60_BRANCH_CONSOLIDATION_UI_MODEL_GOVERNOR_BINDING
+policy_id: ion.branch_consolidation_ui_model_governor_policy.v1
+authority_scope: BRANCH_CONSOLIDATION_AND_UI_MODEL_GOVERNOR_BINDING_RECEIPT_ONLY
+production_authority: false
+live_dispatch_claim: false
+binding_rules:
+  - ui_dispatch_preview_must_not_authorize_live_dispatch
+  - future_live_dispatch_requires_model_router_budget_governor_and_api_rate_governor
+  - model_router_must_not_bypass_budget_or_rate_governors
+  - cockpit_must_surface_blocked_capabilities
+blocked_capabilities:
+  live_external_model_dispatch: false
+  provider_credentials: false
+  browser_session_mutation: false
+  scheduler_direct_provider_calls: false
+  paid_cloud_launch: false
+  source_summary_rewrite: false
+  canonical_graph_write: false
+  unrestricted_agent_activation: false
+  production_authority: false

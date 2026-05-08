@@ -1,0 +1,18 @@
+{
+  "accepted": true,
+  "alignment": {
+    "candidate_boundary_preserved": true,
+    "dataset_entry_count_preserved": 36,
+    "new_state_index": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_3.json",
+    "no_ION_03_registry_mutation": true,
+    "no_product_front_door_mutation": true,
+    "previous_state_index": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_2.json",
+    "receipt_references_latest_packet": true,
+    "simulation_report_latest_present": true,
+    "validation_note_latest_present": true
+  },
+  "created_at": "2026-05-08T15:00:56Z",
+  "findings": [],
+  "schema": "ion.ai_assistant_work.state_surface_sync_report.v0_1",
+  "status": "accepted_candidate_evidence"
+}

@@ -1,0 +1,31 @@
+{
+  "checks": {
+    "all_14_domains_loaded_across_simulation": true,
+    "all_routes_exercised": true,
+    "gate_criterion_7_ready": true,
+    "gate_status_blocks_only_acceptance": true,
+    "index_domain_count_is_14": true,
+    "index_route_count_matches_report": true,
+    "next_packet_exists": true,
+    "report_accepted": true,
+    "target_registry_not_mutated": true
+  },
+  "generated_at": "2026-05-08T04:37:08+00:00",
+  "live_execution_authority": false,
+  "non_claims": [
+    "This sync report does not accept registry promotion.",
+    "This sync report does not authorize ION/03_registry writes.",
+    "This sync report does not claim production readiness."
+  ],
+  "production_authority": false,
+  "schema_id": "ion.self_knowledge.state_surface_sync_report.v0_2",
+  "status": "passed",
+  "surfaces": {
+    "acceptance_gate": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ACCEPTANCE_GATE_STATUS_V0_2.json",
+    "domain_state_index": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+    "next_packet": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T043119Z.json",
+    "promotion_manifest": "ION/05_context/current/self_knowledge/promotion_candidate/PROMOTION_CANDIDATE_MANIFEST_V0_2.json",
+    "route_usage_receipt": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_RECEIPT_20260508T043119Z.json",
+    "route_usage_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json"
+  }
+}

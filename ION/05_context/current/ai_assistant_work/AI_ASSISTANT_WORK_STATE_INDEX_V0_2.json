@@ -1,0 +1,51 @@
+{
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "created_at": "2026-05-08T14:34:13Z",
+  "current_state": "ai_assistant_work_dataset_genesis_built_and_validated_as_candidate_current_context",
+  "inherits_from": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_1.json",
+  "key_files": {
+    "dataset": "ION/05_context/current/ai_assistant_work/dataset/AI_ASSISTANT_WORK_DATASET_GENESIS_V0_1.jsonl",
+    "dataset_summary": "ION/05_context/current/ai_assistant_work/dataset/AI_ASSISTANT_WORK_DATASET_GENESIS_SUMMARY_20260508T143225Z.json",
+    "failure_mode_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_FAILURE_MODE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "gap_analysis": "ION/05_context/current/ai_assistant_work/gaps/AI_ASSISTANT_WORK_DATASET_GAP_ANALYSIS_V0_1.yaml",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_DATASET_GENESIS_RECEIPT_20260508T143413Z.json",
+    "route_simulation": "ION/05_context/current/ai_assistant_work/simulations/AI_ASSISTANT_WORK_DATASET_ROUTE_SIMULATION_REPORT_LATEST.json",
+    "skill_to_agent_binding_map": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_SKILL_TO_AGENT_BINDING_MAP_V0_1.yaml",
+    "validation_note": "ION/05_context/current/ai_assistant_work/validation/AI_ASSISTANT_WORK_DATASET_GENESIS_VALIDATION_NOTE_LATEST.json"
+  },
+  "non_claims": [
+    "Candidate state index does not accept dataset entries as canon.",
+    "External product behavior is not asserted from this dataset unless separately cited in source evidence.",
+    "No external execution occurred."
+  ],
+  "open_decisions": [
+    "Whether PR-agent work deserves a child domain under AI Assistant Work.",
+    "Whether background-agent queue/intake deserves a child domain or protocol family.",
+    "Whether UI state modeling should become a separate specialist role before UI implementation.",
+    "Which template gaps should become first implemented templates."
+  ],
+  "recommended_next_packet": "AI_ASSISTANT_WORK_NEXT_PACKET_DATASET_MINING_TO_DOMAIN_FISSION",
+  "root": "ION/05_context/current/ai_assistant_work/",
+  "schema": "ion.ai_assistant_work.state_index.v0_2",
+  "status": "candidate_current_state_not_accepted_canon",
+  "summary": {
+    "agent_count": 47,
+    "agent_domain_gap_count": 13,
+    "dataset_entry_count": 36,
+    "domain_count": 19,
+    "failure_mode_count": 68,
+    "protocol_count": 59,
+    "route_count": 6,
+    "route_simulation_cases": 36,
+    "route_simulation_cases_accepted": 36,
+    "skill_binding_count": 26,
+    "state_family_count": 77,
+    "template_family_count": 69,
+    "template_gap_count": 13
+  }
+}

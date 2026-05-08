@@ -1,0 +1,74 @@
+{
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "created_at": "2026-05-08T15:19:39Z",
+  "current_state": "ai_assistant_work_agent_boot_drafts_and_machine_checkable_template_specs_built_as_candidate_current_context",
+  "inherits_from": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_3.json",
+  "key_files": {
+    "agent_boot_binding_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_AGENT_BOOT_BINDING_REGISTRY_CANDIDATE_V0_1.yaml",
+    "agent_boot_index": "ION/05_context/current/ai_assistant_work/agent_boots/AI_ASSISTANT_WORK_AGENT_BOOT_DRAFTS_INDEX_V0_1.yaml",
+    "dispatch_simulation": "ION/05_context/current/ai_assistant_work/simulations/AI_ASSISTANT_WORK_AGENT_BOOT_TEMPLATE_DISPATCH_SIMULATION_REPORT_LATEST.json",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_AGENT_BOOT_TEMPLATE_SPEC_RECEIPT_20260508T151939Z.json",
+    "template_spec_index": "ION/05_context/current/ai_assistant_work/template_specs/AI_ASSISTANT_WORK_TEMPLATE_SPEC_INDEX_V0_1.yaml",
+    "template_spec_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_TEMPLATE_SPEC_REGISTRY_CANDIDATE_V0_1.yaml",
+    "validation_note": "ION/05_context/current/ai_assistant_work/validation/AI_ASSISTANT_WORK_AGENT_BOOT_TEMPLATE_SPEC_VALIDATION_NOTE_LATEST.json"
+  },
+  "machine_checkable_template_specs": [
+    "screen_state_matrix_packet",
+    "pr_review_packet",
+    "background_queue_result_intake_packet",
+    "terminal_proof_receipt_packet",
+    "api_docs_example_validation_packet",
+    "release_readiness_matrix_packet",
+    "migration_plan_and_rollback_packet"
+  ],
+  "non_claims": [
+    "Agent boot drafts are not active runtime agents.",
+    "Template specs are not accepted template law.",
+    "No ION/03_registry landing occurred.",
+    "No product/front-door mutation occurred.",
+    "No external IDE, CLI, cloud, PR, GitHub, MCP, Codex, daemon, or production action occurred."
+  ],
+  "open_decisions": [
+    "Whether these seven boot drafts should become accepted specialist agent bootstrap surfaces.",
+    "Whether these seven template specs should be promoted into active template law after acceptance.",
+    "Which remaining template packet drafts require machine-checkable specs next.",
+    "Whether domain-fission candidates should be settled before or after template instance exercises."
+  ],
+  "recommended_next_packet": "AI_ASSISTANT_WORK_NEXT_PACKET_TEMPLATE_INSTANCE_CORPUS_AND_AGENT_BOOT_EXERCISES",
+  "root": "ION/05_context/current/ai_assistant_work/",
+  "schema": "ion.ai_assistant_work.state_index.v0_4",
+  "specialist_agent_boots": [
+    "UI_STATE_MODELER",
+    "PR_REVIEW_STEWARD",
+    "BACKGROUND_QUEUE_STEWARD",
+    "TERMINAL_PROOF_CURATOR",
+    "EXAMPLE_RUNNER",
+    "RELEASE_EVIDENCE_CURATOR",
+    "MIGRATION_MASON"
+  ],
+  "status": "candidate_current_state_not_accepted_canon",
+  "summary": {
+    "agent_boot_draft_count": 7,
+    "agent_registry_v0_2_count": 71,
+    "base_domain_count": 19,
+    "candidate_child_domain_count": 10,
+    "dispatch_simulation_cases": 8,
+    "dispatch_simulation_cases_accepted": 8,
+    "template_spec_count": 7,
+    "validation_findings": 0
+  },
+  "validation": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "candidate_validation": "accepted_candidate_validation",
+    "dispatch_simulation": "accepted",
+    "focused_tests": "29 passed",
+    "ion_status": "ION_STATUS_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+    "status_preflight_integrity_tests": "12 passed"
+  }
+}

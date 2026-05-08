@@ -1,0 +1,81 @@
+{
+  "checks": {
+    "acceptance_gate_has_criterion_12": true,
+    "acceptance_gate_status": "promotion_ready_candidate_blocked_on_explicit_acceptance_only",
+    "focused_tests": "25 passed",
+    "manifest_has_product_onboarding_evidence": true,
+    "product_surfaces_mutated": false,
+    "registry_mutated": false
+  },
+  "generated_at": "2026-05-08T13:53:57+00:00",
+  "missing": [],
+  "non_claims": [
+    "Sync report does not land product/front-door overlay.",
+    "Sync report does not land registry namespace.",
+    "Sync report does not claim production readiness."
+  ],
+  "schema_id": "ion.self_knowledge.state_surface_sync_report.v0_2",
+  "status": "passed",
+  "surfaces": [
+    {
+      "bytes": 6110,
+      "exists": true,
+      "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+      "sha256": "b6731f083c1ebd0a4d947a39aadc58ea58ad6535792a58e48468caeec93ba404"
+    },
+    {
+      "bytes": 28859,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+      "sha256": "452830410dda82bc87f19a3df3fa8ea83781da8846b66083114bf959854b0ca3"
+    },
+    {
+      "bytes": 8806,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_AUDIT_REPORT_20260508T135357Z.json",
+      "sha256": "c7f8b51c5378dc855b906c34b385c2a3c7a2ae3c18caf2e66b8097a68b7c0ef0"
+    },
+    {
+      "bytes": 2113,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_OVERLAY_V0_2.json",
+      "sha256": "02ad323c52872cf7cf5a21f051974106ddf78221c8c6bdaab92d68bf7f4aeb43"
+    },
+    {
+      "bytes": 9239,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PATCHSET_20260508T135357Z.json",
+      "sha256": "f1ebc3214641ee3982917b24e9d555de709b75bf36e2ebfb156ef829ffd12014"
+    },
+    {
+      "bytes": 1945,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PROPOSAL_20260508T135357Z.md",
+      "sha256": "213fc8a3bc4819efb8f8cc06f79edb46433e137d767f585e658fa0031e7d68f0"
+    },
+    {
+      "bytes": 3298,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_VALIDATION_NOTE_20260508T135357Z.json",
+      "sha256": "046b290fa7543c17e129f921f1bb01bb930133dc352064a1124ba12483a4435f"
+    },
+    {
+      "bytes": 8636,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/PROMOTION_CANDIDATE_MANIFEST_V0_2.json",
+      "sha256": "ee4fffe6d9dbaf09d0e0a615bf09ed61954678cfc7abe20e0b35794e5ed6f5b2"
+    },
+    {
+      "bytes": 6126,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ACCEPTANCE_GATE_STATUS_V0_2.json",
+      "sha256": "1409f29edb13b3bbfba813684fd53d0fff94f639a3f8162b1dfa3b64f5affc3b"
+    },
+    {
+      "bytes": 6335,
+      "exists": true,
+      "path": "ION/tests/test_kernel_ion_self_knowledge_product_onboarding.py",
+      "sha256": "d434ab64b3b89e54b3f0dceb4d1aff76ab958a3406e79c613fddc25d965a7aa9"
+    }
+  ]
+}

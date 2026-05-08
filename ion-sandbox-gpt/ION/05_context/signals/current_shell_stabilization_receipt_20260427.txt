@@ -1,0 +1,25 @@
+type: mission_receipt
+mission: ION_CURRENT_SHELL_STABILIZATION_AND_TEMPLATE_SUBSTRATE_RECOVERY
+date: 2026-04-27
+working_shell_logical: IONcursorbuild/ION MASTER CURRENT
+pwd_at_record:
+  /home/sev/ION - Production/ION most recent/CURSOR- ION/IONcursorbuild/ION MASTER CURRENT
+realpath_at_record:
+  /home/sev/ION - Production/ION most recent/CURSOR- ION/IONcursorbuild/ION_MASTER_CURRENT_3_V69_HANDOFF_PACKAGE_ASSEMBLY_PLAN_AND_CHECKSUM_PREVIEW_FULL_PROJECT_20260426/ION MASTER CURRENT
+symlink: yes
+readlink: ION_MASTER_CURRENT_3_V69_HANDOFF_PACKAGE_ASSEMBLY_PLAN_AND_CHECKSUM_PREVIEW_FULL_PROJECT_20260426/ION MASTER CURRENT
+root_verdict: ROOT_CONFIRMED
+template_substrate: PRESENT_133_FILES_NO_FILESYSTEM_RESTORE
+template_development_path: ION/07_templates/actions/TEMPLATE_DEVELOPMENT.md
+v73_carrier_law_ok: true
+v74_template_substrate_ok: true
+pytest_focused_20260427: 14_passed
+pytest_full_ION_tests_20260427: 1081_passed_8_subtests_passed
+kernel_implementation_stream: ok_required_surfaces_ok_true
+kernel_audit_stream: unsupported_invalid_cli_choice
+kernel_documentation_stream: unsupported_invalid_cli_choice
+subagent_dry_run: VESTIGE_read_only_completed
+production_authority_claim: none
+live_mcp_execution_claim: none
+zip_overlay: ION_CURRENT_SHELL_STABILIZATION_AND_TEMPLATE_RECOVERY_OVERLAY_20260427.zip
+final_verdict: CURRENT_SHELL_STABLE

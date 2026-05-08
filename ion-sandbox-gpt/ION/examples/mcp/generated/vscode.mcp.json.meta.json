@@ -1,0 +1,27 @@
+{
+  "client": "VS Code",
+  "config": {
+    "servers": {
+      "ion-local": {
+        "args": [
+          "-m",
+          "kernel.ion_mcp_local_bridge",
+          "--ion-root",
+          "/mnt/data/ion_v64_work/ION MASTER CURRENT/ION",
+          "--stdio"
+        ],
+        "command": "python",
+        "env": {
+          "PYTHONPATH": "/mnt/data/ion_v64_work/ION MASTER CURRENT/ION/04_packages"
+        },
+        "type": "stdio"
+      }
+    }
+  },
+  "filename": "vscode.mcp.json",
+  "notes": [
+    "Example VS Code MCP profile. Place/adapt according to the target VS Code MCP configuration surface.",
+    "The bridge is local and dry-run bounded."
+  ],
+  "profile_name": "vscode-local-stdio"
+}

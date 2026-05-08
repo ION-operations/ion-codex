@@ -1,0 +1,38 @@
+schema: ion.ai_assistant_work.candidate_lifecycle_scorecard.v0_1
+candidate_id: screen_state_matrix_packet
+candidate_type: template
+lifecycle_state: proof_gated_candidate
+created_at: '2026-05-08T18:50:31Z'
+source_evidence:
+  - ION/05_context/current/ai_assistant_work/template_specs/screen_state_matrix_packet.template_spec.yaml
+  - ION/05_context/current/ai_assistant_work/template_instances/screen_state_matrix_packet.minimal_valid.instance.json
+  - ION/05_context/current/ai_assistant_work/template_instances/screen_state_matrix_packet.expected_rejection.instance.json
+allowed_uses:
+  - UI proof shaping
+  - state inventory
+  - empty_loading_error_success coverage
+  - acceptance gate before UI polish claims
+forbidden_uses:
+  - automatic acceptance of UI work
+  - replacing actual user-facing chat behavior with debug panels
+scores:
+  route_accuracy: 3
+  proof_usefulness: 4
+  user_burden_reduction: 3
+  drift_or_confusion_risk: 1
+  test_coverage: 3
+validation_evidence:
+  valid_instance_count: 1
+  expected_rejection_count: 1
+  receipt_count: 1
+  focused_tests:
+    - ION/tests/test_kernel_ai_assistant_work_template_instances.py
+conflicts_with_accepted_law: none_found_currently
+operator_acceptance_notes:
+  - Strong fit for preventing opaque UI monoliths and unclear chat flows.
+promotion_recommendation: REVISE_AND_RETEST
+next_evidence_needed:
+  - apply to one live cockpit/chat UI repair packet
+  - record before/after user workflow clarity evidence
+non_claims:
+  - This scorecard does not promote screen_state_matrix_packet into accepted templates.

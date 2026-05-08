@@ -1,0 +1,74 @@
+{
+  "active_packet_capabilities": {
+    "can_edit_files": true,
+    "can_read_files": true,
+    "can_run_tests": true,
+    "can_spawn_carrier_slots": false,
+    "can_use_mcp": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "active_work_packet_exists": true,
+  "active_work_packet_path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+  "allowed_paths": [
+    "ION/",
+    "product/",
+    "README.md",
+    "START_HERE.md",
+    "PRODUCT_MANIFEST.json",
+    "VALIDATION_REPORT.json",
+    "PACKAGE_BUILD_RECEIPT.json",
+    "SOURCE_PROVENANCE.json"
+  ],
+  "capability_findings": [],
+  "carrier": "GPT_SANDBOX_CARRIER",
+  "carrier_profile_exists": true,
+  "carrier_profile_path": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+  "contract_exists": true,
+  "contract_path": "ION/02_architecture/ION_GPT_SANDBOX_ENVIRONMENT_CONTRACT.md",
+  "created_at": "2026-05-08T19:31:48+00:00",
+  "host_observed_capabilities": {
+    "can_edit_files": true,
+    "can_edit_sandbox_copy": true,
+    "can_export_candidate_zip": true,
+    "can_patch_live_repo": false,
+    "can_push_git": false,
+    "can_read_files": true,
+    "can_run_python_validation_in_sandbox": true,
+    "can_run_tests": true,
+    "can_spawn_carrier_slots": false,
+    "can_use_mcp": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "ion_root": "/home/sev/ION - Production/ION_CODEX FULL/ion-sandbox-gpt/ION",
+  "next_lawful_action": "Proceed with bounded sandbox work and receipt export",
+  "preflight_verdict": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+  "profile_capabilities": {
+    "can_edit_files": true,
+    "can_read_files": true,
+    "can_run_tests": true,
+    "can_spawn_carrier_slots": false,
+    "can_use_mcp": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "sandbox_boundary": {
+    "can_edit_sandbox_copy": true,
+    "can_export_candidate_zip": true,
+    "can_patch_live_repo": false,
+    "can_push_git": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "schema_id": "ion.gpt_sandbox_preflight.v1",
+  "shell_root": "/home/sev/ION - Production/ION_CODEX FULL/ion-sandbox-gpt",
+  "shell_root_confirmed": true,
+  "test_tiers": [
+    "ion_status",
+    "focused_gpt_sandbox_readiness_tests",
+    "changed_surface_kernel_tests",
+    "segmented_pytest_slices",
+    "monolithic_pytest_only_when_host_allows"
+  ]
+}

@@ -1,0 +1,23 @@
+schema_id: ion.visual_fixture_runner_sandbox_review_policy.v1
+version: V50_VISUAL_FIXTURE_RUNNER_LOCAL_SANDBOX_REVIEW
+authority: A3_VISUAL_AGENT_SANDBOX_REVIEW_POLICY
+production_authority: false
+authority_scope: LOCAL_DEV_SANDBOX_REVIEW_ONLY
+required_safe_policies:
+  network_isolation: NO_NETWORK
+  credential_policy: NO_CREDENTIALS
+  dom_mutation_policy: NO_DOM_MUTATION
+  file_write_policy: RECEIPT_OUTPUT_ONLY
+forbidden_capabilities:
+  browser_execution: false
+  unrestricted_browser_control: false
+  network_side_effects: false
+  credential_sensitive_action: false
+  account_operation: false
+  destructive_action: false
+  form_submission: false
+  purchase_or_submission: false
+  persistent_dom_mutation: false
+  production_visual_automation: false
+  production_authority: false
+next_lawful_move: V51_LOCAL_BROWSER_EXECUTION_SANDBOX_SPEC

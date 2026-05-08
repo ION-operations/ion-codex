@@ -1,0 +1,315 @@
+{
+  "accepted": true,
+  "candidate_domain_count": 10,
+  "candidate_template_packet_count": 31,
+  "case_count": 10,
+  "cases": [
+    {
+      "accepted": true,
+      "case_id": "fission_case.pr_agent_work_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0019_lockfile_diff_review",
+      "loaded_agents": [
+        "PR_REVIEW_STEWARD",
+        "PR_COMMENT_SCRIBE",
+        "PR_MERGE_SETTLEMENT_AUDITOR",
+        "CI_EVIDENCE_TRIAGER",
+        "LOCKFILE_AUDITOR"
+      ],
+      "loaded_parent_domains": [
+        "review_security_domain",
+        "cross_domain_settlement_domain",
+        "dependency_package_domain",
+        "testing_quality_domain"
+      ],
+      "loaded_template_packets": [
+        "pr_review_packet",
+        "pr_comment_candidate_packet",
+        "pr_merge_settlement_packet",
+        "ci_evidence_triage_packet",
+        "lockfile_diff_risk_packet"
+      ],
+      "requested_work": "pr agent work",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "pr_agent_work_domain"
+    },
+    {
+      "accepted": true,
+      "case_id": "fission_case.background_queue_intake_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0024_cloud_background_feature",
+      "loaded_agents": [
+        "BACKGROUND_QUEUE_STEWARD",
+        "CLOUD_BRANCH_STEWARD",
+        "RESULT_INTAKE_AUDITOR",
+        "SETTLEMENT_STEWARD"
+      ],
+      "loaded_parent_domains": [
+        "workflow_automation_tool_domain",
+        "cross_domain_settlement_domain",
+        "knowledge_context_memory_domain"
+      ],
+      "loaded_template_packets": [
+        "background_queue_result_intake_packet",
+        "cloud_branch_work_packet",
+        "branch_return_settlement_packet"
+      ],
+      "requested_work": "background queue and result intake",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "background_queue_intake_domain"
+    },
+    {
+      "accepted": true,
+      "case_id": "fission_case.terminal_proof_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0005_ide_single_file_patch",
+      "loaded_agents": [
+        "TERMINAL_PROOF_CURATOR",
+        "COMMAND_RECEIPT_AUDITOR",
+        "TEST_RUNNER",
+        "PATCH_MASON"
+      ],
+      "loaded_parent_domains": [
+        "workflow_automation_tool_domain",
+        "testing_quality_domain",
+        "implementation_domain"
+      ],
+      "loaded_template_packets": [
+        "terminal_proof_receipt_packet",
+        "command_rerun_validation_packet",
+        "script_tool_receipt_packet"
+      ],
+      "requested_work": "terminal and command proof",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "terminal_proof_domain"
+    },
+    {
+      "accepted": true,
+      "case_id": "fission_case.ui_state_modeling_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0007_ui_feature_brief",
+      "loaded_agents": [
+        "UI_STATE_MODELER",
+        "SCREEN_STATE_CARTOGRAPHER",
+        "UI_ARCHITECT",
+        "COMPONENT_BUILDER",
+        "ACCESSIBILITY_AUDITOR"
+      ],
+      "loaded_parent_domains": [
+        "ui_ux_domain",
+        "product_requirements_domain",
+        "testing_quality_domain"
+      ],
+      "loaded_template_packets": [
+        "screen_state_matrix_packet",
+        "component_contract_to_tests_packet",
+        "interaction_validation_packet"
+      ],
+      "requested_work": "ui state modeling",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "ui_state_modeling_domain"
+    },
+    {
+      "accepted": true,
+      "case_id": "fission_case.documentation_example_validation_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0002_chat_artifact_rewrite",
+      "loaded_agents": [
+        "DOCS_ARCHITECT",
+        "TECHNICAL_WRITER",
+        "EXAMPLE_RUNNER",
+        "REWRITE_CLAIM_AUDITOR",
+        "DOCS_NEMESIS"
+      ],
+      "loaded_parent_domains": [
+        "documentation_writing_domain",
+        "testing_quality_domain",
+        "codebase_understanding_domain"
+      ],
+      "loaded_template_packets": [
+        "api_docs_example_validation_packet",
+        "rewrite_claim_preservation_packet",
+        "readme_claim_map_packet"
+      ],
+      "requested_work": "documentation example validation",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "documentation_example_validation_domain"
+    },
+    {
+      "accepted": true,
+      "case_id": "fission_case.release_evidence_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0012_changelog_release_notes",
+      "loaded_agents": [
+        "RELEASE_EVIDENCE_CURATOR",
+        "RELEASE_MANAGER",
+        "BUILD_STEWARD",
+        "REGRESSION_HUNTER",
+        "RELEASE_GATE_NEMESIS"
+      ],
+      "loaded_parent_domains": [
+        "devops_release_domain",
+        "testing_quality_domain",
+        "cross_domain_settlement_domain"
+      ],
+      "loaded_template_packets": [
+        "release_readiness_matrix_packet",
+        "release_evidence_bundle_packet",
+        "rollback_boundary_packet"
+      ],
+      "requested_work": "release evidence",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "release_evidence_domain"
+    },
+    {
+      "accepted": true,
+      "case_id": "fission_case.migration_work_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0030_schema_migration",
+      "loaded_agents": [
+        "MIGRATION_MASON",
+        "SCHEMA_DRIFT_AUDITOR",
+        "TEST_RUNNER",
+        "RELEASE_EVIDENCE_CURATOR"
+      ],
+      "loaded_parent_domains": [
+        "implementation_domain",
+        "devops_release_domain",
+        "testing_quality_domain"
+      ],
+      "loaded_template_packets": [
+        "migration_plan_and_rollback_packet",
+        "schema_drift_audit_packet"
+      ],
+      "requested_work": "schema and data migration work",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "migration_work_domain"
+    },
+    {
+      "accepted": true,
+      "case_id": "fission_case.assistant_work_observation_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0003_chat_research_brief_to_state",
+      "loaded_agents": [
+        "ASSISTANT_USAGE_ETHNOGRAPHER",
+        "WORK_PATTERN_ETHNOGRAPHER",
+        "OBSERVATION_LINEAGE_SCRIBE",
+        "TEMPLATE_MINER",
+        "STATE_TAXONOMIST"
+      ],
+      "loaded_parent_domains": [
+        "assistant_learning_dataset_domain",
+        "knowledge_context_memory_domain"
+      ],
+      "loaded_template_packets": [
+        "assistant_work_observation_lineage_packet",
+        "dataset_gap_mining_packet",
+        "candidate_registry_delta_packet"
+      ],
+      "requested_work": "assistant work observation and taxonomy",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "assistant_work_observation_domain"
+    },
+    {
+      "accepted": true,
+      "case_id": "fission_case.incident_triage_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0017_production_bug_triage",
+      "loaded_agents": [
+        "INCIDENT_TRIAGE_STEWARD",
+        "PRODUCTION_BOUNDARY_AUDITOR",
+        "DEBUGGER",
+        "SECURITY_NEMESIS"
+      ],
+      "loaded_parent_domains": [
+        "debugging_observability_domain",
+        "review_security_domain",
+        "devops_release_domain"
+      ],
+      "loaded_template_packets": [
+        "incident_triage_packet",
+        "containment_or_escalation_packet",
+        "production_boundary_nonclaim_packet"
+      ],
+      "requested_work": "incident triage",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "incident_triage_domain"
+    },
+    {
+      "accepted": true,
+      "case_id": "fission_case.untrusted_input_tool_guard_domain",
+      "findings": [],
+      "input_entry": "aiw_obs_0021_prompt_injection_guard",
+      "loaded_agents": [
+        "PROMPT_INJECTION_BOUNDARY_GUARDIAN",
+        "SECURITY_NEMESIS",
+        "TOOL_ORCHESTRATOR",
+        "SOURCE_RANKER"
+      ],
+      "loaded_parent_domains": [
+        "review_security_domain",
+        "workflow_automation_tool_domain",
+        "chat_work_domain"
+      ],
+      "loaded_template_packets": [
+        "prompt_injection_tool_guard_packet",
+        "untrusted_source_classification_packet"
+      ],
+      "requested_work": "untrusted input and tool guard",
+      "required_non_claims": [
+        "candidate domain fission is not accepted domain law",
+        "no external IDE/CLI/cloud/PR/background execution occurred",
+        "dataset evidence is seed corpus evidence only"
+      ],
+      "selected_candidate_domain": "untrusted_input_tool_guard_domain"
+    }
+  ],
+  "cases_accepted": 10,
+  "created_at": "2026-05-08T15:00:56Z",
+  "new_agent_candidate_count": 24,
+  "non_claims": [
+    "No external IDE execution occurred.",
+    "No external CLI/cloud/PR/background execution occurred.",
+    "Candidate child domains are not accepted canon.",
+    "Simulation validates internal route coherence only."
+  ],
+  "schema": "ion.ai_assistant_work.domain_fission_route_simulation.v0_1",
+  "simulation_mode": "sandbox_local_dataset_mining_route_usage_not_external_ide_cli_cloud_pr_or_daemon_execution",
+  "status": "accepted_candidate_evidence"
+}

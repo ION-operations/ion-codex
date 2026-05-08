@@ -1,0 +1,22 @@
+{
+  "$id": "ion.expressive_telemetry.v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "binding_id",
+    "state_alignment_verdict",
+    "production_authority"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.expressive_telemetry.v1"
+    },
+    "version": {
+      "const": "V43_EXPRESSIVE_TELEMETRY_RUNTIME_BINDING"
+    },
+    "production_authority": {
+      "const": false
+    }
+  }
+}

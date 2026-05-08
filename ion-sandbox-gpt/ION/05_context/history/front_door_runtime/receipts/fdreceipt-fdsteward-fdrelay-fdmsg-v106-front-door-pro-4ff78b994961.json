@@ -1,0 +1,14 @@
+{
+  "created_at": "2026-05-02T22:52:19+00:00",
+  "detail": "front-door user message accepted through Persona Interface -> Relay -> Steward boundary",
+  "receipt_id": "fdreceipt-fdsteward-fdrelay-fdmsg-v106-front-door-pro-4ff78b994961",
+  "session_id": "v106-front-door-proof-trace",
+  "stage": "RELAY_TO_STEWARD",
+  "status": "ACCEPTED",
+  "witness_paths": [
+    "ION/05_context/history/front_door_runtime/persona_ingress/fdmsg-v106-front-door-proof-trace-user-sovereign-9266b5943379.json",
+    "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-v106-front-door-proof-trace-user-sove-f1dc5baef7bc.json",
+    "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-v106-front-door-proof-trace-u-8a98a48a44d3.json",
+    "ION/05_context/history/front_door_runtime/receipts/fdreceipt-fdsteward-fdrelay-fdmsg-v106-front-door-pro-4ff78b994961.json"
+  ]
+}

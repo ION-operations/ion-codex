@@ -1,0 +1,132 @@
+schema: ion.ai_assistant_work.template_spec.v0_1
+template_id: release_readiness_matrix_packet
+title: Release Readiness Matrix Packet
+status: candidate_machine_checkable_template_spec_not_accepted_canon
+created_at: '2026-05-08T15:19:39Z'
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  external_execution_authority: false
+  requires_explicit_acceptance_to_land: true
+owned_by_domain: release_evidence_domain
+primary_agent: RELEASE_EVIDENCE_CURATOR
+supporting_agents:
+- RELEASE_GATE_NEMESIS
+- CI_EVIDENCE_TRIAGER
+- TEST_RUNNER
+- RECEIPT_CURATOR
+purpose: Compile release evidence across tests, builds, docs, migrations, risk, approvals,
+  and known non-claims.
+intent_class: specialist_domain_template
+state_inputs:
+- release_candidate_state
+- version_state
+- changelog_state
+- ci_state
+- risk_state
+state_outputs:
+- release_readiness_matrix_state
+- release_blocker_state
+- release_receipt_candidate_state
+required_context:
+- candidate release scope
+- validation artifacts
+- risk ledger
+- changelog/docs
+- approval boundary
+machine_required_sections:
+- name: RELEASE_SCOPE
+  type: string
+  min_length: 20
+- name: VERSION_AND_CHANGELOG
+  type: object
+  required_keys:
+  - version
+  - changelog_status
+- name: TEST_CI_MATRIX
+  type: list
+  min_items: 1
+- name: RISK_REGISTER
+  type: list
+  min_items: 1
+- name: ROLLBACK_PATH
+  type: string
+  min_length: 10
+- name: OPEN_BLOCKERS
+  type: list
+  min_items: 0
+- name: RELEASE_DECISION
+  type: enum
+  allowed:
+  - ready_candidate
+  - blocked
+  - defer
+  - requires_human_review
+- name: NON_CLAIMS
+  type: list
+  min_items: 1
+- name: RECEIPT_TARGET
+  type: string
+  min_length: 5
+proof_gates:
+- gate_id: candidate_boundary_named
+  description: Output states it is candidate/not accepted unless explicit acceptance
+    exists
+  machine_check:
+    requires_non_claim: accepted_state
+- gate_id: required_sections_present
+  description: Every machine_required_sections item is present and non-empty according
+    to rule
+  machine_check:
+    type: schema_section_presence
+- gate_id: settlement_route_named
+  description: Return includes route for review/settlement/inheritance
+  machine_check:
+    section_any:
+    - SETTLEMENT_ROUTE
+    - RECEIPT_TARGET
+- gate_id: proof_or_missing_context_named
+  description: Proof, command receipts, or missing context are stated
+  machine_check:
+    requires_any:
+    - PROOF
+    - COMMAND_RECEIPTS
+    - TEST_AND_PROOF_PLAN
+    - PROOF_NORMALIZATION
+    - CI_EVIDENCE
+- gate_id: draft_gate_1
+  description: local success not treated as release readiness
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_2
+  description: blockers preserved
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_3
+  description: human gates named
+  machine_check:
+    type: human_or_script_check
+reject_if:
+- release readiness is claimed without evidence matrix
+- rollback path is empty
+- version/changelog mismatch is unresolved
+output_contract: release evidence bundle and readiness recommendation
+completion_class: release_candidate_readiness
+settlement_route: RELEASE_MANAGER or human gate
+route_binding:
+  dispatch_before_generic_implementation: true
+  trigger_patterns:
+  - release readiness matrix packet
+  - release readiness matrix
+  - release evidence curator
+  fallback_agent_forbidden_until_specialist_check: true
+minimal_valid_instance_shape:
+  template_id: release_readiness_matrix_packet
+  sections: must match machine_required_sections
+  non_claims_required: true
+  settlement_route_or_receipt_target_required: true
+status_notes:
+- This spec is machine-checkable structure for candidate current-context use; it is
+  not active template law.

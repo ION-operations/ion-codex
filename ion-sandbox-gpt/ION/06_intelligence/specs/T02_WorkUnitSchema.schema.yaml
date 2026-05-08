@@ -1,0 +1,98 @@
+# ION Kernel Schema: WorkUnit
+# Version: 1.0.0
+# Authority: A2_CONSTITUTIONAL
+# This file is machine-parseable. Human rationale is in T02_WorkUnitSchema.spec.md.
+
+schema_version: "1.0"
+
+enums:
+  WorkUnitStatus:
+    - PENDING
+    - DISPATCHED
+    - EXECUTING
+    - DELTA_PROPOSED
+    - VALIDATING
+    - COMMITTED
+    - FAILED
+    - BLOCKED
+
+  ScopeType:
+    - FILE
+    - DIRECTORY
+    - PROJECT
+    - CROSS_PROJECT
+
+  Priority:
+    - P0_CRITICAL
+    - P1_HIGH
+    - P2_NORMAL
+    - P3_LOW
+
+  Visibility:
+    - FULL
+    - SIGNATURES_ONLY
+    - SUMMARY
+
+types:
+  OpenQuestionRef:
+    type: string
+    description: question_id from T05_OpenQuestionSchema
+
+  InputRef:
+    ref_id: string
+    ref_type: string  # ARTIFACT | EVIDENCE_FINDING | SIGNAL | STATE_FILE | DOCTRINE
+    ref_path: string
+    visibility: Visibility
+    required: boolean
+
+  SpawnPolicy:
+    may_spawn: boolean
+    max_children: integer?  # default 0
+    spawn_templates: list[string]?
+    spawn_requires_approval: boolean?  # default false
+
+  WorkUnit:
+    # Identity
+    work_unit_id: string
+    created_at: string  # ISO 8601
+
+    # Protocol binding
+    protocol_id: string
+    transition_id: string
+    context_version: string
+
+    # Agent binding
+    agent_personal_name: string
+    agent_role: string
+    agent_structural_id: string
+    agent_tier: integer
+    agent_domain: string
+    chassis: string
+
+    # Scope
+    scope_type: ScopeType
+    scope_ref: string
+    bound_template: string
+
+    # Inputs
+    input_refs: list[InputRef]
+    context_package_id: string
+
+    # Constraints
+    allowed_writes: list[string]
+    allowed_next_actions: list[string]
+    must_not: list[string]?
+
+    # Open questions in scope
+    open_question_refs: list[OpenQuestionRef]?
+
+    # Scheduling
+    priority: Priority
+    dependencies: list[string]?
+    spawn_policy: SpawnPolicy?
+    timeout_seconds: integer?  # default 300
+
+    # Tracking
+    status: WorkUnitStatus
+    expected_output_schema: string?
+    parent_work_unit_id: string?

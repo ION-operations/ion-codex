@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ION Persona Interface State",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "status",
+    "default_opening",
+    "hide_ion_machinery_by_default",
+    "translation_map"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.persona_interface_state.v1"
+    },
+    "status": {
+      "type": "string"
+    },
+    "default_opening": {
+      "type": "string"
+    },
+    "hide_ion_machinery_by_default": {
+      "type": "boolean"
+    },
+    "explain_ion_when_asked": {
+      "type": "boolean"
+    },
+    "translation_map": {
+      "type": "object"
+    },
+    "continuity_offer": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+schema: ion.ai_assistant_work.domain_packet.v0_1
+domain_id: dependency_package_domain
+title: Dependency and Package Domain
+state_class: candidate_current_state
+status: seed_candidate
+purpose: Own dependency choices, version constraints, package managers, lockfiles,
+  vulnerability posture, and upgrade/migration paths.
+burden: Prevent assistants from adding dependencies casually or changing package state
+  without proof.
+primary_questions:
+- Is a new dependency necessary?
+- What version and lockfile effects follow?
+- What security/license risks exist?
+specialist_agents:
+- DEPENDENCY_STEWARD
+- PACKAGE_UPGRADER
+- LICENSE_AUDITOR
+- VULNERABILITY_SCOUT
+state_families:
+- dependency_state
+- lockfile_state
+- license_state
+- vulnerability_state
+template_families:
+- dependency_change_packet
+- upgrade_packet
+- license_review_packet
+protocols:
+- dependency_change_requires_reason
+- lockfile_diff_review
+- security_license_gate
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+  level_1_summary:
+    max_tokens: 500
+  level_2_working:
+    max_tokens: 1500
+  level_3_operational:
+    max_tokens: 4000
+  level_4_deep:
+    max_tokens: 12000
+  level_5_implementation:
+    includes_paths: true
+anti_drift_notes:
+- Do not let a generic coding assistant absorb this domain without domain-specific
+  context and proof obligations.
+- Do not treat templates as enough; a domain needs specialist agents to maintain,
+  route, validate, and settle the work.
+- Do not promote this candidate into active canon without explicit acceptance and
+  receipt.
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_only_until_accepted: true

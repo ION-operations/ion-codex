@@ -1,0 +1,85 @@
+{
+  "$id": "ion.ui_work_surface_projection.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "authority_scope": {
+      "const": "UI_WORK_SURFACE_PROJECTION_RECEIPT_ONLY"
+    },
+    "automation_loops": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "dxl_constraints": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "type": "object"
+    },
+    "emitted_at": {
+      "type": "string"
+    },
+    "forbidden_capabilities": {
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "type": "object"
+    },
+    "layout_zones": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "production_authority": {
+      "const": false
+    },
+    "projection_id": {
+      "type": "string"
+    },
+    "projection_name": {
+      "type": "string"
+    },
+    "projection_surfaces": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "projection_verdict": {
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "ion.ui_work_surface_projection.v1"
+    },
+    "source_inputs": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "target_ui": {
+      "type": "string"
+    },
+    "version": {
+      "const": "V55_VISUAL_CLOSURE_GRAPH_PROJECTION_AND_UI_WORK_SURFACE"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "projection_id",
+    "projection_verdict",
+    "authority_scope",
+    "layout_zones",
+    "projection_surfaces",
+    "automation_loops",
+    "dxl_constraints",
+    "forbidden_capabilities",
+    "production_authority"
+  ],
+  "title": "ION UI Work Surface Projection Receipt",
+  "type": "object"
+}

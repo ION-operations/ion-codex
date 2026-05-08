@@ -1,0 +1,45 @@
+{
+  "active_spawn_plan_path": null,
+  "active_turn_packet_path": null,
+  "audits": [
+    {
+      "exit_code": 0,
+      "findings": [],
+      "label": "cursor_hooks",
+      "status": "ION_CURSOR_HOOK_BRIDGE_READY"
+    }
+  ],
+  "checked_files": {
+    "command_continue": ".cursor/commands/ion-continue.md",
+    "hooks_json": ".cursor/hooks.json",
+    "protocol": "ION/02_architecture/ION_CURSOR_SDK_HOOK_BRIDGE_PROTOCOL.md",
+    "sdk_agent": "ION/09_integrations/cursor_sdk/src/ion_cursor_sdk_carrier.ts",
+    "sdk_package": "ION/09_integrations/cursor_sdk/package.json",
+    "sdk_readme": "ION/09_integrations/cursor_sdk/README.md",
+    "session_start_hook": ".cursor/hooks/ion_carrier_session_start.py",
+    "skill": ".cursor/skills/ion-carrier-control/SKILL.md"
+  },
+  "continue_exit_code": null,
+  "continue_verdict": null,
+  "created_at": "2026-05-02T22:26:21+00:00",
+  "cursor_hook_bridge_findings": [],
+  "cursor_hook_bridge_ready": true,
+  "cursor_hook_bridge_verdict": "ION_CURSOR_HOOK_BRIDGE_READY",
+  "enabled": false,
+  "hook": "sessionStart",
+  "hook_script": ".cursor/hooks/ion_carrier_session_start.py",
+  "host_connection_state": "NOT_CONNECTED_OR_NOT_OBSERVED",
+  "live_execution_authority": false,
+  "live_hook_event_seen": false,
+  "production_authority": false,
+  "schema_id": "ion.cursor_hook_state.v1",
+  "shell_root": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION",
+  "spawn_queue_count": null,
+  "starter_note": "Cursor/local hook disabled in sandbox Custom GPT baseline.",
+  "starter_state": true,
+  "state_source": "kernel.ion_cursor_hook_state",
+  "status": "projected_not_connected",
+  "steward_integration_queue_path": null,
+  "task_return_ledger_path": null,
+  "updated_at": "2026-05-07T20:04:24+00:00"
+}

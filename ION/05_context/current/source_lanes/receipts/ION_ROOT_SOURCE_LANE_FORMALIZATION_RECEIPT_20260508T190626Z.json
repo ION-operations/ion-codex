@@ -1,0 +1,57 @@
+{
+  "schema": "ion.root_source_lane.formalization_receipt.v0_1",
+  "created_at": "2026-05-08T19:06:26Z",
+  "status": "root_source_lanes_formalized",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "formalized_lanes": [
+    "workpackets",
+    "diffs",
+    "ION_sandbox"
+  ],
+  "implemented_surfaces": [
+    "workpackets/README.md",
+    "workpackets/WORKPACKET_INDEX_20260508T190626Z.json",
+    "diffs/README.md",
+    "diffs/DIFF_INDEX_20260508T190626Z.json",
+    "ION_sandbox/README.md",
+    "ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json",
+    "ION/05_context/current/source_lanes/ION_ROOT_SOURCE_LANE_POLICY_20260508T190626Z.md",
+    "ION/05_context/current/source_lanes/ION_ROOT_SOURCE_LANE_INDEX_20260508T190626Z.json",
+    ".gitignore"
+  ],
+  "inventory": {
+    "workpackets": {
+      "file_count": 20,
+      "size_summary": "260K"
+    },
+    "diffs": {
+      "file_count": 4,
+      "size_summary": "328K"
+    },
+    "ION_sandbox": {
+      "file_count": 3756,
+      "size_summary": "26M"
+    }
+  },
+  "git_policy": {
+    "workpackets": "trackable_source_intake",
+    "diffs": "trackable_patch_evidence",
+    "ION_sandbox_raw_snapshots": "ignored_by_default",
+    "ION_sandbox_indexes": "trackable"
+  },
+  "authority_boundary": {
+    "active_runtime_root": "ION/",
+    "source_lanes_are_active_authority": false,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "non_claims": [
+    "This receipt does not implement any workpacket.",
+    "This receipt does not apply any diff.",
+    "This receipt does not promote sandbox package files into accepted ION canon.",
+    "This receipt does not grant production, live execution, secrets, deployment, git push, or arbitrary shell authority."
+  ]
+}

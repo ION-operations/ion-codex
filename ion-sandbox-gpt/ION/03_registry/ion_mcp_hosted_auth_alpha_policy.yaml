@@ -1,0 +1,56 @@
+policy_id: ion_mcp_hosted_auth_alpha_policy
+version: V69_HOSTED_MCP_AUTH_AND_ACCOUNT_WORKSPACE_ALPHA_PROTOCOL
+status: active_alpha_boundary
+summary: >
+  Defines hosted-MCP account/workspace/state-root/token/session separation before
+  any OAuth, cloud, public endpoint, Kubernetes, or live execution certification.
+
+allowed_execution_modes:
+  - read_only
+  - dry_run
+
+allowed_resolutions:
+  - READ_ONLY
+  - DRY_RUN
+  - APPROVAL_REQUIRED
+  - REFUSED
+
+forbidden_resolutions:
+  - LIVE_EXECUTED
+
+baseline_scopes:
+  - ion.mount.basic
+  - ion.state.read
+  - ion.receipts.read
+  - ion.approvals.read
+  - ion.jobs.plan
+  - ion.jobs.execute.dry_run
+  - ion.bundles.export
+
+elevated_scopes:
+  - ion.jobs.execute.live
+  - ion.approvals.write
+  - ion.workspace.admin
+  - ion.secrets.write
+  - ion.provider.dispatch
+  - ion.browser.mutate
+  - ion.governed_write.direct
+
+mandatory_separations:
+  token_is_not_ion_session: true
+  mcp_transport_session_is_not_authority: true
+  oauth_login_is_not_execution_authorization: true
+  workspace_mount_requires_state_root: true
+  state_root_not_mutable_directly_by_mcp: true
+
+uncertified_in_v69:
+  oauth: true
+  hosted_cloud: true
+  public_endpoint: true
+  kubernetes: true
+  live_execution: true
+  provider_dispatch: true
+  shell_execution: true
+  browser_mutation: true
+  credential_access: true
+  direct_governed_write: true

@@ -1,0 +1,124 @@
+schema: ion.ai_assistant_work.template_spec_index.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T15:19:39Z'
+authority_boundary:
+  candidate_only: true
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  requires_explicit_acceptance_to_land: true
+template_spec_count: 7
+template_specs:
+- template_id: screen_state_matrix_packet
+  title: Screen State Matrix Packet
+  path: ION/05_context/current/ai_assistant_work/template_specs/screen_state_matrix_packet.template_spec.yaml
+  owned_by_domain: ui_state_modeling_domain
+  primary_agent: UI_STATE_MODELER
+  state_inputs:
+  - product_brief_state
+  - existing_route_state
+  - design_system_state
+  - a11y_baseline_state
+  state_outputs:
+  - screen_state_matrix
+  - component_contract_state
+  - test_plan_state
+  - settlement_request_state
+  machine_required_section_count: 9
+  status: candidate_machine_checkable_template_spec_not_accepted_canon
+- template_id: pr_review_packet
+  title: PR Review Packet
+  path: ION/05_context/current/ai_assistant_work/template_specs/pr_review_packet.template_spec.yaml
+  owned_by_domain: pr_agent_work_domain
+  primary_agent: PR_REVIEW_STEWARD
+  state_inputs:
+  - diff_state
+  - ci_state
+  - review_policy_state
+  - lockfile_state
+  state_outputs:
+  - review_comment_candidate_state
+  - merge_blocker_state
+  - pr_settlement_request_state
+  machine_required_section_count: 8
+  status: candidate_machine_checkable_template_spec_not_accepted_canon
+- template_id: background_queue_result_intake_packet
+  title: Background Queue Result Intake Packet
+  path: ION/05_context/current/ai_assistant_work/template_specs/background_queue_result_intake_packet.template_spec.yaml
+  owned_by_domain: background_queue_intake_domain
+  primary_agent: BACKGROUND_QUEUE_STEWARD
+  state_inputs:
+  - queue_state
+  - authority_packet_state
+  - branch_return_state
+  - proof_state
+  state_outputs:
+  - normalized_branch_return_state
+  - intake_decision_state
+  - settlement_packet_state
+  machine_required_section_count: 8
+  status: candidate_machine_checkable_template_spec_not_accepted_canon
+- template_id: terminal_proof_receipt_packet
+  title: Terminal Proof Receipt Packet
+  path: ION/05_context/current/ai_assistant_work/template_specs/terminal_proof_receipt_packet.template_spec.yaml
+  owned_by_domain: terminal_proof_domain
+  primary_agent: TERMINAL_PROOF_CURATOR
+  state_inputs:
+  - command_state
+  - workspace_state
+  - test_target_state
+  state_outputs:
+  - command_receipt_state
+  - proof_claim_state
+  - rerun_instruction_state
+  machine_required_section_count: 10
+  status: candidate_machine_checkable_template_spec_not_accepted_canon
+- template_id: api_docs_example_validation_packet
+  title: API Docs Example Validation Packet
+  path: ION/05_context/current/ai_assistant_work/template_specs/api_docs_example_validation_packet.template_spec.yaml
+  owned_by_domain: documentation_example_validation_domain
+  primary_agent: EXAMPLE_RUNNER
+  state_inputs:
+  - api_surface_state
+  - docs_example_state
+  - runtime_state
+  - source_version_state
+  state_outputs:
+  - example_validation_state
+  - docs_patch_candidate_state
+  - claim_map_state
+  machine_required_section_count: 8
+  status: candidate_machine_checkable_template_spec_not_accepted_canon
+- template_id: release_readiness_matrix_packet
+  title: Release Readiness Matrix Packet
+  path: ION/05_context/current/ai_assistant_work/template_specs/release_readiness_matrix_packet.template_spec.yaml
+  owned_by_domain: release_evidence_domain
+  primary_agent: RELEASE_EVIDENCE_CURATOR
+  state_inputs:
+  - release_candidate_state
+  - version_state
+  - changelog_state
+  - ci_state
+  - risk_state
+  state_outputs:
+  - release_readiness_matrix_state
+  - release_blocker_state
+  - release_receipt_candidate_state
+  machine_required_section_count: 9
+  status: candidate_machine_checkable_template_spec_not_accepted_canon
+- template_id: migration_plan_and_rollback_packet
+  title: Migration Plan and Rollback Packet
+  path: ION/05_context/current/ai_assistant_work/template_specs/migration_plan_and_rollback_packet.template_spec.yaml
+  owned_by_domain: migration_work_domain
+  primary_agent: MIGRATION_MASON
+  state_inputs:
+  - current_schema_state
+  - target_schema_state
+  - data_surface_state
+  - compatibility_state
+  state_outputs:
+  - migration_plan_state
+  - rollback_plan_state
+  - migration_proof_plan_state
+  - approval_request_state
+  machine_required_section_count: 11
+  status: candidate_machine_checkable_template_spec_not_accepted_canon

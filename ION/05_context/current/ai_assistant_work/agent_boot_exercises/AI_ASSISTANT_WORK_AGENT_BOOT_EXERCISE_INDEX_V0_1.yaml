@@ -1,0 +1,32 @@
+schema: ion.ai_assistant_work.agent_boot_exercise_index.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T15:43:33Z'
+authority_boundary:
+  candidate_only: true
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  external_execution_authority: false
+  requires_explicit_acceptance_to_land: true
+inherits_from: ION/05_context/current/ai_assistant_work/agent_boots/AI_ASSISTANT_WORK_AGENT_BOOT_DRAFTS_INDEX_V0_1.yaml
+exercise_count: 7
+role_ids:
+- BACKGROUND_QUEUE_STEWARD
+- EXAMPLE_RUNNER
+- MIGRATION_MASON
+- PR_REVIEW_STEWARD
+- RELEASE_EVIDENCE_CURATOR
+- TERMINAL_PROOF_CURATOR
+- UI_STATE_MODELER
+exercise_files:
+- ION/05_context/current/ai_assistant_work/agent_boot_exercises/BACKGROUND_QUEUE_STEWARD.boot_exercise.json
+- ION/05_context/current/ai_assistant_work/agent_boot_exercises/EXAMPLE_RUNNER.boot_exercise.json
+- ION/05_context/current/ai_assistant_work/agent_boot_exercises/MIGRATION_MASON.boot_exercise.json
+- ION/05_context/current/ai_assistant_work/agent_boot_exercises/PR_REVIEW_STEWARD.boot_exercise.json
+- ION/05_context/current/ai_assistant_work/agent_boot_exercises/RELEASE_EVIDENCE_CURATOR.boot_exercise.json
+- ION/05_context/current/ai_assistant_work/agent_boot_exercises/TERMINAL_PROOF_CURATOR.boot_exercise.json
+- ION/05_context/current/ai_assistant_work/agent_boot_exercises/UI_STATE_MODELER.boot_exercise.json
+purpose: Exercise specialist-first dispatch for the initial seven AI assistant work
+  agent boots.
+non_claims:
+- Boot exercises are sandbox-local simulations, not real isolated agent invocations.
+- No external execution or accepted-state landing occurred.

@@ -1,0 +1,71 @@
+{
+  "created_at": "2026-05-02",
+  "items": [
+    {
+      "exit_condition": "compact runtime and forensic archive can be built separately with policy receipts",
+      "id": "OW-001",
+      "owner_role": "MASON+STEWARD",
+      "priority": "P0",
+      "status": "open",
+      "title": "Bind release/carrier packaging to context lifecycle"
+    },
+    {
+      "exit_condition": "ACTIVE_AGENT_CONTEXT_WINDOW_PLAN has no stale flags and records generation source",
+      "id": "OW-002",
+      "owner_role": "CONTEXT_CARTOGRAPHER",
+      "priority": "P0",
+      "status": "partially_repaired_in_v104",
+      "title": "Regenerate active context packages from registry and filesystem"
+    },
+    {
+      "exit_condition": "operator message produces Relay packet, Steward verdict, Persona response, and front-stage receipt",
+      "id": "OW-003",
+      "owner_role": "RELAY+STEWARD+PERSONA_INTERFACE",
+      "priority": "P0",
+      "status": "open",
+      "title": "Front-door runtime path"
+    },
+    {
+      "exit_condition": "external/local workers cannot return without context proof, template action proof, lifecycle check, and Steward integration",
+      "id": "OW-004",
+      "owner_role": "VIZIER+MASON",
+      "priority": "P1",
+      "status": "blocked",
+      "title": "Bounded worker adapter interface"
+    },
+    {
+      "exit_condition": "writeback proposals are diff/review/commit events, not repeated full graph snapshots",
+      "id": "OW-005",
+      "owner_role": "TEMPLATE_CURATOR+ATLAS",
+      "priority": "P1",
+      "status": "open",
+      "title": "Template graph writeback metabolism"
+    },
+    {
+      "exit_condition": "closed cycles produce compact residue and retire raw work to cold evidence policy without deletion",
+      "id": "OW-006",
+      "owner_role": "ATLAS+VESTIGE",
+      "priority": "P1",
+      "status": "open",
+      "title": "Context residue and timeline deltas"
+    },
+    {
+      "exit_condition": "operator can see objective, gate, stop reason, active roles, receipts, lifecycle verdict, and next lawful move",
+      "id": "OW-007",
+      "owner_role": "MASON+PERSONA_INTERFACE",
+      "priority": "P1",
+      "status": "open",
+      "title": "Cockpit/JOC proof surface"
+    },
+    {
+      "exit_condition": "branch versions and production gates are separated in verifier outputs",
+      "id": "OW-008",
+      "owner_role": "CANON_LIBRARIAN+NEMESIS",
+      "priority": "P2",
+      "status": "open",
+      "title": "Production readiness namespace repair"
+    }
+  ],
+  "production_authority": false,
+  "schema_id": "ion.open_work_register.v104"
+}

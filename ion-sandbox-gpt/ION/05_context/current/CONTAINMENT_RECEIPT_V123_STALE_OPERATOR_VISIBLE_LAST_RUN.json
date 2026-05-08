@@ -1,0 +1,29 @@
+{
+  "schema_id": "ion.containment_receipt.v1",
+  "receipt_id": "CONTAINMENT_RECEIPT_V123_STALE_OPERATOR_VISIBLE_LAST_RUN",
+  "line": "V123_ROOT_ONBOARDING_SHIM_RETIREMENT",
+  "created_at": "2026-05-03T22:10:00+00:00",
+  "classification": "RETIRE_TO_CONTAINMENT",
+  "reason": "The current-context OPERATOR_VISIBLE_LAST_RUN.md and _tmp_onboard.json were old April 27 witness/generated surfaces that still listed START_HERE_FOR_ANY_AGENT.md and the April 17 START_HERE.md bundle as required reads. Keeping them in ION/05_context/current made stale onboarding look current.",
+  "source_policy": "NO_SILENT_LOSS_PLUS_CONTAINMENT_PRESERVATION",
+  "production_authority": false,
+  "live_execution_authority": false,
+  "moves": [
+    {
+      "from_path": "ION/05_context/current/OPERATOR_VISIBLE_LAST_RUN.md",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/OPERATOR_VISIBLE_LAST_RUN_20260427_STALE_START_HERE.md",
+      "sha256": "27569d526f2983a9fc589263ea73e68a8d9adf8f14785997a51f4d2b92872ed3",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    },
+    {
+      "from_path": "ION/05_context/current/_tmp_onboard.json",
+      "to_path": "ION/05_context/archive/containment/V123_ROOT_ONBOARDING_SHIMS/_tmp_onboard_20260427_STALE_START_HERE.json",
+      "sha256": "f29c84910b6717a88c4af2341350c6be6e4171a94ddbff9f1b7d7c2ddb2f412d",
+      "transition": "RETIRE_TO_CONTAINMENT"
+    }
+  ],
+  "hot_current_after_transition": {
+    "ION/05_context/current/OPERATOR_VISIBLE_LAST_RUN.md": "absent",
+    "ION/05_context/current/_tmp_onboard.json": "absent"
+  }
+}

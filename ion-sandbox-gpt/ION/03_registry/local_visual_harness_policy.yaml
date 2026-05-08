@@ -1,0 +1,35 @@
+policy_id: ion.local_visual_harness_policy.v1
+version: V46_LOCAL_VISUAL_HARNESS_PROTOTYPE
+authority_scope: LOCAL_DEV_CAPTURE_ONLY
+production_authority: false
+allowed_target_kinds:
+  - local_html
+  - local_preview
+  - local_static_file
+  - authorized_local_url_placeholder
+allowed_capture_modes:
+  - SCREENSHOT_REF
+  - DOM_SNAPSHOT_FILE
+  - VIEWPORT_METADATA
+  - ACCESSIBILITY_TREE_FILE
+  - CONSOLE_LOG_SUMMARY_FILE
+  - COMPOSED_LOCAL_CAPTURE
+steward_gate_statuses:
+  - APPROVED_LOCAL_DEV_ONLY
+  - STEWARD_REVIEW_REQUIRED
+  - BLOCKED
+forbidden_capabilities:
+  unrestricted_browser_control: false
+  credential_sensitive_action: false
+  destructive_action: false
+  form_submission: false
+  purchase_or_submission: false
+  account_operation: false
+  persistent_dom_mutation_without_authority: false
+  network_side_effects: false
+  production_authority: false
+notes:
+  - V46 is a local/dev capture prototype, not an autonomous browser agent.
+  - It may hash and reference explicitly supplied local visual artifacts under workspace root.
+  - It may compose V44/V45 packet and receipt objects for continuity.
+  - It may not perform persistent mutation, credentialed actions, submissions, or production operations.

@@ -1,0 +1,71 @@
+{
+  "schema": "ion.ai_assistant_work.route_compiler_implementation_receipt.v0_1",
+  "created_at": "2026-05-08T18:19:26Z",
+  "status": "candidate_route_metadata_integrated_not_accepted_canon",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "implemented_surfaces": [
+    {
+      "path": "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+      "role": "candidate-only route compiler that reads the imported assistant-work route registry and candidate map"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_engine.py",
+      "role": "attaches assistant_work_route metadata to Codex chat engine turns and exposes assistant_work_routes on the engine surface"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_dual_codex_chat.py",
+      "role": "carries route metadata into queued objectives, trace events, UI model drawers, and top status chips"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py",
+      "role": "renders candidate Assistant Work Routes in the inspector without adding user chore controls"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
+      "role": "focused tests for route selection, unavailable fallback, candidate map path, and authority boundary"
+    }
+  ],
+  "candidate_inputs": [
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_ROUTE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_MAP_20260508T175230Z.json"
+  ],
+  "active_route_surface": {
+    "verdict": "ION_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_READY",
+    "route_count": 6,
+    "mapped_route_count": 6,
+    "policy": "candidate_route_metadata_only_no_registry_or_product_law_mutation"
+  },
+  "validation": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_assistant_work_route_compiler.py ION/tests/test_kernel_ion_codex_chat_engine.py ION/tests/test_kernel_ion_dual_codex_chat.py",
+      "result": "24 passed"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ai_assistant_work_domain_candidate.py ION/tests/test_kernel_ai_assistant_work_dataset_genesis.py ION/tests/test_kernel_ai_assistant_work_domain_fission_candidate.py ION/tests/test_kernel_ai_assistant_work_agent_boot_template_specs.py ION/tests/test_kernel_ai_assistant_work_template_instances.py",
+      "result": "36 passed"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_status",
+      "result": "ION_STATUS_READY"
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_active_state_integrity_audit",
+      "result": "ION_ACTIVE_STATE_INTEGRITY_READY"
+    }
+  ],
+  "non_claims": [
+    "This receipt does not accept the assistant-work route registry into ION canon.",
+    "This receipt does not promote candidate domains, agents, templates, or route mappings into ION/03_registry.",
+    "This receipt does not grant production, live execution, secret, deployment, or external tool authority.",
+    "Route metadata is advisory context for chat routing, objectives, traces, and inspector visibility only."
+  ]
+}

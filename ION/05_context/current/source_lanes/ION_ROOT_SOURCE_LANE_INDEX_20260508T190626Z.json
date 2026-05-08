@@ -1,0 +1,45 @@
+{
+  "schema": "ion.root_source_lane.index.v0_1",
+  "created_at": "2026-05-08T19:06:26Z",
+  "status": "active_source_lane_policy_not_accepted_canon",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "policy": "ION/05_context/current/source_lanes/ION_ROOT_SOURCE_LANE_POLICY_20260508T190626Z.md",
+  "lanes": [
+    {
+      "lane": "workpackets",
+      "role": "operator/source packet intake",
+      "index": "workpackets/WORKPACKET_INDEX_20260508T190626Z.json",
+      "readme": "workpackets/README.md",
+      "file_count": 20,
+      "size_summary": "260K",
+      "active_authority": false
+    },
+    {
+      "lane": "diffs",
+      "role": "patch evidence and candidate patch intake",
+      "index": "diffs/DIFF_INDEX_20260508T190626Z.json",
+      "readme": "diffs/README.md",
+      "file_count": 4,
+      "size_summary": "328K",
+      "active_authority": false
+    },
+    {
+      "lane": "ION_sandbox",
+      "role": "sandbox GPT/product package snapshots and source evidence",
+      "index": "ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json",
+      "readme": "ION_sandbox/README.md",
+      "file_count": 3756,
+      "size_summary": "26M",
+      "active_authority": false,
+      "raw_snapshot_git_policy": "ignored_by_default"
+    }
+  ],
+  "active_authority_root": "ION/",
+  "processing_rule": "read_classify_compare_apply_or_import_selected_validate_receipt",
+  "candidate_lifecycle_link": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/CANDIDATE_DOMAIN_LIFECYCLE_REGISTRY_V0_1.yaml",
+  "non_claims": [
+    "This index does not accept source-lane files as ION canon.",
+    "This index does not apply diffs or implement workpackets.",
+    "This index does not make ION_sandbox an active runtime root."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "anti_drift_guards": [
+    "single_carrier_is_fallback_not_base",
+    "do_not_call_gpt_reduced_ion",
+    "no_donor_as_active_authority",
+    "do_not_invent_replacement_ion_before_checking_existing_organs"
+  ],
+  "audit_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_AUDIT_REPORT_20260508T135357Z.json",
+  "authority_boundary": {
+    "active_packet_allowed_paths": [
+      "ION/05_context/current/",
+      "ION/04_packages/kernel/",
+      "ION/tests/",
+      "ION/docs/consolidation/",
+      "ION/05_context/signals/",
+      "ION/02_architecture/"
+    ],
+    "candidate_only": true,
+    "mutates_active_product_files": false,
+    "mutates_custom_gpt_instructions": false,
+    "mutates_product_manifest": false,
+    "mutates_product_surfaces": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "generated_at": "2026-05-08T13:54:49+00:00",
+  "non_claims": [
+    "This patchset is not accepted product law.",
+    "This patchset has not mutated product/custom_gpt_adapter, START_HERE.md, README.md, PRODUCT_MANIFEST.json, or package guides.",
+    "This patchset does not grant production authority, live execution authority, external Codex/MCP execution, or registry landing.",
+    "If applied after acceptance, target status fields may need Steward settlement/update."
+  ],
+  "patchset": "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PATCHSET_20260508T135357Z.json",
+  "proposal": "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PROPOSAL_20260508T135357Z.md",
+  "required_sequence_for_product_carriers": [
+    "normal_ion_mount",
+    "load_active_state",
+    "classify_ion_about_ion",
+    "mount_active_self_knowledge_mount_packet",
+    "load_self_knowledge_route_registry",
+    "load_required_domain_packets",
+    "answer_or_act_with_non_claims"
+  ],
+  "schema_id": "ion.self_knowledge.product_onboarding_overlay.v0_2",
+  "status": "candidate_current_state_not_accepted_product_law"
+}

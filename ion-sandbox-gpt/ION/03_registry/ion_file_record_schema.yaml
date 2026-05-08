@@ -1,0 +1,41 @@
+registry_id: ion_file_record_schema
+status: current_phase_seed
+created: '2026-04-24'
+required_fields:
+- path
+- file_type
+- purpose
+- governing_intent
+- authority_status
+- operational_status
+- epistemic_status
+- role_class
+- lineage_role
+- approved_context_status
+- default_retrieval_zone
+- source_basis
+load_bearing_additional_required:
+- owner_agent_family
+- reviewer_agent_family
+- upstream_dependencies
+- downstream_dependencies
+- last_verified_at
+approved_context_status_enum:
+- APPROVED_CONTEXT
+- PROVISIONAL_CONTEXT
+- WITNESS_CONTEXT
+- HISTORICAL_CONTEXT
+- QUARANTINED_CONTEXT
+- STALE_CONTEXT
+- SUPERSEDED_CONTEXT
+- NEEDS_REVIEW
+- UNKNOWN_CONTEXT
+authority_status_enum:
+- A1_CROWN_LAW
+- A2_PRODUCTION_GOVERNANCE
+- A3_OPERATIONAL_PROPOSAL
+- RUNTIME_PROOF_SURFACE
+- WITNESS
+- HISTORICAL_LINEAGE
+- EXPLANATORY_SYNTHESIS
+- UNKNOWN

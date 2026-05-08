@@ -1,0 +1,68 @@
+schema_id: ion.self_knowledge.authority_ranking.v0_2
+status: candidate_current_state_not_accepted_canon
+generated_at: '2026-05-08T03:51:05+00:00'
+ranking:
+- rank: 0
+  label: human_sovereign_or_explicit_steward_acceptance
+  meaning: Explicit human/Steward settlement/acceptance boundary for state-bearing changes.
+  examples:
+  - operator approval
+  - accepted integration receipt
+  notes: This candidate pack has not been accepted into canon merely by being generated.
+- rank: 1
+  label: repo_root_authority_and_package_manifests
+  meaning: REPO_AUTHORITY, package manifests, validation reports, and current accepted root surfaces.
+  examples:
+  - ION/REPO_AUTHORITY.md
+  - PRODUCT_MANIFEST.json
+  - VALIDATION_REPORT.json
+- rank: 2
+  label: active_operational_protocols_and_current_state
+  meaning: Mount contract, carrier profiles, active work packets, current state/preflight surfaces.
+  examples:
+  - ION/02_architecture/ION_MOUNT_CONTRACT.md
+  - ION/05_context/current/ACTIVE_WORK_PACKET.json
+- rank: 3
+  label: registries_templates_and_context_systems
+  meaning: Domain/graph/role/template registries and template/context cards under current path.
+  examples:
+  - ION/03_registry/*
+  - ION/07_templates/*
+  - ION/05_context/current/agent_context_systems/*
+- rank: 4
+  label: implementation_tests_and_runtime_proofs
+  meaning: Kernel code, tests, status/preflight outputs, proof gate results.
+  examples:
+  - ION/04_packages/kernel/*
+  - ION/tests/*
+- rank: 5
+  label: product_projection_and_adapter_guides
+  meaning: Custom GPT/product guides that project ION into a host body under package policy.
+  examples:
+  - product/custom_gpt_adapter/*
+  - product/package_guides/*
+- rank: 6
+  label: candidate_workpack_outputs
+  meaning: This workpack's generated self-knowledge state files, pending acceptance.
+  examples:
+  - ION/05_context/current/self_knowledge/*
+  - ION/05_context/current/SELF_KNOWLEDGE_ORGAN_INVENTORY_V0_2.json
+- rank: 7
+  label: witness_explainers_journals_reports
+  meaning: Useful explanatory or historical witness material; cannot override active authority alone.
+  examples:
+  - ION_Continuity_Substrate_Explainer_v7.md
+  - context_engineering_white_paper_v_0_1.md
+- rank: 8
+  label: donor_deprecated_quarantined
+  meaning: Historical/donor/deprecated/quarantined surfaces; route through Canon Librarian/Vestige before
+    use.
+  examples:
+  - ION/05_context/archive/*
+  - forensic companion material
+interpretation_rules:
+- Higher authority constrains lower surfaces.
+- Current path + explicit status/validation outrank broad summaries.
+- Witness material can explain but cannot settle state.
+- Candidate workpack outputs remain proposal until accepted and receipted.
+

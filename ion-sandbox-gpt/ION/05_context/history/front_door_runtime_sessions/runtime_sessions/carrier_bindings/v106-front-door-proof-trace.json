@@ -1,0 +1,7 @@
+{
+  "binding_id": "rsc-96d927aae9e9",
+  "bound_at": "2026-05-02T22:52:19+00:00",
+  "carrier_kind": "EXTERNAL_API",
+  "carrier_ref": "api://front-door-proof-trace",
+  "session_id": "v106-front-door-proof-trace"
+}

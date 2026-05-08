@@ -1,0 +1,40 @@
+{
+  "checks": {
+    "all_14_domains_loaded_across_simulation": true,
+    "all_candidate_routes_exercised": true,
+    "all_route_cases_accepted": true,
+    "candidate_validation_passed": true,
+    "case_count": 7,
+    "external_codex_claimed": false,
+    "focused_pytest_passed": true,
+    "focused_pytest_tests_count": 11,
+    "ion_status_ready": true,
+    "route_count": 7,
+    "sandbox_preflight_ready": true,
+    "target_registry_mutated": false
+  },
+  "findings": [],
+  "generated_at": "2026-05-08T04:31:19+00:00",
+  "live_execution_authority": false,
+  "non_claims": [
+    "This validation note is not accepted canon.",
+    "This validation note does not authorize ION/03_registry writes."
+  ],
+  "production_authority": false,
+  "receipt_path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_RECEIPT_20260508T043119Z.json",
+  "receipt_sha256": "9960716a453d471678a981ca004d9f741ba03795f2a80a561be41a9a9981f0c4",
+  "report_path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json",
+  "report_sha256": "de5d0e6712338656d2b18a51ce8d55e403c10c4d597c889876f00fdaaaf1700e",
+  "schema_id": "ion.self_knowledge.route_usage_validation_note.v0_2",
+  "status": "passed_candidate_validation",
+  "stderr_note": "Python startup emitted unrelated artifact_tool spreadsheet warmup stderr in this environment; route simulation returned 0 and wrote accepted report.",
+  "test_evidence": {
+    "command": "python3 -S -c \"sys.path[:0]=[site-packages, ION/04_packages]; import pytest; pytest.main([...])\"",
+    "result": "11 passed",
+    "tests": [
+      "ION/tests/test_kernel_ion_self_knowledge_candidate.py",
+      "ION/tests/test_kernel_ion_self_knowledge_route_usage.py"
+    ]
+  },
+  "updated_at": "2026-05-08T04:36:20+00:00"
+}

@@ -1,0 +1,32 @@
+{
+  "$id": "ion.conversational_receipt.v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "receipt_id",
+    "conversation_status",
+    "repair_required",
+    "events",
+    "production_authority"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.conversational_receipt.v1"
+    },
+    "version": {
+      "const": "V42_CONVERSATIONAL_RECEIPTS_AND_LIVE_REPAIR"
+    },
+    "conversation_status": {
+      "enum": [
+        "OPEN_PROVISIONAL",
+        "REPAIRED",
+        "RATIFIED",
+        "BLOCKED"
+      ]
+    },
+    "production_authority": {
+      "const": false
+    }
+  }
+}

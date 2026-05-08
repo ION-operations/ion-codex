@@ -1,0 +1,33 @@
+{
+  "accepted": false,
+  "created_at": "2026-05-04T04:12:42+00:00",
+  "decision": "REJECTED_BY_TEMPLATE_ACTION_GATE",
+  "external_execution_authority": false,
+  "gate": {
+    "accepted": false,
+    "action_id": null,
+    "findings": [
+      "missing_template_action_proof_heading",
+      "empty_template_action_proof_section",
+      "missing_template_id",
+      "missing_action_id",
+      "missing_result",
+      "missing_touched_paths"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_OR_REPAIR",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": null,
+    "touched_paths": []
+  },
+  "index": 1,
+  "production_authority": false,
+  "receipt_id": "queue_01_steward_0acfdf36909f_steward_integration",
+  "role": "steward",
+  "schema_id": "ion.steward_queue_integration_receipt.v1",
+  "source": "active_steward_integration_queue",
+  "task_output_path": "ION/05_context/current/task_returns/2026-05-04T040927Z0000_01_steward_task_return.md",
+  "task_output_sha256": "c90a79c764b05b6801f7b7e82eb6d3d638e0dc19170213fa718b698326f52bff",
+  "worker_output_preview": "### CONTEXT PROOF\n1. path: `ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md`; status: file_present; line_count: 97; sha256: `37c4f30751a51a4da5d3de74b1d8cf9eb879e10c6fbf4dee398a8c227dad4aca`; excerpt: `---`\n2. path: `ION/03_registry/agent_context_system_registry.yaml`; status: file_present; line_count: 176; sha256: `0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12`; excerpt: `registry_id: ion.agent_context_system_registry.v1`\n3. path: `ION/05_context/current/agent_context_systems/AGENT_CONTEXT_SYSTEMS_INDEX.md`; status: file_present; line_count: 34; sha256: `392cfa8eea6444d0a3f1dd36428c5905dadb32a4b75b76dcd5da3895fa9021ad`; excerpt: `# Agent Context Systems Index \u2014 V81`\n4. path: `ION/05_context/current/agent_context_systems/STEWARD.context_system.md`; status: file_present; line_count: 44; sha256: `29f4f7d4d5e0aa895a74500e651cae04b3f0b8eb8d09726a7f6d546b0de6e310`; excerpt: `# STEWARD \u2014 Agent Context System Card`\n5. path: `ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md`; status: file_present; line_count: 74; sha256: `931da654a6a9c1625da5e5348088c009004c09d2c70dda061d1534ae54437e6d`; excerpt: `# AGENT_CONTEXT_BUILD_STEP`\n6. path: `ION/07_templates/context/AGENT_CONTEXT_PACKAGE_INDEX.md`; status: file_present; line_count: 14; sha256: `2090d6b38fe93452000d3e3d3df48659df125117ebb168ab60345f8174add30a`; excerpt: `# AGENT_CONTEXT_PACKAGE_INDEX`\n7. path: `ION/07_templates/bindings/STEWARD__TASK.md`; status: file_present; line_count: 27; sha256: `9ac57cdb7a299fa782b3edad5fdd2c8eee1e24a92efb426e5622b371e46312bb`; excerpt: `---`\n8. path: `ION/07_template"
+}

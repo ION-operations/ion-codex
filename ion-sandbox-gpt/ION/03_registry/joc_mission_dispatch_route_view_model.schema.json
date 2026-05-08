@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.joc_mission_dispatch_route_view_model.v1",
+  "title": "ION/JOC Mission Dispatch Route View Model Receipt",
+  "type": "object",
+  "required": [
+    "version", "schema_id", "receipt_id", "authority_scope", "route_verdict",
+    "mission_id", "target_count", "compute_ring_count", "route_factor_count",
+    "view_surface_count", "primary_target", "fallback_targets", "findings",
+    "forbidden_capabilities", "production_authority", "live_dispatch_claim"
+  ],
+  "properties": {
+    "version": { "const": "V59_MISSION_DISPATCH_AND_MODEL_ROUTE_VIEW_MODEL" },
+    "schema_id": { "const": "ion.joc_mission_dispatch_route_view_model.v1" },
+    "receipt_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "authority_scope": { "const": "MISSION_DISPATCH_ROUTE_VIEW_MODEL_RECEIPT_ONLY" },
+    "route_verdict": { "type": "string" },
+    "mission_id": { "type": "string" },
+    "target_count": { "type": "integer" },
+    "compute_ring_count": { "type": "integer" },
+    "route_factor_count": { "type": "integer" },
+    "view_surface_count": { "type": "integer" },
+    "primary_target": { "type": "object" },
+    "fallback_targets": { "type": "array" },
+    "route_factors": { "type": "array" },
+    "view_surfaces": { "type": "array" },
+    "approval_gate": { "type": "string" },
+    "estimated_cost_band": { "type": "string" },
+    "estimated_latency_band": { "type": "string" },
+    "quality_band": { "type": "string" },
+    "findings": { "type": "array" },
+    "forbidden_capabilities": { "type": "object" },
+    "production_authority": { "const": false },
+    "live_dispatch_claim": { "const": false }
+  }
+}

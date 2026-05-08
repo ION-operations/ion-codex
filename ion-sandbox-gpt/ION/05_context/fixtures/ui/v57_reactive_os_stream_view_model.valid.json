@@ -1,0 +1,172 @@
+{
+  "schema_id": "ion.joc_reactive_os_stream_view_model.v1",
+  "version": "V57_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL",
+  "surface_name": "ION/JOC Reactive OS Stream V57 Fixture",
+  "source_receipt_ids": [
+    "v54-visual-run-diagnosis-binding-reference",
+    "v55-ui-work-surface-projection-reference",
+    "v56-joc-cockpit-component-contract-reference"
+  ],
+  "forbidden_capabilities": {
+    "production_authority": false,
+    "unrestricted_browser_control": false,
+    "credential_access": false,
+    "external_network_authority": false,
+    "account_operation": false,
+    "destructive_action": false,
+    "form_submission": false,
+    "purchase_or_submission": false,
+    "persistent_dom_mutation": false,
+    "production_visual_automation": false
+  },
+  "dxl_constraints": {
+    "no_emoji_ui_controls": true,
+    "custom_inline_svg_icons": true,
+    "mono_dense_uppercase_labels": true,
+    "instrument_panel_radius_lte_2px": true
+  },
+  "events": [
+    {
+      "event_id": "v57-evt-visual-001",
+      "occurred_at": "18:12:01",
+      "loop_id": "VISUAL_ISSUE_CLOSURE_LOOP",
+      "phase": "closure_render",
+      "status": "OK",
+      "claim_lane": "C0",
+      "rendered_surface": "VISUAL_EVIDENCE_LENS",
+      "authority_scope": "VISUAL_RUN_TO_DIAGNOSIS_CLOSURE_RECEIPT_ONLY",
+      "evidence_refs": [
+        "V45 diagnosis receipt",
+        "V48 before-after receipt",
+        "V53 local browser run receipt",
+        "V54 closure binding receipt"
+      ],
+      "repair_required": false,
+      "blocked_capabilities": [],
+      "detail": "Visual closure may be rendered as scoped evidence because run and diagnosis lineage agree."
+    },
+    {
+      "event_id": "v57-evt-context-001",
+      "occurred_at": "18:12:09",
+      "loop_id": "CONTEXT_PROJECTION_LOOP",
+      "phase": "surface_projection",
+      "status": "OK",
+      "claim_lane": "C2",
+      "rendered_surface": "CONTEXT_GRAPH_COGNITIVE_EXPLORER",
+      "authority_scope": "UI_WORK_SURFACE_PROJECTION_RECEIPT_ONLY",
+      "evidence_refs": [
+        "V55 projection receipt",
+        "V56 component contract"
+      ],
+      "repair_required": false,
+      "blocked_capabilities": [],
+      "detail": "Projection surfaces are mapped into cockpit regions for operator inspection."
+    },
+    {
+      "event_id": "v57-evt-mission-001",
+      "occurred_at": "18:12:17",
+      "loop_id": "MISSION_DISPATCH_LOOP",
+      "phase": "route_preview",
+      "status": "WATCH",
+      "claim_lane": "C2",
+      "rendered_surface": "MISSION_DISPATCH_AND_MODEL_ROUTE_PANEL",
+      "authority_scope": "MISSION_ROUTE_PREVIEW_ONLY",
+      "evidence_refs": [
+        "JOC mission lifecycle doctrine",
+        "compute ring routing plan"
+      ],
+      "repair_required": false,
+      "blocked_capabilities": [],
+      "detail": "Route plan may be previewed, but dispatch remains unmounted in this branch."
+    },
+    {
+      "event_id": "v57-evt-session-001",
+      "occurred_at": "18:12:24",
+      "loop_id": "SESSION_HEALTH_LOOP",
+      "phase": "browser_authority_gate",
+      "status": "BLOCKED",
+      "claim_lane": "C1",
+      "rendered_surface": "BROWSER_SESSION_AUTOMATION_OVERLAY",
+      "authority_scope": "BROWSER_AUTOMATION_VISIBILITY_ONLY",
+      "evidence_refs": [],
+      "repair_required": false,
+      "blocked_capabilities": [
+        "credential_access",
+        "form_submission",
+        "persistent_dom_mutation",
+        "production_visual_automation"
+      ],
+      "detail": "Session overlay can display injection/extraction zones but cannot operate credentials or submit forms."
+    },
+    {
+      "event_id": "v57-evt-repair-001",
+      "occurred_at": "18:12:31",
+      "loop_id": "CONVERSATIONAL_REPAIR_LOOP",
+      "phase": "artifact_repair_visibility",
+      "status": "REPAIR",
+      "claim_lane": "C3",
+      "rendered_surface": "CONVERSATIONAL_REPAIR_QUEUE",
+      "authority_scope": "CONVERSATIONAL_REPAIR_QUEUE_VISIBILITY_ONLY",
+      "evidence_refs": [
+        "V42 conversational repair doctrine",
+        "current UI branch continuation obligation"
+      ],
+      "repair_required": true,
+      "blocked_capabilities": [],
+      "detail": "Chat correction and artifact correction remain visibly distinct in the cockpit queue."
+    },
+    {
+      "event_id": "v57-evt-cost-001",
+      "occurred_at": "18:12:38",
+      "loop_id": "MODEL_COST_QUALITY_LOOP",
+      "phase": "compute_ring_score",
+      "status": "WATCH",
+      "claim_lane": "C2",
+      "rendered_surface": "COMPUTE_AND_COST_ROUTER",
+      "authority_scope": "ROUTING_RECOMMENDATION_ONLY",
+      "evidence_refs": [
+        "JOC compute ring design",
+        "model route policy placeholder"
+      ],
+      "repair_required": false,
+      "blocked_capabilities": [],
+      "detail": "Cost and quality route scoring is display-only until live dispatch drivers are mounted."
+    },
+    {
+      "event_id": "v57-evt-receipt-001",
+      "occurred_at": "18:12:45",
+      "loop_id": "VISUAL_ISSUE_CLOSURE_LOOP",
+      "phase": "receipt_rail_sync",
+      "status": "OK",
+      "claim_lane": "C0",
+      "rendered_surface": "CLAIM_AND_RECEIPT_RAIL",
+      "authority_scope": "RECEIPT_RAIL_RENDER_ONLY",
+      "evidence_refs": [
+        "V54 closure binding receipt",
+        "V57 stream view model receipt"
+      ],
+      "repair_required": false,
+      "blocked_capabilities": [],
+      "detail": "Receipt rail can display closure state, evidence refs, and blocked authority boundaries."
+    },
+    {
+      "event_id": "v57-evt-stream-001",
+      "occurred_at": "18:12:52",
+      "loop_id": "CONTEXT_PROJECTION_LOOP",
+      "phase": "reactive_stream_render",
+      "status": "OK",
+      "claim_lane": "C1",
+      "rendered_surface": "REACTIVE_OS_STREAM",
+      "authority_scope": "REACTIVE_OS_STREAM_VIEW_MODEL_RECEIPT_ONLY",
+      "evidence_refs": [
+        "V57 view-model fixture"
+      ],
+      "repair_required": false,
+      "blocked_capabilities": [],
+      "detail": "Reactive OS Stream renders events with loop, phase, claim lane, evidence, and authority scope."
+    }
+  ],
+  "notes": [
+    "Static V57 fixture; not live automation evidence."
+  ]
+}

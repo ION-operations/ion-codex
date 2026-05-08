@@ -1,0 +1,19 @@
+{
+  "$id": "https://ion.local/schemas/domain_registry.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "domains": {
+      "type": "array"
+    },
+    "schema_id": {
+      "const": "ion.domain_registry.v1"
+    }
+  },
+  "required": [
+    "schema_id",
+    "domains"
+  ],
+  "title": "ION Domain Registry",
+  "type": "object"
+}

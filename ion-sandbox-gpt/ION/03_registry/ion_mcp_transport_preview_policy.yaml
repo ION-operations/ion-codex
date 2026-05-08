@@ -1,0 +1,27 @@
+policy_id: ion_mcp_transport_preview_policy
+version: V67_OFFICIAL_MCP_SDK_ADAPTER_AND_STREAMABLE_HTTP_PREVIEW
+allowed_transports:
+  - stdio
+  - streamable_http_preview
+allowed_resolutions:
+  - READ_ONLY
+  - DRY_RUN
+  - APPROVAL_REQUIRED
+  - REFUSED
+forbidden_resolutions:
+  - LIVE_EXECUTED
+forbidden_capabilities:
+  live_execution: true
+  hosted_cloud_certification: true
+  oauth_certification: true
+  provider_dispatch: true
+  browser_mutation: true
+  shell_execution: true
+  credential_access: true
+  daemon_loop_activation: true
+  direct_governed_write: true
+required_invariants:
+  live_execution_authorized_seen: false
+  kernel_truth_mutation_seen: false
+  streamable_http_preview_only: true
+  official_sdk_runtime_required: false

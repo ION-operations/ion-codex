@@ -1,0 +1,79 @@
+{
+  "created_at": "2026-05-03T14:10:32+00:00",
+  "origin_operator_request": "Implement lane timeline, receipt/repair hydration, and debug performance overlays; generalize that instrumentation discipline across all core ION systems.",
+  "production_authority": false,
+  "requirements": [
+    {
+      "applies_to": [
+        "front_door",
+        "persona",
+        "relay",
+        "steward",
+        "visual",
+        "worker_adapter"
+      ],
+      "id": "TEL-001",
+      "must_show": [
+        "message_id",
+        "requested_lane",
+        "effective_lane",
+        "lane_change_reason",
+        "organ_events",
+        "authority_verdict",
+        "repair_obligations"
+      ],
+      "name": "lane_timeline_widget",
+      "status": "required_not_implemented"
+    },
+    {
+      "applies_to": [
+        "front_stage_council_receipts",
+        "conversational_repair",
+        "joc_cockpit",
+        "persona_output"
+      ],
+      "id": "TEL-002",
+      "must_prove": [
+        "latest DB/source receipts map to the correct assistant bubble",
+        "mixed utterance_id and atom_id cases are deterministic",
+        "repair receipts supersede stale claim receipts without orphaning history"
+      ],
+      "name": "receipt_repair_hydration_mapper",
+      "status": "required_not_implemented"
+    },
+    {
+      "applies_to": [
+        "joc_cockpit",
+        "cursor_extension",
+        "front_door",
+        "future_browser_chat_surface"
+      ],
+      "id": "TEL-003",
+      "must_show": [
+        "SSE event throughput",
+        "render timings",
+        "DB hydration time",
+        "kernel projection time",
+        "file watcher refresh time"
+      ],
+      "name": "runtime_debug_overlay",
+      "status": "required_not_implemented"
+    },
+    {
+      "applies_to": [
+        "all core systems in ion.deep_operational_cartography.v105"
+      ],
+      "id": "TEL-004",
+      "must_show": [
+        "system verdict",
+        "wired vs doctrine-only",
+        "latest receipt",
+        "next gate",
+        "latency/cost/size where measurable"
+      ],
+      "name": "core_system_health_overlay",
+      "status": "planned"
+    }
+  ],
+  "schema_id": "ion.core_system_telemetry_requirements.v105"
+}

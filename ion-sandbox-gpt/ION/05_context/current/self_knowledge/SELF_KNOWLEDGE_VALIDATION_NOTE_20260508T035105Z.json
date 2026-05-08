@@ -1,0 +1,29 @@
+{
+  "accepted": true,
+  "additional_checks": {
+    "all_domain_yaml_parse": true,
+    "domain_count": 14,
+    "donor_false_authority_guard_present": true,
+    "gpt_reduced_ion_guard_present": true,
+    "mount_packet_anti_drift_guards_present": true,
+    "route_count": 6,
+    "single_carrier_reduction_guard_present": true
+  },
+  "generated_at": "2026-05-08T03:51:05+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "return_code": 0,
+  "schema_id": "ion.self_knowledge.validation_note.v0_2",
+  "stderr_note": "Subprocess emitted unrelated artifact_tool spreadsheet warmup traceback on stderr; validation script returned 0 and produced accepted=true JSON.",
+  "stdout": {
+    "accepted": true,
+    "domain_count": 14,
+    "findings": [],
+    "live_execution_authority": false,
+    "parsed_files_count": 22,
+    "production_authority": false,
+    "route_count": 6,
+    "schema_id": "ion.self_knowledge_candidate_validation.v0_2"
+  },
+  "validation_command": "/opt/pyvenv/bin/python ION/05_context/current/self_knowledge/validate_self_knowledge_candidate.py"
+}

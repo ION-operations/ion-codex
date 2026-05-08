@@ -1,0 +1,47 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "release_readiness_matrix_packet.expected_rejection.v0_1",
+  "template_id": "release_readiness_matrix_packet",
+  "case_type": "expected_rejection",
+  "status": "candidate_rejection_case_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/release_readiness_matrix_packet.template_spec.yaml",
+  "primary_agent": "RELEASE_EVIDENCE_CURATOR",
+  "domain_id": "release_evidence_domain",
+  "objective": "Exercise the release_readiness_matrix_packet candidate template rejection behavior.",
+  "sections": {
+    "RELEASE_SCOPE": "Release.",
+    "VERSION_AND_CHANGELOG": {
+      "version": "1.0.0"
+    },
+    "TEST_CI_MATRIX": [],
+    "RISK_REGISTER": [],
+    "ROLLBACK_PATH": "",
+    "OPEN_BLOCKERS": [],
+    "RELEASE_DECISION": "approved",
+    "NON_CLAIMS": [],
+    "RECEIPT_TARGET": ""
+  },
+  "expected_validation": {
+    "should_pass": false,
+    "expected_failure_kinds": [
+      "missing_or_invalid_required_section",
+      "candidate_boundary_or_non_claim_failure"
+    ],
+    "proves": [
+      "template validator rejects incomplete or overclaiming output",
+      "generic fluent output cannot satisfy machine sections"
+    ]
+  },
+  "non_claims": [
+    "This rejection case intentionally violates the candidate template spec.",
+    "The failed output is not a usable work product."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.chatgpt_browser_mcp_connector.schema.v1",
+  "title": "ION ChatGPT Browser MCP Connector Contract",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version_line",
+    "connector_id",
+    "verdict",
+    "allowed_tools",
+    "forbidden_tools",
+    "production_authority",
+    "live_execution_authority"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.chatgpt_browser_mcp_connector_contract.v1"
+    },
+    "version_line": {
+      "const": "V120_CHATGPT_BROWSER_MCP_CONNECTOR_AND_CORRECT_CARRIER_ONBOARDING"
+    },
+    "connector_id": {
+      "const": "ION_CHATGPT_BROWSER_CONNECTOR"
+    },
+    "verdict": {
+      "enum": [
+        "ION_CHATGPT_BROWSER_MCP_CONNECTOR_CONTRACT_READY",
+        "ION_CHATGPT_BROWSER_MCP_CONNECTOR_CONTRACT_BLOCKED"
+      ]
+    },
+    "connector_state": {
+      "enum": [
+        "CONTRACT_READY_NOT_DEPLOYED",
+        "DEPLOYED_REQUIRES_AUDIT",
+        "BLOCKED"
+      ]
+    },
+    "allowed_tools": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "forbidden_tools": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "findings": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "source_paths": {
+      "type": "object",
+      "additionalProperties": {"type": "string"}
+    },
+    "production_authority": {
+      "const": false
+    },
+    "live_execution_authority": {
+      "const": false
+    },
+    "deployment_authority": {
+      "const": false
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JOC Dry-Run Dispatch Trace View Model",
+  "type": "object",
+  "required": [
+    "version",
+    "mission_id",
+    "trace_verdict",
+    "authority_scope",
+    "execution_mode",
+    "trace_steps",
+    "view_surfaces",
+    "production_authority",
+    "live_dispatch_claim",
+    "external_model_call_authorized"
+  ],
+  "properties": {
+    "version": {
+      "const": "V63_DRY_RUN_DISPATCH_EXECUTION_TRACE_VIEW_MODEL"
+    },
+    "mission_id": {
+      "type": "string"
+    },
+    "trace_verdict": {
+      "enum": [
+        "DRY_RUN_TRACE_READY",
+        "BLOCKED_HANDOFF_NOT_READY",
+        "BLOCKED_LIVE_EXECUTION_REQUESTED",
+        "BLOCKED_MISSING_TRACE_EVIDENCE",
+        "BLOCKED_FORBIDDEN_CAPABILITY",
+        "BLOCKED_UNSUPPORTED_EXECUTION_MODE"
+      ]
+    },
+    "authority_scope": {
+      "const": "DRY_RUN_DISPATCH_TRACE_VIEW_MODEL_RECEIPT_ONLY"
+    },
+    "execution_mode": {
+      "enum": [
+        "TRACE_ONLY_NON_EXECUTING",
+        "VIEW_ONLY_BLOCKED"
+      ]
+    },
+    "trace_steps": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "view_surfaces": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "production_authority": {
+      "const": false
+    },
+    "live_dispatch_claim": {
+      "const": false
+    },
+    "external_model_call_authorized": {
+      "const": false
+    }
+  }
+}

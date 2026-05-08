@@ -1,0 +1,11 @@
+answer_output_class,default_landing_boundary_class,may_mutate_code,may_mutate_law,may_mutate_atlas,may_mutate_current_branch,notes
+consultation_answer,no_landing_or_advisory_only,no,no,no,no,understanding without mutation
+comparison_judgment,conflict_and_missing_evidence_only,no,no,yes,no,preserve tension or comparison judgment
+recovery_note,atlas_evidence_only,no,no,yes,no,recover evidence before acting
+bridge_repair_note,current_branch_bridge_repair_only,possibly,possibly,limited,yes,narrow current-branch repair only
+conflict_entry,conflict_and_missing_evidence_only,no,no,yes,no,preserve contradiction only
+missing_evidence_escalation,conflict_and_missing_evidence_only,no,no,yes,no,block work pending stronger evidence
+executable_receipt,runnable_proof_layer_only,no,no,yes,no,verification not redesign
+lineage_update,lineage_and_status_only,no,no,yes,no,clarify relations and center status
+atlas_update,atlas_operating_layer_only,no,possibly,yes,no,refine atlas control layer
+bounded_implementation_packet,tightly_scoped_implementation_surface,yes,possibly,limited,yes,requires explicit non-reinvention proof

@@ -1,0 +1,44 @@
+{
+  "capability_claims": {
+    "filesystem_read": "PROFILE_BOUND",
+    "filesystem_write": "PROFILE_BOUND",
+    "host_subagents": "UNPROVEN_IN_THIS_AUDIT",
+    "shell_command_execution": "PROFILE_BOUND",
+    "test_execution": "PROFILE_BOUND"
+  },
+  "carrier_id": "CODEX_EXTENSION_CARRIER",
+  "checked_files": {
+    "carrier_registry": "ION/04_agents/carriers/carrier_registry.json",
+    "context_proof_gate": "ION/04_packages/kernel/ion_context_proof_gate.py",
+    "execution_packet_template": "ION/07_templates/carriers/CODEX_EXTENSION_EXECUTION_PACKET.md",
+    "generic_codex_profile": "ION/04_agents/carriers/CODEX_CARRIER.profile.md",
+    "mount_proof_template": "ION/07_templates/carriers/CARRIER_MOUNT_PROOF.md",
+    "profile": "ION/03_registry/codex_extension_carrier_profile.yaml",
+    "protocol": "ION/02_architecture/CODEX_EXTENSION_CARRIER_PROTOCOL.md",
+    "status_module": "ION/04_packages/kernel/ion_status.py",
+    "task_return_module": "ION/04_packages/kernel/ion_carrier_task_return.py"
+  },
+  "context_proof_gate": "kernel.ion_context_proof_gate",
+  "findings": [],
+  "forbidden_claims": [
+    "ION identity",
+    "STEWARD authority",
+    "RELAY authority",
+    "PERSONA authority",
+    "production authority",
+    "live host subagents without spawn proof"
+  ],
+  "generated_at": "2026-05-02T22:36:07+00:00",
+  "host_family": "codex_extension",
+  "live_execution_authority": false,
+  "mount_level_ceiling": "L1_TOOL_ASSISTED_UNLESS_HOST_SPAWN_PROVEN",
+  "production_authority": false,
+  "required_return_sections": [
+    "### CONTEXT PROOF",
+    "### TEMPLATE ACTION PROOF",
+    "### RESULT"
+  ],
+  "return_intake_module": "kernel.ion_carrier_task_return",
+  "schema_id": "ion.codex_extension_carrier_audit.v1",
+  "verdict": "ION_CODEX_EXTENSION_CARRIER_READY"
+}

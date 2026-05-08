@@ -1,0 +1,111 @@
+{
+  "accepted_count": 8,
+  "authority_boundary": {
+    "candidate_only": true,
+    "external_execution_performed": false,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false
+  },
+  "case_count": 8,
+  "cases": [
+    {
+      "accepted": true,
+      "case_id": "aiw_boot_dispatch_001_ui_feature_states",
+      "dispatch_reason": "specialist boot and template spec exist; generic implementation blocked until specialist check",
+      "expected_agent": "UI_STATE_MODELER",
+      "expected_template": "screen_state_matrix_packet",
+      "generic_agent_allowed": false,
+      "user_intent": "Build a dashboard screen with loading, error, empty and success states."
+    },
+    {
+      "accepted": true,
+      "case_id": "aiw_boot_dispatch_002_pr_review",
+      "dispatch_reason": "specialist boot and template spec exist; generic implementation blocked until specialist check",
+      "expected_agent": "PR_REVIEW_STEWARD",
+      "expected_template": "pr_review_packet",
+      "generic_agent_allowed": false,
+      "user_intent": "Review this pull request and tell me whether it is mergeable."
+    },
+    {
+      "accepted": true,
+      "case_id": "aiw_boot_dispatch_003_background_result",
+      "dispatch_reason": "specialist boot and template spec exist; generic implementation blocked until specialist check",
+      "expected_agent": "BACKGROUND_QUEUE_STEWARD",
+      "expected_template": "background_queue_result_intake_packet",
+      "generic_agent_allowed": false,
+      "user_intent": "A cloud worker returned a patch; decide whether to accept it."
+    },
+    {
+      "accepted": true,
+      "case_id": "aiw_boot_dispatch_004_command_proof",
+      "dispatch_reason": "specialist boot and template spec exist; generic implementation blocked until specialist check",
+      "expected_agent": "TERMINAL_PROOF_CURATOR",
+      "expected_template": "terminal_proof_receipt_packet",
+      "generic_agent_allowed": false,
+      "user_intent": "The tests passed; make a receipt from the terminal output."
+    },
+    {
+      "accepted": true,
+      "case_id": "aiw_boot_dispatch_005_docs_examples",
+      "dispatch_reason": "specialist boot and template spec exist; generic implementation blocked until specialist check",
+      "expected_agent": "EXAMPLE_RUNNER",
+      "expected_template": "api_docs_example_validation_packet",
+      "generic_agent_allowed": false,
+      "user_intent": "Validate the API docs examples before publishing."
+    },
+    {
+      "accepted": true,
+      "case_id": "aiw_boot_dispatch_006_release_ready",
+      "dispatch_reason": "specialist boot and template spec exist; generic implementation blocked until specialist check",
+      "expected_agent": "RELEASE_EVIDENCE_CURATOR",
+      "expected_template": "release_readiness_matrix_packet",
+      "generic_agent_allowed": false,
+      "user_intent": "Are we ready to release this package?"
+    },
+    {
+      "accepted": true,
+      "case_id": "aiw_boot_dispatch_007_schema_migration",
+      "dispatch_reason": "specialist boot and template spec exist; generic implementation blocked until specialist check",
+      "expected_agent": "MIGRATION_MASON",
+      "expected_template": "migration_plan_and_rollback_packet",
+      "generic_agent_allowed": false,
+      "user_intent": "Plan this database migration and rollback path."
+    },
+    {
+      "accepted": true,
+      "case_id": "aiw_boot_dispatch_008_generic_patch_after_specialist",
+      "dispatch_reason": "generic implementation allowed only after prior specialist packet output exists",
+      "expected_agent": "COMPONENT_BUILDER",
+      "expected_template": "component_contract_to_tests_packet",
+      "generic_agent_allowed": true,
+      "requires_prior_specialist_output": "screen_state_matrix_packet",
+      "user_intent": "Now implement the component after the screen state matrix is accepted."
+    }
+  ],
+  "created_at": "2026-05-08T15:19:39Z",
+  "objective": "Validate that high-value assistant-work intents dispatch to specialist agent boots and machine-checkable template specs before generic implementation.",
+  "result": "accepted",
+  "schema": "ion.ai_assistant_work.agent_boot_template_dispatch_simulation.v0_1",
+  "status": "candidate_simulation_not_accepted_canon",
+  "summary": {
+    "generic_implementation_blocked_until_specialist_check": true,
+    "specialist_agent_boots_exercised": [
+      "UI_STATE_MODELER",
+      "PR_REVIEW_STEWARD",
+      "BACKGROUND_QUEUE_STEWARD",
+      "TERMINAL_PROOF_CURATOR",
+      "EXAMPLE_RUNNER",
+      "RELEASE_EVIDENCE_CURATOR",
+      "MIGRATION_MASON"
+    ],
+    "template_specs_exercised": [
+      "screen_state_matrix_packet",
+      "pr_review_packet",
+      "background_queue_result_intake_packet",
+      "terminal_proof_receipt_packet",
+      "api_docs_example_validation_packet",
+      "release_readiness_matrix_packet",
+      "migration_plan_and_rollback_packet"
+    ]
+  }
+}

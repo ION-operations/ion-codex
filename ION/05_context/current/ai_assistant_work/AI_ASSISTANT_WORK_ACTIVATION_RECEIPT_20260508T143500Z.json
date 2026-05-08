@@ -1,0 +1,68 @@
+{
+  "schema": "ion.ai_assistant_work.activation_receipt.v0_1",
+  "receipt_id": "AI_ASSISTANT_WORK_ACTIVATION_RECEIPT_20260508T143500Z",
+  "created_at": "2026-05-08T14:35:00Z",
+  "status": "candidate_current_state_receipt_not_accepted_canon",
+  "objective": "Activate candidate AI Assistant / IDE Work domain system with specialist domains, states, protocols, templates, and agents.",
+  "operator_signal": "User identified missing specialist domains and agents for UI, documentation, IDE-agent work, and mass AI-assisted developer workflows.",
+  "authority": {
+    "allowed_paths_used": [
+      "ION/05_context/current/ai_assistant_work/",
+      "ION/tests/"
+    ],
+    "mutated_ION_03_registry": false,
+    "mutated_product_front_door": false,
+    "live_execution_authority": false,
+    "production_authority": false,
+    "candidate_only": true
+  },
+  "created_surfaces": {
+    "domain_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_DOMAIN_REGISTRY_CANDIDATE_V0_1.yaml",
+    "agent_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_AGENT_REGISTRY_CANDIDATE_V0_1.yaml",
+    "route_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_ROUTE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "state_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_STATE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "template_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_TEMPLATE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "protocol_registry": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_PROTOCOL_REGISTRY_CANDIDATE_V0_1.yaml",
+    "domain_packets_dir": "ION/05_context/current/ai_assistant_work/domains/",
+    "protocols_dir": "ION/05_context/current/ai_assistant_work/protocols/",
+    "template_families": "ION/05_context/current/ai_assistant_work/templates/AI_ASSISTANT_WORK_TEMPLATE_FAMILIES_V0_1.md",
+    "dataset_entry_schema": "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_DATASET_ENTRY_SCHEMA_V0_1.yaml",
+    "source_evidence_map": "ION/05_context/current/ai_assistant_work/source_evidence/AI_ASSISTANT_WORK_SOURCE_EVIDENCE_MAP_20260508T143500Z.json"
+  },
+  "validation": {
+    "candidate_validation": "accepted",
+    "route_simulation": "accepted",
+    "focused_tests": "9 passed",
+    "ion_status": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+    "domain_count": 19,
+    "agent_count": 47,
+    "route_count": 6,
+    "state_family_count": 77,
+    "template_family_count": 69,
+    "protocol_count": 59,
+    "findings": []
+  },
+  "external_research_context": [
+    "Stack Overflow 2025 AI survey",
+    "GitHub Copilot / Copilot cloud agent documentation",
+    "VS Code Copilot agent mode blog",
+    "Windsurf Cascade documentation",
+    "Claude Code documentation/product page",
+    "OpenAI Codex documentation and Agent Skills documentation"
+  ],
+  "decisions": [
+    "Treat AI assistant work as a superdomain spanning chat, IDE, CLI, cloud, PR, and background agent bodies.",
+    "Define assistant identity as host-body mounted work interface, not model/prompt/autocomplete alone.",
+    "Create first candidate specialist-domain system rather than routing UI/docs/IDE work to a generic coder.",
+    "Bind templates to specialist domains and specialist agents.",
+    "Preserve candidate-only boundary until explicit acceptance."
+  ],
+  "non_claims": [
+    "This receipt does not accept the domain system into ION canon.",
+    "No external IDE, Codex, GitHub, MCP, daemon, or cloud-agent execution occurred.",
+    "No registry, product-front-door, or production mutation occurred.",
+    "External product docs/survey data are research evidence, not ION law."
+  ],
+  "next_packet": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_NEXT_PACKET_20260508T143500Z.json"
+}

@@ -1,0 +1,34 @@
+# ION Kernel Schema: AuthorityClass
+# Version: 1.0.0
+# Authority: A2_CONSTITUTIONAL
+# This file is machine-parseable. Human rationale is in T06_AuthorityClassSchema.spec.md.
+
+schema_version: "1.0"
+
+enums:
+  AuthorityClass:
+    - AUTHORITY          # Currently governing truth
+    - WITNESS            # Evidence of prior state, not current authority
+    - PLAN               # Intended direction, not proof of reality
+    - AUDIT              # Interpretation at a point in time, must be revalidated
+    - GENERATED_STATE    # Auto-produced summaries, compiled context, ledger entries
+    - STALE_COMPETITOR   # Resembles authority enough to mislead agents
+    - ARCHIVE_REFERENCE  # Historical material, read-only
+
+types:
+  ArtifactClassification:
+    artifact_path: string
+    authority_class: AuthorityClass
+    classified_by: string
+    classified_at: string  # ISO 8601
+    justification: string
+    last_revalidated: string?
+    competition_refs: list[string]?
+
+# Classification rules (machine-enforceable)
+rules:
+  default_class: GENERATED_STATE
+  promotion_to_authority_requires: SOVEREIGN  # only T0 may promote
+  stale_competitor_requires_explicit_identification: true
+  witness_and_archive_are_permanent: true
+  plan_execution_does_not_promote_plan: true  # the executed output gets classified, not the plan

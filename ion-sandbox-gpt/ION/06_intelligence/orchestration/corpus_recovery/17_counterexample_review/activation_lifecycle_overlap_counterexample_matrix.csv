@@ -1,0 +1,8 @@
+case_id,counterexample,primary_false_move,required_boundary,expected_resolution,current_status
+ALC-01,scheduler masquerading as activation authority,scheduler treated as enactment grant,activation owns crossing decision,note schedule/queue state as upstream planning only,opened
+ALC-02,lifecycle re-adjudicating activation,entry failure treated as fresh authority ruling,lifecycle may block entry but not own capability truth,emit denial provenance without semantic annexation,opened
+ALC-03,stale activation surviving invalidation,old authority assumed durable after material drift,activation must be invalidatable with legible receipt,revalidation or explicit invalidation required,opened
+ALC-04,continuation becoming new activation,takeover or replay treated as hidden new enactment grant,continuation composes with activation and may require revalidation,state when continuity-safe re-entry is lawful,opened
+ALC-05,carrier-specific enactment drift,manual/daemon/API carriers change doctrine by convenience,enactment crossing must remain carrier-invariant,carrier shells change invocation form not governing meaning,opened
+ALC-06,runtime/session shell annexation,service/session wrapper treated as authority source,runtime surfaces are carrier and witness layers,entry shell cannot silently grant activation,opened
+ALC-07,settlement rewriting history,completion state used to revise prior lawfulness,settlement records outcome not original authority,keep chronological receipt linkage explicit,opened

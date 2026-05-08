@@ -1,0 +1,9 @@
+criterion,question,current_state,promotion_requirement,main_risk,status
+boundary_closure,"Are enactment permission, lifecycle entry, and interface ownership non-overlapping?",Partially explicit across three review artifacts,Single unambiguous division of ownership with no silent overlap,authority bleed,needs_work
+carrier_symmetry,Does the set preserve one meaning across manual/daemon/bootstrap/external carriers?,Implied but not worked through with examples,Worked carrier-crossing examples preserve identical governing meaning,carrier drift,needs_work
+continuity_compatibility,Is the set compatible with packet/takeover/continuation/equivalence law?,"Broadly aligned, not exhaustively cross-checked",Explicit compatibility note and no contradiction on re-entry or handoff,continuity conflict,needs_work
+scheduler_non_annexation,Does scheduler law stay upstream of activation/lifecycle?,"Clear in prose, not yet tested against counterexamples",Counterexamples show scheduler never reclaims enactment authority,scheduler creep,needs_work
+runtime_non_annexation,Do runtime/session shells remain carriers rather than authority sources?,Stated in Lane C and implied here,Install-path note preserves runtime as shell/witness layer,runtime creep,needs_work
+receipt_legibility,"Can entry, execution, and settlement receipts be named clearly?",Partially named via interface review,Receipt linkage is explicit at boundary crossing and settlement,receipt ambiguity,needs_work
+negative_case_coverage,"Are denial, stale activation, invalidation, pause, timeout, and re-entry covered?",Only partially covered,Named negative cases with expected handling,edge-case drift,needs_work
+promotion_mapping,Is there a concrete thaw/install path into active architecture?,Not yet,"Promotion map names target files, coexistence rules, and untouched surfaces",premature promotion,not_started

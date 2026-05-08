@@ -1,0 +1,27 @@
+{
+  "client": "Cursor",
+  "config": {
+    "mcpServers": {
+      "ion-local": {
+        "args": [
+          "-m",
+          "kernel.ion_mcp_local_bridge",
+          "--ion-root",
+          "/mnt/data/ion_v64_work/ION MASTER CURRENT/ION",
+          "--stdio"
+        ],
+        "command": "python",
+        "env": {
+          "PYTHONPATH": "/mnt/data/ion_v64_work/ION MASTER CURRENT/ION/04_packages"
+        }
+      }
+    }
+  },
+  "filename": "cursor.mcp.json",
+  "notes": [
+    "Example local stdio MCP profile for Cursor-style clients.",
+    "V65 exposes read-only and dry-run bridge tools only.",
+    "Do not add shell/provider/browser live tools to this profile."
+  ],
+  "profile_name": "cursor-local-stdio"
+}

@@ -1,0 +1,75 @@
+{
+  "$id": "https://ion.local/schemas/ion_mcp_hosted_alpha_boundary_report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "created_at": {
+      "type": "string"
+    },
+    "forbidden_resolution_seen": {
+      "const": false,
+      "type": "boolean"
+    },
+    "hosted_cloud_certified": {
+      "const": false,
+      "type": "boolean"
+    },
+    "kernel_truth_mutation_seen": {
+      "const": false,
+      "type": "boolean"
+    },
+    "kubernetes_certified": {
+      "const": false,
+      "type": "boolean"
+    },
+    "live_execution_authorized_seen": {
+      "const": false,
+      "type": "boolean"
+    },
+    "mode": {
+      "const": "HOSTED_ALPHA_BOUNDARY_ONLY",
+      "type": "string"
+    },
+    "oauth_certified": {
+      "const": false,
+      "type": "boolean"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "public_endpoint_certified": {
+      "const": false,
+      "type": "boolean"
+    },
+    "token_session_separation_verified": {
+      "const": true,
+      "type": "boolean"
+    },
+    "transport_session_authority_separation_verified": {
+      "const": true,
+      "type": "boolean"
+    },
+    "version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "created_at",
+    "mode",
+    "passed",
+    "oauth_certified",
+    "hosted_cloud_certified",
+    "public_endpoint_certified",
+    "live_execution_authorized_seen",
+    "kernel_truth_mutation_seen",
+    "token_session_separation_verified",
+    "transport_session_authority_separation_verified",
+    "accepted_decision",
+    "elevated_decision",
+    "wrong_audience_decision",
+    "token_as_session_decision"
+  ],
+  "title": "ION MCP Hosted Alpha Boundary Report",
+  "type": "object"
+}

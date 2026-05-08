@@ -1,0 +1,45 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "external_execution": false,
+    "mutated_ION_03_registry": false,
+    "mutated_product_front_door": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "created_at": "2026-05-08T15:00:56Z",
+  "inputs": [
+    "AI_ASSISTANT_WORK_DATASET_GENESIS_V0_1.jsonl",
+    "AI_ASSISTANT_WORK_DATASET_GAP_ANALYSIS_V0_1.yaml",
+    "AI_ASSISTANT_WORK_STATE_INDEX_V0_2.json"
+  ],
+  "next_packet": "AI_ASSISTANT_WORK_NEXT_PACKET_TEMPLATE_IMPLEMENTATION_AND_AGENT_BOOT_DRAFTS",
+  "non_claims": [
+    "No accepted canon was changed.",
+    "No active registry landing was performed.",
+    "No external work execution occurred.",
+    "Candidate artifacts require explicit acceptance or revision."
+  ],
+  "outputs": [
+    "ION/05_context/current/ai_assistant_work/analysis/AI_ASSISTANT_WORK_DATASET_MINING_REPORT_20260508T150056Z.json",
+    "ION/05_context/current/ai_assistant_work/fission/AI_ASSISTANT_WORK_DOMAIN_FISSION_CANDIDATES_V0_1.yaml",
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_*_CANDIDATE_V0_2.yaml",
+    "ION/05_context/current/ai_assistant_work/template_packets/AI_ASSISTANT_WORK_CONCRETE_TEMPLATE_PACKET_DRAFTS_V0_1.yaml",
+    "ION/05_context/current/ai_assistant_work/simulations/AI_ASSISTANT_WORK_DOMAIN_FISSION_ROUTE_SIMULATION_REPORT_20260508T150056Z.json",
+    "ION/05_context/current/ai_assistant_work/validation/AI_ASSISTANT_WORK_DATASET_MINING_DOMAIN_FISSION_VALIDATION_NOTE_20260508T150056Z.json"
+  ],
+  "receipt_id": "receipt.ai_assistant_work.dataset_mining_to_domain_fission.20260508T150056Z",
+  "result_summary": {
+    "candidate_child_domains": 10,
+    "concrete_template_packet_drafts": 31,
+    "new_specialist_agents": 24,
+    "simulation_cases_accepted": 10
+  },
+  "schema": "ion.receipt.ai_assistant_work.dataset_mining_to_domain_fission.v0_1",
+  "status": "candidate_current_state_receipt_not_accepted_canon",
+  "validation": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "focused_tests": "23 passed",
+    "ion_status": "ION_STATUS_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+  }
+}

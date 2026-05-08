@@ -1,0 +1,455 @@
+{
+  "contracts": [
+    {
+      "authority_class": "RUNTIME_PROOF_SURFACE",
+      "canonical_name": "Template Completion Event",
+      "completion_threshold": {
+        "additional_checks": [
+          "contract_status_allows_eventing"
+        ],
+        "mode": "all_required_fields",
+        "required_fields": [
+          "event_id",
+          "source_file",
+          "template_id",
+          "graph_region",
+          "authority_class",
+          "completion_state"
+        ]
+      },
+      "contract_status": "ACTIVE_CONTRACT",
+      "downstream_effects": {
+        "allowed": [
+          "reaction_selection_witness"
+        ],
+        "forbidden": [
+          "graph_commit",
+          "registry_mutation",
+          "agent_activation",
+          "direct_graph_mutation"
+        ]
+      },
+      "file_class": "template_completion_event_witness",
+      "graph_mapping": {
+        "affected_region_fields": [
+          "graph_region"
+        ],
+        "dependency_fields": [],
+        "edge_fields": [
+          "source_file"
+        ],
+        "node_id_field": "event_id",
+        "node_id_strategy": "field"
+      },
+      "graph_node_type": "node.template_completion_event",
+      "graph_region": "region.evented_file_graph",
+      "lifecycle": {
+        "allowed_statuses": [
+          "WITNESS",
+          "REFUSED",
+          "HELD"
+        ],
+        "complete_statuses": [
+          "WITNESS"
+        ],
+        "draft_statuses": [],
+        "terminal_statuses": [
+          "WITNESS",
+          "REFUSED",
+          "HELD"
+        ]
+      },
+      "optional_fields": [
+        "warnings",
+        "notes"
+      ],
+      "reaction_hooks": {
+        "agent_activation_hooks": [],
+        "graph_writeback_hooks": [],
+        "index_update_hooks": [],
+        "registry_update_hooks": [],
+        "scheduler_hooks": []
+      },
+      "receipts": {
+        "receipt_classes": [
+          "template_completion_scan_receipt"
+        ],
+        "receipt_required": true
+      },
+      "required_fields": [
+        "event_id",
+        "source_file",
+        "template_id",
+        "graph_region",
+        "authority_class",
+        "completion_state"
+      ],
+      "review": {
+        "approval_required": false,
+        "required_reviewers": [
+          "Steward"
+        ],
+        "review_depth": "D2"
+      },
+      "safety": {
+        "contradiction_behavior": "ESCALATE_CONTRADICTION",
+        "escalation_behavior": "HOLD_OR_ESCALATE",
+        "forbidden_reactions": [
+          "direct_graph_mutation",
+          "direct_registry_update"
+        ],
+        "stale_behavior": "REFUSE_STALE_EVENT"
+      },
+      "template_id": "events.template_completion_event",
+      "version": "1.0"
+    },
+    {
+      "authority_class": "RUNTIME_PROOF_SURFACE",
+      "canonical_name": "Template Reaction Selection Witness",
+      "completion_threshold": {
+        "additional_checks": [
+          "selected_reactions_must_be_allowed"
+        ],
+        "mode": "all_required_fields",
+        "required_fields": [
+          "selection_id",
+          "source_event_id",
+          "selected_reactions"
+        ]
+      },
+      "contract_status": "ACTIVE_CONTRACT",
+      "downstream_effects": {
+        "allowed": [
+          "index_projection",
+          "writeback_proposal"
+        ],
+        "forbidden": [
+          "direct_graph_commit",
+          "agent_activation"
+        ]
+      },
+      "file_class": "template_reaction_selection_witness",
+      "graph_mapping": {
+        "affected_region_fields": [
+          "graph_region"
+        ],
+        "dependency_fields": [
+          "source_event_id"
+        ],
+        "edge_fields": [
+          "source_event_id"
+        ],
+        "node_id_field": "selection_id",
+        "node_id_strategy": "field"
+      },
+      "graph_node_type": "node.template_reaction_selection",
+      "graph_region": "region.evented_file_graph",
+      "lifecycle": {
+        "allowed_statuses": [
+          "WITNESS",
+          "REFUSED",
+          "HELD"
+        ],
+        "complete_statuses": [
+          "WITNESS"
+        ],
+        "draft_statuses": [],
+        "terminal_statuses": [
+          "WITNESS",
+          "REFUSED",
+          "HELD"
+        ]
+      },
+      "optional_fields": [
+        "notes"
+      ],
+      "reaction_hooks": {
+        "agent_activation_hooks": [],
+        "graph_writeback_hooks": [
+          "proposal_only"
+        ],
+        "index_update_hooks": [
+          "template_event_index_projection"
+        ],
+        "registry_update_hooks": [],
+        "scheduler_hooks": []
+      },
+      "receipts": {
+        "receipt_classes": [
+          "template_reaction_selection_receipt"
+        ],
+        "receipt_required": true
+      },
+      "required_fields": [
+        "selection_id",
+        "source_event_id",
+        "selected_reactions",
+        "deferred_reactions"
+      ],
+      "review": {
+        "approval_required": false,
+        "required_reviewers": [
+          "Steward"
+        ],
+        "review_depth": "D2"
+      },
+      "safety": {
+        "contradiction_behavior": "ESCALATE_CONTRADICTION",
+        "escalation_behavior": "HOLD_OR_ESCALATE",
+        "forbidden_reactions": [
+          "direct_graph_mutation"
+        ],
+        "stale_behavior": "REFUSE_STALE_EVENT"
+      },
+      "template_id": "events.template_reaction_selection_witness",
+      "version": "1.0"
+    },
+    {
+      "authority_class": "A3_OPERATIONAL_PROPOSAL",
+      "canonical_name": "Doctrine Evolution Packet",
+      "completion_threshold": {
+        "additional_checks": [
+          "depth_reviewers_match_protocol"
+        ],
+        "mode": "all_required_fields",
+        "required_fields": [
+          "packet_id",
+          "statement",
+          "depth_class",
+          "authority_posture",
+          "donor_line_search",
+          "contradiction_review",
+          "reexpression_validation",
+          "runtime_mapping",
+          "required_reviewers"
+        ]
+      },
+      "contract_status": "PROVISIONAL_CONTRACT",
+      "downstream_effects": {
+        "allowed": [
+          "semantic_review",
+          "contradiction_review",
+          "registry_update_proposal",
+          "approved_context_index_update"
+        ],
+        "forbidden": [
+          "silent_ratification",
+          "direct_constitutional_write"
+        ]
+      },
+      "file_class": "doctrine_evolution_packet",
+      "graph_mapping": {
+        "affected_region_fields": [
+          "affected_graph_regions"
+        ],
+        "dependency_fields": [
+          "donor_line_search"
+        ],
+        "edge_fields": [
+          "affected_laws",
+          "affected_protocols"
+        ],
+        "node_id_field": "packet_id",
+        "node_id_strategy": "field"
+      },
+      "graph_node_type": "node.file.template_instantiated",
+      "graph_region": "region.doctrine_evolution",
+      "lifecycle": {
+        "allowed_statuses": [
+          "DRAFT",
+          "COMPLETE_PROPOSAL",
+          "HELD",
+          "LANDED_PROVISIONAL"
+        ],
+        "complete_statuses": [
+          "COMPLETE_PROPOSAL"
+        ],
+        "draft_statuses": [
+          "DRAFT"
+        ],
+        "terminal_statuses": [
+          "LANDED_PROVISIONAL",
+          "HELD"
+        ]
+      },
+      "optional_fields": [
+        "affected_graph_regions",
+        "affected_laws"
+      ],
+      "reaction_hooks": {
+        "agent_activation_hooks": [
+          "Nemesis",
+          "Vestige"
+        ],
+        "graph_writeback_hooks": [
+          "proposal_only"
+        ],
+        "index_update_hooks": [
+          "approved_context_index_update"
+        ],
+        "registry_update_hooks": [
+          "proposal_only"
+        ],
+        "scheduler_hooks": [
+          "required_review_scheduling"
+        ]
+      },
+      "receipts": {
+        "receipt_classes": [
+          "doctrine_evolution_receipt"
+        ],
+        "receipt_required": true
+      },
+      "required_fields": [
+        "packet_id",
+        "statement",
+        "depth_class",
+        "authority_posture",
+        "donor_line_search",
+        "contradiction_review",
+        "reexpression_validation",
+        "runtime_mapping",
+        "required_reviewers"
+      ],
+      "review": {
+        "approval_required": true,
+        "required_reviewers": [
+          "Steward",
+          "Nemesis"
+        ],
+        "review_depth": "D3_TO_D5"
+      },
+      "safety": {
+        "contradiction_behavior": "ESCALATE_CONTRADICTION",
+        "escalation_behavior": "ESCALATE_IF_D4_D5_UNREVIEWED",
+        "forbidden_reactions": [
+          "silent_ratification",
+          "direct_constitutional_write"
+        ],
+        "stale_behavior": "HOLD_FOR_RECONFIRMATION"
+      },
+      "template_id": "doctrine.evolution_packet",
+      "version": "1.0"
+    },
+    {
+      "authority_class": "A3_OPERATIONAL_PROPOSAL",
+      "canonical_name": "Summary Refresh Demo Request",
+      "completion_threshold": {
+        "additional_checks": [
+          "contract_status_allows_eventing"
+        ],
+        "mode": "all_required_fields",
+        "required_fields": [
+          "type",
+          "status",
+          "summary_target",
+          "downstream_effects"
+        ]
+      },
+      "contract_status": "ACTIVE_CONTRACT",
+      "downstream_effects": {
+        "allowed": [
+          "update_index",
+          "refresh_context_package_source"
+        ],
+        "forbidden": [
+          "direct_graph_commit",
+          "direct_source_summary_rewrite",
+          "agent_activation",
+          "registry_mutation"
+        ]
+      },
+      "file_class": "summary_refresh_demo_request",
+      "graph_mapping": {
+        "affected_region_fields": [
+          "graph_region"
+        ],
+        "dependency_fields": [
+          "front_door_work_unit_id"
+        ],
+        "edge_fields": [
+          "relay_packet_id",
+          "steward_envelope_id"
+        ],
+        "node_id_field": "demo_id",
+        "node_id_strategy": "field"
+      },
+      "graph_node_type": "node.file.template_instantiated",
+      "graph_region": "region.product_surface",
+      "lifecycle": {
+        "allowed_statuses": [
+          "READY",
+          "HELD",
+          "REFUSED"
+        ],
+        "complete_statuses": [
+          "READY"
+        ],
+        "draft_statuses": [],
+        "terminal_statuses": [
+          "READY",
+          "HELD",
+          "REFUSED"
+        ]
+      },
+      "optional_fields": [
+        "session_id",
+        "demo_id",
+        "front_door_work_unit_id",
+        "relay_packet_id",
+        "steward_envelope_id"
+      ],
+      "reaction_hooks": {
+        "agent_activation_hooks": [],
+        "graph_writeback_hooks": [
+          "proposal_only"
+        ],
+        "index_update_hooks": [
+          "summary_refresh_index_projection"
+        ],
+        "registry_update_hooks": [],
+        "scheduler_hooks": []
+      },
+      "receipts": {
+        "receipt_classes": [
+          "summary_refresh_demo_receipt"
+        ],
+        "receipt_required": true
+      },
+      "required_fields": [
+        "type",
+        "status",
+        "summary_target",
+        "downstream_effects"
+      ],
+      "review": {
+        "approval_required": false,
+        "required_reviewers": [
+          "Steward",
+          "Nemesis"
+        ],
+        "review_depth": "D3"
+      },
+      "safety": {
+        "contradiction_behavior": "ESCALATE_CONTRADICTION",
+        "escalation_behavior": "HOLD_OR_ESCALATE",
+        "forbidden_reactions": [
+          "direct_graph_mutation",
+          "direct_source_summary_rewrite",
+          "direct_registry_update"
+        ],
+        "stale_behavior": "HOLD_FOR_RECONFIRMATION"
+      },
+      "template_id": "demo.summary_refresh_request",
+      "version": "1.0"
+    }
+  ],
+  "created": "2026-04-24",
+  "notes": [
+    "Dependency-free runtime projection.",
+    "Derived surface; source YAML remains governance registry."
+  ],
+  "projection_status": "current_phase_seed",
+  "registry_id": "template_metadata_contract_registry_projection",
+  "source_registry": "ION/03_registry/template_metadata_contract_registry.yaml"
+}

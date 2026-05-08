@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.joc_cockpit_component_contract.v1",
+  "title": "ION JOC Cockpit Component Contract",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "component_set_name",
+    "target_ui",
+    "components",
+    "layout_zones",
+    "projection_surfaces",
+    "automation_loops",
+    "dxl_constraints",
+    "forbidden_capabilities"
+  ],
+  "properties": {
+    "schema_id": { "const": "ion.joc_cockpit_component_contract.v1" },
+    "version": { "const": "V56_ION_JOC_COCKPIT_SHELL_COMPONENT_CONTRACTS" },
+    "component_set_name": { "type": "string", "minLength": 1 },
+    "target_ui": { "type": "string", "minLength": 1 },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "layout_zone", "projection_surfaces", "automation_loops", "claim_lanes", "evidence_lanes"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "layout_zone": { "type": "string", "minLength": 1 },
+          "projection_surfaces": { "type": "array", "items": { "type": "string" } },
+          "automation_loops": { "type": "array", "items": { "type": "string" } },
+          "claim_lanes": { "type": "array", "items": { "type": "string" } },
+          "evidence_lanes": { "type": "array", "items": { "type": "string" } },
+          "receipts_rendered": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "layout_zones": { "type": "array", "items": { "type": "string" } },
+    "projection_surfaces": { "type": "array", "items": { "type": "string" } },
+    "automation_loops": { "type": "array", "items": { "type": "string" } },
+    "dxl_constraints": { "type": "object", "additionalProperties": { "type": "boolean" } },
+    "forbidden_capabilities": { "type": "object", "additionalProperties": { "type": "boolean" } },
+    "source_projection_receipt_ids": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}

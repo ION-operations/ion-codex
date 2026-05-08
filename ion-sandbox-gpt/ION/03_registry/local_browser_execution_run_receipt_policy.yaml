@@ -1,0 +1,16 @@
+policy_id: gpt55_local_browser_execution_run_receipts_v1
+version: V53_LOCAL_BROWSER_EXECUTION_RUN_RECEIPTS
+authority_scope: LOCAL_DEV_BROWSER_EXECUTION_RUN_RECEIPT_ONLY
+requires:
+  - V51 sandbox specification lineage
+  - V52 gated local browser harness lineage
+  - fixture manifest references
+forbidden:
+  unrestricted_browser_control: true
+  external_network_access: true
+  credential_or_session_import: true
+  account_operation: true
+  form_submission: true
+  persistent_dom_mutation: true
+  production_authority: true
+next: V54_VISUAL_RUN_RECEIPT_TO_DIAGNOSIS_BINDING

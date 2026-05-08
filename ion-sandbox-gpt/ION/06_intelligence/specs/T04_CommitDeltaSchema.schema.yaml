@@ -1,0 +1,98 @@
+# ION Kernel Schema: CommitDelta
+# Version: 1.0.0
+# Authority: A2_CONSTITUTIONAL
+# This file is machine-parseable. Human rationale is in T04_CommitDeltaSchema.spec.md.
+#
+# ARCHITECTURAL DECISION: Agents propose CommitDeltas. The daemon validates and commits.
+# Agents NEVER write directly to the filesystem. This is the core anti-drift mechanism.
+
+schema_version: "1.0"
+
+enums:
+  CommitOutcome:
+    - PROPOSED
+    - ACCEPTED
+    - ACCEPTED_AS_WITNESS
+    - REJECTED
+    - REQUIRES_REVIEW
+    - REQUIRES_RECONCILIATION
+
+  ArtifactOperation:
+    - CREATE
+    - UPDATE
+    - APPEND
+
+types:
+  ProducedArtifact:
+    path: string
+    content: string
+    operation: ArtifactOperation
+    authority_class: string  # from T06 AuthorityClassSchema
+    checksum: string
+
+  LedgerEntry:
+    ledger: string
+    row: object  # schema varies by ledger type
+
+  StateMutation:
+    target: string
+    operation: string  # APPEND | UPDATE_SECTION
+    content: string
+
+  ProposedSignal:
+    signal_type: string  # from T07 SignalSchema canonical types
+    target: string
+    payload: object?
+
+  # References T05 OpenQuestionSchema — full object, not just string
+  ProposedOpenQuestion:
+    domain: string
+    scope_ref: string
+    question_text: string
+    needed_from: string
+    priority: string  # P0_BLOCKING | P1_HIGH | P2_NORMAL | P3_LOW
+    context: string?
+    linked_artifacts: list[string]?
+    linked_competitions: list[string]?
+
+  ChildWorkUnitSpec:
+    suggested_agent: string?
+    suggested_template: string
+    scope_ref: string
+    rationale: string
+    priority: string?  # default P2_NORMAL
+    dependencies: list[string]?
+
+  CommitDelta:
+    # Identity
+    delta_id: string
+    created_at: string  # ISO 8601
+
+    # Binding (must match the WorkUnit that produced this)
+    work_unit_id: string
+    context_version: string  # must match WorkUnit.context_version for freshness check
+    protocol_id: string
+    transition_id: string
+
+    # Agent
+    agent_personal_name: string
+    agent_structural_id: string
+    chassis: string
+
+    # Produced artifacts (the actual work output)
+    produced_artifacts: list[ProducedArtifact]
+
+    # State changes
+    ledger_additions: list[LedgerEntry]?
+    state_mutations: list[StateMutation]?
+
+    # Forward-looking proposals (daemon decides whether to act on these)
+    proposed_signals: list[ProposedSignal]?
+    proposed_open_questions: list[ProposedOpenQuestion]?  # rich objects, not bare strings
+    proposed_child_work_units: list[ChildWorkUnitSpec]?
+
+    # Quality
+    status: CommitOutcome
+    confidence: float  # [0.0, 1.0]
+    contradictions: list[string]?
+    notes: string?

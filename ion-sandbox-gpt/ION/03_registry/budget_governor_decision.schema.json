@@ -1,0 +1,56 @@
+{
+  "$id": "ion.budget_governor_decision.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "budget_remaining_usd": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "decision": {
+      "enum": [
+        "allow",
+        "downgrade_model",
+        "batch_route",
+        "require_approval",
+        "block"
+      ]
+    },
+    "estimated_cost_usd": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "live_provider_calls_authorized": {
+      "const": false
+    },
+    "margin_status": {
+      "type": "string"
+    },
+    "production_authority": {
+      "const": false
+    },
+    "provider_credentials_authorized": {
+      "const": false
+    },
+    "schema_id": {
+      "const": "ion.budget_governor_decision.v1"
+    },
+    "version": {
+      "const": "V58_BUDGET_AND_API_RATE_GOVERNORS"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "decision_id",
+    "decision",
+    "estimated_cost_usd",
+    "production_authority",
+    "live_provider_calls_authorized"
+  ],
+  "type": "object"
+}

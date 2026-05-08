@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.visual_regression_fixture_runner.v1",
+  "title": "ION Visual Regression Fixture Runner Receipt",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "version",
+    "run_id",
+    "suite_id",
+    "suite_verdict",
+    "authority_scope",
+    "production_authority",
+    "forbidden_capabilities"
+  ],
+  "properties": {
+    "schema_id": {"const": "ion.visual_regression_fixture_runner.v1"},
+    "version": {"const": "V49_VISUAL_REGRESSION_FIXTURE_RUNNER_PLAN"},
+    "run_id": {"type": "string"},
+    "emitted_at": {"type": "string"},
+    "suite_id": {"type": "string"},
+    "suite_target": {"type": "string"},
+    "fixture_count": {"type": "integer", "minimum": 0},
+    "passed_count": {"type": "integer", "minimum": 0},
+    "failed_count": {"type": "integer", "minimum": 0},
+    "review_count": {"type": "integer", "minimum": 0},
+    "blocked_count": {"type": "integer", "minimum": 0},
+    "suite_verdict": {"type": "string"},
+    "authority_scope": {"const": "LOCAL_DEV_VISUAL_FIXTURE_PLAN_AND_REPORT_ONLY"},
+    "production_authority": {"const": false},
+    "forbidden_capabilities": {"type": "object"}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,54 @@
+# ION Kernel Schema: OpenQuestion
+# Version: 1.0.0
+# Authority: A2_CONSTITUTIONAL
+# This file is machine-parseable. Human rationale is in T05_OpenQuestionSchema.spec.md.
+
+schema_version: "1.0"
+
+enums:
+  QuestionPriority:
+    - P0_BLOCKING
+    - P1_HIGH
+    - P2_NORMAL
+    - P3_LOW
+
+  QuestionStatus:
+    - OPEN
+    - ASSIGNED
+    - RESOLVED
+    - DEFERRED
+    - CANCELLED
+
+types:
+  OpenQuestion:
+    # Identity
+    question_id: string
+    created_at: string  # ISO 8601
+
+    # Origin
+    origin_work_unit: string
+    origin_agent: string
+    origin_transition: string
+
+    # Content
+    domain: string
+    scope_ref: string
+    question_text: string
+    context: string?
+
+    # Resolution
+    needed_from: string
+    priority: QuestionPriority
+    status: QuestionStatus
+    blocking: list[string]?  # work_unit_ids or transition_ids
+
+    # Resolution data (filled when answered)
+    resolved_by: string?
+    resolved_at: string?
+    resolution: string?
+    resolution_evidence: list[string]?
+
+    # Linking
+    linked_artifacts: list[string]?
+    linked_competitions: list[string]?
+    parent_question_id: string?

@@ -1,0 +1,113 @@
+registry_id: reintegration.duplicate_competition_registry
+display_name: Reintegration Duplicate Competition Registry
+status: WORKING
+authority: A3_OPERATIONAL
+canon_status: PROVISIONAL_BRIDGE_NOT_FINAL_CANON
+decision_anchor: ION/06_intelligence/decisions/2026-04-17_workspace_root_authority_canonicalization_decision.md
+purpose: >-
+  Surface the first explicit root-level competition without flattening the
+  competing centers into a false consensus.
+competition_records:
+  - id: ion_root_authority_split
+    category: ROOT_AUTHORITY
+    current_state: SETTLED_RETAINED_DUAL_CENTER_CURRENT_PHASE
+    candidates:
+      - id: ion_packaged_current_generation
+        strengths:
+          - later recovery and orchestration spine
+          - corpus_recovery program
+          - foundry planning suite
+          - current-phase template governance
+        missing_or_weaker:
+          - top-level docs hub parity
+          - promoted MCP and ion_api parity
+      - id: ion_top_level_production
+        strengths:
+          - MCP packages
+          - ion_api
+          - docs/program and production-facing entry surfaces
+        missing_or_weaker:
+          - later corpus_recovery spine
+          - current controlled-reintegration board and foundry surfaces
+    affected_domains:
+      - root read order
+      - README and STATUS truth
+      - carrier onboarding
+      - MCP and API promotion mapping
+      - docs and preflight support promotion
+    evidence:
+      - ION/06_intelligence/orchestration/2026-04-17_reintegration_state_and_canonical_root_assessment.md
+      - ION/06_intelligence/orchestration/corpus_recovery/26_constitutional_reintegration_foundry/02_ion_estate_build_lines_and_root_status_assessment.md
+      - /home/sev/ION - Production/_opus_composer_bridge/30_deliverables_for_opus/002_estate_survey.md
+      - ION/06_intelligence/decisions/2026-04-17_retained_dual_center_settlement_canonicalization_decision.md
+    resolved_outcome: retained_dual_center_settlement_with_packaged_primary
+    next_resolution_packet: future_root_reassessment_only_after_real_promotion_packets_land
+  - id: aim_family_classification
+    category: CLASSIFICATION
+    current_state: RESOLVED_ADJACENT_SIBLING_PATTERN_RESERVOIR
+    candidates:
+      - id: aim_witness_only
+        strengths:
+          - curated copy / orphan mirror framing
+          - layered and partially contradictory status surfaces
+          - no stable direct ION runtime contract found in this pass
+        missing_or_weaker:
+          - understates the operational truth-pack and gate-writing value
+          - discards useful pattern-level guidance too aggressively
+      - id: aim_adjacent_sibling_pattern_reservoir
+        strengths:
+          - matches curated-copy framing while preserving AIM-OS-scale pattern value
+          - fits strong gate, spine, truth-pack, provenance, and context-package signals
+          - keeps coupled operator/runtime stacks out of direct canon
+        missing_or_weaker:
+          - still requires future bounded extraction packets for any actual reuse
+      - id: aim_dedicated_reintegration_lane
+        strengths:
+          - large adjacent system with real operational surfaces
+          - some historical ION references exist in local manifests/workspaces
+        missing_or_weaker:
+          - too coupled for current lane-first reintegration
+          - no stable direct contract justifying a dedicated lane right now
+    resolved_outcome: aim_adjacent_sibling_pattern_reservoir
+    affected_domains:
+      - adjacent lineage classification
+      - future extraction candidate posture
+      - doctrinal scope protection
+      - operator expectations about AIM and ION relation
+    evidence:
+      - ION/06_intelligence/decisions/2026-04-17_aim_ion_aim_os_classification_canonicalization_decision.md
+      - /home/sev/ION - Production/_opus_composer_bridge/30_deliverables_for_opus/004_aim_deep_survey.md
+      - /home/sev/ION - Production/AIM-ION/AIM_ION_OVERVIEW.md
+      - /home/sev/ION - Production/AIM-ION/PROJECT_TRUTH/05_operational_definition.md
+      - /home/sev/ION - Production/AIM-ION/PROJECT_TRUTH/06_operational_spine.md
+    next_resolution_packet: bounded_aim_pattern_extraction_packets_only_if_separately_justified
+  - id: packaged_nested_path_authority
+    category: PATH_AUTHORITY
+    current_state: RESOLVED_EMBEDDED_RESIDUE_NOT_SECOND_ROOT
+    candidates:
+      - id: false_second_root_inference
+        strengths:
+          - duplicated ION/ directory name inside the packaged root
+          - easy to confuse with the top-level production ION/ at workspace scope
+        missing_or_weaker:
+          - no doctrine, package, test, or registry organs
+          - observed contents are only context/history/signal residue
+      - id: embedded_residue_lane
+        strengths:
+          - matches the nested directory's actual file families
+          - matches ledger self-references to branch-local ION/05_context paths
+          - preserves the files as witness matter without manufacturing a new root
+        missing_or_weaker:
+          - still requires carrier/export surfaces to explain the naming explicitly
+    resolved_outcome: embedded_residue_lane
+    affected_domains:
+      - root read order
+      - carrier export naming
+      - startup path normalization
+      - packaged-root onboarding
+    evidence:
+      - ION/06_intelligence/decisions/2026-04-17_packaged_root_nested_path_disambiguation_canonicalization_decision.md
+      - ION/ION/05_context/history/daemon_service_ledger.json
+      - ION/ION/05_context/history/system_ledger.json
+      - ION/REPO_AUTHORITY.md
+    next_resolution_packet: q004_root_authority_export_bundle

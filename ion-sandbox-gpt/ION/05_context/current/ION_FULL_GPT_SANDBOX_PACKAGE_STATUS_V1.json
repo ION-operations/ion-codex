@@ -1,0 +1,13 @@
+{
+  "finalized_at": "2026-05-07T02:10:41Z",
+  "generated_at": "2026-05-07T02:01:34Z",
+  "gpt_sandbox_carrier_profile": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+  "gpt_sandbox_session_packet": "ION/07_templates/carriers/GPT_SANDBOX_CARRIER_SESSION_PACKET.md",
+  "live_execution_authority": false,
+  "mcp_42_tool_lane": "optional_external_local_ion_codex_adapter_lane",
+  "package_name": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1",
+  "production_authority": false,
+  "schema_id": "ion.full_gpt_sandbox_package.status.v1",
+  "validation_report": "VALIDATION_REPORT.json",
+  "verdict": "PACKAGE_VALIDATED_PASS"
+}

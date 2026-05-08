@@ -1,0 +1,35 @@
+{
+  "acceptance_criteria": [
+    "At least 6 candidate child-domain/fission decisions are evaluated.",
+    "At least 10 candidate specialist agents are fully defined with authority ceilings and return contracts.",
+    "At least 10 concrete template packet drafts are created from gap analysis.",
+    "No registry/product-front-door landing occurs without explicit acceptance."
+  ],
+  "allowed_paths": [
+    "ION/05_context/current/ai_assistant_work/",
+    "ION/tests/"
+  ],
+  "created_at": "2026-05-08T14:34:13Z",
+  "deliverables": [
+    "candidate child-domain fission analysis",
+    "candidate new specialist-agent definitions",
+    "first 10 concrete template packet drafts",
+    "dataset-mining route simulation",
+    "focused tests, validation note, receipt, and G8 continuity export"
+  ],
+  "inputs": [
+    "AI_ASSISTANT_WORK_DATASET_GENESIS_V0_1.jsonl",
+    "AI_ASSISTANT_WORK_DATASET_GAP_ANALYSIS_V0_1.yaml",
+    "AI_ASSISTANT_WORK_FAILURE_MODE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "AI_ASSISTANT_WORK_SKILL_TO_AGENT_BINDING_MAP_V0_1.yaml"
+  ],
+  "non_claims": [
+    "This next packet is candidate-only.",
+    "It does not authorize registry landing, product mutation, or external execution."
+  ],
+  "objective": "Mine the dataset genesis corpus into concrete candidate subdomains, specialist agents, and first implementable template packets.",
+  "packet_id": "AI_ASSISTANT_WORK_NEXT_PACKET_DATASET_MINING_TO_DOMAIN_FISSION_20260508T143413Z",
+  "recommended_next_action": "Run assistant-work dataset mining to propose child domains/agents/templates for PR-agent work, background-agent queue/intake, UI state modeling, migration work, release evidence, terminal proof, and example validation.",
+  "schema": "ion.next_packet.v1",
+  "status": "candidate_next_packet"
+}

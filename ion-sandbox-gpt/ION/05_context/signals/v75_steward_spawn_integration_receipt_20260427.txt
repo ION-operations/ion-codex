@@ -1,0 +1,19 @@
+type: steward_spawn_integration_receipt
+mission: V75_subagent_spawn_readiness_demo
+date: 2026-04-27
+relay_packet_id: RELAY-V75-20260427-BATCH
+steward_mount: TASK_SCOPED_LOCAL_ORCHESTRATION
+
+proposals:
+  - spawn_packet_id: V75-MASON-STRUCT-20260427
+    return_artifact: ION/05_context/signals/v75_spawn_return_mason_structure_audit_20260427.md
+    verdict: ACCEPTED_FOR_DEMO_WITNESS
+    note: Proposal remains non-authoritative; demo witness only. No production integration performed.
+
+  - spawn_packet_id: V75-VESTIGE-PROV-20260427
+    return_artifact: ION/05_context/signals/v75_spawn_return_vestige_provenance_audit_20260427.md
+    verdict: ACCEPTED_FOR_DEMO_WITNESS
+    note: Read-only archaeology proposal; no external calls; no live MCP.
+
+relay_report_required: true
+next_action: EMIT_RELAY_REPORT

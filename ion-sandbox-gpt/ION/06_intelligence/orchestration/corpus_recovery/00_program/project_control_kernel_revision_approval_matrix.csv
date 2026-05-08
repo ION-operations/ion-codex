@@ -1,0 +1,6 @@
+change_class,minimum_evidence,conflict_check,widening_default,approval_rule,re_freeze_required,notes
+clarification_only,local ambiguity or wording collision,check direct conflicts only,non-widening,stable-kernel surfaces plus conflict check,yes,should not reorder control logic
+ordering_correction,ordering mismatch causing repeated misuse,check direct conflicts plus read-order tension,non-widening,recovering ordering must be justified against existing kernel flow,yes,do not add new primitives
+defaults_correction,defaults matrix mismatch or repeated lawful dead-end,check defaults-related conflicts,non-widening unless comparison required,compare against preserved centers before changing defaults,yes,should preserve smaller control path
+new_control_primitive,evidence that an essential control function is missing,check broader conflicts and preserved centers,limited widening,requires preserved-center evidence plus insufficiency proof,yes,highest-risk normal change class
+freeze_rollback,frozen baseline shown materially unsafe or misframed,full conflict and insufficiency review,widening allowed if necessary,requires explicit rollback judgment and replacement baseline,yes,should be rare and strongly evidenced

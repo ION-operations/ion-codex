@@ -1,0 +1,68 @@
+{
+  "data": {
+    "agent_domain": "orchestration",
+    "agent_personal_name": "Steward",
+    "agent_role": "current-phase orchestration",
+    "agent_structural_id": "role.steward",
+    "agent_tier": 1,
+    "allowed_next_actions": [
+      "route_to_specialist_or_kernel_surface",
+      "ask_clarifying_question",
+      "prepare_persona_response",
+      "defer_without_fake_completion"
+    ],
+    "allowed_writes": [
+      "front_door_route_proposal",
+      "open_question",
+      "generated_state",
+      "controlled_system_return"
+    ],
+    "bound_template": "ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md",
+    "chassis": "front_door_chat_orchestration_adapter",
+    "context_package_id": "fdctx-fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-7f8c0860d4ee",
+    "context_version": "fdctxv-fdsession-e3325d8e7fd2e91c61-fdrelay-fdmsg-99c8e5db6fe0",
+    "created_at": "2026-05-02T22:53:18+00:00",
+    "dependencies": [],
+    "expected_output_schema": "front_door_steward_route_or_clarifying_question",
+    "input_refs": [
+      {
+        "ref_id": "fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a",
+        "ref_path": "ION/05_context/history/front_door_runtime/relay_semantic_boundary_packets/fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-user-sov-ba415756fb8a.json",
+        "ref_type": "STATE_FILE",
+        "required": true,
+        "visibility": "FULL"
+      },
+      {
+        "ref_id": "fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63",
+        "ref_path": "ION/05_context/history/front_door_runtime/steward_routing_envelopes/fdsteward-fdrelay-fdmsg-fdsession-e3325d8e7fd2e91c61-d0f82d9dad63.json",
+        "ref_type": "STATE_FILE",
+        "required": true,
+        "visibility": "FULL"
+      }
+    ],
+    "must_not": [
+      "do_not_treat_raw_user_text_as_governed_write",
+      "do_not_route_persona_style_as_system_truth",
+      "do_not_collapse_persona_relay_steward_roles"
+    ],
+    "open_questions_in_scope": [],
+    "parent_work_unit_id": null,
+    "priority": "P2_NORMAL",
+    "protocol_id": "ION/02_architecture/FRONT_DOOR_RUNTIME_ENTRY_PROTOCOL.md",
+    "scope_ref": "front-door-session:fdsession-e3325d8e7fd2e91c61",
+    "scope_type": "PROJECT",
+    "spawn_policy": {
+      "max_children": 0,
+      "may_spawn": false,
+      "spawn_requires_approval": false,
+      "spawn_templates": []
+    },
+    "status": "DISPATCHED",
+    "timeout_seconds": 300,
+    "transition_id": "front_door_relay_to_steward",
+    "work_unit_id": "fdwu-fdsession-e3325d8e7fd2e91c61-fdsteward-fdre-595dbc2762ff"
+  },
+  "record_class": "WorkUnit",
+  "record_type": "work_unit",
+  "stored_at": "2026-05-02T18:53:18-04:00"
+}

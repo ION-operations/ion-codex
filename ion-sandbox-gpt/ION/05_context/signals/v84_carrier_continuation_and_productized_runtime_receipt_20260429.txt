@@ -1,0 +1,11 @@
+ION V84 carrier continuation and productized runtime receipt
+date: 2026-04-29
+base: ION_CURSOR_CONSOLIDATED_V82_FULL_PROJECT_20260428(1).zip
+verdict: ION_CARRIER_WORKFLOW_READY
+continue_result: ION_CARRIER_CONTINUE_READY
+audit_findings: []
+active_turn_packet: ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json
+active_spawn_plan: ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json
+key_rule: continue/proceed/resume means refresh carrier state, then execute spawn=true generated context packages only.
+productization: excludes _archive, pycache, pytest cache, forensic top-level packages, and heavy history/projection/sandbox bodies not required for live runtime.
+authority: production_authority=false; live_execution_authority=false

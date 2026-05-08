@@ -1,0 +1,41 @@
+policy_id: ion_mcp_hosted_storage_receipt_ledger_alpha_policy
+version: V71_HOSTED_MCP_STORAGE_AND_RECEIPT_LEDGER_ALPHA
+status: alpha_boundary_only
+allowed_resolutions:
+  - READ_ONLY
+  - DRY_RUN
+  - APPROVAL_REQUIRED
+  - REFUSED
+forbidden_resolutions:
+  - LIVE_EXECUTED
+allowed_event_kinds:
+  - MOUNT_RECEIPT
+  - STATE_ROOT_SNAPSHOT
+  - DRY_RUN_PLAN
+  - DRY_RUN_SUBMISSION
+  - APPROVAL_QUEUE_PROJECTION
+  - BUNDLE_EXPORT_PREVIEW
+  - ROLLBACK_PREVIEW
+  - REPLAY_PREVIEW
+forbidden_event_kinds:
+  - LIVE_EXECUTION
+  - SHELL_EXECUTION
+  - BROWSER_MUTATION
+  - PROVIDER_DISPATCH
+  - SECRET_READ
+  - SECRET_WRITE
+  - GOVERNED_WRITE_DIRECT
+  - DAEMON_LOOP_ACTIVATION
+certification_claims:
+  hosted_cloud_certified: false
+  public_endpoint_certified: false
+  kubernetes_certified: false
+  production_object_storage_certified: false
+  live_execution_certified: false
+required_invariants:
+  - event_chain_verified
+  - content_addressed_state_root_verified
+  - append_only_ledger_verified
+  - bundle_preview_verified
+  - no_kernel_truth_mutation
+  - no_live_execution_authorization

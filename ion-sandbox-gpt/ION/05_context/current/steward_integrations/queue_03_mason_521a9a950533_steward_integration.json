@@ -1,0 +1,30 @@
+{
+  "accepted": true,
+  "created_at": "2026-05-07T03:41:43+00:00",
+  "decision": "INTEGRATED_AS_ACCEPTED_STATE_DELTA",
+  "external_execution_authority": false,
+  "gate": {
+    "accepted": true,
+    "action_id": "sandbox_startup_readiness_mason_3",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.audit_observation.v1",
+    "touched_paths": [
+      "ION/04_packages/kernel/",
+      "ION/tests/",
+      "ION/05_context/current/"
+    ]
+  },
+  "index": 3,
+  "production_authority": false,
+  "receipt_id": "queue_03_mason_521a9a950533_steward_integration",
+  "role": "mason",
+  "schema_id": "ion.steward_queue_integration_receipt.v1",
+  "source": "active_steward_integration_queue",
+  "task_output_path": "ION/05_context/current/manual_role_returns/03_mason_single_carrier_return.md",
+  "task_output_sha256": "e2374438666dbd3f7846af4d480fc50860f31849b63c2d72518b7256a11af8fd",
+  "worker_output_preview": "### CONTEXT PROOF\n\n1. path: `ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md`\n   status: `file_present`; required=True; kind=file; line_count=97; sha256=37c4f30751a51a4da5d3de74b1d8cf9eb879e10c6fbf4dee398a8c227dad4aca\n   excerpt/verbatim: `---`\n2. path: `ION/03_registry/agent_context_system_registry.yaml`\n   status: `file_present`; required=True; kind=file; line_count=176; sha256=0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12\n   excerpt/verbatim: `registry_id: ion.agent_context_system_registry.v1`\n3. path: `ION/05_context/current/agent_context_systems/AGENT_CONTEXT_SYSTEMS_INDEX.md`\n   status: `file_present`; required=False; kind=file; line_count=34; sha256=392cfa8eea6444d0a3f1dd36428c5905dadb32a4b75b76dcd5da3895fa9021ad\n   excerpt/verbatim: `# Agent Context Systems Index \u2014 V81`\n4. path: `ION/05_context/current/agent_context_systems/MASON.context_system.md`\n   status: `file_present`; required=True; kind=file; line_count=42; sha256=2ecce43cf5f758b5d937b85df2782aa6d381867c5d16cd748b8bf78641423b8a\n   excerpt/verbatim: `# MASON \u2014 Agent Context System Card`\n5. path: `ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md`\n   status: `file_present`; required=False; kind=file; line_count=74; sha256=931da654a6a9c1625da5e5348088c009004c09d2c70dda061d1534ae54437e6d\n   excerpt/verbatim: `# AGENT_CONTEXT_BUILD_STEP`\n6. path: `ION/07_templates/context/AGENT_CONTEXT_PACKAGE_INDEX.md`\n   status: `file_present`; required=False; kind=file; line_count=14; sha256=2090d6b38fe93452000d3e3d3df48659df125117ebb168ab60345f8174add30a\n   excerpt/verbatim: `# AGENT_CONTEXT_PA"
+}

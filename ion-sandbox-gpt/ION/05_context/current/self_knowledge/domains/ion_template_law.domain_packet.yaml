@@ -1,0 +1,86 @@
+schema: ion.self_knowledge.domain_packet.v0_2
+domain_id: ion_template_law
+title: ION Template Law Domain
+state_class: candidate_current_state
+authority_rank: 6
+status: draft_candidate_seed
+generated_at: '2026-05-08T03:51:05+00:00'
+purpose: Explain templates as ION's operating grammar for typed, checkable work.
+primary_questions:
+- What template governs this act?
+- What proof does the template require?
+- What receipt follows?
+required_nodes:
+- ion.template.action_type
+- ion.template.bindings
+- ion.template.receipt_shape
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+    loads:
+    - domain_header
+    - anti_drift_notes
+  level_1_summary:
+    max_tokens: 500
+    loads:
+    - domain_header
+    - evidence_sources
+    - core claims
+  level_2_working:
+    max_tokens: 1500
+    loads:
+    - domain_packet
+    - selected nodes
+    - source ranking
+  level_3_operational:
+    max_tokens: 4000
+    loads:
+    - domain_packet
+    - node evidence
+    - active packet/state surfaces
+  level_4_deep:
+    max_tokens: 12000
+    loads:
+    - domain_packet
+    - node registry
+    - source files
+    - contradictions
+  level_5_implementation:
+    includes_paths: true
+    loads:
+    - source paths
+    - tests/proofs
+    - candidate deltas
+evidence_sources:
+- path: ION/03_registry/current_phase_template_surface_registry.yaml
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/07_templates/_MASTER.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/07_templates/actions/TASK.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/07_templates/context/CONTEXT_PACKAGE.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/07_templates/receipts/SINGLE_CARRIER_SEQUENCE_RECEIPT.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/05_context/current/agent_context_systems/TEMPLATE_CURATOR.context_system.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+anti_drift_notes:
+- Do not mutate template law under a status/report packet.
+- Template action proof is required before integration.
+specialist_roles:
+- TEMPLATE_CURATOR
+- CANON_LIBRARIAN
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_namespace: ION/05_context/current/self_knowledge/
+non_claims:
+- This domain packet is not accepted canon.
+- This domain packet does not mutate ION/03_registry/self_knowledge unless separately promoted.
+

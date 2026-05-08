@@ -1,0 +1,17 @@
+policy_id: ion.joc_operator_approval_queue.v1
+version: V62_OPERATOR_APPROVAL_QUEUE_AND_DRY_RUN_HANDOFF
+authority_scope: OPERATOR_APPROVAL_QUEUE_VIEW_MODEL_RECEIPT_ONLY
+default_execution_mode: DRY_RUN_HANDOFF_ONLY
+requires_explicit_operator_approval: true
+allows_live_provider_dispatch: false
+allows_browser_session_mutation: false
+allows_credential_access: false
+allows_paid_cloud_launch: false
+allows_production_authority: false
+required_surfaces:
+  - OPERATOR_APPROVAL_QUEUE
+  - GOVERNOR_EVIDENCE_RAIL
+  - APPROVAL_DECISION_CARD
+  - DENIAL_REASON_LANE
+  - DRY_RUN_HANDOFF_PREVIEW
+  - NON_AUTHORITY_BOUNDARY_STRIP

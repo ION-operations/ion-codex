@@ -1,0 +1,42 @@
+{
+  "schema": "ion.root_source_lane.diff_index.v0_1",
+  "created_at": "2026-05-08T19:06:26Z",
+  "status": "patch_evidence_candidate_intake_not_applied_state",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "lane": "diffs",
+  "file_count": 4,
+  "size_summary": "328K",
+  "processing_rule": "inspect_compare_apply_selected_hunks_validate_receipt",
+  "authority_boundary": {
+    "accepted_canon": false,
+    "applied_state": false,
+    "requires_receipted_application": true
+  },
+  "files": [
+    {
+      "path": "diffs/ION_CARRIER_FRICTION_LEDGER_PATCH_20260507.diff",
+      "category": "carrier_friction_ledger_patch",
+      "size_bytes": 51671
+    },
+    {
+      "path": "diffs/ION_CUSTOM_GPT_ANTI_THEATER_PATCH_20260507.diff",
+      "category": "custom_gpt_anti_theater_patch",
+      "size_bytes": 5160
+    },
+    {
+      "path": "diffs/ION_GPT_NATIVE_PORTABLE_ENGINE_PACKAGE_v0_2_PATCH_20260507.diff",
+      "category": "native_portable_engine_package_patch",
+      "size_bytes": 236456
+    },
+    {
+      "path": "diffs/ION_SOLE_GPT_PORTABLE_PACKAGE_V0_1_PATCH_20260507.diff",
+      "category": "sole_gpt_portable_package_patch",
+      "size_bytes": 32640
+    }
+  ],
+  "non_claims": [
+    "This index does not apply any diff.",
+    "This index does not accept any diff as ION canon.",
+    "This index does not grant production, live execution, secrets, deployment, git push, or arbitrary shell authority."
+  ]
+}

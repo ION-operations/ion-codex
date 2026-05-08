@@ -1,0 +1,9 @@
+ION V103 full project consolidation receipt
+line: V103_TEMPORAL_CONTEXT_ENFORCEMENT_RECONCILIATION
+base: V102 full consolidated project
+production_authority: false
+full_suite_command: PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -m pytest -p no:ddtrace ION/tests -q
+full_suite_result: 29 passed in 4.28s
+context_lifecycle_verdict: PASS_WITH_LIFECYCLE_MODEL
+temporal_context_enforcement_verdict: SYSTEM_PRESENT_AND_PARTIALLY_ENFORCED
+packaging_gate_present: false

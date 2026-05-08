@@ -1,0 +1,699 @@
+{
+  "acceptance_criterion_11": {
+    "criterion": "future carriers select self-knowledge route before answering ION-about-ION questions",
+    "evidence": "sandbox-local onboarding trace simulation across GPT sandbox and Codex CLI carrier surfaces; external carrier invocation not claimed",
+    "status": "ready_candidate"
+  },
+  "accepted": true,
+  "authority_boundary": {
+    "candidate_only": true,
+    "live_execution_authority": false,
+    "mutated_ION_03_registry": false,
+    "mutated_active_onboarding_packets": false,
+    "production_authority": false
+  },
+  "cases": [
+    {
+      "accepted": true,
+      "active_onboarding_packet": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+      "carrier_case_id": "gpt_sandbox_identity",
+      "carrier_id": "GPT_SANDBOX_CARRIER",
+      "carrier_profile": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+      "classified_ion_about_ion": true,
+      "expected_ion_about_ion": true,
+      "expected_route_id": "route.ion_identity_answer",
+      "findings": [],
+      "loaded_domains": [
+        "ion_identity",
+        "ion_canon_authority"
+      ],
+      "matched_route_id": "route.ion_identity_answer",
+      "operator_task": "What is ION?",
+      "task_class": "ion_identity_question",
+      "trace": [
+        {
+          "action": "confirm_shell_root",
+          "path": ".",
+          "status": "ok"
+        },
+        {
+          "action": "read_repo_authority",
+          "path": "ION/REPO_AUTHORITY.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_mount_contract",
+          "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_carrier_profile",
+          "path": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "read_active_onboarding_packet",
+          "path": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+          "status": "ok"
+        },
+        {
+          "action": "classify_operator_task",
+          "note": "task_class=ion_identity_question ion_about_ion=True",
+          "status": "ok"
+        },
+        {
+          "action": "mount_active_self_knowledge_mount_packet",
+          "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+          "status": "ok"
+        },
+        {
+          "action": "load_self_knowledge_route_registry",
+          "path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "select_self_knowledge_route",
+          "note": "route.ion_identity_answer",
+          "status": "ok"
+        },
+        {
+          "action": "load_required_domain_packets",
+          "note": "ion_identity,ion_canon_authority",
+          "path": "ION/05_context/current/self_knowledge/domains/",
+          "status": "ok"
+        },
+        {
+          "action": "answer_or_act_with_non_claims",
+          "note": "candidate route-shaped response only",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "active_onboarding_packet": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+      "carrier_case_id": "gpt_sandbox_authority_donor_boundary",
+      "carrier_id": "GPT_SANDBOX_CARRIER",
+      "carrier_profile": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+      "classified_ion_about_ion": true,
+      "expected_ion_about_ion": true,
+      "expected_route_id": "route.ion_authority_classification",
+      "findings": [],
+      "loaded_domains": [
+        "ion_canon_authority",
+        "ion_stale_donor_historical"
+      ],
+      "matched_route_id": "route.ion_authority_classification",
+      "operator_task": "Which ION source is authoritative if a donor archive conflicts with current law?",
+      "task_class": "ion_authority_question",
+      "trace": [
+        {
+          "action": "confirm_shell_root",
+          "path": ".",
+          "status": "ok"
+        },
+        {
+          "action": "read_repo_authority",
+          "path": "ION/REPO_AUTHORITY.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_mount_contract",
+          "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_carrier_profile",
+          "path": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "read_active_onboarding_packet",
+          "path": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+          "status": "ok"
+        },
+        {
+          "action": "classify_operator_task",
+          "note": "task_class=ion_authority_question ion_about_ion=True",
+          "status": "ok"
+        },
+        {
+          "action": "mount_active_self_knowledge_mount_packet",
+          "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+          "status": "ok"
+        },
+        {
+          "action": "load_self_knowledge_route_registry",
+          "path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "select_self_knowledge_route",
+          "note": "route.ion_authority_classification",
+          "status": "ok"
+        },
+        {
+          "action": "load_required_domain_packets",
+          "note": "ion_canon_authority,ion_stale_donor_historical",
+          "path": "ION/05_context/current/self_knowledge/domains/",
+          "status": "ok"
+        },
+        {
+          "action": "answer_or_act_with_non_claims",
+          "note": "candidate route-shaped response only",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "active_onboarding_packet": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+      "carrier_case_id": "gpt_sandbox_product_boundary",
+      "carrier_id": "GPT_SANDBOX_CARRIER",
+      "carrier_profile": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+      "classified_ion_about_ion": true,
+      "expected_ion_about_ion": true,
+      "expected_route_id": "route.gpt_sandbox_adaptation",
+      "findings": [],
+      "loaded_domains": [
+        "ion_carrier_embodiment",
+        "ion_product_package",
+        "ion_state_steward_receipt"
+      ],
+      "matched_route_id": "route.gpt_sandbox_adaptation",
+      "operator_task": "Is the Custom GPT package a reduced ION or full ION in a sandbox body?",
+      "task_class": "ion_package_or_gpt_sandbox_question",
+      "trace": [
+        {
+          "action": "confirm_shell_root",
+          "path": ".",
+          "status": "ok"
+        },
+        {
+          "action": "read_repo_authority",
+          "path": "ION/REPO_AUTHORITY.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_mount_contract",
+          "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_carrier_profile",
+          "path": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "read_active_onboarding_packet",
+          "path": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+          "status": "ok"
+        },
+        {
+          "action": "classify_operator_task",
+          "note": "task_class=ion_package_or_gpt_sandbox_question ion_about_ion=True",
+          "status": "ok"
+        },
+        {
+          "action": "mount_active_self_knowledge_mount_packet",
+          "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+          "status": "ok"
+        },
+        {
+          "action": "load_self_knowledge_route_registry",
+          "path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "select_self_knowledge_route",
+          "note": "route.gpt_sandbox_adaptation",
+          "status": "ok"
+        },
+        {
+          "action": "load_required_domain_packets",
+          "note": "ion_carrier_embodiment,ion_product_package,ion_state_steward_receipt",
+          "path": "ION/05_context/current/self_knowledge/domains/",
+          "status": "ok"
+        },
+        {
+          "action": "answer_or_act_with_non_claims",
+          "note": "candidate route-shaped response only",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "active_onboarding_packet": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.codex_cli.json",
+      "carrier_case_id": "codex_cli_full_runtime",
+      "carrier_id": "CODEX_CLI_CARRIER",
+      "carrier_profile": "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "classified_ion_about_ion": true,
+      "expected_ion_about_ion": true,
+      "expected_route_id": "route.full_local_codex_api_ion",
+      "findings": [],
+      "loaded_domains": [
+        "ion_full_multi_agent_runtime",
+        "ion_carrier_embodiment",
+        "ion_agent_role",
+        "ion_context_system"
+      ],
+      "matched_route_id": "route.full_local_codex_api_ion",
+      "operator_task": "Explain full local ION with Codex CLI isolated invocations.",
+      "task_class": "ion_runtime_question",
+      "trace": [
+        {
+          "action": "confirm_shell_root",
+          "path": ".",
+          "status": "ok"
+        },
+        {
+          "action": "read_repo_authority",
+          "path": "ION/REPO_AUTHORITY.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_mount_contract",
+          "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_carrier_profile",
+          "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "read_active_onboarding_packet",
+          "path": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.codex_cli.json",
+          "status": "ok"
+        },
+        {
+          "action": "classify_operator_task",
+          "note": "task_class=ion_runtime_question ion_about_ion=True",
+          "status": "ok"
+        },
+        {
+          "action": "mount_active_self_knowledge_mount_packet",
+          "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+          "status": "ok"
+        },
+        {
+          "action": "load_self_knowledge_route_registry",
+          "path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "select_self_knowledge_route",
+          "note": "route.full_local_codex_api_ion",
+          "status": "ok"
+        },
+        {
+          "action": "load_required_domain_packets",
+          "note": "ion_full_multi_agent_runtime,ion_carrier_embodiment,ion_agent_role,ion_context_system",
+          "path": "ION/05_context/current/self_knowledge/domains/",
+          "status": "ok"
+        },
+        {
+          "action": "answer_or_act_with_non_claims",
+          "note": "candidate route-shaped response only",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "active_onboarding_packet": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.codex_cli.json",
+      "carrier_case_id": "codex_cli_context_template_receipt",
+      "carrier_id": "CODEX_CLI_CARRIER",
+      "carrier_profile": "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "classified_ion_about_ion": true,
+      "expected_ion_about_ion": true,
+      "expected_route_id": "route.context_template_receipt",
+      "findings": [],
+      "loaded_domains": [
+        "ion_context_system",
+        "ion_template_law",
+        "ion_state_steward_receipt",
+        "ion_workpacket"
+      ],
+      "matched_route_id": "route.context_template_receipt",
+      "operator_task": "How do context package, template law, proof gate, work packet, and receipt relate in ION?",
+      "task_class": "ion_workpacket_or_context_question",
+      "trace": [
+        {
+          "action": "confirm_shell_root",
+          "path": ".",
+          "status": "ok"
+        },
+        {
+          "action": "read_repo_authority",
+          "path": "ION/REPO_AUTHORITY.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_mount_contract",
+          "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_carrier_profile",
+          "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "read_active_onboarding_packet",
+          "path": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.codex_cli.json",
+          "status": "ok"
+        },
+        {
+          "action": "classify_operator_task",
+          "note": "task_class=ion_workpacket_or_context_question ion_about_ion=True",
+          "status": "ok"
+        },
+        {
+          "action": "mount_active_self_knowledge_mount_packet",
+          "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+          "status": "ok"
+        },
+        {
+          "action": "load_self_knowledge_route_registry",
+          "path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "select_self_knowledge_route",
+          "note": "route.context_template_receipt",
+          "status": "ok"
+        },
+        {
+          "action": "load_required_domain_packets",
+          "note": "ion_context_system,ion_template_law,ion_state_steward_receipt,ion_workpacket",
+          "path": "ION/05_context/current/self_knowledge/domains/",
+          "status": "ok"
+        },
+        {
+          "action": "answer_or_act_with_non_claims",
+          "note": "candidate route-shaped response only",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "active_onboarding_packet": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.codex_cli.json",
+      "carrier_case_id": "codex_cli_self_knowledge_continue",
+      "carrier_id": "CODEX_CLI_CARRIER",
+      "carrier_profile": "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "classified_ion_about_ion": true,
+      "expected_ion_about_ion": true,
+      "expected_route_id": "route.self_knowledge_implementation",
+      "findings": [],
+      "loaded_domains": [
+        "ion_identity",
+        "ion_canon_authority",
+        "ion_architecture",
+        "ion_operations_build"
+      ],
+      "matched_route_id": "route.self_knowledge_implementation",
+      "operator_task": "Continue building ION about ION self knowledge domain state.",
+      "task_class": "ion_self_knowledge_implementation_question",
+      "trace": [
+        {
+          "action": "confirm_shell_root",
+          "path": ".",
+          "status": "ok"
+        },
+        {
+          "action": "read_repo_authority",
+          "path": "ION/REPO_AUTHORITY.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_mount_contract",
+          "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_carrier_profile",
+          "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "read_active_onboarding_packet",
+          "path": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.codex_cli.json",
+          "status": "ok"
+        },
+        {
+          "action": "classify_operator_task",
+          "note": "task_class=ion_self_knowledge_implementation_question ion_about_ion=True",
+          "status": "ok"
+        },
+        {
+          "action": "mount_active_self_knowledge_mount_packet",
+          "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+          "status": "ok"
+        },
+        {
+          "action": "load_self_knowledge_route_registry",
+          "path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "select_self_knowledge_route",
+          "note": "route.self_knowledge_implementation",
+          "status": "ok"
+        },
+        {
+          "action": "load_required_domain_packets",
+          "note": "ion_identity,ion_canon_authority,ion_architecture,ion_operations_build",
+          "path": "ION/05_context/current/self_knowledge/domains/",
+          "status": "ok"
+        },
+        {
+          "action": "answer_or_act_with_non_claims",
+          "note": "candidate route-shaped response only",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "active_onboarding_packet": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+      "carrier_case_id": "gpt_sandbox_recovery_anti_regression",
+      "carrier_id": "GPT_SANDBOX_CARRIER",
+      "carrier_profile": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+      "classified_ion_about_ion": true,
+      "expected_ion_about_ion": true,
+      "expected_route_id": "route.ion_recovery_anti_regression",
+      "findings": [],
+      "loaded_domains": [
+        "ion_recovery_anti_regression",
+        "ion_canon_authority",
+        "ion_stale_donor_historical"
+      ],
+      "matched_route_id": "route.ion_recovery_anti_regression",
+      "operator_task": "How should ION prevent repeated failure, stale resurfacing, and hallucinated replacement during recovery?",
+      "task_class": "ion_recovery_or_anti_regression_question",
+      "trace": [
+        {
+          "action": "confirm_shell_root",
+          "path": ".",
+          "status": "ok"
+        },
+        {
+          "action": "read_repo_authority",
+          "path": "ION/REPO_AUTHORITY.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_mount_contract",
+          "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_carrier_profile",
+          "path": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "read_active_onboarding_packet",
+          "path": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+          "status": "ok"
+        },
+        {
+          "action": "classify_operator_task",
+          "note": "task_class=ion_recovery_or_anti_regression_question ion_about_ion=True",
+          "status": "ok"
+        },
+        {
+          "action": "mount_active_self_knowledge_mount_packet",
+          "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+          "status": "ok"
+        },
+        {
+          "action": "load_self_knowledge_route_registry",
+          "path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "select_self_knowledge_route",
+          "note": "route.ion_recovery_anti_regression",
+          "status": "ok"
+        },
+        {
+          "action": "load_required_domain_packets",
+          "note": "ion_recovery_anti_regression,ion_canon_authority,ion_stale_donor_historical",
+          "path": "ION/05_context/current/self_knowledge/domains/",
+          "status": "ok"
+        },
+        {
+          "action": "answer_or_act_with_non_claims",
+          "note": "candidate route-shaped response only",
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "active_onboarding_packet": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+      "carrier_case_id": "gpt_sandbox_non_ion_bypass",
+      "carrier_id": "GPT_SANDBOX_CARRIER",
+      "carrier_profile": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+      "classified_ion_about_ion": false,
+      "expected_ion_about_ion": false,
+      "expected_route_id": null,
+      "findings": [],
+      "loaded_domains": [],
+      "matched_route_id": null,
+      "operator_task": "Draft a short project update email for a teammate.",
+      "task_class": "ordinary_user_writing_request",
+      "trace": [
+        {
+          "action": "confirm_shell_root",
+          "path": ".",
+          "status": "ok"
+        },
+        {
+          "action": "read_repo_authority",
+          "path": "ION/REPO_AUTHORITY.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_mount_contract",
+          "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "action": "read_carrier_profile",
+          "path": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+          "status": "ok"
+        },
+        {
+          "action": "read_active_onboarding_packet",
+          "path": "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+          "status": "ok"
+        },
+        {
+          "action": "classify_operator_task",
+          "note": "task_class=ordinary_user_writing_request ion_about_ion=False",
+          "status": "ok"
+        },
+        {
+          "action": "skip_self_knowledge_route",
+          "note": "non-ION task; use ordinary active packet/domain workflow",
+          "status": "ok"
+        },
+        {
+          "action": "continue_normal_active_packet_route",
+          "path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+          "status": "ok"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "carrier_cases": 8,
+    "carriers_exercised": [
+      "CODEX_CLI_CARRIER",
+      "GPT_SANDBOX_CARRIER"
+    ],
+    "cases_accepted": 8,
+    "ion_about_ion_cases": 7,
+    "loaded_domain_count": 14,
+    "loaded_domain_union": [
+      "ion_agent_role",
+      "ion_architecture",
+      "ion_canon_authority",
+      "ion_carrier_embodiment",
+      "ion_context_system",
+      "ion_full_multi_agent_runtime",
+      "ion_identity",
+      "ion_operations_build",
+      "ion_product_package",
+      "ion_recovery_anti_regression",
+      "ion_stale_donor_historical",
+      "ion_state_steward_receipt",
+      "ion_template_law",
+      "ion_workpacket"
+    ],
+    "matched_routes": [
+      "route.context_template_receipt",
+      "route.full_local_codex_api_ion",
+      "route.gpt_sandbox_adaptation",
+      "route.ion_authority_classification",
+      "route.ion_identity_answer",
+      "route.ion_recovery_anti_regression",
+      "route.self_knowledge_implementation"
+    ],
+    "non_ion_bypass_cases": 1
+  },
+  "findings": [],
+  "generated_at": "2026-05-08T05:02:37+00:00",
+  "inputs": {
+    "domain_registry_candidate": {
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/candidate_registries/domain_registry.candidate.yaml",
+      "sha256": "31f00d6bdb0a518bdb672a0234069b4099c410db172789a48f7bcd9d6f402a01"
+    },
+    "mount_contract": {
+      "exists": true,
+      "path": "ION/02_architecture/ION_MOUNT_CONTRACT.md",
+      "sha256": "dba14b5a4eea579196eaae45982cfc6b8abae7f958f30c9d865f0b801ee4fdbb"
+    },
+    "onboarding_overlay": {
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_OVERLAY_V0_2.json",
+      "sha256": "74556991f13e5b9a619dbef66a6d5532be99f4006b8e94c4ee9dda656bd28cd2"
+    },
+    "onboarding_proposal": {
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/ONBOARDING_WIRING_PROPOSAL_V0_3.md",
+      "sha256": "86a0142da161dafba83c81d08295c28503cd815c77605704fe2d0c909b360d0a"
+    },
+    "repo_authority": {
+      "exists": true,
+      "path": "ION/REPO_AUTHORITY.md",
+      "sha256": "804ed8430fc53e551d254af063ec414646a1c1bf94ceeec51c31769fa41aca1e"
+    },
+    "route_registry_candidate": {
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+      "sha256": "c58757478bb92176e4227751d6d3d99a86c373939c618cc238a52b8e4de7bfb1"
+    },
+    "self_knowledge_mount_packet": {
+      "exists": true,
+      "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+      "sha256": "b6731f083c1ebd0a4d947a39aadc58ea58ad6535792a58e48468caeec93ba404"
+    }
+  },
+  "non_claims": [
+    "This simulation does not mutate active onboarding packets.",
+    "This simulation does not accept or land ION/03_registry/self_knowledge.",
+    "This simulation is not an external Codex/MCP/daemon invocation.",
+    "Trace-shaped answer/action steps are candidate evidence, not canon."
+  ],
+  "root": "/mnt/data/ion_selfknow_onboarding_sim_20260508/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE",
+  "schema_id": "ion.self_knowledge.onboarding_wiring_simulation_report.v0_2",
+  "simulation_mode": "sandbox_local_onboarding_trace_not_external_codex",
+  "status": "accepted_candidate_evidence"
+}

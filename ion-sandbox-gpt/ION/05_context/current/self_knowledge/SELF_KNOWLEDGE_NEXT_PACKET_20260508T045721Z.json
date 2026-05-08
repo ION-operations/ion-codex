@@ -1,0 +1,51 @@
+{
+  "authority_options": [
+    {
+      "option": "human_acceptance_to_promote_registry_and_onboarding_candidate",
+      "requires": [
+        "explicit operator acceptance using acceptance language, not just 'continue'",
+        "copy promotion apply_tree into accepted target paths only under authority",
+        "settle state classes for accepted/current files",
+        "emit settlement receipt",
+        "rerun status, preflight, candidate tests, route usage tests, and onboarding wiring tests"
+      ]
+    },
+    {
+      "option": "revise_before_acceptance",
+      "requires": [
+        "operator names revision target or continue with next validation lane",
+        "update candidate surfaces only under current-context candidate namespace unless explicitly authorized",
+        "rerun relevant simulations and focused tests",
+        "emit candidate receipt"
+      ]
+    },
+    {
+      "option": "more_validation_before_acceptance",
+      "requires": [
+        "run product/package onboarding audit to ensure exported GPT package front-door surfaces inherit the self-knowledge mount-first behavior as candidate instructions",
+        "do not mutate active product law or registry without explicit acceptance",
+        "emit product-lane audit receipt"
+      ]
+    }
+  ],
+  "generated_at": "2026-05-08T04:57:21+00:00",
+  "inputs": [
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ACCEPTANCE_GATE_STATUS_V0_2.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/PROMOTION_CANDIDATE_MANIFEST_V0_2.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATION_NOTE_20260508T045721Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_RECEIPT_20260508T045721Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_ONBOARDING_20260508T045721Z.json"
+  ],
+  "non_claims": [
+    "This packet is not approval to mutate ION/03_registry.",
+    "This packet is not approval to mutate active onboarding law.",
+    "This packet is not production readiness.",
+    "This packet does not claim external Codex execution."
+  ],
+  "objective": "After route-usage and onboarding-wiring validation, either explicitly accept/reject/revise the self-knowledge promotion mirror or continue with product/package onboarding audit without mutating accepted registry/onboarding law.",
+  "packet_id": "SELF_KNOWLEDGE_PACKET_ACCEPT_OR_PRODUCT_LANE_AUDIT_20260508T045721Z",
+  "recommended_next_action": "If no explicit acceptance is given, run product/package onboarding audit for the GPT sandbox package and preserve all promotion surfaces as candidate-only.",
+  "schema_id": "ion.self_knowledge.next_packet.v0_2",
+  "status": "queued_candidate"
+}

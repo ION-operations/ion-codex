@@ -1,0 +1,30 @@
+{
+  "authority_boundary": {
+    "allowed_paths": [
+      "ION/05_context/current/ai_assistant_work/",
+      "ION/tests/"
+    ],
+    "candidate_only": true,
+    "external_execution_allowed": false,
+    "forbidden_paths_without_explicit_acceptance": [
+      "ION/03_registry/",
+      "product front-door surfaces"
+    ]
+  },
+  "created_at": "2026-05-08T15:00:56Z",
+  "deliverables": [
+    "agent boot drafts for UI_STATE_MODELER, PR_REVIEW_STEWARD, BACKGROUND_QUEUE_STEWARD, TERMINAL_PROOF_CURATOR, EXAMPLE_RUNNER, RELEASE_EVIDENCE_CURATOR, MIGRATION_MASON",
+    "first machine-checkable template specs for screen_state_matrix_packet, background_queue_result_intake_packet, terminal_proof_receipt_packet, api_docs_example_validation_packet, release_readiness_matrix_packet",
+    "route simulation showing specialist dispatch before generic implementation",
+    "candidate receipt and G9 continuity export"
+  ],
+  "inputs": [
+    "AI_ASSISTANT_WORK_DOMAIN_FISSION_CANDIDATES_V0_1.yaml",
+    "AI_ASSISTANT_WORK_CONCRETE_TEMPLATE_PACKET_DRAFTS_V0_1.yaml",
+    "AI_ASSISTANT_WORK_AGENT_REGISTRY_CANDIDATE_V0_2.yaml"
+  ],
+  "objective": "Turn the highest-value candidate fission domains into implementation-ready agent boot drafts and template files while preserving candidate/accepted boundaries.",
+  "packet_id": "AI_ASSISTANT_WORK_NEXT_PACKET_TEMPLATE_IMPLEMENTATION_AND_AGENT_BOOT_DRAFTS",
+  "schema": "ion.ai_assistant_work.next_packet.v0_1",
+  "status": "candidate_next_packet"
+}

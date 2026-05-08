@@ -1,0 +1,634 @@
+schema: ion.ai_assistant_work.agent_registry.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T14:35:00Z'
+purpose: Candidate specialist agent registry for AI-assisted chat/IDE/domain work.
+core_correction: Templates are action grammars, but specialist domains need specialist
+  agents to own context, state, proof, drift resistance, and settlement.
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  requires_explicit_acceptance_to_land: true
+agent_count: 47
+agents:
+- role_id: ASSISTANT_ONTOLOGIST
+  title: Assistant Ontologist
+  domain_ids:
+  - ai_assistant_identity_embodiment
+  purpose: Defines assistant identity across chat, IDE, CLI, cloud, PR, and background
+    agent bodies.
+  authority_ceiling: conceptual_definition_and_boundary_mapping_only
+  return_contract: assistant definition, embodiment map, non-claims, next routes
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: EMBODIMENT_CARTOGRAPHER
+  title: Embodiment Cartographer
+  domain_ids:
+  - ai_assistant_identity_embodiment
+  - ide_work_domain
+  - chat_work_domain
+  purpose: Maps host body capabilities, context surfaces, tool authority, and limits.
+  authority_ceiling: host_surface_mapping_only
+  return_contract: capability profile, surface inventory, authority warnings
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: CHAT_STEWARD
+  title: Chat Steward
+  domain_ids:
+  - chat_work_domain
+  - knowledge_context_memory_domain
+  purpose: Routes chat requests into answers, artifacts, packets, or continuity bundles.
+  authority_ceiling: conversation_orchestration_no_external_side_effects
+  return_contract: intent classification, answer/artifact boundary, export recommendation
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: IDE_CARTOGRAPHER
+  title: IDE Cartographer
+  domain_ids:
+  - ide_work_domain
+  - codebase_understanding_domain
+  purpose: 'Maps IDE workspace surfaces: open buffers, file tree, diagnostics, terminal,
+    git, tests, extensions.'
+  authority_ceiling: workspace_read_and_mapping
+  return_contract: workspace map, relevant surfaces, missing context, safe next packet
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: WORKSPACE_STEWARD
+  title: Workspace Steward
+  domain_ids:
+  - ide_work_domain
+  - workflow_automation_tool_domain
+  purpose: Maintains IDE mutation boundaries and coordinates editor/terminal/git state.
+  authority_ceiling: workspace_orchestration_bounded
+  return_contract: allowed writes, command gates, diff/test receipt
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: CODEBASE_CARTOGRAPHER
+  title: Codebase Cartographer
+  domain_ids:
+  - codebase_understanding_domain
+  purpose: Finds relevant code, architecture, dependencies, and local conventions
+    before implementation.
+  authority_ceiling: read_and_map_before_write
+  return_contract: repo map, likely files, convention summary, context package
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: CONVENTION_MINER
+  title: Convention Miner
+  domain_ids:
+  - codebase_understanding_domain
+  - documentation_writing_domain
+  purpose: Extracts local code/doc/style conventions so specialists do not invent
+    new norms.
+  authority_ceiling: read_and_summarize
+  return_contract: convention map, examples, caveats
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: TASK_PLANNER
+  title: Task Planner
+  domain_ids:
+  - planning_and_task_breakdown_domain
+  purpose: Converts broad intent into bounded packets, dependencies, acceptance criteria,
+    and routes.
+  authority_ceiling: planning_only
+  return_contract: packet graph, dependencies, acceptance criteria, route plan
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: DEPENDENCY_ROUTER
+  title: Dependency Router
+  domain_ids:
+  - planning_and_task_breakdown_domain
+  - cross_domain_settlement_domain
+  purpose: Routes subtasks to specialist domains and defines fan-out/fan-in boundaries.
+  authority_ceiling: routing_only
+  return_contract: domain route plan, branch returns expected, settlement target
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: PATCH_MASON
+  title: Patch Mason
+  domain_ids:
+  - implementation_domain
+  purpose: Implements bounded code changes under allowed write scope and validation
+    gates.
+  authority_ceiling: bounded_candidate_patch
+  return_contract: diff summary, files touched, tests run, risks, receipt draft
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: REFACTOR_MASON
+  title: Refactor Mason
+  domain_ids:
+  - implementation_domain
+  purpose: Performs behavior-preserving refactors with explicit proof boundaries.
+  authority_ceiling: bounded_candidate_patch
+  return_contract: refactor scope, equivalence proof, tests, rollback note
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: UI_ARCHITECT
+  title: UI Architect
+  domain_ids:
+  - ui_ux_domain
+  - product_requirements_domain
+  purpose: Defines interface structure, screen states, flows, and design-system fit
+    before UI implementation.
+  authority_ceiling: design_candidate_no_unapproved_mutation
+  return_contract: UI brief, screen state map, component contract, a11y obligations
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: UX_FLOW_DESIGNER
+  title: UX Flow Designer
+  domain_ids:
+  - ui_ux_domain
+  purpose: Models user journeys, interaction flows, empty/loading/error/success states,
+    and user feedback loops.
+  authority_ceiling: design_candidate
+  return_contract: flow map, state machine, edge cases
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: COMPONENT_BUILDER
+  title: Component Builder
+  domain_ids:
+  - ui_ux_domain
+  - implementation_domain
+  purpose: Builds bounded UI components from a component contract and design-system
+    constraints.
+  authority_ceiling: bounded_candidate_patch
+  return_contract: component diff, state coverage, accessibility proof, screenshots
+    if available
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: DESIGN_SYSTEM_STEWARD
+  title: Design System Steward
+  domain_ids:
+  - ui_ux_domain
+  purpose: Protects component library consistency, token use, layout patterns, and
+    visual grammar.
+  authority_ceiling: review_and_guidance
+  return_contract: design-system fit report, violations, remediation
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: ACCESSIBILITY_AUDITOR
+  title: Accessibility Auditor
+  domain_ids:
+  - ui_ux_domain
+  - review_security_domain
+  purpose: Audits WCAG-relevant UI behavior, semantics, keyboard navigation, contrast,
+    and assistive states.
+  authority_ceiling: review_only_unless_patch_authorized
+  return_contract: a11y findings, severity, proof, remediation route
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: DOCS_ARCHITECT
+  title: Docs Architect
+  domain_ids:
+  - documentation_writing_domain
+  purpose: Defines documentation information architecture, reader paths, doc surfaces,
+    and versioning.
+  authority_ceiling: docs_structure_candidate
+  return_contract: doc map, reader model, source authority, update plan
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: TECHNICAL_WRITER
+  title: Technical Writer
+  domain_ids:
+  - documentation_writing_domain
+  purpose: Writes task-oriented technical docs from source-authorized facts and examples.
+  authority_ceiling: candidate_doc_artifact
+  return_contract: doc draft, source map, assumptions, open claims
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: API_DOCS_SCRIBE
+  title: API Docs Scribe
+  domain_ids:
+  - documentation_writing_domain
+  - codebase_understanding_domain
+  purpose: Maintains API docs, reference material, parameters, examples, and generated/manual
+    doc boundaries.
+  authority_ceiling: candidate_doc_artifact
+  return_contract: API doc update, source pointers, example validation status
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: CHANGELOG_SCRIBE
+  title: Changelog Scribe
+  domain_ids:
+  - documentation_writing_domain
+  - devops_release_domain
+  purpose: Writes changelogs and release notes from accepted changes, not imagined
+    improvements.
+  authority_ceiling: candidate_doc_artifact
+  return_contract: changelog entry, source changes, release caveats
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: DOCS_NEMESIS
+  title: Docs Nemesis
+  domain_ids:
+  - documentation_writing_domain
+  - review_security_domain
+  purpose: Audits docs for stale claims, unsupported claims, wrong audience, and version
+    mismatch.
+  authority_ceiling: review_only
+  return_contract: docs findings, claim defects, source gaps
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: TEST_ARCHITECT
+  title: Test Architect
+  domain_ids:
+  - testing_quality_domain
+  purpose: Designs test plans, regression matrices, and validation scope.
+  authority_ceiling: test_design_only
+  return_contract: test plan, coverage gaps, risk matrix
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: TEST_RUNNER
+  title: Test Runner
+  domain_ids:
+  - testing_quality_domain
+  - ide_work_domain
+  purpose: Runs authorized tests/commands and reports exact evidence.
+  authority_ceiling: test_execution_bounded
+  return_contract: commands, return codes, outputs, failures, proof note
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: REGRESSION_HUNTER
+  title: Regression Hunter
+  domain_ids:
+  - testing_quality_domain
+  - debugging_observability_domain
+  purpose: Looks for breakage introduced by changes and maps failure mechanisms.
+  authority_ceiling: review_and_test
+  return_contract: regression findings, repro steps, severity
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: SECURITY_NEMESIS
+  title: Security Nemesis
+  domain_ids:
+  - review_security_domain
+  purpose: Performs adversarial review for code, tool, prompt-injection, secret, and
+    policy risks.
+  authority_ceiling: review_only_unless_remediation_authorized
+  return_contract: risk findings, exploit path, mitigation
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: PROMPT_INJECTION_AUDITOR
+  title: Prompt Injection Auditor
+  domain_ids:
+  - review_security_domain
+  - ide_work_domain
+  purpose: Audits IDE/file/tool surfaces that can influence autonomous assistant behavior.
+  authority_ceiling: review_only
+  return_contract: injection surfaces, trust boundaries, mitigations
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: DEBUGGER
+  title: Debugger
+  domain_ids:
+  - debugging_observability_domain
+  purpose: Builds reproductions, hypotheses, and verification loops for bugs.
+  authority_ceiling: diagnosis_and_bounded_patch_if_authorized
+  return_contract: repro, hypothesis, evidence, fix route
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: REPRODUCTION_BUILDER
+  title: Reproduction Builder
+  domain_ids:
+  - debugging_observability_domain
+  - testing_quality_domain
+  purpose: Constructs minimal or faithful reproductions for observed failures.
+  authority_ceiling: artifact_or_test_candidate
+  return_contract: repro artifact, steps, expected/actual
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: BUILD_STEWARD
+  title: Build Steward
+  domain_ids:
+  - devops_release_domain
+  purpose: Owns build and CI readiness boundaries for assistant-created changes.
+  authority_ceiling: validation_orchestration
+  return_contract: build result, environment notes, blocker list
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: RELEASE_MANAGER
+  title: Release Manager
+  domain_ids:
+  - devops_release_domain
+  - documentation_writing_domain
+  purpose: Coordinates release candidate state, notes, rollout, rollback, and acceptance
+    gates.
+  authority_ceiling: release_candidate_only_without_approval
+  return_contract: release readiness, rollback plan, open gates
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: DATA_CARTOGRAPHER
+  title: Data Cartographer
+  domain_ids:
+  - data_analysis_domain
+  purpose: Maps datasets, schemas, lineage, authority, and privacy constraints.
+  authority_ceiling: read_and_map
+  return_contract: data manifest, schema map, risks
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: ANALYSIS_MASON
+  title: Analysis Mason
+  domain_ids:
+  - data_analysis_domain
+  purpose: Performs bounded analyses with reproducible methods and claim evidence.
+  authority_ceiling: candidate_analysis
+  return_contract: method, code/notebook, results, limitations
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: PRODUCT_ANALYST
+  title: Product Analyst
+  domain_ids:
+  - product_requirements_domain
+  purpose: Clarifies business/user intent, constraints, personas, and value tradeoffs.
+  authority_ceiling: requirements_candidate
+  return_contract: requirements, non-goals, acceptance criteria
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: REQUIREMENTS_TRANSLATOR
+  title: Requirements Translator
+  domain_ids:
+  - product_requirements_domain
+  - planning_and_task_breakdown_domain
+  purpose: Turns conversational intent into implementation-ready requirements without
+    overbuilding.
+  authority_ceiling: requirements_candidate
+  return_contract: user stories, acceptance criteria, risk/open questions
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: CONTEXT_CARTOGRAPHER
+  title: Context Cartographer
+  domain_ids:
+  - knowledge_context_memory_domain
+  - codebase_understanding_domain
+  purpose: Builds bounded context packages and source-ranking maps for specialist
+    work.
+  authority_ceiling: context_package_candidate
+  return_contract: context package, sources, authority ranking, exclusions
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: SOURCE_RANKER
+  title: Source Ranker
+  domain_ids:
+  - knowledge_context_memory_domain
+  - documentation_writing_domain
+  purpose: Ranks active, stale, donor, witness, and external sources for a bounded
+    task.
+  authority_ceiling: ranking_only
+  return_contract: source ranking, conflicts, non-claims
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: MEMORY_STEWARD
+  title: Memory Steward
+  domain_ids:
+  - knowledge_context_memory_domain
+  purpose: Separates hidden memory, artifact state, receipts, and accepted/candidate
+    decisions.
+  authority_ceiling: state_boundary_mapping
+  return_contract: memory vs artifact map, inheritance rules
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: DEPENDENCY_STEWARD
+  title: Dependency Steward
+  domain_ids:
+  - dependency_package_domain
+  purpose: Reviews dependency additions, upgrades, lockfile diffs, license/security
+    posture.
+  authority_ceiling: review_and_patch_if_authorized
+  return_contract: dependency rationale, risk, validation
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: TOOL_STEWARD
+  title: Tool Steward
+  domain_ids:
+  - workflow_automation_tool_domain
+  purpose: Converts raw tool intent into bounded action packets with approval and
+    receipts.
+  authority_ceiling: tool_orchestration_no_unapproved_side_effects
+  return_contract: action packet, policy gate, proof, receipt
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: SKILL_PACKAGER
+  title: Skill Packager
+  domain_ids:
+  - workflow_automation_tool_domain
+  - assistant_learning_dataset_domain
+  purpose: Packages repeatable workflows as skills/templates with resources and validation
+    scripts.
+  authority_ceiling: candidate_skill_package
+  return_contract: skill spec, resources, validation
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: WORK_PATTERN_ETHNOGRAPHER
+  title: Work Pattern Ethnographer
+  domain_ids:
+  - assistant_learning_dataset_domain
+  purpose: Observes real AI-assistant usage patterns across chat/IDE/CLI/cloud and
+    turns them into dataset entries.
+  authority_ceiling: observation_and_taxonomy
+  return_contract: usage pattern record, lineage, candidate domain/template/agent
+    implications
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: STATE_TAXONOMIST
+  title: State Taxonomist
+  domain_ids:
+  - assistant_learning_dataset_domain
+  purpose: 'Builds state taxonomies for assistant work: surfaces, intentions, risks,
+    receipts, transitions.'
+  authority_ceiling: taxonomy_candidate
+  return_contract: state schema, transitions, examples
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: TEMPLATE_MINER
+  title: Template Miner
+  domain_ids:
+  - assistant_learning_dataset_domain
+  - planning_and_task_breakdown_domain
+  purpose: Finds repeated workflows that deserve explicit templates or agent skills.
+  authority_ceiling: taxonomy_candidate
+  return_contract: template gap report, candidate template
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: FAILURE_CLASSIFIER
+  title: Failure Classifier
+  domain_ids:
+  - assistant_learning_dataset_domain
+  - review_security_domain
+  purpose: Classifies assistant failures into context, template, authority, tool,
+    validation, settlement, or UX defects.
+  authority_ceiling: classification_only
+  return_contract: failure class, mechanism, corrective template/domain/agent
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: SETTLEMENT_STEWARD
+  title: Settlement Steward
+  domain_ids:
+  - cross_domain_settlement_domain
+  purpose: Settles multi-domain branch returns into accepted/rejected/deferred candidate
+    outcomes.
+  authority_ceiling: settlement_candidate_not_human_acceptance
+  return_contract: branch summary, conflicts, merge proposal, receipt
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: CONFLICT_NEMESIS
+  title: Conflict Nemesis
+  domain_ids:
+  - cross_domain_settlement_domain
+  purpose: Audits contradictions and overlap between specialist returns.
+  authority_ceiling: review_only
+  return_contract: conflict map, severity, settlement recommendation
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent
+- role_id: RECEIPT_CURATOR
+  title: Receipt Curator
+  domain_ids:
+  - cross_domain_settlement_domain
+  - knowledge_context_memory_domain
+  purpose: Creates receipt drafts that make accepted/ rejected/ deferred outcomes
+    inheritable.
+  authority_ceiling: receipt_draft_only
+  return_contract: receipt draft, inheritance fields, non-claims
+  must_not_claim:
+  - accepted state without explicit acceptance
+  - external execution not actually performed
+  - production authority unless granted
+  status: candidate_specialist_agent

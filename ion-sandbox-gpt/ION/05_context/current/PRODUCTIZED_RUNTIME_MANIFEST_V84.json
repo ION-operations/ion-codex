@@ -1,0 +1,31 @@
+{
+  "active_runtime_files": [
+    "ION/04_packages/kernel/ion_carrier_continue.py",
+    "ION/04_packages/kernel/ion_carrier_workflow_audit.py",
+    "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+    "ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json",
+    "ION/05_context/current/ACTIVE_WORK_PACKET.json"
+  ],
+  "base": "ION_CURSOR_CONSOLIDATED_V82_FULL_PROJECT_20260428(1).zip",
+  "created": "2026-04-29",
+  "excluded_policy": [
+    "exclude _archive as donor/forensic body, not live runtime authority",
+    "exclude __pycache__ and .pytest_cache",
+    "exclude top-level old changelogs/manifests/reports except current V84 files",
+    "exclude ION/05_context/history, projections, and sandboxes from productized runtime package",
+    "exclude nested continuation-bundle reads that mirror ION/05_context/history"
+  ],
+  "included_file_count": 3704,
+  "included_uncompressed_bytes": 14960501,
+  "live_execution_authority": false,
+  "package": "ION_CURSOR_CONSOLIDATED_V84_PRODUCTIZED_RUNTIME_20260429.zip",
+  "production_authority": false,
+  "schema_id": "ion.productized_runtime_manifest.v84",
+  "validation": {
+    "audit_carrier_workflow": "ION_CARRIER_WORKFLOW_READY",
+    "audit_findings": [],
+    "continue_carrier": "ION_CARRIER_CONTINUE_READY",
+    "py_compile": "passed for V84 carrier modules and dependent context modules",
+    "pytest_note": "focused pytest subprocess was interrupted by the execution environment after about 60 seconds; V84 focused tests are included for local Cursor execution"
+  }
+}

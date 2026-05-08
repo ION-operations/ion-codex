@@ -1,0 +1,125 @@
+{
+  "authority_boundary": {
+    "active_packet_allowed_paths": [
+      "ION/05_context/current/",
+      "ION/04_packages/kernel/",
+      "ION/tests/",
+      "ION/docs/consolidation/",
+      "ION/05_context/signals/",
+      "ION/02_architecture/"
+    ],
+    "mutates_custom_gpt_instructions": false,
+    "mutates_product_manifest": false,
+    "mutates_product_surfaces": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "generated_at": "2026-05-08T13:54:49+00:00",
+  "intent": "Make product/front-door GPT package surfaces inherit self-knowledge mount-first behavior for ION-about-ION tasks after acceptance.",
+  "non_claims": [
+    "This patchset is not accepted product law.",
+    "This patchset has not mutated product/custom_gpt_adapter, START_HERE.md, README.md, PRODUCT_MANIFEST.json, or package guides.",
+    "This patchset does not grant production authority, live execution authority, external Codex/MCP execution, or registry landing.",
+    "If applied after acceptance, target status fields may need Steward settlement/update."
+  ],
+  "patch_operations": [
+    {
+      "anchor": "## Mount order",
+      "operation": "insert_section_after",
+      "required_phrases": [
+        "ION-about-ION",
+        "ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+        "single-carrier",
+        "not reduced ION"
+      ],
+      "section_title": "ION Self-Knowledge Route",
+      "target_path": "START_HERE.md",
+      "text": "## ION Self-Knowledge Route\n\nWhen the user's request is about ION itself\u2014identity, architecture, runtime bodies, agents/roles, packages, templates, workpackets, authority, receipts, recovery, or implementation\u2014the carrier must route through the mounted self-knowledge system before answering or acting.\n\nRequired order:\n\n```text\nnormal ION mount\n\u2192 active state load\n\u2192 classify whether the task is ION-about-ION\n\u2192 mount ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md\n\u2192 load self-knowledge route registry\n\u2192 load required self-knowledge domain packets\n\u2192 answer or act with explicit non-claims\n```\n\nAnti-drift guards:\n\n- Single-carrier sequential mode is a host-limited fallback, not ION's intended center.\n- The GPT sandbox package is not reduced ION; it is full ION adapted to sandbox constraints.\n- Historical/donor material may inform recovery but may not become active authority without settlement.\n- Do not invent replacement ION law before checking existing domains, registries, templates, protocols, receipts, and package surfaces."
+    },
+    {
+      "anchor": "See:",
+      "operation": "insert_section_before",
+      "required_phrases": [
+        "ION-about-ION",
+        "ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+        "not reduced ION"
+      ],
+      "section_title": "ION Self-Knowledge Route",
+      "target_path": "README.md",
+      "text": "## ION Self-Knowledge Route\n\nWhen the user's request is about ION itself\u2014identity, architecture, runtime bodies, agents/roles, packages, templates, workpackets, authority, receipts, recovery, or implementation\u2014the carrier must route through the mounted self-knowledge system before answering or acting.\n\nRequired order:\n\n```text\nnormal ION mount\n\u2192 active state load\n\u2192 classify whether the task is ION-about-ION\n\u2192 mount ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md\n\u2192 load self-knowledge route registry\n\u2192 load required self-knowledge domain packets\n\u2192 answer or act with explicit non-claims\n```\n\nAnti-drift guards:\n\n- Single-carrier sequential mode is a host-limited fallback, not ION's intended center.\n- The GPT sandbox package is not reduced ION; it is full ION adapted to sandbox constraints.\n- Historical/donor material may inform recovery but may not become active authority without settlement.\n- Do not invent replacement ION law before checking existing domains, registries, templates, protocols, receipts, and package surfaces."
+    },
+    {
+      "anchor": "## Full ION Package Mounting",
+      "operation": "insert_section_after",
+      "required_phrases": [
+        "ION-about-ION",
+        "ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+        "Single-carrier sequential execution is a sandbox fallback"
+      ],
+      "section_title": "ION Self-Knowledge Mount-First Rule",
+      "target_path": "product/custom_gpt_adapter/CUSTOM_GPT_INSTRUCTIONS_8000.md",
+      "text": "## ION Self-Knowledge Mount-First Rule\n\nWhen the user asks about ION itself or asks to build, repair, explain, package, resume, or audit ION, do not free-answer from memory. After the normal package mount and active-state check, mount:\n\n`ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md`\n\nThen select the matching route from the self-knowledge route registry and load the required domain packets. Preserve the distinction between full local/API-style ION, Codex CLI local ION, and Custom GPT/GPT sandbox ION. Single-carrier sequential execution is a sandbox fallback, not the conceptual base of ION.\n\nThis rule does not grant live execution authority, production authority, external Codex/MCP execution, or permission to promote candidate state without human/Steward acceptance and receipt."
+    },
+    {
+      "anchor": "# GPT Instructions",
+      "operation": "insert_section_after",
+      "required_phrases": [
+        "ION-about-ION",
+        "ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+        "Full local/API-style ION"
+      ],
+      "section_title": "ION-About-ION Questions",
+      "target_path": "product/custom_gpt_adapter/GPT_INSTRUCTIONS.md",
+      "text": "## ION-About-ION Questions\n\nFor ION-about-ION questions, mount the self-knowledge route selector before answering. Use `ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md` when present; if an accepted `ION/03_registry/self_knowledge/` namespace later exists, prefer accepted registry law over candidate current-context mirrors. If neither exists, answer in degraded mode and state the missing self-knowledge route.\n\nDo not compress ION into a single-carrier helper model. Full local/API-style ION uses isolated role invocations when available; GPT sandbox ION adapts the same workflow to a single carrier when the host cannot isolate invocations."
+    },
+    {
+      "anchor": "# Startup Behavior",
+      "operation": "insert_section_after",
+      "required_phrases": [
+        "ION-about-ION",
+        "ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md"
+      ],
+      "section_title": "ION-About-ION Startup Route",
+      "target_path": "product/custom_gpt_adapter/STARTUP_BEHAVIOR.md",
+      "text": "For ION-about-ION startup or resume requests, quietly mount the self-knowledge route selector after normal package mount and before explaining or changing ION. Use `ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md` when present. Preserve normal first-run user language for unrelated projects."
+    },
+    {
+      "anchor": "## Package Contents",
+      "operation": "insert_section_after",
+      "required_phrases": [
+        "ION-about-ION",
+        "ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+        "GPT sandbox package is full ION adapted to sandbox constraints"
+      ],
+      "section_title": "Self-Knowledge Product Route",
+      "target_path": "product/package_guides/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE.md",
+      "text": "The package may carry a candidate or accepted self-knowledge domain state for ION-about-ION work. When present, carriers should mount `ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md` before answering ION identity, architecture, runtime, package, role, template, receipt, recovery, or implementation questions. The GPT sandbox package is full ION adapted to sandbox constraints, not reduced ION."
+    },
+    {
+      "anchor": "added_surfaces",
+      "operation": "add_paths",
+      "paths_to_add": [
+        "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+        "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+        "ION/05_context/current/self_knowledge/candidate_registries/domain_registry.candidate.yaml",
+        "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+        "ION/05_context/current/self_knowledge/domains/"
+      ],
+      "target_path": "product/custom_gpt_adapter/knowledge_manifest.json"
+    },
+    {
+      "anchor": "root",
+      "object_key": "self_knowledge_product_onboarding_candidate",
+      "object_value": {
+        "acceptance_required_before_product_landing": true,
+        "domain_state_index": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+        "mount_packet": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+        "route_registry_candidate": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+        "status": "candidate_overlay_pending_explicit_acceptance"
+      },
+      "operation": "add_object",
+      "target_path": "PRODUCT_MANIFEST.json"
+    }
+  ],
+  "schema_id": "ion.self_knowledge.product_onboarding_patchset.v0_2",
+  "status": "candidate_overlay_pending_explicit_acceptance"
+}

@@ -1,0 +1,47 @@
+{
+  "$id": "ion.self_surface_drift_gate.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "assessment_id": {
+      "type": "string"
+    },
+    "blocked_claims": {
+      "type": "array"
+    },
+    "continuable": {
+      "type": "boolean"
+    },
+    "production_authority": {
+      "const": false
+    },
+    "required_action": {
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "ion.self_surface_drift_assessment.v1"
+    },
+    "severity": {
+      "enum": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ]
+    },
+    "signals": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_id",
+    "assessment_id",
+    "severity",
+    "continuable",
+    "signals",
+    "blocked_claims",
+    "required_action"
+  ],
+  "type": "object"
+}

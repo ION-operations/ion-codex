@@ -1,0 +1,33 @@
+schema_id: ion.model_eval_score_registry.v1
+version: V56_MODEL_ECONOMICS_REGISTRY_SKELETONS
+authority_scope: A3_STEWARD_MODEL_ECONOMICS_REGISTRY_SKELETON
+production_authority: false
+scores_are_authoritative: false
+score_source: placeholder_until_receipt_history_exists
+model_scores:
+  openai/gpt-class-frontier:
+    recent_success_score: null
+    quality_score: null
+    latency_score: null
+    cost_efficiency_score: null
+  anthropic/claude-class-frontier:
+    recent_success_score: null
+    quality_score: null
+    latency_score: null
+    cost_efficiency_score: null
+  gemini/gemini-class-frontier:
+    recent_success_score: null
+    quality_score: null
+    latency_score: null
+    cost_efficiency_score: null
+  cerebras/cerebras-fast-lane:
+    recent_success_score: null
+    quality_score: null
+    latency_score: null
+    cost_efficiency_score: null
+  local/local-private-lane:
+    recent_success_score: null
+    quality_score: null
+    latency_score: null
+    cost_efficiency_score: null
+

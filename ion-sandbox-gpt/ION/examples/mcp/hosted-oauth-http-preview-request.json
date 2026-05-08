@@ -1,0 +1,21 @@
+{
+  "method": "POST",
+  "path": "/mcp",
+  "headers": {
+    "Authorization": "Bearer ionv70_preview:<token_id>:<token_hash_prefix>",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+      "name": "ion.mount",
+      "arguments": {
+        "client_name": "v70-hosted-oauth-preview",
+        "transport": "streamable-http-oauth-preview",
+        "requested_mode": "dry_run"
+      }
+    }
+  }
+}

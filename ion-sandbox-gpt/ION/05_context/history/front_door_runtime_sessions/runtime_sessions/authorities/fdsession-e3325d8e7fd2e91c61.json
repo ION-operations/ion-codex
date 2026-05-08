@@ -1,0 +1,10 @@
+{
+  "authority_id": "rsa-3657ebd25c83",
+  "created_at": "2026-05-02T22:53:18+00:00",
+  "last_transition_detail": "runtime session created",
+  "lifecycle_state": "ACTIVE",
+  "notes": null,
+  "root_authority_ref": "ION/00_BOOTSTRAP/ROOT_AUTHORITY_BUNDLE.md",
+  "session_id": "fdsession-e3325d8e7fd2e91c61",
+  "updated_at": "2026-05-02T22:53:18+00:00"
+}

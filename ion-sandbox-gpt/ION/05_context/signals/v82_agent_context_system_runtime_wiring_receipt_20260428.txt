@@ -1,0 +1,17 @@
+ION V82 AGENT CONTEXT SYSTEM RUNTIME WIRING RECEIPT
+status: ACCEPTED_LOCAL_VERIFICATION
+created: 2026-04-28
+base: V80 full project + V81 agent context systems update
+
+Accepted change:
+- Added runtime helper kernel.ion_agent_context_systems.
+- Patched kernel.ion_cycle_runner materialize_cursor_task_context_package(...) to prepend role Agent Context System surfaces.
+- Generated Cursor Task prompts now include Agent Context System authority and package policy.
+- Generated context-load receipts now include agent_context_system and context_system_read_paths.
+- Legacy MINI/CAPSULE surfaces remain available but are ordered after current context-system authority surfaces.
+
+Manual verification:
+- get_agent_context_system(root, "steward") returned active STEWARD system.
+- build_cycle_plan(... implementation ...) returned validate_cycle_plan(...) valid=True.
+- generated STEWARD prompt included "## Agent Context System authority".
+- generated receipt ordered STEWARD.context_system.md before ION/agents/steward/MINI.md.

@@ -1,0 +1,88 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "api_docs_example_validation_packet.minimal_valid.v0_1",
+  "template_id": "api_docs_example_validation_packet",
+  "case_type": "minimal_valid",
+  "status": "candidate_template_instance_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/api_docs_example_validation_packet.template_spec.yaml",
+  "primary_agent": "EXAMPLE_RUNNER",
+  "domain_id": "documentation_example_validation_domain",
+  "objective": "Exercise the api_docs_example_validation_packet candidate template with a minimal valid instance.",
+  "sections": {
+    "API_SURFACE": "POST /v1/widgets example snippets in the public API docs.",
+    "EXAMPLES": [
+      {
+        "example_id": "widget_create_curl",
+        "language": "curl",
+        "executable": true
+      },
+      {
+        "example_id": "widget_create_typescript",
+        "language": "typescript",
+        "executable": true
+      }
+    ],
+    "RUN_STATUS": [
+      {
+        "example_id": "widget_create_curl",
+        "status": "unrun_marked",
+        "reason": "no API sandbox token mounted"
+      },
+      {
+        "example_id": "widget_create_typescript",
+        "status": "unrun_marked",
+        "reason": "SDK fixture unavailable in current context"
+      }
+    ],
+    "COMMAND_RECEIPTS": [],
+    "CLAIM_MAP": [
+      {
+        "claim": "widget create endpoint accepts name and project_id",
+        "support": "source docs only",
+        "status": "unverified_candidate"
+      },
+      {
+        "claim": "examples produce a widget id",
+        "support": "illustrative response",
+        "status": "illustrative_unrun"
+      }
+    ],
+    "UNRUN_MARKERS": [
+      {
+        "example_id": "widget_create_curl",
+        "marker": "Illustrative example; not executed in this validation pass."
+      },
+      {
+        "example_id": "widget_create_typescript",
+        "marker": "Illustrative example; not executed in this validation pass."
+      }
+    ],
+    "DOCS_DELTA": "Add explicit unrun markers and remove any language implying the examples were executed.",
+    "NON_CLAIMS": [
+      "Examples are not claimed to have run.",
+      "Docs patch is candidate-only and not accepted product documentation.",
+      "No API behavior is certified by this packet."
+    ]
+  },
+  "expected_validation": {
+    "should_pass": true,
+    "expected_failure_kinds": [],
+    "proves": [
+      "required section shape can be satisfied",
+      "candidate boundary can be preserved",
+      "settlement/proof/non-claim surfaces can be named"
+    ]
+  },
+  "non_claims": [
+    "This instance is candidate current-context test data, not accepted template law.",
+    "This instance does not execute external tools or mutate production state."
+  ]
+}

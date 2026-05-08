@@ -1,0 +1,14 @@
+schema_id: ion.model_economics_implementation_schedule.v1
+version_introduced: V55_VISUAL_CLOSURE_GRAPH_PROJECTION
+authority_scope: STEWARD_IMPLEMENTATION_PLANNING_LANE
+production_authority: false
+live_provider_call_authority: false
+source_handoff: ION/05_context/steward_handoffs/ION_Steward_Implementation_Handoff_API_Provider_Orchestration_Model_Economics.md
+phases:
+  - {phase_id: ME-1, name: Policy and registry skeletons, recommended_branch: V56_MODEL_ECONOMICS_REGISTRY_SKELETONS, live_provider_calls_allowed: false}
+  - {phase_id: ME-2, name: Pure routing logic, recommended_branch: V57_MODEL_ROUTER_AND_COST_QUALITY_ROUTING, live_provider_calls_allowed: false}
+  - {phase_id: ME-3, name: Budget and API rate governors, recommended_branch: V58_BUDGET_AND_API_RATE_GOVERNORS, live_provider_calls_allowed: false}
+  - {phase_id: ME-4, name: Model call receipts, recommended_branch: V59_MODEL_CALL_RECEIPTS, live_provider_calls_allowed: false}
+  - {phase_id: ME-5, name: Provider adapter dry-run stubs, recommended_branch: V60_PROVIDER_ADAPTER_DRY_RUN_STUBS, live_provider_calls_allowed: false}
+  - {phase_id: ME-6, name: Scheduler integration planning, recommended_branch: V61_SCHEDULER_MODEL_ROUTING_INTEGRATION_PLAN, live_provider_calls_allowed: false}
+forbidden_until_future_ratification: {live_provider_calls: true, provider_credentials: true, scheduler_direct_provider_calls: true, production_authority: true, unreceipted_model_outputs: true}

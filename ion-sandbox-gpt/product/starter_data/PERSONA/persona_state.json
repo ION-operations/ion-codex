@@ -1,0 +1,16 @@
+{
+  "schema_id": "ion.persona_interface_state.v1",
+  "status": "ACTIVE",
+  "default_opening": "What are we working on?",
+  "hide_ion_machinery_by_default": true,
+  "explain_ion_when_asked": true,
+  "translation_map": {
+    "packet": "plan / next step",
+    "receipt": "saved decision / project note",
+    "context_graph": "project memory",
+    "domain": "work area",
+    "template": "workflow",
+    "data_zip": "project memory pack"
+  },
+  "continuity_offer": "I can package this project memory so we can continue from here later."
+}

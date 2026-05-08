@@ -1,0 +1,53 @@
+schema_id: ion.joc_cockpit_layout_manifest.v1
+version: V56_ION_JOC_COCKPIT_SHELL_COMPONENT_CONTRACTS
+status: component_contract_manifest
+production_authority: false
+layout_zones:
+  - TOP_BAR
+  - LEFT_RAIL
+  - MAIN_WORK_SURFACE
+  - RIGHT_INSPECTOR
+  - BOTTOM_TIMELINE
+required_components:
+  - IonTopBar
+  - IonLeftRail
+  - IonMainWorkSurface
+  - IonRightInspector
+  - IonBottomTimeline
+  - ReceiptRail
+  - VisualEvidenceLens
+  - ReactiveOsStream
+  - MissionRoutePanel
+  - ContextGraphExplorer
+  - ConversationalRepairQueue
+  - BrowserAutomationOverlay
+  - ComputeCostRouter
+projection_surfaces:
+  - MAINTAINED_WORK_SURFACE_OVERVIEW
+  - FRONT_STAGE_COUNCIL_STATE_STRIP
+  - CLAIM_AND_RECEIPT_RAIL
+  - VISUAL_EVIDENCE_LENS
+  - MISSION_DISPATCH_AND_MODEL_ROUTE_PANEL
+  - CONTEXT_GRAPH_COGNITIVE_EXPLORER
+  - REACTIVE_OS_STREAM
+  - CONVERSATIONAL_REPAIR_QUEUE
+  - BROWSER_SESSION_AUTOMATION_OVERLAY
+  - COMPUTE_AND_COST_ROUTER
+automation_loops:
+  - VISUAL_ISSUE_CLOSURE_LOOP
+  - MISSION_DISPATCH_LOOP
+  - SESSION_HEALTH_LOOP
+  - CONTEXT_PROJECTION_LOOP
+  - CONVERSATIONAL_REPAIR_LOOP
+  - MODEL_COST_QUALITY_LOOP
+forbidden_capabilities:
+  production_authority: false
+  unrestricted_browser_control: false
+  credential_access: false
+  external_network_authority: false
+  account_operation: false
+  destructive_action: false
+  form_submission: false
+  purchase_or_submission: false
+  persistent_dom_mutation: false
+  production_visual_automation: false

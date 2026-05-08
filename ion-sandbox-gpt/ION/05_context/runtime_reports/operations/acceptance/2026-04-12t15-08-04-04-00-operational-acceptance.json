@@ -1,0 +1,72 @@
+{
+  "acceptance_criteria": [
+    {
+      "criterion_id": "A1",
+      "evidence_paths": [
+        "ION/04_packages/kernel/operator_control.py",
+        "ION/05_context/history/operator_controls/operator_control_state.json"
+      ],
+      "satisfied": true,
+      "summary": "Operator control state is machine-readable (service_mode=ENABLED)."
+    },
+    {
+      "criterion_id": "A2",
+      "evidence_paths": [
+        "ION/04_packages/kernel/daemon_service.py",
+        "ION/05_context/history/daemon_service_ledger.json"
+      ],
+      "satisfied": true,
+      "summary": "Daemon service has executed or been invoked through the supervised service path."
+    },
+    {
+      "criterion_id": "A3",
+      "evidence_paths": [
+        "ION/04_packages/kernel/automation_policy.py",
+        "ION/05_context/history/supervised_runtime/supervised_runtime_state.json"
+      ],
+      "satisfied": true,
+      "summary": "Automation actions can be refused lawfully through the policy floor."
+    },
+    {
+      "criterion_id": "A4",
+      "evidence_paths": [
+        "ION/04_packages/kernel/child_work_service.py",
+        "ION/05_context/history/child_work_service_ledger.json"
+      ],
+      "satisfied": true,
+      "summary": "Child-work issuance has an approval-aware supervised service path."
+    },
+    {
+      "criterion_id": "A5",
+      "evidence_paths": [
+        "ION/04_packages/kernel/recovery_replay.py",
+        "ION/05_context/history/recovery_replay_ledger.json"
+      ],
+      "satisfied": true,
+      "summary": "Recovery and replay are available before stronger autonomy claims."
+    },
+    {
+      "criterion_id": "A6",
+      "evidence_paths": [
+        "ION/06_intelligence/research/2026-04-08_ion_operationalization_master_plan.md",
+        "ION/05_context/comms/migration_ledgers/automation_operationalization_ledger.md"
+      ],
+      "satisfied": true,
+      "summary": "Witness/report surfaces remain subordinate to the operational kernel by plan and protocol."
+    }
+  ],
+  "child_work_service_events": 0,
+  "external_execution_events": 0,
+  "generated_at": "2026-04-12T15:08:04-04:00",
+  "latest_daemon_service_receipt_path": "ION/05_context/history/daemon_service_receipts/daemon-service-2026-04-10t18-07-40-00-00.daemon_service_receipt.json",
+  "latest_daemon_service_status": "EXECUTED",
+  "operator_control_state": {
+    "global_notes": [],
+    "scope_holds": [],
+    "service_mode": "ENABLED",
+    "updated_at": "2026-04-12T15:08:04-04:00"
+  },
+  "preferred_active_mode": true,
+  "recovery_replay_events": 0,
+  "runtime_state_path": "ION/05_context/history/supervised_runtime/supervised_runtime_state.json"
+}

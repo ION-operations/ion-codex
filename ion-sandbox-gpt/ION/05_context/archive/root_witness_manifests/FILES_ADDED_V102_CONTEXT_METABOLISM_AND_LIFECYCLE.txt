@@ -1,0 +1,10 @@
+ION/00_BOOTSTRAP/V102_CONTEXT_METABOLISM_AND_LIFECYCLE_LOCK.md
+ION/02_architecture/ION_CONTEXT_METABOLISM_AND_LIFECYCLE_PROTOCOL.md
+ION/03_registry/context_lifecycle_policy.yaml
+ION/04_packages/kernel/ion_context_lifecycle.py
+ION/tests/test_kernel_ion_context_lifecycle.py
+ION/05_context/current/CONTEXT_METABOLISM_MANIFEST_V102.json
+ION/05_context/current/CONTEXT_LIFECYCLE_AUDIT_V102.json
+ION/05_context/current/agent_context_systems/LEAD_DEV_CONTEXT_METABOLISM_SURFACE_V102.md
+ION/05_context/signals/v102_context_metabolism_receipt_20260502.txt
+ION/docs/consolidation/ION_V102_CONTEXT_METABOLISM_AND_LIFECYCLE_REPORT_20260502.md

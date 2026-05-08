@@ -1,0 +1,87 @@
+{
+  "closed_or_improved_in_v104": [
+    "created active carrier work-cycle template referenced by ACTIVE_WORK_PACKET",
+    "refreshed stale false existence flags in ACTIVE_AGENT_CONTEXT_WINDOW_PLAN where referenced context-system files exist",
+    "materialized non-empty IONOLOGIST context-system card",
+    "added operational truth audit module and report path",
+    "added long-horizon operational roadmap and open-work register"
+  ],
+  "created_at": "2026-05-02",
+  "current_verdict": "partial_operational_runtime_with_open_gates",
+  "line": "V104_OPERATIONAL_TRUTH_AUDIT_AND_LONG_HORIZON_ORCHESTRATION",
+  "next_three_versions": [
+    {
+      "exit_condition": "one command builds compact runtime zip and forensic archive manifest under lifecycle policy",
+      "name": "LIFECYCLE_AWARE_CARRIER_RELEASE_PACKAGER",
+      "version": "V105"
+    },
+    {
+      "exit_condition": "operator input produces grounded front-door receipt and accepted persona output without bypassing Steward",
+      "name": "FRONT_DOOR_RELAY_STEWARD_PERSONA_RUNTIME_PATH",
+      "version": "V106"
+    },
+    {
+      "exit_condition": "local/external workers return packets through context proof/template gate/Steward integration only",
+      "name": "BOUNDED_WORKER_ADAPTER_INTERFACE",
+      "version": "V107"
+    }
+  ],
+  "not_production_ready_reasons": [
+    "packaging gate not bound to context lifecycle",
+    "external worker adapters intentionally not active",
+    "front-door runtime path not yet proven end-to-end",
+    "template graph writeback remains proposal/review machinery rather than closed metabolic runtime",
+    "release verifier and production namespace repair not complete",
+    "full-suite production verification not claimed"
+  ],
+  "open_gates": [
+    {
+      "exit_condition": "carrier/release packager excludes cold/history by policy while preserving forensic archives",
+      "gate": "G2_lifecycle_aware_packaging",
+      "status": "open"
+    },
+    {
+      "exit_condition": "operator message routes through Relay grounding, Steward authority, Persona rendering, and receipts",
+      "gate": "G3_front_door_runtime",
+      "status": "open"
+    },
+    {
+      "exit_condition": "external workers cannot bypass context proof, template/action gate, Steward integration, lifecycle policy, or human gates",
+      "gate": "G4_bounded_worker_adapter",
+      "status": "blocked_until_G2_G3"
+    },
+    {
+      "exit_condition": "proposal/diff/review/commit path uses deltas and reconciles repeated/stale proposals",
+      "gate": "G5_template_graph_writeback_runtime",
+      "status": "open"
+    },
+    {
+      "exit_condition": "accepted work metabolizes into compact role/context deltas and timeline entries",
+      "gate": "G6_context_delta_timeline",
+      "status": "open"
+    },
+    {
+      "exit_condition": "JOC/cockpit exposes objective, gate, role packages, receipts, stop reason, lifecycle verdict, and next action",
+      "gate": "G7_cockpit_operator_surface",
+      "status": "open"
+    },
+    {
+      "exit_condition": "release verifier separates branch lineage from production-gate namespace and verifies the compact package",
+      "gate": "G8_release_verifier_namespace_repair",
+      "status": "open"
+    },
+    {
+      "exit_condition": "Cursor/MCP/API workers run only as carrier slots under ION gates",
+      "gate": "G9_external_carrier_api_mcp_execution",
+      "status": "blocked_until_G2_G4"
+    },
+    {
+      "exit_condition": "production readiness verifier and adversarial audit pass without overclaim",
+      "gate": "G10_production_adversarial_audit",
+      "status": "blocked_until_G8_G9"
+    }
+  ],
+  "production_authority": false,
+  "schema_id": "ion.master_operational_roadmap.v104",
+  "truth_statement": "ION has many advanced temporal/context/orchestration surfaces. The live defect is not absence; it is incomplete enforcement and packaging wiring across the full operational path."
+}

@@ -1,0 +1,65 @@
+{
+  "action": "product_package_onboarding_audit_and_candidate_overlay_preparation",
+  "authority_boundary": {
+    "explicit_acceptance_observed": false,
+    "live_execution_authority": false,
+    "mutated_ION_03_registry": false,
+    "mutated_custom_gpt_instructions": false,
+    "mutated_product_manifest": false,
+    "mutated_product_surfaces": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-08T13:53:57+00:00",
+  "inputs": [
+    "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T045721Z.json",
+    "START_HERE.md",
+    "README.md",
+    "PRODUCT_MANIFEST.json",
+    "product/custom_gpt_adapter/",
+    "product/package_guides/",
+    "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+    "ION/05_context/current/self_knowledge/"
+  ],
+  "non_claims": [
+    "Receipt is candidate evidence, not product-law acceptance.",
+    "No target product/front-door surface was mutated.",
+    "No ION/03_registry/self_knowledge landing occurred.",
+    "No external Codex/MCP/daemon execution occurred."
+  ],
+  "objective": "Audit product/front-door package surfaces for ION self-knowledge mount-first behavior and prepare candidate product overlay without product-law mutation.",
+  "outputs": [
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_AUDIT_REPORT_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_OVERLAY_V0_2.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PATCHSET_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/product_onboarding_overlay/PRODUCT_ONBOARDING_SELF_KNOWLEDGE_WIRING_PROPOSAL_20260508T135357Z.md",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PRODUCT_ONBOARDING_VALIDATION_NOTE_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_PRODUCT_ONBOARDING_20260508T135357Z.json",
+    "ION/05_context/current/self_knowledge/audit_self_knowledge_product_onboarding.py",
+    "ION/tests/test_kernel_ion_self_knowledge_product_onboarding.py"
+  ],
+  "receipt_id": "self_knowledge_product_onboarding_20260508T135357Z",
+  "result": {
+    "acceptance_gate_criterion_12_ready_candidate": true,
+    "candidate_product_overlay_prepared": true,
+    "frontdoor_explicit_self_knowledge_surface_count": 0,
+    "package_includes_self_knowledge_candidate_surfaces": true
+  },
+  "schema_id": "ion.receipt.self_knowledge_product_onboarding.v0_2",
+  "status": "candidate_evidence_recorded_not_accepted_state",
+  "validation": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "candidate_validation": {
+      "accepted": true,
+      "domain_count": 14,
+      "findings": [],
+      "live_execution_authority": false,
+      "parsed_files_count": 22,
+      "production_authority": false,
+      "route_count": 7,
+      "schema_id": "ion.self_knowledge_candidate_validation.v0_2"
+    },
+    "focused_pytest": "25 passed",
+    "ion_status": "ION_STATUS_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+  }
+}

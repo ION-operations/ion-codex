@@ -1,0 +1,155 @@
+schema_id: ion.carrier_capability_registry.v1
+status: draft_non_production
+production_authority: false
+live_execution_authority: false
+core_invariant: "ION has one core engine mounted by all carriers."
+failure_classifications:
+  - ION_CORE_FAILURE
+  - CARRIER_ADAPTER_FAILURE
+  - TRANSPORT_FAILURE
+  - AUTH_OR_CONFIRMATION_FAILURE
+  - CAPABILITY_NOT_YET_IMPLEMENTED
+  - POLICY_BLOCK_WORKING_AS_DESIGNED
+  - CODEX_CLI_FAILURE
+  - DAEMON_FAILURE
+  - AGENT_INVOCATION_FAILURE
+  - BACKEND_CODEX_FAILURE
+capability_classes:
+  mount_and_context:
+    core_owner: ION/02_architecture/ION_MOUNT_CONTRACT.md
+    proof_template: ION/07_templates/carriers/CARRIER_MOUNT_PROOF.md
+    required_for_full_carrier: true
+  status_and_state_visibility:
+    core_owner: ION/04_packages/kernel/ion_status.py
+    current_browser_tools:
+      - ion_status
+      - ion_current_operating_packet
+      - ion_carrier_onboarding_packet
+      - ion_read_active_packet
+      - ion_context_plan
+      - ion_cockpit_view
+      - ion_artifact_manifest
+      - ion_receipt_search
+      - ion_git_status_summary
+      - ion_codex_work_queue
+      - ion_file_read
+      - ion_file_search
+      - ion_tree_list
+      - ion_registry_read
+      - ion_template_read
+      - ion_context_compile
+      - ion_receipt_hydrate
+      - ion_tool_manifest
+      - ion_daemon_status
+      - ion_codex_queue_autorun_status
+    required_for_full_carrier: true
+  bounded_project_visibility:
+    core_owner: ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py
+    browser_tools:
+      - ion_file_read
+      - ion_file_search
+      - ion_tree_list
+      - ion_registry_read
+      - ion_template_read
+      - ion_context_compile
+      - ion_receipt_hydrate
+      - ion_tool_manifest
+    policy: repo_relative_no_secret_or_git_paths
+    required_for_full_carrier: true
+  work_packet_creation:
+    core_owner: ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json
+    current_browser_tools:
+      - ion_queue_operator_message
+      - ion_request_codex_work_packet
+    required_for_full_carrier: true
+  codex_queue_automation:
+    core_owner: ION/04_packages/kernel/ion_codex_queue_runner.py
+    queue_owner: ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json
+    current_browser_tools:
+      - ion_daemon_status
+      - ion_codex_queue_autorun_status
+      - ion_codex_queue_process_once
+    command_policy: fixed_codex_cli_carrier_command_only_no_arbitrary_shell
+    failure_classes:
+      - CARRIER_ADAPTER_FAILURE
+      - CODEX_CLI_FAILURE
+      - BACKEND_CODEX_FAILURE
+      - DAEMON_FAILURE
+      - ION_CORE_FAILURE
+    required_for_full_carrier: true
+  agent_invocation_broker:
+    core_owner: ION/04_packages/kernel/ion_agent_invocation_broker.py
+    queue_owner: ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json
+    invocation_owner: ION/05_context/current/chatgpt_connector/agent_invocations/
+    registry_owners:
+      - ION/03_registry/agent_roster_registry.yaml
+      - ION/03_registry/agent_context_system_registry.yaml
+      - ION/03_registry/codex_cli_carrier_profile.yaml
+    template_owner: ION/07_templates/carriers/CODEX_CLI_EXECUTION_PACKET.md
+    current_browser_tools:
+      - ion_agent_list
+      - ion_agent_status
+      - ion_agent_result
+      - ion_agent_queue
+      - ion_agent_spawn_plan
+      - ion_swarm_status
+      - ion_agent_invoke
+      - ion_agent_cancel
+      - ion_swarm_step_once
+    backend_policy: fixed_codex_cli_carrier_command_only_no_arbitrary_shell
+    output_policy: raw_backend_output_requires_existing_task_return_proof_gates
+    failure_classes:
+      - AGENT_INVOCATION_FAILURE
+      - BACKEND_CODEX_FAILURE
+      - CARRIER_ADAPTER_FAILURE
+      - DAEMON_FAILURE
+      - ION_CORE_FAILURE
+    required_for_full_carrier: true
+  file_artifact_transfer:
+    core_owner: ION/05_context/current/chatgpt_connector/
+    first_browser_tools:
+      - ion_file_put_text
+      - ion_artifact_upload_init
+      - ion_artifact_upload_chunk
+      - ion_artifact_upload_commit
+    transfer_roots:
+      - ION/05_context/current/chatgpt_connector/artifacts/
+      - ION/05_context/inbox/
+      - ION/05_context/signals/
+    overwrite_policy: BLOCK_EXISTING_TARGET_AND_REQUIRE_LIFECYCLE_RECEIPT
+    required_for_full_carrier: true
+  carrier_to_carrier_comms:
+    core_owner: ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json
+    first_browser_tools:
+      - ion_carrier_message_send
+      - ion_carrier_message_poll
+      - ion_carrier_message_ack
+    distinguishes_from:
+      - ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json
+      - ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json
+      - ION/05_context/current/chatgpt_connector/task_returns/
+    required_for_full_carrier: true
+  task_return_and_integration:
+    core_owner: ION/04_packages/kernel/ion_carrier_task_return.py
+    current_browser_tools:
+      - ion_submit_task_return
+    proof_gates:
+      - kernel.ion_context_proof_gate
+      - kernel.ion_template_action_gate
+    required_for_full_carrier: true
+  command_test_process_git:
+    core_owner: ION/07_templates/actions/FULL_CARRIER_ACTION_RECEIPT.md
+    browser_state: CAPABILITY_NOT_YET_IMPLEMENTED
+    staging_requirement: approval_and_receipt_before_any_live_host_action
+    required_for_full_carrier: true
+carrier_profiles:
+  CHATGPT_BROWSER_CARRIER:
+    current_profile: ION/03_registry/chatgpt_browser_carrier_profile.yaml
+    current_posture: FULL_CARRIER_TARGET_WITH_STAGED_MCP_TOOLS_BOUNDED_PROJECT_VISIBILITY_AND_CODEX_QUEUE_PROCESS_ONCE
+    adapter_gap_not_core_failure: true
+  CODEX_CLI_CARRIER:
+    current_profile: ION/03_registry/codex_cli_carrier_profile.yaml
+    current_posture: LOCAL_FILESYSTEM_BUILD_TEST_WORKER
+  CODEX_EXTENSION_CARRIER:
+    current_profile: ION/03_registry/codex_extension_carrier_profile.yaml
+    current_posture: IDE_FILESYSTEM_BUILD_TEST_WORKER

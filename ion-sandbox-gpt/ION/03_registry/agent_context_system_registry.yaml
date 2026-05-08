@@ -1,0 +1,176 @@
+registry_id: ion.agent_context_system_registry.v1
+status: ACTIVE_OPERATIONAL
+rank: A2_CONTEXT_AUTHORITY
+created: 2026-04-28
+primary_protocol: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+primary_index: ION/05_context/current/agent_context_systems/AGENT_CONTEXT_SYSTEMS_INDEX.md
+primary_templates:
+  - ION/07_templates/context/AGENT_CONTEXT_SYSTEM_CARD.md
+  - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - ION/07_templates/context/AGENT_CONTEXT_PACKAGE_INDEX.md
+context_authority_team:
+  - role.ionologist
+  - role.context_cartographer
+  - role.runtime_cartographer
+  - role.canon_librarian
+  - role.template_curator
+legacy_surfaces_policy:
+  mini_capsule_status: STANDING_CONTINUITY_WITNESS_NOT_PRIMARY_CONTEXT_AUTHORITY
+  boot_status: IDENTITY_AND_LAW_INPUT_NOT_COMPLETE_CONTEXT_PACKAGE
+  root_projection_status: UI_OR_OPERATOR_PROJECTION_NOT_AGENT_PRIVATE_CONTEXT_SOURCE
+  required_package_phrase: MINI/CAPSULE are witness inputs, not primary context authority. The active package is the operative context for this run.
+agents:
+  - role_id: role.steward
+    display_name: STEWARD
+    context_system_card: ION/05_context/current/agent_context_systems/STEWARD.context_system.md
+    base_sources:
+      - ION/03_registry/boots/STEWARD.boot.md
+      - ION/03_registry/semantic_identities/STEWARD.semantic.yaml
+      - ION/agents/steward/MINI.md
+      - ION/agents/steward/CAPSULE.md
+    package_strategy: orchestration and integration package with current cycle plan, authority map, carrier limits, and acceptance gates
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/bindings/STEWARD__TASK.md
+      - ION/07_templates/bindings/STEWARD__STATUS_REPORT.md
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.vizier
+    display_name: VIZIER
+    context_system_card: ION/05_context/current/agent_context_systems/VIZIER.context_system.md
+    base_sources:
+      - ION/03_registry/boots/VIZIER.boot.md
+      - ION/03_registry/semantic_identities/VIZIER.semantic.yaml
+      - ION/agents/vizier/MINI.md
+      - ION/agents/vizier/CAPSULE.md
+    package_strategy: architecture and continuity package with scope, dependencies, system implications, and review posture
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/bindings/STEWARD__PROPOSAL.md
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.mason
+    display_name: MASON
+    context_system_card: ION/05_context/current/agent_context_systems/MASON.context_system.md
+    base_sources:
+      - ION/03_registry/boots/MASON.boot.md
+      - ION/agents/mason/MINI.md
+      - ION/agents/mason/CAPSULE.md
+    package_strategy: bounded implementation package with explicit allowed paths, exact files, tests, and no architecture expansion unless routed
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/bindings/MASON__CODE.md
+      - ION/07_templates/actions/CODE.md
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.nemesis
+    display_name: NEMESIS
+    context_system_card: ION/05_context/current/agent_context_systems/NEMESIS.context_system.md
+    base_sources:
+      - ION/03_registry/boots/NEMESIS.boot.md
+      - ION/03_registry/semantic_identities/NEMESIS.semantic.yaml
+      - ION/agents/nemesis/MINI.md
+    package_strategy: independent audit package with evidence ledger, admissibility rules, release sensitivity, and non-authoring boundary
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/bindings/NEMESIS__AUDIT.md
+      - ION/07_templates/reports/AUDIT.md
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.vice
+    display_name: VICE
+    context_system_card: ION/05_context/current/agent_context_systems/VICE.context_system.md
+    base_sources:
+      - ION/03_registry/boots/VICE.boot.md
+      - ION/03_registry/semantic_identities/VICE.semantic.yaml
+      - ION/agents/vice/MINI.md
+      - ION/agents/vice/CAPSULE.md
+    package_strategy: contradiction-pressure package with future answerability, dissent ledger, and risk pressure boundaries
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.relay
+    display_name: RELAY
+    context_system_card: ION/05_context/current/agent_context_systems/RELAY.context_system.md
+    base_sources:
+      - ION/03_registry/boots/RELAY.boot.md
+      - ION/03_registry/semantic_identities/RELAY.semantic.yaml
+      - ION/06_intelligence/relay/relay/
+    package_strategy: packetization and transmission package; courier, digest, handoff, and operator-facing relay, not authority source
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/bindings/RELAY__HANDOFF.md
+      - ION/07_templates/actions/HANDOFF.md
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.vestige
+    display_name: VESTIGE
+    context_system_card: ION/05_context/current/agent_context_systems/VESTIGE.context_system.md
+    base_sources:
+      - ION/03_registry/boots/VESTIGE.boot.md
+      - ION/03_registry/semantic_identities/VESTIGE.semantic.yaml
+      - ION/06_intelligence/archaeology/vestige/
+    package_strategy: provenance and drift-watch package with branch/donor/stale surface classification and broad-read/narrow-write rule
+    default_active_package_class: RECOVERY_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/bindings/VESTIGE__EVIDENCE.md
+      - ION/07_templates/reports/EVIDENCE.md
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.thoth
+    display_name: THOTH
+    context_system_card: ION/05_context/current/agent_context_systems/THOTH.context_system.md
+    base_sources:
+      - ION/03_registry/boots/THOTH.boot.md
+      - ION/agents/thoth/MINI.md
+      - ION/agents/thoth/CAPSULE.md
+    package_strategy: reasoning and research package with question framing, evidence synthesis, and non-mutating analysis boundary
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/bindings/THOTH__RESEARCH.md
+      - ION/07_templates/reports/RESEARCH.md
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.scribe
+    display_name: SCRIBE
+    context_system_card: ION/05_context/current/agent_context_systems/SCRIBE.context_system.md
+    base_sources:
+      - ION/03_registry/boots/SCRIBE.boot.md
+      - ION/agents/scribe/MINI.md
+      - ION/agents/scribe/CAPSULE.md
+    package_strategy: documentation and receipt package with exact paths, summaries, report style, and no architecture ownership
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/reports/STATUS_REPORT.md
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.persona_interface
+    display_name: PERSONA_INTERFACE
+    context_system_card: ION/05_context/current/agent_context_systems/PERSONA_INTERFACE.context_system.md
+    base_sources:
+      - ION/03_registry/boots/PERSONA_INTERFACE.boot.md
+      - ION/03_registry/semantic_identities/PERSONA_INTERFACE.semantic.yaml
+      - ION/agents/persona_interface/continuity.md
+    package_strategy: user-facing discourse package with accepted Relay/Steward output, relationship continuity, and no hidden authority claims
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/bindings/PERSONA_INTERFACE__USER_RESPONSE.md
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - role_id: role.atlas
+    display_name: ATLAS
+    context_system_card: ION/05_context/current/agent_context_systems/ATLAS.context_system.md
+    base_sources:
+      - ION/03_registry/boots/ATLAS.boot.md
+      - ION/agents/atlas/MINI.md
+      - ION/agents/atlas/CAPSULE.md
+    package_strategy: external systems reference package with evidence tiers, comparative mapping, and no ION continuity authority
+    default_active_package_class: MISSION_ACTIVE_CONTEXT_PACKAGE
+    primary_templates:
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+context_specialists:
+  - role_id: role.ionologist
+    context_system_card: ION/05_context/current/agent_context_systems/IONOLOGIST.context_system.md
+  - role_id: role.context_cartographer
+    context_system_card: ION/05_context/current/agent_context_systems/CONTEXT_CARTOGRAPHER.context_system.md
+  - role_id: role.runtime_cartographer
+    context_system_card: ION/05_context/current/agent_context_systems/RUNTIME_CARTOGRAPHER.context_system.md
+  - role_id: role.canon_librarian
+    context_system_card: ION/05_context/current/agent_context_systems/CANON_LIBRARIAN.context_system.md
+  - role_id: role.template_curator
+    context_system_card: ION/05_context/current/agent_context_systems/TEMPLATE_CURATOR.context_system.md
+acceptance_gate:
+  audit_module: kernel.ion_agent_context_system_audit
+  required_index: ION/05_context/current/agent_context_systems/AGENT_CONTEXT_SYSTEMS_INDEX.md
+  required_template: ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md

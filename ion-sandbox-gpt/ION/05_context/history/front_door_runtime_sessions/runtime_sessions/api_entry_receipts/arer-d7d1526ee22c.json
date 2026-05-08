@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-05-02T22:53:18.580262+00:00",
+  "detail": "API carrier api://front-door-proof-trace entered runtime session fdsession-e3325d8e7fd2e91c61",
+  "failure_disposition": null,
+  "intent_id": "arei-1a66fd400712",
+  "receipt_id": "arer-d7d1526ee22c",
+  "session_id": "fdsession-e3325d8e7fd2e91c61",
+  "status": "ACCEPTED",
+  "witness_paths": [
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/sessions/fdsession-e3325d8e7fd2e91c61.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/authorities/fdsession-e3325d8e7fd2e91c61.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/queues/fdsession-e3325d8e7fd2e91c61.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/carrier_bindings/fdsession-e3325d8e7fd2e91c61.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/context_bindings/fdsession-e3325d8e7fd2e91c61.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/api_carrier_boundaries/acb-847548dfe713.json",
+    "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/05_context/history/front_door_runtime_sessions/runtime_sessions/api_entry_receipts/arer-d7d1526ee22c.json"
+  ]
+}

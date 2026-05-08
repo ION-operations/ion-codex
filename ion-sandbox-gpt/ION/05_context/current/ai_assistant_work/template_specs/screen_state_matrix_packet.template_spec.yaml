@@ -1,0 +1,131 @@
+schema: ion.ai_assistant_work.template_spec.v0_1
+template_id: screen_state_matrix_packet
+title: Screen State Matrix Packet
+status: candidate_machine_checkable_template_spec_not_accepted_canon
+created_at: '2026-05-08T15:19:39Z'
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  external_execution_authority: false
+  requires_explicit_acceptance_to_land: true
+owned_by_domain: ui_state_modeling_domain
+primary_agent: UI_STATE_MODELER
+supporting_agents:
+- UI_ARCHITECT
+- SCREEN_STATE_CARTOGRAPHER
+- ACCESSIBILITY_AUDITOR
+- TEST_RUNNER
+purpose: Convert a UI feature brief into explicit screen states, user roles, transitions,
+  component obligations, and validation gates before implementation.
+intent_class: specialist_domain_template
+state_inputs:
+- product_brief_state
+- existing_route_state
+- design_system_state
+- a11y_baseline_state
+state_outputs:
+- screen_state_matrix
+- component_contract_state
+- test_plan_state
+- settlement_request_state
+required_context:
+- user story or product brief
+- existing routes/components if present
+- design system constraints
+- accessibility baseline
+machine_required_sections:
+- name: INTENT
+  type: string
+  min_length: 20
+- name: USER_ROLES
+  type: list
+  min_items: 1
+- name: SCREEN_STATES
+  type: list
+  min_items: 4
+  must_include_any:
+  - loading
+  - error
+  - empty
+  - success
+  - permission
+- name: TRANSITIONS
+  type: list
+  min_items: 1
+- name: COMPONENT_CONTRACTS
+  type: list
+  min_items: 1
+- name: A11Y_GATES
+  type: list
+  min_items: 1
+- name: TEST_GATES
+  type: list
+  min_items: 1
+- name: NON_CLAIMS
+  type: list
+  min_items: 1
+- name: SETTLEMENT_ROUTE
+  type: string
+  min_length: 5
+proof_gates:
+- gate_id: candidate_boundary_named
+  description: Output states it is candidate/not accepted unless explicit acceptance
+    exists
+  machine_check:
+    requires_non_claim: accepted_state
+- gate_id: required_sections_present
+  description: Every machine_required_sections item is present and non-empty according
+    to rule
+  machine_check:
+    type: schema_section_presence
+- gate_id: settlement_route_named
+  description: Return includes route for review/settlement/inheritance
+  machine_check:
+    section_any:
+    - SETTLEMENT_ROUTE
+    - RECEIPT_TARGET
+- gate_id: proof_or_missing_context_named
+  description: Proof, command receipts, or missing context are stated
+  machine_check:
+    requires_any:
+    - PROOF
+    - COMMAND_RECEIPTS
+    - TEST_AND_PROOF_PLAN
+    - PROOF_NORMALIZATION
+    - CI_EVIDENCE
+- gate_id: draft_gate_1
+  description: states include loading/error/empty/permission where applicable
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_2
+  description: component obligations are testable
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_3
+  description: a11y gates are named
+  machine_check:
+    type: human_or_script_check
+reject_if:
+- screen states do not include failure/empty/loading/permission analysis where applicable
+- component contracts are not testable
+- generic implementation is selected before UI state modeling
+output_contract: screen-state matrix and downstream component/test packets
+completion_class: planning_to_implementation_ready
+settlement_route: UI_ARCHITECT or PRODUCT_ANALYST before COMPONENT_BUILDER
+route_binding:
+  dispatch_before_generic_implementation: true
+  trigger_patterns:
+  - screen state matrix packet
+  - screen state matrix
+  - ui state modeler
+  fallback_agent_forbidden_until_specialist_check: true
+minimal_valid_instance_shape:
+  template_id: screen_state_matrix_packet
+  sections: must match machine_required_sections
+  non_claims_required: true
+  settlement_route_or_receipt_target_required: true
+status_notes:
+- This spec is machine-checkable structure for candidate current-context use; it is
+  not active template law.
