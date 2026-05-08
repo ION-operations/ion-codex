@@ -2,7 +2,7 @@
   "active_packet_path": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
   "active_template": "ION/07_templates/carriers/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
   "carrier": "GPT_SANDBOX_CARRIER",
-  "created_at": "2026-05-08T19:31:48+00:00",
+  "created_at": "2026-05-08T19:37:22+00:00",
   "findings": [],
   "legacy_reference_count": 1484,
   "legacy_references_sample": [

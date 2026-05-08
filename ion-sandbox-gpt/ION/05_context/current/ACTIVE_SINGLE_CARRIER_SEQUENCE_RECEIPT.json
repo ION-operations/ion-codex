@@ -3,12 +3,12 @@
   "carrier": "GPT_SANDBOX_CARRIER",
   "completed_output_path": null,
   "context_proof_required": true,
-  "created_at": "2026-05-08T19:31:48+00:00",
+  "created_at": "2026-05-08T19:37:21+00:00",
   "live_execution_authority": false,
   "next_state_projection": "none_written_without_steward_or_human_acceptance",
   "objective": "write sequence packet test",
   "output_evaluation": null,
-  "packet_path": "ION/05_context/current/single_carrier_sequences/scseq-4e716a45c88e82ed15/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
+  "packet_path": "ION/05_context/current/single_carrier_sequences/scseq-b01bb146005dae0f3e/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
   "phase_order": [
     {
       "phase_id": "PERSONA_INTERFACE_INGRESS",
@@ -67,10 +67,10 @@
   ],
   "phase_section_validation": "ready",
   "production_authority": false,
-  "receipt_id": "screceipt-8f5a066abbf8ad25ad",
+  "receipt_id": "screceipt-d78be6aa5326f14ea0",
   "receipt_status": "SEQUENCE_PACKET_READY_AWAITING_CARRIER_OUTPUT",
   "schema_id": "ion.single_carrier_sequence_receipt.v1",
-  "sequence_id": "scseq-4e716a45c88e82ed15",
+  "sequence_id": "scseq-b01bb146005dae0f3e",
   "steward_review_required": true,
   "template_action_proof_required": true,
   "template_id": "ion.template.single_carrier_sequence_receipt.v1"

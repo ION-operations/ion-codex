@@ -2,8 +2,8 @@
 
 schema_id: ion.single_carrier_sequence_packet.v1
 template_id: ion.template.single_carrier_sequential_runtime.v1
-sequence_id: scseq-4e716a45c88e82ed15
-created_at: 2026-05-08T19:31:48+00:00
+sequence_id: scseq-b01bb146005dae0f3e
+created_at: 2026-05-08T19:37:21+00:00
 carrier: GPT_SANDBOX_CARRIER
 objective: write sequence packet test
 production_authority: false
@@ -32,8 +32,8 @@ PERSONA_INTERFACE ingress
 ## Active packet
 
 - active work packet: `ION/05_context/current/ACTIVE_WORK_PACKET.json`
-- sequence receipt candidate: `ION/05_context/current/single_carrier_sequences/scseq-4e716a45c88e82ed15/SINGLE_CARRIER_SEQUENCE_RECEIPT.json`
-- packet path: `ION/05_context/current/single_carrier_sequences/scseq-4e716a45c88e82ed15/SINGLE_CARRIER_SEQUENTIAL_PACKET.md`
+- sequence receipt candidate: `ION/05_context/current/single_carrier_sequences/scseq-b01bb146005dae0f3e/SINGLE_CARRIER_SEQUENCE_RECEIPT.json`
+- packet path: `ION/05_context/current/single_carrier_sequences/scseq-b01bb146005dae0f3e/SINGLE_CARRIER_SEQUENTIAL_PACKET.md`
 - GPT sandbox preflight verdict: `ION_GPT_SANDBOX_PREFLIGHT_READY`
 
 ## Required context reads
@@ -122,7 +122,7 @@ return is a candidate until Steward/human review accepts it.
 ### TEMPLATE ACTION PROOF
 
 template_id: ion.template.single_carrier_sequential_runtime.v1
-action_id: scseq-4e716a45c88e82ed15
+action_id: scseq-b01bb146005dae0f3e
 result: <candidate_result>
 touched_paths:
   - ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_RECEIPT.json
