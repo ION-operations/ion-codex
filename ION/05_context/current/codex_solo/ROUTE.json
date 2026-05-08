@@ -1,36 +1,36 @@
 {
   "entries": [
     {
-      "bytes": 28613,
+      "bytes": 29280,
       "classification": "codex_solo_minimum_working_context",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/CAPSULE.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "393e8166594e1833e7c389dcfa391217a41c637890bc911004238e4008c2aa58",
+      "sha256": "26c7fd472d6d5d8205c8d7f36b606287bc4d4883f08c09456af82df6c0ef44d3",
       "why": "Minimum context the standalone Codex lane must always carry."
     },
     {
-      "bytes": 1959,
+      "bytes": 1952,
       "classification": "codex_solo_lookup_receipt_index",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/MINI.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "81e70478d2efcecf52c0da42418b21ccf33b204e694fdcf58dbc60890a8d031a",
+      "sha256": "0077dc437a4b124a47a037f9df2310e6d285846b3f6172284f76828c481a0927",
       "why": "Lookup index and receipt summary for capsule history."
     },
     {
-      "bytes": 36258,
+      "bytes": 37840,
       "classification": "codex_solo_long_horizon_index",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
       "repo_relative": true,
       "required": true,
-      "sha256": "da8004847af8a9f85f1e0b98daf514b3164c1cf478ebd26d722418f9e50e0077",
+      "sha256": "9ffd0b546e43566a63f72791ad3135656a533e2a17e708fce0b0070a83e37357",
       "why": "Compressed long-horizon capsule index for older continuity lookup."
     },
     {
@@ -89,14 +89,14 @@
       "why": "Small ION operating kernel for Codex fallback/basic ops."
     },
     {
-      "bytes": 4016,
+      "bytes": 4015,
       "classification": "codex_skill_activation_governance",
       "exists": true,
       "is_file": true,
       "path": "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "226d607c78a164033b536bf2c7f6bd99d641168b41f206b6167eee2eaadbe3de",
+      "sha256": "cc3207616a001e71116e7262968f3b7b6b932d819bbd52b69be31d5923a67c94",
       "why": "Defines skills as activation control while templates remain proof law."
     },
     {
@@ -111,14 +111,14 @@
       "why": "Active skill registry for Codex chat, ION handoff, recovery, template curation, and receipts."
     },
     {
-      "bytes": 3402,
+      "bytes": 3401,
       "classification": "codex_chat_engine_protocol",
       "exists": true,
       "is_file": true,
       "path": "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "a87eb08ef90ce36e1b911d90574754c2b485cf387f0e4139827b8c608dc338d1",
+      "sha256": "3b8176c08c0524d6befef8d1434d3af23e3dc8a90aed88ee496119f7b4751d1c",
       "why": "Defines the chat-quality engine under the UI: context, skills, native lenses, model route, and response contract."
     },
     {
@@ -158,40 +158,40 @@
   "live_execution_authority": false,
   "production_authority": false,
   "schema_id": "ion.codex_solo_route.v1",
-  "updated_at": "2026-05-08T19:39:16+00:00",
+  "updated_at": "2026-05-08T20:12:02+00:00",
   "validation": {
     "entries": [
       {
-        "bytes": 28613,
+        "bytes": 29280,
         "classification": "codex_solo_minimum_working_context",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/CAPSULE.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "393e8166594e1833e7c389dcfa391217a41c637890bc911004238e4008c2aa58",
+        "sha256": "26c7fd472d6d5d8205c8d7f36b606287bc4d4883f08c09456af82df6c0ef44d3",
         "why": "Minimum context the standalone Codex lane must always carry."
       },
       {
-        "bytes": 1959,
+        "bytes": 1952,
         "classification": "codex_solo_lookup_receipt_index",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/MINI.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "81e70478d2efcecf52c0da42418b21ccf33b204e694fdcf58dbc60890a8d031a",
+        "sha256": "0077dc437a4b124a47a037f9df2310e6d285846b3f6172284f76828c481a0927",
         "why": "Lookup index and receipt summary for capsule history."
       },
       {
-        "bytes": 36258,
+        "bytes": 37840,
         "classification": "codex_solo_long_horizon_index",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
         "repo_relative": true,
         "required": true,
-        "sha256": "da8004847af8a9f85f1e0b98daf514b3164c1cf478ebd26d722418f9e50e0077",
+        "sha256": "9ffd0b546e43566a63f72791ad3135656a533e2a17e708fce0b0070a83e37357",
         "why": "Compressed long-horizon capsule index for older continuity lookup."
       },
       {
@@ -250,14 +250,14 @@
         "why": "Small ION operating kernel for Codex fallback/basic ops."
       },
       {
-        "bytes": 4016,
+        "bytes": 4015,
         "classification": "codex_skill_activation_governance",
         "exists": true,
         "is_file": true,
         "path": "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "226d607c78a164033b536bf2c7f6bd99d641168b41f206b6167eee2eaadbe3de",
+        "sha256": "cc3207616a001e71116e7262968f3b7b6b932d819bbd52b69be31d5923a67c94",
         "why": "Defines skills as activation control while templates remain proof law."
       },
       {
@@ -272,14 +272,14 @@
         "why": "Active skill registry for Codex chat, ION handoff, recovery, template curation, and receipts."
       },
       {
-        "bytes": 3402,
+        "bytes": 3401,
         "classification": "codex_chat_engine_protocol",
         "exists": true,
         "is_file": true,
         "path": "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "a87eb08ef90ce36e1b911d90574754c2b485cf387f0e4139827b8c608dc338d1",
+        "sha256": "3b8176c08c0524d6befef8d1434d3af23e3dc8a90aed88ee496119f7b4751d1c",
         "why": "Defines the chat-quality engine under the UI: context, skills, native lenses, model route, and response contract."
       },
       {

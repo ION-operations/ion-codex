@@ -1,5 +1,5 @@
 {
-  "capsule_entry_count": 52,
+  "capsule_entry_count": 53,
   "epoch_count": 6,
   "epoch_size_rows": 10,
   "epochs": [
@@ -342,14 +342,21 @@
         "ion-sandbox-gpt/ION/05_context/current/ACTIVE_WORK_PACKET.json",
         "ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py",
         "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_ROOT_PREP_RECEIPT_20260508T192928Z.json",
-        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json"
+        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json",
+        "ION/04_packages/kernel/ion_dual_codex_chat.py",
+        "ION/04_packages/kernel/ion_codex_chat_engine.py",
+        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
+        "ION/04_packages/kernel/ion_codex_solo_context.py",
+        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json",
+        "ION/tests/test_kernel_ion_dual_codex_chat.py",
+        "ION/tests/test_kernel_ion_codex_chat_engine.py"
       ],
-      "row_count": 2,
-      "row_end": "C-052",
+      "row_count": 3,
+      "row_end": "C-053",
       "row_start": "C-051",
       "status_counts": {
         "IMPLEMENTED": 1,
-        "PUBLISHED": 1
+        "PUBLISHED": 2
       },
       "summaries": [
         {
@@ -363,11 +370,17 @@
           "id": "C-052",
           "status": "PUBLISHED",
           "summary": "Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push rece"
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-053",
+          "status": "PUBLISHED",
+          "summary": "Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov"
         }
       ]
     }
   ],
-  "generated_at": "2026-05-08T19:39:16+00:00",
+  "generated_at": "2026-05-08T20:12:02+00:00",
   "latest_epochs": [
     {
       "date_end": "2026-05-07",
@@ -708,14 +721,21 @@
         "ion-sandbox-gpt/ION/05_context/current/ACTIVE_WORK_PACKET.json",
         "ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py",
         "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_ROOT_PREP_RECEIPT_20260508T192928Z.json",
-        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json"
+        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json",
+        "ION/04_packages/kernel/ion_dual_codex_chat.py",
+        "ION/04_packages/kernel/ion_codex_chat_engine.py",
+        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
+        "ION/04_packages/kernel/ion_codex_solo_context.py",
+        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json",
+        "ION/tests/test_kernel_ion_dual_codex_chat.py",
+        "ION/tests/test_kernel_ion_codex_chat_engine.py"
       ],
-      "row_count": 2,
-      "row_end": "C-052",
+      "row_count": 3,
+      "row_end": "C-053",
       "row_start": "C-051",
       "status_counts": {
         "IMPLEMENTED": 1,
-        "PUBLISHED": 1
+        "PUBLISHED": 2
       },
       "summaries": [
         {
@@ -729,6 +749,12 @@
           "id": "C-052",
           "status": "PUBLISHED",
           "summary": "Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push rece"
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-053",
+          "status": "PUBLISHED",
+          "summary": "Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov"
         }
       ]
     }

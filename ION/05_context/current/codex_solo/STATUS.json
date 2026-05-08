@@ -14,19 +14,12 @@
   },
   "capsule": {
     "context_line_limit": 80,
-    "entry_count": 52,
+    "entry_count": 53,
     "findings": [],
     "minimum_context": true,
     "ok": true,
     "path": "ION/05_context/current/codex_solo/CAPSULE.md",
     "recent_rows": [
-      {
-        "date": "2026-05-08",
-        "evidence": "ION/02_architecture/ION_CANDIDATE_DOMAIN_OPERATION_PROTOCOL.md, ION/05_context/current/ai_assistant_work/candidate_lifecycle/CANDIDATE_DOMAIN_LIFECYCLE_REGISTRY_V0_1.yaml, ION/04_packages/kernel/ion_assistant_work_route_compiler.py, ION/tests/test_kernel_ion_assistant_work_route_compiler.py, ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_CANDIDATE_DOMAIN_LIFECYCLE_IMPLEMENTATION_RECEIPT_20260508T185104Z.json",
-        "id": "C-048",
-        "status": "IMPLEMENTED",
-        "summary": "Implemented candidate-domain lifecycle gate: added provisional protocol, candidate lifecycle registry, scorecards, promotion proposal draft, and route compiler filtering for inactive/rejected/archived/draft routes."
-      },
       {
         "date": "2026-05-08",
         "evidence": "workpackets/README.md, workpackets/WORKPACKET_INDEX_20260508T190626Z.json, diffs/README.md, diffs/DIFF_INDEX_20260508T190626Z.json, ION_sandbox/README.md, ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json, ION/05_context/current/source_lanes/ION_ROOT_SOURCE_LANE_POLICY_20260508T190626Z.md, ION/05_context/current/source_lanes/receipts/ION_ROOT_SOURCE_LANE_FORMALIZATION_RECEIPT_20260508T190626Z.json",
@@ -54,11 +47,17 @@
         "id": "C-052",
         "status": "PUBLISHED",
         "summary": "Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push receipt. First release commit dda4a89541cc85"
+      },
+      {
+        "date": "2026-05-08",
+        "evidence": "ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_chat_engine.py, ION/04_packages/kernel/ion_codex_chat_response_carrier.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_chat_engine.py",
+        "id": "C-053",
+        "status": "PUBLISHED",
+        "summary": "Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model move policy, skill/lens registries, candida"
       }
     ],
     "role": "minimum_working_context",
     "tail": [
-      "| C-039 | 2026-05-08 | Improved Codex Chat response-carrier prompt quality: mounted Hot Context and context package selector, removed hard-coded root assumption, strengthened direct-answer continuity rules, and verified with live cockpit chat  | `ION/04_packages/kernel/ion_codex_chat_response_carrier.py, ION/tests/test_kernel_ion_codex_chat_response_carrier.py, ION/tests/test_kernel_ion_codex_chat_engine.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json` | VERIFIED |",
       "| C-040 | 2026-05-08 | Added response-run observability to Codex Chat: recent response carrier run packets are projected into the active model and Evidence/Runs inspector with prompt, return, event, stdout, stderr, model, and status refs; live | `ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json` | VERIFIED |",
       "| C-041 | 2026-05-08 | Preserved first ION custom-GPT user-handling case study: added v0.2 governed-continuity draft, evidence index with local v2.4 pack SHA/file count, benchmark rubric, and user-handling trial index. | `ION/06_intelligence/research/user_handling_trials/2026-05-08_ion_first_custom_gpt_user_handling_case_study_v0_2.md, ION/06_intelligence/evidence/user_handling_trials/2026-05-08_ion_first_custom_gpt_user_handling_evidence_index.json, ION/06_intelligence/research/user_handling_trials/2026-05-08_ion_prompt_burden_continuity_benchmark_v0_1.md, ION/06_intelligence/research/user_handling_trials/README.md` | VERIFIED |",
       "| C-042 | 2026-05-08 | Imported sandbox package v1.4 AI Assistant Work candidate lane into active root, documented package diff, preserved evidence index, patched validator -S path bootstrap, and locally validated candidate suite. | `ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_sandbox_agent_package_v1_4_ai_assistant_work_diff.md, ION/06_intelligence/evidence/sandbox_agent_package_evolution/2026-05-08_sandbox_agent_package_v1_4_ai_assistant_work_evidence_index.json, ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ACTIVE_ROOT_CANDIDATE_IMPORT_RECEIPT_20260508T174843Z.json, ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_5.json, ION/tests/test_kernel_ai_assistant_work_template_instances.py` | VERIFIED |",
@@ -71,7 +70,8 @@
       "| C-049 | 2026-05-08 | Formalized root source lanes for workpackets, diffs, and ION_sandbox: added lane READMEs, machine-readable indexes, consolidated source-lane policy, receipt, and git hygiene for sandbox snapshots. | `workpackets/README.md, workpackets/WORKPACKET_INDEX_20260508T190626Z.json, diffs/README.md, diffs/DIFF_INDEX_20260508T190626Z.json, ION_sandbox/README.md, ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json, ION/05_context/current/source_lanes/ION_ROOT_SOURCE_LANE_POLICY_20260508T190626Z.md, ION/05_context/current/source_lanes/receipts/ION_ROOT_SOURCE_LANE_FORMALIZATION_RECEIPT_20260508T190626Z.json` | IMPLEMENTED |",
       "| C-050 | 2026-05-08 | Documented GitHub release strategy for ION_sandbox: recommend a dedicated release/ion-sandbox-gpt-v1 branch with curated product root, after cache cleanup, metadata repair, Cursor test-boundary decision, focused tests, s | `ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_ion_sandbox_github_release_strategy.md, ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GITHUB_RELEASE_STRATEGY_RECEIPT_20260508T191612Z.json, ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json` | PLANNED |",
       "| C-051 | 2026-05-08 | Prepared sanitized ion-sandbox-gpt release root from ION_sandbox snapshot: repaired active GPT sandbox packet, release metadata, Cursor optional test boundary, passed focused release tests, secret scan clean, generated c | `ion-sandbox-gpt/RELEASE_MANIFEST.json, ion-sandbox-gpt/RELEASE_READINESS.md, ion-sandbox-gpt/VALIDATION_REPORT.json, ion-sandbox-gpt/ION/05_context/current/ACTIVE_WORK_PACKET.json, ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py, ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_ROOT_PREP_RECEIPT_20260508T192928Z.json` | IMPLEMENTED |",
-      "| C-052 | 2026-05-08 | Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push receipt. First release commit dda4a89541cc85 | `ion-sandbox-gpt/RELEASE_MANIFEST.json, ion-sandbox-gpt/RELEASE_READINESS.md, ion-sandbox-gpt/VALIDATION_REPORT.json, ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json` | PUBLISHED |"
+      "| C-052 | 2026-05-08 | Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push receipt. First release commit dda4a89541cc85 | `ion-sandbox-gpt/RELEASE_MANIFEST.json, ion-sandbox-gpt/RELEASE_READINESS.md, ion-sandbox-gpt/VALIDATION_REPORT.json, ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json` | PUBLISHED |",
+      "| C-053 | 2026-05-08 | Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model move policy, skill/lens registries, candida | `ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_chat_engine.py, ION/04_packages/kernel/ion_codex_chat_response_carrier.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_chat_engine.py` | PUBLISHED |"
     ]
   },
   "context_packages": {
@@ -202,15 +202,15 @@
       "route_depth_package"
     ]
   },
-  "generated_at": "2026-05-08T19:39:16+00:00",
+  "generated_at": "2026-05-08T20:12:02+00:00",
   "hot_context": {
-    "bytes": 82362,
+    "bytes": 83813,
     "ok": true,
     "path": "ION/05_context/current/codex_solo/HOT_CONTEXT.md"
   },
   "live_execution_authority": false,
   "long_horizon": {
-    "capsule_entry_count": 52,
+    "capsule_entry_count": 53,
     "epoch_count": 6,
     "latest_epochs": [
       {
@@ -552,14 +552,21 @@
           "ion-sandbox-gpt/ION/05_context/current/ACTIVE_WORK_PACKET.json",
           "ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py",
           "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_ROOT_PREP_RECEIPT_20260508T192928Z.json",
-          "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json"
+          "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json",
+          "ION/04_packages/kernel/ion_dual_codex_chat.py",
+          "ION/04_packages/kernel/ion_codex_chat_engine.py",
+          "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
+          "ION/04_packages/kernel/ion_codex_solo_context.py",
+          "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json",
+          "ION/tests/test_kernel_ion_dual_codex_chat.py",
+          "ION/tests/test_kernel_ion_codex_chat_engine.py"
         ],
-        "row_count": 2,
-        "row_end": "C-052",
+        "row_count": 3,
+        "row_end": "C-053",
         "row_start": "C-051",
         "status_counts": {
           "IMPLEMENTED": 1,
-          "PUBLISHED": 1
+          "PUBLISHED": 2
         },
         "summaries": [
           {
@@ -573,6 +580,12 @@
             "id": "C-052",
             "status": "PUBLISHED",
             "summary": "Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push rece"
+          },
+          {
+            "date": "2026-05-08",
+            "id": "C-053",
+            "status": "PUBLISHED",
+            "summary": "Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov"
           }
         ]
       }
@@ -585,7 +598,7 @@
     "max_lines": 30,
     "ok": true,
     "role": "lookup_receipt_index_for_capsule_history",
-    "text": "CODEX SOLO MINI INDEX | 2026-05-08T19:39:16+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: ION Sandbox GPT public candidate branch release\nPHASE: release branch pushed\nLAST_RECEIPT: Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push rece\nBLOCKER: None\nNEXT: Review or open the GitHub PR at https://github.com/ION-operations/ION/pull/new/release/ion-sandbox-gpt-v1; keep ION_sandbox source lane as witness until explicit promotion review.\n\nACTIVE_TEMPLATE: sandbox_gpt_release_branch_push\n\nCAPSULE_LOOKUP:\n- C-048 2026-05-08 IMPLEMENTED: Implemented candidate-domain lifecycle gate: added provisional protocol, candidate lifecycle registry, scoreca\n- C-049 2026-05-08 IMPLEMENTED: Formalized root source lanes for workpackets, diffs, and ION_sandbox: added lane READMEs, machine-readable ind\n- C-050 2026-05-08 PLANNED: Documented GitHub release strategy for ION_sandbox: recommend a dedicated release/ion-sandbox-gpt-v1 branch wi\n- C-051 2026-05-08 IMPLEMENTED: Prepared sanitized ion-sandbox-gpt release root from ION_sandbox snapshot: repaired active GPT sandbox packet,\n- C-052 2026-05-08 PUBLISHED: Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/sou\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.\n"
+    "text": "CODEX SOLO MINI INDEX | 2026-05-08T20:12:02+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Codex Capsule Chat active-root branch publication\nPHASE: feature branch pushed\nLAST_RECEIPT: Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov\nBLOCKER: None\nNEXT: Review/open GitHub PR https://github.com/ION-operations/ION/pull/new/feature/codex-capsule-chat-active-root and decide merge order relative to sandbox GPT release branch.\n\nACTIVE_TEMPLATE: codex_capsule_chat_branch_publish\n\nCAPSULE_LOOKUP:\n- C-049 2026-05-08 IMPLEMENTED: Formalized root source lanes for workpackets, diffs, and ION_sandbox: added lane READMEs, machine-readable ind\n- C-050 2026-05-08 PLANNED: Documented GitHub release strategy for ION_sandbox: recommend a dedicated release/ion-sandbox-gpt-v1 branch wi\n- C-051 2026-05-08 IMPLEMENTED: Prepared sanitized ion-sandbox-gpt release root from ION_sandbox snapshot: repaired active GPT sandbox packet,\n- C-052 2026-05-08 PUBLISHED: Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/sou\n- C-053 2026-05-08 PUBLISHED: Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context sys\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.\n"
   },
   "ok": true,
   "paths": {
@@ -609,36 +622,36 @@
   "route": {
     "entries": [
       {
-        "bytes": 28613,
+        "bytes": 29280,
         "classification": "codex_solo_minimum_working_context",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/CAPSULE.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "393e8166594e1833e7c389dcfa391217a41c637890bc911004238e4008c2aa58",
+        "sha256": "26c7fd472d6d5d8205c8d7f36b606287bc4d4883f08c09456af82df6c0ef44d3",
         "why": "Minimum context the standalone Codex lane must always carry."
       },
       {
-        "bytes": 1959,
+        "bytes": 1952,
         "classification": "codex_solo_lookup_receipt_index",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/MINI.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "81e70478d2efcecf52c0da42418b21ccf33b204e694fdcf58dbc60890a8d031a",
+        "sha256": "0077dc437a4b124a47a037f9df2310e6d285846b3f6172284f76828c481a0927",
         "why": "Lookup index and receipt summary for capsule history."
       },
       {
-        "bytes": 36258,
+        "bytes": 37840,
         "classification": "codex_solo_long_horizon_index",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
         "repo_relative": true,
         "required": true,
-        "sha256": "da8004847af8a9f85f1e0b98daf514b3164c1cf478ebd26d722418f9e50e0077",
+        "sha256": "9ffd0b546e43566a63f72791ad3135656a533e2a17e708fce0b0070a83e37357",
         "why": "Compressed long-horizon capsule index for older continuity lookup."
       },
       {
@@ -697,14 +710,14 @@
         "why": "Small ION operating kernel for Codex fallback/basic ops."
       },
       {
-        "bytes": 4016,
+        "bytes": 4015,
         "classification": "codex_skill_activation_governance",
         "exists": true,
         "is_file": true,
         "path": "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "226d607c78a164033b536bf2c7f6bd99d641168b41f206b6167eee2eaadbe3de",
+        "sha256": "cc3207616a001e71116e7262968f3b7b6b932d819bbd52b69be31d5923a67c94",
         "why": "Defines skills as activation control while templates remain proof law."
       },
       {
@@ -719,14 +732,14 @@
         "why": "Active skill registry for Codex chat, ION handoff, recovery, template curation, and receipts."
       },
       {
-        "bytes": 3402,
+        "bytes": 3401,
         "classification": "codex_chat_engine_protocol",
         "exists": true,
         "is_file": true,
         "path": "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "a87eb08ef90ce36e1b911d90574754c2b485cf387f0e4139827b8c608dc338d1",
+        "sha256": "3b8176c08c0524d6befef8d1434d3af23e3dc8a90aed88ee496119f7b4751d1c",
         "why": "Defines the chat-quality engine under the UI: context, skills, native lenses, model route, and response contract."
       },
       {
