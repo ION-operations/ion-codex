@@ -1,0 +1,65 @@
+{
+  "schema_id": "ion.source_lane.release_branch_push_receipt.v1",
+  "receipt_id": "ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z",
+  "created_at_utc": "2026-05-08T19:38:25Z",
+  "workstream": "ion_sandbox_gpt_public_candidate_release",
+  "repository_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "branch": "release/ion-sandbox-gpt-v1",
+  "remote": "origin",
+  "remote_url": "https://github.com/ION-operations/ION.git",
+  "published_commit": "dda4a89541cc85d6e4f27e1fca8c9f277310afaa",
+  "github_compare_or_pr_url": "https://github.com/ION-operations/ION/pull/new/release/ion-sandbox-gpt-v1",
+  "release_root": "ion-sandbox-gpt",
+  "included_surfaces": [
+    "ion-sandbox-gpt/",
+    "ION_sandbox/README.md",
+    "ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json",
+    "workpackets/",
+    "diffs/",
+    "ION/05_context/current/source_lanes/",
+    "ION/06_intelligence/research/sandbox_agent_package_evolution/",
+    "ION/06_intelligence/evidence/sandbox_agent_package_evolution/",
+    "ION/05_context/current/ai_assistant_work/",
+    "ION/02_architecture/ION_CANDIDATE_DOMAIN_OPERATION_PROTOCOL.md",
+    "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+    "ION/tests/test_kernel_ion_assistant_work_route_compiler.py"
+  ],
+  "validation": {
+    "active_ion_status": "ION_STATUS_READY",
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "release_root_tests": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_sandbox_preflight.py ION/tests/test_kernel_single_carrier_sequence_runner.py ION/tests/test_kernel_ion_stale_surface_audit.py",
+      "working_directory": "ion-sandbox-gpt",
+      "result": "13 passed in 0.50s"
+    },
+    "active_route_compiler_tests": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -m pytest -q ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
+      "result": "3 passed in 0.05s"
+    },
+    "high_confidence_secret_scan": {
+      "target": "ion-sandbox-gpt",
+      "result": "no_findings"
+    },
+    "generated_cache_check": {
+      "target": "ion-sandbox-gpt",
+      "result": "clean_after_pytest_cache_removal"
+    }
+  },
+  "authority_boundary": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "release_status": "public_candidate_branch_pushed",
+    "operator_approval": "approved_proceed"
+  },
+  "non_claims": [
+    "This receipt does not claim the branch has been merged.",
+    "This receipt does not claim production readiness.",
+    "This receipt does not claim Custom GPT marketplace publication.",
+    "This receipt does not claim that unrelated dirty worktree changes were included."
+  ],
+  "next_lawful_actions": [
+    "Open or review the GitHub pull request for release/ion-sandbox-gpt-v1.",
+    "Decide whether the release branch should remain as a public candidate branch or be refined before merge.",
+    "Do not promote ION_sandbox source-lane contents into active law except through explicit review and receipt."
+  ]
+}
