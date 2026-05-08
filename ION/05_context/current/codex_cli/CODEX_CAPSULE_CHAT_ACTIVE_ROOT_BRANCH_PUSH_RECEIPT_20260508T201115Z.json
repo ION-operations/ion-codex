@@ -1,0 +1,72 @@
+{
+  "schema_id": "ion.codex_capsule_chat.branch_push_receipt.v1",
+  "receipt_id": "CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z",
+  "created_at_utc": "2026-05-08T20:11:15Z",
+  "workstream": "codex_capsule_chat_active_root",
+  "repository_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "base_branch": "docs/github-public-data-plane-policy",
+  "feature_branch": "feature/codex-capsule-chat-active-root",
+  "remote": "origin",
+  "remote_url": "https://github.com/ION-operations/ION.git",
+  "published_commit": "7e239ac50222f6f5d513cb5086462698ed01d291",
+  "github_pr_url": "https://github.com/ION-operations/ION/pull/new/feature/codex-capsule-chat-active-root",
+  "included_surfaces": [
+    ".codex/config.toml",
+    ".codex/hooks/ion_session_start_context.py",
+    "ION/02_architecture/CODEX_CAPSULE_OPERATING_PROTOCOL.md",
+    "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+    "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+    "ION/02_architecture/ION_CANDIDATE_DOMAIN_OPERATION_PROTOCOL.md",
+    "ION/03_registry/codex_cli_model_move_policy.yaml",
+    "ION/03_registry/ion_native_lens_registry.yaml",
+    "ION/03_registry/ion_skill_registry.yaml",
+    "ION/04_packages/kernel/ion_codex_solo_context.py",
+    "ION/04_packages/kernel/ion_codex_model_moves.py",
+    "ION/04_packages/kernel/ion_skill_activation.py",
+    "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+    "ION/04_packages/kernel/ion_codex_chat_*.py",
+    "ION/04_packages/kernel/ion_dual_codex_chat.py",
+    "ION/05_context/current/codex_solo/",
+    "ION/05_context/current/codex_cli/",
+    "ION/05_context/current/codex_capsule_chat/state.json",
+    "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
+    "ION/05_context/current/ai_assistant_work/",
+    "ION/tests/test_kernel_ion_codex_*.py",
+    "ION/tests/test_kernel_ion_dual_codex_chat.py",
+    "ION/tests/test_kernel_ion_skill_activation.py",
+    "ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
+    "ION/tests/test_kernel_ion_cockpit_playwright_smoke.py"
+  ],
+  "excluded_surfaces": [
+    "ION/05_context/current/codex_capsule_chat/response_runs/",
+    "Python __pycache__ and *.pyc files",
+    "runtime stdout/stderr logs"
+  ],
+  "validation": {
+    "focused_chat_capsule_suite": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -m pytest -q ION/tests/test_kernel_ion_codex_solo_context.py ION/tests/test_codex_project_config_and_hook.py ION/tests/test_kernel_ion_codex_model_moves.py ION/tests/test_kernel_ion_skill_activation.py ION/tests/test_kernel_ion_assistant_work_route_compiler.py ION/tests/test_kernel_ion_dual_codex_chat.py ION/tests/test_kernel_ion_codex_chat_engine.py ION/tests/test_kernel_ion_codex_chat_response_carrier.py ION/tests/test_kernel_ion_cockpit_playwright_smoke.py",
+      "result": "53 passed, 2 skipped in 1.51s"
+    },
+    "active_ion_status": "ION_STATUS_READY",
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "diff_check": "git diff --cached --check passed before commit",
+    "raw_response_runs_staged": false
+  },
+  "authority_boundary": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "state_acceptance_granted": false,
+    "release_status": "feature_branch_pushed_for_review"
+  },
+  "non_claims": [
+    "This receipt does not claim the feature branch has been merged.",
+    "This receipt does not claim production readiness.",
+    "This receipt does not claim UI quality is final.",
+    "This receipt does not claim raw response-run transcripts were published."
+  ],
+  "next_lawful_actions": [
+    "Open or review the GitHub PR for feature/codex-capsule-chat-active-root.",
+    "Decide whether to merge this feature branch before continuing major active-root chat UI work.",
+    "Continue improving functionality and chat quality under focused follow-up branches."
+  ]
+}
