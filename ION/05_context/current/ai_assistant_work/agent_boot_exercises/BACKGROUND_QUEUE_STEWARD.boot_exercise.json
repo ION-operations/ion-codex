@@ -1,0 +1,154 @@
+{
+  "schema": "ion.ai_assistant_work.agent_boot_exercise.v0_1",
+  "exercise_id": "background_queue_steward.boot_exercise.v0_1",
+  "role_id": "BACKGROUND_QUEUE_STEWARD",
+  "template_id": "background_queue_result_intake_packet",
+  "domain_id": "background_queue_intake_domain",
+  "status": "candidate_agent_boot_exercise_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_agent_boot": "ION/05_context/current/ai_assistant_work/agent_boots/BACKGROUND_QUEUE_STEWARD.agent_boot.yaml",
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/background_queue_result_intake_packet.template_spec.yaml",
+  "valid_instance_ref": "ION/05_context/current/ai_assistant_work/template_instances/background_queue_result_intake_packet.minimal_valid.instance.json",
+  "rejection_case_ref": "ION/05_context/current/ai_assistant_work/template_instances/background_queue_result_intake_packet.expected_rejection.instance.json",
+  "user_request": "Queue a background worker to draft the docs patch and intake its result safely.",
+  "dispatch_assertion": {
+    "specialist_first": true,
+    "generic_implementation_first": false,
+    "selected_agent": "BACKGROUND_QUEUE_STEWARD",
+    "selected_template": "background_queue_result_intake_packet",
+    "selected_domain": "background_queue_intake_domain",
+    "reason": "Intent matches owned template/state surfaces/refusal triggers before generic implementation."
+  },
+  "mount_sequence_exercised": [
+    "read authority boundary and active packet",
+    "load this agent boot draft",
+    "load required domain packet(s)",
+    "load referenced machine-checkable template spec(s)",
+    "classify input state surfaces and missing context",
+    "execute only candidate template movement within authority",
+    "return proof, non-claims, settlement route, and next packet"
+  ],
+  "required_context_packages_checked": [
+    {
+      "context_id": "authority_and_packet_context",
+      "required": true,
+      "contents": [
+        "active packet",
+        "allowed paths",
+        "candidate/accepted boundary"
+      ]
+    },
+    {
+      "context_id": "domain_context",
+      "required": true,
+      "contents": [
+        "background_queue_intake_domain"
+      ]
+    },
+    {
+      "context_id": "template_spec_context",
+      "required": true,
+      "contents": [
+        "background_queue_result_intake_packet"
+      ]
+    },
+    {
+      "context_id": "state_surface_context",
+      "required": true,
+      "contents": [
+        "queue_state",
+        "authority_packet_state",
+        "branch_return_state",
+        "tool_result_state",
+        "intake_receipt_state"
+      ]
+    }
+  ],
+  "owned_state_surfaces": [
+    "queue_state",
+    "authority_packet_state",
+    "branch_return_state",
+    "tool_result_state",
+    "intake_receipt_state"
+  ],
+  "protocols_required": [
+    "queued_work_requires_authority_packet",
+    "background_result_is_proposal_until_intake",
+    "no_background_claim_without_receipt"
+  ],
+  "proof_obligations_checked": [
+    "name all context sources used",
+    "state missing context explicitly",
+    "map output to required template sections",
+    "include non-claims",
+    "name settlement route",
+    "attach receipt candidate when meaningful"
+  ],
+  "return_contract_checked": {
+    "required_sections": [
+      "RESULT",
+      "PROOF",
+      "RISKS_OR_MISSING_CONTEXT",
+      "NON_CLAIMS",
+      "SETTLEMENT_ROUTE",
+      "NEXT_PACKET"
+    ],
+    "result_status_values": [
+      "candidate",
+      "blocked",
+      "needs_review",
+      "ready_for_settlement"
+    ],
+    "must_include_template_id": true
+  },
+  "expected_result": {
+    "valid_instance_should_pass": true,
+    "rejection_case_should_fail": true,
+    "completion_class": "branch_return_intake_ready_for_settlement",
+    "settlement_route": "RESULT_INTAKE_AUDITOR then SETTLEMENT_STEWARD",
+    "non_claims_preserved": true
+  },
+  "handoff_routes": [
+    {
+      "condition": "template proof complete",
+      "route": "SETTLEMENT_STEWARD or domain owner review"
+    },
+    {
+      "condition": "implementation required after planning",
+      "route": "PATCH_MASON or COMPONENT_BUILDER with template output as context"
+    },
+    {
+      "condition": "proof required after action",
+      "route": "TERMINAL_PROOF_CURATOR or TEST_RUNNER"
+    },
+    {
+      "condition": "authority exceeds sandbox",
+      "route": "human/Steward approval gate"
+    }
+  ],
+  "must_not_claim": [
+    "accepted state without explicit acceptance",
+    "external execution not actually performed",
+    "production authority unless granted",
+    "tool or background action without receipt",
+    "specialist domain accepted into canon",
+    "external tool execution without proof",
+    "generic coding assistant is enough for this work class"
+  ],
+  "anti_drift_notes": [
+    "Do not claim asynchronous/background work happened unless a receipt exists.",
+    "Do not ingest branch returns as truth before settlement."
+  ],
+  "non_claims": [
+    "This is a sandbox-local boot exercise, not an actual isolated agent invocation.",
+    "No external tools, IDEs, PR systems, background workers, or production state were used.",
+    "The exercise validates dispatch shape, not accepted runtime readiness."
+  ]
+}

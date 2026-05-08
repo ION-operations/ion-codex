@@ -1,0 +1,54 @@
+# Project-scoped Codex config for the active ION root only.
+# Do not store secrets here.
+
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+developer_instructions = """
+ION project-scoped Codex carrier guidance:
+- This config applies only to /home/sev/ION - Production/ION_CODEX FULL.
+- Before substantive ION work, confirm the shell root contains pyproject.toml and ION/REPO_AUTHORITY.md.
+- Treat ION/REPO_AUTHORITY.md, ION/02_architecture/ION_MOUNT_CONTRACT.md, carrier profiles, carrier templates, and active packets as authority.
+- Use ION/05_context/current/codex_solo/HOT_CONTEXT.md as the natural boot context for the standalone Codex lane.
+- Capsule is minimum working context; Mini is a lookup/receipt index only.
+- Do not create or use the old /home/sev/ION - Production/ION_CODEX path without explicit operator approval.
+- Do not claim ION identity, STEWARD authority, RELAY authority, PERSONA authority, production authority, live execution authority, or secrets authority.
+- After material work, record an explicit Codex Solo capsule post through kernel.ion_codex_solo_context with confirmation token ION_BOUNDED_WRITE_CONFIRMED.
+"""
+
+[features]
+codex_hooks = true
+
+[sandbox_workspace_write]
+network_access = false
+writable_roots = [
+  ".",
+  "ION/05_context/current/codex_cli",
+  "ION/05_context/current/codex_solo",
+  "ION/05_context/current/action_gateway",
+]
+
+[mcp_servers.ion_local]
+enabled = true
+required = false
+command = "python3"
+args = ["-S", "-m", "kernel.ion_mcp_local_bridge", "--ion-root", ".", "--stdio"]
+cwd = "."
+startup_timeout_sec = 10
+tool_timeout_sec = 60
+enabled_tools = [
+  "ion.status",
+  "ion.boot_packet",
+  "ion.horizon.current",
+  "ion.receipts.list",
+  "ion.tools.list",
+]
+env = { PYTHONPATH = "ION/04_packages", PYTHONDONTWRITEBYTECODE = "1" }
+
+[[hooks.SessionStart]]
+matcher = "startup|resume"
+
+[[hooks.SessionStart.hooks]]
+type = "command"
+command = 'python3 "$(git rev-parse --show-toplevel)/.codex/hooks/ion_session_start_context.py"'
+timeout = 10
+statusMessage = "Loading ION Codex Solo capsule context"

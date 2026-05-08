@@ -1,0 +1,45 @@
+{
+  "actual_counts": {
+    "agent_boot_drafts": 7,
+    "dispatch_accepted": 8,
+    "dispatch_cases": 8,
+    "template_specs": 7
+  },
+  "created_at": "2026-05-08T15:19:39Z",
+  "expected_counts": {
+    "agent_boot_drafts": 7,
+    "dispatch_accepted": 8,
+    "dispatch_cases": 8,
+    "template_specs": 7
+  },
+  "findings": [],
+  "non_claims": [
+    "Agent boot drafts are not active runtime agents.",
+    "Template specs are not accepted template law.",
+    "No ION/03_registry landing occurred.",
+    "No product/front-door mutation occurred.",
+    "No external IDE, CLI, cloud, PR, GitHub, MCP, Codex, daemon, or production action occurred."
+  ],
+  "schema": "ion.ai_assistant_work.state_surface_sync.v0_1",
+  "status": "candidate_sync_pass",
+  "surfaces_checked": [
+    "state_index_v0_4",
+    "agent_boot_index",
+    "template_spec_index",
+    "binding_registry",
+    "template_spec_registry",
+    "dispatch_simulation_latest",
+    "validation_note_latest",
+    "receipt",
+    "next_packet"
+  ],
+  "validation": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "candidate_validation": "accepted_candidate_validation",
+    "dispatch_simulation": "accepted",
+    "focused_tests": "29 passed",
+    "ion_status": "ION_STATUS_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+    "status_preflight_integrity_tests": "12 passed"
+  }
+}

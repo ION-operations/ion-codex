@@ -1,0 +1,42 @@
+schema: ion.ai_assistant_work.candidate_lifecycle_scorecard.v0_1
+candidate_id: ui_ux_domain
+candidate_type: domain
+lifecycle_state: proof_gated_candidate
+created_at: '2026-05-08T18:50:31Z'
+source_evidence:
+  - ION/05_context/current/ai_assistant_work/domains/ui_ux_domain.domain_packet.yaml
+  - ION/05_context/current/ai_assistant_work/template_specs/screen_state_matrix_packet.template_spec.yaml
+  - ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_phase4_product_reconciliation_matrix.md
+allowed_uses:
+  - proof_shaping
+  - route_preview
+  - state_matrix_requirement
+  - accessibility_requirement
+forbidden_uses:
+  - accepted_UI_law_without_human_review
+  - state_acceptance
+  - visual_polish_without_workflow_logic
+scores:
+  route_accuracy: 3
+  proof_usefulness: 4
+  user_burden_reduction: 3
+  drift_or_confusion_risk: 2
+  test_coverage: 2
+validation_evidence:
+  valid_instance_count: 1
+  expected_rejection_count: 1
+  receipt_count: 2
+  focused_tests:
+    - ION/tests/test_kernel_ion_assistant_work_route_compiler.py
+conflicts_with_accepted_law: none_found_currently
+operator_acceptance_notes:
+  - User explicitly identified UI monolith/drift as a major failure mode.
+  - Domain should stay behind JOC/ION layout and proof rules, not become user chore.
+promotion_recommendation: REVISE_AND_RETEST
+next_evidence_needed:
+  - route distribution from real Codex Chat turns
+  - screen state matrix used on a live UI repair packet
+  - accessibility and responsive proof examples
+non_claims:
+  - This scorecard does not promote ui_ux_domain into ION canon.
+  - This scorecard does not approve any UI implementation by itself.

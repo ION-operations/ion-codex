@@ -1,0 +1,466 @@
+schema: ion.ai_assistant_work.domain_registry.v0_2
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T15:00:56Z'
+purpose: First candidate registry for AI-assisted chat/IDE work as a domain system
+  with specialist domains and agents. Extended with candidate child-domain fission
+  proposals mined from dataset genesis.
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  requires_explicit_acceptance_to_land: true
+core_thesis: An AI assistant is a governed work interface mounted in a host body;
+  effective assistant work requires domains, states, protocols, templates, agents,
+  proof, and settlement, not one generic agent improvising every skill.
+domains:
+- domain_id: ai_assistant_identity_embodiment
+  title: AI Assistant Identity and Embodiment Domain
+  purpose: Define what an AI assistant is across chat, IDE, CLI, cloud, PR, and background
+    agent bodies.
+  primary_specialist_agents:
+  - ASSISTANT_ONTOLOGIST
+  - EMBODIMENT_CARTOGRAPHER
+  - CAPABILITY_BOUNDARY_AUDITOR
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: chat_work_domain
+  title: Chat Work Domain
+  purpose: Model the chat assistant as a conversational work carrier with limited
+    or indirect tool/state access.
+  primary_specialist_agents:
+  - CHAT_STEWARD
+  - CONVERSATION_CARTOGRAPHER
+  - ARTIFACT_HANDOFF_SCRIBE
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: ide_work_domain
+  title: IDE Work Domain
+  purpose: Define work inside an IDE where chat, file tree, editor buffers, terminal,
+    diagnostics, git, tests, and extensions meet.
+  primary_specialist_agents:
+  - IDE_CARTOGRAPHER
+  - WORKSPACE_STEWARD
+  - EDITOR_BUFFER_SCOUT
+  - TERMINAL_RUNNER
+  state_family_count: 5
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: codebase_understanding_domain
+  title: Codebase Understanding Domain
+  purpose: Map repository structure, dependencies, conventions, architecture, and
+    change-local context before implementation.
+  primary_specialist_agents:
+  - CODEBASE_CARTOGRAPHER
+  - DEPENDENCY_SCOUT
+  - ARCHITECTURE_READER
+  - CONVENTION_MINER
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: planning_and_task_breakdown_domain
+  title: Planning and Task Breakdown Domain
+  purpose: Translate user intent into bounded tasks, packets, dependencies, acceptance
+    criteria, and route decisions.
+  primary_specialist_agents:
+  - TASK_PLANNER
+  - DEPENDENCY_ROUTER
+  - ACCEPTANCE_CRITERIA_STEWARD
+  - HORIZON_PLANNER
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: implementation_domain
+  title: Implementation Domain
+  purpose: Produce bounded code changes under local conventions, diffs, tests, and
+    proof.
+  primary_specialist_agents:
+  - PATCH_MASON
+  - REFACTOR_MASON
+  - BUGFIX_MASON
+  - MIGRATION_MASON
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: ui_ux_domain
+  title: UI/UX Specialist Domain
+  purpose: Own interface design, component systems, interaction patterns, accessibility,
+    responsive behavior, and frontend polish.
+  primary_specialist_agents:
+  - UI_ARCHITECT
+  - UX_FLOW_DESIGNER
+  - COMPONENT_BUILDER
+  - DESIGN_SYSTEM_STEWARD
+  state_family_count: 5
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: documentation_writing_domain
+  title: Documentation and Writing Specialist Domain
+  purpose: Own technical writing, user docs, API docs, changelogs, release notes,
+    internal guides, and explainers.
+  primary_specialist_agents:
+  - DOCS_ARCHITECT
+  - TECHNICAL_WRITER
+  - API_DOCS_SCRIBE
+  - CHANGELOG_SCRIBE
+  state_family_count: 4
+  template_family_count: 5
+  status: seed_candidate
+- domain_id: testing_quality_domain
+  title: Testing and Quality Domain
+  purpose: Own test design, test execution, regression checks, validation plans, and
+    quality evidence.
+  primary_specialist_agents:
+  - TEST_ARCHITECT
+  - TEST_RUNNER
+  - REGRESSION_HUNTER
+  - QUALITY_STEWARD
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: review_security_domain
+  title: Review, Safety, and Security Domain
+  purpose: Own code review, security review, prompt/tool injection risk, data exposure,
+    and adversarial checks.
+  primary_specialist_agents:
+  - CODE_REVIEWER
+  - SECURITY_NEMESIS
+  - PROMPT_INJECTION_AUDITOR
+  - SECRET_BOUNDARY_AUDITOR
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: debugging_observability_domain
+  title: Debugging and Observability Domain
+  purpose: Own runtime symptoms, logs, traces, reproduction, hypotheses, and fix verification.
+  primary_specialist_agents:
+  - DEBUGGER
+  - LOG_ANALYST
+  - REPRODUCTION_BUILDER
+  - OBSERVABILITY_CARTOGRAPHER
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: devops_release_domain
+  title: DevOps, CI/CD, and Release Domain
+  purpose: Own build, CI, deployment, environments, release notes, rollout, rollback,
+    and operational readiness.
+  primary_specialist_agents:
+  - BUILD_STEWARD
+  - CI_DIAGNOSTICIAN
+  - RELEASE_MANAGER
+  - ROLLBACK_PLANNER
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: data_analysis_domain
+  title: Data and Analysis Domain
+  purpose: Own datasets, schemas, notebooks, analysis claims, visualization, and statistical/measurement
+    proof.
+  primary_specialist_agents:
+  - DATA_CARTOGRAPHER
+  - ANALYSIS_MASON
+  - VISUALIZATION_BUILDER
+  - METHOD_NEMESIS
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: product_requirements_domain
+  title: Product and Requirements Domain
+  purpose: Translate user/business intent into requirements, user stories, acceptance
+    criteria, roadmaps, and design constraints.
+  primary_specialist_agents:
+  - PRODUCT_ANALYST
+  - REQUIREMENTS_TRANSLATOR
+  - USER_STORY_SCRIBE
+  - SCOPE_NEMESIS
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: knowledge_context_memory_domain
+  title: Knowledge, Context, and Memory Domain
+  purpose: Own retrieval, context packages, memory, source ranking, continuity bundles,
+    and stale-context resistance.
+  primary_specialist_agents:
+  - CONTEXT_CARTOGRAPHER
+  - SOURCE_RANKER
+  - MEMORY_STEWARD
+  - CONTINUITY_EXPORTER
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: dependency_package_domain
+  title: Dependency and Package Domain
+  purpose: Own dependency choices, version constraints, package managers, lockfiles,
+    vulnerability posture, and upgrade/migration paths.
+  primary_specialist_agents:
+  - DEPENDENCY_STEWARD
+  - PACKAGE_UPGRADER
+  - LICENSE_AUDITOR
+  - VULNERABILITY_SCOUT
+  state_family_count: 4
+  template_family_count: 3
+  status: seed_candidate
+- domain_id: workflow_automation_tool_domain
+  title: Workflow Automation and Tool Domain
+  purpose: Own tool calls, scripts, MCP/gateway actions, agent skills, IDE commands,
+    and automation boundaries.
+  primary_specialist_agents:
+  - TOOL_STEWARD
+  - AUTOMATION_MASON
+  - GATEWAY_AUDITOR
+  - SKILL_PACKAGER
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: assistant_learning_dataset_domain
+  title: Assistant Work Dataset and Taxonomy Domain
+  purpose: Build the massive dataset of AI-assisted work states, intents, protocols,
+    templates, agent roles, failures, and receipts.
+  primary_specialist_agents:
+  - WORK_PATTERN_ETHNOGRAPHER
+  - STATE_TAXONOMIST
+  - TEMPLATE_MINER
+  - FAILURE_CLASSIFIER
+  state_family_count: 5
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: cross_domain_settlement_domain
+  title: Cross-Domain Settlement Domain
+  purpose: Settle outputs when multiple specialist domains participate in one task.
+  primary_specialist_agents:
+  - SETTLEMENT_STEWARD
+  - CONFLICT_NEMESIS
+  - MERGE_SCRIBE
+  - RECEIPT_CURATOR
+  state_family_count: 4
+  template_family_count: 4
+  status: seed_candidate
+- domain_id: pr_agent_work_domain
+  title: PR Agent Work Domain
+  purpose: PR-agent work combines diff review, CI evidence, lockfile analysis, review
+    comments, and merge settlement. Dataset entries show it repeatedly crosses generic
+    review/security, dependency, and settlement domains.
+  parent_domains:
+  - review_security_domain
+  - cross_domain_settlement_domain
+  - dependency_package_domain
+  - testing_quality_domain
+  primary_specialist_agents:
+  - PR_REVIEW_STEWARD
+  - PR_COMMENT_SCRIBE
+  - PR_MERGE_SETTLEMENT_AUDITOR
+  - CI_EVIDENCE_TRIAGER
+  - LOCKFILE_AUDITOR
+  template_packet_count: 5
+  state_family_count: 5
+  evidence_entry_ids:
+  - aiw_obs_0019_lockfile_diff_review
+  - aiw_obs_0022_pr_code_review
+  - aiw_obs_0023_pr_merge_settlement
+  - aiw_obs_0027_ci_failure_triage
+  settlement_route: review_return_to_settlement_steward
+  status: fission_candidate_not_accepted_domain
+- domain_id: background_queue_intake_domain
+  title: Background Queue and Result Intake Domain
+  purpose: Background agent work is neither ordinary chat nor ordinary implementation.
+    It needs queue packets, authority gates, asynchronous-result intake, proof normalization,
+    and receipt boundaries.
+  parent_domains:
+  - workflow_automation_tool_domain
+  - cross_domain_settlement_domain
+  - knowledge_context_memory_domain
+  primary_specialist_agents:
+  - BACKGROUND_QUEUE_STEWARD
+  - CLOUD_BRANCH_STEWARD
+  - RESULT_INTAKE_AUDITOR
+  - SETTLEMENT_STEWARD
+  template_packet_count: 3
+  state_family_count: 5
+  evidence_entry_ids:
+  - aiw_obs_0024_cloud_background_feature
+  - aiw_obs_0025_cloud_parallel_work
+  - aiw_obs_0035_background_daemon_queue
+  settlement_route: background_return_intake_then_parent_settlement
+  status: fission_candidate_not_accepted_domain
+- domain_id: terminal_proof_domain
+  title: Terminal and Command Proof Domain
+  purpose: IDE/CLI work depends on command evidence, return codes, stdout/stderr excerpts,
+    reruns, and non-claims. This proof is a reusable domain burden, not just a testing
+    detail.
+  parent_domains:
+  - workflow_automation_tool_domain
+  - testing_quality_domain
+  - implementation_domain
+  primary_specialist_agents:
+  - TERMINAL_PROOF_CURATOR
+  - COMMAND_RECEIPT_AUDITOR
+  - TEST_RUNNER
+  - PATCH_MASON
+  template_packet_count: 3
+  state_family_count: 4
+  evidence_entry_ids:
+  - aiw_obs_0005_ide_single_file_patch
+  - aiw_obs_0014_failing_test_fix_loop
+  - aiw_obs_0026_cli_batch_patch
+  - aiw_obs_0033_tool_automation_script
+  settlement_route: proof_receipt_to_task_or_release_owner
+  status: fission_candidate_not_accepted_domain
+- domain_id: ui_state_modeling_domain
+  title: UI State Modeling Domain
+  purpose: UI tasks recur as screen states, user flows, components, accessibility,
+    and interaction validation. Screen-state modeling should precede component implementation.
+  parent_domains:
+  - ui_ux_domain
+  - product_requirements_domain
+  - testing_quality_domain
+  primary_specialist_agents:
+  - UI_STATE_MODELER
+  - SCREEN_STATE_CARTOGRAPHER
+  - UI_ARCHITECT
+  - COMPONENT_BUILDER
+  - ACCESSIBILITY_AUDITOR
+  template_packet_count: 3
+  state_family_count: 5
+  evidence_entry_ids:
+  - aiw_obs_0007_ui_feature_brief
+  - aiw_obs_0008_ui_component_build
+  - aiw_obs_0009_ui_accessibility_audit
+  - aiw_obs_0034_product_acceptance_criteria
+  settlement_route: ui_state_contract_to_component_or_product_owner
+  status: fission_candidate_not_accepted_domain
+- domain_id: documentation_example_validation_domain
+  title: Documentation Example Validation Domain
+  purpose: Documentation work is not just writing. Examples, API references, README
+    claims, and changelogs need source/claim alignment and proof about whether examples
+    were run.
+  parent_domains:
+  - documentation_writing_domain
+  - testing_quality_domain
+  - codebase_understanding_domain
+  primary_specialist_agents:
+  - DOCS_ARCHITECT
+  - TECHNICAL_WRITER
+  - EXAMPLE_RUNNER
+  - REWRITE_CLAIM_AUDITOR
+  - DOCS_NEMESIS
+  template_packet_count: 3
+  state_family_count: 4
+  evidence_entry_ids:
+  - aiw_obs_0002_chat_artifact_rewrite
+  - aiw_obs_0010_docs_readme_refresh
+  - aiw_obs_0011_api_docs_generation
+  - aiw_obs_0012_changelog_release_notes
+  settlement_route: docs_claims_to_source_ranker_or_release_owner
+  status: fission_candidate_not_accepted_domain
+- domain_id: release_evidence_domain
+  title: Release Evidence Domain
+  purpose: Release readiness requires collecting evidence across tests, builds, docs,
+    risk gates, approvals, and known non-claims. Local success should not become release
+    readiness.
+  parent_domains:
+  - devops_release_domain
+  - testing_quality_domain
+  - cross_domain_settlement_domain
+  primary_specialist_agents:
+  - RELEASE_EVIDENCE_CURATOR
+  - RELEASE_MANAGER
+  - BUILD_STEWARD
+  - REGRESSION_HUNTER
+  - RELEASE_GATE_NEMESIS
+  template_packet_count: 3
+  state_family_count: 5
+  evidence_entry_ids:
+  - aiw_obs_0012_changelog_release_notes
+  - aiw_obs_0015_regression_matrix_update
+  - aiw_obs_0028_release_readiness
+  - aiw_obs_0030_schema_migration
+  settlement_route: release_evidence_to_human_or_steward_decision
+  status: fission_candidate_not_accepted_domain
+- domain_id: migration_work_domain
+  title: Schema and Data Migration Work Domain
+  purpose: Migration work has special rollback, fixture, data-shape, deployment, and
+    release-gate concerns that exceed generic implementation.
+  parent_domains:
+  - implementation_domain
+  - devops_release_domain
+  - testing_quality_domain
+  primary_specialist_agents:
+  - MIGRATION_MASON
+  - SCHEMA_DRIFT_AUDITOR
+  - TEST_RUNNER
+  - RELEASE_EVIDENCE_CURATOR
+  template_packet_count: 2
+  state_family_count: 5
+  evidence_entry_ids:
+  - aiw_obs_0030_schema_migration
+  - aiw_obs_0028_release_readiness
+  - aiw_obs_0014_failing_test_fix_loop
+  settlement_route: migration_return_to_release_evidence_or_implementation_steward
+  status: fission_candidate_not_accepted_domain
+- domain_id: assistant_work_observation_domain
+  title: Assistant Work Observation and Taxonomy Domain
+  purpose: The dataset should not remain anecdotal. Observed AI work patterns need
+    lineage, classification, gap mining, and template/agent proposal workflows.
+  parent_domains:
+  - assistant_learning_dataset_domain
+  - knowledge_context_memory_domain
+  primary_specialist_agents:
+  - ASSISTANT_USAGE_ETHNOGRAPHER
+  - WORK_PATTERN_ETHNOGRAPHER
+  - OBSERVATION_LINEAGE_SCRIBE
+  - TEMPLATE_MINER
+  - STATE_TAXONOMIST
+  template_packet_count: 3
+  state_family_count: 5
+  evidence_entry_ids:
+  - aiw_obs_0003_chat_research_brief_to_state
+  - aiw_obs_0032_work_pattern_capture
+  - aiw_obs_0031_continuity_bundle_export
+  settlement_route: dataset_gap_to_candidate_registry_review
+  status: fission_candidate_not_accepted_domain
+- domain_id: incident_triage_domain
+  title: Incident Triage Domain
+  purpose: Production-like incidents require escalation, human-gate awareness, reproduction,
+    containment, and non-action boundaries distinct from ordinary debugging.
+  parent_domains:
+  - debugging_observability_domain
+  - review_security_domain
+  - devops_release_domain
+  primary_specialist_agents:
+  - INCIDENT_TRIAGE_STEWARD
+  - PRODUCTION_BOUNDARY_AUDITOR
+  - DEBUGGER
+  - SECURITY_NEMESIS
+  template_packet_count: 3
+  state_family_count: 5
+  evidence_entry_ids:
+  - aiw_obs_0017_production_bug_triage
+  - aiw_obs_0016_bug_reproduction
+  - aiw_obs_0020_secret_exposure_review
+  settlement_route: incident_triage_to_human_gate_or_fix_packet
+  status: fission_candidate_not_accepted_domain
+- domain_id: untrusted_input_tool_guard_domain
+  title: Untrusted Input and Tool Guard Domain
+  purpose: Prompt-injection and untrusted instruction boundaries are tool-authority
+    issues. They should be routed before tool use, not patched after unsafe actions.
+  parent_domains:
+  - review_security_domain
+  - workflow_automation_tool_domain
+  - chat_work_domain
+  primary_specialist_agents:
+  - PROMPT_INJECTION_BOUNDARY_GUARDIAN
+  - SECURITY_NEMESIS
+  - TOOL_ORCHESTRATOR
+  - SOURCE_RANKER
+  template_packet_count: 2
+  state_family_count: 4
+  evidence_entry_ids:
+  - aiw_obs_0021_prompt_injection_guard
+  - aiw_obs_0003_chat_research_brief_to_state
+  - aiw_obs_0020_secret_exposure_review
+  settlement_route: guard_return_to_tool_or_task_owner
+  status: fission_candidate_not_accepted_domain
+domain_count: 29

@@ -1,0 +1,162 @@
+schema_id: ion.native_lens_registry.v1
+status: ACTIVE_PROVISIONAL
+authority_scope: A3_OPERATIONAL_CHAT_ROUTING
+protocol: ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md
+production_authority: false
+live_execution_authority: false
+secrets_authority: false
+default_lenses:
+  - persona
+  - context_cartographer
+lenses:
+  - lens_id: persona
+    display_name: Persona
+    role_id: role.persona_interface
+    purpose: "Final user-facing clarity, tone, continuity, and concise answer shape."
+    use_when:
+      - normal_chat
+      - final_response
+    model_stage_id: persona_response
+    template_refs:
+      - ION/07_templates/bindings/PERSONA_INTERFACE__USER_RESPONSE.md
+  - lens_id: relay
+    display_name: Relay
+    role_id: role.relay
+    purpose: "Normalize messy operator language into bounded intent and handoff shape."
+    use_when:
+      - ion_handoff
+      - ambiguous_intent
+    model_stage_id: relay_ingress
+    template_refs:
+      - ION/07_templates/bindings/RELAY__HANDOFF.md
+  - lens_id: steward
+    display_name: Steward
+    role_id: role.steward
+    purpose: "Authority, risk, route legitimacy, and acceptance boundary."
+    use_when:
+      - recovery
+      - high_risk
+      - ion_handoff
+      - mutation
+    model_stage_id: steward_route
+    template_refs:
+      - ION/07_templates/bindings/STEWARD__TASK.md
+      - ION/07_templates/bindings/STEWARD__STATUS_REPORT.md
+  - lens_id: vizier
+    display_name: Vizier
+    role_id: role.vizier
+    purpose: "Architecture, system design, dependencies, and plan depth."
+    use_when:
+      - architecture
+      - plan
+    model_stage_id: vizier_plan
+    template_refs:
+      - ION/07_templates/bindings/STEWARD__PROPOSAL.md
+  - lens_id: thoth
+    display_name: Thoth
+    role_id: role.thoth
+    purpose: "Research, explanation, synthesis, and concept mapping."
+    use_when:
+      - explanation
+      - research
+    model_stage_id: persona_response
+    template_refs:
+      - ION/07_templates/bindings/THOTH__RESEARCH.md
+  - lens_id: mason_codex
+    display_name: Mason/Codex
+    role_id: role.mason
+    purpose: "Bounded implementation work through Codex CLI and proof return."
+    use_when:
+      - implementation
+      - queue_work
+    model_stage_id: mason_codex_work
+    template_refs:
+      - ION/07_templates/bindings/MASON__CODE.md
+      - ION/07_templates/actions/CODE.md
+  - lens_id: nemesis
+    display_name: Nemesis
+    role_id: role.nemesis
+    purpose: "Audit, proof checking, regression risk, and release sensitivity."
+    use_when:
+      - verify
+      - audit
+      - recovery
+    model_stage_id: nemesis_verify
+    template_refs:
+      - ION/07_templates/bindings/NEMESIS__AUDIT.md
+  - lens_id: vice
+    display_name: Vice
+    role_id: role.vice
+    purpose: "Contradiction pressure and future-answerability review."
+    use_when:
+      - high_risk
+      - architecture
+      - recovery
+    model_stage_id: vice_risk
+    template_refs:
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - lens_id: scribe
+    display_name: Scribe
+    role_id: role.scribe
+    purpose: "Receipts, summaries, Capsule/Mini settlement, and durable context notes."
+    use_when:
+      - receipt
+      - settlement
+      - material_work
+    model_stage_id: relay_return
+    template_refs:
+      - ION/07_templates/reports/STATUS_REPORT.md
+  - lens_id: context_cartographer
+    display_name: Context Cartographer
+    role_id: role.context_cartographer
+    purpose: "Context package selection, route-deeper map, and drift prevention."
+    use_when:
+      - normal_chat
+      - context_mount
+      - recovery
+    model_stage_id: relay_ingress
+    template_refs:
+      - ION/07_templates/context/ION_CONTEXT_LOAD_PROOF.md
+  - lens_id: ionologist
+    display_name: Ionologist
+    role_id: role.ionologist
+    purpose: "ION meaning, system law, and internal concept alignment."
+    use_when:
+      - ion_concept
+      - governance
+    model_stage_id: steward_route
+    template_refs:
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md
+  - lens_id: template_curator
+    display_name: Template Curator
+    role_id: role.template_curator
+    purpose: "Skill, template, binding, and proof-contract correctness."
+    use_when:
+      - template
+      - skill
+      - proof_contract
+    model_stage_id: vizier_plan
+    template_refs:
+      - ION/07_templates/actions/TEMPLATE_DEVELOPMENT.md
+      - ION/07_templates/actions/TEMPLATE_SURFACE_CHANGE.md
+  - lens_id: vestige
+    display_name: Vestige
+    role_id: role.vestige
+    purpose: "Historical build archaeology, stale surface classification, and lineage."
+    use_when:
+      - historical
+      - old_build
+      - recovery
+    model_stage_id: nemesis_verify
+    template_refs:
+      - ION/07_templates/bindings/VESTIGE__EVIDENCE.md
+  - lens_id: atlas
+    display_name: Atlas
+    role_id: role.atlas
+    purpose: "External reference mapping and comparative systems context."
+    use_when:
+      - external_reference
+      - comparison
+    model_stage_id: persona_response
+    template_refs:
+      - ION/07_templates/context/AGENT_CONTEXT_BUILD_STEP.md

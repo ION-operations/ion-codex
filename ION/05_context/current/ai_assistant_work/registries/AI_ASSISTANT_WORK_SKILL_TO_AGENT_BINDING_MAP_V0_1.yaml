@@ -1,0 +1,583 @@
+schema: ion.ai_assistant_work.skill_to_agent_binding_map.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T14:32:25Z'
+purpose: Candidate map from common AI assistant skills to specialist domains, agents,
+  templates, and protocols.
+authority_boundary:
+  candidate_only: true
+  mutates_ION_03_registry: false
+  requires_explicit_acceptance_to_land: true
+binding_count: 26
+bindings:
+- skill_id: assistant_identity_definition
+  status: candidate_skill_binding
+  domains:
+  - ai_assistant_identity_embodiment
+  primary_agents:
+  - ASSISTANT_ONTOLOGIST
+  - EMBODIMENT_CARTOGRAPHER
+  required_templates:
+  - assistant_embodiment_mount
+  - capability_boundary_report
+  required_protocols:
+  - assistant_is_work_interface_not_model_alone
+  - chat_ide_cli_cloud_boundary_mapping
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: chat_intake_and_artifact_handoff
+  status: candidate_skill_binding
+  domains:
+  - chat_work_domain
+  - knowledge_context_memory_domain
+  primary_agents:
+  - CHAT_STEWARD
+  - RECEIPT_CURATOR
+  required_templates:
+  - chat_intake_packet
+  - artifact_creation_packet
+  required_protocols:
+  - conversation_to_artifact_handoff
+  - answer_vs_state_boundary
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: ide_workspace_mount
+  status: candidate_skill_binding
+  domains:
+  - ide_work_domain
+  - codebase_understanding_domain
+  primary_agents:
+  - IDE_CARTOGRAPHER
+  - WORKSPACE_STEWARD
+  - CODEBASE_CARTOGRAPHER
+  required_templates:
+  - ide_workspace_mount
+  - host_tool_surface_inventory
+  - scope_boundary_packet
+  required_protocols:
+  - workspace_surface_inventory
+  - read_before_write
+  - allowed_write_scope
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: single_file_patch
+  status: candidate_skill_binding
+  domains:
+  - implementation_domain
+  - testing_quality_domain
+  primary_agents:
+  - PATCH_MASON
+  - TEST_RUNNER
+  required_templates:
+  - bounded_patch_packet
+  - workspace_diff_receipt
+  - validation_run_packet
+  required_protocols:
+  - diff_first_review
+  - test_after_mutation
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: multi_file_refactor
+  status: candidate_skill_binding
+  domains:
+  - codebase_understanding_domain
+  - implementation_domain
+  - testing_quality_domain
+  - cross_domain_settlement_domain
+  primary_agents:
+  - CODEBASE_CARTOGRAPHER
+  - CONVENTION_MINER
+  - REFACTOR_MASON
+  - REGRESSION_HUNTER
+  - SETTLEMENT_STEWARD
+  required_templates:
+  - codebase_scan_packet
+  - refactor_packet
+  - regression_matrix
+  - settlement_packet
+  required_protocols:
+  - locality_first_context
+  - settlement_before_inheritance
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: ui_flow_and_screen_state_design
+  status: candidate_skill_binding
+  domains:
+  - ui_ux_domain
+  - product_requirements_domain
+  primary_agents:
+  - UI_ARCHITECT
+  - UX_FLOW_DESIGNER
+  - PRODUCT_ANALYST
+  required_templates:
+  - ui_brief_packet
+  - interaction_state_matrix
+  - component_contract_packet
+  required_protocols:
+  - states_before_pixels
+  - design_system_first
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: ui_component_implementation
+  status: candidate_skill_binding
+  domains:
+  - ui_ux_domain
+  - implementation_domain
+  - testing_quality_domain
+  primary_agents:
+  - COMPONENT_BUILDER
+  - DESIGN_SYSTEM_STEWARD
+  - ACCESSIBILITY_AUDITOR
+  - TEST_RUNNER
+  required_templates:
+  - component_contract_packet
+  - implementation_packet
+  - accessibility_review_packet
+  required_protocols:
+  - a11y_as_proof_gate
+  - responsive_behavior_matrix
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: documentation_architecture
+  status: candidate_skill_binding
+  domains:
+  - documentation_writing_domain
+  - knowledge_context_memory_domain
+  primary_agents:
+  - DOCS_ARCHITECT
+  - TECHNICAL_WRITER
+  - SOURCE_RANKER
+  required_templates:
+  - docs_brief_packet
+  - source_ranking_packet
+  - claim_source_map
+  required_protocols:
+  - reader_task_first
+  - source_claim_alignment
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: api_reference_docs
+  status: candidate_skill_binding
+  domains:
+  - documentation_writing_domain
+  - codebase_understanding_domain
+  - testing_quality_domain
+  primary_agents:
+  - API_DOCS_SCRIBE
+  - CODEBASE_CARTOGRAPHER
+  - TEST_RUNNER
+  - DOCS_NEMESIS
+  required_templates:
+  - api_reference_packet
+  - validation_run_packet
+  - claim_source_map
+  required_protocols:
+  - examples_must_run_or_be_marked
+  - docs_version_boundary
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: changelog_and_release_notes
+  status: candidate_skill_binding
+  domains:
+  - documentation_writing_domain
+  - devops_release_domain
+  primary_agents:
+  - CHANGELOG_SCRIBE
+  - RELEASE_MANAGER
+  - SOURCE_RANKER
+  required_templates:
+  - changelog_packet
+  - release_readiness_packet
+  required_protocols:
+  - docs_version_boundary
+  - local_success_is_not_release
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: test_plan_creation
+  status: candidate_skill_binding
+  domains:
+  - testing_quality_domain
+  - planning_and_task_breakdown_domain
+  primary_agents:
+  - TEST_ARCHITECT
+  - TASK_PLANNER
+  required_templates:
+  - test_plan_packet
+  - regression_matrix
+  required_protocols:
+  - focused_then_broad_validation
+  - test_after_mutation
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: failing_test_debug_loop
+  status: candidate_skill_binding
+  domains:
+  - debugging_observability_domain
+  - testing_quality_domain
+  - implementation_domain
+  primary_agents:
+  - DEBUGGER
+  - TEST_RUNNER
+  - PATCH_MASON
+  - REGRESSION_HUNTER
+  required_templates:
+  - ci_failure_packet
+  - diagnosis_packet
+  - fix_verification_packet
+  required_protocols:
+  - diagnostic_feedback_loop
+  - repro_before_fix_when_possible
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: bug_reproduction
+  status: candidate_skill_binding
+  domains:
+  - debugging_observability_domain
+  - testing_quality_domain
+  primary_agents:
+  - REPRODUCTION_BUILDER
+  - DEBUGGER
+  - TEST_ARCHITECT
+  required_templates:
+  - bug_repro_packet
+  - diagnosis_packet
+  required_protocols:
+  - repro_before_fix_when_possible
+  - logs_are_evidence_not_truth
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: dependency_upgrade
+  status: candidate_skill_binding
+  domains:
+  - dependency_package_domain
+  - testing_quality_domain
+  - review_security_domain
+  primary_agents:
+  - DEPENDENCY_STEWARD
+  - DEPENDENCY_ROUTER
+  - SECURITY_NEMESIS
+  - TEST_RUNNER
+  required_templates:
+  - dependency_map_packet
+  - upgrade_packet
+  - license_review_packet
+  required_protocols:
+  - dependency_change_requires_reason
+  - lockfile_diff_review
+  - security_license_gate
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: security_review
+  status: candidate_skill_binding
+  domains:
+  - review_security_domain
+  - implementation_domain
+  primary_agents:
+  - SECURITY_NEMESIS
+  - PROMPT_INJECTION_AUDITOR
+  required_templates:
+  - security_review_packet
+  - prompt_injection_audit_packet
+  - risk_escalation_packet
+  required_protocols:
+  - secret_boundary_preservation
+  - tool_injection_guard
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: pr_review_and_commentary
+  status: candidate_skill_binding
+  domains:
+  - review_security_domain
+  - codebase_understanding_domain
+  - testing_quality_domain
+  primary_agents:
+  - CONFLICT_NEMESIS
+  - SECURITY_NEMESIS
+  - TEST_ARCHITECT
+  required_templates:
+  - code_review_packet
+  - security_review_packet
+  - regression_matrix
+  required_protocols:
+  - diff_first_review
+  - adversarial_review_before_landing
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: branch_settlement
+  status: candidate_skill_binding
+  domains:
+  - cross_domain_settlement_domain
+  primary_agents:
+  - SETTLEMENT_STEWARD
+  - CONFLICT_NEMESIS
+  - RECEIPT_CURATOR
+  required_templates:
+  - branch_return_packet
+  - conflict_review_packet
+  - settlement_packet
+  - merge_receipt
+  required_protocols:
+  - branch_returns_are_proposals
+  - receipt_after_fan_in
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: cloud_background_task
+  status: candidate_skill_binding
+  domains:
+  - planning_and_task_breakdown_domain
+  - implementation_domain
+  - cross_domain_settlement_domain
+  primary_agents:
+  - TASK_PLANNER
+  - PATCH_MASON
+  - TEST_RUNNER
+  - SETTLEMENT_STEWARD
+  required_templates:
+  - workpacket_draft
+  - branch_return_packet
+  - quality_receipt
+  required_protocols:
+  - branch_returns_are_proposals
+  - settlement_before_inheritance
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: cli_tool_action
+  status: candidate_skill_binding
+  domains:
+  - workflow_automation_tool_domain
+  - implementation_domain
+  primary_agents:
+  - TOOL_STEWARD
+  - PATCH_MASON
+  - TEST_RUNNER
+  - RECEIPT_CURATOR
+  required_templates:
+  - tool_action_packet
+  - terminal_command_packet
+  - tool_receipt
+  required_protocols:
+  - tool_access_is_not_authority
+  - receipt_after_tool_action
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: ci_failure_triage
+  status: candidate_skill_binding
+  domains:
+  - devops_release_domain
+  - testing_quality_domain
+  - debugging_observability_domain
+  primary_agents:
+  - BUILD_STEWARD
+  - FAILURE_CLASSIFIER
+  - DEBUGGER
+  - TASK_PLANNER
+  required_templates:
+  - ci_failure_packet
+  - failure_classification_packet
+  - diagnosis_packet
+  required_protocols:
+  - failure_classification_loop
+  - logs_are_evidence_not_truth
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: release_readiness
+  status: candidate_skill_binding
+  domains:
+  - devops_release_domain
+  - testing_quality_domain
+  - review_security_domain
+  - documentation_writing_domain
+  primary_agents:
+  - RELEASE_MANAGER
+  - TEST_ARCHITECT
+  - SECURITY_NEMESIS
+  - CHANGELOG_SCRIBE
+  - SETTLEMENT_STEWARD
+  required_templates:
+  - release_readiness_packet
+  - quality_receipt
+  - security_review_packet
+  - approval_request_packet
+  required_protocols:
+  - local_success_is_not_release
+  - approval_before_side_effect
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: data_analysis
+  status: candidate_skill_binding
+  domains:
+  - data_analysis_domain
+  - knowledge_context_memory_domain
+  primary_agents:
+  - DATA_CARTOGRAPHER
+  - ANALYSIS_MASON
+  - SOURCE_RANKER
+  required_templates:
+  - data_source_manifest
+  - analysis_packet
+  - visualization_packet
+  required_protocols:
+  - source_data_lineage
+  - method_before_claim
+  - reproducible_analysis
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: continuity_export
+  status: candidate_skill_binding
+  domains:
+  - knowledge_context_memory_domain
+  - cross_domain_settlement_domain
+  primary_agents:
+  - CONTEXT_CARTOGRAPHER
+  - MEMORY_STEWARD
+  - RECEIPT_CURATOR
+  - SETTLEMENT_STEWARD
+  required_templates:
+  - continuity_bundle_packet
+  - continuity_export_packet
+  - settlement_packet
+  required_protocols:
+  - portable_continuity_export
+  - memory_orients_artifacts_govern
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: assistant_work_dataset_mining
+  status: candidate_skill_binding
+  domains:
+  - assistant_learning_dataset_domain
+  primary_agents:
+  - WORK_PATTERN_ETHNOGRAPHER
+  - STATE_TAXONOMIST
+  - TEMPLATE_MINER
+  - FAILURE_CLASSIFIER
+  required_templates:
+  - work_observation_packet
+  - state_taxonomy_packet
+  - template_gap_packet
+  - failure_classification_packet
+  required_protocols:
+  - observe_before_canonize
+  - pattern_to_template_to_agent
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: automation_script_packaging
+  status: candidate_skill_binding
+  domains:
+  - workflow_automation_tool_domain
+  - implementation_domain
+  - testing_quality_domain
+  primary_agents:
+  - TOOL_STEWARD
+  - SKILL_PACKAGER
+  - PATCH_MASON
+  - TEST_RUNNER
+  required_templates:
+  - automation_script_packet
+  - tool_action_packet
+  - tool_receipt
+  required_protocols:
+  - approval_before_side_effect
+  - proof_is_run_not_assumption
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+- skill_id: product_acceptance_criteria
+  status: candidate_skill_binding
+  domains:
+  - product_requirements_domain
+  - planning_and_task_breakdown_domain
+  - testing_quality_domain
+  primary_agents:
+  - PRODUCT_ANALYST
+  - REQUIREMENTS_TRANSLATOR
+  - TASK_PLANNER
+  - TEST_ARCHITECT
+  required_templates:
+  - user_story_packet
+  - acceptance_criteria_packet
+  - test_plan_packet
+  required_protocols:
+  - acceptance_before_build
+  - intent_to_requirement
+  handoff_rule: Route to specialist domain before implementation; return candidate
+    proof and settlement/non-claim notes.
+  must_not_route_to:
+  - generic_coder_without_domain_mount
+  - generic_writer_without_source_claim_map
+non_claims:
+- Skill bindings are route proposals, not accepted scheduler law.
+- A skill-like package is not sufficient without domain, agent, proof, and settlement
+  binding.

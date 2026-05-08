@@ -1,0 +1,19 @@
+{
+  "candidate_state_index": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_3.json",
+  "created_at": "2026-05-08T15:00:56Z",
+  "non_claims": [
+    "Export is candidate continuity, not accepted canon.",
+    "No ION/03_registry landing was performed.",
+    "No product/front-door mutation was performed.",
+    "No external execution occurred."
+  ],
+  "schema": "ion.ai_assistant_work.domain_fission_export_note.v0_1",
+  "status": "candidate_export_ready",
+  "summary": {
+    "candidate_child_domains": 10,
+    "focused_tests": "23 passed",
+    "new_specialist_agents": 24,
+    "simulation_cases_accepted": 10,
+    "template_packet_drafts": 31
+  }
+}

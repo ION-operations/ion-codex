@@ -1,0 +1,402 @@
+schema: ion.ai_assistant_work.domain_fission_candidates.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T15:00:56Z'
+purpose: Mine dataset genesis entries into candidate child-domain fission, specialist
+  agent expansion, and template packet drafts.
+authority_boundary:
+  candidate_only: true
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  requires_explicit_acceptance_to_land: true
+selection_rule: A candidate child domain is proposed when recurring assistant work
+  combines distinct state surfaces, proof obligations, agents, templates, and settlement
+  paths beyond its parent domain.
+candidate_count: 10
+candidates:
+- candidate_domain_id: pr_agent_work_domain
+  title: PR Agent Work Domain
+  parent_domains:
+  - review_security_domain
+  - cross_domain_settlement_domain
+  - dependency_package_domain
+  - testing_quality_domain
+  rationale: PR-agent work combines diff review, CI evidence, lockfile analysis, review
+    comments, and merge settlement. Dataset entries show it repeatedly crosses generic
+    review/security, dependency, and settlement domains.
+  evidence_entry_ids:
+  - aiw_obs_0019_lockfile_diff_review
+  - aiw_obs_0022_pr_code_review
+  - aiw_obs_0023_pr_merge_settlement
+  - aiw_obs_0027_ci_failure_triage
+  pressure_signals:
+  - recurring PR embodiment
+  - review comments are candidate state
+  - branch/merge settlement is distinct from implementation
+  - CI and lockfile evidence need specialized proof
+  proposed_primary_agents:
+  - PR_REVIEW_STEWARD
+  - PR_COMMENT_SCRIBE
+  - PR_MERGE_SETTLEMENT_AUDITOR
+  - CI_EVIDENCE_TRIAGER
+  - LOCKFILE_AUDITOR
+  proposed_template_packets:
+  - pr_review_packet
+  - pr_comment_candidate_packet
+  - pr_merge_settlement_packet
+  - ci_evidence_triage_packet
+  - lockfile_diff_risk_packet
+  proposed_protocols:
+  - pr_comments_are_candidate_review_state
+  - merge_requires_settlement_receipt
+  - ci_output_requires_failure_classification
+  critical_state_surfaces:
+  - diff_state
+  - review_comment_state
+  - ci_state
+  - lockfile_state
+  - settlement_receipt_state
+  settlement_route: review_return_to_settlement_steward
+  status: fission_candidate_not_accepted_domain
+- candidate_domain_id: background_queue_intake_domain
+  title: Background Queue and Result Intake Domain
+  parent_domains:
+  - workflow_automation_tool_domain
+  - cross_domain_settlement_domain
+  - knowledge_context_memory_domain
+  rationale: Background agent work is neither ordinary chat nor ordinary implementation.
+    It needs queue packets, authority gates, asynchronous-result intake, proof normalization,
+    and receipt boundaries.
+  evidence_entry_ids:
+  - aiw_obs_0024_cloud_background_feature
+  - aiw_obs_0025_cloud_parallel_work
+  - aiw_obs_0035_background_daemon_queue
+  pressure_signals:
+  - operator intent becomes queue packet
+  - return arrives later or from separate body
+  - branch output is proposal
+  - false background-execution claims are high-risk
+  proposed_primary_agents:
+  - BACKGROUND_QUEUE_STEWARD
+  - CLOUD_BRANCH_STEWARD
+  - RESULT_INTAKE_AUDITOR
+  - SETTLEMENT_STEWARD
+  proposed_template_packets:
+  - background_queue_result_intake_packet
+  - cloud_branch_work_packet
+  - branch_return_settlement_packet
+  proposed_protocols:
+  - queued_work_requires_authority_packet
+  - background_result_is_proposal_until_intake
+  - no_background_claim_without_receipt
+  critical_state_surfaces:
+  - queue_state
+  - branch_return_state
+  - tool_result_state
+  - receipt_state
+  - settlement_receipt_state
+  settlement_route: background_return_intake_then_parent_settlement
+  status: fission_candidate_not_accepted_domain
+- candidate_domain_id: terminal_proof_domain
+  title: Terminal and Command Proof Domain
+  parent_domains:
+  - workflow_automation_tool_domain
+  - testing_quality_domain
+  - implementation_domain
+  rationale: IDE/CLI work depends on command evidence, return codes, stdout/stderr
+    excerpts, reruns, and non-claims. This proof is a reusable domain burden, not
+    just a testing detail.
+  evidence_entry_ids:
+  - aiw_obs_0005_ide_single_file_patch
+  - aiw_obs_0014_failing_test_fix_loop
+  - aiw_obs_0026_cli_batch_patch
+  - aiw_obs_0033_tool_automation_script
+  pressure_signals:
+  - terminal output is often overclaimed
+  - return-code proof must be normalized
+  - test reruns create state-surface sync pressure
+  proposed_primary_agents:
+  - TERMINAL_PROOF_CURATOR
+  - COMMAND_RECEIPT_AUDITOR
+  - TEST_RUNNER
+  - PATCH_MASON
+  proposed_template_packets:
+  - terminal_proof_receipt_packet
+  - command_rerun_validation_packet
+  - script_tool_receipt_packet
+  proposed_protocols:
+  - command_claim_requires_return_code
+  - stdout_stderr_are_evidence_not_state
+  - tool_receipt_before_inheritance
+  critical_state_surfaces:
+  - terminal_session_state
+  - command_receipt_state
+  - test_result_state
+  - validation_state
+  settlement_route: proof_receipt_to_task_or_release_owner
+  status: fission_candidate_not_accepted_domain
+- candidate_domain_id: ui_state_modeling_domain
+  title: UI State Modeling Domain
+  parent_domains:
+  - ui_ux_domain
+  - product_requirements_domain
+  - testing_quality_domain
+  rationale: UI tasks recur as screen states, user flows, components, accessibility,
+    and interaction validation. Screen-state modeling should precede component implementation.
+  evidence_entry_ids:
+  - aiw_obs_0007_ui_feature_brief
+  - aiw_obs_0008_ui_component_build
+  - aiw_obs_0009_ui_accessibility_audit
+  - aiw_obs_0034_product_acceptance_criteria
+  pressure_signals:
+  - UI architecture differs from UI implementation
+  - component builders need screen-state contracts
+  - a11y and interaction states are proof gates
+  proposed_primary_agents:
+  - UI_STATE_MODELER
+  - SCREEN_STATE_CARTOGRAPHER
+  - UI_ARCHITECT
+  - COMPONENT_BUILDER
+  - ACCESSIBILITY_AUDITOR
+  proposed_template_packets:
+  - screen_state_matrix_packet
+  - component_contract_to_tests_packet
+  - interaction_validation_packet
+  proposed_protocols:
+  - screen_states_before_component_patch
+  - a11y_as_proof_gate
+  - acceptance_before_build
+  critical_state_surfaces:
+  - screen_state
+  - user_flow_state
+  - component_contract_state
+  - accessibility_state
+  - acceptance_criteria_state
+  settlement_route: ui_state_contract_to_component_or_product_owner
+  status: fission_candidate_not_accepted_domain
+- candidate_domain_id: documentation_example_validation_domain
+  title: Documentation Example Validation Domain
+  parent_domains:
+  - documentation_writing_domain
+  - testing_quality_domain
+  - codebase_understanding_domain
+  rationale: Documentation work is not just writing. Examples, API references, README
+    claims, and changelogs need source/claim alignment and proof about whether examples
+    were run.
+  evidence_entry_ids:
+  - aiw_obs_0002_chat_artifact_rewrite
+  - aiw_obs_0010_docs_readme_refresh
+  - aiw_obs_0011_api_docs_generation
+  - aiw_obs_0012_changelog_release_notes
+  pressure_signals:
+  - unsupported doc claims recur
+  - example validation is separate from prose drafting
+  - release notes require boundary labels
+  proposed_primary_agents:
+  - DOCS_ARCHITECT
+  - TECHNICAL_WRITER
+  - EXAMPLE_RUNNER
+  - REWRITE_CLAIM_AUDITOR
+  - DOCS_NEMESIS
+  proposed_template_packets:
+  - api_docs_example_validation_packet
+  - rewrite_claim_preservation_packet
+  - readme_claim_map_packet
+  proposed_protocols:
+  - examples_must_be_run_or_marked_unrun
+  - source_claim_alignment
+  - rewrite_preserves_claim_authority
+  critical_state_surfaces:
+  - documentation_surface_state
+  - example_run_state
+  - claim_evidence_state
+  - release_note_state
+  settlement_route: docs_claims_to_source_ranker_or_release_owner
+  status: fission_candidate_not_accepted_domain
+- candidate_domain_id: release_evidence_domain
+  title: Release Evidence Domain
+  parent_domains:
+  - devops_release_domain
+  - testing_quality_domain
+  - cross_domain_settlement_domain
+  rationale: Release readiness requires collecting evidence across tests, builds,
+    docs, risk gates, approvals, and known non-claims. Local success should not become
+    release readiness.
+  evidence_entry_ids:
+  - aiw_obs_0012_changelog_release_notes
+  - aiw_obs_0015_regression_matrix_update
+  - aiw_obs_0028_release_readiness
+  - aiw_obs_0030_schema_migration
+  pressure_signals:
+  - local success as release is a known failure mode
+  - evidence collation differs from release decision
+  - migration/release coupling creates high proof burden
+  proposed_primary_agents:
+  - RELEASE_EVIDENCE_CURATOR
+  - RELEASE_MANAGER
+  - BUILD_STEWARD
+  - REGRESSION_HUNTER
+  - RELEASE_GATE_NEMESIS
+  proposed_template_packets:
+  - release_readiness_matrix_packet
+  - release_evidence_bundle_packet
+  - rollback_boundary_packet
+  proposed_protocols:
+  - release_requires_multi_surface_evidence
+  - local_success_is_not_release_readiness
+  - human_gate_for_high_risk_release
+  critical_state_surfaces:
+  - release_gate_state
+  - build_state
+  - test_result_state
+  - risk_state
+  - approval_state
+  settlement_route: release_evidence_to_human_or_steward_decision
+  status: fission_candidate_not_accepted_domain
+- candidate_domain_id: migration_work_domain
+  title: Schema and Data Migration Work Domain
+  parent_domains:
+  - implementation_domain
+  - devops_release_domain
+  - testing_quality_domain
+  rationale: Migration work has special rollback, fixture, data-shape, deployment,
+    and release-gate concerns that exceed generic implementation.
+  evidence_entry_ids:
+  - aiw_obs_0030_schema_migration
+  - aiw_obs_0028_release_readiness
+  - aiw_obs_0014_failing_test_fix_loop
+  pressure_signals:
+  - migration plan needs rollback proof
+  - schema drift is distinct from code diff
+  - release gates become coupled to data state
+  proposed_primary_agents:
+  - MIGRATION_MASON
+  - SCHEMA_DRIFT_AUDITOR
+  - TEST_RUNNER
+  - RELEASE_EVIDENCE_CURATOR
+  proposed_template_packets:
+  - migration_plan_and_rollback_packet
+  - schema_drift_audit_packet
+  proposed_protocols:
+  - migration_requires_rollback_boundary
+  - schema_change_requires_fixture_or_migration_proof
+  critical_state_surfaces:
+  - schema_state
+  - migration_state
+  - rollback_state
+  - test_result_state
+  - release_gate_state
+  settlement_route: migration_return_to_release_evidence_or_implementation_steward
+  status: fission_candidate_not_accepted_domain
+- candidate_domain_id: assistant_work_observation_domain
+  title: Assistant Work Observation and Taxonomy Domain
+  parent_domains:
+  - assistant_learning_dataset_domain
+  - knowledge_context_memory_domain
+  rationale: The dataset should not remain anecdotal. Observed AI work patterns need
+    lineage, classification, gap mining, and template/agent proposal workflows.
+  evidence_entry_ids:
+  - aiw_obs_0003_chat_research_brief_to_state
+  - aiw_obs_0032_work_pattern_capture
+  - aiw_obs_0031_continuity_bundle_export
+  pressure_signals:
+  - observations become dataset entries
+  - dataset entries produce gaps
+  - gaps should not automatically become law
+  proposed_primary_agents:
+  - ASSISTANT_USAGE_ETHNOGRAPHER
+  - WORK_PATTERN_ETHNOGRAPHER
+  - OBSERVATION_LINEAGE_SCRIBE
+  - TEMPLATE_MINER
+  - STATE_TAXONOMIST
+  proposed_template_packets:
+  - assistant_work_observation_lineage_packet
+  - dataset_gap_mining_packet
+  - candidate_registry_delta_packet
+  proposed_protocols:
+  - observation_requires_source_class_and_lineage
+  - dataset_gap_is_proposal_not_law
+  - template_mining_requires_settlement
+  critical_state_surfaces:
+  - dataset_entry_state
+  - agent_gap_state
+  - template_gap_state
+  - lineage_state
+  - receipt_state
+  settlement_route: dataset_gap_to_candidate_registry_review
+  status: fission_candidate_not_accepted_domain
+- candidate_domain_id: incident_triage_domain
+  title: Incident Triage Domain
+  parent_domains:
+  - debugging_observability_domain
+  - review_security_domain
+  - devops_release_domain
+  rationale: Production-like incidents require escalation, human-gate awareness, reproduction,
+    containment, and non-action boundaries distinct from ordinary debugging.
+  evidence_entry_ids:
+  - aiw_obs_0017_production_bug_triage
+  - aiw_obs_0016_bug_reproduction
+  - aiw_obs_0020_secret_exposure_review
+  pressure_signals:
+  - incident authority is higher than local debug
+  - security and production effects require refusal/escalation boundaries
+  - triage may route to fix but is not itself a fix
+  proposed_primary_agents:
+  - INCIDENT_TRIAGE_STEWARD
+  - PRODUCTION_BOUNDARY_AUDITOR
+  - DEBUGGER
+  - SECURITY_NEMESIS
+  proposed_template_packets:
+  - incident_triage_packet
+  - containment_or_escalation_packet
+  - production_boundary_nonclaim_packet
+  proposed_protocols:
+  - incident_triage_before_patch
+  - high_risk_action_requires_human_gate
+  - secret_exposure_requires_containment
+  critical_state_surfaces:
+  - incident_state
+  - reproduction_state
+  - security_risk_state
+  - escalation_state
+  - authority_boundary_state
+  settlement_route: incident_triage_to_human_gate_or_fix_packet
+  status: fission_candidate_not_accepted_domain
+- candidate_domain_id: untrusted_input_tool_guard_domain
+  title: Untrusted Input and Tool Guard Domain
+  parent_domains:
+  - review_security_domain
+  - workflow_automation_tool_domain
+  - chat_work_domain
+  rationale: Prompt-injection and untrusted instruction boundaries are tool-authority
+    issues. They should be routed before tool use, not patched after unsafe actions.
+  evidence_entry_ids:
+  - aiw_obs_0021_prompt_injection_guard
+  - aiw_obs_0003_chat_research_brief_to_state
+  - aiw_obs_0020_secret_exposure_review
+  pressure_signals:
+  - instruction/data split must precede tool action
+  - untrusted text appears across chat and IDE
+  - tool guard is distinct from general security review
+  proposed_primary_agents:
+  - PROMPT_INJECTION_BOUNDARY_GUARDIAN
+  - SECURITY_NEMESIS
+  - TOOL_ORCHESTRATOR
+  - SOURCE_RANKER
+  proposed_template_packets:
+  - prompt_injection_tool_guard_packet
+  - untrusted_source_classification_packet
+  proposed_protocols:
+  - instruction_data_split_before_tool_action
+  - untrusted_text_cannot_expand_authority
+  - approval_before_side_effect
+  critical_state_surfaces:
+  - untrusted_input_state
+  - tool_surface_state
+  - security_risk_state
+  - authority_boundary_state
+  settlement_route: guard_return_to_tool_or_task_owner
+  status: fission_candidate_not_accepted_domain
+non_claims:
+- Domain fission pressure is evidence for review, not automatic domain creation.
+- This candidate file does not alter active ION registry law.
+- Parent domains remain valid until explicit settlement.

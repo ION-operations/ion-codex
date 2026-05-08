@@ -1,0 +1,21 @@
+{
+  "schema_id": "ion.playwright_cockpit_shell_smoke.v1",
+  "ok": true,
+  "base_url": "http://127.0.0.1:8765",
+  "assertions": [
+    "joc_shell_regions_visible",
+    "left_drawer_models_panel_switches",
+    "right_inspector_context_panel_switches",
+    "context_page_memory_visualization_visible",
+    "memory_segment_selection_updates_selected_node_panel",
+    "route_edge_selection_updates_selected_node_panel",
+    "route_edge_type_filter_activates",
+    "source_ref_drilldown_updates_selected_node_panel",
+    "trace_event_selection_updates_selected_node_panel",
+    "right_inspector_evidence_panel_switches",
+    "bottom_timeline_filter_activates",
+    "chat_turn_selection_highlights_message",
+    "chat_page_restores_composer"
+  ],
+  "token_value_recorded": false
+}

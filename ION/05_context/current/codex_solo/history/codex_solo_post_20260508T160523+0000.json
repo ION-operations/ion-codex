@@ -1,0 +1,680 @@
+{
+  "capsule_entry_id": "C-034",
+  "checkpoint_id": "codex_solo_post_20260508T160523+0000",
+  "created_at": "2026-05-08T16:05:23+00:00",
+  "evidence_paths": [
+    "ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py",
+    "ION/04_packages/kernel/ion_codex_chat_main_ui.py",
+    "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+    "ION/tests/test_kernel_ion_dual_codex_chat.py",
+    "ION/tests/test_kernel_ion_cockpit_playwright_smoke.py",
+    "ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json"
+  ],
+  "live_execution_authority": false,
+  "model": {
+    "active_context": {
+      "context_packages_path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "hot_context_path": "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+      "long_horizon_path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+      "mini_role": "lookup_receipt_index_not_prompt_source",
+      "minimum_context_kind": "capsule",
+      "minimum_context_path": "ION/05_context/current/codex_solo/CAPSULE.md"
+    },
+    "authority": {
+      "live_execution_authority": false,
+      "mini_capsule_authority": "capsule_minimum_context_mini_lookup_index_witness_not_repo_law",
+      "production_authority": false
+    },
+    "capsule": {
+      "context_line_limit": 80,
+      "entry_count": 34,
+      "findings": [],
+      "minimum_context": true,
+      "ok": true,
+      "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+      "recent_rows": [
+        {
+          "date": "2026-05-08",
+          "evidence": "ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_chat_shell_ui.py, ION/04_packages/kernel/ion_codex_chat_left_drawer_ui.py, ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py, ION/04_packages/kernel/ion_codex_chat_assets_ui.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_cockpit_playwright_smoke.py, ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json, ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json",
+          "id": "C-030",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented Codex Chat Phase 2 JOC shell behavior: top page tabs, page-local left drawer, main work-surface pages, right icon rail, inspector tab panels, bottom timeline filters, client-side shell toggles, and preserved"
+        },
+        {
+          "date": "2026-05-08",
+          "evidence": "ION/04_packages/kernel/ion_codex_chat_memory_visualization.py, ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py, ION/04_packages/kernel/ion_codex_chat_assets_ui.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
+          "id": "C-031",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented Codex Chat Phase 3 smart context visualization: selected-turn context, memory strata, Contextual Matryoshka layers, route graph, compaction timeline, protocol manifest, and UI-safe budget surface."
+        },
+        {
+          "date": "2026-05-08",
+          "evidence": "ION/tests/test_kernel_ion_cockpit_playwright_smoke.py, ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json, ION/05_context/current/codex_solo/history/codex_solo_post_20260508T155446+0000.json",
+          "id": "C-032",
+          "status": "VERIFIED",
+          "summary": "Verified Codex Chat Phase 3 smart context visualization through restarted local cockpit service and live Playwright cockpit smoke."
+        },
+        {
+          "date": "2026-05-08",
+          "evidence": "ION/tests/test_kernel_ion_cockpit_playwright_smoke.py, ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json, ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json",
+          "id": "C-033",
+          "status": "VERIFIED",
+          "summary": "Added and passed live Playwright JOC shell smoke for Codex Chat: shell regions, top page switch, left drawer, right inspector, context memory page, timeline filter, and composer restoration."
+        },
+        {
+          "date": "2026-05-08",
+          "evidence": "ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py, ION/04_packages/kernel/ion_codex_chat_main_ui.py, ION/04_packages/kernel/ion_codex_chat_assets_ui.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_cockpit_playwright_smoke.py, ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json",
+          "id": "C-034",
+          "status": "VERIFIED",
+          "summary": "Implemented selected-message and route graph interaction for Codex Chat: chat turns, memory segments, and route edges are selectable; selected-node panel updates; connected context is highlighted; live Playwright shell s"
+        }
+      ],
+      "role": "minimum_working_context",
+      "tail": [
+        "| C-021 | 2026-05-08 | Implemented ION Codex Chat Engine layer: user turns now route through context mount, skill activation, native lenses, model move, response mode, and existing Codex queue carrier metadata. | `ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md, ION/03_registry/ion_native_lens_registry.yaml, ION/04_packages/kernel/ion_codex_chat_engine.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_chat_app_ui.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py, ION/04_packages/kernel/ion_codex_queue_runner.py, ION/tests/test_kernel_ion_codex_chat_engine.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_queue_runner.py, ION/tests/test_kernel_ion_chatgpt_browser_connector_e2e_flow.py, ION/05_context/current/codex_cli/CODEX_CHAT_ENGINE_IMPLEMENTATION_20260508.md` | IMPLEMENTED |",
+        "| C-022 | 2026-05-08 | Planned next Codex Chat step: real GPT-5.5 Codex CLI response carrier for respond-only chat turns under the existing Capsule/skill/native-lens engine. | `ION/05_context/current/codex_cli/CODEX_CHAT_RESPONSE_CARRIER_ORCHESTRATION_20260508.md, ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_queue_runner.py` | PLANNED |",
+        "| C-023 | 2026-05-08 | Implemented Codex Chat response carrier: respond-only chat turns can use Codex CLI final messages under the Capsule/skill/native-lens engine, with fallback, trace events, artifacts, and drift detection. | `ION/04_packages/kernel/ion_codex_chat_response_carrier.py, ION/tests/test_kernel_ion_codex_chat_response_carrier.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_chat_app_ui.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md, ION/05_context/current/codex_cli/CODEX_CHAT_RESPONSE_CARRIER_IMPLEMENTATION_20260508.md, ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T140124Z968157_live_carrier_smoke_reply_with_one_concise_sentence_naming_the_current_ca/run.json, ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T140124Z968157_live_carrier_smoke_reply_with_one_concise_sentence_naming_the_current_ca/latest_r` | IMPLEMENTED |",
+        "| C-024 | 2026-05-08 | Enabled Codex Chat response carrier in the user service and verified authenticated cockpit chat turn captured a real GPT-5.5 Codex final message with no unexpected worktree drift. | `ION/05_context/current/codex_cli/CODEX_CHAT_RESPONSE_CARRIER_SERVICE_ENABLEMENT_20260508.md, /home/sev/.config/systemd/user/ion-mcp-preview.service.d/cockpit-token.conf, ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T143135Z679115_authenticated_cockpit_carrier_smoke_answer_in_one_concise_sentence_with_/run.json, ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T143135Z679115_authenticated_cockpit_carrier_smoke_answer_in_one_concise_sentence_with_/latest_r` | IMPLEMENTED |",
+        "| C-025 | 2026-05-08 | Fixed cockpit chat pending-state UX: optimistic user bubble, Codex loading bubble, textarea clear, disabled submit controls, duplicate-submit guard, JSON fetch response handling, and execution-status rendering. | `ION/04_packages/kernel/ion_codex_chat_app_ui.py, ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py, ION/05_context/current/codex_cli/CODEX_CHAT_PENDING_STATE_UX_FIX_20260508.md` | IMPLEMENTED |",
+        "| C-026 | 2026-05-08 | Installed Playwright package and added opt-in live cockpit browser smoke proving chat submit clears immediately, shows pending Codex response state, blocks duplicate submit, and captures the real response carrier output. | `ION/tests/test_kernel_ion_cockpit_playwright_smoke.py, ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json, ION/04_packages/kernel/ion_codex_chat_app_ui.py, ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py, ION/05_context/current/codex_cli/CODEX_CHAT_PENDING_STATE_UX_FIX_20260508.md` | IMPLEMENTED |",
+        "| C-027 | 2026-05-08 | Planned the next Codex Capsule Chat rewrite around JOC shell regions, Victus Contextual Matryoshka, Echo Forge evented chat traces, protocol manifest routing, and smart context visualization. | `ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md, /home/sev/ION - Production/AIM-ION/packages/joc/plans/01-architecture-and-layout.md, /home/sev/ION - Production/AIM-ION/packages/joc/plans/09-context-node-graph-visualization.md, /home/sev/AIMOS - Builds/AIM-OS-FRESH/echo-forge-loop/src/components/chat/XRayMessage.tsx, /home/sev/AIMOS - Builds/AIM-OS-FRESH/echo-forge-loop/src/components/chat/stream.ts, /home/sev/ION - Production/operation-victus/victus/context_assembler.py, /home/sev/ION - Production/operation-victus/victus/memory_bus.py` | PLANNED |",
+        "| C-028 | 2026-05-08 | Implemented Codex Chat Phase 0 memory visualization projection: memory strata, context route edges, protocol manifest summary, carrier phase events, token budget summary, redaction, model/UI drawer exposure, and tests. | `ION/04_packages/kernel/ion_codex_chat_memory_visualization.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json, ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md` | IMPLEMENTED |",
+        "| C-029 | 2026-05-08 | Implemented Codex Chat Phase 1 shell component split: app facade, shell, main chat, right inspector, timeline, memory visualization drawer, shared helpers, and CSS/JS assets split into focused modules while preserving co | `ION/04_packages/kernel/ion_codex_chat_app_ui.py, ION/04_packages/kernel/ion_codex_chat_shell_ui.py, ION/04_packages/kernel/ion_codex_chat_main_ui.py, ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py, ION/04_packages/kernel/ion_codex_chat_timeline_ui.py, ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py, ION/04_packages/kernel/ion_codex_chat_assets_ui.py, ION/04_packages/kernel/ion_codex_chat_ui_common.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json` | IMPLEMENTED |",
+        "| C-030 | 2026-05-08 | Implemented Codex Chat Phase 2 JOC shell behavior: top page tabs, page-local left drawer, main work-surface pages, right icon rail, inspector tab panels, bottom timeline filters, client-side shell toggles, and preserved  | `ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_chat_shell_ui.py, ION/04_packages/kernel/ion_codex_chat_left_drawer_ui.py, ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py, ION/04_packages/kernel/ion_codex_chat_assets_ui.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_cockpit_playwright_smoke.py, ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json, ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json` | IMPLEMENTED |",
+        "| C-031 | 2026-05-08 | Implemented Codex Chat Phase 3 smart context visualization: selected-turn context, memory strata, Contextual Matryoshka layers, route graph, compaction timeline, protocol manifest, and UI-safe budget surface. | `ION/04_packages/kernel/ion_codex_chat_memory_visualization.py, ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py, ION/04_packages/kernel/ion_codex_chat_assets_ui.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json` | IMPLEMENTED |",
+        "| C-032 | 2026-05-08 | Verified Codex Chat Phase 3 smart context visualization through restarted local cockpit service and live Playwright cockpit smoke. | `ION/tests/test_kernel_ion_cockpit_playwright_smoke.py, ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json, ION/05_context/current/codex_solo/history/codex_solo_post_20260508T155446+0000.json` | VERIFIED |",
+        "| C-033 | 2026-05-08 | Added and passed live Playwright JOC shell smoke for Codex Chat: shell regions, top page switch, left drawer, right inspector, context memory page, timeline filter, and composer restoration. | `ION/tests/test_kernel_ion_cockpit_playwright_smoke.py, ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json, ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json` | VERIFIED |",
+        "| C-034 | 2026-05-08 | Implemented selected-message and route graph interaction for Codex Chat: chat turns, memory segments, and route edges are selectable; selected-node panel updates; connected context is highlighted; live Playwright shell s | `ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py, ION/04_packages/kernel/ion_codex_chat_main_ui.py, ION/04_packages/kernel/ion_codex_chat_assets_ui.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_cockpit_playwright_smoke.py, ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json` | VERIFIED |"
+      ]
+    },
+    "context_packages": {
+      "package_count": 8,
+      "packages": [
+        {
+          "context_type": "active_short_horizon",
+          "load_policy": "always_inline_first",
+          "package_id": "minimum_working_capsule",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/CAPSULE.md"
+          ],
+          "window": {
+            "kind": "line_tail",
+            "max_lines": 80
+          }
+        },
+        {
+          "context_type": "receipt_lookup",
+          "load_policy": "index_only_not_primary_prompt",
+          "package_id": "mini_lookup_index",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/MINI.md"
+          ],
+          "window": {
+            "kind": "recent_capsule_rows",
+            "max_rows": 5
+          }
+        },
+        {
+          "context_type": "compressed_long_horizon",
+          "load_policy": "load_when_older_continuity_or_prior_decisions_matter",
+          "package_id": "long_horizon_capsule_index",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+          ],
+          "window": {
+            "epoch_count": 4,
+            "epoch_size_rows": 10,
+            "hot_context_recent_epochs": 6,
+            "kind": "epoch_summary"
+          }
+        },
+        {
+          "context_type": "authority_and_policy",
+          "load_policy": "always_available_by_route_hash",
+          "package_id": "active_authority_package",
+          "path_refs": [
+            "ION/REPO_AUTHORITY.md",
+            "ION/03_registry/agent_context_system_registry.yaml",
+            "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md"
+          ],
+          "window": {
+            "kind": "route_excerpt",
+            "max_chars_per_file": 1600
+          }
+        },
+        {
+          "context_type": "current_objective",
+          "load_policy": "injected_per_queue_or_chat_turn",
+          "package_id": "mission_active_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/HOT_CONTEXT.md"
+          ],
+          "window": {
+            "capsule_first": true,
+            "kind": "compiled_hot_context"
+          }
+        },
+        {
+          "context_type": "route_deeper",
+          "load_policy": "use_when_hot_context_is_insufficient",
+          "package_id": "route_depth_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/ROUTE.json",
+            "ION/05_context/current/codex_solo/CAPSULE.md",
+            "ION/05_context/current/codex_solo/MINI.md",
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+            "ION/REPO_AUTHORITY.md",
+            "ION/03_registry/agent_context_system_registry.yaml",
+            "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md",
+            "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+            "ION/02_architecture/CODEX_CAPSULE_OPERATING_PROTOCOL.md",
+            "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+            "ION/03_registry/ion_skill_registry.yaml",
+            "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+            "ION/03_registry/ion_native_lens_registry.yaml",
+            "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_REBUILD_ORCHESTRATION_20260507.md",
+            "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md"
+          ],
+          "window": {
+            "kind": "validate_before_queue",
+            "required_missing": []
+          }
+        },
+        {
+          "context_type": "proof_and_receipts",
+          "load_policy": "use_for_verification_or_claims_about_completed_work",
+          "package_id": "evidence_receipt_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/history"
+          ],
+          "window": {
+            "kind": "latest_checkpoint_plus_named_evidence",
+            "source": "capsule_row_evidence_refs"
+          }
+        },
+        {
+          "context_type": "recovery",
+          "load_policy": "use_when_context_drift_or_old_build_comparison_is_requested",
+          "package_id": "recovery_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/history",
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+          ],
+          "window": {
+            "kind": "explicit_operator_or_blocker_triggered"
+          }
+        }
+      ],
+      "path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "selected_by_default": [
+        "minimum_working_capsule",
+        "mini_lookup_index",
+        "long_horizon_capsule_index",
+        "active_authority_package",
+        "mission_active_package",
+        "route_depth_package"
+      ]
+    },
+    "generated_at": "2026-05-08T16:05:23+00:00",
+    "hot_context": {
+      "bytes": 65360,
+      "ok": true,
+      "path": "ION/05_context/current/codex_solo/HOT_CONTEXT.md"
+    },
+    "live_execution_authority": false,
+    "long_horizon": {
+      "capsule_entry_count": 34,
+      "epoch_count": 4,
+      "latest_epochs": [
+        {
+          "date_end": "2026-05-07",
+          "date_start": "2026-05-07",
+          "epoch_id": "E-001",
+          "evidence_refs": [
+            "ION/04_packages/kernel/ion_codex_solo_context.py",
+            "ION/04_packages/kernel/ion_dual_codex_chat.py",
+            "ION/tests/test_kernel_ion_codex_solo_context.py",
+            "ION/tests/test_kernel_ion_dual_codex_chat.py",
+            "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
+            "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+            "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+            ".codex/config.toml",
+            ".codex/hooks/ion_session_start_context.py",
+            "ION/tests/test_codex_project_config_and_hook.py",
+            "ION/04_packages/kernel/ion_codex_model_moves.py",
+            "ION/04_packages/kernel/ion_codex_queue_runner.py",
+            "ION/03_registry/codex_cli_model_move_policy.yaml",
+            "ION/tests/test_kernel_ion_codex_model_moves.py",
+            "ION/04_packages/kernel/ion_public_cockpit_auth.py",
+            "ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py",
+            "ION/tests/test_kernel_ion_public_cockpit_auth.py",
+            "ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py",
+            "/home/sev/.config/systemd/user/ion-mcp-preview.service.d/cockpit-token.conf"
+          ],
+          "row_count": 10,
+          "row_end": "C-010",
+          "row_start": "C-001",
+          "status_counts": {
+            "CORRECTED": 2,
+            "IMPLEMENTED": 8
+          },
+          "summaries": [
+            {
+              "date": "2026-05-07",
+              "id": "C-006",
+              "status": "IMPLEMENTED",
+              "summary": "Updated cockpit login password and pre-allowed crinkedart Google account"
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-007",
+              "status": "IMPLEMENTED",
+              "summary": "Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers"
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-008",
+              "status": "CORRECTED",
+              "summary": "Added Codex Capsule Operating Protocol: Capsule ION is the minified fallback/basic ops kernel while full ION Codex CLI chat is rebuilt."
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-009",
+              "status": "CORRECTED",
+              "summary": "Corrected Codex chat product direction to one Capsule Codex chat with bounded full-ION comms adapter."
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-010",
+              "status": "IMPLEMENTED",
+              "summary": "Added opt-in chat execution bridge from Codex Capsule chat turns to existing Codex work queue."
+            }
+          ]
+        },
+        {
+          "date_end": "2026-05-08",
+          "date_start": "2026-05-07",
+          "epoch_id": "E-002",
+          "evidence_refs": [
+            "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md",
+            "ION/04_packages/kernel/ion_codex_solo_context.py",
+            "ION/tests/test_kernel_ion_codex_solo_context.py",
+            "ION/tests/test_kernel_ion_dual_codex_chat.py",
+            "ION/04_packages/kernel/ion_dual_codex_chat.py",
+            "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
+            "ION/05_context/current/codex_cli/CODEX_CAPSULE_TRACE_AND_AGENT_TRANSPARENCY_ORCHESTRATION_20260507.md",
+            "ION/05_context/current/codex_cli/CODEX_CHAT_UI_RECOVERY_ORCHESTRATION_20260507.md",
+            "ION/04_packages/kernel/ion_codex_chat_app_ui.py",
+            "ION/05_context/current/codex_cli/CODEX_CHAT_APP_SHELL_COMPONENTIZATION_20260507.md",
+            "ION/05_context/current/codex_cli/CODEX_CHAT_TIMELINE_AGENTS_DRAWER_PASS_20260507.md",
+            "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+            "ION/03_registry/ion_skill_registry.yaml",
+            "ION/04_packages/kernel/ion_skill_activation.py",
+            "ION/tests/test_kernel_ion_skill_activation.py",
+            "ION/05_context/current/codex_cli/CODEX_SKILL_ACTIVATION_IMPLEMENTATION_20260507.md",
+            "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+            "ION/03_registry/ion_native_lens_registry.yaml",
+            "ION/04_packages/kernel/ion_codex_chat_engine.py",
+            "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py"
+          ],
+          "row_count": 10,
+          "row_end": "C-020",
+          "row_start": "C-011",
+          "status_counts": {
+            "CORRECTED": 1,
+            "IMPLEMENTED": 8,
+            "PLANNED": 1
+          },
+          "summaries": [
+            {
+              "date": "2026-05-07",
+              "id": "C-016",
+              "status": "IMPLEMENTED",
+              "summary": "Extracted active Codex Chat app shell into dedicated UI renderer module."
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-017",
+              "status": "IMPLEMENTED",
+              "summary": "Removed obsolete in-file Codex chat HTML/CSS renderer blocks after UI extraction."
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-018",
+              "status": "IMPLEMENTED",
+              "summary": "Improved Codex Chat Timeline and Agents drawers from existing trace and broker data."
+            },
+            {
+              "date": "2026-05-08",
+              "id": "C-019",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented ION skill activation layer for Codex Chat: skills activate workflows while templates remain proof gates."
+            },
+            {
+              "date": "2026-05-08",
+              "id": "C-020",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented Codex Chat Engine core: response modes, native ION lenses, GPT-5.5 chat route, and queue metadata handoff."
+            }
+          ]
+        },
+        {
+          "date_end": "2026-05-08",
+          "date_start": "2026-05-08",
+          "epoch_id": "E-003",
+          "evidence_refs": [
+            "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+            "ION/03_registry/ion_native_lens_registry.yaml",
+            "ION/04_packages/kernel/ion_codex_chat_engine.py",
+            "ION/04_packages/kernel/ion_dual_codex_chat.py",
+            "ION/04_packages/kernel/ion_codex_chat_app_ui.py",
+            "ION/04_packages/kernel/ion_codex_solo_context.py",
+            "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+            "ION/04_packages/kernel/ion_codex_queue_runner.py",
+            "ION/tests/test_kernel_ion_codex_chat_engine.py",
+            "ION/tests/test_kernel_ion_dual_codex_chat.py",
+            "ION/tests/test_kernel_ion_codex_queue_runner.py",
+            "ION/tests/test_kernel_ion_chatgpt_browser_connector_e2e_flow.py",
+            "ION/05_context/current/codex_cli/CODEX_CHAT_ENGINE_IMPLEMENTATION_20260508.md",
+            "ION/05_context/current/codex_cli/CODEX_CHAT_RESPONSE_CARRIER_ORCHESTRATION_20260508.md",
+            "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
+            "ION/tests/test_kernel_ion_codex_chat_response_carrier.py",
+            "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
+            "ION/05_context/current/codex_cli/CODEX_CHAT_RESPONSE_CARRIER_IMPLEMENTATION_20260508.md",
+            "ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T140124Z968157_live_carrier_smoke_reply_with_one_concise_sentence_naming_the_current_ca/run.json",
+            "ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T140124Z968157_live_carrier_smoke_reply_with_one_concise_sentence_naming_the_current_ca/latest_r"
+          ],
+          "row_count": 10,
+          "row_end": "C-030",
+          "row_start": "C-021",
+          "status_counts": {
+            "IMPLEMENTED": 8,
+            "PLANNED": 2
+          },
+          "summaries": [
+            {
+              "date": "2026-05-08",
+              "id": "C-026",
+              "status": "IMPLEMENTED",
+              "summary": "Installed Playwright package and added opt-in live cockpit browser smoke proving chat submit clears immediately, shows pending Codex response state, blocks duplicate submit, and ca"
+            },
+            {
+              "date": "2026-05-08",
+              "id": "C-027",
+              "status": "PLANNED",
+              "summary": "Planned the next Codex Capsule Chat rewrite around JOC shell regions, Victus Contextual Matryoshka, Echo Forge evented chat traces, protocol manifest routing, and smart context vis"
+            },
+            {
+              "date": "2026-05-08",
+              "id": "C-028",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented Codex Chat Phase 0 memory visualization projection: memory strata, context route edges, protocol manifest summary, carrier phase events, token budget summary, redaction"
+            },
+            {
+              "date": "2026-05-08",
+              "id": "C-029",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented Codex Chat Phase 1 shell component split: app facade, shell, main chat, right inspector, timeline, memory visualization drawer, shared helpers, and CSS/JS assets split "
+            },
+            {
+              "date": "2026-05-08",
+              "id": "C-030",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented Codex Chat Phase 2 JOC shell behavior: top page tabs, page-local left drawer, main work-surface pages, right icon rail, inspector tab panels, bottom timeline filters, c"
+            }
+          ]
+        },
+        {
+          "date_end": "2026-05-08",
+          "date_start": "2026-05-08",
+          "epoch_id": "E-004",
+          "evidence_refs": [
+            "ION/04_packages/kernel/ion_codex_chat_memory_visualization.py",
+            "ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py",
+            "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+            "ION/tests/test_kernel_ion_dual_codex_chat.py",
+            "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
+            "ION/tests/test_kernel_ion_cockpit_playwright_smoke.py",
+            "ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json",
+            "ION/05_context/current/codex_solo/history/codex_solo_post_20260508T155446+0000.json",
+            "ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json",
+            "ION/04_packages/kernel/ion_codex_chat_main_ui.py"
+          ],
+          "row_count": 4,
+          "row_end": "C-034",
+          "row_start": "C-031",
+          "status_counts": {
+            "IMPLEMENTED": 1,
+            "VERIFIED": 3
+          },
+          "summaries": [
+            {
+              "date": "2026-05-08",
+              "id": "C-031",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented Codex Chat Phase 3 smart context visualization: selected-turn context, memory strata, Contextual Matryoshka layers, route graph, compaction timeline, protocol manifest,"
+            },
+            {
+              "date": "2026-05-08",
+              "id": "C-032",
+              "status": "VERIFIED",
+              "summary": "Verified Codex Chat Phase 3 smart context visualization through restarted local cockpit service and live Playwright cockpit smoke."
+            },
+            {
+              "date": "2026-05-08",
+              "id": "C-033",
+              "status": "VERIFIED",
+              "summary": "Added and passed live Playwright JOC shell smoke for Codex Chat: shell regions, top page switch, left drawer, right inspector, context memory page, timeline filter, and composer re"
+            },
+            {
+              "date": "2026-05-08",
+              "id": "C-034",
+              "status": "VERIFIED",
+              "summary": "Implemented selected-message and route graph interaction for Codex Chat: chat turns, memory segments, and route edges are selectable; selected-node panel updates; connected context"
+            }
+          ]
+        }
+      ],
+      "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+    },
+    "mini": {
+      "findings": [],
+      "line_count": 26,
+      "max_lines": 30,
+      "ok": true,
+      "role": "lookup_receipt_index_for_capsule_history",
+      "text": "CODEX SOLO MINI INDEX | 2026-05-08T16:05:23+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Maintain the primary Codex Capsule chat profile with bounded full-ION comms.\nPHASE: codex_solo_work\nLAST_RECEIPT: Implemented selected-message and route graph interaction for Codex Chat: chat turns, memory segments, and route edges are selectable; selected-node panel updates; connected context\nBLOCKER: None\nNEXT: Improve route graph readability with grouped edge filters, source-ref drilldowns, and compact selected-turn trace linking.\n\nACTIVE_TEMPLATE: CODEX_SOLO_WORK_UNIT\n\nCAPSULE_LOOKUP:\n- C-030 2026-05-08 IMPLEMENTED: Implemented Codex Chat Phase 2 JOC shell behavior: top page tabs, page-local left drawer, main work-surface pa\n- C-031 2026-05-08 IMPLEMENTED: Implemented Codex Chat Phase 3 smart context visualization: selected-turn context, memory strata, Contextual M\n- C-032 2026-05-08 VERIFIED: Verified Codex Chat Phase 3 smart context visualization through restarted local cockpit service and live Playw\n- C-033 2026-05-08 VERIFIED: Added and passed live Playwright JOC shell smoke for Codex Chat: shell regions, top page switch, left drawer, \n- C-034 2026-05-08 VERIFIED: Implemented selected-message and route graph interaction for Codex Chat: chat turns, memory segments, and rout\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.\n"
+    },
+    "ok": true,
+    "paths": {
+      "capsule": "ION/05_context/current/codex_solo/CAPSULE.md",
+      "context_packages": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "dir": "ION/05_context/current/codex_solo",
+      "hot_context": "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+      "long_horizon": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+      "mini": "ION/05_context/current/codex_solo/MINI.md",
+      "route": "ION/05_context/current/codex_solo/ROUTE.json",
+      "status": "ION/05_context/current/codex_solo/STATUS.json"
+    },
+    "production_authority": false,
+    "rolling_windows": {
+      "capsule_active_context_lines": 80,
+      "capsule_rows_per_long_horizon_epoch": 10,
+      "long_horizon_epochs_in_hot_context": 6,
+      "mini_lookup_recent_rows": 5,
+      "route_excerpt_chars": 1600
+    },
+    "route": {
+      "entries": [
+        {
+          "bytes": 17979,
+          "classification": "codex_solo_minimum_working_context",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "f7931f3f81dd2a82e94733dd0bc3644a133293d0e2a99552ade65e4e31bc11ce",
+          "why": "Minimum context the standalone Codex lane must always carry."
+        },
+        {
+          "bytes": 1911,
+          "classification": "codex_solo_lookup_receipt_index",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_solo/MINI.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "9ad59093023dd7be98b79571a7764e8745ea0e9505dde4e0bbc0fc4d4f88a9e6",
+          "why": "Lookup index and receipt summary for capsule history."
+        },
+        {
+          "bytes": 23618,
+          "classification": "codex_solo_long_horizon_index",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "f8dde7dd17b4c1939ed97fcfcc75eee461e4202597a77195d37a96a664742c64",
+          "why": "Compressed long-horizon capsule index for older continuity lookup."
+        },
+        {
+          "bytes": 9259,
+          "classification": "active_repo_authority",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/REPO_AUTHORITY.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "804ed8430fc53e551d254af063ec414646a1c1bf94ceeec51c31769fa41aca1e",
+          "why": "Active root authority boundary."
+        },
+        {
+          "bytes": 9343,
+          "classification": "active_context_policy",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/03_registry/agent_context_system_registry.yaml",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12",
+          "why": "Current Mini/Capsule witness policy and active context-system registry."
+        },
+        {
+          "bytes": 1098,
+          "classification": "active_lead_context",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "3dcbd1f7f1c81c30a9d02f66deffdc5d0c9466df4347946030a3a1cf6721cd4c",
+          "why": "Current lead-dev operating posture."
+        },
+        {
+          "bytes": 10713,
+          "classification": "codex_solo_design",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "4e92263b324a31489cd6be3c375ad0654b94493db87f46ff5ccda7985ea15e47",
+          "why": "Research basis for this single-agent context lane."
+        },
+        {
+          "bytes": 6081,
+          "classification": "codex_capsule_operating_kernel",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/02_architecture/CODEX_CAPSULE_OPERATING_PROTOCOL.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "b76326e484b8c61395f15109c444352a968a3ef6ce58fee4983019ad024abffa",
+          "why": "Small ION operating kernel for Codex fallback/basic ops."
+        },
+        {
+          "bytes": 4016,
+          "classification": "codex_skill_activation_governance",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "226d607c78a164033b536bf2c7f6bd99d641168b41f206b6167eee2eaadbe3de",
+          "why": "Defines skills as activation control while templates remain proof law."
+        },
+        {
+          "bytes": 9803,
+          "classification": "codex_skill_activation_registry",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/03_registry/ion_skill_registry.yaml",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "bc64b6fdbe8805c22dc3ec5faee2ec765ca2f2184e9333f4591c5c1aa83dcdb1",
+          "why": "Active skill registry for Codex chat, ION handoff, recovery, template curation, and receipts."
+        },
+        {
+          "bytes": 3402,
+          "classification": "codex_chat_engine_protocol",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "a87eb08ef90ce36e1b911d90574754c2b485cf387f0e4139827b8c608dc338d1",
+          "why": "Defines the chat-quality engine under the UI: context, skills, native lenses, model route, and response contract."
+        },
+        {
+          "bytes": 5076,
+          "classification": "codex_chat_native_lens_registry",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/03_registry/ion_native_lens_registry.yaml",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "4121707156f13446addccbf19c1b26af087fc7520cd80ca1f8e50cac2b6a437d",
+          "why": "Maps ION native roles into chat-engine lenses without making them user-facing chores."
+        },
+        {
+          "bytes": 3312,
+          "classification": "codex_capsule_chat_rebuild_orchestration",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_REBUILD_ORCHESTRATION_20260507.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "d214747d7a4dd3c9e4585f2345eabad1e98513485bc43c7c4d3a922f5af54439",
+          "why": "Active product correction: one Capsule Codex chat with bounded full-ION comms."
+        },
+        {
+          "bytes": 8550,
+          "classification": "codex_capsule_chat_ui_orchestration",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "050112e9456f270894f796468b1009a60dc646eba731e38ac543548867b9cb29",
+          "why": "Chat-first app UI orchestration using JOC/ION drawers and Capsule context."
+        }
+      ],
+      "findings": [],
+      "live_execution_authority": false,
+      "ok": true,
+      "production_authority": false,
+      "route_path": "ION/05_context/current/codex_solo/ROUTE.json",
+      "schema_id": "ion.codex_solo_route_validation.v1"
+    },
+    "schema_id": "ion.codex_solo_context.v1",
+    "verdict": "ION_CODEX_SOLO_CONTEXT_READY",
+    "witness_policy": "Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions."
+  },
+  "production_authority": false,
+  "schema_id": "ion.codex_solo_post_checkpoint.v1",
+  "status": "VERIFIED",
+  "summary": "Implemented selected-message and route graph interaction for Codex Chat: chat turns, memory segments, and route edges are selectable; selected-node panel updates; connected context is highlighted; live Playwright shell smoke covers the interaction."
+}

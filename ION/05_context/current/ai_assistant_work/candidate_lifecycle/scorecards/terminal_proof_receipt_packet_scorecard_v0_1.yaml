@@ -1,0 +1,42 @@
+schema: ion.ai_assistant_work.candidate_lifecycle_scorecard.v0_1
+candidate_id: terminal_proof_receipt_packet
+candidate_type: template
+lifecycle_state: promotion_candidate
+created_at: '2026-05-08T18:50:31Z'
+source_evidence:
+  - ION/05_context/current/ai_assistant_work/template_specs/terminal_proof_receipt_packet.template_spec.yaml
+  - ION/05_context/current/ai_assistant_work/template_instances/terminal_proof_receipt_packet.minimal_valid.instance.json
+  - ION/05_context/current/ai_assistant_work/template_instances/terminal_proof_receipt_packet.expected_rejection.instance.json
+  - ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_IMPLEMENTATION_RECEIPT_20260508T181926Z.json
+allowed_uses:
+  - proof shaping for command/test claims
+  - receipt requirements for bounded Codex work
+  - rejection of unverified terminal claims
+forbidden_uses:
+  - accepting command claims without captured command/result
+  - replacing focused tests with prose
+  - granting shell authority
+scores:
+  route_accuracy: 3
+  proof_usefulness: 4
+  user_burden_reduction: 3
+  drift_or_confusion_risk: 1
+  test_coverage: 3
+validation_evidence:
+  valid_instance_count: 1
+  expected_rejection_count: 1
+  receipt_count: 3
+  focused_tests:
+    - ION/tests/test_kernel_ai_assistant_work_template_instances.py
+    - ION/tests/test_kernel_ion_assistant_work_route_compiler.py
+conflicts_with_accepted_law: none_found_currently
+operator_acceptance_notes:
+  - Strong fit with current Codex work because terminal proof is already the natural evidence path.
+promotion_recommendation: ACCEPT_AS_TEMPLATE_ONLY
+next_evidence_needed:
+  - Steward/human review
+  - exact accepted target path selection
+  - one more live command/test receipt example
+non_claims:
+  - This scorecard does not accept the template into ION canon.
+  - This scorecard does not grant shell, production, live, or secrets authority.

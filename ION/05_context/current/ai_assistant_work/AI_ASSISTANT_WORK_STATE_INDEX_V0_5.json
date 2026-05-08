@@ -1,0 +1,76 @@
+{
+  "schema": "ion.ai_assistant_work.state_index.v0_5",
+  "status": "candidate_current_state_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "root": "ION/05_context/current/ai_assistant_work/",
+  "inherits_from": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_4.json",
+  "current_state": "ai_assistant_work_template_instance_corpus_and_agent_boot_exercises_built_as_candidate_current_context",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "summary": {
+    "machine_checkable_template_spec_count": 7,
+    "valid_template_instance_count": 7,
+    "expected_rejection_instance_count": 7,
+    "agent_boot_exercise_count": 7,
+    "valid_instances_accepted": 7,
+    "expected_rejections_accepted": 7,
+    "agent_boot_exercises_accepted": 7,
+    "validation_findings": 0
+  },
+  "key_files": {
+    "template_instance_index": "ION/05_context/current/ai_assistant_work/template_instances/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_CORPUS_INDEX_V0_1.yaml",
+    "agent_boot_exercise_index": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/AI_ASSISTANT_WORK_AGENT_BOOT_EXERCISE_INDEX_V0_1.yaml",
+    "simulation_report": "ION/05_context/current/ai_assistant_work/simulations/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_AGENT_BOOT_EXERCISE_SIMULATION_REPORT_LATEST.json",
+    "validation_note": "ION/05_context/current/ai_assistant_work/validation/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_AGENT_BOOT_EXERCISE_VALIDATION_NOTE_LATEST.json",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_AGENT_BOOT_EXERCISE_RECEIPT_20260508T154333Z.json",
+    "state_surface_sync_report": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_SURFACE_SYNC_REPORT_TEMPLATE_INSTANCE_AGENT_BOOT_EXERCISE_20260508T154333Z.json",
+    "next_packet": "ION/05_context/current/ai_assistant_work/next/AI_ASSISTANT_WORK_NEXT_PACKET_ROUTE_COMPILER_AND_PROMOTION_PLAN_20260508T154333Z.json"
+  },
+  "template_specs_exercised": [
+    "api_docs_example_validation_packet",
+    "background_queue_result_intake_packet",
+    "migration_plan_and_rollback_packet",
+    "pr_review_packet",
+    "release_readiness_matrix_packet",
+    "screen_state_matrix_packet",
+    "terminal_proof_receipt_packet"
+  ],
+  "specialist_agent_boots_exercised": [
+    "BACKGROUND_QUEUE_STEWARD",
+    "EXAMPLE_RUNNER",
+    "MIGRATION_MASON",
+    "PR_REVIEW_STEWARD",
+    "RELEASE_EVIDENCE_CURATOR",
+    "TERMINAL_PROOF_CURATOR",
+    "UI_STATE_MODELER"
+  ],
+  "open_decisions": [
+    "Whether to accept or revise the seven machine-checkable template specs.",
+    "Whether to promote these instance corpus and boot exercises into a formal assistant-work validation suite.",
+    "Whether to compile routes into product/GPT onboarding surfaces after human acceptance.",
+    "Which remaining assistant-work domains need boot drafts and template specs next."
+  ],
+  "recommended_next_packet": "AI_ASSISTANT_WORK_NEXT_PACKET_ROUTE_COMPILER_AND_PROMOTION_PLAN",
+  "validation": {
+    "template_instance_agent_boot_exercise_validation": "accepted_candidate_validation",
+    "valid_instances": "7/7 accepted",
+    "expected_rejections": "7/7 accepted as rejections",
+    "agent_boot_exercises": "7/7 accepted",
+    "focused_tests": "48 passed",
+    "ion_status": "ION_STATUS_READY",
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+    "status_preflight_integrity_tests": "included in focused test run"
+  },
+  "non_claims": [
+    "Candidate template instances do not make the template specs accepted law.",
+    "Agent boot exercises are sandbox-local simulations, not real isolated agent invocations.",
+    "No external IDE, CLI, cloud, PR, GitHub, MCP, Codex, daemon, or production action was performed.",
+    "No ION/03_registry or product-front-door landing occurred."
+  ]
+}

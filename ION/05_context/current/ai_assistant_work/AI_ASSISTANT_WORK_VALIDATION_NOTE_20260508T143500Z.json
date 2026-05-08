@@ -1,0 +1,17 @@
+{
+  "schema": "ion.ai_assistant_work.validation_report.v0_1",
+  "accepted": true,
+  "status": "accepted_candidate_evidence",
+  "domain_count": 19,
+  "agent_count": 47,
+  "route_count": 6,
+  "state_family_count": 77,
+  "template_family_count": 69,
+  "protocol_count": 59,
+  "findings": [],
+  "non_claims": [
+    "Candidate validation does not accept this into ION canon.",
+    "No external IDE or cloud-agent execution is claimed.",
+    "No product-front-door or registry mutation is claimed."
+  ]
+}

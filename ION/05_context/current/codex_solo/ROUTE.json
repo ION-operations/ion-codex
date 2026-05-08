@@ -1,0 +1,327 @@
+{
+  "entries": [
+    {
+      "bytes": 28613,
+      "classification": "codex_solo_minimum_working_context",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "393e8166594e1833e7c389dcfa391217a41c637890bc911004238e4008c2aa58",
+      "why": "Minimum context the standalone Codex lane must always carry."
+    },
+    {
+      "bytes": 1959,
+      "classification": "codex_solo_lookup_receipt_index",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/codex_solo/MINI.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "81e70478d2efcecf52c0da42418b21ccf33b204e694fdcf58dbc60890a8d031a",
+      "why": "Lookup index and receipt summary for capsule history."
+    },
+    {
+      "bytes": 36258,
+      "classification": "codex_solo_long_horizon_index",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "da8004847af8a9f85f1e0b98daf514b3164c1cf478ebd26d722418f9e50e0077",
+      "why": "Compressed long-horizon capsule index for older continuity lookup."
+    },
+    {
+      "bytes": 9259,
+      "classification": "active_repo_authority",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/REPO_AUTHORITY.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "804ed8430fc53e551d254af063ec414646a1c1bf94ceeec51c31769fa41aca1e",
+      "why": "Active root authority boundary."
+    },
+    {
+      "bytes": 9343,
+      "classification": "active_context_policy",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/03_registry/agent_context_system_registry.yaml",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12",
+      "why": "Current Mini/Capsule witness policy and active context-system registry."
+    },
+    {
+      "bytes": 1098,
+      "classification": "active_lead_context",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "3dcbd1f7f1c81c30a9d02f66deffdc5d0c9466df4347946030a3a1cf6721cd4c",
+      "why": "Current lead-dev operating posture."
+    },
+    {
+      "bytes": 10713,
+      "classification": "codex_solo_design",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "4e92263b324a31489cd6be3c375ad0654b94493db87f46ff5ccda7985ea15e47",
+      "why": "Research basis for this single-agent context lane."
+    },
+    {
+      "bytes": 6081,
+      "classification": "codex_capsule_operating_kernel",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/02_architecture/CODEX_CAPSULE_OPERATING_PROTOCOL.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "b76326e484b8c61395f15109c444352a968a3ef6ce58fee4983019ad024abffa",
+      "why": "Small ION operating kernel for Codex fallback/basic ops."
+    },
+    {
+      "bytes": 4016,
+      "classification": "codex_skill_activation_governance",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "226d607c78a164033b536bf2c7f6bd99d641168b41f206b6167eee2eaadbe3de",
+      "why": "Defines skills as activation control while templates remain proof law."
+    },
+    {
+      "bytes": 9803,
+      "classification": "codex_skill_activation_registry",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/03_registry/ion_skill_registry.yaml",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "bc64b6fdbe8805c22dc3ec5faee2ec765ca2f2184e9333f4591c5c1aa83dcdb1",
+      "why": "Active skill registry for Codex chat, ION handoff, recovery, template curation, and receipts."
+    },
+    {
+      "bytes": 3402,
+      "classification": "codex_chat_engine_protocol",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "a87eb08ef90ce36e1b911d90574754c2b485cf387f0e4139827b8c608dc338d1",
+      "why": "Defines the chat-quality engine under the UI: context, skills, native lenses, model route, and response contract."
+    },
+    {
+      "bytes": 5076,
+      "classification": "codex_chat_native_lens_registry",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/03_registry/ion_native_lens_registry.yaml",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "4121707156f13446addccbf19c1b26af087fc7520cd80ca1f8e50cac2b6a437d",
+      "why": "Maps ION native roles into chat-engine lenses without making them user-facing chores."
+    },
+    {
+      "bytes": 3312,
+      "classification": "codex_capsule_chat_rebuild_orchestration",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_REBUILD_ORCHESTRATION_20260507.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "d214747d7a4dd3c9e4585f2345eabad1e98513485bc43c7c4d3a922f5af54439",
+      "why": "Active product correction: one Capsule Codex chat with bounded full-ION comms."
+    },
+    {
+      "bytes": 8550,
+      "classification": "codex_capsule_chat_ui_orchestration",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "050112e9456f270894f796468b1009a60dc646eba731e38ac543548867b9cb29",
+      "why": "Chat-first app UI orchestration using JOC/ION drawers and Capsule context."
+    }
+  ],
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.codex_solo_route.v1",
+  "updated_at": "2026-05-08T19:39:16+00:00",
+  "validation": {
+    "entries": [
+      {
+        "bytes": 28613,
+        "classification": "codex_solo_minimum_working_context",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "393e8166594e1833e7c389dcfa391217a41c637890bc911004238e4008c2aa58",
+        "why": "Minimum context the standalone Codex lane must always carry."
+      },
+      {
+        "bytes": 1959,
+        "classification": "codex_solo_lookup_receipt_index",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/05_context/current/codex_solo/MINI.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "81e70478d2efcecf52c0da42418b21ccf33b204e694fdcf58dbc60890a8d031a",
+        "why": "Lookup index and receipt summary for capsule history."
+      },
+      {
+        "bytes": 36258,
+        "classification": "codex_solo_long_horizon_index",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "da8004847af8a9f85f1e0b98daf514b3164c1cf478ebd26d722418f9e50e0077",
+        "why": "Compressed long-horizon capsule index for older continuity lookup."
+      },
+      {
+        "bytes": 9259,
+        "classification": "active_repo_authority",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/REPO_AUTHORITY.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "804ed8430fc53e551d254af063ec414646a1c1bf94ceeec51c31769fa41aca1e",
+        "why": "Active root authority boundary."
+      },
+      {
+        "bytes": 9343,
+        "classification": "active_context_policy",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/03_registry/agent_context_system_registry.yaml",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12",
+        "why": "Current Mini/Capsule witness policy and active context-system registry."
+      },
+      {
+        "bytes": 1098,
+        "classification": "active_lead_context",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "3dcbd1f7f1c81c30a9d02f66deffdc5d0c9466df4347946030a3a1cf6721cd4c",
+        "why": "Current lead-dev operating posture."
+      },
+      {
+        "bytes": 10713,
+        "classification": "codex_solo_design",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "4e92263b324a31489cd6be3c375ad0654b94493db87f46ff5ccda7985ea15e47",
+        "why": "Research basis for this single-agent context lane."
+      },
+      {
+        "bytes": 6081,
+        "classification": "codex_capsule_operating_kernel",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/02_architecture/CODEX_CAPSULE_OPERATING_PROTOCOL.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "b76326e484b8c61395f15109c444352a968a3ef6ce58fee4983019ad024abffa",
+        "why": "Small ION operating kernel for Codex fallback/basic ops."
+      },
+      {
+        "bytes": 4016,
+        "classification": "codex_skill_activation_governance",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "226d607c78a164033b536bf2c7f6bd99d641168b41f206b6167eee2eaadbe3de",
+        "why": "Defines skills as activation control while templates remain proof law."
+      },
+      {
+        "bytes": 9803,
+        "classification": "codex_skill_activation_registry",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/03_registry/ion_skill_registry.yaml",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "bc64b6fdbe8805c22dc3ec5faee2ec765ca2f2184e9333f4591c5c1aa83dcdb1",
+        "why": "Active skill registry for Codex chat, ION handoff, recovery, template curation, and receipts."
+      },
+      {
+        "bytes": 3402,
+        "classification": "codex_chat_engine_protocol",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "a87eb08ef90ce36e1b911d90574754c2b485cf387f0e4139827b8c608dc338d1",
+        "why": "Defines the chat-quality engine under the UI: context, skills, native lenses, model route, and response contract."
+      },
+      {
+        "bytes": 5076,
+        "classification": "codex_chat_native_lens_registry",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/03_registry/ion_native_lens_registry.yaml",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "4121707156f13446addccbf19c1b26af087fc7520cd80ca1f8e50cac2b6a437d",
+        "why": "Maps ION native roles into chat-engine lenses without making them user-facing chores."
+      },
+      {
+        "bytes": 3312,
+        "classification": "codex_capsule_chat_rebuild_orchestration",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_REBUILD_ORCHESTRATION_20260507.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "d214747d7a4dd3c9e4585f2345eabad1e98513485bc43c7c4d3a922f5af54439",
+        "why": "Active product correction: one Capsule Codex chat with bounded full-ION comms."
+      },
+      {
+        "bytes": 8550,
+        "classification": "codex_capsule_chat_ui_orchestration",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "050112e9456f270894f796468b1009a60dc646eba731e38ac543548867b9cb29",
+        "why": "Chat-first app UI orchestration using JOC/ION drawers and Capsule context."
+      }
+    ],
+    "findings": [],
+    "live_execution_authority": false,
+    "ok": true,
+    "production_authority": false,
+    "route_path": "ION/05_context/current/codex_solo/ROUTE.json",
+    "schema_id": "ion.codex_solo_route_validation.v1"
+  },
+  "witness_policy": "Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions."
+}

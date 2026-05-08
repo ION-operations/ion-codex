@@ -1,0 +1,63 @@
+{
+  "authority": {
+    "allowed_paths": [
+      "ION/05_context/current/ai_assistant_work/",
+      "ION/tests/"
+    ],
+    "candidate_only": true,
+    "external_execution": false,
+    "mutated_ION_03_registry": false,
+    "mutated_product_front_door": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "candidate_state_delta": "AI Assistant Work v0.1 now has a seed observation corpus that maps real/synthetic assistant-work patterns to embodiments, domains, states, protocols, templates, agents, proof, failure modes, settlement, and candidate improvement gaps.",
+  "created_at": "2026-05-08T14:34:13Z",
+  "files_created_or_updated": [
+    "ION/05_context/current/ai_assistant_work/dataset/AI_ASSISTANT_WORK_DATASET_GENESIS_V0_1.jsonl",
+    "ION/05_context/current/ai_assistant_work/dataset/AI_ASSISTANT_WORK_DATASET_GENESIS_SUMMARY_20260508T143225Z.json",
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_FAILURE_MODE_REGISTRY_CANDIDATE_V0_1.yaml",
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_SKILL_TO_AGENT_BINDING_MAP_V0_1.yaml",
+    "ION/05_context/current/ai_assistant_work/gaps/AI_ASSISTANT_WORK_DATASET_GAP_ANALYSIS_V0_1.yaml",
+    "ION/05_context/current/ai_assistant_work/simulate_ai_assistant_work_dataset_genesis.py",
+    "ION/05_context/current/ai_assistant_work/validate_ai_assistant_work_dataset_genesis.py",
+    "ION/05_context/current/ai_assistant_work/simulations/AI_ASSISTANT_WORK_DATASET_ROUTE_SIMULATION_REPORT_LATEST.json",
+    "ION/05_context/current/ai_assistant_work/validation/AI_ASSISTANT_WORK_DATASET_GENESIS_VALIDATION_NOTE_LATEST.json"
+  ],
+  "next_packet_hint": "Mine dataset gaps into candidate subdomains/agents/templates and decide whether PR-agent work, background-agent queue work, UI state modeling, and migration work should fission into child domains.",
+  "non_claims": [
+    "This receipt is not human/Steward acceptance into canon.",
+    "The dataset is a seed corpus and is not statistically representative.",
+    "No registry landing, product-front-door mutation, external IDE/CLI/cloud/PR/background execution, GitHub, MCP, Codex, or daemon action occurred."
+  ],
+  "objective": "Build the first structured dataset of AI-assisted work observations and use it to refine domain/state/template/agent registries.",
+  "proof": {
+    "focused_test_command": "python -S -m pytest ION/tests/test_kernel_ai_assistant_work_domain_candidate.py ION/tests/test_kernel_ai_assistant_work_dataset_genesis.py -q",
+    "focused_tests": "17 passed: test_kernel_ai_assistant_work_domain_candidate.py and test_kernel_ai_assistant_work_dataset_genesis.py",
+    "route_simulation_report": "ION/05_context/current/ai_assistant_work/simulations/AI_ASSISTANT_WORK_DATASET_ROUTE_SIMULATION_REPORT_LATEST.json",
+    "validation_note": "ION/05_context/current/ai_assistant_work/validation/AI_ASSISTANT_WORK_DATASET_GENESIS_VALIDATION_NOTE_LATEST.json"
+  },
+  "receipt_id": "AI_ASSISTANT_WORK_DATASET_GENESIS_RECEIPT_20260508T143413Z",
+  "result": {
+    "agent_coverage_count": 47,
+    "agent_domain_gap_count": 13,
+    "dataset_entries": 36,
+    "domain_coverage_count": 19,
+    "embodiments": {
+      "background_agent": 1,
+      "chat": 11,
+      "cli": 2,
+      "cloud_agent": 2,
+      "hybrid": 4,
+      "ide": 12,
+      "pr_agent": 4
+    },
+    "failure_mode_count": 68,
+    "route_simulation_cases": 36,
+    "route_simulation_cases_accepted": 36,
+    "skill_binding_count": 26,
+    "template_gap_count": 13
+  },
+  "schema": "ion.receipt.v1",
+  "status": "candidate_current_state_receipt_not_accepted_canon",
+  "template": "assistant_work_dataset_genesis_packet"
+}

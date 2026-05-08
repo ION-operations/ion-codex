@@ -1,0 +1,14 @@
+{
+  "schema_id": "ion.playwright_cockpit_pending_smoke.v1",
+  "ok": true,
+  "base_url": "http://127.0.0.1:8765",
+  "message_id": "playwright-pending-smoke-1778257392",
+  "assertions": [
+    "textarea_cleared_immediately",
+    "send_disabled_with_sending_label",
+    "pending_codex_bubble_visible",
+    "duplicate_submit_guard_preserved_single_user_bubble",
+    "codex_response_captured"
+  ],
+  "token_value_recorded": false
+}

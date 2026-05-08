@@ -1,0 +1,387 @@
+{
+  "capsule_entry_id": "C-004",
+  "checkpoint_id": "codex_solo_post_20260507T181817+0000",
+  "created_at": "2026-05-07T18:18:17+00:00",
+  "evidence_paths": [
+    "ION/04_packages/kernel/ion_codex_model_moves.py",
+    "ION/04_packages/kernel/ion_dual_codex_chat.py",
+    "ION/04_packages/kernel/ion_codex_queue_runner.py",
+    "ION/03_registry/codex_cli_model_move_policy.yaml",
+    "ION/tests/test_kernel_ion_codex_model_moves.py"
+  ],
+  "live_execution_authority": false,
+  "model": {
+    "active_context": {
+      "context_packages_path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "hot_context_path": "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+      "long_horizon_path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+      "mini_role": "lookup_receipt_index_not_prompt_source",
+      "minimum_context_kind": "capsule",
+      "minimum_context_path": "ION/05_context/current/codex_solo/CAPSULE.md"
+    },
+    "authority": {
+      "live_execution_authority": false,
+      "mini_capsule_authority": "capsule_minimum_context_mini_lookup_index_witness_not_repo_law",
+      "production_authority": false
+    },
+    "capsule": {
+      "context_line_limit": 80,
+      "entry_count": 4,
+      "findings": [],
+      "minimum_context": true,
+      "ok": true,
+      "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+      "recent_rows": [
+        {
+          "date": "2026-05-07",
+          "evidence": "ION/04_packages/kernel/ion_codex_solo_context.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md, ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+          "id": "C-001",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented capsule-first Codex solo context: Capsule is minimum working context; Mini is lookup/receipt index."
+        },
+        {
+          "date": "2026-05-07",
+          "evidence": "ION/04_packages/kernel/ion_codex_solo_context.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md, ION/05_context/current/codex_solo/LONG_HORIZON.json, ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+          "id": "C-002",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented multi-horizon Codex solo context: long-horizon capsule epochs and explicit context package selector."
+        },
+        {
+          "date": "2026-05-07",
+          "evidence": ".codex/config.toml, .codex/hooks/ion_session_start_context.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_codex_project_config_and_hook.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
+          "id": "C-003",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP read/status tools, and explicit post receipt helper."
+        },
+        {
+          "date": "2026-05-07",
+          "evidence": "ION/04_packages/kernel/ion_codex_model_moves.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_queue_runner.py, ION/03_registry/codex_cli_model_move_policy.yaml, ION/tests/test_kernel_ion_codex_model_moves.py",
+          "id": "C-004",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented Codex CLI model moves and Mini auto-post for dual chat"
+        }
+      ],
+      "role": "minimum_working_context",
+      "tail": [
+        "# Codex Solo Capsule",
+        "> Minimum working context for the standalone Codex chat lane. Load this before general Codex work. Mini is only lookup/index; detailed work stays in normal artifacts.",
+        "| # | Date | Summary | Evidence | Status |",
+        "|---|------|---------|----------|--------|",
+        "| C-001 | 2026-05-07 | Implemented capsule-first Codex solo context: Capsule is minimum working context; Mini is lookup/receipt index. | `ION/04_packages/kernel/ion_codex_solo_context.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md, ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md` | IMPLEMENTED |",
+        "| C-002 | 2026-05-07 | Implemented multi-horizon Codex solo context: long-horizon capsule epochs and explicit context package selector. | `ION/04_packages/kernel/ion_codex_solo_context.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md, ION/05_context/current/codex_solo/LONG_HORIZON.json, ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json` | IMPLEMENTED |",
+        "| C-003 | 2026-05-07 | Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP read/status tools, and explicit post receipt helper. | `.codex/config.toml, .codex/hooks/ion_session_start_context.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_codex_project_config_and_hook.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md` | IMPLEMENTED |",
+        "| C-004 | 2026-05-07 | Implemented Codex CLI model moves and Mini auto-post for dual chat | `ION/04_packages/kernel/ion_codex_model_moves.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_queue_runner.py, ION/03_registry/codex_cli_model_move_policy.yaml, ION/tests/test_kernel_ion_codex_model_moves.py` | IMPLEMENTED |"
+      ]
+    },
+    "context_packages": {
+      "package_count": 8,
+      "packages": [
+        {
+          "context_type": "active_short_horizon",
+          "load_policy": "always_inline_first",
+          "package_id": "minimum_working_capsule",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/CAPSULE.md"
+          ],
+          "window": {
+            "kind": "line_tail",
+            "max_lines": 80
+          }
+        },
+        {
+          "context_type": "receipt_lookup",
+          "load_policy": "index_only_not_primary_prompt",
+          "package_id": "mini_lookup_index",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/MINI.md"
+          ],
+          "window": {
+            "kind": "recent_capsule_rows",
+            "max_rows": 5
+          }
+        },
+        {
+          "context_type": "compressed_long_horizon",
+          "load_policy": "load_when_older_continuity_or_prior_decisions_matter",
+          "package_id": "long_horizon_capsule_index",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+          ],
+          "window": {
+            "epoch_count": 1,
+            "epoch_size_rows": 10,
+            "hot_context_recent_epochs": 6,
+            "kind": "epoch_summary"
+          }
+        },
+        {
+          "context_type": "authority_and_policy",
+          "load_policy": "always_available_by_route_hash",
+          "package_id": "active_authority_package",
+          "path_refs": [
+            "ION/REPO_AUTHORITY.md",
+            "ION/03_registry/agent_context_system_registry.yaml",
+            "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md"
+          ],
+          "window": {
+            "kind": "route_excerpt",
+            "max_chars_per_file": 1600
+          }
+        },
+        {
+          "context_type": "current_objective",
+          "load_policy": "injected_per_queue_or_chat_turn",
+          "package_id": "mission_active_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/HOT_CONTEXT.md"
+          ],
+          "window": {
+            "capsule_first": true,
+            "kind": "compiled_hot_context"
+          }
+        },
+        {
+          "context_type": "route_deeper",
+          "load_policy": "use_when_hot_context_is_insufficient",
+          "package_id": "route_depth_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/ROUTE.json",
+            "ION/05_context/current/codex_solo/CAPSULE.md",
+            "ION/05_context/current/codex_solo/MINI.md",
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+            "ION/REPO_AUTHORITY.md",
+            "ION/03_registry/agent_context_system_registry.yaml",
+            "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md",
+            "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md"
+          ],
+          "window": {
+            "kind": "validate_before_queue",
+            "required_missing": []
+          }
+        },
+        {
+          "context_type": "proof_and_receipts",
+          "load_policy": "use_for_verification_or_claims_about_completed_work",
+          "package_id": "evidence_receipt_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/history"
+          ],
+          "window": {
+            "kind": "latest_checkpoint_plus_named_evidence",
+            "source": "capsule_row_evidence_refs"
+          }
+        },
+        {
+          "context_type": "recovery",
+          "load_policy": "use_when_context_drift_or_old_build_comparison_is_requested",
+          "package_id": "recovery_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/history",
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+          ],
+          "window": {
+            "kind": "explicit_operator_or_blocker_triggered"
+          }
+        }
+      ],
+      "path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "selected_by_default": [
+        "minimum_working_capsule",
+        "mini_lookup_index",
+        "long_horizon_capsule_index",
+        "active_authority_package",
+        "mission_active_package",
+        "route_depth_package"
+      ]
+    },
+    "generated_at": "2026-05-07T18:18:17+00:00",
+    "hot_context": {
+      "bytes": 24575,
+      "ok": true,
+      "path": "ION/05_context/current/codex_solo/HOT_CONTEXT.md"
+    },
+    "live_execution_authority": false,
+    "long_horizon": {
+      "capsule_entry_count": 4,
+      "epoch_count": 1,
+      "latest_epochs": [
+        {
+          "date_end": "2026-05-07",
+          "date_start": "2026-05-07",
+          "epoch_id": "E-001",
+          "evidence_refs": [
+            "ION/04_packages/kernel/ion_codex_solo_context.py",
+            "ION/04_packages/kernel/ion_dual_codex_chat.py",
+            "ION/tests/test_kernel_ion_codex_solo_context.py",
+            "ION/tests/test_kernel_ion_dual_codex_chat.py",
+            "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
+            "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+            "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+            ".codex/config.toml",
+            ".codex/hooks/ion_session_start_context.py",
+            "ION/tests/test_codex_project_config_and_hook.py",
+            "ION/04_packages/kernel/ion_codex_model_moves.py",
+            "ION/04_packages/kernel/ion_codex_queue_runner.py",
+            "ION/03_registry/codex_cli_model_move_policy.yaml",
+            "ION/tests/test_kernel_ion_codex_model_moves.py"
+          ],
+          "row_count": 4,
+          "row_end": "C-004",
+          "row_start": "C-001",
+          "status_counts": {
+            "IMPLEMENTED": 4
+          },
+          "summaries": [
+            {
+              "date": "2026-05-07",
+              "id": "C-001",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented capsule-first Codex solo context: Capsule is minimum working context; Mini is lookup/receipt index."
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-002",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented multi-horizon Codex solo context: long-horizon capsule epochs and explicit context package selector."
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-003",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP read/status tools, and explicit post receipt helper."
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-004",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented Codex CLI model moves and Mini auto-post for dual chat"
+            }
+          ]
+        }
+      ],
+      "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+    },
+    "mini": {
+      "findings": [],
+      "line_count": 25,
+      "max_lines": 30,
+      "ok": true,
+      "role": "lookup_receipt_index_for_capsule_history",
+      "text": "CODEX SOLO MINI INDEX | 2026-05-07T18:18:17+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Maintain a practical standalone Codex chat lane beside the full ION workflow chat.\nPHASE: codex_solo_work\nLAST_RECEIPT: Implemented Codex CLI model moves and Mini auto-post for dual chat\nBLOCKER: None\nNEXT: Use model-move receipts on queued Codex CLI work and verify unrelated Cloudflare tunnel tests separately.\n\nACTIVE_TEMPLATE: CODEX_SOLO_WORK_UNIT\n\nCAPSULE_LOOKUP:\n- C-001 2026-05-07 IMPLEMENTED: Implemented capsule-first Codex solo context: Capsule is minimum working context; Mini is lookup/receipt index\n- C-002 2026-05-07 IMPLEMENTED: Implemented multi-horizon Codex solo context: long-horizon capsule epochs and explicit context package selecto\n- C-003 2026-05-07 IMPLEMENTED: Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP re\n- C-004 2026-05-07 IMPLEMENTED: Implemented Codex CLI model moves and Mini auto-post for dual chat\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.\n"
+    },
+    "ok": true,
+    "paths": {
+      "capsule": "ION/05_context/current/codex_solo/CAPSULE.md",
+      "context_packages": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "dir": "ION/05_context/current/codex_solo",
+      "hot_context": "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+      "long_horizon": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+      "mini": "ION/05_context/current/codex_solo/MINI.md",
+      "route": "ION/05_context/current/codex_solo/ROUTE.json",
+      "status": "ION/05_context/current/codex_solo/STATUS.json"
+    },
+    "production_authority": false,
+    "rolling_windows": {
+      "capsule_active_context_lines": 80,
+      "capsule_rows_per_long_horizon_epoch": 10,
+      "long_horizon_epochs_in_hot_context": 6,
+      "mini_lookup_recent_rows": 5,
+      "route_excerpt_chars": 1600
+    },
+    "route": {
+      "entries": [
+        {
+          "bytes": 2123,
+          "classification": "codex_solo_minimum_working_context",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "945058ff873fee14786ee761718b8a30ab228471749b2765cc1ca686ad92760a",
+          "why": "Minimum context the standalone Codex lane must always carry."
+        },
+        {
+          "bytes": 1608,
+          "classification": "codex_solo_lookup_receipt_index",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_solo/MINI.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "7bf18e754df8cdf0cfffacc2e6e67366f401c288672e418118d1276850f77eb1",
+          "why": "Lookup index and receipt summary for capsule history."
+        },
+        {
+          "bytes": 5011,
+          "classification": "codex_solo_long_horizon_index",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "bcc8dd684027935d1711cee15dcc7d1e4a331319bfea6d0744345ccb6d4da073",
+          "why": "Compressed long-horizon capsule index for older continuity lookup."
+        },
+        {
+          "bytes": 9259,
+          "classification": "active_repo_authority",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/REPO_AUTHORITY.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "804ed8430fc53e551d254af063ec414646a1c1bf94ceeec51c31769fa41aca1e",
+          "why": "Active root authority boundary."
+        },
+        {
+          "bytes": 9343,
+          "classification": "active_context_policy",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/03_registry/agent_context_system_registry.yaml",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12",
+          "why": "Current Mini/Capsule witness policy and active context-system registry."
+        },
+        {
+          "bytes": 1098,
+          "classification": "active_lead_context",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "3dcbd1f7f1c81c30a9d02f66deffdc5d0c9466df4347946030a3a1cf6721cd4c",
+          "why": "Current lead-dev operating posture."
+        },
+        {
+          "bytes": 10713,
+          "classification": "codex_solo_design",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "4e92263b324a31489cd6be3c375ad0654b94493db87f46ff5ccda7985ea15e47",
+          "why": "Research basis for this single-agent context lane."
+        }
+      ],
+      "findings": [],
+      "live_execution_authority": false,
+      "ok": true,
+      "production_authority": false,
+      "route_path": "ION/05_context/current/codex_solo/ROUTE.json",
+      "schema_id": "ion.codex_solo_route_validation.v1"
+    },
+    "schema_id": "ion.codex_solo_context.v1",
+    "verdict": "ION_CODEX_SOLO_CONTEXT_READY",
+    "witness_policy": "Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions."
+  },
+  "production_authority": false,
+  "schema_id": "ion.codex_solo_post_checkpoint.v1",
+  "status": "IMPLEMENTED",
+  "summary": "Implemented Codex CLI model moves and Mini auto-post for dual chat"
+}

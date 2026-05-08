@@ -1,0 +1,38 @@
+schema: ion.ai_assistant_work.dataset_entry.v0_1
+status: candidate_schema
+purpose: Schema for collecting real AI-assisted work patterns into domain/state/template/agent
+  data.
+required_fields:
+  entry_id: stable identifier
+  observed_at: timestamp or date
+  source_class: first_party_session | user_report | product_docs | survey | internal_receipt
+    | external_article | synthetic_test
+  assistant_embodiment: chat | ide | cli | cloud_agent | pr_agent | background_agent
+    | hybrid
+  user_intent: natural-language intent
+  work_pattern: short normalized pattern
+  domains_involved:
+  - domain ids
+  state_surfaces:
+  - state family ids
+  tools_or_actions:
+  - tool/action names
+  protocols_required:
+  - protocol ids
+  templates_required:
+  - template family ids
+  specialist_agents_required:
+  - role ids
+  proof_required:
+  - proof kinds
+  failure_modes_observed:
+  - failure classes if any
+  settlement_path: none | single_domain_receipt | cross_domain_settlement | human_gate
+    | external_approval
+  candidate_improvements:
+  - new template/domain/agent/protocol ideas
+  authority_notes: source ranking and limitations
+non_claims:
+- Dataset entries are evidence, not canon.
+- Patterns require review before becoming templates or specialist agents.
+- External product behavior should be source-ranked and date-stamped.

@@ -1,0 +1,921 @@
+schema: ion.ai_assistant_work.template_packet_drafts.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T15:00:56Z'
+purpose: First concrete template packet drafts mined from assistant-work dataset genesis
+  and domain-fission pressure.
+authority_boundary:
+  candidate_only: true
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  requires_explicit_acceptance_to_land: true
+template_packet_count: 31
+template_packets:
+- template_id: screen_state_matrix_packet
+  title: Screen State Matrix Packet
+  owned_by_domain: ui_state_modeling_domain
+  primary_agent: UI_STATE_MODELER
+  purpose: Convert a UI feature brief into explicit screen states, user roles, transitions,
+    component obligations, and validation gates before implementation.
+  required_context:
+  - user story or product brief
+  - existing routes/components if present
+  - design system constraints
+  - accessibility baseline
+  required_sections:
+  - INTENT
+  - USER_ROLES
+  - SCREEN_STATES
+  - TRANSITIONS
+  - COMPONENT_CONTRACTS
+  - A11Y_GATES
+  - TEST_GATES
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - states include loading/error/empty/permission where applicable
+  - component obligations are testable
+  - a11y gates are named
+  output_contract: screen-state matrix and downstream component/test packets
+  settlement_route: UI_ARCHITECT or PRODUCT_ANALYST before COMPONENT_BUILDER
+  status: draft_template_packet_candidate
+- template_id: component_contract_to_tests_packet
+  title: Component Contract to Tests Packet
+  owned_by_domain: ui_state_modeling_domain
+  primary_agent: COMPONENT_BUILDER
+  purpose: Bind component props, states, interaction behavior, accessibility requirements,
+    and validation tests before patching UI code.
+  required_context:
+  - screen-state matrix
+  - component inventory
+  - test framework surface
+  - design-system tokens/components
+  required_sections:
+  - COMPONENT
+  - PROPS_AND_EVENTS
+  - STATE_VARIANTS
+  - INTERACTION_RULES
+  - A11Y_RULES
+  - TEST_PLAN
+  - PATCH_SCOPE
+  - PROOF
+  proof_gates:
+  - each state variant has validation path
+  - a11y checks are explicit
+  - patch scope is bounded
+  output_contract: bounded component implementation packet and test/a11y proof
+  settlement_route: UI_STATE_MODELER then TEST_RUNNER/ACCESSIBILITY_AUDITOR
+  status: draft_template_packet_candidate
+- template_id: api_docs_example_validation_packet
+  title: API Docs Example Validation Packet
+  owned_by_domain: documentation_example_validation_domain
+  primary_agent: EXAMPLE_RUNNER
+  purpose: Ensure API documentation examples are either run with proof or clearly
+    marked as illustrative/unrun.
+  required_context:
+  - API surface
+  - example snippets
+  - runtime/test command availability
+  - version boundary
+  required_sections:
+  - API_SURFACE
+  - EXAMPLES
+  - RUN_STATUS
+  - COMMAND_RECEIPTS
+  - CLAIM_MAP
+  - UNRUN_MARKERS
+  - DOCS_DELTA
+  - NON_CLAIMS
+  proof_gates:
+  - every executable example is run or marked unrun
+  - command receipts include return codes
+  - claims map to source/API
+  output_contract: docs patch candidate with example validation receipt
+  settlement_route: DOCS_ARCHITECT and SOURCE_RANKER
+  status: draft_template_packet_candidate
+- template_id: rewrite_claim_preservation_packet
+  title: Rewrite Claim Preservation Packet
+  owned_by_domain: documentation_example_validation_domain
+  primary_agent: REWRITE_CLAIM_AUDITOR
+  purpose: Separate style improvement from claim changes, preserving authority and
+    source alignment during rewrites.
+  required_context:
+  - original text
+  - rewrite goal
+  - claim-bearing passages
+  - source evidence or lack thereof
+  required_sections:
+  - REWRITE_GOAL
+  - CLAIM_INVENTORY
+  - MEANING_DELTA
+  - SOURCE_MAP
+  - STYLE_ONLY_CHANGES
+  - CLAIM_CHANGES
+  - NON_CLAIMS
+  proof_gates:
+  - claim additions are flagged
+  - unsupported claims remain marked
+  - style changes do not alter authority
+  output_contract: rewrite candidate with claim-preservation audit
+  settlement_route: DOCS_ARCHITECT or SOURCE_RANKER
+  status: draft_template_packet_candidate
+- template_id: branch_return_settlement_packet
+  title: Branch Return Settlement Packet
+  owned_by_domain: background_queue_intake_domain
+  primary_agent: RESULT_INTAKE_AUDITOR
+  purpose: Intake cloud/background/parallel branch returns as proposals and route
+    them through conflict/proof settlement.
+  required_context:
+  - parent scope
+  - branch packet
+  - branch return
+  - files/state touched
+  - proof supplied
+  required_sections:
+  - PARENT_SCOPE
+  - BRANCH_ID
+  - RETURN_SUMMARY
+  - TOUCHED_SURFACES
+  - PROOF
+  - CONFLICTS
+  - ACCEPTANCE_BOUNDARY
+  - SETTLEMENT_RECOMMENDATION
+  proof_gates:
+  - branch identity preserved
+  - returns treated as proposal
+  - conflicts and missing proof named
+  output_contract: settlement recommendation and receipt draft
+  settlement_route: SETTLEMENT_STEWARD with human gate when high risk
+  status: draft_template_packet_candidate
+- template_id: background_queue_result_intake_packet
+  title: Background Queue Result Intake Packet
+  owned_by_domain: background_queue_intake_domain
+  primary_agent: BACKGROUND_QUEUE_STEWARD
+  purpose: Create bounded queue packets and intake background results without claiming
+    asynchronous execution unless receipts prove it.
+  required_context:
+  - operator objective
+  - authority ceiling
+  - allowed paths/tools
+  - expected return family
+  - approval evidence if required
+  required_sections:
+  - QUEUE_OBJECTIVE
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - EXPECTED_RETURN
+  - APPROVAL
+  - RESULT_INTAKE
+  - PROOF
+  - NON_CLAIMS
+  proof_gates:
+  - approval evidence checked when required
+  - result has receipt or remains untrusted proposal
+  - no background claim without return proof
+  output_contract: queue packet or result-intake report
+  settlement_route: RESULT_INTAKE_AUDITOR then SETTLEMENT_STEWARD
+  status: draft_template_packet_candidate
+- template_id: terminal_proof_receipt_packet
+  title: Terminal Proof Receipt Packet
+  owned_by_domain: terminal_proof_domain
+  primary_agent: TERMINAL_PROOF_CURATOR
+  purpose: Normalize command execution evidence into receipt-ready proof with return
+    code, command, cwd, environment notes, and stdout/stderr summary.
+  required_context:
+  - command objective
+  - command text
+  - cwd
+  - environment notes
+  - stdout/stderr
+  - return code
+  required_sections:
+  - COMMAND
+  - CWD
+  - OBJECTIVE
+  - RETURN_CODE
+  - STDOUT_SUMMARY
+  - STDERR_SUMMARY
+  - ARTIFACTS
+  - CLAIMS_SUPPORTED
+  - CLAIMS_NOT_SUPPORTED
+  proof_gates:
+  - return code recorded
+  - unsupported validation claims rejected
+  - artifacts referenced
+  output_contract: command receipt and claim support map
+  settlement_route: task owner or release evidence curator
+  status: draft_template_packet_candidate
+- template_id: release_readiness_matrix_packet
+  title: Release Readiness Matrix Packet
+  owned_by_domain: release_evidence_domain
+  primary_agent: RELEASE_EVIDENCE_CURATOR
+  purpose: Compile release evidence across tests, builds, docs, migrations, risk,
+    approvals, and known non-claims.
+  required_context:
+  - candidate release scope
+  - validation artifacts
+  - risk ledger
+  - changelog/docs
+  - approval boundary
+  required_sections:
+  - RELEASE_SCOPE
+  - TESTS
+  - BUILDS
+  - DOCS
+  - MIGRATIONS
+  - RISKS
+  - APPROVALS
+  - BLOCKERS
+  - NON_CLAIMS
+  - RECOMMENDATION
+  proof_gates:
+  - local success not treated as release readiness
+  - blockers preserved
+  - human gates named
+  output_contract: release evidence bundle and readiness recommendation
+  settlement_route: RELEASE_MANAGER or human gate
+  status: draft_template_packet_candidate
+- template_id: dependency_upgrade_risk_packet
+  title: Dependency Upgrade Risk Packet
+  owned_by_domain: dependency_package_domain
+  primary_agent: LOCKFILE_AUDITOR
+  purpose: Evaluate dependency upgrades through manifest/lockfile diff, license/security
+    notes, transitive changes, and test proof.
+  required_context:
+  - dependency manifest diff
+  - lockfile diff
+  - security/license evidence
+  - test results
+  required_sections:
+  - UPGRADE_SCOPE
+  - MANIFEST_DIFF
+  - LOCKFILE_DIFF
+  - TRANSITIVE_CHANGES
+  - SECURITY_LICENSE
+  - TEST_PROOF
+  - RISK
+  - RECOMMENDATION
+  proof_gates:
+  - lockfile diff reviewed
+  - security/license assumptions marked
+  - tests run or marked unrun
+  output_contract: dependency risk report and acceptance/escalation recommendation
+  settlement_route: DEPENDENCY_STEWARD and SECURITY_NEMESIS
+  status: draft_template_packet_candidate
+- template_id: migration_plan_and_rollback_packet
+  title: Migration Plan and Rollback Packet
+  owned_by_domain: migration_work_domain
+  primary_agent: MIGRATION_MASON
+  purpose: Plan schema/data migrations with forward path, rollback boundary, fixtures,
+    tests, deployment notes, and release evidence.
+  required_context:
+  - schema diff
+  - data contract
+  - migration target
+  - test fixtures
+  - deployment/release constraints
+  required_sections:
+  - MIGRATION_SCOPE
+  - SCHEMA_DELTA
+  - DATA_RISK
+  - FORWARD_PLAN
+  - ROLLBACK_PLAN
+  - FIXTURES
+  - TESTS
+  - RELEASE_GATES
+  - NON_CLAIMS
+  proof_gates:
+  - rollback boundary named
+  - fixtures/tests identified
+  - release gate not bypassed
+  output_contract: migration work packet and release evidence requirements
+  settlement_route: SCHEMA_DRIFT_AUDITOR then RELEASE_EVIDENCE_CURATOR
+  status: draft_template_packet_candidate
+- template_id: assistant_work_observation_lineage_packet
+  title: Assistant Work Observation Lineage Packet
+  owned_by_domain: assistant_work_observation_domain
+  primary_agent: ASSISTANT_USAGE_ETHNOGRAPHER
+  purpose: Turn observed AI-assistant work into a dataset entry with source class,
+    domains, agents, states, templates, protocols, proof, and non-claims.
+  required_context:
+  - observation
+  - source class
+  - work pattern
+  - known registries
+  - authority boundary
+  required_sections:
+  - OBSERVATION
+  - SOURCE_CLASS
+  - EMBODIMENT
+  - DOMAINS
+  - AGENTS
+  - STATES
+  - TEMPLATES
+  - PROTOCOLS
+  - FAILURES
+  - LINEAGE
+  - NON_CLAIMS
+  proof_gates:
+  - lineage recorded
+  - candidate status preserved
+  - unknowns marked instead of invented
+  output_contract: dataset entry proposal and gap-analysis update
+  settlement_route: TEMPLATE_MINER and STATE_TAXONOMIST
+  status: draft_template_packet_candidate
+- template_id: prompt_injection_tool_guard_packet
+  title: Prompt Injection Tool Guard Packet
+  owned_by_domain: untrusted_input_tool_guard_domain
+  primary_agent: PROMPT_INJECTION_BOUNDARY_GUARDIAN
+  purpose: Classify untrusted text, separate instructions from data, and constrain
+    tool actions before execution.
+  required_context:
+  - untrusted content
+  - requested tool action
+  - authority ceiling
+  - allowed tool surface
+  required_sections:
+  - UNTRUSTED_CONTENT
+  - REQUESTED_ACTION
+  - INSTRUCTION_DATA_SPLIT
+  - AUTHORITY_CHECK
+  - ALLOWED_ACTIONS
+  - REFUSALS
+  - SAFE_ROUTE
+  proof_gates:
+  - untrusted text cannot expand authority
+  - tool action stays within approved scope
+  - refusal/escalation route named
+  output_contract: tool guard decision and safe route
+  settlement_route: SECURITY_NEMESIS or TOOL_ORCHESTRATOR
+  status: draft_template_packet_candidate
+- template_id: candidate_registry_delta_packet
+  title: Candidate Registry Delta Packet
+  owned_by_domain: assistant_work_observation_domain
+  primary_agent: OBSERVATION_LINEAGE_SCRIBE
+  purpose: Draft candidate registry deltas while preserving explicit non-acceptance
+    boundaries.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Candidate Registry Delta Packet result with evidence, non-claims,
+    and settlement route
+  settlement_route: SETTLEMENT_STEWARD
+  status: draft_template_packet_candidate
+- template_id: ci_evidence_triage_packet
+  title: CI Evidence Triage Packet
+  owned_by_domain: pr_agent_work_domain
+  primary_agent: CI_EVIDENCE_TRIAGER
+  purpose: Classify CI failures as code, test, infra, flake, or escalation before
+    routing a fix.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: CI Evidence Triage Packet result with evidence, non-claims, and
+    settlement route
+  settlement_route: TEST_RUNNER
+  status: draft_template_packet_candidate
+- template_id: cloud_branch_work_packet
+  title: Cloud Branch Work Packet
+  owned_by_domain: background_queue_intake_domain
+  primary_agent: CLOUD_BRANCH_STEWARD
+  purpose: Bound a cloud/background branch with objective, context, write scope, expected
+    proof, and return contract.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Cloud Branch Work Packet result with evidence, non-claims, and
+    settlement route
+  settlement_route: SETTLEMENT_STEWARD
+  status: draft_template_packet_candidate
+- template_id: command_rerun_validation_packet
+  title: Command Rerun Validation Packet
+  owned_by_domain: terminal_proof_domain
+  primary_agent: COMMAND_RECEIPT_AUDITOR
+  purpose: Decide when command/test reruns are required and normalize before/after
+    validation claims.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Command Rerun Validation Packet result with evidence, non-claims,
+    and settlement route
+  settlement_route: TEST_RUNNER
+  status: draft_template_packet_candidate
+- template_id: containment_or_escalation_packet
+  title: Containment or Escalation Packet
+  owned_by_domain: incident_triage_domain
+  primary_agent: INCIDENT_TRIAGE_STEWARD
+  purpose: Choose containment, refusal, escalation, or bounded fix path for high-risk
+    incidents.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Containment or Escalation Packet result with evidence, non-claims,
+    and settlement route
+  settlement_route: PRODUCTION_BOUNDARY_AUDITOR
+  status: draft_template_packet_candidate
+- template_id: dataset_gap_mining_packet
+  title: Dataset Gap Mining Packet
+  owned_by_domain: assistant_work_observation_domain
+  primary_agent: TEMPLATE_MINER
+  purpose: Mine dataset entries for template, state, domain, protocol, and agent gaps.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Dataset Gap Mining Packet result with evidence, non-claims, and
+    settlement route
+  settlement_route: STATE_TAXONOMIST
+  status: draft_template_packet_candidate
+- template_id: incident_triage_packet
+  title: Incident Triage Packet
+  owned_by_domain: incident_triage_domain
+  primary_agent: INCIDENT_TRIAGE_STEWARD
+  purpose: Classify incident reports, determine containment/fix/escalation route,
+    and set authority gates.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Incident Triage Packet result with evidence, non-claims, and settlement
+    route
+  settlement_route: PRODUCTION_BOUNDARY_AUDITOR
+  status: draft_template_packet_candidate
+- template_id: interaction_validation_packet
+  title: Interaction Validation Packet
+  owned_by_domain: ui_state_modeling_domain
+  primary_agent: SCREEN_STATE_CARTOGRAPHER
+  purpose: Validate UI interactions across screen states, accessibility, and user-flow
+    expectations.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Interaction Validation Packet result with evidence, non-claims,
+    and settlement route
+  settlement_route: UI_ARCHITECT
+  status: draft_template_packet_candidate
+- template_id: lockfile_diff_risk_packet
+  title: Lockfile Diff Risk Packet
+  owned_by_domain: dependency_package_domain
+  primary_agent: LOCKFILE_AUDITOR
+  purpose: Analyze lockfile-heavy diffs, transitive changes, package-manager effects,
+    and dependency risk.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Lockfile Diff Risk Packet result with evidence, non-claims, and
+    settlement route
+  settlement_route: DEPENDENCY_STEWARD
+  status: draft_template_packet_candidate
+- template_id: pr_comment_candidate_packet
+  title: PR Comment Candidate Packet
+  owned_by_domain: pr_agent_work_domain
+  primary_agent: PR_COMMENT_SCRIBE
+  purpose: Draft line/section-specific PR comments with severity, evidence, and non-claim
+    labels.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: PR Comment Candidate Packet result with evidence, non-claims, and
+    settlement route
+  settlement_route: PR_REVIEW_STEWARD
+  status: draft_template_packet_candidate
+- template_id: pr_merge_settlement_packet
+  title: PR Merge Settlement Packet
+  owned_by_domain: pr_agent_work_domain
+  primary_agent: PR_MERGE_SETTLEMENT_AUDITOR
+  purpose: Audit merge readiness, branch conflicts, and settlement requirements before
+    PR acceptance.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: PR Merge Settlement Packet result with evidence, non-claims, and
+    settlement route
+  settlement_route: SETTLEMENT_STEWARD
+  status: draft_template_packet_candidate
+- template_id: pr_review_packet
+  title: PR Review Packet
+  owned_by_domain: pr_agent_work_domain
+  primary_agent: PR_REVIEW_STEWARD
+  purpose: Convert a PR diff and evidence into bounded review findings and candidate
+    comments.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: PR Review Packet result with evidence, non-claims, and settlement
+    route
+  settlement_route: PR_REVIEW_STEWARD
+  status: draft_template_packet_candidate
+- template_id: production_boundary_nonclaim_packet
+  title: Production Boundary Nonclaim Packet
+  owned_by_domain: incident_triage_domain
+  primary_agent: PRODUCTION_BOUNDARY_AUDITOR
+  purpose: Record what was not executed, not verified, and not authorized for production-impact
+    work.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Production Boundary Nonclaim Packet result with evidence, non-claims,
+    and settlement route
+  settlement_route: INCIDENT_TRIAGE_STEWARD
+  status: draft_template_packet_candidate
+- template_id: readme_claim_map_packet
+  title: README Claim Map Packet
+  owned_by_domain: documentation_example_validation_domain
+  primary_agent: REWRITE_CLAIM_AUDITOR
+  purpose: Map README claims to code/source evidence and mark unsupported or stale
+    statements.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: README Claim Map Packet result with evidence, non-claims, and settlement
+    route
+  settlement_route: DOCS_ARCHITECT
+  status: draft_template_packet_candidate
+- template_id: release_evidence_bundle_packet
+  title: Release Evidence Bundle Packet
+  owned_by_domain: release_evidence_domain
+  primary_agent: RELEASE_EVIDENCE_CURATOR
+  purpose: Collect release evidence into an auditable bundle across builds, tests,
+    docs, risks, approvals, and non-claims.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Release Evidence Bundle Packet result with evidence, non-claims,
+    and settlement route
+  settlement_route: RELEASE_MANAGER
+  status: draft_template_packet_candidate
+- template_id: rollback_boundary_packet
+  title: Rollback Boundary Packet
+  owned_by_domain: release_evidence_domain
+  primary_agent: RELEASE_GATE_NEMESIS
+  purpose: Name rollback assumptions, irreversibility risks, and human-gate requirements
+    before release or migration.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Rollback Boundary Packet result with evidence, non-claims, and
+    settlement route
+  settlement_route: RELEASE_MANAGER
+  status: draft_template_packet_candidate
+- template_id: schema_drift_audit_packet
+  title: Schema Drift Audit Packet
+  owned_by_domain: migration_work_domain
+  primary_agent: SCHEMA_DRIFT_AUDITOR
+  purpose: Audit schema/data/API contract drift and required migration/fixture proof.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Schema Drift Audit Packet result with evidence, non-claims, and
+    settlement route
+  settlement_route: MIGRATION_MASON
+  status: draft_template_packet_candidate
+- template_id: script_tool_receipt_packet
+  title: Script Tool Receipt Packet
+  owned_by_domain: terminal_proof_domain
+  primary_agent: TERMINAL_PROOF_CURATOR
+  purpose: Record script/tool execution evidence and prevent automation output from
+    becoming state without receipt.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Script Tool Receipt Packet result with evidence, non-claims, and
+    settlement route
+  settlement_route: TOOL_ORCHESTRATOR
+  status: draft_template_packet_candidate
+- template_id: untrusted_source_classification_packet
+  title: Untrusted Source Classification Packet
+  owned_by_domain: untrusted_input_tool_guard_domain
+  primary_agent: PROMPT_INJECTION_BOUNDARY_GUARDIAN
+  purpose: Classify source trust and separate data from instructions before any tool
+    or code action.
+  required_context:
+  - bounded objective
+  - source context
+  - authority boundary
+  - known state surfaces
+  - available proof
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  proof_gates:
+  - authority boundary declared
+  - candidate vs accepted boundary preserved
+  - proof or non-proof status explicit
+  output_contract: Untrusted Source Classification Packet result with evidence, non-claims,
+    and settlement route
+  settlement_route: SOURCE_RANKER
+  status: draft_template_packet_candidate
+non_claims:
+- These drafts are not active template law.
+- They are structured candidates awaiting review and acceptance.
+- No external action is authorized by these drafts.

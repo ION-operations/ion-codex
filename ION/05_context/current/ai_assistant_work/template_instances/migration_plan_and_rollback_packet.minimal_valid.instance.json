@@ -1,0 +1,74 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "migration_plan_and_rollback_packet.minimal_valid.v0_1",
+  "template_id": "migration_plan_and_rollback_packet",
+  "case_type": "minimal_valid",
+  "status": "candidate_template_instance_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/migration_plan_and_rollback_packet.template_spec.yaml",
+  "primary_agent": "MIGRATION_MASON",
+  "domain_id": "migration_work_domain",
+  "objective": "Exercise the migration_plan_and_rollback_packet candidate template with a minimal valid instance.",
+  "sections": {
+    "MIGRATION_INTENT": "Plan migration from generic assistant-work routing to specialist-domain dispatch for UI, PR, queue, terminal, docs, release, and migration tasks.",
+    "CURRENT_SCHEMA_OR_STATE": "Assistant-work registry has candidate domains, agents, template specs, and dispatch simulations under current context.",
+    "TARGET_SCHEMA_OR_STATE": "Assistant-work registry gains exercised instance corpus and agent boot exercise evidence before any acceptance landing.",
+    "AFFECTED_SURFACES": [
+      "ION/05_context/current/ai_assistant_work/template_instances/",
+      "ION/05_context/current/ai_assistant_work/agent_boot_exercises/",
+      "ION/tests/test_kernel_ai_assistant_work_template_instances.py"
+    ],
+    "FORWARD_PLAN": [
+      "create valid and rejection instances for each machine-checkable template spec",
+      "create agent boot dispatch exercises tied to valid instances",
+      "validate required sections and expected rejection failures",
+      "export G10 continuity bundle"
+    ],
+    "ROLLBACK_PLAN": [
+      "remove template_instances and agent_boot_exercises candidate directories",
+      "remove focused test file for this packet",
+      "resume from G9 continuity bundle artifact"
+    ],
+    "COMPATIBILITY_GATES": [
+      "candidate-only authority boundary remains true",
+      "no ION/03_registry writes",
+      "prior G9 spec files remain unchanged"
+    ],
+    "TEST_AND_PROOF_PLAN": [
+      "run instance corpus validator",
+      "run focused pytest for template instances",
+      "run ION status and sandbox preflight checks"
+    ],
+    "RISK_AND_APPROVAL_BOUNDARY": {
+      "destructive": false,
+      "approval_required": true,
+      "reason": "promotion/landing requires explicit acceptance"
+    },
+    "NON_CLAIMS": [
+      "This is a migration plan candidate, not an executed migration.",
+      "No accepted registry or product law is changed.",
+      "No external execution authority is claimed."
+    ],
+    "SETTLEMENT_ROUTE": "SCHEMA_DRIFT_AUDITOR -> RELEASE_EVIDENCE_CURATOR -> human acceptance gate."
+  },
+  "expected_validation": {
+    "should_pass": true,
+    "expected_failure_kinds": [],
+    "proves": [
+      "required section shape can be satisfied",
+      "candidate boundary can be preserved",
+      "settlement/proof/non-claim surfaces can be named"
+    ]
+  },
+  "non_claims": [
+    "This instance is candidate current-context test data, not accepted template law.",
+    "This instance does not execute external tools or mutate production state."
+  ]
+}

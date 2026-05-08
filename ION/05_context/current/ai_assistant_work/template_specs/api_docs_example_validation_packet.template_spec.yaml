@@ -1,0 +1,124 @@
+schema: ion.ai_assistant_work.template_spec.v0_1
+template_id: api_docs_example_validation_packet
+title: API Docs Example Validation Packet
+status: candidate_machine_checkable_template_spec_not_accepted_canon
+created_at: '2026-05-08T15:19:39Z'
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  external_execution_authority: false
+  requires_explicit_acceptance_to_land: true
+owned_by_domain: documentation_example_validation_domain
+primary_agent: EXAMPLE_RUNNER
+supporting_agents:
+- API_DOCS_SCRIBE
+- DOCS_ARCHITECT
+- COMMAND_RECEIPT_AUDITOR
+- REWRITE_CLAIM_AUDITOR
+purpose: Ensure API documentation examples are either run with proof or clearly marked
+  as illustrative/unrun.
+intent_class: specialist_domain_template
+state_inputs:
+- api_surface_state
+- docs_example_state
+- runtime_state
+- source_version_state
+state_outputs:
+- example_validation_state
+- docs_patch_candidate_state
+- claim_map_state
+required_context:
+- API surface
+- example snippets
+- runtime/test command availability
+- version boundary
+machine_required_sections:
+- name: API_SURFACE
+  type: string
+  min_length: 5
+- name: EXAMPLES
+  type: list
+  min_items: 1
+- name: RUN_STATUS
+  type: list
+  min_items: 1
+  item_required_keys:
+  - example_id
+  - status
+- name: COMMAND_RECEIPTS
+  type: list
+  min_items: 0
+- name: CLAIM_MAP
+  type: list
+  min_items: 1
+- name: UNRUN_MARKERS
+  type: list
+  min_items: 0
+- name: DOCS_DELTA
+  type: string
+  min_length: 5
+- name: NON_CLAIMS
+  type: list
+  min_items: 1
+proof_gates:
+- gate_id: candidate_boundary_named
+  description: Output states it is candidate/not accepted unless explicit acceptance
+    exists
+  machine_check:
+    requires_non_claim: accepted_state
+- gate_id: required_sections_present
+  description: Every machine_required_sections item is present and non-empty according
+    to rule
+  machine_check:
+    type: schema_section_presence
+- gate_id: settlement_route_named
+  description: Return includes route for review/settlement/inheritance
+  machine_check:
+    section_any:
+    - SETTLEMENT_ROUTE
+    - RECEIPT_TARGET
+- gate_id: proof_or_missing_context_named
+  description: Proof, command receipts, or missing context are stated
+  machine_check:
+    requires_any:
+    - PROOF
+    - COMMAND_RECEIPTS
+    - TEST_AND_PROOF_PLAN
+    - PROOF_NORMALIZATION
+    - CI_EVIDENCE
+- gate_id: draft_gate_1
+  description: every executable example is run or marked unrun
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_2
+  description: command receipts include return codes
+  machine_check:
+    type: human_or_script_check
+- gate_id: draft_gate_3
+  description: claims map to source/API
+  machine_check:
+    type: human_or_script_check
+reject_if:
+- an executable example is neither run nor marked unrun
+- claim map omits behavior-changing docs claims
+- runtime/source version boundary is missing
+output_contract: docs patch candidate with example validation receipt
+completion_class: docs_example_validation_candidate
+settlement_route: DOCS_ARCHITECT and SOURCE_RANKER
+route_binding:
+  dispatch_before_generic_implementation: true
+  trigger_patterns:
+  - api docs example validation packet
+  - api docs example validation
+  - example runner
+  fallback_agent_forbidden_until_specialist_check: true
+minimal_valid_instance_shape:
+  template_id: api_docs_example_validation_packet
+  sections: must match machine_required_sections
+  non_claims_required: true
+  settlement_route_or_receipt_target_required: true
+status_notes:
+- This spec is machine-checkable structure for candidate current-context use; it is
+  not active template law.

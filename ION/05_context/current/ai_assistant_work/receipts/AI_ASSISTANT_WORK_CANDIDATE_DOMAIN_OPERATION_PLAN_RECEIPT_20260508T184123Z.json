@@ -1,0 +1,58 @@
+{
+  "schema": "ion.ai_assistant_work.candidate_domain_operation_plan_receipt.v0_1",
+  "created_at": "2026-05-08T18:41:23Z",
+  "status": "candidate_domain_operation_protocol_planned_not_accepted_canon",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "planned_surfaces": [
+    {
+      "path": "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_candidate_domain_operation_protocol_plan.md",
+      "role": "planning artifact for the candidate lifecycle ladder, ION movement mapping, scorecard requirements, and promotion gates"
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/next/AI_ASSISTANT_WORK_NEXT_PACKET_CANDIDATE_DOMAIN_OPERATION_PROTOCOL_20260508T183906Z.json",
+      "role": "next-work packet sequencing the implementation of the candidate operation protocol and lifecycle gates"
+    },
+    {
+      "path": "ION/06_intelligence/evidence/sandbox_agent_package_evolution/2026-05-08_sandbox_agent_package_v1_4_ai_assistant_work_evidence_index.json",
+      "role": "evidence-index pointer preserving this plan in the sandbox package evolution lane"
+    }
+  ],
+  "core_finding": "Candidate domains and candidate specialist agents should be operational under containment: useful for classification, proof shaping, route preview, trace display, and diagnostics, but unable to accept state, mutate accepted registries, alter product front doors, or claim production/live authority.",
+  "lifecycle_ladder": [
+    "L0 Raw Observation",
+    "L1 Candidate Draft",
+    "L2 Operational Candidate",
+    "L3 Proof-Gated Candidate",
+    "L4 Promotion Candidate",
+    "A3 Accepted Operational Domain",
+    "A2/A1 Canonical Domain/Law"
+  ],
+  "recommended_next_packets": [
+    "Protocol draft with ACTIVE_PROVISIONAL or CANDIDATE_OPERATIONAL status",
+    "Candidate lifecycle registry under ION/05_context/current/ai_assistant_work/",
+    "Scorecard schema and first scorecards for screen_state_matrix_packet, terminal_proof_receipt_packet, and ui_ux_domain",
+    "Route compiler lifecycle awareness that refuses inactive, rejected, or archived candidates",
+    "Promotion proposal for one safe candidate after scorecard review"
+  ],
+  "validation": [
+    {
+      "command": "manual architecture consistency check against current assistant-work evidence, phase4 product reconciliation matrix, and route compiler boundary",
+      "result": "candidate-only plan is consistent with non-promotion boundary"
+    }
+  ],
+  "non_claims": [
+    "This receipt does not implement the candidate lifecycle registry.",
+    "This receipt does not promote any candidate domain, agent, template, route, or protocol into accepted ION canon.",
+    "This receipt does not mutate ION/03_registry.",
+    "This receipt does not approve MCP tool-contract expansion.",
+    "This receipt does not grant production, live execution, secret, deployment, or external tool authority."
+  ]
+}

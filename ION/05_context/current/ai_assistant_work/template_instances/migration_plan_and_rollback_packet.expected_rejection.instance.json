@@ -1,0 +1,49 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "migration_plan_and_rollback_packet.expected_rejection.v0_1",
+  "template_id": "migration_plan_and_rollback_packet",
+  "case_type": "expected_rejection",
+  "status": "candidate_rejection_case_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/migration_plan_and_rollback_packet.template_spec.yaml",
+  "primary_agent": "MIGRATION_MASON",
+  "domain_id": "migration_work_domain",
+  "objective": "Exercise the migration_plan_and_rollback_packet candidate template rejection behavior.",
+  "sections": {
+    "MIGRATION_INTENT": "migrate",
+    "CURRENT_SCHEMA_OR_STATE": "old",
+    "TARGET_SCHEMA_OR_STATE": "new",
+    "AFFECTED_SURFACES": [],
+    "FORWARD_PLAN": [],
+    "ROLLBACK_PLAN": [],
+    "COMPATIBILITY_GATES": [],
+    "TEST_AND_PROOF_PLAN": [],
+    "RISK_AND_APPROVAL_BOUNDARY": {
+      "destructive": true
+    },
+    "NON_CLAIMS": [],
+    "SETTLEMENT_ROUTE": ""
+  },
+  "expected_validation": {
+    "should_pass": false,
+    "expected_failure_kinds": [
+      "missing_or_invalid_required_section",
+      "candidate_boundary_or_non_claim_failure"
+    ],
+    "proves": [
+      "template validator rejects incomplete or overclaiming output",
+      "generic fluent output cannot satisfy machine sections"
+    ]
+  },
+  "non_claims": [
+    "This rejection case intentionally violates the candidate template spec.",
+    "The failed output is not a usable work product."
+  ]
+}

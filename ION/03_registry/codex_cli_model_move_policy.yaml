@@ -1,0 +1,50 @@
+schema_id: ion.codex_cli_model_move_policy.v1
+version: V126_CODEX_CLI_MODEL_MOVES
+authority_scope: A3_STEWARD_CODEX_CLI_MODEL_MOVE_PLANNING
+production_authority: false
+live_execution_authority: false
+provider_api_dispatch_authorized: false
+default_routing_posture: conserve_main_bank
+usage_limits_authoritative: false
+usage_limit_policy: usage_pool_ids_are_operator_observed_until_verified
+codex_model_profiles:
+  gpt-5.3-codex-spark:
+    codex_model_slug: gpt-5.3-codex-spark
+    role: fast_codex_lane
+    default_reasoning_effort: high
+    reasoning_efforts_supported: [low, medium, high, xhigh]
+    usage_pool_id: codex_spark_observed
+    usage_pool_authority: operator_observed_pending_verification
+    limit_authority: not_authoritative
+    local_codex_cache_observed: true
+  gpt-5.3-codex:
+    codex_model_slug: gpt-5.3-codex
+    role: primary_codex_engineering_lane
+    default_reasoning_effort: medium
+    reasoning_efforts_supported: [low, medium, high, xhigh]
+    usage_pool_id: codex_primary_observed
+    usage_pool_authority: operator_observed_pending_verification
+    limit_authority: not_authoritative
+    local_codex_cache_observed: true
+  gpt-5.5:
+    codex_model_slug: gpt-5.5
+    role: frontier_authority_and_architecture_lane
+    default_reasoning_effort: medium
+    reasoning_efforts_supported: [low, medium, high, xhigh]
+    usage_pool_id: frontier_main_observed
+    usage_pool_authority: operator_observed_pending_verification
+    limit_authority: not_authoritative
+    local_codex_cache_observed: true
+stage_defaults:
+  relay_ingress: {work_class: front_stage_claim_classification, preferred_model: gpt-5.3-codex-spark, default_reasoning_effort: low}
+  steward_route: {work_class: claim_audit, preferred_model: gpt-5.5, default_reasoning_effort: high}
+  vizier_plan: {work_class: architecture_design, preferred_model: gpt-5.5, default_reasoning_effort: high}
+  mason_codex_work: {work_class: code_patch, preferred_model: gpt-5.3-codex, default_reasoning_effort: medium}
+  vice_risk: {work_class: adversarial_review, preferred_model: gpt-5.5, default_reasoning_effort: high}
+  nemesis_verify: {work_class: code_review, preferred_model: gpt-5.3-codex, default_reasoning_effort: high}
+  relay_return: {work_class: user_facing_answer, preferred_model: gpt-5.5, default_reasoning_effort: medium}
+  persona_response: {work_class: user_facing_answer, preferred_model: gpt-5.5, default_reasoning_effort: medium}
+claim_boundary:
+  - Codex CLI model moves configure bounded CLI invocation only.
+  - Usage pool labels are local/operator-observed hints until separately verified.
+  - This registry does not authorize production, live provider dispatch, credentials, or state acceptance.

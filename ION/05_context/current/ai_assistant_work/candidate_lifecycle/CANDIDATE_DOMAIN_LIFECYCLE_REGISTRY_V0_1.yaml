@@ -1,0 +1,227 @@
+schema: ion.ai_assistant_work.candidate_lifecycle_registry.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T18:50:31Z'
+protocol: ION/02_architecture/ION_CANDIDATE_DOMAIN_OPERATION_PROTOCOL.md
+purpose: Lifecycle gate for AI Assistant Work candidate domains, agents, templates,
+  routes, and protocols before any accepted ION registry promotion.
+authority_boundary:
+  candidate_only: true
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  production_authority: false
+  live_execution_authority: false
+  secrets_authority: false
+default_policy:
+  unrecorded_candidate_route_compiler_default: active_for_compatibility
+  promotion_requires_lifecycle_record: true
+  accepted_registry_promotion_requires_explicit_human_acceptance: true
+route_compiler_enabled_lifecycle_states:
+  - operational_candidate
+  - proof_gated_candidate
+  - promotion_candidate
+route_compiler_refused_lifecycle_states:
+  - raw_observation
+  - candidate_draft
+  - deferred
+  - rejected
+  - archived
+source_registries:
+  domain_registry: ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_DOMAIN_REGISTRY_CANDIDATE_V0_2.yaml
+  agent_registry: ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_AGENT_REGISTRY_CANDIDATE_V0_2.yaml
+  template_registry: ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_TEMPLATE_REGISTRY_CANDIDATE_V0_2.yaml
+  route_registry: ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_ROUTE_REGISTRY_CANDIDATE_V0_1.yaml
+source_registry_counts:
+  candidate_domain_count: 29
+  candidate_specialist_agent_count: 71
+  candidate_template_family_count: 100
+  candidate_route_count: 6
+lifecycle_records:
+  - candidate_id: route.assistant_identity_definition
+    candidate_type: route
+    lifecycle_state: operational_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_MAP_20260508T175230Z.json
+      - ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_ROUTE_REGISTRY_CANDIDATE_V0_1.yaml
+    parent_accepted_surface: Codex Capsule Chat route metadata
+    host_ion_roles: [persona, ionologist, context_cartographer, thoth]
+    allowed_uses: [classification, proof_shaping, route_preview, trace_display]
+    forbidden_uses: [state_acceptance, registry_mutation, autonomous_agent_identity_claim]
+    route_compiler_enabled: true
+    gateway_validation_enabled: true
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    promotion_gate: route_accuracy_and_authority_boundary_review
+  - candidate_id: route.ide_agent_work_map
+    candidate_type: route
+    lifecycle_state: proof_gated_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_IMPLEMENTATION_RECEIPT_20260508T181926Z.json
+      - ION/tests/test_kernel_ion_assistant_work_route_compiler.py
+    parent_accepted_surface: Codex Capsule Chat route metadata
+    host_ion_roles: [relay, steward, context_cartographer, mason_codex, nemesis]
+    allowed_uses: [classification, proof_shaping, route_preview, trace_display, queue_objective_context]
+    forbidden_uses: [state_acceptance, registry_mutation, production_authority, live_execution_authority]
+    route_compiler_enabled: true
+    gateway_validation_enabled: true
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    promotion_gate: scorecard_plus_repeated_codex_chat_use
+  - candidate_id: route.ui_specialist_work
+    candidate_type: route
+    lifecycle_state: proof_gated_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_IMPLEMENTATION_RECEIPT_20260508T181926Z.json
+      - ION/tests/test_kernel_ion_assistant_work_route_compiler.py
+    parent_accepted_surface: Codex Capsule Chat route metadata
+    host_ion_roles: [vizier, mason_codex, nemesis, persona]
+    allowed_uses: [classification, proof_shaping, route_preview, trace_display, cockpit_display]
+    forbidden_uses: [state_acceptance, registry_mutation, visual_polish_without_state_or_a11y_proof]
+    route_compiler_enabled: true
+    gateway_validation_enabled: true
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    scorecard_path: ION/05_context/current/ai_assistant_work/candidate_lifecycle/scorecards/ui_ux_domain_scorecard_v0_1.yaml
+    promotion_gate: screen_state_matrix_and_ui_failure_reduction_review
+  - candidate_id: route.documentation_specialist_work
+    candidate_type: route
+    lifecycle_state: proof_gated_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_IMPLEMENTATION_RECEIPT_20260508T181926Z.json
+    parent_accepted_surface: Codex Capsule Chat route metadata
+    host_ion_roles: [thoth, scribe, context_cartographer, nemesis]
+    allowed_uses: [classification, proof_shaping, route_preview, trace_display]
+    forbidden_uses: [state_acceptance, registry_mutation, unsupported_claims]
+    route_compiler_enabled: true
+    gateway_validation_enabled: true
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    promotion_gate: api_docs_example_validation_scorecard
+  - candidate_id: route.assistant_work_dataset_build
+    candidate_type: route
+    lifecycle_state: operational_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/dataset/AI_ASSISTANT_WORK_DATASET_GENESIS_V0_1.jsonl
+      - ION/05_context/current/ai_assistant_work/analysis/AI_ASSISTANT_WORK_DATASET_MINING_REPORT_LATEST.json
+    parent_accepted_surface: candidate research lane
+    host_ion_roles: [template_curator, context_cartographer, vestige, scribe]
+    allowed_uses: [classification, proof_shaping, route_preview, dataset_gap_diagnostics]
+    forbidden_uses: [canonizing_anecdotes_without_lineage, registry_mutation]
+    route_compiler_enabled: true
+    gateway_validation_enabled: true
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    promotion_gate: dataset_lineage_and_gap_review
+  - candidate_id: route.cross_domain_feature_delivery
+    candidate_type: route
+    lifecycle_state: operational_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_MAP_20260508T175230Z.json
+      - ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_phase4_product_reconciliation_matrix.md
+    parent_accepted_surface: full ION workflow handoff classifier
+    host_ion_roles: [relay, steward, vizier, mason_codex, nemesis, scribe, persona]
+    allowed_uses: [classification, proof_shaping, route_preview, fanout_diagnostic]
+    forbidden_uses: [state_acceptance, steward_bypass, autonomous_execution]
+    route_compiler_enabled: true
+    gateway_validation_enabled: true
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    promotion_gate: full_pipeline_branch_return_review
+  - candidate_id: ui_ux_domain
+    candidate_type: domain
+    lifecycle_state: proof_gated_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/domains/ui_ux_domain.domain_packet.yaml
+      - ION/05_context/current/ai_assistant_work/template_specs/screen_state_matrix_packet.template_spec.yaml
+    parent_accepted_surface: candidate route metadata and Codex Chat UI proof
+    host_ion_roles: [vizier, mason_codex, nemesis, persona]
+    allowed_uses: [proof_shaping, route_preview, state_matrix_requirement, a11y_requirement]
+    forbidden_uses: [state_acceptance, visual_polish_without_workflow_logic]
+    route_compiler_enabled: false
+    gateway_validation_enabled: false
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    scorecard_path: ION/05_context/current/ai_assistant_work/candidate_lifecycle/scorecards/ui_ux_domain_scorecard_v0_1.yaml
+    promotion_gate: user_burden_reduction_and_ui_failure_reduction
+  - candidate_id: documentation_writing_domain
+    candidate_type: domain
+    lifecycle_state: operational_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/domains/documentation_writing_domain.domain_packet.yaml
+    parent_accepted_surface: candidate route metadata and research lane
+    host_ion_roles: [thoth, scribe, context_cartographer, nemesis]
+    allowed_uses: [proof_shaping, source_authority_mapping, claim_map_requirement]
+    forbidden_uses: [unsupported_claims, state_acceptance]
+    route_compiler_enabled: false
+    gateway_validation_enabled: false
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    promotion_gate: docs_example_validation_review
+  - candidate_id: ide_work_domain
+    candidate_type: domain
+    lifecycle_state: proof_gated_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/domains/ide_work_domain.domain_packet.yaml
+      - ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_IMPLEMENTATION_RECEIPT_20260508T181926Z.json
+    parent_accepted_surface: Codex Capsule Chat route metadata
+    host_ion_roles: [relay, steward, context_cartographer, mason_codex, nemesis]
+    allowed_uses: [workspace_mapping, proof_shaping, queue_objective_context]
+    forbidden_uses: [coding_before_workspace_context_map, production_authority]
+    route_compiler_enabled: false
+    gateway_validation_enabled: false
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    promotion_gate: repeated_codex_chat_route_accuracy_review
+  - candidate_id: screen_state_matrix_packet
+    candidate_type: template
+    lifecycle_state: proof_gated_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/template_specs/screen_state_matrix_packet.template_spec.yaml
+      - ION/05_context/current/ai_assistant_work/template_instances/screen_state_matrix_packet.minimal_valid.instance.json
+      - ION/05_context/current/ai_assistant_work/template_instances/screen_state_matrix_packet.expected_rejection.instance.json
+    parent_accepted_surface: candidate template proof contract
+    host_ion_roles: [vizier, mason_codex, nemesis]
+    allowed_uses: [proof_shaping, validation_example, UI route return contract]
+    forbidden_uses: [automatic_state_acceptance, registry_mutation]
+    route_compiler_enabled: false
+    gateway_validation_enabled: false
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    promotion_gate: promotion_proposal_after_scorecard
+  - candidate_id: terminal_proof_receipt_packet
+    candidate_type: template
+    lifecycle_state: promotion_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/template_specs/terminal_proof_receipt_packet.template_spec.yaml
+      - ION/05_context/current/ai_assistant_work/template_instances/terminal_proof_receipt_packet.minimal_valid.instance.json
+      - ION/05_context/current/ai_assistant_work/template_instances/terminal_proof_receipt_packet.expected_rejection.instance.json
+    parent_accepted_surface: Codex proof and receipt discipline
+    host_ion_roles: [mason_codex, nemesis, scribe]
+    allowed_uses: [proof_shaping, validation_example, receipt_requirement]
+    forbidden_uses: [test_claim_without_command_evidence, automatic_state_acceptance]
+    route_compiler_enabled: false
+    gateway_validation_enabled: false
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    scorecard_path: ION/05_context/current/ai_assistant_work/candidate_lifecycle/scorecards/terminal_proof_receipt_packet_scorecard_v0_1.yaml
+    promotion_gate: steward_human_review_ready
+  - candidate_id: api_docs_example_validation_packet
+    candidate_type: template
+    lifecycle_state: proof_gated_candidate
+    source_evidence:
+      - ION/05_context/current/ai_assistant_work/template_specs/api_docs_example_validation_packet.template_spec.yaml
+      - ION/05_context/current/ai_assistant_work/template_instances/api_docs_example_validation_packet.minimal_valid.instance.json
+      - ION/05_context/current/ai_assistant_work/template_instances/api_docs_example_validation_packet.expected_rejection.instance.json
+    parent_accepted_surface: docs proof discipline
+    host_ion_roles: [thoth, scribe, nemesis]
+    allowed_uses: [proof_shaping, documentation_example_validation]
+    forbidden_uses: [unsupported_docs_claims, automatic_state_acceptance]
+    route_compiler_enabled: false
+    gateway_validation_enabled: false
+    mcp_surface_enabled: false
+    cockpit_display_enabled: true
+    promotion_gate: docs_route_scorecard_review
+non_claims:
+  - This registry is not ION/03_registry.
+  - This registry does not accept any candidate into canonical ION law.
+  - This registry does not grant production, live execution, secrets, deployment,
+    git push, or arbitrary shell authority.

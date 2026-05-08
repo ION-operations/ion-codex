@@ -1,0 +1,69 @@
+schema: ion.ai_assistant_work.skill_to_agent_binding_expansion.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T15:00:56Z'
+purpose: Extend skill-to-agent bindings to reflect dataset-mined domain fission.
+authority_boundary:
+  candidate_only: true
+  mutates_ION_03_registry: false
+  requires_explicit_acceptance_to_land: true
+bindings:
+- skill: PR code review and merge settlement
+  primary_agents:
+  - PR_REVIEW_STEWARD
+  - PR_MERGE_SETTLEMENT_AUDITOR
+  - CI_EVIDENCE_TRIAGER
+  candidate_domain: pr_agent_work_domain
+- skill: Background queue packet and result intake
+  primary_agents:
+  - BACKGROUND_QUEUE_STEWARD
+  - RESULT_INTAKE_AUDITOR
+  - CLOUD_BRANCH_STEWARD
+  candidate_domain: background_queue_intake_domain
+- skill: Terminal command proof and validation claims
+  primary_agents:
+  - TERMINAL_PROOF_CURATOR
+  - COMMAND_RECEIPT_AUDITOR
+  candidate_domain: terminal_proof_domain
+- skill: Screen state and UI interaction modeling
+  primary_agents:
+  - UI_STATE_MODELER
+  - SCREEN_STATE_CARTOGRAPHER
+  - UI_ARCHITECT
+  candidate_domain: ui_state_modeling_domain
+- skill: Runnable docs example validation
+  primary_agents:
+  - EXAMPLE_RUNNER
+  - API_DOCS_SCRIBE
+  - DOCS_NEMESIS
+  candidate_domain: documentation_example_validation_domain
+- skill: Release evidence collection
+  primary_agents:
+  - RELEASE_EVIDENCE_CURATOR
+  - RELEASE_GATE_NEMESIS
+  - BUILD_STEWARD
+  candidate_domain: release_evidence_domain
+- skill: Schema/data migration
+  primary_agents:
+  - MIGRATION_MASON
+  - SCHEMA_DRIFT_AUDITOR
+  candidate_domain: migration_work_domain
+- skill: Assistant work pattern observation
+  primary_agents:
+  - ASSISTANT_USAGE_ETHNOGRAPHER
+  - OBSERVATION_LINEAGE_SCRIBE
+  - TEMPLATE_MINER
+  candidate_domain: assistant_work_observation_domain
+- skill: Incident triage and production boundary
+  primary_agents:
+  - INCIDENT_TRIAGE_STEWARD
+  - PRODUCTION_BOUNDARY_AUDITOR
+  - SECURITY_NEMESIS
+  candidate_domain: incident_triage_domain
+- skill: Untrusted input/tool guard
+  primary_agents:
+  - PROMPT_INJECTION_BOUNDARY_GUARDIAN
+  - SECURITY_NEMESIS
+  - TOOL_ORCHESTRATOR
+  candidate_domain: untrusted_input_tool_guard_domain
+non_claims:
+- Bindings are candidate routing recommendations, not accepted registry law.

@@ -1,0 +1,96 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "background_queue_result_intake_packet.minimal_valid.v0_1",
+  "template_id": "background_queue_result_intake_packet",
+  "case_type": "minimal_valid",
+  "status": "candidate_template_instance_not_accepted_canon",
+  "created_at": "2026-05-08T15:43:33Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/background_queue_result_intake_packet.template_spec.yaml",
+  "primary_agent": "BACKGROUND_QUEUE_STEWARD",
+  "domain_id": "background_queue_intake_domain",
+  "objective": "Exercise the background_queue_result_intake_packet candidate template with a minimal valid instance.",
+  "sections": {
+    "QUEUE_PACKET": {
+      "objective": "Draft a bounded patch proposal for docs example validation.",
+      "authority": {
+        "requires_approval": true,
+        "production_authority": false,
+        "live_execution_authority": false
+      },
+      "target": {
+        "paths": [
+          "docs/api/examples.md"
+        ],
+        "write_mode": "draft_only"
+      },
+      "expected_return": "patch_candidate_with_command_receipts"
+    },
+    "AUTHORITY_BOUNDARY": {
+      "requires_approval": true,
+      "allowed_paths": [
+        "docs/api/examples.md"
+      ],
+      "forbidden_paths": [
+        "production",
+        "secrets",
+        "release tags"
+      ]
+    },
+    "BRANCH_RETURN": {
+      "result": "branch returned a candidate docs patch and two unrun example markers",
+      "files_touched": [
+        "docs/api/examples.md"
+      ],
+      "proof": [
+        {
+          "kind": "diff_summary",
+          "status": "provided"
+        },
+        {
+          "kind": "commands",
+          "status": "not_run"
+        }
+      ]
+    },
+    "PROOF_NORMALIZATION": [
+      {
+        "claim": "examples not executed",
+        "normalized_status": "unrun_explicit"
+      },
+      {
+        "claim": "docs patch candidate exists",
+        "normalized_status": "diff_summary_only"
+      }
+    ],
+    "CONFLICTS_OR_GAPS": [
+      "No runtime command receipt was supplied, so examples cannot be claimed verified."
+    ],
+    "INTAKE_DECISION": "accept_for_settlement",
+    "NON_CLAIMS": [
+      "No background execution is claimed beyond the supplied branch return.",
+      "The branch return is not accepted state.",
+      "The docs examples are not claimed verified."
+    ],
+    "SETTLEMENT_ROUTE": "RESULT_INTAKE_AUDITOR -> DOCS_ARCHITECT settlement packet."
+  },
+  "expected_validation": {
+    "should_pass": true,
+    "expected_failure_kinds": [],
+    "proves": [
+      "required section shape can be satisfied",
+      "candidate boundary can be preserved",
+      "settlement/proof/non-claim surfaces can be named"
+    ]
+  },
+  "non_claims": [
+    "This instance is candidate current-context test data, not accepted template law.",
+    "This instance does not execute external tools or mutate production state."
+  ]
+}

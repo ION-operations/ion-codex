@@ -1,0 +1,168 @@
+schema: ion.ai_assistant_work.dataset_gap_analysis.v0_1
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T14:32:25Z'
+purpose: Template and agent/domain gaps mined from dataset genesis entries.
+template_gap_count: 13
+agent_domain_gap_count: 13
+template_gaps:
+- gap_id: template_gap.assistant_embodiment_mount_deep
+  summary: Need deeper mount template for chat/IDE/CLI/cloud/PR/background embodiment
+    differences.
+  proposed_template_family: assistant_embodiment_mount_deep_packet
+  observed_entries:
+  - aiw_obs_0000_assistant_identity_boundary
+- gap_id: template_gap.chat_to_workpacket_intake
+  summary: Need template converting vague chat intent into bounded packet with non-goals.
+  proposed_template_family: chat_to_workpacket_intake_packet
+  observed_entries:
+  - aiw_obs_0001_chat_requirement_to_packet
+- gap_id: template_gap.rewrite_claim_preservation
+  summary: Need template distinguishing style rewrite from claim-authority rewrite.
+  proposed_template_family: rewrite_claim_preservation_packet
+  observed_entries:
+  - aiw_obs_0002_chat_artifact_rewrite
+- gap_id: template_gap.ide_workspace_mount_gate
+  summary: Need mandatory workspace surface and write-scope mount before mutation.
+  proposed_template_family: ide_workspace_mount_gate_packet
+  observed_entries:
+  - aiw_obs_0004_ide_workspace_mount
+- gap_id: template_gap.ui_screen_state_matrix
+  summary: Need UI screen/user-flow state matrix before pixel/component work.
+  proposed_template_family: screen_state_matrix_packet
+  observed_entries:
+  - aiw_obs_0007_ui_feature_brief
+- gap_id: template_gap.component_contract_to_tests
+  summary: Need component contract template that binds props/states/a11y/tests.
+  proposed_template_family: component_contract_to_tests_packet
+  observed_entries:
+  - aiw_obs_0008_ui_component_build
+- gap_id: template_gap.api_docs_example_validation
+  summary: Need API docs template requiring example-run proof or non-run marking.
+  proposed_template_family: api_docs_example_validation_packet
+  observed_entries:
+  - aiw_obs_0011_api_docs_generation
+- gap_id: template_gap.branch_return_settlement
+  summary: Need branch return template for cloud/parallel agent fan-in.
+  proposed_template_family: branch_return_settlement_packet
+  observed_entries:
+  - aiw_obs_0023_pr_merge_settlement
+  - aiw_obs_0025_cloud_parallel_work
+- gap_id: template_gap.dependency_upgrade_risk
+  summary: Need dependency upgrade template combining lockfile, license, security,
+    and tests.
+  proposed_template_family: dependency_upgrade_risk_packet
+  observed_entries:
+  - aiw_obs_0018_dependency_upgrade
+- gap_id: template_gap.prompt_injection_tool_guard
+  summary: Need untrusted-instruction-to-tool-action guard template.
+  proposed_template_family: prompt_injection_tool_guard_packet
+  observed_entries:
+  - aiw_obs_0021_prompt_injection_guard
+- gap_id: template_gap.release_readiness_matrix
+  summary: Need release readiness matrix beyond local success/test pass.
+  proposed_template_family: release_readiness_matrix_packet
+  observed_entries:
+  - aiw_obs_0028_release_readiness
+- gap_id: template_gap.dataset_observation_lineage
+  summary: Need observation lineage template for turning anecdotes into dataset entries.
+  proposed_template_family: assistant_work_observation_lineage_packet
+  observed_entries:
+  - aiw_obs_0032_work_pattern_capture
+- gap_id: template_gap.background_queue_result_intake
+  summary: Need background-agent queue/result intake template with authority and receipt
+    boundaries.
+  proposed_template_family: background_queue_result_intake_packet
+  observed_entries:
+  - aiw_obs_0035_background_daemon_queue
+agent_domain_gaps:
+- gap_id: agent_gap.pr_review_steward
+  summary: PR review needs owner distinct from implementation and security reviewers.
+  proposed_agent: PR_REVIEW_STEWARD
+  proposed_domain: pr_review_domain
+  observed_entries:
+  - aiw_obs_0022_pr_code_review
+- gap_id: agent_gap.migration_mason
+  summary: Schema/data migration work may need a specialist beyond general Patch Mason.
+  proposed_agent: MIGRATION_MASON
+  proposed_domain: migration_domain
+  observed_entries:
+  - aiw_obs_0030_schema_migration
+- gap_id: agent_gap.release_evidence_curator
+  summary: Release decisions need evidence collation distinct from Release Manager
+    decision drafting.
+  proposed_agent: RELEASE_EVIDENCE_CURATOR
+  proposed_domain: devops_release_domain
+  observed_entries:
+  - aiw_obs_0028_release_readiness
+- gap_id: agent_gap.example_runner
+  summary: Docs examples need a runner/verifier specialist instead of relying on writer
+    claims.
+  proposed_agent: EXAMPLE_RUNNER
+  proposed_domain: documentation_writing_domain
+  observed_entries:
+  - aiw_obs_0011_api_docs_generation
+- gap_id: agent_gap.ui_state_modeler
+  summary: UI state modeling is not identical to UI architecture or component building.
+  proposed_agent: UI_STATE_MODELER
+  proposed_domain: ui_ux_domain
+  observed_entries:
+  - aiw_obs_0007_ui_feature_brief
+- gap_id: agent_gap.terminal_proof_curator
+  summary: CLI/IDE command proof needs normalized receipts and return-code capture.
+  proposed_agent: TERMINAL_PROOF_CURATOR
+  proposed_domain: workflow_automation_tool_domain
+  observed_entries:
+  - aiw_obs_0026_cli_batch_patch
+- gap_id: agent_gap.incident_triage_steward
+  summary: Production-like incidents need a high-authority triage specialist with
+    human-gate awareness.
+  proposed_agent: INCIDENT_TRIAGE_STEWARD
+  proposed_domain: debugging_observability_domain
+  observed_entries:
+  - aiw_obs_0017_production_bug_triage
+- gap_id: agent_gap.cloud_branch_steward
+  summary: Background/cloud agent branches need owner for scope, proof, and return
+    contracts.
+  proposed_agent: CLOUD_BRANCH_STEWARD
+  proposed_domain: cross_domain_settlement_domain
+  observed_entries:
+  - aiw_obs_0024_cloud_background_feature
+  - aiw_obs_0025_cloud_parallel_work
+- gap_id: agent_gap.lockfile_auditor
+  summary: Lockfile-heavy work needs a reviewer distinct from general Dependency Steward.
+  proposed_agent: LOCKFILE_AUDITOR
+  proposed_domain: dependency_package_domain
+  observed_entries:
+  - aiw_obs_0019_lockfile_diff_review
+- gap_id: agent_gap.rewrite_claim_auditor
+  summary: Doc rewrites need an auditor for meaning-preservation and claim authority.
+  proposed_agent: REWRITE_CLAIM_AUDITOR
+  proposed_domain: documentation_writing_domain
+  observed_entries:
+  - aiw_obs_0002_chat_artifact_rewrite
+- gap_id: agent_gap.assistant_usage_ethnographer
+  summary: Real-world AI work observation needs ongoing ethnographic capture, not
+    only registry design.
+  proposed_agent: ASSISTANT_USAGE_ETHNOGRAPHER
+  proposed_domain: assistant_learning_dataset_domain
+  observed_entries:
+  - aiw_obs_0032_work_pattern_capture
+- gap_id: domain_gap.pr_agent_work_domain
+  summary: PR-agent work appears distinct enough from generic review/security to deserve
+    candidate domain fission pressure.
+  proposed_agent: PR_REVIEW_STEWARD
+  proposed_domain: pr_agent_work_domain
+  observed_entries:
+  - aiw_obs_0019_lockfile_diff_review
+  - aiw_obs_0022_pr_code_review
+  - aiw_obs_0023_pr_merge_settlement
+- gap_id: agent_gap.background_queue_steward
+  summary: Background queue/intake work needs a steward separate from cloud branch
+    execution.
+  proposed_agent: BACKGROUND_QUEUE_STEWARD
+  proposed_domain: workflow_automation_tool_domain
+  observed_entries:
+  - aiw_obs_0035_background_daemon_queue
+non_claims:
+- Gaps are candidate proposals, not accepted template/agent registry changes.
+- Domain fission pressure is evidence for review, not automatic split.

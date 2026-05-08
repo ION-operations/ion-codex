@@ -1,0 +1,30 @@
+{
+  "accepted": true,
+  "agent_registry_v0_2_count": 71,
+  "created_at": "2026-05-08T15:00:56Z",
+  "domain_registry_v0_2_count": 29,
+  "findings": [],
+  "fission_candidate_count": 10,
+  "focused_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/opt/pyvenv/lib/python3.13/site-packages:/opt/pyvenv/lib/python3.13/dist-packages:/usr/local/lib/python3.13/dist-packages:ION/04_packages python3 -S -m pytest ION/tests/test_kernel_ai_assistant_work_domain_candidate.py ION/tests/test_kernel_ai_assistant_work_dataset_genesis.py ION/tests/test_kernel_ai_assistant_work_domain_fission_candidate.py -q",
+    "result": "23 passed",
+    "return_code": 0
+  },
+  "new_agent_candidate_count": 24,
+  "non_claims": [
+    "Validation checks candidate file coherence and coverage only.",
+    "It does not accept candidate domains, agents, templates, or protocols into active law."
+  ],
+  "schema": "ion.ai_assistant_work.dataset_mining_validation_note.v0_1",
+  "simulation_case_count": 10,
+  "simulation_cases_accepted": 10,
+  "source_dataset_entry_count": 36,
+  "status": "accepted_candidate_evidence",
+  "status_checks": {
+    "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "ion_status_verdict": "ION_STATUS_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+  },
+  "template_packet_draft_count": 31,
+  "template_registry_v0_2_count": 100
+}

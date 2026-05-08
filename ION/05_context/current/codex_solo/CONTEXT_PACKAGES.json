@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-05-08T19:39:16+00:00",
+  "live_execution_authority": false,
+  "package_count": 8,
+  "packages": [
+    {
+      "context_type": "active_short_horizon",
+      "load_policy": "always_inline_first",
+      "package_id": "minimum_working_capsule",
+      "path_refs": [
+        "ION/05_context/current/codex_solo/CAPSULE.md"
+      ],
+      "window": {
+        "kind": "line_tail",
+        "max_lines": 80
+      }
+    },
+    {
+      "context_type": "receipt_lookup",
+      "load_policy": "index_only_not_primary_prompt",
+      "package_id": "mini_lookup_index",
+      "path_refs": [
+        "ION/05_context/current/codex_solo/MINI.md"
+      ],
+      "window": {
+        "kind": "recent_capsule_rows",
+        "max_rows": 5
+      }
+    },
+    {
+      "context_type": "compressed_long_horizon",
+      "load_policy": "load_when_older_continuity_or_prior_decisions_matter",
+      "package_id": "long_horizon_capsule_index",
+      "path_refs": [
+        "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+      ],
+      "window": {
+        "epoch_count": 6,
+        "epoch_size_rows": 10,
+        "hot_context_recent_epochs": 6,
+        "kind": "epoch_summary"
+      }
+    },
+    {
+      "context_type": "authority_and_policy",
+      "load_policy": "always_available_by_route_hash",
+      "package_id": "active_authority_package",
+      "path_refs": [
+        "ION/REPO_AUTHORITY.md",
+        "ION/03_registry/agent_context_system_registry.yaml",
+        "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md"
+      ],
+      "window": {
+        "kind": "route_excerpt",
+        "max_chars_per_file": 1600
+      }
+    },
+    {
+      "context_type": "current_objective",
+      "load_policy": "injected_per_queue_or_chat_turn",
+      "package_id": "mission_active_package",
+      "path_refs": [
+        "ION/05_context/current/codex_solo/HOT_CONTEXT.md"
+      ],
+      "window": {
+        "capsule_first": true,
+        "kind": "compiled_hot_context"
+      }
+    },
+    {
+      "context_type": "route_deeper",
+      "load_policy": "use_when_hot_context_is_insufficient",
+      "package_id": "route_depth_package",
+      "path_refs": [
+        "ION/05_context/current/codex_solo/ROUTE.json",
+        "ION/05_context/current/codex_solo/CAPSULE.md",
+        "ION/05_context/current/codex_solo/MINI.md",
+        "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+        "ION/REPO_AUTHORITY.md",
+        "ION/03_registry/agent_context_system_registry.yaml",
+        "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md",
+        "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+        "ION/02_architecture/CODEX_CAPSULE_OPERATING_PROTOCOL.md",
+        "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+        "ION/03_registry/ion_skill_registry.yaml",
+        "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+        "ION/03_registry/ion_native_lens_registry.yaml",
+        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_REBUILD_ORCHESTRATION_20260507.md",
+        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md"
+      ],
+      "window": {
+        "kind": "validate_before_queue",
+        "required_missing": []
+      }
+    },
+    {
+      "context_type": "proof_and_receipts",
+      "load_policy": "use_for_verification_or_claims_about_completed_work",
+      "package_id": "evidence_receipt_package",
+      "path_refs": [
+        "ION/05_context/current/codex_solo/history"
+      ],
+      "window": {
+        "kind": "latest_checkpoint_plus_named_evidence",
+        "source": "capsule_row_evidence_refs"
+      }
+    },
+    {
+      "context_type": "recovery",
+      "load_policy": "use_when_context_drift_or_old_build_comparison_is_requested",
+      "package_id": "recovery_package",
+      "path_refs": [
+        "ION/05_context/current/codex_solo/history",
+        "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+      ],
+      "window": {
+        "kind": "explicit_operator_or_blocker_triggered"
+      }
+    }
+  ],
+  "path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+  "production_authority": false,
+  "schema_id": "ion.codex_solo_context_packages.v1",
+  "selected_by_default": [
+    "minimum_working_capsule",
+    "mini_lookup_index",
+    "long_horizon_capsule_index",
+    "active_authority_package",
+    "mission_active_package",
+    "route_depth_package"
+  ]
+}

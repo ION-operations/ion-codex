@@ -1,0 +1,1563 @@
+schema: ion.ai_assistant_work.template_registry.v0_2
+status: candidate_current_state_not_accepted_canon
+created_at: '2026-05-08T15:00:56Z'
+purpose: Candidate template-family registry for AI-assisted chat/IDE work. Extended
+  with draft concrete template packet candidates.
+template_family_count: 100
+template_families:
+- template_family_id: acceptance_criteria_packet
+  owned_or_used_by_domains:
+  - planning_and_task_breakdown_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: accessibility_review_packet
+  owned_or_used_by_domains:
+  - ui_ux_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: analysis_packet
+  owned_or_used_by_domains:
+  - data_analysis_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: api_reference_packet
+  owned_or_used_by_domains:
+  - documentation_writing_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: approval_request_packet
+  owned_or_used_by_domains:
+  - workflow_automation_tool_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: artifact_creation_packet
+  owned_or_used_by_domains:
+  - chat_work_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: assistant_embodiment_mount
+  owned_or_used_by_domains:
+  - ai_assistant_identity_embodiment
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: automation_script_packet
+  owned_or_used_by_domains:
+  - workflow_automation_tool_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: bounded_patch_packet
+  owned_or_used_by_domains:
+  - implementation_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: branch_return_packet
+  owned_or_used_by_domains:
+  - cross_domain_settlement_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: bug_repro_packet
+  owned_or_used_by_domains:
+  - debugging_observability_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: build_validation_packet
+  owned_or_used_by_domains:
+  - devops_release_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: capability_boundary_report
+  owned_or_used_by_domains:
+  - ai_assistant_identity_embodiment
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: changelog_packet
+  owned_or_used_by_domains:
+  - documentation_writing_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: chat_intake_packet
+  owned_or_used_by_domains:
+  - chat_work_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: ci_failure_packet
+  owned_or_used_by_domains:
+  - devops_release_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: claim_source_map
+  owned_or_used_by_domains:
+  - documentation_writing_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: claim_validation_packet
+  owned_or_used_by_domains:
+  - data_analysis_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: code_review_packet
+  owned_or_used_by_domains:
+  - review_security_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: codebase_scan_packet
+  owned_or_used_by_domains:
+  - codebase_understanding_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: component_contract_packet
+  owned_or_used_by_domains:
+  - ui_ux_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: conflict_review_packet
+  owned_or_used_by_domains:
+  - cross_domain_settlement_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: context_package_packet
+  owned_or_used_by_domains:
+  - knowledge_context_memory_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: continuity_bundle_packet
+  owned_or_used_by_domains:
+  - knowledge_context_memory_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: continuity_export_packet
+  owned_or_used_by_domains:
+  - chat_work_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: data_source_manifest
+  owned_or_used_by_domains:
+  - data_analysis_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: dependency_change_packet
+  owned_or_used_by_domains:
+  - dependency_package_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: dependency_map_packet
+  owned_or_used_by_domains:
+  - codebase_understanding_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: diagnosis_packet
+  owned_or_used_by_domains:
+  - debugging_observability_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: docs_brief_packet
+  owned_or_used_by_domains:
+  - documentation_writing_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: editor_context_packet
+  owned_or_used_by_domains:
+  - ide_work_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: failure_classification_packet
+  owned_or_used_by_domains:
+  - assistant_learning_dataset_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: fix_verification_packet
+  owned_or_used_by_domains:
+  - debugging_observability_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: host_tool_surface_inventory
+  owned_or_used_by_domains:
+  - ai_assistant_identity_embodiment
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: how_to_guide_packet
+  owned_or_used_by_domains:
+  - documentation_writing_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: ide_workspace_mount
+  owned_or_used_by_domains:
+  - ide_work_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: implementation_packet
+  owned_or_used_by_domains:
+  - implementation_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: interaction_state_matrix
+  owned_or_used_by_domains:
+  - ui_ux_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: license_review_packet
+  owned_or_used_by_domains:
+  - dependency_package_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: local_convention_packet
+  owned_or_used_by_domains:
+  - codebase_understanding_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: merge_receipt
+  owned_or_used_by_domains:
+  - cross_domain_settlement_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: migration_packet
+  owned_or_used_by_domains:
+  - implementation_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: prompt_injection_audit_packet
+  owned_or_used_by_domains:
+  - review_security_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: quality_receipt
+  owned_or_used_by_domains:
+  - testing_quality_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: refactor_packet
+  owned_or_used_by_domains:
+  - implementation_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: regression_matrix
+  owned_or_used_by_domains:
+  - testing_quality_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: release_readiness_packet
+  owned_or_used_by_domains:
+  - devops_release_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: requirements_packet
+  owned_or_used_by_domains:
+  - product_requirements_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: risk_escalation_packet
+  owned_or_used_by_domains:
+  - review_security_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: rollback_packet
+  owned_or_used_by_domains:
+  - devops_release_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: scope_boundary_packet
+  owned_or_used_by_domains:
+  - product_requirements_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: security_review_packet
+  owned_or_used_by_domains:
+  - review_security_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: settlement_packet
+  owned_or_used_by_domains:
+  - cross_domain_settlement_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: source_ranking_packet
+  owned_or_used_by_domains:
+  - knowledge_context_memory_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: state_taxonomy_packet
+  owned_or_used_by_domains:
+  - assistant_learning_dataset_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: task_decomposition_packet
+  owned_or_used_by_domains:
+  - planning_and_task_breakdown_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: template_gap_packet
+  owned_or_used_by_domains:
+  - assistant_learning_dataset_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: terminal_command_packet
+  owned_or_used_by_domains:
+  - ide_work_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: test_plan_packet
+  owned_or_used_by_domains:
+  - testing_quality_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: tool_action_packet
+  owned_or_used_by_domains:
+  - workflow_automation_tool_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: tool_receipt
+  owned_or_used_by_domains:
+  - workflow_automation_tool_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: ui_brief_packet
+  owned_or_used_by_domains:
+  - ui_ux_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: upgrade_packet
+  owned_or_used_by_domains:
+  - dependency_package_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: user_story_packet
+  owned_or_used_by_domains:
+  - product_requirements_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: validation_run_packet
+  owned_or_used_by_domains:
+  - testing_quality_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: visualization_packet
+  owned_or_used_by_domains:
+  - data_analysis_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: work_observation_packet
+  owned_or_used_by_domains:
+  - assistant_learning_dataset_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: workpacket_draft
+  owned_or_used_by_domains:
+  - planning_and_task_breakdown_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: workspace_diff_receipt
+  owned_or_used_by_domains:
+  - ide_work_domain
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - RECEIPT_OR_NEXT_PACKET
+  agent_binding_rule: A template family should name its primary specialist agent and
+    settlement route; it is not just a format.
+- template_family_id: screen_state_matrix_packet
+  owned_or_used_by_domains:
+  - ui_state_modeling_domain
+  primary_agent: UI_STATE_MODELER
+  required_sections:
+  - INTENT
+  - USER_ROLES
+  - SCREEN_STATES
+  - TRANSITIONS
+  - COMPONENT_CONTRACTS
+  - A11Y_GATES
+  - TEST_GATES
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent UI_STATE_MODELER owns initial draft; settlement
+    route: UI_ARCHITECT or PRODUCT_ANALYST before COMPONENT_BUILDER.'
+  status: draft_template_packet_candidate
+- template_family_id: component_contract_to_tests_packet
+  owned_or_used_by_domains:
+  - ui_state_modeling_domain
+  primary_agent: COMPONENT_BUILDER
+  required_sections:
+  - COMPONENT
+  - PROPS_AND_EVENTS
+  - STATE_VARIANTS
+  - INTERACTION_RULES
+  - A11Y_RULES
+  - TEST_PLAN
+  - PATCH_SCOPE
+  - PROOF
+  agent_binding_rule: 'Primary agent COMPONENT_BUILDER owns initial draft; settlement
+    route: UI_STATE_MODELER then TEST_RUNNER/ACCESSIBILITY_AUDITOR.'
+  status: draft_template_packet_candidate
+- template_family_id: api_docs_example_validation_packet
+  owned_or_used_by_domains:
+  - documentation_example_validation_domain
+  primary_agent: EXAMPLE_RUNNER
+  required_sections:
+  - API_SURFACE
+  - EXAMPLES
+  - RUN_STATUS
+  - COMMAND_RECEIPTS
+  - CLAIM_MAP
+  - UNRUN_MARKERS
+  - DOCS_DELTA
+  - NON_CLAIMS
+  agent_binding_rule: 'Primary agent EXAMPLE_RUNNER owns initial draft; settlement
+    route: DOCS_ARCHITECT and SOURCE_RANKER.'
+  status: draft_template_packet_candidate
+- template_family_id: rewrite_claim_preservation_packet
+  owned_or_used_by_domains:
+  - documentation_example_validation_domain
+  primary_agent: REWRITE_CLAIM_AUDITOR
+  required_sections:
+  - REWRITE_GOAL
+  - CLAIM_INVENTORY
+  - MEANING_DELTA
+  - SOURCE_MAP
+  - STYLE_ONLY_CHANGES
+  - CLAIM_CHANGES
+  - NON_CLAIMS
+  agent_binding_rule: 'Primary agent REWRITE_CLAIM_AUDITOR owns initial draft; settlement
+    route: DOCS_ARCHITECT or SOURCE_RANKER.'
+  status: draft_template_packet_candidate
+- template_family_id: branch_return_settlement_packet
+  owned_or_used_by_domains:
+  - background_queue_intake_domain
+  primary_agent: RESULT_INTAKE_AUDITOR
+  required_sections:
+  - PARENT_SCOPE
+  - BRANCH_ID
+  - RETURN_SUMMARY
+  - TOUCHED_SURFACES
+  - PROOF
+  - CONFLICTS
+  - ACCEPTANCE_BOUNDARY
+  - SETTLEMENT_RECOMMENDATION
+  agent_binding_rule: 'Primary agent RESULT_INTAKE_AUDITOR owns initial draft; settlement
+    route: SETTLEMENT_STEWARD with human gate when high risk.'
+  status: draft_template_packet_candidate
+- template_family_id: background_queue_result_intake_packet
+  owned_or_used_by_domains:
+  - background_queue_intake_domain
+  primary_agent: BACKGROUND_QUEUE_STEWARD
+  required_sections:
+  - QUEUE_OBJECTIVE
+  - AUTHORITY
+  - ALLOWED_ACTIONS
+  - EXPECTED_RETURN
+  - APPROVAL
+  - RESULT_INTAKE
+  - PROOF
+  - NON_CLAIMS
+  agent_binding_rule: 'Primary agent BACKGROUND_QUEUE_STEWARD owns initial draft;
+    settlement route: RESULT_INTAKE_AUDITOR then SETTLEMENT_STEWARD.'
+  status: draft_template_packet_candidate
+- template_family_id: terminal_proof_receipt_packet
+  owned_or_used_by_domains:
+  - terminal_proof_domain
+  primary_agent: TERMINAL_PROOF_CURATOR
+  required_sections:
+  - COMMAND
+  - CWD
+  - OBJECTIVE
+  - RETURN_CODE
+  - STDOUT_SUMMARY
+  - STDERR_SUMMARY
+  - ARTIFACTS
+  - CLAIMS_SUPPORTED
+  - CLAIMS_NOT_SUPPORTED
+  agent_binding_rule: 'Primary agent TERMINAL_PROOF_CURATOR owns initial draft; settlement
+    route: task owner or release evidence curator.'
+  status: draft_template_packet_candidate
+- template_family_id: release_readiness_matrix_packet
+  owned_or_used_by_domains:
+  - release_evidence_domain
+  primary_agent: RELEASE_EVIDENCE_CURATOR
+  required_sections:
+  - RELEASE_SCOPE
+  - TESTS
+  - BUILDS
+  - DOCS
+  - MIGRATIONS
+  - RISKS
+  - APPROVALS
+  - BLOCKERS
+  - NON_CLAIMS
+  - RECOMMENDATION
+  agent_binding_rule: 'Primary agent RELEASE_EVIDENCE_CURATOR owns initial draft;
+    settlement route: RELEASE_MANAGER or human gate.'
+  status: draft_template_packet_candidate
+- template_family_id: dependency_upgrade_risk_packet
+  owned_or_used_by_domains:
+  - dependency_package_domain
+  primary_agent: LOCKFILE_AUDITOR
+  required_sections:
+  - UPGRADE_SCOPE
+  - MANIFEST_DIFF
+  - LOCKFILE_DIFF
+  - TRANSITIVE_CHANGES
+  - SECURITY_LICENSE
+  - TEST_PROOF
+  - RISK
+  - RECOMMENDATION
+  agent_binding_rule: 'Primary agent LOCKFILE_AUDITOR owns initial draft; settlement
+    route: DEPENDENCY_STEWARD and SECURITY_NEMESIS.'
+  status: draft_template_packet_candidate
+- template_family_id: migration_plan_and_rollback_packet
+  owned_or_used_by_domains:
+  - migration_work_domain
+  primary_agent: MIGRATION_MASON
+  required_sections:
+  - MIGRATION_SCOPE
+  - SCHEMA_DELTA
+  - DATA_RISK
+  - FORWARD_PLAN
+  - ROLLBACK_PLAN
+  - FIXTURES
+  - TESTS
+  - RELEASE_GATES
+  - NON_CLAIMS
+  agent_binding_rule: 'Primary agent MIGRATION_MASON owns initial draft; settlement
+    route: SCHEMA_DRIFT_AUDITOR then RELEASE_EVIDENCE_CURATOR.'
+  status: draft_template_packet_candidate
+- template_family_id: assistant_work_observation_lineage_packet
+  owned_or_used_by_domains:
+  - assistant_work_observation_domain
+  primary_agent: ASSISTANT_USAGE_ETHNOGRAPHER
+  required_sections:
+  - OBSERVATION
+  - SOURCE_CLASS
+  - EMBODIMENT
+  - DOMAINS
+  - AGENTS
+  - STATES
+  - TEMPLATES
+  - PROTOCOLS
+  - FAILURES
+  - LINEAGE
+  - NON_CLAIMS
+  agent_binding_rule: 'Primary agent ASSISTANT_USAGE_ETHNOGRAPHER owns initial draft;
+    settlement route: TEMPLATE_MINER and STATE_TAXONOMIST.'
+  status: draft_template_packet_candidate
+- template_family_id: prompt_injection_tool_guard_packet
+  owned_or_used_by_domains:
+  - untrusted_input_tool_guard_domain
+  primary_agent: PROMPT_INJECTION_BOUNDARY_GUARDIAN
+  required_sections:
+  - UNTRUSTED_CONTENT
+  - REQUESTED_ACTION
+  - INSTRUCTION_DATA_SPLIT
+  - AUTHORITY_CHECK
+  - ALLOWED_ACTIONS
+  - REFUSALS
+  - SAFE_ROUTE
+  agent_binding_rule: 'Primary agent PROMPT_INJECTION_BOUNDARY_GUARDIAN owns initial
+    draft; settlement route: SECURITY_NEMESIS or TOOL_ORCHESTRATOR.'
+  status: draft_template_packet_candidate
+- template_family_id: candidate_registry_delta_packet
+  owned_or_used_by_domains:
+  - assistant_work_observation_domain
+  primary_agent: OBSERVATION_LINEAGE_SCRIBE
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent OBSERVATION_LINEAGE_SCRIBE owns initial draft;
+    settlement route: SETTLEMENT_STEWARD.'
+  status: draft_template_packet_candidate
+- template_family_id: ci_evidence_triage_packet
+  owned_or_used_by_domains:
+  - pr_agent_work_domain
+  primary_agent: CI_EVIDENCE_TRIAGER
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent CI_EVIDENCE_TRIAGER owns initial draft; settlement
+    route: TEST_RUNNER.'
+  status: draft_template_packet_candidate
+- template_family_id: cloud_branch_work_packet
+  owned_or_used_by_domains:
+  - background_queue_intake_domain
+  primary_agent: CLOUD_BRANCH_STEWARD
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent CLOUD_BRANCH_STEWARD owns initial draft; settlement
+    route: SETTLEMENT_STEWARD.'
+  status: draft_template_packet_candidate
+- template_family_id: command_rerun_validation_packet
+  owned_or_used_by_domains:
+  - terminal_proof_domain
+  primary_agent: COMMAND_RECEIPT_AUDITOR
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent COMMAND_RECEIPT_AUDITOR owns initial draft; settlement
+    route: TEST_RUNNER.'
+  status: draft_template_packet_candidate
+- template_family_id: containment_or_escalation_packet
+  owned_or_used_by_domains:
+  - incident_triage_domain
+  primary_agent: INCIDENT_TRIAGE_STEWARD
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent INCIDENT_TRIAGE_STEWARD owns initial draft; settlement
+    route: PRODUCTION_BOUNDARY_AUDITOR.'
+  status: draft_template_packet_candidate
+- template_family_id: dataset_gap_mining_packet
+  owned_or_used_by_domains:
+  - assistant_work_observation_domain
+  primary_agent: TEMPLATE_MINER
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent TEMPLATE_MINER owns initial draft; settlement
+    route: STATE_TAXONOMIST.'
+  status: draft_template_packet_candidate
+- template_family_id: incident_triage_packet
+  owned_or_used_by_domains:
+  - incident_triage_domain
+  primary_agent: INCIDENT_TRIAGE_STEWARD
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent INCIDENT_TRIAGE_STEWARD owns initial draft; settlement
+    route: PRODUCTION_BOUNDARY_AUDITOR.'
+  status: draft_template_packet_candidate
+- template_family_id: interaction_validation_packet
+  owned_or_used_by_domains:
+  - ui_state_modeling_domain
+  primary_agent: SCREEN_STATE_CARTOGRAPHER
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent SCREEN_STATE_CARTOGRAPHER owns initial draft;
+    settlement route: UI_ARCHITECT.'
+  status: draft_template_packet_candidate
+- template_family_id: lockfile_diff_risk_packet
+  owned_or_used_by_domains:
+  - dependency_package_domain
+  primary_agent: LOCKFILE_AUDITOR
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent LOCKFILE_AUDITOR owns initial draft; settlement
+    route: DEPENDENCY_STEWARD.'
+  status: draft_template_packet_candidate
+- template_family_id: pr_comment_candidate_packet
+  owned_or_used_by_domains:
+  - pr_agent_work_domain
+  primary_agent: PR_COMMENT_SCRIBE
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent PR_COMMENT_SCRIBE owns initial draft; settlement
+    route: PR_REVIEW_STEWARD.'
+  status: draft_template_packet_candidate
+- template_family_id: pr_merge_settlement_packet
+  owned_or_used_by_domains:
+  - pr_agent_work_domain
+  primary_agent: PR_MERGE_SETTLEMENT_AUDITOR
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent PR_MERGE_SETTLEMENT_AUDITOR owns initial draft;
+    settlement route: SETTLEMENT_STEWARD.'
+  status: draft_template_packet_candidate
+- template_family_id: pr_review_packet
+  owned_or_used_by_domains:
+  - pr_agent_work_domain
+  primary_agent: PR_REVIEW_STEWARD
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent PR_REVIEW_STEWARD owns initial draft; settlement
+    route: PR_REVIEW_STEWARD.'
+  status: draft_template_packet_candidate
+- template_family_id: production_boundary_nonclaim_packet
+  owned_or_used_by_domains:
+  - incident_triage_domain
+  primary_agent: PRODUCTION_BOUNDARY_AUDITOR
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent PRODUCTION_BOUNDARY_AUDITOR owns initial draft;
+    settlement route: INCIDENT_TRIAGE_STEWARD.'
+  status: draft_template_packet_candidate
+- template_family_id: readme_claim_map_packet
+  owned_or_used_by_domains:
+  - documentation_example_validation_domain
+  primary_agent: REWRITE_CLAIM_AUDITOR
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent REWRITE_CLAIM_AUDITOR owns initial draft; settlement
+    route: DOCS_ARCHITECT.'
+  status: draft_template_packet_candidate
+- template_family_id: release_evidence_bundle_packet
+  owned_or_used_by_domains:
+  - release_evidence_domain
+  primary_agent: RELEASE_EVIDENCE_CURATOR
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent RELEASE_EVIDENCE_CURATOR owns initial draft;
+    settlement route: RELEASE_MANAGER.'
+  status: draft_template_packet_candidate
+- template_family_id: rollback_boundary_packet
+  owned_or_used_by_domains:
+  - release_evidence_domain
+  primary_agent: RELEASE_GATE_NEMESIS
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent RELEASE_GATE_NEMESIS owns initial draft; settlement
+    route: RELEASE_MANAGER.'
+  status: draft_template_packet_candidate
+- template_family_id: schema_drift_audit_packet
+  owned_or_used_by_domains:
+  - migration_work_domain
+  primary_agent: SCHEMA_DRIFT_AUDITOR
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent SCHEMA_DRIFT_AUDITOR owns initial draft; settlement
+    route: MIGRATION_MASON.'
+  status: draft_template_packet_candidate
+- template_family_id: script_tool_receipt_packet
+  owned_or_used_by_domains:
+  - terminal_proof_domain
+  primary_agent: TERMINAL_PROOF_CURATOR
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent TERMINAL_PROOF_CURATOR owns initial draft; settlement
+    route: TOOL_ORCHESTRATOR.'
+  status: draft_template_packet_candidate
+- template_family_id: untrusted_source_classification_packet
+  owned_or_used_by_domains:
+  - untrusted_input_tool_guard_domain
+  primary_agent: PROMPT_INJECTION_BOUNDARY_GUARDIAN
+  required_sections:
+  - INTENT
+  - DOMAIN
+  - CONTEXT
+  - AUTHORITY
+  - STATE_SURFACES
+  - PROOF_OWED
+  - RESULT
+  - NON_CLAIMS
+  - SETTLEMENT_ROUTE
+  agent_binding_rule: 'Primary agent PROMPT_INJECTION_BOUNDARY_GUARDIAN owns initial
+    draft; settlement route: SOURCE_RANKER.'
+  status: draft_template_packet_candidate

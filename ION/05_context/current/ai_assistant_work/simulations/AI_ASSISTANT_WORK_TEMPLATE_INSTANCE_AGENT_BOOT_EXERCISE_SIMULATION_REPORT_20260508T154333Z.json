@@ -1,0 +1,499 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance_agent_boot_exercise_validation_report.v0_1",
+  "status": "accepted_candidate_validation",
+  "candidate_only": true,
+  "template_spec_count": 7,
+  "valid_instance_count": 7,
+  "expected_rejection_count": 7,
+  "agent_boot_exercise_count": 7,
+  "valid_instances_accepted": 7,
+  "expected_rejections_accepted": 7,
+  "agent_boot_exercises_accepted": 7,
+  "findings": [],
+  "valid_instance_results": [
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/api_docs_example_validation_packet.minimal_valid.instance.json",
+      "template_id": "api_docs_example_validation_packet",
+      "case_type": "minimal_valid",
+      "should_pass": true,
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/background_queue_result_intake_packet.minimal_valid.instance.json",
+      "template_id": "background_queue_result_intake_packet",
+      "case_type": "minimal_valid",
+      "should_pass": true,
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/migration_plan_and_rollback_packet.minimal_valid.instance.json",
+      "template_id": "migration_plan_and_rollback_packet",
+      "case_type": "minimal_valid",
+      "should_pass": true,
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/pr_review_packet.minimal_valid.instance.json",
+      "template_id": "pr_review_packet",
+      "case_type": "minimal_valid",
+      "should_pass": true,
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/release_readiness_matrix_packet.minimal_valid.instance.json",
+      "template_id": "release_readiness_matrix_packet",
+      "case_type": "minimal_valid",
+      "should_pass": true,
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/screen_state_matrix_packet.minimal_valid.instance.json",
+      "template_id": "screen_state_matrix_packet",
+      "case_type": "minimal_valid",
+      "should_pass": true,
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/terminal_proof_receipt_packet.minimal_valid.instance.json",
+      "template_id": "terminal_proof_receipt_packet",
+      "case_type": "minimal_valid",
+      "should_pass": true,
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "expected_rejection_results": [
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/api_docs_example_validation_packet.expected_rejection.instance.json",
+      "template_id": "api_docs_example_validation_packet",
+      "case_type": "expected_rejection",
+      "should_pass": false,
+      "accepted": true,
+      "finding_count": 7,
+      "findings": [
+        {
+          "kind": "section_min_length_error",
+          "section": "API_SURFACE"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "EXAMPLES"
+        },
+        {
+          "kind": "list_item_missing_keys",
+          "section": "RUN_STATUS",
+          "index": 0,
+          "missing": [
+            "status"
+          ]
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "CLAIM_MAP"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "DOCS_DELTA"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "NON_CLAIMS"
+        },
+        {
+          "kind": "non_claims_missing_or_empty"
+        }
+      ]
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/background_queue_result_intake_packet.expected_rejection.instance.json",
+      "template_id": "background_queue_result_intake_packet",
+      "case_type": "expected_rejection",
+      "should_pass": false,
+      "accepted": true,
+      "finding_count": 9,
+      "findings": [
+        {
+          "kind": "object_missing_required_keys",
+          "section": "QUEUE_PACKET",
+          "missing": [
+            "authority",
+            "target",
+            "expected_return"
+          ]
+        },
+        {
+          "kind": "object_missing_required_keys",
+          "section": "AUTHORITY_BOUNDARY",
+          "missing": [
+            "allowed_paths",
+            "forbidden_paths"
+          ]
+        },
+        {
+          "kind": "object_missing_required_keys",
+          "section": "BRANCH_RETURN",
+          "missing": [
+            "files_touched",
+            "proof"
+          ]
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "PROOF_NORMALIZATION"
+        },
+        {
+          "kind": "enum_value_error",
+          "section": "INTAKE_DECISION",
+          "value": "accepted_state"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "NON_CLAIMS"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "SETTLEMENT_ROUTE"
+        },
+        {
+          "kind": "non_claims_missing_or_empty"
+        },
+        {
+          "kind": "route_or_receipt_target_invalid",
+          "section": "SETTLEMENT_ROUTE"
+        }
+      ]
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/migration_plan_and_rollback_packet.expected_rejection.instance.json",
+      "template_id": "migration_plan_and_rollback_packet",
+      "case_type": "expected_rejection",
+      "should_pass": false,
+      "accepted": true,
+      "finding_count": 13,
+      "findings": [
+        {
+          "kind": "section_min_length_error",
+          "section": "MIGRATION_INTENT"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "CURRENT_SCHEMA_OR_STATE"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "TARGET_SCHEMA_OR_STATE"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "AFFECTED_SURFACES"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "FORWARD_PLAN"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "ROLLBACK_PLAN"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "COMPATIBILITY_GATES"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "TEST_AND_PROOF_PLAN"
+        },
+        {
+          "kind": "object_missing_required_keys",
+          "section": "RISK_AND_APPROVAL_BOUNDARY",
+          "missing": [
+            "approval_required"
+          ]
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "NON_CLAIMS"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "SETTLEMENT_ROUTE"
+        },
+        {
+          "kind": "non_claims_missing_or_empty"
+        },
+        {
+          "kind": "route_or_receipt_target_invalid",
+          "section": "SETTLEMENT_ROUTE"
+        }
+      ]
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/pr_review_packet.expected_rejection.instance.json",
+      "template_id": "pr_review_packet",
+      "case_type": "expected_rejection",
+      "should_pass": false,
+      "accepted": true,
+      "finding_count": 8,
+      "findings": [
+        {
+          "kind": "section_min_length_error",
+          "section": "PR_SCOPE"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "DIFF_SUMMARY"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "RISK_AREAS"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "CI_EVIDENCE"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "REVIEW_COMMENTS"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "SETTLEMENT_ROUTE"
+        },
+        {
+          "kind": "candidate_boundary_non_claim_absent"
+        },
+        {
+          "kind": "route_or_receipt_target_invalid",
+          "section": "SETTLEMENT_ROUTE"
+        }
+      ]
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/release_readiness_matrix_packet.expected_rejection.instance.json",
+      "template_id": "release_readiness_matrix_packet",
+      "case_type": "expected_rejection",
+      "should_pass": false,
+      "accepted": true,
+      "finding_count": 10,
+      "findings": [
+        {
+          "kind": "section_min_length_error",
+          "section": "RELEASE_SCOPE"
+        },
+        {
+          "kind": "object_missing_required_keys",
+          "section": "VERSION_AND_CHANGELOG",
+          "missing": [
+            "changelog_status"
+          ]
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "TEST_CI_MATRIX"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "RISK_REGISTER"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "ROLLBACK_PATH"
+        },
+        {
+          "kind": "enum_value_error",
+          "section": "RELEASE_DECISION",
+          "value": "approved"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "NON_CLAIMS"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "RECEIPT_TARGET"
+        },
+        {
+          "kind": "non_claims_missing_or_empty"
+        },
+        {
+          "kind": "route_or_receipt_target_invalid",
+          "section": "RECEIPT_TARGET"
+        }
+      ]
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/screen_state_matrix_packet.expected_rejection.instance.json",
+      "template_id": "screen_state_matrix_packet",
+      "case_type": "expected_rejection",
+      "should_pass": false,
+      "accepted": true,
+      "finding_count": 11,
+      "findings": [
+        {
+          "kind": "section_min_length_error",
+          "section": "INTENT"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "USER_ROLES"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "SCREEN_STATES"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "TRANSITIONS"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "COMPONENT_CONTRACTS"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "A11Y_GATES"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "TEST_GATES"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "NON_CLAIMS"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "SETTLEMENT_ROUTE"
+        },
+        {
+          "kind": "non_claims_missing_or_empty"
+        },
+        {
+          "kind": "route_or_receipt_target_invalid",
+          "section": "SETTLEMENT_ROUTE"
+        }
+      ]
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/terminal_proof_receipt_packet.expected_rejection.instance.json",
+      "template_id": "terminal_proof_receipt_packet",
+      "case_type": "expected_rejection",
+      "should_pass": false,
+      "accepted": true,
+      "finding_count": 9,
+      "findings": [
+        {
+          "kind": "section_min_length_error",
+          "section": "COMMAND_INTENT"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "COMMAND"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "WORKING_DIRECTORY"
+        },
+        {
+          "kind": "missing_required_section",
+          "section": "RETURN_CODE"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "INTERPRETATION"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "NON_CLAIMS"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "RECEIPT_TARGET"
+        },
+        {
+          "kind": "non_claims_missing_or_empty"
+        },
+        {
+          "kind": "route_or_receipt_target_invalid",
+          "section": "RECEIPT_TARGET"
+        }
+      ]
+    }
+  ],
+  "agent_boot_exercise_results": [
+    {
+      "path": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/BACKGROUND_QUEUE_STEWARD.boot_exercise.json",
+      "role_id": "BACKGROUND_QUEUE_STEWARD",
+      "template_id": "background_queue_result_intake_packet",
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/EXAMPLE_RUNNER.boot_exercise.json",
+      "role_id": "EXAMPLE_RUNNER",
+      "template_id": "api_docs_example_validation_packet",
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/MIGRATION_MASON.boot_exercise.json",
+      "role_id": "MIGRATION_MASON",
+      "template_id": "migration_plan_and_rollback_packet",
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/PR_REVIEW_STEWARD.boot_exercise.json",
+      "role_id": "PR_REVIEW_STEWARD",
+      "template_id": "pr_review_packet",
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/RELEASE_EVIDENCE_CURATOR.boot_exercise.json",
+      "role_id": "RELEASE_EVIDENCE_CURATOR",
+      "template_id": "release_readiness_matrix_packet",
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/TERMINAL_PROOF_CURATOR.boot_exercise.json",
+      "role_id": "TERMINAL_PROOF_CURATOR",
+      "template_id": "terminal_proof_receipt_packet",
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/UI_STATE_MODELER.boot_exercise.json",
+      "role_id": "UI_STATE_MODELER",
+      "template_id": "screen_state_matrix_packet",
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    }
+  ],
+  "non_claims": [
+    "This validator checks candidate current-context artifacts only.",
+    "Passing validation does not promote template specs or agent boots to accepted law.",
+    "No external agent invocation or production mutation is performed."
+  ]
+}

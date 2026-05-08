@@ -1,0 +1,25 @@
+{
+  "schema": "ion.ai_assistant_work.export_validation.v0_1",
+  "created_at": "2026-05-08T14:35:00Z",
+  "status": "accepted_candidate_evidence",
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_carrier_continue --ion-root . --carrier GPT_SANDBOX_CARRIER --operator-message '<AI assistant / IDE work domain activation objective>' --json",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S ION/05_context/current/ai_assistant_work/simulate_ai_assistant_work_routing.py",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S ION/05_context/current/ai_assistant_work/validate_ai_assistant_work_candidate.py",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -c '... import pytest; pytest.main([\"ION/tests/test_kernel_ai_assistant_work_domain_candidate.py\",\"-q\"])'",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_status --ion-root . --json",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_sandbox_preflight --ion-root . --json"
+  ],
+  "results": {
+    "route_simulation": "accepted, 6/6 cases, 19 domains, 47 agents",
+    "candidate_validation": "accepted, 19 domains, 47 agents, 6 routes, 77 states, 69 templates, 59 protocols",
+    "focused_tests": "9 passed",
+    "ion_status": "ION_ACTIVE_STATE_INTEGRITY_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+  },
+  "non_claims": [
+    "No external IDE execution occurred.",
+    "No accepted canon was modified.",
+    "No production authority was used."
+  ]
+}

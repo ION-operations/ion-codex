@@ -1,0 +1,76 @@
+{
+  "schema": "ion.ai_assistant_work.active_root_candidate_import_receipt.v0_1",
+  "created_at": "2026-05-08T17:48:43Z",
+  "status": "candidate_import_preserved_and_validated_in_active_root",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "source_package": {
+    "name": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z",
+    "zip_sha256": "0af4e5074c548389e646383a50020168e2d3f08f3df0ff0de94658bed4175e50",
+    "extracted_root": "/home/sev/ION - Production/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE"
+  },
+  "imported_surfaces": {
+    "candidate_context_tree": "ION/05_context/current/ai_assistant_work/",
+    "candidate_context_file_count": 139,
+    "focused_tests": [
+      "ION/tests/test_kernel_ai_assistant_work_domain_candidate.py",
+      "ION/tests/test_kernel_ai_assistant_work_dataset_genesis.py",
+      "ION/tests/test_kernel_ai_assistant_work_domain_fission_candidate.py",
+      "ION/tests/test_kernel_ai_assistant_work_agent_boot_template_specs.py",
+      "ION/tests/test_kernel_ai_assistant_work_template_instances.py"
+    ]
+  },
+  "local_adaptation": {
+    "reason": "package validators were written to run under python -S but did not include this machine's user site-packages path for PyYAML",
+    "patched_files": [
+      "ION/05_context/current/ai_assistant_work/validate_ai_assistant_work_candidate.py",
+      "ION/05_context/current/ai_assistant_work/validate_ai_assistant_work_dataset_genesis.py",
+      "ION/05_context/current/ai_assistant_work/validate_ai_assistant_work_template_instances.py"
+    ],
+    "patch_summary": "add version-derived user site-packages path before importing yaml so -S validator/test runs remain reproducible in the active root"
+  },
+  "validation": {
+    "validator_template_instances": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -S ION/05_context/current/ai_assistant_work/validate_ai_assistant_work_template_instances.py",
+      "result": "accepted_candidate_validation"
+    },
+    "validator_candidate": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -S ION/05_context/current/ai_assistant_work/validate_ai_assistant_work_candidate.py",
+      "result": "accepted_candidate_evidence"
+    },
+    "validator_dataset_genesis": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -S ION/05_context/current/ai_assistant_work/validate_ai_assistant_work_dataset_genesis.py",
+      "result": "accepted_candidate_evidence"
+    },
+    "focused_pytest": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ai_assistant_work_domain_candidate.py ION/tests/test_kernel_ai_assistant_work_dataset_genesis.py ION/tests/test_kernel_ai_assistant_work_domain_fission_candidate.py ION/tests/test_kernel_ai_assistant_work_agent_boot_template_specs.py ION/tests/test_kernel_ai_assistant_work_template_instances.py",
+      "result": "36 passed"
+    },
+    "active_status": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_status",
+      "result": "ION_STATUS_READY"
+    },
+    "active_state_integrity": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_active_state_integrity_audit",
+      "result": "ION_ACTIVE_STATE_INTEGRITY_READY"
+    },
+    "status_integrity_pytest": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q ION/tests/test_kernel_ion_status.py ION/tests/test_kernel_ion_active_state_integrity_audit.py",
+      "result": "8 passed"
+    }
+  },
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "non_claims": [
+    "This import does not accept the assistant-work subsystem into ION canon.",
+    "This import does not promote any candidate domain, agent, route, protocol, or template into ION/03_registry.",
+    "This import does not change product front-door law or Custom GPT instructions.",
+    "This import performed no external IDE, CLI, cloud-agent, PR, GitHub, MCP, daemon, deployment, or production action."
+  ],
+  "recommended_next_packet": "AI_ASSISTANT_WORK_NEXT_PACKET_ROUTE_COMPILER_AND_PROMOTION_PLAN"
+}

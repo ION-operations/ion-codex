@@ -1,0 +1,257 @@
+{
+  "accepted": true,
+  "agent_coverage_count": 47,
+  "case_count": 36,
+  "cases": [
+    {
+      "accepted": true,
+      "candidate_route": "route.assistant_identity_definition",
+      "entry_id": "aiw_obs_0000_assistant_identity_boundary",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0001_chat_requirement_to_packet",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.documentation_specialist_work",
+      "entry_id": "aiw_obs_0002_chat_artifact_rewrite",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.assistant_work_dataset_build",
+      "entry_id": "aiw_obs_0003_chat_research_brief_to_state",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0004_ide_workspace_mount",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0005_ide_single_file_patch",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0006_ide_multi_file_refactor",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ui_specialist_work",
+      "entry_id": "aiw_obs_0007_ui_feature_brief",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ui_specialist_work",
+      "entry_id": "aiw_obs_0008_ui_component_build",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ui_specialist_work",
+      "entry_id": "aiw_obs_0009_ui_accessibility_audit",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.documentation_specialist_work",
+      "entry_id": "aiw_obs_0010_docs_readme_refresh",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.documentation_specialist_work",
+      "entry_id": "aiw_obs_0011_api_docs_generation",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.documentation_specialist_work",
+      "entry_id": "aiw_obs_0012_changelog_release_notes",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0013_test_plan_from_feature",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0014_failing_test_fix_loop",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0015_regression_matrix_update",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0016_bug_reproduction",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0017_production_bug_triage",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0018_dependency_upgrade",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0019_lockfile_diff_review",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0020_secret_exposure_review",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0021_prompt_injection_guard",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0022_pr_code_review",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0023_pr_merge_settlement",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0024_cloud_background_feature",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0025_cloud_parallel_work",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0026_cli_batch_patch",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0027_ci_failure_triage",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0028_release_readiness",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.documentation_specialist_work",
+      "entry_id": "aiw_obs_0029_data_analysis_request",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0030_schema_migration",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0031_continuity_bundle_export",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.assistant_work_dataset_build",
+      "entry_id": "aiw_obs_0032_work_pattern_capture",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ide_agent_work_map",
+      "entry_id": "aiw_obs_0033_tool_automation_script",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.ui_specialist_work",
+      "entry_id": "aiw_obs_0034_product_acceptance_criteria",
+      "findings": []
+    },
+    {
+      "accepted": true,
+      "candidate_route": "route.cross_domain_feature_delivery",
+      "entry_id": "aiw_obs_0035_background_daemon_queue",
+      "findings": []
+    }
+  ],
+  "cases_accepted": 36,
+  "created_at": "2026-05-08T14:33:07Z",
+  "dataset_path": "ION/05_context/current/ai_assistant_work/dataset/AI_ASSISTANT_WORK_DATASET_GENESIS_V0_1.jsonl",
+  "domain_coverage_count": 19,
+  "embodiment_counts": {
+    "background_agent": 1,
+    "chat": 11,
+    "cli": 2,
+    "cloud_agent": 2,
+    "hybrid": 4,
+    "ide": 12,
+    "pr_agent": 4
+  },
+  "findings": [],
+  "non_claims": [
+    "No external IDE execution occurred.",
+    "No external CLI, cloud-agent, PR-agent, daemon, GitHub, or MCP execution occurred.",
+    "Dataset route simulation does not accept candidate entries into ION canon.",
+    "No product-front-door or ION/03_registry mutation is claimed."
+  ],
+  "protocol_coverage_count": 57,
+  "route_counts": {
+    "route.assistant_identity_definition": 1,
+    "route.assistant_work_dataset_build": 2,
+    "route.cross_domain_feature_delivery": 14,
+    "route.documentation_specialist_work": 5,
+    "route.ide_agent_work_map": 10,
+    "route.ui_specialist_work": 4
+  },
+  "schema": "ion.ai_assistant_work.dataset_route_simulation_report.v0_1",
+  "simulation_mode": "sandbox_local_dataset_route_usage_not_external_ide_cli_cloud_pr_or_daemon_execution",
+  "state_surface_coverage_count": 70,
+  "status": "accepted_candidate_evidence",
+  "template_coverage_count": 67
+}

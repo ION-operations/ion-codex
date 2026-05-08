@@ -1,0 +1,221 @@
+{
+  "schema": "ion.sandbox_agent_package_evolution.evidence_index.v0_1",
+  "created_at": "2026-05-08T17:46:46Z",
+  "status": "evidence_preserved_not_accepted_canon",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "source_package": {
+    "requested_name": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z",
+    "extracted_parent": "/home/sev/ION - Production/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z",
+    "extracted_root": "/home/sev/ION - Production/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE",
+    "zip_paths": [
+      "/home/sev/ION - Production/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z.zip",
+      "/home/sev/Downloads/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z.zip"
+    ],
+    "zip_sha256": "0af4e5074c548389e646383a50020168e2d3f08f3df0ff0de94658bed4175e50",
+    "extracted_file_count": 3756
+  },
+  "package_metadata_findings": {
+    "outer_package_label": "v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z",
+    "product_manifest_package_name": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_1_PERSONA_RELAY_STALE_SURFACE_AUDIT",
+    "validation_report_package_name": "ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_1_PERSONA_RELAY_STALE_SURFACE_AUDIT",
+    "finding": "outer package label carries later v1.4 assistant-work evolution while root PRODUCT_MANIFEST and VALIDATION_REPORT still identify v1.1 package metadata"
+  },
+  "key_hashes": {
+    "PRODUCT_MANIFEST.json": "400687641ac70aabce5546bf143624c89832ed5b6ebea7770ca721d17319c8d8",
+    "VALIDATION_REPORT.json": "ffba5069afdf300f3dd1092c0b4d3f517e4b75f565347c4c78fe9c081c0c6138",
+    "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_5.json": "152ac8fab613ae175ccb140bdef8b6c3e5ceedfbcf97f6047caa9f60ce649989",
+    "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_DOMAIN_SYSTEM_OVERVIEW_V0_1.md": "7acb43badcd8e99ec8b2fdfa01b85bf5366d36ae98630df7243fe480e39d7373",
+    "ION/05_context/current/ai_assistant_work/validation/AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_AGENT_BOOT_EXERCISE_VALIDATION_NOTE_20260508T154333Z.json": "51583c04d110ca284e52b7df18befb01cc873b3bd637dc795ce58706f5488693"
+  },
+  "ai_assistant_work_surface": {
+    "path": "ION/05_context/current/ai_assistant_work/",
+    "file_count": 139,
+    "pre_import_active_full_build_status": "absent_from_active_root",
+    "post_import_active_full_build_status": "imported_as_candidate_current_context_not_accepted_canon",
+    "candidate_state_index": "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_5.json",
+    "status": "candidate_current_state_not_accepted_canon",
+    "domain_count": 29,
+    "specialist_agent_count": 71,
+    "dataset_entry_count": 36,
+    "failure_mode_count": 68,
+    "machine_checkable_template_spec_count": 7,
+    "valid_template_instance_count": 7,
+    "expected_rejection_instance_count": 7,
+    "agent_boot_exercise_count": 7,
+    "focused_tests_reported": "48 passed"
+  },
+  "active_root_import": {
+    "imported_at": "2026-05-08T17:48:43Z",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ACTIVE_ROOT_CANDIDATE_IMPORT_RECEIPT_20260508T174843Z.json",
+    "imported_candidate_context_tree": "ION/05_context/current/ai_assistant_work/",
+    "imported_focused_tests": [
+      "ION/tests/test_kernel_ai_assistant_work_domain_candidate.py",
+      "ION/tests/test_kernel_ai_assistant_work_dataset_genesis.py",
+      "ION/tests/test_kernel_ai_assistant_work_domain_fission_candidate.py",
+      "ION/tests/test_kernel_ai_assistant_work_agent_boot_template_specs.py",
+      "ION/tests/test_kernel_ai_assistant_work_template_instances.py"
+    ],
+    "local_validation": {
+      "template_instance_validator": "accepted_candidate_validation",
+      "candidate_validator": "accepted_candidate_evidence",
+      "dataset_genesis_validator": "accepted_candidate_evidence",
+      "focused_pytest": "36 passed",
+      "ion_status": "ION_STATUS_READY",
+      "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+      "status_integrity_pytest": "8 passed"
+    },
+    "local_adaptation": "three validators now add the version-derived user site-packages path so python -S can import PyYAML in this active environment"
+  },
+  "custom_gpt_product_surfaces": {
+    "package_adapter": "product/custom_gpt_adapter/",
+    "package_data_schema_count": 11,
+    "active_action_gateway": "ION/09_integrations/custom_gpt_action_gateway/",
+    "active_mcp_json_rpc_action": "ION/09_integrations/chatgpt_browser_mcp_action/",
+    "finding": "package product adapter is a browser Custom GPT data-zip continuity carrier; active build has live Action Gateway and MCP Action connector surfaces"
+  },
+  "route_compiler_review": {
+    "completed_at": "2026-05-08T17:53:40Z",
+    "review": "ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_REVIEW_20260508T175230Z.md",
+    "candidate_map": "ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_MAP_20260508T175230Z.json",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_REVIEW_RECEIPT_20260508T175340Z.json",
+    "finding": "assistant-work routes map cleanly to active skills/lenses and now have a candidate-only active compiler",
+    "recommended_next_module": "implemented in ION/04_packages/kernel/ion_assistant_work_route_compiler.py"
+  },
+  "route_compiler_implementation": {
+    "completed_at": "2026-05-08T18:19:26Z",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_IMPLEMENTATION_RECEIPT_20260508T181926Z.json",
+    "implemented_modules": [
+      "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+      "ION/04_packages/kernel/ion_codex_chat_engine.py",
+      "ION/04_packages/kernel/ion_dual_codex_chat.py",
+      "ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py",
+      "ION/tests/test_kernel_ion_assistant_work_route_compiler.py"
+    ],
+    "active_route_surface": {
+      "verdict": "ION_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_READY",
+      "route_count": 6,
+      "mapped_route_count": 6,
+      "policy": "candidate_route_metadata_only_no_registry_or_product_law_mutation"
+    },
+    "local_validation": {
+      "route_compiler_chat_pytest": "24 passed",
+      "assistant_work_candidate_pytest": "36 passed",
+      "ion_status": "ION_STATUS_READY",
+      "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY"
+    },
+    "finding": "active Codex chat now consumes assistant-work route metadata for selection, queue objectives, trace transparency, and inspector display without promoting candidate registries"
+  },
+  "phase4_product_reconciliation": {
+    "completed_at": "2026-05-08T18:22:28Z",
+    "matrix": "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_phase4_product_reconciliation_matrix.md",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_PHASE4_PRODUCT_RECONCILIATION_RECEIPT_20260508T182228Z.json",
+    "reconciled_lanes": [
+      "Codex Capsule Chat",
+      "Custom GPT Action Gateway",
+      "MCP JSON-RPC Custom GPT Action",
+      "Browser Data-Zip Custom GPT Product",
+      "Local Cockpit",
+      "Full ION Role Pipeline"
+    ],
+    "finding": "active live connector/runtime lanes and package data-zip continuity lanes are complementary and should share candidate route classification without sharing authority or persistence models",
+    "recommended_next_packets": [
+      "Action Gateway validation route metadata - implemented candidate-only",
+      "MCP read-only assistant-work route surface tool - held for explicit tool-contract/front-door gate",
+      "Cockpit recent-route distribution view",
+      "Custom GPT instructions for live Actions vs data-zip continuity",
+      "selected template promotion proposal"
+    ]
+  },
+  "gateway_route_metadata": {
+    "completed_at": "2026-05-08T18:27:13Z",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_GATEWAY_ROUTE_METADATA_RECEIPT_20260508T182713Z.json",
+    "implemented_modules": [
+      "ION/04_packages/kernel/ion_custom_gpt_action_gateway.py",
+      "ION/tests/test_kernel_ion_custom_gpt_action_gateway.py"
+    ],
+    "local_validation": {
+      "gateway_pytest": "15 passed",
+      "route_gateway_chat_pytest": "39 passed",
+      "ion_status": "ION_STATUS_READY",
+      "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+      "local_cockpit_health_after_restart": "ION_LOCAL_COCKPIT_APP_READY",
+      "action_gateway_health_after_restart": "ION_CUSTOM_GPT_ACTION_GATEWAY_READY"
+    },
+    "finding": "Action Gateway validate-only responses now attach candidate assistant_work_route metadata without changing OpenAPI schemas, MCP tools, ION/03_registry, or product front-door law"
+  },
+  "candidate_domain_operation_protocol_plan": {
+    "completed_at": "2026-05-08T18:41:23Z",
+    "status": "planned_not_accepted_canon",
+    "plan": "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_candidate_domain_operation_protocol_plan.md",
+    "next_packet": "ION/05_context/current/ai_assistant_work/next/AI_ASSISTANT_WORK_NEXT_PACKET_CANDIDATE_DOMAIN_OPERATION_PROTOCOL_20260508T183906Z.json",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_CANDIDATE_DOMAIN_OPERATION_PLAN_RECEIPT_20260508T184123Z.json",
+    "lifecycle_ladder": [
+      "L0 Raw Observation",
+      "L1 Candidate Draft",
+      "L2 Operational Candidate",
+      "L3 Proof-Gated Candidate",
+      "L4 Promotion Candidate",
+      "A3 Accepted Operational Domain",
+      "A2/A1 Canonical Domain/Law"
+    ],
+    "finding": "candidate domains, specialist agents, templates, routes, and protocols should be operational under containment before any accepted registry promotion",
+    "recommended_next_packets": [
+      "Protocol draft with ACTIVE_PROVISIONAL or CANDIDATE_OPERATIONAL status",
+      "Candidate lifecycle registry under ION/05_context/current/ai_assistant_work/",
+      "Scorecard schema and first scorecards for safe candidates",
+      "Route compiler lifecycle-state gate",
+      "Promotion proposal for one safe candidate after scorecard review"
+    ]
+  },
+  "candidate_domain_lifecycle_implementation": {
+    "completed_at": "2026-05-08T18:51:04Z",
+    "status": "implemented_candidate_lifecycle_gate_not_accepted_canon",
+    "protocol": "ION/02_architecture/ION_CANDIDATE_DOMAIN_OPERATION_PROTOCOL.md",
+    "lifecycle_registry": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/CANDIDATE_DOMAIN_LIFECYCLE_REGISTRY_V0_1.yaml",
+    "scorecard_schema": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/CANDIDATE_LIFECYCLE_SCORECARD_SCHEMA_V0_1.yaml",
+    "scorecards": [
+      "ION/05_context/current/ai_assistant_work/candidate_lifecycle/scorecards/ui_ux_domain_scorecard_v0_1.yaml",
+      "ION/05_context/current/ai_assistant_work/candidate_lifecycle/scorecards/screen_state_matrix_packet_scorecard_v0_1.yaml",
+      "ION/05_context/current/ai_assistant_work/candidate_lifecycle/scorecards/terminal_proof_receipt_packet_scorecard_v0_1.yaml"
+    ],
+    "promotion_proposal_draft": "ION/05_context/current/ai_assistant_work/candidate_lifecycle/promotion_proposals/terminal_proof_receipt_packet_PROMOTION_PROPOSAL_DRAFT_20260508T185031Z.md",
+    "receipt": "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_CANDIDATE_DOMAIN_LIFECYCLE_IMPLEMENTATION_RECEIPT_20260508T185104Z.json",
+    "implemented_modules": [
+      "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+      "ION/tests/test_kernel_ion_assistant_work_route_compiler.py"
+    ],
+    "lifecycle_gate_behavior": {
+      "enabled_states": [
+        "operational_candidate",
+        "proof_gated_candidate",
+        "promotion_candidate",
+        "accepted_operational_domain",
+        "canonical_domain_or_law"
+      ],
+      "refused_states": [
+        "raw_observation",
+        "candidate_draft",
+        "deferred",
+        "rejected",
+        "archived"
+      ],
+      "missing_lifecycle_record_behavior": "allowed_for_compatibility_as_unrecorded_candidate"
+    },
+    "local_validation": {
+      "route_compiler_lifecycle_pytest": "3 passed",
+      "route_gateway_chat_pytest": "40 passed",
+      "candidate_lifecycle_yaml_parse": "parsed 5 lifecycle yaml files",
+      "assistant_work_candidate_lifecycle_pytest": "39 passed",
+      "ion_status": "ION_STATUS_READY",
+      "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY"
+    },
+    "finding": "assistant-work candidate routes now have an enforceable lifecycle gate; explicit inactive/rejected/archived/draft candidates are refused before route selection"
+  },
+  "non_claims": [
+    "This evidence index does not promote package files into active ION canon.",
+    "The ai_assistant_work subtree was imported only as candidate current-context evidence.",
+    "Package-reported validation remains witness evidence; selected candidate tests have also been rerun locally in the active root.",
+    "No external IDE, CLI, cloud, PR, GitHub, MCP, daemon, or production action was performed by this evidence pass.",
+    "No ION/03_registry or product-front-door mutation occurred."
+  ]
+}
