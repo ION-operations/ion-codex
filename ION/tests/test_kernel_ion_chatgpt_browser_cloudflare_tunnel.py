@@ -19,6 +19,14 @@ from kernel.ion_chatgpt_browser_cloudflare_tunnel import (
 )
 
 
+def _seed_ion_root(root: Path) -> None:
+    (root / "pyproject.toml").write_text("[project]\nname = \"ion-test\"\n", encoding="utf-8")
+    (root / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
+    (root / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
+    (root / "ION/03_registry/boots").mkdir(parents=True, exist_ok=True)
+    (root / "ION/04_packages/kernel").mkdir(parents=True, exist_ok=True)
+
+
 def test_extract_trycloudflare_url():
     line = "INF +--------------------------------------------------------------------------------------------+ https://abc-def.trycloudflare.com"
 
@@ -101,9 +109,7 @@ def test_audit_reports_ready_when_status_running_and_cloudflared_present(tmp_pat
     fake_cloudflared.write_text("#!/bin/sh\n", encoding="utf-8")
     fake_cloudflared.chmod(0o755)
     status_path = tmp_path / "ION/05_context/current/ACTIVE_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL.json"
-    (tmp_path / "pyproject.toml").write_text("[project]\nname = \"ion-test\"\n", encoding="utf-8")
-    (tmp_path / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
-    (tmp_path / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
+    _seed_ion_root(tmp_path)
     monkeypatch.setattr(tunnel, "audit_http_mcp_preview", lambda _root: {"verdict": tunnel.HTTP_PREVIEW_READY_VERDICT})
     monkeypatch.setattr(tunnel, "_pid_running", lambda _pid: True)
     monkeypatch.setattr(
@@ -140,9 +146,7 @@ def test_audit_classifies_stale_status_url_when_tunnel_process_not_running(tmp_p
     fake_cloudflared.write_text("#!/bin/sh\n", encoding="utf-8")
     fake_cloudflared.chmod(0o755)
     monkeypatch.setenv("HOME", str(tmp_path / "home"))
-    (tmp_path / "pyproject.toml").write_text("[project]\nname = \"ion-test\"\n", encoding="utf-8")
-    (tmp_path / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
-    (tmp_path / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
+    _seed_ion_root(tmp_path)
     monkeypatch.setattr(tunnel, "audit_http_mcp_preview", lambda _root: {"verdict": tunnel.HTTP_PREVIEW_READY_VERDICT})
     monkeypatch.setattr(tunnel, "_pid_running", lambda _pid: False)
     monkeypatch.setattr(
@@ -181,9 +185,7 @@ def test_audit_reports_local_http_only_when_preview_runs_without_tunnel(tmp_path
     fake_cloudflared = tmp_path / "cloudflared"
     fake_cloudflared.write_text("#!/bin/sh\n", encoding="utf-8")
     fake_cloudflared.chmod(0o755)
-    (tmp_path / "pyproject.toml").write_text("[project]\nname = \"ion-test\"\n", encoding="utf-8")
-    (tmp_path / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
-    (tmp_path / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
+    _seed_ion_root(tmp_path)
     monkeypatch.setattr(tunnel, "audit_http_mcp_preview", lambda _root: {"verdict": tunnel.HTTP_PREVIEW_READY_VERDICT})
     monkeypatch.setattr(
         tunnel,
@@ -220,6 +222,8 @@ def test_find_cloudflared_falls_back_to_user_local_bin(tmp_path, monkeypatch):
 
 
 def test_write_tunnel_status_records_non_authority_fields(tmp_path):
+    _seed_ion_root(tmp_path)
+
     status = write_tunnel_status(
         tmp_path,
         tunnel_url="https://abc-def.trycloudflare.com",
@@ -235,14 +239,26 @@ def test_write_tunnel_status_records_non_authority_fields(tmp_path):
     assert status["deployment_authority"] is False
 
 
+def test_write_tunnel_status_refuses_non_ion_root(tmp_path):
+    try:
+        write_tunnel_status(
+            tmp_path,
+            tunnel_url="https://abc-def.trycloudflare.com",
+            running=True,
+            local_url="http://127.0.0.1:8765",
+        )
+    except FileNotFoundError as exc:
+        assert "Refusing to write Cloudflare tunnel status outside an existing ION root" in str(exc)
+    else:
+        raise AssertionError("write_tunnel_status should refuse non-ION roots")
+
+
 def test_audit_reports_stable_hostname_plan_without_treating_it_as_active(tmp_path, monkeypatch):
     fake_cloudflared = tmp_path / "cloudflared"
     fake_cloudflared.write_text("#!/bin/sh\n", encoding="utf-8")
     fake_cloudflared.chmod(0o755)
     monkeypatch.setenv("HOME", str(tmp_path / "home"))
-    (tmp_path / "pyproject.toml").write_text("[project]\nname = \"ion-test\"\n", encoding="utf-8")
-    (tmp_path / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
-    (tmp_path / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
+    _seed_ion_root(tmp_path)
     monkeypatch.setattr(tunnel, "audit_http_mcp_preview", lambda _root: {"verdict": tunnel.HTTP_PREVIEW_READY_VERDICT})
     monkeypatch.setattr(
         tunnel,

@@ -50,6 +50,21 @@ TRANSPORT_CHATGPT_CONNECTOR_ADDED_NOT_TESTED = "CHATGPT_CONNECTOR_ADDED_NOT_TEST
 TRANSPORT_CHATGPT_CONNECTOR_TESTED_READY = "CHATGPT_CONNECTOR_TESTED_READY"
 
 
+def _resolve_existing_ion_root(root: str | Path) -> Path:
+    shell_root = Path(root).expanduser().resolve()
+    required = (
+        shell_root / "ION/03_registry/boots",
+        shell_root / "ION/04_packages/kernel",
+    )
+    missing = [path.as_posix() for path in required if not path.exists()]
+    if missing:
+        raise FileNotFoundError(
+            "Refusing to write Cloudflare tunnel status outside an existing ION root. "
+            f"root={shell_root.as_posix()} missing={missing}"
+        )
+    return shell_root
+
+
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -321,7 +336,7 @@ def write_tunnel_status(
     process_id: int | None = None,
     output: str | Path | None = None,
 ) -> dict[str, Any]:
-    shell_root = Path(root).expanduser().resolve()
+    shell_root = _resolve_existing_ion_root(root)
     status_path = shell_root / (Path(output) if output else STATUS_RELATIVE_PATH)
     connector_url = connector_url_from_tunnel_url(tunnel_url, endpoint_path) if tunnel_url else None
     status = {
