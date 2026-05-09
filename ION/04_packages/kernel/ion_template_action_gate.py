@@ -11,6 +11,8 @@ DEFAULT_ALLOWED_TEMPLATE_IDS = {
     "ion.template.context_system.maintenance.v1",
     "ion.template.patch_proposal.v1",
     "ion.template.audit_observation.v1",
+    "ion.template.single_carrier_sequential_runtime.v1",
+    "ion.template.single_carrier_sequence_receipt.v1",
 }
 
 def _section(text: str, heading: str) -> str:

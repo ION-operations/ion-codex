@@ -143,6 +143,10 @@ capability_classes:
     staging_requirement: approval_and_receipt_before_any_live_host_action
     required_for_full_carrier: true
 carrier_profiles:
+  GPT_SANDBOX_CARRIER:
+    current_profile: ION/03_registry/gpt_sandbox_carrier_profile.yaml
+    current_posture: GPT_PACKAGE_SANDBOX_SEQUENTIAL_SINGLE_CARRIER_CANDIDATE_PRODUCT_LANE
+    adapter_gap_not_core_failure: true
   CHATGPT_BROWSER_CARRIER:
     current_profile: ION/03_registry/chatgpt_browser_carrier_profile.yaml
     current_posture: FULL_CARRIER_TARGET_WITH_STAGED_MCP_TOOLS_BOUNDED_PROJECT_VISIBILITY_AND_CODEX_QUEUE_PROCESS_ONCE

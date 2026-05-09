@@ -17,13 +17,25 @@ from .sequential_kernel import SequentialKernelRouter, Workstream, default_repo_
 
 ACTIVE_PACKET_RELATIVE_PATH = Path("ION/05_context/current/ACTIVE_WORK_PACKET.json")
 DEFAULT_TEMPLATE_PATH = "ION/docs/cursor/ION_CURSOR_WORK_CYCLE_PACKET.md"
+GPT_SANDBOX_TEMPLATE_PATH = "ION/07_templates/carriers/SINGLE_CARRIER_SEQUENTIAL_PACKET.md"
 DEFAULT_MODE = "MANUAL_TEMPLATE_BOUND_WORKFLOW"
+GPT_SANDBOX_MODE = "SINGLE_CARRIER_SEQUENTIAL_FRONT_DOOR_WORKFLOW"
+GPT_SANDBOX_ALIASES = {
+    "gpt_sandbox",
+    "gpt_sandbox_carrier",
+    "chatgpt_sandbox",
+    "custom_gpt_sandbox",
+}
 PROFILE_BY_CARRIER_ALIAS = {
     "codex": Path("ION/03_registry/codex_extension_carrier_profile.yaml"),
     "codex_extension": Path("ION/03_registry/codex_extension_carrier_profile.yaml"),
     "cursor": Path("ION/03_registry/codex_extension_carrier_profile.yaml"),
     "chatgpt": Path("ION/03_registry/chatgpt_browser_carrier_profile.yaml"),
     "chatgpt_browser": Path("ION/03_registry/chatgpt_browser_carrier_profile.yaml"),
+    "gpt_sandbox": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
+    "gpt_sandbox_carrier": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
+    "chatgpt_sandbox": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
+    "custom_gpt_sandbox": Path("ION/03_registry/gpt_sandbox_carrier_profile.yaml"),
 }
 EDIT_TEST_CAPABLE_CARRIERS = {"cursor", "codex", "codex_extension", "ide", "terminal"}
 CARRIER_CAPABILITY_KEYS = {
@@ -82,7 +94,35 @@ def _workstream_from_objective(objective: str | None) -> Workstream:
     return Workstream.IMPLEMENTATION
 
 
-def _role_phase_sequence(trace_roles: list[str]) -> list[str]:
+def _is_gpt_sandbox_carrier(carrier: str) -> bool:
+    return (carrier or "").lower().strip() in GPT_SANDBOX_ALIASES
+
+
+def _template_path_for_carrier(carrier: str) -> str:
+    if _is_gpt_sandbox_carrier(carrier):
+        return GPT_SANDBOX_TEMPLATE_PATH
+    return DEFAULT_TEMPLATE_PATH
+
+
+def _mode_for_carrier(carrier: str) -> str:
+    if _is_gpt_sandbox_carrier(carrier):
+        return GPT_SANDBOX_MODE
+    return DEFAULT_MODE
+
+
+def _role_phase_sequence(trace_roles: list[str], *, carrier: str = "") -> list[str]:
+    if _is_gpt_sandbox_carrier(carrier):
+        return [
+            "PERSONA_INTERFACE_INGRESS",
+            "RELAY",
+            "STEWARD",
+            "VIZIER",
+            "MASON",
+            "NEMESIS_OR_VICE_REVIEW",
+            "SCRIBE",
+            "STEWARD_FINAL",
+            "PERSONA_INTERFACE_RESPONSE",
+        ]
     sequence: list[str] = ["RELAY"]
     for role in trace_roles:
         role_upper = role.upper()
@@ -188,6 +228,17 @@ def _capability_profile(carrier: str, capabilities: Mapping[str, Any] | None = N
         "live_execution_authority": False,
         "production_authority": False,
     }
+    if _is_gpt_sandbox_carrier(carrier):
+        defaults.update({
+            "can_edit_files": True,
+            "can_run_tests": True,
+            "can_spawn_carrier_slots": False,
+            "can_use_mcp": False,
+            "can_edit_sandbox_copy": True,
+            "can_export_candidate_zip": True,
+            "can_patch_live_repo": False,
+            "can_push_git": False,
+        })
     defaults.update(supplied)
     defaults["live_execution_authority"] = False
     defaults["production_authority"] = False
@@ -202,8 +253,9 @@ def build_active_work_packet(
     capabilities: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     trace = _trace_projection(shell_root, objective)
-    role_sequence = _role_phase_sequence(list(trace["trace_roles"]))
-    template_exists = _path_exists(shell_root, DEFAULT_TEMPLATE_PATH)
+    role_sequence = _role_phase_sequence(list(trace["trace_roles"]), carrier=carrier)
+    template_path = _template_path_for_carrier(carrier)
+    template_exists = _path_exists(shell_root, template_path)
     return {
         "packet_type": "ION_ACTIVE_WORK_PACKET",
         "schema_version": "1.0",
@@ -211,7 +263,7 @@ def build_active_work_packet(
         "carrier": carrier,
         "carrier_capabilities": _capability_profile(carrier, capabilities),
         "objective": objective,
-        "mode": DEFAULT_MODE,
+        "mode": _mode_for_carrier(carrier),
         "active_packet_path": str(ACTIVE_PACKET_RELATIVE_PATH),
         "role_phase_sequence": role_sequence,
         "route_source": {
@@ -220,7 +272,7 @@ def build_active_work_packet(
             "required_surfaces_ok": trace["required_surfaces_ok"],
             "missing_required_surfaces": trace["missing_required_surfaces"],
         },
-        "active_template": DEFAULT_TEMPLATE_PATH,
+        "active_template": template_path,
         "active_template_exists": template_exists,
         "template_status": "present" if template_exists else "missing_template",
         "context_package": {
@@ -236,6 +288,8 @@ def build_active_work_packet(
             "ION/docs/consolidation/",
             "ION/05_context/signals/",
             "ION/02_architecture/",
+            "ION/07_templates/carriers/",
+            "ION/07_templates/receipts/",
         ],
         "forbidden_paths": [
             ".env",
@@ -247,7 +301,7 @@ def build_active_work_packet(
             "sibling roots as authority",
         ],
         "validation_commands": [
-            "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_carrier_onboard.py",
+            "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_carrier_onboard.py ION/tests/test_kernel_ion_stale_surface_audit.py ION/tests/test_kernel_single_carrier_sequence_runner.py ION/tests/test_kernel_ion_sandbox_preflight.py",
             "PYTHONPATH=ION/04_packages pytest -q ION/tests",
         ],
         "return_contract": [

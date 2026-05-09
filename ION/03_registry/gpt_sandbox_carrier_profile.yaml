@@ -1,0 +1,59 @@
+schema_id: ion.gpt_sandbox_carrier_profile.v1
+carrier_id: GPT_SANDBOX_CARRIER
+host_family: chatgpt_sandbox
+project_facing_callsign: Sev
+created_at: 2026-05-07T02:01:34Z
+package: ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1
+base_profile: SINGLE_LLM_SEQUENTIAL_ION_CARRIER
+default_level: L1_SELF_CONTAINED_SANDBOX_RUNTIME
+can_mount_uploaded_full_ion_package: true
+can_mount_portable_data_zip: true
+can_initialize_seeded_starter_domains: true
+can_read_bounded_ion_state: true
+can_read_files: true
+can_edit_files: true
+can_run_tests: true
+can_spawn_carrier_slots: false
+can_use_mcp: false
+can_run_python_validation_in_sandbox: true
+can_write_updated_package_artifacts_in_sandbox: true
+can_push_git: false
+can_patch_live_repo: false
+can_export_candidate_zip: true
+can_edit_sandbox_copy: true
+can_execute_ion_role_phases_sequentially: true
+can_claim_external_agents_spawned: false
+can_claim_ion_identity: false
+can_claim_steward_relay_persona_identity: false
+external_worker_surfaces_optional:
+  - cursor
+  - codex_cli
+  - local_daemon
+  - mcp_connector
+  - browser_extension
+primary_continuity_loop:
+  - upload_newest_ion_zip
+  - mount_package_inside_sandbox
+  - execute_ion_sequence_as_single_carrier
+  - record_receipts_and_state_deltas
+  - respond_through_persona_interface
+  - export_updated_zip
+required_onboarding_order:
+  - confirm_shell_root
+  - read_repo_authority
+  - read_mount_contract
+  - read_current_operating_packet_when_present
+  - load_gpt_sandbox_carrier_profile
+  - load_active_packets_or_seeded_starter_data
+  - execute_bounded_role_phase_sequence
+  - record_receipt_or_export_delta
+forbidden_claims:
+  - ION identity
+  - STEWARD identity
+  - RELAY identity
+  - PERSONA identity
+  - production authority
+  - live external execution authority
+  - separate external agents spawned unless actually invoked through an authorized adapter
+production_authority: false
+live_execution_authority: false

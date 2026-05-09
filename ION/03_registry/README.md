@@ -16,6 +16,7 @@ by carriers, tools, templates, audits, integrations, and runtime projections.
 
 - `codex_cli_carrier_profile.yaml`
 - `chatgpt_browser_carrier_profile.yaml`
+- `gpt_sandbox_carrier_profile.yaml`
 - `carrier_capability_registry.yaml`
 - `mcp_full_carrier_tool_registry.yaml`
 - `ion_github_data_plane_registry.yaml`
@@ -38,4 +39,3 @@ semantic_identities/   semantic identity surfaces
 
 Registry changes should be small and traceable. When changing runtime behavior,
 update the relevant protocol, tests, and receipt path where practical.
-
