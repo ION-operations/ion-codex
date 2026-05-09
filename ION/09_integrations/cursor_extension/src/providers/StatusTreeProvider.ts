@@ -27,10 +27,12 @@ export class IonStatusTreeProvider implements vscode.TreeDataProvider<IonTreeIte
     }
     const top = model.top_bar ?? {};
     const runtime = model.runtime ?? {};
+    const localServices = model.local_services ?? {};
     return [
       new IonTreeItem('Runtime', String(runtime.status ?? 'unknown')),
       new IonTreeItem('Objective', String(top.objective ?? 'none')),
       new IonTreeItem('Hook', String(top.hook_status ?? 'unknown')),
+      new IonTreeItem('Local Services', `${localServices.status ?? 'unknown'} ${localServices.service_count ?? 0} units`),
       new IonTreeItem('Spawn Rows', `${top.spawn_count ?? 0}/${top.spawn_rows_total ?? 0}`),
       new IonTreeItem('Returns', `A${top.return_counts?.accepted ?? 0} R${top.return_counts?.rejected ?? 0} P${top.return_counts?.pending ?? 0}`),
       new IonTreeItem('Human Gates', String(top.gate_count ?? 0), { command: 'ion.openHumanGateQueue', title: 'Open Human Gates' }),

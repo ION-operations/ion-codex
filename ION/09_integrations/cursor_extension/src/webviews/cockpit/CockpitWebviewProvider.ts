@@ -24,6 +24,8 @@ function renderCockpitHtml(model: any, modelPath: string): string {
   const runtime = model.runtime ?? {};
   const agents = model.agents ?? { spawn_rows: [], returns: [] };
   const queues = model.queues ?? { human_gates: [], operator_messages: [], steward_integration: [] };
+  const localServices = model.local_services ?? { services: [] };
+  const serviceRows = localServices.services ?? [];
   const timeline = model.timeline ?? [];
   const receipts = model.receipts ?? [];
   const row = (label: string, value: unknown) => `<div class="kv"><span>${escapeHtml(label)}</span><b>${escapeHtml(String(value ?? ''))}</b></div>`;
@@ -39,7 +41,8 @@ function renderCockpitHtml(model: any, modelPath: string): string {
 <main>
 <header class="top"><span class="brand">ION/JOC LIVE</span><span>HOST: CARRIER-CONTROL</span><span>STEWARD: INTEGRATION QUEUE</span><span class="state">${escapeHtml(String(runtime.status ?? 'unknown'))}</span></header>
 <section class="main">
-  <article class="panel"><div class="title">Runtime Status</div><div class="verdict ${escapeHtml(String(runtime.status ?? 'unknown'))}">${escapeHtml(String(runtime.status ?? 'unknown'))}</div><div>${escapeHtml(String(top.objective ?? 'no objective'))}</div><div class="grid">${row('mode', runtime.mode)}${row('hook', top.hook_status)}${row('gates', top.gate_count)}${row('spawn', `${top.spawn_count ?? 0}/${top.spawn_rows_total ?? 0}`)}${row('returns', `A${top.return_counts?.accepted ?? 0} R${top.return_counts?.rejected ?? 0}`)}${row('steward q', top.steward_queue_count)}</div></article>
+  <article class="panel"><div class="title">Runtime Status</div><div class="verdict ${escapeHtml(String(runtime.status ?? 'unknown'))}">${escapeHtml(String(runtime.status ?? 'unknown'))}</div><div>${escapeHtml(String(top.objective ?? 'no objective'))}</div><div class="grid">${row('mode', runtime.mode)}${row('hook', top.hook_status)}${row('gates', top.gate_count)}${row('spawn', `${top.spawn_count ?? 0}/${top.spawn_rows_total ?? 0}`)}${row('returns', `A${top.return_counts?.accepted ?? 0} R${top.return_counts?.rejected ?? 0}`)}${row('services', localServices.status ?? top.local_service_status ?? 'unknown')}</div></article>
+  <article class="panel"><div class="title">Local Services</div><div class="verdict ${escapeHtml(String(localServices.status ?? 'unknown'))}">${escapeHtml(String(localServices.status ?? 'unknown'))}</div><table><tr><th>Unit</th><th>Status</th><th>Endpoint</th></tr>${serviceRows.map((s:any)=>`<tr><td>${escapeHtml(String(s.unit_name))}</td><td>${escapeHtml(String(s.status))}<div class="path">${escapeHtml((s.findings??[]).join(', '))}</div></td><td class="path">${escapeHtml(String(s.health_url ?? s.public_url ?? s.local_url ?? ''))}</td></tr>`).join('')}</table></article>
   <article class="panel"><div class="title">Carrier Paths</div>${Object.entries(model.source_paths ?? {}).map(([k,v])=>row(k,String(v))).join('')}</article>
   <article class="panel"><div class="title">Spawn Queue</div><table><tr><th>#</th><th>Role</th><th>Spawn</th><th>Status</th></tr>${(agents.spawn_rows??[]).map((r:any)=>`<tr><td>${escapeHtml(String(r.index))}</td><td>${escapeHtml(String(r.role))}</td><td>${escapeHtml(String(r.spawn))}</td><td>${escapeHtml(String(r.status))}<div class="path">${escapeHtml(String(r.context_package_path??''))}</div></td></tr>`).join('')}</table></article>
   <article class="panel"><div class="title">Task Returns</div><table><tr><th>Role</th><th>Decision</th><th>Path</th></tr>${(agents.returns??[]).map((r:any)=>`<tr><td>${escapeHtml(String(r.role))}</td><td>${escapeHtml(String(r.decision))}</td><td class="path">${escapeHtml(String(r.path??''))}</td></tr>`).join('')}</table></article>
