@@ -1,0 +1,149 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "joc_work_surface_ui_packet.minimal_valid.v0_1",
+  "template_id": "joc_work_surface_ui_packet",
+  "case_type": "minimal_valid",
+  "status": "candidate_template_instance_not_accepted_canon",
+  "created_at": "2026-05-09T02:54:41Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml",
+  "primary_agent": "FRONTEND_WORK_SURFACE_ARCHITECT",
+  "domain_id": "ui_frontend_excellence_domain",
+  "objective": "Exercise the joc_work_surface_ui_packet candidate template with a minimal valid work-surface architecture packet.",
+  "sections": {
+    "INTENT": "Design a mission cockpit chat work surface that keeps context, proof, and active tool state visible before component implementation starts.",
+    "SOURCE_EVIDENCE": [
+      "ION/05_context/current/ai_assistant_work/protocols/UI_FRONTEND_EXCELLENCE_DOMAIN_PROTOCOL_V0_1.md",
+      "ION/05_context/current/ai_assistant_work/source_evidence/UI_FRONTEND_CANON_SOURCE_EVIDENCE_MAP_20260509T025441Z.json",
+      "ION/05_context/current/ai_assistant_work/analysis/UI_FRONTEND_CANON_SYNTHESIS_REPORT_20260509T025441Z.md"
+    ],
+    "SHELL_ZONES": [
+      {
+        "zone": "TOP_BAR",
+        "purpose": "Expose current mission, connection state, and bounded action controls."
+      },
+      {
+        "zone": "LEFT_ICON_RAIL",
+        "purpose": "Provide stable navigation between chat, context, files, proof, and settings lenses."
+      },
+      {
+        "zone": "MAIN_WORK_SURFACE",
+        "purpose": "Hold the active chat or work packet canvas without hiding progress state."
+      },
+      {
+        "zone": "RIGHT_INSPECTOR",
+        "purpose": "Show selected context, citations, queue packets, and validation receipts."
+      },
+      {
+        "zone": "BOTTOM_TIMELINE",
+        "purpose": "Display async tool runs, returns, validation status, and settlement events."
+      }
+    ],
+    "USER_PRIMARY_FLOW": "A user opens the cockpit, reviews loaded continuity context, asks for work, watches slow tool state, inspects proof, and settles or redirects the next packet.",
+    "DRAWER_AND_LENS_MATRIX": [
+      {
+        "lens": "context",
+        "drawer": "right_inspector",
+        "shows": [
+          "capsule summary",
+          "source evidence",
+          "active route"
+        ]
+      },
+      {
+        "lens": "proof",
+        "drawer": "bottom_timeline",
+        "shows": [
+          "command receipts",
+          "test status",
+          "non-claims"
+        ]
+      }
+    ],
+    "SCREEN_AND_INTERACTION_STATES": [
+      {
+        "state": "loading",
+        "user_feedback": "Continuity context and cockpit routes are resolving."
+      },
+      {
+        "state": "slow_response",
+        "user_feedback": "The active tool or carrier run is still pending, with elapsed time visible."
+      },
+      {
+        "state": "error",
+        "user_feedback": "The failed action names the failing surface and gives retry or inspect options."
+      },
+      {
+        "state": "empty",
+        "user_feedback": "No packet or source is selected, with the next useful selection available."
+      },
+      {
+        "state": "permission",
+        "user_feedback": "A blocked action explains the missing authority without exposing unsafe controls."
+      }
+    ],
+    "COMPONENT_CONTRACTS": [
+      {
+        "component": "CockpitShell",
+        "props": [
+          "activeMission",
+          "routeState",
+          "serviceStatus"
+        ],
+        "testable_obligation": "The shell renders stable zones and does not collapse when async state changes."
+      },
+      {
+        "component": "ContextInspector",
+        "props": [
+          "selectedLens",
+          "sourceReceipts"
+        ],
+        "testable_obligation": "Context and proof lenses remain distinct and keyboard reachable."
+      }
+    ],
+    "CONTEXT_AND_PROOF_VISUALIZATION": [
+      "Capsule, mini, source evidence, and command receipts appear as inspectable surfaces rather than hidden backend jargon.",
+      "Timeline entries distinguish requested work, running work, returned proof, and validation gaps."
+    ],
+    "MISSION_SESSION_DRIVER_SURFACES": [
+      "active mission summary",
+      "driver action status",
+      "next packet target"
+    ],
+    "INTELLIGENCE_MAP_OR_CONTEXT_SELECTION": [
+      "current continuity capsule",
+      "selected source evidence",
+      "bounded memory or route lens"
+    ],
+    "VALIDATION_PLAN": [
+      "Run focused unit tests for routing and view-model projection.",
+      "Run Playwright or screenshot validation before claiming visual completion.",
+      "Record any unrun visual proof explicitly in the return contract."
+    ],
+    "NON_CLAIMS": [
+      "This is a candidate work-surface planning packet, not accepted UI canon.",
+      "No frontend implementation or screenshot proof is claimed by this instance.",
+      "No ION/03_registry mutation or product-front-door landing occurred."
+    ],
+    "SETTLEMENT_ROUTE": "JOC_UI_CANON_STEWARD reviews source alignment, then VISUAL_PROOF_AUDITOR checks visual evidence before broad implementation."
+  },
+  "expected_validation": {
+    "should_pass": true,
+    "expected_failure_kinds": [],
+    "proves": [
+      "required UI work-surface sections can be satisfied",
+      "candidate boundary and non-claims can be preserved",
+      "slow response, proof, context, and settlement surfaces can be named before implementation"
+    ]
+  },
+  "non_claims": [
+    "This instance is candidate current-context test data, not accepted template law.",
+    "This instance does not execute external tools or mutate production state."
+  ]
+}

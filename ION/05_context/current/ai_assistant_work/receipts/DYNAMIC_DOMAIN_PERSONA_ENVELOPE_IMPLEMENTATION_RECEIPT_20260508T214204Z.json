@@ -1,0 +1,60 @@
+{
+  "schema_id": "ion.ai_assistant_work.implementation_receipt.v0_1",
+  "receipt_id": "DYNAMIC_DOMAIN_PERSONA_ENVELOPE_IMPLEMENTATION_RECEIPT_20260508T214204Z",
+  "created_at": "2026-05-08T21:42:04Z",
+  "status": "candidate_implementation_validated",
+  "objective": "Add dynamic candidate domain/agent proposal routing and a persona-visible YAML response envelope for ION/Codex chat surfaces.",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "requires_explicit_acceptance_to_land_domains": true
+  },
+  "changed_or_created_paths": [
+    "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+    "ION/04_packages/kernel/ion_persona_response_envelope.py",
+    "ION/04_packages/kernel/__init__.py",
+    "ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
+    "ION/tests/test_kernel_ion_persona_response_envelope.py",
+    "ION/tests/test_kernel_ion_custom_gpt_action_gateway.py",
+    "ION/05_context/current/ai_assistant_work/protocols/DYNAMIC_DOMAIN_AGENT_FISSION_PROTOCOL_V0_1.md",
+    "ION/05_context/current/ai_assistant_work/protocols/PERSONA_VISIBLE_ENVELOPE_PROTOCOL_V0_1.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/README.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/MANIFEST.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/07_dynamic_domains/DYNAMIC_DOMAIN_AGENT_ROUTING.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/08_persona/PERSONA_VISIBLE_ENVELOPE_REFERENCE.md",
+    "ION/05_context/current/ai_assistant_work/receipts/DYNAMIC_DOMAIN_PERSONA_ENVELOPE_IMPLEMENTATION_RECEIPT_20260508T214204Z.json"
+  ],
+  "implementation_summary": [
+    "Route compiler now emits dynamic_domain_agent_proposal with candidate fission domains, proposed agents, matched signals, local hub report guidance, and non-promotion authority boundaries.",
+    "Compiler reads AI_ASSISTANT_WORK_DOMAIN_FISSION_CANDIDATES_V0_1.yaml and can also draft a novel candidate domain when explicit novelty pressure appears and route selection is weak.",
+    "Persona response envelope utility builds a fenced YAML-visible persona block with semantic confidence, gesture/posture telemetry, operator-visible inner_monologue signal, dynamic domain signal, boundaries, and the tailored response.",
+    "Custom GPT saved-file pack now has references for dynamic domain routing and persona-visible envelopes."
+  ],
+  "validation": [
+    {
+      "command": "pytest -q ION/tests/test_kernel_ion_assistant_work_route_compiler.py ION/tests/test_kernel_ion_persona_response_envelope.py ION/tests/test_kernel_ion_custom_gpt_action_gateway.py",
+      "result": "18 passed in 0.12s"
+    },
+    {
+      "command": "PYTHONPATH=ION/04_packages python3 -S -m kernel.ion_status --ion-root . --json",
+      "result": "ION_STATUS_READY; ION_ACTIVE_STATE_INTEGRITY_READY; finding_count 0"
+    },
+    {
+      "command": "PYTHONPATH=ION/04_packages python3 - <<'PY' ... compile PR route and persona envelope smoke ... PY",
+      "result": "route.ide_agent_work_map with dynamic pr_agent_work_domain proposal; persona envelope verdict ION_PERSONA_RESPONSE_ENVELOPE_READY"
+    }
+  ],
+  "non_claims": [
+    "Dynamic domains are not accepted canon.",
+    "Candidate agents are not sovereign roles.",
+    "Persona inner_monologue is operator-visible telemetry, not hidden chain-of-thought.",
+    "No production or live execution authority was added."
+  ],
+  "next_packet": {
+    "recommended": true,
+    "objective": "Integrate persona envelope rendering into the Codex Capsule Chat / front-door UI and optionally have Action Gateway validation produce a local hub work-packet report when dynamic_domain_agent_proposal.needed is true."
+  }
+}

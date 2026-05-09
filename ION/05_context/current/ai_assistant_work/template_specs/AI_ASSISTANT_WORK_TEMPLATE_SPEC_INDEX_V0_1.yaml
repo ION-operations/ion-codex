@@ -6,7 +6,7 @@ authority_boundary:
   mutates_ION_03_registry: false
   mutates_product_front_door: false
   requires_explicit_acceptance_to_land: true
-template_spec_count: 7
+template_spec_count: 8
 template_specs:
 - template_id: screen_state_matrix_packet
   title: Screen State Matrix Packet
@@ -120,5 +120,26 @@ template_specs:
   - rollback_plan_state
   - migration_proof_plan_state
   - approval_request_state
+  machine_required_section_count: 13
+  status: candidate_machine_checkable_template_spec_not_accepted_canon
+- template_id: joc_work_surface_ui_packet
+  title: JOC Work Surface UI Packet
+  path: ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml
+  owned_by_domain: ui_frontend_excellence_domain
+  primary_agent: FRONTEND_WORK_SURFACE_ARCHITECT
+  state_inputs:
+  - product_intent_state
+  - active_ui_state
+  - joc_canon_state
+  - design_system_state
+  - context_memory_state
+  - proof_receipt_state
+  state_outputs:
+  - work_surface_architecture_state
+  - shell_zone_contract_state
+  - drawer_lens_matrix_state
+  - interaction_feedback_state
+  - visual_validation_plan_state
+  - implementation_packet_state
   machine_required_section_count: 11
   status: candidate_machine_checkable_template_spec_not_accepted_canon

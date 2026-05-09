@@ -1,0 +1,96 @@
+schema: ion.ai_assistant_work.domain_packet.v0_1
+domain_id: ui_frontend_excellence_domain
+title: UI Frontend Excellence Domain
+state_class: candidate_current_state
+status: fission_candidate_not_accepted_domain
+created_at: '2026-05-09T02:54:41Z'
+purpose: Own JOC-grade frontend architecture, agent work surfaces, mission/session
+  surfaces, proof/timeline UI, context visualization, drawer/rail/page systems,
+  compute/IDE cockpit layout, and high-quality application shell development.
+parent_domains:
+- ui_ux_domain
+- product_requirements_domain
+- knowledge_context_memory_domain
+- workflow_automation_tool_domain
+burden: Prevent generic frontend implementation from producing monolithic, confusing,
+  internally noisy, or proof-blind UI for ION/Codex/JOC-class applications.
+source_evidence:
+- ION/05_context/current/ai_assistant_work/source_evidence/UI_FRONTEND_CANON_SOURCE_EVIDENCE_MAP_20260509T025441Z.json
+- ION/05_context/current/ai_assistant_work/analysis/UI_FRONTEND_CANON_SYNTHESIS_REPORT_20260509T025441Z.md
+primary_questions:
+- What operational work surface is this UI rendering?
+- Which JOC/Opus/Echo/Victus canon surfaces apply?
+- What must remain visible without becoming a monolith?
+- What agent/tool/context/proof state does the user need to understand?
+- What mission/session/driver/compute surfaces are active or relevant?
+- What selected context, files, or memory should be visibly explained?
+- What can remain internal unless the user asks for breakdown?
+specialist_agents:
+- JOC_UI_CANON_STEWARD
+- FRONTEND_WORK_SURFACE_ARCHITECT
+- INTERACTION_STATE_WEAVER
+- CONTEXT_VISUALIZATION_CARTOGRAPHER
+- VISUAL_PROOF_AUDITOR
+- COMPONENT_BUILDER
+- DESIGN_SYSTEM_STEWARD
+- ACCESSIBILITY_AUDITOR
+state_families:
+- work_surface_architecture_state
+- shell_zone_state
+- drawer_tab_lens_state
+- interaction_feedback_state
+- context_visualization_state
+- proof_timeline_state
+- session_driver_state
+- compute_resource_state
+- intelligence_map_state
+- material_control_state
+- visual_validation_state
+template_families:
+- joc_work_surface_ui_packet
+- drawer_lens_matrix_packet
+- context_visualization_packet
+- frontend_visual_proof_packet
+protocols:
+- ION/05_context/current/ai_assistant_work/protocols/UI_FRONTEND_EXCELLENCE_DOMAIN_PROTOCOL_V0_1.md
+- non_monolith_shell_first
+- work_surface_before_components
+- visible_feedback_for_slow_tool_calls
+- proof_timeline_as_first_class_ui
+- internal_ion_terms_translated_for_user
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+  level_1_summary:
+    max_tokens: 500
+  level_2_working:
+    max_tokens: 1500
+  level_3_operational:
+    max_tokens: 4000
+  level_4_deep:
+    max_tokens: 12000
+  level_5_implementation:
+    includes_paths: true
+trigger_patterns:
+- JOC UI
+- cockpit shell
+- drawer system
+- agent timeline
+- capsule chat
+- Codex chat UI
+- context visualization
+- proof timeline
+- receipt rail
+- frontend app shell
+- monolithic UI complaint
+settlement_route: ui_frontend_excellence_to_design_system_and_visual_proof_review
+anti_drift_notes:
+- Do not expose ION internals as user chores unless the user asks.
+- Do not treat a chat textbox plus panels as a complete application.
+- Do not accept a monolithic scrolling dashboard as a JOC/ION work surface.
+- Do not skip loading, slow-response, empty, error, and permission states.
+- Do not claim visual quality without screenshot/build proof or an explicit unrun note.
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_only_until_accepted: true

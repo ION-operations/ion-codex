@@ -1,0 +1,135 @@
+schema: ion.ai_assistant_work.template_spec.v0_1
+template_id: joc_work_surface_ui_packet
+title: JOC Work Surface UI Packet
+status: candidate_machine_checkable_template_spec_not_accepted_canon
+created_at: '2026-05-09T02:54:41Z'
+authority_boundary:
+  candidate_only: true
+  allowed_path: ION/05_context/current/ai_assistant_work/
+  mutates_ION_03_registry: false
+  mutates_product_front_door: false
+  external_execution_authority: false
+  requires_explicit_acceptance_to_land: true
+owned_by_domain: ui_frontend_excellence_domain
+primary_agent: FRONTEND_WORK_SURFACE_ARCHITECT
+supporting_agents:
+- JOC_UI_CANON_STEWARD
+- INTERACTION_STATE_WEAVER
+- CONTEXT_VISUALIZATION_CARTOGRAPHER
+- VISUAL_PROOF_AUDITOR
+- COMPONENT_BUILDER
+purpose: Convert an advanced app/chat/cockpit UI request into a shell architecture,
+  state model, component contract, context/proof lenses, and validation plan before
+  implementation.
+intent_class: specialist_domain_template
+state_inputs:
+- product_intent_state
+- active_ui_state
+- joc_canon_state
+- design_system_state
+- context_memory_state
+- proof_receipt_state
+- mission_session_state
+- compute_resource_state
+state_outputs:
+- work_surface_architecture_state
+- shell_zone_contract_state
+- drawer_lens_matrix_state
+- interaction_feedback_state
+- visual_validation_plan_state
+- mission_session_surface_state
+- intelligence_map_state
+- implementation_packet_state
+required_context:
+- user-facing product intent
+- current UI or target app surface
+- active design constraints
+- JOC/Opus/Echo/Victus source evidence when relevant
+- available runtime/tool/chat data surfaces
+- AI session, driver, mission, or compute/resource surfaces when relevant
+machine_required_sections:
+- name: INTENT
+  type: string
+  min_length: 20
+- name: SOURCE_EVIDENCE
+  type: list
+  min_items: 1
+- name: SHELL_ZONES
+  type: list
+  min_items: 5
+  must_include_any:
+  - TOP_BAR
+  - LEFT_ICON_RAIL
+  - MAIN_WORK_SURFACE
+  - RIGHT_INSPECTOR
+  - BOTTOM_TIMELINE
+- name: USER_PRIMARY_FLOW
+  type: string
+  min_length: 20
+- name: DRAWER_AND_LENS_MATRIX
+  type: list
+  min_items: 1
+- name: SCREEN_AND_INTERACTION_STATES
+  type: list
+  min_items: 5
+  must_include_any:
+  - loading
+  - slow_response
+  - error
+  - empty
+  - permission
+- name: COMPONENT_CONTRACTS
+  type: list
+  min_items: 1
+- name: CONTEXT_AND_PROOF_VISUALIZATION
+  type: list
+  min_items: 1
+- name: MISSION_SESSION_DRIVER_SURFACES
+  type: list
+  min_items: 0
+- name: INTELLIGENCE_MAP_OR_CONTEXT_SELECTION
+  type: list
+  min_items: 0
+- name: VALIDATION_PLAN
+  type: list
+  min_items: 1
+- name: NON_CLAIMS
+  type: list
+  min_items: 1
+- name: SETTLEMENT_ROUTE
+  type: string
+  min_length: 5
+proof_gates:
+- gate_id: source_evidence_named
+  description: Source canon and active UI evidence are named.
+  machine_check:
+    section_any:
+    - SOURCE_EVIDENCE
+- gate_id: non_monolith_shell_present
+  description: Shell zones are explicit and avoid one scrolling monolith.
+  machine_check:
+    type: schema_section_presence
+- gate_id: interaction_feedback_present
+  description: Loading, slow-response, error, empty, and permission states are covered
+    or deliberately waived.
+  machine_check:
+    section_any:
+    - SCREEN_AND_INTERACTION_STATES
+- gate_id: proof_visualization_present
+  description: Timeline, receipt, context, or proof visualization is named.
+  machine_check:
+    section_any:
+    - CONTEXT_AND_PROOF_VISUALIZATION
+- gate_id: visual_validation_named
+  description: Build/test/screenshot checks are run or explicitly marked unrun.
+  machine_check:
+    section_any:
+    - VALIDATION_PLAN
+reject_if:
+- UI plan exposes packets/queues/pins/lanes as primary user chores without translation
+- one monolithic scroll surface is the main architecture
+- slow chat/tool call state is missing
+- visual proof is claimed without validation
+output_contract: work-surface architecture and downstream component/test packets
+completion_class: planning_to_implementation_ready
+settlement_route: JOC_UI_CANON_STEWARD then VISUAL_PROOF_AUDITOR before broad implementation

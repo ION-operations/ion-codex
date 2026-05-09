@@ -1,0 +1,58 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "joc_work_surface_ui_packet.expected_rejection.v0_1",
+  "template_id": "joc_work_surface_ui_packet",
+  "case_type": "expected_rejection",
+  "status": "candidate_rejection_case_not_accepted_canon",
+  "created_at": "2026-05-09T02:54:41Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml",
+  "primary_agent": "FRONTEND_WORK_SURFACE_ARCHITECT",
+  "domain_id": "ui_frontend_excellence_domain",
+  "objective": "Exercise the joc_work_surface_ui_packet candidate template rejection behavior.",
+  "sections": {
+    "INTENT": "Make UI.",
+    "SOURCE_EVIDENCE": [],
+    "SHELL_ZONES": [
+      {
+        "zone": "MAIN_WORK_SURFACE"
+      }
+    ],
+    "USER_PRIMARY_FLOW": "",
+    "DRAWER_AND_LENS_MATRIX": [],
+    "SCREEN_AND_INTERACTION_STATES": [
+      {
+        "state": "success"
+      }
+    ],
+    "COMPONENT_CONTRACTS": [],
+    "CONTEXT_AND_PROOF_VISUALIZATION": [],
+    "MISSION_SESSION_DRIVER_SURFACES": [],
+    "INTELLIGENCE_MAP_OR_CONTEXT_SELECTION": [],
+    "VALIDATION_PLAN": [],
+    "NON_CLAIMS": [],
+    "SETTLEMENT_ROUTE": ""
+  },
+  "expected_validation": {
+    "should_pass": false,
+    "expected_failure_kinds": [
+      "missing_or_invalid_required_section",
+      "candidate_boundary_or_non_claim_failure",
+      "settlement_route_missing"
+    ],
+    "proves": [
+      "template validator rejects incomplete UI shell plans",
+      "generic visual polish claims cannot satisfy proof and state requirements"
+    ]
+  },
+  "non_claims": [
+    "This rejection case intentionally violates the candidate template spec.",
+    "The failed output is not a usable work product."
+  ]
+}

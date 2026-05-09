@@ -1,0 +1,144 @@
+{
+  "schema": "ion.ai_assistant_work.agent_boot_exercise.v0_1",
+  "exercise_id": "frontend_work_surface_architect.boot_exercise.v0_1",
+  "role_id": "FRONTEND_WORK_SURFACE_ARCHITECT",
+  "template_id": "joc_work_surface_ui_packet",
+  "domain_id": "ui_frontend_excellence_domain",
+  "status": "candidate_agent_boot_exercise_not_accepted_canon",
+  "created_at": "2026-05-09T02:54:41Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_agent_boot": "ION/05_context/current/ai_assistant_work/agent_boots/FRONTEND_WORK_SURFACE_ARCHITECT.agent_boot.yaml",
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml",
+  "valid_instance_ref": "ION/05_context/current/ai_assistant_work/template_instances/joc_work_surface_ui_packet.minimal_valid.instance.json",
+  "rejection_case_ref": "ION/05_context/current/ai_assistant_work/template_instances/joc_work_surface_ui_packet.expected_rejection.instance.json",
+  "user_request": "Design the ION chat cockpit work surface so continuity, active tool state, proof, and validation are visible before implementation.",
+  "dispatch_assertion": {
+    "specialist_first": true,
+    "generic_implementation_first": false,
+    "selected_agent": "FRONTEND_WORK_SURFACE_ARCHITECT",
+    "selected_template": "joc_work_surface_ui_packet",
+    "selected_domain": "ui_frontend_excellence_domain",
+    "reason": "Intent asks for a complex chat/work cockpit shell and must route through the work-surface architecture template before component implementation."
+  },
+  "mount_sequence_exercised": [
+    "read authority boundary and candidate domain packet",
+    "load this agent boot draft",
+    "load UI frontend excellence protocol and source evidence map",
+    "load referenced machine-checkable template spec",
+    "identify shell zones, drawer lenses, interaction states, and proof surfaces",
+    "return candidate architecture packet with non-claims and settlement route"
+  ],
+  "required_context_packages_checked": [
+    {
+      "context_id": "active_ui_context",
+      "required": true,
+      "contents": [
+        "product intent",
+        "active UI files or screenshots if available",
+        "design system constraints"
+      ]
+    },
+    {
+      "context_id": "canon_context",
+      "required": true,
+      "contents": [
+        "ui_frontend_excellence_domain",
+        "joc_work_surface_ui_packet"
+      ]
+    },
+    {
+      "context_id": "proof_context",
+      "required": true,
+      "contents": [
+        "validation receipts",
+        "visual proof obligations",
+        "non-claims"
+      ]
+    }
+  ],
+  "owned_state_surfaces": [
+    "work_surface_architecture_state",
+    "shell_zone_contract_state",
+    "drawer_lens_matrix_state",
+    "component_contract_state",
+    "validation_plan_state"
+  ],
+  "protocols_required": [
+    "work_surface_before_components",
+    "state_before_pixels",
+    "non_monolith_shell_first",
+    "implementation_scope_before_patch"
+  ],
+  "proof_obligations_checked": [
+    "name source evidence",
+    "list shell zones",
+    "specify drawer and lens behavior",
+    "include screen and interaction states",
+    "include validation plan",
+    "name downstream implementation scope"
+  ],
+  "return_contract_checked": {
+    "required_sections": [
+      "INTENT",
+      "SOURCE_EVIDENCE",
+      "SHELL_ZONES",
+      "USER_PRIMARY_FLOW",
+      "DRAWER_AND_LENS_MATRIX",
+      "SCREEN_AND_INTERACTION_STATES",
+      "COMPONENT_CONTRACTS",
+      "VALIDATION_PLAN",
+      "NON_CLAIMS",
+      "SETTLEMENT_ROUTE"
+    ],
+    "result_status_values": [
+      "candidate",
+      "blocked",
+      "needs_review",
+      "ready_for_settlement"
+    ],
+    "must_include_template_id": true
+  },
+  "expected_result": {
+    "valid_instance_should_pass": true,
+    "rejection_case_should_fail": true,
+    "completion_class": "planning_to_implementation_ready",
+    "settlement_route": "JOC_UI_CANON_STEWARD then VISUAL_PROOF_AUDITOR before broad implementation",
+    "non_claims_preserved": true
+  },
+  "handoff_routes": [
+    {
+      "condition": "source canon alignment needs review",
+      "route": "JOC_UI_CANON_STEWARD"
+    },
+    {
+      "condition": "component work is ready after shell settlement",
+      "route": "COMPONENT_BUILDER with this packet as implementation context"
+    },
+    {
+      "condition": "visual validation is required",
+      "route": "VISUAL_PROOF_AUDITOR"
+    }
+  ],
+  "must_not_claim": [
+    "accepted UI canon without explicit acceptance",
+    "visual quality without validation",
+    "implementation complete before patch and test evidence",
+    "external tool execution without proof"
+  ],
+  "anti_drift_notes": [
+    "Do not design by adding more cards.",
+    "Do not put the user into internal ION maintenance controls.",
+    "Do not skip slow-response and loading feedback for chat/tool surfaces."
+  ],
+  "non_claims": [
+    "This is a sandbox-local boot exercise, not an actual isolated agent invocation.",
+    "No external tools, IDEs, PR systems, background workers, or production state were used.",
+    "The exercise validates dispatch shape, not accepted runtime readiness."
+  ]
+}

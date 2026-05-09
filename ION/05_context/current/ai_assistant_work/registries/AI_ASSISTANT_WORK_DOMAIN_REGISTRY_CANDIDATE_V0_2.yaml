@@ -463,4 +463,28 @@ domains:
   - aiw_obs_0020_secret_exposure_review
   settlement_route: guard_return_to_tool_or_task_owner
   status: fission_candidate_not_accepted_domain
-domain_count: 29
+- domain_id: ui_frontend_excellence_domain
+  title: UI Frontend Excellence Domain
+  purpose: Advanced ION apps need a specialist domain for JOC-grade shells, Opus
+    drawer systems, Echo Forge phase timelines, Victus provenance, capsule/context
+    visualization, proof rails, and frontend visual validation.
+  parent_domains:
+  - ui_ux_domain
+  - product_requirements_domain
+  - knowledge_context_memory_domain
+  - workflow_automation_tool_domain
+  primary_specialist_agents:
+  - JOC_UI_CANON_STEWARD
+  - FRONTEND_WORK_SURFACE_ARCHITECT
+  - INTERACTION_STATE_WEAVER
+  - CONTEXT_VISUALIZATION_CARTOGRAPHER
+  - VISUAL_PROOF_AUDITOR
+  - COMPONENT_BUILDER
+  template_packet_count: 1
+  evidence_entry_ids:
+  - UI_FRONTEND_CANON_SOURCE_EVIDENCE_MAP_20260509T025441Z
+  - UI_FRONTEND_CANON_SYNTHESIS_REPORT_20260509T025441Z
+  settlement_route: ui_frontend_excellence_to_design_system_and_visual_proof_review
+  state_family_count: 11
+  status: fission_candidate_not_accepted_domain
+domain_count: 30

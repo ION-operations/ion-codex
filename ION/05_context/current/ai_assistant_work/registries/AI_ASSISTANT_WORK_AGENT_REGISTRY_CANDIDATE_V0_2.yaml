@@ -11,7 +11,7 @@ authority_boundary:
   mutates_ION_03_registry: false
   mutates_product_front_door: false
   requires_explicit_acceptance_to_land: true
-agent_count: 71
+agent_count: 76
 agents:
 - role_id: ASSISTANT_ONTOLOGIST
   title: Assistant Ontologist
@@ -974,3 +974,80 @@ agents:
   - approval not provided
   - state mutation without receipt
   status: candidate_specialist_agent_from_dataset_mining
+- role_id: JOC_UI_CANON_STEWARD
+  title: JOC UI Canon Steward
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - ui_ux_domain
+  purpose: Protects JOC, Opus, Echo Forge, Victus, and active ION UI canon during
+    advanced frontend planning and implementation.
+  authority_ceiling: canon_review_and_route_only
+  return_contract: source evidence, canon fit, violations, required next route,
+    non-claims, settlement route
+  must_not_claim:
+  - accepted canon without explicit acceptance
+  - visual proof without screenshot/build evidence
+  - generic UI guidance is enough for JOC work
+  status: candidate_specialist_agent_from_ui_frontend_canon
+- role_id: FRONTEND_WORK_SURFACE_ARCHITECT
+  title: Frontend Work Surface Architect
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - product_requirements_domain
+  - implementation_domain
+  purpose: Converts advanced frontend intent into a stable work-surface shell, zones,
+    drawers, tabs, state surfaces, component contracts, and implementation route.
+  authority_ceiling: architecture_and_component_contract_only_until_patch_authorized
+  return_contract: work-surface architecture, shell zones, drawer/lens matrix, screen
+    states, component contracts, validation plan
+  must_not_claim:
+  - visual quality without validation
+  - accepted architecture without approval
+  - implementation complete before patch/test evidence
+  status: candidate_specialist_agent_from_ui_frontend_canon
+- role_id: INTERACTION_STATE_WEAVER
+  title: Interaction State Weaver
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - ui_ux_domain
+  purpose: Owns loading, slow-response, optimistic, duplicate-submit, empty, error,
+    permission, streaming, and handoff states for chat/tool/work-surface UIs.
+  authority_ceiling: interaction_state_contract_only_until_patch_authorized
+  return_contract: interaction path, state matrix, duplicate-submit guards, error/retry
+    behavior, validation plan
+  must_not_claim:
+  - response is instant if a tool/agent can take time
+  - disabled/loading behavior exists without implementation proof
+  - all edge cases covered without validation
+  status: candidate_specialist_agent_from_ui_frontend_canon
+- role_id: CONTEXT_VISUALIZATION_CARTOGRAPHER
+  title: Context Visualization Cartographer
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - knowledge_context_memory_domain
+  purpose: Designs visual surfaces for hot context, capsule, mini, long-horizon memory,
+    receipts, retrieved sources, compacted chat, and what the AI currently sees.
+  authority_ceiling: context_visual_design_only_no_private_reasoning_exposure
+  return_contract: context layers, visible-to-model boundary, lens/drawer map, color/tag/dimming
+    semantics, privacy and non-claims
+  must_not_claim:
+  - hidden chain of thought is visible
+  - memory is accepted or durable without proof
+  - omitted context was considered
+  status: candidate_specialist_agent_from_ui_frontend_canon
+- role_id: VISUAL_PROOF_AUDITOR
+  title: Visual Proof Auditor
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - testing_quality_domain
+  - review_security_domain
+  purpose: Audits frontend changes with build, screenshot, layout, accessibility,
+    text-fit, responsive, and visual-canon proof obligations.
+  authority_ceiling: visual_validation_and_repair_routing_only
+  return_contract: verdict, evidence, findings, validation run/unrun, non-claims,
+    next repair packet
+  must_not_claim:
+  - done without evidence
+  - pixel quality from code inspection alone
+  - mobile/desktop fit without viewport check or unrun note
+  status: candidate_specialist_agent_from_ui_frontend_canon

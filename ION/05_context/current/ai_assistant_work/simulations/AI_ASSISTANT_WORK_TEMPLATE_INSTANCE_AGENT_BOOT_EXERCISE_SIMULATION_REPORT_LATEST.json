@@ -2,13 +2,13 @@
   "schema": "ion.ai_assistant_work.template_instance_agent_boot_exercise_validation_report.v0_1",
   "status": "accepted_candidate_validation",
   "candidate_only": true,
-  "template_spec_count": 7,
-  "valid_instance_count": 7,
-  "expected_rejection_count": 7,
-  "agent_boot_exercise_count": 7,
-  "valid_instances_accepted": 7,
-  "expected_rejections_accepted": 7,
-  "agent_boot_exercises_accepted": 7,
+  "template_spec_count": 8,
+  "valid_instance_count": 8,
+  "expected_rejection_count": 8,
+  "agent_boot_exercise_count": 8,
+  "valid_instances_accepted": 8,
+  "expected_rejections_accepted": 8,
+  "agent_boot_exercises_accepted": 8,
   "findings": [],
   "valid_instance_results": [
     {
@@ -23,6 +23,15 @@
     {
       "path": "ION/05_context/current/ai_assistant_work/template_instances/background_queue_result_intake_packet.minimal_valid.instance.json",
       "template_id": "background_queue_result_intake_packet",
+      "case_type": "minimal_valid",
+      "should_pass": true,
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/joc_work_surface_ui_packet.minimal_valid.instance.json",
+      "template_id": "joc_work_surface_ui_packet",
       "case_type": "minimal_valid",
       "should_pass": true,
       "accepted": true,
@@ -158,6 +167,78 @@
           "kind": "enum_value_error",
           "section": "INTAKE_DECISION",
           "value": "accepted_state"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "NON_CLAIMS"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "SETTLEMENT_ROUTE"
+        },
+        {
+          "kind": "non_claims_missing_or_empty"
+        },
+        {
+          "kind": "route_or_receipt_target_invalid",
+          "section": "SETTLEMENT_ROUTE"
+        }
+      ]
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/template_instances/joc_work_surface_ui_packet.expected_rejection.instance.json",
+      "template_id": "joc_work_surface_ui_packet",
+      "case_type": "expected_rejection",
+      "should_pass": false,
+      "accepted": true,
+      "finding_count": 14,
+      "findings": [
+        {
+          "kind": "section_min_length_error",
+          "section": "INTENT"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "SOURCE_EVIDENCE"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "SHELL_ZONES"
+        },
+        {
+          "kind": "section_min_length_error",
+          "section": "USER_PRIMARY_FLOW"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "DRAWER_AND_LENS_MATRIX"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "SCREEN_AND_INTERACTION_STATES"
+        },
+        {
+          "kind": "list_must_include_any_error",
+          "section": "SCREEN_AND_INTERACTION_STATES",
+          "expected_any": [
+            "loading",
+            "slow_response",
+            "error",
+            "empty",
+            "permission"
+          ]
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "COMPONENT_CONTRACTS"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "CONTEXT_AND_PROOF_VISUALIZATION"
+        },
+        {
+          "kind": "section_min_items_error",
+          "section": "VALIDATION_PLAN"
         },
         {
           "kind": "section_min_items_error",
@@ -446,6 +527,14 @@
       "path": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/EXAMPLE_RUNNER.boot_exercise.json",
       "role_id": "EXAMPLE_RUNNER",
       "template_id": "api_docs_example_validation_packet",
+      "accepted": true,
+      "finding_count": 0,
+      "findings": []
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/agent_boot_exercises/FRONTEND_WORK_SURFACE_ARCHITECT.boot_exercise.json",
+      "role_id": "FRONTEND_WORK_SURFACE_ARCHITECT",
+      "template_id": "joc_work_surface_ui_packet",
       "accepted": true,
       "finding_count": 0,
       "findings": []

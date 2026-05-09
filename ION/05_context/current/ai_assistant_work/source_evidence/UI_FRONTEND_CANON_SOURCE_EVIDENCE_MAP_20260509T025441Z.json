@@ -1,0 +1,108 @@
+{
+  "schema": "ion.ai_assistant_work.source_evidence_map.v0_1",
+  "status": "candidate_evidence_map_not_accepted_canon",
+  "created_at": "2026-05-09T02:54:41Z",
+  "objective": "Map JOC, Opus, Echo Forge, Victus, and active ION UI canon sources into a candidate UI/frontend excellence domain.",
+  "authority_boundary": {
+    "candidate_only": true,
+    "active_write_root": "/home/sev/ION - Production/ION_CODEX FULL",
+    "external_sources_read_only": true,
+    "mutates_ION_03_registry": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "active_ion_sources": [
+    {
+      "path": "ION/01_doctrine/MAINTAINED_WORK_SURFACE_CANON.md",
+      "finding": "ION work surfaces must preserve pressure, synthesis, evidence, recognition, formalization, receipt, and continuation instead of only rendering static pages."
+    },
+    {
+      "path": "ION/02_architecture/VISUAL_CLOSURE_GRAPH_PROJECTION_AND_UI_WORK_SURFACE_PROTOCOL.md",
+      "finding": "JOC-class UI requires top bar, left rail, main work surface, right inspector, and bottom timeline/proof surfaces, with receipt, route, visual evidence, repair, automation, and compute lenses."
+    },
+    {
+      "path": "ION/02_architecture/ION_JOC_COCKPIT_SHELL_COMPONENT_CONTRACT_PROTOCOL.md",
+      "finding": "Cockpit is a projection organ, not a dashboard; named components include top bar, rails, main work surface, inspector, timeline, receipt rail, route panel, context graph, repair queue, and browser automation overlay."
+    },
+    {
+      "path": "ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md",
+      "finding": "Prior local UI failure was monolithic; the correct shell splits top/page navigation, icon rails, drawers, main chat/work surface, right inspector/chat, and bottom timeline."
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/domains/ui_ux_domain.domain_packet.yaml",
+      "finding": "Existing generic UI/UX domain covers ordinary design, state, accessibility, and polish but does not yet encode JOC/Opus/Echo/Victus work-surface law."
+    }
+  ],
+  "external_read_only_sources": [
+    {
+      "path": "/home/sev/ION - Production/_ui_canon_bundle/CANON_JOC_UI_ARCHITECTURE.md",
+      "finding": "JOC is a central nervous system, not a browser, IDE, or app launcher; layout canon uses fixed top bar, left rail, main content, optional right panel, and optional bottom bar."
+    },
+    {
+      "path": "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_UI_DESIGN.md",
+      "finding": "Opus canon defines lucid engine drawers: icon bars, full/top/bottom split-click drawer modes, sub-tabs inside drawers, and configurable drawer widths to prevent scrolling monoliths."
+    },
+    {
+      "path": "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_MASTER_VISION.md",
+      "finding": "Master vision frames JOC as a mission dashboard and AI orchestration center, not a browser or launcher. Primary pillars include mission dashboard, session manager, dispatch engine, results synthesizer, and project catalog."
+    },
+    {
+      "path": "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_ARCHITECTURE.md",
+      "finding": "Architecture canon defines presentation, orchestration, and infrastructure tiers; AI drivers expose session state, login health, prompt injection, response extraction, quota, conversation, memory, and health-check contracts."
+    },
+    {
+      "path": "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_COMPUTE_AND_IDE_LAYOUT.md",
+      "finding": "Compute/IDE canon expands JOC into a three-ring compute fabric and IDE-grade shell: activity bar, tabs, split panes, command palette, status bar, bottom output panel, resource monitor, and documented stop controls."
+    },
+    {
+      "path": "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_GOALS_AND_ROADMAP.md",
+      "finding": "Roadmap canon identifies the signature session page: live browser viewport plus automation overlay, injection/extraction highlights, DOM health, communication pipeline, debug rail, and session health monitoring."
+    },
+    {
+      "path": "/home/sev/ION - Production/_ui_canon_bundle/JOC_UI_REQUIREMENTS.md",
+      "finding": "DXL style requires matte-black instrument-panel density, small monospace labels, strict borders, no emoji, no Material colors, no rounded corners over 2px, and screenshot validation."
+    },
+    {
+      "path": "/home/sev/ION - Production/_ui_canon_bundle/ui_evolution_plan.md",
+      "finding": "V3 Intelligence Map proposes algorithmic certainty UI: instant dictionary/index search, AST/structural blueprint view, dependency web, reactive OS stream, and command palette that visibly highlights selected context."
+    },
+    {
+      "path": "/home/sev/ION - Production/_ui_canon_bundle/uishader.txt",
+      "finding": "Materiality canon explores high-end skeuomorphic/PBR DOM techniques: unified light source, gradients as material, shadows as depth, SVG filter material grain, dynamic light uniforms, caustics, and physics-based motion. Use for selected tactile controls, not as a base-shell default."
+    },
+    {
+      "path": "/home/sev/ION - Production/SOS-OPUS/06_intelligence/2026-03-31_mason_joc_architecture_spec.md",
+      "finding": "JOC implementation pattern used React/Vite/TypeScript/Zustand and a hierarchy of root layout, icon bar, left drawer, main workspace, and inspector panel."
+    },
+    {
+      "path": "/home/sev/ION - Production/SOS-OPUS/06_intelligence/2026-03-31_weaver_joc_ui_agent_research.md",
+      "finding": "UI agent is a signal-driven renderer that transforms typed render requests into pixels; it must not own analysis, state, or command authority."
+    },
+    {
+      "path": "/home/sev/AIMOS - Builds/AIM-OS-FRESH/echo-forge-loop/README.md",
+      "finding": "Echo Forge contributes a streaming cognition/event timeline: memory, plan, execute, verify, retry, audit, synthesize, reflect, evolve, and complete."
+    },
+    {
+      "path": "/home/sev/ION - Production/00_CONSOLIDATED_ATLAS/01_EVIDENCE/EVIDENCE_operation-victus_ION_BUILD_CAPSULE.md",
+      "finding": "Victus contributes typed, portable, provenance-backed file/state thinking and the loop contextualize, reflect, plan, gate, execute, audit, deliver."
+    },
+    {
+      "path": "/home/sev/ION - Production/SOS-OPUS/06_intelligence/2026-03-31_scribe_git_victus_research.md",
+      "finding": "Victus failure evidence warns against overwritten monolithic state; UI state and agent/domain movement require provenance, history, and receipts."
+    }
+  ],
+  "derived_domain_need": {
+    "domain_id": "ui_frontend_excellence_domain",
+    "reason": "Advanced ION apps need a UI domain that fuses JOC shell law, Opus drawer architecture, AI-driver/session/mission surfaces, compute/IDE cockpit layout, Echo Forge event timelines, Victus provenance, material-control craft, and active ION maintained-work-surface governance.",
+    "not_replaced": [
+      "ui_ux_domain",
+      "ui_state_modeling_domain"
+    ],
+    "relationship": "higher-order specialist domain for complex frontend/work-surface applications"
+  },
+  "non_claims": [
+    "External sources were read as evidence, not accepted current law.",
+    "No production frontend was changed by this evidence map.",
+    "This map does not promote the new domain into accepted ION canon.",
+    "Some backup/archive areas may contain additional inaccessible or redundant evidence."
+  ]
+}

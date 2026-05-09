@@ -1,0 +1,77 @@
+{
+  "schema": "ion.ai_assistant_work.receipt.v0_1",
+  "receipt_id": "ui_frontend_excellence_domain_integration_20260509T025441Z",
+  "status": "candidate_receipt_not_accepted_canon",
+  "created_at": "2026-05-09T02:54:41Z",
+  "objective": "Create a candidate ION UI/frontend excellence domain from JOC, Opus, Echo Forge, Victus, and active ION UI canon evidence.",
+  "authority_boundary": {
+    "candidate_only": true,
+    "active_write_root": "/home/sev/ION - Production/ION_CODEX FULL",
+    "external_sources_read_only": true,
+    "production_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_evidence": [
+    "ION/01_doctrine/MAINTAINED_WORK_SURFACE_CANON.md",
+    "ION/02_architecture/VISUAL_CLOSURE_GRAPH_PROJECTION_AND_UI_WORK_SURFACE_PROTOCOL.md",
+    "ION/02_architecture/ION_JOC_COCKPIT_SHELL_COMPONENT_CONTRACT_PROTOCOL.md",
+    "ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md",
+    "/home/sev/ION - Production/_ui_canon_bundle/CANON_JOC_UI_ARCHITECTURE.md",
+    "/home/sev/ION - Production/_ui_canon_bundle/JOC_UI_REQUIREMENTS.md",
+    "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_ARCHITECTURE.md",
+    "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_COMPUTE_AND_IDE_LAYOUT.md",
+    "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_GOALS_AND_ROADMAP.md",
+    "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_MASTER_VISION.md",
+    "/home/sev/ION - Production/_ui_canon_bundle/OPUS1_JOC_UI_DESIGN.md",
+    "/home/sev/ION - Production/_ui_canon_bundle/ui_evolution_plan.md",
+    "/home/sev/ION - Production/_ui_canon_bundle/uishader.txt",
+    "/home/sev/ION - Production/SOS-OPUS/06_intelligence/2026-03-31_mason_joc_architecture_spec.md",
+    "/home/sev/ION - Production/SOS-OPUS/06_intelligence/2026-03-31_weaver_joc_ui_agent_research.md",
+    "/home/sev/AIMOS - Builds/AIM-OS-FRESH/echo-forge-loop/README.md",
+    "/home/sev/ION - Production/00_CONSOLIDATED_ATLAS/01_EVIDENCE/EVIDENCE_operation-victus_ION_BUILD_CAPSULE.md",
+    "/home/sev/ION - Production/SOS-OPUS/06_intelligence/2026-03-31_scribe_git_victus_research.md"
+  ],
+  "created_files": [
+    "ION/05_context/current/ai_assistant_work/source_evidence/UI_FRONTEND_CANON_SOURCE_EVIDENCE_MAP_20260509T025441Z.json",
+    "ION/05_context/current/ai_assistant_work/analysis/UI_FRONTEND_CANON_SYNTHESIS_REPORT_20260509T025441Z.md",
+    "ION/05_context/current/ai_assistant_work/protocols/UI_FRONTEND_EXCELLENCE_DOMAIN_PROTOCOL_V0_1.md",
+    "ION/05_context/current/ai_assistant_work/domains/ui_frontend_excellence_domain.domain_packet.yaml",
+    "ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml",
+    "ION/05_context/current/ai_assistant_work/agent_boots/JOC_UI_CANON_STEWARD.agent_boot.yaml",
+    "ION/05_context/current/ai_assistant_work/agent_boots/FRONTEND_WORK_SURFACE_ARCHITECT.agent_boot.yaml",
+    "ION/05_context/current/ai_assistant_work/agent_boots/INTERACTION_STATE_WEAVER.agent_boot.yaml",
+    "ION/05_context/current/ai_assistant_work/agent_boots/CONTEXT_VISUALIZATION_CARTOGRAPHER.agent_boot.yaml",
+    "ION/05_context/current/ai_assistant_work/agent_boots/VISUAL_PROOF_AUDITOR.agent_boot.yaml",
+    "ION/05_context/current/ai_assistant_work/validation/UI_FRONTEND_EXCELLENCE_DOMAIN_VALIDATION_NOTE_20260509T025441Z.json",
+    "ION/05_context/current/ai_assistant_work/receipts/UI_FRONTEND_EXCELLENCE_DOMAIN_INTEGRATION_RECEIPT_20260509T025441Z.json",
+    "ION/05_context/current/ai_assistant_work/next/UI_FRONTEND_EXCELLENCE_DOMAIN_NEXT_PACKET_20260509T025441Z.json"
+  ],
+  "updated_files": [
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_DOMAIN_REGISTRY_CANDIDATE_V0_2.yaml",
+    "ION/05_context/current/ai_assistant_work/registries/AI_ASSISTANT_WORK_AGENT_REGISTRY_CANDIDATE_V0_2.yaml",
+    "ION/05_context/current/ai_assistant_work/agent_boots/AI_ASSISTANT_WORK_AGENT_BOOT_DRAFTS_INDEX_V0_1.yaml",
+    "ION/05_context/current/ai_assistant_work/template_specs/AI_ASSISTANT_WORK_TEMPLATE_SPEC_INDEX_V0_1.yaml"
+  ],
+  "result": {
+    "new_domain": "ui_frontend_excellence_domain",
+    "new_agents": [
+      "JOC_UI_CANON_STEWARD",
+      "FRONTEND_WORK_SURFACE_ARCHITECT",
+      "INTERACTION_STATE_WEAVER",
+      "CONTEXT_VISUALIZATION_CARTOGRAPHER",
+      "VISUAL_PROOF_AUDITOR"
+    ],
+    "new_template_spec": "joc_work_surface_ui_packet"
+  },
+  "validation": {
+    "note": "ION/05_context/current/ai_assistant_work/validation/UI_FRONTEND_EXCELLENCE_DOMAIN_VALIDATION_NOTE_20260509T025441Z.json",
+    "focused_tests": "21 passed in 0.58s"
+  },
+  "non_claims": [
+    "Candidate artifacts are not accepted canon.",
+    "No production UI was changed.",
+    "No external archive was modified.",
+    "No frontend screenshot proof was generated because this packet created domain/protocol artifacts only."
+  ],
+  "next_packet": "ION/05_context/current/ai_assistant_work/next/UI_FRONTEND_EXCELLENCE_DOMAIN_NEXT_PACKET_20260509T025441Z.json"
+}

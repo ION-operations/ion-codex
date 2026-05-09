@@ -1,0 +1,40 @@
+{
+  "schema": "ion.ai_assistant_work.next_packet.v0_1",
+  "packet_id": "ui_frontend_excellence_apply_to_codex_chat_20260509T025441Z",
+  "status": "candidate_next_packet",
+  "created_at": "2026-05-09T02:54:41Z",
+  "objective": "Apply the new UI frontend excellence domain to the Codex capsule chat/cockpit app, replacing monolithic presentation with a JOC-grade shell and visible interaction/proof states.",
+  "recommended_route": [
+    "JOC_UI_CANON_STEWARD",
+    "FRONTEND_WORK_SURFACE_ARCHITECT",
+    "INTERACTION_STATE_WEAVER",
+    "CONTEXT_VISUALIZATION_CARTOGRAPHER",
+    "COMPONENT_BUILDER",
+    "VISUAL_PROOF_AUDITOR"
+  ],
+  "target_surfaces_to_inspect": [
+    "ION/08_ui/joc_cockpit_shell/",
+    "ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md",
+    "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
+    "ION/05_context/current/ACTIVE_COCKPIT_VIEW_MODEL.json"
+  ],
+  "acceptance_gates": [
+    "User primary chat flow is obvious without internal ION chores.",
+    "Send/run actions have clear pending, disabled, duplicate-submit, and error behavior.",
+    "Shell uses top/page navigation, icon rails, drawers, main work surface, right inspector/chat, and bottom timeline where appropriate.",
+    "Context/capsule/memory visualization shows current, compacted, retrieved, and long-horizon strata without exposing private reasoning.",
+    "Mission/session/driver/service status is visible when chat, Codex, MCP, tunnel, or browser automation is involved.",
+    "Context selection can show source/file/function/capsule reason and priority when retrieval or capsule memory is involved.",
+    "Proof/timeline surface explains slow tool/agent work and validation results.",
+    "Build/tests run, and screenshots are captured or marked unrun with reason."
+  ],
+  "blocked_until": [
+    "Current UI implementation files are inspected in the active root.",
+    "A bounded implementation scope is selected.",
+    "Visual validation method is available or explicitly marked unavailable."
+  ],
+  "non_claims": [
+    "This next packet is not yet executed.",
+    "This packet does not claim current UI repair is complete."
+  ]
+}

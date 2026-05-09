@@ -6,7 +6,7 @@ authority_boundary:
   mutates_ION_03_registry: false
   mutates_product_front_door: false
   requires_explicit_acceptance_to_land: true
-agent_boot_count: 7
+agent_boot_count: 12
 agent_boots:
 - role_id: UI_STATE_MODELER
   title: UI State Modeler
@@ -123,4 +123,91 @@ agent_boots:
   - migration_receipt_state
   dispatch_rule: Route here before generic implementation when the user intent matches
     owned templates, owned state surfaces, or refusal triggers.
+  status: candidate_agent_boot_draft_not_accepted_canon
+- role_id: JOC_UI_CANON_STEWARD
+  title: JOC UI Canon Steward
+  path: ION/05_context/current/ai_assistant_work/agent_boots/JOC_UI_CANON_STEWARD.agent_boot.yaml
+  owned_template_specs:
+  - joc_work_surface_ui_packet
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - ui_ux_domain
+  state_surfaces_owned:
+  - canon_source_state
+  - non_monolith_obligation_state
+  - shell_zone_state
+  - violation_state
+  dispatch_rule: Route here before major UI/frontend implementation when an app shell,
+    cockpit, chat work surface, drawer system, context visualization, or proof timeline
+    is involved.
+  status: candidate_agent_boot_draft_not_accepted_canon
+- role_id: FRONTEND_WORK_SURFACE_ARCHITECT
+  title: Frontend Work Surface Architect
+  path: ION/05_context/current/ai_assistant_work/agent_boots/FRONTEND_WORK_SURFACE_ARCHITECT.agent_boot.yaml
+  owned_template_specs:
+  - joc_work_surface_ui_packet
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - product_requirements_domain
+  - implementation_domain
+  state_surfaces_owned:
+  - work_surface_architecture_state
+  - shell_zone_contract_state
+  - drawer_lens_matrix_state
+  - component_contract_state
+  - validation_plan_state
+  dispatch_rule: Route here after canon stewardship and before component implementation
+    for any complex application shell or chat/work cockpit.
+  status: candidate_agent_boot_draft_not_accepted_canon
+- role_id: INTERACTION_STATE_WEAVER
+  title: Interaction State Weaver
+  path: ION/05_context/current/ai_assistant_work/agent_boots/INTERACTION_STATE_WEAVER.agent_boot.yaml
+  owned_template_specs:
+  - joc_work_surface_ui_packet
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - ui_ux_domain
+  state_surfaces_owned:
+  - interaction_feedback_state
+  - pending_state
+  - duplicate_submit_guard_state
+  - error_recovery_state
+  - stream_event_state
+  dispatch_rule: Route here whenever a chat, tool call, agent run, async operation,
+    form, or timeline can make the user uncertain about what is happening.
+  status: candidate_agent_boot_draft_not_accepted_canon
+- role_id: CONTEXT_VISUALIZATION_CARTOGRAPHER
+  title: Context Visualization Cartographer
+  path: ION/05_context/current/ai_assistant_work/agent_boots/CONTEXT_VISUALIZATION_CARTOGRAPHER.agent_boot.yaml
+  owned_template_specs:
+  - joc_work_surface_ui_packet
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - knowledge_context_memory_domain
+  state_surfaces_owned:
+  - context_layer_state
+  - capsule_visual_state
+  - source_provenance_state
+  - compaction_visual_state
+  - retrieval_lens_state
+  dispatch_rule: Route here when UI must show memory/context/capsule state, rolling
+    chat context, provenance, retrieved sources, or compacted history.
+  status: candidate_agent_boot_draft_not_accepted_canon
+- role_id: VISUAL_PROOF_AUDITOR
+  title: Visual Proof Auditor
+  path: ION/05_context/current/ai_assistant_work/agent_boots/VISUAL_PROOF_AUDITOR.agent_boot.yaml
+  owned_template_specs:
+  - joc_work_surface_ui_packet
+  domain_ids:
+  - ui_frontend_excellence_domain
+  - testing_quality_domain
+  - review_security_domain
+  state_surfaces_owned:
+  - visual_validation_state
+  - screenshot_evidence_state
+  - build_test_state
+  - layout_violation_state
+  - repair_packet_state
+  dispatch_rule: Route here before claiming a frontend/app UI is done, especially
+    for JOC shells, chat UIs, drawers, timelines, and context visualization.
   status: candidate_agent_boot_draft_not_accepted_canon

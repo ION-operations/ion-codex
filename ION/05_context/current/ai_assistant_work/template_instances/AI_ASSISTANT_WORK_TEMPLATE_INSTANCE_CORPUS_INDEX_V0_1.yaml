@@ -8,12 +8,13 @@ authority_boundary:
   external_execution_authority: false
   requires_explicit_acceptance_to_land: true
 inherits_from: ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_4.json
-template_spec_count: 7
-valid_instance_count: 7
-expected_rejection_count: 7
+template_spec_count: 8
+valid_instance_count: 8
+expected_rejection_count: 8
 template_ids:
 - api_docs_example_validation_packet
 - background_queue_result_intake_packet
+- joc_work_surface_ui_packet
 - migration_plan_and_rollback_packet
 - pr_review_packet
 - release_readiness_matrix_packet
@@ -22,6 +23,7 @@ template_ids:
 valid_instances:
 - ION/05_context/current/ai_assistant_work/template_instances/api_docs_example_validation_packet.minimal_valid.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/background_queue_result_intake_packet.minimal_valid.instance.json
+- ION/05_context/current/ai_assistant_work/template_instances/joc_work_surface_ui_packet.minimal_valid.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/migration_plan_and_rollback_packet.minimal_valid.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/pr_review_packet.minimal_valid.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/release_readiness_matrix_packet.minimal_valid.instance.json
@@ -30,12 +32,13 @@ valid_instances:
 expected_rejections:
 - ION/05_context/current/ai_assistant_work/template_instances/api_docs_example_validation_packet.expected_rejection.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/background_queue_result_intake_packet.expected_rejection.instance.json
+- ION/05_context/current/ai_assistant_work/template_instances/joc_work_surface_ui_packet.expected_rejection.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/migration_plan_and_rollback_packet.expected_rejection.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/pr_review_packet.expected_rejection.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/release_readiness_matrix_packet.expected_rejection.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/screen_state_matrix_packet.expected_rejection.instance.json
 - ION/05_context/current/ai_assistant_work/template_instances/terminal_proof_receipt_packet.expected_rejection.instance.json
-purpose: Prove the first seven machine-checkable assistant-work templates can admit
+purpose: Prove the first eight machine-checkable assistant-work templates can admit
   valid work products and reject incomplete/overclaiming outputs.
 non_claims:
 - Instance corpus is candidate test data, not accepted template law.
