@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: ION Custom GPT Action Gateway
+  version: 0.3.0-candidate
+  description: >
+    Candidate OpenAPI schema for the ION Custom GPT Action Gateway. The gateway
+    is an authenticated HTTPS ingress for bounded ION status, validation, and
+    approval-scoped action submission. It is transport only; ION packets,
+    templates, proof gates, Steward integration, and receipts remain authoritative.
+servers:
+  - url: https://ion-actions.YOUR_APPROVED_DOMAIN.example
+    description: Replace with the operator-approved Cloudflare Tunnel public hostname.
+security:
+  - IonBearerAuth: []
+paths:
+  /health:
+    get:
+      operationId: ionGatewayHealth
+      summary: Check low-detail ION gateway health.
+      description: Read-only. May return low-detail health without exposing local state.
+      security: []
+      responses:
+        "200":
+          description: Gateway health.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayResponse"
+
+  /policy:
+    get:
+      operationId: ionGatewayPolicy
+      summary: Read the bounded ION Action Gateway policy.
+      description: >
+        Read-only. Shows authority ceilings, supported intents, hard-gated intents,
+        refusal classes, and local owner pointers.
+      responses:
+        "200":
+          description: Gateway policy.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayResponse"
+
+  /context-pack:
+    get:
+      operationId: ionGatewayContextPack
+      summary: Read the current bounded context pack for this GPT carrier.
+      description: Read-only. Use before planning or creating an action request.
+      responses:
+        "200":
+          description: Context pack export.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayResponse"
+
+  /codex/queue:
+    get:
+      operationId: ionGatewayCodexQueue
+      summary: Read the current bounded Codex work queue status.
+      description: Read-only. Does not start Codex or mutate the queue.
+      responses:
+        "200":
+          description: Codex queue status.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayResponse"
+
+  /agent/status:
+    get:
+      operationId: ionGatewayAgentStatus
+      summary: Read current ION agent broker status.
+      description: Read-only. Does not invoke or spawn agents.
+      responses:
+        "200":
+          description: Agent broker status.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayResponse"
+
+  /receipts/recent:
+    get:
+      operationId: ionGatewayRecentReceipts
+      summary: Read recent Action Gateway and ION bridge receipts.
+      description: Read-only. Use to verify whether a previous action landed or was refused.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        "200":
+          description: Recent receipts.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayResponse"
+
+  /actions/validate:
+    post:
+      operationId: ionGatewayValidateAction
+      summary: Validate a bounded ION action without submitting it.
+      description: >
+        Dry-run validation only. Use this before asking the operator for approval.
+        This endpoint must not create Codex work packets, write files, run shell,
+        deploy, push git, access credentials, or accept state.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IonGatewayActionEnvelope"
+      responses:
+        "200":
+          description: Validation result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayResponse"
+
+  /actions/submit:
+    post:
+      operationId: ionGatewaySubmitApprovedAction
+      summary: Submit an explicitly approved bounded ION action.
+      description: >
+        Mutating endpoint. Requires idempotency_key, operator approval evidence,
+        false production authority, false live execution authority, and a supported
+        MVP intent. The gateway must refuse hard-gated intents and must route
+        accepted packets to existing ION owners. Actions approval is not Steward
+        integration.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IonGatewayActionEnvelope"
+      responses:
+        "200":
+          description: Submission accepted or refused with receipt data.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayResponse"
+        "401":
+          description: Authentication missing or invalid.
+        "409":
+          description: Refused by ION gateway policy or local owner.
+
+components:
+  securitySchemes:
+    IonBearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token configured in the GPT Action authentication settings.
+
+  schemas:
+    GatewayResponse:
+      type: object
+      additionalProperties: true
+      required:
+        - ok
+      properties:
+        ok:
+          type: boolean
+        schema_id:
+          type: string
+        verdict:
+          type: string
+        finding:
+          type: string
+        refusal_class:
+          type: string
+        receipt_path:
+          type: string
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+
+    IonGatewayActionEnvelope:
+      type: object
+      additionalProperties: false
+      required:
+        - idempotency_key
+        - ion_action
+      properties:
+        idempotency_key:
+          type: string
+          minLength: 8
+          description: Stable unique key for replay protection.
+        operator_approval:
+          $ref: "#/components/schemas/OperatorApproval"
+        ion_action:
+          $ref: "#/components/schemas/IonChatOpsAction"
+
+    OperatorApproval:
+      type: object
+      additionalProperties: false
+      properties:
+        approved_by:
+          type: string
+          enum: ["Braden"]
+        approved_at:
+          type: string
+          description: ISO-8601 timestamp supplied by the gateway/operator flow.
+        approval_text:
+          type: string
+          description: Explicit operator approval phrase captured before submit.
+
+    IonChatOpsAction:
+      type: object
+      additionalProperties: true
+      required:
+        - schema
+        - action_id
+        - intent
+        - actor
+        - authority
+        - receipts
+      properties:
+        schema:
+          type: string
+          enum: ["ion.chatops.action.v1"]
+        action_id:
+          type: string
+          minLength: 8
+        intent:
+          type: string
+          enum:
+            - register_artifact
+            - write_file_draft
+            - create_codex_work_packet
+            - create_github_issue_draft
+        actor:
+          type: object
+          additionalProperties: false
+          required:
+            - callsign
+            - carrier
+          properties:
+            callsign:
+              type: string
+              enum: ["Sev"]
+            carrier:
+              type: string
+              enum: ["chatgpt_browser"]
+        authority:
+          type: object
+          additionalProperties: false
+          required:
+            - human_sovereign
+            - requires_approval
+            - production_authority
+            - live_execution_authority
+          properties:
+            human_sovereign:
+              type: string
+              enum: ["Braden"]
+            requires_approval:
+              type: boolean
+              const: true
+            production_authority:
+              type: boolean
+              const: false
+            live_execution_authority:
+              type: boolean
+              const: false
+        payload:
+          type: object
+          additionalProperties: true
+        receipts:
+          type: object
+          additionalProperties: true
+          required:
+            - requested
+          properties:
+            requested:
+              type: boolean
+              const: true

@@ -1,0 +1,135 @@
+{
+  "schema_id": "ion.user_handling_trial_evidence_index.v1",
+  "trial_id": "ION_CUSTOM_GPT_FIRST_USER_HANDLING_20260508",
+  "created_at": "2026-05-08T00:00:00-04:00",
+  "indexed_at": "2026-05-08T16:58:00+00:00",
+  "artifact_type": "case_study_evidence_index",
+  "status": "CANDIDATE_EVIDENCE_INDEX",
+  "case_study_path": "ION/06_intelligence/research/user_handling_trials/2026-05-08_ion_first_custom_gpt_user_handling_case_study_v0_2.md",
+  "benchmark_spec_path": "ION/06_intelligence/research/user_handling_trials/2026-05-08_ion_prompt_burden_continuity_benchmark_v0_1.md",
+  "local_pack": {
+    "path": "/home/sev/Documents/ION_Field_of_Time_Project_Memory_Pack_v2_4_candidate.zip",
+    "repo_relative": false,
+    "sha256": "a964973b647edba00fb15c49620ba3bb45cf857771cadbdfdfd77be9f19c5985",
+    "file_count": 298,
+    "byte_count": 1904897,
+    "read_only_inspected": true,
+    "copied_into_repo": false
+  },
+  "pack_state": {
+    "pack_name": "ION_Field_of_Time_Project_Memory_Pack_v2_4_candidate",
+    "version": "v2.4_candidate",
+    "generated_at": "2026-05-08T00:00:00-04:00",
+    "base_verified_pack": "ION_Field_of_Time_Project_Memory_Pack_v2_0_candidate.zip",
+    "base_verified_pack_sha256": "0b32bae90f432c55a802fbe347ff7903e7668ac1165ea7733a1dddcd4516966b",
+    "last_executed_packet": "PCKT-20260508-013A - Temporal Scale Kernel Seed",
+    "latest_result": "Riemann/zeta retained as strict benchmark and candidate temporality-algorithm lens; no physical derivation yet.",
+    "accepted_state_boundary": "No candidate outputs accepted unless user explicitly accepts.",
+    "candidate_boundary": "candidate_not_accepted"
+  },
+  "key_files": [
+    {
+      "path": "CURRENT_PROJECT_STATE_v2_4.json",
+      "role": "current_candidate_state"
+    },
+    {
+      "path": "state/current_project_state_v2_4.json",
+      "role": "state_lane_current_candidate_state"
+    },
+    {
+      "path": "PACK_MANIFEST_v2_4.json",
+      "role": "pack_manifest"
+    },
+    {
+      "path": "CHANGELOG_v2_4.md",
+      "role": "pack_changelog"
+    },
+    {
+      "path": "lineage/LINEAGE_MOUNT_NOTE_v2_4.md",
+      "role": "lineage_note"
+    },
+    {
+      "path": "reports/TEMPORAL_SCALE_KERNEL_SEED_v2_4.md",
+      "role": "packet_report"
+    },
+    {
+      "path": "packets/PCKT-20260508-013A_TEMPORAL_SCALE_KERNEL_SEED_EXECUTED_v2_4.md",
+      "role": "executed_packet"
+    },
+    {
+      "path": "validation/temporal_scale_kernel_seed_v2_4_validation.json",
+      "role": "validation_result"
+    },
+    {
+      "path": "validation/temporal_scale_kernel_seed_scorecard_v2_4.md",
+      "role": "validation_scorecard"
+    },
+    {
+      "path": "receipts/20260508_temporal_scale_kernel_seed_v2_4_RECEIPT_DRAFT.md",
+      "role": "receipt_draft"
+    },
+    {
+      "path": "queues/next_work_queue_v2_4.json",
+      "role": "next_work_queue"
+    },
+    {
+      "path": "simulation_repair/temporal_scale_kernel_seed_v2_4.py",
+      "role": "validation_script"
+    }
+  ],
+  "validation_summary": {
+    "packet_id": "PCKT-20260508-013A",
+    "packet_name": "Temporal Scale Kernel Seed",
+    "script": "simulation_repair/temporal_scale_kernel_seed_v2_4.py",
+    "script_returncode": 0,
+    "result": "PASS_SCAFFOLD_FAIL_PHYSICAL_DERIVATION",
+    "summary_status": {
+      "riemann_as_benchmark": "PASS_CANDIDATE",
+      "riemann_as_temporality_algorithm": "CANDIDATE_LENS_ONLY",
+      "zeta_physical_derivation": "FAIL_CURRENT",
+      "alpha_derivation": "FAIL_CURRENT",
+      "temporal_scale_kernel_seed": "PASS_SCAFFOLD"
+    },
+    "max_abs_zeta_at_first_8_zeros_reported": 4.095981739550179e-50
+  },
+  "next_packet": {
+    "packet_id": "PCKT-20260508-013B",
+    "name": "Temporal Scale Weight Derivation Attempt",
+    "objective": "Derive candidate scale weights a_n or W_tau(L) from recursive temporal self-mixing rather than importing zeta weights.",
+    "status": "queued"
+  },
+  "active_non_claims": [
+    "Alpha not derived.",
+    "Hydrogen spectra not derived.",
+    "Riemann/zeta not physical evidence.",
+    "Temporal scale weights not derived.",
+    "v2.2/v2.3 full packs not verified in local filesystem during this export."
+  ],
+  "pack_hygiene_findings": [
+    {
+      "finding": "root_current_project_state_alias_is_v2_0",
+      "path": "current_project_state.json",
+      "severity": "low",
+      "recommendation": "Update root alias to current v2.4 state or mark as historical."
+    },
+    {
+      "finding": "nested_readme_is_historical_v0_1_lineage",
+      "path": "ION_Field_of_Time_Project_Memory_Pack_v1_7_candidate/README.md",
+      "severity": "low",
+      "recommendation": "Keep as lineage evidence, but do not treat as v2.4 root current state."
+    }
+  ],
+  "case_study_claims": {
+    "primary_claim": "ION reduced prompt-management burden by converting low-structure intuitive input into structured, governed research continuity.",
+    "claim_level": "first_use_qualitative_evidence",
+    "not_claimed": [
+      "general proof",
+      "multi-user benchmark",
+      "underlying theory validation",
+      "candidate pack acceptance"
+    ]
+  },
+  "production_authority": false,
+  "live_execution_authority": false
+}
+

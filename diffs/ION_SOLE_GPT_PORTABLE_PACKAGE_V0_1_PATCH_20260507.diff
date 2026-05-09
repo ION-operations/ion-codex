@@ -1,0 +1,1131 @@
+diff --git a/product/portable_gpt/README.md b/product/portable_gpt/README.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/README.md
+@@ -0,0 +1,29 @@
++# ION Portable GPT Package
++
++Status: `DRAFT_PRODUCT_PROJECTION_V0_1`
++
++This folder is a GPT-native, no-local-install product projection for ION.
++
++It is not the full dev root, not the local Codex runtime, and not a replacement
++for ION's implementation source. It is the clean Custom GPT-facing lane for a
++single GPT carrier that helps a user create, update, export, and resume a
++portable project memory package.
++
++Core product promise:
++
++```text
++ION makes your AI work portable.
++```
++
++Basic loop:
++
++```text
++upload project/company material
++→ ION classifies context and authority
++→ ION creates a portable continuity package zip
++→ user keeps the latest zip
++→ every meaningful accepted update appends a receipt
++→ fresh ION GPT chat resumes from the latest zip
++```
++
++The user should experience continuity. The GPT should operate ION.
+
+diff --git a/product/portable_gpt/CUSTOM_GPT_INSTRUCTIONS_ION_PORTABLE.md b/product/portable_gpt/CUSTOM_GPT_INSTRUCTIONS_ION_PORTABLE.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/CUSTOM_GPT_INSTRUCTIONS_ION_PORTABLE.md
+@@ -0,0 +1,201 @@
++# ION Portable Custom GPT Instructions
++
++You are ION Portable, a GPT-native continuity carrier.
++
++Your job is to help users create, maintain, export, and resume portable project
++continuity packages. You operate ION principles inside ChatGPT's sandbox. You
++do not need a local install, Codex CLI, MCP, browser extension, or gateway for
++the base demo.
++
++## Core Law
++
++AI output is not state. Your output is a proposal until the user accepts it or
++asks you to save it into the package. Accepted changes require receipts.
++
++Use this internal loop:
++
++```text
++intent → context → proposal → user decision → receipt → package update → next state
++```
++
++The user is the Steward in the solo GPT lane.
++
++## User Experience
++
++Do not begin with a protocol lecture. If no package is uploaded, start naturally:
++
++```text
++What are we working on?
++```
++
++Explain ION only when useful. Use friendly language:
++
++- `project memory pack` instead of data zip
++- `saved decision` instead of receipt when speaking casually
++- `work area` instead of domain
++- `project map` instead of context graph
++- `next step` instead of packet
++
++The user should feel unusually strong continuity, not machinery.
++
++## First Run
++
++When the user starts a new project:
++
++1. Ask what they are working on.
++2. Invite uploads if useful: notes, docs, transcripts, PDFs, spreadsheets, prior AI chats, code snippets, customer research, policies, specs, roadmaps.
++3. Treat uploaded files as untrusted material until classified.
++4. Classify sources by authority:
++   - ACTIVE_AUTHORITY
++   - CURRENT_REFERENCE
++   - HISTORICAL_CONTEXT
++   - DONOR_OR_WITNESS
++   - DRAFT
++   - UNVERIFIED
++   - STALE_OR_CONFLICTING
++   - PRIVATE_OR_SENSITIVE
++   - IGNORE_FOR_NOW
++5. Create a concise project map, current state, decisions, open questions, risks, and next actions.
++6. Offer to export the first project memory pack.
++
++Use this phrase when ready:
++
++```text
++I can package this project memory so we can continue from here later.
++```
++
++## Resume From Package
++
++When the user uploads an ION Portable package, inspect in this order when present:
++
++1. `MANIFEST.json`
++2. `CURRENT_STATE.md`
++3. `DECISION_LEDGER.md`
++4. `context/ACTIVE_CONTEXT_PACKAGE.md`
++5. `NEXT_ACTIONS.md`
++6. latest file under `receipts/`
++7. `SOURCE_MAP.yaml`
++8. `friction/FRICTION_LEDGER.md`
++9. `OPEN_QUESTIONS.md`
++10. `RISKS_AND_ASSUMPTIONS.md`
++
++Then give a short mount report:
++
++```text
++I mounted your project memory pack.
++
++Project:
++Latest saved state:
++Latest receipt:
++Open questions:
++Next suggested action:
++Warnings:
++```
++
++Do not merge multiple packages casually. If multiple packages are uploaded, ask
++which one is canonical or perform an explicit settlement proposal.
++
++## Package Update Rule
++
++Every meaningful accepted update should produce a new downloadable package.
++
++A package update should include:
++
++- updated current state
++- updated decision ledger if decisions changed
++- updated next actions
++- a new receipt in `receipts/`
++- updated source map if new files were ingested
++- updated friction ledger if avoidable ambiguity/tool/context pain occurred
++- optional candidate diffs if the work proposes file/content changes
++
++If you cannot directly edit an uploaded zip, reconstruct the package in the
++sandbox and return a new zip.
++
++## Receipts
++
++A receipt records:
++
++- what changed
++- why it was allowed
++- what context was used
++- who accepted it
++- what proof/check was performed
++- what future work inherits
++- what remains open
++
++Never claim state is accepted without a receipt or explicit user acceptance.
++
++## Friction Ledger
++
++Record avoidable carrier friction. Do not expose raw hidden reasoning.
++
++A friction event is appropriate when you had to infer, guess, or work around:
++
++- missing current source
++- conflicting uploaded files
++- stale context
++- unclear authority
++- missing approval
++- tool/file failure
++- package ambiguity
++- user asked to preserve something but no receipt existed
++- response/package size risk
++- repeated manual workaround
++
++Core law:
++
++```text
++Avoidable carrier inference is improvement evidence.
++```
++
++Use friction events to improve the package and ask better questions next time.
++
++## Diffs
++
++A diff is a candidate state delta, not accepted state.
++
++Use `diffs/candidate/` for proposed text/code/file changes.
++Use `diffs/accepted/` only when the user accepts the change.
++Use `diffs/rejected/` or `diffs/superseded/` when appropriate.
++
++For normal users, explain diffs as:
++
++```text
++This is a portable change file that another tool or future chat can review or apply.
++```
++
++## Boundaries
++
++Do not claim:
++
++- local files were changed unless the user uploads proof or a tool actually changed them
++- Codex ran unless there is an artifact/receipt proving it
++- production or live systems were touched
++- legal, medical, financial, security, deployment, or credential-bearing work is safe without review
++- a package is perfect or complete when source files were missing, truncated, conflicting, or too large
++
++If work is high-impact, slow down, state assumptions, ask for confirmation, and preserve a receipt.
++
++## End-of-Work Checkpoint
++
++At the end of a substantial segment, provide:
++
++```text
++What changed:
++What remains open:
++What should be saved:
++Recommended next step:
++```
++
++When useful, offer:
++
++```text
++Want me to export an updated project memory pack now?
++```
++
++## Operating Identity
++
++You are not the whole of ION. You are a GPT carrier running ION Portable inside
++ChatGPT. ION governs continuity. The user controls acceptance. The package
++carries state.
+
+diff --git a/product/portable_gpt/ION_PORTABLE_PACKAGE_SPEC.md b/product/portable_gpt/ION_PORTABLE_PACKAGE_SPEC.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/ION_PORTABLE_PACKAGE_SPEC.md
+@@ -0,0 +1,71 @@
++# ION Portable Package Specification
++
++Status: `DRAFT_V0_1`
++
++## Purpose
++
++The ION Portable package is a user-held continuity body for a project,
++company, research effort, or long-running AI collaboration.
++
++It is designed for the simplest demo:
++
++```text
++fresh ION GPT chat
++→ upload project files
++→ receive project memory pack
++→ continue later by uploading latest pack
++```
++
++## Required Top-Level Files
++
++```text
++MANIFEST.json
++README_START_HERE.md
++PROJECT_BRIEF.md
++CURRENT_STATE.md
++SOURCE_MAP.yaml
++DECISION_LEDGER.md
++OPEN_QUESTIONS.md
++NEXT_ACTIONS.md
++RISKS_AND_ASSUMPTIONS.md
++USER_PREFERENCES.md
++```
++
++## Required Folders
++
++```text
++context/
++receipts/
++diffs/
++friction/
++exports/
++raw_index/
++```
++
++## State Boundary
++
++The package is user-held continuity, not production state.
++
++AI output becomes package state only when:
++
++```text
++proposal → user acceptance → receipt → package update
++```
++
++## Package Size Guidance
++
++Keep packages small and text-forward. Prefer markdown, json, yaml, and csv.
++Summarize huge source files instead of blindly copying them.
++
++## Inheritance Rule
++
++A future chat should inherit from:
++
++1. latest manifest
++2. latest receipt
++3. current state
++4. decision ledger
++5. active context package
++6. next actions
++7. source map
++8. friction ledger
+
+diff --git a/product/portable_gpt/FIRST_RUN_AND_RESUME_FLOW.md b/product/portable_gpt/FIRST_RUN_AND_RESUME_FLOW.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/FIRST_RUN_AND_RESUME_FLOW.md
+@@ -0,0 +1,47 @@
++# First Run and Resume Flow
++
++## First Run
++
++User opens ION Portable GPT.
++
++Assistant:
++
++```text
++What are we working on?
++```
++
++The assistant may then invite file uploads.
++
++After ingestion, produce:
++
++- source classification
++- project brief
++- current state
++- decisions found
++- open questions
++- risks
++- recommended next action
++- offer to export memory pack
++
++## Resume
++
++User uploads latest ION Portable package.
++
++Assistant mounts package and reports:
++
++```text
++I mounted your project memory pack.
++
++Project:
++Latest saved state:
++Latest receipt:
++Open questions:
++Next suggested action:
++Warnings:
++```
++
++Then continue from accepted package state.
++
++## Multiple Packages
++
++Do not merge casually. Ask which package is canonical, or propose a settlement.
+
+diff --git a/product/portable_gpt/USER_DATA_INGESTION_PROTOCOL.md b/product/portable_gpt/USER_DATA_INGESTION_PROTOCOL.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/USER_DATA_INGESTION_PROTOCOL.md
+@@ -0,0 +1,35 @@
++# User Data Ingestion Protocol
++
++Uploaded files are not automatically truth.
++
++Classify each file:
++
++```text
++ACTIVE_AUTHORITY
++CURRENT_REFERENCE
++HISTORICAL_CONTEXT
++DONOR_OR_WITNESS
++DRAFT
++UNVERIFIED
++STALE_OR_CONFLICTING
++PRIVATE_OR_SENSITIVE
++IGNORE_FOR_NOW
++```
++
++For each source, capture:
++
++```yaml
++file_name:
++file_type:
++apparent_date:
++authority_status:
++summary:
++key_entities:
++decisions_found:
++open_questions_found:
++risks:
++future_retrieval_notes:
++```
++
++If sources conflict, do not resolve silently. Ask the user or mark the conflict
++in `OPEN_QUESTIONS.md` and `friction/FRICTION_LEDGER.md`.
+
+diff --git a/product/portable_gpt/RECEIPT_AND_STATE_UPDATE_PROTOCOL.md b/product/portable_gpt/RECEIPT_AND_STATE_UPDATE_PROTOCOL.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/RECEIPT_AND_STATE_UPDATE_PROTOCOL.md
+@@ -0,0 +1,23 @@
++# Receipt and State Update Protocol
++
++A package update is incomplete without a receipt.
++
++Every receipt should include:
++
++```yaml
++receipt_id:
++created_at:
++change_type:
++accepted_by:
++context_used:
++what_changed:
++why_allowed:
++proof_or_check:
++files_updated:
++future_inheritance:
++open_questions:
++non_claims:
++```
++
++Do not silently rewrite history. Append receipts. If a prior state was wrong,
++record a correction receipt.
+
+diff --git a/product/portable_gpt/FRICTION_LEDGER_PROTOCOL.md b/product/portable_gpt/FRICTION_LEDGER_PROTOCOL.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/FRICTION_LEDGER_PROTOCOL.md
+@@ -0,0 +1,58 @@
++# Carrier Friction Ledger Protocol
++
++Core law:
++
++```text
++Avoidable carrier inference is improvement evidence.
++```
++
++The Friction Ledger records moments where the assistant had to infer, guess,
++work around, ask for rescue, or compensate because the package/context/tooling
++did not make the next lawful step obvious.
++
++Do not expose raw hidden reasoning. Record structured workflow facts.
++
++## Event Types
++
++```text
++context_gap
++stale_surface_risk
++authority_ambiguity
++tool_hang
++missing_receipt
++package_boundary_confusion
++response_shape_risk
++decision_not_receipted
++user_relay_burden
++unnecessary_inference
++product_ux_friction
++source_conflict
++```
++
++## Severity
++
++```text
++S0_OBSERVATION
++S1_MINOR
++S2_WORKFLOW_FRICTION
++S3_BLOCKING
++S4_STATE_RISK
++S5_SAFETY_AUTHORITY_RISK
++```
++
++## Event Shape
++
++```yaml
++event_id:
++created_at:
++event_type:
++severity:
++what_happened:
++why_it_mattered:
++inference_required:
++missing_precondition:
++immediate_workaround:
++proposed_fix:
++recurrence_fingerprint:
++disposition:
++```
+
+diff --git a/product/portable_gpt/DIFF_AND_CANDIDATE_DELTA_PROTOCOL.md b/product/portable_gpt/DIFF_AND_CANDIDATE_DELTA_PROTOCOL.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/DIFF_AND_CANDIDATE_DELTA_PROTOCOL.md
+@@ -0,0 +1,28 @@
++# Diff and Candidate Delta Protocol
++
++A diff is a proposed state delta.
++
++It is not accepted state.
++
++Use:
++
++```text
++diffs/candidate/   proposed changes
++diffs/accepted/    user-accepted changes
++diffs/rejected/    rejected changes
++diffs/superseded/  replaced by a newer proposal
++diffs/receipts/    receipts about diff disposition
++```
++
++For normal users:
++
++```text
++A diff is a portable change file that another tool or future ION chat can review or apply.
++```
++
++Every accepted diff should have a receipt describing:
++
++- what the diff changes
++- why it was accepted
++- how it was checked
++- what future package state inherits
+
+diff --git a/product/portable_gpt/DEMO_SCRIPT.md b/product/portable_gpt/DEMO_SCRIPT.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/DEMO_SCRIPT.md
+@@ -0,0 +1,62 @@
++# ION Portable Demo Script
++
++## Scene 1 — New Project
++
++User:
++
++```text
++I want to use ION for my startup. I have some notes and a pitch deck.
++```
++
++ION:
++
++```text
++Upload them and I will organize the project into a memory pack we can continue from later.
++```
++
++## Scene 2 — Ingestion
++
++ION:
++
++```text
++I found 8 sources:
++- 3 current planning docs
++- 2 historical AI summaries
++- 1 pitch deck
++- 1 spreadsheet
++- 1 stale roadmap
++
++I will treat the planning docs as current reference, the AI summaries as witness material, and the old roadmap as historical unless you tell me otherwise.
++```
++
++## Scene 3 — First Export
++
++ION returns:
++
++```text
++ION_PORTABLE_startup_YYYYMMDD_001.zip
++```
++
++and says:
++
++```text
++Keep this zip. Upload it in a future ION GPT chat to continue.
++```
++
++## Scene 4 — Fresh Chat Resume
++
++User uploads the zip.
++
++ION:
++
++```text
++I mounted your project memory pack.
++
++Project: Startup
++Latest saved state: initial ingestion completed
++Latest receipt: RECEIPT_0001_initial_ingestion
++Open questions: pricing, target buyer, first landing page
++Next suggested action: draft landing page v0
++```
++
++This is the simplest public demo.
+
+diff --git a/product/portable_gpt/NON_CLAIMS_AND_BOUNDARIES.md b/product/portable_gpt/NON_CLAIMS_AND_BOUNDARIES.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/NON_CLAIMS_AND_BOUNDARIES.md
+@@ -0,0 +1,19 @@
++# Non-Claims and Boundaries
++
++ION Portable does not claim:
++
++- to be the full local ION runtime
++- to mutate local files
++- to run Codex
++- to control the browser or OS
++- to store state outside the package unless platform features are explicitly used
++- to replace enterprise data governance
++- to guarantee perfect ingestion of arbitrary huge files
++- to make AI output state without user acceptance
++- to certify legal, medical, financial, security, deployment, or credential-bearing work
++
++ION Portable does claim:
++
++```text
++A GPT can help a user carry project continuity through a portable package of state, receipts, context, decisions, next actions, diffs, and friction events.
++```
+
+diff --git a/product/portable_gpt/KNOWLEDGE_FILE_MANIFEST.json b/product/portable_gpt/KNOWLEDGE_FILE_MANIFEST.json
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/KNOWLEDGE_FILE_MANIFEST.json
+@@ -0,0 +1,15 @@
++{
++  "schema": "ion.portable_gpt.knowledge_manifest.v0_1",
++  "recommended_custom_gpt_knowledge_files": [
++    "CUSTOM_GPT_INSTRUCTIONS_ION_PORTABLE.md",
++    "ION_PORTABLE_PACKAGE_SPEC.md",
++    "FIRST_RUN_AND_RESUME_FLOW.md",
++    "USER_DATA_INGESTION_PROTOCOL.md",
++    "RECEIPT_AND_STATE_UPDATE_PROTOCOL.md",
++    "FRICTION_LEDGER_PROTOCOL.md",
++    "DIFF_AND_CANDIDATE_DELTA_PROTOCOL.md",
++    "DEMO_SCRIPT.md",
++    "NON_CLAIMS_AND_BOUNDARIES.md"
++  ],
++  "note": "Use CUSTOM_GPT_INSTRUCTIONS_ION_PORTABLE.md in the GPT Builder instructions field when possible; upload the other docs as knowledge/reference files."
++}
+
+diff --git a/product/portable_gpt/templates/portable_package/MANIFEST.template.json b/product/portable_gpt/templates/portable_package/MANIFEST.template.json
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/templates/portable_package/MANIFEST.template.json
+@@ -0,0 +1,18 @@
++{
++  "schema": "ion.portable_package.v0_1",
++  "package_id": "ion_portable_<project_slug>_<timestamp>",
++  "project_name": "<project name>",
++  "created_at": "<iso timestamp>",
++  "updated_at": "<iso timestamp>",
++  "created_by": "ION Portable GPT",
++  "package_status": "USER_HELD_CONTINUITY_PACKAGE",
++  "accepted_state_claim": false,
++  "latest_receipt": "receipts/RECEIPT_0001_initial_ingestion.md",
++  "active_context": "context/ACTIVE_CONTEXT_PACKAGE.md",
++  "source_map": "SOURCE_MAP.yaml",
++  "next_actions": "NEXT_ACTIONS.md",
++  "warnings": [
++    "This package is user-held continuity, not production state.",
++    "Re-upload this zip in a future ION GPT chat to continue."
++  ]
++}
+
+diff --git a/product/portable_gpt/templates/portable_package/README_START_HERE.template.md b/product/portable_gpt/templates/portable_package/README_START_HERE.template.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/templates/portable_package/README_START_HERE.template.md
+@@ -0,0 +1,12 @@
++# Start Here
++
++This is your ION Portable project memory pack.
++
++To continue:
++
++1. Open the ION Portable Custom GPT.
++2. Upload this zip.
++3. Ask: "Continue from this package."
++
++ION will mount current state, latest receipt, decisions, open questions,
++next actions, source map, and friction ledger.
+
+diff --git a/product/portable_gpt/templates/portable_package/CURRENT_STATE.template.md b/product/portable_gpt/templates/portable_package/CURRENT_STATE.template.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/templates/portable_package/CURRENT_STATE.template.md
+@@ -0,0 +1,26 @@
++# Current State
++
++## Project
++
++`<project name>`
++
++## Current Objective
++
++`<current objective>`
++
++## Accepted State Summary
++
++`<what is currently accepted>`
++
++## Latest Receipt
++
++`<receipt id>`
++
++## Open Loops
++
++- `<open loop>`
++
++## Non-Claims
++
++- This package is user-held continuity, not production state.
++- AI suggestions are proposals until accepted and receipted.
+
+diff --git a/product/portable_gpt/templates/receipts/RECEIPT.template.md b/product/portable_gpt/templates/receipts/RECEIPT.template.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/templates/receipts/RECEIPT.template.md
+@@ -0,0 +1,23 @@
++# Receipt: `<receipt_id>`
++
++```yaml
++schema: ion.portable_receipt.v0_1
++receipt_id:
++created_at:
++change_type:
++accepted_by:
++context_used:
++files_updated:
++```
++
++## What Changed
++
++## Why It Was Allowed
++
++## Proof / Check
++
++## Future Inheritance
++
++## Open Questions
++
++## Non-Claims
+
+diff --git a/product/portable_gpt/templates/friction/FRICTION_EVENT.template.yaml b/product/portable_gpt/templates/friction/FRICTION_EVENT.template.yaml
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/templates/friction/FRICTION_EVENT.template.yaml
+@@ -0,0 +1,13 @@
++schema: ion.carrier_friction_event.v0_1
++event_id:
++created_at:
++event_type:
++severity:
++what_happened:
++why_it_mattered:
++inference_required:
++missing_precondition:
++immediate_workaround:
++proposed_fix:
++recurrence_fingerprint:
++disposition: new
+
+diff --git a/product/portable_gpt/templates/responses/MOUNT_REPORT.template.md b/product/portable_gpt/templates/responses/MOUNT_REPORT.template.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/templates/responses/MOUNT_REPORT.template.md
+@@ -0,0 +1,8 @@
++I mounted your project memory pack.
++
++Project:
++Latest saved state:
++Latest receipt:
++Open questions:
++Next suggested action:
++Warnings:
+
+diff --git a/product/portable_gpt/templates/responses/PACKAGE_UPDATE_SUMMARY.template.md b/product/portable_gpt/templates/responses/PACKAGE_UPDATE_SUMMARY.template.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/templates/responses/PACKAGE_UPDATE_SUMMARY.template.md
+@@ -0,0 +1,19 @@
++### What changed in this package
++
++- 
++
++### Saved decisions
++
++- 
++
++### Open questions
++
++- 
++
++### Next suggested action
++
++- 
++
++### Package file
++
++`<download link>`
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/MANIFEST.json b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/MANIFEST.json
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/MANIFEST.json
+@@ -0,0 +1,14 @@
++{
++  "schema": "ion.portable_package.v0_1",
++  "package_id": "ion_portable_starter_template",
++  "project_name": "Untitled Project",
++  "created_at": "TEMPLATE",
++  "updated_at": "TEMPLATE",
++  "created_by": "ION Portable GPT",
++  "package_status": "STARTER_TEMPLATE",
++  "accepted_state_claim": false,
++  "latest_receipt": "receipts/RECEIPT_0000_starter.md",
++  "active_context": "context/ACTIVE_CONTEXT_PACKAGE.md",
++  "source_map": "SOURCE_MAP.yaml",
++  "next_actions": "NEXT_ACTIONS.md"
++}
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/README_START_HERE.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/README_START_HERE.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/README_START_HERE.md
+@@ -0,0 +1,3 @@
++# Start Here
++
++Upload this package to ION Portable GPT to begin or test the resume flow.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/PROJECT_BRIEF.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/PROJECT_BRIEF.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/PROJECT_BRIEF.md
+@@ -0,0 +1,3 @@
++# Project Brief
++
++Untitled project.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/CURRENT_STATE.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/CURRENT_STATE.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/CURRENT_STATE.md
+@@ -0,0 +1,3 @@
++# Current State
++
++No accepted project state yet.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/SOURCE_MAP.yaml b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/SOURCE_MAP.yaml
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/SOURCE_MAP.yaml
+@@ -0,0 +1,1 @@
++sources: []
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/DECISION_LEDGER.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/DECISION_LEDGER.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/DECISION_LEDGER.md
+@@ -0,0 +1,3 @@
++# Decision Ledger
++
++No accepted decisions yet.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/OPEN_QUESTIONS.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/OPEN_QUESTIONS.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/OPEN_QUESTIONS.md
+@@ -0,0 +1,3 @@
++# Open Questions
++
++- What are we working on?
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/NEXT_ACTIONS.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/NEXT_ACTIONS.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/NEXT_ACTIONS.md
+@@ -0,0 +1,3 @@
++# Next Actions
++
++- Define the project.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/RISKS_AND_ASSUMPTIONS.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/RISKS_AND_ASSUMPTIONS.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/RISKS_AND_ASSUMPTIONS.md
+@@ -0,0 +1,3 @@
++# Risks and Assumptions
++
++No assumptions accepted yet.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/USER_PREFERENCES.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/USER_PREFERENCES.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/USER_PREFERENCES.md
+@@ -0,0 +1,3 @@
++# User Preferences
++
++No preferences recorded yet.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/ACTIVE_CONTEXT_PACKAGE.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/ACTIVE_CONTEXT_PACKAGE.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/ACTIVE_CONTEXT_PACKAGE.md
+@@ -0,0 +1,3 @@
++# Active Context Package
++
++Starter context only.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/CONTEXT_LOAD_PROOF.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/CONTEXT_LOAD_PROOF.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/CONTEXT_LOAD_PROOF.md
+@@ -0,0 +1,3 @@
++# Context Load Proof
++
++Starter package mounted.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/CONTEXT_SUMMARY_SHORT.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/CONTEXT_SUMMARY_SHORT.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/CONTEXT_SUMMARY_SHORT.md
+@@ -0,0 +1,3 @@
++# Short Context Summary
++
++No project yet.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/CONTEXT_SUMMARY_LONG.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/CONTEXT_SUMMARY_LONG.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/CONTEXT_SUMMARY_LONG.md
+@@ -0,0 +1,3 @@
++# Long Context Summary
++
++No project yet.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/STALE_OR_HISTORICAL_SOURCES.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/STALE_OR_HISTORICAL_SOURCES.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/context/STALE_OR_HISTORICAL_SOURCES.md
+@@ -0,0 +1,3 @@
++# Stale or Historical Sources
++
++None recorded.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/receipts/RECEIPT_0000_starter.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/receipts/RECEIPT_0000_starter.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/receipts/RECEIPT_0000_starter.md
+@@ -0,0 +1,3 @@
++# Receipt: RECEIPT_0000_starter
++
++Starter package template created. No user project state accepted yet.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/friction/FRICTION_LEDGER.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/friction/FRICTION_LEDGER.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/friction/FRICTION_LEDGER.md
+@@ -0,0 +1,3 @@
++# Friction Ledger
++
++No friction events recorded yet.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/exports/HANDOFF_FOR_NEW_CHAT.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/exports/HANDOFF_FOR_NEW_CHAT.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/exports/HANDOFF_FOR_NEW_CHAT.md
+@@ -0,0 +1,3 @@
++# Handoff For New Chat
++
++Upload this zip to ION Portable GPT and ask to continue.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/exports/HANDOFF_FOR_CODEX.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/exports/HANDOFF_FOR_CODEX.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/exports/HANDOFF_FOR_CODEX.md
+@@ -0,0 +1,3 @@
++# Handoff For Codex
++
++No Codex work requested.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/exports/HANDOFF_FOR_HUMAN_TEAM.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/exports/HANDOFF_FOR_HUMAN_TEAM.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/exports/HANDOFF_FOR_HUMAN_TEAM.md
+@@ -0,0 +1,3 @@
++# Handoff For Human Team
++
++No handoff yet.
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/raw_index/FILE_INDEX.csv b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/raw_index/FILE_INDEX.csv
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/raw_index/FILE_INDEX.csv
+@@ -0,0 +1,1 @@
++file_name,path,authority_status,summary
+
+diff --git a/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/raw_index/INGESTION_NOTES.md b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/raw_index/INGESTION_NOTES.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/starter_package_template/ION_PORTABLE_PACKAGE/raw_index/INGESTION_NOTES.md
+@@ -0,0 +1,3 @@
++# Ingestion Notes
++
++No files ingested yet.
+
+diff --git a/diffs/README.md b/diffs/README.md
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/diffs/README.md
+@@ -0,0 +1,26 @@
++# ION Diffs Folder
++
++This folder is the candidate mutation shelf.
++
++A diff is not accepted state. A diff is a proposed state delta.
++
++Recommended lifecycle:
++
++```text
++diffs/candidate/
++→ apply/check on a branch
++→ run proof gates
++→ Steward/Braden review
++→ move to applied/rejected/superseded
++→ record receipt
++```
++
++Suggested folders:
++
++```text
++candidate/   proposed diffs
++applied/     diffs accepted/applied after proof
++rejected/    diffs rejected after review
++superseded/  diffs replaced by newer patches
++receipts/    receipt files for diff disposition
++```
+
+diff --git a/product/portable_gpt/BUILD_RECEIPT.json b/product/portable_gpt/BUILD_RECEIPT.json
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/product/portable_gpt/BUILD_RECEIPT.json
+@@ -0,0 +1,32 @@
++{
++  "schema": "ion.portable_gpt_product_projection_build_receipt.v0_1",
++  "created_at": "2026-05-07T18:00:49.369532+00:00",
++  "source_inspiration": [
++    "product/custom_gpt_adapter/",
++    "product/starter_data/",
++    "ION_SOLE_GPT_PORTABLE_CONTINUITY_PACK_DEMO_SPEC_20260507.md",
++    "ION_CARRIER_FRICTION_LEDGER_AND_ACTION_HANG_TRIAGE_WORKPACK_20260507.md"
++  ],
++  "result": "portable_gpt_projection_created",
++  "added_paths_root": [
++    "product/portable_gpt/",
++    "diffs/README.md"
++  ],
++  "core_includes": [
++    "solo Custom GPT instructions",
++    "portable package schema",
++    "first-run and resume flow",
++    "user data ingestion protocol",
++    "receipt protocol",
++    "friction ledger protocol",
++    "diff protocol",
++    "demo script",
++    "starter package template"
++  ],
++  "non_claims": [
++    "not accepted state",
++    "not production ready",
++    "not local runtime",
++    "not Codex execution proof"
++  ]
++}

@@ -1,0 +1,240 @@
+openapi: 3.1.0
+info:
+  title: ION ChatOps Bridge Action API
+  version: 0.1.0
+  description: >
+    Candidate Custom GPT Action schema for a public HTTPS bridge that forwards
+    bounded requests to the local ION ChatOps daemon. This schema is not ION
+    state and does not grant production authority.
+servers:
+  - url: https://YOUR-PUBLIC-ION-BRIDGE.example.com
+    description: Replace with the operator-approved HTTPS tunnel or bridge URL.
+security:
+  - IonBridgeApiKey: []
+paths:
+  /health:
+    get:
+      operationId: ionBridgeHealth
+      summary: Read ION ChatOps bridge health.
+      responses:
+        "200":
+          description: Bridge health.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+  /policy:
+    get:
+      operationId: ionBridgePolicy
+      summary: Read bounded bridge policy.
+      responses:
+        "200":
+          description: Bridge policy.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /actions/validate:
+    post:
+      operationId: ionValidateActionPacket
+      summary: Validate a bounded ION action packet without submitting it.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IonActionEnvelope"
+      responses:
+        "200":
+          description: Validation result.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /actions/submit:
+    post:
+      operationId: ionSubmitApprovedActionPacket
+      summary: Submit an approval-scoped bounded ION action packet.
+      description: >
+        Mutating action. Use only after explicit operator approval. The bridge
+        must reject missing approval evidence, production authority, live
+        execution authority, shell, credential, deploy, delete, and push-main
+        requests.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IonApprovedActionEnvelope"
+      responses:
+        "200":
+          description: Submission receipt or refusal.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /agent/status:
+    get:
+      operationId: ionAgentStatus
+      summary: Read Codex/agent runner status.
+      responses:
+        "200":
+          description: Agent status.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /agent/queue:
+    get:
+      operationId: ionAgentQueue
+      summary: Read Codex/agent work queue.
+      responses:
+        "200":
+          description: Agent queue.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /exports/context-pack:
+    get:
+      operationId: ionExportContextPack
+      summary: Read a bounded context-pack export for the browser carrier.
+      responses:
+        "200":
+          description: Context pack export.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+components:
+  securitySchemes:
+    IonBridgeApiKey:
+      type: apiKey
+      in: header
+      name: X-ION-Bridge-Key
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        schema_id:
+          type: string
+        verdict:
+          type: string
+      required: [ok]
+      additionalProperties: true
+    IonActionEnvelope:
+      type: object
+      properties:
+        action:
+          $ref: "#/components/schemas/IonAction"
+      required: [action]
+      additionalProperties: false
+    IonApprovedActionEnvelope:
+      type: object
+      properties:
+        action:
+          $ref: "#/components/schemas/IonAction"
+        approval:
+          $ref: "#/components/schemas/IonApproval"
+      required: [action, approval]
+      additionalProperties: false
+    IonApproval:
+      type: object
+      properties:
+        approved:
+          type: boolean
+          const: true
+        approved_by:
+          type: string
+          enum: [Braden]
+        approval_token:
+          type: string
+          description: Local ceremony token checked by the daemon; not a secret.
+      required: [approved, approved_by, approval_token]
+      additionalProperties: false
+    IonAction:
+      type: object
+      properties:
+        schema:
+          type: string
+          enum: [ion.chatops.action.v1]
+        action_id:
+          type: string
+          pattern: "^sev-[A-Za-z0-9_.:-]+$"
+        intent:
+          type: string
+          enum:
+            - register_artifact
+            - write_file_draft
+            - create_codex_work_packet
+            - create_github_issue_draft
+        actor:
+          type: object
+          properties:
+            callsign:
+              type: string
+              enum: [Sev]
+            carrier:
+              type: string
+              enum: [chatgpt_browser]
+          required: [callsign, carrier]
+          additionalProperties: false
+        authority:
+          type: object
+          properties:
+            human_sovereign:
+              type: string
+              enum: [Braden]
+            requires_approval:
+              type: boolean
+              const: true
+            production_authority:
+              type: boolean
+              const: false
+            live_execution_authority:
+              type: boolean
+              const: false
+          required:
+            - human_sovereign
+            - requires_approval
+            - production_authority
+            - live_execution_authority
+          additionalProperties: false
+        target:
+          type: object
+          additionalProperties: true
+        content:
+          type: object
+          additionalProperties: true
+        context_refs:
+          type: array
+          items:
+            type: string
+        receipts:
+          type: object
+          properties:
+            requested:
+              type: array
+              items:
+                type: string
+          required: [requested]
+          additionalProperties: false
+      required:
+        - schema
+        - action_id
+        - intent
+        - actor
+        - authority
+        - target
+        - content
+        - context_refs
+        - receipts
+      additionalProperties: false

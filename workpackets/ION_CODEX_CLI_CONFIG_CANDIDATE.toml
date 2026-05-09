@@ -1,0 +1,34 @@
+# Candidate project-scoped Codex config for ION.
+# Save as .codex/config.toml only after the local operator trusts the project.
+# Do not store secrets here.
+
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[sandbox_workspace_write]
+network_access = false
+writable_roots = [
+  ".",
+  "ION/05_context/current/codex_cli",
+  "ION/05_context/current/action_gateway"
+]
+
+# Optional local ION MCP server.
+# Adjust command/args only to match the actual local MCP entrypoint in the current root.
+# Keep required=false until the MCP transport is live and tested.
+[mcp_servers.ion_local]
+enabled = false
+required = false
+command = "python3"
+args = ["-S", "-m", "kernel.ion_mcp_local_bridge", "--ion-root", "."]
+cwd = "."
+startup_timeout_sec = 10
+tool_timeout_sec = 60
+enabled_tools = [
+  "ion_status",
+  "ion_policy",
+  "ion_context_pack",
+  "ion_codex_queue_status",
+  "ion_receipts_recent"
+]
+env = { PYTHONPATH = "ION/04_packages", PYTHONDONTWRITEBYTECODE = "1" }

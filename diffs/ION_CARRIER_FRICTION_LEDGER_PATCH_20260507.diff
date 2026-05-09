@@ -1,0 +1,1356 @@
+--- a/ION/02_architecture/ION_CARRIER_FRICTION_LEDGER_PROTOCOL.md
++++ b/ION/02_architecture/ION_CARRIER_FRICTION_LEDGER_PROTOCOL.md
+@@ -0,0 +1,108 @@
++---
++type: protocol
++authority: A3_OPERATIONAL_DRAFT
++status: DRAFT_NON_PRODUCTION
++schema_id: ion.carrier_friction_ledger_protocol.v0
++created: 2026-05-07
++production_authority: false
++live_execution_authority: false
++---
++
++# ION Carrier Friction Ledger Protocol v0
++
++## Purpose
++
++The Carrier Friction Ledger captures avoidable friction encountered by an ION
++carrier while performing bounded work.
++
++A friction event is not automatically a bug and not automatically accepted
++state. It is improvement evidence: a structured observation that the carrier had
++to spend attention on substrate ambiguity, missing context, unclear authority,
++tool instability, response shape, proof obligations, or human-relay burden that
++ION may be able to reduce.
++
++## Core law
++
++```text
++Avoidable carrier inference is improvement evidence.
++```
++
++When a carrier must infer workflow law, authority, context, proof obligations,
++transport state, active package boundaries, or next lawful action, ION should log
++that inference burden as a candidate substrate repair.
++
++## Non-goals
++
++This protocol does not require or permit raw chain-of-thought disclosure.
++
++Record structured workflow facts only:
++
++- what happened
++- why it mattered
++- what inference or workaround was required
++- what missing precondition would have made the next move obvious
++- what fix class should receive the event
++
++Do not record secrets, credentials, private hidden reasoning, or unbounded user
++data.
++
++## Event storage
++
++Default draft storage:
++
++```text
++ION/05_context/current/carrier_friction/events/
++ION/05_context/current/carrier_friction/ACTIVE_CARRIER_FRICTION_LEDGER.json
++```
++
++Events are evidence until Steward/human review classifies them.
++
++## Severity
++
++```text
++S0_OBSERVATION              useful note, no active workflow burden
++S1_MINOR                    minor wording or UX issue
++S2_WORKFLOW_FRICTION        avoidable inference or retry; work continued
++S3_BLOCKING                 work blocked or required human rescue/workaround
++S4_STATE_RISK               could cause false readiness, wrong state, stale inheritance, duplicate mutation, or missing receipt
++S5_SAFETY_AUTHORITY_RISK    touches production, live execution, secrets, deletion, deployment, or hard-gated authority
++```
++
++## Minimum fields
++
++See `ION/03_registry/carrier_friction_event_schema.yaml`.
++
++## Steward dispositions
++
++```text
++new
++duplicate
++accepted_issue
++rejected
++escalated
++converted_to_codex_packet
++fixed
++```
++
++## Relationship to existing telemetry
++
++This ledger is not a replacement for expressive telemetry, core system
++telemetry, action receipts, or deep operational cartography. It is a specific
++improvement loop for carrier friction and inference debt.
++
++## Lifecycle
++
++```text
++carrier observes friction
++→ event is recorded
++→ recurrence fingerprint deduplicates repeated pain
++→ Steward classifies event
++→ severe or repeated events become Codex work packets, tests, context fixes, tool fixes, template fixes, or package/UX fixes
++→ receipt records accepted repair
++```
++
++## Non-authority boundary
++
++This protocol grants no production authority, live execution authority,
++credential access, delete authority, git push authority, or direct acceptance of
++unproofed worker output.
+
+--- a/ION/03_registry/carrier_friction_event_schema.yaml
++++ b/ION/03_registry/carrier_friction_event_schema.yaml
+@@ -0,0 +1,64 @@
++schema_id: ion.carrier_friction_event_schema.v0
++status: draft_non_production
++production_authority: false
++live_execution_authority: false
++required_fields:
++  - schema
++  - event_type
++  - severity
++  - recurrence_fingerprint
++  - what_happened
++  - why_it_mattered
++  - inference_required
++  - proposed_fix
++allowed_event_types:
++  - context_gap
++  - stale_surface_risk
++  - authority_ambiguity
++  - approval_contract_mismatch
++  - tool_hang
++  - missing_receipt
++  - missing_idempotency_status
++  - response_shape_risk
++  - template_gap
++  - proof_gate_gap
++  - routing_ambiguity
++  - human_relay_burden
++  - unnecessary_inference
++  - product_ux_friction
++  - test_gap
++  - documentation_gap
++  - role_confusion
++  - package_boundary_confusion
++  - other
++allowed_severities:
++  - S0_OBSERVATION
++  - S1_MINOR
++  - S2_WORKFLOW_FRICTION
++  - S3_BLOCKING
++  - S4_STATE_RISK
++  - S5_SAFETY_AUTHORITY_RISK
++allowed_fix_classes:
++  - context
++  - prompt
++  - template
++  - tool
++  - test
++  - receipt
++  - gateway
++  - mcp
++  - package
++  - ux
++  - documentation
++  - governance
++allowed_steward_dispositions:
++  - new
++  - duplicate
++  - accepted_issue
++  - rejected
++  - escalated
++  - converted_to_codex_packet
++  - fixed
++chain_of_thought_policy:
++  raw_chain_of_thought_allowed: false
++  structured_workflow_facts_allowed: true
+
+--- a/ION/04_packages/kernel/ion_carrier_friction_ledger.py
++++ b/ION/04_packages/kernel/ion_carrier_friction_ledger.py
+@@ -0,0 +1,269 @@
++"""ION Carrier Friction Ledger v0.
++
++Records structured carrier-friction events without exposing raw chain-of-thought.
++Events are improvement evidence only; Steward/human review decides whether they
++become issues, packets, tests, or accepted repairs.
++"""
++from __future__ import annotations
++
++import json
++import re
++from datetime import datetime, timezone
++from pathlib import Path
++from typing import Any, Mapping
++
++from .ion_carrier_onboard import resolve_shell_root_from_ion_root
++
++SCHEMA_ID = "ion.carrier_friction_ledger.v0"
++EVENT_SCHEMA = "ion.carrier_friction_event.v0"
++READY_VERDICT = "ION_CARRIER_FRICTION_LEDGER_READY"
++BLOCKED_VERDICT = "ION_CARRIER_FRICTION_LEDGER_BLOCKED"
++
++BASE_DIR = Path("ION/05_context/current/carrier_friction")
++EVENTS_DIR = BASE_DIR / "events"
++LEDGER_PATH = BASE_DIR / "ACTIVE_CARRIER_FRICTION_LEDGER.json"
++
++ALLOWED_EVENT_TYPES = {
++    "context_gap",
++    "stale_surface_risk",
++    "authority_ambiguity",
++    "approval_contract_mismatch",
++    "tool_hang",
++    "missing_receipt",
++    "missing_idempotency_status",
++    "response_shape_risk",
++    "template_gap",
++    "proof_gate_gap",
++    "routing_ambiguity",
++    "human_relay_burden",
++    "unnecessary_inference",
++    "product_ux_friction",
++    "test_gap",
++    "documentation_gap",
++    "role_confusion",
++    "package_boundary_confusion",
++    "other",
++}
++
++ALLOWED_SEVERITIES = {
++    "S0_OBSERVATION",
++    "S1_MINOR",
++    "S2_WORKFLOW_FRICTION",
++    "S3_BLOCKING",
++    "S4_STATE_RISK",
++    "S5_SAFETY_AUTHORITY_RISK",
++}
++
++ALLOWED_FIX_CLASSES = {
++    "context",
++    "prompt",
++    "template",
++    "tool",
++    "test",
++    "receipt",
++    "gateway",
++    "mcp",
++    "package",
++    "ux",
++    "documentation",
++    "governance",
++}
++
++ALLOWED_STEWARD_DISPOSITIONS = {
++    "new",
++    "duplicate",
++    "accepted_issue",
++    "rejected",
++    "escalated",
++    "converted_to_codex_packet",
++    "fixed",
++}
++
++
++def _now() -> str:
++    return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
++
++
++def _safe_slug(value: str) -> str:
++    return re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")[:96] or "friction_event"
++
++
++def _resolve_root(root: str | Path | None) -> Path:
++    candidate = Path(root or ".").expanduser().resolve()
++    for path in (candidate, *candidate.parents):
++        if (path / "pyproject.toml").exists() and (path / "ION/REPO_AUTHORITY.md").exists():
++            return path
++    return resolve_shell_root_from_ion_root(root)
++
++
++def _write_json(path: Path, value: Mapping[str, Any]) -> None:
++    path.parent.mkdir(parents=True, exist_ok=True)
++    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
++
++
++def _read_json(path: Path) -> dict[str, Any] | None:
++    if not path.exists():
++        return None
++    try:
++        value = json.loads(path.read_text(encoding="utf-8"))
++    except json.JSONDecodeError:
++        return None
++    return value if isinstance(value, dict) else None
++
++
++def validate_friction_event(event: Mapping[str, Any]) -> dict[str, Any]:
++    findings: list[str] = []
++    event_type = str(event.get("event_type") or "").strip()
++    severity = str(event.get("severity") or "").strip()
++    routing = event.get("routing") if isinstance(event.get("routing"), Mapping) else {}
++    fix_class = str(event.get("fix_class") or routing.get("fix_class") or "").strip()
++    disposition = str(event.get("steward_disposition") or routing.get("steward_disposition") or "new").strip() or "new"
++
++    if event.get("schema") != EVENT_SCHEMA:
++        findings.append("schema_must_be_ion_carrier_friction_event_v0")
++    if event_type not in ALLOWED_EVENT_TYPES:
++        findings.append(f"event_type_not_allowed:{event_type or 'missing'}")
++    if severity not in ALLOWED_SEVERITIES:
++        findings.append(f"severity_not_allowed:{severity or 'missing'}")
++    if fix_class and fix_class not in ALLOWED_FIX_CLASSES:
++        findings.append(f"fix_class_not_allowed:{fix_class}")
++    if disposition not in ALLOWED_STEWARD_DISPOSITIONS:
++        findings.append(f"steward_disposition_not_allowed:{disposition}")
++    for field in (
++        "recurrence_fingerprint",
++        "what_happened",
++        "why_it_mattered",
++        "proposed_fix",
++    ):
++        if not str(event.get(field) or "").strip():
++            findings.append(f"{field}_required")
++    if not isinstance(event.get("inference_required"), bool):
++        findings.append("inference_required_boolean_required")
++    if event.get("raw_chain_of_thought") or event.get("chain_of_thought"):
++        findings.append("raw_chain_of_thought_not_allowed")
++
++    return {
++        "schema_id": "ion.carrier_friction_event_validation.v0",
++        "accepted": not findings,
++        "findings": findings,
++        "event_type": event_type or None,
++        "severity": severity or None,
++        "production_authority": False,
++        "live_execution_authority": False,
++    }
++
++
++def _load_ledger(root: Path) -> dict[str, Any]:
++    return _read_json(root / LEDGER_PATH) or {
++        "schema_id": SCHEMA_ID,
++        "created_at": _now(),
++        "updated_at": _now(),
++        "event_count": 0,
++        "recurrence_counts": {},
++        "severity_counts": {},
++        "events": [],
++        "production_authority": False,
++        "live_execution_authority": False,
++    }
++
++
++def record_friction_event(root: str | Path | None, event: Mapping[str, Any]) -> dict[str, Any]:
++    shell_root = _resolve_root(root)
++    validation = validate_friction_event(event)
++    if not validation["accepted"]:
++        return {
++            "schema_id": "ion.carrier_friction_record_result.v0",
++            "ok": False,
++            "verdict": BLOCKED_VERDICT,
++            "finding": "friction_event_validation_failed",
++            "validation": validation,
++            "production_authority": False,
++            "live_execution_authority": False,
++        }
++
++    recurrence = str(event.get("recurrence_fingerprint") or "").strip()
++    event_id = str(event.get("event_id") or "").strip()
++    if not event_id:
++        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
++        event_id = f"friction_{stamp}_{_safe_slug(recurrence)}"
++
++    stored = dict(event)
++    stored.update(
++        {
++            "schema": EVENT_SCHEMA,
++            "event_id": event_id,
++            "created_at": str(event.get("created_at") or _now()),
++            "steward_disposition": str(event.get("steward_disposition") or "new"),
++            "production_authority": False,
++            "live_execution_authority": False,
++        }
++    )
++
++    event_path = shell_root / EVENTS_DIR / f"{_safe_slug(event_id)}.json"
++    counter = 1
++    while event_path.exists():
++        event_path = shell_root / EVENTS_DIR / f"{_safe_slug(event_id)}_{counter}.json"
++        counter += 1
++    _write_json(event_path, stored)
++
++    ledger = _load_ledger(shell_root)
++    recurrence_counts = dict(ledger.get("recurrence_counts") if isinstance(ledger.get("recurrence_counts"), Mapping) else {})
++    severity_counts = dict(ledger.get("severity_counts") if isinstance(ledger.get("severity_counts"), Mapping) else {})
++    recurrence_counts[recurrence] = int(recurrence_counts.get(recurrence, 0)) + 1
++    severity = str(stored.get("severity"))
++    severity_counts[severity] = int(severity_counts.get(severity, 0)) + 1
++    events = list(ledger.get("events") if isinstance(ledger.get("events"), list) else [])
++    rel_path = event_path.relative_to(shell_root).as_posix()
++    events.append(
++        {
++            "event_id": event_id,
++            "event_type": stored.get("event_type"),
++            "severity": severity,
++            "recurrence_fingerprint": recurrence,
++            "steward_disposition": stored.get("steward_disposition"),
++            "path": rel_path,
++            "created_at": stored.get("created_at"),
++        }
++    )
++    ledger.update(
++        {
++            "updated_at": _now(),
++            "event_count": len(events),
++            "recurrence_counts": recurrence_counts,
++            "severity_counts": severity_counts,
++            "events": events[-250:],
++            "latest_event_path": rel_path,
++        }
++    )
++    _write_json(shell_root / LEDGER_PATH, ledger)
++
++    return {
++        "schema_id": "ion.carrier_friction_record_result.v0",
++        "ok": True,
++        "verdict": READY_VERDICT,
++        "event_id": event_id,
++        "event_path": rel_path,
++        "ledger_path": LEDGER_PATH.as_posix(),
++        "recurrence_count": recurrence_counts[recurrence],
++        "production_authority": False,
++        "live_execution_authority": False,
++    }
++
++
++def build_friction_ledger_projection(root: str | Path | None, *, limit: int = 20) -> dict[str, Any]:
++    shell_root = _resolve_root(root)
++    ledger = _load_ledger(shell_root)
++    events = list(ledger.get("events") if isinstance(ledger.get("events"), list) else [])
++    bounded_limit = max(1, min(int(limit or 20), 100))
++    return {
++        "schema_id": "ion.carrier_friction_projection.v0",
++        "ok": True,
++        "verdict": READY_VERDICT,
++        "ledger_path": LEDGER_PATH.as_posix(),
++        "event_count": int(ledger.get("event_count") or 0),
++        "severity_counts": ledger.get("severity_counts") or {},
++        "recurrence_counts": ledger.get("recurrence_counts") or {},
++        "events": list(reversed(events[-bounded_limit:])),
++        "production_authority": False,
++        "live_execution_authority": False,
++    }
+
+--- a/ION/05_context/current/carrier_friction/README.md
++++ b/ION/05_context/current/carrier_friction/README.md
+@@ -0,0 +1,26 @@
++# ION Carrier Friction Ledger
++
++Draft current-context store for carrier friction events.
++
++This directory records structured workflow friction only. Do not store raw
++chain-of-thought, credentials, secrets, or unbounded private data.
++
++Canonical draft protocol:
++
++```text
++ION/02_architecture/ION_CARRIER_FRICTION_LEDGER_PROTOCOL.md
++```
++
++Schema:
++
++```text
++ION/03_registry/carrier_friction_event_schema.yaml
++```
++
++Kernel owner:
++
++```text
++ION/04_packages/kernel/ion_carrier_friction_ledger.py
++```
++
++Events are evidence until Steward/Braden review classifies them.
+
+--- a/ION/05_context/current/carrier_friction/ACTIVE_CARRIER_FRICTION_LEDGER.json
++++ b/ION/05_context/current/carrier_friction/ACTIVE_CARRIER_FRICTION_LEDGER.json
+@@ -0,0 +1,58 @@
++{
++  "created_at": "2026-05-07T17:34:28+00:00",
++  "event_count": 4,
++  "events": [
++    {
++      "created_at": "2026-05-07T17:34:28+00:00",
++      "event_id": "friction_20260507T173428Z_gateway_validate_submit_approval_contract_mismatch",
++      "event_type": "approval_contract_mismatch",
++      "path": "ION/05_context/current/carrier_friction/events/friction_20260507t173428z_gateway_validate_submit_approval_contract_mismatch.json",
++      "recurrence_fingerprint": "gateway_validate_submit_approval_contract_mismatch",
++      "severity": "S4_STATE_RISK",
++      "steward_disposition": "new"
++    },
++    {
++      "created_at": "2026-05-07T17:34:28+00:00",
++      "event_id": "friction_20260507T173428Z_gateway_submit_hang_no_phase_receipt",
++      "event_type": "tool_hang",
++      "path": "ION/05_context/current/carrier_friction/events/friction_20260507t173428z_gateway_submit_hang_no_phase_receipt.json",
++      "recurrence_fingerprint": "gateway_submit_hang_no_phase_receipt",
++      "severity": "S4_STATE_RISK",
++      "steward_disposition": "new"
++    },
++    {
++      "created_at": "2026-05-07T17:34:28+00:00",
++      "event_id": "friction_20260507T173428Z_mcp_tools_call_large_duplicated_response_hang",
++      "event_type": "response_shape_risk",
++      "path": "ION/05_context/current/carrier_friction/events/friction_20260507t173428z_mcp_tools_call_large_duplicated_response_hang.json",
++      "recurrence_fingerprint": "mcp_tools_call_large_duplicated_response_hang",
++      "severity": "S3_BLOCKING",
++      "steward_disposition": "new"
++    },
++    {
++      "created_at": "2026-05-07T17:34:28+00:00",
++      "event_id": "friction_20260507T173428Z_package_lane_selection_full_root_vs_gpt_native",
++      "event_type": "package_boundary_confusion",
++      "path": "ION/05_context/current/carrier_friction/events/friction_20260507t173428z_package_lane_selection_full_root_vs_gpt_native.json",
++      "recurrence_fingerprint": "package_lane_selection_full_root_vs_gpt_native",
++      "severity": "S2_WORKFLOW_FRICTION",
++      "steward_disposition": "new"
++    }
++  ],
++  "latest_event_path": "ION/05_context/current/carrier_friction/events/friction_20260507t173428z_package_lane_selection_full_root_vs_gpt_native.json",
++  "live_execution_authority": false,
++  "production_authority": false,
++  "recurrence_counts": {
++    "gateway_submit_hang_no_phase_receipt": 1,
++    "gateway_validate_submit_approval_contract_mismatch": 1,
++    "mcp_tools_call_large_duplicated_response_hang": 1,
++    "package_lane_selection_full_root_vs_gpt_native": 1
++  },
++  "schema_id": "ion.carrier_friction_ledger.v0",
++  "severity_counts": {
++    "S2_WORKFLOW_FRICTION": 1,
++    "S3_BLOCKING": 1,
++    "S4_STATE_RISK": 2
++  },
++  "updated_at": "2026-05-07T17:34:28+00:00"
++}
+
+--- a/ION/05_context/current/carrier_friction/events/friction_20260507t173428z_gateway_validate_submit_approval_contract_mismatch.json
++++ b/ION/05_context/current/carrier_friction/events/friction_20260507t173428z_gateway_validate_submit_approval_contract_mismatch.json
+@@ -0,0 +1,26 @@
++{
++  "carrier": {
++    "callsign": "Sev",
++    "surface": "chatgpt_browser"
++  },
++  "created_at": "2026-05-07T17:34:28+00:00",
++  "event_id": "friction_20260507T173428Z_gateway_validate_submit_approval_contract_mismatch",
++  "event_type": "approval_contract_mismatch",
++  "fix_class": "gateway",
++  "immediate_workaround": "Treat submit as unknown outcome and inspect receipts/queue manually.",
++  "inference_required": true,
++  "live_execution_authority": false,
++  "missing_precondition": "Validation should check supplied approval evidence and normalize the exact human approval phrase into the ChatOps machine token before submit.",
++  "production_authority": false,
++  "proposed_fix": "Add validate/submit approval parity, exact human phrase support, and tests.",
++  "recurrence_fingerprint": "gateway_validate_submit_approval_contract_mismatch",
++  "role": {
++    "name": "STEWARD",
++    "phase": "action_gateway_submit"
++  },
++  "schema": "ion.carrier_friction_event.v0",
++  "severity": "S4_STATE_RISK",
++  "steward_disposition": "new",
++  "what_happened": "Gateway validation succeeded for create_codex_work_packet, but submit required approval evidence shape that was not validated during validate.",
++  "why_it_mattered": "Carrier and human could believe an action was ready to submit even though submit could reject later or appear to hang after approval."
++}
+
+--- a/ION/05_context/current/carrier_friction/events/friction_20260507t173428z_gateway_submit_hang_no_phase_receipt.json
++++ b/ION/05_context/current/carrier_friction/events/friction_20260507t173428z_gateway_submit_hang_no_phase_receipt.json
+@@ -0,0 +1,26 @@
++{
++  "carrier": {
++    "callsign": "Sev",
++    "surface": "chatgpt_browser"
++  },
++  "created_at": "2026-05-07T17:34:28+00:00",
++  "event_id": "friction_20260507T173428Z_gateway_submit_hang_no_phase_receipt",
++  "event_type": "tool_hang",
++  "fix_class": "gateway",
++  "immediate_workaround": "Read recent receipts and Codex queue to infer no matching mutation was visible.",
++  "inference_required": true,
++  "live_execution_authority": false,
++  "missing_precondition": "Submit phase ledger and read-only action status query.",
++  "production_authority": false,
++  "proposed_fix": "Record submit phases and expose action status by idempotency key/action id.",
++  "recurrence_fingerprint": "gateway_submit_hang_no_phase_receipt",
++  "role": {
++    "name": "STEWARD",
++    "phase": "action_gateway_submit"
++  },
++  "schema": "ion.carrier_friction_event.v0",
++  "severity": "S4_STATE_RISK",
++  "steward_disposition": "new",
++  "what_happened": "ionGatewaySubmitAction hung or returned no usable result after approval.",
++  "why_it_mattered": "Carrier could not know whether mutation happened, whether owner delegation started, or whether idempotency was recorded."
++}
+
+--- a/ION/05_context/current/carrier_friction/events/friction_20260507t173428z_mcp_tools_call_large_duplicated_response_hang.json
++++ b/ION/05_context/current/carrier_friction/events/friction_20260507t173428z_mcp_tools_call_large_duplicated_response_hang.json
+@@ -0,0 +1,26 @@
++{
++  "carrier": {
++    "callsign": "Sev",
++    "surface": "chatgpt_browser"
++  },
++  "created_at": "2026-05-07T17:34:28+00:00",
++  "event_id": "friction_20260507T173428Z_mcp_tools_call_large_duplicated_response_hang",
++  "event_type": "response_shape_risk",
++  "fix_class": "mcp",
++  "immediate_workaround": "Use the gateway queue endpoint instead of MCP tools/call when possible.",
++  "inference_required": true,
++  "live_execution_authority": false,
++  "missing_precondition": "Compact response mode, max_bytes, and non-duplicated structured/text response contract.",
++  "production_authority": false,
++  "proposed_fix": "Add compact mode and response-size limits for MCP tools/call queue/status tools.",
++  "recurrence_fingerprint": "mcp_tools_call_large_duplicated_response_hang",
++  "role": {
++    "name": "RELAY",
++    "phase": "mcp_status_check"
++  },
++  "schema": "ion.carrier_friction_event.v0",
++  "severity": "S3_BLOCKING",
++  "steward_disposition": "new",
++  "what_happened": "MCP health/status returned, but JSON-RPC tools/call for ion_codex_work_queue hung or returned no usable result.",
++  "why_it_mattered": "Read-only tool access becomes unreliable for normal browser-carrier operation."
++}
+
+--- a/ION/05_context/current/carrier_friction/events/friction_20260507t173428z_package_lane_selection_full_root_vs_gpt_native.json
++++ b/ION/05_context/current/carrier_friction/events/friction_20260507t173428z_package_lane_selection_full_root_vs_gpt_native.json
+@@ -0,0 +1,26 @@
++{
++  "carrier": {
++    "callsign": "Sev",
++    "surface": "chatgpt_browser"
++  },
++  "created_at": "2026-05-07T17:34:28+00:00",
++  "event_id": "friction_20260507T173428Z_package_lane_selection_full_root_vs_gpt_native",
++  "event_type": "package_boundary_confusion",
++  "fix_class": "package",
++  "immediate_workaround": "Inspect REPO_AUTHORITY, mount contract, package guides, content manifests, and exclusion manifests.",
++  "inference_required": true,
++  "live_execution_authority": false,
++  "missing_precondition": "First-run package classifier or landing page that clearly declares full-dev, GPT-native product, or historical donor lane.",
++  "production_authority": false,
++  "proposed_fix": "Add stronger package classification/projection guidance and demo-path proof.",
++  "recurrence_fingerprint": "package_lane_selection_full_root_vs_gpt_native",
++  "role": {
++    "name": "RELAY",
++    "phase": "mount_lane_selection"
++  },
++  "schema": "ion.carrier_friction_event.v0",
++  "severity": "S2_WORKFLOW_FRICTION",
++  "steward_disposition": "new",
++  "what_happened": "Full Codex root was mountable, but the GPT sandbox package was better suited for ChatGPT single-carrier operation.",
++  "why_it_mattered": "Carrier had to infer active lane and package boundary manually before selecting a lawful runtime path."
++}
+
+--- a/ION/04_packages/kernel/ion_custom_gpt_action_gateway.py
++++ b/ION/04_packages/kernel/ion_custom_gpt_action_gateway.py
+@@ -43,6 +43,7 @@
+ RECEIPTS_DIR = Path("ION/05_context/current/action_gateway/receipts")
+ RUNTIME_DIR = Path("ION/05_context/current/action_gateway/runtime")
+ IDEMPOTENCY_LEDGER = RUNTIME_DIR / "idempotency_ledger.json"
++ACTION_STATUS_LEDGER = RUNTIME_DIR / "action_status_ledger.json"
+ MAX_BODY_BYTES_DEFAULT = 262144
+ 
+ REFUSAL_CLASSES = (
+@@ -289,6 +290,17 @@
+     return {"ok": True, "refusal_class": None, "finding": None}
+ 
+ 
++def _raw_action_mapping(packet: Mapping[str, Any]) -> Mapping[str, Any]:
++    action = packet.get("ion_action")
++    if isinstance(action, Mapping):
++        return action
++    nested = packet.get("action")
++    if isinstance(nested, Mapping):
++        nested_action = nested.get("ion_action")
++        return nested_action if isinstance(nested_action, Mapping) else nested
++    return {}
++
++
+ def _normalize_packet_for_chatops(packet: Mapping[str, Any]) -> dict[str, Any]:
+     normalized = dict(packet)
+     if "ion_action" not in normalized and isinstance(normalized.get("action"), Mapping):
+@@ -297,7 +309,9 @@
+     approval = normalized.get("approval")
+     evidence = normalized.get("operator_approval_evidence")
+     if not isinstance(approval, Mapping) and isinstance(evidence, Mapping):
+-        normalized["approval"] = dict(evidence)
++        approval = evidence
++    if isinstance(approval, Mapping):
++        normalized["approval"] = _normalize_approval_for_chatops(normalized, approval)
+     return normalized
+ 
+ 
+@@ -323,6 +337,36 @@
+     if isinstance(authority, Mapping):
+         return authority
+     return action
++
++
++def _expected_human_approval_phrase(packet: Mapping[str, Any]) -> str:
++    action = _raw_action_mapping(packet)
++    action_id = str(action.get("action_id") or "").strip()
++    intent = str(action.get("intent") or "").strip()
++    return (
++        f"I approve action_id {action_id} for intent {intent} "
++        "under non-production, non-live-execution authority."
++    )
++
++
++def _approval_token_source(packet: Mapping[str, Any], approval: Mapping[str, Any]) -> str:
++    token = str(approval.get("approval_token") or "").strip()
++    if token == CHATOPS_APPROVAL_TOKEN:
++        return "chatops_machine_token"
++    expected = _expected_human_approval_phrase(packet)
++    if token and hmac.compare_digest(token, expected):
++        return "human_phrase_normalized_by_gateway"
++    return "invalid_or_missing"
++
++
++def _normalize_approval_for_chatops(packet: Mapping[str, Any], approval: Mapping[str, Any]) -> dict[str, Any]:
++    normalized = dict(approval)
++    token_source = _approval_token_source(packet, approval)
++    if token_source == "human_phrase_normalized_by_gateway":
++        normalized["human_approval_phrase"] = str(approval.get("approval_token") or "")
++        normalized["approval_token"] = CHATOPS_APPROVAL_TOKEN
++        normalized["approval_token_source"] = token_source
++    return normalized
+ 
+ 
+ def validate_gateway_request_envelope(packet: Mapping[str, Any], *, mutation: bool) -> dict[str, Any]:
+@@ -376,10 +420,19 @@
+     envelope = validate_gateway_request_envelope(packet, mutation=False)
+     chatops_packet = _normalize_packet_for_chatops(packet)
+     chatops_validation = validate_chatops_action(chatops_packet, require_approval=False) if envelope["accepted"] else None
++    approval_evidence_supplied = bool(_approval_evidence(packet))
++    approval_validation = _validate_operator_approval(packet) if approval_evidence_supplied else None
+     refusal = envelope.get("refusal_class")
+     if chatops_validation and not chatops_validation.get("accepted"):
+         refusal = _map_chatops_validation_refusal(chatops_validation, chatops_packet)
+-    accepted = bool(envelope["accepted"] and chatops_validation and chatops_validation.get("accepted"))
++    if approval_validation and not approval_validation.get("accepted"):
++        refusal = approval_validation.get("refusal_class") or refusal or "APPROVAL_EVIDENCE_INVALID"
++    accepted = bool(
++        envelope["accepted"]
++        and chatops_validation
++        and chatops_validation.get("accepted")
++        and (approval_validation is None or approval_validation.get("accepted"))
++    )
+     return {
+         "schema_id": "ion.custom_gpt_action_gateway_validation.v1",
+         "ok": accepted,
+@@ -388,6 +441,19 @@
+         "intent": chatops_validation.get("intent") if isinstance(chatops_validation, Mapping) else _intent(chatops_packet),
+         "gateway_envelope": envelope,
+         "chatops_validation": chatops_validation,
++        "approval_validation": approval_validation,
++        "approval_evidence_supplied": approval_evidence_supplied,
++        "submit_approval_contract": {
++            "schema_id": "ion.custom_gpt_action_gateway_submit_approval_contract.v1",
++            "approval_checked_when_supplied": True,
++            "accepted_token_shapes": [
++                "ION_CHATOPS_APPROVED",
++                "exact_human_phrase",
++            ],
++            "chatops_machine_token_normalized": True,
++            "production_authority": False,
++            "live_execution_authority": False,
++        },
+         "refusal_class": None if accepted else (refusal or "SCHEMA_INVALID"),
+         "owner": "ION/04_packages/kernel/ion_chatops_bridge.py",
+         "validated_without_mutation": True,
+@@ -408,16 +474,18 @@
+ def _validate_operator_approval(packet: Mapping[str, Any]) -> dict[str, Any]:
+     evidence = _approval_evidence(packet)
+     findings: list[str] = []
++    token_source = "missing"
+     if not evidence:
+         findings.append("operator_approval_evidence_required")
+         refusal = "OPERATOR_APPROVAL_REQUIRED"
+     else:
+         refusal = "APPROVAL_EVIDENCE_INVALID"
++        token_source = _approval_token_source(packet, evidence)
+         if evidence.get("approved") is not True:
+             findings.append("approval_must_be_true")
+         if evidence.get("approved_by") != "Braden":
+             findings.append("approval_must_be_by_Braden")
+-        if evidence.get("approval_token") != CHATOPS_APPROVAL_TOKEN:
++        if token_source == "invalid_or_missing":
+             findings.append("approval_token_invalid")
+     return {
+         "schema_id": "ion.custom_gpt_action_gateway_approval_validation.v1",
+@@ -425,6 +493,8 @@
+         "findings": findings,
+         "refusal_class": None if not findings else refusal,
+         "approved_by": evidence.get("approved_by") if evidence else None,
++        "approval_token_source": token_source,
++        "chatops_machine_token_normalized": token_source == "human_phrase_normalized_by_gateway",
+         "production_authority": False,
+         "live_execution_authority": False,
+     }
+@@ -505,8 +575,114 @@
+     _write_json(root / IDEMPOTENCY_LEDGER, ledger)
+ 
+ 
++def _load_action_status_ledger(root: Path) -> dict[str, Any]:
++    return _read_json(root / ACTION_STATUS_LEDGER) or {
++        "schema_id": "ion.custom_gpt_action_gateway_action_status_ledger.v1",
++        "entries": {},
++        "production_authority": False,
++        "live_execution_authority": False,
++    }
++
++
++def _action_status_key(packet: Mapping[str, Any]) -> str:
++    key = str(packet.get("idempotency_key") or "").strip()
++    if key:
++        return f"idempotency:{key}"
++    action = _action_mapping(packet)
++    action_id = str(action.get("action_id") or "").strip()
++    if action_id:
++        return f"action:{action_id}"
++    return "unknown"
++
++
++def _record_action_phase(
++    root: Path,
++    packet: Mapping[str, Any],
++    *,
++    phase: str,
++    status: str,
++    result: Mapping[str, Any] | None = None,
++    receipt_path: str | None = None,
++    refusal_class: str | None = None,
++) -> None:
++    ledger = _load_action_status_ledger(root)
++    entries = dict(ledger.get("entries") if isinstance(ledger.get("entries"), Mapping) else {})
++    status_key = _action_status_key(packet)
++    action = _action_mapping(packet)
++    entry = dict(entries.get(status_key) if isinstance(entries.get(status_key), Mapping) else {})
++    phases = list(entry.get("phases") if isinstance(entry.get("phases"), list) else [])
++    phase_record: dict[str, Any] = {
++        "recorded_at": _now(),
++        "phase": phase,
++        "status": status,
++        "refusal_class": refusal_class,
++    }
++    if receipt_path:
++        phase_record["receipt_path"] = receipt_path
++    if result is not None:
++        phase_record["result_summary"] = {
++            "ok": result.get("ok"),
++            "verdict": result.get("verdict"),
++            "finding": result.get("finding"),
++            "refusal_class": result.get("refusal_class"),
++        }
++    phases.append(phase_record)
++    entry.update(
++        {
++            "schema_id": "ion.custom_gpt_action_gateway_action_status_entry.v1",
++            "updated_at": _now(),
++            "status_key": status_key,
++            "idempotency_key": str(packet.get("idempotency_key") or "").strip() or None,
++            "action_id": action.get("action_id"),
++            "intent": action.get("intent"),
++            "latest_phase": phase,
++            "latest_status": status,
++            "latest_refusal_class": refusal_class,
++            "latest_receipt_path": receipt_path or entry.get("latest_receipt_path"),
++            "phase_count": len(phases),
++            "phases": phases[-25:],
++            "production_authority": False,
++            "live_execution_authority": False,
++        }
++    )
++    entries[status_key] = entry
++    ledger["entries"] = entries
++    ledger["updated_at"] = _now()
++    _write_json(root / ACTION_STATUS_LEDGER, ledger)
++
++
++def build_gateway_action_status(
++    root: str | Path | None,
++    *,
++    idempotency_key: str | None = None,
++    action_id: str | None = None,
++    limit: int = 20,
++) -> dict[str, Any]:
++    shell_root = _resolve_root(root)
++    ledger = _load_action_status_ledger(shell_root)
++    entries_map = ledger.get("entries") if isinstance(ledger.get("entries"), Mapping) else {}
++    entries = [dict(value) for value in entries_map.values() if isinstance(value, Mapping)]
++    if idempotency_key:
++        entries = [entry for entry in entries if entry.get("idempotency_key") == idempotency_key]
++    if action_id:
++        entries = [entry for entry in entries if entry.get("action_id") == action_id]
++    entries.sort(key=lambda item: str(item.get("updated_at") or ""), reverse=True)
++    bounded_limit = max(1, min(int(limit or 20), 50))
++    return {
++        "schema_id": "ion.custom_gpt_action_gateway_action_status.v1",
++        "ok": True,
++        "known": bool(entries),
++        "entries": entries[:bounded_limit],
++        "entry_count": len(entries),
++        "ledger_path": ACTION_STATUS_LEDGER.as_posix(),
++        "production_authority": False,
++        "live_execution_authority": False,
++    }
++
++
+ def submit_gateway_action_packet(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+     shell_root = _resolve_root(root)
++    _record_action_phase(shell_root, packet, phase="received", status="in_progress")
+     envelope = validate_gateway_request_envelope(packet, mutation=True)
+     if not envelope["accepted"]:
+         receipt_path = _write_gateway_receipt(
+@@ -517,7 +693,7 @@
+             result=envelope,
+             refusal_class=str(envelope.get("refusal_class") or "SCHEMA_INVALID"),
+         )
+-        return {
++        result = {
+             "schema_id": "ion.custom_gpt_action_gateway_submit.v1",
+             "ok": False,
+             "verdict": BLOCKED_VERDICT,
+@@ -528,11 +704,22 @@
+             "production_authority": False,
+             "live_execution_authority": False,
+         }
+-
++        _record_action_phase(
++            shell_root,
++            packet,
++            phase="gateway_envelope_refused",
++            status="blocked",
++            result=result,
++            receipt_path=receipt_path,
++            refusal_class=str(envelope.get("refusal_class") or "SCHEMA_INVALID"),
++        )
++        return result
++
++    _record_action_phase(shell_root, packet, phase="gateway_envelope_validated", status="in_progress", result=envelope)
+     key = str(packet.get("idempotency_key") or "").strip()
+     existing = _idempotency_entry(shell_root, key)
+     if existing:
+-        result = {
++        replay_result = {
+             "schema_id": "ion.custom_gpt_action_gateway_replay_refusal.v1",
+             "ok": False,
+             "finding": "idempotency_key_replayed",
+@@ -545,10 +732,10 @@
+             operation="actions_submit",
+             status="rejected",
+             packet=packet,
+-            result=result,
++            result=replay_result,
+             refusal_class="IDEMPOTENCY_REPLAY_BLOCKED",
+         )
+-        return {
++        result = {
+             "schema_id": "ion.custom_gpt_action_gateway_submit.v1",
+             "ok": False,
+             "verdict": BLOCKED_VERDICT,
+@@ -559,7 +746,18 @@
+             "production_authority": False,
+             "live_execution_authority": False,
+         }
+-
++        _record_action_phase(
++            shell_root,
++            packet,
++            phase="idempotency_replay_blocked",
++            status="blocked",
++            result=result,
++            receipt_path=receipt_path,
++            refusal_class="IDEMPOTENCY_REPLAY_BLOCKED",
++        )
++        return result
++
++    _record_action_phase(shell_root, packet, phase="idempotency_checked", status="in_progress")
+     validation = validate_gateway_action_packet(shell_root, packet)
+     if not validation["ok"]:
+         receipt_path = _write_gateway_receipt(
+@@ -570,7 +768,7 @@
+             result=validation,
+             refusal_class=str(validation.get("refusal_class") or "SCHEMA_INVALID"),
+         )
+-        return {
++        result = {
+             "schema_id": "ion.custom_gpt_action_gateway_submit.v1",
+             "ok": False,
+             "verdict": BLOCKED_VERDICT,
+@@ -581,7 +779,18 @@
+             "production_authority": False,
+             "live_execution_authority": False,
+         }
+-
++        _record_action_phase(
++            shell_root,
++            packet,
++            phase="gateway_validation_refused",
++            status="blocked",
++            result=result,
++            receipt_path=receipt_path,
++            refusal_class=str(validation.get("refusal_class") or "SCHEMA_INVALID"),
++        )
++        return result
++
++    _record_action_phase(shell_root, packet, phase="gateway_validation_ready", status="in_progress", result=validation)
+     approval = _validate_operator_approval(packet)
+     if not approval["accepted"]:
+         receipt_path = _write_gateway_receipt(
+@@ -592,7 +801,7 @@
+             result=approval,
+             refusal_class=str(approval.get("refusal_class") or "OPERATOR_APPROVAL_REQUIRED"),
+         )
+-        return {
++        result = {
+             "schema_id": "ion.custom_gpt_action_gateway_submit.v1",
+             "ok": False,
+             "verdict": BLOCKED_VERDICT,
+@@ -603,10 +812,30 @@
+             "production_authority": False,
+             "live_execution_authority": False,
+         }
+-
++        _record_action_phase(
++            shell_root,
++            packet,
++            phase="approval_refused",
++            status="blocked",
++            result=result,
++            receipt_path=receipt_path,
++            refusal_class=str(approval.get("refusal_class") or "OPERATOR_APPROVAL_REQUIRED"),
++        )
++        return result
++
++    _record_action_phase(shell_root, packet, phase="approval_validated", status="in_progress", result=approval)
+     chatops_packet = _normalize_packet_for_chatops(packet)
++    _record_action_phase(shell_root, packet, phase="owner_submit_started", status="in_progress")
+     owner_result = submit_chatops_action(shell_root, chatops_packet)
+     refusal = None if owner_result.get("ok") else "ION_OWNER_REFUSED"
++    _record_action_phase(
++        shell_root,
++        packet,
++        phase="owner_submit_completed",
++        status="completed" if owner_result.get("ok") else "blocked",
++        result=owner_result,
++        refusal_class=refusal,
++    )
+     receipt_path = _write_gateway_receipt(
+         shell_root,
+         operation="actions_submit",
+@@ -629,7 +858,18 @@
+         "production_authority": False,
+         "live_execution_authority": False,
+     }
++    _record_action_phase(
++        shell_root,
++        packet,
++        phase="gateway_receipt_written",
++        status="completed" if result.get("ok") else "blocked",
++        result=result,
++        receipt_path=receipt_path,
++        refusal_class=refusal,
++    )
+     _record_idempotency(shell_root, key, receipt_path=receipt_path, result=result)
++    _record_action_phase(shell_root, packet, phase="idempotency_recorded", status="completed", result=result, receipt_path=receipt_path)
++    _record_action_phase(shell_root, packet, phase="response_ready", status="completed", result=result, receipt_path=receipt_path)
+     return result
+ 
+ 
+@@ -749,6 +989,22 @@
+                 params = parse_qs(parsed.query)
+                 limit = int(params.get("limit", ["20"])[0])
+                 _http_response(self, 200, build_recent_gateway_receipts(root, limit=limit))
++                return
++            if path == "/actions/status":
++                params = parse_qs(parsed.query)
++                limit = int(params.get("limit", ["20"])[0])
++                idempotency_key = params.get("idempotency_key", [None])[0]
++                action_id = params.get("action_id", [None])[0]
++                _http_response(
++                    self,
++                    200,
++                    build_gateway_action_status(
++                        root,
++                        idempotency_key=idempotency_key,
++                        action_id=action_id,
++                        limit=limit,
++                    ),
++                )
+                 return
+             _http_response(self, 404, {"ok": False, "refusal_class": "ENDPOINT_NOT_ALLOWED", "finding": "endpoint_not_allowed"})
+ 
+
+--- a/ION/03_registry/ion_custom_gpt_action_gateway_policy.yaml
++++ b/ION/03_registry/ion_custom_gpt_action_gateway_policy.yaml
+@@ -20,6 +20,7 @@
+   - /codex/queue
+   - /agent/status
+   - /receipts/recent
++  - /actions/status
+ allowed_post_paths:
+   - /actions/validate
+   - /actions/submit
+
+--- a/ION/09_integrations/custom_gpt_action_gateway/openapi.yaml
++++ b/ION/09_integrations/custom_gpt_action_gateway/openapi.yaml
+@@ -84,6 +84,35 @@
+             application/json:
+               schema:
+                 $ref: "#/components/schemas/GatewayReceiptsRecentResponse"
++  /actions/status:
++    get:
++      operationId: ionGatewayActionStatus
++      summary: Read gateway action submit/idempotency status.
++      parameters:
++        - name: idempotency_key
++          in: query
++          required: false
++          schema:
++            type: string
++        - name: action_id
++          in: query
++          required: false
++          schema:
++            type: string
++        - name: limit
++          in: query
++          required: false
++          schema:
++            type: integer
++            minimum: 1
++            maximum: 50
++      responses:
++        "200":
++          description: Action status response.
++          content:
++            application/json:
++              schema:
++                $ref: "#/components/schemas/GatewayActionStatusResponse"
+   /actions/validate:
+     post:
+       operationId: ionGatewayValidateAction
+@@ -250,6 +279,28 @@
+           type: boolean
+         live_execution_authority:
+           type: boolean
++    GatewayActionStatusResponse:
++      type: object
++      additionalProperties: true
++      properties:
++        schema_id:
++          type: string
++        ok:
++          type: boolean
++        known:
++          type: boolean
++        entries:
++          type: array
++          items:
++            $ref: "#/components/schemas/FlexibleObject"
++        entry_count:
++          type: integer
++        ledger_path:
++          type: string
++        production_authority:
++          type: boolean
++        live_execution_authority:
++          type: boolean
+     GatewayActionResult:
+       type: object
+       additionalProperties: true
+
+--- a/ION/tests/test_kernel_ion_custom_gpt_action_gateway.py
++++ b/ION/tests/test_kernel_ion_custom_gpt_action_gateway.py
+@@ -4,6 +4,7 @@
+ from kernel.ion_chatops_bridge import ACTION_SCHEMA, APPROVAL_TOKEN
+ from kernel.ion_custom_gpt_action_gateway import (
+     READY_VERDICT,
++    build_gateway_action_status,
+     build_gateway_health,
+     build_gateway_policy_surface,
+     build_recent_gateway_receipts,
+@@ -231,3 +232,82 @@
+     assert (tmp_path / first["owner_result"]["receipt_path"]).exists()
+     assert second["ok"] is False
+     assert second["refusal_class"] == "IDEMPOTENCY_REPLAY_BLOCKED"
++
++
++def _human_phrase(action_id: str, intent: str = "register_artifact") -> str:
++    return f"I approve action_id {action_id} for intent {intent} under non-production, non-live-execution authority."
++
++
++def _human_approved(packet: dict, *, idempotency_key: str = "gateway-human-approval-key") -> dict:
++    action = packet["ion_action"]
++    return {
++        **packet,
++        "idempotency_key": idempotency_key,
++        "operator_approval_evidence": {
++            "approved": True,
++            "approved_by": "Braden",
++            "approval_token": _human_phrase(action["action_id"], action["intent"]),
++        },
++    }
++
++
++def test_gateway_validate_blocks_invalid_supplied_approval_evidence(tmp_path):
++    _seed_root(tmp_path)
++    packet = {
++        **_action("gateway-invalid-approval"),
++        "operator_approval_evidence": {
++            "approved": True,
++            "approved_by": "Braden",
++            "approval_token": "not-the-required-token-or-phrase",
++        },
++    }
++
++    result = validate_gateway_action_packet(tmp_path, packet)
++
++    assert result["ok"] is False
++    assert result["refusal_class"] == "APPROVAL_EVIDENCE_INVALID"
++    assert result["approval_validation"]["accepted"] is False
++    assert "approval_token_invalid" in result["approval_validation"]["findings"]
++    assert not (tmp_path / "ION/05_context/current/action_gateway/receipts").exists()
++
++
++def test_gateway_validate_accepts_exact_human_approval_phrase_without_mutation(tmp_path):
++    _seed_root(tmp_path)
++    packet = _human_approved(_action("gateway-human-phrase-validate"), idempotency_key="human-phrase-validate")
++
++    result = validate_gateway_action_packet(tmp_path, packet)
++
++    assert result["ok"] is True
++    assert result["approval_validation"]["accepted"] is True
++    assert result["approval_validation"]["approval_token_source"] == "human_phrase_normalized_by_gateway"
++    assert result["submit_approval_contract"]["chatops_machine_token_normalized"] is True
++    assert not (tmp_path / "ION/05_context/current/action_gateway/receipts").exists()
++
++
++def test_gateway_submit_accepts_exact_human_phrase_and_records_action_status(tmp_path):
++    _seed_root(tmp_path)
++    packet = _human_approved(_action("gateway-human-phrase-submit"), idempotency_key="human-phrase-submit-key")
++
++    result = submit_gateway_action_packet(tmp_path, packet)
++    status = build_gateway_action_status(tmp_path, idempotency_key="human-phrase-submit-key")
++
++    assert result["ok"] is True
++    assert result["owner_result"]["ok"] is True
++    assert status["known"] is True
++    assert status["entries"][0]["latest_phase"] == "response_ready"
++    assert any(phase["phase"] == "owner_submit_started" for phase in status["entries"][0]["phases"])
++    assert (tmp_path / result["gateway_receipt_path"]).exists()
++
++
++def test_gateway_action_status_records_blocked_missing_approval(tmp_path):
++    _seed_root(tmp_path)
++    packet = {**_action("gateway-status-missing-approval"), "idempotency_key": "status-missing-approval"}
++
++    result = submit_gateway_action_packet(tmp_path, packet)
++    status = build_gateway_action_status(tmp_path, idempotency_key="status-missing-approval")
++
++    assert result["ok"] is False
++    assert result["refusal_class"] == "OPERATOR_APPROVAL_REQUIRED"
++    assert status["known"] is True
++    assert status["entries"][0]["latest_phase"] == "approval_refused"
++    assert status["entries"][0]["latest_refusal_class"] == "OPERATOR_APPROVAL_REQUIRED"
+
+--- a/ION/tests/test_kernel_ion_carrier_friction_ledger.py
++++ b/ION/tests/test_kernel_ion_carrier_friction_ledger.py
+@@ -0,0 +1,73 @@
++from pathlib import Path
++
++from kernel.ion_carrier_friction_ledger import (
++    BLOCKED_VERDICT,
++    READY_VERDICT,
++    build_friction_ledger_projection,
++    record_friction_event,
++    validate_friction_event,
++)
++
++
++def _seed_root(root: Path) -> None:
++    (root / "pyproject.toml").write_text("[project]\nname = \"ion-friction-test\"\n", encoding="utf-8")
++    (root / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
++    (root / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
++
++
++def _event(**overrides):
++    event = {
++        "schema": "ion.carrier_friction_event.v0",
++        "event_type": "tool_hang",
++        "severity": "S3_BLOCKING",
++        "recurrence_fingerprint": "gateway_submit_hang_no_phase_receipt",
++        "what_happened": "Gateway submit returned no usable response.",
++        "why_it_mattered": "Carrier could not know whether mutation happened.",
++        "inference_required": True,
++        "missing_precondition": "Action status phase ledger.",
++        "immediate_workaround": "Inspect receipts and queue manually.",
++        "proposed_fix": "Add action status ledger and query.",
++        "fix_class": "gateway",
++    }
++    event.update(overrides)
++    return event
++
++
++def test_friction_event_validation_accepts_structured_event():
++    result = validate_friction_event(_event())
++
++    assert result["accepted"] is True
++    assert result["production_authority"] is False
++    assert result["live_execution_authority"] is False
++
++
++def test_friction_event_validation_rejects_raw_chain_of_thought():
++    result = validate_friction_event(_event(raw_chain_of_thought="hidden reasoning text"))
++
++    assert result["accepted"] is False
++    assert "raw_chain_of_thought_not_allowed" in result["findings"]
++
++
++def test_record_friction_event_writes_event_and_projection(tmp_path):
++    _seed_root(tmp_path)
++
++    result = record_friction_event(tmp_path, _event())
++    projection = build_friction_ledger_projection(tmp_path)
++
++    assert result["ok"] is True
++    assert result["verdict"] == READY_VERDICT
++    assert (tmp_path / result["event_path"]).exists()
++    assert (tmp_path / result["ledger_path"]).exists()
++    assert projection["event_count"] == 1
++    assert projection["severity_counts"]["S3_BLOCKING"] == 1
++
++
++def test_record_friction_event_blocks_invalid_event_without_write(tmp_path):
++    _seed_root(tmp_path)
++
++    result = record_friction_event(tmp_path, _event(event_type="not_allowed"))
++
++    assert result["ok"] is False
++    assert result["verdict"] == BLOCKED_VERDICT
++    assert "event_type_not_allowed:not_allowed" in result["validation"]["findings"]
++    assert not (tmp_path / "ION/05_context/current/carrier_friction/events").exists()
+

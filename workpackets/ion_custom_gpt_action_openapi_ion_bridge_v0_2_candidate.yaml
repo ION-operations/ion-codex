@@ -1,0 +1,284 @@
+openapi: 3.1.0
+info:
+  title: ION Local Bridge GPT Action API
+  version: 0.2.0-candidate
+  description: Candidate minimal Custom GPT Action schema for a public HTTPS gateway
+    that forwards only bounded requests to the local ION ChatOps daemon. The gateway
+    is transport only; ION templates, gates, receipts, and Steward review remain authoritative.
+servers:
+- url: https://YOUR-APPROVED-ION-BRIDGE.example.com
+  description: Replace with operator-approved HTTPS bridge or tunnel.
+security:
+- IonBridgeApiKey: []
+paths:
+  /health:
+    get:
+      operationId: ionBridgeHealth
+      summary: Read bridge and local daemon health.
+      responses:
+        '200':
+          description: Health status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /policy:
+    get:
+      operationId: ionBridgePolicy
+      summary: Read bounded ION bridge policy.
+      description: Read-only. Must show allowed intents, blocked intents, authority
+        ceilings, and local daemon status.
+      responses:
+        '200':
+          description: Policy surface.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /context-pack:
+    get:
+      operationId: ionGetContextPack
+      summary: Read a bounded context pack export for this GPT carrier.
+      responses:
+        '200':
+          description: Context pack export.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /codex/queue:
+    get:
+      operationId: ionGetCodexQueue
+      summary: Read the bounded Codex work queue.
+      responses:
+        '200':
+          description: Codex queue status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /agent/status:
+    get:
+      operationId: ionGetAgentStatus
+      summary: Read agent broker and Codex queue runner status.
+      responses:
+        '200':
+          description: Agent/Codex status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /actions/validate:
+    post:
+      operationId: ionValidateAction
+      summary: Validate a proposed ION action without materializing it.
+      description: Validation only. Must not write source files, run shell, push git,
+        or execute Codex.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IonActionEnvelope'
+      responses:
+        '200':
+          description: Validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /actions/submit:
+    post:
+      operationId: ionSubmitApprovedAction
+      summary: Submit an explicitly approved bounded ION action.
+      description: Mutating and approval-gated. The bridge must reject production/live
+        authority, shell, credential, deploy, delete, push-main, and unsupported intent
+        requests.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IonApprovedActionEnvelope'
+      responses:
+        '200':
+          description: Submission receipt or refusal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /sandbox/returns:
+    get:
+      operationId: ionGetSandboxReturns
+      summary: Read sandbox return inbox/queue projection.
+      responses:
+        '200':
+          description: Sandbox return queue.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /receipts/{receipt_id}:
+    get:
+      operationId: ionGetReceipt
+      summary: Read a receipt by ID.
+      parameters:
+      - name: receipt_id
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 160
+      responses:
+        '200':
+          description: Receipt payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+components:
+  securitySchemes:
+    IonBridgeApiKey:
+      type: apiKey
+      in: header
+      name: X-ION-Bridge-Key
+  schemas:
+    GenericResponse:
+      type: object
+      additionalProperties: true
+    IonActionEnvelope:
+      type: object
+      properties:
+        request_id:
+          type: string
+          pattern: ^gptact-[A-Za-z0-9_.:-]+$
+        created_at:
+          type: string
+          format: date-time
+        action:
+          $ref: '#/components/schemas/IonAction'
+      required:
+      - request_id
+      - created_at
+      - action
+      additionalProperties: false
+    IonApprovedActionEnvelope:
+      type: object
+      properties:
+        request_id:
+          type: string
+          pattern: ^gptact-[A-Za-z0-9_.:-]+$
+        created_at:
+          type: string
+          format: date-time
+        action:
+          $ref: '#/components/schemas/IonAction'
+        approval:
+          $ref: '#/components/schemas/IonApproval'
+      required:
+      - request_id
+      - created_at
+      - action
+      - approval
+      additionalProperties: false
+    IonApproval:
+      type: object
+      properties:
+        approved:
+          type: boolean
+          const: true
+        approved_by:
+          type: string
+          enum:
+          - Braden
+        approval_token:
+          type: string
+          description: Governance ceremony token checked by ION; not the transport
+            secret.
+        approval_note:
+          type: string
+          maxLength: 1000
+      required:
+      - approved
+      - approved_by
+      - approval_token
+      additionalProperties: false
+    IonAction:
+      type: object
+      properties:
+        schema:
+          type: string
+          enum:
+          - ion.chatops.action.v1
+        action_id:
+          type: string
+          pattern: ^sev-[A-Za-z0-9_.:-]+$
+          maxLength: 120
+        intent:
+          type: string
+          enum:
+          - register_artifact
+          - write_file_draft
+          - create_codex_work_packet
+          - create_github_issue_draft
+        actor:
+          type: object
+          properties:
+            callsign:
+              type: string
+              enum:
+              - Sev
+            carrier:
+              type: string
+              enum:
+              - chatgpt_browser
+          required:
+          - callsign
+          - carrier
+          additionalProperties: false
+        authority:
+          type: object
+          properties:
+            human_sovereign:
+              type: string
+              enum:
+              - Braden
+            requires_approval:
+              type: boolean
+              const: true
+            production_authority:
+              type: boolean
+              const: false
+            live_execution_authority:
+              type: boolean
+              const: false
+          required:
+          - human_sovereign
+          - requires_approval
+          - production_authority
+          - live_execution_authority
+          additionalProperties: false
+        target:
+          type: object
+          additionalProperties: true
+        payload:
+          type: object
+          additionalProperties: true
+        receipts:
+          type: object
+          properties:
+            requested:
+              type: boolean
+              const: true
+          required:
+          - requested
+          additionalProperties: true
+      required:
+      - schema
+      - action_id
+      - intent
+      - actor
+      - authority
+      - receipts
+      additionalProperties: false
