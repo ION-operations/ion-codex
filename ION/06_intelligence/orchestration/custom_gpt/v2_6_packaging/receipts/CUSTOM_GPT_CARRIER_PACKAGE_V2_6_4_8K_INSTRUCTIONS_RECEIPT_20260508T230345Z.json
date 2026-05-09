@@ -1,0 +1,65 @@
+{
+  "schema_id": "ion.custom_gpt_carrier_package_repair_receipt.v1",
+  "receipt_id": "custom-gpt-carrier-v2-6-4-8k-instructions-20260508T230345Z",
+  "created_at": "2026-05-08T23:03:45Z",
+  "status": "candidate_packaged",
+  "objective": "Provide an 8,000-character-safe GPT Builder instruction kernel while preserving v2.6.3 protocol-breach repairs in the package.",
+  "authority_boundary": {
+    "candidate_only": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "changed_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE_8K.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/007_V2_6_4_8K_INSTRUCTIONS_NOTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/002_KNOWLEDGE_UPLOAD_MANIFEST.json",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/090_VALIDATION/PACKAGE_MANIFEST.json",
+    "ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py"
+  ],
+  "instruction_kernel": {
+    "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE_8K.md",
+    "character_count": 7559,
+    "builder_limit": 8000,
+    "required_gates_present": [
+      "output_is_not_state",
+      "connector_containment_override",
+      "mount_taxonomy",
+      "explicit_use_actions_mcp",
+      "no_action_mcp_for_sandbox_mount",
+      "persona_gate_blocked"
+    ]
+  },
+  "artifact": {
+    "path": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_4_CANDIDATE_20260508T230345Z.zip",
+    "sha256": "453e597f04d2071d62ffe418ea1b2a138468688aca18d070508e5ece9a8e455d",
+    "file_count": 4287,
+    "compressed_size_bytes": 5572654,
+    "uncompressed_size_bytes": 17177336,
+    "zip_test": "passed"
+  },
+  "validation": [
+    {
+      "scope": "active_root",
+      "command": "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+      "result": "5 passed in 0.04s"
+    },
+    {
+      "scope": "package_local",
+      "command": "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+      "result": "5 passed in 0.04s"
+    },
+    {
+      "scope": "artifact",
+      "command": "unzip -tq ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_4_CANDIDATE_20260508T230345Z.zip",
+      "result": "No errors detected"
+    }
+  ],
+  "non_claims": [
+    "This receipt does not grant production authority.",
+    "This receipt does not grant live execution authority.",
+    "This receipt does not certify live connector health.",
+    "The longer 001_GPT_INSTRUCTIONS_PASTE.md remains a reference file, not the recommended GPT Builder instructions field source."
+  ],
+  "next_packet": "Use 001_GPT_INSTRUCTIONS_PASTE_8K.md for the GPT Builder instructions field and upload the v2.6.4 zip as knowledge."
+}

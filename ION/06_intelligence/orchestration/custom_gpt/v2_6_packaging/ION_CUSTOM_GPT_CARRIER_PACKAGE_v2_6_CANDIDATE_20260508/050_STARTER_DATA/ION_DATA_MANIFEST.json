@@ -1,0 +1,23 @@
+{
+  "authority": {
+    "production_authority": false,
+    "external_execution_authority": false,
+    "accepted_state_source": "receipt_ledger"
+  },
+  "created_at": "2026-05-06T22:21:04Z",
+  "data_schema_version": 1,
+  "engine_version": "ion_engine_v1",
+  "migration_required": false,
+  "package_id": "ion-continuity-data-blank-v1",
+  "project_id": "blank_project",
+  "project_name": "Blank ION Project",
+  "schema_id": "ion.data_zip_manifest.v1",
+  "source_product_package_version": "0.1.0",
+  "updated_at": "2026-05-06T23:42:29+00:00",
+  "state_status": "ACTIVE_BASE_SEEDED",
+  "data_version": 1,
+  "current_objective": "Receive user intent, ingest a project if provided, or organize a new project from conversation.",
+  "base_operating_domains_active": true,
+  "project_domains_initialized": false,
+  "starter_mode": "base_developer_intelligence"
+}

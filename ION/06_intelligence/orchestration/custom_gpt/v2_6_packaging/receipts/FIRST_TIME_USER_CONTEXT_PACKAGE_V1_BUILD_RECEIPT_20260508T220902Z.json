@@ -1,0 +1,49 @@
+{
+  "schema_id": "ion.package_build_receipt.v1",
+  "receipt_id": "FIRST_TIME_USER_CONTEXT_PACKAGE_V1_BUILD_RECEIPT_20260508T220902Z",
+  "created_at": "2026-05-08T22:09:02Z",
+  "carrier": "codex_cli",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "objective": "Build a separate small first-time user context package for ION Custom GPT so new users/workspaces can boot from a stable starter continuity body without duplicating the full carrier package.",
+  "result": "candidate_package_built",
+  "source_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/050_STARTER_DATA"
+  ],
+  "created_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_FIRST_TIME_USER_CONTEXT_PACKAGE_v1_20260508",
+    "ION/06_artifacts/packages/custom_gpt/ION_FIRST_TIME_USER_CONTEXT_PACKAGE_v1_20260508T220902Z.zip"
+  ],
+  "paired_carrier_package": {
+    "path": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508T215736Z.zip",
+    "sha256": "d51849c43a7fa95c52615a094ffcce42af7509d0d6995e197c5387ecac7320ac"
+  },
+  "artifact": {
+    "path": "ION/06_artifacts/packages/custom_gpt/ION_FIRST_TIME_USER_CONTEXT_PACKAGE_v1_20260508T220902Z.zip",
+    "sha256": "aa639079527d549186b66c4c1469a9eadef8119b2013605a753b32cfde864f5d",
+    "size_human": "24K",
+    "zip_entries": 43
+  },
+  "validation": [
+    {
+      "command": "json_parse_all_package_json",
+      "result": "pass",
+      "json_file_count": 11
+    },
+    {
+      "command": "unzip -tq ION_FIRST_TIME_USER_CONTEXT_PACKAGE_v1_20260508T220902Z.zip",
+      "result": "pass"
+    }
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "engine_package": false,
+    "accepted_state_source": "receipt_ledger_or_explicit_user_acceptance"
+  },
+  "non_claims": [
+    "This package does not replace the main ION Custom GPT carrier package.",
+    "This package does not grant connector, MCP, GitHub, local PC, or production access.",
+    "This package contains seeded candidate continuity state, not accepted user project truth."
+  ],
+  "next_step": "Upload the main carrier package as the primary Custom GPT knowledge ZIP and optionally upload this first-time context package as the default blank workspace seed."
+}

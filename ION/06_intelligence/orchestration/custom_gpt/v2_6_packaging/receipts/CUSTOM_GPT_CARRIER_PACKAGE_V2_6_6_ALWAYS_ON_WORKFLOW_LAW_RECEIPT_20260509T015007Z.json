@@ -1,0 +1,65 @@
+{
+  "schema_id": "ion.custom_gpt_carrier_package_repair_receipt.v1",
+  "receipt_id": "custom-gpt-carrier-v2-6-6-always-on-workflow-law-20260509T015007Z",
+  "created_at": "2026-05-09T01:50:07Z",
+  "status": "candidate_packaged",
+  "objective": "Strengthen Custom GPT mounted identity and require an ION workflow object before any substantive Persona output.",
+  "authority_boundary": {
+    "candidate_only": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "instruction_kernel": {
+    "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE_8K.md",
+    "character_count": 7987,
+    "builder_limit": 8000,
+    "added_laws": [
+      "When package mounted, GPT is ION through the ChatGPT carrier.",
+      "Chat window is only the Persona Interface output channel.",
+      "Mounted sandbox/package workflow is the work surface.",
+      "NO_WORKFLOW_OBJECT_NO_SUBSTANTIVE_RESPONSE.",
+      "Every substantive final answer must be the Persona Interface response produced by mounted sandbox/package workflow."
+    ]
+  },
+  "changed_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE_8K.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/ION_CUSTOM_GPT_INSTRUCTIONS_V2_5.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/v2_5_saved_files/01_core_mount/ION_CUSTOM_GPT_INSTRUCTIONS_V2_5.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/009_V2_6_6_ALWAYS_ON_WORKFLOW_LAW_NOTE.md",
+    "ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py"
+  ],
+  "artifact": {
+    "path": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_6_CANDIDATE_20260509T015007Z.zip",
+    "sha256": "b96095eccf583cbb36a2d131e9f0cce14127c0742364567d9d28e6adc8062bc1",
+    "file_count": 4289,
+    "compressed_size_bytes": 5576932,
+    "uncompressed_size_bytes": 17197916,
+    "zip_test": "passed"
+  },
+  "validation": [
+    {
+      "scope": "active_root",
+      "command": "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+      "result": "5 passed in 0.04s"
+    },
+    {
+      "scope": "package_local",
+      "command": "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+      "result": "5 passed in 0.04s"
+    },
+    {
+      "scope": "artifact",
+      "command": "unzip -tq ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_6_CANDIDATE_20260509T015007Z.zip",
+      "result": "No errors detected"
+    }
+  ],
+  "non_claims": [
+    "This does not make candidate domains accepted canon automatically.",
+    "This does not grant production authority.",
+    "This does not grant live execution authority.",
+    "This does not authorize default Action/MCP calls."
+  ],
+  "next_packet": "Use 001_GPT_INSTRUCTIONS_PASTE_8K.md in GPT Builder instructions and upload the v2.6.6 zip as knowledge."
+}

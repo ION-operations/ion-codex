@@ -1,0 +1,72 @@
+{
+  "schema_id": "ion.package_revision_receipt.v1",
+  "receipt_id": "CUSTOM_GPT_CARRIER_PACKAGE_V2_6_2_SANDBOX_FIRST_GATE_RECEIPT_20260508T224500Z",
+  "created_at": "2026-05-08T22:45:00Z",
+  "carrier": "codex_cli",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "objective": "Correct Custom GPT behavior so uploaded package/files/instructions are the default sandbox lane and Action Gateway/MCP are explicit-use connector surfaces only.",
+  "trigger_observation": {
+    "observed_issue": "The Custom GPT attempted to use MCP/local ION instead of operating from the uploaded sandbox package even when instructed to use its instructions and files.",
+    "classification": "lane_priority_and_action_metadata_ambiguity"
+  },
+  "changed_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/000_READ_FIRST_MOUNT_ORDER.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/002_KNOWLEDGE_UPLOAD_MANIFEST.json",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/003_PACKAGE_AUTHORITY_AND_LIMITS.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/005_V2_6_2_SANDBOX_FIRST_ACTION_GATE_NOTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/010_HOT_BOOT/BOOT_1_CUSTOM_GPT_CARRIER_MOUNT.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/010_HOT_BOOT/BOOT_3_ACTIONS_MCP_TOOL_SELECTION.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/v2_5_saved_files/",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/060_ACTION_SCHEMAS/",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/090_VALIDATION/",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/",
+    "ION/09_integrations/custom_gpt_action_gateway/openapi.yaml",
+    "ION/09_integrations/custom_gpt_action_gateway/README.md",
+    "ION/09_integrations/chatgpt_browser_mcp_action/openapi.yaml",
+    "ION/09_integrations/chatgpt_browser_mcp_action/README.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_FIRST_TIME_USER_CONTEXT_PACKAGE_v1_20260508/"
+  ],
+  "created_artifacts": [
+    {
+      "path": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_2_CANDIDATE_20260508T224500Z.zip",
+      "sha256": "2cb518aad01680787b9773e7f00684117e62aa0bd67bad0941d3faee2f855e09",
+      "size_human": "6.9M",
+      "zip_entries": 4235
+    },
+    {
+      "path": "ION/06_artifacts/packages/custom_gpt/ION_FIRST_TIME_USER_CONTEXT_PACKAGE_v1_1_20260508T224500Z.zip",
+      "sha256": "4c6b812a6467360b75a9c1915d9c13937972bf73ad50e6ba81d39c413d179e5f",
+      "size_human": "24K",
+      "zip_entries": 43
+    }
+  ],
+  "validation": [
+    {
+      "command": "json_parse_all_carrier_and_first_time_package_json",
+      "result": "pass"
+    },
+    {
+      "command": "pyyaml_safe_load_all_action_openapi_yaml",
+      "result": "pass"
+    },
+    {
+      "command": "unzip -tq carrier_v2_6_2_and_first_time_v1_1",
+      "result": "pass"
+    }
+  ],
+  "new_lane_rule": [
+    "Default lane is uploaded package/sandbox context.",
+    "Action Gateway and MCP are explicit-use connector surfaces.",
+    "Tool visibility is not permission to call tools.",
+    "Inspecting available sources does not mean calling Action Gateway or MCP.",
+    "Requests to use files, instructions, sandbox, package, /guest-mode, /what is ION?, and first-time context are negative triggers for Action/MCP.",
+    "Connector returns outrank package files only inside explicit connector-lane requests."
+  ],
+  "non_claims": [
+    "This receipt does not prove the Custom GPT has uploaded the revised packages.",
+    "This receipt does not prove the GPT will never call an Action unexpectedly; it tightens instructions and action metadata to reduce that behavior.",
+    "This receipt does not grant production or live execution authority."
+  ],
+  "next_step": "Replace the Custom GPT knowledge ZIP with the v2.6.2 carrier artifact, replace the optional first-time context ZIP with v1.1, and paste/update the GPT instruction field from 001_GPT_INSTRUCTIONS_PASTE.md."
+}

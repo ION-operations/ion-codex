@@ -1,0 +1,37 @@
+{
+  "authority_ranking": [
+    "ION_CODEX 10 operational root",
+    "ION_SINGLE_CARRIER_SANDBOX_PATCHED single-carrier correction overlay",
+    "ION_PRODUCTIZED_FULL_COPY product adapter scaffold",
+    "ION_PRODUCT_PACKAGE_SEEDED_BASE_DOMAINS starter data",
+    "lineage/recovery bundles as forensic or proposal-only evidence"
+  ],
+  "generated_at": "2026-05-07T02:01:34Z",
+  "schema_id": "ion.full_gpt_sandbox_package.source_provenance.v1",
+  "sources": {
+    "ION_CODEX 10.zip": {
+      "bytes": 55517403,
+      "sha256": "3be8dd703c252a6ded2569efdaec1cf82c841643f15d3cd48271279f3bebe900"
+    },
+    "ION_CODEX_9_FUNCTIONAL_READY_CLEANUP_BUNDLE(1).zip": {
+      "bytes": 24756031,
+      "sha256": "b88879064961b805a1c8be8f91fa20e93336f4805d0acfa886cc5f26aa0a2db1"
+    },
+    "ION_PRODUCTIZED_FULL_COPY(1).zip": {
+      "bytes": 4479250,
+      "sha256": "4c26057686cf4e044360ba3b4cac4164b6c2691a0b8795d874ce85f1f0261403"
+    },
+    "ION_PRODUCT_PACKAGE_SEEDED_BASE_DOMAINS_BUNDLE(2).zip": {
+      "bytes": 88186,
+      "sha256": "d1227da398afd6b6578249a6486938ef30afe5eb1e0f1f21b7033d509f034fa3"
+    },
+    "ION_SINGLE_CARRIER_SANDBOX_PATCHED.zip": {
+      "bytes": 5218274,
+      "sha256": "2fd5e883fa1c358312a520f5dd8ed645d03120d67599b413575f9bc83cdba914"
+    },
+    "ion_recovery_investigation_v7_bundle(1).zip": {
+      "bytes": 10547176,
+      "sha256": "cfa5701b0ccddab5c3d08f32d2a6704879d05b5493f4f054a5e11349d5857ac9"
+    }
+  }
+}

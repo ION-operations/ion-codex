@@ -1,0 +1,67 @@
+{
+  "schema_id": "ion.custom_gpt_carrier_package_build_receipt.v2_6",
+  "receipt_id": "CUSTOM_GPT_CARRIER_PACKAGE_V2_6_BUILD_RECEIPT_20260508T215736Z",
+  "created_at": "2026-05-08T21:57:36Z",
+  "status": "candidate_zip_validated",
+  "objective": "Build a reorganized Custom GPT carrier package with hot boot, sign-in/reentry, Action/MCP, YAML bridge, dynamic domain, persona, export, and failure recovery surfaces.",
+  "package_root": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508",
+  "zip_artifact_path": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508T215736Z.zip",
+  "zip_sha256": "d51849c43a7fa95c52615a094ffcce42af7509d0d6995e197c5387ecac7320ac",
+  "zip_size": "6.8M",
+  "zip_entry_count": 4233,
+  "source_package_preserved": "ION_sandbox/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE",
+  "old_zip_not_overwritten": "/home/sev/Downloads/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z.zip",
+  "added_front_door_surfaces": [
+    "000_READ_FIRST_MOUNT_ORDER.md",
+    "001_GPT_INSTRUCTIONS_PASTE.md",
+    "002_KNOWLEDGE_UPLOAD_MANIFEST.json",
+    "003_PACKAGE_AUTHORITY_AND_LIMITS.md",
+    "004_V2_6_DELTA_NOTE.md",
+    "010_HOT_BOOT/",
+    "020_ACTIVE_STATE_INDEX/",
+    "030_CUSTOM_GPT_ADAPTER/",
+    "040_PRODUCT_DOCS/",
+    "050_STARTER_DATA/",
+    "060_ACTION_SCHEMAS/",
+    "070_BROWSER_EXTENSION_YAML_BRIDGE/",
+    "090_VALIDATION/"
+  ],
+  "validation": [
+    {
+      "command": "python3 -m json.tool 002_KNOWLEDGE_UPLOAD_MANIFEST.json",
+      "result": "pass"
+    },
+    {
+      "command": "python3 -m json.tool 020_ACTIVE_STATE_INDEX/ACTIVE_DOMAIN_AGENT_INDEX.json",
+      "result": "pass"
+    },
+    {
+      "command": "python3 -m json.tool 090_VALIDATION/PACKAGE_MANIFEST.json",
+      "result": "pass"
+    },
+    {
+      "command": "unzip -tq ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508T215736Z.zip",
+      "result": "No errors detected"
+    },
+    {
+      "command": "zipinfo required anchor scan",
+      "result": "mount anchors, hot boot, Action schemas, and persona envelope surface present"
+    }
+  ],
+  "authority_boundary": {
+    "candidate_only": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "non_claims": [
+    "This does not prove live Custom GPT upload behavior.",
+    "This does not prove Action auth or Cloudflare tunnel health.",
+    "This does not grant production readiness.",
+    "The package remains candidate until tested in the GPT builder."
+  ],
+  "next_packet": {
+    "recommended": true,
+    "objective": "Upload the v2.6 ZIP plus selected hot files to the Custom GPT, paste 001_GPT_INSTRUCTIONS_PASTE.md into Instructions, configure both Actions with privacy policy URL, and run the mount/sign-in/dynamic-domain/persona smoke tests."
+  }
+}

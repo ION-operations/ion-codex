@@ -1,0 +1,40 @@
+{
+  "schema_id": "ion.custom_gpt_active_domain_agent_index.v2_6",
+  "status": "candidate_index",
+  "primary_candidate_domain_surface": "ION/05_context/current/ai_assistant_work/",
+  "dynamic_fission_source": "ION/05_context/current/ai_assistant_work/fission/AI_ASSISTANT_WORK_DOMAIN_FISSION_CANDIDATES_V0_1.yaml",
+  "route_compiler": "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+  "persona_envelope": "ION/04_packages/kernel/ion_persona_response_envelope.py",
+  "candidate_fission_domains": [
+    "pr_agent_work_domain",
+    "background_queue_intake_domain",
+    "terminal_proof_domain",
+    "ui_state_modeling_domain",
+    "documentation_example_validation_domain",
+    "release_evidence_domain",
+    "migration_work_domain",
+    "assistant_work_observation_domain",
+    "incident_triage_domain",
+    "untrusted_input_tool_guard_domain"
+  ],
+  "important_agents": [
+    "PR_REVIEW_STEWARD",
+    "CI_EVIDENCE_TRIAGER",
+    "LOCKFILE_AUDITOR",
+    "BACKGROUND_QUEUE_STEWARD",
+    "RESULT_INTAKE_AUDITOR",
+    "TERMINAL_PROOF_CURATOR",
+    "COMMAND_RECEIPT_AUDITOR",
+    "UI_STATE_MODELER",
+    "EXAMPLE_RUNNER",
+    "RELEASE_EVIDENCE_CURATOR",
+    "MIGRATION_MASON",
+    "INCIDENT_TRIAGE_STEWARD",
+    "PROMPT_INJECTION_BOUNDARY_GUARDIAN"
+  ],
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "requires_acceptance_to_land": true
+  }
+}

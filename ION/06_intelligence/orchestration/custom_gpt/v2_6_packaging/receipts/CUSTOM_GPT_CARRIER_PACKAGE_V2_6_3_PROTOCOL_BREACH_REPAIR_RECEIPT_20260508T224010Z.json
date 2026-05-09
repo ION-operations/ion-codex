@@ -1,0 +1,103 @@
+{
+  "schema_id": "ion.custom_gpt_carrier_package_repair_receipt.v1",
+  "receipt_id": "custom-gpt-carrier-v2-6-3-protocol-breach-repair-20260508T224010Z",
+  "created_at": "2026-05-08T22:40:10Z",
+  "status": "candidate_repair_packaged",
+  "authority_boundary": {
+    "candidate_only": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "accepted_state": false
+  },
+  "source_evidence": {
+    "user_reported_custom_gpt_self_audit": true,
+    "self_audit_treated_as": "candidate_witness_until_verified",
+    "verified_defect": "GPT sandbox package active work packet could still use Cursor work-cycle template and omit Persona ingress/response phases.",
+    "verified_behavior_risk": "Connector reflex could override sandbox/package debug lane and collapse mount taxonomy claims."
+  },
+  "repairs": [
+    "Added explicit Connector Containment Override to Custom GPT instructions.",
+    "Added mount taxonomy separating uploaded package/sandbox mounted, sandbox preflight ready, connector reachable, local hub state read, external agents invoked, and state accepted/receipted.",
+    "Patched GPT_SANDBOX_CARRIER onboarding to use ION/07_templates/carriers/SINGLE_CARRIER_SEQUENTIAL_PACKET.md.",
+    "Patched GPT_SANDBOX_CARRIER phase sequence to require PERSONA_INTERFACE_INGRESS and PERSONA_INTERFACE_RESPONSE.",
+    "Patched GPT_SANDBOX_CARRIER capability profile to declare can_use_mcp false and no production/live authority.",
+    "Patched sandbox preflight to ignore stale active-packet capabilities from a different carrier id.",
+    "Promoted/synced sandbox preflight, single-carrier sequence runner, stale-surface audit, and related protocol/template surfaces into the Custom GPT package.",
+    "Added protocol-dispute Persona gate requiring a visible Persona envelope or persona_gate_blocked.",
+    "Added focused regression tests for connector containment, mount taxonomy, sandbox carrier onboarding, stale-surface blocking, persona gate, and OpenAPI explicit-use descriptions.",
+    "Regenerated package-local ACTIVE_WORK_PACKET, ACTIVE_GPT_SANDBOX_PREFLIGHT, ACTIVE_SINGLE_CARRIER_SEQUENCE_PACKET, ACTIVE_SINGLE_CARRIER_SEQUENCE_RECEIPT, and ACTIVE_STALE_SURFACE_AUDIT after tests."
+  ],
+  "primary_changed_paths": [
+    "ION/04_packages/kernel/ion_carrier_onboard.py",
+    "ION/04_packages/kernel/ion_sandbox_preflight.py",
+    "ION/04_packages/kernel/ion_stale_surface_audit.py",
+    "ION/04_packages/kernel/ion_template_action_gate.py",
+    "ION/02_architecture/FRONT_DOOR_PERSONA_RELAY_STEWARD_BOUNDARY_PROTOCOL.md",
+    "ION/tests/test_kernel_ion_carrier_onboard.py",
+    "ION/tests/test_kernel_ion_stale_surface_audit.py",
+    "ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/ION_CUSTOM_GPT_INSTRUCTIONS_V2_5.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/010_HOT_BOOT/BOOT_3_ACTIONS_MCP_TOOL_SELECTION.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/006_V2_6_3_PROTOCOL_BREACH_REPAIR_NOTE.md"
+  ],
+  "generated_package_state": {
+    "package_root": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508",
+    "active_packet": "ION/05_context/current/ACTIVE_WORK_PACKET.json",
+    "active_template": "ION/07_templates/carriers/SINGLE_CARRIER_SEQUENTIAL_PACKET.md",
+    "phase_sequence_first": "PERSONA_INTERFACE_INGRESS",
+    "phase_sequence_last": "PERSONA_INTERFACE_RESPONSE",
+    "can_use_mcp": false,
+    "preflight_verdict": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+    "stale_surface_verdict": "ION_STALE_SURFACE_AUDIT_READY"
+  },
+  "artifact": {
+    "path": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_3_CANDIDATE_20260508T224010Z.zip",
+    "sha256": "3f53e13a953b89b33abc2d96382de4010a0d22e29f2dcecff91b1635325f761e",
+    "compressed_size_human": "7.0M",
+    "file_count": 4285,
+    "zip_test": "passed"
+  },
+  "validation": [
+    {
+      "command": "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_carrier_onboard.py ION/tests/test_kernel_ion_sandbox_preflight.py ION/tests/test_kernel_single_carrier_sequence_runner.py ION/tests/test_kernel_ion_stale_surface_audit.py ION/tests/test_kernel_ion_template_action_gate.py ION/tests/test_kernel_ion_persona_response_envelope.py ION/tests/test_kernel_ion_chatgpt_browser_mcp_action_openapi.py ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+      "scope": "active_root",
+      "result": "28 passed in 0.14s"
+    },
+    {
+      "command": "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_carrier_onboard.py ION/tests/test_kernel_ion_sandbox_preflight.py ION/tests/test_kernel_single_carrier_sequence_runner.py ION/tests/test_kernel_ion_stale_surface_audit.py ION/tests/test_kernel_ion_template_action_gate.py ION/tests/test_kernel_ion_persona_response_envelope.py ION/tests/test_kernel_ion_chatgpt_browser_mcp_action_openapi.py ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+      "scope": "package_local",
+      "result": "28 passed in 0.14s"
+    },
+    {
+      "command": "package-local carrier onboarding, sandbox preflight, single-carrier sequence generation, stale-surface audit",
+      "scope": "package_local",
+      "result": "ready verdicts with GPT sandbox single-carrier template and Persona ingress/response phases"
+    },
+    {
+      "command": "json/yaml parse checks",
+      "scope": "package_and_action_schemas",
+      "result": "passed"
+    },
+    {
+      "command": "unzip -tq ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_3_CANDIDATE_20260508T224010Z.zip",
+      "scope": "artifact",
+      "result": "No errors detected"
+    }
+  ],
+  "operational_correction": {
+    "stray_artifact_created": "/home/sev/ION.zip",
+    "cause": "Initial zip command used an unquoted absolute path containing spaces.",
+    "repair": "Removed after explicit approval and rebuilt artifact with quoted path inside active root.",
+    "remaining_stray_artifact": false
+  },
+  "non_claims": [
+    "This receipt does not accept the Custom GPT self-audit as state.",
+    "This receipt does not certify production readiness.",
+    "This receipt does not certify live connector health.",
+    "This receipt does not grant Custom GPT authority to call Action Gateway or MCP by default.",
+    "This receipt does not mutate the active root Codex carrier packet away from its own carrier lane."
+  ],
+  "next_packet": "Upload v2.6.3 as the main Custom GPT knowledge zip and paste 001_GPT_INSTRUCTIONS_PASTE.md into the GPT instructions field. Keep Action Gateway and MCP Actions configured as explicit-use-only connector surfaces."
+}

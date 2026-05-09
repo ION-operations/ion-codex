@@ -44,3 +44,11 @@ ION/05_context/current/action_gateway/runtime/
 *.tar.gz
 *.tgz
 *.7z
+
+# Generated package snapshot copies; curated manifests/receipts stay trackable.
+ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/ION/
+ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/product/
+ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/040_PRODUCT_DOCS/ION_Continuity_Substrate_Explainer_v7.md
+ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/040_PRODUCT_DOCS/ION_ONTOLOGICAL_JOURNAL_GPT55_ENTRIES_0_39_CURRENT_ROOT_ENHANCED.md
+ION_sandbox/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/
+ion-sandbox-gpt/

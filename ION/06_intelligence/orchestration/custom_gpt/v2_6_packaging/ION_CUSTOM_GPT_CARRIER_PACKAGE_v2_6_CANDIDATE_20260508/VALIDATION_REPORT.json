@@ -1,0 +1,152 @@
+{
+  "front_door_persona_relay_proof_trace": {
+    "active_trace_path": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
+    "proof_complete": true,
+    "verdict": "ION_FRONT_DOOR_PROOF_TRACE_READY"
+  },
+  "generated_at": "2026-05-08T22:40:10Z",
+  "github_data_plane": {
+    "accepted": false,
+    "failure_classification": "GITHUB_DATA_PLANE_ABSENT_BY_PACKAGE_POLICY",
+    "git_mutation_performed": false,
+    "github_mutation_performed": false,
+    "network_access_used": false,
+    "package_policy": "optional_for_gpt_sandbox_package_absent_by_policy_unless_local_git_variant",
+    "verdict": "ION_GITHUB_DATA_PLANE_AUDIT_BLOCKED"
+  },
+  "gpt_sandbox_onboarding": {
+    "carrier_profile_carrier_id": "GPT_SANDBOX_CARRIER",
+    "carrier_profile_path": "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+    "gpt_sandbox_session_packet_listed": true,
+    "root_confirmed": true,
+    "verdict": "ION_CARRIER_ONBOARDING_PACKET_READY"
+  },
+  "gpt_sandbox_preflight": {
+    "blocking_findings": [],
+    "report_path": "ION/05_context/current/ACTIVE_GPT_SANDBOX_PREFLIGHT.json",
+    "verdict": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+  },
+  "ion_status": {
+    "live_execution_authority": false,
+    "missing_state_surfaces": [],
+    "production_authority": false,
+    "verdict": "ION_STATUS_READY"
+  },
+  "live_execution_authority": false,
+  "package_name": "ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_3_PROTOCOL_BREACH_REPAIR",
+  "production_authority": false,
+  "readiness_verdict": "ION_CUSTOM_GPT_CARRIER_PACKAGE_READY_WITH_PROTOCOL_BREACH_REPAIR",
+  "root_confirmed": true,
+  "schema_id": "ion.full_gpt_sandbox_agent_package.validation_report.v1_1",
+  "single_carrier_persona_relay_runtime": {
+    "active_packet_path": "ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_PACKET.md",
+    "active_receipt_path": "ION/05_context/current/ACTIVE_SINGLE_CARRIER_SEQUENCE_RECEIPT.json",
+    "daemon_required": false,
+    "external_agent_spawn_required": false,
+    "github_required": false,
+    "live_execution_authority": false,
+    "mcp_required": false,
+    "persona_ingress_required": true,
+    "persona_response_required": true,
+    "phase_order": [
+      "PERSONA_INTERFACE ingress",
+      "RELAY",
+      "STEWARD",
+      "VIZIER",
+      "MASON",
+      "NEMESIS / VICE when required",
+      "SCRIBE",
+      "STEWARD FINAL",
+      "PERSONA_INTERFACE response",
+      "RECEIPT / NEXT STATE"
+    ],
+    "production_authority": false,
+    "relay_required": true,
+    "verdict": "ION_SINGLE_CARRIER_SEQUENCE_PACKET_READY"
+  },
+  "stale_surface_audit": {
+      "blocking_findings": [],
+      "legacy_reference_count": 1514,
+      "verdict": "ION_STALE_SURFACE_AUDIT_READY"
+  },
+  "tests": {
+    "focused_protocol_breach_repair_tests_active_root": {
+      "passed": 28,
+      "status": "passed"
+    },
+    "focused_protocol_breach_repair_tests_package_local": {
+      "passed": 28,
+      "status": "passed"
+    },
+    "focused_hardening_tests": {
+      "passed": 45
+    },
+    "focused_preflight_direct_validation": {
+      "passed": 19,
+      "status": "passed",
+      "total": 19
+    },
+    "front_door_proof_trace_direct_validation": {
+      "note": "Direct in-process proof trace used because subprocess pytest for front-door proof trace can exceed this sandbox's command window.",
+      "proof_complete": true,
+      "result": "ION_FRONT_DOOR_PROOF_TRACE_READY",
+      "status": "passed"
+    },
+    "monolithic_full_suite": {
+      "reason": "sandbox timeout instability observed; bounded/direct validation used for this accepted package export",
+      "status": "not_used_for_final_verdict"
+    },
+    "segmented_full_suite": {
+      "groups": [
+        {
+          "group": "01_10",
+          "output_file": "v1_1_group_01_10.txt",
+          "passed": 56
+        },
+        {
+          "group": "11_20",
+          "output_file": "v1_1_group_11_20.txt",
+          "passed": 84
+        },
+        {
+          "group": "21_30",
+          "output_file": "v1_1_group_21_30.txt",
+          "passed": 27
+        },
+        {
+          "group": "31_40",
+          "output_file": "v1_1_group_31_40.txt",
+          "passed": 44
+        },
+        {
+          "group": "41_50",
+          "output_file": "v1_1_group_41_50.txt",
+          "passed": 42
+        },
+        {
+          "group": "51_59",
+          "output_file": "v1_1_group_51_59.txt",
+          "passed": 36
+        }
+      ],
+      "passed": 289
+    },
+    "single_carrier_persona_relay_direct_validation": {
+      "passed": 9,
+      "result_file": "SINGLE_CARRIER_PERSONA_RELAY_DIRECT_VALIDATION_RESULTS.json",
+      "status": "passed",
+      "total": 9
+    },
+    "single_carrier_sequence_runner_pytest": {
+      "command": "python -m pytest ION/tests/test_kernel_single_carrier_sequence_runner.py -q",
+      "note": "subprocess startup emitted unrelated artifact_tool spreadsheet warmup warning; pytest return code was 0",
+      "result": "6 passed",
+      "status": "passed"
+    },
+    "stale_surface_direct_validation": {
+      "passed": 11,
+      "status": "passed",
+      "total": 11
+    }
+  }
+}

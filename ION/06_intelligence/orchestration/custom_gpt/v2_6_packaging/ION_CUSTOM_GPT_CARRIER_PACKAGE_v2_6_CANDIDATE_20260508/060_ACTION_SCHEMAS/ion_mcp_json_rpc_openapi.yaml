@@ -1,0 +1,302 @@
+openapi: 3.1.0
+info:
+  title: ION MCP JSON-RPC Action
+  version: 0.1.1
+  description: >-
+    Explicit-use-only connector wrapper for the existing ION MCP HTTP preview
+    endpoint. Do not call this Action to mount ION, boot the uploaded
+    sandbox/package, answer from files, satisfy /guest-mode, satisfy /what is
+    ION?, or start first-time context. Use only when the user explicitly asks
+    for live MCP/local hub status, tool listing, runtime reads, or a
+    connector-backed action.
+servers:
+  - url: https://ion.helixion.net
+    description: Operator-approved HTTPS tunnel hostname for the ION MCP preview.
+paths:
+  /health:
+    get:
+      operationId: ionMcpHealth
+      summary: "Explicit-use only: read ION MCP preview health when the user asks for live MCP status."
+      description: Do not use for sandbox/package boot, /guest-mode, /what is ION?, first-time context, or uploaded-file answers.
+      responses:
+        "200":
+          description: MCP preview health response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonMcpHealthResponse"
+  /app/status.json:
+    get:
+      operationId: ionMcpAppStatus
+      summary: "Explicit-use only: read ION MCP preview status when the user asks for live MCP status."
+      description: MCP status is transport/runtime proof only; it does not mount sandbox state or sign in a user.
+      responses:
+        "200":
+          description: MCP preview status response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonMcpHealthResponse"
+  /mcp:
+    post:
+      operationId: ionMcpJsonRpc
+      summary: "Explicit-use only: call the ION MCP JSON-RPC endpoint."
+      description: Use only after an explicit connector-lane trigger. Do not use this to mount ION, open the sandbox, answer from uploaded files, handle /guest-mode, or start first-time context. For connector-lane use, method tools/list discovers tools and method tools/call invokes a specific ION MCP tool.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IonMcpJsonRpcRequest"
+      responses:
+        "200":
+          description: MCP JSON-RPC response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonMcpJsonRpcResponse"
+components:
+  schemas:
+    FlexibleObject:
+      type: object
+      additionalProperties: true
+      properties:
+        summary:
+          type: string
+    IonMcpHealthResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        generated_at:
+          type: string
+        verdict:
+          type: string
+        connector_state:
+          type: string
+        endpoint_path:
+          type: string
+        tool_count:
+          type: integer
+        write_confirmation_required:
+          type: boolean
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+        deployment_authority:
+          type: boolean
+        findings:
+          type: array
+          items:
+            type: string
+    IonMcpJsonRpcRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - jsonrpc
+        - id
+        - method
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+            - "2.0"
+        id:
+          description: Caller-provided request id.
+          anyOf:
+            - type: string
+            - type: integer
+        method:
+          type: string
+          enum:
+            - initialize
+            - tools/list
+            - tools/call
+            - ping
+        params:
+          $ref: "#/components/schemas/IonMcpJsonRpcParams"
+    IonMcpJsonRpcParams:
+      type: object
+      additionalProperties: true
+      properties:
+        protocolVersion:
+          type: string
+          description: Optional MCP protocol version for initialize.
+        capabilities:
+          $ref: "#/components/schemas/FlexibleObject"
+        clientInfo:
+          $ref: "#/components/schemas/FlexibleObject"
+        name:
+          type: string
+          description: Tool name when method is tools/call.
+          enum:
+            - ion_status
+            - ion_read_active_packet
+            - ion_carrier_onboarding_packet
+            - ion_receipt_search
+            - ion_codex_work_queue
+            - ion_file_read
+            - ion_file_search
+            - ion_tree_list
+            - ion_registry_read
+            - ion_template_read
+            - ion_context_compile
+            - ion_receipt_hydrate
+            - ion_tool_manifest
+            - ion_daemon_status
+            - ion_codex_queue_autorun_status
+            - ion_agent_list
+            - ion_agent_status
+            - ion_agent_result
+            - ion_agent_queue
+            - ion_agent_spawn_plan
+            - ion_swarm_status
+            - ion_agent_invoke
+            - ion_agent_cancel
+            - ion_swarm_step_once
+            - ion_queue_operator_message
+            - ion_codex_queue_process_once
+        arguments:
+          $ref: "#/components/schemas/IonMcpToolArguments"
+    IonMcpToolArguments:
+      type: object
+      additionalProperties: true
+      properties:
+        path:
+          type: string
+        query:
+          type: string
+        packet:
+          type: string
+        carrier:
+          type: string
+        carrier_profile:
+          type: string
+        profile:
+          type: string
+        include_excerpts:
+          type: boolean
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        max_bytes:
+          type: integer
+          minimum: 1
+          maximum: 262144
+        max_depth:
+          type: integer
+          minimum: 0
+          maximum: 6
+        max_files:
+          type: integer
+          minimum: 1
+          maximum: 500
+        roots:
+          type: array
+          items:
+            type: string
+        invocation_id:
+          type: string
+        agent:
+          type: string
+        objective:
+          type: string
+        mode:
+          type: string
+        queue:
+          type: boolean
+        start:
+          type: boolean
+        request_path:
+          type: string
+        message:
+          type: string
+        priority:
+          type: integer
+          minimum: 0
+          maximum: 100
+        context_refs:
+          type: array
+          items:
+            type: string
+        requested_by_carrier_id:
+          type: string
+        requested_by_callsign:
+          type: string
+        max_runtime_seconds:
+          type: integer
+          minimum: 30
+          maximum: 7200
+        confirmation:
+          type: string
+          description: Required for bounded write tools. Use ION_BOUNDED_WRITE_CONFIRMED only when the operator has approved the bounded queue/write action.
+    IonMcpJsonRpcResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        jsonrpc:
+          type: string
+        id:
+          description: Request id echoed by the MCP endpoint.
+          anyOf:
+            - type: string
+            - type: integer
+        result:
+          $ref: "#/components/schemas/IonMcpResult"
+        error:
+          $ref: "#/components/schemas/IonMcpError"
+    IonMcpResult:
+      type: object
+      additionalProperties: true
+      properties:
+        protocolVersion:
+          type: string
+        capabilities:
+          $ref: "#/components/schemas/FlexibleObject"
+        serverInfo:
+          $ref: "#/components/schemas/FlexibleObject"
+        tools:
+          type: array
+          items:
+            $ref: "#/components/schemas/IonMcpTool"
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/IonMcpContent"
+        structuredContent:
+          $ref: "#/components/schemas/FlexibleObject"
+        isError:
+          type: boolean
+    IonMcpTool:
+      type: object
+      additionalProperties: true
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        inputSchema:
+          $ref: "#/components/schemas/FlexibleObject"
+        annotations:
+          $ref: "#/components/schemas/FlexibleObject"
+    IonMcpContent:
+      type: object
+      additionalProperties: true
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+    IonMcpError:
+      type: object
+      additionalProperties: true
+      properties:
+        code:
+          type: integer
+        message:
+          type: string

@@ -1,0 +1,57 @@
+{
+  "schema_id": "ion.first_time_user_context_package_manifest.v1",
+  "package_id": "ION_FIRST_TIME_USER_CONTEXT_PACKAGE_v1_20260508",
+  "created_at": "2026-05-08T22:09:02Z",
+  "status": "candidate_upload_package_v1_1_sandbox_first",
+  "revision": "v1_1_sandbox_first_connector_gate",
+  "intended_use": "Upload alongside the main ION Custom GPT carrier package as a small blank first-time user continuity seed.",
+  "paired_carrier_package": "ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_2_CANDIDATE_20260508T224500Z.zip",
+  "revision_note": "v1.1 clarifies that first-time context is mounted from uploaded sandbox files and must not trigger Action/MCP by default.",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "accepted_state_source": "receipt_ledger_or_explicit_user_acceptance",
+    "engine_package": false
+  },
+  "mount_order": [
+    "000_READ_FIRST_FIRST_TIME_CONTEXT.md",
+    "ION_DATA_MANIFEST.json",
+    "STATE/current_state.json",
+    "STATE/current_state.md",
+    "PERSONA/persona_state.json",
+    "DOMAINS/domain_registry.json",
+    "CONTEXT/context_graph.json",
+    "PACKETS/open_packets.json",
+    "DECISIONS/decision_ledger.json",
+    "ARTIFACTS/artifact_manifest.json",
+    "RECEIPTS/bootstrap_receipt.json",
+    "RECEIPTS/receipt_ledger.jsonl",
+    "FIRST_TIME_CONTEXT_MOUNT_GUIDE.md",
+    "AUTHORITY_AND_LIMITS.md",
+    "EXPORT_INSTRUCTIONS.md"
+  ],
+  "required_top_level_paths": [
+    "000_READ_FIRST_FIRST_TIME_CONTEXT.md",
+    "ION_DATA_MANIFEST.json",
+    "README_FOR_AI.md",
+    "FIRST_TIME_CONTEXT_MOUNT_GUIDE.md",
+    "AUTHORITY_AND_LIMITS.md",
+    "EXPORT_INSTRUCTIONS.md",
+    "MOUNT_REPORT_TEMPLATE.md",
+    "STATE/current_state.json",
+    "PERSONA/persona_state.json",
+    "DOMAINS/domain_registry.json",
+    "CONTEXT/context_graph.json",
+    "PACKETS/open_packets.json",
+    "DECISIONS/decision_ledger.json",
+    "ARTIFACTS/artifact_manifest.json",
+    "RECEIPTS/bootstrap_receipt.json",
+    "RECEIPTS/receipt_ledger.jsonl"
+  ],
+  "non_claims": [
+    "This package is not the full ION engine.",
+    "This package is not production authority.",
+    "This package does not grant live connector access.",
+    "This package contains no secrets by design."
+  ]
+}

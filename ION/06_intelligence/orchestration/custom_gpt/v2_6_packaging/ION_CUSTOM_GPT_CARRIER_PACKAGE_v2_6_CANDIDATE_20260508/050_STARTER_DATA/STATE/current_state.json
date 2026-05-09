@@ -1,0 +1,9 @@
+{
+  "current_objective": "Discover what the user wants to work on and form the first useful project memory.",
+  "open_packets": [],
+  "project_id": "blank_project",
+  "schema_id": "ion.current_state.v1",
+  "warnings": [
+    "seeded_starter_state_non_release_scaffold"
+  ]
+}

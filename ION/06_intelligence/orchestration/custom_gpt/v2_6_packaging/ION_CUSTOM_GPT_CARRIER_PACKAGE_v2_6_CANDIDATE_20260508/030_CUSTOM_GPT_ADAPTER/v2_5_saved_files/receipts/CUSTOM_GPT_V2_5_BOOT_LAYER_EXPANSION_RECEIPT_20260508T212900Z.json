@@ -1,0 +1,36 @@
+{
+  "schema": "ion.custom_gpt_boot_layer_expansion_receipt.v0_1",
+  "timestamp": "2026-05-08T21:29:00Z",
+  "status": "candidate_boot_layer_context_added",
+  "objective": "Add BOOT-0 through BOOT-6 context layering and boot package artifact mapping to the ION Custom GPT v2.5 saved-files pack.",
+  "created_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/BOOT_LAYER_CONTEXT_MODEL.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/BOOT_PACKAGE_ARTIFACT_MAP.md"
+  ],
+  "updated_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/README.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/MANIFEST.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/ION_CUSTOM_GPT_INSTRUCTIONS_V2_5.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/receipts/CUSTOM_GPT_V2_5_SAVED_FILES_RECEIPT_20260508T211900Z.json"
+  ],
+  "boot_layers": [
+    "BOOT-0 Kernel law",
+    "BOOT-1 Carrier mount",
+    "BOOT-2 Current state",
+    "BOOT-3 Domain context",
+    "BOOT-4 Deep doctrine / architecture",
+    "BOOT-5 Retrieval reserve",
+    "BOOT-6 Export context"
+  ],
+  "authority_boundary": {
+    "candidate_only": true,
+    "accepted_canon": false,
+    "production_authority": false,
+    "live_execution_authority": false
+  },
+  "non_claims": [
+    "This receipt does not prove a Custom GPT has uploaded or mounted the saved files.",
+    "This receipt does not create an automated boot compiler.",
+    "This receipt does not grant production or live execution authority."
+  ]
+}

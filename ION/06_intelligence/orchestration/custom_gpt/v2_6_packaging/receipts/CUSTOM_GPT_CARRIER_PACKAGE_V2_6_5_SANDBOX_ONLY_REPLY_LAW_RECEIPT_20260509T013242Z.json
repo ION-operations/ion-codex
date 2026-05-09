@@ -1,0 +1,71 @@
+{
+  "schema_id": "ion.custom_gpt_carrier_package_repair_receipt.v1",
+  "receipt_id": "custom-gpt-carrier-v2-6-5-sandbox-only-reply-law-20260509T013242Z",
+  "created_at": "2026-05-09T01:32:42Z",
+  "status": "candidate_packaged",
+  "objective": "Make the Custom GPT carrier generate every visible user reply through sandbox/package workflow and Persona handoff rather than freehand chat.",
+  "authority_boundary": {
+    "candidate_only": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "changed_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE_8K.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/ION_CUSTOM_GPT_INSTRUCTIONS_V2_5.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/v2_5_saved_files/01_core_mount/ION_CUSTOM_GPT_INSTRUCTIONS_V2_5.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/008_V2_6_5_SANDBOX_ONLY_REPLY_LAW_NOTE.md",
+    "ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py"
+  ],
+  "sandbox_only_reply_law": {
+    "required_visible_reply_source": "Persona Interface response produced by sandbox/package workflow",
+    "required_workflow": [
+      "Persona ingress",
+      "Relay boundary",
+      "Steward route",
+      "needed domain/agent/skill",
+      "proof/non-claims/receipt/export posture",
+      "Persona handoff"
+    ],
+    "missing_route_behavior": "create candidate domain/agent proposal in sandbox text, then hand off through Persona",
+    "blocked_behavior": "reply only with persona_gate_blocked, missing proof, and next unblocker"
+  },
+  "instruction_kernel": {
+    "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE_8K.md",
+    "character_count": 7806,
+    "builder_limit": 8000
+  },
+  "artifact": {
+    "path": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_5_CANDIDATE_20260509T013242Z.zip",
+    "sha256": "a0df814624a7f873057abbb00be787101db4efd61ed4c57d36d57fac06ca6423",
+    "file_count": 4288,
+    "compressed_size_bytes": 5574497,
+    "uncompressed_size_bytes": 17184919,
+    "zip_test": "passed"
+  },
+  "validation": [
+    {
+      "scope": "active_root",
+      "command": "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+      "result": "5 passed in 0.05s"
+    },
+    {
+      "scope": "package_local",
+      "command": "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+      "result": "5 passed in 0.05s"
+    },
+    {
+      "scope": "artifact",
+      "command": "unzip -tq ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_5_CANDIDATE_20260509T013242Z.zip",
+      "result": "No errors detected"
+    }
+  ],
+  "non_claims": [
+    "This does not make candidate domains accepted canon automatically.",
+    "This does not grant production authority.",
+    "This does not grant live execution authority.",
+    "This does not authorize default Action/MCP calls."
+  ],
+  "next_packet": "Use 001_GPT_INSTRUCTIONS_PASTE_8K.md in GPT Builder instructions and upload the v2.6.5 zip as knowledge."
+}

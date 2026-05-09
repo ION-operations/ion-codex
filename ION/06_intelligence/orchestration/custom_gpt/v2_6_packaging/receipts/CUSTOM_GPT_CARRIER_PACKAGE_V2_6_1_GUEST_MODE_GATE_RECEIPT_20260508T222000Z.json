@@ -1,0 +1,60 @@
+{
+  "schema_id": "ion.package_revision_receipt.v1",
+  "receipt_id": "CUSTOM_GPT_CARRIER_PACKAGE_V2_6_1_GUEST_MODE_GATE_RECEIPT_20260508T222000Z",
+  "created_at": "2026-05-08T22:20:00Z",
+  "carrier": "codex_cli",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "objective": "Correct Custom GPT /guest-mode behavior so the starter route does not automatically call Action Gateway or MCP and does not treat MCP readiness as the guest mount.",
+  "trigger_observation": {
+    "route": "/guest-mode",
+    "observed_issue": "Custom GPT called MCP/local ION status and reported runtime proof as if that was guest-mode mounting.",
+    "classification": "instruction_ambiguity"
+  },
+  "changed_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/010_HOT_BOOT/BOOT_1_CUSTOM_GPT_CARRIER_MOUNT.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/010_HOT_BOOT/BOOT_2_SIGN_IN_AND_REENTRY.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/010_HOT_BOOT/BOOT_3_ACTIONS_MCP_TOOL_SELECTION.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/004_V2_6_1_GUEST_MODE_TOOL_GATE_NOTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/002_KNOWLEDGE_UPLOAD_MANIFEST.json",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/090_VALIDATION/PACKAGE_MANIFEST.json",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/090_VALIDATION/V2_6_VALIDATION_REPORT.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/ION_CUSTOM_GPT_INSTRUCTIONS_V2_5.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/MOUNT_FIRST_OPERATING_LAW.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/03_actions_and_mcp/ACTION_SELECTION_AND_PROOF_MAP.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/04_auth_reentry/AUTH_REENTRY_AND_GUEST_MODE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/v2_5_saved_files/"
+  ],
+  "created_artifact": {
+    "path": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_1_CANDIDATE_20260508T222000Z.zip",
+    "sha256": "c668568949484e28f6281ce29008030569b14a571e219a4f0ee9cb175ed3fcf7",
+    "size_human": "6.8M",
+    "zip_entries": 4234
+  },
+  "validation": [
+    {
+      "command": "rg guest-mode tool gate terms",
+      "result": "pass"
+    },
+    {
+      "command": "json_parse_all_package_json",
+      "result": "pass"
+    },
+    {
+      "command": "unzip -tq ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_1_CANDIDATE_20260508T222000Z.zip",
+      "result": "pass"
+    }
+  ],
+  "new_guest_mode_rule": [
+    "/guest-mode is a starter route, not an automatic tool call.",
+    "Guest mode starts from mounted package/starter context.",
+    "Action Gateway and MCP are used in guest mode only if the user asks for live connection/status, asks for a connector-backed draft, or provides relevant non-secret reentry/status proof.",
+    "MCP health/status proves transport reachability only; it does not prove guest workspace mount, sign-in, accepted state, local execution authority, or production authority."
+  ],
+  "non_claims": [
+    "This receipt does not prove the Custom GPT has uploaded the revised package.",
+    "This receipt does not prove live Action or MCP behavior after upload.",
+    "This receipt does not grant production or live execution authority."
+  ],
+  "next_step": "Replace the Custom GPT knowledge ZIP with the v2.6.1 artifact and keep the first-time context package as the optional blank workspace seed."
+}

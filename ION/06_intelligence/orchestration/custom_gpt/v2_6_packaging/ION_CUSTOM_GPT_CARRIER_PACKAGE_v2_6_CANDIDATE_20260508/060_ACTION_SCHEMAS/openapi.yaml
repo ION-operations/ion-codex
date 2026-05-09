@@ -1,0 +1,384 @@
+openapi: 3.1.0
+info:
+  title: ION Custom GPT Action Gateway
+  version: 0.3.1
+  description: >-
+    Explicit-use-only non-production connector for ION Custom GPT Actions. Do
+    not call this Action to mount ION, boot the uploaded sandbox/package, answer
+    from files, satisfy /guest-mode, satisfy /what is ION?, or start first-time
+    context. Use only when the user explicitly asks for live gateway/local hub
+    status, queue/receipt reads, validation, submit, or a connector-backed
+    draft.
+servers:
+  - url: https://ion-actions.helixion.net
+    description: Operator-approved HTTPS tunnel hostname for the Action Gateway.
+security:
+  - bearerAuth: []
+paths:
+  /health:
+    get:
+      operationId: ionGatewayHealth
+      summary: "Explicit-use only: read gateway health when the user asks for live connector status."
+      description: Do not use for sandbox/package boot, /guest-mode, /what is ION?, first-time context, or uploaded-file answers.
+      security: []
+      responses:
+        "200":
+          description: Health response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayHealthResponse"
+  /policy:
+    get:
+      operationId: ionGatewayPolicy
+      summary: "Explicit-use only: read bounded gateway policy for connector-lane work."
+      description: Do not use as the default ION mount path; use only after a connector-lane trigger.
+      responses:
+        "200":
+          description: Policy response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayPolicyResponse"
+  /context-pack:
+    get:
+      operationId: ionGatewayContextPack
+      summary: "Explicit-use only: read current local hub context pack."
+      description: Local hub context is not the same as uploaded sandbox context; do not call for /guest-mode or package boot.
+      responses:
+        "200":
+          description: Context pack response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayContextPackResponse"
+  /codex/queue:
+    get:
+      operationId: ionGatewayCodexQueue
+      summary: "Explicit-use only: read Codex queue status when requested."
+      description: Do not call unless the user asks for local queue/runtime status.
+      responses:
+        "200":
+          description: Queue response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayCodexQueueResponse"
+  /agent/status:
+    get:
+      operationId: ionGatewayAgentStatus
+      summary: "Explicit-use only: read agent backend status when requested."
+      description: Do not call unless the user asks for live local agent/backend status.
+      responses:
+        "200":
+          description: Agent status response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayAgentStatusResponse"
+  /receipts/recent:
+    get:
+      operationId: ionGatewayReceiptsRecent
+      summary: "Explicit-use only: read recent gateway and ChatOps receipts."
+      description: Do not call unless the user asks for connector receipt proof or local hub receipts.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+      responses:
+        "200":
+          description: Recent receipt response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayReceiptsRecentResponse"
+  /actions/validate:
+    post:
+      operationId: ionGatewayValidateAction
+      summary: "Explicit-use only: validate a bounded ION action packet without mutation."
+      description: Use only for a connector-backed draft/action the user asked to validate.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayActionEnvelope"
+      responses:
+        "200":
+          description: Validation response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayActionResult"
+  /actions/submit:
+    post:
+      operationId: ionGatewaySubmitAction
+      summary: "Explicit-use only: submit an approved bounded ION action packet."
+      description: Use only after explicit user approval and required bounded-action proof.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GatewayActionEnvelope"
+      responses:
+        "200":
+          description: Submit response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayActionResult"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    GatewayHealthResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        ok:
+          type: boolean
+        gateway:
+          type: string
+        status:
+          type: string
+        verdict:
+          type: string
+        listen_host:
+          type: string
+        listen_port:
+          type: integer
+        public_transport:
+          type: string
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    GatewayPolicyResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        verdict:
+          type: string
+        status:
+          type: string
+        auth:
+          $ref: "#/components/schemas/FlexibleObject"
+        supported_mvp_intents:
+          type: array
+          items:
+            type: string
+        hard_gated_intents:
+          type: array
+          items:
+            type: string
+        refusal_classes:
+          type: array
+          items:
+            type: string
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    GatewayContextPackResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        ok:
+          type: boolean
+        active_work_packet:
+          $ref: "#/components/schemas/FlexibleObject"
+        policy:
+          $ref: "#/components/schemas/FlexibleObject"
+        local_paths:
+          $ref: "#/components/schemas/FlexibleObject"
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    GatewayCodexQueueResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        verdict:
+          type: string
+        queue_path:
+          type: string
+        queued_request_count:
+          type: integer
+        active_process_running:
+          type: boolean
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    GatewayAgentStatusResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        verdict:
+          type: string
+        accepted:
+          type: boolean
+        agent_count:
+          type: integer
+        agent_invocation_count:
+          type: integer
+        queued_agent_codex_work_request_count:
+          type: integer
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    GatewayReceiptsRecentResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        gateway_receipts:
+          type: array
+          items:
+            $ref: "#/components/schemas/FlexibleObject"
+        chatops_receipts:
+          type: array
+          items:
+            $ref: "#/components/schemas/FlexibleObject"
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    GatewayActionResult:
+      type: object
+      additionalProperties: true
+      properties:
+        ok:
+          type: boolean
+        action_id:
+          type: string
+        intent:
+          type: string
+        status:
+          type: string
+        verdict:
+          type: string
+        refusal_class:
+          type: string
+        gateway_receipt_path:
+          type: string
+        chatops_result:
+          $ref: "#/components/schemas/FlexibleObject"
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    FlexibleObject:
+      type: object
+      additionalProperties: true
+      properties:
+        summary:
+          type: string
+    GatewayActionEnvelope:
+      type: object
+      additionalProperties: true
+      properties:
+        idempotency_key:
+          type: string
+        operator_approval_evidence:
+          type: object
+          additionalProperties: true
+          properties:
+            approved:
+              type: boolean
+            approved_by:
+              type: string
+            approval_token:
+              type: string
+        approval:
+          type: object
+          additionalProperties: true
+          properties:
+            approved:
+              type: boolean
+            approved_by:
+              type: string
+            approval_token:
+              type: string
+        ion_action:
+          type: object
+          additionalProperties: true
+          properties:
+            schema:
+              type: string
+              const: ion.chatops.action.v1
+            action_id:
+              type: string
+            intent:
+              type: string
+              enum:
+                - register_artifact
+                - write_file_draft
+                - create_codex_work_packet
+                - create_github_issue_draft
+            actor:
+              type: object
+              additionalProperties: true
+              properties:
+                callsign:
+                  type: string
+                carrier:
+                  type: string
+            authority:
+              type: object
+              additionalProperties: true
+              properties:
+                human_sovereign:
+                  type: string
+                requires_approval:
+                  type: boolean
+                production_authority:
+                  type: boolean
+                live_execution_authority:
+                  type: boolean
+            target:
+              type: object
+              additionalProperties: true
+              properties:
+                path:
+                  type: string
+                name:
+                  type: string
+            content:
+              type: object
+              additionalProperties: true
+              properties:
+                text:
+                  type: string
+                format:
+                  type: string
+            objective:
+              type: string
+            receipts:
+              type: object
+              additionalProperties: true
+              properties:
+                requested:
+                  type: array
+                  items:
+                    type: string

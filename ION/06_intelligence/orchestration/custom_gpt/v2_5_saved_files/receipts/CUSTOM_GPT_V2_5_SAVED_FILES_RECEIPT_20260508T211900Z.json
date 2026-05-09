@@ -1,0 +1,46 @@
+{
+  "schema": "ion.custom_gpt_saved_files_receipt.v0_1",
+  "timestamp": "2026-05-08T21:19:00Z",
+  "status": "candidate_saved_files_created",
+  "root": "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files",
+  "purpose": "Create a saved-files pack for the ION Custom GPT browser carrier covering mount-first law, extension YAML, Action Gateway, MCP JSON-RPC Action, auth/reentry, and drift guards.",
+  "source_anchors": [
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/README.md",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/schema.ts",
+    "ION/09_integrations/custom_gpt_action_gateway/README.md",
+    "ION/09_integrations/custom_gpt_action_gateway/openapi.yaml",
+    "ION/09_integrations/chatgpt_browser_mcp_action/README.md",
+    "ION/09_integrations/chatgpt_browser_mcp_action/openapi.yaml",
+    "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+    "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+    "ION/05_context/current/self_knowledge/"
+  ],
+  "created_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/README.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/MANIFEST.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/ION_CUSTOM_GPT_INSTRUCTIONS_V2_5.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/MOUNT_FIRST_OPERATING_LAW.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/BOOT_LAYER_CONTEXT_MODEL.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/01_core_mount/BOOT_PACKAGE_ARTIFACT_MAP.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/02_extension_yaml_bridge/README.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/02_extension_yaml_bridge/ION_ACTION_YAML_REFERENCE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/03_actions_and_mcp/ACTION_GATEWAY_REFERENCE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/03_actions_and_mcp/MCP_JSON_RPC_ACTION_REFERENCE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/03_actions_and_mcp/ACTION_SELECTION_AND_PROOF_MAP.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/04_auth_reentry/AUTH_REENTRY_AND_GUEST_MODE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/05_drift_guards/DRIFT_PREVENTION_AND_SOURCE_PRIORITY.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_5_saved_files/06_examples/YAML_AND_ACTION_EXAMPLES.md"
+  ],
+  "authority_boundary": {
+    "candidate_only": true,
+    "accepted_canon": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "non_claims": [
+    "This receipt does not prove the Custom GPT has uploaded or mounted these files.",
+    "This receipt does not prove external Action or MCP availability.",
+    "This receipt does not grant production or live execution authority."
+  ]
+}
