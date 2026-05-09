@@ -23,8 +23,11 @@ out/
 *.log
 *.pid
 ION/05_context/current/chatgpt_connector/runtime/*.log
+ION/05_context/current/chatgpt_connector/runtime/*.latest_log
 ION/05_context/current/chatgpt_connector/runtime/*.pid
 ION/05_context/current/codex_capsule_chat/response_runs/
+ION/05_context/current/chatops_bridge/runtime/
+ION/05_context/current/action_gateway/runtime/
 
 # Secrets and local auth material
 .env
