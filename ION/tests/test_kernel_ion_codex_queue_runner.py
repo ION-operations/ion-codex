@@ -29,6 +29,25 @@ def _seed_request(root: Path) -> str:
         "updated_at": "2026-05-04T00:00:00+00:00",
         "return_packet_paths": [],
         "latest_return_packet_path": None,
+        "request_kind": "codex_chat_response",
+        "ion_skill_activation": {
+            "skill_id": "codex-chat-answer",
+            "display_name": "Codex Chat Answer",
+            "activates_templates": ["ION/07_templates/context/ION_CONTEXT_LOAD_PROOF.md"],
+        },
+        "ion_chat_engine_turn": {
+            "response_mode": "answer",
+            "carrier_strategy": {"mode": "gpt_5_5_codex_chat_response_contract"},
+            "native_lenses": [{"display_name": "Persona", "purpose": "User-facing clarity."}],
+        },
+        "codex_model_move": {
+            "selected_model": "gpt-5.3-codex-spark",
+            "selected_reasoning_effort": "low",
+            "work_class": "cheap_classification",
+            "ion_stage_id": "relay_ingress",
+            "usage_pool_id": "codex_spark_observed",
+            "usage_pool_authority": "operator_observed_pending_verification",
+        },
         "production_authority": False,
         "live_execution_authority": False,
     }
@@ -86,7 +105,18 @@ def test_prepare_codex_queue_run_writes_prompt_and_receipt_without_claiming(tmp_
     run = prepared["run"]
     assert (tmp_path / run["prompt_path"]).exists()
     assert (tmp_path / run["context_receipt_path"]).exists()
-    assert request_rel in (tmp_path / run["prompt_path"]).read_text(encoding="utf-8")
+    prompt = (tmp_path / run["prompt_path"]).read_text(encoding="utf-8")
+    assert request_rel in prompt
+    assert 'request_kind: "codex_chat_response"' in prompt
+    assert "ion_chat_engine:" in prompt
+    assert 'selected_skill: "Codex Chat Answer"' in prompt
+    assert "Persona: User-facing clarity." in prompt
+    assert "codex_model_move:" in prompt
+    assert 'selected_model: "gpt-5.3-codex-spark"' in prompt
+    assert "result: <one-line result>" in prompt
+    assert "touched_paths as a non-empty YAML list" in prompt
+    assert run["codex_model_move"]["selected_model"] == "gpt-5.3-codex-spark"
+    assert run["codex_command"][:6] == ["codex", "exec", "-m", "gpt-5.3-codex-spark", "-c", "model_reasoning_effort=low"]
     request = json.loads((tmp_path / request_rel).read_text(encoding="utf-8"))
     assert request["status"] == "QUEUED_FOR_CODEX_CARRIER"
 
@@ -108,6 +138,7 @@ def test_process_once_inline_records_proof_gated_task_return(tmp_path):
 
     assert result["ok"] is True
     assert result["result"] == "RETURN_RECORDED_PROOF_ACCEPTED"
+    assert result["run"]["pid"] > 0
     request = json.loads((tmp_path / request_rel).read_text(encoding="utf-8"))
     assert request["status"] == "RETURN_RECORDED_PROOF_ACCEPTED"
     assert request["latest_context_proof_accepted"] is True

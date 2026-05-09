@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from .ion_carrier_onboard import resolve_shell_root_from_ion_root
+from .ion_codex_model_moves import build_codex_model_move_plan, codex_exec_args_from_model_move, summarize_model_move
 
 SCHEMA_ID = "ion.codex_queue_runner.v1"
 READY_VERDICT = "ION_CODEX_QUEUE_RUNNER_READY"
@@ -251,8 +252,43 @@ def _context_receipt_for_request(request_rel: str, request: Mapping[str, Any] | 
     }
 
 
-def _build_prompt(request: Mapping[str, Any], request_rel: str, context_receipt_rel: str) -> str:
+def _model_move_for_request(root: Path, request: Mapping[str, Any]) -> dict[str, Any]:
+    existing = request.get("codex_model_move") if isinstance(request.get("codex_model_move"), Mapping) else None
+    if existing:
+        return dict(existing)
+    return build_codex_model_move_plan(
+        root,
+        lane_id=str(request.get("lane_id") or "codex_general"),
+        stage_id=str(request.get("ion_stage_id") or "codex_general_work"),
+        objective=str(request.get("objective") or ""),
+    )
+
+
+def _codex_command(codex_binary: str, model_move: Mapping[str, Any], last_message_rel: str) -> list[str]:
+    return [
+        codex_binary,
+        "exec",
+        *codex_exec_args_from_model_move(model_move),
+        "--sandbox",
+        "workspace-write",
+        "--output-last-message",
+        last_message_rel,
+    ]
+
+
+def _build_prompt(request: Mapping[str, Any], request_rel: str, context_receipt_rel: str, model_move: Mapping[str, Any]) -> str:
     objective = str(request.get("objective") or "")
+    request_kind = str(request.get("request_kind") or "codex_work")
+    skill_activation = request.get("ion_skill_activation") if isinstance(request.get("ion_skill_activation"), Mapping) else {}
+    chat_engine = request.get("ion_chat_engine_turn") if isinstance(request.get("ion_chat_engine_turn"), Mapping) else {}
+    native_lenses = chat_engine.get("native_lenses") if isinstance(chat_engine.get("native_lenses"), list) else []
+    native_lens_lines = [
+        f"    - \"{str(lens.get('display_name') or lens.get('lens_id') or 'lens').replace(chr(34), chr(39))}: {str(lens.get('purpose') or '')[:180].replace(chr(34), chr(39))}\""
+        for lens in native_lenses[:8]
+        if isinstance(lens, Mapping)
+    ]
+    template_refs = skill_activation.get("activates_templates") if isinstance(skill_activation.get("activates_templates"), list) else []
+    template_lines = [f"    - \"{str(ref)}\"" for ref in template_refs[:8]]
     return "\n".join([
         "carrier_mount:",
         "  title: \"ION Codex Queue Runner Work Packet\"",
@@ -263,8 +299,27 @@ def _build_prompt(request: Mapping[str, Any], request_rel: str, context_receipt_
         "  live_execution_authority: false",
         "",
         "mission:",
+        f"  request_kind: \"{request_kind}\"",
         "  primary_goal: >",
         f"    {objective}",
+        "",
+        "ion_chat_engine:",
+        f"  response_mode: \"{chat_engine.get('response_mode') if chat_engine else 'unspecified'}\"",
+        f"  selected_skill: \"{skill_activation.get('display_name') if skill_activation else 'unspecified'}\"",
+        f"  carrier_strategy: \"{(chat_engine.get('carrier_strategy') or {}).get('mode') if isinstance(chat_engine.get('carrier_strategy'), Mapping) else 'existing_codex_queue'}\"",
+        "  native_lenses:",
+        *(native_lens_lines or ["    - \"none declared\""]),
+        "  active_template_refs:",
+        *(template_lines or ["    - \"none declared\""]),
+        "",
+        "codex_model_move:",
+        f"  summary: \"{summarize_model_move(model_move)}\"",
+        f"  selected_model: \"{model_move.get('selected_model')}\"",
+        f"  selected_reasoning_effort: \"{model_move.get('selected_reasoning_effort')}\"",
+        f"  usage_pool_id: \"{model_move.get('usage_pool_id')}\"",
+        f"  usage_pool_authority: \"{model_move.get('usage_pool_authority')}\"",
+        "  usage_limits_authoritative: false",
+        "  note: \"Usage-pool labels are advisory until externally verified.\"",
         "",
         "hard_boundaries:",
         "  - \"Do not claim to be ION, STEWARD, RELAY, PERSONA, or sovereign authority.\"",
@@ -288,8 +343,17 @@ def _build_prompt(request: Mapping[str, Any], request_rel: str, context_receipt_
         "    - \"### RESULT\"",
         "  template_id: \"ion.template.autonomous_loop.local_worker.v1\"",
         "  action_id_hint: \"codex_queue_runner_process_once\"",
+        "  template_action_proof_exact_shape: |",
+        "    ### TEMPLATE ACTION PROOF",
+        "    template_id: ion.template.autonomous_loop.local_worker.v1",
+        "    action_id: codex_queue_runner_process_once",
+        "    result: <one-line result>",
+        "    touched_paths:",
+        "      - <repo-relative evidence or changed path>",
         "  context_proof_requirement: \"Mention every required context path with line/excerpt/sha256 evidence.\"",
         "  result_requirement: \"State touched paths, tests, remaining blockers, and next lawful moves.\"",
+        "  touched_paths_requirement: \"Under TEMPLATE ACTION PROOF, include touched_paths as a non-empty YAML list. For read-only/no-edit work, list the work request, run packet, context receipt, or repo-relative source/status files inspected.\"",
+        "  proof_rejection_warning: \"Do not omit template_id, action_id, result, or touched_paths; [] and none are not accepted for touched_paths.\"",
         "",
     ])
 
@@ -353,9 +417,11 @@ def prepare_codex_queue_run(
     last_message_path = run_dir / "latest_return.md"
     run_packet_path = run_dir / "run.json"
     _write_json(context_receipt_path, context_receipt)
-    prompt = _build_prompt(request, request_rel, _connector_rel(context_receipt_path, shell_root))
+    model_move = _model_move_for_request(shell_root, request)
+    prompt = _build_prompt(request, request_rel, _connector_rel(context_receipt_path, shell_root), model_move)
     prompt_path.write_text(prompt, encoding="utf-8")
     timeout = min(max(int(timeout_seconds), 30), MAX_CODEX_TIMEOUT_SECONDS)
+    last_message_rel = _connector_rel(last_message_path, shell_root)
     run = {
         "schema_id": "ion.codex_queue_runner_run.v1",
         "run_id": run_id,
@@ -369,16 +435,11 @@ def prepare_codex_queue_run(
         "context_receipt_path": _connector_rel(context_receipt_path, shell_root),
         "stdout_path": _connector_rel(stdout_path, shell_root),
         "stderr_path": _connector_rel(stderr_path, shell_root),
-        "last_message_path": _connector_rel(last_message_path, shell_root),
+        "last_message_path": last_message_rel,
         "run_packet_path": _connector_rel(run_packet_path, shell_root),
-        "codex_command": [
-            codex_binary,
-            "exec",
-            "--sandbox",
-            "workspace-write",
-            "--output-last-message",
-            _connector_rel(last_message_path, shell_root),
-        ],
+        "codex_model_move": model_move,
+        "codex_model_move_summary": summarize_model_move(model_move),
+        "codex_command": _codex_command(codex_binary, model_move, last_message_rel),
         "timeout_seconds": timeout,
         "failure_classification": None,
         "production_authority": False,
@@ -701,8 +762,20 @@ def run_codex_queue_worker(
     if not isinstance(run, dict):
         raise ValueError(f"invalid run packet: {run_packet_path}")
     run["status"] = "CODEX_CLI_RUNNING"
+    run["pid"] = os.getpid()
     run["started_at"] = _now()
     _write_run_packet(run_path, run)
+    _update_runner_state(shell_root, {
+        "active_run": {
+            "run_id": run["run_id"],
+            "pid": os.getpid(),
+            "run_packet_path": run["run_packet_path"],
+            "request_path": run["request_path"],
+            "started_at": run["started_at"],
+        },
+        "latest_run": run["run_packet_path"],
+        "manual_proceed_relay_required": False,
+    })
     request_rel = str(run["request_path"])
     task_output = task_output_override
     returncode: int | None = None
@@ -829,7 +902,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         ok = bool(result.get("ok"))
     else:
-        result = build_codex_queue_runner_status(args.ion_root)
+        result = build_codex_queue_runner_status(args.ion_root, reconcile=False)
         ok = result.get("verdict") == READY_VERDICT
 
     if args.json:

@@ -9,6 +9,7 @@ from kernel.ion_chatgpt_browser_mcp_http_preview import (
     handle_mcp_jsonrpc,
     http_mcp_tool_list,
     render_ion_connector_landing,
+    render_public_cockpit_login,
     write_http_mcp_preview_audit,
 )
 
@@ -29,6 +30,7 @@ def test_http_preview_audit_ready_on_current_tree():
     assert result["production_authority"] is False
     assert result["live_execution_authority"] is False
     assert result["deployment_authority"] is False
+    assert result["public_cockpit_auth"]["schema_id"] == "ion.public_cockpit_auth_status.v1"
 
 
 def test_tools_list_exposes_only_v120_contract_tools():
@@ -199,3 +201,80 @@ def test_connector_landing_page_is_safe_human_ui():
 
 def test_connector_landing_paths_include_root_app_and_ion():
     assert {"/", "/app", "/ion"} <= APP_PATHS
+
+
+def test_public_cockpit_csp_allows_bundled_chat_script():
+    class DummyHandler:
+        headers = {}
+        sent_headers: dict[str, str] = {}
+
+        def send_response(self, _status):
+            return None
+
+        def send_header(self, key, value):
+            self.sent_headers[key] = value
+
+        def end_headers(self):
+            return None
+
+        @property
+        def wfile(self):
+            class Writer:
+                def write(self, _body):
+                    return None
+
+            return Writer()
+
+    handler = DummyHandler()
+    from kernel.ion_chatgpt_browser_mcp_http_preview import IonChatGPTPreviewHandler
+
+    IonChatGPTPreviewHandler._send_html(handler, 200, "<html></html>")
+
+    csp = handler.sent_headers["Content-Security-Policy"]
+    assert "script-src 'unsafe-inline'" in csp
+    assert "connect-src 'self'" in csp
+
+
+def test_public_cockpit_login_renders_token_and_google_controls():
+    html = render_public_cockpit_login(
+        next_path="/cockpit/chat",
+        env={
+            "ION_COCKPIT_PUBLIC_TOKEN": "abc123-private-token",
+            "ION_GOOGLE_OAUTH_CLIENT_ID": "client",
+            "ION_GOOGLE_OAUTH_CLIENT_SECRET": "secret",
+            "ION_COCKPIT_ALLOWED_GOOGLE_EMAILS": "sev@example.com",
+        },
+    )
+
+    assert "<title>ION Cockpit Login</title>" in html
+    assert "/cockpit/auth/token" in html
+    assert "/cockpit/auth/google/start" in html
+    assert "Continue with Google" in html
+    assert "Allowed Google emails: 1" in html
+    assert "ION_COCKPIT_ALLOWED_GOOGLE_EMAILS" in html
+    assert "abc123-private-token" not in html
+
+
+def test_public_cockpit_login_explains_google_oauth_setup_gap():
+    html = render_public_cockpit_login(
+        next_path="/cockpit/chat",
+        env={
+            "ION_COCKPIT_PUBLIC_TOKEN": "abc123-private-token",
+            "ION_COCKPIT_ALLOWED_GOOGLE_EMAILS": "crinkedart@gmail.com",
+        },
+    )
+
+    assert "Google OAuth setup needed" in html
+    assert "Allowed Google emails already listed: 1" in html
+    assert "crinkedart@gmail.com" not in html
+
+
+def test_public_cockpit_login_translates_google_state_error():
+    html = render_public_cockpit_login(
+        next_path="/cockpit/chat",
+        finding="google_oauth_state_missing_or_invalid",
+        env={"ION_COCKPIT_PUBLIC_TOKEN": "abc123-private-token"},
+    )
+
+    assert "Google login is not enabled yet. Use the permission token for now." in html
+    assert "google_oauth_state_missing_or_invalid" not in html

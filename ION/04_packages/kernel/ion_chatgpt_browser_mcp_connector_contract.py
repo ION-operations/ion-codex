@@ -207,6 +207,27 @@ def _write_json(path: Path, value: Mapping[str, Any]) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def _sanitize_required_context_reads(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    reads: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for item in value:
+        if isinstance(item, Mapping):
+            path = str(item.get("path") or "").strip()
+            kind = str(item.get("kind") or "file").strip() or "file"
+            required = bool(item.get("required", True))
+        else:
+            path = str(item or "").strip()
+            kind = "file"
+            required = True
+        if not path or path in seen or path.startswith("/") or ".." in Path(path).parts:
+            continue
+        seen.add(path)
+        reads.append({"kind": kind, "path": path, "required": required})
+    return reads[:64]
+
+
 def _safe_slug(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")[:80] or "chatgpt_packet"
 
@@ -369,18 +390,38 @@ def _latest_matching(root: Path, pattern: str) -> Path | None:
     return candidates[-1] if candidates else None
 
 
-def _packet_read(root: Path, packet: str) -> dict[str, Any]:
+def _packet_read(
+    root: Path,
+    packet: str,
+    *,
+    max_bytes: int | None = None,
+    tool_name: str = "ion_read_active_packet",
+) -> dict[str, Any]:
     rel = ACTIVE_PACKET_ALLOWLIST.get(packet)
     if not rel:
-        return _blocked("ion_read_active_packet", "packet_not_allowlisted", {"allowed": sorted(ACTIVE_PACKET_ALLOWLIST)})
+        return _blocked(tool_name, "packet_not_allowlisted", {"allowed": sorted(ACTIVE_PACKET_ALLOWLIST)})
     path = root / rel
     if not path.exists():
-        return _blocked("ion_read_active_packet", "packet_missing", {"path": rel})
+        return _blocked(tool_name, "packet_missing", {"path": rel})
+    if max_bytes is not None:
+        bounded_max = min(max(int(max_bytes), 1), MAX_READ_BYTES)
+        data = path.read_bytes()
+        shown = data[:bounded_max].decode("utf-8", errors="replace")
+        return _ok(
+            tool_name,
+            {
+                "path": rel,
+                "content_preview": shown,
+                "content_truncated": len(data) > bounded_max,
+                "content_bytes": len(data),
+                "max_bytes": bounded_max,
+            },
+        )
     if path.suffix == ".json":
         data: Any = _read_json(path)
     else:
         data = {"text": _read_text(path)}
-    return _ok("ion_read_active_packet", {"path": rel, "content": data})
+    return _ok(tool_name, {"path": rel, "content": data})
 
 
 def _artifact_manifest(root: Path) -> dict[str, Any]:
@@ -1199,9 +1240,15 @@ def call_chatgpt_connector_tool(
         packet = build_carrier_onboarding_packet(shell_root, carrier_id=carrier, carrier_profile_path=profile_path)
         return _ok(tool_name, packet)
     if tool_name == "ion_read_active_packet":
-        return _packet_read(shell_root, str(args.get("packet") or ""))
+        max_bytes = args.get("max_bytes")
+        return _packet_read(
+            shell_root,
+            str(args.get("packet") or ""),
+            max_bytes=int(max_bytes) if max_bytes is not None else None,
+            tool_name=tool_name,
+        )
     if tool_name == "ion_context_plan":
-        return _packet_read(shell_root, "context_window")
+        return _packet_read(shell_root, "context_window", max_bytes=int(args.get("max_bytes") or 32 * 1024), tool_name=tool_name)
     if tool_name == "ion_cockpit_view":
         return _ok(tool_name, build_cockpit_view_model(shell_root))
     if tool_name == "ion_artifact_manifest":
@@ -1231,7 +1278,7 @@ def call_chatgpt_connector_tool(
     if tool_name == "ion_tool_manifest":
         return _ok(tool_name, _tool_manifest(shell_root))
     if tool_name in {"ion_daemon_status", "ion_codex_queue_autorun_status"}:
-        data = build_codex_queue_runner_status(shell_root)
+        data = build_codex_queue_runner_status(shell_root, reconcile=False)
         reconciliation = data.get("reconciliation") if isinstance(data.get("reconciliation"), dict) else {}
         mutates = bool(
             data.get("stale_active_run_detected")
@@ -1324,6 +1371,18 @@ def call_chatgpt_connector_tool(
             "production_authority": False,
             "live_execution_authority": False,
         }
+        if isinstance(args.get("codex_model_move"), Mapping):
+            payload["codex_model_move"] = dict(args["codex_model_move"])
+        request_kind = str(args.get("request_kind") or "").strip()
+        if request_kind:
+            payload["request_kind"] = request_kind
+        if isinstance(args.get("ion_skill_activation"), Mapping):
+            payload["ion_skill_activation"] = dict(args["ion_skill_activation"])
+        if isinstance(args.get("ion_chat_engine_turn"), Mapping):
+            payload["ion_chat_engine_turn"] = dict(args["ion_chat_engine_turn"])
+        required_context_reads = _sanitize_required_context_reads(args.get("required_context_reads"))
+        if required_context_reads:
+            payload["required_context_reads"] = required_context_reads
         packet_path = _write_connector_packet(shell_root, "codex_work_requests", objective, payload)
         payload["packet_path"] = packet_path.relative_to(shell_root).as_posix()
         _write_json(packet_path, payload)

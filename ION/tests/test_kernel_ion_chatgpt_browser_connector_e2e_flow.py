@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from kernel.ion_chatgpt_browser_mcp_http_preview import (
@@ -67,6 +68,9 @@ def test_chatgpt_browser_connector_complete_bounded_codex_work_loop(tmp_path):
         {
             "objective": "E2E connector queue and return proof",
             "confirmation": WRITE_CONFIRMATION_TOKEN,
+            "request_kind": "codex_chat_response",
+            "ion_skill_activation": {"skill_id": "codex-chat-answer", "display_name": "Codex Chat Answer"},
+            "ion_chat_engine_turn": {"response_mode": "answer", "carrier_strategy": {"mode": "gpt_5_5_codex_chat_response_contract"}},
         },
     )
 
@@ -74,6 +78,10 @@ def test_chatgpt_browser_connector_complete_bounded_codex_work_loop(tmp_path):
     request_path = queued["data"]["packet_path"]
     request_id = queued["data"]["request_id"]
     assert (tmp_path / request_path).exists()
+    request_packet = json.loads((tmp_path / request_path).read_text(encoding="utf-8"))
+    assert request_packet["request_kind"] == "codex_chat_response"
+    assert request_packet["ion_skill_activation"]["skill_id"] == "codex-chat-answer"
+    assert request_packet["ion_chat_engine_turn"]["response_mode"] == "answer"
     assert (tmp_path / "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json").exists()
 
     queue = _call(tmp_path, 4, "ion_codex_work_queue", {"limit": 10})

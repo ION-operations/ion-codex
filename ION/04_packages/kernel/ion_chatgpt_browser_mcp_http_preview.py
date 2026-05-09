@@ -9,10 +9,12 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import os
 import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Mapping
+from urllib.parse import parse_qs, urlencode, urlparse
 
 from .ion_chatgpt_browser_mcp_connector_contract import (
     BOUNDED_QUEUE_RECEIPT_TOOLS,
@@ -20,6 +22,40 @@ from .ion_chatgpt_browser_mcp_connector_contract import (
     STATUS_READ_TOOLS,
     audit_chatgpt_browser_mcp_connector_contract,
     call_chatgpt_connector_tool,
+)
+from .ion_cockpit_view_model import build_cockpit_view_model
+from .ion_dual_codex_chat import (
+    WRITE_CONFIRMATION_TOKEN,
+    build_dual_codex_chat_model,
+    pin_dual_chat_memory,
+    queue_chat_codex_work_packet,
+    record_chat_turn,
+    render_dual_codex_chat_html,
+)
+from .ion_local_cockpit_app import build_cockpit_html
+from .ion_public_cockpit_auth import (
+    ALLOWED_EMAILS_ENV,
+    GOOGLE_CLIENT_ID_ENV,
+    GOOGLE_CLIENT_SECRET_ENV,
+    GOOGLE_REDIRECT_URI_ENV,
+    INVITE_TOKENS_ENV,
+    OAUTH_STATE_COOKIE,
+    PUBLIC_COCKPIT_TOKEN_ENV,
+    SESSION_COOKIE,
+    SESSION_SECRET_ENV,
+    auth_status,
+    authorize_google_user,
+    build_google_authorization_url,
+    clear_cookie_header,
+    cockpit_session_secret,
+    exchange_google_code_for_userinfo,
+    google_oauth_configured,
+    make_oauth_state_cookie,
+    make_session_cookie,
+    safe_next_path,
+    validate_oauth_state_cookie,
+    validate_permission_token,
+    validate_session_cookie,
 )
 
 SCHEMA_ID = "ion.chatgpt_browser_http_mcp_preview.v1"
@@ -305,7 +341,28 @@ def _tool_schema(name: str) -> dict[str, Any]:
     if name == "ion_request_codex_work_packet":
         return {
             "type": "object",
-            "properties": {"objective": {"type": "string"}, "confirmation": {"type": "string"}},
+            "properties": {
+                "objective": {"type": "string"},
+                "confirmation": {"type": "string"},
+                "codex_model_move": {
+                    "type": "object",
+                    "description": "Optional deterministic Codex CLI model-move plan created by ION.",
+                    "additionalProperties": True,
+                },
+                "required_context_reads": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "kind": {"type": "string"},
+                            "path": {"type": "string"},
+                            "required": {"type": "boolean"},
+                        },
+                        "required": ["path"],
+                        "additionalProperties": False,
+                    },
+                },
+            },
             "required": ["objective", "confirmation"],
             "additionalProperties": False,
         }
@@ -463,6 +520,7 @@ def audit_http_mcp_preview(root: str | Path | None = None) -> dict[str, Any]:
         "accepted": ready,
         "connector_state": "LOCAL_HTTP_PREVIEW_NOT_PUBLIC_CONNECTOR" if ready else "BLOCKED",
         "endpoint_path": "/mcp",
+        "public_cockpit_auth": auth_status(),
         "default_bind_host": DEFAULT_BIND_HOST,
         "default_port": DEFAULT_PORT,
         "write_confirmation_required": True,
@@ -651,6 +709,101 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
 """
 
 
+def render_public_cockpit_login(
+    *,
+    next_path: str = "/cockpit/chat",
+    finding: str | None = None,
+    env: Mapping[str, str] | None = None,
+) -> str:
+    status = auth_status(env)
+    google_enabled = bool(status.get("google_oauth_configured"))
+    token_enabled = bool(status.get("permission_token_configured"))
+    allowed_count = int(status.get("google_allowed_email_count") or 0)
+    google_status = (
+        f"Google OAuth is configured. Allowed Google emails: {allowed_count}."
+        if google_enabled
+        else f"Google OAuth still needs client ID and secret. Allowed Google emails already listed: {allowed_count}."
+    )
+    finding_messages = {
+        "google_oauth_state_missing_or_invalid": "Google login is not enabled yet. Use the permission token for now.",
+        "google_oauth_not_configured": "Google login is not enabled yet. Use the permission token for now.",
+        "google_oauth_state_mismatch": "Google login expired. Start again from this page after Google setup is complete.",
+        "permission_token_invalid": "Permission token did not match.",
+        "permission_token_required": "Enter the permission token.",
+    }
+    finding_text = finding_messages.get(str(finding or ""), str(finding or ""))
+    finding_html = f"<p class=\"error\">{_html_text(finding_text)}</p>" if finding_text else ""
+    google_button = (
+        "<button type=\"submit\">Continue with Google</button>"
+        if google_enabled
+        else "<button type=\"submit\" disabled>Google OAuth setup needed</button>"
+    )
+    token_button = (
+        "<button type=\"submit\">Login with permission token</button>"
+        if token_enabled
+        else "<button type=\"submit\" disabled>Permission token not configured</button>"
+    )
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ION Cockpit Login</title>
+  <style>
+    :root {{ color-scheme: dark; --bg:#090b0c; --panel:#121619; --line:#2b343a; --text:#edf2f4; --muted:#9aa7ad; --blue:#65a7e8; --red:#e15f5f; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }}
+    * {{ box-sizing: border-box; }}
+    body {{ margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--text); }}
+    main {{ width:min(920px, calc(100vw - 32px)); display:grid; grid-template-columns:1fr 1fr; gap:14px; }}
+    header {{ grid-column:1 / -1; border-bottom:1px solid var(--line); padding-bottom:14px; }}
+    h1,h2,p {{ margin:0; letter-spacing:0; }}
+    h1 {{ font-size:32px; }}
+    h2 {{ font-size:16px; margin-bottom:8px; }}
+    p {{ color:var(--muted); line-height:1.4; }}
+    section {{ background:var(--panel); border:1px solid var(--line); border-radius:7px; padding:14px; }}
+    form {{ display:grid; gap:8px; margin-top:12px; }}
+    label {{ color:var(--muted); font-size:13px; }}
+    input {{ width:100%; border:1px solid var(--line); border-radius:5px; background:#0d1113; color:var(--text); padding:9px; font:inherit; }}
+    button {{ justify-self:start; border:1px solid var(--line); background:#18242b; color:var(--text); border-radius:5px; padding:8px 11px; font-weight:700; cursor:pointer; }}
+    button:disabled {{ opacity:.55; cursor:not-allowed; }}
+    .error {{ grid-column:1 / -1; color:var(--red); }}
+    code {{ color:#f5d0b4; overflow-wrap:anywhere; }}
+    @media (max-width:760px) {{ main {{ grid-template-columns:1fr; }} }}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>ION Cockpit Login</h1>
+    <p>Access is limited to signed cockpit sessions, permission tokens, or approved Google accounts. This login does not grant production authority.</p>
+  </header>
+  {finding_html}
+  <section>
+    <h2>Permission Token</h2>
+    <p>Use the current ION cockpit permission token or an invited token.</p>
+    <form method="post" action="/cockpit/auth/token">
+      <input type="hidden" name="next" value="{_html_text(safe_next_path(next_path))}">
+      <label for="permission_token">Token</label>
+      <input id="permission_token" name="permission_token" type="password" autocomplete="current-password">
+      {token_button}
+    </form>
+  </section>
+  <section>
+    <h2>Google Account</h2>
+    <p>{_html_text(google_status)}</p>
+    <p>Allowed emails are controlled by <code>{ALLOWED_EMAILS_ENV}</code>. An invite token can permit an additional Google account.</p>
+    <form method="post" action="/cockpit/auth/google/start">
+      <input type="hidden" name="next" value="{_html_text(safe_next_path(next_path))}">
+      <label for="invite_token">Invite token, optional</label>
+      <input id="invite_token" name="invite_token" type="password" autocomplete="one-time-code">
+      {google_button}
+    </form>
+  </section>
+</main>
+</body>
+</html>"""
+
+
 def write_http_mcp_preview_audit(
     root: str | Path | None = None,
     *,
@@ -672,6 +825,7 @@ class IonChatGPTPreviewHandler(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(body)
 
@@ -682,7 +836,7 @@ class IonChatGPTPreviewHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
         self.send_header("X-Content-Type-Options", "nosniff")
-        self.send_header("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'")
+        self.send_header("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'")
         self.end_headers()
         self.wfile.write(body)
 
@@ -690,11 +844,199 @@ class IonChatGPTPreviewHandler(BaseHTTPRequestHandler):
         host = self.headers.get("host") or ""
         if not host:
             return ""
-        proto = self.headers.get("x-forwarded-proto") or ("https" if host.endswith(".trycloudflare.com") else "http")
+        local_host = host.startswith("127.0.0.1") or host.startswith("localhost")
+        proto = self.headers.get("x-forwarded-proto") or ("http" if local_host else "https")
         return f"{proto}://{host}"
+
+    def _secure_cookie(self) -> bool:
+        return self._public_base_url().startswith("https://")
+
+    def _request_token(self, payload: Mapping[str, Any] | None = None) -> str:
+        auth = self.headers.get("authorization") or ""
+        if auth.lower().startswith("bearer "):
+            return auth.split(" ", 1)[1].strip()
+        query = parse_qs(urlparse(self.path).query)
+        if query.get("token"):
+            return str(query["token"][-1])
+        if payload and payload.get("public_token"):
+            return str(payload.get("public_token") or "")
+        return ""
+
+    def _check_public_cockpit_access(self, payload: Mapping[str, Any] | None = None) -> tuple[bool, str | None, str | None]:
+        secret = cockpit_session_secret()
+        if secret:
+            session = validate_session_cookie(self.headers.get("cookie"), secret=secret)
+            if session.ok:
+                return True, None, None
+        supplied = self._request_token(payload)
+        if supplied:
+            token_result = validate_permission_token(supplied)
+            if token_result.ok:
+                return True, None, supplied
+            return False, token_result.finding or "permission_token_invalid", None
+        if not secret and not validate_permission_token(os.environ.get(PUBLIC_COCKPIT_TOKEN_ENV) or "").ok and not google_oauth_configured():
+            return False, "public_cockpit_auth_not_configured", None
+        return False, "public_cockpit_login_required", None
+
+    def _login_path(self, next_path: str | None = None, finding: str | None = None) -> str:
+        params: dict[str, str] = {"next": safe_next_path(next_path or self.path)}
+        if finding:
+            params["finding"] = finding
+        return "/cockpit/login?" + urlencode(params)
+
+    def _send_public_cockpit_blocked(self, finding: str, *, next_path: str | None = None) -> None:
+        if not self._wants_json() and finding in {"public_cockpit_login_required", "permission_token_required", "permission_token_invalid"}:
+            self._redirect(self._login_path(next_path or self.path, None if finding == "public_cockpit_login_required" else finding))
+            return
+        self._send_json(
+            503 if finding == "public_cockpit_auth_not_configured" else 401,
+            {
+                "ok": False,
+                "finding": finding,
+                "login_path": self._login_path(next_path or self.path),
+                "public_cockpit_path": "/cockpit/chat",
+                "session_cookie": SESSION_COOKIE,
+                "requires_env": [
+                    PUBLIC_COCKPIT_TOKEN_ENV,
+                    SESSION_SECRET_ENV,
+                    INVITE_TOKENS_ENV,
+                    GOOGLE_CLIENT_ID_ENV,
+                    GOOGLE_CLIENT_SECRET_ENV,
+                    GOOGLE_REDIRECT_URI_ENV,
+                    ALLOWED_EMAILS_ENV,
+                ],
+                "production_authority": False,
+                "live_execution_authority": False,
+            },
+        )
+
+    def _send_login(self, *, status: int = 200, next_path: str = "/cockpit/chat", finding: str | None = None) -> None:
+        self._send_html(status, render_public_cockpit_login(next_path=next_path, finding=finding))
+
+    def _redirect_with_headers(self, target: str, headers: Mapping[str, str]) -> None:
+        self.send_response(303)
+        self.send_header("Location", target)
+        self.send_header("Cache-Control", "no-store")
+        for key, value in headers.items():
+            self.send_header(key, value)
+        self.end_headers()
+
+    def _session_redirect(self, principal: Mapping[str, Any], next_path: str) -> None:
+        secret = cockpit_session_secret()
+        if not secret:
+            self._send_login(status=503, next_path=next_path, finding="cockpit_session_secret_not_configured")
+            return
+        self._redirect_with_headers(
+            safe_next_path(next_path),
+            {"Set-Cookie": make_session_cookie(principal, secret=secret, secure=self._secure_cookie())},
+        )
+
+    def _read_payload(self) -> dict[str, Any]:
+        length = int(self.headers.get("content-length") or "0")
+        raw = self.rfile.read(length)
+        content_type = (self.headers.get("content-type") or "").split(";", 1)[0].strip().lower()
+        if content_type == "application/json":
+            return json.loads(raw.decode("utf-8") or "{}")
+        parsed = parse_qs(raw.decode("utf-8"), keep_blank_values=True)
+        return {key: values[-1] if values else "" for key, values in parsed.items()}
+
+    def _wants_json(self) -> bool:
+        accept = self.headers.get("accept") or ""
+        content_type = self.headers.get("content-type") or ""
+        return "application/json" in accept or content_type.startswith("application/json")
+
+    def _redirect(self, target: str) -> None:
+        self.send_response(303)
+        self.send_header("Location", target)
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
 
     def do_GET(self) -> None:  # noqa: N802 - stdlib handler name
         path = self.path.split("?", 1)[0]
+        query = parse_qs(urlparse(self.path).query)
+        if path in {"/cockpit/login", "/cockpit/login/"}:
+            self._send_login(
+                next_path=str(query.get("next", ["/cockpit/chat"])[-1]),
+                finding=str(query.get("finding", [""])[-1]) or None,
+            )
+            return
+        if path in {"/cockpit/logout", "/cockpit/logout/"}:
+            self.send_response(303)
+            self.send_header("Location", "/cockpit/login")
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("Set-Cookie", clear_cookie_header(SESSION_COOKIE, secure=self._secure_cookie()))
+            self.send_header("Set-Cookie", clear_cookie_header(OAUTH_STATE_COOKIE, secure=self._secure_cookie()))
+            self.end_headers()
+            return
+        if path == "/cockpit/auth/google/callback":
+            if not google_oauth_configured():
+                self._send_login(status=503, finding="google_oauth_not_configured")
+                return
+            secret = cockpit_session_secret()
+            if not secret:
+                self._send_login(status=503, finding="cockpit_session_secret_not_configured")
+                return
+            state_result = validate_oauth_state_cookie(
+                self.headers.get("cookie"),
+                secret=secret,
+                state=str(query.get("state", [""])[-1]),
+            )
+            if not state_result.ok:
+                self._send_login(status=401, finding=state_result.finding)
+                return
+            if query.get("error"):
+                self._send_login(status=401, finding="google_oauth_" + str(query.get("error", ["error"])[-1]))
+                return
+            try:
+                userinfo = exchange_google_code_for_userinfo(
+                    code=str(query.get("code", [""])[-1]),
+                    base_url=self._public_base_url(),
+                )
+                auth = authorize_google_user(userinfo, oauth_state=state_result.principal or {})
+            except Exception as exc:
+                self._send_login(status=401, finding=f"google_oauth_failed:{exc.__class__.__name__}")
+                return
+            if not auth.ok:
+                self._send_login(status=401, finding=auth.finding)
+                return
+            self.send_response(303)
+            self.send_header("Location", safe_next_path(str((state_result.principal or {}).get("next") or "/cockpit/chat")))
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("Set-Cookie", make_session_cookie(auth.principal or {}, secret=secret, secure=self._secure_cookie()))
+            self.send_header("Set-Cookie", clear_cookie_header(OAUTH_STATE_COOKIE, secure=self._secure_cookie()))
+            self.end_headers()
+            return
+        if path in {"/cockpit", "/cockpit/"}:
+            ok, finding, token = self._check_public_cockpit_access()
+            if not ok:
+                self._send_public_cockpit_blocked(str(finding), next_path="/cockpit")
+                return
+            html_text = build_cockpit_html(build_cockpit_view_model(self.server.ion_root))  # type: ignore[attr-defined]
+            replacement = f'href="/cockpit?token={_html_text(token)}"' if token else 'href="/cockpit"'
+            self._send_html(200, html_text.replace('href="/cockpit"', replacement))
+            return
+        if path in {"/cockpit/chat", "/cockpit/chat/"}:
+            ok, finding, token = self._check_public_cockpit_access()
+            if not ok:
+                self._send_public_cockpit_blocked(str(finding), next_path="/cockpit/chat")
+                return
+            model = build_dual_codex_chat_model(self.server.ion_root, write=True)  # type: ignore[attr-defined]
+            self._send_html(200, render_dual_codex_chat_html(model, base_path="/cockpit/chat", auth_token=token))
+            return
+        if path == "/cockpit/model.json":
+            ok, finding, _token = self._check_public_cockpit_access()
+            if not ok:
+                self._send_public_cockpit_blocked(str(finding), next_path="/cockpit/model.json")
+                return
+            self._send_json(200, build_cockpit_view_model(self.server.ion_root))  # type: ignore[attr-defined]
+            return
+        if path == "/cockpit/chat/model.json":
+            ok, finding, _token = self._check_public_cockpit_access()
+            if not ok:
+                self._send_public_cockpit_blocked(str(finding), next_path="/cockpit/chat/model.json")
+                return
+            self._send_json(200, build_dual_codex_chat_model(self.server.ion_root))  # type: ignore[attr-defined]
+            return
         if path in APP_PATHS:
             self._send_html(
                 200,
@@ -710,7 +1052,77 @@ class IonChatGPTPreviewHandler(BaseHTTPRequestHandler):
         self._send_json(200, audit_http_mcp_preview(self.server.ion_root))  # type: ignore[attr-defined]
 
     def do_POST(self) -> None:  # noqa: N802 - stdlib handler name
-        if self.path != "/mcp":
+        path = self.path.split("?", 1)[0]
+        if path == "/cockpit/auth/token":
+            payload = self._read_payload()
+            next_path = safe_next_path(str(payload.get("next") or "/cockpit/chat"))
+            token_result = validate_permission_token(str(payload.get("permission_token") or ""))
+            if not token_result.ok:
+                self._send_login(status=401, next_path=next_path, finding=token_result.finding)
+                return
+            self._session_redirect(token_result.principal or {}, next_path)
+            return
+        if path == "/cockpit/auth/google/start":
+            payload = self._read_payload()
+            next_path = safe_next_path(str(payload.get("next") or "/cockpit/chat"))
+            if not google_oauth_configured():
+                self._send_login(status=503, next_path=next_path, finding="google_oauth_not_configured")
+                return
+            secret = cockpit_session_secret()
+            if not secret:
+                self._send_login(status=503, next_path=next_path, finding="cockpit_session_secret_not_configured")
+                return
+            nonce, state_cookie = make_oauth_state_cookie(
+                secret=secret,
+                next_path=next_path,
+                invite_token=str(payload.get("invite_token") or ""),
+                secure=self._secure_cookie(),
+            )
+            self._redirect_with_headers(
+                build_google_authorization_url(base_url=self._public_base_url(), state=nonce),
+                {"Set-Cookie": state_cookie},
+            )
+            return
+        if path in {"/cockpit/chat/turn", "/cockpit/chat/queue", "/cockpit/chat/memory"}:
+            try:
+                payload = self._read_payload()
+                ok, finding, token = self._check_public_cockpit_access(payload)
+                if not ok:
+                    self._send_public_cockpit_blocked(str(finding), next_path="/cockpit/chat")
+                    return
+                if path == "/cockpit/chat/turn":
+                    result = record_chat_turn(
+                        self.server.ion_root,  # type: ignore[attr-defined]
+                        lane_id=str(payload.get("lane_id") or ""),
+                        message=str(payload.get("message") or ""),
+                        author=str(payload.get("author") or "operator"),
+                        execution_mode=str(payload.get("execution_mode") or ""),
+                    )
+                elif path == "/cockpit/chat/queue":
+                    result = queue_chat_codex_work_packet(
+                        self.server.ion_root,  # type: ignore[attr-defined]
+                        lane_id=str(payload.get("lane_id") or ""),
+                        objective=str(payload.get("objective") or ""),
+                        confirmation=str(payload.get("confirmation") or ""),
+                    )
+                else:
+                    result = pin_dual_chat_memory(
+                        self.server.ion_root,  # type: ignore[attr-defined]
+                        lane_id=str(payload.get("lane_id") or ""),
+                        text=str(payload.get("text") or ""),
+                        source_turn_id=str(payload.get("source_turn_id") or "") or None,
+                        confirmation=str(payload.get("confirmation") or WRITE_CONFIRMATION_TOKEN),
+                    )
+            except Exception as exc:
+                result = {"ok": False, "finding": "request_failed", "error": exc.__class__.__name__}
+                token = None
+            if self._wants_json():
+                self._send_json(200 if result.get("ok") else 400, result)
+                return
+            suffix = f"?token={token}" if token else ""
+            self._redirect(f"/cockpit/chat{suffix}")
+            return
+        if path != "/mcp":
             self._send_json(404, {"ok": False, "error": "not_found"})
             return
         length = int(self.headers.get("content-length") or "0")
