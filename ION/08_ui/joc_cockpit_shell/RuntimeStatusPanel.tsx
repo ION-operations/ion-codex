@@ -28,6 +28,7 @@ export function RuntimeStatusPanel({ runtime }: Props) {
         <Metric label="gates" value={String(top.gate_count)} />
         <Metric label="returns" value={`A${top.return_counts.accepted ?? 0} R${top.return_counts.rejected ?? 0} P${top.return_counts.pending ?? 0}`} />
         <Metric label="steward q" value={String(top.steward_queue_count)} />
+        <Metric label="services" value={runtime.local_services?.status ?? top.local_service_status ?? 'unknown'} />
         <Metric label="package" value={packageVerdict} />
         <Metric label="mcp donor" value={donorVerdict} />
       </div>

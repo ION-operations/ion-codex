@@ -1,0 +1,16 @@
+[Unit]
+Description=ION Custom GPT Action Gateway
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=__ION_ROOT__
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONPATH=__ION_PYTHONPATH__
+EnvironmentFile=__ION_ACTION_GATEWAY_ENV__
+ExecStart=/usr/bin/python3 -u -S -m kernel.ion_custom_gpt_action_gateway --ion-root . --host 127.0.0.1 --port 8777 --serve
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target

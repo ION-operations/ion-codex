@@ -18,6 +18,7 @@ from typing import Any, Iterable
 from .ion_agent_invocation_broker import build_agent_broker_status
 from .ion_chatgpt_sandbox_return_intake import build_sandbox_return_queue_projection
 from .ion_codex_queue_runner import build_codex_queue_runner_status
+from .ion_local_service_status import build_local_service_status
 
 CURRENT = Path("ION/05_context/current")
 SIGNALS = Path("ION/05_context/signals")
@@ -403,7 +404,7 @@ def _chatgpt_browser_mcp_summary(root: Path) -> dict[str, Any]:
         "latest_agent_invocations": _latest_files(root, "ION/05_context/current/chatgpt_connector/agent_invocations"),
         "latest_artifact_receipts": _latest_files(root, "ION/05_context/current/chatgpt_connector/artifact_receipts"),
         "latest_decisions": _latest_files(root, "ION/05_context/current/chatgpt_connector/decisions"),
-        "codex_queue_runner": build_codex_queue_runner_status(root),
+        "codex_queue_runner": build_codex_queue_runner_status(root, reconcile=False),
         "agent_invocation_broker": agent_broker,
         "artifact_upload_status_counts": upload_status_counts,
         "adapter_gap_not_core_failure": True,
@@ -455,6 +456,7 @@ def build_cockpit_view_model(ion_root: str | Path = ".") -> dict[str, Any]:
     plan_spawn_count = _spawn_count(spawn_rows)
     deferred_spawn_count = _deferred_spawn_count(spawn_rows)
     sandbox_returns = _chatgpt_sandbox_returns_summary(root)
+    local_services = build_local_service_status(root)
     counts = {
         "spawn_rows": len(spawn_rows),
         "spawn_true": active_spawn_count,
@@ -492,6 +494,9 @@ def build_cockpit_view_model(ion_root: str | Path = ".") -> dict[str, Any]:
             "steward_queue_count": len(steward_items),
             "operator_queue_pending": len(pending_operator),
             "sandbox_return_count": sandbox_returns.get("return_count", 0),
+            "local_service_status": local_services.get("status"),
+            "local_service_count": local_services.get("service_count", 0),
+            "local_service_missing_template_count": local_services.get("missing_template_count", 0),
         },
         "queues": {
             "operator_messages": operator_items,
@@ -508,6 +513,7 @@ def build_cockpit_view_model(ion_root: str | Path = ".") -> dict[str, Any]:
         "v72_mcp_donor_reconciliation": data["v72_mcp_donor_reconciliation"],
         "chatgpt_browser_mcp": _chatgpt_browser_mcp_summary(root),
         "chatgpt_sandbox_returns": sandbox_returns,
+        "local_services": local_services,
         "receipts": recent_receipts(root),
         "authority_classes": [
             "ACTIVE_RUNTIME_AUTHORITY",

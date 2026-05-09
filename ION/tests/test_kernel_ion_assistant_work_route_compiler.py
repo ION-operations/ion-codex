@@ -116,6 +116,81 @@ lifecycle_records:
     )
 
 
+def _seed_fission_candidates(root: Path) -> None:
+    fission = root / "ION/05_context/current/ai_assistant_work/fission/AI_ASSISTANT_WORK_DOMAIN_FISSION_CANDIDATES_V0_1.yaml"
+    fission.parent.mkdir(parents=True, exist_ok=True)
+    fission.write_text(
+        """
+schema: ion.ai_assistant_work.domain_fission_candidates.v0_1
+status: candidate_current_state_not_accepted_canon
+candidate_count: 2
+candidates:
+  - candidate_domain_id: pr_agent_work_domain
+    title: PR Agent Work Domain
+    parent_domains:
+      - review_security_domain
+      - dependency_package_domain
+      - testing_quality_domain
+    rationale: PR-agent work combines diff review, CI evidence, lockfile analysis, review comments, and merge settlement.
+    pressure_signals:
+      - recurring PR embodiment
+      - review comments are candidate state
+      - CI and lockfile evidence need specialized proof
+    proposed_primary_agents:
+      - PR_REVIEW_STEWARD
+      - PR_COMMENT_SCRIBE
+      - PR_MERGE_SETTLEMENT_AUDITOR
+      - CI_EVIDENCE_TRIAGER
+      - LOCKFILE_AUDITOR
+    proposed_template_packets:
+      - pr_review_packet
+      - pr_comment_candidate_packet
+      - pr_merge_settlement_packet
+      - ci_evidence_triage_packet
+      - lockfile_diff_risk_packet
+    proposed_protocols:
+      - pr_comments_are_candidate_review_state
+      - merge_requires_settlement_receipt
+      - ci_output_requires_failure_classification
+    critical_state_surfaces:
+      - diff_state
+      - review_comment_state
+      - ci_state
+      - lockfile_state
+      - settlement_receipt_state
+    settlement_route: review_return_to_settlement_steward
+    status: fission_candidate_not_accepted_domain
+  - candidate_domain_id: terminal_proof_domain
+    title: Terminal and Command Proof Domain
+    parent_domains:
+      - workflow_automation_tool_domain
+      - testing_quality_domain
+    rationale: CLI work depends on command evidence, return codes, stdout/stderr excerpts, reruns, and non-claims.
+    pressure_signals:
+      - terminal output is often overclaimed
+      - return-code proof must be normalized
+    proposed_primary_agents:
+      - TERMINAL_PROOF_CURATOR
+      - COMMAND_RECEIPT_AUDITOR
+      - TEST_RUNNER
+    proposed_template_packets:
+      - terminal_proof_receipt_packet
+      - command_rerun_validation_packet
+    proposed_protocols:
+      - command_claim_requires_return_code
+      - stdout_stderr_are_evidence_not_state
+    critical_state_surfaces:
+      - terminal_session_state
+      - command_receipt_state
+      - test_result_state
+    settlement_route: proof_receipt_to_task_or_release_owner
+    status: fission_candidate_not_accepted_domain
+""".strip()
+        + "\n",
+        encoding="utf-8",
+    )
+
+
 def test_route_compiler_selects_candidate_ui_route_without_promoting_law(tmp_path: Path):
     if compiler.yaml is None:
         pytest.skip("PyYAML unavailable")
@@ -146,6 +221,57 @@ def test_route_compiler_selects_candidate_ui_route_without_promoting_law(tmp_pat
     assert route["authority_boundary"]["mutates_ION_03_registry"] is False
     assert route["authority_boundary"]["mutates_product_front_door"] is False
     assert route["production_authority"] is False
+
+
+def test_route_compiler_proposes_dynamic_fission_domain_for_pr_pressure(tmp_path: Path):
+    if compiler.yaml is None:
+        pytest.skip("PyYAML unavailable")
+    _seed_route_compiler(tmp_path)
+    _seed_lifecycle(tmp_path)
+    _seed_fission_candidates(tmp_path)
+
+    route = compile_assistant_work_route(
+        tmp_path,
+        lane_id="codex_general",
+        message="Review this PR branch, classify CI failures, inspect lockfile diff risk, and prepare merge settlement.",
+        response_mode="queue_work",
+        selected_skill_id="codex-solo-work",
+        execution_mode="queue_for_codex",
+    )
+
+    proposal = route["dynamic_domain_agent_proposal"]
+    assert proposal["needed"] is True
+    assert proposal["trigger"] == "fission_candidate_match"
+    assert proposal["lifecycle_state"] == "operational_candidate"
+    assert proposal["recommended_local_hub_report"] is True
+    assert proposal["candidate_domains"][0]["domain_id"] == "pr_agent_work_domain"
+    assert "CI_EVIDENCE_TRIAGER" in [agent["agent_id"] for agent in proposal["candidate_agents"]]
+    assert "LOCKFILE_AUDITOR" in [agent["agent_id"] for agent in proposal["candidate_agents"]]
+    assert proposal["authority_boundary"]["mutates_ION_03_registry"] is False
+    assert proposal["authority_boundary"]["requires_explicit_acceptance_to_land"] is True
+
+
+def test_route_compiler_keeps_dynamic_proposal_empty_for_covered_generic_task(tmp_path: Path):
+    if compiler.yaml is None:
+        pytest.skip("PyYAML unavailable")
+    _seed_route_compiler(tmp_path)
+    _seed_lifecycle(tmp_path)
+    _seed_fission_candidates(tmp_path)
+
+    route = compile_assistant_work_route(
+        tmp_path,
+        lane_id="codex_general",
+        message="Refactor the local codebase and run the focused test loop.",
+        response_mode="queue_work",
+        selected_skill_id="codex-solo-work",
+        execution_mode="queue_for_codex",
+    )
+
+    proposal = route["dynamic_domain_agent_proposal"]
+    assert proposal["needed"] is False
+    assert proposal["trigger"] == "none"
+    assert proposal["candidate_domains"] == []
+    assert proposal["recommended_local_hub_report"] is False
 
 
 def test_route_compiler_filters_disabled_lifecycle_route(tmp_path: Path):

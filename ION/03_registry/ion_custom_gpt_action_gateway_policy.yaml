@@ -1,0 +1,58 @@
+schema_id: ion.custom_gpt_action_gateway_policy.v1
+status: draft_non_production
+production_authority: false
+live_execution_authority: false
+listen_host: 127.0.0.1
+listen_port: 8777
+public_transport: cloudflare_tunnel
+auth:
+  required: true
+  scheme: bearer
+  token_env_var: ION_ACTION_GATEWAY_TOKEN
+  token_sha256_env_var: ION_ACTION_GATEWAY_TOKEN_SHA256
+limits:
+  max_body_bytes: 262144
+  require_idempotency_key_for_mutation: true
+allowed_get_paths:
+  - /health
+  - /policy
+  - /context-pack
+  - /codex/queue
+  - /agent/status
+  - /receipts/recent
+allowed_post_paths:
+  - /actions/validate
+  - /actions/submit
+supported_mvp_intents:
+  - register_artifact
+  - write_file_draft
+  - create_codex_work_packet
+  - create_github_issue_draft
+hard_gated_intents:
+  - delete_file
+  - overwrite_protected_file
+  - push_main
+  - access_credential
+  - production_deploy
+  - broad_shell
+refusal_classes:
+  - AUTH_MISSING
+  - AUTH_INVALID
+  - IDEMPOTENCY_KEY_REQUIRED
+  - IDEMPOTENCY_REPLAY_BLOCKED
+  - PAYLOAD_TOO_LARGE
+  - ENDPOINT_NOT_ALLOWED
+  - INTENT_NOT_SUPPORTED
+  - INTENT_HARD_GATED
+  - PRODUCTION_AUTHORITY_REFUSED
+  - LIVE_EXECUTION_AUTHORITY_REFUSED
+  - OPERATOR_APPROVAL_REQUIRED
+  - APPROVAL_EVIDENCE_INVALID
+  - PATH_NOT_ALLOWED
+  - SCHEMA_INVALID
+  - LOCAL_DAEMON_UNAVAILABLE
+  - ION_OWNER_REFUSED
+  - STEWARD_GATE_REQUIRED
+storage:
+  receipts: ION/05_context/current/action_gateway/receipts/
+  runtime: ION/05_context/current/action_gateway/runtime/

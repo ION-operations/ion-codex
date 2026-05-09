@@ -1,0 +1,15 @@
+[Unit]
+Description=ION ChatGPT Browser MCP HTTP Preview
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=__ION_ROOT__
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONPATH=__ION_PYTHONPATH__
+ExecStart=/usr/bin/python3 -S -m kernel.ion_chatgpt_browser_mcp_http_preview --ion-root . --host 127.0.0.1 --port 8765 --serve
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target

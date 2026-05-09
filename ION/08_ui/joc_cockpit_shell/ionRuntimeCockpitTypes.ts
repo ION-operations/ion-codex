@@ -159,6 +159,35 @@ export type IonQueueState = {
   steward_integration: Record<string, unknown>[];
 };
 
+export type IonLocalServiceStatus = {
+  schema_id: 'ion.local_service_status.v1';
+  generated_at: string;
+  verdict: string;
+  status: string;
+  probe_http: boolean;
+  service_count: number;
+  ready_count: number;
+  not_running_count: number;
+  degraded_count: number;
+  missing_template_count: number;
+  services: Array<{
+    service_id: string;
+    unit_name: string;
+    role: string;
+    local_url?: string | null;
+    health_url?: string | null;
+    public_url?: string | null;
+    tunnel_name?: string | null;
+    status: string;
+    findings: string[];
+    production_authority: boolean;
+    live_execution_authority: boolean;
+  }>;
+  install_authority: boolean;
+  production_authority: boolean;
+  live_execution_authority: boolean;
+};
+
 export type IonCockpitViewModel = {
   schema_id: 'ion.cockpit_view_model.v1';
   generated_at: string;
@@ -183,6 +212,9 @@ export type IonCockpitViewModel = {
     return_counts: Record<string, number>;
     steward_queue_count: number;
     operator_queue_pending: number;
+    local_service_status?: string;
+    local_service_count?: number;
+    local_service_missing_template_count?: number;
   };
   queues: IonQueueState;
   agents: {
@@ -208,6 +240,7 @@ export type IonCockpitViewModel = {
   runtime_debug_overlay?: IonRuntimeDebugOverlay;
   safe_full_project_package?: IonSafeFullProjectPackage;
   v72_mcp_donor_reconciliation?: IonV72McpDonorReconciliation;
+  local_services?: IonLocalServiceStatus;
   receipts: Record<string, unknown>[];
   authority_classes: IonAuthorityClass[];
   source_paths: Record<string, string>;

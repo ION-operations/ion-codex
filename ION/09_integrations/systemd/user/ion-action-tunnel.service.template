@@ -1,0 +1,14 @@
+[Unit]
+Description=ION Cloudflare Tunnel for ion-actions.helixion.net
+Requires=ion-action-gateway.service
+After=network.target ion-action-gateway.service
+
+[Service]
+Type=simple
+WorkingDirectory=__ION_ROOT__
+ExecStart=__CLOUDFLARED__ tunnel run --url http://127.0.0.1:8777 ion-actions
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target

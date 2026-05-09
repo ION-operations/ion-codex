@@ -21,6 +21,7 @@ except Exception:  # pragma: no cover
 
 SCHEMA_ID = "ion.assistant_work_route_compiler.v0_1"
 SURFACE_SCHEMA_ID = "ion.assistant_work_route_surface.v0_1"
+DYNAMIC_PROPOSAL_SCHEMA_ID = "ion.assistant_work.dynamic_domain_agent_proposal.v0_1"
 READY_VERDICT = "ION_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_READY"
 UNAVAILABLE_VERDICT = "ION_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_UNAVAILABLE"
 
@@ -28,6 +29,7 @@ AIW_ROOT = Path("ION/05_context/current/ai_assistant_work")
 ROUTE_REGISTRY_PATH = AIW_ROOT / "registries/AI_ASSISTANT_WORK_ROUTE_REGISTRY_CANDIDATE_V0_1.yaml"
 ROUTE_COMPILER_DIR = AIW_ROOT / "route_compiler"
 LIFECYCLE_REGISTRY_PATH = AIW_ROOT / "candidate_lifecycle/CANDIDATE_DOMAIN_LIFECYCLE_REGISTRY_V0_1.yaml"
+FISSION_CANDIDATES_PATH = AIW_ROOT / "fission/AI_ASSISTANT_WORK_DOMAIN_FISSION_CANDIDATES_V0_1.yaml"
 
 ROUTE_COMPILER_ENABLED_LIFECYCLE_STATES = frozenset(
     {
@@ -55,6 +57,157 @@ FALLBACK_ROUTE_KEYWORDS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("route.ide_agent_work_map", ("codex", "ide", "workspace", "codebase", "terminal", "test", "debug", "refactor")),
     ("route.cross_domain_feature_delivery", ("build feature", "ship", "full stack", "release", "product")),
     ("route.assistant_identity_definition", ("what is an ai assistant", "assistant ontology", "host body", "embodiment")),
+)
+
+FISSION_HINT_KEYWORDS: dict[str, tuple[str, ...]] = {
+    "pr_agent_work_domain": (
+        "pr",
+        "pull request",
+        "merge",
+        "review comment",
+        "review comments",
+        "ci",
+        "lockfile",
+        "branch",
+        "diff review",
+    ),
+    "background_queue_intake_domain": (
+        "background",
+        "queue",
+        "queued",
+        "async",
+        "asynchronous",
+        "daemon",
+        "branch return",
+        "result intake",
+        "parallel work",
+    ),
+    "terminal_proof_domain": (
+        "terminal",
+        "command",
+        "stdout",
+        "stderr",
+        "return code",
+        "exit code",
+        "test output",
+        "shell",
+        "rerun",
+    ),
+    "ui_state_modeling_domain": (
+        "ui",
+        "ux",
+        "screen",
+        "screen state",
+        "drawer",
+        "component",
+        "a11y",
+        "accessibility",
+        "interaction",
+    ),
+    "documentation_example_validation_domain": (
+        "docs",
+        "documentation",
+        "readme",
+        "api docs",
+        "example",
+        "examples",
+        "changelog",
+        "release notes",
+    ),
+    "release_evidence_domain": (
+        "release",
+        "readiness",
+        "rollback",
+        "build",
+        "regression",
+        "deployment",
+        "deploy",
+        "gate",
+    ),
+    "migration_work_domain": (
+        "migration",
+        "schema",
+        "database",
+        "fixture",
+        "data shape",
+        "rollback",
+        "schema drift",
+    ),
+    "assistant_work_observation_domain": (
+        "observation",
+        "dataset",
+        "taxonomy",
+        "work pattern",
+        "gap mining",
+        "template mining",
+        "assistant work",
+    ),
+    "incident_triage_domain": (
+        "incident",
+        "outage",
+        "production bug",
+        "triage",
+        "containment",
+        "escalation",
+        "security exposure",
+    ),
+    "untrusted_input_tool_guard_domain": (
+        "prompt injection",
+        "untrusted",
+        "tool guard",
+        "credential",
+        "secret",
+        "instruction data",
+        "side effect",
+        "authority boundary",
+    ),
+}
+
+DYNAMIC_STOPWORDS = frozenset(
+    {
+        "about",
+        "agent",
+        "agents",
+        "assistant",
+        "because",
+        "build",
+        "codex",
+        "context",
+        "could",
+        "domain",
+        "domains",
+        "general",
+        "having",
+        "important",
+        "local",
+        "needs",
+        "please",
+        "project",
+        "really",
+        "should",
+        "system",
+        "there",
+        "thing",
+        "things",
+        "unique",
+        "user",
+        "using",
+        "workflow",
+        "would",
+    }
+)
+
+NOVELTY_HINT_TERMS = (
+    "new domain",
+    "new specialist",
+    "specialist agent",
+    "unique domain",
+    "domain for",
+    "agent for",
+    "beyond general",
+    "not covered",
+    "ontology",
+    "taxonomy",
 )
 
 
@@ -86,6 +239,250 @@ def _as_list(value: Any) -> list[Any]:
 
 def _clean_text(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "").lower()).strip()
+
+
+def _safe_identifier(value: str, *, fallback: str) -> str:
+    candidate = re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")
+    return candidate or fallback
+
+
+def _candidate_blob(candidate: Mapping[str, Any]) -> str:
+    parts: list[str] = []
+    for key in (
+        "candidate_domain_id",
+        "title",
+        "rationale",
+        "settlement_route",
+        "status",
+    ):
+        parts.append(str(candidate.get(key) or ""))
+    for key in (
+        "parent_domains",
+        "pressure_signals",
+        "proposed_primary_agents",
+        "proposed_template_packets",
+        "proposed_protocols",
+        "critical_state_surfaces",
+    ):
+        parts.extend(str(item) for item in _as_list(candidate.get(key)))
+    return _clean_text(" ".join(parts))
+
+
+def _fission_candidates(payload: Mapping[str, Any] | None) -> list[dict[str, Any]]:
+    if not isinstance(payload, Mapping):
+        return []
+    candidates: list[dict[str, Any]] = []
+    for raw in _as_list(payload.get("candidates")):
+        if isinstance(raw, Mapping) and raw.get("candidate_domain_id"):
+            candidates.append(dict(raw))
+    return candidates
+
+
+def _score_fission_candidate(candidate: Mapping[str, Any], text: str) -> tuple[int, list[str]]:
+    candidate_id = str(candidate.get("candidate_domain_id") or "")
+    manual_hits = [term for term in FISSION_HINT_KEYWORDS.get(candidate_id, ()) if term in text]
+    blob = _candidate_blob(candidate)
+    text_tokens = {
+        token
+        for token in re.split(r"[^a-z0-9]+", text)
+        if len(token) >= 4 and token not in DYNAMIC_STOPWORDS
+    }
+    token_hits = sorted(token for token in text_tokens if token in blob)[:10]
+    score = (len(manual_hits) * 14) + (len(token_hits) * 3)
+    return score, sorted(set(manual_hits + token_hits))
+
+
+def _extract_novel_terms(text: str) -> list[str]:
+    tokens = [
+        token
+        for token in re.split(r"[^a-z0-9]+", text)
+        if len(token) >= 6 and token not in DYNAMIC_STOPWORDS
+    ]
+    unique: list[str] = []
+    for token in tokens:
+        if token not in unique:
+            unique.append(token)
+    return unique[:4]
+
+
+def _dynamic_proposal_empty(*, generated_at: str) -> dict[str, Any]:
+    return {
+        "schema_id": DYNAMIC_PROPOSAL_SCHEMA_ID,
+        "needed": False,
+        "trigger": "none",
+        "lifecycle_state": None,
+        "candidate_domains": [],
+        "candidate_agents": [],
+        "matched_signals": [],
+        "recommended_local_hub_report": False,
+        "local_hub_report": {
+            "recommended": False,
+            "reason": "selected_candidate_route_is_sufficient_for_current_message",
+        },
+        "authority_boundary": {
+            "candidate_only": True,
+            "mutates_ION_03_registry": False,
+            "mutates_product_front_door": False,
+            "requires_explicit_acceptance_to_land": True,
+        },
+        "generated_at": generated_at,
+    }
+
+
+def _build_dynamic_domain_agent_proposal(
+    shell_root: Path,
+    *,
+    message: str,
+    route_id: str | None,
+    candidate_domains: list[Any],
+    candidate_agents: list[Any],
+    score: int,
+    selection_basis: str,
+) -> dict[str, Any]:
+    generated_at = _now()
+    text = _clean_text(message)
+    fission_payload = _read_yaml(shell_root / FISSION_CANDIDATES_PATH)
+    fission_matches: list[tuple[int, list[str], dict[str, Any]]] = []
+    for candidate in _fission_candidates(fission_payload):
+        candidate_id = str(candidate.get("candidate_domain_id") or "")
+        if candidate_id in {str(item) for item in candidate_domains}:
+            continue
+        candidate_score, hits = _score_fission_candidate(candidate, text)
+        if candidate_score >= 24:
+            fission_matches.append((candidate_score, hits, candidate))
+    fission_matches.sort(key=lambda item: item[0], reverse=True)
+    selected_matches = fission_matches[:3]
+
+    if selected_matches:
+        domains: list[dict[str, Any]] = []
+        agents: list[dict[str, Any]] = []
+        matched_signals: list[str] = []
+        for candidate_score, hits, candidate in selected_matches:
+            domain_id = str(candidate.get("candidate_domain_id") or "")
+            proposed_agents = [str(agent) for agent in _as_list(candidate.get("proposed_primary_agents"))]
+            domains.append(
+                {
+                    "domain_id": domain_id,
+                    "title": candidate.get("title"),
+                    "lifecycle_state": "operational_candidate",
+                    "source_path": FISSION_CANDIDATES_PATH.as_posix(),
+                    "source_status": candidate.get("status"),
+                    "route_parent": route_id,
+                    "parent_domains": _as_list(candidate.get("parent_domains")),
+                    "proposed_agents": proposed_agents,
+                    "proposed_template_packets": _as_list(candidate.get("proposed_template_packets")),
+                    "proposed_protocols": _as_list(candidate.get("proposed_protocols")),
+                    "critical_state_surfaces": _as_list(candidate.get("critical_state_surfaces")),
+                    "settlement_route": candidate.get("settlement_route"),
+                    "matched_signals": hits,
+                    "match_score": candidate_score,
+                    "reason": candidate.get("rationale"),
+                    "status": "candidate_fission_route_available_not_accepted_law",
+                }
+            )
+            matched_signals.extend(hits)
+            for agent in proposed_agents:
+                agents.append(
+                    {
+                        "agent_id": agent,
+                        "domain_id": domain_id,
+                        "lifecycle_state": "operational_candidate",
+                        "status": "candidate_agent_from_fission_surface",
+                    }
+                )
+        top_domain = domains[0]["domain_id"]
+        return {
+            "schema_id": DYNAMIC_PROPOSAL_SCHEMA_ID,
+            "needed": True,
+            "trigger": "fission_candidate_match",
+            "lifecycle_state": "operational_candidate",
+            "candidate_domains": domains,
+            "candidate_agents": agents,
+            "matched_signals": sorted(set(matched_signals)),
+            "recommended_local_hub_report": True,
+            "local_hub_report": {
+                "recommended": True,
+                "surface": "Action Gateway validate/submit after approval or extension ion_action create_codex_work_packet",
+                "intent": "create_codex_work_packet",
+                "objective_summary": (
+                    f"Review and settle dynamic assistant-work domain proposal {top_domain} "
+                    f"for route {route_id or 'unselected'}."
+                ),
+                "mutation_boundary": "report_or_work_packet_only_until_human_acceptance",
+            },
+            "authority_boundary": {
+                "candidate_only": True,
+                "mutates_ION_03_registry": False,
+                "mutates_product_front_door": False,
+                "requires_explicit_acceptance_to_land": True,
+            },
+            "generated_at": generated_at,
+        }
+
+    novelty_terms = _extract_novel_terms(text)
+    novelty_pressure = any(term in text for term in NOVELTY_HINT_TERMS)
+    weak_selection = selection_basis in {"fallback", "best_available"} and score <= 6
+    if novelty_pressure and weak_selection and len(novelty_terms) >= 2:
+        stem = "_".join(novelty_terms[:3])
+        domain_id = f"dynamic_{_safe_identifier(stem, fallback='specialist')}_domain"
+        agent_prefix = _safe_identifier(stem, fallback="specialist").upper()
+        proposed_agents = [
+            f"{agent_prefix}_DOMAIN_CARTOGRAPHER",
+            f"{agent_prefix}_CLAIM_AUDITOR",
+            f"{agent_prefix}_RECEIPT_SCRIBE",
+        ]
+        return {
+            "schema_id": DYNAMIC_PROPOSAL_SCHEMA_ID,
+            "needed": True,
+            "trigger": "novel_domain_pressure",
+            "lifecycle_state": "candidate_draft",
+            "candidate_domains": [
+                {
+                    "domain_id": domain_id,
+                    "title": "Dynamic Specialist Domain Draft",
+                    "lifecycle_state": "candidate_draft",
+                    "source_path": None,
+                    "route_parent": route_id,
+                    "parent_domains": [str(item) for item in candidate_domains],
+                    "proposed_agents": proposed_agents,
+                    "proposed_template_packets": ["dynamic_domain_intake_packet", "candidate_registry_delta_packet"],
+                    "proposed_protocols": ["dynamic_domain_requires_settlement_before_landing"],
+                    "critical_state_surfaces": ["candidate_domain_state", "agent_gap_state", "receipt_state"],
+                    "settlement_route": "candidate_registry_review_then_human_acceptance",
+                    "matched_signals": novelty_terms,
+                    "match_score": score,
+                    "reason": "Message declares specialist or uncovered domain pressure beyond the selected generic route.",
+                    "status": "draft_only_requires_dataset_entry_lifecycle_record_and_human_acceptance",
+                }
+            ],
+            "candidate_agents": [
+                {
+                    "agent_id": agent,
+                    "domain_id": domain_id,
+                    "lifecycle_state": "candidate_draft",
+                    "status": "draft_agent_requires_registry_review",
+                }
+                for agent in proposed_agents
+            ],
+            "matched_signals": novelty_terms,
+            "recommended_local_hub_report": True,
+            "local_hub_report": {
+                "recommended": True,
+                "surface": "Action Gateway validate/submit after approval or extension ion_action create_codex_work_packet",
+                "intent": "create_codex_work_packet",
+                "objective_summary": f"Create dataset-backed candidate lifecycle review for {domain_id}.",
+                "mutation_boundary": "report_or_work_packet_only_until_human_acceptance",
+            },
+            "authority_boundary": {
+                "candidate_only": True,
+                "mutates_ION_03_registry": False,
+                "mutates_product_front_door": False,
+                "requires_explicit_acceptance_to_land": True,
+            },
+            "generated_at": generated_at,
+        }
+
+    return _dynamic_proposal_empty(generated_at=generated_at)
 
 
 def _latest_candidate_map(shell_root: Path) -> dict[str, Any] | None:
@@ -281,6 +678,8 @@ def build_assistant_work_route_surface(root: str | Path | None = None) -> dict[s
     if all_routes and not routes:
         findings.append("no_lifecycle_enabled_routes")
     route_map = _route_map_by_id(candidate_map)
+    fission_payload = _read_yaml(shell_root / FISSION_CANDIDATES_PATH)
+    fission_candidates = _fission_candidates(fission_payload)
     ok = bool(registry) and bool(routes) and yaml is not None
     return {
         "schema_id": SURFACE_SCHEMA_ID,
@@ -291,6 +690,7 @@ def build_assistant_work_route_surface(root: str | Path | None = None) -> dict[s
         "root": AIW_ROOT.as_posix(),
         "route_registry_path": ROUTE_REGISTRY_PATH.as_posix(),
         "lifecycle_registry_path": LIFECYCLE_REGISTRY_PATH.as_posix(),
+        "fission_candidates_path": FISSION_CANDIDATES_PATH.as_posix(),
         "candidate_map_path": candidate_map.get("_source_path") if isinstance(candidate_map, Mapping) else None,
         "total_route_count": len(all_routes),
         "route_count": len(routes),
@@ -299,6 +699,7 @@ def build_assistant_work_route_surface(root: str | Path | None = None) -> dict[s
         "inactive_route_ids": inactive_route_ids,
         "lifecycle_record_count": len(lifecycle_records),
         "mapped_route_count": len(route_map),
+        "fission_candidate_count": len(fission_candidates),
         "findings": findings,
         "policy": "candidate_route_metadata_only_no_registry_or_product_law_mutation",
         "production_authority": False,
@@ -353,6 +754,17 @@ def compile_assistant_work_route(
     lifecycle_record = lifecycle_records.get(route_id or "")
     mapped = mapped_routes.get(route_id or "", {})
     output_contract = route.get("output_contract") if isinstance(route, Mapping) and isinstance(route.get("output_contract"), Mapping) else {}
+    candidate_domains = _as_list((route or {}).get("required_domains")) or _as_list(mapped.get("candidate_domains"))
+    candidate_agents = _as_list((route or {}).get("primary_agents")) or _as_list(mapped.get("candidate_agents"))
+    dynamic_proposal = _build_dynamic_domain_agent_proposal(
+        shell_root,
+        message=message,
+        route_id=route_id,
+        candidate_domains=candidate_domains,
+        candidate_agents=candidate_agents,
+        score=score,
+        selection_basis=selection_basis,
+    )
     return {
         "schema_id": SCHEMA_ID,
         "verdict": READY_VERDICT,
@@ -368,8 +780,9 @@ def compile_assistant_work_route(
         "score": score,
         "matched_triggers": matches,
         "candidate_lifecycle": _lifecycle_summary(route_id, lifecycle_record),
-        "candidate_domains": _as_list((route or {}).get("required_domains")) or _as_list(mapped.get("candidate_domains")),
-        "candidate_agents": _as_list((route or {}).get("primary_agents")) or _as_list(mapped.get("candidate_agents")),
+        "candidate_domains": candidate_domains,
+        "candidate_agents": candidate_agents,
+        "dynamic_domain_agent_proposal": dynamic_proposal,
         "active_skill_candidates": _as_list(mapped.get("active_skill_candidates")),
         "active_lens_candidates": _as_list(mapped.get("active_lens_candidates")),
         "template_spec_candidates": _as_list(mapped.get("template_spec_candidates")),
@@ -387,6 +800,7 @@ def compile_assistant_work_route(
             "inactive_route_count": surface.get("inactive_route_count"),
             "inactive_route_ids": inactive_route_ids,
             "mapped_route_count": surface.get("mapped_route_count"),
+            "fission_candidate_count": surface.get("fission_candidate_count"),
         },
         "policy": "candidate_route_metadata_only_no_registry_or_product_law_mutation",
         "authority_boundary": {

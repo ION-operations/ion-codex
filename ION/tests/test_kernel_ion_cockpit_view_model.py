@@ -62,6 +62,9 @@ def test_build_cockpit_view_model_summarizes_v88_runtime(tmp_path):
     assert model["top_bar"]["return_counts"]["accepted"] == 1
     assert model["top_bar"]["operator_queue_pending"] == 1
     assert model["top_bar"]["sandbox_return_count"] == 0
+    assert model["top_bar"]["local_service_count"] == 6
+    assert model["local_services"]["schema_id"] == "ion.local_service_status.v1"
+    assert model["local_services"]["install_authority"] is False
     assert model["top_bar"]["gate_count"] == 0
     assert model["agents"]["spawn_rows"][0]["role"] == "STEWARD"
     assert model["agents"]["spawn_rows"][0]["return_recorded"] is True
@@ -162,6 +165,7 @@ def test_cockpit_projects_chatgpt_browser_callsign(tmp_path):
     assert summary["project_facing_callsign"] == "Sev"
     assert summary["callsign_authority"] == "carrier_continuity_label_only_not_ion_authority"
     assert summary["codex_queue_runner"]["schema_id"] == "ion.codex_queue_runner.v1"
+    assert summary["codex_queue_runner"]["reconciliation"]["write"] is False
 
 
 def test_cockpit_projects_chatgpt_sandbox_returns(tmp_path):

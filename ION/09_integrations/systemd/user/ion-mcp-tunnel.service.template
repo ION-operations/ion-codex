@@ -1,0 +1,14 @@
+[Unit]
+Description=ION Cloudflare Tunnel for ion.helixion.net MCP
+Requires=ion-mcp-preview.service
+After=network.target ion-mcp-preview.service
+
+[Service]
+Type=simple
+WorkingDirectory=__ION_ROOT__
+ExecStart=__CLOUDFLARED__ tunnel run --url http://127.0.0.1:8765 ion-browser
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target
