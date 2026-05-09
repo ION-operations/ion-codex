@@ -1,0 +1,31 @@
+{
+  "created_at": "2026-05-09T00:49:41+00:00",
+  "latest_return_packet_path": null,
+  "live_execution_authority": false,
+  "objective": "Prepare a bounded ION work packet/report for the next local ION/Codex or role-agent run that ingests the current ChatGPT Browser conversation as operator-supplied candidate context.\n\nScope:\n1. Capture the operator's voice-mode direction: place major agent frameworks, AI systems, and major theoretical/scientific minds on an \"imaginary wall\"; identify what they are all pointing toward at first principles; locate where ION connects in that landscape.\n2. Treat this as an ION doctrine/product cartography task, not accepted canon. ION should be mapped as a continuity/state-transition substrate at the intersection between agent outputs, proof, approval, receipts, and durable state.\n3. Carry forward the Field of Time temporal phase-state hypothesis only as candidate ontology: frozen/null lock, fluid mobility field, diffuse/null gas, radiant/unbounded limit. Do not promote it to physics canon.\n4. Produce a concise report with comparable systems/framework families, first-principles axes shared across them, where ION is similar/different/complementary, candidate domain/agent implications for dynamic domain fission, and risks/non-claims.\n5. Return in the standard Codex/ION format: CONTEXT PROOF, TEMPLATE ACTION PROOF, RESULT.\n\nBoundaries: read-only unless bounded draft artifact is explicitly requested; no production/live authority; no secrets; no provider API calls; no git push; no deletion; outputs are candidate state until Steward/human acceptance.",
+  "packet_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T004941Z0000_prepare_a_bounded_ion_work_packet_report_for_the_next_local_ion_codex_or_role_ag.json",
+  "production_authority": false,
+  "request_id": "codex_req_2026-05-09T004941Z0000_prepare_a_bounded_ion_work_packet_report_for_the_next_local_ion_codex_or_role_ag",
+  "requested_by": "chatgpt_browser_connector",
+  "required_context_reads": [
+    {
+      "kind": "current_operating_packet",
+      "path": "ION/docs/setup/ION_CURRENT_OPERATING_PACKET_V119.md",
+      "required": true
+    },
+    {
+      "kind": "context_plan",
+      "path": "ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json",
+      "required": true
+    },
+    {
+      "kind": "queue_state",
+      "path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "required": false
+    }
+  ],
+  "return_packet_paths": [],
+  "schema_id": "ion.chatgpt_browser_connector_codex_work_request.v1",
+  "status": "QUEUED_FOR_CODEX_CARRIER",
+  "updated_at": "2026-05-09T00:49:41+00:00"
+}

@@ -1,0 +1,60 @@
+{
+  "required_context_reads": [
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_carrier_task_return.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_carrier_continue.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "required": true
+    },
+    {
+      "kind": "file",
+      "path": "ION/04_packages/kernel/ion_cockpit_view_model.py",
+      "required": true
+    }
+  ],
+  "schema_id": "ion.context_load_receipt.v1"
+}

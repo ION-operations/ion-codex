@@ -1,0 +1,49 @@
+{
+  "accepted_for_carrier_intake": false,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt.json",
+      "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/04_packages/kernel/ion_carrier_task_return.py",
+      "ION/04_packages/kernel/ion_carrier_continue.py",
+      "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+      "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "ION/04_packages/kernel/ion_cockpit_view_model.py"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-07T16:45:20+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "BLOCKED_BY_PROOF_GATE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\n\n| Required path | sha256 | line/excerpt evidence |\n|---|---|---|\n| `ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T163852Z0000_codex_req_2026_05_07t163712z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_/context_receipt.json` | `029c6dc0389ca9ae074759cc950a71c732fbc530c4882b70983b555047ec9c2c` | lines 2-57 list all required context reads. |\n| `ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt.json` | `313124a84a218df1ee339fb71cc87250436063cb6f28dba09899f958b8b30fb5` | lines 10-12 show latest return/objective; lines 18-20 show `RETURN_RECORDED_PROOF_BLOCKED`. |\n| `ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json` | `61536a9c0d1bd7e47e3a85fd8e25e271c4497c703251d42d3cf903294798a274` | lines 2-5 show no authority and `request_count: 25`; lines 10-18 show current return path and blocked status. |\n| `ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json` | `813e2d6ed5a620fcb608554d667b70db569388a79c5378cc54cb4451cd644dae` | lines 2-4 show queue/messages; lines 24, 52, 79, 102, 126 show pending/ack",
+  "task_output_sha256": "ebff1c2e9a4bcdb1b6eece9fb702c960bd0c0d864eb698499db4309063fcd0e4",
+  "template_action_proof_result": {
+    "accepted": false,
+    "action_id": "codex_queue_runner_process_once",
+    "findings": [
+      "missing_touched_paths"
+    ],
+    "integration_decision": "REJECT_RETURN_AND_RERUN_OR_REPAIR",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.autonomous_loop.local_worker.v1",
+    "touched_paths": []
+  },
+  "work_request_id": "codex_req_2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt.json"
+}

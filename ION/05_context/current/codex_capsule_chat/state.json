@@ -3760,6 +3760,21 @@
           "production_authority": false,
           "reason": "codex_capsule_chat_model_refresh",
           "turn_id": "mini_2026-05-08T175403Z0000_4294b65b7602"
+        },
+        {
+          "author": "ion_context",
+          "capsule_ref": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "created_at": "2026-05-08T21:30:44+00:00",
+          "kind": "mini_auto_post",
+          "lane_id": "codex_general",
+          "live_execution_authority": false,
+          "message": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: 3d13528324a5506aca70507afc22ba6128e44909fce72cf7133e0702658f0674\nlatest_capsule_row: | C-053 | 2026-05-08 | Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model move policy, skill/lens registries, candida | `ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_chat_engine.py, ION/04_packages/kernel/ion_codex_chat_response_carrier.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_chat_engine.py` | PUBLISHED |\n\nCODEX SOLO MINI INDEX | 2026-05-08T20:12:02+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Codex Capsule Chat active-root branch publication\nPHASE: feature branch pushed\nLAST_RECEIPT: Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov\nBLOCKER: None\nNEXT: Review/open GitHub PR https://github.com/ION-operations/ION/pull/new/feature/codex-capsule-chat-active-root and decide merge order relative to sandbox GPT release branch.\n\nACTIVE_TEMPLATE: codex_capsule_chat_branch_publish\n\nCAPSULE_LOOKUP:\n- C-049 2026-05-08 IMPLEMENTED: Formalized root source lanes for workpackets, diffs, and ION_sandbox: added lane READMEs, machine-readable ind\n- C-050 2026-05-08 PLANNED: Documented GitHub release strategy for ION_sandbox: recommend a dedicated release/ion-sandbox-gpt-v1 branch wi\n- C-051 2026-05-08 IMPLEMENTED: Prepared sanitized ion-sandbox-gpt release root from ION_sandbox snapshot: repaired active GPT sandbox packet,\n- C-052 2026-05-08 PUBLISHED: Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/sou\n- C-053 2026-05-08 PUBLISHED: Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context sys\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.",
+          "message_sha256": "dd6878bbe4dbc00e9091f98abc820a4539e0af3c51729164c6464f0c30315f2f",
+          "mini_ref": "ION/05_context/current/codex_solo/MINI.md",
+          "mini_sha256": "3d13528324a5506aca70507afc22ba6128e44909fce72cf7133e0702658f0674",
+          "production_authority": false,
+          "reason": "codex_capsule_chat_model_refresh",
+          "turn_id": "mini_2026-05-08T213044Z0000_3d13528324a5"
         }
       ]
     },
@@ -3781,10 +3796,10 @@
   "mini_auto_post": {
     "enabled": true,
     "lane_id": "codex_general",
-    "last_mini_sha256": "4294b65b76027529776e1d7329521ad888322ea7540f04ef9f84b3c7a9d5e743",
-    "last_posted_at": "2026-05-08T17:54:03+00:00",
+    "last_mini_sha256": "3d13528324a5506aca70507afc22ba6128e44909fce72cf7133e0702658f0674",
+    "last_posted_at": "2026-05-08T21:30:44+00:00",
     "last_reason": "codex_capsule_chat_model_refresh",
-    "last_turn_id": "mini_2026-05-08T175403Z0000_4294b65b7602",
+    "last_turn_id": "mini_2026-05-08T213044Z0000_3d13528324a5",
     "policy": "post_mini_to_chat_when_capsule_summary_changes"
   },
   "pipeline_runs": [],
@@ -3799,5 +3814,5 @@
   },
   "production_authority": false,
   "schema_id": "ion.codex_capsule_chat_state.v1",
-  "updated_at": "2026-05-08T17:54:03+00:00"
+  "updated_at": "2026-05-08T21:30:44+00:00"
 }

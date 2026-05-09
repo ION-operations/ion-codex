@@ -1,0 +1,2234 @@
+{
+  "authority": {
+    "arbitrary_shell": false,
+    "git_push": false,
+    "live_execution_authority": false,
+    "production_authority": false,
+    "proof_gates_required": true
+  },
+  "codex_queue": {
+    "latest_task_returns": [
+      {
+        "mtime": "2026-05-07T16:53:25+00:00",
+        "name": "2026-05-07T165325Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T165325Z0000_task_return.json"
+      },
+      {
+        "mtime": "2026-05-07T16:49:13+00:00",
+        "name": "2026-05-07T164913Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164913Z0000_task_return.json"
+      },
+      {
+        "mtime": "2026-05-07T16:45:20+00:00",
+        "name": "2026-05-07T164520Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164520Z0000_task_return.json"
+      },
+      {
+        "mtime": "2026-05-07T16:42:45+00:00",
+        "name": "2026-05-07T164245Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164245Z0000_task_return.json"
+      },
+      {
+        "mtime": "2026-05-05T01:03:10+00:00",
+        "name": "2026-05-05T010310Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-05T010310Z0000_task_return.json"
+      }
+    ],
+    "latest_work_requests": [
+      {
+        "mtime": "2026-05-07T16:53:25+00:00",
+        "name": "2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ.json",
+        "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ.json"
+      },
+      {
+        "mtime": "2026-05-07T16:49:13+00:00",
+        "name": "2026-05-07T164636Z0000_read_only_codex_cli_carrier_loop_proof_contract_smoke_for_sev_after_touched_path.json",
+        "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T164636Z0000_read_only_codex_cli_carrier_loop_proof_contract_smoke_for_sev_after_touched_path.json"
+      },
+      {
+        "mtime": "2026-05-07T16:45:20+00:00",
+        "name": "2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt.json",
+        "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt.json"
+      },
+      {
+        "mtime": "2026-05-05T14:59:18+00:00",
+        "name": "2026-05-05T022944Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_.json",
+        "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T022944Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_.json"
+      },
+      {
+        "mtime": "2026-05-05T14:59:18+00:00",
+        "name": "2026-05-05T022734Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_.json",
+        "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-05T022734Z0000_verify_and_harden_the_live_ion_chatops_browser_carrier_runtime_after_successful_.json"
+      }
+    ],
+    "runner": {
+      "active_process_running": false,
+      "active_run": null,
+      "automation_surface": "ion_codex_queue_process_once",
+      "autorun_loop_state": "NOT_STARTED_PROCESS_ONCE_AVAILABLE",
+      "failure_classes": [
+        "BACKEND_CODEX_FAILURE",
+        "CARRIER_ADAPTER_FAILURE",
+        "CODEX_CLI_FAILURE",
+        "DAEMON_FAILURE",
+        "ION_CORE_FAILURE"
+      ],
+      "latest_runs": [
+        {
+          "mtime": "2026-05-07T16:53:25+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac/run.json",
+          "request_id": "codex_req_2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ",
+          "run_id": "codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac",
+          "status": "RETURN_RECORDED_PROOF_ACCEPTED"
+        },
+        {
+          "mtime": "2026-05-07T16:49:13+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T164647Z0000_codex_req_2026_05_07t164636z0000_read_only_codex_cli_carrier_loop_proof_contract/run.json",
+          "request_id": "codex_req_2026-05-07T164636Z0000_read_only_codex_cli_carrier_loop_proof_contract_smoke_for_sev_after_touched_path",
+          "run_id": "codex_run_2026-05-07T164647Z0000_codex_req_2026_05_07t164636z0000_read_only_codex_cli_carrier_loop_proof_contract",
+          "status": "RETURN_RECORDED_PROOF_BLOCKED"
+        },
+        {
+          "mtime": "2026-05-07T16:45:20+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T163852Z0000_codex_req_2026_05_07t163712z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_/run.json",
+          "request_id": "codex_req_2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt",
+          "run_id": "codex_run_2026-05-07T163852Z0000_codex_req_2026_05_07t163712z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_",
+          "status": "RETURN_RECORDED_PROOF_BLOCKED"
+        },
+        {
+          "mtime": "2026-05-04T22:04:50+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/run.json",
+          "request_id": "codex_req_agent_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+          "run_id": "codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic",
+          "status": "RETURN_RECORDED_PROOF_BLOCKED"
+        },
+        {
+          "mtime": "2026-05-04T21:55:31+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T214406Z0000_codex_req_agent_2026_05_04t214342z0000_nemesis_audit_the_newly_accepted_ion_agen/run.json",
+          "request_id": "codex_req_agent_2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run",
+          "run_id": "codex_run_2026-05-04T214406Z0000_codex_req_agent_2026_05_04t214342z0000_nemesis_audit_the_newly_accepted_ion_agen",
+          "status": "RETURN_RECORDED_PROOF_BLOCKED"
+        }
+      ],
+      "live_execution_authority": false,
+      "manual_proceed_relay_required": false,
+      "next_request_path": null,
+      "production_authority": false,
+      "queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "queued_request_count": 0,
+      "reconciliation": {
+        "action": "not_requested",
+        "ok": true,
+        "schema_id": "ion.codex_queue_runner_reconciliation.v1",
+        "write": false
+      },
+      "runner_state_path": "ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json",
+      "schema_id": "ion.codex_queue_runner.v1",
+      "stale_active_run_detected": false,
+      "verdict": "ION_CODEX_QUEUE_RUNNER_READY"
+    },
+    "work_queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json"
+  },
+  "codex_solo_context": {
+    "active_context": {
+      "context_packages_path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "hot_context_path": "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+      "long_horizon_path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+      "mini_role": "lookup_receipt_index_not_prompt_source",
+      "minimum_context_kind": "capsule",
+      "minimum_context_path": "ION/05_context/current/codex_solo/CAPSULE.md"
+    },
+    "authority": {
+      "live_execution_authority": false,
+      "mini_capsule_authority": "capsule_minimum_context_mini_lookup_index_witness_not_repo_law",
+      "production_authority": false
+    },
+    "capsule": {
+      "context_line_limit": 80,
+      "entry_count": 7,
+      "findings": [],
+      "minimum_context": true,
+      "ok": true,
+      "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+      "recent_rows": [
+        {
+          "date": "2026-05-07",
+          "evidence": ".codex/config.toml, .codex/hooks/ion_session_start_context.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_codex_project_config_and_hook.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
+          "id": "C-003",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP read/status tools, and explicit post receipt helper."
+        },
+        {
+          "date": "2026-05-07",
+          "evidence": "ION/04_packages/kernel/ion_codex_model_moves.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_queue_runner.py, ION/03_registry/codex_cli_model_move_policy.yaml, ION/tests/test_kernel_ion_codex_model_moves.py",
+          "id": "C-004",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented Codex CLI model moves and Mini auto-post for dual chat"
+        },
+        {
+          "date": "2026-05-07",
+          "evidence": "ION/04_packages/kernel/ion_public_cockpit_auth.py, ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py, ION/tests/test_kernel_ion_public_cockpit_auth.py, ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
+          "id": "C-005",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks"
+        },
+        {
+          "date": "2026-05-07",
+          "evidence": "/home/sev/.config/systemd/user/ion-mcp-preview.service.d/cockpit-token.conf, ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py, ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py",
+          "id": "C-006",
+          "status": "IMPLEMENTED",
+          "summary": "Updated cockpit login password and pre-allowed crinkedart Google account"
+        },
+        {
+          "date": "2026-05-07",
+          "evidence": "ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/05_context/current/codex_cli/CODEX_CLI_CARRIER_AND_COCKPIT_PASS_20260507.md",
+          "id": "C-007",
+          "status": "IMPLEMENTED",
+          "summary": "Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers"
+        }
+      ],
+      "role": "minimum_working_context",
+      "tail": [
+        "# Codex Solo Capsule",
+        "> Minimum working context for the standalone Codex chat lane. Load this before general Codex work. Mini is only lookup/index; detailed work stays in normal artifacts.",
+        "| # | Date | Summary | Evidence | Status |",
+        "|---|------|---------|----------|--------|",
+        "| C-001 | 2026-05-07 | Implemented capsule-first Codex solo context: Capsule is minimum working context; Mini is lookup/receipt index. | `ION/04_packages/kernel/ion_codex_solo_context.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md, ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md` | IMPLEMENTED |",
+        "| C-002 | 2026-05-07 | Implemented multi-horizon Codex solo context: long-horizon capsule epochs and explicit context package selector. | `ION/04_packages/kernel/ion_codex_solo_context.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md, ION/05_context/current/codex_solo/LONG_HORIZON.json, ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json` | IMPLEMENTED |",
+        "| C-003 | 2026-05-07 | Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP read/status tools, and explicit post receipt helper. | `.codex/config.toml, .codex/hooks/ion_session_start_context.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_codex_project_config_and_hook.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md` | IMPLEMENTED |",
+        "| C-004 | 2026-05-07 | Implemented Codex CLI model moves and Mini auto-post for dual chat | `ION/04_packages/kernel/ion_codex_model_moves.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_queue_runner.py, ION/03_registry/codex_cli_model_move_policy.yaml, ION/tests/test_kernel_ion_codex_model_moves.py` | IMPLEMENTED |",
+        "| C-005 | 2026-05-07 | Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks | `ION/04_packages/kernel/ion_public_cockpit_auth.py, ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py, ION/tests/test_kernel_ion_public_cockpit_auth.py, ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md` | IMPLEMENTED |",
+        "| C-006 | 2026-05-07 | Updated cockpit login password and pre-allowed crinkedart Google account | `/home/sev/.config/systemd/user/ion-mcp-preview.service.d/cockpit-token.conf, ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py, ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py` | IMPLEMENTED |",
+        "| C-007 | 2026-05-07 | Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers | `ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/05_context/current/codex_cli/CODEX_CLI_CARRIER_AND_COCKPIT_PASS_20260507.md` | IMPLEMENTED |"
+      ]
+    },
+    "context_packages": {
+      "package_count": 8,
+      "packages": [
+        {
+          "context_type": "active_short_horizon",
+          "load_policy": "always_inline_first",
+          "package_id": "minimum_working_capsule",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/CAPSULE.md"
+          ],
+          "window": {
+            "kind": "line_tail",
+            "max_lines": 80
+          }
+        },
+        {
+          "context_type": "receipt_lookup",
+          "load_policy": "index_only_not_primary_prompt",
+          "package_id": "mini_lookup_index",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/MINI.md"
+          ],
+          "window": {
+            "kind": "recent_capsule_rows",
+            "max_rows": 5
+          }
+        },
+        {
+          "context_type": "compressed_long_horizon",
+          "load_policy": "load_when_older_continuity_or_prior_decisions_matter",
+          "package_id": "long_horizon_capsule_index",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+          ],
+          "window": {
+            "epoch_count": 1,
+            "epoch_size_rows": 10,
+            "hot_context_recent_epochs": 6,
+            "kind": "epoch_summary"
+          }
+        },
+        {
+          "context_type": "authority_and_policy",
+          "load_policy": "always_available_by_route_hash",
+          "package_id": "active_authority_package",
+          "path_refs": [
+            "ION/REPO_AUTHORITY.md",
+            "ION/03_registry/agent_context_system_registry.yaml",
+            "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md"
+          ],
+          "window": {
+            "kind": "route_excerpt",
+            "max_chars_per_file": 1600
+          }
+        },
+        {
+          "context_type": "current_objective",
+          "load_policy": "injected_per_queue_or_chat_turn",
+          "package_id": "mission_active_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/HOT_CONTEXT.md"
+          ],
+          "window": {
+            "capsule_first": true,
+            "kind": "compiled_hot_context"
+          }
+        },
+        {
+          "context_type": "route_deeper",
+          "load_policy": "use_when_hot_context_is_insufficient",
+          "package_id": "route_depth_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/ROUTE.json",
+            "ION/05_context/current/codex_solo/CAPSULE.md",
+            "ION/05_context/current/codex_solo/MINI.md",
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+            "ION/REPO_AUTHORITY.md",
+            "ION/03_registry/agent_context_system_registry.yaml",
+            "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md",
+            "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md"
+          ],
+          "window": {
+            "kind": "validate_before_queue",
+            "required_missing": []
+          }
+        },
+        {
+          "context_type": "proof_and_receipts",
+          "load_policy": "use_for_verification_or_claims_about_completed_work",
+          "package_id": "evidence_receipt_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/history"
+          ],
+          "window": {
+            "kind": "latest_checkpoint_plus_named_evidence",
+            "source": "capsule_row_evidence_refs"
+          }
+        },
+        {
+          "context_type": "recovery",
+          "load_policy": "use_when_context_drift_or_old_build_comparison_is_requested",
+          "package_id": "recovery_package",
+          "path_refs": [
+            "ION/05_context/current/codex_solo/history",
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+          ],
+          "window": {
+            "kind": "explicit_operator_or_blocker_triggered"
+          }
+        }
+      ],
+      "path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "selected_by_default": [
+        "minimum_working_capsule",
+        "mini_lookup_index",
+        "long_horizon_capsule_index",
+        "active_authority_package",
+        "mission_active_package",
+        "route_depth_package"
+      ]
+    },
+    "generated_at": "2026-05-07T19:25:18+00:00",
+    "hot_context": {
+      "bytes": 26306,
+      "ok": true,
+      "path": "ION/05_context/current/codex_solo/HOT_CONTEXT.md"
+    },
+    "live_execution_authority": false,
+    "long_horizon": {
+      "capsule_entry_count": 7,
+      "epoch_count": 1,
+      "latest_epochs": [
+        {
+          "date_end": "2026-05-07",
+          "date_start": "2026-05-07",
+          "epoch_id": "E-001",
+          "evidence_refs": [
+            "ION/04_packages/kernel/ion_codex_solo_context.py",
+            "ION/04_packages/kernel/ion_dual_codex_chat.py",
+            "ION/tests/test_kernel_ion_codex_solo_context.py",
+            "ION/tests/test_kernel_ion_dual_codex_chat.py",
+            "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
+            "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+            "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+            "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+            ".codex/config.toml",
+            ".codex/hooks/ion_session_start_context.py",
+            "ION/tests/test_codex_project_config_and_hook.py",
+            "ION/04_packages/kernel/ion_codex_model_moves.py",
+            "ION/04_packages/kernel/ion_codex_queue_runner.py",
+            "ION/03_registry/codex_cli_model_move_policy.yaml",
+            "ION/tests/test_kernel_ion_codex_model_moves.py",
+            "ION/04_packages/kernel/ion_public_cockpit_auth.py",
+            "ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py",
+            "ION/tests/test_kernel_ion_public_cockpit_auth.py",
+            "ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py",
+            "/home/sev/.config/systemd/user/ion-mcp-preview.service.d/cockpit-token.conf"
+          ],
+          "row_count": 7,
+          "row_end": "C-007",
+          "row_start": "C-001",
+          "status_counts": {
+            "IMPLEMENTED": 7
+          },
+          "summaries": [
+            {
+              "date": "2026-05-07",
+              "id": "C-003",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP read/status tools, and explicit post receipt helper."
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-004",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented Codex CLI model moves and Mini auto-post for dual chat"
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-005",
+              "status": "IMPLEMENTED",
+              "summary": "Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks"
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-006",
+              "status": "IMPLEMENTED",
+              "summary": "Updated cockpit login password and pre-allowed crinkedart Google account"
+            },
+            {
+              "date": "2026-05-07",
+              "id": "C-007",
+              "status": "IMPLEMENTED",
+              "summary": "Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers"
+            }
+          ]
+        }
+      ],
+      "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json"
+    },
+    "mini": {
+      "findings": [],
+      "line_count": 26,
+      "max_lines": 30,
+      "ok": true,
+      "role": "lookup_receipt_index_for_capsule_history",
+      "text": "CODEX SOLO MINI INDEX | 2026-05-07T19:07:44+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Maintain a practical standalone Codex chat lane beside the full ION workflow chat.\nPHASE: codex_solo_work\nLAST_RECEIPT: Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers\nBLOCKER: None\nNEXT: Use public /cockpit/chat and local /chat to review the JOC workbench layout, then iterate visual density and controls from operator feedback.\n\nACTIVE_TEMPLATE: CODEX_SOLO_WORK_UNIT\n\nCAPSULE_LOOKUP:\n- C-003 2026-05-07 IMPLEMENTED: Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP re\n- C-004 2026-05-07 IMPLEMENTED: Implemented Codex CLI model moves and Mini auto-post for dual chat\n- C-005 2026-05-07 IMPLEMENTED: Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks\n- C-006 2026-05-07 IMPLEMENTED: Updated cockpit login password and pre-allowed crinkedart Google account\n- C-007 2026-05-07 IMPLEMENTED: Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.\n"
+    },
+    "ok": true,
+    "paths": {
+      "capsule": "ION/05_context/current/codex_solo/CAPSULE.md",
+      "context_packages": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "dir": "ION/05_context/current/codex_solo",
+      "hot_context": "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+      "long_horizon": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+      "mini": "ION/05_context/current/codex_solo/MINI.md",
+      "route": "ION/05_context/current/codex_solo/ROUTE.json",
+      "status": "ION/05_context/current/codex_solo/STATUS.json"
+    },
+    "production_authority": false,
+    "rolling_windows": {
+      "capsule_active_context_lines": 80,
+      "capsule_rows_per_long_horizon_epoch": 10,
+      "long_horizon_epochs_in_hot_context": 6,
+      "mini_lookup_recent_rows": 5,
+      "route_excerpt_chars": 1600
+    },
+    "route": {
+      "entries": [
+        {
+          "bytes": 3184,
+          "classification": "codex_solo_minimum_working_context",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "84b4f038ec85e77da8bb692d344274e7a9d465fed7f9c612552acebba565d4c2",
+          "why": "Minimum context the standalone Codex lane must always carry."
+        },
+        {
+          "bytes": 1747,
+          "classification": "codex_solo_lookup_receipt_index",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_solo/MINI.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "a3be82044833503e97cf78b97eb086546417784a00900c12f55ba04bc7995fa4",
+          "why": "Lookup index and receipt summary for capsule history."
+        },
+        {
+          "bytes": 6073,
+          "classification": "codex_solo_long_horizon_index",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "423125be7843146e7120eddd26db9e40a3aad550232b19623a7e701df1ae7aba",
+          "why": "Compressed long-horizon capsule index for older continuity lookup."
+        },
+        {
+          "bytes": 9259,
+          "classification": "active_repo_authority",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/REPO_AUTHORITY.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "804ed8430fc53e551d254af063ec414646a1c1bf94ceeec51c31769fa41aca1e",
+          "why": "Active root authority boundary."
+        },
+        {
+          "bytes": 9343,
+          "classification": "active_context_policy",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/03_registry/agent_context_system_registry.yaml",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "0c9e8d86b55bcf310f85adabbdee3d4d7947a24c0ce05680b608d29d5466fd12",
+          "why": "Current Mini/Capsule witness policy and active context-system registry."
+        },
+        {
+          "bytes": 1098,
+          "classification": "active_lead_context",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/05_context/current/agent_context_systems/LEAD_DEV_ACTIVE_OPERATING_CONTEXT_V105.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "3dcbd1f7f1c81c30a9d02f66deffdc5d0c9466df4347946030a3a1cf6721cd4c",
+          "why": "Current lead-dev operating posture."
+        },
+        {
+          "bytes": 10713,
+          "classification": "codex_solo_design",
+          "exists": true,
+          "is_file": true,
+          "path": "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
+          "repo_relative": true,
+          "required": true,
+          "sha256": "4e92263b324a31489cd6be3c375ad0654b94493db87f46ff5ccda7985ea15e47",
+          "why": "Research basis for this single-agent context lane."
+        }
+      ],
+      "findings": [],
+      "live_execution_authority": false,
+      "ok": true,
+      "production_authority": false,
+      "route_path": "ION/05_context/current/codex_solo/ROUTE.json",
+      "schema_id": "ion.codex_solo_route_validation.v1"
+    },
+    "schema_id": "ion.codex_solo_context.v1",
+    "verdict": "ION_CODEX_SOLO_CONTEXT_READY",
+    "witness_policy": "Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions."
+  },
+  "generated_at": "2026-05-07T19:25:18+00:00",
+  "lanes": {
+    "codex_general": {
+      "context_substrate": {
+        "active_context": {
+          "context_packages_path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+          "hot_context_path": "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+          "long_horizon_path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+          "mini_role": "lookup_receipt_index_not_prompt_source",
+          "minimum_context_kind": "capsule",
+          "minimum_context_path": "ION/05_context/current/codex_solo/CAPSULE.md"
+        },
+        "paths": {
+          "capsule": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "context_packages": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+          "dir": "ION/05_context/current/codex_solo",
+          "hot_context": "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+          "long_horizon": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+          "mini": "ION/05_context/current/codex_solo/MINI.md",
+          "route": "ION/05_context/current/codex_solo/ROUTE.json",
+          "status": "ION/05_context/current/codex_solo/STATUS.json"
+        },
+        "schema_id": "ion.codex_solo_context.v1",
+        "verdict": "ION_CODEX_SOLO_CONTEXT_READY",
+        "witness_policy": "Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions."
+      },
+      "label": "General Codex Chat",
+      "lane_id": "codex_general",
+      "memory_policy": "Codex solo Capsule is the minimum working context; Mini indexes receipts; long-horizon epochs and package selector decide older context; no hidden memory claims.",
+      "mini_auto_post": {
+        "enabled": true,
+        "lane_id": "codex_general",
+        "last_mini_sha256": "5cf2ab5b1fa648ed5df0a7860aab58cc4f60cfb7fc36bdf3a6cfb45400f17950",
+        "last_posted_at": "2026-05-07T19:07:57+00:00",
+        "last_reason": "dual_chat_model_refresh",
+        "last_turn_id": "mini_2026-05-07T190757Z0000_5cf2ab5b1fa6",
+        "policy": "post_mini_to_chat_when_capsule_summary_changes"
+      },
+      "purpose": "Practical single-agent Codex lane using Capsule as minimum context, Mini as lookup index, explicit repo context, and pinned memory.",
+      "queue_links": [],
+      "turns": [
+        {
+          "author": "ion_context",
+          "capsule_ref": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "created_at": "2026-05-07T18:18:06+00:00",
+          "kind": "mini_auto_post",
+          "lane_id": "codex_general",
+          "live_execution_authority": false,
+          "message": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: c35e0c2006d2aac9425b07a47a4e6041645785a8388b6f02831ade5984a3d206\nlatest_capsule_row: | C-003 | 2026-05-07 | Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP read/status tools, and explicit post receipt helper. | `.codex/config.toml, .codex/hooks/ion_session_start_context.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/tests/test_kernel_ion_codex_solo_context.py, ION/tests/test_codex_project_config_and_hook.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md` | IMPLEMENTED |\n\nCODEX SOLO MINI INDEX | 2026-05-07T18:01:46+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Maintain a practical standalone Codex chat lane beside the full ION workflow chat.\nPHASE: codex_solo_work\nLAST_RECEIPT: Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP read/status tools, and explicit post receipt helper.\nBLOCKER: None\nNEXT: Start future Codex CLI sessions from the active root so the project hook injects Codex Solo HOT_CONTEXT automatically.\n\nACTIVE_TEMPLATE: CODEX_SOLO_WORK_UNIT\n\nCAPSULE_LOOKUP:\n- C-001 2026-05-07 IMPLEMENTED: Implemented capsule-first Codex solo context: Capsule is minimum working context; Mini is lookup/receipt index\n- C-002 2026-05-07 IMPLEMENTED: Implemented multi-horizon Codex solo context: long-horizon capsule epochs and explicit context package selecto\n- C-003 2026-05-07 IMPLEMENTED: Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP re\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.",
+          "message_sha256": "bbc63a2c0c3a1ecf0f0556f3da2a7c035248e6f70dbad27328af0d9b77e6c3c9",
+          "mini_ref": "ION/05_context/current/codex_solo/MINI.md",
+          "mini_sha256": "c35e0c2006d2aac9425b07a47a4e6041645785a8388b6f02831ade5984a3d206",
+          "production_authority": false,
+          "reason": "dual_chat_model_refresh",
+          "turn_id": "mini_2026-05-07T181806Z0000_c35e0c2006d2"
+        },
+        {
+          "author": "ion_context",
+          "capsule_ref": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "created_at": "2026-05-07T18:18:24+00:00",
+          "kind": "mini_auto_post",
+          "lane_id": "codex_general",
+          "live_execution_authority": false,
+          "message": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: f27c8ea987509ac53ece0d4346c6ea1d3e5ab7146fb3217c1777b786bf103ae0\nlatest_capsule_row: | C-004 | 2026-05-07 | Implemented Codex CLI model moves and Mini auto-post for dual chat | `ION/04_packages/kernel/ion_codex_model_moves.py, ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_queue_runner.py, ION/03_registry/codex_cli_model_move_policy.yaml, ION/tests/test_kernel_ion_codex_model_moves.py` | IMPLEMENTED |\n\nCODEX SOLO MINI INDEX | 2026-05-07T18:18:17+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Maintain a practical standalone Codex chat lane beside the full ION workflow chat.\nPHASE: codex_solo_work\nLAST_RECEIPT: Implemented Codex CLI model moves and Mini auto-post for dual chat\nBLOCKER: None\nNEXT: Use model-move receipts on queued Codex CLI work and verify unrelated Cloudflare tunnel tests separately.\n\nACTIVE_TEMPLATE: CODEX_SOLO_WORK_UNIT\n\nCAPSULE_LOOKUP:\n- C-001 2026-05-07 IMPLEMENTED: Implemented capsule-first Codex solo context: Capsule is minimum working context; Mini is lookup/receipt index\n- C-002 2026-05-07 IMPLEMENTED: Implemented multi-horizon Codex solo context: long-horizon capsule epochs and explicit context package selecto\n- C-003 2026-05-07 IMPLEMENTED: Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP re\n- C-004 2026-05-07 IMPLEMENTED: Implemented Codex CLI model moves and Mini auto-post for dual chat\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.",
+          "message_sha256": "848575d33387d91388a673ad856582e99e5a22cb58c9172b099ea20e4496df57",
+          "mini_ref": "ION/05_context/current/codex_solo/MINI.md",
+          "mini_sha256": "f27c8ea987509ac53ece0d4346c6ea1d3e5ab7146fb3217c1777b786bf103ae0",
+          "production_authority": false,
+          "reason": "dual_chat_model_refresh",
+          "turn_id": "mini_2026-05-07T181824Z0000_f27c8ea98750"
+        },
+        {
+          "author": "ion_context",
+          "capsule_ref": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "created_at": "2026-05-07T18:41:39+00:00",
+          "kind": "mini_auto_post",
+          "lane_id": "codex_general",
+          "live_execution_authority": false,
+          "message": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: 06d94493fd6012082163ac27660c076dfae33a07a97b6eb1bb259b1362be92b3\nlatest_capsule_row: | C-005 | 2026-05-07 | Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks | `ION/04_packages/kernel/ion_public_cockpit_auth.py, ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py, ION/tests/test_kernel_ion_public_cockpit_auth.py, ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py, ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md` | IMPLEMENTED |\n\nCODEX SOLO MINI INDEX | 2026-05-07T18:41:31+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Maintain a practical standalone Codex chat lane beside the full ION workflow chat.\nPHASE: codex_solo_work\nLAST_RECEIPT: Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks\nBLOCKER: None\nNEXT: Configure Google OAuth client ID, secret, redirect URI, and allowed email list when ready.\n\nACTIVE_TEMPLATE: CODEX_SOLO_WORK_UNIT\n\nCAPSULE_LOOKUP:\n- C-001 2026-05-07 IMPLEMENTED: Implemented capsule-first Codex solo context: Capsule is minimum working context; Mini is lookup/receipt index\n- C-002 2026-05-07 IMPLEMENTED: Implemented multi-horizon Codex solo context: long-horizon capsule epochs and explicit context package selecto\n- C-003 2026-05-07 IMPLEMENTED: Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP re\n- C-004 2026-05-07 IMPLEMENTED: Implemented Codex CLI model moves and Mini auto-post for dual chat\n- C-005 2026-05-07 IMPLEMENTED: Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.",
+          "message_sha256": "78be200847b7ebe98c6dbaa613dc3c3a33dc997ecab05b0b3530b17b4dd67bdf",
+          "mini_ref": "ION/05_context/current/codex_solo/MINI.md",
+          "mini_sha256": "06d94493fd6012082163ac27660c076dfae33a07a97b6eb1bb259b1362be92b3",
+          "production_authority": false,
+          "reason": "dual_chat_model_refresh",
+          "turn_id": "mini_2026-05-07T184139Z0000_06d94493fd60"
+        },
+        {
+          "author": "ion_context",
+          "capsule_ref": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "created_at": "2026-05-07T18:47:09+00:00",
+          "kind": "mini_auto_post",
+          "lane_id": "codex_general",
+          "live_execution_authority": false,
+          "message": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: 684c752baa50dec27db9afaa49374c46d40a0a99efd39ca7c3ed190780e1a880\nlatest_capsule_row: | C-006 | 2026-05-07 | Updated cockpit login password and pre-allowed crinkedart Google account | `/home/sev/.config/systemd/user/ion-mcp-preview.service.d/cockpit-token.conf, ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py, ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py` | IMPLEMENTED |\n\nCODEX SOLO MINI INDEX | 2026-05-07T18:47:05+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Maintain a practical standalone Codex chat lane beside the full ION workflow chat.\nPHASE: codex_solo_work\nLAST_RECEIPT: Updated cockpit login password and pre-allowed crinkedart Google account\nBLOCKER: None\nNEXT: Create Google OAuth web client credentials to enable one-click Google login.\n\nACTIVE_TEMPLATE: CODEX_SOLO_WORK_UNIT\n\nCAPSULE_LOOKUP:\n- C-002 2026-05-07 IMPLEMENTED: Implemented multi-horizon Codex solo context: long-horizon capsule epochs and explicit context package selecto\n- C-003 2026-05-07 IMPLEMENTED: Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP re\n- C-004 2026-05-07 IMPLEMENTED: Implemented Codex CLI model moves and Mini auto-post for dual chat\n- C-005 2026-05-07 IMPLEMENTED: Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks\n- C-006 2026-05-07 IMPLEMENTED: Updated cockpit login password and pre-allowed crinkedart Google account\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.",
+          "message_sha256": "aa01d7adaad2db0a0dd19a9f4dc835942c2f77adbb8fec3f53cac862e53c82d8",
+          "mini_ref": "ION/05_context/current/codex_solo/MINI.md",
+          "mini_sha256": "684c752baa50dec27db9afaa49374c46d40a0a99efd39ca7c3ed190780e1a880",
+          "production_authority": false,
+          "reason": "dual_chat_model_refresh",
+          "turn_id": "mini_2026-05-07T184709Z0000_684c752baa50"
+        },
+        {
+          "author": "ion_context",
+          "capsule_ref": "ION/05_context/current/codex_solo/CAPSULE.md",
+          "created_at": "2026-05-07T19:07:57+00:00",
+          "kind": "mini_auto_post",
+          "lane_id": "codex_general",
+          "live_execution_authority": false,
+          "message": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: 5cf2ab5b1fa648ed5df0a7860aab58cc4f60cfb7fc36bdf3a6cfb45400f17950\nlatest_capsule_row: | C-007 | 2026-05-07 | Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers | `ION/04_packages/kernel/ion_dual_codex_chat.py, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/05_context/current/codex_cli/CODEX_CLI_CARRIER_AND_COCKPIT_PASS_20260507.md` | IMPLEMENTED |\n\nCODEX SOLO MINI INDEX | 2026-05-07T19:07:44+00:00\n\nROLE: lookup/receipt index; Capsule is the minimum working context.\nACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md\nHOT_CONTEXT: ION/05_context/current/codex_solo/HOT_CONTEXT.md\nLONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json\nPACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json\nHISTORY: ION/05_context/current/codex_solo/history\n\nMISSION: Maintain a practical standalone Codex chat lane beside the full ION workflow chat.\nPHASE: codex_solo_work\nLAST_RECEIPT: Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers\nBLOCKER: None\nNEXT: Use public /cockpit/chat and local /chat to review the JOC workbench layout, then iterate visual density and controls from operator feedback.\n\nACTIVE_TEMPLATE: CODEX_SOLO_WORK_UNIT\n\nCAPSULE_LOOKUP:\n- C-003 2026-05-07 IMPLEMENTED: Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP re\n- C-004 2026-05-07 IMPLEMENTED: Implemented Codex CLI model moves and Mini auto-post for dual chat\n- C-005 2026-05-07 IMPLEMENTED: Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks\n- C-006 2026-05-07 IMPLEMENTED: Updated cockpit login password and pre-allowed crinkedart Google account\n- C-007 2026-05-07 IMPLEMENTED: Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers\n\nROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.\nPOLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.",
+          "message_sha256": "5b62f15a217d1ce9d4adf12629c5380c855679c9fd44bec14a06097a1b1402dd",
+          "mini_ref": "ION/05_context/current/codex_solo/MINI.md",
+          "mini_sha256": "5cf2ab5b1fa648ed5df0a7860aab58cc4f60cfb7fc36bdf3a6cfb45400f17950",
+          "production_authority": false,
+          "reason": "dual_chat_model_refresh",
+          "turn_id": "mini_2026-05-07T190757Z0000_5cf2ab5b1fa6"
+        }
+      ]
+    },
+    "ion_system": {
+      "label": "ION System Chat",
+      "lane_id": "ion_system",
+      "memory_policy": "ION state, proof-gated returns, receipts, and explicit promoted memory only.",
+      "purpose": "Full ION pipeline lane: Relay, Steward, Vizier, Mason/Codex, Vice, Nemesis, Relay return, Persona.",
+      "queue_links": [],
+      "turns": [
+        {
+          "author": "operator",
+          "created_at": "2026-05-07T19:25:18+00:00",
+          "lane_id": "ion_system",
+          "live_execution_authority": false,
+          "message": "hello ION, this is the first test to see if you are operational.",
+          "message_sha256": "fcf2846714912379f4fd3d242d4e72089ae302d3675ffcd1c58d546f4f173d45",
+          "production_authority": false,
+          "turn_id": "turn_2026-05-07T192518Z0000_hello_ion_this_is_the_first_test_to_see_if_you_are_operational"
+        }
+      ]
+    }
+  },
+  "live_execution_authority": false,
+  "memory": {
+    "codex_memory_path": "/home/sev/.codex/memories/ion_dual_codex_chat_memory.md",
+    "pins": [],
+    "policy": "explicit_source_linked_repo_and_codex_memory"
+  },
+  "mini_auto_post": {
+    "enabled": true,
+    "lane_id": "codex_general",
+    "last_mini_sha256": "5cf2ab5b1fa648ed5df0a7860aab58cc4f60cfb7fc36bdf3a6cfb45400f17950",
+    "last_posted_at": "2026-05-07T19:07:57+00:00",
+    "last_reason": "dual_chat_model_refresh",
+    "last_turn_id": "mini_2026-05-07T190757Z0000_5cf2ab5b1fa6",
+    "policy": "post_mini_to_chat_when_capsule_summary_changes",
+    "sync_result": {
+      "finding": "mini_unchanged",
+      "mini_sha256": "5cf2ab5b1fa648ed5df0a7860aab58cc4f60cfb7fc36bdf3a6cfb45400f17950",
+      "ok": true,
+      "posted": false
+    }
+  },
+  "model_moves": {
+    "live_execution_authority": false,
+    "production_authority": false,
+    "profiles": {
+      "default_routing_posture": "conserve_main_bank",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "profiles": {
+        "gpt-5.3-codex": {
+          "codex_model_slug": "gpt-5.3-codex",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.3-Codex",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "primary_codex_engineering_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "codex_primary_observed"
+        },
+        "gpt-5.3-codex-spark": {
+          "codex_model_slug": "gpt-5.3-codex-spark",
+          "default_reasoning_effort": "high",
+          "display_name": "GPT-5.3-Codex-Spark",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "fast_codex_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "codex_spark_observed"
+        },
+        "gpt-5.4": {
+          "codex_model_slug": "gpt-5.4",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.4",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "fallback_frontier_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "frontier_main_observed"
+        },
+        "gpt-5.4-mini": {
+          "codex_model_slug": "gpt-5.4-mini",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.4-Mini",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "fallback_light_codex_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "codex_light_observed"
+        },
+        "gpt-5.5": {
+          "codex_model_slug": "gpt-5.5",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.5",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "frontier_authority_and_architecture_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "frontier_main_observed"
+        }
+      },
+      "schema_id": "ion.codex_cli_model_profiles.v1",
+      "usage_limits_authoritative": false,
+      "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+      "version": "V126_CODEX_CLI_MODEL_MOVES"
+    },
+    "routing_posture": "conserve_main_bank",
+    "schema_id": "ion.dual_codex_chat_model_moves.v1",
+    "stage_defaults": [
+      {
+        "claim_boundary": [
+          "Model move plans configure Codex CLI invocation only.",
+          "Usage-pool labels are operator-observed hints until externally verified.",
+          "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+        ],
+        "codex_exec_args": [
+          "-m",
+          "gpt-5.3-codex-spark",
+          "-c",
+          "model_reasoning_effort=low"
+        ],
+        "command_preview": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.3-codex-spark",
+          "-c",
+          "model_reasoning_effort=low"
+        ],
+        "config_overrides": {
+          "model": "gpt-5.3-codex-spark",
+          "model_reasoning_effort": "low"
+        },
+        "context_need": "medium",
+        "emitted_at": "2026-05-07T19:25:18+00:00",
+        "ion_stage_id": "relay_ingress",
+        "lane_id": "ion_system",
+        "limit_authority": "not_authoritative",
+        "live_execution_authority": false,
+        "model_move_id": "codex_model_move_858ae94937dca920507c8f0b",
+        "model_profile": {
+          "codex_model_slug": "gpt-5.3-codex-spark",
+          "default_reasoning_effort": "high",
+          "display_name": "GPT-5.3-Codex-Spark",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "fast_codex_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "codex_spark_observed"
+        },
+        "production_authority": false,
+        "provider_api_dispatch_authorized": false,
+        "receipt_fields_required": [
+          "ion_stage_id",
+          "work_class",
+          "selected_model",
+          "selected_reasoning_effort",
+          "usage_pool_id",
+          "model_move_id",
+          "prompt_path",
+          "run_packet_path",
+          "tests_run"
+        ],
+        "risk_level": "low",
+        "routing_posture": "conserve_main_bank",
+        "schema_id": "ion.codex_cli_model_move_plan.v1",
+        "selected_model": "gpt-5.3-codex-spark",
+        "selected_reasoning_effort": "low",
+        "selection_reason": [
+          "routing_posture:conserve_main_bank",
+          "work_class:front_stage_claim_classification",
+          "risk_level:low",
+          "low_risk_fast_work_conserves_frontier_usage"
+        ],
+        "usage_limits_authoritative": false,
+        "usage_pool_authority": "operator_observed_pending_verification",
+        "usage_pool_id": "codex_spark_observed",
+        "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+        "version": "V126_CODEX_CLI_MODEL_MOVES",
+        "work_class": "front_stage_claim_classification",
+        "workspace_root": null
+      },
+      {
+        "claim_boundary": [
+          "Model move plans configure Codex CLI invocation only.",
+          "Usage-pool labels are operator-observed hints until externally verified.",
+          "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+        ],
+        "codex_exec_args": [
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=high"
+        ],
+        "command_preview": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=high"
+        ],
+        "config_overrides": {
+          "model": "gpt-5.5",
+          "model_reasoning_effort": "high"
+        },
+        "context_need": "medium",
+        "emitted_at": "2026-05-07T19:25:18+00:00",
+        "ion_stage_id": "steward_route",
+        "lane_id": "ion_system",
+        "limit_authority": "not_authoritative",
+        "live_execution_authority": false,
+        "model_move_id": "codex_model_move_8dde81c037eb75fa473f60b0",
+        "model_profile": {
+          "codex_model_slug": "gpt-5.5",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.5",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "frontier_authority_and_architecture_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "frontier_main_observed"
+        },
+        "production_authority": false,
+        "provider_api_dispatch_authorized": false,
+        "receipt_fields_required": [
+          "ion_stage_id",
+          "work_class",
+          "selected_model",
+          "selected_reasoning_effort",
+          "usage_pool_id",
+          "model_move_id",
+          "prompt_path",
+          "run_packet_path",
+          "tests_run"
+        ],
+        "risk_level": "medium",
+        "routing_posture": "conserve_main_bank",
+        "schema_id": "ion.codex_cli_model_move_plan.v1",
+        "selected_model": "gpt-5.5",
+        "selected_reasoning_effort": "high",
+        "selection_reason": [
+          "routing_posture:conserve_main_bank",
+          "work_class:claim_audit",
+          "risk_level:medium",
+          "ion_stage:steward_route_requires_authority_or_architecture_lane"
+        ],
+        "usage_limits_authoritative": false,
+        "usage_pool_authority": "operator_observed_pending_verification",
+        "usage_pool_id": "frontier_main_observed",
+        "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+        "version": "V126_CODEX_CLI_MODEL_MOVES",
+        "work_class": "claim_audit",
+        "workspace_root": null
+      },
+      {
+        "claim_boundary": [
+          "Model move plans configure Codex CLI invocation only.",
+          "Usage-pool labels are operator-observed hints until externally verified.",
+          "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+        ],
+        "codex_exec_args": [
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=high"
+        ],
+        "command_preview": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=high"
+        ],
+        "config_overrides": {
+          "model": "gpt-5.5",
+          "model_reasoning_effort": "high"
+        },
+        "context_need": "medium",
+        "emitted_at": "2026-05-07T19:25:18+00:00",
+        "ion_stage_id": "vizier_plan",
+        "lane_id": "ion_system",
+        "limit_authority": "not_authoritative",
+        "live_execution_authority": false,
+        "model_move_id": "codex_model_move_3ca5b50ec81e32ac84a2bdb7",
+        "model_profile": {
+          "codex_model_slug": "gpt-5.5",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.5",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "frontier_authority_and_architecture_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "frontier_main_observed"
+        },
+        "production_authority": false,
+        "provider_api_dispatch_authorized": false,
+        "receipt_fields_required": [
+          "ion_stage_id",
+          "work_class",
+          "selected_model",
+          "selected_reasoning_effort",
+          "usage_pool_id",
+          "model_move_id",
+          "prompt_path",
+          "run_packet_path",
+          "tests_run"
+        ],
+        "risk_level": "medium",
+        "routing_posture": "conserve_main_bank",
+        "schema_id": "ion.codex_cli_model_move_plan.v1",
+        "selected_model": "gpt-5.5",
+        "selected_reasoning_effort": "high",
+        "selection_reason": [
+          "routing_posture:conserve_main_bank",
+          "work_class:architecture_design",
+          "risk_level:medium",
+          "ion_stage:vizier_plan_requires_authority_or_architecture_lane"
+        ],
+        "usage_limits_authoritative": false,
+        "usage_pool_authority": "operator_observed_pending_verification",
+        "usage_pool_id": "frontier_main_observed",
+        "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+        "version": "V126_CODEX_CLI_MODEL_MOVES",
+        "work_class": "architecture_design",
+        "workspace_root": null
+      },
+      {
+        "claim_boundary": [
+          "Model move plans configure Codex CLI invocation only.",
+          "Usage-pool labels are operator-observed hints until externally verified.",
+          "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+        ],
+        "codex_exec_args": [
+          "-m",
+          "gpt-5.3-codex",
+          "-c",
+          "model_reasoning_effort=medium"
+        ],
+        "command_preview": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.3-codex",
+          "-c",
+          "model_reasoning_effort=medium"
+        ],
+        "config_overrides": {
+          "model": "gpt-5.3-codex",
+          "model_reasoning_effort": "medium"
+        },
+        "context_need": "medium",
+        "emitted_at": "2026-05-07T19:25:18+00:00",
+        "ion_stage_id": "mason_codex_work",
+        "lane_id": "ion_system",
+        "limit_authority": "not_authoritative",
+        "live_execution_authority": false,
+        "model_move_id": "codex_model_move_643f27cf754b4638dfc7e822",
+        "model_profile": {
+          "codex_model_slug": "gpt-5.3-codex",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.3-Codex",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "primary_codex_engineering_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "codex_primary_observed"
+        },
+        "production_authority": false,
+        "provider_api_dispatch_authorized": false,
+        "receipt_fields_required": [
+          "ion_stage_id",
+          "work_class",
+          "selected_model",
+          "selected_reasoning_effort",
+          "usage_pool_id",
+          "model_move_id",
+          "prompt_path",
+          "run_packet_path",
+          "tests_run"
+        ],
+        "risk_level": "low",
+        "routing_posture": "conserve_main_bank",
+        "schema_id": "ion.codex_cli_model_move_plan.v1",
+        "selected_model": "gpt-5.3-codex",
+        "selected_reasoning_effort": "medium",
+        "selection_reason": [
+          "routing_posture:conserve_main_bank",
+          "work_class:code_patch",
+          "risk_level:low",
+          "primary_codex_engineering_lane_is_sufficient"
+        ],
+        "usage_limits_authoritative": false,
+        "usage_pool_authority": "operator_observed_pending_verification",
+        "usage_pool_id": "codex_primary_observed",
+        "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+        "version": "V126_CODEX_CLI_MODEL_MOVES",
+        "work_class": "code_patch",
+        "workspace_root": null
+      },
+      {
+        "claim_boundary": [
+          "Model move plans configure Codex CLI invocation only.",
+          "Usage-pool labels are operator-observed hints until externally verified.",
+          "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+        ],
+        "codex_exec_args": [
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=high"
+        ],
+        "command_preview": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=high"
+        ],
+        "config_overrides": {
+          "model": "gpt-5.5",
+          "model_reasoning_effort": "high"
+        },
+        "context_need": "medium",
+        "emitted_at": "2026-05-07T19:25:18+00:00",
+        "ion_stage_id": "vice_risk",
+        "lane_id": "ion_system",
+        "limit_authority": "not_authoritative",
+        "live_execution_authority": false,
+        "model_move_id": "codex_model_move_3bb34bcf5de637d4d3831d5d",
+        "model_profile": {
+          "codex_model_slug": "gpt-5.5",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.5",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "frontier_authority_and_architecture_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "frontier_main_observed"
+        },
+        "production_authority": false,
+        "provider_api_dispatch_authorized": false,
+        "receipt_fields_required": [
+          "ion_stage_id",
+          "work_class",
+          "selected_model",
+          "selected_reasoning_effort",
+          "usage_pool_id",
+          "model_move_id",
+          "prompt_path",
+          "run_packet_path",
+          "tests_run"
+        ],
+        "risk_level": "medium",
+        "routing_posture": "conserve_main_bank",
+        "schema_id": "ion.codex_cli_model_move_plan.v1",
+        "selected_model": "gpt-5.5",
+        "selected_reasoning_effort": "high",
+        "selection_reason": [
+          "routing_posture:conserve_main_bank",
+          "work_class:adversarial_review",
+          "risk_level:medium",
+          "ion_stage:vice_risk_requires_authority_or_architecture_lane"
+        ],
+        "usage_limits_authoritative": false,
+        "usage_pool_authority": "operator_observed_pending_verification",
+        "usage_pool_id": "frontier_main_observed",
+        "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+        "version": "V126_CODEX_CLI_MODEL_MOVES",
+        "work_class": "adversarial_review",
+        "workspace_root": null
+      },
+      {
+        "claim_boundary": [
+          "Model move plans configure Codex CLI invocation only.",
+          "Usage-pool labels are operator-observed hints until externally verified.",
+          "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+        ],
+        "codex_exec_args": [
+          "-m",
+          "gpt-5.3-codex",
+          "-c",
+          "model_reasoning_effort=high"
+        ],
+        "command_preview": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.3-codex",
+          "-c",
+          "model_reasoning_effort=high"
+        ],
+        "config_overrides": {
+          "model": "gpt-5.3-codex",
+          "model_reasoning_effort": "high"
+        },
+        "context_need": "medium",
+        "emitted_at": "2026-05-07T19:25:18+00:00",
+        "ion_stage_id": "nemesis_verify",
+        "lane_id": "ion_system",
+        "limit_authority": "not_authoritative",
+        "live_execution_authority": false,
+        "model_move_id": "codex_model_move_f9c3d64e81afbc419d0b1119",
+        "model_profile": {
+          "codex_model_slug": "gpt-5.3-codex",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.3-Codex",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "primary_codex_engineering_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "codex_primary_observed"
+        },
+        "production_authority": false,
+        "provider_api_dispatch_authorized": false,
+        "receipt_fields_required": [
+          "ion_stage_id",
+          "work_class",
+          "selected_model",
+          "selected_reasoning_effort",
+          "usage_pool_id",
+          "model_move_id",
+          "prompt_path",
+          "run_packet_path",
+          "tests_run"
+        ],
+        "risk_level": "medium",
+        "routing_posture": "conserve_main_bank",
+        "schema_id": "ion.codex_cli_model_move_plan.v1",
+        "selected_model": "gpt-5.3-codex",
+        "selected_reasoning_effort": "high",
+        "selection_reason": [
+          "routing_posture:conserve_main_bank",
+          "work_class:code_review",
+          "risk_level:medium",
+          "primary_codex_engineering_lane_is_sufficient"
+        ],
+        "usage_limits_authoritative": false,
+        "usage_pool_authority": "operator_observed_pending_verification",
+        "usage_pool_id": "codex_primary_observed",
+        "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+        "version": "V126_CODEX_CLI_MODEL_MOVES",
+        "work_class": "code_review",
+        "workspace_root": null
+      },
+      {
+        "claim_boundary": [
+          "Model move plans configure Codex CLI invocation only.",
+          "Usage-pool labels are operator-observed hints until externally verified.",
+          "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+        ],
+        "codex_exec_args": [
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=medium"
+        ],
+        "command_preview": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=medium"
+        ],
+        "config_overrides": {
+          "model": "gpt-5.5",
+          "model_reasoning_effort": "medium"
+        },
+        "context_need": "medium",
+        "emitted_at": "2026-05-07T19:25:18+00:00",
+        "ion_stage_id": "relay_return",
+        "lane_id": "ion_system",
+        "limit_authority": "not_authoritative",
+        "live_execution_authority": false,
+        "model_move_id": "codex_model_move_6f28cfc9a22c364993bb3767",
+        "model_profile": {
+          "codex_model_slug": "gpt-5.5",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.5",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "frontier_authority_and_architecture_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "frontier_main_observed"
+        },
+        "production_authority": false,
+        "provider_api_dispatch_authorized": false,
+        "receipt_fields_required": [
+          "ion_stage_id",
+          "work_class",
+          "selected_model",
+          "selected_reasoning_effort",
+          "usage_pool_id",
+          "model_move_id",
+          "prompt_path",
+          "run_packet_path",
+          "tests_run"
+        ],
+        "risk_level": "low",
+        "routing_posture": "conserve_main_bank",
+        "schema_id": "ion.codex_cli_model_move_plan.v1",
+        "selected_model": "gpt-5.5",
+        "selected_reasoning_effort": "medium",
+        "selection_reason": [
+          "routing_posture:conserve_main_bank",
+          "work_class:user_facing_answer",
+          "risk_level:low",
+          "user_visible_synthesis_defaults_to_frontier_medium"
+        ],
+        "usage_limits_authoritative": false,
+        "usage_pool_authority": "operator_observed_pending_verification",
+        "usage_pool_id": "frontier_main_observed",
+        "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+        "version": "V126_CODEX_CLI_MODEL_MOVES",
+        "work_class": "user_facing_answer",
+        "workspace_root": null
+      },
+      {
+        "claim_boundary": [
+          "Model move plans configure Codex CLI invocation only.",
+          "Usage-pool labels are operator-observed hints until externally verified.",
+          "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+        ],
+        "codex_exec_args": [
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=medium"
+        ],
+        "command_preview": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "-c",
+          "model_reasoning_effort=medium"
+        ],
+        "config_overrides": {
+          "model": "gpt-5.5",
+          "model_reasoning_effort": "medium"
+        },
+        "context_need": "medium",
+        "emitted_at": "2026-05-07T19:25:18+00:00",
+        "ion_stage_id": "persona_response",
+        "lane_id": "ion_system",
+        "limit_authority": "not_authoritative",
+        "live_execution_authority": false,
+        "model_move_id": "codex_model_move_65910c966e2ea5ce593eaae3",
+        "model_profile": {
+          "codex_model_slug": "gpt-5.5",
+          "default_reasoning_effort": "medium",
+          "display_name": "GPT-5.5",
+          "limit_authority": "not_authoritative",
+          "live_execution_authority": false,
+          "local_codex_cache_observed": true,
+          "production_authority": false,
+          "reasoning_efforts_supported": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "role": "frontier_authority_and_architecture_lane",
+          "usage_pool_authority": "operator_observed_pending_verification",
+          "usage_pool_id": "frontier_main_observed"
+        },
+        "production_authority": false,
+        "provider_api_dispatch_authorized": false,
+        "receipt_fields_required": [
+          "ion_stage_id",
+          "work_class",
+          "selected_model",
+          "selected_reasoning_effort",
+          "usage_pool_id",
+          "model_move_id",
+          "prompt_path",
+          "run_packet_path",
+          "tests_run"
+        ],
+        "risk_level": "low",
+        "routing_posture": "conserve_main_bank",
+        "schema_id": "ion.codex_cli_model_move_plan.v1",
+        "selected_model": "gpt-5.5",
+        "selected_reasoning_effort": "medium",
+        "selection_reason": [
+          "routing_posture:conserve_main_bank",
+          "work_class:user_facing_answer",
+          "risk_level:low",
+          "user_visible_synthesis_defaults_to_frontier_medium"
+        ],
+        "usage_limits_authoritative": false,
+        "usage_pool_authority": "operator_observed_pending_verification",
+        "usage_pool_id": "frontier_main_observed",
+        "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+        "version": "V126_CODEX_CLI_MODEL_MOVES",
+        "work_class": "user_facing_answer",
+        "workspace_root": null
+      }
+    ],
+    "usage_limits_authoritative": false
+  },
+  "model_path": "ION/05_context/current/ACTIVE_DUAL_CODEX_CHAT_MODEL.json",
+  "pipeline_runs": [
+    {
+      "created_at": "2026-05-07T19:25:18+00:00",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "run_id": "ion_pipe_2026-05-07T192518Z0000_turn_2026_05_07t192518z0000_hello_ion_this_is_the_first_test_to_",
+      "schema_id": "ion.dual_codex_chat_pipeline_run.v1",
+      "source_lane_id": "ion_system",
+      "source_turn_id": "turn_2026-05-07T192518Z0000_hello_ion_this_is_the_first_test_to_see_if_you_are_operational",
+      "stages": [
+        {
+          "description": "Translate operator text into a bounded semantic packet.",
+          "index": 1,
+          "label": "Relay ingress",
+          "model_move": {
+            "claim_boundary": [
+              "Model move plans configure Codex CLI invocation only.",
+              "Usage-pool labels are operator-observed hints until externally verified.",
+              "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+            ],
+            "codex_exec_args": [
+              "-m",
+              "gpt-5.3-codex-spark",
+              "-c",
+              "model_reasoning_effort=low"
+            ],
+            "command_preview": [
+              "codex",
+              "exec",
+              "-m",
+              "gpt-5.3-codex-spark",
+              "-c",
+              "model_reasoning_effort=low"
+            ],
+            "config_overrides": {
+              "model": "gpt-5.3-codex-spark",
+              "model_reasoning_effort": "low"
+            },
+            "context_need": "medium",
+            "emitted_at": "2026-05-07T19:25:18+00:00",
+            "ion_stage_id": "relay_ingress",
+            "lane_id": "ion_system",
+            "limit_authority": "not_authoritative",
+            "live_execution_authority": false,
+            "model_move_id": "codex_model_move_858ae94937dca920507c8f0b",
+            "model_profile": {
+              "codex_model_slug": "gpt-5.3-codex-spark",
+              "default_reasoning_effort": "high",
+              "display_name": "GPT-5.3-Codex-Spark",
+              "limit_authority": "not_authoritative",
+              "live_execution_authority": false,
+              "local_codex_cache_observed": true,
+              "production_authority": false,
+              "reasoning_efforts_supported": [
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "role": "fast_codex_lane",
+              "usage_pool_authority": "operator_observed_pending_verification",
+              "usage_pool_id": "codex_spark_observed"
+            },
+            "production_authority": false,
+            "provider_api_dispatch_authorized": false,
+            "receipt_fields_required": [
+              "ion_stage_id",
+              "work_class",
+              "selected_model",
+              "selected_reasoning_effort",
+              "usage_pool_id",
+              "model_move_id",
+              "prompt_path",
+              "run_packet_path",
+              "tests_run"
+            ],
+            "risk_level": "low",
+            "routing_posture": "conserve_main_bank",
+            "schema_id": "ion.codex_cli_model_move_plan.v1",
+            "selected_model": "gpt-5.3-codex-spark",
+            "selected_reasoning_effort": "low",
+            "selection_reason": [
+              "routing_posture:conserve_main_bank",
+              "work_class:front_stage_claim_classification",
+              "risk_level:low",
+              "low_risk_fast_work_conserves_frontier_usage"
+            ],
+            "usage_limits_authoritative": false,
+            "usage_pool_authority": "operator_observed_pending_verification",
+            "usage_pool_id": "codex_spark_observed",
+            "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+            "version": "V126_CODEX_CLI_MODEL_MOVES",
+            "work_class": "front_stage_claim_classification",
+            "workspace_root": null
+          },
+          "receipt_refs": [],
+          "request_refs": [],
+          "stage_id": "relay_ingress",
+          "status": "ready"
+        },
+        {
+          "description": "Classify authority, risk, and work legitimacy.",
+          "index": 2,
+          "label": "Steward route",
+          "model_move": {
+            "claim_boundary": [
+              "Model move plans configure Codex CLI invocation only.",
+              "Usage-pool labels are operator-observed hints until externally verified.",
+              "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+            ],
+            "codex_exec_args": [
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=high"
+            ],
+            "command_preview": [
+              "codex",
+              "exec",
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=high"
+            ],
+            "config_overrides": {
+              "model": "gpt-5.5",
+              "model_reasoning_effort": "high"
+            },
+            "context_need": "medium",
+            "emitted_at": "2026-05-07T19:25:18+00:00",
+            "ion_stage_id": "steward_route",
+            "lane_id": "ion_system",
+            "limit_authority": "not_authoritative",
+            "live_execution_authority": false,
+            "model_move_id": "codex_model_move_8dde81c037eb75fa473f60b0",
+            "model_profile": {
+              "codex_model_slug": "gpt-5.5",
+              "default_reasoning_effort": "medium",
+              "display_name": "GPT-5.5",
+              "limit_authority": "not_authoritative",
+              "live_execution_authority": false,
+              "local_codex_cache_observed": true,
+              "production_authority": false,
+              "reasoning_efforts_supported": [
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "role": "frontier_authority_and_architecture_lane",
+              "usage_pool_authority": "operator_observed_pending_verification",
+              "usage_pool_id": "frontier_main_observed"
+            },
+            "production_authority": false,
+            "provider_api_dispatch_authorized": false,
+            "receipt_fields_required": [
+              "ion_stage_id",
+              "work_class",
+              "selected_model",
+              "selected_reasoning_effort",
+              "usage_pool_id",
+              "model_move_id",
+              "prompt_path",
+              "run_packet_path",
+              "tests_run"
+            ],
+            "risk_level": "medium",
+            "routing_posture": "conserve_main_bank",
+            "schema_id": "ion.codex_cli_model_move_plan.v1",
+            "selected_model": "gpt-5.5",
+            "selected_reasoning_effort": "high",
+            "selection_reason": [
+              "routing_posture:conserve_main_bank",
+              "work_class:claim_audit",
+              "risk_level:medium",
+              "ion_stage:steward_route_requires_authority_or_architecture_lane"
+            ],
+            "usage_limits_authoritative": false,
+            "usage_pool_authority": "operator_observed_pending_verification",
+            "usage_pool_id": "frontier_main_observed",
+            "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+            "version": "V126_CODEX_CLI_MODEL_MOVES",
+            "work_class": "claim_audit",
+            "workspace_root": null
+          },
+          "receipt_refs": [],
+          "request_refs": [],
+          "stage_id": "steward_route",
+          "status": "pending"
+        },
+        {
+          "description": "Set architecture, dependencies, and review posture.",
+          "index": 3,
+          "label": "Vizier plan",
+          "model_move": {
+            "claim_boundary": [
+              "Model move plans configure Codex CLI invocation only.",
+              "Usage-pool labels are operator-observed hints until externally verified.",
+              "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+            ],
+            "codex_exec_args": [
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=high"
+            ],
+            "command_preview": [
+              "codex",
+              "exec",
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=high"
+            ],
+            "config_overrides": {
+              "model": "gpt-5.5",
+              "model_reasoning_effort": "high"
+            },
+            "context_need": "medium",
+            "emitted_at": "2026-05-07T19:25:18+00:00",
+            "ion_stage_id": "vizier_plan",
+            "lane_id": "ion_system",
+            "limit_authority": "not_authoritative",
+            "live_execution_authority": false,
+            "model_move_id": "codex_model_move_3ca5b50ec81e32ac84a2bdb7",
+            "model_profile": {
+              "codex_model_slug": "gpt-5.5",
+              "default_reasoning_effort": "medium",
+              "display_name": "GPT-5.5",
+              "limit_authority": "not_authoritative",
+              "live_execution_authority": false,
+              "local_codex_cache_observed": true,
+              "production_authority": false,
+              "reasoning_efforts_supported": [
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "role": "frontier_authority_and_architecture_lane",
+              "usage_pool_authority": "operator_observed_pending_verification",
+              "usage_pool_id": "frontier_main_observed"
+            },
+            "production_authority": false,
+            "provider_api_dispatch_authorized": false,
+            "receipt_fields_required": [
+              "ion_stage_id",
+              "work_class",
+              "selected_model",
+              "selected_reasoning_effort",
+              "usage_pool_id",
+              "model_move_id",
+              "prompt_path",
+              "run_packet_path",
+              "tests_run"
+            ],
+            "risk_level": "medium",
+            "routing_posture": "conserve_main_bank",
+            "schema_id": "ion.codex_cli_model_move_plan.v1",
+            "selected_model": "gpt-5.5",
+            "selected_reasoning_effort": "high",
+            "selection_reason": [
+              "routing_posture:conserve_main_bank",
+              "work_class:architecture_design",
+              "risk_level:medium",
+              "ion_stage:vizier_plan_requires_authority_or_architecture_lane"
+            ],
+            "usage_limits_authoritative": false,
+            "usage_pool_authority": "operator_observed_pending_verification",
+            "usage_pool_id": "frontier_main_observed",
+            "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+            "version": "V126_CODEX_CLI_MODEL_MOVES",
+            "work_class": "architecture_design",
+            "workspace_root": null
+          },
+          "receipt_refs": [],
+          "request_refs": [],
+          "stage_id": "vizier_plan",
+          "status": "pending"
+        },
+        {
+          "description": "Execute bounded implementation through Codex queue and proof return.",
+          "index": 4,
+          "label": "Mason/Codex work",
+          "model_move": {
+            "claim_boundary": [
+              "Model move plans configure Codex CLI invocation only.",
+              "Usage-pool labels are operator-observed hints until externally verified.",
+              "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+            ],
+            "codex_exec_args": [
+              "-m",
+              "gpt-5.3-codex",
+              "-c",
+              "model_reasoning_effort=medium"
+            ],
+            "command_preview": [
+              "codex",
+              "exec",
+              "-m",
+              "gpt-5.3-codex",
+              "-c",
+              "model_reasoning_effort=medium"
+            ],
+            "config_overrides": {
+              "model": "gpt-5.3-codex",
+              "model_reasoning_effort": "medium"
+            },
+            "context_need": "medium",
+            "emitted_at": "2026-05-07T19:25:18+00:00",
+            "ion_stage_id": "mason_codex_work",
+            "lane_id": "ion_system",
+            "limit_authority": "not_authoritative",
+            "live_execution_authority": false,
+            "model_move_id": "codex_model_move_643f27cf754b4638dfc7e822",
+            "model_profile": {
+              "codex_model_slug": "gpt-5.3-codex",
+              "default_reasoning_effort": "medium",
+              "display_name": "GPT-5.3-Codex",
+              "limit_authority": "not_authoritative",
+              "live_execution_authority": false,
+              "local_codex_cache_observed": true,
+              "production_authority": false,
+              "reasoning_efforts_supported": [
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "role": "primary_codex_engineering_lane",
+              "usage_pool_authority": "operator_observed_pending_verification",
+              "usage_pool_id": "codex_primary_observed"
+            },
+            "production_authority": false,
+            "provider_api_dispatch_authorized": false,
+            "receipt_fields_required": [
+              "ion_stage_id",
+              "work_class",
+              "selected_model",
+              "selected_reasoning_effort",
+              "usage_pool_id",
+              "model_move_id",
+              "prompt_path",
+              "run_packet_path",
+              "tests_run"
+            ],
+            "risk_level": "low",
+            "routing_posture": "conserve_main_bank",
+            "schema_id": "ion.codex_cli_model_move_plan.v1",
+            "selected_model": "gpt-5.3-codex",
+            "selected_reasoning_effort": "medium",
+            "selection_reason": [
+              "routing_posture:conserve_main_bank",
+              "work_class:code_patch",
+              "risk_level:low",
+              "primary_codex_engineering_lane_is_sufficient"
+            ],
+            "usage_limits_authoritative": false,
+            "usage_pool_authority": "operator_observed_pending_verification",
+            "usage_pool_id": "codex_primary_observed",
+            "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+            "version": "V126_CODEX_CLI_MODEL_MOVES",
+            "work_class": "code_patch",
+            "workspace_root": null
+          },
+          "receipt_refs": [],
+          "request_refs": [],
+          "stage_id": "mason_codex_work",
+          "status": "pending"
+        },
+        {
+          "description": "Apply future-answerability and contradiction pressure.",
+          "index": 5,
+          "label": "Vice risk pass",
+          "model_move": {
+            "claim_boundary": [
+              "Model move plans configure Codex CLI invocation only.",
+              "Usage-pool labels are operator-observed hints until externally verified.",
+              "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+            ],
+            "codex_exec_args": [
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=high"
+            ],
+            "command_preview": [
+              "codex",
+              "exec",
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=high"
+            ],
+            "config_overrides": {
+              "model": "gpt-5.5",
+              "model_reasoning_effort": "high"
+            },
+            "context_need": "medium",
+            "emitted_at": "2026-05-07T19:25:18+00:00",
+            "ion_stage_id": "vice_risk",
+            "lane_id": "ion_system",
+            "limit_authority": "not_authoritative",
+            "live_execution_authority": false,
+            "model_move_id": "codex_model_move_3bb34bcf5de637d4d3831d5d",
+            "model_profile": {
+              "codex_model_slug": "gpt-5.5",
+              "default_reasoning_effort": "medium",
+              "display_name": "GPT-5.5",
+              "limit_authority": "not_authoritative",
+              "live_execution_authority": false,
+              "local_codex_cache_observed": true,
+              "production_authority": false,
+              "reasoning_efforts_supported": [
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "role": "frontier_authority_and_architecture_lane",
+              "usage_pool_authority": "operator_observed_pending_verification",
+              "usage_pool_id": "frontier_main_observed"
+            },
+            "production_authority": false,
+            "provider_api_dispatch_authorized": false,
+            "receipt_fields_required": [
+              "ion_stage_id",
+              "work_class",
+              "selected_model",
+              "selected_reasoning_effort",
+              "usage_pool_id",
+              "model_move_id",
+              "prompt_path",
+              "run_packet_path",
+              "tests_run"
+            ],
+            "risk_level": "medium",
+            "routing_posture": "conserve_main_bank",
+            "schema_id": "ion.codex_cli_model_move_plan.v1",
+            "selected_model": "gpt-5.5",
+            "selected_reasoning_effort": "high",
+            "selection_reason": [
+              "routing_posture:conserve_main_bank",
+              "work_class:adversarial_review",
+              "risk_level:medium",
+              "ion_stage:vice_risk_requires_authority_or_architecture_lane"
+            ],
+            "usage_limits_authoritative": false,
+            "usage_pool_authority": "operator_observed_pending_verification",
+            "usage_pool_id": "frontier_main_observed",
+            "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+            "version": "V126_CODEX_CLI_MODEL_MOVES",
+            "work_class": "adversarial_review",
+            "workspace_root": null
+          },
+          "receipt_refs": [],
+          "request_refs": [],
+          "stage_id": "vice_risk",
+          "status": "pending"
+        },
+        {
+          "description": "Audit proof, regressions, and release sensitivity.",
+          "index": 6,
+          "label": "Nemesis verification",
+          "model_move": {
+            "claim_boundary": [
+              "Model move plans configure Codex CLI invocation only.",
+              "Usage-pool labels are operator-observed hints until externally verified.",
+              "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+            ],
+            "codex_exec_args": [
+              "-m",
+              "gpt-5.3-codex",
+              "-c",
+              "model_reasoning_effort=high"
+            ],
+            "command_preview": [
+              "codex",
+              "exec",
+              "-m",
+              "gpt-5.3-codex",
+              "-c",
+              "model_reasoning_effort=high"
+            ],
+            "config_overrides": {
+              "model": "gpt-5.3-codex",
+              "model_reasoning_effort": "high"
+            },
+            "context_need": "medium",
+            "emitted_at": "2026-05-07T19:25:18+00:00",
+            "ion_stage_id": "nemesis_verify",
+            "lane_id": "ion_system",
+            "limit_authority": "not_authoritative",
+            "live_execution_authority": false,
+            "model_move_id": "codex_model_move_f9c3d64e81afbc419d0b1119",
+            "model_profile": {
+              "codex_model_slug": "gpt-5.3-codex",
+              "default_reasoning_effort": "medium",
+              "display_name": "GPT-5.3-Codex",
+              "limit_authority": "not_authoritative",
+              "live_execution_authority": false,
+              "local_codex_cache_observed": true,
+              "production_authority": false,
+              "reasoning_efforts_supported": [
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "role": "primary_codex_engineering_lane",
+              "usage_pool_authority": "operator_observed_pending_verification",
+              "usage_pool_id": "codex_primary_observed"
+            },
+            "production_authority": false,
+            "provider_api_dispatch_authorized": false,
+            "receipt_fields_required": [
+              "ion_stage_id",
+              "work_class",
+              "selected_model",
+              "selected_reasoning_effort",
+              "usage_pool_id",
+              "model_move_id",
+              "prompt_path",
+              "run_packet_path",
+              "tests_run"
+            ],
+            "risk_level": "medium",
+            "routing_posture": "conserve_main_bank",
+            "schema_id": "ion.codex_cli_model_move_plan.v1",
+            "selected_model": "gpt-5.3-codex",
+            "selected_reasoning_effort": "high",
+            "selection_reason": [
+              "routing_posture:conserve_main_bank",
+              "work_class:code_review",
+              "risk_level:medium",
+              "primary_codex_engineering_lane_is_sufficient"
+            ],
+            "usage_limits_authoritative": false,
+            "usage_pool_authority": "operator_observed_pending_verification",
+            "usage_pool_id": "codex_primary_observed",
+            "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+            "version": "V126_CODEX_CLI_MODEL_MOVES",
+            "work_class": "code_review",
+            "workspace_root": null
+          },
+          "receipt_refs": [],
+          "request_refs": [],
+          "stage_id": "nemesis_verify",
+          "status": "pending"
+        },
+        {
+          "description": "Package accepted state and receipts back to the front stage.",
+          "index": 7,
+          "label": "Relay return",
+          "model_move": {
+            "claim_boundary": [
+              "Model move plans configure Codex CLI invocation only.",
+              "Usage-pool labels are operator-observed hints until externally verified.",
+              "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+            ],
+            "codex_exec_args": [
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=medium"
+            ],
+            "command_preview": [
+              "codex",
+              "exec",
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=medium"
+            ],
+            "config_overrides": {
+              "model": "gpt-5.5",
+              "model_reasoning_effort": "medium"
+            },
+            "context_need": "medium",
+            "emitted_at": "2026-05-07T19:25:18+00:00",
+            "ion_stage_id": "relay_return",
+            "lane_id": "ion_system",
+            "limit_authority": "not_authoritative",
+            "live_execution_authority": false,
+            "model_move_id": "codex_model_move_6f28cfc9a22c364993bb3767",
+            "model_profile": {
+              "codex_model_slug": "gpt-5.5",
+              "default_reasoning_effort": "medium",
+              "display_name": "GPT-5.5",
+              "limit_authority": "not_authoritative",
+              "live_execution_authority": false,
+              "local_codex_cache_observed": true,
+              "production_authority": false,
+              "reasoning_efforts_supported": [
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "role": "frontier_authority_and_architecture_lane",
+              "usage_pool_authority": "operator_observed_pending_verification",
+              "usage_pool_id": "frontier_main_observed"
+            },
+            "production_authority": false,
+            "provider_api_dispatch_authorized": false,
+            "receipt_fields_required": [
+              "ion_stage_id",
+              "work_class",
+              "selected_model",
+              "selected_reasoning_effort",
+              "usage_pool_id",
+              "model_move_id",
+              "prompt_path",
+              "run_packet_path",
+              "tests_run"
+            ],
+            "risk_level": "low",
+            "routing_posture": "conserve_main_bank",
+            "schema_id": "ion.codex_cli_model_move_plan.v1",
+            "selected_model": "gpt-5.5",
+            "selected_reasoning_effort": "medium",
+            "selection_reason": [
+              "routing_posture:conserve_main_bank",
+              "work_class:user_facing_answer",
+              "risk_level:low",
+              "user_visible_synthesis_defaults_to_frontier_medium"
+            ],
+            "usage_limits_authoritative": false,
+            "usage_pool_authority": "operator_observed_pending_verification",
+            "usage_pool_id": "frontier_main_observed",
+            "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+            "version": "V126_CODEX_CLI_MODEL_MOVES",
+            "work_class": "user_facing_answer",
+            "workspace_root": null
+          },
+          "receipt_refs": [],
+          "request_refs": [],
+          "stage_id": "relay_return",
+          "status": "pending"
+        },
+        {
+          "description": "Present the user-facing response without claiming sovereign authority.",
+          "index": 8,
+          "label": "Persona response",
+          "model_move": {
+            "claim_boundary": [
+              "Model move plans configure Codex CLI invocation only.",
+              "Usage-pool labels are operator-observed hints until externally verified.",
+              "This plan does not authorize production, provider API dispatch, credentials, shell expansion, or state acceptance."
+            ],
+            "codex_exec_args": [
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=medium"
+            ],
+            "command_preview": [
+              "codex",
+              "exec",
+              "-m",
+              "gpt-5.5",
+              "-c",
+              "model_reasoning_effort=medium"
+            ],
+            "config_overrides": {
+              "model": "gpt-5.5",
+              "model_reasoning_effort": "medium"
+            },
+            "context_need": "medium",
+            "emitted_at": "2026-05-07T19:25:18+00:00",
+            "ion_stage_id": "persona_response",
+            "lane_id": "ion_system",
+            "limit_authority": "not_authoritative",
+            "live_execution_authority": false,
+            "model_move_id": "codex_model_move_65910c966e2ea5ce593eaae3",
+            "model_profile": {
+              "codex_model_slug": "gpt-5.5",
+              "default_reasoning_effort": "medium",
+              "display_name": "GPT-5.5",
+              "limit_authority": "not_authoritative",
+              "live_execution_authority": false,
+              "local_codex_cache_observed": true,
+              "production_authority": false,
+              "reasoning_efforts_supported": [
+                "low",
+                "medium",
+                "high",
+                "xhigh"
+              ],
+              "role": "frontier_authority_and_architecture_lane",
+              "usage_pool_authority": "operator_observed_pending_verification",
+              "usage_pool_id": "frontier_main_observed"
+            },
+            "production_authority": false,
+            "provider_api_dispatch_authorized": false,
+            "receipt_fields_required": [
+              "ion_stage_id",
+              "work_class",
+              "selected_model",
+              "selected_reasoning_effort",
+              "usage_pool_id",
+              "model_move_id",
+              "prompt_path",
+              "run_packet_path",
+              "tests_run"
+            ],
+            "risk_level": "low",
+            "routing_posture": "conserve_main_bank",
+            "schema_id": "ion.codex_cli_model_move_plan.v1",
+            "selected_model": "gpt-5.5",
+            "selected_reasoning_effort": "medium",
+            "selection_reason": [
+              "routing_posture:conserve_main_bank",
+              "work_class:user_facing_answer",
+              "risk_level:low",
+              "user_visible_synthesis_defaults_to_frontier_medium"
+            ],
+            "usage_limits_authoritative": false,
+            "usage_pool_authority": "operator_observed_pending_verification",
+            "usage_pool_id": "frontier_main_observed",
+            "verdict": "ION_CODEX_CLI_MODEL_MOVES_READY",
+            "version": "V126_CODEX_CLI_MODEL_MOVES",
+            "work_class": "user_facing_answer",
+            "workspace_root": null
+          },
+          "receipt_refs": [],
+          "request_refs": [],
+          "stage_id": "persona_response",
+          "status": "pending"
+        }
+      ],
+      "status": "PIPELINE_PROJECTED_AWAITING_PROOF_GATED_WORK"
+    }
+  ],
+  "production_authority": false,
+  "remote_access": {
+    "enabled_by_model": true,
+    "public_cockpit_path": "https://ion.helixion.net/cockpit/chat",
+    "requires_token_env": "ION_COCKPIT_PUBLIC_TOKEN"
+  },
+  "schema_id": "ion.dual_codex_chat_model.v1",
+  "shared_digest": {
+    "codex_general_visible_to_ion_system": [
+      {
+        "author": "ion_context",
+        "created_at": "2026-05-07T18:18:24+00:00",
+        "summary": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: f27c8ea987509ac53ece0d4346c6ea1d3e5ab7146fb3217c1777b786bf103ae0\nlatest_capsule_row: | C-004 |",
+        "turn_id": "mini_2026-05-07T181824Z0000_f27c8ea98750"
+      },
+      {
+        "author": "ion_context",
+        "created_at": "2026-05-07T18:41:39+00:00",
+        "summary": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: 06d94493fd6012082163ac27660c076dfae33a07a97b6eb1bb259b1362be92b3\nlatest_capsule_row: | C-005 |",
+        "turn_id": "mini_2026-05-07T184139Z0000_06d94493fd60"
+      },
+      {
+        "author": "ion_context",
+        "created_at": "2026-05-07T18:47:09+00:00",
+        "summary": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: 684c752baa50dec27db9afaa49374c46d40a0a99efd39ca7c3ed190780e1a880\nlatest_capsule_row: | C-006 |",
+        "turn_id": "mini_2026-05-07T184709Z0000_684c752baa50"
+      },
+      {
+        "author": "ion_context",
+        "created_at": "2026-05-07T19:07:57+00:00",
+        "summary": "ION Mini capsule brief\nmini_ref: ION/05_context/current/codex_solo/MINI.md\ncapsule_ref: ION/05_context/current/codex_solo/CAPSULE.md\nmini_sha256: 5cf2ab5b1fa648ed5df0a7860aab58cc4f60cfb7fc36bdf3a6cfb45400f17950\nlatest_capsule_row: | C-007 |",
+        "turn_id": "mini_2026-05-07T190757Z0000_5cf2ab5b1fa6"
+      }
+    ],
+    "codex_queue": {
+      "active_process_running": false,
+      "latest_run": {
+        "mtime": "2026-05-07T16:53:25+00:00",
+        "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac/run.json",
+        "request_id": "codex_req_2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ",
+        "run_id": "codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac",
+        "status": "RETURN_RECORDED_PROOF_ACCEPTED"
+      },
+      "queued_request_count": 0
+    },
+    "ion_system_visible_to_codex_general": [
+      {
+        "author": "operator",
+        "created_at": "2026-05-07T19:25:18+00:00",
+        "summary": "hello ION, this is the first test to see if you are operational.",
+        "turn_id": "turn_2026-05-07T192518Z0000_hello_ion_this_is_the_first_test_to_see_if_you_are_operational"
+      }
+    ],
+    "memory_pin_count": 0,
+    "policy": "shared_digest_not_full_transcript_by_default",
+    "schema_id": "ion.dual_codex_chat_shared_digest.v1"
+  },
+  "state_path": "ION/05_context/current/dual_codex_chat/state.json",
+  "verdict": "ION_DUAL_CODEX_CHAT_READY"
+}

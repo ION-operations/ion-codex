@@ -1,0 +1,107 @@
+{
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": "Braden",
+  "created_at": "2026-05-05T20:22:51+00:00",
+  "failure_classification": "POLICY_BLOCK_WORKING_AS_DESIGNED",
+  "files_touched": [],
+  "live_execution_authority": false,
+  "operation": "local_operator_attach_artifact",
+  "production_authority": false,
+  "receipt_id": "chatops_bridge_operation_20260505T202251Z_local_operator_attach_artifact",
+  "schema_id": "ion.chatops.bridge_operation_receipt.v1",
+  "status": "blocked",
+  "target_refs": [],
+  "validation": {
+    "result": {
+      "artifact": {
+        "attachable": true,
+        "content_type": "application/zip",
+        "finding": null,
+        "mtime": "2026-05-05T18:58:49+00:00",
+        "name": "ION_COMPACT_RUNTIME_2026-05-05T185848Z0000.zip",
+        "path": "ION/06_artifacts/packages/ION_COMPACT_RUNTIME_2026-05-05T185848Z0000.zip",
+        "sha256": "782ceff63678bac6d0f0cf3aad815688f3d953866cc5cf41af301339717d4872",
+        "size_bytes": 2390808
+      },
+      "finding": "LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID",
+      "geometry": {
+        "age_ms": 1516,
+        "captured_at_ms": 1778012569487,
+        "composer_rect": {
+          "center_x": 619.0,
+          "center_y": 1098.0,
+          "height": 102.0,
+          "width": 968.0,
+          "x": 135.0,
+          "y": 1047.0
+        },
+        "display_geometry": {
+          "height": 1080,
+          "ok": true,
+          "width": 1920
+        },
+        "findings": [
+          "target_screen_center_outside_display"
+        ],
+        "ok": false,
+        "page_url": "https://chatgpt.com/c/69f9751c-f354-8325-af7d-7ac7bac29cc4",
+        "planned_click": [
+          610,
+          1113
+        ],
+        "target_rect": {
+          "center_x": 618.0,
+          "center_y": 1083.0,
+          "height": 40.0,
+          "width": 728.0,
+          "x": 254.0,
+          "y": 1063.0
+        },
+        "target_screen_rect": {
+          "center_x": 610.0,
+          "center_y": 1113.0,
+          "height": 40.0,
+          "width": 728.0,
+          "x": 246.0,
+          "y": 1093.0
+        },
+        "viewport": {
+          "height": 1181,
+          "width": 1185
+        }
+      },
+      "ok": false,
+      "operator_status": {
+        "active_window_title": "ION README Rewrite - Google Chrome",
+        "backend": "linux_desktop_automation",
+        "display_geometry": {
+          "height": 1080,
+          "ok": true,
+          "width": 1920
+        },
+        "live_execution_authority": false,
+        "ok": true,
+        "production_authority": false,
+        "requires_operator_presence": true,
+        "schema_id": "ion.chatops.local_operator_status.v1",
+        "send_click_authority": false,
+        "silent_upload_authority": false,
+        "supported_operations": [
+          "attach_approved_artifact"
+        ],
+        "tools": {
+          "wl-copy": null,
+          "wtype": null,
+          "xclip": null,
+          "xdotool": "/usr/bin/xdotool",
+          "xsel": null,
+          "ydotool": null
+        },
+        "verdict": "ION_CHATOPS_BRIDGE_READY"
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": "Braden",
+  "created_at": "2026-05-05T20:34:00+00:00",
+  "failure_classification": null,
+  "files_touched": [
+    "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/5c8qbrzx_7ww864ui13s866ne0blnlar.json"
+  ],
+  "live_execution_authority": false,
+  "operation": "artifact_prepare_browser_drop",
+  "production_authority": false,
+  "receipt_id": "chatops_bridge_operation_20260505T203400Z_artifact_prepare_browser_drop",
+  "schema_id": "ion.chatops.bridge_operation_receipt.v1",
+  "status": "completed",
+  "target_refs": [
+    {
+      "path": "ION/06_artifacts/packages/ION_COMPACT_RUNTIME_2026-05-05T185848Z0000.zip",
+      "provider": "local_ion",
+      "role": "browser_attachment_candidate"
+    }
+  ],
+  "validation": {
+    "result": {
+      "artifact": {
+        "attachable": true,
+        "content_type": "application/zip",
+        "finding": null,
+        "mtime": "2026-05-05T18:58:49+00:00",
+        "name": "ION_COMPACT_RUNTIME_2026-05-05T185848Z0000.zip",
+        "path": "ION/06_artifacts/packages/ION_COMPACT_RUNTIME_2026-05-05T185848Z0000.zip",
+        "sha256": "782ceff63678bac6d0f0cf3aad815688f3d953866cc5cf41af301339717d4872",
+        "size_bytes": 2390808
+      },
+      "content_type": "application/zip",
+      "download_token": "5c8QbRzX-7wW864UI13S866ne0BlNLar",
+      "download_url": "http://127.0.0.1:8767/artifacts/download/5c8QbRzX-7wW864UI13S866ne0BlNLar",
+      "filename": "ION_COMPACT_RUNTIME_2026-05-05T185848Z0000.zip",
+      "ok": true,
+      "sha256": "782ceff63678bac6d0f0cf3aad815688f3d953866cc5cf41af301339717d4872",
+      "size_bytes": 2390808,
+      "ticket_path": "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/5c8qbrzx_7ww864ui13s866ne0blnlar.json"
+    }
+  }
+}

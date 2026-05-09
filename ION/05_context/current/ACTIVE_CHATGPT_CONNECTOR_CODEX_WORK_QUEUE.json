@@ -2,8 +2,63 @@
   "live_execution_authority": false,
   "production_authority": false,
   "queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
-  "request_count": 24,
+  "request_count": 28,
   "requests": [
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-09T00:49:41+00:00",
+      "latest_return_packet_path": null,
+      "linked_return_count": 0,
+      "objective": "Prepare a bounded ION work packet/report for the next local ION/Codex or role-agent run that ingests the current ChatGPT Browser conversation as operator-supplied candidate context.\n\nScope:\n1. Capture the operator's voice-mode direction: place major agent frameworks, AI systems, and major theoretical/scientific minds on an \"imaginary wall\"; identify what they are all pointing toward at first principles; locate where ION connects in that landscape.\n2. Treat this as an ION doctrine/product cartography task, not accepted canon. ION should be mapped as a continuity/state-transition substrate at the intersection between agent outputs, proof, approval, receipts, and durable state.\n3. Carry forward the Field of Time temporal phase-state hypothesis only as candidate ontology: frozen/null lock, fluid mobility field, diffuse/null gas, radiant/unbounded limit. Do not promote it to physics canon.\n4. Produce a concise report with comparable systems/framework families, first-principles axes shared across them, where ION is similar/different/complementary, candidate domain/agent implications for dynamic domain fission, and risks/non-claims.\n5. Return in the standard Codex/ION format: CONTEXT PROOF, TEMPLATE ACTION PROOF, RESULT.\n\nBoundaries: read-only unless bounded draft artifact is explicitly requested; no production/live authority; no secrets; no provider API calls; no git push; no deletion; outputs are candidate state until Steward/human acceptance.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T004941Z0000_prepare_a_bounded_ion_work_packet_report_for_the_next_local_ion_codex_or_role_ag.json",
+      "request_id": "codex_req_2026-05-09T004941Z0000_prepare_a_bounded_ion_work_packet_report_for_the_next_local_ion_codex_or_role_ag",
+      "return_packet_paths": [],
+      "status": "QUEUED_FOR_CODEX_CARRIER",
+      "updated_at": "2026-05-09T00:49:41+00:00"
+    },
+    {
+      "accepted_return_count": 1,
+      "created_at": "2026-05-07T16:50:19+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T165325Z0000_task_return.json",
+      "linked_return_count": 1,
+      "objective": "Final read-only Codex CLI carrier proof-contract smoke for Sev after exact TEMPLATE ACTION PROOF prompt repair. Read the required context receipt paths, do not edit files, do not delete, do not push git, do not access secrets, and return CONTEXT PROOF, TEMPLATE ACTION PROOF, VALIDATION, and RESULT. In TEMPLATE ACTION PROOF include template_id, action_id, result, and a non-empty touched_paths YAML list of repo-relative evidence paths inspected.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ.json",
+      "request_id": "codex_req_2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T165325Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_ACCEPTED",
+      "updated_at": "2026-05-07T16:53:25+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-07T16:46:36+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164913Z0000_task_return.json",
+      "linked_return_count": 1,
+      "objective": "Read-only Codex CLI carrier loop proof-contract smoke for Sev after touched_paths prompt repair. Read the required context receipt paths, do not edit files, do not delete, do not push git, do not access secrets, and return the required proof sections with a non-empty touched_paths list naming repo-relative evidence paths inspected.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T164636Z0000_read_only_codex_cli_carrier_loop_proof_contract_smoke_for_sev_after_touched_path.json",
+      "request_id": "codex_req_2026-05-07T164636Z0000_read_only_codex_cli_carrier_loop_proof_contract_smoke_for_sev_after_touched_path",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164913Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_BLOCKED",
+      "updated_at": "2026-05-07T16:49:13+00:00"
+    },
+    {
+      "accepted_return_count": 0,
+      "created_at": "2026-05-07T16:37:12+00:00",
+      "latest_return_packet_path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164520Z0000_task_return.json",
+      "linked_return_count": 2,
+      "objective": "Read-only Codex CLI carrier loop smoke for Sev. Read the required context receipt paths, do not edit files, do not delete, do not push git, do not access secrets, and return only the required proof sections summarizing current Codex queue, local cockpit, and service status.",
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt.json",
+      "request_id": "codex_req_2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt",
+      "return_packet_paths": [
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164245Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164520Z0000_task_return.json"
+      ],
+      "status": "RETURN_RECORDED_PROOF_BLOCKED",
+      "updated_at": "2026-05-07T16:45:20+00:00"
+    },
     {
       "accepted_return_count": 0,
       "created_at": "2026-05-05T02:29:44+00:00",

@@ -1,16 +1,18 @@
 {
   "accepted": true,
-  "active_connector_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp",
-  "active_process_id": 38274,
+  "active_connector_url": "https://ion.helixion.net/mcp",
+  "active_process_id": 290192,
   "active_process_running": true,
   "active_running": true,
   "active_status_path": "ION/05_context/current/ACTIVE_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL.json",
-  "active_tunnel_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com",
+  "active_tunnel_url": "https://ion.helixion.net",
   "cloudflared_command": [
     "/home/sev/.local/bin/cloudflared",
     "tunnel",
+    "run",
     "--url",
-    "http://127.0.0.1:8765"
+    "http://127.0.0.1:8765",
+    "ion-browser"
   ],
   "cloudflared_found": true,
   "cloudflared_path": "/home/sev/.local/bin/cloudflared",
@@ -19,7 +21,7 @@
   "endpoint_path": "/mcp",
   "findings": [],
   "health_checks": {
-    "connector_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp",
+    "connector_url": "https://ion.helixion.net/mcp",
     "deployment_authority": false,
     "live_execution_authority": false,
     "local_http_preview": {
@@ -60,13 +62,26 @@
   "live_execution_authority": false,
   "local_http_running": true,
   "local_url": "http://127.0.0.1:8765",
+  "named_tunnel_route_dns_command": [
+    "/home/sev/.local/bin/cloudflared",
+    "tunnel",
+    "route",
+    "dns",
+    "ion-browser",
+    "ion.helixion.net"
+  ],
   "production_authority": false,
   "public_tunnel_verified": true,
   "required_public_connector_path": "https://<cloudflare-tunnel-host>/mcp",
   "schema_id": "ion.chatgpt_browser_cloudflare_tunnel.v1",
+  "stable_connector_active": true,
+  "stable_connector_url": "https://ion.helixion.net/mcp",
+  "stable_hostname": "ion.helixion.net",
+  "stable_tunnel_url": "https://ion.helixion.net",
   "stale_connector_url": null,
   "stale_tunnel_url": null,
   "transport_state": "TUNNEL_RUNNING_VERIFIED",
+  "tunnel_name": "ion-browser",
   "verdict": "ION_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL_READY",
   "version_line": "V122_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL",
   "write_tools_require_confirmation": true

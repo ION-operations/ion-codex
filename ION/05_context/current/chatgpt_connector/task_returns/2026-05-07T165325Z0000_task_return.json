@@ -1,0 +1,54 @@
+{
+  "accepted_for_carrier_intake": true,
+  "connector_id": "ION_CHATGPT_BROWSER_CONNECTOR",
+  "context_proof_result": {
+    "accepted": true,
+    "context_proof_heading": "### CONTEXT PROOF",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_REVIEW",
+    "live_execution_authority": false,
+    "missing_paths": [],
+    "production_authority": false,
+    "required_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ.json",
+      "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/04_packages/kernel/ion_carrier_task_return.py",
+      "ION/04_packages/kernel/ion_carrier_continue.py",
+      "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "ION/02_architecture/ION_FULL_CARRIER_MCP_PARITY_PROTOCOL.md",
+      "ION/03_registry/chatgpt_browser_carrier_profile.yaml",
+      "ION/03_registry/codex_cli_carrier_profile.yaml",
+      "ION/04_packages/kernel/ion_cockpit_view_model.py"
+    ],
+    "schema_id": "ion.context_proof_return_evaluation.v1"
+  },
+  "created_at": "2026-05-07T16:53:25+00:00",
+  "live_execution_authority": false,
+  "production_authority": false,
+  "result": "RECORDED_FOR_CARRIER_INTAKE",
+  "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
+  "task_output_preview": "### CONTEXT PROOF\n\nRead-only context paths inspected with SHA-256 and line evidence:\n\n- `ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ.json` sha256 `11eefcc5317fa0e3ede5cfb70d69f82a08f62ce1eb7b580dfa4cd9b2d44a1df8`; lines 8, 14-15 show read-only objective, schema `ion.chatgpt_browser_connector_codex_work_request.v1`, status `CLAIMED_BY_CODEX_QUEUE_RUNNER`.\n- `ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac/context_receipt.json` sha256 `38d4c356fab5e97dd8ad3412eece25abfcb9046f8027817bcdb561155430ca76`; lines 2, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 enumerate required reads; line 59 schema `ion.context_load_receipt.v1`.\n- `ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json` sha256 `56f725f2a32afce3ccb3baffe11bc6db16d534aeca9a60b8430292ea968763c7`; lines 12, 14, 16 show this objective, request id, and claimed status; line 377 schema.\n- `ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json` sha256 `813e2d6ed5a620fcb60855",
+  "task_output_sha256": "7594e6526943d127a8ef7b1cad17bca05a76f51953dbeb1f61d3ea9e632162f0",
+  "template_action_proof_result": {
+    "accepted": true,
+    "action_id": "codex_queue_runner_process_once",
+    "findings": [],
+    "integration_decision": "ALLOW_STEWARD_INTEGRATION",
+    "live_external_execution_authority": false,
+    "production_authority": false,
+    "schema_id": "ion.template_action_gate_result.v1",
+    "template_id": "ion.template.autonomous_loop.local_worker.v1",
+    "touched_paths": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ.json",
+      "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac/context_receipt.json",
+      "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac/run.json",
+      "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+      "ION/04_packages/kernel/ion_codex_queue_runner.py"
+    ]
+  },
+  "work_request_id": "codex_req_2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ",
+  "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ.json"
+}

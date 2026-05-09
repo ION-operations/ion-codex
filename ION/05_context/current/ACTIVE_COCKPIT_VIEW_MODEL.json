@@ -66,25 +66,20 @@
     "FORBIDDEN_CAPABILITY"
   ],
   "chatgpt_browser_mcp": {
-    "active_connector_url": "https://attention-chrome-satisfactory-guy.trycloudflare.com/mcp",
+    "active_connector_url": "https://ion.helixion.net/mcp",
     "adapter_gap_not_core_failure": true,
     "agent_invocation_broker": {
       "accepted": true,
-      "agent_codex_work_request_count": 2,
+      "agent_codex_work_request_count": 4,
       "agent_count": 16,
-      "agent_invocation_count": 2,
+      "agent_invocation_count": 4,
       "codex_queue_runner": {
-        "active_process_running": true,
-        "active_run": {
-          "pid": 80802,
-          "request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro.json",
-          "run_id": "codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i",
-          "run_packet_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i/run.json",
-          "started_at": "2026-05-04T21:36:33+00:00"
-        },
+        "active_process_running": false,
+        "active_run": null,
         "automation_surface": "ion_codex_queue_process_once",
         "autorun_loop_state": "NOT_STARTED_PROCESS_ONCE_AVAILABLE",
         "failure_classes": [
+          "BACKEND_CODEX_FAILURE",
           "CARRIER_ADAPTER_FAILURE",
           "CODEX_CLI_FAILURE",
           "DAEMON_FAILURE",
@@ -92,18 +87,39 @@
         ],
         "latest_runs": [
           {
-            "mtime": "2026-05-04T21:36:33+00:00",
-            "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i/run.json",
-            "request_id": "codex_req_2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro",
-            "run_id": "codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i",
-            "status": "CODEX_CLI_RUNNING"
+            "mtime": "2026-05-07T16:53:25+00:00",
+            "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac/run.json",
+            "request_id": "codex_req_2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ",
+            "run_id": "codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac",
+            "status": "RETURN_RECORDED_PROOF_ACCEPTED"
           },
           {
-            "mtime": "2026-05-04T20:54:59+00:00",
-            "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/run.json",
-            "request_id": "codex_req_2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion",
-            "run_id": "codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_",
-            "status": "PREPARED_NOT_STARTED"
+            "mtime": "2026-05-07T16:49:13+00:00",
+            "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T164647Z0000_codex_req_2026_05_07t164636z0000_read_only_codex_cli_carrier_loop_proof_contract/run.json",
+            "request_id": "codex_req_2026-05-07T164636Z0000_read_only_codex_cli_carrier_loop_proof_contract_smoke_for_sev_after_touched_path",
+            "run_id": "codex_run_2026-05-07T164647Z0000_codex_req_2026_05_07t164636z0000_read_only_codex_cli_carrier_loop_proof_contract",
+            "status": "RETURN_RECORDED_PROOF_BLOCKED"
+          },
+          {
+            "mtime": "2026-05-07T16:45:20+00:00",
+            "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T163852Z0000_codex_req_2026_05_07t163712z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_/run.json",
+            "request_id": "codex_req_2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt",
+            "run_id": "codex_run_2026-05-07T163852Z0000_codex_req_2026_05_07t163712z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_",
+            "status": "RETURN_RECORDED_PROOF_BLOCKED"
+          },
+          {
+            "mtime": "2026-05-04T22:04:50+00:00",
+            "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/run.json",
+            "request_id": "codex_req_agent_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+            "run_id": "codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic",
+            "status": "RETURN_RECORDED_PROOF_BLOCKED"
+          },
+          {
+            "mtime": "2026-05-04T21:55:31+00:00",
+            "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T214406Z0000_codex_req_agent_2026_05_04t214342z0000_nemesis_audit_the_newly_accepted_ion_agen/run.json",
+            "request_id": "codex_req_agent_2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run",
+            "run_id": "codex_run_2026-05-04T214406Z0000_codex_req_agent_2026_05_04t214342z0000_nemesis_audit_the_newly_accepted_ion_agen",
+            "status": "RETURN_RECORDED_PROOF_BLOCKED"
           }
         ],
         "live_execution_authority": false,
@@ -112,8 +128,15 @@
         "production_authority": false,
         "queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
         "queued_request_count": 0,
+        "reconciliation": {
+          "action": "not_requested",
+          "ok": true,
+          "schema_id": "ion.codex_queue_runner_reconciliation.v1",
+          "write": false
+        },
         "runner_state_path": "ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json",
         "schema_id": "ion.codex_queue_runner.v1",
+        "stale_active_run_detected": false,
         "verdict": "ION_CODEX_QUEUE_RUNNER_READY"
       },
       "failure_classes": [
@@ -125,14 +148,14 @@
       ],
       "findings": [],
       "latest_state": {
-        "latest_codex_work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T213935Z0000_agent_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_.json",
-        "latest_invocation_id": "agent_inv_2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g",
-        "latest_invocation_path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g.json",
-        "latest_requested_agent": "role.steward",
+        "latest_codex_work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T220209Z0000_agent_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the.json",
+        "latest_invocation_id": "agent_inv_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+        "latest_invocation_path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json",
+        "latest_requested_agent": "role.vizier",
         "live_execution_authority": false,
         "production_authority": false,
         "schema_id": "ion.agent_invocation_broker_state.v1",
-        "updated_at": "2026-05-04T21:39:35+00:00"
+        "updated_at": "2026-05-04T22:02:09+00:00"
       },
       "live_execution_authority": false,
       "next_agent_codex_work_request_path": null,
@@ -216,17 +239,12 @@
     "carrier_id": "CHATGPT_BROWSER_CARRIER",
     "carrier_message_count": 5,
     "codex_queue_runner": {
-      "active_process_running": true,
-      "active_run": {
-        "pid": 80802,
-        "request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro.json",
-        "run_id": "codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i",
-        "run_packet_path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i/run.json",
-        "started_at": "2026-05-04T21:36:33+00:00"
-      },
+      "active_process_running": false,
+      "active_run": null,
       "automation_surface": "ion_codex_queue_process_once",
       "autorun_loop_state": "NOT_STARTED_PROCESS_ONCE_AVAILABLE",
       "failure_classes": [
+        "BACKEND_CODEX_FAILURE",
         "CARRIER_ADAPTER_FAILURE",
         "CODEX_CLI_FAILURE",
         "DAEMON_FAILURE",
@@ -234,18 +252,39 @@
       ],
       "latest_runs": [
         {
-          "mtime": "2026-05-04T21:36:33+00:00",
-          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i/run.json",
-          "request_id": "codex_req_2026-05-04T211836Z0000_build_the_next_layer_multi_agent_codex_backed_ion_swarm_control_from_sev_gpt_bro",
-          "run_id": "codex_run_2026-05-04T213633Z0000_codex_req_2026_05_04t211836z0000_build_the_next_layer_multi_agent_codex_backed_i",
-          "status": "CODEX_CLI_RUNNING"
+          "mtime": "2026-05-07T16:53:25+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac/run.json",
+          "request_id": "codex_req_2026-05-07T165019Z0000_final_read_only_codex_cli_carrier_proof_contract_smoke_for_sev_after_exact_templ",
+          "run_id": "codex_run_2026-05-07T165024Z0000_codex_req_2026_05_07t165019z0000_final_read_only_codex_cli_carrier_proof_contrac",
+          "status": "RETURN_RECORDED_PROOF_ACCEPTED"
         },
         {
-          "mtime": "2026-05-04T20:54:59+00:00",
-          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_/run.json",
-          "request_id": "codex_req_2026-05-04T203755Z0000_build_the_next_ion_automation_layer_so_chatgpt_browser_can_operate_the_local_ion",
-          "run_id": "codex_run_2026-05-04T205459Z0000_codex_req_2026_05_04t203755z0000_build_the_next_ion_automation_layer_so_chatgpt_",
-          "status": "PREPARED_NOT_STARTED"
+          "mtime": "2026-05-07T16:49:13+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T164647Z0000_codex_req_2026_05_07t164636z0000_read_only_codex_cli_carrier_loop_proof_contract/run.json",
+          "request_id": "codex_req_2026-05-07T164636Z0000_read_only_codex_cli_carrier_loop_proof_contract_smoke_for_sev_after_touched_path",
+          "run_id": "codex_run_2026-05-07T164647Z0000_codex_req_2026_05_07t164636z0000_read_only_codex_cli_carrier_loop_proof_contract",
+          "status": "RETURN_RECORDED_PROOF_BLOCKED"
+        },
+        {
+          "mtime": "2026-05-07T16:45:20+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-07T163852Z0000_codex_req_2026_05_07t163712z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_/run.json",
+          "request_id": "codex_req_2026-05-07T163712Z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_read_the_required_context_receipt",
+          "run_id": "codex_run_2026-05-07T163852Z0000_codex_req_2026_05_07t163712z0000_read_only_codex_cli_carrier_loop_smoke_for_sev_",
+          "status": "RETURN_RECORDED_PROOF_BLOCKED"
+        },
+        {
+          "mtime": "2026-05-04T22:04:50+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic/run.json",
+          "request_id": "codex_req_agent_2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to",
+          "run_id": "codex_run_2026-05-04T220220Z0000_codex_req_agent_2026_05_04t220209z0000_vizier_analyze_the_next_architecture_slic",
+          "status": "RETURN_RECORDED_PROOF_BLOCKED"
+        },
+        {
+          "mtime": "2026-05-04T21:55:31+00:00",
+          "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-04T214406Z0000_codex_req_agent_2026_05_04t214342z0000_nemesis_audit_the_newly_accepted_ion_agen/run.json",
+          "request_id": "codex_req_agent_2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run",
+          "run_id": "codex_run_2026-05-04T214406Z0000_codex_req_agent_2026_05_04t214342z0000_nemesis_audit_the_newly_accepted_ion_agen",
+          "status": "RETURN_RECORDED_PROOF_BLOCKED"
         }
       ],
       "live_execution_authority": false,
@@ -254,11 +293,18 @@
       "production_authority": false,
       "queue_path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
       "queued_request_count": 0,
+      "reconciliation": {
+        "action": "not_requested",
+        "ok": true,
+        "schema_id": "ion.codex_queue_runner_reconciliation.v1",
+        "write": false
+      },
       "runner_state_path": "ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json",
       "schema_id": "ion.codex_queue_runner.v1",
+      "stale_active_run_detected": false,
       "verdict": "ION_CODEX_QUEUE_RUNNER_READY"
     },
-    "codex_work_request_count": 11,
+    "codex_work_request_count": 27,
     "connector_contract_verdict": "ION_CHATGPT_BROWSER_MCP_CONNECTOR_CONTRACT_READY",
     "first_parity_tools_present": [
       "ion_artifact_upload_chunk",
@@ -271,6 +317,16 @@
     ],
     "http_preview_verdict": "ION_CHATGPT_BROWSER_HTTP_MCP_PREVIEW_READY",
     "latest_agent_invocations": [
+      {
+        "mtime": "2026-05-04T22:02:09+00:00",
+        "name": "2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json",
+        "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T220209Z0000_vizier_analyze_the_next_architecture_slice_for_ion_swarm_control_after_the_42_to.json"
+      },
+      {
+        "mtime": "2026-05-04T21:43:42+00:00",
+        "name": "2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run.json",
+        "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-04T214342Z0000_nemesis_audit_the_newly_accepted_ion_agent_invocation_broker_and_codex_queue_run.json"
+      },
       {
         "mtime": "2026-05-04T21:39:35+00:00",
         "name": "2026-05-04T213935Z0000_steward_prepare_only_broker_regression_smoke_after_cancellation_and_swarm_step_g.json",
@@ -328,6 +384,11 @@
     ],
     "latest_decisions": [
       {
+        "mtime": "2026-05-04T23:21:34+00:00",
+        "name": "2026-05-04T232134Z0000_use_neutral_ion_naming_for_github_ssh_identity_labels_and_local_ssh_key_names_pr.json",
+        "path": "ION/05_context/current/chatgpt_connector/decisions/2026-05-04T232134Z0000_use_neutral_ion_naming_for_github_ssh_identity_labels_and_local_ssh_key_names_pr.json"
+      },
+      {
         "mtime": "2026-05-04T21:06:48+00:00",
         "name": "2026-05-04T210648Z0000_record_gpt_browser_sev_as_the_preferred_ion_dogfooding_workflow_sev_operates_fro.json",
         "path": "ION/05_context/current/chatgpt_connector/decisions/2026-05-04T210648Z0000_record_gpt_browser_sev_as_the_preferred_ion_dogfooding_workflow_sev_operates_fro.json"
@@ -350,29 +411,29 @@
     ],
     "latest_task_returns": [
       {
-        "mtime": "2026-05-04T21:35:58+00:00",
-        "name": "2026-05-04T213558Z0000_task_return.json",
-        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T213558Z0000_task_return.json"
+        "mtime": "2026-05-07T16:53:25+00:00",
+        "name": "2026-05-07T165325Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T165325Z0000_task_return.json"
       },
       {
-        "mtime": "2026-05-04T21:00:25+00:00",
-        "name": "2026-05-04T210025Z0000_task_return.json",
-        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T210025Z0000_task_return.json"
+        "mtime": "2026-05-07T16:49:13+00:00",
+        "name": "2026-05-07T164913Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164913Z0000_task_return.json"
       },
       {
-        "mtime": "2026-05-04T20:26:13+00:00",
-        "name": "2026-05-04T202613Z0000_task_return.json",
-        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T202613Z0000_task_return.json"
+        "mtime": "2026-05-07T16:45:20+00:00",
+        "name": "2026-05-07T164520Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164520Z0000_task_return.json"
       },
       {
-        "mtime": "2026-05-04T19:23:25+00:00",
-        "name": "2026-05-04T192325Z0000_task_return.json",
-        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T192325Z0000_task_return.json"
+        "mtime": "2026-05-07T16:42:45+00:00",
+        "name": "2026-05-07T164245Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-07T164245Z0000_task_return.json"
       },
       {
-        "mtime": "2026-05-04T19:11:28+00:00",
-        "name": "2026-05-04T191128Z0000_task_return.json",
-        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-04T191128Z0000_task_return.json"
+        "mtime": "2026-05-05T01:03:10+00:00",
+        "name": "2026-05-05T010310Z0000_task_return.json",
+        "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-05T010310Z0000_task_return.json"
       }
     ],
     "live_execution_authority": false,
@@ -391,6 +452,18 @@
       "ion_tool_manifest",
       "ion_tree_list"
     ]
+  },
+  "chatgpt_sandbox_returns": {
+    "direct_apply_authority": false,
+    "git_push_authority": false,
+    "inbox_root": "ION/05_context/inbox/chatgpt_sandbox_returns",
+    "latest_returns": [],
+    "live_execution_authority": false,
+    "production_authority": false,
+    "queue_path": "ION/05_context/current/ACTIVE_CHATGPT_SANDBOX_RETURN_QUEUE.json",
+    "return_count": 0,
+    "schema_id": "ion.chatgpt_sandbox_returns_cockpit_summary.v1",
+    "status_counts": {}
   },
   "front_door_proof_trace": {
     "boundary_proof": {
@@ -587,7 +660,7 @@
       "ION/05_context/history/conversational_receipts/9163df7a9a5760d705dbeec1.conversational_receipt.json"
     ]
   },
-  "generated_at": "2026-05-04T21:39:43+00:00",
+  "generated_at": "2026-05-07T16:54:09+00:00",
   "lane_timeline": {
     "event_count": 46,
     "events": [
@@ -2823,6 +2896,163 @@
       "turn": "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json"
     }
   },
+  "local_services": {
+    "degraded_count": 0,
+    "generated_at": "2026-05-07T16:54:09+00:00",
+    "install_authority": false,
+    "live_execution_authority": false,
+    "missing_template_count": 0,
+    "not_running_count": 0,
+    "probe_http": false,
+    "probe_timeout_seconds": 0.35,
+    "production_authority": false,
+    "ready_count": 0,
+    "schema_id": "ion.local_service_status.v1",
+    "service_count": 6,
+    "services": [
+      {
+        "command_summary": "python3 -S -m kernel.ion_chatops_bridge --ion-root . --host 127.0.0.1 --port 8767 --serve",
+        "findings": [],
+        "health": {
+          "finding": null,
+          "http_status": null,
+          "status": "not_probed"
+        },
+        "health_url": "http://127.0.0.1:8767/health",
+        "live_execution_authority": false,
+        "local_url": "http://127.0.0.1:8767",
+        "production_authority": false,
+        "public_url": null,
+        "role": "ChatOps localhost bridge for browser extension approvals and local operator actions.",
+        "service_id": "chatops",
+        "status": "configured",
+        "systemd": {
+          "template_path": "ION/09_integrations/systemd/user/ion-chatops.service.template",
+          "template_present": true
+        },
+        "tunnel_name": null,
+        "unit_name": "ion-chatops.service"
+      },
+      {
+        "command_summary": "python3 -S -m kernel.ion_chatgpt_browser_mcp_http_preview --ion-root . --host 127.0.0.1 --port 8765 --serve",
+        "findings": [],
+        "health": {
+          "finding": null,
+          "http_status": null,
+          "status": "not_probed"
+        },
+        "health_url": "http://127.0.0.1:8765/health",
+        "live_execution_authority": false,
+        "local_url": "http://127.0.0.1:8765",
+        "production_authority": false,
+        "public_url": "https://ion.helixion.net/mcp",
+        "role": "Local HTTP MCP preview backing the public ChatGPT browser connector.",
+        "service_id": "mcp_preview",
+        "status": "configured",
+        "systemd": {
+          "template_path": "ION/09_integrations/systemd/user/ion-mcp-preview.service.template",
+          "template_present": true
+        },
+        "tunnel_name": null,
+        "unit_name": "ion-mcp-preview.service"
+      },
+      {
+        "command_summary": "cloudflared tunnel run --url http://127.0.0.1:8765 ion-browser",
+        "findings": [],
+        "health": {
+          "finding": null,
+          "http_status": null,
+          "status": "not_probed"
+        },
+        "health_url": null,
+        "live_execution_authority": false,
+        "local_url": "http://127.0.0.1:8765",
+        "production_authority": false,
+        "public_url": "https://ion.helixion.net/mcp",
+        "role": "Cloudflare named tunnel for ion.helixion.net to the local MCP preview.",
+        "service_id": "mcp_tunnel",
+        "status": "configured",
+        "systemd": {
+          "template_path": "ION/09_integrations/systemd/user/ion-mcp-tunnel.service.template",
+          "template_present": true
+        },
+        "tunnel_name": "ion-browser",
+        "unit_name": "ion-mcp-tunnel.service"
+      },
+      {
+        "command_summary": "python3 -u -S -m kernel.ion_custom_gpt_action_gateway --ion-root . --host 127.0.0.1 --port 8777 --serve",
+        "findings": [],
+        "health": {
+          "finding": null,
+          "http_status": null,
+          "status": "not_probed"
+        },
+        "health_url": "http://127.0.0.1:8777/health",
+        "live_execution_authority": false,
+        "local_url": "http://127.0.0.1:8777",
+        "production_authority": false,
+        "public_url": "https://ion-actions.helixion.net",
+        "role": "Local Custom GPT Action Gateway with bearer-authenticated bounded action intake.",
+        "service_id": "action_gateway",
+        "status": "configured",
+        "systemd": {
+          "template_path": "ION/09_integrations/systemd/user/ion-action-gateway.service.template",
+          "template_present": true
+        },
+        "tunnel_name": null,
+        "unit_name": "ion-action-gateway.service"
+      },
+      {
+        "command_summary": "cloudflared tunnel run --url http://127.0.0.1:8777 ion-actions",
+        "findings": [],
+        "health": {
+          "finding": null,
+          "http_status": null,
+          "status": "not_probed"
+        },
+        "health_url": null,
+        "live_execution_authority": false,
+        "local_url": "http://127.0.0.1:8777",
+        "production_authority": false,
+        "public_url": "https://ion-actions.helixion.net",
+        "role": "Cloudflare named tunnel for ion-actions.helixion.net to the local Action Gateway.",
+        "service_id": "action_tunnel",
+        "status": "configured",
+        "systemd": {
+          "template_path": "ION/09_integrations/systemd/user/ion-action-tunnel.service.template",
+          "template_present": true
+        },
+        "tunnel_name": "ion-actions",
+        "unit_name": "ion-action-tunnel.service"
+      },
+      {
+        "command_summary": "python3 -S -m kernel.ion_local_cockpit_app --ion-root . --host 127.0.0.1 --port 8788 --serve",
+        "findings": [],
+        "health": {
+          "finding": null,
+          "http_status": null,
+          "status": "not_probed"
+        },
+        "health_url": "http://127.0.0.1:8788/health",
+        "live_execution_authority": false,
+        "local_url": "http://127.0.0.1:8788",
+        "production_authority": false,
+        "public_url": null,
+        "role": "Local-only browser cockpit app for ION runtime, service, Codex queue, and receipt visibility.",
+        "service_id": "cockpit_app",
+        "status": "configured",
+        "systemd": {
+          "template_path": "ION/09_integrations/systemd/user/ion-cockpit-app.service.template",
+          "template_present": true
+        },
+        "tunnel_name": null,
+        "unit_name": "ion-cockpit-app.service"
+      }
+    ],
+    "status": "configured",
+    "systemd_template_root": "ION/09_integrations/systemd/user",
+    "verdict": "ION_LOCAL_SERVICE_STATUS_PROJECTED"
+  },
   "queues": {
     "human_gates": [
       {
@@ -4147,7 +4377,7 @@
     "audit_findings": [],
     "blocked": false,
     "mode": "codex_extension",
-    "shell_root": "/home/sev/ION - Production/ION_CODEX",
+    "shell_root": "/home/sev/ION - Production/ION_CODEX FULL",
     "status": "ready",
     "version": "V90_CURSOR_COCKPIT_LIVE_WEBVIEW_BINDING"
   },
@@ -4289,7 +4519,7 @@
       "path": "ION/05_context/current/SAFE_FULL_PROJECT_PACKAGE_RESULT_V110.json",
       "source": "safe_full_project_package",
       "status": "degraded",
-      "time": "2026-05-04T21:39:43+00:00"
+      "time": "2026-05-07T16:54:09+00:00"
     },
     {
       "detail": "V72_MCP_DONOR_RECONCILIATION_PASS; restored: 38; forbidden runtime: 0",
@@ -4297,7 +4527,7 @@
       "path": "ION/05_context/current/V108_V72_MCP_DONOR_RECONCILIATION_AUDIT.json",
       "source": "v72_mcp_donor_reconciliation",
       "status": "ready",
-      "time": "2026-05-04T21:39:43+00:00"
+      "time": "2026-05-07T16:54:09+00:00"
     },
     {
       "detail": "ION_FRONT_DOOR_PROOF_TRACE_READY",
@@ -4305,7 +4535,7 @@
       "path": "ION/05_context/current/ACTIVE_FRONT_DOOR_PROOF_TRACE.json",
       "source": "front_door_proof_trace",
       "status": "ready",
-      "time": "2026-05-04T21:39:43+00:00"
+      "time": "2026-05-07T16:54:09+00:00"
     }
   ],
   "top_bar": {
@@ -4314,6 +4544,9 @@
     "execution_bundle_materialized": true,
     "gate_count": 0,
     "hook_status": "projected_not_connected",
+    "local_service_count": 6,
+    "local_service_missing_template_count": 0,
+    "local_service_status": "configured",
     "objective": "Reconcile ChatGPT Browser MCP connector transport truth, health check, carrier-specific onboarding tick, and human trial instructions",
     "operator_queue_pending": 0,
     "plan_spawn_count": 0,
@@ -4323,6 +4556,7 @@
       "pending": 0,
       "rejected": 0
     },
+    "sandbox_return_count": 0,
     "spawn_count": 0,
     "spawn_rows_total": 5,
     "steward_queue_count": 0

@@ -1,12 +1,26 @@
 {
   "archive_root_policy": "pyproject.toml and ION/REPO_AUTHORITY.md must be at archive root; wrapper-directory zips require repackaging",
   "context_lifecycle_audit_path": "ION/05_context/current/CONTEXT_LIFECYCLE_AUDIT_V102.json",
-  "created_at": "2026-05-02T23:01:05+00:00",
+  "created_at": "2026-05-05T18:58:48+00:00",
   "excluded_forensic_context": [
+    "ION/05_context/archive",
+    "ION/05_context/current/BASELINE_MANIFEST_V124.json",
+    "ION/05_context/current/BRANCH_LANDING_PLAN_20260505_CHATOPS_PUBLIC_GITHUB.md",
     "ION/05_context/current/CARRIER_AGENT_SYSTEM_BUILD_PLAN_V105.json",
     "ION/05_context/current/CARRIER_CAPABILITY_SURVEY_20260427_CURSOR_L0.md",
+    "ION/05_context/current/CARRIER_ONBOARDING_AUTHORITY_AUDIT_V116.json",
+    "ION/05_context/current/CARRIER_ONBOARDING_AUTHORITY_AUDIT_V117.json",
+    "ION/05_context/current/CARRIER_ONBOARDING_AUTHORITY_AUDIT_V123.json",
     "ION/05_context/current/CARRIER_RUN_20260427.md",
+    "ION/05_context/current/CHATGPT_BROWSER_CLOUDFLARE_TUNNEL_V122.json",
+    "ION/05_context/current/CHATGPT_BROWSER_HTTP_MCP_PREVIEW_V121.json",
+    "ION/05_context/current/CHATGPT_BROWSER_LEGACY_TUNNEL_REUSE_AUDIT_V124.json",
+    "ION/05_context/current/CHATGPT_BROWSER_MCP_CONNECTOR_CONTRACT_V120.json",
+    "ION/05_context/current/CODEX_CLI_CARRIER_AUDIT_V125.json",
     "ION/05_context/current/CODEX_EXTENSION_CARRIER_AUDIT_V106.json",
+    "ION/05_context/current/CONTAINMENT_RECEIPT_V123_ROOT_AUTHORITY_BUNDLE_START_HERE.json",
+    "ION/05_context/current/CONTAINMENT_RECEIPT_V123_ROOT_ONBOARDING_SHIMS.json",
+    "ION/05_context/current/CONTAINMENT_RECEIPT_V123_STALE_OPERATOR_VISIBLE_LAST_RUN.json",
     "ION/05_context/current/CONTEXT_LIFECYCLE_AUDIT_V102.json",
     "ION/05_context/current/CONTEXT_METABOLISM_MANIFEST_V102.json",
     "ION/05_context/current/CURSOR_AGENT_HANDOFF_20260428_WORKSPACE_AND_CARRIER_FOUNDATION.md",
@@ -22,15 +36,23 @@
     "ION/05_context/current/LAST_SUBAGENT_SPAWN_RUN.txt",
     "ION/05_context/current/LAST_TOOL_CHAIN.txt",
     "ION/05_context/current/OPERATOR_MECHANICAL_REPORT_20260427.md",
-    "ION/05_context/current/OPERATOR_VISIBLE_LAST_RUN.md",
+    "ION/05_context/current/POST_PATCH_MANIFEST_V124.json",
     "ION/05_context/current/STEWARD_INTEGRATION_RECEIPT_20260427.txt",
     "ION/05_context/current/TASK_RUN_CORRECTNESS_AUDIT_20260427.md",
     "ION/05_context/current/TEMPORAL_CONTEXT_ENFORCEMENT_AUDIT_V103.json",
+    "ION/05_context/current/TRUNK_FILE_MANIFEST_BASELINE_V118.json",
+    "ION/05_context/current/TRUNK_FILE_MANIFEST_POSTPATCH_V118.json",
+    "ION/05_context/current/TRUNK_PRESERVATION_REPORT_V118.json",
+    "ION/05_context/current/V108_V72_MCP_DONOR_RECONCILIATION_AUDIT.json",
     "ION/05_context/current/_tmp_kernel.txt",
-    "ION/05_context/current/_tmp_onboard.json",
     "ION/05_context/current/backups",
+    "ION/05_context/current/chatgpt_connector",
+    "ION/05_context/current/chatops_bridge",
+    "ION/05_context/current/codex_cli",
     "ION/05_context/current/execution_cycles",
+    "ION/05_context/current/github_data_plane",
     "ION/05_context/current/role_sessions",
+    "ION/05_context/current/steward_integrations",
     "ION/05_context/current/task_returns"
   ],
   "excluded_package_sidecar_context": [
@@ -43,8 +65,15 @@
   "included_cold_context": [],
   "included_hot_context": [
     "ION/05_context/current/ACTIVE_AGENT_CONTEXT_WINDOW_PLAN.json",
+    "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+    "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.codex_cli.json",
+    "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+    "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.sev.json",
     "ION/05_context/current/ACTIVE_CARRIER_TASK_RETURN_LEDGER.json",
+    "ION/05_context/current/ACTIVE_CARRIER_TICK.json",
     "ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json",
+    "ION/05_context/current/ACTIVE_CHATGPT_BROWSER_CLOUDFLARE_TUNNEL.json",
+    "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
     "ION/05_context/current/ACTIVE_COCKPIT_VIEW_MODEL.json",
     "ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_PACKET.json",
     "ION/05_context/current/ACTIVE_CURSOR_AUTOPILOT_STATE.json",
@@ -89,7 +118,7 @@
   "lifecycle_policy_version": "V102_CONTEXT_METABOLISM_AND_LIFECYCLE",
   "mutation_performed": false,
   "package_class": "COMPACT_RUNTIME",
-  "package_manifest_id": "lifecycle-package-manifest-de5cfec8f0f69d7c",
+  "package_manifest_id": "lifecycle-package-manifest-fd404c121c8cc8bd",
   "production_authority": false,
   "root_confirmed": true,
   "root_missing_files": [],
@@ -98,11 +127,11 @@
     "ION/REPO_AUTHORITY.md"
   ],
   "schema_id": "ion.lifecycle_package_manifest.v1",
-  "source_root": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION",
+  "source_root": "/home/sev/ION - Production/ION_CODEX",
   "verdict": "PACKAGE_ZIP_READY_WITH_EXCLUSIONS",
   "version_line": "V106_LIFECYCLE_AWARE_PACKAGE_ROOT_INTEGRITY",
   "zip_creation_performed": true,
-  "zip_path": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/06_artifacts/packages/ION_COMPACT_RUNTIME_V106_20260502.zip",
+  "zip_path": "/home/sev/ION - Production/ION_CODEX/ION/06_artifacts/packages/ION_COMPACT_RUNTIME_2026-05-05T185848Z0000.zip",
   "zip_root_audit": {
     "archive_root_mode": "CANONICAL_ARCHIVE_ROOT",
     "findings": [
@@ -121,7 +150,7 @@
       "ION/REPO_AUTHORITY.md"
     ],
     "wrapped_root_prefix": null,
-    "zip_path": "/home/sev/ION - Production/ION most recent/ION_CURSOR_V105_FULL_PROJECT_CONSOLIDATED_20260502/CURSOR- ION/ION/06_artifacts/packages/ION_COMPACT_RUNTIME_V106_20260502.zip"
+    "zip_path": "/home/sev/ION - Production/ION_CODEX/ION/06_artifacts/packages/ION_COMPACT_RUNTIME_2026-05-05T185848Z0000.zip"
   },
-  "zip_sha256": "20c335824f0d28bc0ec58910df0a9e606dfe4680c9763a30b54ccb85e460285a"
+  "zip_sha256": "782ceff63678bac6d0f0cf3aad815688f3d953866cc5cf41af301339717d4872"
 }

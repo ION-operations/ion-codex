@@ -1,0 +1,24 @@
+{
+  "action_id": "act_20260508_ion_framework_cartography_work_packet_draft",
+  "created_at": "2026-05-09T00:49:29+00:00",
+  "idempotency_key": "chatgpt-browser-continue-ion-framework-cartography-20260508-submit-v1",
+  "intent": "create_codex_work_packet",
+  "live_execution_authority": false,
+  "operation": "actions_submit",
+  "production_authority": false,
+  "receipt_id": "action_gateway_receipt_20260509T004929Z_actions_submit_act_20260508_ion_framework_cartography_work_packet_draft",
+  "refusal_class": "APPROVAL_EVIDENCE_INVALID",
+  "result": {
+    "accepted": false,
+    "approved_by": "Braden",
+    "findings": [
+      "approval_token_invalid"
+    ],
+    "live_execution_authority": false,
+    "production_authority": false,
+    "refusal_class": "APPROVAL_EVIDENCE_INVALID",
+    "schema_id": "ion.custom_gpt_action_gateway_approval_validation.v1"
+  },
+  "schema_id": "ion.custom_gpt_action_gateway_receipt.v1",
+  "status": "rejected"
+}

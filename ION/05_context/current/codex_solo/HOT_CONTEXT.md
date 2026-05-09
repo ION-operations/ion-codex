@@ -1,6 +1,6 @@
 # Codex Solo HOT_CONTEXT
 
-generated_at: 2026-05-08T20:12:02+00:00
+generated_at: 2026-05-08T21:30:44+00:00
 witness_policy: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.
 production_authority: false
 live_execution_authority: false
@@ -647,7 +647,7 @@ POLICY: Capsule is the minimum working context. Mini is a lookup/receipt index f
       "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
       "repo_relative": true,
       "required": true,
-      "sha256": "9ffd0b546e43566a63f72791ad3135656a533e2a17e708fce0b0070a83e37357",
+      "sha256": "520646e3fd91e985acff2a66d390902b2607af500ce71c8336a8ba9cabdf35bd",
       "why": "Compressed long-horizon capsule index for older continuity lookup."
     },
     {

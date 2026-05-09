@@ -1,0 +1,24 @@
+{
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": "Braden",
+  "created_at": "2026-05-05T18:59:28+00:00",
+  "failure_classification": "POLICY_BLOCK_WORKING_AS_DESIGNED",
+  "files_touched": [],
+  "live_execution_authority": false,
+  "operation": "local_operator_attach_artifact",
+  "production_authority": false,
+  "receipt_id": "chatops_bridge_operation_20260505T185928Z_local_operator_attach_artifact",
+  "schema_id": "ion.chatops.bridge_operation_receipt.v1",
+  "status": "failed",
+  "target_refs": [],
+  "validation": {
+    "result": {
+      "active_window_title": "ION README Rewrite - Google Chrome",
+      "finding": "active_window_not_chatgpt",
+      "ok": false
+    }
+  }
+}
