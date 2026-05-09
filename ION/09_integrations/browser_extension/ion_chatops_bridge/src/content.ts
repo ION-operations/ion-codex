@@ -7,6 +7,7 @@ import {
   setBridgeAgentDetail,
   setBridgeArtifactDetail,
   setBridgeDiagnosticsDetail,
+  setBridgeInspectorLayers,
   setBridgePackageDetail,
   setBridgeSandboxDetail,
   setBridgeSettingsDetail,
@@ -23,9 +24,14 @@ const MODAL_ID = "ion-chatops-bridge-approval";
 const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
 const ATTACH_PREVIEW_ID = "ion-chatops-attach-target-preview";
 const DROP_PREVIEW_ID = "ion-chatops-drop-target-preview";
+const TABS_ANCHOR_PREVIEW_ID = "ion-chatops-tabs-anchor-preview";
+const INSPECTOR_HUD_ID = "ion-chatops-dom-inspector-hud";
+const INSPECTOR_SELECTED_PREVIEW_ID = "ion-chatops-dom-inspector-selected-preview";
+const INSPECTOR_OUTLINE_CLASS = "ion-chatops-dom-inspector-outline";
 const SAFE_MODE_KEY = "ION_CHATOPS_SAFE_MODE";
 const ATTACH_TARGET_SELECTOR_KEY = "ION_CHATOPS_ATTACH_TARGET_SELECTOR";
 const DROP_TARGET_SELECTOR_KEY = "ION_CHATOPS_DROP_TARGET_SELECTOR";
+const TABS_ANCHOR_SELECTOR_KEY = "ION_CHATOPS_TABS_ANCHOR_SELECTOR";
 const SCAN_DEBOUNCE_MS = 450;
 const ION_ACTION_LINE = /(^|\n)\s*ion_action:\s*(\n|$)/;
 const AUTO_SCAN_SELECTORS = [
@@ -143,9 +149,22 @@ type DomRegistryStats = {
 
 type ScanMode = "auto" | "manual";
 
+type InspectorSaveTarget = "tabs_anchor" | "drop_zone" | "attach_target";
+
+type InspectorLayer = {
+  index: number;
+  element: HTMLElement;
+  selector: string;
+  label: string;
+  rect: Record<string, number>;
+};
+
 let scanTimer: number | null = null;
 let scanRunning = false;
 let scanQueued = false;
+let inspectorActive = false;
+let inspectorCapturedLayers: InspectorLayer[] = [];
+let inspectorSelectedIndex = 0;
 
 function safeModeDisabled(): boolean {
   try {
@@ -224,20 +243,96 @@ function ensureDomRegistryStyle(): void {
     [data-ion-control-role="uploaded_attachment"] {
       box-shadow: 0 0 0 1px rgba(129,140,248,0.40), 0 0 0 4px rgba(129,140,248,0.07) !important;
     }
-    #${ATTACH_PREVIEW_ID},
-    #${DROP_PREVIEW_ID} {
-      position: fixed;
-      z-index: 2147483645;
+      #${ATTACH_PREVIEW_ID},
+      #${DROP_PREVIEW_ID},
+      #${TABS_ANCHOR_PREVIEW_ID} {
+        position: fixed;
+        z-index: 2147483645;
       pointer-events: none;
       border: 2px solid rgba(52,211,153,0.98);
       border-radius: 12px;
       box-shadow: 0 0 0 5px rgba(52,211,153,0.18), 0 0 28px rgba(52,211,153,0.55);
       background: rgba(52,211,153,0.08);
     }
-    #${DROP_PREVIEW_ID} {
-      border-color: rgba(96,165,250,0.98);
-      box-shadow: 0 0 0 5px rgba(96,165,250,0.16), 0 0 34px rgba(96,165,250,0.50);
-      background: rgba(96,165,250,0.08);
+      #${DROP_PREVIEW_ID} {
+        border-color: rgba(96,165,250,0.98);
+        box-shadow: 0 0 0 5px rgba(96,165,250,0.16), 0 0 34px rgba(96,165,250,0.50);
+        background: rgba(96,165,250,0.08);
+      }
+      #${TABS_ANCHOR_PREVIEW_ID} {
+        border-color: rgba(255,112,28,0.98);
+        box-shadow: 0 0 0 5px rgba(255,112,28,0.15), 0 0 34px rgba(255,112,28,0.48);
+        background: rgba(255,112,28,0.08);
+      }
+    .${INSPECTOR_OUTLINE_CLASS},
+    #${INSPECTOR_SELECTED_PREVIEW_ID} {
+      position: fixed;
+      z-index: 2147483644;
+      pointer-events: none;
+      box-sizing: border-box;
+      border: 1px solid rgba(96,165,250,0.64);
+      border-radius: 8px;
+      background: rgba(96,165,250,0.045);
+      box-shadow: 0 0 0 2px rgba(96,165,250,0.10);
+    }
+    .${INSPECTOR_OUTLINE_CLASS}[data-layer="0"] {
+      border-color: rgba(255,112,28,0.96);
+      background: rgba(255,112,28,0.07);
+      box-shadow: 0 0 0 3px rgba(255,112,28,0.14), 0 0 22px rgba(255,112,28,0.28);
+    }
+    .${INSPECTOR_OUTLINE_CLASS}[data-selected="true"],
+    #${INSPECTOR_SELECTED_PREVIEW_ID} {
+      z-index: 2147483645;
+      border: 2px solid rgba(236,72,153,0.98);
+      background: rgba(236,72,153,0.08);
+      box-shadow: 0 0 0 5px rgba(236,72,153,0.16), 0 0 34px rgba(236,72,153,0.42);
+    }
+    .${INSPECTOR_OUTLINE_CLASS} > span,
+    #${INSPECTOR_SELECTED_PREVIEW_ID} > span {
+      position: absolute;
+      top: -20px;
+      left: 0;
+      max-width: min(320px, 60vw);
+      height: 18px;
+      padding: 0 6px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(12,12,12,0.82);
+      color: rgba(255,255,255,0.86);
+      font: 10px/18px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      backdrop-filter: blur(8px);
+    }
+    #${INSPECTOR_HUD_ID} {
+      position: fixed;
+      z-index: 2147483646;
+      pointer-events: none;
+      max-width: min(430px, calc(100vw - 24px));
+      border: 1px solid rgba(255,112,28,0.52);
+      border-radius: 10px;
+      background: rgba(12,12,12,0.90);
+      color: rgba(255,255,255,0.86);
+      padding: 8px 9px;
+      box-shadow: 0 18px 46px rgba(0,0,0,0.42);
+      backdrop-filter: blur(14px);
+      font: 11px/1.3 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    #${INSPECTOR_HUD_ID} strong {
+      color: #ffd2b0;
+      font-weight: 700;
+    }
+    #${INSPECTOR_HUD_ID} ol {
+      margin: 6px 0 0;
+      padding-left: 18px;
+    }
+    #${INSPECTOR_HUD_ID} li {
+      margin: 2px 0;
+      max-width: 390px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   `;
   document.documentElement.appendChild(style);
@@ -938,6 +1033,14 @@ function storedAttachSelector(): string {
   }
 }
 
+function storedTabsAnchorSelector(): string {
+  try {
+    return String(window.localStorage?.getItem(TABS_ANCHOR_SELECTOR_KEY) ?? "").trim();
+  } catch (_error) {
+    return "";
+  }
+}
+
 function elementWithinComposerBand(node: HTMLElement, rect: DOMRect | null): boolean {
   const bounds = node.getBoundingClientRect();
   if (!rect) return bounds.top > window.innerHeight * 0.45;
@@ -976,6 +1079,252 @@ function selectorForElement(node: HTMLElement): string {
   return parts.join(" > ");
 }
 
+function inspectorNodeAllowed(node: Element): node is HTMLElement {
+  if (!(node instanceof HTMLElement)) return false;
+  if (isBridgeElement(node)) return false;
+  if (node.id === INSPECTOR_HUD_ID || node.id === INSPECTOR_SELECTED_PREVIEW_ID) return false;
+  if (node.classList.contains(INSPECTOR_OUTLINE_CLASS) || node.classList.contains("ion-dom-badge")) return false;
+  if (!visibleElement(node)) return false;
+  return true;
+}
+
+function inspectorLabel(node: HTMLElement, index: number): string {
+  const tag = node.tagName.toLowerCase();
+  const id = node.id ? `#${node.id}` : "";
+  const role = node.getAttribute("role") ? `[role=${node.getAttribute("role")}]` : "";
+  const testId = node.getAttribute("data-testid") ? `[data-testid=${node.getAttribute("data-testid")}]` : "";
+  const aria = node.getAttribute("aria-label") || node.getAttribute("title") || "";
+  const classes = Array.from(node.classList ?? []).filter(Boolean).slice(0, 3).map((name) => `.${name}`).join("");
+  const label = controlLabel(node) || aria || node.textContent?.trim().slice(0, 60) || "";
+  const rect = rectPayload(node.getBoundingClientRect());
+  return `${index} ${tag}${id}${testId || role || classes} ${rect.x},${rect.y} ${rect.width}x${rect.height}${label ? ` - ${label}` : ""}`.replace(/\s+/g, " ").trim();
+}
+
+function inspectorLayersAt(x: number, y: number): InspectorLayer[] {
+  const fromPoint = typeof document.elementsFromPoint === "function" ? document.elementsFromPoint(x, y) : [];
+  const seenNodes = new Set<Element>();
+  const layers: InspectorLayer[] = [];
+  fromPoint.forEach((node) => {
+    if (seenNodes.has(node) || !inspectorNodeAllowed(node)) return;
+    seenNodes.add(node);
+    const index = layers.length;
+    layers.push({
+      index,
+      element: node,
+      selector: selectorForElement(node),
+      label: inspectorLabel(node, index),
+      rect: rectPayload(node.getBoundingClientRect()),
+    });
+  });
+  return layers.slice(0, 16);
+}
+
+function removeInspectorOutlines(): void {
+  document.querySelectorAll(`.${INSPECTOR_OUTLINE_CLASS}`).forEach((node) => node.remove());
+}
+
+function removeInspectorHud(): void {
+  document.getElementById(INSPECTOR_HUD_ID)?.remove();
+}
+
+function removeInspectorSelectedPreview(): void {
+  document.getElementById(INSPECTOR_SELECTED_PREVIEW_ID)?.remove();
+}
+
+function removeInspectorChrome(): void {
+  removeInspectorOutlines();
+  removeInspectorHud();
+  removeInspectorSelectedPreview();
+}
+
+function drawInspectorOutline(layer: InspectorLayer, selected = false, persistentId?: string): void {
+  const overlay = document.createElement("div");
+  overlay.className = INSPECTOR_OUTLINE_CLASS;
+  if (persistentId) overlay.id = persistentId;
+  overlay.dataset.layer = String(layer.index);
+  overlay.dataset.selected = String(selected);
+  overlay.style.left = `${layer.rect.x}px`;
+  overlay.style.top = `${layer.rect.y}px`;
+  overlay.style.width = `${layer.rect.width}px`;
+  overlay.style.height = `${layer.rect.height}px`;
+  const label = document.createElement("span");
+  label.textContent = layer.label;
+  overlay.appendChild(label);
+  document.documentElement.appendChild(overlay);
+}
+
+function drawInspectorLayers(layers: InspectorLayer[], selectedIndex = -1): void {
+  removeInspectorOutlines();
+  layers.slice(0, 10).forEach((layer) => drawInspectorOutline(layer, layer.index === selectedIndex));
+}
+
+function updateInspectorHud(x: number, y: number, layers: InspectorLayer[], locked = false): void {
+  let hud = document.getElementById(INSPECTOR_HUD_ID);
+  if (!hud) {
+    hud = document.createElement("div");
+    hud.id = INSPECTOR_HUD_ID;
+    document.documentElement.appendChild(hud);
+  }
+  const left = Math.min(window.innerWidth - 24, Math.max(12, x + 14));
+  const top = Math.min(window.innerHeight - 28, Math.max(12, y + 14));
+  hud.style.left = `${left}px`;
+  hud.style.top = `${top}px`;
+  const items = layers.slice(0, 8).map((layer) => `<li>${layer.label.replace(/[&<>]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[char] ?? char)}</li>`).join("");
+  hud.innerHTML = [
+    `<strong>${locked ? "ION DOM Inspector captured" : "ION DOM Inspector"}</strong>`,
+    `<div>pixel: ${Math.round(x)},${Math.round(y)} | layers: ${layers.length}</div>`,
+    layers.length ? `<ol>${items}</ol>` : "<div>No selectable page element under cursor.</div>",
+  ].join("");
+}
+
+function publishInspectorLayers(): void {
+  setBridgeInspectorLayers(
+    inspectorCapturedLayers.map((layer) => ({ index: layer.index, label: layer.label, selector: layer.selector })),
+    inspectorSelectedIndex,
+  );
+}
+
+function inspectorSelectedLayer(): InspectorLayer | null {
+  return inspectorCapturedLayers.find((layer) => layer.index === inspectorSelectedIndex) ?? inspectorCapturedLayers[0] ?? null;
+}
+
+function previewInspectorSelectedLayer(): void {
+  ensureDomRegistryStyle();
+  removeInspectorSelectedPreview();
+  const layer = inspectorSelectedLayer();
+  if (!layer) {
+    setBridgeSettingsDetail("dom_inspector_no_layer_selected\nStart Inspector, hover the page, and click the target pixel first.");
+    setBridgeStatus("Inspector layer missing", "No captured pixel stack is available.", "error");
+    return;
+  }
+  const current = document.querySelector<HTMLElement>(layer.selector);
+  if (current && visibleElement(current)) {
+    layer.element = current;
+    layer.rect = rectPayload(current.getBoundingClientRect());
+    layer.label = inspectorLabel(current, layer.index);
+  }
+  drawInspectorOutline(layer, true, INSPECTOR_SELECTED_PREVIEW_ID);
+  const detail = [
+    "dom_inspector_layer_preview",
+    `index: ${layer.index}`,
+    `selector: ${layer.selector}`,
+    `label: ${layer.label}`,
+    `rect: ${JSON.stringify(layer.rect)}`,
+  ].join("\n");
+  setBridgeSettingsDetail(detail);
+  setBridgeStatus("Inspector layer previewed", "Pink ring marks the selected captured layer.", "success");
+}
+
+function saveInspectorSelectedLayer(target: InspectorSaveTarget): void {
+  const layer = inspectorSelectedLayer();
+  if (!layer) {
+    setBridgeSettingsDetail("dom_inspector_save_blocked\nNo captured layer is selected.");
+    setBridgeStatus("Inspector save blocked", "Capture a pixel stack before saving an anchor.", "error");
+    return;
+  }
+  const key =
+    target === "tabs_anchor"
+      ? TABS_ANCHOR_SELECTOR_KEY
+      : target === "drop_zone"
+        ? DROP_TARGET_SELECTOR_KEY
+        : ATTACH_TARGET_SELECTOR_KEY;
+  try {
+    window.localStorage?.setItem(key, layer.selector);
+  } catch (_error) {
+    setBridgeSettingsDetail("dom_inspector_save_failed\nlocalStorage write failed.");
+    setBridgeStatus("Inspector save failed", "localStorage write failed.", "error");
+    return;
+  }
+  const detail = [
+    "dom_inspector_layer_saved",
+    `target: ${target}`,
+    `index: ${layer.index}`,
+    `selector: ${layer.selector}`,
+    `label: ${layer.label}`,
+  ].join("\n");
+  setBridgeSettingsDetail(detail);
+  setBridgeStatus("Inspector anchor saved", `${target} now uses the selected DOM layer.`, "success");
+  previewInspectorSelectedLayer();
+  if (target === "tabs_anchor") refreshBridgePosition();
+}
+
+function selectInspectorLayer(index: number): void {
+  inspectorSelectedIndex = Math.max(0, Math.min(index, Math.max(0, inspectorCapturedLayers.length - 1)));
+  publishInspectorLayers();
+  previewInspectorSelectedLayer();
+}
+
+function stopDomInspector(message = "DOM inspector cancelled."): void {
+  inspectorActive = false;
+  document.removeEventListener("mousemove", domInspectorMouseMove, true);
+  document.removeEventListener("click", domInspectorClick, true);
+  document.removeEventListener("keydown", domInspectorKeydown, true);
+  removeInspectorHud();
+  removeInspectorOutlines();
+  setBridgeSettingsDetail(message);
+}
+
+function domInspectorMouseMove(event: MouseEvent): void {
+  if (!inspectorActive) return;
+  if (event.target instanceof Element && isBridgeElement(event.target)) return;
+  ensureDomRegistryStyle();
+  const layers = inspectorLayersAt(event.clientX, event.clientY);
+  drawInspectorLayers(layers);
+  updateInspectorHud(event.clientX, event.clientY, layers);
+}
+
+function domInspectorClick(event: MouseEvent): void {
+  if (!inspectorActive) return;
+  if (event.target instanceof Element && isBridgeElement(event.target)) return;
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
+  const layers = inspectorLayersAt(event.clientX, event.clientY);
+  if (!layers.length) {
+    setBridgeSettingsDetail("dom_inspector_capture_empty\nNo selectable page element under clicked pixel.");
+    setBridgeStatus("Inspector capture empty", "Move over a visible ChatGPT element and click again.", "error");
+    return;
+  }
+  inspectorCapturedLayers = layers;
+  inspectorSelectedIndex = 0;
+  publishInspectorLayers();
+  drawInspectorLayers(layers, 0);
+  updateInspectorHud(event.clientX, event.clientY, layers, true);
+  stopDomInspector([
+    "dom_inspector_pixel_captured",
+    `pixel: ${Math.round(event.clientX)},${Math.round(event.clientY)}`,
+    `layers: ${layers.length}`,
+    `top_selector: ${layers[0].selector}`,
+    "Use the Settings dropdown to select a lower layer, then preview or save it as Tabs Anchor, Drop Zone, or Attach Target.",
+  ].join("\n"));
+  previewInspectorSelectedLayer();
+}
+
+function domInspectorKeydown(event: KeyboardEvent): void {
+  if (event.key !== "Escape") return;
+  event.preventDefault();
+  event.stopPropagation();
+  stopDomInspector("dom_inspector_cancelled\nInspector was cancelled with Escape.");
+  setBridgeStatus("Inspector cancelled", "No anchor changed.", "idle");
+}
+
+function beginDomInspector(): void {
+  ensureDomRegistryStyle();
+  removeInspectorChrome();
+  inspectorActive = true;
+  setBridgeStatus("DOM inspector armed", "Hover the page to see every element under the cursor. Click once to capture that pixel stack.", "working");
+  setBridgeSettingsDetail([
+    "dom_inspector_armed",
+    "Hover ChatGPT elements to see the top layer and lower layers under the cursor.",
+    "Click one pixel to capture the stack.",
+    "After capture, use the Settings dropdown to choose the exact layer and save it as an anchor.",
+    "Escape cancels without changing settings.",
+  ].join("\n"));
+  document.addEventListener("mousemove", domInspectorMouseMove, true);
+  document.addEventListener("click", domInspectorClick, true);
+  document.addEventListener("keydown", domInspectorKeydown, true);
+}
+
 function attachCandidateFromEventTarget(target: EventTarget | null): HTMLElement | null {
   if (!(target instanceof Element)) return null;
   if (isBridgeElement(target)) return null;
@@ -991,6 +1340,133 @@ function dropCandidateFromEventTarget(target: EventTarget | null): HTMLElement |
     target.closest<HTMLElement>("main, form, [data-testid*='composer' i], [data-message-author-role], article, section, div") ??
     (target instanceof HTMLElement ? target : null);
   return candidate && !isBridgeElement(candidate) ? candidate : null;
+}
+
+function tabsAnchorCandidateFromEventTarget(target: EventTarget | null): HTMLElement | null {
+  if (!(target instanceof Element)) return null;
+  if (isBridgeElement(target)) return null;
+  const composer = findComposer();
+  const candidate =
+    target.closest<HTMLElement>("form, [data-testid*='composer' i], [class*='composer' i], [class*='prompt' i], main, section, div") ??
+    (target instanceof HTMLElement ? target : null);
+  if (!candidate || isBridgeElement(candidate)) return null;
+  if (composer && !elementContains(candidate, composer)) {
+    const parent = composer.closest<HTMLElement>("form, [data-testid*='composer' i], [class*='composer' i], [class*='prompt' i]");
+    return parent && !isBridgeElement(parent) ? parent : null;
+  }
+  return candidate;
+}
+
+function tabsAnchorElement(): HTMLElement | null {
+  const selector = storedTabsAnchorSelector();
+  if (!selector) return null;
+  let node: HTMLElement | null = null;
+  try {
+    node = document.querySelector<HTMLElement>(selector);
+  } catch (_error) {
+    setBridgeSettingsDetail(`tabs_anchor_selector_invalid\nselector: ${selector}`);
+    return null;
+  }
+  const composer = findComposer();
+  if (!node || !visibleElement(node)) {
+    setBridgeSettingsDetail(`tabs_anchor_missing_or_hidden\nselector: ${selector}`);
+    return null;
+  }
+  if (composer && !elementContains(node, composer)) {
+    setBridgeSettingsDetail([
+      "tabs_anchor_does_not_contain_composer_input",
+      `selector: ${selector}`,
+      `anchor_rect: ${JSON.stringify(rectPayload(node.getBoundingClientRect()))}`,
+      `composer_rect: ${JSON.stringify(rectPayload(composer.getBoundingClientRect()))}`,
+      "Use Pick Tabs Anchor again and click the visible composer background panel.",
+    ].join("\n"));
+    return null;
+  }
+  return node;
+}
+
+function previewTabsAnchor(): void {
+  ensureDomRegistryStyle();
+  const target = tabsAnchorElement();
+  document.getElementById(TABS_ANCHOR_PREVIEW_ID)?.remove();
+  if (!target) {
+    const detail = storedTabsAnchorSelector()
+      ? "tabs_anchor_not_detected\nSaved tabs anchor is missing, hidden, or not the composer shell. Use Pick Tabs Anchor again or Clear Tabs Anchor."
+      : "tabs_anchor_not_calibrated\nUse Settings -> Pick Tabs Anchor, then click the visible ChatGPT composer background panel.";
+    setBridgeSettingsDetail(detail);
+    setBridgeStatus("Tabs anchor missing", detail, "error");
+    return;
+  }
+  const rect = target.getBoundingClientRect();
+  const overlay = document.createElement("div");
+  overlay.id = TABS_ANCHOR_PREVIEW_ID;
+  overlay.style.left = `${Math.round(rect.left)}px`;
+  overlay.style.top = `${Math.round(rect.top)}px`;
+  overlay.style.width = `${Math.round(rect.width)}px`;
+  overlay.style.height = `${Math.round(rect.height)}px`;
+  document.documentElement.appendChild(overlay);
+  window.setTimeout(() => overlay.remove(), 4000);
+  const detail = [
+    "preview_tabs_anchor",
+    `selector: ${storedTabsAnchorSelector()}`,
+    `target: ${target.tagName.toLowerCase()}`,
+    `rect: ${JSON.stringify(rectPayload(rect))}`,
+    "The tab rail now anchors to this element before falling back to automatic composer-shell detection.",
+  ].join("\n");
+  setBridgeSettingsDetail(detail);
+  setBridgeStatus("Tabs anchor previewed", "Orange ring marks the selected tab anchor.", "success");
+  refreshBridgePosition();
+}
+
+function beginTabsAnchorPicker(): void {
+  setBridgeStatus("Pick tabs anchor", "Click the visible ChatGPT composer background panel/top shell.", "working");
+  setBridgeSettingsDetail("Tabs anchor picker armed. Click the composer background panel that should define the tab rail top edge.");
+  const handler = (event: MouseEvent) => {
+    const candidate = tabsAnchorCandidateFromEventTarget(event.target);
+    if (!candidate) {
+      setBridgeSettingsDetail("Tabs anchor pick ignored because the click was inside ION UI or not an element.");
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    document.removeEventListener("click", handler, true);
+    const selector = selectorForElement(candidate);
+    try {
+      window.localStorage?.setItem(TABS_ANCHOR_SELECTOR_KEY, selector);
+    } catch (_error) {
+      setBridgeSettingsDetail("Tabs anchor could not be saved to localStorage.");
+      setBridgeStatus("Tabs anchor not saved", "localStorage write failed.", "error");
+      return;
+    }
+    const detail = [
+      "tabs_anchor_calibrated",
+      `selector: ${selector}`,
+      `label: ${controlLabel(candidate) || candidate.tagName.toLowerCase()}`,
+      `rect: ${JSON.stringify(rectPayload(candidate.getBoundingClientRect()))}`,
+    ].join("\n");
+    setBridgeSettingsDetail(detail);
+    setBridgeStatus("Tabs anchor calibrated", "Tabs now use the picked composer shell before auto detection.", "success");
+    previewTabsAnchor();
+    refreshBridgePosition();
+  };
+  document.addEventListener("click", handler, true);
+  window.setTimeout(() => {
+    document.removeEventListener("click", handler, true);
+  }, 12000);
+}
+
+function clearTabsAnchorCalibration(): void {
+  try {
+    window.localStorage?.removeItem(TABS_ANCHOR_SELECTOR_KEY);
+  } catch (_error) {
+    // Ignore storage failures; automatic composer anchoring remains available.
+  }
+  document.getElementById(TABS_ANCHOR_PREVIEW_ID)?.remove();
+  const detail = "tabs_anchor_calibration_cleared\nTabs will use automatic composer-shell detection again.";
+  setBridgeSettingsDetail(detail);
+  setBridgeStatus("Tabs anchor cleared", "Pick Tabs Anchor can be used to bind it again.", "idle");
+  refreshBridgePosition();
 }
 
 function calibratedAttachControlElement(rect: DOMRect | null): HTMLElement | null {
@@ -1656,6 +2132,9 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   findDropTarget,
   localAttachPayload,
   requestArtifactLocalAttachDryRun,
+  beginDomInspector,
+  previewInspectorSelectedLayer,
+  saveInspectorSelectedLayer,
   rescan: () => {
     seen.clear();
     return scan("manual");
@@ -1748,6 +2227,33 @@ window.addEventListener("ion-chatops-settings-pick-drop", () => {
 });
 window.addEventListener("ion-chatops-settings-clear-drop", () => {
   clearDropTargetCalibration();
+});
+window.addEventListener("ion-chatops-settings-pick-tabs-anchor", () => {
+  beginTabsAnchorPicker();
+});
+window.addEventListener("ion-chatops-settings-clear-tabs-anchor", () => {
+  clearTabsAnchorCalibration();
+});
+window.addEventListener("ion-chatops-settings-inspector-start", () => {
+  beginDomInspector();
+});
+window.addEventListener("ion-chatops-settings-inspector-cancel", () => {
+  stopDomInspector("dom_inspector_cancelled\nInspector was cancelled from Settings.");
+  setBridgeStatus("Inspector cancelled", "No anchor changed.", "idle");
+});
+window.addEventListener("ion-chatops-settings-inspector-preview", () => {
+  previewInspectorSelectedLayer();
+});
+window.addEventListener("ion-chatops-settings-inspector-layer", (event) => {
+  const detail = (event as CustomEvent<{ index?: number }>).detail;
+  selectInspectorLayer(Number(detail?.index ?? 0));
+});
+window.addEventListener("ion-chatops-settings-inspector-save", (event) => {
+  const detail = (event as CustomEvent<{ target?: InspectorSaveTarget }>).detail;
+  const target = detail?.target;
+  if (target === "tabs_anchor" || target === "drop_zone" || target === "attach_target") {
+    saveInspectorSelectedLayer(target);
+  }
 });
 
 if (safeModeDisabled()) {

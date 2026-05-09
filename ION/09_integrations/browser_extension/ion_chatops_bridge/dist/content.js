@@ -8,9 +8,14 @@
   const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
   const ATTACH_PREVIEW_ID = "ion-chatops-attach-target-preview";
   const DROP_PREVIEW_ID = "ion-chatops-drop-target-preview";
+  const TABS_ANCHOR_PREVIEW_ID = "ion-chatops-tabs-anchor-preview";
+  const INSPECTOR_HUD_ID = "ion-chatops-dom-inspector-hud";
+  const INSPECTOR_SELECTED_PREVIEW_ID = "ion-chatops-dom-inspector-selected-preview";
+  const INSPECTOR_OUTLINE_CLASS = "ion-chatops-dom-inspector-outline";
   const SAFE_MODE_KEY = "ION_CHATOPS_SAFE_MODE";
   const ATTACH_TARGET_SELECTOR_KEY = "ION_CHATOPS_ATTACH_TARGET_SELECTOR";
   const DROP_TARGET_SELECTOR_KEY = "ION_CHATOPS_DROP_TARGET_SELECTOR";
+  const TABS_ANCHOR_SELECTOR_KEY = "ION_CHATOPS_TABS_ANCHOR_SELECTOR";
   const SCAN_DEBOUNCE_MS = 450;
   const ION_ACTION_LINE = /(^|\n)\s*ion_action:\s*(\n|$)/;
   const AUTO_SCAN_SELECTORS = [
@@ -47,6 +52,15 @@
   const COMPOSER_PANEL_MAX_WIDTH = 920;
   const TAB_LIFT_KEY = "ION_CHATOPS_TAB_LIFT_PX";
   const DRAWER_MAX_KEY = "ION_CHATOPS_DRAWER_MAX_PX";
+  const LAYOUT_TARGET_KEY = "ION_CHATOPS_LAYOUT_TARGET";
+  const TOP_RAIL_X_KEY = "ION_CHATOPS_TOP_RAIL_X_PX";
+  const TOP_RAIL_Y_KEY = "ION_CHATOPS_TOP_RAIL_Y_PX";
+  const TABS_X_KEY = "ION_CHATOPS_TABS_X_PX";
+  const TABS_Y_KEY = "ION_CHATOPS_TABS_Y_PX";
+  const DRAWER_X_KEY = "ION_CHATOPS_DRAWER_X_PX";
+  const DRAWER_Y_KEY = "ION_CHATOPS_DRAWER_Y_PX";
+  const TAB_LABEL_MIN_WIDTH = 780;
+  const TAB_HEIGHT = 22;
   const bridgeState = {
     title: "Monitoring ChatGPT",
     detail: "Waiting for ion_action YAML blocks.",
@@ -58,6 +72,8 @@
     automation: "Automation controls are staged only. This packet does not execute macros.",
     artifacts: "Artifact detection is staged only. No upload or local file movement occurs in this shell slice.",
     settings: "No local calibration has been changed in this session.",
+    inspectorLayers: [],
+    inspectorSelectedIndex: 0,
     diagnostics: "Normal carrier flow: Sev emits an ion_action YAML block in ChatGPT, the extension detects it, Braden approves it, the local daemon records/executes it, and ION writes a receipt.\n\nThe buttons below are local diagnostics only. They fabricate known-good test actions so the extension/daemon path can be checked without waiting on ChatGPT to emit YAML.",
     tools: "Daemon: http://127.0.0.1:8767\nUse Rescan after ChatGPT finishes rendering a YAML block.",
     logs: [],
@@ -76,6 +92,9 @@
   let scanTimer = null;
   let scanRunning = false;
   let scanQueued = false;
+  let inspectorActive = false;
+  let inspectorCapturedLayers = [];
+  let inspectorSelectedIndex = 0;
   function safeModeDisabled() {
     try {
       const value = window.localStorage?.getItem(SAFE_MODE_KEY) ?? window.sessionStorage?.getItem(SAFE_MODE_KEY);
@@ -227,7 +246,8 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         box-shadow: 0 0 0 1px rgba(129,140,248,0.40), 0 0 0 4px rgba(129,140,248,0.07) !important;
       }
       #${ATTACH_PREVIEW_ID},
-      #${DROP_PREVIEW_ID} {
+      #${DROP_PREVIEW_ID},
+      #${TABS_ANCHOR_PREVIEW_ID} {
         position: fixed;
         z-index: 2147483645;
         pointer-events: none;
@@ -240,6 +260,81 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         border-color: rgba(96,165,250,0.98);
         box-shadow: 0 0 0 5px rgba(96,165,250,0.16), 0 0 34px rgba(96,165,250,0.50);
         background: rgba(96,165,250,0.08);
+      }
+      #${TABS_ANCHOR_PREVIEW_ID} {
+        border-color: rgba(255,112,28,0.98);
+        box-shadow: 0 0 0 5px rgba(255,112,28,0.15), 0 0 34px rgba(255,112,28,0.48);
+        background: rgba(255,112,28,0.08);
+      }
+      .${INSPECTOR_OUTLINE_CLASS},
+      #${INSPECTOR_SELECTED_PREVIEW_ID} {
+        position: fixed;
+        z-index: 2147483644;
+        pointer-events: none;
+        box-sizing: border-box;
+        border: 1px solid rgba(96,165,250,0.64);
+        border-radius: 8px;
+        background: rgba(96,165,250,0.045);
+        box-shadow: 0 0 0 2px rgba(96,165,250,0.10);
+      }
+      .${INSPECTOR_OUTLINE_CLASS}[data-layer="0"] {
+        border-color: rgba(255,112,28,0.96);
+        background: rgba(255,112,28,0.07);
+        box-shadow: 0 0 0 3px rgba(255,112,28,0.14), 0 0 22px rgba(255,112,28,0.28);
+      }
+      .${INSPECTOR_OUTLINE_CLASS}[data-selected="true"],
+      #${INSPECTOR_SELECTED_PREVIEW_ID} {
+        z-index: 2147483645;
+        border: 2px solid rgba(236,72,153,0.98);
+        background: rgba(236,72,153,0.08);
+        box-shadow: 0 0 0 5px rgba(236,72,153,0.16), 0 0 34px rgba(236,72,153,0.42);
+      }
+      .${INSPECTOR_OUTLINE_CLASS} > span,
+      #${INSPECTOR_SELECTED_PREVIEW_ID} > span {
+        position: absolute;
+        top: -20px;
+        left: 0;
+        max-width: min(320px, 60vw);
+        height: 18px;
+        padding: 0 6px;
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 999px;
+        background: rgba(12,12,12,0.82);
+        color: rgba(255,255,255,0.86);
+        font: 10px/18px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        backdrop-filter: blur(8px);
+      }
+      #${INSPECTOR_HUD_ID} {
+        position: fixed;
+        z-index: 2147483646;
+        pointer-events: none;
+        max-width: min(430px, calc(100vw - 24px));
+        border: 1px solid rgba(255,112,28,0.52);
+        border-radius: 10px;
+        background: rgba(12,12,12,0.90);
+        color: rgba(255,255,255,0.86);
+        padding: 8px 9px;
+        box-shadow: 0 18px 46px rgba(0,0,0,0.42);
+        backdrop-filter: blur(14px);
+        font: 11px/1.3 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      #${INSPECTOR_HUD_ID} strong {
+        color: #ffd2b0;
+        font-weight: 700;
+      }
+      #${INSPECTOR_HUD_ID} ol {
+        margin: 6px 0 0;
+        padding-left: 18px;
+      }
+      #${INSPECTOR_HUD_ID} li {
+        margin: 2px 0;
+        max-width: 390px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     `;
     document.documentElement.appendChild(style);
@@ -763,6 +858,11 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         background: rgba(255,255,255,0.08);
         border-color: rgba(255,255,255,0.08);
       }
+      #${PANEL_ID} .ion-tool[data-active="true"] {
+        color: #ffd2b0;
+        background: rgba(255,112,28,0.16);
+        border-color: rgba(255,112,28,0.70);
+      }
       #${PANEL_ID} .ion-toolbar-actions {
         display: flex;
         align-items: center;
@@ -825,11 +925,12 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         background: rgba(24, 24, 24, 0.96);
         box-shadow: 0 -16px 46px rgba(0,0,0,0.34), 0 -1px 12px rgba(255,112,28,0.15);
         backdrop-filter: blur(14px);
-        margin: 0;
-        padding: 10px 10px 11px;
+        margin: 0 0 calc(-1 * var(--ion-chatops-tab-height, 22px));
+        padding: 10px 10px calc(var(--ion-chatops-tab-height, 22px) + 12px);
         max-height: min(38vh, var(--ion-chatops-drawer-max-px, 360px));
         overflow: auto;
         pointer-events: auto;
+        transform: translate(var(--ion-chatops-drawer-x-px, 0px), var(--ion-chatops-drawer-y-px, 0px));
       }
       #${PANEL_ID}[data-expanded="true"] .ion-tab-panel[data-active="true"] {
         display: flex;
@@ -855,6 +956,8 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         overflow: hidden;
         text-overflow: ellipsis;
         pointer-events: auto;
+        position: relative;
+        z-index: 2;
       }
       #${PANEL_ID} .ion-tab[data-active="true"] {
         color: #ffd2b0;
@@ -878,8 +981,72 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         padding: 0 6px;
         max-width: 94px;
       }
-      #${PANEL_ID}[data-layout="tiny"] .ion-tabs {
+      #${PANEL_ID} .ion-tab-icon {
         display: none;
+        font-size: 13px;
+        line-height: 21px;
+      }
+      #${PANEL_ID}[data-tab-mode="icons"] .ion-tab {
+        width: 31px;
+        min-width: 31px;
+        max-width: 31px;
+        padding: 0;
+        text-align: center;
+      }
+      #${PANEL_ID}[data-tab-mode="icons"] .ion-tab-label {
+        display: none;
+      }
+      #${PANEL_ID}[data-tab-mode="icons"] .ion-tab-icon {
+        display: inline;
+      }
+      #${PANEL_ID} .ion-layout-picker {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        width: 100%;
+      }
+      #${PANEL_ID} .ion-nudge-pad {
+        display: grid;
+        grid-template-columns: repeat(3, 34px);
+        grid-template-rows: repeat(3, 30px);
+        gap: 4px;
+        align-items: center;
+        justify-content: start;
+      }
+      #${PANEL_ID} .ion-nudge-pad .ion-tool {
+        width: 34px;
+        padding: 0;
+      }
+      #${PANEL_ID} .ion-nudge-spacer {
+        width: 34px;
+        height: 30px;
+      }
+      #${PANEL_ID} .ion-setting-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 6px;
+        width: 100%;
+      }
+      #${PANEL_ID} .ion-setting-label {
+        color: rgba(255,255,255,0.58);
+        font-size: 10px;
+        line-height: 1.2;
+      }
+      #${PANEL_ID} .ion-select {
+        width: 100%;
+        min-height: 28px;
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 7px;
+        background: rgba(12,12,12,0.72);
+        color: rgba(255,255,255,0.86);
+        font-size: 11px;
+        line-height: 1.2;
+        padding: 4px 7px;
+        outline: none;
+      }
+      #${PANEL_ID} .ion-select:focus {
+        border-color: rgba(255,112,28,0.78);
+        box-shadow: 0 0 0 3px rgba(255,112,28,0.13);
       }
       #${MODAL_ID} {
         position: fixed;
@@ -1042,6 +1209,69 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return bounded;
   }
 
+  function readLayoutTarget() {
+    try {
+      const raw = String(window.localStorage?.getItem(LAYOUT_TARGET_KEY) ?? "").trim();
+      if (raw === "top_rail" || raw === "tabs" || raw === "drawer") return raw;
+    } catch (_error) {
+    }
+    return "tabs";
+  }
+
+  function writeLayoutTarget(target) {
+    try {
+      window.localStorage?.setItem(LAYOUT_TARGET_KEY, target);
+    } catch (_error) {
+    }
+  }
+
+  function layoutOffset(target) {
+    if (target === "top_rail") {
+      return {
+        x: readNumberSetting(TOP_RAIL_X_KEY, 0, -260, 260),
+        y: readNumberSetting(TOP_RAIL_Y_KEY, 0, -40, 160),
+      };
+    }
+    if (target === "drawer") {
+      return {
+        x: readNumberSetting(DRAWER_X_KEY, 0, -260, 260),
+        y: readNumberSetting(DRAWER_Y_KEY, 0, -180, 180),
+      };
+    }
+    return {
+      x: readNumberSetting(TABS_X_KEY, 0, -260, 260),
+      y: readNumberSetting(TABS_Y_KEY, 0, -120, 160),
+    };
+  }
+
+  function writeLayoutOffset(target, x, y) {
+    if (target === "top_rail") {
+      return {
+        x: writeNumberSetting(TOP_RAIL_X_KEY, x, -260, 260),
+        y: writeNumberSetting(TOP_RAIL_Y_KEY, y, -40, 160),
+      };
+    }
+    if (target === "drawer") {
+      return {
+        x: writeNumberSetting(DRAWER_X_KEY, x, -260, 260),
+        y: writeNumberSetting(DRAWER_Y_KEY, y, -180, 180),
+      };
+    }
+    return {
+      x: writeNumberSetting(TABS_X_KEY, x, -260, 260),
+      y: writeNumberSetting(TABS_Y_KEY, y, -120, 160),
+    };
+  }
+
+  function applyDrawerOffset(panel) {
+    const offset = layoutOffset("drawer");
+    if (typeof panel.style.setProperty === "function") {
+      panel.style.setProperty("--ion-chatops-drawer-x-px", `${offset.x}px`);
+      panel.style.setProperty("--ion-chatops-drawer-y-px", `${offset.y}px`);
+      panel.style.setProperty("--ion-chatops-tab-height", `${TAB_HEIGHT}px`);
+    }
+  }
+
   function attachTargetSelector() {
     try {
       return String(window.localStorage?.getItem(ATTACH_TARGET_SELECTOR_KEY) ?? "").trim();
@@ -1057,20 +1287,70 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       return "";
     }
   }
+  function tabsAnchorSelector() {
+    try {
+      return String(window.localStorage?.getItem(TABS_ANCHOR_SELECTOR_KEY) ?? "").trim();
+    } catch (_error) {
+      return "";
+    }
+  }
 
   function settingsSummary() {
     const selector = attachTargetSelector();
     const dropSelector = dropTargetSelector();
+    const tabsAnchor = tabsAnchorSelector();
+    const selected = readLayoutTarget();
+    const top = layoutOffset("top_rail");
+    const tabs = layoutOffset("tabs");
+    const drawer = layoutOffset("drawer");
     return [
       `attach_target: ${selector || "not calibrated"}`,
       `drop_zone: ${dropSelector || "default page/composer zone"}`,
+      `tabs_anchor: ${tabsAnchor || "auto composer shell"}`,
+      `layout_target: ${selected}`,
+      `top_rail_offset: x=${top.x}, y=${top.y}`,
+      `tabs_offset: x=${tabs.x}, y=${tabs.y}`,
+      `drawer_offset: x=${drawer.x}, y=${drawer.y}`,
       `tab_lift_px: ${readNumberSetting(TAB_LIFT_KEY, 2, -24, 48)}`,
       `drawer_max_px: ${readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680)}`,
+      `inspector_layers: ${bridgeState.inspectorLayers.length ? `${bridgeState.inspectorLayers.length} captured at last click` : "none captured"}`,
       "",
+      "Select Top Rail, Tabs, or Drawer, then use the arrow pad to nudge that surface.",
+      "Use DOM Inspector when blind clicking is not precise enough. It shows every element under the cursor, captures the pixel stack on click, then lets you choose which layer to save.",
+      "Use Pick Tabs Anchor when the automatic composer shell is not the visible panel top.",
       "Use Preview Drop Zone before Drop Latest. Pick Drop Zone if the blue ring is not where ChatGPT accepts file drops.",
       "Use Pick Attach Target, then click ChatGPT's real attach/add-file button once.",
       "Local Attach is a fallback and should only be used after Preview Target rings the correct button and Dry Run passes.",
     ].join("\n");
+  }
+  function setBridgeInspectorLayers(layers, selectedIndex = 0) {
+    bridgeState.inspectorLayers = layers.slice(0, 24);
+    bridgeState.inspectorSelectedIndex = selectedIndex;
+    renderPanel();
+  }
+
+  function selectLayoutTarget(target) {
+    writeLayoutTarget(target);
+    bridgeState.settings = `layout_target set to ${target}`;
+    appendBridgeLog(`Layout target selected: ${target}`);
+    renderPanel();
+  }
+
+  function nudgeLayoutTarget(dx, dy) {
+    const target = readLayoutTarget();
+    const current = layoutOffset(target);
+    const next = writeLayoutOffset(target, current.x + dx, current.y + dy);
+    bridgeState.settings = `${target} offset set to x=${next.x}, y=${next.y}`;
+    appendBridgeLog(`Layout nudged: ${target} x=${next.x} y=${next.y}`);
+    renderPanel();
+  }
+
+  function resetSelectedLayoutTarget() {
+    const target = readLayoutTarget();
+    const next = writeLayoutOffset(target, 0, 0);
+    bridgeState.settings = `${target} offset reset to x=${next.x}, y=${next.y}`;
+    appendBridgeLog(`Layout target reset: ${target}`);
+    renderPanel();
   }
 
   function adjustTabLift(delta) {
@@ -1091,6 +1371,13 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     try {
       window.localStorage?.removeItem(TAB_LIFT_KEY);
       window.localStorage?.removeItem(DRAWER_MAX_KEY);
+      window.localStorage?.removeItem(LAYOUT_TARGET_KEY);
+      window.localStorage?.removeItem(TOP_RAIL_X_KEY);
+      window.localStorage?.removeItem(TOP_RAIL_Y_KEY);
+      window.localStorage?.removeItem(TABS_X_KEY);
+      window.localStorage?.removeItem(TABS_Y_KEY);
+      window.localStorage?.removeItem(DRAWER_X_KEY);
+      window.localStorage?.removeItem(DRAWER_Y_KEY);
     } catch (_error) {
     }
     bridgeState.settings = "Layout tuning reset to defaults.";
@@ -1110,10 +1397,11 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
 
   function applyTopRailLayout(panel) {
     const { left, available, width } = topBarGeometry();
+    const offset = layoutOffset("top_rail");
     const rail = topRail(panel);
     if (!rail) return;
-    rail.style.top = `${PANEL_TOP}px`;
-    rail.style.left = `${left}px`;
+    rail.style.top = `${Math.max(0, PANEL_TOP + offset.y)}px`;
+    rail.style.left = `${Math.max(TOP_BAR_GAP, left + offset.x)}px`;
     rail.style.right = "auto";
     rail.style.bottom = "auto";
     rail.style.width = `${width}px`;
@@ -1126,14 +1414,17 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
 
   function applyTopBarLayout(panel) {
     const { left, available, width, layout } = topBarGeometry();
+    const offset = layoutOffset("tabs");
     const cockpit = composerCockpit(panel);
     panel.dataset.anchorMode = "topbar_fallback";
     panel.dataset.anchorHealth = "degraded";
     panel.dataset.layout = layout;
+    panel.dataset.tabMode = width < TAB_LABEL_MIN_WIDTH ? "icons" : "labels";
     applyTopRailLayout(panel);
+    applyDrawerOffset(panel);
     if (cockpit) {
-      cockpit.style.top = `${PANEL_TOP + 36}px`;
-      cockpit.style.left = `${left}px`;
+      cockpit.style.top = `${Math.max(0, PANEL_TOP + 36 + offset.y)}px`;
+      cockpit.style.left = `${Math.max(TOP_BAR_GAP, left + offset.x)}px`;
       cockpit.style.right = "auto";
       cockpit.style.bottom = "auto";
       cockpit.style.width = `${width}px`;
@@ -1323,15 +1614,18 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     const width = available;
     const tabLift = readNumberSetting(TAB_LIFT_KEY, 2, -24, 48);
     const drawerMax = readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680);
-    const bottom = Math.max(4, Math.round(viewport - rect.top + tabLift));
+    const offset = layoutOffset("tabs");
+    const bottom = Math.max(4, Math.round(viewport - rect.top + tabLift - offset.y));
     const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 520 ? "compact" : "normal";
     const cockpit = composerCockpit(panel);
     panel.dataset.anchorMode = "composer";
     panel.dataset.anchorHealth = anchor.health;
     panel.dataset.layout = layout;
+    panel.dataset.tabMode = width < TAB_LABEL_MIN_WIDTH ? "icons" : "labels";
+    applyDrawerOffset(panel);
     if (cockpit) {
       cockpit.style.top = "auto";
-      cockpit.style.left = `${left}px`;
+      cockpit.style.left = `${Math.max(margin, left + offset.x)}px`;
       cockpit.style.right = "auto";
       cockpit.style.bottom = `${bottom}px`;
       cockpit.style.width = `${width}px`;
@@ -1412,11 +1706,41 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
           </div>
           <div class="ion-tab-panel" data-panel="settings">
             <div class="ion-detail" data-field="settings"></div>
+            <div class="ion-layout-picker">
+              <button type="button" class="ion-tool" data-tool="settings-target-top">Top Rail</button>
+              <button type="button" class="ion-tool" data-tool="settings-target-tabs">Tabs</button>
+              <button type="button" class="ion-tool" data-tool="settings-target-drawer">Drawer</button>
+            </div>
+            <div class="ion-nudge-pad" aria-label="Nudge selected ION surface">
+              <span class="ion-nudge-spacer"></span>
+              <button type="button" class="ion-tool" data-tool="settings-nudge-up" title="Move selected surface up">↑</button>
+              <span class="ion-nudge-spacer"></span>
+              <button type="button" class="ion-tool" data-tool="settings-nudge-left" title="Move selected surface left">←</button>
+              <button type="button" class="ion-tool" data-tool="settings-nudge-reset" title="Reset selected surface">0</button>
+              <button type="button" class="ion-tool" data-tool="settings-nudge-right" title="Move selected surface right">→</button>
+              <span class="ion-nudge-spacer"></span>
+              <button type="button" class="ion-tool" data-tool="settings-nudge-down" title="Move selected surface down">↓</button>
+              <span class="ion-nudge-spacer"></span>
+            </div>
+            <div class="ion-setting-row">
+              <div class="ion-setting-label">DOM inspector captured element stack</div>
+              <select class="ion-select" data-control="settings-inspector-layer"></select>
+            </div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="settings-inspector-start">Start Inspector</button>
+              <button type="button" class="ion-tool" data-tool="settings-inspector-cancel">Cancel Inspector</button>
+              <button type="button" class="ion-tool" data-tool="settings-inspector-preview">Preview Layer</button>
+              <button type="button" class="ion-tool" data-tool="settings-inspector-save-tabs">Save As Tabs Anchor</button>
+              <button type="button" class="ion-tool" data-tool="settings-inspector-save-drop">Save As Drop Zone</button>
+              <button type="button" class="ion-tool" data-tool="settings-inspector-save-attach">Save As Attach Target</button>
+            </div>
             <div class="ion-toolbar-actions">
               <button type="button" class="ion-tool" data-tool="settings-pick-attach">Pick Attach Target</button>
               <button type="button" class="ion-tool" data-tool="settings-clear-attach">Clear Attach Target</button>
               <button type="button" class="ion-tool" data-tool="settings-pick-drop">Pick Drop Zone</button>
               <button type="button" class="ion-tool" data-tool="settings-clear-drop">Clear Drop Zone</button>
+              <button type="button" class="ion-tool" data-tool="settings-pick-tabs-anchor">Pick Tabs Anchor</button>
+              <button type="button" class="ion-tool" data-tool="settings-clear-tabs-anchor">Clear Tabs Anchor</button>
               <button type="button" class="ion-tool" data-tool="settings-tabs-up">Tabs Up</button>
               <button type="button" class="ion-tool" data-tool="settings-tabs-down">Tabs Down</button>
               <button type="button" class="ion-tool" data-tool="settings-drawer-taller">Drawer Taller</button>
@@ -1434,16 +1758,16 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
           <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
         </div>
         <div class="ion-tabs">
-          <button type="button" class="ion-tab" data-tab="status">Status</button>
-          <button type="button" class="ion-tab" data-tab="action">Action</button>
-          <button type="button" class="ion-tab" data-tab="agent">Agent</button>
-          <button type="button" class="ion-tab" data-tab="packages">Packages</button>
-          <button type="button" class="ion-tab" data-tab="sandbox">Sandbox</button>
-          <button type="button" class="ion-tab" data-tab="automation">Automation</button>
-          <button type="button" class="ion-tab" data-tab="artifacts">Artifacts</button>
-          <button type="button" class="ion-tab" data-tab="settings">Settings</button>
-          <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
-          <button type="button" class="ion-tab" data-tab="tools">Logs</button>
+          <button type="button" class="ion-tab" data-tab="status" title="Status"><span class="ion-tab-label">Status</span><span class="ion-tab-icon" aria-hidden="true">●</span></button>
+          <button type="button" class="ion-tab" data-tab="action" title="Action"><span class="ion-tab-label">Action</span><span class="ion-tab-icon" aria-hidden="true">✓</span></button>
+          <button type="button" class="ion-tab" data-tab="agent" title="Agent"><span class="ion-tab-label">Agent</span><span class="ion-tab-icon" aria-hidden="true">A</span></button>
+          <button type="button" class="ion-tab" data-tab="packages" title="Packages"><span class="ion-tab-label">Packages</span><span class="ion-tab-icon" aria-hidden="true">□</span></button>
+          <button type="button" class="ion-tab" data-tab="sandbox" title="Sandbox"><span class="ion-tab-label">Sandbox</span><span class="ion-tab-icon" aria-hidden="true">◇</span></button>
+          <button type="button" class="ion-tab" data-tab="automation" title="Automation"><span class="ion-tab-label">Automation</span><span class="ion-tab-icon" aria-hidden="true">▶</span></button>
+          <button type="button" class="ion-tab" data-tab="artifacts" title="Artifacts"><span class="ion-tab-label">Artifacts</span><span class="ion-tab-icon" aria-hidden="true">⇪</span></button>
+          <button type="button" class="ion-tab" data-tab="settings" title="Settings"><span class="ion-tab-label">Settings</span><span class="ion-tab-icon" aria-hidden="true">⚙</span></button>
+          <button type="button" class="ion-tab" data-tab="diagnostics" title="Diagnostics"><span class="ion-tab-label">Diagnostics</span><span class="ion-tab-icon" aria-hidden="true">!</span></button>
+          <button type="button" class="ion-tab" data-tab="tools" title="Logs"><span class="ion-tab-label">Logs</span><span class="ion-tab-icon" aria-hidden="true">≡</span></button>
         </div>
       </div>
     `;
@@ -1545,6 +1869,58 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.querySelector('[data-tool="settings-clear-drop"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-drop"));
     });
+    panel.querySelector('[data-tool="settings-pick-tabs-anchor"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-pick-tabs-anchor"));
+    });
+    panel.querySelector('[data-tool="settings-clear-tabs-anchor"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-tabs-anchor"));
+    });
+    panel.querySelector('[data-tool="settings-inspector-start"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-start"));
+    });
+    panel.querySelector('[data-tool="settings-inspector-cancel"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-cancel"));
+    });
+    panel.querySelector('[data-tool="settings-inspector-preview"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-preview"));
+    });
+    panel.querySelector('[data-tool="settings-inspector-save-tabs"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-save", { detail: { target: "tabs_anchor" } }));
+    });
+    panel.querySelector('[data-tool="settings-inspector-save-drop"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-save", { detail: { target: "drop_zone" } }));
+    });
+    panel.querySelector('[data-tool="settings-inspector-save-attach"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-save", { detail: { target: "attach_target" } }));
+    });
+    panel.querySelector('[data-control="settings-inspector-layer"]')?.addEventListener("change", (event) => {
+      const select = event.currentTarget;
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-layer", { detail: { index: Number.parseInt(select.value, 10) || 0 } }));
+    });
+    panel.querySelector('[data-tool="settings-target-top"]')?.addEventListener("click", () => {
+      selectLayoutTarget("top_rail");
+    });
+    panel.querySelector('[data-tool="settings-target-tabs"]')?.addEventListener("click", () => {
+      selectLayoutTarget("tabs");
+    });
+    panel.querySelector('[data-tool="settings-target-drawer"]')?.addEventListener("click", () => {
+      selectLayoutTarget("drawer");
+    });
+    panel.querySelector('[data-tool="settings-nudge-up"]')?.addEventListener("click", () => {
+      nudgeLayoutTarget(0, -2);
+    });
+    panel.querySelector('[data-tool="settings-nudge-down"]')?.addEventListener("click", () => {
+      nudgeLayoutTarget(0, 2);
+    });
+    panel.querySelector('[data-tool="settings-nudge-left"]')?.addEventListener("click", () => {
+      nudgeLayoutTarget(-2, 0);
+    });
+    panel.querySelector('[data-tool="settings-nudge-right"]')?.addEventListener("click", () => {
+      nudgeLayoutTarget(2, 0);
+    });
+    panel.querySelector('[data-tool="settings-nudge-reset"]')?.addEventListener("click", () => {
+      resetSelectedLayoutTarget();
+    });
     panel.querySelector('[data-tool="settings-tabs-up"]')?.addEventListener("click", () => {
       adjustTabLift(4);
     });
@@ -1608,6 +1984,12 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.querySelectorAll(".ion-tab-panel").forEach((tabPanel) => {
       tabPanel.dataset.active = String(tabPanel.dataset.panel === activeTab);
     });
+    const layoutTarget = readLayoutTarget();
+    panel.querySelectorAll("[data-tool^='settings-target-']").forEach((button) => {
+      const tool = button.dataset.tool ?? "";
+      const target = tool.endsWith("top") ? "top_rail" : tool.endsWith("drawer") ? "drawer" : "tabs";
+      button.dataset.active = String(target === layoutTarget);
+    });
     const statusNode = panel.querySelector('[data-field="status"]');
     const actionNode = panel.querySelector('[data-field="action"]');
     const agentNode = panel.querySelector('[data-field="agent"]');
@@ -1616,6 +1998,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     const automationNode = panel.querySelector('[data-field="automation"]');
     const artifactsNode = panel.querySelector('[data-field="artifacts"]');
     const settingsNode = panel.querySelector('[data-field="settings"]');
+    const inspectorSelect = panel.querySelector('[data-control="settings-inspector-layer"]');
     const diagnosticsNode = panel.querySelector('[data-field="diagnostics"]');
     const toolsNode = panel.querySelector('[data-field="tools"]');
     if (statusNode) statusNode.textContent = bridgeState.detail;
@@ -1626,6 +2009,27 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     if (automationNode) automationNode.textContent = bridgeState.automation;
     if (artifactsNode) artifactsNode.textContent = bridgeState.artifacts;
     if (settingsNode) settingsNode.textContent = `${bridgeState.settings}\n\n${settingsSummary()}`;
+    if (inspectorSelect) {
+      const layers = bridgeState.inspectorLayers;
+      inspectorSelect.innerHTML = "";
+      if (!layers.length) {
+        const option = document.createElement("option");
+        option.value = "0";
+        option.textContent = "No pixel stack captured yet";
+        inspectorSelect.appendChild(option);
+        inspectorSelect.disabled = true;
+      } else {
+        inspectorSelect.disabled = false;
+        layers.forEach((layer) => {
+          const option = document.createElement("option");
+          option.value = String(layer.index);
+          option.textContent = `${layer.index}: ${layer.label}`;
+          option.title = layer.selector;
+          option.selected = layer.index === bridgeState.inspectorSelectedIndex;
+          inspectorSelect.appendChild(option);
+        });
+      }
+    }
     if (diagnosticsNode) diagnosticsNode.textContent = `${bridgeState.anchor.detail}\n\n${bridgeState.diagnostics}`;
     if (toolsNode) {
       toolsNode.textContent = `${bridgeState.tools}\n\nRecent:\n${bridgeState.logs.join("\n") || "No events yet."}`;
@@ -2254,6 +2658,14 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     }
   }
 
+  function storedTabsAnchorSelector() {
+    try {
+      return String(window.localStorage?.getItem(TABS_ANCHOR_SELECTOR_KEY) ?? "").trim();
+    } catch (_error) {
+      return "";
+    }
+  }
+
   function elementWithinComposerBand(node, rect) {
     const bounds = node.getBoundingClientRect();
     if (!rect) return bounds.top > window.innerHeight * 0.45;
@@ -2291,6 +2703,252 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return parts.join(" > ");
   }
 
+  function inspectorNodeAllowed(node) {
+    if (!(node instanceof HTMLElement)) return false;
+    if (isBridgeElement(node)) return false;
+    if (node.id === INSPECTOR_HUD_ID || node.id === INSPECTOR_SELECTED_PREVIEW_ID) return false;
+    if (node.classList.contains(INSPECTOR_OUTLINE_CLASS) || node.classList.contains("ion-dom-badge")) return false;
+    if (!visibleElement(node)) return false;
+    return true;
+  }
+
+  function inspectorLabel(node, index) {
+    const tag = node.tagName.toLowerCase();
+    const id = node.id ? `#${node.id}` : "";
+    const role = node.getAttribute("role") ? `[role=${node.getAttribute("role")}]` : "";
+    const testId = node.getAttribute("data-testid") ? `[data-testid=${node.getAttribute("data-testid")}]` : "";
+    const aria = node.getAttribute("aria-label") || node.getAttribute("title") || "";
+    const classes = Array.from(node.classList ?? []).filter(Boolean).slice(0, 3).map((name) => `.${name}`).join("");
+    const label = controlLabel(node) || aria || node.textContent?.trim().slice(0, 60) || "";
+    const rect = rectPayload(node.getBoundingClientRect());
+    return `${index} ${tag}${id}${testId || role || classes} ${rect.x},${rect.y} ${rect.width}x${rect.height}${label ? ` - ${label}` : ""}`.replace(/\s+/g, " ").trim();
+  }
+
+  function inspectorLayersAt(x, y) {
+    const fromPoint = typeof document.elementsFromPoint === "function" ? document.elementsFromPoint(x, y) : [];
+    const seenNodes = new Set();
+    const layers = [];
+    fromPoint.forEach((node) => {
+      if (seenNodes.has(node) || !inspectorNodeAllowed(node)) return;
+      seenNodes.add(node);
+      const index = layers.length;
+      layers.push({
+        index,
+        element: node,
+        selector: selectorForElement(node),
+        label: inspectorLabel(node, index),
+        rect: rectPayload(node.getBoundingClientRect()),
+      });
+    });
+    return layers.slice(0, 16);
+  }
+
+  function removeInspectorOutlines() {
+    document.querySelectorAll(`.${INSPECTOR_OUTLINE_CLASS}`).forEach((node) => node.remove());
+  }
+
+  function removeInspectorHud() {
+    document.getElementById(INSPECTOR_HUD_ID)?.remove();
+  }
+
+  function removeInspectorSelectedPreview() {
+    document.getElementById(INSPECTOR_SELECTED_PREVIEW_ID)?.remove();
+  }
+
+  function removeInspectorChrome() {
+    removeInspectorOutlines();
+    removeInspectorHud();
+    removeInspectorSelectedPreview();
+  }
+
+  function drawInspectorOutline(layer, selected = false, persistentId) {
+    const overlay = document.createElement("div");
+    overlay.className = INSPECTOR_OUTLINE_CLASS;
+    if (persistentId) overlay.id = persistentId;
+    overlay.dataset.layer = String(layer.index);
+    overlay.dataset.selected = String(selected);
+    overlay.style.left = `${layer.rect.x}px`;
+    overlay.style.top = `${layer.rect.y}px`;
+    overlay.style.width = `${layer.rect.width}px`;
+    overlay.style.height = `${layer.rect.height}px`;
+    const label = document.createElement("span");
+    label.textContent = layer.label;
+    overlay.appendChild(label);
+    document.documentElement.appendChild(overlay);
+  }
+
+  function drawInspectorLayers(layers, selectedIndex = -1) {
+    removeInspectorOutlines();
+    layers.slice(0, 10).forEach((layer) => drawInspectorOutline(layer, layer.index === selectedIndex));
+  }
+
+  function updateInspectorHud(x, y, layers, locked = false) {
+    let hud = document.getElementById(INSPECTOR_HUD_ID);
+    if (!hud) {
+      hud = document.createElement("div");
+      hud.id = INSPECTOR_HUD_ID;
+      document.documentElement.appendChild(hud);
+    }
+    const left = Math.min(window.innerWidth - 24, Math.max(12, x + 14));
+    const top = Math.min(window.innerHeight - 28, Math.max(12, y + 14));
+    hud.style.left = `${left}px`;
+    hud.style.top = `${top}px`;
+    const items = layers.slice(0, 8).map((layer) => `<li>${layer.label.replace(/[&<>]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[char] ?? char)}</li>`).join("");
+    hud.innerHTML = [
+      `<strong>${locked ? "ION DOM Inspector captured" : "ION DOM Inspector"}</strong>`,
+      `<div>pixel: ${Math.round(x)},${Math.round(y)} | layers: ${layers.length}</div>`,
+      layers.length ? `<ol>${items}</ol>` : "<div>No selectable page element under cursor.</div>",
+    ].join("");
+  }
+
+  function publishInspectorLayers() {
+    setBridgeInspectorLayers(
+      inspectorCapturedLayers.map((layer) => ({ index: layer.index, label: layer.label, selector: layer.selector })),
+      inspectorSelectedIndex,
+    );
+  }
+
+  function inspectorSelectedLayer() {
+    return inspectorCapturedLayers.find((layer) => layer.index === inspectorSelectedIndex) ?? inspectorCapturedLayers[0] ?? null;
+  }
+
+  function previewInspectorSelectedLayer() {
+    ensureDomRegistryStyle();
+    removeInspectorSelectedPreview();
+    const layer = inspectorSelectedLayer();
+    if (!layer) {
+      setBridgeSettingsDetail("dom_inspector_no_layer_selected\nStart Inspector, hover the page, and click the target pixel first.");
+      setBridgeStatus("Inspector layer missing", "No captured pixel stack is available.", "error");
+      return;
+    }
+    const current = document.querySelector(layer.selector);
+    if (current && visibleElement(current)) {
+      layer.element = current;
+      layer.rect = rectPayload(current.getBoundingClientRect());
+      layer.label = inspectorLabel(current, layer.index);
+    }
+    drawInspectorOutline(layer, true, INSPECTOR_SELECTED_PREVIEW_ID);
+    const detail = [
+      "dom_inspector_layer_preview",
+      `index: ${layer.index}`,
+      `selector: ${layer.selector}`,
+      `label: ${layer.label}`,
+      `rect: ${JSON.stringify(layer.rect)}`,
+    ].join("\n");
+    setBridgeSettingsDetail(detail);
+    setBridgeStatus("Inspector layer previewed", "Pink ring marks the selected captured layer.", "success");
+  }
+
+  function saveInspectorSelectedLayer(target) {
+    const layer = inspectorSelectedLayer();
+    if (!layer) {
+      setBridgeSettingsDetail("dom_inspector_save_blocked\nNo captured layer is selected.");
+      setBridgeStatus("Inspector save blocked", "Capture a pixel stack before saving an anchor.", "error");
+      return;
+    }
+    const key =
+      target === "tabs_anchor"
+        ? TABS_ANCHOR_SELECTOR_KEY
+        : target === "drop_zone"
+          ? DROP_TARGET_SELECTOR_KEY
+          : ATTACH_TARGET_SELECTOR_KEY;
+    try {
+      window.localStorage?.setItem(key, layer.selector);
+    } catch (_error) {
+      setBridgeSettingsDetail("dom_inspector_save_failed\nlocalStorage write failed.");
+      setBridgeStatus("Inspector save failed", "localStorage write failed.", "error");
+      return;
+    }
+    const detail = [
+      "dom_inspector_layer_saved",
+      `target: ${target}`,
+      `index: ${layer.index}`,
+      `selector: ${layer.selector}`,
+      `label: ${layer.label}`,
+    ].join("\n");
+    setBridgeSettingsDetail(detail);
+    setBridgeStatus("Inspector anchor saved", `${target} now uses the selected DOM layer.`, "success");
+    previewInspectorSelectedLayer();
+    if (target === "tabs_anchor") refreshBridgePosition();
+  }
+
+  function selectInspectorLayer(index) {
+    inspectorSelectedIndex = Math.max(0, Math.min(index, Math.max(0, inspectorCapturedLayers.length - 1)));
+    publishInspectorLayers();
+    previewInspectorSelectedLayer();
+  }
+
+  function stopDomInspector(message = "DOM inspector cancelled.") {
+    inspectorActive = false;
+    document.removeEventListener("mousemove", domInspectorMouseMove, true);
+    document.removeEventListener("click", domInspectorClick, true);
+    document.removeEventListener("keydown", domInspectorKeydown, true);
+    removeInspectorHud();
+    removeInspectorOutlines();
+    setBridgeSettingsDetail(message);
+  }
+
+  function domInspectorMouseMove(event) {
+    if (!inspectorActive) return;
+    if (event.target instanceof Element && isBridgeElement(event.target)) return;
+    ensureDomRegistryStyle();
+    const layers = inspectorLayersAt(event.clientX, event.clientY);
+    drawInspectorLayers(layers);
+    updateInspectorHud(event.clientX, event.clientY, layers);
+  }
+
+  function domInspectorClick(event) {
+    if (!inspectorActive) return;
+    if (event.target instanceof Element && isBridgeElement(event.target)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    const layers = inspectorLayersAt(event.clientX, event.clientY);
+    if (!layers.length) {
+      setBridgeSettingsDetail("dom_inspector_capture_empty\nNo selectable page element under clicked pixel.");
+      setBridgeStatus("Inspector capture empty", "Move over a visible ChatGPT element and click again.", "error");
+      return;
+    }
+    inspectorCapturedLayers = layers;
+    inspectorSelectedIndex = 0;
+    publishInspectorLayers();
+    drawInspectorLayers(layers, 0);
+    updateInspectorHud(event.clientX, event.clientY, layers, true);
+    stopDomInspector([
+      "dom_inspector_pixel_captured",
+      `pixel: ${Math.round(event.clientX)},${Math.round(event.clientY)}`,
+      `layers: ${layers.length}`,
+      `top_selector: ${layers[0].selector}`,
+      "Use the Settings dropdown to select a lower layer, then preview or save it as Tabs Anchor, Drop Zone, or Attach Target.",
+    ].join("\n"));
+    previewInspectorSelectedLayer();
+  }
+
+  function domInspectorKeydown(event) {
+    if (event.key !== "Escape") return;
+    event.preventDefault();
+    event.stopPropagation();
+    stopDomInspector("dom_inspector_cancelled\nInspector was cancelled with Escape.");
+    setBridgeStatus("Inspector cancelled", "No anchor changed.", "idle");
+  }
+
+  function beginDomInspector() {
+    ensureDomRegistryStyle();
+    removeInspectorChrome();
+    inspectorActive = true;
+    setBridgeStatus("DOM inspector armed", "Hover the page to see every element under the cursor. Click once to capture that pixel stack.", "working");
+    setBridgeSettingsDetail([
+      "dom_inspector_armed",
+      "Hover ChatGPT elements to see the top layer and lower layers under the cursor.",
+      "Click one pixel to capture the stack.",
+      "After capture, use the Settings dropdown to choose the exact layer and save it as an anchor.",
+      "Escape cancels without changing settings.",
+    ].join("\n"));
+    document.addEventListener("mousemove", domInspectorMouseMove, true);
+    document.addEventListener("click", domInspectorClick, true);
+    document.addEventListener("keydown", domInspectorKeydown, true);
+  }
+
   function attachCandidateFromEventTarget(target) {
     if (!(target instanceof Element)) return null;
     if (isBridgeElement(target)) return null;
@@ -2306,6 +2964,132 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       target.closest("main, form, [data-testid*='composer' i], [data-message-author-role], article, section, div") ??
       (target instanceof HTMLElement ? target : null);
     return candidate && !isBridgeElement(candidate) ? candidate : null;
+  }
+
+  function tabsAnchorCandidateFromEventTarget(target) {
+    if (!(target instanceof Element)) return null;
+    if (isBridgeElement(target)) return null;
+    const composer = findComposer();
+    const candidate =
+      target.closest("form, [data-testid*='composer' i], [class*='composer' i], [class*='prompt' i], main, section, div") ??
+      (target instanceof HTMLElement ? target : null);
+    if (!candidate || isBridgeElement(candidate)) return null;
+    if (composer && !elementContains(candidate, composer)) {
+      const parent = composer.closest("form, [data-testid*='composer' i], [class*='composer' i], [class*='prompt' i]");
+      return parent && !isBridgeElement(parent) ? parent : null;
+    }
+    return candidate;
+  }
+
+  function tabsAnchorElement() {
+    const selector = storedTabsAnchorSelector();
+    if (!selector) return null;
+    let node = null;
+    try {
+      node = document.querySelector(selector);
+    } catch (_error) {
+      setBridgeSettingsDetail(`tabs_anchor_selector_invalid\nselector: ${selector}`);
+      return null;
+    }
+    const composer = findComposer();
+    if (!node || !visibleElement(node)) {
+      setBridgeSettingsDetail(`tabs_anchor_missing_or_hidden\nselector: ${selector}`);
+      return null;
+    }
+    if (composer && !elementContains(node, composer)) {
+      setBridgeSettingsDetail([
+        "tabs_anchor_does_not_contain_composer_input",
+        `selector: ${selector}`,
+        `anchor_rect: ${JSON.stringify(rectPayload(node.getBoundingClientRect()))}`,
+        `composer_rect: ${JSON.stringify(rectPayload(composer.getBoundingClientRect()))}`,
+        "Use Pick Tabs Anchor again and click the visible composer background panel.",
+      ].join("\n"));
+      return null;
+    }
+    return node;
+  }
+
+  function previewTabsAnchor() {
+    ensureDomRegistryStyle();
+    const target = tabsAnchorElement();
+    document.getElementById(TABS_ANCHOR_PREVIEW_ID)?.remove();
+    if (!target) {
+      const detail = storedTabsAnchorSelector()
+        ? "tabs_anchor_not_detected\nSaved tabs anchor is missing, hidden, or not the composer shell. Use Pick Tabs Anchor again or Clear Tabs Anchor."
+        : "tabs_anchor_not_calibrated\nUse Settings -> Pick Tabs Anchor, then click the visible ChatGPT composer background panel.";
+      setBridgeSettingsDetail(detail);
+      setBridgeStatus("Tabs anchor missing", detail, "error");
+      return;
+    }
+    const rect = target.getBoundingClientRect();
+    const overlay = document.createElement("div");
+    overlay.id = TABS_ANCHOR_PREVIEW_ID;
+    overlay.style.left = `${Math.round(rect.left)}px`;
+    overlay.style.top = `${Math.round(rect.top)}px`;
+    overlay.style.width = `${Math.round(rect.width)}px`;
+    overlay.style.height = `${Math.round(rect.height)}px`;
+    document.documentElement.appendChild(overlay);
+    window.setTimeout(() => overlay.remove(), 4000);
+    const detail = [
+      "preview_tabs_anchor",
+      `selector: ${storedTabsAnchorSelector()}`,
+      `target: ${target.tagName.toLowerCase()}`,
+      `rect: ${JSON.stringify(rectPayload(rect))}`,
+      "The tab rail now anchors to this element before falling back to automatic composer-shell detection.",
+    ].join("\n");
+    setBridgeSettingsDetail(detail);
+    setBridgeStatus("Tabs anchor previewed", "Orange ring marks the selected tab anchor.", "success");
+    refreshBridgePosition();
+  }
+
+  function beginTabsAnchorPicker() {
+    setBridgeStatus("Pick tabs anchor", "Click the visible ChatGPT composer background panel/top shell.", "working");
+    setBridgeSettingsDetail("Tabs anchor picker armed. Click the composer background panel that should define the tab rail top edge.");
+    const handler = (event) => {
+      const candidate = tabsAnchorCandidateFromEventTarget(event.target);
+      if (!candidate) {
+        setBridgeSettingsDetail("Tabs anchor pick ignored because the click was inside ION UI or not an element.");
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      document.removeEventListener("click", handler, true);
+      const selector = selectorForElement(candidate);
+      try {
+        window.localStorage?.setItem(TABS_ANCHOR_SELECTOR_KEY, selector);
+      } catch (_error) {
+        setBridgeSettingsDetail("Tabs anchor could not be saved to localStorage.");
+        setBridgeStatus("Tabs anchor not saved", "localStorage write failed.", "error");
+        return;
+      }
+      const detail = [
+        "tabs_anchor_calibrated",
+        `selector: ${selector}`,
+        `label: ${controlLabel(candidate) || candidate.tagName.toLowerCase()}`,
+        `rect: ${JSON.stringify(rectPayload(candidate.getBoundingClientRect()))}`,
+      ].join("\n");
+      setBridgeSettingsDetail(detail);
+      setBridgeStatus("Tabs anchor calibrated", "Tabs now use the picked composer shell before auto detection.", "success");
+      previewTabsAnchor();
+      refreshBridgePosition();
+    };
+    document.addEventListener("click", handler, true);
+    window.setTimeout(() => {
+      document.removeEventListener("click", handler, true);
+    }, 12000);
+  }
+
+  function clearTabsAnchorCalibration() {
+    try {
+      window.localStorage?.removeItem(TABS_ANCHOR_SELECTOR_KEY);
+    } catch (_error) {
+    }
+    document.getElementById(TABS_ANCHOR_PREVIEW_ID)?.remove();
+    const detail = "tabs_anchor_calibration_cleared\nTabs will use automatic composer-shell detection again.";
+    setBridgeSettingsDetail(detail);
+    setBridgeStatus("Tabs anchor cleared", "Pick Tabs Anchor can be used to bind it again.", "idle");
+    refreshBridgePosition();
   }
 
   function calibratedAttachControlElement(rect) {
@@ -2968,6 +3752,9 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     localAttachPayload,
     requestArtifactLocalAttachDryRun,
     beginAttachTargetPicker,
+    beginDomInspector,
+    previewInspectorSelectedLayer,
+    saveInspectorSelectedLayer,
     rescan: () => {
       seen.clear();
       return scan("manual");
@@ -3060,6 +3847,33 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   });
   window.addEventListener("ion-chatops-settings-clear-drop", () => {
     clearDropTargetCalibration();
+  });
+  window.addEventListener("ion-chatops-settings-pick-tabs-anchor", () => {
+    beginTabsAnchorPicker();
+  });
+  window.addEventListener("ion-chatops-settings-clear-tabs-anchor", () => {
+    clearTabsAnchorCalibration();
+  });
+  window.addEventListener("ion-chatops-settings-inspector-start", () => {
+    beginDomInspector();
+  });
+  window.addEventListener("ion-chatops-settings-inspector-cancel", () => {
+    stopDomInspector("dom_inspector_cancelled\nInspector was cancelled from Settings.");
+    setBridgeStatus("Inspector cancelled", "No anchor changed.", "idle");
+  });
+  window.addEventListener("ion-chatops-settings-inspector-preview", () => {
+    previewInspectorSelectedLayer();
+  });
+  window.addEventListener("ion-chatops-settings-inspector-layer", (event) => {
+    const detail = event.detail;
+    selectInspectorLayer(Number(detail?.index ?? 0));
+  });
+  window.addEventListener("ion-chatops-settings-inspector-save", (event) => {
+    const detail = event.detail;
+    const target = detail?.target;
+    if (target === "tabs_anchor" || target === "drop_zone" || target === "attach_target") {
+      saveInspectorSelectedLayer(target);
+    }
   });
   if (safeModeDisabled()) {
     console.info(`ION ChatOps Bridge disabled by ${SAFE_MODE_KEY}. Remove the flag and reload to re-enable.`);

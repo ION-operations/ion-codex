@@ -33,6 +33,10 @@ MVP behavior:
   ordinary drag/drop over broad page regions;
 - calibrate the ChatGPT attach/add-file target by letting Braden pick the
   exact page element once, then using that saved selector before heuristics;
+- inspect the live ChatGPT DOM from Settings with a hover/click element finder
+  that shows every element under the cursor pixel, captures the full layer
+  stack, and lets Braden save a chosen layer as the tabs anchor, drop zone, or
+  attach target;
 - tune composer tab lift and drawer height from the Settings tab without a code
   patch;
 - attempt a visible ChatGPT drag/drop for an approved artifact without clicking
@@ -196,10 +200,41 @@ that saved target first. If the saved target disappears or is no longer near
 the composer, attach automation fails closed and asks for re-calibration instead
 of falling back to a random visible control.
 
-The Settings tab also exposes lightweight visual tuning:
+For precise calibration, prefer:
 
 ```text
-Tabs Up / Tabs Down
+Settings -> Start Inspector
+```
+
+The DOM inspector is an operator-visible targeting tool. While armed, hovering
+the ChatGPT page draws outlines around the elements under the cursor pixel and
+shows the top layer plus lower layers in a small HUD. One click captures that
+pixel stack without activating the page. The Settings dropdown then lists every
+captured layer; selecting a layer previews it with a pink ring.
+
+From the selected layer, Settings can save:
+
+```text
+Save As Tabs Anchor
+Save As Drop Zone
+Save As Attach Target
+```
+
+This avoids blind clicks when ChatGPT has overlapping surfaces such as profile
+buttons, composer wrappers, upload overlays, source chips, and nested controls.
+The inspector only writes local selector settings. It does not click Send,
+upload files, invoke Codex, or mutate ION state.
+
+The Settings tab exposes lightweight visual tuning:
+
+```text
+Top Rail / Tabs / Drawer
+arrow-pad nudge controls
+selected-surface reset
+Start Inspector / Cancel Inspector / Preview Layer
+Save As Tabs Anchor / Save As Drop Zone / Save As Attach Target
+Pick Tabs Anchor / Clear Tabs Anchor
+Tabs Up / Tabs Down legacy lift controls
 Drawer Taller / Drawer Shorter
 Reset Layout
 ```
@@ -207,9 +242,20 @@ Reset Layout
 These write only local browser settings:
 
 ```text
+ION_CHATOPS_LAYOUT_TARGET
+ION_CHATOPS_TOP_RAIL_X_PX
+ION_CHATOPS_TOP_RAIL_Y_PX
+ION_CHATOPS_TABS_X_PX
+ION_CHATOPS_TABS_Y_PX
+ION_CHATOPS_DRAWER_X_PX
+ION_CHATOPS_DRAWER_Y_PX
 ION_CHATOPS_TAB_LIFT_PX
 ION_CHATOPS_DRAWER_MAX_PX
 ```
+
+The drawer opens behind the composer tab rail so the tabs stay attached to the
+same composer edge. When the composer is too narrow for full tab titles, the
+tab rail switches to compact icon labels.
 
 Because ChatGPT accepts normal drag/drop over broad page regions, the preferred
 browser lane is:
@@ -230,6 +276,24 @@ ION_CHATOPS_DROP_TARGET_SELECTOR
 If the saved drop zone is hidden or stale, `Drop Latest` fails visibly and asks
 for re-calibration. `Local Attach` remains a fallback for OS file-picker
 assistance; it is not the primary ChatGPT upload lane.
+
+If the tab rail attaches to the inner text input instead of the visible
+composer background, use:
+
+```text
+Settings -> Pick Tabs Anchor
+```
+
+Then click the visible ChatGPT composer background/top shell. The selector is
+stored in page `localStorage`:
+
+```text
+ION_CHATOPS_TABS_ANCHOR_SELECTOR
+```
+
+The tabs use this picked anchor before falling back to automatic composer-shell
+detection. If the saved anchor disappears, is hidden, or no longer contains the
+composer input, the extension reports that state and asks for re-calibration.
 
 `Attachables` intentionally shows a compact selected-artifact summary rather
 than dumping the full daemon JSON. The selected artifact is the same latest

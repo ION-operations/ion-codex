@@ -16,8 +16,26 @@ const PANEL_TINY_WIDTH = 230;
 const COMPOSER_PANEL_MAX_WIDTH = 920;
 const ATTACH_TARGET_SELECTOR_KEY = "ION_CHATOPS_ATTACH_TARGET_SELECTOR";
 const DROP_TARGET_SELECTOR_KEY = "ION_CHATOPS_DROP_TARGET_SELECTOR";
+const TABS_ANCHOR_SELECTOR_KEY = "ION_CHATOPS_TABS_ANCHOR_SELECTOR";
 const TAB_LIFT_KEY = "ION_CHATOPS_TAB_LIFT_PX";
 const DRAWER_MAX_KEY = "ION_CHATOPS_DRAWER_MAX_PX";
+const LAYOUT_TARGET_KEY = "ION_CHATOPS_LAYOUT_TARGET";
+const TOP_RAIL_X_KEY = "ION_CHATOPS_TOP_RAIL_X_PX";
+const TOP_RAIL_Y_KEY = "ION_CHATOPS_TOP_RAIL_Y_PX";
+const TABS_X_KEY = "ION_CHATOPS_TABS_X_PX";
+const TABS_Y_KEY = "ION_CHATOPS_TABS_Y_PX";
+const DRAWER_X_KEY = "ION_CHATOPS_DRAWER_X_PX";
+const DRAWER_Y_KEY = "ION_CHATOPS_DRAWER_Y_PX";
+const TAB_LABEL_MIN_WIDTH = 780;
+const TAB_HEIGHT = 22;
+
+type LayoutTarget = "top_rail" | "tabs" | "drawer";
+
+type InspectorLayerOption = {
+  index: number;
+  label: string;
+  selector: string;
+};
 
 type AnchorInfo = {
   mode: "composer" | "topbar_fallback";
@@ -40,6 +58,8 @@ const bridgeState = {
   automation: "Automation controls are staged only. This packet does not execute macros.",
   artifacts: "Artifact detection is staged only. No upload or local file movement occurs in this shell slice.",
   settings: "No local calibration has been changed in this session.",
+  inspectorLayers: [] as InspectorLayerOption[],
+  inspectorSelectedIndex: 0,
   diagnostics:
     "Normal carrier flow: Sev emits an ion_action YAML block in ChatGPT, the extension detects it, Braden approves it, the local daemon records/executes it, and ION writes a receipt.\n\nThe buttons below are local diagnostics only. They fabricate known-good test actions so the extension/daemon path can be checked without waiting on ChatGPT to emit YAML.",
   tools: "Daemon: http://127.0.0.1:8767\nUse Rescan after ChatGPT finishes rendering a YAML block.",
@@ -165,6 +185,11 @@ function ensureStyle(): void {
       background: rgba(255,255,255,0.08);
       border-color: rgba(255,255,255,0.08);
     }
+    #${PANEL_ID} .ion-tool[data-active="true"] {
+      color: #ffd2b0;
+      background: rgba(255,112,28,0.16);
+      border-color: rgba(255,112,28,0.70);
+    }
     #${PANEL_ID} .ion-toolbar-actions {
       display: flex;
       align-items: center;
@@ -227,11 +252,12 @@ function ensureStyle(): void {
       background: rgba(24, 24, 24, 0.96);
       box-shadow: 0 -16px 46px rgba(0,0,0,0.34), 0 -1px 12px rgba(255,112,28,0.15);
       backdrop-filter: blur(14px);
-      margin: 0;
-      padding: 10px 10px 11px;
+      margin: 0 0 calc(-1 * var(--ion-chatops-tab-height, 22px));
+      padding: 10px 10px calc(var(--ion-chatops-tab-height, 22px) + 12px);
       max-height: min(38vh, var(--ion-chatops-drawer-max-px, 360px));
       overflow: auto;
       pointer-events: auto;
+      transform: translate(var(--ion-chatops-drawer-x-px, 0px), var(--ion-chatops-drawer-y-px, 0px));
     }
     #${PANEL_ID}[data-expanded="true"] .ion-tab-panel[data-active="true"] {
       display: flex;
@@ -257,6 +283,8 @@ function ensureStyle(): void {
       overflow: hidden;
       text-overflow: ellipsis;
       pointer-events: auto;
+      position: relative;
+      z-index: 2;
     }
     #${PANEL_ID} .ion-tab[data-active="true"] {
       color: #ffd2b0;
@@ -280,8 +308,72 @@ function ensureStyle(): void {
       padding: 0 6px;
       max-width: 94px;
     }
-    #${PANEL_ID}[data-layout="tiny"] .ion-tabs {
+    #${PANEL_ID} .ion-tab-icon {
       display: none;
+      font-size: 13px;
+      line-height: 21px;
+    }
+    #${PANEL_ID}[data-tab-mode="icons"] .ion-tab {
+      width: 31px;
+      min-width: 31px;
+      max-width: 31px;
+      padding: 0;
+      text-align: center;
+    }
+    #${PANEL_ID}[data-tab-mode="icons"] .ion-tab-label {
+      display: none;
+    }
+    #${PANEL_ID}[data-tab-mode="icons"] .ion-tab-icon {
+      display: inline;
+    }
+    #${PANEL_ID} .ion-layout-picker {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      width: 100%;
+    }
+    #${PANEL_ID} .ion-nudge-pad {
+      display: grid;
+      grid-template-columns: repeat(3, 34px);
+      grid-template-rows: repeat(3, 30px);
+      gap: 4px;
+      align-items: center;
+      justify-content: start;
+    }
+    #${PANEL_ID} .ion-nudge-pad .ion-tool {
+      width: 34px;
+      padding: 0;
+    }
+    #${PANEL_ID} .ion-nudge-spacer {
+      width: 34px;
+      height: 30px;
+    }
+    #${PANEL_ID} .ion-setting-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 6px;
+      width: 100%;
+    }
+    #${PANEL_ID} .ion-setting-label {
+      color: rgba(255,255,255,0.58);
+      font-size: 10px;
+      line-height: 1.2;
+    }
+    #${PANEL_ID} .ion-select {
+      width: 100%;
+      min-height: 28px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 7px;
+      background: rgba(12,12,12,0.72);
+      color: rgba(255,255,255,0.86);
+      font-size: 11px;
+      line-height: 1.2;
+      padding: 4px 7px;
+      outline: none;
+    }
+    #${PANEL_ID} .ion-select:focus {
+      border-color: rgba(255,112,28,0.78);
+      box-shadow: 0 0 0 3px rgba(255,112,28,0.13);
     }
     #${MODAL_ID} {
       position: fixed;
@@ -445,6 +537,71 @@ function writeNumberSetting(key: string, value: number, min: number, max: number
   return bounded;
 }
 
+function readLayoutTarget(): LayoutTarget {
+  try {
+    const raw = String(window.localStorage?.getItem(LAYOUT_TARGET_KEY) ?? "").trim();
+    if (raw === "top_rail" || raw === "tabs" || raw === "drawer") return raw;
+  } catch (_error) {
+    // Ignore storage failures; the panel will continue with defaults.
+  }
+  return "tabs";
+}
+
+function writeLayoutTarget(target: LayoutTarget): void {
+  try {
+    window.localStorage?.setItem(LAYOUT_TARGET_KEY, target);
+  } catch (_error) {
+    // Ignore storage failures; the panel will continue with defaults.
+  }
+}
+
+function layoutOffset(target: LayoutTarget): { x: number; y: number } {
+  if (target === "top_rail") {
+    return {
+      x: readNumberSetting(TOP_RAIL_X_KEY, 0, -260, 260),
+      y: readNumberSetting(TOP_RAIL_Y_KEY, 0, -40, 160),
+    };
+  }
+  if (target === "drawer") {
+    return {
+      x: readNumberSetting(DRAWER_X_KEY, 0, -260, 260),
+      y: readNumberSetting(DRAWER_Y_KEY, 0, -180, 180),
+    };
+  }
+  return {
+    x: readNumberSetting(TABS_X_KEY, 0, -260, 260),
+    y: readNumberSetting(TABS_Y_KEY, 0, -120, 160),
+  };
+}
+
+function writeLayoutOffset(target: LayoutTarget, x: number, y: number): { x: number; y: number } {
+  if (target === "top_rail") {
+    return {
+      x: writeNumberSetting(TOP_RAIL_X_KEY, x, -260, 260),
+      y: writeNumberSetting(TOP_RAIL_Y_KEY, y, -40, 160),
+    };
+  }
+  if (target === "drawer") {
+    return {
+      x: writeNumberSetting(DRAWER_X_KEY, x, -260, 260),
+      y: writeNumberSetting(DRAWER_Y_KEY, y, -180, 180),
+    };
+  }
+  return {
+    x: writeNumberSetting(TABS_X_KEY, x, -260, 260),
+    y: writeNumberSetting(TABS_Y_KEY, y, -120, 160),
+  };
+}
+
+function applyDrawerOffset(panel: HTMLElement): void {
+  const offset = layoutOffset("drawer");
+  if (typeof panel.style.setProperty === "function") {
+    panel.style.setProperty("--ion-chatops-drawer-x-px", `${offset.x}px`);
+    panel.style.setProperty("--ion-chatops-drawer-y-px", `${offset.y}px`);
+    panel.style.setProperty("--ion-chatops-tab-height", `${TAB_HEIGHT}px`);
+  }
+}
+
 function attachTargetSelector(): string {
   try {
     return String(window.localStorage?.getItem(ATTACH_TARGET_SELECTOR_KEY) ?? "").trim();
@@ -461,19 +618,71 @@ function dropTargetSelector(): string {
   }
 }
 
+function tabsAnchorSelector(): string {
+  try {
+    return String(window.localStorage?.getItem(TABS_ANCHOR_SELECTOR_KEY) ?? "").trim();
+  } catch (_error) {
+    return "";
+  }
+}
+
 function settingsSummary(): string {
   const selector = attachTargetSelector();
   const dropSelector = dropTargetSelector();
+  const tabsAnchor = tabsAnchorSelector();
+  const selected = readLayoutTarget();
+  const top = layoutOffset("top_rail");
+  const tabs = layoutOffset("tabs");
+  const drawer = layoutOffset("drawer");
   return [
     `attach_target: ${selector || "not calibrated"}`,
     `drop_zone: ${dropSelector || "default page/composer zone"}`,
+    `tabs_anchor: ${tabsAnchor || "auto composer shell"}`,
+    `layout_target: ${selected}`,
+    `top_rail_offset: x=${top.x}, y=${top.y}`,
+    `tabs_offset: x=${tabs.x}, y=${tabs.y}`,
+    `drawer_offset: x=${drawer.x}, y=${drawer.y}`,
     `tab_lift_px: ${readNumberSetting(TAB_LIFT_KEY, 2, -24, 48)}`,
     `drawer_max_px: ${readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680)}`,
+    `inspector_layers: ${bridgeState.inspectorLayers.length ? `${bridgeState.inspectorLayers.length} captured at last click` : "none captured"}`,
     "",
+    "Select Top Rail, Tabs, or Drawer, then use the arrow pad to nudge that surface.",
+    "Use DOM Inspector when blind clicking is not precise enough. It shows every element under the cursor, captures the pixel stack on click, then lets you choose which layer to save.",
+    "Use Pick Tabs Anchor when the automatic composer shell is not the visible panel top.",
     "Use Preview Drop Zone before Drop Latest. Pick Drop Zone if the blue ring is not where ChatGPT accepts file drops.",
     "Use Pick Attach Target, then click ChatGPT's real attach/add-file button once.",
     "Local Attach is a fallback and should only be used after Preview Target rings the correct button and Dry Run passes.",
   ].join("\n");
+}
+
+export function setBridgeInspectorLayers(layers: InspectorLayerOption[], selectedIndex = 0): void {
+  bridgeState.inspectorLayers = layers.slice(0, 24);
+  bridgeState.inspectorSelectedIndex = selectedIndex;
+  renderPanel();
+}
+
+function selectLayoutTarget(target: LayoutTarget): void {
+  writeLayoutTarget(target);
+  bridgeState.settings = `layout_target set to ${target}`;
+  appendBridgeLog(`Layout target selected: ${target}`);
+  renderPanel();
+}
+
+function nudgeLayoutTarget(dx: number, dy: number): void {
+  const target = readLayoutTarget();
+  const current = layoutOffset(target);
+  const next = writeLayoutOffset(target, current.x + dx, current.y + dy);
+  bridgeState.settings = `${target} offset set to x=${next.x}, y=${next.y}`;
+  appendBridgeLog(`Layout nudged: ${target} x=${next.x} y=${next.y}`);
+  renderPanel();
+}
+
+function resetSelectedLayoutTarget(): void {
+  const target = readLayoutTarget();
+  const next = writeLayoutOffset(target, 0, 0);
+  bridgeState.settings = `${target} offset reset to x=${next.x}, y=${next.y}`;
+  appendBridgeLog(`Layout target reset: ${target}`);
+  renderPanel();
 }
 
 function adjustTabLift(delta: number): void {
@@ -494,6 +703,14 @@ function resetLayoutSettings(): void {
   try {
     window.localStorage?.removeItem(TAB_LIFT_KEY);
     window.localStorage?.removeItem(DRAWER_MAX_KEY);
+    window.localStorage?.removeItem(LAYOUT_TARGET_KEY);
+    window.localStorage?.removeItem(TOP_RAIL_X_KEY);
+    window.localStorage?.removeItem(TOP_RAIL_Y_KEY);
+    window.localStorage?.removeItem(TABS_X_KEY);
+    window.localStorage?.removeItem(TABS_Y_KEY);
+    window.localStorage?.removeItem(DRAWER_X_KEY);
+    window.localStorage?.removeItem(DRAWER_Y_KEY);
+    window.localStorage?.removeItem(TABS_ANCHOR_SELECTOR_KEY);
   } catch (_error) {
     // Ignore storage failures; the panel will continue with defaults.
   }
@@ -514,10 +731,11 @@ function topBarGeometry() {
 
 function applyTopRailLayout(panel: HTMLElement): void {
   const { left, available, width } = topBarGeometry();
+  const offset = layoutOffset("top_rail");
   const rail = topRail(panel);
   if (!rail) return;
-  rail.style.top = `${PANEL_TOP}px`;
-  rail.style.left = `${left}px`;
+  rail.style.top = `${Math.max(0, PANEL_TOP + offset.y)}px`;
+  rail.style.left = `${Math.max(TOP_BAR_GAP, left + offset.x)}px`;
   rail.style.right = "auto";
   rail.style.bottom = "auto";
   rail.style.width = `${width}px`;
@@ -530,14 +748,17 @@ function applyTopRailLayout(panel: HTMLElement): void {
 
 function applyTopBarLayout(panel: HTMLElement): void {
   const { left, available, width, layout } = topBarGeometry();
+  const offset = layoutOffset("tabs");
   const cockpit = composerCockpit(panel);
   panel.dataset.anchorMode = "topbar_fallback";
   panel.dataset.anchorHealth = "degraded";
   panel.dataset.layout = layout;
+  panel.dataset.tabMode = width < TAB_LABEL_MIN_WIDTH ? "icons" : "labels";
   applyTopRailLayout(panel);
+  applyDrawerOffset(panel);
   if (cockpit) {
-    cockpit.style.top = `${PANEL_TOP + 36}px`;
-    cockpit.style.left = `${left}px`;
+    cockpit.style.top = `${Math.max(0, PANEL_TOP + 36 + offset.y)}px`;
+    cockpit.style.left = `${Math.max(TOP_BAR_GAP, left + offset.x)}px`;
     cockpit.style.right = "auto";
     cockpit.style.bottom = "auto";
     cockpit.style.width = `${width}px`;
@@ -688,6 +909,54 @@ function detectComposerAnchor(): AnchorInfo {
     };
   }
   const attachments = composerAttachmentNodes(input);
+  const calibratedSelector = tabsAnchorSelector();
+  if (calibratedSelector) {
+    let calibrated: HTMLElement | null = null;
+    try {
+      calibrated = document.querySelector<HTMLElement>(calibratedSelector);
+    } catch (_error) {
+      return {
+        mode: "topbar_fallback",
+        rect: null,
+        element: null,
+        health: "degraded",
+        detail: `Saved tabs anchor selector is invalid; clear or re-pick it.\nselector: ${calibratedSelector}`,
+        source: "calibrated_tabs_anchor_invalid",
+        attachmentsDetected: attachments.length,
+      };
+    }
+    const calibratedRect = calibrated ? visibleRect(calibrated) : null;
+    if (calibrated && calibratedRect && elementContains(calibrated, input)) {
+      observeComposerAnchor(calibrated);
+      return {
+        mode: "composer",
+        rect: calibratedRect,
+        element: calibrated,
+        health: "ready",
+        source: "calibrated_tabs_anchor",
+        attachmentsDetected: attachments.length,
+        detail: [
+          `Composer anchor ready: ${Math.round(calibratedRect.left)},${Math.round(calibratedRect.top)} ${Math.round(calibratedRect.width)}x${Math.round(calibratedRect.height)}.`,
+          "source: calibrated_tabs_anchor",
+          `selector: ${calibratedSelector}`,
+          `attachments_detected: ${attachments.length}`,
+        ].join("\n"),
+      };
+    }
+    return {
+      mode: "topbar_fallback",
+      rect: null,
+      element: null,
+      health: "degraded",
+      detail: [
+        "Saved tabs anchor is missing, hidden, or does not contain the composer input.",
+        `selector: ${calibratedSelector}`,
+        "Use Settings -> Pick Tabs Anchor again, or Clear Tabs Anchor.",
+      ].join("\n"),
+      source: "calibrated_tabs_anchor_missing",
+      attachmentsDetected: attachments.length,
+    };
+  }
   const container = candidateComposerContainer(input);
   const rect = container.getBoundingClientRect();
   if (!rectIsVisible(rect)) {
@@ -728,15 +997,18 @@ function applyComposerLayout(panel: HTMLElement, anchor: AnchorInfo): boolean {
   const width = available;
   const tabLift = readNumberSetting(TAB_LIFT_KEY, 2, -24, 48);
   const drawerMax = readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680);
-  const bottom = Math.max(4, Math.round(viewport - rect.top + tabLift));
+  const offset = layoutOffset("tabs");
+  const bottom = Math.max(4, Math.round(viewport - rect.top + tabLift - offset.y));
   const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 520 ? "compact" : "normal";
   const cockpit = composerCockpit(panel);
   panel.dataset.anchorMode = "composer";
   panel.dataset.anchorHealth = anchor.health;
   panel.dataset.layout = layout;
+  panel.dataset.tabMode = width < TAB_LABEL_MIN_WIDTH ? "icons" : "labels";
+  applyDrawerOffset(panel);
   if (cockpit) {
     cockpit.style.top = "auto";
-    cockpit.style.left = `${left}px`;
+    cockpit.style.left = `${Math.max(margin, left + offset.x)}px`;
     cockpit.style.right = "auto";
     cockpit.style.bottom = `${bottom}px`;
     cockpit.style.width = `${width}px`;
@@ -817,11 +1089,41 @@ function ensurePanel(): HTMLElement {
         </div>
         <div class="ion-tab-panel" data-panel="settings">
           <div class="ion-detail" data-field="settings"></div>
+          <div class="ion-layout-picker">
+            <button type="button" class="ion-tool" data-tool="settings-target-top">Top Rail</button>
+            <button type="button" class="ion-tool" data-tool="settings-target-tabs">Tabs</button>
+            <button type="button" class="ion-tool" data-tool="settings-target-drawer">Drawer</button>
+          </div>
+          <div class="ion-nudge-pad" aria-label="Nudge selected ION surface">
+            <span class="ion-nudge-spacer"></span>
+            <button type="button" class="ion-tool" data-tool="settings-nudge-up" title="Move selected surface up">↑</button>
+            <span class="ion-nudge-spacer"></span>
+            <button type="button" class="ion-tool" data-tool="settings-nudge-left" title="Move selected surface left">←</button>
+            <button type="button" class="ion-tool" data-tool="settings-nudge-reset" title="Reset selected surface">0</button>
+            <button type="button" class="ion-tool" data-tool="settings-nudge-right" title="Move selected surface right">→</button>
+            <span class="ion-nudge-spacer"></span>
+            <button type="button" class="ion-tool" data-tool="settings-nudge-down" title="Move selected surface down">↓</button>
+            <span class="ion-nudge-spacer"></span>
+          </div>
+          <div class="ion-setting-row">
+            <div class="ion-setting-label">DOM inspector captured element stack</div>
+            <select class="ion-select" data-control="settings-inspector-layer"></select>
+          </div>
+          <div class="ion-toolbar-actions">
+            <button type="button" class="ion-tool" data-tool="settings-inspector-start">Start Inspector</button>
+            <button type="button" class="ion-tool" data-tool="settings-inspector-cancel">Cancel Inspector</button>
+            <button type="button" class="ion-tool" data-tool="settings-inspector-preview">Preview Layer</button>
+            <button type="button" class="ion-tool" data-tool="settings-inspector-save-tabs">Save As Tabs Anchor</button>
+            <button type="button" class="ion-tool" data-tool="settings-inspector-save-drop">Save As Drop Zone</button>
+            <button type="button" class="ion-tool" data-tool="settings-inspector-save-attach">Save As Attach Target</button>
+          </div>
           <div class="ion-toolbar-actions">
             <button type="button" class="ion-tool" data-tool="settings-pick-attach">Pick Attach Target</button>
             <button type="button" class="ion-tool" data-tool="settings-clear-attach">Clear Attach Target</button>
             <button type="button" class="ion-tool" data-tool="settings-pick-drop">Pick Drop Zone</button>
             <button type="button" class="ion-tool" data-tool="settings-clear-drop">Clear Drop Zone</button>
+            <button type="button" class="ion-tool" data-tool="settings-pick-tabs-anchor">Pick Tabs Anchor</button>
+            <button type="button" class="ion-tool" data-tool="settings-clear-tabs-anchor">Clear Tabs Anchor</button>
             <button type="button" class="ion-tool" data-tool="settings-tabs-up">Tabs Up</button>
             <button type="button" class="ion-tool" data-tool="settings-tabs-down">Tabs Down</button>
             <button type="button" class="ion-tool" data-tool="settings-drawer-taller">Drawer Taller</button>
@@ -839,16 +1141,16 @@ function ensurePanel(): HTMLElement {
         <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
       </div>
       <div class="ion-tabs">
-        <button type="button" class="ion-tab" data-tab="status">Status</button>
-        <button type="button" class="ion-tab" data-tab="action">Action</button>
-        <button type="button" class="ion-tab" data-tab="agent">Agent</button>
-        <button type="button" class="ion-tab" data-tab="packages">Packages</button>
-        <button type="button" class="ion-tab" data-tab="sandbox">Sandbox</button>
-        <button type="button" class="ion-tab" data-tab="automation">Automation</button>
-        <button type="button" class="ion-tab" data-tab="artifacts">Artifacts</button>
-        <button type="button" class="ion-tab" data-tab="settings">Settings</button>
-        <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
-        <button type="button" class="ion-tab" data-tab="tools">Logs</button>
+        <button type="button" class="ion-tab" data-tab="status" title="Status"><span class="ion-tab-label">Status</span><span class="ion-tab-icon" aria-hidden="true">●</span></button>
+        <button type="button" class="ion-tab" data-tab="action" title="Action"><span class="ion-tab-label">Action</span><span class="ion-tab-icon" aria-hidden="true">✓</span></button>
+        <button type="button" class="ion-tab" data-tab="agent" title="Agent"><span class="ion-tab-label">Agent</span><span class="ion-tab-icon" aria-hidden="true">A</span></button>
+        <button type="button" class="ion-tab" data-tab="packages" title="Packages"><span class="ion-tab-label">Packages</span><span class="ion-tab-icon" aria-hidden="true">□</span></button>
+        <button type="button" class="ion-tab" data-tab="sandbox" title="Sandbox"><span class="ion-tab-label">Sandbox</span><span class="ion-tab-icon" aria-hidden="true">◇</span></button>
+        <button type="button" class="ion-tab" data-tab="automation" title="Automation"><span class="ion-tab-label">Automation</span><span class="ion-tab-icon" aria-hidden="true">▶</span></button>
+        <button type="button" class="ion-tab" data-tab="artifacts" title="Artifacts"><span class="ion-tab-label">Artifacts</span><span class="ion-tab-icon" aria-hidden="true">⇪</span></button>
+        <button type="button" class="ion-tab" data-tab="settings" title="Settings"><span class="ion-tab-label">Settings</span><span class="ion-tab-icon" aria-hidden="true">⚙</span></button>
+        <button type="button" class="ion-tab" data-tab="diagnostics" title="Diagnostics"><span class="ion-tab-label">Diagnostics</span><span class="ion-tab-icon" aria-hidden="true">!</span></button>
+        <button type="button" class="ion-tab" data-tab="tools" title="Logs"><span class="ion-tab-label">Logs</span><span class="ion-tab-icon" aria-hidden="true">≡</span></button>
       </div>
     </div>
   `;
@@ -950,6 +1252,58 @@ function ensurePanel(): HTMLElement {
   panel.querySelector('[data-tool="settings-clear-drop"]')?.addEventListener("click", () => {
     window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-drop"));
   });
+  panel.querySelector('[data-tool="settings-pick-tabs-anchor"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-pick-tabs-anchor"));
+  });
+  panel.querySelector('[data-tool="settings-clear-tabs-anchor"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-tabs-anchor"));
+  });
+  panel.querySelector('[data-tool="settings-inspector-start"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-start"));
+  });
+  panel.querySelector('[data-tool="settings-inspector-cancel"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-cancel"));
+  });
+  panel.querySelector('[data-tool="settings-inspector-preview"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-preview"));
+  });
+  panel.querySelector('[data-tool="settings-inspector-save-tabs"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-save", { detail: { target: "tabs_anchor" } }));
+  });
+  panel.querySelector('[data-tool="settings-inspector-save-drop"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-save", { detail: { target: "drop_zone" } }));
+  });
+  panel.querySelector('[data-tool="settings-inspector-save-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-save", { detail: { target: "attach_target" } }));
+  });
+  panel.querySelector<HTMLSelectElement>('[data-control="settings-inspector-layer"]')?.addEventListener("change", (event) => {
+    const select = event.currentTarget as HTMLSelectElement;
+    window.dispatchEvent(new CustomEvent("ion-chatops-settings-inspector-layer", { detail: { index: Number.parseInt(select.value, 10) || 0 } }));
+  });
+  panel.querySelector('[data-tool="settings-target-top"]')?.addEventListener("click", () => {
+    selectLayoutTarget("top_rail");
+  });
+  panel.querySelector('[data-tool="settings-target-tabs"]')?.addEventListener("click", () => {
+    selectLayoutTarget("tabs");
+  });
+  panel.querySelector('[data-tool="settings-target-drawer"]')?.addEventListener("click", () => {
+    selectLayoutTarget("drawer");
+  });
+  panel.querySelector('[data-tool="settings-nudge-up"]')?.addEventListener("click", () => {
+    nudgeLayoutTarget(0, -2);
+  });
+  panel.querySelector('[data-tool="settings-nudge-down"]')?.addEventListener("click", () => {
+    nudgeLayoutTarget(0, 2);
+  });
+  panel.querySelector('[data-tool="settings-nudge-left"]')?.addEventListener("click", () => {
+    nudgeLayoutTarget(-2, 0);
+  });
+  panel.querySelector('[data-tool="settings-nudge-right"]')?.addEventListener("click", () => {
+    nudgeLayoutTarget(2, 0);
+  });
+  panel.querySelector('[data-tool="settings-nudge-reset"]')?.addEventListener("click", () => {
+    resetSelectedLayoutTarget();
+  });
   panel.querySelector('[data-tool="settings-tabs-up"]')?.addEventListener("click", () => {
     adjustTabLift(4);
   });
@@ -985,6 +1339,12 @@ function renderPanel(panel = ensurePanel()): void {
   panel.querySelectorAll<HTMLElement>(".ion-tab-panel").forEach((tabPanel) => {
     tabPanel.dataset.active = String(tabPanel.dataset.panel === activeTab);
   });
+  const layoutTarget = readLayoutTarget();
+  panel.querySelectorAll<HTMLElement>("[data-tool^='settings-target-']").forEach((button) => {
+    const tool = button.dataset.tool ?? "";
+    const target = tool.endsWith("top") ? "top_rail" : tool.endsWith("drawer") ? "drawer" : "tabs";
+    button.dataset.active = String(target === layoutTarget);
+  });
   const statusNode = panel.querySelector<HTMLElement>('[data-field="status"]');
   const actionNode = panel.querySelector<HTMLElement>('[data-field="action"]');
   const agentNode = panel.querySelector<HTMLElement>('[data-field="agent"]');
@@ -993,6 +1353,7 @@ function renderPanel(panel = ensurePanel()): void {
   const automationNode = panel.querySelector<HTMLElement>('[data-field="automation"]');
   const artifactsNode = panel.querySelector<HTMLElement>('[data-field="artifacts"]');
   const settingsNode = panel.querySelector<HTMLElement>('[data-field="settings"]');
+  const inspectorSelect = panel.querySelector<HTMLSelectElement>('[data-control="settings-inspector-layer"]');
   const diagnosticsNode = panel.querySelector<HTMLElement>('[data-field="diagnostics"]');
   const toolsNode = panel.querySelector<HTMLElement>('[data-field="tools"]');
   if (statusNode) statusNode.textContent = bridgeState.detail;
@@ -1003,6 +1364,27 @@ function renderPanel(panel = ensurePanel()): void {
   if (automationNode) automationNode.textContent = bridgeState.automation;
   if (artifactsNode) artifactsNode.textContent = bridgeState.artifacts;
   if (settingsNode) settingsNode.textContent = `${bridgeState.settings}\n\n${settingsSummary()}`;
+  if (inspectorSelect) {
+    const layers = bridgeState.inspectorLayers;
+    inspectorSelect.innerHTML = "";
+    if (!layers.length) {
+      const option = document.createElement("option");
+      option.value = "0";
+      option.textContent = "No pixel stack captured yet";
+      inspectorSelect.appendChild(option);
+      inspectorSelect.disabled = true;
+    } else {
+      inspectorSelect.disabled = false;
+      layers.forEach((layer) => {
+        const option = document.createElement("option");
+        option.value = String(layer.index);
+        option.textContent = `${layer.index}: ${layer.label}`;
+        option.title = layer.selector;
+        option.selected = layer.index === bridgeState.inspectorSelectedIndex;
+        inspectorSelect.appendChild(option);
+      });
+    }
+  }
   if (diagnosticsNode) diagnosticsNode.textContent = `${bridgeState.anchor.detail}\n\n${bridgeState.diagnostics}`;
   if (toolsNode) toolsNode.textContent = `${bridgeState.tools}\n\nRecent:\n${bridgeState.logs.join("\n") || "No events yet."}`;
 }
