@@ -1,0 +1,21 @@
+{
+  "schema_id": "ion.root_source_lane.diff_index.v1",
+  "index_id": "DIFF_INDEX_20260508T190626Z",
+  "generated_at_utc": "2026-05-09T16:01:55Z",
+  "reconstructed_metadata": true,
+  "reconstruction_reason": "The capsule C-049 evidence referenced this index, but the file was absent from the active working tree during dirty-tree settlement.",
+  "lane_path": "diffs",
+  "lane_class": "root_source_lane_artifacts",
+  "active_runtime_authority": false,
+  "production_authority": false,
+  "live_execution_authority": false,
+  "file_count": 4,
+  "total_size_bytes": 325927,
+  "settlement_default_action": "review_as_patch_evidence; do_not_mix_with_code_commits",
+  "files": [
+    {"path": "diffs/ION_CARRIER_FRICTION_LEDGER_PATCH_20260507.diff", "size_bytes": 51671},
+    {"path": "diffs/ION_CUSTOM_GPT_ANTI_THEATER_PATCH_20260507.diff", "size_bytes": 5160},
+    {"path": "diffs/ION_GPT_NATIVE_PORTABLE_ENGINE_PACKAGE_v0_2_PATCH_20260507.diff", "size_bytes": 236456},
+    {"path": "diffs/ION_SOLE_GPT_PORTABLE_PACKAGE_V0_1_PATCH_20260507.diff", "size_bytes": 32640}
+  ]
+}

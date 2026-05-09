@@ -1,0 +1,47 @@
+{
+  "schema_id": "ion.root_source_lane.formalization_receipt.v1",
+  "receipt_id": "ION_ROOT_SOURCE_LANE_FORMALIZATION_RECEIPT_20260508T190626Z",
+  "status": "RECONSTRUCTED_METADATA_RECEIPT",
+  "generated_at_utc": "2026-05-09T16:01:55Z",
+  "original_referenced_timestamp": "2026-05-08T19:06:26Z",
+  "reconstruction_reason": "Capsule row C-049 referenced this source-lane policy and receipt, but the files were absent from the active working tree during dirty-tree settlement.",
+  "operator_authorization": "approved non-destructive settlement pass",
+  "mutating_actions": [
+    "add_missing_source_lane_readmes",
+    "add_missing_source_lane_indexes",
+    "add_missing_source_lane_policy",
+    "add_reconstructed_source_lane_receipt",
+    "add_dirty_tree_staging_plan"
+  ],
+  "non_actions": [
+    "no_delete",
+    "no_move",
+    "no_stage",
+    "no_commit",
+    "no_runtime_claim"
+  ],
+  "created_paths": [
+    "workpackets/README.md",
+    "workpackets/WORKPACKET_INDEX_20260508T190626Z.json",
+    "diffs/README.md",
+    "diffs/DIFF_INDEX_20260508T190626Z.json",
+    "ION_sandbox/README.md",
+    "ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json",
+    "ION/05_context/current/source_lanes/ION_ROOT_SOURCE_LANE_POLICY_20260508T190626Z.md",
+    "ION/05_context/current/source_lanes/receipts/ION_ROOT_SOURCE_LANE_FORMALIZATION_RECEIPT_20260508T190626Z.json",
+    "ION/05_context/current/source_lanes/ION_DIRTY_TREE_STAGING_PLAN_20260509T160155Z.md"
+  ],
+  "evidence": {
+    "dirty_tree_manifest": "/tmp/ion_dirty_tree_settlement_manifest_20260509T160155Z.json",
+    "workpacket_index": "workpackets/WORKPACKET_INDEX_20260508T190626Z.json",
+    "diff_index": "diffs/DIFF_INDEX_20260508T190626Z.json",
+    "sandbox_index": "ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json",
+    "policy": "ION/05_context/current/source_lanes/ION_ROOT_SOURCE_LANE_POLICY_20260508T190626Z.md"
+  },
+  "authority": {
+    "active_runtime_authority": false,
+    "production_authority": false,
+    "live_execution_authority": false
+  },
+  "result": "Missing source-lane metadata was restored as explicit reconstructed metadata. Bulk files remain uncommitted and require a separate custody decision."
+}

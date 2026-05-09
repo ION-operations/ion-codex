@@ -1,0 +1,37 @@
+{
+  "schema_id": "ion.root_source_lane.sandbox_index.v1",
+  "index_id": "ION_SANDBOX_INDEX_20260508T190626Z",
+  "generated_at_utc": "2026-05-09T16:01:55Z",
+  "reconstructed_metadata": true,
+  "reconstruction_reason": "The capsule C-049 evidence referenced this index, but the file was absent from the active working tree during dirty-tree settlement.",
+  "lane_path": "ION_sandbox",
+  "lane_class": "sandbox_snapshot_bulk",
+  "active_runtime_authority": false,
+  "production_authority": false,
+  "live_execution_authority": false,
+  "observed_file_count": 3761,
+  "git_untracked_file_count": 3736,
+  "observed_size": "26M",
+  "settlement_default_action": "compare_against_release_root_then_archive_ignore_or_commit_to_dedicated_release_lane",
+  "primary_snapshot": {
+    "path": "ION_sandbox/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_PRUNE_PASS_3_STARTER_STATE_CANDIDATE",
+    "top_level_files_observed": [
+      ".gitignore",
+      "CONTENT_CLASSIFICATION_MANIFEST.json",
+      "CONTRIBUTING.md",
+      "PACKAGE_BUILD_RECEIPT.json",
+      "PRODUCT_MANIFEST.json",
+      "PRODUCT_PRUNE_PASS_3_STARTER_STATE_NOTE.md",
+      "README.md",
+      "SECURITY.md",
+      "SOURCE_PROVENANCE.json",
+      "START_HERE.md",
+      "VALIDATION_REPORT.json",
+      "pyproject.toml"
+    ],
+    "observed_subtrees": [
+      "ION",
+      "product"
+    ]
+  }
+}
