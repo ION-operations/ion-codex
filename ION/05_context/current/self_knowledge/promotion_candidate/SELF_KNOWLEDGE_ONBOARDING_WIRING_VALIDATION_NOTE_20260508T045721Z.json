@@ -1,0 +1,77 @@
+{
+  "authority_boundary": {
+    "candidate_only": true,
+    "live_execution_authority": false,
+    "mutated_ION_03_registry": false,
+    "mutated_active_onboarding_packets": false,
+    "production_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "generated_at": "2026-05-08T04:57:21+00:00",
+  "inputs": {
+    "apply_tree_protocol": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/02_architecture/ION_SELF_KNOWLEDGE_ONBOARDING_WIRING_PROTOCOL.md",
+    "overlay": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_OVERLAY_V0_2.json",
+    "proposal": "ION/05_context/current/self_knowledge/promotion_candidate/ONBOARDING_WIRING_PROPOSAL_V0_3.md",
+    "simulation_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json",
+    "simulation_script": "ION/05_context/current/self_knowledge/simulate_self_knowledge_onboarding_wiring.py",
+    "test_file": "ION/tests/test_kernel_ion_self_knowledge_onboarding_wiring.py"
+  },
+  "non_claims": [
+    "No accepted onboarding law was mutated.",
+    "No self-knowledge registry was landed.",
+    "No external carrier was invoked.",
+    "Simulation traces are candidate evidence, not canon."
+  ],
+  "objective": "Validate candidate onboarding wiring simulation for ION self-knowledge route-first behavior.",
+  "results": {
+    "candidate_validation": {
+      "accepted": true,
+      "domain_count": 14,
+      "findings": [],
+      "live_execution_authority": false,
+      "parsed_files_count": 22,
+      "production_authority": false,
+      "route_count": 7,
+      "schema_id": "ion.self_knowledge_candidate_validation.v0_2"
+    },
+    "focused_pytest": {
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "summary_stdout": "\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m                                                        [100%]\u001b[0m\n\u001b[32m\u001b[32m\u001b[1m17 passed\u001b[0m\u001b[32m in 3.10s\u001b[0m\u001b[0m"
+    },
+    "ion_status": {
+      "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+      "returncode": 0,
+      "verdict": "ION_STATUS_READY"
+    },
+    "onboarding_simulation": {
+      "accepted": true,
+      "carrier_cases": 8,
+      "carriers_exercised": [
+        "CODEX_CLI_CARRIER",
+        "GPT_SANDBOX_CARRIER"
+      ],
+      "findings": [],
+      "ion_about_ion_cases": 7,
+      "loaded_domain_count": 14,
+      "matched_routes": [
+        "route.context_template_receipt",
+        "route.full_local_codex_api_ion",
+        "route.gpt_sandbox_adaptation",
+        "route.ion_authority_classification",
+        "route.ion_identity_answer",
+        "route.ion_recovery_anti_regression",
+        "route.self_knowledge_implementation"
+      ],
+      "non_ion_bypass_cases": 1,
+      "status": "accepted_candidate_evidence"
+    },
+    "sandbox_preflight": {
+      "returncode": 0,
+      "verdict": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+    }
+  },
+  "schema_id": "ion.self_knowledge.onboarding_wiring_validation_note.v0_2",
+  "status": "passed_candidate_validation"
+}

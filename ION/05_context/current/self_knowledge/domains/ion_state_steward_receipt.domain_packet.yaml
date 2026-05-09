@@ -1,0 +1,84 @@
+schema: ion.self_knowledge.domain_packet.v0_2
+domain_id: ion_state_steward_receipt
+title: ION State, Steward, and Receipt Domain
+state_class: candidate_current_state
+authority_rank: 6
+status: draft_candidate_seed
+generated_at: '2026-05-08T03:51:05+00:00'
+purpose: Explain how output becomes or fails to become state through proof, Steward/human decision, receipts,
+  and inheritance.
+primary_questions:
+- When does output become state?
+- What does a receipt prove?
+- Who accepts/rejects candidate transitions?
+required_nodes:
+- ion.state.candidate_transition
+- ion.receipt.inheritance
+- ion.steward.acceptance_gate
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+    loads:
+    - domain_header
+    - anti_drift_notes
+  level_1_summary:
+    max_tokens: 500
+    loads:
+    - domain_header
+    - evidence_sources
+    - core claims
+  level_2_working:
+    max_tokens: 1500
+    loads:
+    - domain_packet
+    - selected nodes
+    - source ranking
+  level_3_operational:
+    max_tokens: 4000
+    loads:
+    - domain_packet
+    - node evidence
+    - active packet/state surfaces
+  level_4_deep:
+    max_tokens: 12000
+    loads:
+    - domain_packet
+    - node registry
+    - source files
+    - contradictions
+  level_5_implementation:
+    includes_paths: true
+    loads:
+    - source paths
+    - tests/proofs
+    - candidate deltas
+evidence_sources:
+- path: ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/02_architecture/CONVERSATIONAL_RECEIPT_AND_LIVE_REPAIR_PROTOCOL.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/04_packages/kernel/ion_carrier_task_return.py
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/04_packages/kernel/receipts.py
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json
+  exists: true
+  state_class_hint: current_operational_or_witness
+anti_drift_notes:
+- AI output is candidate state transition until accepted.
+- No proof → no landing. No Steward/human decision → no state. No receipt/export → no inheritance.
+specialist_roles:
+- STEWARD
+- SCRIBE
+- CANON_LIBRARIAN
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_namespace: ION/05_context/current/self_knowledge/
+non_claims:
+- This domain packet is not accepted canon.
+- This domain packet does not mutate ION/03_registry/self_knowledge unless separately promoted.

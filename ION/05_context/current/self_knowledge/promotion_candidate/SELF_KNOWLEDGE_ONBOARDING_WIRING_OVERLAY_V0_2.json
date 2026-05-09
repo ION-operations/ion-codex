@@ -1,0 +1,96 @@
+{
+  "authority_boundary": {
+    "candidate_only": true,
+    "live_execution_authority": false,
+    "mutates_ION_03_registry": false,
+    "mutates_active_onboarding_packets": false,
+    "production_authority": false,
+    "requires_explicit_acceptance_to_land": true,
+    "safe_write_namespace": "ION/05_context/current/self_knowledge/promotion_candidate/"
+  },
+  "candidate_route_intercept": {
+    "bypass_classes": [
+      "ordinary_user_writing_request",
+      "non_ion_project_task",
+      "unrelated_analysis_request"
+    ],
+    "candidate_inputs": {
+      "authority_ranking": "ION/05_context/current/self_knowledge/candidate_registries/authority_ranking.candidate.yaml",
+      "domain_packets": "ION/05_context/current/self_knowledge/domains/",
+      "mount_packet": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+      "route_registry": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml"
+    },
+    "forbidden_sequence_errors": [
+      "answer_before_self_knowledge_mount",
+      "free_answer_ion_about_ion_from_memory",
+      "load_donor_or_witness_as_law",
+      "treat_single_carrier_as_primary_architecture",
+      "call_gpt_package_reduced_ion",
+      "claim_external_spawn_without_tool_receipt",
+      "mutate_target_registry_without_acceptance"
+    ],
+    "future_accepted_inputs_after_settlement": {
+      "domain_registry": "ION/03_registry/self_knowledge/domain_registry.yaml",
+      "node_registry": "ION/03_registry/self_knowledge/node_registry.yaml",
+      "route_registry": "ION/03_registry/self_knowledge/route_registry.yaml"
+    },
+    "required_sequence_for_matching_tasks": [
+      "confirm_shell_root",
+      "read_repo_authority",
+      "read_mount_contract",
+      "read_carrier_profile",
+      "read_active_onboarding_packet",
+      "classify_operator_task",
+      "mount_active_self_knowledge_mount_packet",
+      "load_self_knowledge_route_registry",
+      "select_self_knowledge_route",
+      "load_required_domain_packets",
+      "answer_or_act_with_non_claims"
+    ],
+    "rule_id": "self_knowledge_mount_first_for_ion_about_ion",
+    "trigger_classes": [
+      "ion_identity_question",
+      "ion_architecture_question",
+      "ion_runtime_question",
+      "ion_package_or_gpt_sandbox_question",
+      "ion_workpacket_or_context_question",
+      "ion_state_steward_receipt_question",
+      "ion_agent_role_question",
+      "ion_recovery_or_anti_regression_question",
+      "ion_self_knowledge_implementation_question"
+    ]
+  },
+  "carrier_surfaces_evaluated": [
+    "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.json",
+    "ION/05_context/current/ACTIVE_CARRIER_ONBOARDING_PACKET.codex_cli.json",
+    "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+    "ION/03_registry/codex_cli_carrier_profile.yaml",
+    "ION/02_architecture/ION_CARRIER_ONBOARDING_AUTHORITY_PROTOCOL.md",
+    "ION/02_architecture/ION_DEFAULT_CARRIER_ONBOARDING_PROTOCOL.md"
+  ],
+  "generated_at": "2026-05-08T04:57:21+00:00",
+  "non_claims": [
+    "This overlay does not modify carrier onboarding packets.",
+    "This overlay does not install self-knowledge into ION/03_registry.",
+    "This overlay is candidate evidence for future acceptance."
+  ],
+  "objective": "Prove a future carrier can classify ION-about-ION tasks and mount the self-knowledge route before answering, without mutating active onboarding or registry law.",
+  "output_contract": {
+    "ion_about_ion_tasks_must_include": [
+      "selected self-knowledge route id",
+      "required domains loaded",
+      "source/authority boundary",
+      "anti-drift guards",
+      "candidate-vs-accepted non-claim"
+    ],
+    "must_not_include": [
+      "implicit registry landing",
+      "production readiness claim",
+      "external agent spawn claim",
+      "donor-as-law claim"
+    ]
+  },
+  "schema_id": "ion.self_knowledge.onboarding_wiring_overlay.v0_2",
+  "source_proposal": "ION/05_context/current/self_knowledge/promotion_candidate/ONBOARDING_WIRING_PROPOSAL_V0_2.md",
+  "status": "candidate_current_state_not_accepted_canon"
+}

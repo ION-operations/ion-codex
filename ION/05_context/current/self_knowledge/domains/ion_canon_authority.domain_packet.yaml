@@ -1,0 +1,84 @@
+schema: ion.self_knowledge.domain_packet.v0_2
+domain_id: ion_canon_authority
+title: ION Canon and Authority Domain
+state_class: candidate_current_state
+authority_rank: 6
+status: draft_candidate_seed
+generated_at: '2026-05-08T03:51:05+00:00'
+purpose: Rank sources and separate current law, current operational state, product projection, witness,
+  donor, stale, and candidate material.
+primary_questions:
+- Which sources are authoritative?
+- Which source outranks which?
+- What is witness/donor/stale only?
+required_nodes:
+- ion.authority.repo
+- ion.authority.mount_contract
+- ion.authority.state_classes
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+    loads:
+    - domain_header
+    - anti_drift_notes
+  level_1_summary:
+    max_tokens: 500
+    loads:
+    - domain_header
+    - evidence_sources
+    - core claims
+  level_2_working:
+    max_tokens: 1500
+    loads:
+    - domain_packet
+    - selected nodes
+    - source ranking
+  level_3_operational:
+    max_tokens: 4000
+    loads:
+    - domain_packet
+    - node evidence
+    - active packet/state surfaces
+  level_4_deep:
+    max_tokens: 12000
+    loads:
+    - domain_packet
+    - node registry
+    - source files
+    - contradictions
+  level_5_implementation:
+    includes_paths: true
+    loads:
+    - source paths
+    - tests/proofs
+    - candidate deltas
+evidence_sources:
+- path: ION/REPO_AUTHORITY.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/02_architecture/RANK_AND_PRECEDENCE_PROTOCOL.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/02_architecture/TRUE_NAME_AND_SEMANTIC_LAYER_PROTOCOL.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: CONTENT_CLASSIFICATION_MANIFEST.json
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/03_registry/ion_context_authority_team_registry.yaml
+  exists: true
+  state_class_hint: current_operational_or_witness
+anti_drift_notes:
+- Do not promote historical witness or donor material into live authority.
+- Do not treat this candidate packet as canon before acceptance.
+specialist_roles:
+- CANON_LIBRARIAN
+- NEMESIS
+- STEWARD
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_namespace: ION/05_context/current/self_knowledge/
+non_claims:
+- This domain packet is not accepted canon.
+- This domain packet does not mutate ION/03_registry/self_knowledge unless separately promoted.

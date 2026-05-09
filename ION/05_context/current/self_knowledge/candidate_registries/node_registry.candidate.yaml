@@ -1,0 +1,1885 @@
+schema_id: ion.self_knowledge.node_registry.v0_2
+status: candidate_current_state_not_accepted_canon
+generated_at: '2026-05-08T03:51:05+00:00'
+nodes:
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.identity.definition
+  title: Identity Definition
+  domain_id: ion_identity
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Identity Domain.
+  summary_working: This node should be populated from ION Identity Domain evidence sources during the
+    next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.identity.definition belongs to ion_identity and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/REPO_AUTHORITY.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_MOUNT_CONTRACT.md
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/boots/IONOLOGIST.boot.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not reduce ION to a prompt, agent persona, repo, or memory store.
+  - Do not let fluent explanation become accepted state without proof and receipt.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.identity.definition
+    deep:
+      load_nodes: &id001
+      - ion.identity.definition
+      - ion.identity.core_law
+      - ion.identity.not_state
+    implementation:
+      load_nodes: *id001
+      include_paths: &id002
+      - ION/REPO_AUTHORITY.md
+      - ION/02_architecture/ION_MOUNT_CONTRACT.md
+      - ION/03_registry/boots/IONOLOGIST.boot.md
+      - ION/05_context/current/agent_context_systems/IONOLOGIST.context_system.md
+      - ION/05_context/current/self_knowledge/source_inputs/ION_Continuity_Substrate_Explainer_v7.md
+  related_nodes:
+  - ion.identity.core_law
+  - ion.identity.not_state
+  source_paths: *id002
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: IONOLOGIST
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.identity.core_law
+  title: Identity Core_Law
+  domain_id: ion_identity
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Identity Domain.
+  summary_working: This node should be populated from ION Identity Domain evidence sources during the
+    next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.identity.core_law belongs to ion_identity and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/REPO_AUTHORITY.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_MOUNT_CONTRACT.md
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/boots/IONOLOGIST.boot.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not reduce ION to a prompt, agent persona, repo, or memory store.
+  - Do not let fluent explanation become accepted state without proof and receipt.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.identity.core_law
+    deep:
+      load_nodes: *id001
+    implementation:
+      load_nodes: *id001
+      include_paths: *id002
+  related_nodes:
+  - ion.identity.definition
+  - ion.identity.not_state
+  source_paths: *id002
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: IONOLOGIST
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.identity.not_state
+  title: Identity Not_State
+  domain_id: ion_identity
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Identity Domain.
+  summary_working: This node should be populated from ION Identity Domain evidence sources during the
+    next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.identity.not_state belongs to ion_identity and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/REPO_AUTHORITY.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_MOUNT_CONTRACT.md
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/boots/IONOLOGIST.boot.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not reduce ION to a prompt, agent persona, repo, or memory store.
+  - Do not let fluent explanation become accepted state without proof and receipt.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.identity.not_state
+    deep:
+      load_nodes: *id001
+    implementation:
+      load_nodes: *id001
+      include_paths: *id002
+  related_nodes:
+  - ion.identity.definition
+  - ion.identity.core_law
+  source_paths: *id002
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: IONOLOGIST
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.authority.repo
+  title: Authority Repo
+  domain_id: ion_canon_authority
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Canon and Authority Domain.
+  summary_working: This node should be populated from ION Canon and Authority Domain evidence sources
+    during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.authority.repo belongs to ion_canon_authority and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/REPO_AUTHORITY.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/RANK_AND_PRECEDENCE_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/TRUE_NAME_AND_SEMANTIC_LAYER_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not promote historical witness or donor material into live authority.
+  - Do not treat this candidate packet as canon before acceptance.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.authority.repo
+    deep:
+      load_nodes: &id003
+      - ion.authority.repo
+      - ion.authority.mount_contract
+      - ion.authority.state_classes
+    implementation:
+      load_nodes: *id003
+      include_paths: &id004
+      - ION/REPO_AUTHORITY.md
+      - ION/02_architecture/RANK_AND_PRECEDENCE_PROTOCOL.md
+      - ION/02_architecture/TRUE_NAME_AND_SEMANTIC_LAYER_PROTOCOL.md
+      - CONTENT_CLASSIFICATION_MANIFEST.json
+      - ION/03_registry/ion_context_authority_team_registry.yaml
+  related_nodes:
+  - ion.authority.mount_contract
+  - ion.authority.state_classes
+  source_paths: *id004
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: CANON_LIBRARIAN
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.authority.mount_contract
+  title: Authority Mount_Contract
+  domain_id: ion_canon_authority
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Canon and Authority Domain.
+  summary_working: This node should be populated from ION Canon and Authority Domain evidence sources
+    during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.authority.mount_contract belongs to ion_canon_authority and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/REPO_AUTHORITY.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/RANK_AND_PRECEDENCE_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/TRUE_NAME_AND_SEMANTIC_LAYER_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not promote historical witness or donor material into live authority.
+  - Do not treat this candidate packet as canon before acceptance.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.authority.mount_contract
+    deep:
+      load_nodes: *id003
+    implementation:
+      load_nodes: *id003
+      include_paths: *id004
+  related_nodes:
+  - ion.authority.repo
+  - ion.authority.state_classes
+  source_paths: *id004
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: CANON_LIBRARIAN
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.authority.state_classes
+  title: Authority State_Classes
+  domain_id: ion_canon_authority
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Canon and Authority Domain.
+  summary_working: This node should be populated from ION Canon and Authority Domain evidence sources
+    during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.authority.state_classes belongs to ion_canon_authority and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/REPO_AUTHORITY.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/RANK_AND_PRECEDENCE_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/TRUE_NAME_AND_SEMANTIC_LAYER_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not promote historical witness or donor material into live authority.
+  - Do not treat this candidate packet as canon before acceptance.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.authority.state_classes
+    deep:
+      load_nodes: *id003
+    implementation:
+      load_nodes: *id003
+      include_paths: *id004
+  related_nodes:
+  - ion.authority.repo
+  - ion.authority.mount_contract
+  source_paths: *id004
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: CANON_LIBRARIAN
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.architecture.context_graph
+  title: Architecture Context_Graph
+  domain_id: ion_architecture
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Architecture Domain.
+  summary_working: This node should be populated from ION Architecture Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.architecture.context_graph belongs to ion_architecture and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/SELF_DOCUMENTING_CONTEXT_GRAPH_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - A domain is a governed graph region, not a folder/topic bucket.
+  - Templates govern action shape; context packages govern the bounded working world.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.architecture.context_graph
+    deep:
+      load_nodes: &id005
+      - ion.architecture.context_graph
+      - ion.architecture.templates
+      - ion.architecture.receipts
+    implementation:
+      load_nodes: *id005
+      include_paths: &id006
+      - ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      - ION/02_architecture/SELF_DOCUMENTING_CONTEXT_GRAPH_PROTOCOL.md
+      - ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+      - ION/03_registry/context_graph_node_class_registry.yaml
+      - ION/07_templates/context/CONTEXT_PACKAGE.md
+  related_nodes:
+  - ion.architecture.templates
+  - ion.architecture.receipts
+  source_paths: *id006
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: IONOLOGIST
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.architecture.templates
+  title: Architecture Templates
+  domain_id: ion_architecture
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Architecture Domain.
+  summary_working: This node should be populated from ION Architecture Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.architecture.templates belongs to ion_architecture and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/SELF_DOCUMENTING_CONTEXT_GRAPH_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - A domain is a governed graph region, not a folder/topic bucket.
+  - Templates govern action shape; context packages govern the bounded working world.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.architecture.templates
+    deep:
+      load_nodes: *id005
+    implementation:
+      load_nodes: *id005
+      include_paths: *id006
+  related_nodes:
+  - ion.architecture.context_graph
+  - ion.architecture.receipts
+  source_paths: *id006
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: IONOLOGIST
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.architecture.receipts
+  title: Architecture Receipts
+  domain_id: ion_architecture
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Architecture Domain.
+  summary_working: This node should be populated from ION Architecture Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.architecture.receipts belongs to ion_architecture and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/SELF_DOCUMENTING_CONTEXT_GRAPH_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - A domain is a governed graph region, not a folder/topic bucket.
+  - Templates govern action shape; context packages govern the bounded working world.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.architecture.receipts
+    deep:
+      load_nodes: *id005
+    implementation:
+      load_nodes: *id005
+      include_paths: *id006
+  related_nodes:
+  - ion.architecture.context_graph
+  - ion.architecture.templates
+  source_paths: *id006
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: IONOLOGIST
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.agent.role_vs_carrier
+  title: Agent Role_Vs_Carrier
+  domain_id: ion_agent_role
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Agent and Role Domain.
+  summary_working: This node should be populated from ION Agent and Role Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.agent.role_vs_carrier belongs to ion_agent_role and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/agent_context_system_registry.yaml
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not treat boot files or MINI/CAPSULE as sufficient live context.
+  - Do not claim separate agents spawned unless an authorized adapter actually ran.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.agent.role_vs_carrier
+    deep:
+      load_nodes: &id007
+      - ion.agent.role_vs_carrier
+      - ion.agent.context_system
+      - ion.agent.return_contract
+    implementation:
+      load_nodes: *id007
+      include_paths: &id008
+      - ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md
+      - ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      - ION/03_registry/agent_context_system_registry.yaml
+      - ION/03_registry/agent_roster_registry.yaml
+      - ION/07_templates/agents/AGENT_RESULT_PACKET.md
+  related_nodes:
+  - ion.agent.context_system
+  - ion.agent.return_contract
+  source_paths: *id008
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: CONTEXT_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.agent.context_system
+  title: Agent Context_System
+  domain_id: ion_agent_role
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Agent and Role Domain.
+  summary_working: This node should be populated from ION Agent and Role Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.agent.context_system belongs to ion_agent_role and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/agent_context_system_registry.yaml
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not treat boot files or MINI/CAPSULE as sufficient live context.
+  - Do not claim separate agents spawned unless an authorized adapter actually ran.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.agent.context_system
+    deep:
+      load_nodes: *id007
+    implementation:
+      load_nodes: *id007
+      include_paths: *id008
+  related_nodes:
+  - ion.agent.role_vs_carrier
+  - ion.agent.return_contract
+  source_paths: *id008
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: CONTEXT_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.agent.return_contract
+  title: Agent Return_Contract
+  domain_id: ion_agent_role
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Agent and Role Domain.
+  summary_working: This node should be populated from ION Agent and Role Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.agent.return_contract belongs to ion_agent_role and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/02_architecture/ION_CONTEXT_AUTHORITY_TEAM_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/agent_context_system_registry.yaml
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not treat boot files or MINI/CAPSULE as sufficient live context.
+  - Do not claim separate agents spawned unless an authorized adapter actually ran.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.agent.return_contract
+    deep:
+      load_nodes: *id007
+    implementation:
+      load_nodes: *id007
+      include_paths: *id008
+  related_nodes:
+  - ion.agent.role_vs_carrier
+  - ion.agent.context_system
+  source_paths: *id008
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: CONTEXT_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.runtime.multi_invocation
+  title: Runtime Multi_Invocation
+  domain_id: ion_full_multi_agent_runtime
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Full Multi-Agent Runtime Domain.
+  summary_working: This node should be populated from ION Full Multi-Agent Runtime Domain evidence sources
+    during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.runtime.multi_invocation belongs to ion_full_multi_agent_runtime and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_CARRIER_RUNTIME_FOUNDATION_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_CARRIER_TASK_RETURN_INTAKE_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Single-carrier sequential mode is a host-limited fallback, not the intended center.
+  - Codex CLI full local ION is an API-like backend for isolated invocations, not a helper for GPT package.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.runtime.multi_invocation
+    deep:
+      load_nodes: &id009
+      - ion.runtime.multi_invocation
+      - ion.runtime.codex_cli
+      - ion.runtime.settlement
+    implementation:
+      load_nodes: *id009
+      include_paths: &id010
+      - ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md
+      - ION/02_architecture/ION_CARRIER_RUNTIME_FOUNDATION_PROTOCOL.md
+      - ION/02_architecture/ION_CARRIER_TASK_RETURN_INTAKE_PROTOCOL.md
+      - ION/02_architecture/FAN_IN_MERGE_REVIEW_SETTLEMENT_PROTOCOL.md
+      - ION/07_templates/context/FAN_OUT_REQUEST.md
+      - ION/07_templates/context/FAN_IN_SETTLEMENT.md
+  related_nodes:
+  - ion.runtime.codex_cli
+  - ion.runtime.settlement
+  source_paths: *id010
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.runtime.codex_cli
+  title: Runtime Codex_Cli
+  domain_id: ion_full_multi_agent_runtime
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Full Multi-Agent Runtime Domain.
+  summary_working: This node should be populated from ION Full Multi-Agent Runtime Domain evidence sources
+    during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.runtime.codex_cli belongs to ion_full_multi_agent_runtime and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_CARRIER_RUNTIME_FOUNDATION_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_CARRIER_TASK_RETURN_INTAKE_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Single-carrier sequential mode is a host-limited fallback, not the intended center.
+  - Codex CLI full local ION is an API-like backend for isolated invocations, not a helper for GPT package.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.runtime.codex_cli
+    deep:
+      load_nodes: *id009
+    implementation:
+      load_nodes: *id009
+      include_paths: *id010
+  related_nodes:
+  - ion.runtime.multi_invocation
+  - ion.runtime.settlement
+  source_paths: *id010
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.runtime.settlement
+  title: Runtime Settlement
+  domain_id: ion_full_multi_agent_runtime
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Full Multi-Agent Runtime Domain.
+  summary_working: This node should be populated from ION Full Multi-Agent Runtime Domain evidence sources
+    during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.runtime.settlement belongs to ion_full_multi_agent_runtime and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_CARRIER_RUNTIME_FOUNDATION_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_CARRIER_TASK_RETURN_INTAKE_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Single-carrier sequential mode is a host-limited fallback, not the intended center.
+  - Codex CLI full local ION is an API-like backend for isolated invocations, not a helper for GPT package.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.runtime.settlement
+    deep:
+      load_nodes: *id009
+    implementation:
+      load_nodes: *id009
+      include_paths: *id010
+  related_nodes:
+  - ion.runtime.multi_invocation
+  - ion.runtime.codex_cli
+  source_paths: *id010
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.carrier.gpt_sandbox
+  title: Carrier Gpt_Sandbox
+  domain_id: ion_carrier_embodiment
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Carrier Embodiment Domain.
+  summary_working: This node should be populated from ION Carrier Embodiment Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.carrier.gpt_sandbox belongs to ion_carrier_embodiment and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/03_registry/gpt_sandbox_carrier_profile.yaml
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/codex_cli_carrier_profile.yaml
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/carrier_capability_registry.yaml
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Tool availability is not authority to mutate external state.
+  - GPT sandbox can edit/export the sandbox copy, not patch production/live repo.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.carrier.gpt_sandbox
+    deep:
+      load_nodes: &id011
+      - ion.carrier.gpt_sandbox
+      - ion.carrier.codex_cli
+      - ion.carrier.capability_profile
+    implementation:
+      load_nodes: *id011
+      include_paths: &id012
+      - ION/03_registry/gpt_sandbox_carrier_profile.yaml
+      - ION/03_registry/codex_cli_carrier_profile.yaml
+      - ION/03_registry/carrier_capability_registry.yaml
+      - ION/02_architecture/ION_GPT_SANDBOX_ENVIRONMENT_CONTRACT.md
+      - ION/07_templates/carriers/GPT_SANDBOX_CARRIER_SESSION_PACKET.md
+  related_nodes:
+  - ion.carrier.codex_cli
+  - ion.carrier.capability_profile
+  source_paths: *id012
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.carrier.codex_cli
+  title: Carrier Codex_Cli
+  domain_id: ion_carrier_embodiment
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Carrier Embodiment Domain.
+  summary_working: This node should be populated from ION Carrier Embodiment Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.carrier.codex_cli belongs to ion_carrier_embodiment and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/03_registry/gpt_sandbox_carrier_profile.yaml
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/codex_cli_carrier_profile.yaml
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/carrier_capability_registry.yaml
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Tool availability is not authority to mutate external state.
+  - GPT sandbox can edit/export the sandbox copy, not patch production/live repo.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.carrier.codex_cli
+    deep:
+      load_nodes: *id011
+    implementation:
+      load_nodes: *id011
+      include_paths: *id012
+  related_nodes:
+  - ion.carrier.gpt_sandbox
+  - ion.carrier.capability_profile
+  source_paths: *id012
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.carrier.capability_profile
+  title: Carrier Capability_Profile
+  domain_id: ion_carrier_embodiment
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Carrier Embodiment Domain.
+  summary_working: This node should be populated from ION Carrier Embodiment Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.carrier.capability_profile belongs to ion_carrier_embodiment and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/03_registry/gpt_sandbox_carrier_profile.yaml
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/codex_cli_carrier_profile.yaml
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/carrier_capability_registry.yaml
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Tool availability is not authority to mutate external state.
+  - GPT sandbox can edit/export the sandbox copy, not patch production/live repo.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.carrier.capability_profile
+    deep:
+      load_nodes: *id011
+    implementation:
+      load_nodes: *id011
+      include_paths: *id012
+  related_nodes:
+  - ion.carrier.gpt_sandbox
+  - ion.carrier.codex_cli
+  source_paths: *id012
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.context.package
+  title: Context Package
+  domain_id: ion_context_system
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Context System Domain.
+  summary_working: This node should be populated from ION Context System Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.context.package belongs to ion_context_system and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/agent_context_system_registry.yaml
+      evidence_class: filesystem_proof
+    - path: ION/07_templates/context/AGENT_CONTEXT_PACKAGE.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - A path list is not loaded context.
+  - A context package without a template is informed improvisation.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.context.package
+    deep:
+      load_nodes: &id013
+      - ion.context.package
+      - ion.context.proof
+      - ion.context.inheritance
+    implementation:
+      load_nodes: *id013
+      include_paths: &id014
+      - ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      - ION/03_registry/agent_context_system_registry.yaml
+      - ION/07_templates/context/AGENT_CONTEXT_PACKAGE.md
+      - ION/07_templates/context/ION_CONTEXT_LOAD_PROOF.md
+      - ION/05_context/current/agent_context_systems/CONTEXT_CARTOGRAPHER.context_system.md
+  related_nodes:
+  - ion.context.proof
+  - ion.context.inheritance
+  source_paths: *id014
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: CONTEXT_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.context.proof
+  title: Context Proof
+  domain_id: ion_context_system
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Context System Domain.
+  summary_working: This node should be populated from ION Context System Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.context.proof belongs to ion_context_system and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/agent_context_system_registry.yaml
+      evidence_class: filesystem_proof
+    - path: ION/07_templates/context/AGENT_CONTEXT_PACKAGE.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - A path list is not loaded context.
+  - A context package without a template is informed improvisation.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.context.proof
+    deep:
+      load_nodes: *id013
+    implementation:
+      load_nodes: *id013
+      include_paths: *id014
+  related_nodes:
+  - ion.context.package
+  - ion.context.inheritance
+  source_paths: *id014
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: CONTEXT_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.context.inheritance
+  title: Context Inheritance
+  domain_id: ion_context_system
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Context System Domain.
+  summary_working: This node should be populated from ION Context System Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.context.inheritance belongs to ion_context_system and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/02_architecture/ION_AGENT_CONTEXT_SYSTEMS_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/03_registry/agent_context_system_registry.yaml
+      evidence_class: filesystem_proof
+    - path: ION/07_templates/context/AGENT_CONTEXT_PACKAGE.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - A path list is not loaded context.
+  - A context package without a template is informed improvisation.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.context.inheritance
+    deep:
+      load_nodes: *id013
+    implementation:
+      load_nodes: *id013
+      include_paths: *id014
+  related_nodes:
+  - ion.context.package
+  - ion.context.proof
+  source_paths: *id014
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: CONTEXT_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.template.action_type
+  title: Template Action_Type
+  domain_id: ion_template_law
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Template Law Domain.
+  summary_working: This node should be populated from ION Template Law Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.template.action_type belongs to ion_template_law and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/03_registry/current_phase_template_surface_registry.yaml
+      evidence_class: filesystem_proof
+    - path: ION/07_templates/_MASTER.md
+      evidence_class: filesystem_proof
+    - path: ION/07_templates/actions/TASK.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not mutate template law under a status/report packet.
+  - Template action proof is required before integration.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.template.action_type
+    deep:
+      load_nodes: &id015
+      - ion.template.action_type
+      - ion.template.bindings
+      - ion.template.receipt_shape
+    implementation:
+      load_nodes: *id015
+      include_paths: &id016
+      - ION/03_registry/current_phase_template_surface_registry.yaml
+      - ION/07_templates/_MASTER.md
+      - ION/07_templates/actions/TASK.md
+      - ION/07_templates/context/CONTEXT_PACKAGE.md
+      - ION/07_templates/receipts/SINGLE_CARRIER_SEQUENCE_RECEIPT.md
+      - ION/05_context/current/agent_context_systems/TEMPLATE_CURATOR.context_system.md
+  related_nodes:
+  - ion.template.bindings
+  - ion.template.receipt_shape
+  source_paths: *id016
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: TEMPLATE_CURATOR
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.template.bindings
+  title: Template Bindings
+  domain_id: ion_template_law
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Template Law Domain.
+  summary_working: This node should be populated from ION Template Law Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.template.bindings belongs to ion_template_law and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/03_registry/current_phase_template_surface_registry.yaml
+      evidence_class: filesystem_proof
+    - path: ION/07_templates/_MASTER.md
+      evidence_class: filesystem_proof
+    - path: ION/07_templates/actions/TASK.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not mutate template law under a status/report packet.
+  - Template action proof is required before integration.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.template.bindings
+    deep:
+      load_nodes: *id015
+    implementation:
+      load_nodes: *id015
+      include_paths: *id016
+  related_nodes:
+  - ion.template.action_type
+  - ion.template.receipt_shape
+  source_paths: *id016
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: TEMPLATE_CURATOR
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.template.receipt_shape
+  title: Template Receipt_Shape
+  domain_id: ion_template_law
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Template Law Domain.
+  summary_working: This node should be populated from ION Template Law Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.template.receipt_shape belongs to ion_template_law and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/03_registry/current_phase_template_surface_registry.yaml
+      evidence_class: filesystem_proof
+    - path: ION/07_templates/_MASTER.md
+      evidence_class: filesystem_proof
+    - path: ION/07_templates/actions/TASK.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not mutate template law under a status/report packet.
+  - Template action proof is required before integration.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.template.receipt_shape
+    deep:
+      load_nodes: *id015
+    implementation:
+      load_nodes: *id015
+      include_paths: *id016
+  related_nodes:
+  - ion.template.action_type
+  - ion.template.bindings
+  source_paths: *id016
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: TEMPLATE_CURATOR
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.state.candidate_transition
+  title: State Candidate_Transition
+  domain_id: ion_state_steward_receipt
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION State, Steward, and Receipt Domain.
+  summary_working: This node should be populated from ION State, Steward, and Receipt Domain evidence
+    sources during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.state.candidate_transition belongs to ion_state_steward_receipt and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/CONVERSATIONAL_RECEIPT_AND_LIVE_REPAIR_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/04_packages/kernel/ion_carrier_task_return.py
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - AI output is candidate state transition until accepted.
+  - No proof → no landing. No Steward/human decision → no state. No receipt/export → no inheritance.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.state.candidate_transition
+    deep:
+      load_nodes: &id017
+      - ion.state.candidate_transition
+      - ion.receipt.inheritance
+      - ion.steward.acceptance_gate
+    implementation:
+      load_nodes: *id017
+      include_paths: &id018
+      - ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+      - ION/02_architecture/CONVERSATIONAL_RECEIPT_AND_LIVE_REPAIR_PROTOCOL.md
+      - ION/04_packages/kernel/ion_carrier_task_return.py
+      - ION/04_packages/kernel/receipts.py
+      - ION/05_context/current/ACTIVE_STEWARD_INTEGRATION_QUEUE.json
+  related_nodes:
+  - ion.receipt.inheritance
+  - ion.steward.acceptance_gate
+  source_paths: *id018
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: STEWARD
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.receipt.inheritance
+  title: Receipt Inheritance
+  domain_id: ion_state_steward_receipt
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION State, Steward, and Receipt Domain.
+  summary_working: This node should be populated from ION State, Steward, and Receipt Domain evidence
+    sources during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.receipt.inheritance belongs to ion_state_steward_receipt and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/CONVERSATIONAL_RECEIPT_AND_LIVE_REPAIR_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/04_packages/kernel/ion_carrier_task_return.py
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - AI output is candidate state transition until accepted.
+  - No proof → no landing. No Steward/human decision → no state. No receipt/export → no inheritance.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.receipt.inheritance
+    deep:
+      load_nodes: *id017
+    implementation:
+      load_nodes: *id017
+      include_paths: *id018
+  related_nodes:
+  - ion.state.candidate_transition
+  - ion.steward.acceptance_gate
+  source_paths: *id018
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: STEWARD
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.steward.acceptance_gate
+  title: Steward Acceptance_Gate
+  domain_id: ion_state_steward_receipt
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION State, Steward, and Receipt Domain.
+  summary_working: This node should be populated from ION State, Steward, and Receipt Domain evidence
+    sources during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.steward.acceptance_gate belongs to ion_state_steward_receipt and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/02_architecture/GRAPH_WRITEBACK_AND_RECEIPT_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/CONVERSATIONAL_RECEIPT_AND_LIVE_REPAIR_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/04_packages/kernel/ion_carrier_task_return.py
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - AI output is candidate state transition until accepted.
+  - No proof → no landing. No Steward/human decision → no state. No receipt/export → no inheritance.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.steward.acceptance_gate
+    deep:
+      load_nodes: *id017
+    implementation:
+      load_nodes: *id017
+      include_paths: *id018
+  related_nodes:
+  - ion.state.candidate_transition
+  - ion.receipt.inheritance
+  source_paths: *id018
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: STEWARD
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.product.gpt_sandbox_package
+  title: Product Gpt_Sandbox_Package
+  domain_id: ion_product_package
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Product Package Domain.
+  summary_working: This node should be populated from ION Product Package Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.product.gpt_sandbox_package belongs to ion_product_package and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: PRODUCT_MANIFEST.json
+      evidence_class: filesystem_proof
+    - path: VALIDATION_REPORT.json
+      evidence_class: filesystem_proof
+    - path: PACKAGE_BUILD_RECEIPT.json
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not call GPT package reduced ION; it is full ION adapted to sandbox constraints.
+  - Package-ready does not mean production authority or live external execution authority.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.product.gpt_sandbox_package
+    deep:
+      load_nodes: &id019
+      - ion.product.gpt_sandbox_package
+      - ion.product.starter_data
+      - ion.product.package_audit
+    implementation:
+      load_nodes: *id019
+      include_paths: &id020
+      - PRODUCT_MANIFEST.json
+      - VALIDATION_REPORT.json
+      - PACKAGE_BUILD_RECEIPT.json
+      - product/custom_gpt_adapter/README.md
+      - product/package_guides/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE.md
+      - product/starter_data/ION_DATA_MANIFEST.json
+  related_nodes:
+  - ion.product.starter_data
+  - ion.product.package_audit
+  source_paths: *id020
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.product.starter_data
+  title: Product Starter_Data
+  domain_id: ion_product_package
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Product Package Domain.
+  summary_working: This node should be populated from ION Product Package Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.product.starter_data belongs to ion_product_package and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: PRODUCT_MANIFEST.json
+      evidence_class: filesystem_proof
+    - path: VALIDATION_REPORT.json
+      evidence_class: filesystem_proof
+    - path: PACKAGE_BUILD_RECEIPT.json
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not call GPT package reduced ION; it is full ION adapted to sandbox constraints.
+  - Package-ready does not mean production authority or live external execution authority.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.product.starter_data
+    deep:
+      load_nodes: *id019
+    implementation:
+      load_nodes: *id019
+      include_paths: *id020
+  related_nodes:
+  - ion.product.gpt_sandbox_package
+  - ion.product.package_audit
+  source_paths: *id020
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.product.package_audit
+  title: Product Package_Audit
+  domain_id: ion_product_package
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Product Package Domain.
+  summary_working: This node should be populated from ION Product Package Domain evidence sources during
+    the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.product.package_audit belongs to ion_product_package and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: PRODUCT_MANIFEST.json
+      evidence_class: filesystem_proof
+    - path: VALIDATION_REPORT.json
+      evidence_class: filesystem_proof
+    - path: PACKAGE_BUILD_RECEIPT.json
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not call GPT package reduced ION; it is full ION adapted to sandbox constraints.
+  - Package-ready does not mean production authority or live external execution authority.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.product.package_audit
+    deep:
+      load_nodes: *id019
+    implementation:
+      load_nodes: *id019
+      include_paths: *id020
+  related_nodes:
+  - ion.product.gpt_sandbox_package
+  - ion.product.starter_data
+  source_paths: *id020
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.workpacket.active
+  title: Workpacket Active
+  domain_id: ion_workpacket
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Workpacket Domain.
+  summary_working: This node should be populated from ION Workpacket Domain evidence sources during the
+    next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.workpacket.active belongs to ion_workpacket and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/05_context/current/ACTIVE_WORK_PACKET.json
+      evidence_class: filesystem_proof
+    - path: ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json
+      evidence_class: filesystem_proof
+    - path: ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not widen allowed paths silently.
+  - A workpacket return is proposal/evidence until integrated.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.workpacket.active
+    deep:
+      load_nodes: &id021
+      - ion.workpacket.active
+      - ion.workpacket.allowed_paths
+      - ion.workpacket.return_contract
+    implementation:
+      load_nodes: *id021
+      include_paths: &id022
+      - ION/05_context/current/ACTIVE_WORK_PACKET.json
+      - ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json
+      - ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json
+      - ION/07_templates/actions/TASK.md
+      - product/data_schema/schemas/work_packet.schema.json
+  related_nodes:
+  - ion.workpacket.allowed_paths
+  - ion.workpacket.return_contract
+  source_paths: *id022
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: STEWARD
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.workpacket.allowed_paths
+  title: Workpacket Allowed_Paths
+  domain_id: ion_workpacket
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Workpacket Domain.
+  summary_working: This node should be populated from ION Workpacket Domain evidence sources during the
+    next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.workpacket.allowed_paths belongs to ion_workpacket and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/05_context/current/ACTIVE_WORK_PACKET.json
+      evidence_class: filesystem_proof
+    - path: ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json
+      evidence_class: filesystem_proof
+    - path: ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not widen allowed paths silently.
+  - A workpacket return is proposal/evidence until integrated.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.workpacket.allowed_paths
+    deep:
+      load_nodes: *id021
+    implementation:
+      load_nodes: *id021
+      include_paths: *id022
+  related_nodes:
+  - ion.workpacket.active
+  - ion.workpacket.return_contract
+  source_paths: *id022
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: STEWARD
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.workpacket.return_contract
+  title: Workpacket Return_Contract
+  domain_id: ion_workpacket
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Workpacket Domain.
+  summary_working: This node should be populated from ION Workpacket Domain evidence sources during the
+    next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.workpacket.return_contract belongs to ion_workpacket and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: ION/05_context/current/ACTIVE_WORK_PACKET.json
+      evidence_class: filesystem_proof
+    - path: ION/05_context/current/ACTIVE_CARRIER_TURN_PACKET.json
+      evidence_class: filesystem_proof
+    - path: ION/05_context/current/ACTIVE_ROLE_SPAWN_PLAN.json
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not widen allowed paths silently.
+  - A workpacket return is proposal/evidence until integrated.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.workpacket.return_contract
+    deep:
+      load_nodes: *id021
+    implementation:
+      load_nodes: *id021
+      include_paths: *id022
+  related_nodes:
+  - ion.workpacket.active
+  - ion.workpacket.allowed_paths
+  source_paths: *id022
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: STEWARD
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.history.donor
+  title: History Donor
+  domain_id: ion_stale_donor_historical
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Stale, Donor, and Historical Domain.
+  summary_working: This node should be populated from ION Stale, Donor, and Historical Domain evidence
+    sources during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.history.donor belongs to ion_stale_donor_historical and requires authority-ranked evidence
+      before active use.
+    support:
+    - path: CONTENT_CLASSIFICATION_MANIFEST.json
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_V72_MCP_DONOR_RECONCILIATION_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Historical witness may explain lineage but cannot settle active law.
+  - Do not erase mature organs during cleanup or prune passes.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.history.donor
+    deep:
+      load_nodes: &id023
+      - ion.history.donor
+      - ion.history.stale_surface
+      - ion.history.containment
+    implementation:
+      load_nodes: *id023
+      include_paths: &id024
+      - CONTENT_CLASSIFICATION_MANIFEST.json
+      - ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md
+      - ION/02_architecture/ION_V72_MCP_DONOR_RECONCILIATION_PROTOCOL.md
+      - ION/05_context/current/ACTIVE_STALE_SURFACE_AUDIT.json
+      - ION/05_context/current/V108_V72_MCP_DONOR_RECONCILIATION_AUDIT.json
+      - ION/06_intelligence/archaeology/vestige/watchlist.md
+  related_nodes:
+  - ion.history.stale_surface
+  - ion.history.containment
+  source_paths: *id024
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: VESTIGE
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.history.stale_surface
+  title: History Stale_Surface
+  domain_id: ion_stale_donor_historical
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Stale, Donor, and Historical Domain.
+  summary_working: This node should be populated from ION Stale, Donor, and Historical Domain evidence
+    sources during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.history.stale_surface belongs to ion_stale_donor_historical and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: CONTENT_CLASSIFICATION_MANIFEST.json
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_V72_MCP_DONOR_RECONCILIATION_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Historical witness may explain lineage but cannot settle active law.
+  - Do not erase mature organs during cleanup or prune passes.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.history.stale_surface
+    deep:
+      load_nodes: *id023
+    implementation:
+      load_nodes: *id023
+      include_paths: *id024
+  related_nodes:
+  - ion.history.donor
+  - ion.history.containment
+  source_paths: *id024
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: VESTIGE
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.history.containment
+  title: History Containment
+  domain_id: ion_stale_donor_historical
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Stale, Donor, and Historical Domain.
+  summary_working: This node should be populated from ION Stale, Donor, and Historical Domain evidence
+    sources during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.history.containment belongs to ion_stale_donor_historical and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: CONTENT_CLASSIFICATION_MANIFEST.json
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_V72_MCP_DONOR_RECONCILIATION_PROTOCOL.md
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Historical witness may explain lineage but cannot settle active law.
+  - Do not erase mature organs during cleanup or prune passes.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.history.containment
+    deep:
+      load_nodes: *id023
+    implementation:
+      load_nodes: *id023
+      include_paths: *id024
+  related_nodes:
+  - ion.history.donor
+  - ion.history.stale_surface
+  source_paths: *id024
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: VESTIGE
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.recovery.no_silent_loss
+  title: Recovery No_Silent_Loss
+  domain_id: ion_recovery_anti_regression
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Recovery and Anti-Regression Domain.
+  summary_working: This node should be populated from ION Recovery and Anti-Regression Domain evidence
+    sources during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.recovery.no_silent_loss belongs to ion_recovery_anti_regression and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/00_BOOTSTRAP/V118_NO_SILENT_LOSS_AND_CONTAINMENT_PRESERVATION_LOCK.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/05_context/current/TRUNK_PRESERVATION_REPORT_V118.json
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not treat narrow test pass as full-system readiness.
+  - Recovery should route and contain, not broadly consolidate by vibes.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.recovery.no_silent_loss
+    deep:
+      load_nodes: &id025
+      - ion.recovery.no_silent_loss
+      - ion.recovery.stale_gate
+      - ion.recovery.regression_tests
+    implementation:
+      load_nodes: *id025
+      include_paths: &id026
+      - ION/00_BOOTSTRAP/V118_NO_SILENT_LOSS_AND_CONTAINMENT_PRESERVATION_LOCK.md
+      - ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md
+      - ION/05_context/current/TRUNK_PRESERVATION_REPORT_V118.json
+      - ION/05_context/current/ACTIVE_STALE_SURFACE_AUDIT.json
+      - ION/tests/test_kernel_ion_stale_surface_audit.py
+  related_nodes:
+  - ion.recovery.stale_gate
+  - ion.recovery.regression_tests
+  source_paths: *id026
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: NEMESIS
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.recovery.stale_gate
+  title: Recovery Stale_Gate
+  domain_id: ion_recovery_anti_regression
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Recovery and Anti-Regression Domain.
+  summary_working: This node should be populated from ION Recovery and Anti-Regression Domain evidence
+    sources during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.recovery.stale_gate belongs to ion_recovery_anti_regression and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/00_BOOTSTRAP/V118_NO_SILENT_LOSS_AND_CONTAINMENT_PRESERVATION_LOCK.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/05_context/current/TRUNK_PRESERVATION_REPORT_V118.json
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not treat narrow test pass as full-system readiness.
+  - Recovery should route and contain, not broadly consolidate by vibes.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.recovery.stale_gate
+    deep:
+      load_nodes: *id025
+    implementation:
+      load_nodes: *id025
+      include_paths: *id026
+  related_nodes:
+  - ion.recovery.no_silent_loss
+  - ion.recovery.regression_tests
+  source_paths: *id026
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: NEMESIS
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.recovery.regression_tests
+  title: Recovery Regression_Tests
+  domain_id: ion_recovery_anti_regression
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Recovery and Anti-Regression Domain.
+  summary_working: This node should be populated from ION Recovery and Anti-Regression Domain evidence
+    sources during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.recovery.regression_tests belongs to ion_recovery_anti_regression and requires authority-ranked
+      evidence before active use.
+    support:
+    - path: ION/00_BOOTSTRAP/V118_NO_SILENT_LOSS_AND_CONTAINMENT_PRESERVATION_LOCK.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md
+      evidence_class: filesystem_proof
+    - path: ION/05_context/current/TRUNK_PRESERVATION_REPORT_V118.json
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Do not treat narrow test pass as full-system readiness.
+  - Recovery should route and contain, not broadly consolidate by vibes.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.recovery.regression_tests
+    deep:
+      load_nodes: *id025
+    implementation:
+      load_nodes: *id025
+      include_paths: *id026
+  related_nodes:
+  - ion.recovery.no_silent_loss
+  - ion.recovery.stale_gate
+  source_paths: *id026
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: NEMESIS
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.ops.build_lane
+  title: Ops Build_Lane
+  domain_id: ion_operations_build
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Operations and Build Domain.
+  summary_working: This node should be populated from ION Operations and Build Domain evidence sources
+    during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.ops.build_lane belongs to ion_operations_build and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/02_architecture/ION_MOUNT_CONTRACT.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_GPT_SANDBOX_ENVIRONMENT_CONTRACT.md
+      evidence_class: filesystem_proof
+    - path: ION/04_packages/kernel/ion_status.py
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Build/package readiness is bounded by the validated lane and current authority ceiling.
+  - Do not claim external MCP/GitHub/Codex execution unless tool receipts prove it.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.ops.build_lane
+    deep:
+      load_nodes: &id027
+      - ion.ops.build_lane
+      - ion.ops.preflight
+      - ion.ops.export
+    implementation:
+      load_nodes: *id027
+      include_paths: &id028
+      - ION/02_architecture/ION_MOUNT_CONTRACT.md
+      - ION/02_architecture/ION_GPT_SANDBOX_ENVIRONMENT_CONTRACT.md
+      - ION/04_packages/kernel/ion_status.py
+      - ION/04_packages/kernel/ion_sandbox_preflight.py
+      - VALIDATION_REPORT.json
+      - ION/tests/test_product_gpt_sandbox_package_readiness.py
+  related_nodes:
+  - ion.ops.preflight
+  - ion.ops.export
+  source_paths: *id028
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.ops.preflight
+  title: Ops Preflight
+  domain_id: ion_operations_build
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Operations and Build Domain.
+  summary_working: This node should be populated from ION Operations and Build Domain evidence sources
+    during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.ops.preflight belongs to ion_operations_build and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/02_architecture/ION_MOUNT_CONTRACT.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_GPT_SANDBOX_ENVIRONMENT_CONTRACT.md
+      evidence_class: filesystem_proof
+    - path: ION/04_packages/kernel/ion_status.py
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Build/package readiness is bounded by the validated lane and current authority ceiling.
+  - Do not claim external MCP/GitHub/Codex execution unless tool receipts prove it.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.ops.preflight
+    deep:
+      load_nodes: *id027
+    implementation:
+      load_nodes: *id027
+      include_paths: *id028
+  related_nodes:
+  - ion.ops.build_lane
+  - ion.ops.export
+  source_paths: *id028
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []
+- schema: ion.self_knowledge.node.v0_2
+  node_id: ion.ops.export
+  title: Ops Export
+  domain_id: ion_operations_build
+  state_class: candidate_current_state
+  authority_rank: 6
+  status: draft
+  summary_short: Candidate node seed for ION Operations and Build Domain.
+  summary_working: This node should be populated from ION Operations and Build Domain evidence sources
+    during the next deep route pass.
+  summary_deep: ''
+  key_claims:
+  - claim: ion.ops.export belongs to ion_operations_build and requires authority-ranked evidence before
+      active use.
+    support:
+    - path: ION/02_architecture/ION_MOUNT_CONTRACT.md
+      evidence_class: filesystem_proof
+    - path: ION/02_architecture/ION_GPT_SANDBOX_ENVIRONMENT_CONTRACT.md
+      evidence_class: filesystem_proof
+    - path: ION/04_packages/kernel/ion_status.py
+      evidence_class: filesystem_proof
+  anti_drift_notes:
+  - Build/package readiness is bounded by the validated lane and current authority ceiling.
+  - Do not claim external MCP/GitHub/Codex execution unless tool receipts prove it.
+  routes:
+    quick:
+      load_nodes: []
+    working:
+      load_nodes:
+      - ion.ops.export
+    deep:
+      load_nodes: *id027
+    implementation:
+      load_nodes: *id027
+      include_paths: *id028
+  related_nodes:
+  - ion.ops.build_lane
+  - ion.ops.preflight
+  source_paths: *id028
+  last_reviewed_at: '2026-05-08T03:51:05+00:00'
+  review_owner_role: RUNTIME_CARTOGRAPHER
+  receipt_refs: []

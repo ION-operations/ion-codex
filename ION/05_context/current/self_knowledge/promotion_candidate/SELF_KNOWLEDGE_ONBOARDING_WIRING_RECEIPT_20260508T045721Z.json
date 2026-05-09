@@ -1,0 +1,135 @@
+{
+  "actions": [
+    {
+      "action": "created_candidate_onboarding_wiring_overlay",
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_OVERLAY_V0_2.json",
+      "sha256": "74556991f13e5b9a619dbef66a6d5532be99f4006b8e94c4ee9dda656bd28cd2"
+    },
+    {
+      "action": "created_candidate_apply_tree_protocol",
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/02_architecture/ION_SELF_KNOWLEDGE_ONBOARDING_WIRING_PROTOCOL.md",
+      "sha256": "45a30444a1af28011777ec710fb4d21c57a903c4f57274eadde1adc604f9f06a"
+    },
+    {
+      "action": "created_updated_wiring_proposal",
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/ONBOARDING_WIRING_PROPOSAL_V0_3.md",
+      "sha256": "86a0142da161dafba83c81d08295c28503cd815c77605704fe2d0c909b360d0a"
+    },
+    {
+      "action": "created_onboarding_wiring_simulation_script",
+      "path": "ION/05_context/current/self_knowledge/simulate_self_knowledge_onboarding_wiring.py",
+      "sha256": "896a9b0d29be6ca7f0508220ea6fb1ea1394ee0636a9b62688af1bd62007d790"
+    },
+    {
+      "action": "ran_onboarding_wiring_simulation",
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json",
+      "result": {
+        "accepted": true,
+        "carrier_cases": 8,
+        "cases_accepted": 8,
+        "findings": [],
+        "loaded_domain_count": 14,
+        "matched_routes": [
+          "route.context_template_receipt",
+          "route.full_local_codex_api_ion",
+          "route.gpt_sandbox_adaptation",
+          "route.ion_authority_classification",
+          "route.ion_identity_answer",
+          "route.ion_recovery_anti_regression",
+          "route.self_knowledge_implementation"
+        ]
+      },
+      "sha256": "7abcb7ccdd641dbe645067e66e8eb193ac0067815e2b68482bbb22236d88efc4"
+    },
+    {
+      "action": "added_focused_tests",
+      "path": "ION/tests/test_kernel_ion_self_knowledge_onboarding_wiring.py",
+      "sha256": "5d0b7f41baa0393c12a4017b82333c2aa5c000231982ca49c768cd5b55ab6d4d"
+    },
+    {
+      "action": "ran_focused_tests_status_and_preflight",
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATION_NOTE_20260508T045721Z.json",
+      "result": "passed_candidate_validation",
+      "sha256": "cffd31176491e28b431865cb4f3c3b143f9cb67b76908a95f73e67cf31dc287c"
+    }
+  ],
+  "authority_boundary": {
+    "candidate_only": true,
+    "live_execution_authority": false,
+    "mutated_ION_03_registry": false,
+    "mutated_active_onboarding_packets": false,
+    "production_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "generated_at": "2026-05-08T04:57:21+00:00",
+  "landing_blockers": [
+    "No explicit human/Steward acceptance has been provided.",
+    "Do not mutate ION/03_registry/self_knowledge without acceptance.",
+    "Do not mutate active onboarding law from a candidate simulation alone."
+  ],
+  "next_recommended_action": "Explicit accept/reject/revise the promotion mirror and onboarding wiring candidate, or continue with package/onboarding product-lane audit.",
+  "non_claims": [
+    "No accepted onboarding law was mutated.",
+    "No self-knowledge registry was landed.",
+    "No external carrier was invoked.",
+    "Simulation traces are candidate evidence, not canon."
+  ],
+  "objective": "Run onboarding-wiring simulation to prove future carriers route ION-about-ION work through the self-knowledge mount before answering.",
+  "operator_message_interpretation": {
+    "interpreted_as": "proceed_with_more_validation_before_acceptance",
+    "not_interpreted_as": "human_steward_acceptance_to_land_registry_or_onboarding_law",
+    "raw": "continue"
+  },
+  "receipt_id": "SELF_KNOWLEDGE_ONBOARDING_WIRING_RECEIPT_20260508T045721Z",
+  "schema_id": "ion.self_knowledge.onboarding_wiring_receipt.v0_2",
+  "status": "candidate_evidence_recorded_pending_explicit_acceptance",
+  "validation_summary": {
+    "candidate_validation": {
+      "accepted": true,
+      "domain_count": 14,
+      "findings": [],
+      "live_execution_authority": false,
+      "parsed_files_count": 22,
+      "production_authority": false,
+      "route_count": 7,
+      "schema_id": "ion.self_knowledge_candidate_validation.v0_2"
+    },
+    "focused_pytest": {
+      "passed": true,
+      "returncode": 0,
+      "stderr": "",
+      "summary_stdout": "\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m                                                        [100%]\u001b[0m\n\u001b[32m\u001b[32m\u001b[1m17 passed\u001b[0m\u001b[32m in 3.10s\u001b[0m\u001b[0m"
+    },
+    "ion_status": {
+      "active_state_integrity": "ION_ACTIVE_STATE_INTEGRITY_READY",
+      "returncode": 0,
+      "verdict": "ION_STATUS_READY"
+    },
+    "onboarding_simulation": {
+      "accepted": true,
+      "carrier_cases": 8,
+      "carriers_exercised": [
+        "CODEX_CLI_CARRIER",
+        "GPT_SANDBOX_CARRIER"
+      ],
+      "findings": [],
+      "ion_about_ion_cases": 7,
+      "loaded_domain_count": 14,
+      "matched_routes": [
+        "route.context_template_receipt",
+        "route.full_local_codex_api_ion",
+        "route.gpt_sandbox_adaptation",
+        "route.ion_authority_classification",
+        "route.ion_identity_answer",
+        "route.ion_recovery_anti_regression",
+        "route.self_knowledge_implementation"
+      ],
+      "non_ion_bypass_cases": 1,
+      "status": "accepted_candidate_evidence"
+    },
+    "sandbox_preflight": {
+      "returncode": 0,
+      "verdict": "ION_GPT_SANDBOX_PREFLIGHT_READY"
+    }
+  }
+}

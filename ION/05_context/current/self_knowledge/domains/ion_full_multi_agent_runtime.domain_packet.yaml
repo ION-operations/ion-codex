@@ -1,0 +1,87 @@
+schema: ion.self_knowledge.domain_packet.v0_2
+domain_id: ion_full_multi_agent_runtime
+title: ION Full Multi-Agent Runtime Domain
+state_class: candidate_current_state
+authority_rank: 6
+status: draft_candidate_seed
+generated_at: '2026-05-08T03:51:05+00:00'
+purpose: Preserve the primary API/local/Codex-style isolated invocation model while distinguishing sandbox
+  fallback.
+primary_questions:
+- How does full local/API ION run?
+- What is fan-out/fan-in settlement?
+- Why is single-carrier fallback not conceptual base?
+required_nodes:
+- ion.runtime.multi_invocation
+- ion.runtime.codex_cli
+- ion.runtime.settlement
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+    loads:
+    - domain_header
+    - anti_drift_notes
+  level_1_summary:
+    max_tokens: 500
+    loads:
+    - domain_header
+    - evidence_sources
+    - core claims
+  level_2_working:
+    max_tokens: 1500
+    loads:
+    - domain_packet
+    - selected nodes
+    - source ranking
+  level_3_operational:
+    max_tokens: 4000
+    loads:
+    - domain_packet
+    - node evidence
+    - active packet/state surfaces
+  level_4_deep:
+    max_tokens: 12000
+    loads:
+    - domain_packet
+    - node registry
+    - source files
+    - contradictions
+  level_5_implementation:
+    includes_paths: true
+    loads:
+    - source paths
+    - tests/proofs
+    - candidate deltas
+evidence_sources:
+- path: ION/02_architecture/CODEX_CLI_CARRIER_PROTOCOL.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/02_architecture/ION_CARRIER_RUNTIME_FOUNDATION_PROTOCOL.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/02_architecture/ION_CARRIER_TASK_RETURN_INTAKE_PROTOCOL.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/02_architecture/FAN_IN_MERGE_REVIEW_SETTLEMENT_PROTOCOL.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/07_templates/context/FAN_OUT_REQUEST.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/07_templates/context/FAN_IN_SETTLEMENT.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+anti_drift_notes:
+- Single-carrier sequential mode is a host-limited fallback, not the intended center.
+- Codex CLI full local ION is an API-like backend for isolated invocations, not a helper for GPT package.
+specialist_roles:
+- RUNTIME_CARTOGRAPHER
+- STEWARD
+- NEMESIS
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_namespace: ION/05_context/current/self_knowledge/
+non_claims:
+- This domain packet is not accepted canon.
+- This domain packet does not mutate ION/03_registry/self_knowledge unless separately promoted.

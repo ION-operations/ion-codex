@@ -1,0 +1,119 @@
+{
+  "authority_boundary": {
+    "active_packet_allowed_paths": [
+      "ION/05_context/current/",
+      "ION/04_packages/kernel/",
+      "ION/tests/",
+      "ION/docs/consolidation/",
+      "ION/05_context/signals/",
+      "ION/02_architecture/"
+    ],
+    "actual_target_namespace_mutated": false,
+    "direct_registry_mutation_authorized": false,
+    "mirror_namespace": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge",
+    "target_namespace": "ION/03_registry/self_knowledge/"
+  },
+  "generated_at": "2026-05-08T04:05:23+00:00",
+  "last_continuation_at": "2026-05-08T04:57:21+00:00",
+  "non_claims": [
+    "This manifest does not accept the candidate registries.",
+    "This manifest does not mutate ION/03_registry/self_knowledge.",
+    "This manifest does not claim production authority or live execution authority.",
+    "Future work may inherit this only as a promotion proposal pending settlement.",
+    "Route usage simulation passed, but it is sandbox-local and not external Codex execution.",
+    "Onboarding wiring simulation passed, but it is sandbox-local and not external Codex/MCP/daemon execution.",
+    "This manifest does not mutate active carrier onboarding law."
+  ],
+  "objective": "Prepare self-knowledge registries for future ION/03_registry/self_knowledge landing without silently promoting candidate state.",
+  "onboarding_wiring_evidence": {
+    "apply_tree_protocol": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/02_architecture/ION_SELF_KNOWLEDGE_ONBOARDING_WIRING_PROTOCOL.md",
+    "carrier_cases": 8,
+    "carriers_exercised": [
+      "CODEX_CLI_CARRIER",
+      "GPT_SANDBOX_CARRIER"
+    ],
+    "external_carrier_claimed": false,
+    "ion_about_ion_cases": 7,
+    "loaded_domain_count": 14,
+    "matched_routes": [
+      "route.context_template_receipt",
+      "route.full_local_codex_api_ion",
+      "route.gpt_sandbox_adaptation",
+      "route.ion_authority_classification",
+      "route.ion_identity_answer",
+      "route.ion_recovery_anti_regression",
+      "route.self_knowledge_implementation"
+    ],
+    "non_ion_bypass_cases": 1,
+    "overlay": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_OVERLAY_V0_2.json",
+    "proposal": "ION/05_context/current/self_knowledge/promotion_candidate/ONBOARDING_WIRING_PROPOSAL_V0_3.md",
+    "receipt": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_RECEIPT_20260508T045721Z.json",
+    "report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json",
+    "script": "ION/05_context/current/self_knowledge/simulate_self_knowledge_onboarding_wiring.py",
+    "status": "passed_candidate_evidence",
+    "validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATION_NOTE_20260508T045721Z.json"
+  },
+  "prepared_mappings": [
+    {
+      "action": "copy_after_acceptance_and_update_status_if_steward_requires",
+      "mirror_path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/domain_registry.yaml",
+      "mirror_sha256": "fe2f64c65fa610c1cc31db03e8ed7e7ff0e15a39eca22304e2fdebd7206ac616",
+      "source_path": "ION/05_context/current/self_knowledge/candidate_registries/domain_registry.candidate.yaml",
+      "source_sha256": "31f00d6bdb0a518bdb672a0234069b4099c410db172789a48f7bcd9d6f402a01",
+      "target_path": "ION/03_registry/self_knowledge/domain_registry.yaml"
+    },
+    {
+      "action": "copy_after_acceptance_and_update_status_if_steward_requires",
+      "mirror_path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/route_registry.yaml",
+      "mirror_sha256": "89231412d41d287ed8ed8f8c3d6ab9281f7276344eb098bf7bba41149b136650",
+      "source_path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+      "source_sha256": "14044f808078f97d21bd139749e9dbb94af2b016638c2a3d5bc99a71af91f739",
+      "target_path": "ION/03_registry/self_knowledge/route_registry.yaml"
+    },
+    {
+      "action": "copy_after_acceptance_and_update_status_if_steward_requires",
+      "mirror_path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/node_registry.yaml",
+      "mirror_sha256": "32fd2f18abea9a6c8b5d915864f7776c59bf44d76dff27287a7aae722f56eecf",
+      "source_path": "ION/05_context/current/self_knowledge/candidate_registries/node_registry.candidate.yaml",
+      "source_sha256": "f533868b34fca7ffa0d13bc391c3a04c5ed684e2ac9ca58cb3163815385df810",
+      "target_path": "ION/03_registry/self_knowledge/node_registry.yaml"
+    },
+    {
+      "action": "copy_after_acceptance_and_update_status_if_steward_requires",
+      "mirror_path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/node_schema.yaml",
+      "mirror_sha256": "a41ba44ef7008bf16832b9f98eca2bf47907cd423c43adbb7c6b9ccd007b4570",
+      "source_path": "ION/05_context/current/self_knowledge/candidate_registries/node_schema.candidate.yaml",
+      "source_sha256": "3fd13c22a813d8d01ef6e6c76709dfd7bb44a483e91e1cbc2aab02e41f87093e",
+      "target_path": "ION/03_registry/self_knowledge/node_schema.yaml"
+    },
+    {
+      "action": "copy_after_acceptance_and_update_status_if_steward_requires",
+      "mirror_path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/state_classification.yaml",
+      "mirror_sha256": "d651d85ac4ebf0574f01fc0b04b0333ac7c7b544d7625cd095274e582751a95d",
+      "source_path": "ION/05_context/current/self_knowledge/candidate_registries/state_classification.candidate.yaml",
+      "source_sha256": "c42249c835de294e9347c92ef2da98b7a4f80429dbcee7d609d6ec86f18c10bd",
+      "target_path": "ION/03_registry/self_knowledge/state_classification.yaml"
+    },
+    {
+      "action": "copy_after_acceptance_and_update_status_if_steward_requires",
+      "mirror_path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/authority_ranking.yaml",
+      "mirror_sha256": "8ab2192371701e69af61a5d9382013ef33c6d79cf8639ab58bc8e2c3a4d8beba",
+      "source_path": "ION/05_context/current/self_knowledge/candidate_registries/authority_ranking.candidate.yaml",
+      "source_sha256": "ad1bf1285badd39713d763c2796b4fa057780488784d85845dcec54bde24332a",
+      "target_path": "ION/03_registry/self_knowledge/authority_ranking.yaml"
+    }
+  ],
+  "route_usage_evidence": {
+    "case_count": 7,
+    "external_codex_claimed": false,
+    "loaded_domain_count": 14,
+    "receipt": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_RECEIPT_20260508T043119Z.json",
+    "report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json",
+    "route_count": 7,
+    "status": "passed_candidate_evidence",
+    "validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_VALIDATION_NOTE_20260508T043119Z.json"
+  },
+  "schema_id": "ion.self_knowledge.promotion_candidate_manifest.v0_2",
+  "source_candidate_namespace": "ION/05_context/current/self_knowledge/candidate_registries/",
+  "status": "promotion_ready_candidate_blocked_on_explicit_acceptance_only"
+}

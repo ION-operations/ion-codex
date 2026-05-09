@@ -1,0 +1,177 @@
+schema_id: ion.self_knowledge.route_registry.v0_2
+status: candidate_current_state_not_accepted_canon
+generated_at: '2026-05-08T04:28:48+00:00'
+default_behavior: Classify ION-about-ION query, load ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET,
+  then route through domain packets; do not free-answer from memory.
+routes:
+- route_id: route.ion_identity_answer
+  description: Answer what ION is at requested depth.
+  trigger_patterns:
+  - what is ION
+  - define ION
+  - explain ION
+  - ION identity
+  required_domains:
+  - ion_identity
+  - ion_canon_authority
+  anti_drift_required:
+  - do_not_reduce_to_prompt_or_agent
+  - output_is_not_state
+  output_contract:
+    include:
+    - core law
+    - state boundary
+    - what ION is not
+    forbid:
+    - mythologizing
+    - claiming accepted state from explanation
+- route_id: route.ion_authority_classification
+  description: Classify sources as current law, current operational, product projection,
+    witness, donor, stale, or candidate.
+  trigger_patterns:
+  - which source is authoritative
+  - canon
+  - current law
+  - is this stale
+  - donor
+  required_domains:
+  - ion_canon_authority
+  - ion_stale_donor_historical
+  anti_drift_required:
+  - no_witness_to_law_promotion
+  - no_donor_as_active_authority
+  output_contract:
+    include:
+    - source ranking
+    - state class
+    - non-claims
+    forbid:
+    - promotion without receipt
+- route_id: route.full_local_codex_api_ion
+  description: Explain full local/API/Codex-style ION without reducing it to sandbox
+    single-carrier mode.
+  trigger_patterns:
+  - full local ION
+  - Codex CLI
+  - multi agent ION
+  - API style ION
+  - isolated invocations
+  required_domains:
+  - ion_full_multi_agent_runtime
+  - ion_carrier_embodiment
+  - ion_agent_role
+  - ion_context_system
+  anti_drift_required:
+  - single_carrier_is_fallback_not_base
+  - codex_cli_is_api_like_backend_for_isolated_invocations
+  output_contract:
+    include:
+    - primary architecture
+    - sandbox fallback distinction
+    - context isolation rationale
+    - settlement law
+    forbid:
+    - describing full local as helper mode
+    - implying single-carrier is intended center
+- route_id: route.gpt_sandbox_adaptation
+  description: Explain GPT sandbox ION as full ION adapted to sandbox constraints.
+  trigger_patterns:
+  - GPT sandbox
+  - Custom GPT package
+  - single carrier
+  - sandbox body
+  - ChatGPT ION
+  required_domains:
+  - ion_carrier_embodiment
+  - ion_product_package
+  - ion_state_steward_receipt
+  anti_drift_required:
+  - do_not_call_gpt_reduced_ion
+  - no_external_spawn_claim
+  output_contract:
+    include:
+    - capability limits
+    - sequential role phase law
+    - candidate/export boundary
+    forbid:
+    - production authority claim
+    - external agent spawn claim
+- route_id: route.context_template_receipt
+  description: Explain a bounded ION work action through context package + template
+    + proof + receipt.
+  trigger_patterns:
+  - context package
+  - template law
+  - receipt
+  - proof gate
+  - work packet
+  required_domains:
+  - ion_context_system
+  - ion_template_law
+  - ion_state_steward_receipt
+  - ion_workpacket
+  anti_drift_required:
+  - path_list_is_not_context
+  - template_shape_not_format_only
+  output_contract:
+    include:
+    - context
+    - template
+    - proof
+    - receipt
+    - non-claims
+    forbid:
+    - raw output as state
+- route_id: route.self_knowledge_implementation
+  description: Continue building the self-knowledge domain state.
+  trigger_patterns:
+  - self knowledge
+  - ION about ION
+  - domain state
+  - mount packet
+  - route registry
+  required_domains:
+  - ion_identity
+  - ion_canon_authority
+  - ion_architecture
+  - ion_operations_build
+  anti_drift_required:
+  - activation_not_new_architecture
+  - check_existing_organs_first
+  output_contract:
+    include:
+    - inventory proof
+    - candidate files
+    - validation
+    - next packet
+    forbid:
+    - inventing replacement architecture
+    - broad registry mutation without acceptance
+- route_id: route.ion_recovery_anti_regression
+  description: Explain or audit known ION misunderstanding, stale resurfacing, recovery
+    loops, and anti-regression guards.
+  trigger_patterns:
+  - recovery
+  - anti regression
+  - anti-regression
+  - repeated failure
+  - foundational misunderstanding
+  - stale resurfacing
+  - hallucinated replacement
+  required_domains:
+  - ion_recovery_anti_regression
+  - ion_canon_authority
+  - ion_stale_donor_historical
+  anti_drift_required:
+  - do_not_reconstruct_from_fragments
+  - no_stale_resurfacing
+  - no_hallucinated_replacement
+  output_contract:
+    include:
+    - known failure pattern
+    - authority ranking
+    - containment or recovery action
+    - receipt or next packet
+    forbid:
+    - broad consolidation without proof
+    - erasing mature ION organs during cleanup

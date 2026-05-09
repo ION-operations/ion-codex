@@ -1,0 +1,44 @@
+{
+  "schema": "ion.self_knowledge.active_root_candidate_import_receipt.v0_1",
+  "timestamp": "2026-05-08T21:03:05Z",
+  "status": "candidate_imported_not_accepted_canon",
+  "source_package": "/home/sev/Documents/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATED_CANDIDATE_20260508T045721Z.zip",
+  "active_root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "branch": "feature/codex-capsule-chat-active-root",
+  "imported_paths": [
+    "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+    "ION/05_context/current/SELF_KNOWLEDGE_ORGAN_INVENTORY_V0_2.json",
+    "ION/05_context/current/self_knowledge/",
+    "ION/03_registry/gpt_sandbox_carrier_profile.yaml",
+    "ION/07_templates/carriers/GPT_SANDBOX_CARRIER_SESSION_PACKET.md",
+    "ION/tests/test_kernel_ion_self_knowledge_candidate.py",
+    "ION/tests/test_kernel_ion_self_knowledge_route_usage.py",
+    "ION/tests/test_kernel_ion_self_knowledge_onboarding_wiring.py"
+  ],
+  "preserved_proposal_paths": [
+    "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/02_architecture/ION_SELF_KNOWLEDGE_ONBOARDING_WIRING_PROTOCOL.md",
+    "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/"
+  ],
+  "not_landed_paths": [
+    "ION/02_architecture/ION_SELF_KNOWLEDGE_ONBOARDING_WIRING_PROTOCOL.md",
+    "ION/03_registry/self_knowledge/"
+  ],
+  "authority_boundary": {
+    "candidate_only": true,
+    "accepted_canon": false,
+    "mutates_ION_03_registry_self_knowledge": false,
+    "adds_supporting_non_production_carrier_profile": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "non_claims": [
+    "This receipt does not accept self-knowledge domains as canonical ION law.",
+    "This receipt does not land ION/03_registry/self_knowledge.",
+    "The GPT sandbox carrier profile is imported only as a non-production supporting carrier surface.",
+    "This receipt does not grant production, live execution, secrets, deployment, git push, or arbitrary shell authority.",
+    "This receipt treats the source package as candidate evidence, not law."
+  ],
+  "next_gate": "run focused self-knowledge validation and then hold for explicit Steward/human promotion review before any accepted registry landing"
+}

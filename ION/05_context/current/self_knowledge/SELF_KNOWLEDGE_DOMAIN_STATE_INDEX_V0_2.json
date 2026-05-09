@@ -1,0 +1,616 @@
+{
+  "authority_boundary": {
+    "candidate_only": true,
+    "live_execution_authority": false,
+    "production_authority": false,
+    "requires_acceptance_to_promote_to_ION_03_registry": true,
+    "write_scope_used": "ION/05_context/current/ and generated sandbox export only"
+  },
+  "domain_count": 14,
+  "generated_artifacts": [
+    {
+      "bytes": 34661,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 555,
+      "path": "ION/05_context/current/SELF_KNOWLEDGE_ORGAN_INVENTORY_V0_2.json",
+      "sha256": "20a07352cebf7a7cb03d9c3221dc0cd4b21ad3e9d96bfef3dfead601c5ec1f24"
+    },
+    {
+      "bytes": 6110,
+      "exists": true,
+      "first_meaningful_line": "# ACTIVE ION Self-Knowledge Mount Packet v0.2",
+      "line_count": 153,
+      "path": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+      "sha256": "b6731f083c1ebd0a4d947a39aadc58ea58ad6535792a58e48468caeec93ba404"
+    },
+    {
+      "bytes": 1069,
+      "exists": true,
+      "first_meaningful_line": "# ION Self-Knowledge Candidate Domain State v0.2",
+      "line_count": 26,
+      "path": "ION/05_context/current/self_knowledge/README.md",
+      "sha256": "9a64a9f76bae3dfb6afbdff7b0d73336bd3695e6dcc5933e76c36e38ebbb2f2c"
+    },
+    {
+      "bytes": 28918,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+      "sha256": "4fb34f35826b53254e7a47548eb9787428307897c28b46c9c198b00937a83870"
+    },
+    {
+      "bytes": 4072,
+      "exists": true,
+      "first_meaningful_line": "#!/usr/bin/env python3",
+      "line_count": 107,
+      "path": "ION/05_context/current/self_knowledge/validate_self_knowledge_candidate.py",
+      "sha256": "340b079931fe8acecd80cf64267d9c3da886df80ff115b65b19eec3a33977ea7"
+    },
+    {
+      "bytes": 15220,
+      "exists": true,
+      "first_meaningful_line": "#!/usr/bin/env python3",
+      "line_count": 316,
+      "path": "ION/05_context/current/self_knowledge/simulate_self_knowledge_route_usage.py",
+      "sha256": "42675342fe35efd03bbabb2720238c7313eb87df74e7776dad59a845a8b51da3"
+    },
+    {
+      "bytes": 2505,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 49,
+      "path": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T043119Z.json",
+      "sha256": "eb63053c59c9e05573e1e156663ca28e4beb4b3c4ca75af63dd6b32b20f34d39"
+    },
+    {
+      "bytes": 4521,
+      "exists": true,
+      "first_meaningful_line": "\"\"\"Focused tests for candidate ION self-knowledge domain-state artifacts.",
+      "line_count": 115,
+      "path": "ION/tests/test_kernel_ion_self_knowledge_candidate.py",
+      "sha256": "5f4ee5d68cc8b51866f56a949f564871f78b8c26cf557228f1fd7a3c6ad94108"
+    },
+    {
+      "bytes": 3625,
+      "exists": true,
+      "first_meaningful_line": "\"\"\"Focused tests for candidate ION self-knowledge route usage.",
+      "line_count": 79,
+      "path": "ION/tests/test_kernel_ion_self_knowledge_route_usage.py",
+      "sha256": "6e15c4a5325548700673978a65e056f33b572055df7e68525616bebb4699f6c6"
+    },
+    {
+      "bytes": 2698,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.authority_ranking.v0_2",
+      "line_count": 68,
+      "path": "ION/05_context/current/self_knowledge/candidate_registries/authority_ranking.candidate.yaml",
+      "sha256": "ad1bf1285badd39713d763c2796b4fa057780488784d85845dcec54bde24332a"
+    },
+    {
+      "bytes": 7942,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.domain_registry.v0_2",
+      "line_count": 245,
+      "path": "ION/05_context/current/self_knowledge/candidate_registries/domain_registry.candidate.yaml",
+      "sha256": "31f00d6bdb0a518bdb672a0234069b4099c410db172789a48f7bcd9d6f402a01"
+    },
+    {
+      "bytes": 68515,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.node_registry.v0_2",
+      "line_count": 1886,
+      "path": "ION/05_context/current/self_knowledge/candidate_registries/node_registry.candidate.yaml",
+      "sha256": "f533868b34fca7ffa0d13bc391c3a04c5ed684e2ac9ca58cb3163815385df810"
+    },
+    {
+      "bytes": 900,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.node.v0_2",
+      "line_count": 50,
+      "path": "ION/05_context/current/self_knowledge/candidate_registries/node_schema.candidate.yaml",
+      "sha256": "3fd13c22a813d8d01ef6e6c76709dfd7bb44a483e91e1cbc2aab02e41f87093e"
+    },
+    {
+      "bytes": 4821,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.route_registry.v0_2",
+      "line_count": 177,
+      "path": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+      "sha256": "c58757478bb92176e4227751d6d3d99a86c373939c618cc238a52b8e4de7bfb1"
+    },
+    {
+      "bytes": 2140,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.state_classification.v0_2",
+      "line_count": 60,
+      "path": "ION/05_context/current/self_knowledge/candidate_registries/state_classification.candidate.yaml",
+      "sha256": "c42249c835de294e9347c92ef2da98b7a4f80429dbcee7d609d6ec86f18c10bd"
+    },
+    {
+      "bytes": 2478,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 85,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_agent_role.domain_packet.yaml",
+      "sha256": "b4657959c0805c9de5770ba696026e1a2d1e16d1075e50ca300eda3927f92086"
+    },
+    {
+      "bytes": 2527,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 85,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_architecture.domain_packet.yaml",
+      "sha256": "cd0bb55bc9349f2f9a6bbc3f956897ac87ba58d998bf64030bdb576169f1f068"
+    },
+    {
+      "bytes": 2429,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 85,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_canon_authority.domain_packet.yaml",
+      "sha256": "c1aa99a73d576ac1f060d114a9865c094055f7a543a5ba77e63afd76a78e488c"
+    },
+    {
+      "bytes": 2463,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 84,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_carrier_embodiment.domain_packet.yaml",
+      "sha256": "34a3260b5e4fedae204879d5c560ff25a64842150d2a608505a68530faf5e720"
+    },
+    {
+      "bytes": 2444,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 85,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_context_system.domain_packet.yaml",
+      "sha256": "6bfd5a9952c3d30052d8c0698aa80c56bb12c82c3c8328bd602f5a06acbc8344"
+    },
+    {
+      "bytes": 2671,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 88,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_full_multi_agent_runtime.domain_packet.yaml",
+      "sha256": "901851a0312e452a05365b91a6fa96a1170e338811707ee86392bb777c192f79"
+    },
+    {
+      "bytes": 2337,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 83,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_identity.domain_packet.yaml",
+      "sha256": "54b215f4a1b4e699f4da4d157978b95f6cfcd8119beae6e9c11db5cac87d8d2b"
+    },
+    {
+      "bytes": 2558,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 89,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_operations_build.domain_packet.yaml",
+      "sha256": "8e6dad5c7efe043b2cd1161e057ca5611b1a2515b2cba0bd635e7a2013397dc9"
+    },
+    {
+      "bytes": 2539,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 88,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_product_package.domain_packet.yaml",
+      "sha256": "de783897392481257d3256ca398ed32088bc892ed30e924bde78b0b389869d44"
+    },
+    {
+      "bytes": 2480,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 85,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_recovery_anti_regression.domain_packet.yaml",
+      "sha256": "5bd2502de022a045cfcdb343e4721d022b49f5f3ad79339cf4bc9f253a987c6d"
+    },
+    {
+      "bytes": 2592,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 87,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_stale_donor_historical.domain_packet.yaml",
+      "sha256": "034b17625b6a011b71f64906cdb6750fb04a1f4ebbdc5dd630d73ccc7447c819"
+    },
+    {
+      "bytes": 2510,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 85,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_state_steward_receipt.domain_packet.yaml",
+      "sha256": "bbbc96a94cea0acb28be0db56dd6d2cc7c5d6353eeb57d5927a4e2bd2037c853"
+    },
+    {
+      "bytes": 2476,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 86,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_template_law.domain_packet.yaml",
+      "sha256": "6834c90347321af53d7dcef365a684f800f77f13ef665288920c717251d92863"
+    },
+    {
+      "bytes": 2389,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.domain_packet.v0_2",
+      "line_count": 85,
+      "path": "ION/05_context/current/self_knowledge/domains/ion_workpacket.domain_packet.yaml",
+      "sha256": "038997e74ca403ecb43146547f971c562d1b891cb60c40e135065cb4749ef110"
+    },
+    {
+      "bytes": 1964,
+      "exists": true,
+      "first_meaningful_line": "# ION Self-Knowledge Onboarding Wiring Proposal v0.2",
+      "line_count": 58,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/ONBOARDING_WIRING_PROPOSAL_V0_2.md",
+      "sha256": "bbd8842f00bbd6e670a6a140e247e7c8a02c2ddf30034202d49461c114b264cd"
+    },
+    {
+      "bytes": 7510,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 119,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/PROMOTION_CANDIDATE_MANIFEST_V0_2.json",
+      "sha256": "3b9e65ee114a56377373429f1df3afbf6a8198fa14c2c3e1da58930d90c9ca19"
+    },
+    {
+      "bytes": 551,
+      "exists": true,
+      "first_meaningful_line": "# ION Self-Knowledge Promotion Candidate",
+      "line_count": 11,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/README.md",
+      "sha256": "062d7843437fd20b134c4000294403afb293078ad7b21a5501b5b28ed4a7011e"
+    },
+    {
+      "bytes": 1692,
+      "exists": true,
+      "first_meaningful_line": "# ION Self-Knowledge Registry Promotion Patch Proposal v0.2",
+      "line_count": 38,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/REGISTRY_PROMOTION_PATCH_PROPOSAL_V0_2.md",
+      "sha256": "116ac59fbaca3063fbc73e80275210f41fc731ee46d654273d551d8cf926c116"
+    },
+    {
+      "bytes": 4822,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 104,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ACCEPTANCE_GATE_STATUS_V0_2.json",
+      "sha256": "3a5fa1cc9014aa4cabd3b915cc9877bfd2c3ae9fe2aa1dee9179ef49f55fef6c"
+    },
+    {
+      "bytes": 2547,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 48,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PROMOTION_CANDIDATE_RECEIPT_20260508T041112Z.json",
+      "sha256": "2876432617f38e6fd908eccfc0be4f24c724fd956dd8d5995680583844969b14"
+    },
+    {
+      "bytes": 18553,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 79,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PROMOTION_READINESS_VALIDATION_NOTE_20260508T040908Z.json",
+      "sha256": "f216521289409a9401b7d10c73dfa930b937e104b38b93b7620f6d3c8e3b29f0"
+    },
+    {
+      "bytes": 12001,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 53,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PROMOTION_READINESS_VALIDATION_NOTE_20260508T040948Z.json",
+      "sha256": "43c7b81edf6d2b50e2b2ddf69e6250e7c7b5df520577b9525d0e57c80ed7e680"
+    },
+    {
+      "bytes": 11713,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 51,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PROMOTION_READINESS_VALIDATION_NOTE_20260508T041044Z.json",
+      "sha256": "a1eea96fc89646f9c060eb0e39f1133888eab6fb6acb9223ec83bb43e35ff15c"
+    },
+    {
+      "bytes": 3044,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 48,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_FINAL_VALIDATION_NOTE_20260508T043924Z.json",
+      "sha256": "db68adf1bb38fc773cd138807fcb947270e2ebfda9fcfca73112339f0e0dfd08"
+    },
+    {
+      "bytes": 4966,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 92,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_RECEIPT_20260508T043119Z.json",
+      "sha256": "eb71910efd03170121206db2766a0b5136567f7197550f81406ebb7502637067"
+    },
+    {
+      "bytes": 17342,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 240,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T042848Z.json",
+      "sha256": "5d3d59626e100efbfa90e49ee701e3519481cfdcacd222daa889712e73265bdd"
+    },
+    {
+      "bytes": 20037,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 273,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json",
+      "sha256": "31f3d2e899958999850f768115abdc890c72d6a7d88931fc1081aee0acd6d678"
+    },
+    {
+      "bytes": 1834,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 40,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_VALIDATION_NOTE_20260508T043119Z.json",
+      "sha256": "7b6b7fbc5bc7016dd1bcbc1bc15979282cbcad9e236553196dbc15cedc56e961"
+    },
+    {
+      "bytes": 1159,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 22,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_20260508T040523Z.json",
+      "sha256": "d5b29c3a166b9891028f9ddb604fad2eb2995d2b138e354667a544c856b3854f"
+    },
+    {
+      "bytes": 1591,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 31,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_20260508T043708Z.json",
+      "sha256": "556503ca8dcbaf2870cbdab4936a4e426fa762fbb6844417d12f29b4fd870671"
+    },
+    {
+      "bytes": 1901,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 35,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_FINAL_20260508T043924Z.json",
+      "sha256": "0a817133f98b541cc75af7136d792630512f2ace87335cf1f7586860f7f9a7ea"
+    },
+    {
+      "bytes": 2339,
+      "exists": true,
+      "first_meaningful_line": "# ION Self-Knowledge Registry Promotion Candidate",
+      "line_count": 48,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/README.md",
+      "sha256": "988bfc71bf4e13d3b520206cf89545f3a99f1270e2989a90909189d1ab803679"
+    },
+    {
+      "bytes": 3160,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.authority_ranking.v0_2",
+      "line_count": 79,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/authority_ranking.yaml",
+      "sha256": "8ab2192371701e69af61a5d9382013ef33c6d79cf8639ab58bc8e2c3a4d8beba"
+    },
+    {
+      "bytes": 8376,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.domain_registry.v0_2",
+      "line_count": 250,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/domain_registry.yaml",
+      "sha256": "fe2f64c65fa610c1cc31db03e8ed7e7ff0e15a39eca22304e2fdebd7206ac616"
+    },
+    {
+      "bytes": 68981,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.node_registry.v0_2",
+      "line_count": 1900,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/node_registry.yaml",
+      "sha256": "32fd2f18abea9a6c8b5d915864f7776c59bf44d76dff27287a7aae722f56eecf"
+    },
+    {
+      "bytes": 1313,
+      "exists": true,
+      "first_meaningful_line": "schema: ion.self_knowledge.node.v0_2",
+      "line_count": 50,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/node_schema.yaml",
+      "sha256": "a41ba44ef7008bf16832b9f98eca2bf47907cd423c43adbb7c6b9ccd007b4570"
+    },
+    {
+      "bytes": 5262,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.route_registry.v0_2",
+      "line_count": 183,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/route_registry.yaml",
+      "sha256": "c702754e122d8748526c934529244cfbe096a78d67321a73ccac0bae9dc69ca8"
+    },
+    {
+      "bytes": 2600,
+      "exists": true,
+      "first_meaningful_line": "schema_id: ion.self_knowledge.state_classification.v0_2",
+      "line_count": 69,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/state_classification.yaml",
+      "sha256": "d651d85ac4ebf0574f01fc0b04b0333ac7c7b544d7625cd095274e582751a95d"
+    },
+    {
+      "bytes": 4074,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 96,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_OVERLAY_V0_2.json",
+      "sha256": "74556991f13e5b9a619dbef66a6d5532be99f4006b8e94c4ee9dda656bd28cd2"
+    },
+    {
+      "bytes": 1696,
+      "exists": true,
+      "first_meaningful_line": "# ION Self-Knowledge Onboarding Wiring Protocol v0.2",
+      "line_count": 48,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/02_architecture/ION_SELF_KNOWLEDGE_ONBOARDING_WIRING_PROTOCOL.md",
+      "sha256": "45a30444a1af28011777ec710fb4d21c57a903c4f57274eadde1adc604f9f06a"
+    },
+    {
+      "bytes": 1815,
+      "exists": true,
+      "first_meaningful_line": "# ION Self-Knowledge Onboarding Wiring Proposal v0.3",
+      "line_count": 44,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/ONBOARDING_WIRING_PROPOSAL_V0_3.md",
+      "sha256": "86a0142da161dafba83c81d08295c28503cd815c77605704fe2d0c909b360d0a"
+    },
+    {
+      "bytes": 19398,
+      "exists": true,
+      "first_meaningful_line": "#!/usr/bin/env python3",
+      "line_count": 396,
+      "path": "ION/05_context/current/self_knowledge/simulate_self_knowledge_onboarding_wiring.py",
+      "sha256": "896a9b0d29be6ca7f0508220ea6fb1ea1394ee0636a9b62688af1bd62007d790"
+    },
+    {
+      "bytes": 24979,
+      "exists": true,
+      "first_meaningful_line": "{",
+      "line_count": 699,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json",
+      "sha256": "7abcb7ccdd641dbe645067e66e8eb193ac0067815e2b68482bbb22236d88efc4"
+    },
+    {
+      "bytes": 4760,
+      "exists": true,
+      "first_meaningful_line": "\"\"\"Focused tests for ION self-knowledge onboarding-wiring candidate evidence.",
+      "line_count": 96,
+      "path": "ION/tests/test_kernel_ion_self_knowledge_onboarding_wiring.py",
+      "sha256": "5d0b7f41baa0393c12a4017b82333c2aa5c000231982ca49c768cd5b55ab6d4d"
+    },
+    {
+      "bytes": 3445,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATION_NOTE_20260508T045721Z.json",
+      "sha256": "cffd31176491e28b431865cb4f3c3b143f9cb67b76908a95f73e67cf31dc287c"
+    },
+    {
+      "bytes": 5962,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_RECEIPT_20260508T045721Z.json",
+      "sha256": "91e059ecc2452805ea66644bf6a0b031bf53d350271780dd4293cfdc29d1c68a"
+    },
+    {
+      "bytes": 4526,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_ONBOARDING_20260508T045721Z.json",
+      "sha256": "b6e579a47623a352606b2a28415cb035321328b43da2e7e85d7c2a745ad634f1"
+    },
+    {
+      "bytes": 2967,
+      "exists": true,
+      "path": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T045721Z.json",
+      "sha256": "a536466cbc73ec5e3e00e2f6d8bbde77e57b97dcd2e0d836f6471ee12ca9977d"
+    }
+  ],
+  "generated_at": "2026-05-08T03:51:05+00:00",
+  "last_continuation_at": "2026-05-08T04:57:21+00:00",
+  "next_packet": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T045721Z.json",
+  "node_seed_count": 42,
+  "objective": "Mount ION and start the self-knowledge domain-state workpack: recover existing self-knowledge organs, classify/rank them, seed routable self-knowledge domain state, and export candidate bundle without production/live authority.",
+  "phase_status": {
+    "acceptance_gate": "blocked_on_explicit_acceptance_only",
+    "final_validation": {
+      "note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_FINAL_VALIDATION_NOTE_20260508T043924Z.json",
+      "status": "passed_candidate_validation"
+    },
+    "onboarding_wiring_simulation": {
+      "active_onboarding_mutated": false,
+      "carrier_cases": 8,
+      "carriers_exercised": [
+        "CODEX_CLI_CARRIER",
+        "GPT_SANDBOX_CARRIER"
+      ],
+      "external_carrier_claimed": false,
+      "ion_about_ion_cases": 7,
+      "loaded_domain_count": 14,
+      "matched_routes": [
+        "route.context_template_receipt",
+        "route.full_local_codex_api_ion",
+        "route.gpt_sandbox_adaptation",
+        "route.ion_authority_classification",
+        "route.ion_identity_answer",
+        "route.ion_recovery_anti_regression",
+        "route.self_knowledge_implementation"
+      ],
+      "non_ion_bypass_cases": 1,
+      "receipt": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_RECEIPT_20260508T045721Z.json",
+      "report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json",
+      "status": "passed_candidate_evidence",
+      "validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATION_NOTE_20260508T045721Z.json"
+    },
+    "phase_0_inventory_existing_organs": "complete_candidate",
+    "phase_1_candidate_registries": "complete_candidate_under_current_namespace",
+    "phase_2_domain_packets": "seeded_14_candidate_domains",
+    "phase_3_mount_packet": "complete_candidate",
+    "phase_4_onboarding_wiring": "complete_candidate_simulated_not_landed",
+    "phase_5_tests_audits": "candidate_validation_passed_and_role_returns_integrated",
+    "phase_6_package_integration": "candidate_export_prepared",
+    "route_usage_simulation": {
+      "domains_loaded_across_simulation": 14,
+      "external_codex_claimed": false,
+      "receipt": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_RECEIPT_20260508T043119Z.json",
+      "report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json",
+      "routes_exercised": 7,
+      "status": "passed_candidate_evidence"
+    },
+    "state_surface_sync": {
+      "report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_ONBOARDING_20260508T045721Z.json",
+      "status": "passed"
+    }
+  },
+  "promotion_candidate": {
+    "acceptance_gate": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ACCEPTANCE_GATE_STATUS_V0_2.json",
+    "active_onboarding_mutated": false,
+    "apply_tree": "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/",
+    "final_validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_FINAL_VALIDATION_NOTE_20260508T043924Z.json",
+    "onboarding_wiring_overlay": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_OVERLAY_V0_2.json",
+    "onboarding_wiring_receipt": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_RECEIPT_20260508T045721Z.json",
+    "onboarding_wiring_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_SIMULATION_REPORT_20260508T045721Z.json",
+    "onboarding_wiring_validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ONBOARDING_WIRING_VALIDATION_NOTE_20260508T045721Z.json",
+    "promotion_manifest": "ION/05_context/current/self_knowledge/promotion_candidate/PROMOTION_CANDIDATE_MANIFEST_V0_2.json",
+    "route_usage_receipt": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_RECEIPT_20260508T043119Z.json",
+    "route_usage_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json",
+    "route_usage_validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_VALIDATION_NOTE_20260508T043119Z.json",
+    "state_surface_sync_report": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_STATE_SURFACE_SYNC_REPORT_ONBOARDING_20260508T045721Z.json",
+    "status": "promotion_ready_candidate_with_onboarding_wiring_validated_blocked_on_explicit_acceptance_only",
+    "target_registry_mutated": false
+  },
+  "route_count": 7,
+  "schema_id": "ion.self_knowledge.domain_state_index.v0_2",
+  "status": "promotion_ready_candidate_with_onboarding_wiring_validated_blocked_on_explicit_acceptance_only",
+  "validation_summary": {
+    "active_onboarding_mutated": false,
+    "candidate_validation_passed": true,
+    "domain_count": 14,
+    "external_codex_claimed": false,
+    "focused_pytest_passed": true,
+    "focused_tests_count": 17,
+    "ion_status_ready": true,
+    "loaded_domain_count": 14,
+    "onboarding_wiring_carriers_exercised": [
+      "CODEX_CLI_CARRIER",
+      "GPT_SANDBOX_CARRIER"
+    ],
+    "onboarding_wiring_case_count": 8,
+    "onboarding_wiring_ion_cases": 7,
+    "onboarding_wiring_loaded_domain_count": 14,
+    "onboarding_wiring_non_ion_bypass_cases": 1,
+    "onboarding_wiring_simulation_passed": true,
+    "route_count": 7,
+    "route_usage_case_count": 7,
+    "route_usage_simulation_passed": true,
+    "sandbox_preflight_ready": true,
+    "state_surface_sync_passed": true,
+    "target_registry_mutated": false
+  },
+  "warnings": [
+    "Candidate registry files were written under ION/05_context/current/self_knowledge rather than ION/03_registry/self_knowledge because the active packet allowed current-state paths but did not authorize registry mutation.",
+    "ION/03_registry/self_knowledge/ has not been mutated.",
+    "Outer zip/internal root name mismatch observed; proceeded conservatively after status/preflight passed.",
+    "Promotion remains blocked on explicit human/Steward acceptance.",
+    "Route-usage simulation is sandbox-local and does not claim external Codex execution.",
+    "Self-knowledge mount packet filename is ACTIVE by candidate convention, but contents state candidate status awaiting Steward/human acceptance.",
+    "Onboarding wiring is simulation-backed candidate evidence only; active carrier onboarding and ION/03_registry remain unmutated pending explicit acceptance."
+  ]
+}

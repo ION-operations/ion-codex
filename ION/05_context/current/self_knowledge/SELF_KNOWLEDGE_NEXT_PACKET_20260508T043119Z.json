@@ -1,0 +1,49 @@
+{
+  "authority_options": [
+    {
+      "option": "human_acceptance_to_promote",
+      "requires": [
+        "explicit operator acceptance using acceptance language, not just 'continue'",
+        "copy promotion apply_tree into ION/03_registry/self_knowledge",
+        "choose accepted/current state class for landed files",
+        "emit settlement receipt",
+        "rerun status, preflight, candidate tests, and route usage tests"
+      ]
+    },
+    {
+      "option": "revise_before_acceptance",
+      "requires": [
+        "operator names revision target or continue with next validation lane",
+        "update candidate registries/domain packets only under current-context candidate namespace",
+        "rerun route usage simulation and focused tests",
+        "emit candidate receipt"
+      ]
+    },
+    {
+      "option": "more_validation_before_acceptance",
+      "requires": [
+        "run onboarding-wiring simulation to prove future carriers can select self-knowledge route before answering ION-about-ION questions",
+        "do not mutate ION/03_registry unless explicit acceptance arrives",
+        "emit onboarding route receipt"
+      ]
+    }
+  ],
+  "generated_at": "2026-05-08T04:35:52+00:00",
+  "inputs": [
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ACCEPTANCE_GATE_STATUS_V0_2.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_RECEIPT_20260508T043119Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/ONBOARDING_WIRING_PROPOSAL_V0_2.md",
+    "ION/tests/test_kernel_ion_self_knowledge_route_usage.py"
+  ],
+  "non_claims": [
+    "This packet is not approval to mutate ION/03_registry.",
+    "This packet is not production readiness.",
+    "This packet does not claim external Codex execution."
+  ],
+  "objective": "After route-usage validation, either explicitly accept/reject/revise the self-knowledge registry promotion mirror or continue with onboarding-wiring simulation without mutating ION/03_registry.",
+  "packet_id": "SELF_KNOWLEDGE_PACKET_ACCEPT_OR_ONBOARDING_WIRING_20260508T043119Z",
+  "recommended_next_action": "If no explicit acceptance is given, run onboarding-wiring simulation against carrier mount surfaces and preserve promotion as candidate-only.",
+  "schema_id": "ion.self_knowledge.next_packet.v0_2",
+  "status": "queued_candidate"
+}

@@ -1,0 +1,84 @@
+schema: ion.self_knowledge.domain_packet.v0_2
+domain_id: ion_recovery_anti_regression
+title: ION Recovery and Anti-Regression Domain
+state_class: candidate_current_state
+authority_rank: 6
+status: draft_candidate_seed
+generated_at: '2026-05-08T03:51:05+00:00'
+purpose: Prevent repeated recovery loops, stale resurfacing, package bloat, and hallucinated replacement
+  architectures.
+primary_questions:
+- What failure is recurring?
+- What gate prevents silent loss?
+- What must not regress?
+required_nodes:
+- ion.recovery.no_silent_loss
+- ion.recovery.stale_gate
+- ion.recovery.regression_tests
+route_ladders:
+  level_0_identity:
+    max_tokens: 150
+    loads:
+    - domain_header
+    - anti_drift_notes
+  level_1_summary:
+    max_tokens: 500
+    loads:
+    - domain_header
+    - evidence_sources
+    - core claims
+  level_2_working:
+    max_tokens: 1500
+    loads:
+    - domain_packet
+    - selected nodes
+    - source ranking
+  level_3_operational:
+    max_tokens: 4000
+    loads:
+    - domain_packet
+    - node evidence
+    - active packet/state surfaces
+  level_4_deep:
+    max_tokens: 12000
+    loads:
+    - domain_packet
+    - node registry
+    - source files
+    - contradictions
+  level_5_implementation:
+    includes_paths: true
+    loads:
+    - source paths
+    - tests/proofs
+    - candidate deltas
+evidence_sources:
+- path: ION/00_BOOTSTRAP/V118_NO_SILENT_LOSS_AND_CONTAINMENT_PRESERVATION_LOCK.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/02_architecture/STALE_SURFACE_AND_LEGACY_TERM_ENFORCEMENT_PROTOCOL.md
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/05_context/current/TRUNK_PRESERVATION_REPORT_V118.json
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/05_context/current/ACTIVE_STALE_SURFACE_AUDIT.json
+  exists: true
+  state_class_hint: current_operational_or_witness
+- path: ION/tests/test_kernel_ion_stale_surface_audit.py
+  exists: true
+  state_class_hint: current_operational_or_witness
+anti_drift_notes:
+- Do not treat narrow test pass as full-system readiness.
+- Recovery should route and contain, not broadly consolidate by vibes.
+specialist_roles:
+- NEMESIS
+- VESTIGE
+- STEWARD
+update_rules:
+  requires_steward: true
+  requires_receipt: true
+  candidate_namespace: ION/05_context/current/self_knowledge/
+non_claims:
+- This domain packet is not accepted canon.
+- This domain packet does not mutate ION/03_registry/self_knowledge unless separately promoted.

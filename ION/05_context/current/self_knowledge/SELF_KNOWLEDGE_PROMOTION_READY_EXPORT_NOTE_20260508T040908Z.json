@@ -1,0 +1,26 @@
+{
+  "changed_surfaces": [
+    "ION/05_context/current/self_knowledge/promotion_candidate/",
+    "ION/tests/test_kernel_ion_self_knowledge_candidate.py",
+    "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+    "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T040908Z.json"
+  ],
+  "generated_at": "2026-05-08T04:09:08+00:00",
+  "next_packet": "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T040908Z.json",
+  "non_claims": [
+    "No ION/03_registry/self_knowledge files were written.",
+    "No human/Steward acceptance was inferred from 'continue'.",
+    "No live external agent, MCP, GitHub, Codex, or production action was performed.",
+    "No full suite was run; focused tests and status/preflight passed."
+  ],
+  "objective": "Continue self-knowledge domain-state workpack by preparing promotion mirror, onboarding wiring proposal, focused tests, validation note, state-surface sync, and next packet without accepted registry landing.",
+  "schema_id": "ion.self_knowledge.promotion_ready_export_note.v0_2",
+  "status": "promotion_ready_candidate_export_prepared",
+  "validation_summary": {
+    "candidate_validation_passed": true,
+    "focused_pytest_passed": false,
+    "focused_tests_count": 6,
+    "ion_status_ready": false,
+    "sandbox_preflight_ready": false
+  }
+}

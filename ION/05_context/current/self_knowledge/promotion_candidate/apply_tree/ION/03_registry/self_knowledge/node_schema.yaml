@@ -1,0 +1,50 @@
+schema: ion.self_knowledge.node.v0_2
+node_id: string
+title: string
+domain_id: string
+state_class:
+- canonical_active
+- current_operational
+- product_projection
+- implementation_surface
+- candidate_current_state
+- draft
+- witness
+- donor
+- deprecated
+- quarantined
+authority_rank: integer
+status: promotion_proposal_pending_human_steward_acceptance
+summary_short: string
+summary_working: string
+summary_deep: string
+key_claims:
+- claim: string
+  support:
+  - path: string
+    evidence_class: runtime_proof | filesystem_proof | cross_corpus_convergence |
+      user_intent_witness | historical_witness | generated_witness
+anti_drift_notes:
+- string
+routes:
+  quick:
+    load_nodes: []
+  working:
+    load_nodes: []
+  deep:
+    load_nodes: []
+  implementation:
+    load_nodes: []
+related_nodes:
+- node_id
+source_paths:
+- path
+last_reviewed_at: timestamp
+review_owner_role: role_id
+receipt_refs: []
+promotion_candidate_generated_at: '2026-05-08T04:05:23+00:00'
+source_candidate_path: ION/05_context/current/self_knowledge/candidate_registries/node_schema.candidate.yaml
+target_registry_path: ION/03_registry/self_knowledge/node_schema.yaml
+non_claim: This mirror is not accepted registry law until explicit human/Steward settlement
+  and receipt.
+original_candidate_status: candidate_current_state_not_accepted_canon

@@ -1,0 +1,92 @@
+{
+  "acceptance_criterion_7_status": "ready_candidate",
+  "coverage": {
+    "case_count": 7,
+    "cases_accepted": 7,
+    "loaded_domain_count": 14,
+    "loaded_domain_union": [
+      "ion_agent_role",
+      "ion_architecture",
+      "ion_canon_authority",
+      "ion_carrier_embodiment",
+      "ion_context_system",
+      "ion_full_multi_agent_runtime",
+      "ion_identity",
+      "ion_operations_build",
+      "ion_product_package",
+      "ion_recovery_anti_regression",
+      "ion_stale_donor_historical",
+      "ion_state_steward_receipt",
+      "ion_template_law",
+      "ion_workpacket"
+    ],
+    "missing_route_coverage": [],
+    "route_count": 7,
+    "routes_exercised": [
+      "route.context_template_receipt",
+      "route.full_local_codex_api_ion",
+      "route.gpt_sandbox_adaptation",
+      "route.ion_authority_classification",
+      "route.ion_identity_answer",
+      "route.ion_recovery_anti_regression",
+      "route.self_knowledge_implementation"
+    ]
+  },
+  "final_validation_note_path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_FINAL_VALIDATION_NOTE_20260508T043924Z.json",
+  "final_validation_note_sha256": "db68adf1bb38fc773cd138807fcb947270e2ebfda9fcfca73112339f0e0dfd08",
+  "generated_at": "2026-05-08T04:31:19+00:00",
+  "inputs": {
+    "domain_packets_dir": "ION/05_context/current/self_knowledge/domains",
+    "domain_registry": "ION/05_context/current/self_knowledge/candidate_registries/domain_registry.candidate.yaml",
+    "domain_registry_sha256": "31f00d6bdb0a518bdb672a0234069b4099c410db172789a48f7bcd9d6f402a01",
+    "mount_packet": "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+    "mount_packet_sha256": "b6731f083c1ebd0a4d947a39aadc58ea58ad6535792a58e48468caeec93ba404",
+    "route_registry": "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+    "route_registry_sha256": "c58757478bb92176e4227751d6d3d99a86c373939c618cc238a52b8e4de7bfb1"
+  },
+  "live_execution_authority": false,
+  "non_claims": [
+    "This receipt does not accept or land the self-knowledge registry.",
+    "This receipt does not claim external Codex execution; it records sandbox-local route-usage simulation.",
+    "This receipt does not claim production readiness.",
+    "This receipt is candidate evidence for human/Steward settlement."
+  ],
+  "objective": "Run sandbox-local Codex-style route usage workpacket against the candidate self-knowledge route registry before acceptance.",
+  "production_authority": false,
+  "receipt_id": "SELF_KNOWLEDGE_ROUTE_USAGE_RECEIPT_20260508T043119Z",
+  "report_path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json",
+  "report_sha256": "de5d0e6712338656d2b18a51ce8d55e403c10c4d597c889876f00fdaaaf1700e",
+  "route_registry_change": {
+    "added_route": "route.ion_recovery_anti_regression",
+    "reason": "Initial route usage exposed that all route IDs were exercised but one top-level domain, ion_recovery_anti_regression, had no route coverage. Added a candidate recovery/anti-regression route under current-context candidate registry and promotion mirror.",
+    "target_registry_mutated": false
+  },
+  "schema_id": "ion.self_knowledge.route_usage_receipt.v0_2",
+  "status": "candidate_evidence_ready_not_accepted_canon",
+  "touched_paths": [
+    "ION/05_context/current/self_knowledge/simulate_self_knowledge_route_usage.py",
+    "ION/05_context/current/self_knowledge/candidate_registries/route_registry.candidate.yaml",
+    "ION/05_context/current/self_knowledge/promotion_candidate/apply_tree/ION/03_registry/self_knowledge/route_registry.yaml",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_SIMULATION_REPORT_20260508T043119Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_VALIDATION_NOTE_20260508T043119Z.json",
+    "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ACCEPTANCE_GATE_STATUS_V0_2.json",
+    "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_NEXT_PACKET_20260508T043119Z.json",
+    "ION/tests/test_kernel_ion_self_knowledge_route_usage.py"
+  ],
+  "updated_at": "2026-05-08T04:39:24+00:00",
+  "validation": {
+    "candidate_validation_passed": true,
+    "external_codex_claimed": false,
+    "findings": [],
+    "focused_pytest_passed": true,
+    "focused_pytest_tests_count": 11,
+    "ion_status_ready": true,
+    "live_execution_authority": false,
+    "production_authority": false,
+    "sandbox_preflight_ready": true,
+    "simulation_accepted": true
+  },
+  "validation_note_path": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_ROUTE_USAGE_VALIDATION_NOTE_20260508T043119Z.json",
+  "validation_note_sha256": "7b6b7fbc5bc7016dd1bcbc1bc15979282cbcad9e236553196dbc15cedc56e961",
+  "workpacket": "SELF_KNOWLEDGE_PACKET_PROMOTE_OR_ROUTE_USAGE_20260508T040908Z"
+}

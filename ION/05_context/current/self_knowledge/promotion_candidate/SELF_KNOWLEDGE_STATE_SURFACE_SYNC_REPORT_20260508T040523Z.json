@@ -1,0 +1,22 @@
+{
+  "candidate_accepted_boundary": "consistent: promotion mirror marks pending acceptance; target ION/03_registry/self_knowledge remains absent/unmutated.",
+  "findings": [],
+  "generated_at": "2026-05-08T04:10:44+00:00",
+  "registry_target_mutation_observed": false,
+  "schema_id": "ion.self_knowledge.state_surface_sync_report.v0_2",
+  "status": "candidate_surfaces_aligned_focused_tests_passed",
+  "surfaces_checked": [
+    "ION/05_context/current/SELF_KNOWLEDGE_ORGAN_INVENTORY_V0_2.json",
+    "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+    "ION/05_context/current/self_knowledge/SELF_KNOWLEDGE_DOMAIN_STATE_INDEX_V0_2.json",
+    "ION/05_context/current/self_knowledge/candidate_registries/",
+    "ION/05_context/current/self_knowledge/domains/",
+    "ION/05_context/current/self_knowledge/promotion_candidate/"
+  ],
+  "test_results": {
+    "focused_pytest": "6 passed",
+    "ion_status": "ION_STATUS_READY",
+    "sandbox_preflight": "ION_GPT_SANDBOX_PREFLIGHT_READY",
+    "validation_note": "ION/05_context/current/self_knowledge/promotion_candidate/SELF_KNOWLEDGE_PROMOTION_READINESS_VALIDATION_NOTE_20260508T041044Z.json"
+  }
+}

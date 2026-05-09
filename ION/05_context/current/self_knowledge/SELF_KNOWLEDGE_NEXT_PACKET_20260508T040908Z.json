@@ -1,0 +1,38 @@
+{
+  "authority_options": [
+    {
+      "option": "human_acceptance_to_promote",
+      "requires": [
+        "explicit operator acceptance",
+        "copy apply_tree into ION/03_registry/self_knowledge",
+        "update statuses from promotion_proposal_pending_human_steward_acceptance to current_operational or accepted class chosen by Steward",
+        "emit settlement receipt"
+      ]
+    },
+    {
+      "option": "more_validation_before_acceptance",
+      "requires": [
+        "run at least one local/Codex workpacket using self-knowledge route",
+        "add route usage receipt",
+        "rerun focused tests",
+        "update acceptance gate criterion #7"
+      ]
+    }
+  ],
+  "generated_at": "2026-05-08T04:09:08+00:00",
+  "inputs": [
+    "ION/05_context/current/self_knowledge/promotion_candidate/PROMOTION_CANDIDATE_MANIFEST_V0_2.json",
+    "ION/05_context/current/ACTIVE_ION_SELF_KNOWLEDGE_MOUNT_PACKET.md",
+    "ION/tests/test_kernel_ion_self_knowledge_candidate.py"
+  ],
+  "non_claims": [
+    "This packet is not approval to mutate ION/03_registry.",
+    "This packet is not production readiness.",
+    "This packet does not claim external Codex execution."
+  ],
+  "objective": "Either explicitly accept and land the self-knowledge registry namespace, or run a Codex/local route-usage workpacket against the promotion candidate before acceptance.",
+  "packet_id": "SELF_KNOWLEDGE_PACKET_PROMOTE_OR_ROUTE_USAGE_20260508T040908Z",
+  "recommended_next_action": "Run local/Codex-style route usage simulation in sandbox if no explicit acceptance is given; promote only on explicit acceptance.",
+  "schema_id": "ion.self_knowledge.next_packet.v0_2",
+  "status": "queued_candidate"
+}
