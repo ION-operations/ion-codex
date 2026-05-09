@@ -890,7 +890,7 @@ def build_agent_broker_status(root: str | Path | None = None) -> dict[str, Any]:
         "queued_agent_codex_work_request_count": len(queued_agent_work),
         "next_agent_codex_work_request_path": _connector_rel(_agent_work_requests(shell_root, queued_only=True)[0][0], shell_root) if queued_agent_work else None,
         "latest_state": state,
-        "codex_queue_runner": build_codex_queue_runner_status(shell_root),
+        "codex_queue_runner": build_codex_queue_runner_status(shell_root, reconcile=False),
         "failure_classes": list(FAILURE_CLASSES),
         "tools": {"read": list(READ_TOOL_NAMES), "write": list(WRITE_TOOL_NAMES)},
         "no_parallel_agent_system_created": True,
