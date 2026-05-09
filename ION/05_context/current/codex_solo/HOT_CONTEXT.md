@@ -1,6 +1,6 @@
 # Codex Solo HOT_CONTEXT
 
-generated_at: 2026-05-08T21:30:44+00:00
+generated_at: 2026-05-09T17:35:55+00:00
 witness_policy: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.
 production_authority: false
 live_execution_authority: false
@@ -66,10 +66,11 @@ live_execution_authority: false
 | C-051 | 2026-05-08 | Prepared sanitized ion-sandbox-gpt release root from ION_sandbox snapshot: repaired active GPT sandbox packet, release metadata, Cursor optional test boundary, passed focused release tests, secret scan clean, generated c | `ion-sandbox-gpt/RELEASE_MANIFEST.json, ion-sandbox-gpt/RELEASE_READINESS.md, ion-sandbox-gpt/VALIDATION_REPORT.json, ion-sandbox-gpt/ION/05_context/current/ACTIVE_WORK_PACKET.json, ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py, ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_ROOT_PREP_RECEIPT_20260508T192928Z.json` | IMPLEMENTED |
 | C-052 | 2026-05-08 | Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push receipt. First release commit dda4a89541cc85 | `ion-sandbox-gpt/RELEASE_MANIFEST.json, ion-sandbox-gpt/RELEASE_READINESS.md, ion-sandbox-gpt/VALIDATION_REPORT.json, ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json` | PUBLISHED |
 | C-053 | 2026-05-08 | Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model move policy, skill/lens registries, candida | `ION/04_packages/kernel/ion_dual_codex_chat.py, ION/04_packages/kernel/ion_codex_chat_engine.py, ION/04_packages/kernel/ion_codex_chat_response_carrier.py, ION/04_packages/kernel/ion_codex_solo_context.py, ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json, ION/tests/test_kernel_ion_dual_codex_chat.py, ION/tests/test_kernel_ion_codex_chat_engine.py` | PUBLISHED |
+| C-054 | 2026-05-09 | Recovered lost Codex CLI terminal session and verified final pushed branch state | `ION/05_context/current/codex_solo/recovery/CODEX_SESSION_RECOVERY_20260509T173524Z.md, .codex/config.toml, .codex/hooks/ion_session_start_context.py` | RECOVERED |
 
 ## MINI LOOKUP INDEX
 
-CODEX SOLO MINI INDEX | 2026-05-08T20:12:02+00:00
+CODEX SOLO MINI INDEX | 2026-05-09T17:35:55+00:00
 
 ROLE: lookup/receipt index; Capsule is the minimum working context.
 ACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md
@@ -78,20 +79,20 @@ LONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json
 PACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json
 HISTORY: ION/05_context/current/codex_solo/history
 
-MISSION: Codex Capsule Chat active-root branch publication
-PHASE: feature branch pushed
-LAST_RECEIPT: Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov
-BLOCKER: None
-NEXT: Review/open GitHub PR https://github.com/ION-operations/ION/pull/new/feature/codex-capsule-chat-active-root and decide merge order relative to sandbox GPT release branch.
+MISSION: Codex Capsule Chat active-root branch continuity and recovery
+PHASE: lost_session_recovered_after_push
+LAST_RECEIPT: Recovered lost Codex CLI terminal session and verified final pushed branch state
+BLOCKER: Project hook only auto-loads when Codex starts under the active ION root; global chats must inspect Codex history/session files and the project capsule explicitly.
+NEXT: Use Capsule as minimum context; branch is pushed and synced; next decision is PR/review/merge order for feature/codex-capsule-chat-active-root and release/ion-sandbox-gpt-v1.
 
-ACTIVE_TEMPLATE: codex_capsule_chat_branch_publish
+ACTIVE_TEMPLATE: codex_solo_lost_session_recovery
 
 CAPSULE_LOOKUP:
-- C-049 2026-05-08 IMPLEMENTED: Formalized root source lanes for workpackets, diffs, and ION_sandbox: added lane READMEs, machine-readable ind
 - C-050 2026-05-08 PLANNED: Documented GitHub release strategy for ION_sandbox: recommend a dedicated release/ion-sandbox-gpt-v1 branch wi
 - C-051 2026-05-08 IMPLEMENTED: Prepared sanitized ion-sandbox-gpt release root from ION_sandbox snapshot: repaired active GPT sandbox packet,
 - C-052 2026-05-08 PUBLISHED: Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/sou
 - C-053 2026-05-08 PUBLISHED: Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context sys
+- C-054 2026-05-09 RECOVERED: Recovered lost Codex CLI terminal session and verified final pushed branch state
 
 ROUTE_INDEX: ION/05_context/current/codex_solo/ROUTE.json validates active refs.
 POLICY: Capsule is the minimum working context. Mini is a lookup/receipt index for capsule history. Neither overrides current repo authority, tests, receipts, or explicit operator instructions.
@@ -100,7 +101,7 @@ POLICY: Capsule is the minimum working context. Mini is a lookup/receipt index f
 ## LONG HORIZON CAPSULE INDEX
 
 {
-  "capsule_entry_count": 53,
+  "capsule_entry_count": 54,
   "epoch_count": 6,
   "latest_epochs": [
     {
@@ -432,7 +433,7 @@ POLICY: Capsule is the minimum working context. Mini is a lookup/receipt index f
       ]
     },
     {
-      "date_end": "2026-05-08",
+      "date_end": "2026-05-09",
       "date_start": "2026-05-08",
       "epoch_id": "E-006",
       "evidence_refs": [
@@ -449,14 +450,18 @@ POLICY: Capsule is the minimum working context. Mini is a lookup/receipt index f
         "ION/04_packages/kernel/ion_codex_solo_context.py",
         "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json",
         "ION/tests/test_kernel_ion_dual_codex_chat.py",
-        "ION/tests/test_kernel_ion_codex_chat_engine.py"
+        "ION/tests/test_kernel_ion_codex_chat_engine.py",
+        "ION/05_context/current/codex_solo/recovery/CODEX_SESSION_RECOVERY_20260509T173524Z.md",
+        ".codex/config.toml",
+        ".codex/hooks/ion_session_start_context.py"
       ],
-      "row_count": 3,
-      "row_end": "C-053",
+      "row_count": 4,
+      "row_end": "C-054",
       "row_start": "C-051",
       "status_counts": {
         "IMPLEMENTED": 1,
-        "PUBLISHED": 2
+        "PUBLISHED": 2,
+        "RECOVERED": 1
       },
       "summaries": [
         {
@@ -476,6 +481,12 @@ POLICY: Capsule is the minimum working context. Mini is a lookup/receipt index f
           "id": "C-053",
           "status": "PUBLISHED",
           "summary": "Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov"
+        },
+        {
+          "date": "2026-05-09",
+          "id": "C-054",
+          "status": "RECOVERED",
+          "summary": "Recovered lost Codex CLI terminal session and verified final pushed branch state"
         }
       ]
     }
@@ -618,36 +629,36 @@ POLICY: Capsule is the minimum working context. Mini is a lookup/receipt index f
 {
   "entries": [
     {
-      "bytes": 29280,
+      "bytes": 29551,
       "classification": "codex_solo_minimum_working_context",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/CAPSULE.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "26c7fd472d6d5d8205c8d7f36b606287bc4d4883f08c09456af82df6c0ef44d3",
+      "sha256": "0cb0fadbbb15edab96477c09d100d638b9445291226adc3656ac2911207eaf2c",
       "why": "Minimum context the standalone Codex lane must always carry."
     },
     {
-      "bytes": 1952,
+      "bytes": 2006,
       "classification": "codex_solo_lookup_receipt_index",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/MINI.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "0077dc437a4b124a47a037f9df2310e6d285846b3f6172284f76828c481a0927",
+      "sha256": "fba83b1d26a2b0a4387f835b394adbc151b9cd3234d9871414c270e5badcb880",
       "why": "Lookup index and receipt summary for capsule history."
     },
     {
-      "bytes": 37840,
+      "bytes": 38678,
       "classification": "codex_solo_long_horizon_index",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
       "repo_relative": true,
       "required": true,
-      "sha256": "520646e3fd91e985acff2a66d390902b2607af500ce71c8336a8ba9cabdf35bd",
+      "sha256": "c970971b30bad9f6be005ddc5a4a89d347da4ec228fb21107390d0faf483fb1d",
       "why": "Compressed long-horizon capsule index for older continuity lookup."
     },
     {
@@ -796,7 +807,7 @@ POLICY: Capsule is the minimum working context. Mini is a lookup/receipt index f
 
 ### ION/05_context/current/codex_solo/MINI.md
 
-CODEX SOLO MINI INDEX | 2026-05-08T20:12:02+00:00
+CODEX SOLO MINI INDEX | 2026-05-09T17:35:55+00:00
 
 ROLE: lookup/receipt index; Capsule is the minimum working context.
 ACTIVE_CAPSULE: ION/05_context/current/codex_solo/CAPSULE.md
@@ -805,25 +816,24 @@ LONG_HORIZON: ION/05_context/current/codex_solo/LONG_HORIZON.json
 PACKAGES: ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json
 HISTORY: ION/05_context/current/codex_solo/history
 
-MISSION: Codex Capsule Chat active-root branch publication
-PHASE: feature branch pushed
-LAST_RECEIPT: Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov
-BLOCKER: None
-NEXT: Review/open GitHub PR https://github.com/ION-operations/ION/pull/new/feature/codex-capsule-chat-active-root and decide merge order relative to sandbox GPT release branch.
+MISSION: Codex Capsule Chat active-root branch continuity and recovery
+PHASE: lost_session_recovered_after_push
+LAST_RECEIPT: Recovered lost Codex CLI terminal session and verified final pushed branch state
+BLOCKER: Project hook only auto-loads when Codex starts under the active ION root; global chats must inspect Codex history/session files and the project capsule explicitly.
+NEXT: Use Capsule as minimum context; branch is pushed and synced; next decision is PR/review/merge order for feature/codex-capsule-chat-active-root and release/ion-sandbox-gpt-v1.
 
-ACTIVE_TEMPLATE: codex_capsule_chat_branch_publish
+ACTIVE_TEMPLATE: codex_solo_lost_session_recovery
 
 CAPSULE_LOOKUP:
-- C-049 2026-05-08 IMPLEMENTED: Formalized root source lanes for workpackets, diffs, and ION_sandbox: added lane READMEs, machine-readable ind
 - C-050 2026-05-08 PLANNED: Documented GitHub release strategy for ION_sandbox: recommend a dedicated release/ion-sandbox-gpt-v1 branch wi
 - C-051 2026-05-08 IMPLEMENTED: Prepared sanitized ion-sandbox-gpt release root from ION_sandbox snapshot: repaired active GPT sandbox packet,
 - C-052 2026-05-08 PUBLISHED: Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/sou
-- C-053 2026-05-08 PUBLISHED: Published feature/codex-capsule-cha
+- C-053 2026-05-08 PUBLISHED: Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/C
 
 ### ION/05_context/current/codex_solo/LONG_HORIZON.json
 
 {
-  "capsule_entry_count": 53,
+  "capsule_entry_count": 54,
   "epoch_count": 6,
   "epoch_size_rows": 10,
   "epochs": [

@@ -1,5 +1,5 @@
 {
-  "capsule_entry_count": 53,
+  "capsule_entry_count": 54,
   "epoch_count": 6,
   "epoch_size_rows": 10,
   "epochs": [
@@ -332,7 +332,7 @@
       ]
     },
     {
-      "date_end": "2026-05-08",
+      "date_end": "2026-05-09",
       "date_start": "2026-05-08",
       "epoch_id": "E-006",
       "evidence_refs": [
@@ -349,14 +349,18 @@
         "ION/04_packages/kernel/ion_codex_solo_context.py",
         "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json",
         "ION/tests/test_kernel_ion_dual_codex_chat.py",
-        "ION/tests/test_kernel_ion_codex_chat_engine.py"
+        "ION/tests/test_kernel_ion_codex_chat_engine.py",
+        "ION/05_context/current/codex_solo/recovery/CODEX_SESSION_RECOVERY_20260509T173524Z.md",
+        ".codex/config.toml",
+        ".codex/hooks/ion_session_start_context.py"
       ],
-      "row_count": 3,
-      "row_end": "C-053",
+      "row_count": 4,
+      "row_end": "C-054",
       "row_start": "C-051",
       "status_counts": {
         "IMPLEMENTED": 1,
-        "PUBLISHED": 2
+        "PUBLISHED": 2,
+        "RECOVERED": 1
       },
       "summaries": [
         {
@@ -376,11 +380,17 @@
           "id": "C-053",
           "status": "PUBLISHED",
           "summary": "Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov"
+        },
+        {
+          "date": "2026-05-09",
+          "id": "C-054",
+          "status": "RECOVERED",
+          "summary": "Recovered lost Codex CLI terminal session and verified final pushed branch state"
         }
       ]
     }
   ],
-  "generated_at": "2026-05-08T21:30:44+00:00",
+  "generated_at": "2026-05-09T17:35:55+00:00",
   "latest_epochs": [
     {
       "date_end": "2026-05-07",
@@ -711,7 +721,7 @@
       ]
     },
     {
-      "date_end": "2026-05-08",
+      "date_end": "2026-05-09",
       "date_start": "2026-05-08",
       "epoch_id": "E-006",
       "evidence_refs": [
@@ -728,14 +738,18 @@
         "ION/04_packages/kernel/ion_codex_solo_context.py",
         "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json",
         "ION/tests/test_kernel_ion_dual_codex_chat.py",
-        "ION/tests/test_kernel_ion_codex_chat_engine.py"
+        "ION/tests/test_kernel_ion_codex_chat_engine.py",
+        "ION/05_context/current/codex_solo/recovery/CODEX_SESSION_RECOVERY_20260509T173524Z.md",
+        ".codex/config.toml",
+        ".codex/hooks/ion_session_start_context.py"
       ],
-      "row_count": 3,
-      "row_end": "C-053",
+      "row_count": 4,
+      "row_end": "C-054",
       "row_start": "C-051",
       "status_counts": {
         "IMPLEMENTED": 1,
-        "PUBLISHED": 2
+        "PUBLISHED": 2,
+        "RECOVERED": 1
       },
       "summaries": [
         {
@@ -755,6 +769,12 @@
           "id": "C-053",
           "status": "PUBLISHED",
           "summary": "Published feature/codex-capsule-chat-active-root with active-root Codex Capsule Chat, Mini/Capsule context system, chat engine, response carrier, JOC-style shell modules, model mov"
+        },
+        {
+          "date": "2026-05-09",
+          "id": "C-054",
+          "status": "RECOVERED",
+          "summary": "Recovered lost Codex CLI terminal session and verified final pushed branch state"
         }
       ]
     }

@@ -1,36 +1,36 @@
 {
   "entries": [
     {
-      "bytes": 29280,
+      "bytes": 29551,
       "classification": "codex_solo_minimum_working_context",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/CAPSULE.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "26c7fd472d6d5d8205c8d7f36b606287bc4d4883f08c09456af82df6c0ef44d3",
+      "sha256": "0cb0fadbbb15edab96477c09d100d638b9445291226adc3656ac2911207eaf2c",
       "why": "Minimum context the standalone Codex lane must always carry."
     },
     {
-      "bytes": 1952,
+      "bytes": 2006,
       "classification": "codex_solo_lookup_receipt_index",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/MINI.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "0077dc437a4b124a47a037f9df2310e6d285846b3f6172284f76828c481a0927",
+      "sha256": "fba83b1d26a2b0a4387f835b394adbc151b9cd3234d9871414c270e5badcb880",
       "why": "Lookup index and receipt summary for capsule history."
     },
     {
-      "bytes": 37840,
+      "bytes": 38678,
       "classification": "codex_solo_long_horizon_index",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
       "repo_relative": true,
       "required": true,
-      "sha256": "520646e3fd91e985acff2a66d390902b2607af500ce71c8336a8ba9cabdf35bd",
+      "sha256": "c970971b30bad9f6be005ddc5a4a89d347da4ec228fb21107390d0faf483fb1d",
       "why": "Compressed long-horizon capsule index for older continuity lookup."
     },
     {
@@ -158,40 +158,40 @@
   "live_execution_authority": false,
   "production_authority": false,
   "schema_id": "ion.codex_solo_route.v1",
-  "updated_at": "2026-05-08T21:30:44+00:00",
+  "updated_at": "2026-05-09T17:35:55+00:00",
   "validation": {
     "entries": [
       {
-        "bytes": 29280,
+        "bytes": 29551,
         "classification": "codex_solo_minimum_working_context",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/CAPSULE.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "26c7fd472d6d5d8205c8d7f36b606287bc4d4883f08c09456af82df6c0ef44d3",
+        "sha256": "0cb0fadbbb15edab96477c09d100d638b9445291226adc3656ac2911207eaf2c",
         "why": "Minimum context the standalone Codex lane must always carry."
       },
       {
-        "bytes": 1952,
+        "bytes": 2006,
         "classification": "codex_solo_lookup_receipt_index",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/MINI.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "0077dc437a4b124a47a037f9df2310e6d285846b3f6172284f76828c481a0927",
+        "sha256": "fba83b1d26a2b0a4387f835b394adbc151b9cd3234d9871414c270e5badcb880",
         "why": "Lookup index and receipt summary for capsule history."
       },
       {
-        "bytes": 37840,
+        "bytes": 38678,
         "classification": "codex_solo_long_horizon_index",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
         "repo_relative": true,
         "required": true,
-        "sha256": "520646e3fd91e985acff2a66d390902b2607af500ce71c8336a8ba9cabdf35bd",
+        "sha256": "c970971b30bad9f6be005ddc5a4a89d347da4ec228fb21107390d0faf483fb1d",
         "why": "Compressed long-horizon capsule index for older continuity lookup."
       },
       {
