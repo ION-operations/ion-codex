@@ -181,6 +181,25 @@ Steward may emit:
 
 None of these roles may silently assume the other's authority class.
 
+## 5.1 Protocol Dispute Response Gate
+
+When the user raises a protocol dispute, mount dispute, connector misuse claim,
+state acceptance dispute, or trust repair issue, the final user-facing response
+must pass through Persona Interface after Relay and Steward boundaries are
+respected.
+
+The carrier must either:
+
+- render a visible Persona envelope with route, confidence, gesture, boundaries,
+  and tailored response; or
+- declare `persona_gate_blocked` and name the missing proof.
+
+This requirement does not expose hidden chain-of-thought. Visible
+`inner_monologue` fields are operator-facing persona telemetry only.
+
+Connector-use disputes activate connector containment: Action Gateway and MCP
+remain disabled until the user explicitly re-enables one exact connector action.
+
 ## 6. Promotion status
 
 Persona Interface is provisional until it passes semantic review, contradiction
