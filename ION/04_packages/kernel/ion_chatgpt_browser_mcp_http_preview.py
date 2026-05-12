@@ -268,6 +268,12 @@ def _tool_schema(name: str) -> dict[str, Any]:
             "properties": {"limit": {"type": "integer", "minimum": 1, "maximum": 100}},
             "additionalProperties": False,
         }
+    if name == "ion_codex_queue_duplicate_audit":
+        return {
+            "type": "object",
+            "properties": {"limit": {"type": "integer", "minimum": 1, "maximum": 100}},
+            "additionalProperties": False,
+        }
     if name == "ion_file_read":
         return {
             "type": "object",
@@ -442,6 +448,63 @@ def _tool_schema(name: str) -> dict[str, Any]:
             "required": ["confirmation"],
             "additionalProperties": False,
         }
+    if name == "ion_codex_queue_supersede_duplicates":
+        return {
+            "type": "object",
+            "properties": {
+                "confirmation": {"type": "string"},
+                "idempotency_key": {"type": "string"},
+                "all_duplicates": {"type": "boolean"},
+                "group_key": {"type": "string"},
+                "dedupe_key": {"type": "string"},
+                "objective_sha256": {"type": "string"},
+                "request_ids": {"type": "array", "items": {"type": "string"}, "maxItems": 100},
+                "reason": {"type": "string"},
+                "force_new": {"type": "boolean"},
+            },
+            "required": ["confirmation", "idempotency_key"],
+            "additionalProperties": False,
+        }
+
+    if name in {"ion_bounded_patch_preview", "ion_bounded_patch_apply"}:
+        operation_schema = {
+            "type": "object",
+            "properties": {
+                "path": {"type": "string"},
+                "target_path": {"type": "string"},
+                "old_text": {"type": "string"},
+                "new_text": {"type": "string"},
+                "expected_sha256": {"type": "string"},
+            },
+            "additionalProperties": False,
+        }
+        properties = {
+            "operations": {"type": "array", "items": operation_schema, "maxItems": 25},
+            "path": {"type": "string"},
+            "target_path": {"type": "string"},
+            "old_text": {"type": "string"},
+            "new_text": {"type": "string"},
+            "expected_sha256": {"type": "string"},
+        }
+        required = []
+        if name == "ion_bounded_patch_apply":
+            properties.update({
+                "confirmation": {"type": "string"},
+                "idempotency_key": {
+                    "type": "string",
+                    "description": "Stable key for safe retries; repeated keys return the original patch receipt.",
+                },
+                "client_request_id": {"type": "string"},
+                "force_new": {"type": "boolean"},
+            })
+            required = ["confirmation"]
+        return {
+            "type": "object",
+            "properties": properties,
+            "required": required,
+            "additionalProperties": False,
+        }
+
     if name == "ion_file_put_text":
         return {
             "type": "object",
@@ -591,6 +654,18 @@ def _tool_schema(name: str) -> dict[str, Any]:
                         "required": ["path"],
                         "additionalProperties": False,
                     },
+                },
+                "idempotency_key": {
+                    "type": "string",
+                    "description": "Stable key for safe retries; repeated keys return the original packet instead of creating a duplicate.",
+                },
+                "client_request_id": {
+                    "type": "string",
+                    "description": "Optional carrier-side request id used for no-receipt/timeout replay recovery.",
+                },
+                "force_new": {
+                    "type": "boolean",
+                    "description": "Explicitly bypass dedupe for intentional duplicate work. Defaults to false.",
                 },
             },
             "required": ["objective", "confirmation"],

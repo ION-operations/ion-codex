@@ -1568,6 +1568,8 @@ def queue_chat_codex_work_packet(
     objective: str,
     confirmation: str,
     source_turn_id: str | None = None,
+    idempotency_key: str | None = None,
+    client_request_id: str | None = None,
 ) -> dict[str, Any]:
     if confirmation != WRITE_CONFIRMATION_TOKEN:
         return {"ok": False, "finding": "bounded_write_confirmation_required", "required_confirmation": WRITE_CONFIRMATION_TOKEN}
@@ -1626,17 +1628,26 @@ def queue_chat_codex_work_packet(
             execution_mode="ion_comms_projection",
             model_move=model_move,
         )
+    stable_key = str(idempotency_key or "").strip()
+    if not stable_key:
+        source = str(source_turn_id or "").strip()
+        key_seed = f"{lane_id}:{source or _sha256_text(queued_text)}"
+        stable_key = f"dual_codex_chat:{_sha256_text(key_seed)}"
+    connector_args = {
+        "objective": queued_text,
+        "codex_model_move": model_move,
+        "required_context_reads": [{"path": ref, "kind": "file", "required": True} for ref in context_refs],
+        "ion_skill_activation": skill_activation,
+        "ion_chat_engine_turn": chat_engine_turn,
+        "request_kind": (chat_engine_turn.get("carrier_strategy") or {}).get("request_kind") if isinstance(chat_engine_turn.get("carrier_strategy"), Mapping) else "codex_work",
+        "idempotency_key": stable_key,
+    }
+    if client_request_id:
+        connector_args["client_request_id"] = client_request_id
     result = call_chatgpt_connector_tool(
         root,
         "ion_request_codex_work_packet",
-        {
-            "objective": queued_text,
-            "codex_model_move": model_move,
-            "required_context_reads": [{"path": ref, "kind": "file", "required": True} for ref in context_refs],
-            "ion_skill_activation": skill_activation,
-            "ion_chat_engine_turn": chat_engine_turn,
-            "request_kind": (chat_engine_turn.get("carrier_strategy") or {}).get("request_kind") if isinstance(chat_engine_turn.get("carrier_strategy"), Mapping) else "codex_work",
-        },
+        connector_args,
     )
     data = result.get("data") if isinstance(result.get("data"), Mapping) else {}
     link = {

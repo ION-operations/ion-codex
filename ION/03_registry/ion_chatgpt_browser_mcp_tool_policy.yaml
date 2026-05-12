@@ -17,6 +17,7 @@ allowed_status_read_tools:
   - ion_receipt_search
   - ion_git_status_summary
   - ion_codex_work_queue
+  - ion_codex_queue_duplicate_audit
   - ion_carrier_message_poll
   - ion_file_read
   - ion_file_search
@@ -37,6 +38,7 @@ allowed_status_read_tools:
   - ion_swarm_status
   - ion_codex_capsule_chat_status
   - ion_codex_capsule_message_poll
+  - ion_bounded_patch_preview
 allowed_bounded_queue_receipt_tools:
   - ion_queue_operator_message
   - ion_request_codex_work_packet
@@ -44,6 +46,7 @@ allowed_bounded_queue_receipt_tools:
   - ion_record_chatgpt_decision
   - ion_create_containment_receipt
   - ion_file_put_text
+  - ion_bounded_patch_apply
   - ion_artifact_upload_init
   - ion_artifact_upload_chunk
   - ion_artifact_upload_commit
@@ -54,6 +57,7 @@ allowed_bounded_queue_receipt_tools:
   - ion_agent_cancel
   - ion_swarm_step_once
   - ion_codex_runner_reconcile
+  - ion_codex_queue_supersede_duplicates
   - ion_codex_capsule_message_send
   - ion_codex_capsule_sync_to_queue
 forbidden_tools:
@@ -81,8 +85,25 @@ artifact_transfer_roots:
   - ION/05_context/current/chatgpt_connector/artifacts/
   - ION/05_context/inbox/
   - ION/05_context/signals/
+bounded_patch_roots:
+  - .codex/
+  - docs/
+  - ION/01_doctrine/
+  - ION/02_architecture/
+  - ION/03_registry/
+  - ION/04_packages/kernel/
+  - ION/05_context/current/action_surface_cartography/
+  - ION/05_context/current/chatgpt_connector/
+  - ION/05_context/current/context_settlement/
+  - ION/05_context/inbox/
+  - ION/06_artifacts/
+  - ION/07_templates/
+  - ION/09_integrations/
+  - ION/tests/
 first_full_carrier_tool_surfaces:
   - ion_file_put_text
+  - ion_bounded_patch_preview
+  - ion_bounded_patch_apply
   - ion_artifact_upload_init
   - ion_artifact_upload_chunk
   - ion_artifact_upload_commit

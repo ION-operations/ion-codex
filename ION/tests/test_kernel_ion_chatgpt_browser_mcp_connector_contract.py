@@ -171,6 +171,131 @@ def test_connector_timeout_policy_enforces_minimum_for_cartography_queue_run(tmp
     assert captured["timeout_seconds"] == 900
 
 
+
+def test_codex_work_packet_request_is_idempotent_for_safe_retry(tmp_path):
+    _seed_root(tmp_path)
+    args = {
+        "objective": "B00 duplicate no-receipt retry should not create another work packet",
+        "idempotency_key": "b00-safe-retry-key",
+    }
+
+    first = call_chatgpt_connector_tool(tmp_path, "ion_request_codex_work_packet", args)
+    second = call_chatgpt_connector_tool(tmp_path, "ion_request_codex_work_packet", args)
+    queue = call_chatgpt_connector_tool(tmp_path, "ion_codex_work_queue", {"limit": 10})
+
+    assert first["ok"] is True
+    assert first["mutates_active_state"] is True
+    assert second["ok"] is True
+    assert second["mutates_active_state"] is False
+    assert second["data"]["idempotent_replay"] is True
+    assert second["data"]["duplicate_prevented"] is True
+    assert second["data"]["request_id"] == first["data"]["request_id"]
+    assert second["data"]["packet_path"] == first["data"]["packet_path"]
+    assert len(list((tmp_path / "ION/05_context/current/chatgpt_connector/codex_work_requests").glob("*.json"))) == 1
+    assert queue["data"]["request_count"] == 1
+
+
+def test_codex_work_packet_request_implicit_objective_dedupe_catches_no_receipt_retry(tmp_path):
+    _seed_root(tmp_path)
+    args = {
+        "objective": "Operator retries same objective after no receipt from carrier",
+    }
+
+    first = call_chatgpt_connector_tool(tmp_path, "ion_request_codex_work_packet", args)
+    second = call_chatgpt_connector_tool(tmp_path, "ion_request_codex_work_packet", args)
+    forced = call_chatgpt_connector_tool(tmp_path, "ion_request_codex_work_packet", {**args, "force_new": True})
+    queue = call_chatgpt_connector_tool(tmp_path, "ion_codex_work_queue", {"limit": 10})
+
+    assert first["ok"] is True
+    assert first["data"]["implicit_idempotency_key"] is True
+    assert second["ok"] is True
+    assert second["mutates_active_state"] is False
+    assert second["data"]["idempotent_replay"] is True
+    assert second["data"]["packet_path"] == first["data"]["packet_path"]
+    assert forced["ok"] is True
+    assert forced["data"]["idempotent_replay"] is False
+    assert forced["data"]["packet_path"] != first["data"]["packet_path"]
+    assert queue["data"]["request_count"] == 2
+    assert queue["data"]["duplicate_group_count"] == 1
+
+
+def test_codex_queue_duplicate_audit_and_supersede_preserves_packets(tmp_path):
+    _seed_root(tmp_path)
+    args = {"objective": "B00 duplicated packet family for cleanup"}
+    first = call_chatgpt_connector_tool(tmp_path, "ion_request_codex_work_packet", args)
+    second = call_chatgpt_connector_tool(tmp_path, "ion_request_codex_work_packet", {**args, "force_new": True})
+    third = call_chatgpt_connector_tool(tmp_path, "ion_request_codex_work_packet", {**args, "force_new": True})
+
+    audit = call_chatgpt_connector_tool(tmp_path, "ion_codex_queue_duplicate_audit", {"limit": 10})
+
+    assert first["ok"] is True
+    assert second["ok"] is True
+    assert third["ok"] is True
+    assert audit["ok"] is True
+    assert audit["data"]["duplicate_group_count"] == 1
+    assert audit["data"]["duplicate_request_count"] == 2
+    group = audit["data"]["groups"][0]
+    assert group["canonical_request_id"] == first["data"]["request_id"]
+
+    cleanup = call_chatgpt_connector_tool(
+        tmp_path,
+        "ion_codex_queue_supersede_duplicates",
+        {
+            "confirmation": "ION_BOUNDED_WRITE_CONFIRMED",
+            "idempotency_key": "cleanup-b00-duplicates-001",
+            "all_duplicates": True,
+            "reason": "test duplicate cleanup",
+        },
+    )
+    replay = call_chatgpt_connector_tool(
+        tmp_path,
+        "ion_codex_queue_supersede_duplicates",
+        {
+            "confirmation": "ION_BOUNDED_WRITE_CONFIRMED",
+            "idempotency_key": "cleanup-b00-duplicates-001",
+            "all_duplicates": True,
+            "reason": "test duplicate cleanup",
+        },
+    )
+
+    assert cleanup["ok"] is True
+    assert cleanup["mutates_active_state"] is True
+    assert cleanup["data"]["status"] == "DUPLICATES_SUPERSEDED_NOT_DELETED"
+    assert cleanup["data"]["superseded_count"] == 2
+    assert (tmp_path / cleanup["data"]["receipt_path"]).exists()
+    assert replay["ok"] is True
+    assert replay["mutates_active_state"] is False
+    assert replay["data"]["idempotent_replay"] is True
+    assert replay["data"]["duplicate_prevented"] is True
+    assert replay["data"]["receipt_path"] == cleanup["data"]["receipt_path"]
+
+    request_files = list((tmp_path / "ION/05_context/current/chatgpt_connector/codex_work_requests").glob("*.json"))
+    assert len(request_files) == 3
+    statuses = {json.loads(path.read_text(encoding="utf-8"))["request_id"]: json.loads(path.read_text(encoding="utf-8"))["status"] for path in request_files}
+    assert statuses[first["data"]["request_id"]] == "QUEUED_FOR_CODEX_CARRIER"
+    assert statuses[second["data"]["request_id"]] == "SUPERSEDED_DUPLICATE"
+    assert statuses[third["data"]["request_id"]] == "SUPERSEDED_DUPLICATE"
+
+
+def test_codex_queue_supersede_duplicates_requires_confirmation_and_idempotency(tmp_path):
+    _seed_root(tmp_path)
+    no_confirmation = call_chatgpt_connector_tool(
+        tmp_path,
+        "ion_codex_queue_supersede_duplicates",
+        {"idempotency_key": "missing-confirmation", "all_duplicates": True},
+    )
+    no_key = call_chatgpt_connector_tool(
+        tmp_path,
+        "ion_codex_queue_supersede_duplicates",
+        {"confirmation": "ION_BOUNDED_WRITE_CONFIRMED", "all_duplicates": True},
+    )
+
+    assert no_confirmation["ok"] is False
+    assert no_confirmation["finding"] == "confirmation_required"
+    assert no_key["ok"] is False
+    assert no_key["finding"] == "idempotency_key_required"
+
+
 def test_task_return_requires_context_and_template_action_proof(tmp_path):
     _seed_root(tmp_path)
     receipt = {
@@ -715,3 +840,126 @@ def test_capsule_message_send_writes_bounded_state_and_packet_only(tmp_path):
     assert polled["ok"] is True
     assert polled["data"]["message_count"] >= 1
     assert not queue_dir.exists() or not list(queue_dir.glob("*.json"))
+
+
+def test_bounded_patch_preview_and_apply_with_receipt_and_replay(tmp_path):
+    _seed_root(tmp_path)
+    target = tmp_path / "ION/04_packages/kernel/sample_patch_target.py"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text("VALUE = 1\n", encoding="utf-8")
+    original_sha = hashlib.sha256(target.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
+
+    preview = call_chatgpt_connector_tool(
+        tmp_path,
+        "ion_bounded_patch_preview",
+        {
+            "operations": [
+                {
+                    "path": "ION/04_packages/kernel/sample_patch_target.py",
+                    "old_text": "VALUE = 1\n",
+                    "new_text": "VALUE = 2\n",
+                    "expected_sha256": original_sha,
+                }
+            ]
+        },
+    )
+
+    assert preview["ok"] is True
+    assert preview["mutates_active_state"] is False
+    assert preview["data"]["touched_paths"] == ["ION/04_packages/kernel/sample_patch_target.py"]
+    assert "-VALUE = 1" in preview["data"]["previews"][0]["diff"]
+    assert "+VALUE = 2" in preview["data"]["previews"][0]["diff"]
+
+    applied = call_chatgpt_connector_tool(
+        tmp_path,
+        "ion_bounded_patch_apply",
+        {
+            "confirmation": "ION_BOUNDED_WRITE_CONFIRMED",
+            "idempotency_key": "patch-sample-target-001",
+            "operations": [
+                {
+                    "path": "ION/04_packages/kernel/sample_patch_target.py",
+                    "old_text": "VALUE = 1\n",
+                    "new_text": "VALUE = 2\n",
+                    "expected_sha256": original_sha,
+                }
+            ],
+        },
+    )
+    replay = call_chatgpt_connector_tool(
+        tmp_path,
+        "ion_bounded_patch_apply",
+        {
+            "confirmation": "ION_BOUNDED_WRITE_CONFIRMED",
+            "idempotency_key": "patch-sample-target-001",
+            "operations": [
+                {
+                    "path": "ION/04_packages/kernel/sample_patch_target.py",
+                    "old_text": "VALUE = 1\n",
+                    "new_text": "VALUE = 2\n",
+                    "expected_sha256": original_sha,
+                }
+            ],
+        },
+    )
+
+    assert applied["ok"] is True
+    assert applied["mutates_active_state"] is True
+    assert applied["data"]["status"] == "CANDIDATE_PATCH_APPLIED"
+    assert (tmp_path / applied["data"]["receipt_path"]).exists()
+    assert target.read_text(encoding="utf-8") == "VALUE = 2\n"
+    assert replay["ok"] is True
+    assert replay["mutates_active_state"] is False
+    assert replay["data"]["idempotent_replay"] is True
+    assert replay["data"]["duplicate_prevented"] is True
+    assert replay["data"]["receipt_path"] == applied["data"]["receipt_path"]
+
+
+def test_bounded_patch_blocks_protected_shared_context(tmp_path):
+    _seed_root(tmp_path)
+    target = tmp_path / "ION/05_context/current/codex_solo/CAPSULE.md"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text("# Capsule\n", encoding="utf-8")
+
+    result = call_chatgpt_connector_tool(
+        tmp_path,
+        "ion_bounded_patch_apply",
+        {
+            "confirmation": "ION_BOUNDED_WRITE_CONFIRMED",
+            "operations": [
+                {
+                    "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+                    "old_text": "# Capsule\n",
+                    "new_text": "# Changed\n",
+                }
+            ],
+        },
+    )
+
+    assert result["ok"] is False
+    assert result["finding"] == "protected_shared_context_path_requires_settlement"
+    assert target.read_text(encoding="utf-8") == "# Capsule\n"
+
+
+def test_bounded_patch_blocks_non_allowlisted_path(tmp_path):
+    _seed_root(tmp_path)
+    target = tmp_path / "random.txt"
+    target.write_text("x\n", encoding="utf-8")
+
+    result = call_chatgpt_connector_tool(
+        tmp_path,
+        "ion_bounded_patch_preview",
+        {
+            "operations": [
+                {
+                    "path": "random.txt",
+                    "old_text": "x\n",
+                    "new_text": "y\n",
+                }
+            ],
+        },
+    )
+
+    assert result["ok"] is False
+    assert result["finding"] == "target_path_not_in_bounded_patch_roots"
+    assert target.read_text(encoding="utf-8") == "x\n"
