@@ -31,6 +31,39 @@ RUNNER_STATE_PATH = RUNTIME_DIR / "codex_queue_runner_state.json"
 CODEX_WORK_QUEUE_INDEX = Path("ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json")
 DEFAULT_CODEX_TIMEOUT_SECONDS = 1800
 MAX_CODEX_TIMEOUT_SECONDS = 7200
+MAX_LIVE_PREVIEW_BYTES = 2048
+DEFAULT_LIVE_PREVIEW_BYTES = 512
+MAX_WORKER_LIFECYCLE_EVENTS = 40
+BASE_RETURN_CONTRACT_SECTIONS = (
+    "### CONTEXT PROOF",
+    "### TEMPLATE ACTION PROOF",
+    "### VALIDATION",
+    "### RESULT",
+)
+WORKLOAD_DIFF_SECTION = "### WORKLOAD DIFF"
+WORKLOAD_DIFF_REQUEST_HINTS = (
+    "agent",
+    "cartograph",
+    "probe",
+    "proof",
+    "design",
+)
+MANDATORY_RETURN_SECTIONS = (
+    "### CONTEXT PROOF",
+    "### TEMPLATE ACTION PROOF",
+    "### VALIDATION",
+    "### RESULT",
+    "### WORKLOAD DIFF",
+    "### BLOCKERS",
+    "### RECOMMENDED NEXT PACKET",
+)
+WORKLOAD_TEMPLATE_BY_CLASS = {
+    "proof_repair": "ion.template.autonomous_loop.local_worker.v1",
+    "context_package_materialization": "ion.template.autonomous_loop.local_worker.v1",
+    "code_patch": "ion.template.patch_proposal.v1",
+    "design_report": "ion.template.audit_observation.v1",
+    "cartography": "ion.template.autonomous_loop.local_worker.v1",
+}
 
 FAILURE_CLASSES = (
     "BACKEND_CODEX_FAILURE",
@@ -49,9 +82,21 @@ ACTIVE_RUN_STATUSES = {
 TERMINAL_RUN_STATUSES = {
     "RETURN_RECORDED_PROOF_ACCEPTED",
     "RETURN_RECORDED_PROOF_BLOCKED",
+    "RETURN_TEMPLATE_INVALID",
     "CODEX_CLI_EXIT_NONZERO",
     "CODEX_CLI_TIMEOUT",
     "DAEMON_WORKER_EXITED_WITHOUT_FINALIZATION",
+}
+
+TERMINAL_FAILED_STATUSES = {
+    "CODEX_CLI_EXIT_NONZERO",
+    "CODEX_CLI_TIMEOUT",
+    "DAEMON_WORKER_EXITED_WITHOUT_FINALIZATION",
+}
+
+LIVE_PREVIEW_TARGETS = {
+    "worker_stdout": "worker_stdout_path",
+    "worker_stderr": "worker_stderr_path",
 }
 
 DEFAULT_CONTEXT_READS = (
@@ -85,6 +130,23 @@ def _read_json(path: Path) -> dict[str, Any] | None:
 def _write_json(path: Path, value: Mapping[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _append_worker_lifecycle_event(run: dict[str, Any], event: str, **fields: Any) -> None:
+    events = list(run.get("worker_lifecycle_events") or [])
+    payload = {
+        "event": event,
+        "at": _now(),
+        "run_id": run.get("run_id"),
+        "request_id": run.get("request_id"),
+        "status": run.get("status"),
+        "pid": run.get("pid"),
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+    payload.update({key: value for key, value in fields.items() if value is not None})
+    events.append(payload)
+    run["worker_lifecycle_events"] = events[-MAX_WORKER_LIFECYCLE_EVENTS:]
 
 
 def _resolve_root(root: str | Path | None) -> Path:
@@ -183,6 +245,224 @@ def _run_output_presence(root: Path, run: Mapping[str, Any]) -> dict[str, bool]:
     }
 
 
+def _parse_iso8601(value: Any) -> datetime | None:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    raw = value.strip()
+    if raw.endswith("Z"):
+        raw = raw[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+    return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
+
+
+def _elapsed_seconds(start: datetime | None, end: datetime | None) -> int | None:
+    if start is None or end is None:
+        return None
+    delta = int((end - start).total_seconds())
+    return delta if delta >= 0 else None
+
+
+def _file_meta(root: Path, rel_path: str | None) -> dict[str, Any]:
+    meta: dict[str, Any] = {
+        "path": rel_path,
+        "exists": False,
+        "bytes": None,
+        "modified_at": None,
+        "finding": None,
+    }
+    if not rel_path:
+        return meta
+    try:
+        target = _safe_rel_path(root, rel_path)
+    except ValueError:
+        meta["finding"] = "path_not_repo_relative"
+        return meta
+    if not target.exists() or not target.is_file():
+        return meta
+    stat = target.stat()
+    meta["exists"] = True
+    meta["bytes"] = int(stat.st_size)
+    meta["modified_at"] = datetime.fromtimestamp(stat.st_mtime, timezone.utc).replace(microsecond=0).isoformat()
+    return meta
+
+
+def _latest_event_timestamp(*values: Any) -> str | None:
+    latest: datetime | None = None
+    for value in values:
+        if isinstance(value, str):
+            parsed = _parse_iso8601(value)
+            if parsed and (latest is None or parsed > latest):
+                latest = parsed
+        elif isinstance(value, Mapping):
+            parsed = _parse_iso8601(value.get("modified_at"))
+            if parsed and (latest is None or parsed > latest):
+                latest = parsed
+    return latest.replace(microsecond=0).isoformat() if latest else None
+
+
+def _tail_preview(meta: Mapping[str, Any], root: Path, *, max_bytes: int) -> dict[str, Any]:
+    rel_path = str(meta.get("path") or "")
+    if not rel_path:
+        return {"included": False, "finding": "preview_path_missing"}
+    try:
+        target = _safe_rel_path(root, rel_path)
+    except ValueError:
+        return {"included": False, "finding": "preview_path_not_repo_relative"}
+    if not target.exists() or not target.is_file():
+        return {"included": False, "finding": "preview_path_missing"}
+    data = target.read_bytes()
+    bounded = min(max(int(max_bytes), 1), MAX_LIVE_PREVIEW_BYTES)
+    tail = data[-bounded:]
+    return {
+        "included": True,
+        "path": rel_path,
+        "bytes": len(data),
+        "shown_bytes": len(tail),
+        "truncated": len(data) > len(tail),
+        "text": tail.decode("utf-8", errors="replace"),
+    }
+
+
+def _build_live_worker_telemetry(
+    root: Path,
+    *,
+    state: Mapping[str, Any],
+    active: Mapping[str, Any] | None,
+    active_pid: int | None,
+    active_running: bool,
+    stale_active_run_detected: bool,
+    queued_request_count: int,
+    include_preview: bool,
+    preview_target: str | None,
+    preview_max_bytes: int,
+) -> dict[str, Any]:
+    now = datetime.now(timezone.utc)
+    run_rel = ""
+    if active and isinstance(active.get("run_packet_path"), str):
+        run_rel = str(active.get("run_packet_path") or "")
+    if not run_rel:
+        run_rel = str(state.get("latest_run") or "")
+    run: dict[str, Any] = {}
+    if run_rel:
+        run_path = root / run_rel
+        loaded = _read_json(run_path)
+        if isinstance(loaded, dict):
+            run = loaded
+
+    run_status = str(run.get("status") or "")
+    run_dir = str(run.get("run_dir") or "")
+    worker_stdout_path = f"{run_dir}/worker_stdout.log" if run_dir else None
+    worker_stderr_path = f"{run_dir}/worker_stderr.log" if run_dir else None
+    artifacts = {
+        "run_packet": _file_meta(root, run_rel or None),
+        "stdout": _file_meta(root, str(run.get("stdout_path") or "") or None),
+        "stderr": _file_meta(root, str(run.get("stderr_path") or "") or None),
+        "latest_return": _file_meta(root, str(run.get("last_message_path") or "") or None),
+        "worker_stdout": _file_meta(root, worker_stdout_path),
+        "worker_stderr": _file_meta(root, worker_stderr_path),
+    }
+
+    phase_status = "idle"
+    if stale_active_run_detected:
+        phase_status = "stale-active-reference"
+    elif active_running:
+        phase_status = "active"
+    elif run_status in {"PREPARED_NOT_STARTED", "CLAIMED_BY_CODEX_QUEUE_RUNNER", "CODEX_QUEUE_RUNNER_WORKER_STARTED"}:
+        phase_status = "prepared-not-started"
+    elif run_status == "RETURN_RECORDED_PROOF_ACCEPTED":
+        phase_status = "terminal-accepted"
+    elif run_status == "RETURN_RECORDED_PROOF_BLOCKED":
+        phase_status = "terminal-blocked"
+    elif run_status == "RETURN_TEMPLATE_INVALID":
+        phase_status = "template-invalid"
+    elif run_status in TERMINAL_FAILED_STATUSES:
+        phase_status = "terminal-failed"
+    elif queued_request_count > 0:
+        phase_status = "idle"
+
+    started_at = _parse_iso8601(run.get("started_at")) or _parse_iso8601((active or {}).get("started_at"))
+    completed_at = _parse_iso8601(run.get("completed_at"))
+    elapsed = _elapsed_seconds(started_at, completed_at or now)
+
+    submit = run.get("submit_result") if isinstance(run.get("submit_result"), Mapping) else {}
+    accepted_for_intake = submit.get("accepted_for_carrier_intake")
+    terminal_intake_state = "not-completed"
+    if run_status == "RETURN_RECORDED_PROOF_ACCEPTED" or accepted_for_intake is True:
+        terminal_intake_state = "accepted"
+    elif run_status == "RETURN_TEMPLATE_INVALID":
+        terminal_intake_state = "template_invalid"
+    elif run_status == "RETURN_RECORDED_PROOF_BLOCKED" or accepted_for_intake is False:
+        terminal_intake_state = "blocked"
+    elif run_status in TERMINAL_FAILED_STATUSES:
+        terminal_intake_state = "failed"
+
+    proof_checks = {
+        "context_receipt_exists": _file_meta(root, str(run.get("context_receipt_path") or "") or None).get("exists"),
+        "request_path_exists": _file_meta(root, str(run.get("request_path") or "") or None).get("exists"),
+        "latest_return_exists": artifacts["latest_return"].get("exists"),
+        "submit_result_present": bool(submit),
+    }
+
+    preview: dict[str, Any] = {"requested": bool(include_preview), "included": False}
+    if include_preview:
+        target = str(preview_target or "worker_stdout").strip()
+        if target not in LIVE_PREVIEW_TARGETS:
+            preview["finding"] = "preview_target_not_allowed_public_log_only"
+        elif not run:
+            preview["finding"] = "preview_unavailable_no_run_packet"
+        else:
+            meta_name = target
+            preview = {
+                "requested": True,
+                "target": target,
+                **_tail_preview(artifacts[meta_name], root, max_bytes=preview_max_bytes),
+            }
+
+    return {
+        "schema_id": "ion.codex_worker_live_status.v1",
+        "phase_status": phase_status,
+        "run_status": run_status or None,
+        "worker_lifecycle_events": list(run.get("worker_lifecycle_events") or [])[-MAX_WORKER_LIFECYCLE_EVENTS:],
+        "latest_worker_lifecycle_event": (list(run.get("worker_lifecycle_events") or [])[-1] if run.get("worker_lifecycle_events") else None),
+        "active_worker_pid": active_pid if active_running else None,
+        "active_run_id": run.get("run_id") or (active or {}).get("run_id"),
+        "request_id": run.get("request_id") or (active or {}).get("request_id"),
+        "request_path": run.get("request_path") or (active or {}).get("request_path"),
+        "run_packet_path": run_rel or None,
+        "elapsed_seconds": elapsed,
+        "active_process_running": active_running,
+        "stale_active_reference_detected": stale_active_run_detected,
+        "proof_gate_preflight": {
+            "determinable": bool(run),
+            "checks": proof_checks,
+            "context_proof_accepted": submit.get("context_proof_accepted"),
+            "template_action_proof_accepted": submit.get("template_action_proof_accepted"),
+        },
+        "terminal_intake_result": {
+            "state": terminal_intake_state,
+            "accepted_for_carrier_intake": accepted_for_intake if isinstance(accepted_for_intake, bool) else None,
+            "context_proof_accepted": submit.get("context_proof_accepted"),
+            "template_action_proof_accepted": submit.get("template_action_proof_accepted"),
+            "packet_path": submit.get("packet_path"),
+        },
+        "artifacts": artifacts,
+        "last_heartbeat_or_event_at": _latest_event_timestamp(
+            state.get("updated_at"),
+            run.get("updated_at"),
+            artifacts["run_packet"],
+            artifacts["stdout"],
+            artifacts["stderr"],
+            artifacts["latest_return"],
+            artifacts["worker_stdout"],
+            artifacts["worker_stderr"],
+        ),
+        "preview": preview,
+    }
+
+
 def _refresh_codex_work_queue_index(root: Path) -> dict[str, Any]:
     from .ion_chatgpt_browser_mcp_connector_contract import call_chatgpt_connector_tool
 
@@ -192,7 +472,14 @@ def _refresh_codex_work_queue_index(root: Path) -> dict[str, Any]:
     return queue
 
 
-def build_codex_queue_runner_status(root: str | Path | None = None, *, reconcile: bool = True) -> dict[str, Any]:
+def build_codex_queue_runner_status(
+    root: str | Path | None = None,
+    *,
+    reconcile: bool = True,
+    include_preview: bool = False,
+    preview_target: str | None = None,
+    preview_max_bytes: int = DEFAULT_LIVE_PREVIEW_BYTES,
+) -> dict[str, Any]:
     shell_root = _resolve_root(root)
     reconciliation = reconcile_codex_queue_runner_state(shell_root, write=True) if reconcile else {
         "schema_id": "ion.codex_queue_runner_reconciliation.v1",
@@ -205,6 +492,18 @@ def build_codex_queue_runner_status(root: str | Path | None = None, *, reconcile
     active_pid = int(active.get("pid")) if active and active.get("pid") else None
     active_running = _pid_running(active_pid)
     queued = _queued_request_paths(shell_root)
+    live_worker = _build_live_worker_telemetry(
+        shell_root,
+        state=state,
+        active=active,
+        active_pid=active_pid,
+        active_running=active_running,
+        stale_active_run_detected=bool(reconciliation.get("stale_active_run_detected")),
+        queued_request_count=len(queued),
+        include_preview=include_preview,
+        preview_target=preview_target,
+        preview_max_bytes=preview_max_bytes,
+    )
     return {
         "schema_id": SCHEMA_ID,
         "verdict": READY_VERDICT,
@@ -216,6 +515,7 @@ def build_codex_queue_runner_status(root: str | Path | None = None, *, reconcile
         "active_process_running": active_running,
         "stale_active_run_detected": bool(reconciliation.get("stale_active_run_detected")),
         "reconciliation": reconciliation,
+        "live_worker_telemetry": live_worker,
         "latest_runs": _latest_run_packets(shell_root, limit=5),
         "failure_classes": list(FAILURE_CLASSES),
         "manual_proceed_relay_required": False,
@@ -264,6 +564,81 @@ def _model_move_for_request(root: Path, request: Mapping[str, Any]) -> dict[str,
     )
 
 
+def _request_requires_workload_diff(request: Mapping[str, Any]) -> bool:
+    requested_by = str(request.get("requested_by") or "").strip().lower()
+    if requested_by == "ion_agent_invocation_broker":
+        return True
+    signal_text = " ".join([
+        str(request.get("request_kind") or ""),
+        str(request.get("objective") or ""),
+        str(request.get("agent_role") or ""),
+        str(request.get("agent_role_id") or ""),
+        str(request.get("agent_display_name") or ""),
+    ]).lower()
+    return any(hint in signal_text for hint in WORKLOAD_DIFF_REQUEST_HINTS)
+
+
+def _return_contract_sections_for_request(request: Mapping[str, Any]) -> list[str]:
+    configured = request.get("return_contract_sections")
+    sections: list[str] = []
+    if isinstance(configured, list):
+        for item in configured:
+            section = str(item or "").strip()
+            if section.startswith("### ") and section not in sections:
+                sections.append(section)
+    if not sections:
+        sections = list(BASE_RETURN_CONTRACT_SECTIONS)
+    if _request_requires_workload_diff(request) and WORKLOAD_DIFF_SECTION not in sections:
+        sections.append(WORKLOAD_DIFF_SECTION)
+    return sections
+
+
+def _workload_class_for_request(request: Mapping[str, Any]) -> str:
+    signal = " ".join([
+        str(request.get("request_kind") or ""),
+        str(request.get("objective") or ""),
+        str(request.get("agent_role") or ""),
+    ]).lower()
+    if "proof_repair" in signal or "repair the proof return" in signal:
+        return "proof_repair"
+    if "context_package" in signal and ("materialize" in signal or "materialization" in signal):
+        return "context_package_materialization"
+    if any(token in signal for token in ("cartography", "map", "route")):
+        return "cartography"
+    if any(token in signal for token in ("design", "report", "proposal", "plan")):
+        return "design_report"
+    return "code_patch"
+
+
+def _worker_spawn_contract_for_request(request: Mapping[str, Any], *, timeout_seconds: int) -> dict[str, Any]:
+    required_reads = request.get("required_context_reads")
+    reads = required_reads if isinstance(required_reads, list) else [{"kind": "file", "path": path, "required": True} for path in DEFAULT_CONTEXT_READS]
+    workload_class = _workload_class_for_request(request)
+    return {
+        "schema_id": "ion.codex_worker_spawn_contract.v1",
+        "template_id": WORKLOAD_TEMPLATE_BY_CLASS.get(workload_class, "ion.template.autonomous_loop.local_worker.v1"),
+        "action_id": "codex_queue_runner_process_once",
+        "work_request_id": str(request.get("request_id") or ""),
+        "workload_class": workload_class,
+        "runtime_budget_seconds": int(timeout_seconds),
+        "soft_deadline_seconds": max(30, int(timeout_seconds * 0.8)),
+        "hard_timeout_seconds": int(timeout_seconds),
+        "authority_boundaries": {
+            "production_authority": False,
+            "live_execution_authority": False,
+            "ion_identity_claim": False,
+        },
+        "required_context_reads": reads,
+        "proof_obligations": {
+            "context_proof_format": "path/sha256/excerpt for each required read",
+            "template_action_proof_required_fields": ["template_id", "action_id", "result", "touched_paths|no_touched_paths"],
+            "workload_diff_required": True,
+        },
+        "return_contract_sections": list(MANDATORY_RETURN_SECTIONS),
+        "settlement_posture": "candidate_only_blocked_returns_preserved",
+    }
+
+
 def _codex_command(codex_binary: str, model_move: Mapping[str, Any], last_message_rel: str) -> list[str]:
     return [
         codex_binary,
@@ -276,7 +651,13 @@ def _codex_command(codex_binary: str, model_move: Mapping[str, Any], last_messag
     ]
 
 
-def _build_prompt(request: Mapping[str, Any], request_rel: str, context_receipt_rel: str, model_move: Mapping[str, Any]) -> str:
+def _build_prompt(
+    request: Mapping[str, Any],
+    request_rel: str,
+    context_receipt_rel: str,
+    model_move: Mapping[str, Any],
+    spawn_contract: Mapping[str, Any],
+) -> str:
     objective = str(request.get("objective") or "")
     request_kind = str(request.get("request_kind") or "codex_work")
     skill_activation = request.get("ion_skill_activation") if isinstance(request.get("ion_skill_activation"), Mapping) else {}
@@ -289,6 +670,8 @@ def _build_prompt(request: Mapping[str, Any], request_rel: str, context_receipt_
     ]
     template_refs = skill_activation.get("activates_templates") if isinstance(skill_activation.get("activates_templates"), list) else []
     template_lines = [f"    - \"{str(ref)}\"" for ref in template_refs[:8]]
+    return_contract_sections = list(spawn_contract.get("return_contract_sections") or _return_contract_sections_for_request(request))
+    return_contract_section_lines = [f"    - \"{section}\"" for section in return_contract_sections]
     return "\n".join([
         "carrier_mount:",
         "  title: \"ION Codex Queue Runner Work Packet\"",
@@ -335,14 +718,23 @@ def _build_prompt(request: Mapping[str, Any], request_rel: str, context_receipt_
         f"  context_receipt_path: \"{context_receipt_rel}\"",
         "  instruction: \"Read the work request and every required path in the context receipt before writing.\"",
         "",
+        "worker_spawn_contract:",
+        f"  schema_id: \"{spawn_contract.get('schema_id')}\"",
+        f"  template_id: \"{spawn_contract.get('template_id')}\"",
+        f"  action_id: \"{spawn_contract.get('action_id')}\"",
+        f"  work_request_id: \"{spawn_contract.get('work_request_id')}\"",
+        f"  workload_class: \"{spawn_contract.get('workload_class')}\"",
+        "",
+        "ion_runtime_budget:",
+        f"  runtime_budget_seconds: {spawn_contract.get('runtime_budget_seconds')}",
+        f"  soft_deadline_seconds: {spawn_contract.get('soft_deadline_seconds')}",
+        f"  hard_timeout_seconds: {spawn_contract.get('hard_timeout_seconds')}",
+        "",
         "return_contract:",
         "  required_sections:",
-        "    - \"### CONTEXT PROOF\"",
-        "    - \"### TEMPLATE ACTION PROOF\"",
-        "    - \"### VALIDATION\"",
-        "    - \"### RESULT\"",
-        "  template_id: \"ion.template.autonomous_loop.local_worker.v1\"",
-        "  action_id_hint: \"codex_queue_runner_process_once\"",
+        *return_contract_section_lines,
+        f"  template_id: \"{spawn_contract.get('template_id')}\"",
+        f"  action_id_hint: \"{spawn_contract.get('action_id')}\"",
         "  template_action_proof_exact_shape: |",
         "    ### TEMPLATE ACTION PROOF",
         "    template_id: ion.template.autonomous_loop.local_worker.v1",
@@ -354,6 +746,34 @@ def _build_prompt(request: Mapping[str, Any], request_rel: str, context_receipt_
         "  result_requirement: \"State touched paths, tests, remaining blockers, and next lawful moves.\"",
         "  touched_paths_requirement: \"Under TEMPLATE ACTION PROOF, include touched_paths as a non-empty YAML list. For read-only/no-edit work, list the work request, run packet, context receipt, or repo-relative source/status files inspected.\"",
         "  proof_rejection_warning: \"Do not omit template_id, action_id, result, or touched_paths; [] and none are not accepted for touched_paths.\"",
+        "",
+        "return_template: |",
+        "  ### CONTEXT PROOF",
+        "  path: ION/...",
+        "  sha256: ...",
+        "  excerpt: \"...\"",
+        "",
+        "  ### TEMPLATE ACTION PROOF",
+        f"  template_id: {spawn_contract.get('template_id')}",
+        f"  action_id: {spawn_contract.get('action_id')}",
+        "  result: <implemented|designed|blocked>",
+        "  touched_paths:",
+        "    - ION/...",
+        "",
+        "  ### VALIDATION",
+        "  - <tests/checks>",
+        "",
+        "  ### RESULT",
+        "  <what changed>",
+        "",
+        "  ### WORKLOAD DIFF",
+        "  - ION/...",
+        "",
+        "  ### BLOCKERS",
+        "  - none",
+        "",
+        "  ### RECOMMENDED NEXT PACKET",
+        "  <one packet>",
         "",
     ])
 
@@ -418,9 +838,10 @@ def prepare_codex_queue_run(
     run_packet_path = run_dir / "run.json"
     _write_json(context_receipt_path, context_receipt)
     model_move = _model_move_for_request(shell_root, request)
-    prompt = _build_prompt(request, request_rel, _connector_rel(context_receipt_path, shell_root), model_move)
-    prompt_path.write_text(prompt, encoding="utf-8")
     timeout = min(max(int(timeout_seconds), 30), MAX_CODEX_TIMEOUT_SECONDS)
+    spawn_contract = _worker_spawn_contract_for_request(request, timeout_seconds=timeout)
+    prompt = _build_prompt(request, request_rel, _connector_rel(context_receipt_path, shell_root), model_move, spawn_contract)
+    prompt_path.write_text(prompt, encoding="utf-8")
     last_message_rel = _connector_rel(last_message_path, shell_root)
     run = {
         "schema_id": "ion.codex_queue_runner_run.v1",
@@ -440,6 +861,7 @@ def prepare_codex_queue_run(
         "codex_model_move": model_move,
         "codex_model_move_summary": summarize_model_move(model_move),
         "codex_command": _codex_command(codex_binary, model_move, last_message_rel),
+        "worker_spawn_contract": spawn_contract,
         "timeout_seconds": timeout,
         "failure_classification": None,
         "production_authority": False,
@@ -528,6 +950,7 @@ def process_codex_queue_once(
         run["status"] = "CODEX_QUEUE_RUNNER_WORKER_STARTED"
         run["pid"] = proc.pid
         run["worker_command"] = cmd
+        _append_worker_lifecycle_event(run, "worker_process_spawned", worker_pid=proc.pid)
         _write_run_packet(run_packet, run)
         _update_runner_state(shell_root, {
             "active_run": {
@@ -536,6 +959,7 @@ def process_codex_queue_once(
                 "run_packet_path": run["run_packet_path"],
                 "request_path": run["request_path"],
                 "started_at": _now(),
+                "latest_worker_lifecycle_event": run["worker_lifecycle_events"][-1],
             },
             "latest_run": run["run_packet_path"],
             "manual_proceed_relay_required": False,
@@ -601,14 +1025,15 @@ def reconcile_codex_queue_runner_state(root: str | Path | None = None, *, write:
     active_running = _pid_running(active_pid)
     result["active_process_running"] = active_running
     result["active_run"] = active
-    if active_running:
-        result["action"] = "active_run_still_running"
-        return result
 
-    result["stale_active_run_detected"] = True
-    result["action"] = "clear_stale_active_reference"
     run_rel = str(active.get("run_packet_path") or "")
     if not run_rel:
+        if active_running:
+            result["action"] = "active_run_still_running"
+            result["finding"] = "active_run_missing_run_packet_path"
+            return result
+        result["stale_active_run_detected"] = True
+        result["action"] = "clear_stale_active_reference"
         result["finding"] = "active_run_missing_run_packet_path"
         if write:
             _update_runner_state(shell_root, {
@@ -621,6 +1046,12 @@ def reconcile_codex_queue_runner_state(root: str | Path | None = None, *, write:
     try:
         run_path = _safe_rel_path(shell_root, run_rel)
     except ValueError:
+        if active_running:
+            result["action"] = "active_run_still_running"
+            result["finding"] = "active_run_run_packet_path_not_repo_relative"
+            return result
+        result["stale_active_run_detected"] = True
+        result["action"] = "clear_stale_active_reference"
         result["finding"] = "active_run_run_packet_path_not_repo_relative"
         if write:
             _update_runner_state(shell_root, {
@@ -632,6 +1063,12 @@ def reconcile_codex_queue_runner_state(root: str | Path | None = None, *, write:
 
     run = _read_json(run_path)
     if not isinstance(run, dict):
+        if active_running:
+            result["action"] = "active_run_still_running"
+            result["finding"] = "active_run_run_packet_missing_or_invalid"
+            return result
+        result["stale_active_run_detected"] = True
+        result["action"] = "clear_stale_active_reference"
         result["finding"] = "active_run_run_packet_missing_or_invalid"
         if write:
             _update_runner_state(shell_root, {
@@ -645,6 +1082,37 @@ def reconcile_codex_queue_runner_state(root: str | Path | None = None, *, write:
     result["run_packet_path"] = _connector_rel(run_path, shell_root)
     result["previous_run_status"] = previous_status
     result["output_presence"] = _run_output_presence(shell_root, run)
+
+    if previous_status in TERMINAL_RUN_STATUSES:
+        result["terminal_active_run_detected"] = True
+        result["action"] = "clear_terminal_active_reference"
+        if previous_status == "RETURN_RECORDED_PROOF_BLOCKED" and not run.get("failure_classification"):
+            result["action"] = "classify_proof_blocked_terminal_run_and_clear_active"
+            if write:
+                run["failure_classification"] = "BACKEND_CODEX_FAILURE"
+                _write_run_packet(run_path, run)
+                request_rel = str(run.get("request_path") or active.get("request_path") or "")
+                if request_rel:
+                    _update_request_status(
+                        shell_root,
+                        request_rel,
+                        status="RETURN_RECORDED_PROOF_BLOCKED",
+                        failure_classification="BACKEND_CODEX_FAILURE",
+                    )
+        if write:
+            _update_runner_state(shell_root, {
+                "active_run": None,
+                "latest_run": _connector_rel(run_path, shell_root),
+                "manual_proceed_relay_required": False,
+            })
+        return result
+
+    if active_running:
+        result["action"] = "active_run_still_running"
+        return result
+
+    result["stale_active_run_detected"] = True
+    result["action"] = "clear_stale_active_reference"
 
     if previous_status in ACTIVE_RUN_STATUSES:
         result["action"] = "mark_daemon_failure_and_clear_active"
@@ -764,6 +1232,7 @@ def run_codex_queue_worker(
     run["status"] = "CODEX_CLI_RUNNING"
     run["pid"] = os.getpid()
     run["started_at"] = _now()
+    _append_worker_lifecycle_event(run, "worker_boot", worker_pid=os.getpid())
     _write_run_packet(run_path, run)
     _update_runner_state(shell_root, {
         "active_run": {
@@ -772,6 +1241,7 @@ def run_codex_queue_worker(
             "run_packet_path": run["run_packet_path"],
             "request_path": run["request_path"],
             "started_at": run["started_at"],
+            "latest_worker_lifecycle_event": run["worker_lifecycle_events"][-1],
         },
         "latest_run": run["run_packet_path"],
         "manual_proceed_relay_required": False,
@@ -815,6 +1285,7 @@ def run_codex_queue_worker(
     if timed_out:
         run["status"] = "CODEX_CLI_TIMEOUT"
         run["failure_classification"] = "CODEX_CLI_FAILURE"
+        _append_worker_lifecycle_event(run, "worker_terminal", terminal_state="timeout", failure_classification="CODEX_CLI_FAILURE")
         _write_run_packet(run_path, run)
         _update_request_status(shell_root, request_rel, status="CODEX_QUEUE_RUNNER_FAILED", failure_classification="CODEX_CLI_FAILURE")
         return {"schema_id": SCHEMA_ID, "ok": False, "result": "CODEX_CLI_TIMEOUT", "run": run}
@@ -822,6 +1293,7 @@ def run_codex_queue_worker(
         run["status"] = "CODEX_CLI_EXIT_NONZERO"
         run["returncode"] = returncode
         run["failure_classification"] = "CODEX_CLI_FAILURE"
+        _append_worker_lifecycle_event(run, "worker_terminal", terminal_state="exit_nonzero", returncode=returncode, failure_classification="CODEX_CLI_FAILURE")
         _write_run_packet(run_path, run)
         _update_request_status(shell_root, request_rel, status="CODEX_QUEUE_RUNNER_FAILED", failure_classification="CODEX_CLI_FAILURE")
         return {"schema_id": SCHEMA_ID, "ok": False, "result": "CODEX_CLI_EXIT_NONZERO", "run": run}
@@ -840,23 +1312,35 @@ def run_codex_queue_worker(
             "work_request_path": request_rel,
         },
     )
-    accepted = bool((submit.get("data") or {}).get("accepted_for_carrier_intake"))
-    run["status"] = "RETURN_RECORDED_PROOF_ACCEPTED" if accepted else "RETURN_RECORDED_PROOF_BLOCKED"
+    submit_data = submit.get("data") if isinstance(submit.get("data"), Mapping) else {}
+    accepted = bool(submit_data.get("accepted_for_carrier_intake"))
+    template_valid = bool(submit_data.get("return_template_valid", True))
+    run["status"] = "RETURN_RECORDED_PROOF_ACCEPTED" if accepted else ("RETURN_TEMPLATE_INVALID" if not template_valid else "RETURN_RECORDED_PROOF_BLOCKED")
     run["returncode"] = returncode
     run["failure_classification"] = None if accepted else "BACKEND_CODEX_FAILURE"
-    run["submit_result"] = submit.get("data")
+    run["submit_result"] = submit_data
     run["completed_at"] = _now()
+    _append_worker_lifecycle_event(
+        run,
+        "worker_terminal",
+        terminal_state="accepted" if accepted else ("template_invalid" if not template_valid else "blocked"),
+        returncode=returncode,
+        task_return_packet_path=submit_data.get("packet_path"),
+        context_proof_accepted=submit_data.get("context_proof_accepted"),
+        template_action_proof_accepted=submit_data.get("template_action_proof_accepted"),
+    )
     _write_run_packet(run_path, run)
     if not accepted:
         _update_request_status(
             shell_root,
             request_rel,
-            status="RETURN_RECORDED_PROOF_BLOCKED",
+            status="RETURN_TEMPLATE_INVALID" if not template_valid else "RETURN_RECORDED_PROOF_BLOCKED",
             failure_classification="BACKEND_CODEX_FAILURE",
         )
     _update_runner_state(shell_root, {
         "active_run": None,
         "latest_run": _connector_rel(run_path, shell_root),
+        "latest_worker_lifecycle_event": run["worker_lifecycle_events"][-1],
         "manual_proceed_relay_required": False,
     })
     return {

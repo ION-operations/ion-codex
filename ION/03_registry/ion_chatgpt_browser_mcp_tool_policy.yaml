@@ -28,12 +28,15 @@ allowed_status_read_tools:
   - ion_tool_manifest
   - ion_daemon_status
   - ion_codex_queue_autorun_status
+  - ion_codex_worker_live_status
   - ion_agent_list
   - ion_agent_status
   - ion_agent_result
   - ion_agent_queue
   - ion_agent_spawn_plan
   - ion_swarm_status
+  - ion_codex_capsule_chat_status
+  - ion_codex_capsule_message_poll
 allowed_bounded_queue_receipt_tools:
   - ion_queue_operator_message
   - ion_request_codex_work_packet
@@ -50,6 +53,9 @@ allowed_bounded_queue_receipt_tools:
   - ion_agent_invoke
   - ion_agent_cancel
   - ion_swarm_step_once
+  - ion_codex_runner_reconcile
+  - ion_codex_capsule_message_send
+  - ion_codex_capsule_sync_to_queue
 forbidden_tools:
   - arbitrary_shell
   - arbitrary_file_write
@@ -95,7 +101,14 @@ next_visibility_tool_surfaces:
 automation_tool_surfaces:
   - ion_daemon_status
   - ion_codex_queue_autorun_status
+  - ion_codex_worker_live_status
   - ion_codex_queue_process_once
+  - ion_codex_runner_reconcile
+capsule_chat_bridge_tool_surfaces:
+  - ion_codex_capsule_chat_status
+  - ion_codex_capsule_message_send
+  - ion_codex_capsule_message_poll
+  - ion_codex_capsule_sync_to_queue
 agent_invocation_broker_tool_surfaces:
   - ion_agent_list
   - ion_agent_status

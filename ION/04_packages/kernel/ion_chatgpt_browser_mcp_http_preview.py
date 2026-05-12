@@ -24,6 +24,7 @@ from .ion_chatgpt_browser_mcp_connector_contract import (
     call_chatgpt_connector_tool,
 )
 from .ion_cockpit_view_model import build_cockpit_view_model
+from .ion_cockpit_service_manager import restart_service
 from .ion_dual_codex_chat import (
     WRITE_CONFIRMATION_TOKEN,
     build_dual_codex_chat_model,
@@ -67,6 +68,98 @@ DEFAULT_BIND_HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
 OUTPUT_RELATIVE_PATH = Path("ION/05_context/current/CHATGPT_BROWSER_HTTP_MCP_PREVIEW_V121.json")
 APP_PATHS = {"/", "/app", "/ion"}
+HELIXION_SITE_NAV_ITEMS = (
+    {"id": "home", "label": "Home", "href": "/", "icon": "home"},
+    {"id": "cockpit", "label": "Cockpit", "href": "/cockpit", "icon": "grid"},
+    {"id": "chat", "label": "Codex Chat", "href": "/cockpit/chat", "icon": "chat"},
+    {"id": "worker", "label": "Worker", "href": "/cockpit/worker", "icon": "pulse"},
+    {"id": "status", "label": "Status JSON", "href": "/app/status.json", "icon": "receipt"},
+    {"id": "health", "label": "Health", "href": "/health", "icon": "check"},
+    {"id": "login", "label": "Login", "href": "/cockpit/login", "icon": "key"},
+)
+
+HELIXION_SITE_CSS = """
+.helix-sitebar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  min-height: 42px;
+  padding: 0 10px;
+  border-bottom: 1px solid #2b343a;
+  background: #080a0b;
+  color: #e7edf0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+.helix-sitebar::before {
+  content: "HELIXION";
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  margin-right: 10px;
+  padding: 0 12px 0 2px;
+  border-right: 1px solid #2b343a;
+  color: #f2c7a7;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+.helix-sitebar a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  max-width: 180px;
+  margin-right: 6px;
+  padding: 5px 9px;
+  border: 1px solid #2b343a;
+  border-radius: 2px;
+  background: #0d1113;
+  color: #96a3aa;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.helix-sitebar a:hover,
+.helix-sitebar a:focus-visible {
+  color: #e7edf0;
+  border-color: #d7ad52;
+  outline: none;
+}
+.helix-sitebar a.is-active {
+  color: #e7edf0;
+  border-color: #d7ad52;
+  background: #151b1e;
+  box-shadow: inset 0 -2px 0 #d7ad52;
+}
+.helix-sitebar svg {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+}
+.helix-sitebar .helix-site-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 820px) {
+  .helix-sitebar {
+    align-items: stretch;
+    overflow-x: auto;
+    padding: 6px 8px;
+  }
+  .helix-sitebar::before {
+    min-height: 30px;
+  }
+  .helix-sitebar a {
+    min-width: max-content;
+  }
+}
+"""
 
 
 def _json_text(value: Any) -> str:
@@ -75,6 +168,75 @@ def _json_text(value: Any) -> str:
 
 def _html_text(value: Any) -> str:
     return html.escape(str(value), quote=True)
+
+
+def _site_icon(name: str) -> str:
+    paths = {
+        "home": '<path d="M5 11.5 12 5l7 6.5V20H8v-6h8v6"/>',
+        "grid": '<path d="M5 5h6v6H5z"/><path d="M13 5h6v6h-6z"/><path d="M5 13h6v6H5z"/><path d="M13 13h6v6h-6z"/>',
+        "chat": '<path d="M5 6.5h14v8.5H9l-4 3V6.5Z"/><path d="M8 9.5h8M8 12h5"/>',
+        "pulse": '<path d="M4 12h4l2-6 4 12 2-6h4"/>',
+        "receipt": '<path d="M7 4h10v16l-2-1.2-2 1.2-2-1.2-2 1.2-2-1.2V4Z"/><path d="M9 8h6M9 12h6M9 16h4"/>',
+        "check": '<path d="M5 12.5 9.5 17 19 7"/>',
+        "key": '<path d="M14 9a4 4 0 1 0-2.6 3.7L13 14.3V17h2.7l1.1 1.1H19v-2.3l-4.2-4.2A4 4 0 0 0 14 9Z"/><path d="M7 9h.01"/>',
+        "link": '<path d="M10 13a5 5 0 0 0 7 0l1-1a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-1 1a5 5 0 0 0 7 7l1-1"/>',
+    }
+    body = paths.get(name, paths["link"])
+    return (
+        '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" '
+        'stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'
+        f"{body}</svg>"
+    )
+
+
+def _site_href(path: str, *, auth_token: str | None = None, public_base_url: str | None = None) -> str:
+    href = path
+    if auth_token and path.startswith("/cockpit") and path not in {"/cockpit/login", "/cockpit/logout"}:
+        href = f"{path}{'&' if '?' in path else '?'}{urlencode({'token': auth_token})}"
+    base = (public_base_url or "").rstrip("/")
+    if base and href.startswith("/"):
+        return f"{base}{href}"
+    return href
+
+
+def render_helixion_site_bar(
+    active: str,
+    *,
+    auth_token: str | None = None,
+    public_base_url: str | None = None,
+) -> str:
+    links = []
+    for item in HELIXION_SITE_NAV_ITEMS:
+        item_id = str(item["id"])
+        active_class = " is-active" if item_id == active else ""
+        current = ' aria-current="page"' if item_id == active else ""
+        href = _site_href(str(item["href"]), auth_token=auth_token, public_base_url=public_base_url)
+        links.append(
+            f'<a class="helix-site-button{active_class}" href="{_html_text(href)}"{current}>'
+            f'{_site_icon(str(item["icon"]))}<span class="helix-site-label">{_html_text(item["label"])}</span>'
+            "</a>"
+        )
+    return f'<nav class="helix-sitebar" aria-label="HelixION site pages">{"".join(links)}</nav>'
+
+
+def wrap_helixion_site_shell(
+    page_html: str,
+    active: str,
+    *,
+    auth_token: str | None = None,
+    public_base_url: str | None = None,
+) -> str:
+    """Inject the shared HelixION site bar into existing cockpit HTML."""
+
+    wrapped = page_html
+    if "</style>" in wrapped:
+        wrapped = wrapped.replace("</style>", HELIXION_SITE_CSS + "\n</style>", 1)
+    elif "</head>" in wrapped:
+        wrapped = wrapped.replace("</head>", f"<style>{HELIXION_SITE_CSS}</style></head>", 1)
+    bar = render_helixion_site_bar(active, auth_token=auth_token, public_base_url=public_base_url)
+    if "<body>" in wrapped:
+        return wrapped.replace("<body>", f"<body>\n{bar}", 1)
+    return bar + wrapped
 
 
 def _tool_schema(name: str) -> dict[str, Any]:
@@ -165,8 +327,39 @@ def _tool_schema(name: str) -> dict[str, Any]:
         }
     if name == "ion_tool_manifest":
         return {"type": "object", "properties": {}, "additionalProperties": False}
+    if name == "ion_codex_capsule_chat_status":
+        return {
+            "type": "object",
+            "properties": {
+                "include_preview": {"type": "boolean"},
+                "max_preview_bytes": {"type": "integer", "minimum": 1, "maximum": 2048},
+            },
+            "additionalProperties": False,
+        }
+    if name == "ion_codex_capsule_message_poll":
+        return {
+            "type": "object",
+            "properties": {
+                "lane_id": {"type": "string"},
+                "since_turn_id": {"type": "string"},
+                "include_assistant": {"type": "boolean"},
+                "include_context_posts": {"type": "boolean"},
+                "limit": {"type": "integer", "minimum": 1, "maximum": 100},
+            },
+            "additionalProperties": False,
+        }
     if name in {"ion_daemon_status", "ion_codex_queue_autorun_status"}:
         return {"type": "object", "properties": {}, "additionalProperties": False}
+    if name == "ion_codex_worker_live_status":
+        return {
+            "type": "object",
+            "properties": {
+                "include_preview": {"type": "boolean"},
+                "preview_target": {"type": "string", "enum": ["worker_stdout", "worker_stderr"]},
+                "max_preview_bytes": {"type": "integer", "minimum": 1, "maximum": 2048},
+            },
+            "additionalProperties": False,
+        }
     if name in {"ion_agent_list", "ion_agent_status", "ion_swarm_status"}:
         return {"type": "object", "properties": {}, "additionalProperties": False}
     if name == "ion_agent_queue":
@@ -234,6 +427,16 @@ def _tool_schema(name: str) -> dict[str, Any]:
                 "request_path": {"type": "string"},
                 "start": {"type": "boolean"},
                 "max_runtime_seconds": {"type": "integer", "minimum": 30, "maximum": 7200},
+                "confirmation": {"type": "string"},
+            },
+            "required": ["confirmation"],
+            "additionalProperties": False,
+        }
+    if name == "ion_codex_runner_reconcile":
+        return {
+            "type": "object",
+            "properties": {
+                "write": {"type": "boolean"},
                 "confirmation": {"type": "string"},
             },
             "required": ["confirmation"],
@@ -325,6 +528,33 @@ def _tool_schema(name: str) -> dict[str, Any]:
                 "confirmation": {"type": "string"},
             },
             "required": ["message_id", "ack_by_carrier", "confirmation"],
+            "additionalProperties": False,
+        }
+    if name == "ion_codex_capsule_message_send":
+        return {
+            "type": "object",
+            "properties": {
+                "lane_id": {"type": "string"},
+                "message": {"type": "string"},
+                "body": {"type": "string"},
+                "author": {"type": "string"},
+                "execution_mode": {"type": "string"},
+                "confirmation": {"type": "string"},
+            },
+            "required": ["confirmation"],
+            "additionalProperties": False,
+        }
+    if name == "ion_codex_capsule_sync_to_queue":
+        return {
+            "type": "object",
+            "properties": {
+                "lane_id": {"type": "string"},
+                "objective": {"type": "string"},
+                "message": {"type": "string"},
+                "source_turn_id": {"type": "string"},
+                "confirmation": {"type": "string"},
+            },
+            "required": ["confirmation"],
             "additionalProperties": False,
         }
     if name == "ion_queue_operator_message":
@@ -545,6 +775,11 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
     base = (public_base_url or "").rstrip("/")
     connector_hint = f"{base}/mcp" if base else "/mcp"
     health_hint = f"{base}/health" if base else "/health"
+    worker_hint = f"{base}/cockpit/worker" if base else "/cockpit/worker"
+    cockpit_hint = f"{base}/cockpit" if base else "/cockpit"
+    chat_hint = f"{base}/cockpit/chat" if base else "/cockpit/chat"
+    login_hint = f"{base}/cockpit/login" if base else "/cockpit/login"
+    status_hint = f"{base}/app/status.json" if base else "/app/status.json"
     status_class = "ready" if audit.get("accepted") else "blocked"
     allowed_tools = audit.get("allowed_tools") if isinstance(audit.get("allowed_tools"), list) else []
     forbidden_tools = audit.get("forbidden_tools") if isinstance(audit.get("forbidden_tools"), list) else []
@@ -552,6 +787,28 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
     tool_items = "\n".join(f"<li><code>{_html_text(tool)}</code></li>" for tool in allowed_tools[:80])
     forbidden_items = "\n".join(f"<li><code>{_html_text(tool)}</code></li>" for tool in forbidden_tools[:80])
     finding_items = "\n".join(f"<li>{_html_text(item)}</li>" for item in findings) or "<li>none</li>"
+    route_cards = "\n".join(
+        (
+            '<a class="route-card" href="{href}">'
+            '<span>{kind}</span>'
+            '<b>{label}</b>'
+            '<p>{summary}</p>'
+            '</a>'
+        ).format(
+            href=_html_text(href),
+            kind=_html_text(kind),
+            label=_html_text(label),
+            summary=_html_text(summary),
+        )
+        for label, kind, href, summary in [
+            ("Operator Cockpit", "HTML", cockpit_hint, "Runtime, queues, services, receipts, and authority state."),
+            ("Codex Chat", "HTML", chat_hint, "Capsule-backed operator chat and bounded queue controls."),
+            ("Worker Telemetry", "HTML", worker_hint, "Live Codex runner status, phase, proof gate, and public artifacts."),
+            ("Cockpit Login", "AUTH", login_hint, "Permission-token or Google account entry for protected pages."),
+            ("Status JSON", "JSON", status_hint, "Connector audit posture for automated checks."),
+            ("Health JSON", "JSON", health_hint, "Readiness endpoint for local preview and tunnel checks."),
+        ]
+    )
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -560,6 +817,7 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
   <meta name="robots" content="noindex,nofollow">
   <title>ION Connector</title>
   <style>
+    {HELIXION_SITE_CSS}
     :root {{
       color-scheme: dark;
       --bg: #101112;
@@ -583,7 +841,7 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
     main {{
       max-width: 1040px;
       margin: 0 auto;
-      padding: 48px 22px 56px;
+      padding: 30px 22px 56px;
     }}
     header {{
       border-bottom: 1px solid var(--line);
@@ -592,9 +850,10 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
     }}
     h1 {{
       margin: 0 0 8px;
-      font-size: clamp(34px, 7vw, 68px);
-      line-height: 0.94;
+      font-size: clamp(24px, 4vw, 40px);
+      line-height: 1;
       letter-spacing: 0;
+      text-transform: uppercase;
     }}
     h2 {{
       margin: 0 0 12px;
@@ -605,7 +864,7 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
     code {{
       background: #0b0c0d;
       border: 1px solid #26292b;
-      border-radius: 6px;
+      border-radius: 2px;
       color: #f5d0b4;
       padding: 2px 5px;
       overflow-wrap: anywhere;
@@ -618,7 +877,7 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
     .card {{
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 2px;
       padding: 16px;
     }}
     .status {{
@@ -627,9 +886,10 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
       gap: 8px;
       padding: 6px 10px;
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-radius: 2px;
       color: var(--muted);
       font-size: 13px;
+      text-transform: uppercase;
     }}
     .dot {{
       width: 9px;
@@ -663,25 +923,69 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
       padding-left: 18px;
       color: var(--muted);
     }}
+    .route-grid {{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0 22px;
+    }}
+    .route-card {{
+      display: grid;
+      gap: 7px;
+      min-height: 128px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: #0d1113;
+      color: var(--text);
+      text-decoration: none;
+    }}
+    .route-card:hover,
+    .route-card:focus-visible {{
+      border-color: var(--accent);
+      outline: none;
+    }}
+    .route-card span {{
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }}
+    .route-card b {{
+      font-size: 14px;
+      text-transform: uppercase;
+    }}
+    .route-card p {{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }}
     @media (max-width: 760px) {{
       .grid {{ grid-template-columns: 1fr; }}
+      .route-grid {{ grid-template-columns: 1fr; }}
       .tools {{ columns: 1; }}
       main {{ padding-top: 28px; }}
     }}
   </style>
 </head>
 <body>
+  {render_helixion_site_bar("home", public_base_url=base)}
   <main>
     <header>
       <div class="status {status_class}"><span class="dot"></span><span>{_html_text(audit.get("verdict"))}</span></div>
       <h1>ION Connector</h1>
       <p>A bounded browser-carrier surface for ION. This page is a status/UI landing surface; MCP tools remain on <code>{_html_text(connector_hint)}</code>.</p>
     </header>
+    <nav class="route-grid" aria-label="HelixION route directory">
+      {route_cards}
+    </nav>
     <section class="grid" aria-label="connector summary">
       <article class="card">
         <h2>Current Surface</h2>
         <p>Endpoint path: <code>{_html_text(audit.get("endpoint_path"))}</code></p>
         <p>Health JSON: <code>{_html_text(health_hint)}</code></p>
+        <p>Worker telemetry: <code>{_html_text(worker_hint)}</code></p>
         <p>Write confirmation required: <code>{_html_text(audit.get("write_confirmation_required"))}</code></p>
       </article>
       <article class="card">
@@ -704,6 +1008,220 @@ def render_ion_connector_landing(root: str | Path, *, public_base_url: str | Non
       </article>
     </section>
   </main>
+</body>
+</html>
+"""
+
+
+def _format_bool(value: Any) -> str:
+    return "true" if bool(value) else "false"
+
+
+def _format_seconds(value: Any) -> str:
+    try:
+        seconds = int(value)
+    except (TypeError, ValueError):
+        return "unknown"
+    minutes, rem = divmod(max(seconds, 0), 60)
+    if minutes:
+        return f"{minutes}m {rem}s"
+    return f"{rem}s"
+
+
+def _worker_artifact_rows(telemetry: Mapping[str, Any]) -> str:
+    artifacts = telemetry.get("artifacts") if isinstance(telemetry.get("artifacts"), Mapping) else {}
+    if not artifacts:
+        return "<tr><td colspan=\"4\">No artifacts reported.</td></tr>"
+    rows: list[str] = []
+    for name in ("run_packet", "worker_stdout", "worker_stderr", "stdout", "stderr", "latest_return"):
+        artifact = artifacts.get(name) if isinstance(artifacts.get(name), Mapping) else {}
+        rows.append(
+            "<tr>"
+            f"<td><code>{_html_text(name)}</code></td>"
+            f"<td>{_html_text(_format_bool(artifact.get('exists')))}</td>"
+            f"<td>{_html_text(artifact.get('bytes') if artifact.get('bytes') is not None else 'unknown')}</td>"
+            f"<td>{_html_text(artifact.get('modified_at') or 'none')}</td>"
+            "</tr>"
+        )
+    return "\n".join(rows)
+
+
+def _worker_summary_items(telemetry: Mapping[str, Any]) -> str:
+    proof = telemetry.get("proof_gate_preflight") if isinstance(telemetry.get("proof_gate_preflight"), Mapping) else {}
+    terminal = telemetry.get("terminal_intake_result") if isinstance(telemetry.get("terminal_intake_result"), Mapping) else {}
+    items = {
+        "phase": telemetry.get("phase_status") or telemetry.get("run_status") or "unknown",
+        "active": _format_bool(telemetry.get("active_process_running")),
+        "elapsed": _format_seconds(telemetry.get("elapsed_seconds")),
+        "pid": telemetry.get("active_worker_pid") or "none",
+        "run": telemetry.get("active_run_id") or "none",
+        "heartbeat": telemetry.get("last_heartbeat_or_event_at") or "none",
+        "proof_context": proof.get("context_proof_accepted") if proof else "unknown",
+        "proof_template": proof.get("template_action_proof_accepted") if proof else "unknown",
+        "terminal": terminal.get("state") if terminal else "not-terminal",
+    }
+    return "\n".join(
+        f"<li><span>{_html_text(label)}</span><strong>{_html_text(value)}</strong></li>"
+        for label, value in items.items()
+    )
+
+
+def render_codex_worker_live_status_html(root: str | Path, *, auth_token: str | None = None) -> str:
+    """Render a bounded live status panel over public Codex worker telemetry."""
+
+    result = call_chatgpt_connector_tool(root, "ion_codex_worker_live_status", {})
+    data = result.get("data") if isinstance(result.get("data"), Mapping) else {}
+    telemetry = data.get("live_worker_telemetry") if isinstance(data.get("live_worker_telemetry"), Mapping) else {}
+    query = f"?{urlencode({'token': auth_token})}" if auth_token else ""
+    model_endpoint = f"/cockpit/worker/model.json{query}"
+    status_class = "active" if telemetry.get("active_process_running") else "idle"
+    if str(telemetry.get("phase_status") or "").startswith("terminal"):
+        status_class = "terminal"
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ION Codex Worker</title>
+  <style>
+    {HELIXION_SITE_CSS}
+    :root {{
+      color-scheme: dark;
+      --bg: #101112;
+      --panel: #181a1b;
+      --line: #303336;
+      --text: #f4f4f2;
+      --muted: #a8a8a1;
+      --ok: #20d88f;
+      --warn: #ffb020;
+      --bad: #ff6565;
+      --accent: #ff7a1a;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }}
+    main {{ max-width: 1120px; margin: 0 auto; padding: 34px 20px 48px; }}
+    header {{ display: flex; gap: 18px; align-items: flex-start; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 18px; }}
+    h1 {{ margin: 0 0 6px; font-size: clamp(30px, 6vw, 56px); line-height: 1; letter-spacing: 0; }}
+    h2 {{ margin: 0 0 12px; font-size: 17px; letter-spacing: 0; }}
+    p {{ color: var(--muted); max-width: 760px; }}
+    code {{ background: #0b0c0d; border: 1px solid #26292b; border-radius: 2px; color: #f5d0b4; padding: 2px 5px; overflow-wrap: anywhere; }}
+    .status {{ display: inline-flex; align-items: center; gap: 8px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 2px; color: var(--muted); font-size: 13px; white-space: nowrap; text-transform: uppercase; }}
+    .dot {{ width: 9px; height: 9px; border-radius: 999px; background: var(--warn); box-shadow: 0 0 14px rgba(255, 176, 32, 0.42); }}
+    .status.idle .dot, .status.terminal .dot {{ background: var(--ok); box-shadow: 0 0 14px rgba(32, 216, 143, 0.42); }}
+    .grid {{ display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr); gap: 14px; }}
+    .card {{ background: var(--panel); border: 1px solid var(--line); border-radius: 2px; padding: 16px; }}
+    .summary {{ display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }}
+    .summary li {{ display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 8px; align-items: start; border-bottom: 1px solid #25282a; padding: 7px 0; }}
+    .summary span {{ color: var(--muted); }}
+    .summary strong {{ overflow-wrap: anywhere; font-weight: 650; }}
+    table {{ width: 100%; border-collapse: collapse; font-size: 14px; }}
+    th, td {{ border-bottom: 1px solid #25282a; padding: 8px 6px; text-align: left; vertical-align: top; }}
+    th {{ color: var(--muted); font-weight: 600; }}
+    .note {{ border-left: 2px solid var(--accent); padding-left: 10px; }}
+    @media (max-width: 840px) {{
+      header {{ display: block; }}
+      .status {{ margin-top: 12px; }}
+      .grid {{ grid-template-columns: 1fr; }}
+      .summary li {{ grid-template-columns: 110px minmax(0, 1fr); }}
+    }}
+  </style>
+</head>
+<body data-endpoint="{_html_text(model_endpoint)}">
+  {render_helixion_site_bar("worker", auth_token=auth_token)}
+  <main>
+    <header>
+      <div>
+        <h1>ION Codex Worker</h1>
+        <p>Bounded live telemetry for the current Codex queue runner. This panel shows public run state and artifact metadata only; it does not expose model private reasoning, credentials, or raw broad logs.</p>
+      </div>
+      <div class="status {status_class}" id="phase-badge"><span class="dot"></span><span>{_html_text(telemetry.get("phase_status") or "unknown")}</span></div>
+    </header>
+    <section class="grid" aria-label="worker telemetry">
+      <article class="card">
+        <h2>Run State</h2>
+        <ul class="summary" id="summary">{_worker_summary_items(telemetry)}</ul>
+      </article>
+      <article class="card">
+        <h2>Proof Gate</h2>
+        <p class="note">Tool: <code>ion_codex_worker_live_status</code></p>
+        <p>Schema: <code>{_html_text(telemetry.get("schema_id") or "unknown")}</code></p>
+        <p>Run status: <code id="run-status">{_html_text(telemetry.get("run_status") or "unknown")}</code></p>
+        <p>Last updated: <code id="last-event">{_html_text(telemetry.get("last_heartbeat_or_event_at") or "none")}</code></p>
+      </article>
+      <article class="card" style="grid-column: 1 / -1;">
+        <h2>Public Artifacts</h2>
+        <table>
+          <thead><tr><th>artifact</th><th>exists</th><th>bytes</th><th>modified</th></tr></thead>
+          <tbody id="artifacts">{_worker_artifact_rows(telemetry)}</tbody>
+        </table>
+      </article>
+    </section>
+  </main>
+  <script>
+    const endpoint = document.body.dataset.endpoint;
+    const phaseBadge = document.getElementById('phase-badge');
+    const summary = document.getElementById('summary');
+    const artifacts = document.getElementById('artifacts');
+    const runStatus = document.getElementById('run-status');
+    const lastEvent = document.getElementById('last-event');
+    function text(value) {{ return value === undefined || value === null || value === '' ? 'none' : String(value); }}
+    function seconds(value) {{
+      const n = Number(value);
+      if (!Number.isFinite(n)) return 'unknown';
+      const whole = Math.max(0, Math.floor(n));
+      const m = Math.floor(whole / 60);
+      const s = whole % 60;
+      return m ? `${{m}}m ${{s}}s` : `${{s}}s`;
+    }}
+    function esc(value) {{
+      return text(value).replace(/[&<>"']/g, ch => ({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[ch]));
+    }}
+    function render(data) {{
+      const payload = data && data.data ? data.data : data;
+      const t = payload && payload.live_worker_telemetry ? payload.live_worker_telemetry : {{}};
+      const phase = text(t.phase_status || t.run_status || 'unknown');
+      phaseBadge.className = 'status ' + (t.active_process_running ? 'active' : (phase.startsWith('terminal') ? 'terminal' : 'idle'));
+      phaseBadge.querySelector('span:last-child').textContent = phase;
+      const proof = t.proof_gate_preflight || {{}};
+      const terminal = t.terminal_intake_result || {{}};
+      const rows = [
+        ['phase', phase],
+        ['active', Boolean(t.active_process_running)],
+        ['elapsed', seconds(t.elapsed_seconds)],
+        ['pid', t.active_worker_pid || 'none'],
+        ['run', t.active_run_id || 'none'],
+        ['heartbeat', t.last_heartbeat_or_event_at || 'none'],
+        ['proof_context', proof.context_proof_accepted ?? 'unknown'],
+        ['proof_template', proof.template_action_proof_accepted ?? 'unknown'],
+        ['terminal', terminal.state || 'not-terminal'],
+      ];
+      summary.innerHTML = rows.map(([k, v]) => `<li><span>${{esc(k)}}</span><strong>${{esc(v)}}</strong></li>`).join('');
+      const a = t.artifacts || {{}};
+      const names = ['run_packet', 'worker_stdout', 'worker_stderr', 'stdout', 'stderr', 'latest_return'];
+      artifacts.innerHTML = names.map(name => {{
+        const item = a[name] || {{}};
+        return `<tr><td><code>${{esc(name)}}</code></td><td>${{esc(Boolean(item.exists))}}</td><td>${{esc(item.bytes ?? 'unknown')}}</td><td>${{esc(item.modified_at || 'none')}}</td></tr>`;
+      }}).join('');
+      runStatus.textContent = text(t.run_status || 'unknown');
+      lastEvent.textContent = text(t.last_heartbeat_or_event_at || 'none');
+    }}
+    async function poll() {{
+      try {{
+        const response = await fetch(endpoint, {{cache: 'no-store', headers: {{'accept': 'application/json'}}}});
+        if (response.ok) render(await response.json());
+      }} catch (_error) {{}}
+    }}
+    setInterval(poll, 5000);
+    poll();
+  </script>
 </body>
 </html>
 """
@@ -751,20 +1269,22 @@ def render_public_cockpit_login(
   <meta name="robots" content="noindex,nofollow">
   <title>ION Cockpit Login</title>
   <style>
+    {HELIXION_SITE_CSS}
     :root {{ color-scheme: dark; --bg:#090b0c; --panel:#121619; --line:#2b343a; --text:#edf2f4; --muted:#9aa7ad; --blue:#65a7e8; --red:#e15f5f; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }}
     * {{ box-sizing: border-box; }}
-    body {{ margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--text); }}
+    body {{ margin:0; min-height:100vh; background:var(--bg); color:var(--text); }}
     main {{ width:min(920px, calc(100vw - 32px)); display:grid; grid-template-columns:1fr 1fr; gap:14px; }}
+    .login-wrap {{ min-height:calc(100vh - 43px); display:grid; place-items:center; padding:24px 0; }}
     header {{ grid-column:1 / -1; border-bottom:1px solid var(--line); padding-bottom:14px; }}
     h1,h2,p {{ margin:0; letter-spacing:0; }}
     h1 {{ font-size:32px; }}
     h2 {{ font-size:16px; margin-bottom:8px; }}
     p {{ color:var(--muted); line-height:1.4; }}
-    section {{ background:var(--panel); border:1px solid var(--line); border-radius:7px; padding:14px; }}
+    section {{ background:var(--panel); border:1px solid var(--line); border-radius:2px; padding:14px; }}
     form {{ display:grid; gap:8px; margin-top:12px; }}
     label {{ color:var(--muted); font-size:13px; }}
-    input {{ width:100%; border:1px solid var(--line); border-radius:5px; background:#0d1113; color:var(--text); padding:9px; font:inherit; }}
-    button {{ justify-self:start; border:1px solid var(--line); background:#18242b; color:var(--text); border-radius:5px; padding:8px 11px; font-weight:700; cursor:pointer; }}
+    input {{ width:100%; border:1px solid var(--line); border-radius:2px; background:#0d1113; color:var(--text); padding:9px; font:inherit; }}
+    button {{ justify-self:start; border:1px solid var(--line); background:#18242b; color:var(--text); border-radius:2px; padding:8px 11px; font-weight:700; cursor:pointer; text-transform:uppercase; }}
     button:disabled {{ opacity:.55; cursor:not-allowed; }}
     .error {{ grid-column:1 / -1; color:var(--red); }}
     code {{ color:#f5d0b4; overflow-wrap:anywhere; }}
@@ -772,6 +1292,8 @@ def render_public_cockpit_login(
   </style>
 </head>
 <body>
+{render_helixion_site_bar("login")}
+<div class="login-wrap">
 <main>
   <header>
     <h1>ION Cockpit Login</h1>
@@ -800,6 +1322,7 @@ def render_public_cockpit_login(
     </form>
   </section>
 </main>
+</div>
 </body>
 </html>"""
 
@@ -1013,7 +1536,13 @@ class IonChatGPTPreviewHandler(BaseHTTPRequestHandler):
                 return
             html_text = build_cockpit_html(build_cockpit_view_model(self.server.ion_root))  # type: ignore[attr-defined]
             replacement = f'href="/cockpit?token={_html_text(token)}"' if token else 'href="/cockpit"'
-            self._send_html(200, html_text.replace('href="/cockpit"', replacement))
+            html_text = html_text.replace('href="/cockpit"', replacement)
+            if token:
+                html_text = html_text.replace(
+                    '<input type="hidden" name="confirmation"',
+                    f'<input type="hidden" name="auth_token" value="{_html_text(token)}"><input type="hidden" name="confirmation"',
+                )
+            self._send_html(200, wrap_helixion_site_shell(html_text, "cockpit", auth_token=token))
             return
         if path in {"/cockpit/chat", "/cockpit/chat/"}:
             ok, finding, token = self._check_public_cockpit_access()
@@ -1021,7 +1550,18 @@ class IonChatGPTPreviewHandler(BaseHTTPRequestHandler):
                 self._send_public_cockpit_blocked(str(finding), next_path="/cockpit/chat")
                 return
             model = build_dual_codex_chat_model(self.server.ion_root, write=True)  # type: ignore[attr-defined]
-            self._send_html(200, render_dual_codex_chat_html(model, base_path="/cockpit/chat", auth_token=token))
+            chat_html = render_dual_codex_chat_html(model, base_path="/cockpit/chat", auth_token=token)
+            self._send_html(200, wrap_helixion_site_shell(chat_html, "chat", auth_token=token))
+            return
+        if path in {"/cockpit/worker", "/cockpit/worker/"}:
+            ok, finding, token = self._check_public_cockpit_access()
+            if not ok:
+                self._send_public_cockpit_blocked(str(finding), next_path="/cockpit/worker")
+                return
+            self._send_html(
+                200,
+                render_codex_worker_live_status_html(self.server.ion_root, auth_token=token),  # type: ignore[attr-defined]
+            )
             return
         if path == "/cockpit/model.json":
             ok, finding, _token = self._check_public_cockpit_access()
@@ -1036,6 +1576,13 @@ class IonChatGPTPreviewHandler(BaseHTTPRequestHandler):
                 self._send_public_cockpit_blocked(str(finding), next_path="/cockpit/chat/model.json")
                 return
             self._send_json(200, build_dual_codex_chat_model(self.server.ion_root))  # type: ignore[attr-defined]
+            return
+        if path == "/cockpit/worker/model.json":
+            ok, finding, _token = self._check_public_cockpit_access()
+            if not ok:
+                self._send_public_cockpit_blocked(str(finding), next_path="/cockpit/worker/model.json")
+                return
+            self._send_json(200, call_chatgpt_connector_tool(self.server.ion_root, "ion_codex_worker_live_status", {}))  # type: ignore[attr-defined]
             return
         if path in APP_PATHS:
             self._send_html(
@@ -1121,6 +1668,18 @@ class IonChatGPTPreviewHandler(BaseHTTPRequestHandler):
                 return
             suffix = f"?token={token}" if token else ""
             self._redirect(f"/cockpit/chat{suffix}")
+            return
+        if path == "/cockpit/services/restart":
+            payload = self._read_payload()
+            ok, finding, _token = self._check_public_cockpit_access(payload)
+            if not ok:
+                self._send_public_cockpit_blocked(str(finding), next_path="/cockpit")
+                return
+            result = restart_service(self.server.ion_root, payload)  # type: ignore[attr-defined]
+            if self._wants_json():
+                self._send_json(200 if result.get("ok") else 409, result)
+                return
+            self._redirect(safe_next_path(str(payload.get("next") or "/cockpit")))
             return
         if path != "/mcp":
             self._send_json(404, {"ok": False, "error": "not_found"})

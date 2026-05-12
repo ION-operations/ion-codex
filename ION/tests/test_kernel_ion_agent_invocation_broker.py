@@ -126,6 +126,49 @@ def test_agent_invoke_queue_and_swarm_step_prepare_existing_runner_packet(tmp_pa
     assert "ION/05_context/current/agent_context_systems/TEMPLATE_CURATOR.context_system.md" in required_paths
 
 
+def test_agent_invoke_start_enforces_min_timeout_and_workload_diff_contract(tmp_path, monkeypatch):
+    import kernel.ion_agent_invocation_broker as broker
+
+    _seed_root(tmp_path)
+    captured: dict[str, int] = {}
+
+    def fake_process_codex_queue_once(_root, **kwargs):
+        captured["timeout_seconds"] = int(kwargs["timeout_seconds"])
+        return {"ok": True, "result": "BACKEND_RUN_STARTED"}
+
+    monkeypatch.setattr(broker, "process_codex_queue_once", fake_process_codex_queue_once)
+    result = broker.invoke_agent(
+        tmp_path,
+        agent="MASON",
+        objective="cartography proof timeout policy smoke",
+        start=True,
+        timeout_seconds=30,
+    )
+
+    assert result["ok"] is True
+    assert captured["timeout_seconds"] == 900
+    work = json.loads((tmp_path / result["codex_work_request_path"]).read_text(encoding="utf-8"))
+    assert "### WORKLOAD DIFF" in work["return_contract_sections"]
+
+
+def test_swarm_step_once_enforces_min_timeout_for_agent_workload(tmp_path, monkeypatch):
+    import kernel.ion_agent_invocation_broker as broker
+
+    _seed_root(tmp_path)
+    invoked = invoke_agent(tmp_path, agent="MASON", objective="swarm timeout smoke", queue=True)
+    captured: dict[str, int] = {}
+
+    def fake_process_codex_queue_once(_root, **kwargs):
+        captured["timeout_seconds"] = int(kwargs["timeout_seconds"])
+        return {"ok": True, "result": "BACKEND_RUN_PREPARED"}
+
+    monkeypatch.setattr(broker, "process_codex_queue_once", fake_process_codex_queue_once)
+    result = swarm_step_once(tmp_path, request_path=invoked["codex_work_request_path"], start=False, timeout_seconds=30)
+
+    assert result["ok"] is True
+    assert captured["timeout_seconds"] == 900
+
+
 def test_agent_status_result_queue_cancel_and_spawn_plan(tmp_path):
     _seed_root(tmp_path)
     invoked = invoke_agent(tmp_path, agent="context_cartographer", objective="status smoke", queue=True)
@@ -195,3 +238,205 @@ def test_swarm_step_rejects_non_agent_or_nonqueued_request_path(tmp_path):
     assert non_agent["finding"] == "request_path_is_not_agent_invocation_work"
     assert nonqueued["ok"] is False
     assert nonqueued["finding"] == "agent_invocation_work_request_not_queued"
+
+
+
+def _bounded_agent_packet(key="bounded-key-001", **overrides):
+    packet = {
+        "schema_id": "ion.agent_invocation_packet.v1",
+        "idempotency_key": key,
+        "created_by": "chatgpt_browser",
+        "agent_role": "role.context_cartographer",
+        "objective": "Inspect current browser queue architecture and return a proof-bearing report.",
+        "capsule_context": {
+            "mode": "refs_and_inline_summary",
+            "context_refs": ["ION/04_packages/kernel/ion_custom_gpt_action_gateway.py"],
+            "inline_summary": "Bounded read-only context cartography run requested by ChatGPT Browser.",
+            "required_reads": ["ION/04_packages/kernel/ion_custom_gpt_action_gateway.py"],
+            "forbidden_reads": [".env", "secrets", "credentials"],
+            "source_posture": "candidate",
+        },
+        "authority": {
+            "production_authority": False,
+            "live_execution_authority": False,
+            "local_write_authority": "none",
+            "allowed_paths": ["ION/"],
+            "forbidden_paths": [".env", "secrets", "credentials"],
+            "hard_gates": [
+                "access_credential",
+                "broad_shell",
+                "delete_file",
+                "overwrite_protected_file",
+                "production_deploy",
+                "push_main",
+            ],
+        },
+        "execution": {
+            "backend": "codex_cli",
+            "queue": True,
+            "max_runtime_seconds": 900,
+            "max_steps": 4,
+            "stop_condition": "return proof packet or relay question",
+        },
+        "relay_policy": {
+            "allow_relay_to_chatgpt": True,
+            "allow_relay_to_operator": True,
+            "no_silent_authority_expansion": True,
+        },
+    }
+    packet.update(overrides)
+    return packet
+
+
+def test_bounded_agent_invocation_creates_capsule_context_queue_and_receipts(tmp_path):
+    from kernel.ion_agent_invocation_broker import build_bounded_agent_status, invoke_bounded_agent
+
+    _seed_root(tmp_path)
+    result = invoke_bounded_agent(tmp_path, _bounded_agent_packet())
+    assert result["ok"] is True
+    assert result["status"] == "QUEUED"
+
+    capsule_path = tmp_path / result["capsule_context_path"]
+    work_path = tmp_path / result["codex_work_request_path"]
+    assert capsule_path.exists()
+    assert work_path.exists()
+    assert json.loads(capsule_path.read_text())["schema_id"] == "ion.agent_invocation_capsule_context.v1"
+    work = json.loads(work_path.read_text())
+    assert work["invocation_id"] == result["invocation_id"]
+    assert work["agent_role"] == "role.context_cartographer"
+    assert work["capsule_context_path"] == result["capsule_context_path"]
+    assert result["receipt_paths"]
+
+    status = build_bounded_agent_status(tmp_path, invocation_id=result["invocation_id"])
+    assert status["ok"] is True
+    assert status["invocation"]["status"] == "QUEUED"
+
+
+def test_bounded_agent_invocation_requires_idempotency_key(tmp_path):
+    from kernel.ion_agent_invocation_broker import invoke_bounded_agent
+
+    _seed_root(tmp_path)
+    packet = _bounded_agent_packet(key="")
+    result = invoke_bounded_agent(tmp_path, packet)
+    assert result["ok"] is False
+    assert result["error"] == "AGENT_INVOCATION_VALIDATION_FAILED"
+    assert "MISSING_IDEMPOTENCY_KEY" in result["errors"]
+
+
+def test_bounded_agent_invocation_refuses_production_authority(tmp_path):
+    from kernel.ion_agent_invocation_broker import invoke_bounded_agent
+
+    _seed_root(tmp_path)
+    packet = _bounded_agent_packet(key="prod-key-001")
+    packet["authority"]["production_authority"] = True
+    result = invoke_bounded_agent(tmp_path, packet)
+    assert result["ok"] is False
+    assert "PRODUCTION_AUTHORITY_FORBIDDEN" in result["errors"]
+
+
+def test_bounded_agent_invocation_refuses_hard_gated_intent_or_scope(tmp_path):
+    from kernel.ion_agent_invocation_broker import invoke_bounded_agent
+
+    _seed_root(tmp_path)
+    packet = _bounded_agent_packet(key="gate-key-001", intent="push_main")
+    result = invoke_bounded_agent(tmp_path, packet)
+    assert result["ok"] is False
+    assert any("HARD_GATED_INTENT" in error for error in result["errors"])
+
+    packet = _bounded_agent_packet(key="bad-scope-001")
+    packet["authority"]["allowed_paths"] = [".env"]
+    result = invoke_bounded_agent(tmp_path, packet)
+    assert result["ok"] is False
+    assert any("FORBIDDEN_ALLOWED_PATH" in error for error in result["errors"])
+
+
+def test_agent_relay_create_pending_respond_receipts(tmp_path):
+    from kernel.ion_agent_invocation_broker import (
+        create_agent_relay_message,
+        invoke_bounded_agent,
+        pending_agent_relays,
+        recent_agent_invocation_receipts,
+        respond_agent_relay,
+    )
+
+    _seed_root(tmp_path)
+    invocation = invoke_bounded_agent(tmp_path, _bounded_agent_packet(key="relay-key-001"))
+    relay = create_agent_relay_message(
+        tmp_path,
+        {
+            "invocation_id": invocation["invocation_id"],
+            "from_agent": "role.context_cartographer",
+            "to": "chatgpt_browser",
+            "question_type": "context",
+            "question": "Which queue file should I inspect first?",
+            "evidence_refs": [invocation["capsule_context_path"]],
+        },
+    )
+    assert relay["ok"] is True
+
+    pending = pending_agent_relays(tmp_path, invocation_id=invocation["invocation_id"])
+    assert pending["count"] == 1
+    assert pending["relay_messages"][0]["status"] == "WAITING"
+
+    response = respond_agent_relay(
+        tmp_path,
+        {
+            "schema_id": "ion.agent_relay_response.v1",
+            "relay_id": relay["relay_id"],
+            "invocation_id": invocation["invocation_id"],
+            "answered_by": "chatgpt_browser",
+            "response": "Inspect ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json first.",
+            "continue": True,
+        },
+    )
+    assert response["ok"] is True
+    receipts = recent_agent_invocation_receipts(tmp_path, limit=10)
+    assert any(item["event"] == "relay_answered" for item in receipts["receipts"])
+
+
+def test_bounded_agent_invocation_idempotency_replay_returns_existing(tmp_path):
+    from kernel.ion_agent_invocation_broker import invoke_bounded_agent
+
+    _seed_root(tmp_path)
+    packet = _bounded_agent_packet(key="idempotent-key-001")
+    first = invoke_bounded_agent(tmp_path, packet)
+    second = invoke_bounded_agent(tmp_path, packet)
+    assert first["ok"] is True
+    assert second["ok"] is True
+    assert second["idempotent_replay"] is True
+    assert first["invocation_id"] == second["invocation_id"]
+
+
+
+def test_agent_settlement_requires_evidence_and_records_receipt(tmp_path):
+    from kernel.ion_agent_invocation_broker import invoke_bounded_agent, recent_agent_invocation_receipts, settle_agent_invocation
+
+    _seed_root(tmp_path)
+    invocation = invoke_bounded_agent(tmp_path, _bounded_agent_packet(key="settle-key-001"))
+    refused = settle_agent_invocation(
+        tmp_path,
+        {
+            "schema_id": "ion.agent_invocation_settlement.v1",
+            "invocation_id": invocation["invocation_id"],
+            "terminal_state": "accepted",
+            "settled_by": "chatgpt_browser",
+        },
+    )
+    assert refused["ok"] is False
+    assert refused["refusal_class"] == "PROOF_REQUIRED"
+
+    settled = settle_agent_invocation(
+        tmp_path,
+        {
+            "schema_id": "ion.agent_invocation_settlement.v1",
+            "invocation_id": invocation["invocation_id"],
+            "terminal_state": "accepted",
+            "settled_by": "chatgpt_browser",
+            "summary": "Smoke settlement with capsule evidence.",
+            "evidence_refs": [invocation["capsule_context_path"]],
+        },
+    )
+    assert settled["ok"] is True
+    assert settled["status"] == "TERMINAL_ACCEPTED"
+    receipts = recent_agent_invocation_receipts(tmp_path, limit=20)
+    assert any(item["event"] == "settlement_recorded" for item in receipts["receipts"])

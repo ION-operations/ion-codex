@@ -28,7 +28,13 @@ from .ion_agent_invocation_broker import (
     list_agents,
     swarm_step_once,
 )
-from .ion_codex_queue_runner import build_codex_queue_runner_status, process_codex_queue_once
+from .ion_codex_queue_runner import (
+    DEFAULT_CODEX_TIMEOUT_SECONDS,
+    MAX_CODEX_TIMEOUT_SECONDS,
+    build_codex_queue_runner_status,
+    process_codex_queue_once,
+    reconcile_codex_queue_runner_state,
+)
 from .ion_cockpit_view_model import build_cockpit_view_model
 from .ion_context_proof_gate import evaluate_context_proof_return
 from .ion_receipt_hydration_mapper import build_receipt_hydration_view_model
@@ -59,6 +65,30 @@ MAX_UPLOAD_BYTES = 4 * 1024 * 1024
 MAX_READ_BYTES = 256 * 1024
 MAX_SEARCH_FILE_BYTES = 128 * 1024
 MAX_SEARCH_FILES = 500
+MIN_COMPLEX_WORKLOAD_TIMEOUT_SECONDS = 900
+BASE_RETURN_CONTRACT_SECTIONS = (
+    "### CONTEXT PROOF",
+    "### TEMPLATE ACTION PROOF",
+    "### VALIDATION",
+    "### RESULT",
+)
+WORKLOAD_DIFF_SECTION = "### WORKLOAD DIFF"
+RETURN_TEMPLATE_REQUIRED_SECTIONS = (
+    "### CONTEXT PROOF",
+    "### TEMPLATE ACTION PROOF",
+    "### VALIDATION",
+    "### RESULT",
+    "### WORKLOAD DIFF",
+    "### BLOCKERS",
+    "### RECOMMENDED NEXT PACKET",
+)
+WORKLOAD_POLICY_HINTS = (
+    "agent",
+    "cartograph",
+    "probe",
+    "proof",
+    "design",
+)
 ARTIFACT_TARGET_ROOTS = (
     Path("ION/05_context/current/chatgpt_connector/artifacts"),
     Path("ION/05_context/inbox"),
@@ -114,12 +144,15 @@ STATUS_READ_TOOLS = {
     "ion_tool_manifest",
     "ion_daemon_status",
     "ion_codex_queue_autorun_status",
+    "ion_codex_worker_live_status",
     "ion_agent_list",
     "ion_agent_status",
     "ion_agent_result",
     "ion_agent_queue",
     "ion_agent_spawn_plan",
     "ion_swarm_status",
+    "ion_codex_capsule_chat_status",
+    "ion_codex_capsule_message_poll",
 }
 
 BOUNDED_QUEUE_RECEIPT_TOOLS = {
@@ -138,6 +171,9 @@ BOUNDED_QUEUE_RECEIPT_TOOLS = {
     "ion_agent_invoke",
     "ion_agent_cancel",
     "ion_swarm_step_once",
+    "ion_codex_runner_reconcile",
+    "ion_codex_capsule_message_send",
+    "ion_codex_capsule_sync_to_queue",
 }
 
 FORBIDDEN_CAPABILITIES = {
@@ -1046,6 +1082,238 @@ def _carrier_message_ack(root: Path, args: Mapping[str, Any]) -> dict[str, Any]:
     return _blocked("ion_carrier_message_ack", "message_id_not_found")
 
 
+def _preview_text(value: Any, *, limit: int = 280) -> str:
+    text = str(value or "").replace("\r\n", "\n").strip()
+    if len(text) <= limit:
+        return text
+    return text[:limit].rstrip() + "..."
+
+
+def _capsule_file_surface(
+    root: Path,
+    rel_path: str,
+    *,
+    include_preview: bool = False,
+    max_preview_bytes: int = 512,
+) -> dict[str, Any]:
+    target, finding = _validate_read_path(
+        root,
+        rel_path,
+        allowed_roots=(
+            Path("ION/05_context/current/codex_solo"),
+            Path("ION/05_context/current/codex_capsule_chat"),
+        ),
+    )
+    if finding or target is None:
+        return {"path": rel_path, "exists": False, "finding": finding or "invalid_path"}
+    if not target.exists():
+        return {"path": rel_path, "exists": False, "finding": "path_missing"}
+    if not target.is_file():
+        return {"path": rel_path, "exists": False, "finding": "path_not_file"}
+    data = target.read_bytes()
+    payload: dict[str, Any] = {
+        "path": _connector_rel(target, root),
+        "exists": True,
+        "bytes": len(data),
+        "sha256": _sha256_bytes(data),
+    }
+    if include_preview:
+        bounded_max = min(max(int(max_preview_bytes), 1), 2048)
+        preview = data[:bounded_max].decode("utf-8", errors="replace")
+        payload["preview"] = preview
+        payload["preview_truncated"] = len(data) > bounded_max
+    return payload
+
+
+def _codex_capsule_chat_status(root: Path, args: Mapping[str, Any]) -> dict[str, Any]:
+    include_preview = bool(args.get("include_preview"))
+    max_preview_bytes = int(args.get("max_preview_bytes") or 512)
+    state_rel = "ION/05_context/current/codex_capsule_chat/state.json"
+    state_payload = _read_json(root / state_rel) or {}
+    lanes = state_payload.get("lanes") if isinstance(state_payload.get("lanes"), Mapping) else {}
+    lane_summaries: dict[str, Any] = {}
+    for lane_id in ("codex_general", "ion_system"):
+        lane = lanes.get(lane_id) if isinstance(lanes.get(lane_id), Mapping) else {}
+        turns = lane.get("turns") if isinstance(lane.get("turns"), list) else []
+        queue_links = lane.get("queue_links") if isinstance(lane.get("queue_links"), list) else []
+        latest_turn = turns[-1] if turns and isinstance(turns[-1], Mapping) else {}
+        lane_summaries[lane_id] = {
+            "turn_count": len(turns),
+            "queue_link_count": len(queue_links),
+            "latest_turn_id": latest_turn.get("turn_id"),
+            "latest_turn_kind": latest_turn.get("kind"),
+            "latest_turn_created_at": latest_turn.get("created_at"),
+        }
+    return _ok("ion_codex_capsule_chat_status", {
+        "schema_id": "ion.codex_capsule_chat_bridge_status.v1",
+        "state_path": state_rel,
+        "state_exists": (root / state_rel).exists(),
+        "state_sha256": _sha256_file(root / state_rel) if (root / state_rel).exists() else None,
+        "paths": {
+            "capsule": _capsule_file_surface(
+                root,
+                "ION/05_context/current/codex_solo/CAPSULE.md",
+                include_preview=include_preview,
+                max_preview_bytes=max_preview_bytes,
+            ),
+            "mini": _capsule_file_surface(
+                root,
+                "ION/05_context/current/codex_solo/MINI.md",
+                include_preview=include_preview,
+                max_preview_bytes=max_preview_bytes,
+            ),
+            "hot_context": _capsule_file_surface(
+                root,
+                "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+                include_preview=include_preview,
+                max_preview_bytes=max_preview_bytes,
+            ),
+        },
+        "lanes": lane_summaries,
+        "production_authority": False,
+        "live_execution_authority": False,
+    })
+
+
+def _codex_capsule_message_send(root: Path, args: Mapping[str, Any]) -> dict[str, Any]:
+    from .ion_dual_codex_chat import record_chat_turn
+
+    lane_id = str(args.get("lane_id") or "codex_general").strip() or "codex_general"
+    message = str(args.get("message") or args.get("body") or "").strip()
+    author = str(args.get("author") or "user").strip() or "user"
+    execution_mode = str(args.get("execution_mode") or "respond_only").strip() or "respond_only"
+    if not message:
+        return _blocked("ion_codex_capsule_message_send", "message_required")
+    if execution_mode != "respond_only":
+        return _blocked(
+            "ion_codex_capsule_message_send",
+            "execution_mode_must_be_respond_only_for_bounded_message_send",
+            {"allowed_execution_modes": ["respond_only"]},
+        )
+    result = record_chat_turn(
+        root,
+        lane_id=lane_id,
+        message=message,
+        author=author,
+        execution_mode="respond_only",
+    )
+    if not result.get("ok"):
+        return _blocked("ion_codex_capsule_message_send", str(result.get("finding") or "capsule_message_send_blocked"), result)
+    turn = result.get("turn") if isinstance(result.get("turn"), Mapping) else {}
+    assistant_turn = result.get("assistant_turn") if isinstance(result.get("assistant_turn"), Mapping) else {}
+    packet = {
+        "schema_id": "ion.codex_capsule_chat_message_packet.v1",
+        "lane_id": lane_id,
+        "author": author,
+        "execution_mode": "respond_only",
+        "turn_id": turn.get("turn_id"),
+        "assistant_turn_id": assistant_turn.get("turn_id"),
+        "message_sha256": _sha256_text(message),
+        "message_preview": _preview_text(message),
+        "created_at": _now(),
+        "status": "RECORDED_TO_CAPSULE_CHAT_STATE",
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+    packet_path = _write_connector_packet(root, "capsule_messages", f"{lane_id}_message", packet)
+    return _ok("ion_codex_capsule_message_send", {
+        "lane_id": lane_id,
+        "turn_id": turn.get("turn_id"),
+        "assistant_turn_id": assistant_turn.get("turn_id"),
+        "state_path": "ION/05_context/current/codex_capsule_chat/state.json",
+        "packet_path": _connector_rel(packet_path, root),
+        "status": "RECORDED_TO_CAPSULE_CHAT_STATE",
+    }, mutates_active_state=True)
+
+
+def _codex_capsule_message_poll(root: Path, args: Mapping[str, Any]) -> dict[str, Any]:
+    from .ion_dual_codex_chat import load_dual_chat_state
+
+    lane_id = str(args.get("lane_id") or "codex_general").strip() or "codex_general"
+    limit = min(max(int(args.get("limit") or 25), 1), 100)
+    include_assistant = bool(args.get("include_assistant", True))
+    include_context_posts = bool(args.get("include_context_posts", False))
+    since_turn_id = str(args.get("since_turn_id") or "").strip()
+    state = load_dual_chat_state(root)
+    lanes = state.get("lanes") if isinstance(state.get("lanes"), Mapping) else {}
+    lane = lanes.get(lane_id) if isinstance(lanes.get(lane_id), Mapping) else None
+    if lane is None:
+        return _blocked("ion_codex_capsule_message_poll", "unknown_lane_id", {"allowed_lanes": sorted(lanes)})
+    turns = lane.get("turns") if isinstance(lane.get("turns"), list) else []
+    start_index = 0
+    if since_turn_id:
+        for idx, raw in enumerate(turns):
+            if isinstance(raw, Mapping) and str(raw.get("turn_id") or "") == since_turn_id:
+                start_index = idx + 1
+                break
+    records: list[dict[str, Any]] = []
+    for raw in reversed(turns[start_index:]):
+        if not isinstance(raw, Mapping):
+            continue
+        author = str(raw.get("author") or "")
+        kind = str(raw.get("kind") or "")
+        if not include_assistant and author not in {"operator", "user"}:
+            continue
+        if not include_context_posts and kind == "mini_auto_post":
+            continue
+        message = str(raw.get("message") or "")
+        records.append({
+            "turn_id": raw.get("turn_id"),
+            "created_at": raw.get("created_at"),
+            "author": author,
+            "kind": kind,
+            "execution_mode": raw.get("execution_mode"),
+            "message_sha256": raw.get("message_sha256"),
+            "message_preview": _preview_text(message, limit=420),
+        })
+        if len(records) >= limit:
+            break
+    return _ok("ion_codex_capsule_message_poll", {
+        "lane_id": lane_id,
+        "since_turn_id": since_turn_id or None,
+        "message_count": len(records),
+        "messages": records,
+        "state_path": "ION/05_context/current/codex_capsule_chat/state.json",
+    })
+
+
+def _codex_capsule_sync_to_queue(root: Path, args: Mapping[str, Any]) -> dict[str, Any]:
+    from .ion_dual_codex_chat import WRITE_CONFIRMATION_TOKEN as CAPSULE_WRITE_CONFIRMATION_TOKEN
+    from .ion_dual_codex_chat import queue_chat_codex_work_packet
+
+    lane_id = str(args.get("lane_id") or "codex_general").strip() or "codex_general"
+    objective = str(args.get("objective") or args.get("message") or "").strip()
+    source_turn_id = str(args.get("source_turn_id") or "").strip() or None
+    if not objective:
+        return _blocked("ion_codex_capsule_sync_to_queue", "objective_required")
+    result = queue_chat_codex_work_packet(
+        root,
+        lane_id=lane_id,
+        objective=objective,
+        confirmation=CAPSULE_WRITE_CONFIRMATION_TOKEN,
+        source_turn_id=source_turn_id,
+    )
+    if not result.get("ok"):
+        return _blocked("ion_codex_capsule_sync_to_queue", str(result.get("finding") or "capsule_sync_to_queue_blocked"), result)
+    queue_link = result.get("queue_link") if isinstance(result.get("queue_link"), Mapping) else {}
+    packet_path = _write_connector_packet(root, "capsule_queue_sync", f"{lane_id}_sync", {
+        "schema_id": "ion.codex_capsule_chat_queue_sync_packet.v1",
+        "lane_id": lane_id,
+        "source_turn_id": source_turn_id,
+        "objective_sha256": _sha256_text(objective),
+        "objective_preview": _preview_text(objective, limit=420),
+        "queue_link": queue_link,
+        "created_at": _now(),
+        "status": queue_link.get("status") or "QUEUED_FOR_CODEX_CARRIER",
+        "production_authority": False,
+        "live_execution_authority": False,
+    })
+    return _ok("ion_codex_capsule_sync_to_queue", {
+        "queue_link": queue_link,
+        "sync_packet_path": _connector_rel(packet_path, root),
+    }, mutates_active_state=True)
+
+
 def _bounded_connector_packet_path(root: Path, rel_value: str, *, subdir: str) -> Path:
     path = _safe_rel_path(root, rel_value)
     allowed_root = (root / CONNECTOR_STATE_DIR / subdir).resolve()
@@ -1154,6 +1422,117 @@ def _enqueue_connector_operator_message(root: Path, *, message: str, priority: i
     }
 
 
+def _coerce_timeout_seconds(value: Any) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return DEFAULT_CODEX_TIMEOUT_SECONDS
+
+
+def _load_timeout_policy_request(root: Path, request_path: str | None) -> dict[str, Any] | None:
+    if not request_path:
+        return None
+    try:
+        bounded = _bounded_connector_packet_path(root, request_path, subdir="codex_work_requests")
+    except (ValueError, RuntimeError):
+        return None
+    if not bounded.exists():
+        return None
+    payload = _load_json_file(bounded)
+    return payload if isinstance(payload, dict) else None
+
+
+def _work_request_requires_workload_diff(payload: Mapping[str, Any]) -> bool:
+    requested_by = str(payload.get("requested_by") or "").strip().lower()
+    if requested_by == "ion_agent_invocation_broker":
+        return True
+    signal_text = " ".join([
+        str(payload.get("request_kind") or ""),
+        str(payload.get("objective") or ""),
+        str(payload.get("agent_role") or ""),
+        str(payload.get("agent_role_id") or ""),
+        str(payload.get("agent_display_name") or ""),
+    ]).lower()
+    return any(hint in signal_text for hint in WORKLOAD_POLICY_HINTS)
+
+
+def _return_contract_sections_for_work_request(payload: Mapping[str, Any]) -> list[str]:
+    sections: list[str] = []
+    configured = payload.get("return_contract_sections")
+    if isinstance(configured, list):
+        for item in configured:
+            section = str(item or "").strip()
+            if section.startswith("### ") and section not in sections:
+                sections.append(section)
+    if not sections:
+        sections = list(BASE_RETURN_CONTRACT_SECTIONS)
+    if _work_request_requires_workload_diff(payload) and WORKLOAD_DIFF_SECTION not in sections:
+        sections.append(WORKLOAD_DIFF_SECTION)
+    return sections
+
+
+def _section_heading_present(text: str, heading: str) -> bool:
+    normalized = heading.strip().lower()
+    for line in text.splitlines():
+        if line.strip().lower() == normalized:
+            return True
+    return False
+
+
+def _return_template_lint(text: str, required_reads: list[str]) -> dict[str, Any]:
+    findings: list[str] = []
+    for heading in RETURN_TEMPLATE_REQUIRED_SECTIONS:
+        if not _section_heading_present(text, heading):
+            findings.append(f"missing_required_section:{heading}")
+    lower_text = text.lower()
+    for required_field in ("template_id:", "action_id:", "result:"):
+        if required_field not in lower_text:
+            findings.append(f"missing_required_field:{required_field.rstrip(':')}")
+    if "touched_paths:" not in lower_text and "no_touched_paths:" not in lower_text:
+        findings.append("missing_required_field:touched_paths_or_no_touched_paths")
+    for path in required_reads:
+        if path not in text:
+            findings.append(f"missing_required_read_path:{path}")
+            continue
+        idx = text.find(path)
+        window = text[idx: idx + 800].lower()
+        if "sha256:" not in window:
+            findings.append(f"missing_sha256_near_required_read:{path}")
+        if "excerpt:" not in window:
+            findings.append(f"missing_excerpt_near_required_read:{path}")
+    return {
+        "schema_id": "ion.return_template_lint_result.v1",
+        "accepted": not findings,
+        "findings": findings,
+    }
+
+
+def _requires_extended_timeout(tool_name: str, args: Mapping[str, Any], request_payload: Mapping[str, Any] | None) -> bool:
+    if tool_name in {"ion_agent_invoke", "ion_swarm_step_once"}:
+        return True
+    if request_payload and _work_request_requires_workload_diff(request_payload):
+        return True
+    signal_text = " ".join([
+        str(args.get("request_kind") or ""),
+        str(args.get("objective") or ""),
+        str(args.get("agent") or ""),
+    ]).lower()
+    return any(hint in signal_text for hint in WORKLOAD_POLICY_HINTS)
+
+
+def _normalized_timeout_for_tool(root: Path, tool_name: str, args: Mapping[str, Any]) -> int:
+    raw = args.get("max_runtime_seconds")
+    if raw is None:
+        raw = args.get("timeout_seconds")
+    timeout = _coerce_timeout_seconds(raw)
+    request_payload = _load_timeout_policy_request(root, str(args.get("request_path") or "").strip() or None)
+    if _requires_extended_timeout(tool_name, args, request_payload):
+        timeout = max(timeout, MIN_COMPLEX_WORKLOAD_TIMEOUT_SECONDS)
+    timeout = min(timeout, MAX_CODEX_TIMEOUT_SECONDS)
+    timeout = max(timeout, 30)
+    return timeout
+
+
 def _evaluate_task_return_packet(root: Path, args: Mapping[str, Any]) -> dict[str, Any]:
     text = str(args.get("task_output_text") or "")
     receipt = args.get("context_receipt")
@@ -1172,19 +1551,46 @@ def _evaluate_task_return_packet(root: Path, args: Mapping[str, Any]) -> dict[st
             return _blocked("ion_submit_task_return", "work_request_path_missing")
         request_payload = _load_json_file(request_path)
         work_request_id = work_request_id or str(request_payload.get("request_id") or "")
+    required_reads = []
+    receipt_reads = receipt.get("required_context_reads")
+    if isinstance(receipt_reads, list):
+        for item in receipt_reads:
+            if isinstance(item, Mapping) and item.get("required") is True and str(item.get("kind") or "") == "file":
+                read_path = str(item.get("path") or "").strip()
+                if read_path:
+                    required_reads.append(read_path)
+    lint_result = _return_template_lint(text, required_reads)
+    return_template_valid = bool(lint_result.get("accepted"))
     context_result = evaluate_context_proof_return(receipt=receipt, task_output=text)
     template_result = evaluate_template_action_proof(worker_output=text)
-    accepted = bool(context_result.get("accepted")) and bool(template_result.get("accepted"))
+    required_sections = _return_contract_sections_for_work_request(request_payload or {})
+    workload_diff_required = WORKLOAD_DIFF_SECTION in required_sections
+    workload_diff_present = _section_heading_present(text, WORKLOAD_DIFF_SECTION)
+    workload_diff_accepted = (not workload_diff_required) or workload_diff_present
+    accepted = return_template_valid and bool(context_result.get("accepted")) and bool(template_result.get("accepted")) and workload_diff_accepted
+    workload_diff_findings: list[str] = []
+    if workload_diff_required and not workload_diff_present:
+        workload_diff_findings.append("missing_required_section:### WORKLOAD DIFF")
+    lint_findings = list(lint_result.get("findings", []))
+    result_status = "RECORDED_FOR_CARRIER_INTAKE" if accepted else ("RETURN_TEMPLATE_INVALID" if not return_template_valid else "BLOCKED_BY_PROOF_GATE")
     packet = {
         "schema_id": "ion.chatgpt_browser_connector_task_return_packet.v1",
         "accepted_for_carrier_intake": accepted,
+        "return_template_valid": return_template_valid,
+        "return_template_lint_result": lint_result,
+        "blocked_but_preserved": not accepted,
+        "salvage_route": "ION/05_context/current/chatgpt_connector/task_returns",
+        "raw_latest_return_md_expected_from_run_packet": True,
         "work_request_id": work_request_id or None,
         "work_request_path": work_request_path or None,
         "context_proof_result": context_result,
         "template_action_proof_result": template_result,
+        "workload_diff_required": workload_diff_required,
+        "workload_diff_present": workload_diff_present,
+        "workload_diff_accepted": workload_diff_accepted,
         "task_output_sha256": _sha256_text(text),
         "task_output_preview": text[:1200],
-        "result": "RECORDED_FOR_CARRIER_INTAKE" if accepted else "BLOCKED_BY_PROOF_GATE",
+        "result": result_status,
     }
     packet_path = _write_connector_packet(root, "task_returns", "task_return", packet)
     rel_return_path = packet_path.relative_to(root).as_posix()
@@ -1195,7 +1601,7 @@ def _evaluate_task_return_packet(root: Path, args: Mapping[str, Any]) -> dict[st
             paths.append(rel_return_path)
         request_payload["return_packet_paths"] = paths
         request_payload["latest_return_packet_path"] = rel_return_path
-        request_payload["status"] = "RETURN_RECORDED_PROOF_ACCEPTED" if accepted else "RETURN_RECORDED_PROOF_BLOCKED"
+        request_payload["status"] = "RETURN_RECORDED_PROOF_ACCEPTED" if accepted else ("RETURN_TEMPLATE_INVALID" if not return_template_valid else "RETURN_RECORDED_PROOF_BLOCKED")
         request_payload["updated_at"] = _now()
         request_payload["latest_context_proof_accepted"] = context_result.get("accepted")
         request_payload["latest_template_action_proof_accepted"] = template_result.get("accepted")
@@ -1212,12 +1618,18 @@ def _evaluate_task_return_packet(root: Path, args: Mapping[str, Any]) -> dict[st
             "work_request_updated": work_request_updated,
             "codex_work_queue_path": CODEX_WORK_QUEUE_RELATIVE_PATH.as_posix(),
             "codex_work_queue_request_count": queue["request_count"],
-            "context_proof_accepted": context_result.get("accepted"),
-            "template_action_proof_accepted": template_result.get("accepted"),
-            "findings": list(context_result.get("findings", [])) + list(template_result.get("findings", [])),
-        },
-        mutates_active_state=True,
-    )
+                "return_template_valid": return_template_valid,
+                "context_proof_accepted": context_result.get("accepted"),
+                "template_action_proof_accepted": template_result.get("accepted"),
+                "workload_diff_required": workload_diff_required,
+                "workload_diff_present": workload_diff_present,
+                "workload_diff_accepted": workload_diff_accepted,
+                "blocked_but_preserved": not accepted,
+                "salvage_route": "ION/05_context/current/chatgpt_connector/task_returns",
+                "findings": lint_findings + list(context_result.get("findings", [])) + list(template_result.get("findings", [])) + workload_diff_findings,
+            },
+            mutates_active_state=True,
+        )
 
 
 def call_chatgpt_connector_tool(
@@ -1277,6 +1689,10 @@ def call_chatgpt_connector_tool(
         return _receipt_hydrate(shell_root, args)
     if tool_name == "ion_tool_manifest":
         return _ok(tool_name, _tool_manifest(shell_root))
+    if tool_name == "ion_codex_capsule_chat_status":
+        return _codex_capsule_chat_status(shell_root, args)
+    if tool_name == "ion_codex_capsule_message_poll":
+        return _codex_capsule_message_poll(shell_root, args)
     if tool_name in {"ion_daemon_status", "ion_codex_queue_autorun_status"}:
         data = build_codex_queue_runner_status(shell_root, reconcile=False)
         reconciliation = data.get("reconciliation") if isinstance(data.get("reconciliation"), dict) else {}
@@ -1285,6 +1701,42 @@ def call_chatgpt_connector_tool(
             or reconciliation.get("latest_run_failure_classification_updated")
         )
         return _ok(tool_name, data, mutates_active_state=mutates)
+    if tool_name == "ion_codex_worker_live_status":
+        include_preview = bool(args.get("include_preview"))
+        preview_target = str(args.get("preview_target") or "").strip() or None
+        preview_max_bytes = int(args.get("max_preview_bytes") or 512)
+        data = build_codex_queue_runner_status(
+            shell_root,
+            reconcile=False,
+            include_preview=include_preview,
+            preview_target=preview_target,
+            preview_max_bytes=preview_max_bytes,
+        )
+        reconciliation = data.get("reconciliation") if isinstance(data.get("reconciliation"), dict) else {}
+        mutates = bool(
+            data.get("stale_active_run_detected")
+            or reconciliation.get("latest_run_failure_classification_updated")
+        )
+        return _ok(tool_name, data, mutates_active_state=mutates)
+    if tool_name == "ion_codex_runner_reconcile":
+        write = bool(args.get("write", True))
+        reconciliation = reconcile_codex_queue_runner_state(shell_root, write=write)
+        status = build_codex_queue_runner_status(shell_root, reconcile=False)
+        action = str(reconciliation.get("action") or "")
+        mutates = bool(
+            write
+            and action not in {"", "no_active_run", "active_run_still_running", "not_requested"}
+        )
+        return _ok(
+            tool_name,
+            {
+                "schema_id": "ion.codex_queue_runner_reconcile_result.v1",
+                "reconcile_write": write,
+                "reconciliation": reconciliation,
+                "status": status,
+            },
+            mutates_active_state=mutates,
+        )
     if tool_name == "ion_agent_list":
         return _ok(tool_name, list_agents(shell_root))
     if tool_name == "ion_agent_status":
@@ -1315,9 +1767,13 @@ def call_chatgpt_connector_tool(
         return _carrier_message_send(shell_root, args)
     if tool_name == "ion_carrier_message_ack":
         return _carrier_message_ack(shell_root, args)
+    if tool_name == "ion_codex_capsule_message_send":
+        return _codex_capsule_message_send(shell_root, args)
+    if tool_name == "ion_codex_capsule_sync_to_queue":
+        return _codex_capsule_sync_to_queue(shell_root, args)
     if tool_name == "ion_codex_queue_process_once":
         request_path = str(args.get("request_path") or "").strip() or None
-        timeout = int(args.get("max_runtime_seconds") or args.get("timeout_seconds") or 1800)
+        timeout = _normalized_timeout_for_tool(shell_root, tool_name, args)
         start = bool(args.get("start"))
         result = process_codex_queue_once(
             shell_root,
@@ -1338,7 +1794,7 @@ def call_chatgpt_connector_tool(
             context_refs=list(args.get("context_refs") or []),
             requested_by_carrier_id=str(args.get("requested_by_carrier_id") or "CHATGPT_BROWSER_CARRIER"),
             requested_by_callsign=str(args.get("requested_by_callsign") or "Sev"),
-            timeout_seconds=int(args.get("max_runtime_seconds") or args.get("timeout_seconds") or 1800),
+            timeout_seconds=_normalized_timeout_for_tool(shell_root, tool_name, args),
         )
         return _ok(tool_name, result, mutates_active_state=True) if result.get("ok") else _blocked(tool_name, str(result.get("finding") or "agent_invoke_blocked"), result)
     if tool_name == "ion_agent_cancel":
@@ -1349,7 +1805,7 @@ def call_chatgpt_connector_tool(
             shell_root,
             request_path=str(args.get("request_path") or "").strip() or None,
             start=bool(args.get("start")),
-            timeout_seconds=int(args.get("max_runtime_seconds") or args.get("timeout_seconds") or 1800),
+            timeout_seconds=_normalized_timeout_for_tool(shell_root, tool_name, args),
         )
         return _ok(tool_name, result, mutates_active_state=True) if result.get("ok") else _blocked(tool_name, str(result.get("finding") or result.get("result") or "swarm_step_once_blocked"), result)
     if tool_name == "ion_request_codex_work_packet":
@@ -1376,6 +1832,7 @@ def call_chatgpt_connector_tool(
         request_kind = str(args.get("request_kind") or "").strip()
         if request_kind:
             payload["request_kind"] = request_kind
+        payload["return_contract_sections"] = _return_contract_sections_for_work_request(payload)
         if isinstance(args.get("ion_skill_activation"), Mapping):
             payload["ion_skill_activation"] = dict(args["ion_skill_activation"])
         if isinstance(args.get("ion_chat_engine_turn"), Mapping):
