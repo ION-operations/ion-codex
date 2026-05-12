@@ -1,0 +1,150 @@
+{
+  "authority": {
+    "direct_main_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-11T23:57:48Z",
+  "lane": "joc_ui_candidate",
+  "manifest_id": "GIT_STAGE_MANIFEST_JOC_UI_CANDIDATE_20260511",
+  "path_count": 26,
+  "paths": [
+    {
+      "path": "ION/04_packages/kernel/ion_cockpit_service_manager.py",
+      "status": "??"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_cockpit_view_model.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_left_drawer_ui.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_shell_ui.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_dual_codex_chat.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_local_cockpit_app.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/CodexCapsuleChatWorkbenchPanel.tsx",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/DocsProjectsPackagesPanel.tsx",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/ExtensionMicroShellPanel.tsx",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/HelixionDevelopmentPanel.tsx",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/HelixionEvolutionPanel.tsx",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+      "status": "M"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/LocalCockpitApp.tsx",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/QueueGatewayCockpitPanel.tsx",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/ServiceConsolePanel.tsx",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/index.html",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css",
+      "status": "M"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+      "status": "M"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/main.tsx",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/package-lock.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/package.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/tsconfig.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/08_ui/joc_cockpit_shell/vite.config.ts",
+      "status": "??"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_cockpit_view_model.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_local_cockpit_app.py",
+      "status": "M"
+    }
+  ],
+  "required_pre_stage_gates": [
+    "operator_review",
+    "ui_canon_review",
+    "diff_review",
+    "staged_secret_scan",
+    "visual_review_if_requested"
+  ],
+  "schema_id": "ion.git_stage_manifest.v1",
+  "selection_policy": "JOC cockpit React shell, Python host/view-model UI surfaces, and focused UI tests. Candidate until visually reviewed against JOC canon.",
+  "source_status_snapshot": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "feature/codex-capsule-chat-active-root",
+    "dirty_path_count_before_manifest_write": 703,
+    "remote_lines": [
+      "origin\thttps://github.com/ION-operations/ION.git (fetch)",
+      "origin\thttps://github.com/ION-operations/ION.git (push)"
+    ],
+    "status_counts_before_manifest_write": {
+      "??": 641,
+      "M": 62
+    },
+    "upstream": "origin/feature/codex-capsule-chat-active-root"
+  },
+  "status": "candidate_stage_manifest_not_staged",
+  "status_counts": {
+    "??": 15,
+    "M": 11
+  },
+  "title": "Helixion/JOC cockpit UI candidate slice"
+}

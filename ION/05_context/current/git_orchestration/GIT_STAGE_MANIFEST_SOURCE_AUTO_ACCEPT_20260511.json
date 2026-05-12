@@ -1,0 +1,117 @@
+{
+  "authority": {
+    "direct_main_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-11T23:57:48Z",
+  "lane": "source_auto_accept",
+  "manifest_id": "GIT_STAGE_MANIFEST_SOURCE_AUTO_ACCEPT_20260511",
+  "path_count": 18,
+  "paths": [
+    {
+      "path": "ION/03_registry/ion_custom_gpt_action_gateway_policy.yaml",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_chatops_bridge.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_custom_gpt_action_gateway.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/AGENT_INVOCATION_LANE_CONTRACT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/QUEUE_PACK_AUTHORING.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/README.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/background.js",
+      "status": "M"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+      "status": "M"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/examples/ION_QUEUE_PACK_EXAMPLE.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/src/approval_ui.ts",
+      "status": "M"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/src/background.ts",
+      "status": "M"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+      "status": "M"
+    },
+    {
+      "path": "ION/09_integrations/browser_extension/ion_chatops_bridge/tests/live_smoke_parser_simulation.js",
+      "status": "M"
+    },
+    {
+      "path": "ION/09_integrations/custom_gpt_action_gateway/README.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/09_integrations/custom_gpt_action_gateway/openapi.yaml",
+      "status": "M"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_chatops_bridge_policy.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_custom_gpt_action_gateway.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_custom_gpt_action_gateway_policy.py",
+      "status": "M"
+    }
+  ],
+  "required_pre_stage_gates": [
+    "operator_review",
+    "diff_review",
+    "staged_secret_scan",
+    "targeted_extension_reload_or_simulation_if_requested"
+  ],
+  "schema_id": "ion.git_stage_manifest.v1",
+  "selection_policy": "Source, dist bundle, OpenAPI, policy, and tests for the top-bar Auto toggle and safe native-action confirm path.",
+  "source_status_snapshot": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "feature/codex-capsule-chat-active-root",
+    "dirty_path_count_before_manifest_write": 703,
+    "remote_lines": [
+      "origin\thttps://github.com/ION-operations/ION.git (fetch)",
+      "origin\thttps://github.com/ION-operations/ION.git (push)"
+    ],
+    "status_counts_before_manifest_write": {
+      "??": 641,
+      "M": 62
+    },
+    "upstream": "origin/feature/codex-capsule-chat-active-root"
+  },
+  "status": "candidate_stage_manifest_not_staged",
+  "status_counts": {
+    "??": 3,
+    "M": 15
+  },
+  "title": "Action Gateway and browser-extension auto-accept source slice"
+}

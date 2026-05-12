@@ -1,0 +1,925 @@
+{
+  "authority": {
+    "direct_main_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-11T23:57:48Z",
+  "lane": "context_packages",
+  "manifest_id": "GIT_STAGE_MANIFEST_CONTEXT_PACKAGES_20260511",
+  "path_count": 220,
+  "paths": [
+    {
+      "path": "ION/02_architecture/CODEX_CARRIER_LIMITS_CONTEXT_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/02_architecture/DAIMON_EXTENSION_JOC_AUTOMATION_LINEAGE_SYNTHESIS.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/02_architecture/DOM_PERCEPTION_001_BROWSER_PERCEPTION_DOMAIN_DESIGN.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/02_architecture/ION_AGENT_BRANCH_CAPSULE_PROTOCOL_V0_1.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/02_architecture/ION_CHATOPS_MODE_VISIBILITY_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/02_architecture/ION_MULTI_AGENT_CONTEXT_AND_WORKPACKET_SETTLEMENT_PROTOCOL_V0_1.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/02_architecture/PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/03_registry/browser_perception_agent_roster_proposal.yaml",
+      "status": "??"
+    },
+    {
+      "path": "ION/03_registry/browser_perception_domain_registry_proposal.yaml",
+      "status": "??"
+    },
+    {
+      "path": "ION/03_registry/codex_carrier_limits_registry.yaml",
+      "status": "??"
+    },
+    {
+      "path": "ION/03_registry/helixion_joc_evolution_registry.yaml",
+      "status": "??"
+    },
+    {
+      "path": "ION/03_registry/portable_ion_page_companion_registry.yaml",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_CONTEXT_PACKAGE_001_WORK_PACKET.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_CONTEXT_PACKAGE_MANIFEST_V0_1.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_LIMITS_AND_VARIABLES_V0_1.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_ROADMAP_V0_1.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_TEST_LOG_V0_1.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_surface_cartography/ION_ACTIONS_CONNECTOR_CONTEXT_PACKAGE_V0_1.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_surface_cartography/SHA256SUMS.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/agent_context_branches/BRANCH_CAPSULE_REGISTRY_V0_1.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/agent_context_branches/README.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/agent_context_branches/templates/AGENT_BRANCH_CAPSULE.template.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/agent_context_branches/templates/AGENT_BRANCH_STATUS.template.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/agent_context_branches/templates/AGENT_CONTEXT_IDENTITY_CARD.template.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/TASK_RETURN_DOM_PERCEPTION_001.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/browser_perception_issue_fix_library.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/schemas/ax_region.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/schemas/chat_thread_performance_profile.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/schemas/dom_region.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/schemas/extension_action_trace_event.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/schemas/mutation_event.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/schemas/page_state_object.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/schemas/visual_region.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/validation_strategy.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/browser_perception/DOM_PERCEPTION_001/workflow_family_dom_perception.yaml",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/actions/b01_b04_extension_queue_protocol_context_package_001_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/actions/b01_b04_extension_queue_protocol_proof_repair_001_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/actions/b01_codex_runner_timeout_policy_001_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/actions/b01_codex_runner_timeout_policy_002_live_queue_proof_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/actions/b01_live_queue_proof_002_compact_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_bridge_operation_20260510t162831z_docs_prepare_zip_drop.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_bridge_operation_20260510t185518z_docs_prepare_zip_drop.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_bridge_operation_20260510t185530z_docs_prepare_zip_drop.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_bridge_operation_20260510t185755z_docs_prepare_zip_drop.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_bridge_operation_20260510t185800z_docs_prepare_zip_drop.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_bridge_operation_20260510t185802z_docs_prepare_zip_drop.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_bridge_operation_20260511t153314z_agent_process_one_start.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_receipt_20260511t025848z_b01_codex_runner_timeout_policy_001_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_receipt_20260511t152116z_b01_live_queue_proof_002_compact_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_receipt_20260511t153246z_b01_codex_runner_timeout_policy_002_live_queue_proof_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_receipt_20260511t160749z_b01_b04_extension_queue_protocol_context_package_001_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatops_bridge/receipts/chatops_receipt_20260511t170055z_b01_b04_extension_queue_protocol_proof_repair_001_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/CONTEXT_SETTLEMENT_REGISTRY_V0_1.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/README.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/claims/claim_20260511_action_surface_context_package_001.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/claims/claim_20260511_agent_branch_capsule_protocol.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/claims/claim_20260511_context_settlement_protocol_recovery.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/conflicts/CHECKPOINT_COLLISION_C088_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/inbox/SETTLE_ACTION_SURFACE_CONTEXT_PACKAGE_001_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/inbox/SETTLE_AGENT_BRANCH_CAPSULE_PROTOCOL_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/inbox/SETTLE_UI_RECOVERY_ANCHORED_PAGES_AND_DRAWER_CANON_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/context_settlement/inbox/SETTLE_WORKPACKETS_DIFFS_INGESTION_002_20260510T234208.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/CUSTOM_GPT_CAPSULE_SYSTEM_003_COMPARISON_REPORT.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/CUSTOM_GPT_CAPSULE_SYSTEM_003_SETUP_CARDS_BLOCKER.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/CUSTOM_GPT_CAPSULE_SYSTEM_003_SETUP_CARDS_INGEST.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/CUSTOM_GPT_CAPSULE_SYSTEM_003_SETUP_CARDS_INTAKE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/DAIMON_COMPANION_ACTION_GATEWAY_VISIBILITY_SETUP_20260510.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/ATLAS_SYSTEMS_CARTOGRAPHER_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/CONTEXT_CARTOGRAPHER_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/DAIMON_COMPANION_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/DOM_CARTOGRAPHER_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/INTEGRATION_ARCHITECT_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/ION_CORE_CARRIER_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/LIVING_GRAPH_DESIGNER_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/MASON_BUILDER_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/NEMESIS_AUDIT_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/RUNTIME_CARTOGRAPHER_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/SCRIBE_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/SHARED_MICRO_CORE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/WISDOMNET_LIBRARIAN_CAPSULE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/non_claims_and_authority.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/product_taxonomy.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/MANIFEST.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/MANIFESTS/custom_gpt_setup_card.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/PACKETS/CUSTOM_GPT_CAPSULE_SYSTEM_003_SETUP_CARDS.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/PROOF/VALIDATION_REPORT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/RECEIPTS/sandbox_receipt_v0_4.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/REGISTRY/custom_gpt_role_setup_registry.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/atlas_systems_cartographer_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/atlas_systems_cartographer_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/context_cartographer_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/context_cartographer_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/daimon_companion_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/daimon_companion_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/dom_cartographer_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/dom_cartographer_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/integration_architect_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/integration_architect_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/ion_core_carrier_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/ion_core_carrier_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/living_graph_designer_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/living_graph_designer_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/mason_builder_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/mason_builder_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/nemesis_audit_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/nemesis_audit_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/runtime_cartographer_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/runtime_cartographer_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/scribe_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/scribe_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/wisdomnet_librarian_custom_gpt_setup_card.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/SETUP_CARDS/wisdomnet_librarian_instructions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/VALIDATION/CUSTOM_GPT_CAPSULE_VALIDATION_MATRIX_v0_4.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DAIMON_COMPANION_BUILDER_FIELDS.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DAIMON_COMPANION_CUSTOM_GPT_BUILD_DRAFT.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DOM_CARTOGRAPHER_BUILDER_FIELDS.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DOM_CARTOGRAPHER_CUSTOM_GPT_BUILD_DRAFT.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/build_drafts/FIRST_TWO_BUILD_VALIDATION_AND_RELEASE_CHECKLIST.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_capsule_system/build_drafts/FIRST_TWO_CUSTOM_GPT_BUILD_PACKET.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/custom_gpt_factory/CUSTOM_GPT_FACTORY_001_DOMAIN_AND_AGENT_DESIGN.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/MANIFEST.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/README.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/packets/B01_SELECTED_REQUEST_START_AND_QUEUE_CLASSIFICATION_001.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/packets/B04_EXTENSION_CHAT_SELF_QUEUE_AND_AGENT_COCKPIT_001.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/AGENT_EDITABLE_QUEUE_PACKET_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/BRANCH_CARRIER_MESSAGE_QUEUE_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/CHAT_SELF_QUEUE_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/EXTENSION_QUEUE_PACKET_LIFECYCLE_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/EXTENSION_QUEUE_REGISTRY_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/QUEUE_EVENT_LEDGER_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/QUEUE_SETTLEMENT_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/QUEUE_VISIBILITY_AND_REDACTION_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/RESULT_CAPTURE_AND_RETURN_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/protocols/SELECTED_REQUEST_START_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/schemas/agent_classification.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/schemas/browser_self_queue_packet.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/schemas/extension_queue_packet.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/schemas/queue_event.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/schemas/queue_registry.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/schemas/queue_result_capture.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/schemas/queue_visibility_view.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/schemas/selected_request_start.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/templates/APPROVE_QUEUE_PACKET_TEMPLATE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/templates/CAPTURE_CHAT_RETURN_TEMPLATE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/templates/CREATE_QUEUE_PACKET_TEMPLATE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/templates/EDIT_QUEUE_PACKET_TEMPLATE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/templates/SETTLE_QUEUE_RESULT_TEMPLATE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/templates/START_SELECTED_REQUEST_TEMPLATE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/ui_contracts/approval_overlay_mode_memory.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/ui_contracts/extension_agent_cockpit_modes.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/ui_contracts/queue_panel_requirements.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/ui_contracts/selected_request_start_ui.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/git_orchestration/ION_DIRTY_TREE_ORCHESTRATION_PLAN_20260511.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_BOTTOM_MONITOR_METRICS_001.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_BOTTOM_MONITOR_METRICS_001_RECEIPT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_INLINE_ACTION_FALSE_POSITIVE_001.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_INLINE_ACTION_FALSE_POSITIVE_001_RECEIPT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_MARKER_POPOVER_TOGGLE_001.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_MARKER_POPOVER_TOGGLE_001_RECEIPT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_MODE_VISIBILITY_001.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_MODE_VISIBILITY_001_RECEIPT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_PERCEPTION_MARKER_SEMANTICS_001.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_PERCEPTION_MARKER_SEMANTICS_001_RECEIPT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_QUEUE_CONTROL_AND_FILE_ITEMS_001.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_QUEUE_CONTROL_AND_FILE_ITEMS_001_RECEIPT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_RECEIPT_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/CHATOPS_CONTEXT_SYNC_PANEL_RECEIPT_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/CHATOPS_CONTEXT_WORKFLOW_RAIL_RECEIPT_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_LOAD_RECEIPT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_RECOVERY_002_EXISTING_COCKPIT_TOP_PAGES_RECEIPT_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_RECOVERY_003_ANCHORED_PAGES_AND_DRAWER_CANON_RECEIPT_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_REPAIR_001_SHELL_ZONE_REFACTOR_RECEIPT_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_ROUTE_RECOVERY_RECEIPT_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_WORKFLOW_GATE_RECEIPT_20260511.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/portable_ion_page_companion/PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/factory/PACKETS/CUSTOM_GPT_FACTORY_002_GENERATE_FIRST_ROLE_PACKS.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/factory/docs/custom_gpt_factory_domain.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/factory/registry/custom_gpt_role_registry.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/factory/schemas/capsule_family.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/factory/schemas/custom_gpt_role_package.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/000_READ_FIRST.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/001_BROWSER_GPT_SYSTEM_INSTRUCTIONS.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/010_PROTOCOL/ION_QUEUE_WORKFLOW_AUTHORING_PROTOCOL.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/020_SCHEMAS/ion_extension_queue_pack.schema.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/030_TEMPLATES/queue_pack_manifest.template.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/030_TEMPLATES/workflow_step_prompt.template.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/README.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/ion_queue_pack.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/prompts/01_intake/01_scope_intent_authority.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/prompts/01_intake/02_context_inventory.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/prompts/02_orchestration/01_build_route.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/prompts/02_orchestration/02_build_schedule.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/prompts/03_execution/01_draft_work_packets.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/prompts/03_execution/02_draft_connector_actions.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/prompts/04_verification/01_verify_plan.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/040_EXAMPLES/advanced_orchestration_queue_pack/prompts/04_verification/02_receipt_and_next_action.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/050_VALIDATION/QUEUE_WORKFLOW_VALIDATION_CHECKLIST.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/090_MANIFEST/PACKAGE_MANIFEST.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511/README.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/000_READ_FIRST_MOUNT_ORDER.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE_8K.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/002_KNOWLEDGE_UPLOAD_MANIFEST.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/010_V2_6_7_DAIMON_RELAY_AND_GOVERNED_STATE_NOTE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/011_V2_6_7_VOICE_MISRECOGNITION_SAFETY_GATE_NOTE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/CODEX_CAPSULE_BRIDGE_RUNBOOK_V2_6_7.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/CODEX_QUEUE_RECONCILE_LIVE_TELEMETRY_RUNBOOK_V2_6_7.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/FIRST_CONTACT_PROJECT_IDENTITY_AND_COLLAB_MODEL_V2_6_7.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/040_PRODUCT_DOCS/DAIMON_PROJECT_DOCTRINE_V2_6_7.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/060_ACTION_SCHEMAS/ACTION_SELECTION_AND_PROOF_MAP.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/060_ACTION_SCHEMAS/CONNECTION_SURFACE_MANIFEST_V2_6_7.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/090_VALIDATION/PACKAGE_MANIFEST.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/090_VALIDATION/V2_6_VALIDATION_REPORT.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/receipts/CUSTOM_GPT_CARRIER_PACKAGE_V2_6_7_DAIMON_CONNECTIVITY_AND_WORKFLOW_RECEIPT_20260509T224136Z.json",
+      "status": "??"
+    }
+  ],
+  "required_pre_stage_gates": [
+    "operator_review",
+    "context_package_review",
+    "settlement_status_review",
+    "staged_secret_scan"
+  ],
+  "schema_id": "ion.git_stage_manifest.v1",
+  "selection_policy": "Architecture docs, registries, context packages, settlement records, and orchestration plans intended as durable ION context rather than live queue residue.",
+  "source_status_snapshot": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "feature/codex-capsule-chat-active-root",
+    "dirty_path_count_before_manifest_write": 703,
+    "remote_lines": [
+      "origin\thttps://github.com/ION-operations/ION.git (fetch)",
+      "origin\thttps://github.com/ION-operations/ION.git (push)"
+    ],
+    "status_counts_before_manifest_write": {
+      "??": 641,
+      "M": 62
+    },
+    "upstream": "origin/feature/codex-capsule-chat-active-root"
+  },
+  "status": "candidate_stage_manifest_not_staged",
+  "status_counts": {
+    "??": 213,
+    "M": 7
+  },
+  "title": "Durable context package, doctrine, registry, and settlement candidate slice"
+}

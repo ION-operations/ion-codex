@@ -1,0 +1,77 @@
+{
+  "schema_id": "ion.git_settlement_receipt.v1",
+  "receipt_id": "GIT_SETTLEMENT_001_STAGE_MANIFESTS_AND_QUARANTINE_RECEIPT_20260511",
+  "created_at": "2026-05-11T23:57:48Z",
+  "status": "candidate_stage_manifests_created_not_staged",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "direct_main_authority": false
+  },
+  "objective": "Create exact dirty-tree stage manifests and a duplicate B00 no-receipt quarantine plan without staging, committing, pushing, deleting, resetting, or cleaning files.",
+  "source_repo": {
+    "root": "/home/sev/ION - Production/ION_CODEX FULL",
+    "branch": "feature/codex-capsule-chat-active-root",
+    "upstream": "origin/feature/codex-capsule-chat-active-root"
+  },
+  "dirty_path_count_before_manifest_write": 703,
+  "manifest_index": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_INDEX_20260511.json",
+  "created_manifests": [
+    {
+      "lane": "source_auto_accept",
+      "path_count": 18,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_SOURCE_AUTO_ACCEPT_20260511.json"
+    },
+    {
+      "lane": "worker_spawn_contract",
+      "path_count": 9,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_WORKER_SPAWN_CONTRACT_20260511.json"
+    },
+    {
+      "lane": "joc_ui_candidate",
+      "path_count": 26,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_JOC_UI_CANDIDATE_20260511.json"
+    },
+    {
+      "lane": "codex_solo_continuity",
+      "path_count": 42,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_CODEX_SOLO_CONTINUITY_20260511.json"
+    },
+    {
+      "lane": "bounded_agent_lane",
+      "path_count": 8,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_BOUNDED_AGENT_LANE_20260511.json"
+    },
+    {
+      "lane": "context_packages",
+      "path_count": 220,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_CONTEXT_PACKAGES_20260511.json"
+    },
+    {
+      "lane": "runtime_evidence",
+      "path_count": 196,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_RUNTIME_EVIDENCE_20260511.json"
+    },
+    {
+      "lane": "imported_workpackets_diffs",
+      "path_count": 26,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_IMPORTED_WORKPACKETS_DIFFS_20260511.json"
+    },
+    {
+      "lane": "b00_duplicate_quarantine",
+      "path_count": 158,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_B00_DUPLICATE_QUARANTINE_20260511.json"
+    },
+    {
+      "lane": "uncategorized",
+      "path_count": 0,
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_UNCATEGORIZED_20260511.json"
+    }
+  ],
+  "quarantine_plan": "ION/05_context/current/git_orchestration/GIT_QUARANTINE_DUPLICATE_B00_NO_RECEIPT_20260511.md",
+  "result": "The dirty tree now has candidate machine-readable lane manifests. No Git staging or push action was performed. The B00 duplicate/no-receipt residue is isolated as a quarantine lane and should not be bulk-staged.",
+  "recommended_next_step": "Operator review of manifest index, then approve one exact staging lane or request a read-only staged-path proposal."
+}

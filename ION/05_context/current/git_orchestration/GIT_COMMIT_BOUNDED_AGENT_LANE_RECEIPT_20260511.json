@@ -1,0 +1,47 @@
+{
+  "schema_id": "ion.git_commit_receipt.v1",
+  "receipt_id": "GIT_COMMIT_BOUNDED_AGENT_LANE_RECEIPT_20260511",
+  "created_at": "2026-05-12T00:01:00Z",
+  "status": "committed_not_pushed",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "git_add_authority": true,
+    "git_commit_authority": true,
+    "git_push_authority": false,
+    "direct_main_authority": false
+  },
+  "operator_approval": "approved",
+  "commit": {
+    "hash": "4627c0a",
+    "message": "Add bounded agent relay lane contract",
+    "branch": "feature/codex-capsule-chat-active-root"
+  },
+  "committed_path_count": 8,
+  "stat_summary": {
+    "files_changed": 8,
+    "insertions": 543,
+    "deletions": 0
+  },
+  "committed_paths": [
+    "ION/02_architecture/ION_BOUNDED_AGENT_INVOCATION_AND_RELAY_PROTOCOL.md",
+    "ION/03_registry/ion_agent_invocation_packet.schema.json",
+    "ION/03_registry/ion_agent_relay_message.schema.json",
+    "ION/03_registry/ion_agent_relay_response.schema.json",
+    "ION/03_registry/ion_bounded_agent_role_registry.yaml",
+    "ION/04_packages/kernel/ion_bounded_agent_lane_smoke.py",
+    "ION/05_context/current/chatgpt_connector/BOUNDED_AGENT_INVOCATION_RELAY_V1_STATE.md",
+    "ION/05_context/current/chatgpt_connector/DAIMON_COMPANION_AGENT_LANE_UI_001_STATE.md"
+  ],
+  "pathspec_file": "ION/05_context/current/git_orchestration/GIT_STAGE_PATHSPEC_BOUNDED_AGENT_LANE_20260511.txt",
+  "not_performed": [
+    "git push",
+    "direct main push",
+    "reset",
+    "cleanup",
+    "delete",
+    "test run",
+    "full validation"
+  ],
+  "next_recommended_step": "Proceed with Codex solo continuity or context package lane only after deciding whether current Capsule/Mini active-state files should be treated as evidence."
+}

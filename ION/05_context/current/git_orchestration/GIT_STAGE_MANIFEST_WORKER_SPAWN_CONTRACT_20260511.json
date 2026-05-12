@@ -1,0 +1,80 @@
+{
+  "authority": {
+    "direct_main_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-11T23:57:48Z",
+  "lane": "worker_spawn_contract",
+  "manifest_id": "GIT_STAGE_MANIFEST_WORKER_SPAWN_CONTRACT_20260511",
+  "path_count": 9,
+  "paths": [
+    {
+      "path": "ION/03_registry/ion_chatgpt_browser_mcp_tool_policy.yaml",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_agent_invocation_broker.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_agent_invocation_broker.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_chatgpt_browser_mcp_connector_contract.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_codex_queue_runner.py",
+      "status": "M"
+    }
+  ],
+  "required_pre_stage_gates": [
+    "operator_review",
+    "diff_review",
+    "staged_secret_scan",
+    "focused_connector_queue_regression_if_requested"
+  ],
+  "schema_id": "ion.git_stage_manifest.v1",
+  "selection_policy": "Kernel, connector, policy, and tests for runtime budgets, no-receipt handling, and pre-submit return template enforcement.",
+  "source_status_snapshot": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "feature/codex-capsule-chat-active-root",
+    "dirty_path_count_before_manifest_write": 703,
+    "remote_lines": [
+      "origin\thttps://github.com/ION-operations/ION.git (fetch)",
+      "origin\thttps://github.com/ION-operations/ION.git (push)"
+    ],
+    "status_counts_before_manifest_write": {
+      "??": 641,
+      "M": 62
+    },
+    "upstream": "origin/feature/codex-capsule-chat-active-root"
+  },
+  "status": "candidate_stage_manifest_not_staged",
+  "status_counts": {
+    "M": 9
+  },
+  "title": "Worker spawn-contract, timeout, and return-template enforcement source slice"
+}

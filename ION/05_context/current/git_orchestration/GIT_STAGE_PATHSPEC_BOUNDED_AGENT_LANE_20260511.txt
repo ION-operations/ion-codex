@@ -1,0 +1,8 @@
+ION/02_architecture/ION_BOUNDED_AGENT_INVOCATION_AND_RELAY_PROTOCOL.md
+ION/03_registry/ion_agent_invocation_packet.schema.json
+ION/03_registry/ion_agent_relay_message.schema.json
+ION/03_registry/ion_agent_relay_response.schema.json
+ION/03_registry/ion_bounded_agent_role_registry.yaml
+ION/04_packages/kernel/ion_bounded_agent_lane_smoke.py
+ION/05_context/current/chatgpt_connector/BOUNDED_AGENT_INVOCATION_RELAY_V1_STATE.md
+ION/05_context/current/chatgpt_connector/DAIMON_COMPANION_AGENT_LANE_UI_001_STATE.md

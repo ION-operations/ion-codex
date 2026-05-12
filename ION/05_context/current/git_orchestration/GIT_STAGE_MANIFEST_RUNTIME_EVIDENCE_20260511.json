@@ -1,0 +1,830 @@
+{
+  "authority": {
+    "direct_main_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-11T23:57:48Z",
+  "lane": "runtime_evidence",
+  "manifest_id": "GIT_STAGE_MANIFEST_RUNTIME_EVIDENCE_20260511",
+  "path_count": 196,
+  "paths": [
+    {
+      "path": "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/ACTIVE_OPERATOR_MESSAGE_QUEUE.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/action_gateway/receipts/action_gateway_receipt_20260509t174934z_actions_submit_daimon_codexcli_handshake_audit_20260509t.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_gateway/receipts/action_gateway_receipt_20260511t020951z_browser_queue_enqueue_bq_e80d77cedffc2f39.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_gateway/receipts/action_gateway_receipt_20260511t021542z_browser_queue_enqueue_b01_runtime_connectors_activation_.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/action_gateway/receipts/action_gateway_receipt_20260511t023101z_actions_submit_b01_codex_runner_timeout_policy_001_20260.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-09T193142Z0000_runtime_cartographer_read_only_runtime_cartography_experiment_for_local_ion_daim.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-10T144321Z0000_runtime_cartographer_google_cloud_setup_cartography_for_daimon_final_live_trace_.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-10T171017Z0000_context_cartographer_read_only_collaboration_smoke_inspect_whether_chatgpt_brows.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-10T175229Z0000_context_cartographer_post_patch_lifecycle_telemetry_proof_perform_read_only_insp.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-10T231337Z0000_context_cartographer_fresh_chatgpt_carrier_smoke_test_for_bounded_ion_agent_invo.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-10T232654Z0000_runtime_cartographer_read_only_capability_probe_google_agent_and_chatops_schema_.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/agent_invocations/_templates/context_cartographer_bounded_invocation_sample.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/capsule_messages/2026-05-09T222152Z0000_codex_general_message.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/capsule_messages/2026-05-09T222229Z0000_codex_general_message.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/capsule_messages/2026-05-09T222519Z0000_codex_general_message.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/capsule_messages/2026-05-09T223659Z0000_codex_general_message.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T170629Z0000_carmsg_2026_05_10t170527z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T170707Z0000_carmsg_2026_05_10t170636z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T170833Z0000_carmsg_2026_05_10t170737z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T170909Z0000_carmsg_2026_05_10t170847z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T171011Z0000_carmsg_2026_05_10t170935z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T171040Z0000_carmsg_2026_05_10t171026z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T174207Z0000_carmsg_2026_05_10t173912z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T174611Z0000_carmsg_2026_05_10t174221z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T175224Z0000_carmsg_2026_05_10t175146z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T175302Z0000_carmsg_2026_05_10t175237z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T175922Z0000_carmsg_2026_05_10t175702z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T182014Z0000_carmsg_2026_05_10t181352z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T193041Z0000_carmsg_2026_05_10t192948z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T200102Z0000_carmsg_2026_05_10t193243z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T200313Z0000_carmsg_2026_05_10t200114z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-09T175026Z0000_carmsg_2026_05_09t175026z0000_chatgpt_browser_sev_to_codex_cli.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-09T224240Z0000_carmsg_2026_05_09t224240z0000_claude_sonnet_46_carrier_to_codex_cli.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-09T225231Z0000_carmsg_2026_05_09t225231z0000_claude_sonnet_46_carrier_to_codex_cli.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T170527Z0000_carmsg_2026_05_10t170527z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T170636Z0000_carmsg_2026_05_10t170636z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T170737Z0000_carmsg_2026_05_10t170737z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T170847Z0000_carmsg_2026_05_10t170847z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T170935Z0000_carmsg_2026_05_10t170935z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T171026Z0000_carmsg_2026_05_10t171026z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T171522Z0000_carmsg_2026_05_10t171522z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T173912Z0000_carmsg_2026_05_10t173912z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T174221Z0000_carmsg_2026_05_10t174221z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T175056Z0000_carmsg_2026_05_10t175056z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T175146Z0000_carmsg_2026_05_10t175146z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T175237Z0000_carmsg_2026_05_10t175237z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T175702Z0000_carmsg_2026_05_10t175702z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T180351Z0000_carmsg_2026_05_10t180351z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T181352Z0000_carmsg_2026_05_10t181352z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T182947Z0000_carmsg_2026_05_10t182947z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T183114Z0000_carmsg_2026_05_10t183114z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T190629Z0000_carmsg_2026_05_10t190629z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T192709Z0000_carmsg_2026_05_10t192709z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T192900Z0000_carmsg_2026_05_10t192900z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T192948Z0000_carmsg_2026_05_10t192948z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T193243Z0000_carmsg_2026_05_10t193243z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T200114Z0000_carmsg_2026_05_10t200114z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-11T012916Z0000_carmsg_2026_05_11t012916z0000_codex_cli_carrier_to_chatgpt_browser_carrier.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-11T141714Z0000_carmsg_2026_05_11t141714z0000_b00_parent_settlement_to_b01_runtime_connectors.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-11T141718Z0000_carmsg_2026_05_11t141718z0000_b00_parent_settlement_to_b04_extension_dom_percept.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-11T141723Z0000_carmsg_2026_05_11t141723z0000_b00_parent_settlement_to_b05_pc_health_security.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-11T142549Z0000_carmsg_2026_05_11t142549z0000_b00_parent_settlement_to_b01_runtime_connectors.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-11T142554Z0000_carmsg_2026_05_11t142554z0000_b00_parent_settlement_to_b04_extension_dom_percept.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-11T142602Z0000_carmsg_2026_05_11t142602z0000_b00_parent_settlement_to_b05_pc_health_security.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T175003Z0000_codex_req_2026_05_09t174956z0000_read_only_daimon_local_connector_handshake_from/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T175003Z0000_codex_req_2026_05_09t174956z0000_read_only_daimon_local_connector_handshake_from/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T175003Z0000_codex_req_2026_05_09t174956z0000_read_only_daimon_local_connector_handshake_from/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T175003Z0000_codex_req_2026_05_09t174956z0000_read_only_daimon_local_connector_handshake_from/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T192625Z0000_codex_req_2026_05_09t175121z0000_implement_a_bounded_connector_root_readability_/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T192625Z0000_codex_req_2026_05_09t175121z0000_implement_a_bounded_connector_root_readability_/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T192625Z0000_codex_req_2026_05_09t175121z0000_implement_a_bounded_connector_root_readability_/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T194739Z0000_codex_req_2026_05_09t004941z0000_prepare_a_bounded_ion_work_packet_report_for_th/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T194739Z0000_codex_req_2026_05_09t004941z0000_prepare_a_bounded_ion_work_packet_report_for_th/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T194739Z0000_codex_req_2026_05_09t004941z0000_prepare_a_bounded_ion_work_packet_report_for_th/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T200130Z0000_codex_req_2026_05_09t175121z0000_implement_a_bounded_connector_root_readability_/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T200130Z0000_codex_req_2026_05_09t175121z0000_implement_a_bounded_connector_root_readability_/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T200130Z0000_codex_req_2026_05_09t175121z0000_implement_a_bounded_connector_root_readability_/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T200152Z0000_codex_req_agent_2026_05_09t193142z0000_runtime_cartographer_read_only_runtime_ca/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T200152Z0000_codex_req_agent_2026_05_09t193142z0000_runtime_cartographer_read_only_runtime_ca/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T200152Z0000_codex_req_agent_2026_05_09t193142z0000_runtime_cartographer_read_only_runtime_ca/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T211329Z0000_codex_req_agent_2026_05_09t193142z0000_runtime_cartographer_read_only_runtime_ca/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T211329Z0000_codex_req_agent_2026_05_09t193142z0000_runtime_cartographer_read_only_runtime_ca/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T211329Z0000_codex_req_agent_2026_05_09t193142z0000_runtime_cartographer_read_only_runtime_ca/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T211329Z0000_codex_req_agent_2026_05_09t193142z0000_runtime_cartographer_read_only_runtime_ca/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T211859Z0000_codex_req_2026_05_09t194800z0000_build_the_next_bounded_ion_codexcli_control_sur/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T211859Z0000_codex_req_2026_05_09t194800z0000_build_the_next_bounded_ion_codexcli_control_sur/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T211859Z0000_codex_req_2026_05_09t194800z0000_build_the_next_bounded_ion_codexcli_control_sur/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T211859Z0000_codex_req_2026_05_09t194800z0000_build_the_next_bounded_ion_codexcli_control_sur/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T213323Z0000_codex_req_2026_05_09t213207z0000_proof_repair_packet_for_blocked_control_surface/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T213323Z0000_codex_req_2026_05_09t213207z0000_proof_repair_packet_for_blocked_control_surface/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T213323Z0000_codex_req_2026_05_09t213207z0000_proof_repair_packet_for_blocked_control_surface/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T213323Z0000_codex_req_2026_05_09t213207z0000_proof_repair_packet_for_blocked_control_surface/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T214100Z0000_codex_req_2026_05_09t214012z0000_implement_bounded_live_worker_telemetry_for_cha/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T214100Z0000_codex_req_2026_05_09t214012z0000_implement_bounded_live_worker_telemetry_for_cha/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T214100Z0000_codex_req_2026_05_09t214012z0000_implement_bounded_live_worker_telemetry_for_cha/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T214100Z0000_codex_req_2026_05_09t214012z0000_implement_bounded_live_worker_telemetry_for_cha/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T223722Z0000_codex_req_2026_05_09t223716z0000_daimon_custom_gpt_infrastructure_update_packet_/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T223722Z0000_codex_req_2026_05_09t223716z0000_daimon_custom_gpt_infrastructure_update_packet_/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T223722Z0000_codex_req_2026_05_09t223716z0000_daimon_custom_gpt_infrastructure_update_packet_/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T223722Z0000_codex_req_2026_05_09t223716z0000_daimon_custom_gpt_infrastructure_update_packet_/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T232413Z0000_codex_req_2026_05_09t225713z0000_proof_repair_packet_for_blocked_daimon_custom_g/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T232413Z0000_codex_req_2026_05_09t225713z0000_proof_repair_packet_for_blocked_daimon_custom_g/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T232413Z0000_codex_req_2026_05_09t225713z0000_proof_repair_packet_for_blocked_daimon_custom_g/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T232413Z0000_codex_req_2026_05_09t225713z0000_proof_repair_packet_for_blocked_daimon_custom_g/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T171106Z0000_codex_req_agent_2026_05_10t171017z0000_context_cartographer_read_only_collaborat/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T171106Z0000_codex_req_agent_2026_05_10t171017z0000_context_cartographer_read_only_collaborat/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T171106Z0000_codex_req_agent_2026_05_10t171017z0000_context_cartographer_read_only_collaborat/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T171106Z0000_codex_req_agent_2026_05_10t171017z0000_context_cartographer_read_only_collaborat/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T175308Z0000_codex_req_agent_2026_05_10t175229z0000_context_cartographer_post_patch_lifecycle/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T175308Z0000_codex_req_agent_2026_05_10t175229z0000_context_cartographer_post_patch_lifecycle/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T175308Z0000_codex_req_agent_2026_05_10t175229z0000_context_cartographer_post_patch_lifecycle/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T175308Z0000_codex_req_agent_2026_05_10t175229z0000_context_cartographer_post_patch_lifecycle/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T231342Z0000_codex_req_agent_2026_05_10t231337z0000_context_cartographer_fresh_chatgpt_carrie/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T231342Z0000_codex_req_agent_2026_05_10t231337z0000_context_cartographer_fresh_chatgpt_carrie/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T231342Z0000_codex_req_agent_2026_05_10t231337z0000_context_cartographer_fresh_chatgpt_carrie/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T232654Z0000_codex_req_agent_2026_05_10t232654z0000_runtime_cartographer_read_only_capability/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T232654Z0000_codex_req_agent_2026_05_10t232654z0000_runtime_cartographer_read_only_capability/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T232654Z0000_codex_req_agent_2026_05_10t232654z0000_runtime_cartographer_read_only_capability/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T143101Z0000_codex_req_2026_05_11t025848z0000_b01_codex_runner_timeout_policy_001_implement_a/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T143101Z0000_codex_req_2026_05_11t025848z0000_b01_codex_runner_timeout_policy_001_implement_a/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T143101Z0000_codex_req_2026_05_11t025848z0000_b01_codex_runner_timeout_policy_001_implement_a/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T143101Z0000_codex_req_2026_05_11t025848z0000_b01_codex_runner_timeout_policy_001_implement_a/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T153314Z0000_codex_req_2026_05_09t004941z0000_prepare_a_bounded_ion_work_packet_report_for_th/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T153314Z0000_codex_req_2026_05_09t004941z0000_prepare_a_bounded_ion_work_packet_report_for_th/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T153314Z0000_codex_req_2026_05_09t004941z0000_prepare_a_bounded_ion_work_packet_report_for_th/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T153314Z0000_codex_req_2026_05_09t004941z0000_prepare_a_bounded_ion_work_packet_report_for_th/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T160953Z0000_codex_req_2026_05_11t160749z0000_b01_b04_extension_queue_protocol_context_packag/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T160953Z0000_codex_req_2026_05_11t160749z0000_b01_b04_extension_queue_protocol_context_packag/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T160953Z0000_codex_req_2026_05_11t160749z0000_b01_b04_extension_queue_protocol_context_packag/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T160953Z0000_codex_req_2026_05_11t160749z0000_b01_b04_extension_queue_protocol_context_packag/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T190656Z0000_codex_req_2026_05_11t190651z0000_action_surface_context_package_001_materialize_/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T190656Z0000_codex_req_2026_05_11t190651z0000_action_surface_context_package_001_materialize_/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T190656Z0000_codex_req_2026_05_11t190651z0000_action_surface_context_package_001_materialize_/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T190656Z0000_codex_req_2026_05_11t190651z0000_action_surface_context_package_001_materialize_/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T191947Z0000_codex_req_2026_05_11t191943z0000_action_surface_context_package_001_proof_repair/context_receipt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T191947Z0000_codex_req_2026_05_11t191943z0000_action_surface_context_package_001_proof_repair/latest_return.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T191947Z0000_codex_req_2026_05_11t191943z0000_action_surface_context_package_001_proof_repair/prompt.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T191947Z0000_codex_req_2026_05_11t191943z0000_action_surface_context_package_001_proof_repair/run.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T004941Z0000_prepare_a_bounded_ion_work_packet_report_for_the_next_local_ion_codex_or_role_ag.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T174956Z0000_read_only_daimon_local_connector_handshake_from_chatgpt_browser_sev_goal_codexcl.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T175121Z0000_implement_a_bounded_connector_root_readability_improvement_for_the_daimon_hackat.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T193142Z0000_agent_runtime_cartographer_read_only_runtime_cartography_experiment_for_local_io.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T194800Z0000_build_the_next_bounded_ion_codexcli_control_surface_from_chatgpt_browser_purpose.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T213207Z0000_proof_repair_packet_for_blocked_control_surface_build_goal_do_not_redo_broad_imp.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T214012Z0000_implement_bounded_live_worker_telemetry_for_chatgpt_browser_ion_codex_runner_goa.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T223716Z0000_daimon_custom_gpt_infrastructure_update_packet_goal_update_the_custom_gpt_packag.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-09T225713Z0000_proof_repair_packet_for_blocked_daimon_custom_gpt_infrastructure_update_goal_do_.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T003102Z0000_daimon_final_live_trace_gate_agent_builder_mongodb_mcp_trace_capture_and_evidenc.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T144321Z0000_agent_runtime_cartographer_google_cloud_setup_cartography_for_daimon_final_live_.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T154510Z0000_graph_001_context_bundle_build_the_ion_daimon_living_operational_graph_planning_.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T171017Z0000_agent_context_cartographer_read_only_collaboration_smoke_inspect_whether_chatgpt.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T172639Z0000_dom_perception_001_domain_design_design_the_ion_daimon_browser_perception_domain.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T173958Z0000_dom_perception_002_context_package_ingest_and_operation_model_goal_ingest_the_sa.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T175229Z0000_agent_context_cartographer_post_patch_lifecycle_telemetry_proof_perform_read_onl.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T184613Z0000_custom_gpt_factory_001_domain_and_agent_design_goal_design_the_ion_daimon_custom.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T194105Z0000_pc_health_security_001_control_surface_design_goal_design_a_bounded_pc_health_re.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T201357Z0000_custom_gpt_factory_002_minimum_carrier_kernel_and_drop_in_role_packs_goal_regene.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T231337Z0000_agent_context_cartographer_fresh_chatgpt_carrier_smoke_test_for_bounded_ion_agen.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T232654Z0000_agent_runtime_cartographer_read_only_capability_probe_google_agent_and_chatops_s.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T025848Z0000_b01_codex_runner_timeout_policy_001_implement_a_bounded_fix_for_codex_queue_time.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T152116Z0000_b01_codex_runner_timeout_policy_002_live_queue_proof_compact_retry_prove_the_pat.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T153246Z0000_b01_codex_runner_timeout_policy_002_live_queue_proof_goal_prove_that_the_patched.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T160749Z0000_b01_b04_extension_queue_protocol_context_package_001_goal_create_the_first_proto.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T170055Z0000_b01_b04_extension_queue_protocol_context_package_001_proof_repair_goal_repair_th.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T190651Z0000_action_surface_context_package_001_materialize_live_repo_candidate_goal_material.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T191943Z0000_action_surface_context_package_001_proof_repair_goal_repair_the_proof_return_for.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T192522Z0000_b01_branch_capsule_diff_intake_and_apply_path_001_goal_proceed_with_real_local_d.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T193641Z0000_action_connector_reliability_001_dynamic_runtime_budgets_hung_actions_and_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/probes/BOUNDED_AGENT_LANE_CHATGPT_BROWSER_PROBE.md",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/runtime/agent_invocation_broker_state.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T175346Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T211832Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T212844Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T213543Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T214819Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T224639Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T232820Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T233017Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T171322Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T175640Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T182929Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T183008Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T183035Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T183105Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T193235Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-11T143901Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-11T153540Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-11T161321Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-11T191608Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-11T192544Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/chatgpt_connector/task_returns/2026-05-11T203616Z0000_task_return.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_capsule_chat/state.json",
+      "status": "M"
+    }
+  ],
+  "required_pre_stage_gates": [
+    "operator_review",
+    "public_safety_review",
+    "redaction_review",
+    "selected_receipt_review",
+    "staged_secret_scan"
+  ],
+  "schema_id": "ion.git_stage_manifest.v1",
+  "selection_policy": "Queue state, carrier messages, task returns, run records, action receipts, and mutable active state. Evidence-only; do not mix into source commits.",
+  "source_status_snapshot": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "feature/codex-capsule-chat-active-root",
+    "dirty_path_count_before_manifest_write": 703,
+    "remote_lines": [
+      "origin\thttps://github.com/ION-operations/ION.git (fetch)",
+      "origin\thttps://github.com/ION-operations/ION.git (push)"
+    ],
+    "status_counts_before_manifest_write": {
+      "??": 641,
+      "M": 62
+    },
+    "upstream": "origin/feature/codex-capsule-chat-active-root"
+  },
+  "status": "candidate_stage_manifest_not_staged",
+  "status_counts": {
+    "??": 188,
+    "M": 8
+  },
+  "title": "Live runtime evidence and active-state slice"
+}

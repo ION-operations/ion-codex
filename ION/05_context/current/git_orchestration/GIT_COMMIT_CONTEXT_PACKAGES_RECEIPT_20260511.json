@@ -1,0 +1,45 @@
+{
+  "schema_id": "ion.git_commit_receipt.v1",
+  "receipt_id": "GIT_COMMIT_CONTEXT_PACKAGES_RECEIPT_20260511",
+  "created_at": "2026-05-12T00:03:00Z",
+  "status": "committed_not_pushed",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "git_add_authority": true,
+    "git_commit_authority": true,
+    "git_push_authority": false,
+    "direct_main_authority": false
+  },
+  "operator_approval": "proceed",
+  "commit": {
+    "hash": "a0d0db1",
+    "message": "Record ION context package candidates",
+    "branch": "feature/codex-capsule-chat-active-root"
+  },
+  "committed_path_count": 220,
+  "stat_summary": {
+    "files_changed": 220,
+    "insertions": 14218,
+    "deletions": 61
+  },
+  "pathspec_file": "ION/05_context/current/git_orchestration/GIT_STAGE_PATHSPEC_CONTEXT_PACKAGES_20260511.txt",
+  "lane_note": "Committed as durable doctrine/context/package candidate lane. This included architecture, registries, context packages, settlement records, custom GPT capsule materials, extension queue protocols, Helixion/JOC context receipts, and the dirty-tree orchestration plan. It excluded runtime_evidence, B00 duplicate quarantine, imported workpackets/diffs, and JOC UI candidate implementation lane.",
+  "not_performed": [
+    "git push",
+    "direct main push",
+    "reset",
+    "cleanup",
+    "delete",
+    "test run",
+    "full validation"
+  ],
+  "remaining_unsettled_lanes": [
+    "joc_ui_candidate",
+    "runtime_evidence",
+    "imported_workpackets_diffs",
+    "b00_duplicate_quarantine",
+    "new git_orchestration receipts created after the original manifest"
+  ],
+  "next_recommended_step": "Do not commit JOC UI candidate automatically because prior operator feedback flagged UI quality concerns. Prefer push approval for current clean source/context stack, or explicit approval for a UI-candidate commit marked not visually accepted."
+}

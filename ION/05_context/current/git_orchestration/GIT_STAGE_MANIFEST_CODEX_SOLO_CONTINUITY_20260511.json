@@ -1,0 +1,213 @@
+{
+  "authority": {
+    "direct_main_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-11T23:57:48Z",
+  "lane": "codex_solo_continuity",
+  "manifest_id": "GIT_STAGE_MANIFEST_CODEX_SOLO_CONTINUITY_20260511",
+  "path_count": 42,
+  "paths": [
+    {
+      "path": "ION/03_registry/ion_skill_registry.yaml",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_solo_context.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_skill_activation.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/CAPSULE.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/CODEX_CARRIER_LIMITS_CONTEXT.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/MINI.md",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/ROUTE.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/STATUS.json",
+      "status": "M"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260509T212636+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260509T214723+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260509T224509+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260509T232846+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T045248+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T045318+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T045408+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T045906+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T045956+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T052830+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T145732+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T154736+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T165418+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T171512+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T175048+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T175654+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T005445+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T011822+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T012337+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T012706+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T013016+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T013600+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T014044+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T033756+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T034546+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T143745+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T161221+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T192314+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T203601+0000.json",
+      "status": "??"
+    },
+    {
+      "path": "ION/tests/test_codex_project_config_and_hook.py",
+      "status": "M"
+    },
+    {
+      "path": "ION/tests/test_kernel_ion_codex_solo_context.py",
+      "status": "M"
+    }
+  ],
+  "required_pre_stage_gates": [
+    "operator_review",
+    "context_authority_review",
+    "staged_secret_scan",
+    "capsule_receipt_review"
+  ],
+  "schema_id": "ion.git_stage_manifest.v1",
+  "selection_policy": "Codex Solo context boot, skill activation, and active Capsule/Mini continuity files. Context files are evidence, not source-only implementation.",
+  "source_status_snapshot": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "feature/codex-capsule-chat-active-root",
+    "dirty_path_count_before_manifest_write": 703,
+    "remote_lines": [
+      "origin\thttps://github.com/ION-operations/ION.git (fetch)",
+      "origin\thttps://github.com/ION-operations/ION.git (push)"
+    ],
+    "status_counts_before_manifest_write": {
+      "??": 641,
+      "M": 62
+    },
+    "upstream": "origin/feature/codex-capsule-chat-active-root"
+  },
+  "status": "candidate_stage_manifest_not_staged",
+  "status_counts": {
+    "??": 30,
+    "M": 12
+  },
+  "title": "Codex solo continuity and skill activation slice"
+}

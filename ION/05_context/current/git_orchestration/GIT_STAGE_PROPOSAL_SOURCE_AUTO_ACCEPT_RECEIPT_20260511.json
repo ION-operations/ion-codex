@@ -1,0 +1,19 @@
+{
+  "authority": {
+    "direct_main_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-12T00:22:56Z",
+  "path_count": 18,
+  "pathspec_file": "ION/05_context/current/git_orchestration/GIT_STAGE_PATHSPEC_SOURCE_AUTO_ACCEPT_20260511.txt",
+  "proposal": "ION/05_context/current/git_orchestration/GIT_STAGE_PROPOSAL_SOURCE_AUTO_ACCEPT_20260511.json",
+  "proposal_markdown": "ION/05_context/current/git_orchestration/GIT_STAGE_PROPOSAL_SOURCE_AUTO_ACCEPT_20260511.md",
+  "receipt_id": "GIT_STAGE_PROPOSAL_SOURCE_AUTO_ACCEPT_RECEIPT_20260511",
+  "result": "Exact staging proposal created for source_auto_accept lane. No git add, commit, push, validation, cleanup, reset, or delete was performed.",
+  "schema_id": "ion.git_stage_proposal_receipt.v1",
+  "status": "candidate_proposal_created_not_staged"
+}

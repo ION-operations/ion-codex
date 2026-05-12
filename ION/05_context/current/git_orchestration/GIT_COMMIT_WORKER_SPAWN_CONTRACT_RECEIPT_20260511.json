@@ -1,0 +1,48 @@
+{
+  "schema_id": "ion.git_commit_receipt.v1",
+  "receipt_id": "GIT_COMMIT_WORKER_SPAWN_CONTRACT_RECEIPT_20260511",
+  "created_at": "2026-05-12T00:00:00Z",
+  "status": "committed_not_pushed",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "git_add_authority": true,
+    "git_commit_authority": true,
+    "git_push_authority": false,
+    "direct_main_authority": false
+  },
+  "operator_approval": "approved",
+  "commit": {
+    "hash": "a0360d7",
+    "message": "Enforce Codex worker spawn contracts",
+    "branch": "feature/codex-capsule-chat-active-root"
+  },
+  "committed_path_count": 9,
+  "stat_summary": {
+    "files_changed": 9,
+    "insertions": 3563,
+    "deletions": 53
+  },
+  "committed_paths": [
+    "ION/03_registry/ion_chatgpt_browser_mcp_tool_policy.yaml",
+    "ION/04_packages/kernel/ion_agent_invocation_broker.py",
+    "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+    "ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py",
+    "ION/04_packages/kernel/ion_codex_queue_runner.py",
+    "ION/tests/test_kernel_ion_agent_invocation_broker.py",
+    "ION/tests/test_kernel_ion_chatgpt_browser_mcp_connector_contract.py",
+    "ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py",
+    "ION/tests/test_kernel_ion_codex_queue_runner.py"
+  ],
+  "pathspec_file": "ION/05_context/current/git_orchestration/GIT_STAGE_PATHSPEC_WORKER_SPAWN_CONTRACT_20260511.txt",
+  "not_performed": [
+    "git push",
+    "direct main push",
+    "reset",
+    "cleanup",
+    "delete",
+    "test run",
+    "full validation"
+  ],
+  "next_recommended_step": "Review remaining lanes. Suggested next commit lane is Codex solo continuity or bounded agent lane, but context/evidence files should remain separate from source."
+}

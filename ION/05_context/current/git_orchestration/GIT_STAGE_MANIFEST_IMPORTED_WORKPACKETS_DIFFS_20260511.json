@@ -1,0 +1,148 @@
+{
+  "authority": {
+    "direct_main_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-11T23:57:48Z",
+  "lane": "imported_workpackets_diffs",
+  "manifest_id": "GIT_STAGE_MANIFEST_IMPORTED_WORKPACKETS_DIFFS_20260511",
+  "path_count": 26,
+  "paths": [
+    {
+      "path": "diffs/ChatGPT Image May 10, 2026, 12_14_44 PM.png",
+      "status": "??"
+    },
+    {
+      "path": "diffs/ION_AUDITED_READ_ACTION_QUARANTINE_MEMBRANE_v0_1_CANDIDATE.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/ION_EXTENSION_SELECTED_REQUEST_START_REPAIR_CANDIDATE_20260511.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/agent_branch_capsule_bootstrap_002.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/agent_branch_capsule_guard_003.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/agent_branch_capsule_reconciliation_005.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/agent_branch_capsule_runtime_001.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/agent_branch_capsule_settlement_intake_004.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/ion_action_idempotency_no_receipt_repair_001.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/ion_codex_queue_duplicate_cleanup_003.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/ion_direct_bounded_patch_lane_002.diff",
+      "status": "??"
+    },
+    {
+      "path": "diffs/ion_extension_codex_daimon_candidate_improvements.patch",
+      "status": "??"
+    },
+    {
+      "path": "what_is_ion/ION_Continuity_Substrate_Explainer_v8_current_ion_evolution.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/BUILD_ENCYCLOPEDIA_AUDIT_WORKFLOW.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ION_AIMOS_AIMION_INTEGRATION_DOSSIER_V2_ACTUAL_SOURCE_20260509.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ION_AIMOS_COMPUTE_AT_WRITE_DEEP_DIVE_20260509.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ION_COMPUTE_AT_WRITE_SPEC_20260509.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ION_Continuity_Substrate_Explainer_v7.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ION_ONTOLOGICAL_JOURNAL_GPT55_ENTRIES_0_39_CURRENT_ROOT_ENHANCED.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ion_daimon_wisdomnet_product_concept.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ion_extension_work_packets/ION_EXT_ARTIFACT_FILE_LANE_PACKET.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ion_extension_work_packets/ION_EXT_CODEX_AGENT_COCKPIT_PACKET.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ion_extension_work_packets/ION_EXT_DOM_ACTION_REGISTRY_PACKET.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ion_extension_work_packets/ION_EXT_DOM_COCKPIT_SHELL_PACKET.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ion_extension_work_packets/ION_EXT_GUARDED_MACRO_AUTOMATION_PACKET.md",
+      "status": "??"
+    },
+    {
+      "path": "workpackets/ion_extension_work_packets/README.md",
+      "status": "??"
+    }
+  ],
+  "required_pre_stage_gates": [
+    "operator_review",
+    "inbox_intake_review",
+    "diff_safety_review",
+    "staged_secret_scan"
+  ],
+  "schema_id": "ion.git_stage_manifest.v1",
+  "selection_policy": "External/imported workpackets, candidate diffs, images, and explanatory materials. Ingest or reference by manifest before source staging.",
+  "source_status_snapshot": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "feature/codex-capsule-chat-active-root",
+    "dirty_path_count_before_manifest_write": 703,
+    "remote_lines": [
+      "origin\thttps://github.com/ION-operations/ION.git (fetch)",
+      "origin\thttps://github.com/ION-operations/ION.git (push)"
+    ],
+    "status_counts_before_manifest_write": {
+      "??": 641,
+      "M": 62
+    },
+    "upstream": "origin/feature/codex-capsule-chat-active-root"
+  },
+  "status": "candidate_stage_manifest_not_staged",
+  "status_counts": {
+    "??": 26
+  },
+  "title": "Imported workpackets, diffs, and what-is-ION materials"
+}

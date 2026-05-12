@@ -1,0 +1,176 @@
+{
+  "authority": {
+    "direct_main_authority": false,
+    "git_add_authority": false,
+    "git_commit_authority": false,
+    "git_push_authority": false,
+    "live_execution_authority": false,
+    "production_authority": false
+  },
+  "created_at": "2026-05-11T23:57:48Z",
+  "manifest_files": [
+    {
+      "lane": "source_auto_accept",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_SOURCE_AUTO_ACCEPT_20260511.json",
+      "path_count": 18,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "diff_review",
+        "staged_secret_scan",
+        "targeted_extension_reload_or_simulation_if_requested"
+      ],
+      "status_counts": {
+        "??": 3,
+        "M": 15
+      }
+    },
+    {
+      "lane": "worker_spawn_contract",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_WORKER_SPAWN_CONTRACT_20260511.json",
+      "path_count": 9,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "diff_review",
+        "staged_secret_scan",
+        "focused_connector_queue_regression_if_requested"
+      ],
+      "status_counts": {
+        "M": 9
+      }
+    },
+    {
+      "lane": "joc_ui_candidate",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_JOC_UI_CANDIDATE_20260511.json",
+      "path_count": 26,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "ui_canon_review",
+        "diff_review",
+        "staged_secret_scan",
+        "visual_review_if_requested"
+      ],
+      "status_counts": {
+        "??": 15,
+        "M": 11
+      }
+    },
+    {
+      "lane": "codex_solo_continuity",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_CODEX_SOLO_CONTINUITY_20260511.json",
+      "path_count": 42,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "context_authority_review",
+        "staged_secret_scan",
+        "capsule_receipt_review"
+      ],
+      "status_counts": {
+        "??": 30,
+        "M": 12
+      }
+    },
+    {
+      "lane": "bounded_agent_lane",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_BOUNDED_AGENT_LANE_20260511.json",
+      "path_count": 8,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "authority_boundary_review",
+        "diff_review",
+        "staged_secret_scan"
+      ],
+      "status_counts": {
+        "??": 8
+      }
+    },
+    {
+      "lane": "context_packages",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_CONTEXT_PACKAGES_20260511.json",
+      "path_count": 220,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "context_package_review",
+        "settlement_status_review",
+        "staged_secret_scan"
+      ],
+      "status_counts": {
+        "??": 213,
+        "M": 7
+      }
+    },
+    {
+      "lane": "runtime_evidence",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_RUNTIME_EVIDENCE_20260511.json",
+      "path_count": 196,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "public_safety_review",
+        "redaction_review",
+        "selected_receipt_review",
+        "staged_secret_scan"
+      ],
+      "status_counts": {
+        "??": 188,
+        "M": 8
+      }
+    },
+    {
+      "lane": "imported_workpackets_diffs",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_IMPORTED_WORKPACKETS_DIFFS_20260511.json",
+      "path_count": 26,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "inbox_intake_review",
+        "diff_safety_review",
+        "staged_secret_scan"
+      ],
+      "status_counts": {
+        "??": 26
+      }
+    },
+    {
+      "lane": "b00_duplicate_quarantine",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_B00_DUPLICATE_QUARANTINE_20260511.json",
+      "path_count": 158,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "select_canonical_request",
+        "summarize_duplicates",
+        "do_not_stage_bulk_duplicates"
+      ],
+      "status_counts": {
+        "??": 158
+      }
+    },
+    {
+      "lane": "uncategorized",
+      "path": "ION/05_context/current/git_orchestration/GIT_STAGE_MANIFEST_UNCATEGORIZED_20260511.json",
+      "path_count": 0,
+      "required_pre_stage_gates": [
+        "operator_review",
+        "manual_classification",
+        "staged_secret_scan"
+      ],
+      "status_counts": {}
+    }
+  ],
+  "manifest_id": "GIT_STAGE_MANIFEST_INDEX_20260511",
+  "next_recommended_step": "operator_review_exact_stage_manifests_before_any_git_add_commit_or_push",
+  "schema_id": "ion.git_stage_manifest_index.v1",
+  "source_status_snapshot": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "feature/codex-capsule-chat-active-root",
+    "dirty_path_count_before_manifest_write": 703,
+    "remote_lines": [
+      "origin\thttps://github.com/ION-operations/ION.git (fetch)",
+      "origin\thttps://github.com/ION-operations/ION.git (push)"
+    ],
+    "status_counts_before_manifest_write": {
+      "??": 641,
+      "M": 62
+    },
+    "upstream": "origin/feature/codex-capsule-chat-active-root"
+  },
+  "status": "candidate_index_not_staged"
+}
