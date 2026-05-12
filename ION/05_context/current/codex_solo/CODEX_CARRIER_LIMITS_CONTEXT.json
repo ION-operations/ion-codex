@@ -1,0 +1,102 @@
+{
+  "schema_id": "ion.codex_carrier_limits_context.v1",
+  "generated_at": "2026-05-10T16:05:00+00:00",
+  "domain_id": "codex_carrier_limits",
+  "status": "ACTIVE",
+  "primary_protocol": "ION/02_architecture/CODEX_CARRIER_LIMITS_CONTEXT_PROTOCOL.md",
+  "registry": "ION/03_registry/codex_carrier_limits_registry.yaml",
+  "production_authority": false,
+  "live_execution_authority": false,
+  "secrets_authority": false,
+  "local_codex_cli": {
+    "observed_version": "codex-cli 0.130.0",
+    "version_source": "codex --version",
+    "global_config": {
+      "path": "/home/sev/.codex/config.toml",
+      "model": "gpt-5.5",
+      "model_reasoning_effort": "xhigh",
+      "service_tier": "fast",
+      "features": {
+        "multi_agent": true,
+        "apps": false,
+        "plugins": false
+      }
+    },
+    "active_root_config": {
+      "path": ".codex/config.toml",
+      "sandbox_mode": "workspace-write",
+      "approval_policy": "on-request",
+      "codex_hooks": true,
+      "session_start_hook_timeout_seconds": 10,
+      "ion_local_mcp_startup_timeout_seconds": 10,
+      "ion_local_mcp_tool_timeout_seconds": 60
+    },
+    "parent_root_config": {
+      "path": "/home/sev/ION - Production/.codex/config.toml",
+      "codex_hooks": true,
+      "session_start_hook_timeout_seconds": 10,
+      "active_root": "/home/sev/ION - Production/ION_CODEX FULL"
+    }
+  },
+  "ion_enforced_limits": {
+    "codex_solo_boot_context_default_bytes": 24000,
+    "codex_solo_mini_max_lines": 30,
+    "codex_solo_capsule_active_context_lines": 80,
+    "codex_solo_capsule_rows_per_long_horizon_epoch": 10,
+    "codex_solo_hot_context_recent_long_horizon_epochs": 6,
+    "codex_solo_route_excerpt_chars": 1600,
+    "startup_recency_snapshot_required": true
+  },
+  "openai_external_references": {
+    "model_compare": {
+      "url": "https://developers.openai.com/api/docs/models/compare",
+      "observed_model": "GPT-5.5",
+      "observed_context_window_tokens": 1050000,
+      "observed_max_output_tokens": 128000,
+      "authority_class": "openai_published_limit",
+      "verification_rule": "Recheck official OpenAI docs before claims that depend on current model limits."
+    },
+    "codex_plan_limits": {
+      "url": "https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan/",
+      "authority_class": "account_or_plan_limit",
+      "verification_rule": "Plan and usage limits are dynamic and depend on task complexity, surface, and context held."
+    },
+    "codex_cli": {
+      "url": "https://developers.openai.com/codex/cli",
+      "authority_class": "openai_published_limit",
+      "verification_rule": "CLI capabilities and configuration options can change with Codex CLI version."
+    }
+  },
+  "known_unknowns": [
+    {
+      "surface": "Codex CLI internal context assembly",
+      "risk": "The CLI may summarize, prioritize, or omit local context before model submission.",
+      "handling": "Use route packages and durable artifacts instead of assuming raw repository or transcript inclusion."
+    },
+    {
+      "surface": "Tool output transcript",
+      "risk": "Command output displayed to the agent may be capped or truncated independently of model context.",
+      "handling": "Write durable evidence files for important outputs and summarize into receipts."
+    },
+    {
+      "surface": "Plan/account usage limits",
+      "risk": "Limits vary by subscription, workspace controls, task complexity, and active OpenAI policy.",
+      "handling": "Verify from account/runtime state before planning high-volume or long-running work."
+    },
+    {
+      "surface": "Hook and bridge payloads",
+      "risk": "Hook payloads may be capped, timed out, or ignored depending on launch root and CLI behavior.",
+      "handling": "Keep parent and active-root hooks tested and ensure recency snapshot survives default truncation."
+    }
+  ],
+  "audit_requirements": [
+    "PYTHONPATH=ION/04_packages python3 -m pytest ION/tests/test_kernel_ion_codex_solo_context.py ION/tests/test_codex_project_config_and_hook.py -q",
+    "PYTHONPATH=ION/04_packages python3 -m kernel.ion_codex_solo_context --ion-root '/home/sev/ION - Production/ION_CODEX FULL' boot-context"
+  ],
+  "last_verified": {
+    "capsule_entry": "C-066",
+    "focused_continuity_tests": "18 passed",
+    "active_root_boot_context_has_latest_capsule_row": true,
+    "parent_root_bridge_has_latest_capsule_row": true
+  }
+}

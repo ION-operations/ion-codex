@@ -121,6 +121,24 @@ DEFAULT_ROUTE_ENTRIES: tuple[dict[str, Any], ...] = (
         "why": "Maps ION native roles into chat-engine lenses without making them user-facing chores.",
     },
     {
+        "path": "ION/02_architecture/CODEX_CARRIER_LIMITS_CONTEXT_PROTOCOL.md",
+        "required": True,
+        "classification": "codex_carrier_limits_protocol",
+        "why": "Defines Codex carrier limits as a first-class context domain and separates local hard limits from dynamic external limits.",
+    },
+    {
+        "path": "ION/03_registry/codex_carrier_limits_registry.yaml",
+        "required": True,
+        "classification": "codex_carrier_limits_registry",
+        "why": "Machine-readable registry for Codex carrier limit classes, sources, and verification requirements.",
+    },
+    {
+        "path": "ION/05_context/current/codex_solo/CODEX_CARRIER_LIMITS_CONTEXT.json",
+        "required": True,
+        "classification": "codex_carrier_limits_current_context",
+        "why": "Current Codex carrier limits snapshot used for context planning and startup audits.",
+    },
+    {
         "path": "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_REBUILD_ORCHESTRATION_20260507.md",
         "required": True,
         "classification": "codex_capsule_chat_rebuild_orchestration",
@@ -131,6 +149,30 @@ DEFAULT_ROUTE_ENTRIES: tuple[dict[str, Any], ...] = (
         "required": True,
         "classification": "codex_capsule_chat_ui_orchestration",
         "why": "Chat-first app UI orchestration using JOC/ION drawers and Capsule context.",
+    },
+    {
+        "path": "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+        "required": True,
+        "classification": "helixion_joc_master_evolution_plan",
+        "why": "Master evolution plan for Helixion, JOC, ION, dAimon, WisdomNET, extension, queue, and Codex surfaces.",
+    },
+    {
+        "path": "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+        "required": True,
+        "classification": "helixion_joc_orchestration_workflow_protocol",
+        "why": "ION-native orchestration law for Helixion/JOC rebuild context, skills, routes, packets, and receipts.",
+    },
+    {
+        "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+        "required": True,
+        "classification": "helixion_joc_orchestration_context_package",
+        "why": "Machine-readable context package for future Helixion/JOC rebuild orchestration work.",
+    },
+    {
+        "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+        "required": True,
+        "classification": "helixion_joc_orchestration_context_brief",
+        "why": "Human/model-readable briefing for the Helixion/JOC orchestration package.",
     },
 )
 
@@ -584,6 +626,20 @@ def compile_codex_solo_context_packages(
             "path_refs": [HISTORY_DIR.as_posix(), LONG_HORIZON_PATH.as_posix()],
             "window": {"kind": "explicit_operator_or_blocker_triggered"},
         },
+        {
+            "package_id": "helixion_joc_orchestration_package",
+            "context_type": "active_orchestration",
+            "load_policy": "use_for_helixion_joc_daimon_wisdomnet_rebuild_work",
+            "path_refs": [
+                "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+                "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+                "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+                "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+                "ION/03_registry/helixion_joc_evolution_registry.yaml",
+                "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json",
+            ],
+            "window": {"kind": "main_context_package", "authority": "planning_control_plane_only"},
+        },
     ]
     payload = {
         "schema_id": "ion.codex_solo_context_packages.v1",
@@ -956,6 +1012,11 @@ def build_codex_solo_boot_context(
             _read_text(shell_root / CAPSULE_PATH, fallback="(missing CAPSULE.md)"),
             _read_text(shell_root / MINI_PATH, fallback="(missing MINI.md)"),
         ])
+    startup_recency = {
+        "mini": (model.get("mini") or {}).get("text", ""),
+        "capsule_entry_count": (model.get("capsule") or {}).get("entry_count", 0),
+        "recent_capsule_rows": (model.get("capsule") or {}).get("recent_rows", []),
+    }
     sections = [
         "# ION Codex Solo Boot Context",
         "",
@@ -973,6 +1034,10 @@ def build_codex_solo_boot_context(
         "- Treat Capsule as minimum working context and Mini as lookup/receipt index only.",
         "- Do not claim ION identity, STEWARD/RELAY/PERSONA authority, production authority, live execution authority, or secrets authority.",
         "- After material work, record a Codex Solo capsule post with explicit confirmation.",
+        "",
+        "## Startup Recency Snapshot",
+        "",
+        json.dumps(startup_recency, indent=2, sort_keys=True),
         "",
         "## Context Paths",
         "",

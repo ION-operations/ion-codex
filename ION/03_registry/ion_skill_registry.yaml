@@ -211,6 +211,97 @@ skills:
       label: Templates
       drawer_visible: true
       user_chore: false
+  - skill_id: ui-frontend-excellence
+    display_name: UI Frontend Excellence
+    class: specialist
+    purpose: "Route JOC/ION/Codex Chat/dAimon frontend work through the UI specialist domain before implementation, preventing monolithic cockpit/dashboard drift."
+    trigger_summary: "Selected for JOC UI, cockpit shell, drawers, rails, inspector, bottom timeline, Codex Chat UI, extension UI, dAimon companion, visual proof, or monolith complaints."
+    selection_priority: 110
+    model_stage_id: frontend_work_surface_architect
+    preferred_model: gpt-5.5
+    default_reasoning_effort: high
+    activates_templates:
+      - ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml
+      - ION/07_templates/context/ION_CONTEXT_LOAD_PROOF.md
+      - ION/07_templates/actions/FULL_CARRIER_ACTION_RECEIPT.md
+      - ION/07_templates/reports/AUDIT.md
+    template_bindings:
+      - ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml
+      - ION/07_templates/bindings/VESTIGE__EVIDENCE.md
+      - ION/07_templates/bindings/NEMESIS__AUDIT.md
+    context_mount:
+      required_packages:
+        - minimum_working_capsule
+        - mini_lookup_index
+        - active_authority_package
+        - mission_active_package
+        - ui_frontend_excellence_package
+      route_deeper_packages:
+        - route_depth_package
+        - evidence_receipt_package
+        - recovery_package
+        - helixion_joc_orchestration_package
+    allowed_authority:
+      read_context: true
+      queue_work: false
+      write_files: scoped_ui_protocol_receipts_and_explicitly_approved_ui_surfaces_only
+      production_authority: false
+      live_execution_authority: false
+      secrets_authority: false
+    proof_contract:
+      context_proof_required: true
+      template_action_proof_required: true
+      receipt_required: true
+      visual_proof_required_before_acceptance: true
+      non_monolith_shell_required: true
+    ui:
+      label: UI Canon
+      drawer_visible: true
+      user_chore: false
+  - skill_id: helixion-joc-orchestration
+    display_name: Helixion JOC Orchestration
+    class: specialist
+    purpose: "Orchestrate the Helixion/JOC rebuild across ION, dAimon, WisdomNET, Codex Chat, browser extension, Custom GPT Actions, queues, receipts, context packages, and cockpit surfaces."
+    trigger_summary: "Selected for Helixion app rebuild, JOC/ION cockpit planning, dAimon extension orchestration, WisdomNET planning, browser-carrier queue architecture, and context package assembly for this rebuild."
+    selection_priority: 95
+    model_stage_id: vizier_plan
+    preferred_model: gpt-5.5
+    default_reasoning_effort: high
+    activates_templates:
+      - ION/07_templates/context/ION_CONTEXT_LOAD_PROOF.md
+      - ION/07_templates/actions/TEMPLATE_DEVELOPMENT.md
+      - ION/07_templates/actions/FULL_CARRIER_ACTION_RECEIPT.md
+      - ION/07_templates/reports/AUDIT.md
+    template_bindings:
+      - ION/07_templates/bindings/STEWARD__TEMPLATE_SURFACE_CHANGE.md
+      - ION/07_templates/bindings/VESTIGE__EVIDENCE.md
+      - ION/07_templates/bindings/NEMESIS__AUDIT.md
+    context_mount:
+      required_packages:
+        - minimum_working_capsule
+        - mini_lookup_index
+        - active_authority_package
+        - mission_active_package
+        - helixion_joc_orchestration_package
+      route_deeper_packages:
+        - route_depth_package
+        - evidence_receipt_package
+        - recovery_package
+    allowed_authority:
+      read_context: true
+      queue_work: bounded_existing_queue_only
+      write_files: scoped_planning_and_requested_rebuild_surfaces_only
+      production_authority: false
+      live_execution_authority: false
+      secrets_authority: false
+    proof_contract:
+      context_proof_required: true
+      template_action_proof_required: true
+      receipt_required: true
+    ui:
+      label: Helixion
+      drawer_visible: true
+      user_chore: false
   - skill_id: context-mount
     display_name: Context Mount
     class: internal_support

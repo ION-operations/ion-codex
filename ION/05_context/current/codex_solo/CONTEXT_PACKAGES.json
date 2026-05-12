@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-05-09T17:35:55+00:00",
+  "generated_at": "2026-05-11T20:36:01+00:00",
   "live_execution_authority": false,
-  "package_count": 8,
+  "package_count": 9,
   "packages": [
     {
       "context_type": "active_short_horizon",
@@ -35,7 +35,7 @@
         "ION/05_context/current/codex_solo/LONG_HORIZON.json"
       ],
       "window": {
-        "epoch_count": 6,
+        "epoch_count": 10,
         "epoch_size_rows": 10,
         "hot_context_recent_epochs": 6,
         "kind": "epoch_summary"
@@ -85,8 +85,15 @@
         "ION/03_registry/ion_skill_registry.yaml",
         "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
         "ION/03_registry/ion_native_lens_registry.yaml",
+        "ION/02_architecture/CODEX_CARRIER_LIMITS_CONTEXT_PROTOCOL.md",
+        "ION/03_registry/codex_carrier_limits_registry.yaml",
+        "ION/05_context/current/codex_solo/CODEX_CARRIER_LIMITS_CONTEXT.json",
         "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_REBUILD_ORCHESTRATION_20260507.md",
-        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md"
+        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md",
+        "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+        "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md"
       ],
       "window": {
         "kind": "validate_before_queue",
@@ -115,6 +122,23 @@
       ],
       "window": {
         "kind": "explicit_operator_or_blocker_triggered"
+      }
+    },
+    {
+      "context_type": "active_orchestration",
+      "load_policy": "use_for_helixion_joc_daimon_wisdomnet_rebuild_work",
+      "package_id": "helixion_joc_orchestration_package",
+      "path_refs": [
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+        "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+        "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+        "ION/03_registry/helixion_joc_evolution_registry.yaml",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json"
+      ],
+      "window": {
+        "authority": "planning_control_plane_only",
+        "kind": "main_context_package"
       }
     }
   ],

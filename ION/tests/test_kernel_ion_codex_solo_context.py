@@ -32,6 +32,9 @@ def _seed_root(root: Path) -> None:
         "ION/02_architecture/CODEX_CAPSULE_OPERATING_PROTOCOL.md": "# capsule operating protocol\n",
         "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md": "# skill activation protocol\n",
         "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md": "# chat engine protocol\n",
+        "ION/02_architecture/CODEX_CARRIER_LIMITS_CONTEXT_PROTOCOL.md": "# codex carrier limits protocol\n",
+        "ION/03_registry/codex_carrier_limits_registry.yaml": "schema_id: ion.codex_carrier_limits_registry.v1\nstatus: ACTIVE\n",
+        "ION/05_context/current/codex_solo/CODEX_CARRIER_LIMITS_CONTEXT.json": "{\"schema_id\":\"ion.codex_carrier_limits_context.v1\"}\n",
         "ION/03_registry/ion_skill_registry.yaml": "schema_id: ion.skill_registry.v1\nproduction_authority: false\nlive_execution_authority: false\nsecrets_authority: false\nskills: []\n",
         "ION/03_registry/ion_native_lens_registry.yaml": "schema_id: ion.native_lens_registry.v1\nproduction_authority: false\nlive_execution_authority: false\nsecrets_authority: false\nlenses: []\n",
         "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_REBUILD_ORCHESTRATION_20260507.md": "# orchestration\n",
@@ -66,6 +69,16 @@ def test_initialize_codex_solo_context_writes_compact_surfaces(tmp_path: Path):
     assert hot_context.index("## MINIMUM WORKING CAPSULE") < hot_context.index("## MINI LOOKUP INDEX")
     assert "## LONG HORIZON CAPSULE INDEX" in hot_context
     assert "## CONTEXT PACKAGE SELECTOR" in hot_context
+
+
+def test_default_route_includes_codex_carrier_limits_domain(tmp_path: Path):
+    _seed_root(tmp_path)
+    model = initialize_codex_solo_context(tmp_path)
+
+    route_paths = {entry["path"] for entry in model["route"]["entries"]}
+    assert "ION/02_architecture/CODEX_CARRIER_LIMITS_CONTEXT_PROTOCOL.md" in route_paths
+    assert "ION/03_registry/codex_carrier_limits_registry.yaml" in route_paths
+    assert "ION/05_context/current/codex_solo/CODEX_CARRIER_LIMITS_CONTEXT.json" in route_paths
 
 
 def test_mini_renderer_enforces_line_limit_and_indexes_capsule_rows():
@@ -150,6 +163,25 @@ def test_boot_context_is_read_only_and_capsule_first(tmp_path: Path):
     assert "## Loaded HOT_CONTEXT" in result["context"]
     assert "## MINIMUM WORKING CAPSULE" in result["context"]
     assert history_after == history_before
+
+
+def test_boot_context_preserves_recent_capsule_rows_when_truncated(tmp_path: Path):
+    _seed_root(tmp_path)
+    initialize_codex_solo_context(tmp_path)
+    for idx in range(35):
+        record_codex_solo_post(
+            tmp_path,
+            summary=f"Completed recency unit {idx}",
+            evidence_paths=[f"ION/evidence/{idx}/" + ("long_path_segment_" * 20) + ".json"],
+            status="DONE",
+        )
+
+    result = build_codex_solo_boot_context(tmp_path, max_bytes=4096)
+
+    assert result["truncated"] is True
+    assert "## Startup Recency Snapshot" in result["context"]
+    assert "C-035" in result["context"]
+    assert "Completed recency unit 34" in result["context"]
 
 
 def test_cli_status_and_boot_context_emit_expected_output(tmp_path: Path, capsys):

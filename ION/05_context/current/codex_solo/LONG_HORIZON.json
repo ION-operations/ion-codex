@@ -1,13 +1,22 @@
 {
-  "capsule_entry_count": 54,
-  "epoch_count": 6,
+  "capsule_entry_count": 91,
+  "epoch_count": 10,
   "epoch_size_rows": 10,
   "epochs": [
     {
       "date_end": "2026-05-07",
-      "date_start": "2026-05-07",
+      "date_start": "2026-05-11",
       "epoch_id": "E-001",
       "evidence_refs": [
+        "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_left_drawer_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_shell_ui.py",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_RECOVERY_003_ANCHORED_PAGES_AND_DRAWER_CANON_RECEIPT_20260511.json",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_RECOVERY_002_EXISTING_COCKPIT_TOP_PAGES_RECEIPT_20260511.json",
+        "ION/04_packages/kernel/ion_skill_activation.py",
+        "ION/03_registry/ion_skill_registry.yaml",
+        "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_ROUTE_RECOVERY_RECEIPT_20260511.json",
         "ION/04_packages/kernel/ion_codex_solo_context.py",
         "ION/04_packages/kernel/ion_dual_codex_chat.py",
         "ION/tests/test_kernel_ion_codex_solo_context.py",
@@ -15,28 +24,38 @@
         "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
         "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
         "ION/05_context/current/codex_solo/LONG_HORIZON.json",
-        "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
         ".codex/config.toml",
         ".codex/hooks/ion_session_start_context.py",
         "ION/tests/test_codex_project_config_and_hook.py",
-        "ION/04_packages/kernel/ion_codex_model_moves.py",
-        "ION/04_packages/kernel/ion_codex_queue_runner.py",
-        "ION/03_registry/codex_cli_model_move_policy.yaml",
-        "ION/tests/test_kernel_ion_codex_model_moves.py",
-        "ION/04_packages/kernel/ion_public_cockpit_auth.py",
-        "ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py",
-        "ION/tests/test_kernel_ion_public_cockpit_auth.py",
-        "ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py",
-        "/home/sev/.config/systemd/user/ion-mcp-preview.service.d/cockpit-token.conf"
+        "ION/04_packages/kernel/ion_codex_model_moves.py"
       ],
       "row_count": 10,
-      "row_end": "C-010",
-      "row_start": "C-001",
+      "row_end": "C-007",
+      "row_start": "C-088",
       "status_counts": {
-        "CORRECTED": 2,
-        "IMPLEMENTED": 8
+        "CANDIDATE_UI_RECOVERY_PATCHED_NOT_VISUALLY_PROVED": 2,
+        "IMPLEMENTED": 7,
+        "RECOVERY_ROUTE_PATCHED": 1
       },
       "summaries": [
+        {
+          "date": "2026-05-07",
+          "id": "C-003",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented project-scoped Codex CLI capsule boot setup with read-only session hook, optional local ION MCP read/status tools, and explicit post receipt helper."
+        },
+        {
+          "date": "2026-05-07",
+          "id": "C-004",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented Codex CLI model moves and Mini auto-post for dual chat"
+        },
+        {
+          "date": "2026-05-07",
+          "id": "C-005",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented public cockpit login with signed sessions, permission tokens, and Google OAuth hooks"
+        },
         {
           "date": "2026-05-07",
           "id": "C-006",
@@ -48,62 +67,57 @@
           "id": "C-007",
           "status": "IMPLEMENTED",
           "summary": "Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers"
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-008",
-          "status": "CORRECTED",
-          "summary": "Added Codex Capsule Operating Protocol: Capsule ION is the minified fallback/basic ops kernel while full ION Codex CLI chat is rebuilt."
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-009",
-          "status": "CORRECTED",
-          "summary": "Corrected Codex chat product direction to one Capsule Codex chat with bounded full-ION comms adapter."
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-010",
-          "status": "IMPLEMENTED",
-          "summary": "Added opt-in chat execution bridge from Codex Capsule chat turns to existing Codex work queue."
         }
       ]
     },
     {
-      "date_end": "2026-05-08",
+      "date_end": "2026-05-07",
       "date_start": "2026-05-07",
       "epoch_id": "E-002",
       "evidence_refs": [
-        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md",
+        "ION/02_architecture/CODEX_CAPSULE_OPERATING_PROTOCOL.md",
         "ION/04_packages/kernel/ion_codex_solo_context.py",
-        "ION/tests/test_kernel_ion_codex_solo_context.py",
-        "ION/tests/test_kernel_ion_dual_codex_chat.py",
         "ION/04_packages/kernel/ion_dual_codex_chat.py",
+        "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
+        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_REBUILD_ORCHESTRATION_20260507.md",
+        "ION/tests/test_kernel_ion_dual_codex_chat.py",
+        "ION/04_packages/kernel/ion_local_cockpit_app.py",
+        "ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py",
+        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md",
+        "ION/tests/test_kernel_ion_codex_solo_context.py",
         "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
         "ION/05_context/current/codex_cli/CODEX_CAPSULE_TRACE_AND_AGENT_TRANSPARENCY_ORCHESTRATION_20260507.md",
         "ION/05_context/current/codex_cli/CODEX_CHAT_UI_RECOVERY_ORCHESTRATION_20260507.md",
         "ION/04_packages/kernel/ion_codex_chat_app_ui.py",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_APP_SHELL_COMPONENTIZATION_20260507.md",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_TIMELINE_AGENTS_DRAWER_PASS_20260507.md",
-        "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
-        "ION/03_registry/ion_skill_registry.yaml",
-        "ION/04_packages/kernel/ion_skill_activation.py",
-        "ION/tests/test_kernel_ion_skill_activation.py",
-        "ION/05_context/current/codex_cli/CODEX_SKILL_ACTIVATION_IMPLEMENTATION_20260507.md",
-        "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
-        "ION/03_registry/ion_native_lens_registry.yaml",
-        "ION/04_packages/kernel/ion_codex_chat_engine.py",
-        "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py"
+        "ION/05_context/current/codex_cli/CODEX_CHAT_APP_SHELL_COMPONENTIZATION_20260507.md"
       ],
       "row_count": 10,
-      "row_end": "C-020",
-      "row_start": "C-011",
+      "row_end": "C-017",
+      "row_start": "C-008",
       "status_counts": {
-        "CORRECTED": 1,
-        "IMPLEMENTED": 8,
+        "CORRECTED": 3,
+        "IMPLEMENTED": 6,
         "PLANNED": 1
       },
       "summaries": [
+        {
+          "date": "2026-05-07",
+          "id": "C-013",
+          "status": "IMPLEMENTED",
+          "summary": "Added Codex return/proof hydration into the Codex Capsule chat timeline."
+        },
+        {
+          "date": "2026-05-07",
+          "id": "C-014",
+          "status": "IMPLEMENTED",
+          "summary": "Added transparent per-turn trace and agent broker visibility to Codex Capsule chat."
+        },
+        {
+          "date": "2026-05-07",
+          "id": "C-015",
+          "status": "CORRECTED",
+          "summary": "Corrected Codex chat UI language and composer flow after operator confusion."
+        },
         {
           "date": "2026-05-07",
           "id": "C-016",
@@ -115,61 +129,61 @@
           "id": "C-017",
           "status": "IMPLEMENTED",
           "summary": "Removed obsolete in-file Codex chat HTML/CSS renderer blocks after UI extraction."
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-018",
-          "status": "IMPLEMENTED",
-          "summary": "Improved Codex Chat Timeline and Agents drawers from existing trace and broker data."
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-019",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented ION skill activation layer for Codex Chat: skills activate workflows while templates remain proof gates."
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-020",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented Codex Chat Engine core: response modes, native ION lenses, GPT-5.5 chat route, and queue metadata handoff."
         }
       ]
     },
     {
       "date_end": "2026-05-08",
-      "date_start": "2026-05-08",
+      "date_start": "2026-05-07",
       "epoch_id": "E-003",
       "evidence_refs": [
+        "ION/04_packages/kernel/ion_codex_chat_app_ui.py",
+        "ION/tests/test_kernel_ion_dual_codex_chat.py",
+        "ION/05_context/current/codex_cli/CODEX_CHAT_TIMELINE_AGENTS_DRAWER_PASS_20260507.md",
+        "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
+        "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+        "ION/03_registry/ion_skill_registry.yaml",
+        "ION/04_packages/kernel/ion_skill_activation.py",
+        "ION/04_packages/kernel/ion_dual_codex_chat.py",
+        "ION/04_packages/kernel/ion_codex_solo_context.py",
+        "ION/tests/test_kernel_ion_skill_activation.py",
+        "ION/tests/test_kernel_ion_codex_solo_context.py",
+        "ION/05_context/current/codex_cli/CODEX_SKILL_ACTIVATION_IMPLEMENTATION_20260507.md",
         "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
         "ION/03_registry/ion_native_lens_registry.yaml",
         "ION/04_packages/kernel/ion_codex_chat_engine.py",
-        "ION/04_packages/kernel/ion_dual_codex_chat.py",
-        "ION/04_packages/kernel/ion_codex_chat_app_ui.py",
-        "ION/04_packages/kernel/ion_codex_solo_context.py",
         "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
         "ION/04_packages/kernel/ion_codex_queue_runner.py",
         "ION/tests/test_kernel_ion_codex_chat_engine.py",
-        "ION/tests/test_kernel_ion_dual_codex_chat.py",
         "ION/tests/test_kernel_ion_codex_queue_runner.py",
-        "ION/tests/test_kernel_ion_chatgpt_browser_connector_e2e_flow.py",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_ENGINE_IMPLEMENTATION_20260508.md",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_RESPONSE_CARRIER_ORCHESTRATION_20260508.md",
-        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
-        "ION/tests/test_kernel_ion_codex_chat_response_carrier.py",
-        "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_RESPONSE_CARRIER_IMPLEMENTATION_20260508.md",
-        "ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T140124Z968157_live_carrier_smoke_reply_with_one_concise_sentence_naming_the_current_ca/run.json",
-        "ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T140124Z968157_live_carrier_smoke_reply_with_one_concise_sentence_naming_the_current_ca/latest_r"
+        "ION/tests/test_kernel_ion_chatgpt_browser_connector_e2e_flow.py"
       ],
       "row_count": 10,
-      "row_end": "C-030",
-      "row_start": "C-021",
+      "row_end": "C-027",
+      "row_start": "C-018",
       "status_counts": {
         "IMPLEMENTED": 8,
         "PLANNED": 2
       },
       "summaries": [
+        {
+          "date": "2026-05-08",
+          "id": "C-023",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented Codex Chat response carrier: respond-only chat turns can use Codex CLI final messages under the Capsule/skill/native-lens engine, with fallback, trace events, artifacts"
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-024",
+          "status": "IMPLEMENTED",
+          "summary": "Enabled Codex Chat response carrier in the user service and verified authenticated cockpit chat turn captured a real GPT-5.5 Codex final message with no unexpected worktree drift."
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-025",
+          "status": "IMPLEMENTED",
+          "summary": "Fixed cockpit chat pending-state UX: optimistic user bubble, Codex loading bubble, textarea clear, disabled submit controls, duplicate-submit guard, JSON fetch response handling, a"
+        },
         {
           "date": "2026-05-08",
           "id": "C-026",
@@ -181,24 +195,6 @@
           "id": "C-027",
           "status": "PLANNED",
           "summary": "Planned the next Codex Capsule Chat rewrite around JOC shell regions, Victus Contextual Matryoshka, Echo Forge evented chat traces, protocol manifest routing, and smart context vis"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-028",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented Codex Chat Phase 0 memory visualization projection: memory strata, context route edges, protocol manifest summary, carrier phase events, token budget summary, redaction"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-029",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented Codex Chat Phase 1 shell component split: app facade, shell, main chat, right inspector, timeline, memory visualization drawer, shared helpers, and CSS/JS assets split "
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-030",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented Codex Chat Phase 2 JOC shell behavior: top page tabs, page-local left drawer, main work-surface pages, right icon rail, inspector tab panels, bottom timeline filters, c"
         }
       ]
     },
@@ -208,29 +204,50 @@
       "epoch_id": "E-004",
       "evidence_refs": [
         "ION/04_packages/kernel/ion_codex_chat_memory_visualization.py",
-        "ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py",
-        "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+        "ION/04_packages/kernel/ion_dual_codex_chat.py",
         "ION/tests/test_kernel_ion_dual_codex_chat.py",
         "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
+        "ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md",
+        "ION/04_packages/kernel/ion_codex_chat_app_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_shell_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_main_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_timeline_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_ui_common.py",
+        "ION/04_packages/kernel/ion_codex_chat_left_drawer_ui.py",
         "ION/tests/test_kernel_ion_cockpit_playwright_smoke.py",
         "ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json",
         "ION/05_context/current/codex_solo/history/codex_solo_post_20260508T155446+0000.json",
-        "ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json",
-        "ION/04_packages/kernel/ion_codex_chat_main_ui.py",
-        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
-        "ION/tests/test_kernel_ion_codex_chat_response_carrier.py",
-        "ION/tests/test_kernel_ion_codex_chat_engine.py",
-        "ION/04_packages/kernel/ion_dual_codex_chat.py",
-        "ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py"
+        "ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json"
       ],
       "row_count": 10,
-      "row_end": "C-040",
-      "row_start": "C-031",
+      "row_end": "C-037",
+      "row_start": "C-028",
       "status_counts": {
-        "IMPLEMENTED": 1,
-        "VERIFIED": 9
+        "IMPLEMENTED": 4,
+        "VERIFIED": 6
       },
       "summaries": [
+        {
+          "date": "2026-05-08",
+          "id": "C-033",
+          "status": "VERIFIED",
+          "summary": "Added and passed live Playwright JOC shell smoke for Codex Chat: shell regions, top page switch, left drawer, right inspector, context memory page, timeline filter, and composer re"
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-034",
+          "status": "VERIFIED",
+          "summary": "Implemented selected-message and route graph interaction for Codex Chat: chat turns, memory segments, and route edges are selectable; selected-node panel updates; connected context"
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-035",
+          "status": "VERIFIED",
+          "summary": "Improved Codex Chat route graph usability: edge-type filters, route row metadata, selected node turn/source fields, and live browser coverage for compressed route filtering."
+        },
         {
           "date": "2026-05-08",
           "id": "C-036",
@@ -242,24 +259,6 @@
           "id": "C-037",
           "status": "VERIFIED",
           "summary": "Persisted Codex Chat context inspector selection across reloads: memory, route, source, and trace selections now store in browser state/hash and restore before default selection; l"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-038",
-          "status": "VERIFIED",
-          "summary": "Added grouped source-reference drilldown and route edge summaries to Codex Chat: source refs now expose grouped filters and lanes, route graph shows type counts before detailed edg"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-039",
-          "status": "VERIFIED",
-          "summary": "Improved Codex Chat response-carrier prompt quality: mounted Hot Context and context package selector, removed hard-coded root assumption, strengthened direct-answer continuity rul"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-040",
-          "status": "VERIFIED",
-          "summary": "Added response-run observability to Codex Chat: recent response carrier run packets are projected into the active model and Evidence/Runs inspector with prompt, return, event, stdo"
         }
       ]
     },
@@ -268,6 +267,17 @@
       "date_start": "2026-05-08",
       "epoch_id": "E-005",
       "evidence_refs": [
+        "ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+        "ION/tests/test_kernel_ion_dual_codex_chat.py",
+        "ION/tests/test_kernel_ion_cockpit_playwright_smoke.py",
+        "ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json",
+        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
+        "ION/tests/test_kernel_ion_codex_chat_response_carrier.py",
+        "ION/tests/test_kernel_ion_codex_chat_engine.py",
+        "ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json",
+        "ION/04_packages/kernel/ion_dual_codex_chat.py",
+        "ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py",
         "ION/06_intelligence/research/user_handling_trials/2026-05-08_ion_first_custom_gpt_user_handling_case_study_v0_2.md",
         "ION/06_intelligence/evidence/user_handling_trials/2026-05-08_ion_first_custom_gpt_user_handling_evidence_index.json",
         "ION/06_intelligence/research/user_handling_trials/2026-05-08_ion_prompt_burden_continuity_benchmark_v0_1.md",
@@ -276,29 +286,35 @@
         "ION/06_intelligence/evidence/sandbox_agent_package_evolution/2026-05-08_sandbox_agent_package_v1_4_ai_assistant_work_evidence_index.json",
         "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ACTIVE_ROOT_CANDIDATE_IMPORT_RECEIPT_20260508T174843Z.json",
         "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_5.json",
-        "ION/tests/test_kernel_ai_assistant_work_template_instances.py",
-        "ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_REVIEW_20260508T175230Z.md",
-        "ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_MAP_20260508T175230Z.json",
-        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_REVIEW_RECEIPT_20260508T175340Z.json",
-        "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
-        "ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
-        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_IMPLEMENTATION_RECEIPT_20260508T181926Z.json",
-        "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_phase4_product_reconciliation_matrix.md",
-        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_PHASE4_PRODUCT_RECONCILIATION_RECEIPT_20260508T182228Z.json",
-        "ION/04_packages/kernel/ion_custom_gpt_action_gateway.py",
-        "ION/tests/test_kernel_ion_custom_gpt_action_gateway.py",
-        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_GATEWAY_ROUTE_METADATA_RECEIPT_20260508T182713Z.json"
+        "ION/tests/test_kernel_ai_assistant_work_template_instances.py"
       ],
       "row_count": 10,
-      "row_end": "C-050",
-      "row_start": "C-041",
+      "row_end": "C-047",
+      "row_start": "C-038",
       "status_counts": {
-        "IMPLEMENTED": 2,
-        "PLANNED": 2,
-        "VERIFIED": 5,
+        "PLANNED": 1,
+        "VERIFIED": 8,
         "done": 1
       },
       "summaries": [
+        {
+          "date": "2026-05-08",
+          "id": "C-043",
+          "status": "VERIFIED",
+          "summary": "Reviewed AI Assistant Work route compiler next packet and mapped candidate routes to active Codex chat skills, native lenses, Custom GPT/MCP/product lanes, and next compiler implem"
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-044",
+          "status": "done",
+          "summary": "Implemented candidate-only Assistant Work route compiler and wired route metadata into Codex chat engine, queued objectives, turn traces, UI model drawers, and right inspector."
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-045",
+          "status": "VERIFIED",
+          "summary": "Documented Phase 4 product reconciliation matrix across Codex Capsule Chat, Action Gateway, MCP Action, data-zip Custom GPT product, local cockpit, and full ION pipeline."
+        },
         {
           "date": "2026-05-08",
           "id": "C-046",
@@ -310,24 +326,6 @@
           "id": "C-047",
           "status": "PLANNED",
           "summary": "Planned candidate-domain operation ladder for assistant-work surfaces: candidate domains/agents/templates/routes may operate under containment for classification, proof shaping, ro"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-048",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented candidate-domain lifecycle gate: added provisional protocol, candidate lifecycle registry, scorecards, promotion proposal draft, and route compiler filtering for inacti"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-049",
-          "status": "IMPLEMENTED",
-          "summary": "Formalized root source lanes for workpackets, diffs, and ION_sandbox: added lane READMEs, machine-readable indexes, consolidated source-lane policy, receipt, and git hygiene for sa"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-050",
-          "status": "PLANNED",
-          "summary": "Documented GitHub release strategy for ION_sandbox: recommend a dedicated release/ion-sandbox-gpt-v1 branch with curated product root, after cache cleanup, metadata repair, Cursor "
         }
       ]
     },
@@ -336,45 +334,37 @@
       "date_start": "2026-05-08",
       "epoch_id": "E-006",
       "evidence_refs": [
+        "ION/02_architecture/ION_CANDIDATE_DOMAIN_OPERATION_PROTOCOL.md",
+        "ION/05_context/current/ai_assistant_work/candidate_lifecycle/CANDIDATE_DOMAIN_LIFECYCLE_REGISTRY_V0_1.yaml",
+        "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+        "ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
+        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_CANDIDATE_DOMAIN_LIFECYCLE_IMPLEMENTATION_RECEIPT_20260508T185104Z.json",
+        "workpackets/README.md",
+        "workpackets/WORKPACKET_INDEX_20260508T190626Z.json",
+        "diffs/README.md",
+        "diffs/DIFF_INDEX_20260508T190626Z.json",
+        "ION_sandbox/README.md",
+        "ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json",
+        "ION/05_context/current/source_lanes/ION_ROOT_SOURCE_LANE_POLICY_20260508T190626Z.md",
+        "ION/05_context/current/source_lanes/receipts/ION_ROOT_SOURCE_LANE_FORMALIZATION_RECEIPT_20260508T190626Z.json",
+        "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_ion_sandbox_github_release_strategy.md",
+        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GITHUB_RELEASE_STRATEGY_RECEIPT_20260508T191612Z.json",
         "ion-sandbox-gpt/RELEASE_MANIFEST.json",
         "ion-sandbox-gpt/RELEASE_READINESS.md",
         "ion-sandbox-gpt/VALIDATION_REPORT.json",
         "ion-sandbox-gpt/ION/05_context/current/ACTIVE_WORK_PACKET.json",
-        "ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py",
-        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_ROOT_PREP_RECEIPT_20260508T192928Z.json",
-        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json",
-        "ION/04_packages/kernel/ion_dual_codex_chat.py",
-        "ION/04_packages/kernel/ion_codex_chat_engine.py",
-        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
-        "ION/04_packages/kernel/ion_codex_solo_context.py",
-        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json",
-        "ION/tests/test_kernel_ion_dual_codex_chat.py",
-        "ION/tests/test_kernel_ion_codex_chat_engine.py",
-        "ION/05_context/current/codex_solo/recovery/CODEX_SESSION_RECOVERY_20260509T173524Z.md",
-        ".codex/config.toml",
-        ".codex/hooks/ion_session_start_context.py"
+        "ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py"
       ],
-      "row_count": 4,
-      "row_end": "C-054",
-      "row_start": "C-051",
+      "row_count": 10,
+      "row_end": "C-057",
+      "row_start": "C-048",
       "status_counts": {
-        "IMPLEMENTED": 1,
+        "IMPLEMENTED": 6,
+        "PLANNED": 1,
         "PUBLISHED": 2,
         "RECOVERED": 1
       },
       "summaries": [
-        {
-          "date": "2026-05-08",
-          "id": "C-051",
-          "status": "IMPLEMENTED",
-          "summary": "Prepared sanitized ion-sandbox-gpt release root from ION_sandbox snapshot: repaired active GPT sandbox packet, release metadata, Cursor optional test boundary, passed focused relea"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-052",
-          "status": "PUBLISHED",
-          "summary": "Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push rece"
-        },
         {
           "date": "2026-05-08",
           "id": "C-053",
@@ -386,277 +376,277 @@
           "id": "C-054",
           "status": "RECOVERED",
           "summary": "Recovered lost Codex CLI terminal session and verified final pushed branch state"
+        },
+        {
+          "date": "2026-05-09",
+          "id": "C-055",
+          "status": "IMPLEMENTED",
+          "summary": "Exposed bounded codex-runner reconcile and capsule chat MCP bridge tools with focused tests."
+        },
+        {
+          "date": "2026-05-09",
+          "id": "C-056",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented bounded Codex worker live telemetry surface with safe preview gating and tests."
+        },
+        {
+          "date": "2026-05-09",
+          "id": "C-057",
+          "status": "IMPLEMENTED",
+          "summary": "Built Custom GPT carrier package v2.6.7 candidate with Codex Capsule/queue relay docs, dAimon doctrine updates, and validated zip/test receipt."
+        }
+      ]
+    },
+    {
+      "date_end": "2026-05-10",
+      "date_start": "2026-05-09",
+      "epoch_id": "E-007",
+      "evidence_refs": [
+        "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T223722Z0000_codex_req_2026_05_09t223716z0000_daimon_custom_gpt_infrastructure_update_packet_/run.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T224639Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T232413Z0000_codex_req_2026_05_09t225713z0000_proof_repair_packet_for_blocked_daimon_custom_g/run.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T232820Z0000_task_return.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/live_vertical_slice_summary.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/gemini_handoff_summary.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/phoenix_readiness.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/cloud_run_deploy_summary.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/cloud_run_live_health.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/atlas_access_list_update.json",
+        "/home/sev/ION - Production/dAimon/scripts/check_cloud_run_live.py",
+        "/home/sev/ION - Production/dAimon/scripts/deploy_cloud_run.py",
+        "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T045248+0000.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/demo_evidence_package.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/dashboard_evidence_trace.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/demo_video_claims.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/agent_builder_mcp_trace_validation.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/agent_builder_mcp_trace.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/agent_engine_deploy_summary.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/agent_engine_query_response.json"
+      ],
+      "row_count": 10,
+      "row_end": "C-067",
+      "row_start": "C-058",
+      "status_counts": {
+        "CHECKPOINT": 4,
+        "COMPLETE": 1,
+        "HANDOFF_READY": 1,
+        "IMPLEMENTED": 2,
+        "PROVEN": 1,
+        "VERIFIED": 1
+      },
+      "summaries": [
+        {
+          "date": "2026-05-10",
+          "id": "C-063",
+          "status": "CHECKPOINT",
+          "summary": "dAimon Cloud Run proof update committed and pushed to GitHub on main at 33f29ed; repo is clean. Remaining gate is Agent Builder MongoDB MCP trace export."
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-064",
+          "status": "PROVEN",
+          "summary": "dAimon final live proof gate passed: deployed Vertex AI Agent Engine proof agent called Cloud Run find_continuity_objects, Cloud Run queried live MongoDB-backed receipt-cleared sta"
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-065",
+          "status": "IMPLEMENTED",
+          "summary": "Added parent-scope Codex startup bridge so chats launched from /home/sev/ION - Production load the active ION Codex Solo capsule context."
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-066",
+          "status": "VERIFIED",
+          "summary": "Audited and hardened Codex Solo startup continuity: added parent bridge regression coverage and startup recency snapshot so truncated boot context preserves latest capsule rows."
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-067",
+          "status": "IMPLEMENTED",
+          "summary": "Created Codex Carrier Limits as a first-class ION context domain with protocol, registry, current limits snapshot, route integration, and focused regression coverage."
+        }
+      ]
+    },
+    {
+      "date_end": "2026-05-11",
+      "date_start": "2026-05-10",
+      "epoch_id": "E-008",
+      "evidence_refs": [
+        "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T171106Z0000_codex_req_agent_2026_05_10t171017z0000_context_cartographer_read_only_collaborat/run.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T171322Z0000_task_return.json",
+        "ION/04_packages/kernel/ion_codex_queue_runner.py",
+        "ION/tests/test_kernel_ion_codex_queue_runner.py",
+        "ION/tests/test_kernel_ion_chatgpt_browser_mcp_connector_contract.py",
+        "ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py",
+        "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T175308Z0000_codex_req_agent_2026_05_10t175229z0000_context_cartographer_post_patch_lifecycle/run.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T175640Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-10T175229Z0000_context_cartographer_post_patch_lifecycle_telemetry_proof_perform_read_only_insp.json",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/docs/custom_gpt_factory_domain.md",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/registry/custom_gpt_role_registry.json",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/schemas/custom_gpt_role_package.schema.json",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/schemas/capsule_family.schema.json",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/PACKETS/CUSTOM_GPT_FACTORY_002_GENERATE_FIRST_ROLE_PACKS.md",
+        "ION/05_context/current/custom_gpt_factory/CUSTOM_GPT_FACTORY_001_DOMAIN_AND_AGENT_DESIGN.json",
+        "ION/05_context/current/custom_gpt_capsule_system/build_drafts/FIRST_TWO_CUSTOM_GPT_BUILD_PACKET.md",
+        "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DAIMON_COMPANION_BUILDER_FIELDS.json",
+        "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DOM_CARTOGRAPHER_BUILDER_FIELDS.json",
+        "ION/05_context/current/custom_gpt_capsule_system/build_drafts/FIRST_TWO_BUILD_VALIDATION_AND_RELEASE_CHECKLIST.md",
+        "AGENTS.md"
+      ],
+      "row_count": 10,
+      "row_end": "C-077",
+      "row_start": "C-068",
+      "status_counts": {
+        "BLOCKED_ARTIFACT_NOT_PRESENT": 1,
+        "IMPLEMENTED": 5,
+        "VERIFIED": 4
+      },
+      "summaries": [
+        {
+          "date": "2026-05-10",
+          "id": "C-074",
+          "status": "VERIFIED",
+          "summary": "Corrected Custom GPT Capsule System v0.4 intake after root workpackets lane miss: found zip in `ION_CODEX FULL/workpackets`, verified sha256, copied to ION inbox, staged candidate "
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-073",
+          "status": "BLOCKED_ARTIFACT_NOT_PRESENT",
+          "summary": "Created blocked-intake record for sandbox Custom GPT Capsule System v0.4 setup-card package; local zip is absent, so ingestion/comparison/build drafts are blocked until artifact is"
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-072",
+          "status": "IMPLEMENTED",
+          "summary": "Created DOM_PERCEPTION_001 Browser Perception domain design packet constrained by the Portable ION Page Companion product context, including domain registry proposal, perception ag"
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-071",
+          "status": "IMPLEMENTED",
+          "summary": "Created durable Portable ION Page Companion product context for one portable ION companion across pages, one shared governed chat/context graph, page/workflow branches, governed DO"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-077",
+          "status": "IMPLEMENTED",
+          "summary": "Created Helixion JOC orchestration context package and reusable ION/Codex skill lane for the full ION dAimon WisdomNET rebuild."
+        }
+      ]
+    },
+    {
+      "date_end": "2026-05-11",
+      "date_start": "2026-05-11",
+      "epoch_id": "E-009",
+      "evidence_refs": [
+        "ION/04_packages/kernel/ion_local_cockpit_app.py",
+        "ION/04_packages/kernel/ion_cockpit_view_model.py",
+        "ION/08_ui/joc_cockpit_shell/LocalCockpitApp.tsx",
+        "ION/08_ui/joc_cockpit_shell/ServiceConsolePanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+        "ION/08_ui/joc_cockpit_shell/package.json",
+        "ION/08_ui/joc_cockpit_shell/dist/index.html",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json",
+        "ION/08_ui/joc_cockpit_shell/HelixionDevelopmentPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+        "ION/08_ui/joc_cockpit_shell/QueueGatewayCockpitPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css",
+        "ION/08_ui/joc_cockpit_shell/CodexCapsuleChatWorkbenchPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/ExtensionMicroShellPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/DocsProjectsPackagesPanel.tsx",
+        "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_WORKFLOW_GATE_RECEIPT_20260511.json",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+        "/home/sev/.codex/skills/ion-orchestration/SKILL.md"
+      ],
+      "row_count": 10,
+      "row_end": "C-090",
+      "row_start": "C-078",
+      "status_counts": {
+        "CANDIDATE_IMPLEMENTED": 1,
+        "CANDIDATE_IMPLEMENTED_BUILD_PASSED": 1,
+        "CANDIDATE_IMPLEMENTED_TESTED": 1,
+        "CORRECTIVE_GATE_CREATED": 1,
+        "IMPLEMENTED": 6
+      },
+      "summaries": [
+        {
+          "date": "2026-05-11",
+          "id": "C-083",
+          "status": "IMPLEMENTED",
+          "summary": "Built the local JOC docs/projects/packages visibility panel for project favorites, Codex context packages, package ZIP artifacts, safe full-project package state, and Custom GPT bu"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-084",
+          "status": "CORRECTIVE_GATE_CREATED",
+          "summary": "Added the UI Frontend Excellence workflow gate for Helixion/JOC rebuild work, including a joc_work_surface_ui_packet corrective architecture packet and skill routing rule to preven"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-085",
+          "status": "CANDIDATE_IMPLEMENTED_BUILD_PASSED",
+          "summary": "Implemented candidate Helixion/JOC shell-zone refactor under the UI Frontend Excellence workflow gate: active pages, page rail, universal inspector drawer tabs, and bottom timeline"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-088",
+          "status": "CANDIDATE_IMPLEMENTED_TESTED",
+          "summary": "Implemented bounded queue timeout policy at connector/broker boundaries for agent/cartography/proof/design workloads; enforced workload-diff return contract when required; added ta"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-090",
+          "status": "CANDIDATE_IMPLEMENTED",
+          "summary": "Created candidate extension queue protocol context package v0.1 with protocols, schemas, templates, UI contracts, and packet drafts for selected-request start and queue classificat"
+        }
+      ]
+    },
+    {
+      "date_end": "2026-05-11",
+      "date_start": "2026-05-11",
+      "epoch_id": "E-010",
+      "evidence_refs": [
+        "ION/04_packages/kernel/ion_codex_queue_runner.py",
+        "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+        "ION/tests/test_kernel_ion_codex_queue_runner.py",
+        "ION/tests/test_kernel_ion_chatgpt_browser_mcp_connector_contract.py"
+      ],
+      "row_count": 1,
+      "row_end": "C-091",
+      "row_start": "C-091",
+      "status_counts": {
+        "CANDIDATE_IMPLEMENTED_TESTED": 1
+      },
+      "summaries": [
+        {
+          "date": "2026-05-11",
+          "id": "C-091",
+          "status": "CANDIDATE_IMPLEMENTED_TESTED",
+          "summary": "Implemented worker spawn-contract enforcement, deterministic workload-class template routing, return-template pre-submit linting, and template-invalid salvage metadata/status propa"
         }
       ]
     }
   ],
-  "generated_at": "2026-05-09T17:35:55+00:00",
+  "generated_at": "2026-05-11T20:36:01+00:00",
   "latest_epochs": [
-    {
-      "date_end": "2026-05-07",
-      "date_start": "2026-05-07",
-      "epoch_id": "E-001",
-      "evidence_refs": [
-        "ION/04_packages/kernel/ion_codex_solo_context.py",
-        "ION/04_packages/kernel/ion_dual_codex_chat.py",
-        "ION/tests/test_kernel_ion_codex_solo_context.py",
-        "ION/tests/test_kernel_ion_dual_codex_chat.py",
-        "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
-        "ION/06_intelligence/research/2026-05-07_codex_single_agent_mini_capsule_research.md",
-        "ION/05_context/current/codex_solo/LONG_HORIZON.json",
-        "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
-        ".codex/config.toml",
-        ".codex/hooks/ion_session_start_context.py",
-        "ION/tests/test_codex_project_config_and_hook.py",
-        "ION/04_packages/kernel/ion_codex_model_moves.py",
-        "ION/04_packages/kernel/ion_codex_queue_runner.py",
-        "ION/03_registry/codex_cli_model_move_policy.yaml",
-        "ION/tests/test_kernel_ion_codex_model_moves.py",
-        "ION/04_packages/kernel/ion_public_cockpit_auth.py",
-        "ION/04_packages/kernel/ion_chatgpt_browser_mcp_http_preview.py",
-        "ION/tests/test_kernel_ion_public_cockpit_auth.py",
-        "ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py",
-        "/home/sev/.config/systemd/user/ion-mcp-preview.service.d/cockpit-token.conf"
-      ],
-      "row_count": 10,
-      "row_end": "C-010",
-      "row_start": "C-001",
-      "status_counts": {
-        "CORRECTED": 2,
-        "IMPLEMENTED": 8
-      },
-      "summaries": [
-        {
-          "date": "2026-05-07",
-          "id": "C-006",
-          "status": "IMPLEMENTED",
-          "summary": "Updated cockpit login password and pre-allowed crinkedart Google account"
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-007",
-          "status": "IMPLEMENTED",
-          "summary": "Rebuilt dual Codex chat into JOC-style cockpit workbench with command rail and context drawers"
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-008",
-          "status": "CORRECTED",
-          "summary": "Added Codex Capsule Operating Protocol: Capsule ION is the minified fallback/basic ops kernel while full ION Codex CLI chat is rebuilt."
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-009",
-          "status": "CORRECTED",
-          "summary": "Corrected Codex chat product direction to one Capsule Codex chat with bounded full-ION comms adapter."
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-010",
-          "status": "IMPLEMENTED",
-          "summary": "Added opt-in chat execution bridge from Codex Capsule chat turns to existing Codex work queue."
-        }
-      ]
-    },
-    {
-      "date_end": "2026-05-08",
-      "date_start": "2026-05-07",
-      "epoch_id": "E-002",
-      "evidence_refs": [
-        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_APP_UI_ORCHESTRATION_20260507.md",
-        "ION/04_packages/kernel/ion_codex_solo_context.py",
-        "ION/tests/test_kernel_ion_codex_solo_context.py",
-        "ION/tests/test_kernel_ion_dual_codex_chat.py",
-        "ION/04_packages/kernel/ion_dual_codex_chat.py",
-        "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
-        "ION/05_context/current/codex_cli/CODEX_CAPSULE_TRACE_AND_AGENT_TRANSPARENCY_ORCHESTRATION_20260507.md",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_UI_RECOVERY_ORCHESTRATION_20260507.md",
-        "ION/04_packages/kernel/ion_codex_chat_app_ui.py",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_APP_SHELL_COMPONENTIZATION_20260507.md",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_TIMELINE_AGENTS_DRAWER_PASS_20260507.md",
-        "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
-        "ION/03_registry/ion_skill_registry.yaml",
-        "ION/04_packages/kernel/ion_skill_activation.py",
-        "ION/tests/test_kernel_ion_skill_activation.py",
-        "ION/05_context/current/codex_cli/CODEX_SKILL_ACTIVATION_IMPLEMENTATION_20260507.md",
-        "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
-        "ION/03_registry/ion_native_lens_registry.yaml",
-        "ION/04_packages/kernel/ion_codex_chat_engine.py",
-        "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py"
-      ],
-      "row_count": 10,
-      "row_end": "C-020",
-      "row_start": "C-011",
-      "status_counts": {
-        "CORRECTED": 1,
-        "IMPLEMENTED": 8,
-        "PLANNED": 1
-      },
-      "summaries": [
-        {
-          "date": "2026-05-07",
-          "id": "C-016",
-          "status": "IMPLEMENTED",
-          "summary": "Extracted active Codex Chat app shell into dedicated UI renderer module."
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-017",
-          "status": "IMPLEMENTED",
-          "summary": "Removed obsolete in-file Codex chat HTML/CSS renderer blocks after UI extraction."
-        },
-        {
-          "date": "2026-05-07",
-          "id": "C-018",
-          "status": "IMPLEMENTED",
-          "summary": "Improved Codex Chat Timeline and Agents drawers from existing trace and broker data."
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-019",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented ION skill activation layer for Codex Chat: skills activate workflows while templates remain proof gates."
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-020",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented Codex Chat Engine core: response modes, native ION lenses, GPT-5.5 chat route, and queue metadata handoff."
-        }
-      ]
-    },
-    {
-      "date_end": "2026-05-08",
-      "date_start": "2026-05-08",
-      "epoch_id": "E-003",
-      "evidence_refs": [
-        "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
-        "ION/03_registry/ion_native_lens_registry.yaml",
-        "ION/04_packages/kernel/ion_codex_chat_engine.py",
-        "ION/04_packages/kernel/ion_dual_codex_chat.py",
-        "ION/04_packages/kernel/ion_codex_chat_app_ui.py",
-        "ION/04_packages/kernel/ion_codex_solo_context.py",
-        "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
-        "ION/04_packages/kernel/ion_codex_queue_runner.py",
-        "ION/tests/test_kernel_ion_codex_chat_engine.py",
-        "ION/tests/test_kernel_ion_dual_codex_chat.py",
-        "ION/tests/test_kernel_ion_codex_queue_runner.py",
-        "ION/tests/test_kernel_ion_chatgpt_browser_connector_e2e_flow.py",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_ENGINE_IMPLEMENTATION_20260508.md",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_RESPONSE_CARRIER_ORCHESTRATION_20260508.md",
-        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
-        "ION/tests/test_kernel_ion_codex_chat_response_carrier.py",
-        "ION/docs/setup/ION_DUAL_CHAT_AND_CODEX_SOLO_CONTEXT_RUNBOOK.md",
-        "ION/05_context/current/codex_cli/CODEX_CHAT_RESPONSE_CARRIER_IMPLEMENTATION_20260508.md",
-        "ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T140124Z968157_live_carrier_smoke_reply_with_one_concise_sentence_naming_the_current_ca/run.json",
-        "ION/05_context/current/codex_capsule_chat/response_runs/codex_chat_response_20260508T140124Z968157_live_carrier_smoke_reply_with_one_concise_sentence_naming_the_current_ca/latest_r"
-      ],
-      "row_count": 10,
-      "row_end": "C-030",
-      "row_start": "C-021",
-      "status_counts": {
-        "IMPLEMENTED": 8,
-        "PLANNED": 2
-      },
-      "summaries": [
-        {
-          "date": "2026-05-08",
-          "id": "C-026",
-          "status": "IMPLEMENTED",
-          "summary": "Installed Playwright package and added opt-in live cockpit browser smoke proving chat submit clears immediately, shows pending Codex response state, blocks duplicate submit, and ca"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-027",
-          "status": "PLANNED",
-          "summary": "Planned the next Codex Capsule Chat rewrite around JOC shell regions, Victus Contextual Matryoshka, Echo Forge evented chat traces, protocol manifest routing, and smart context vis"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-028",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented Codex Chat Phase 0 memory visualization projection: memory strata, context route edges, protocol manifest summary, carrier phase events, token budget summary, redaction"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-029",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented Codex Chat Phase 1 shell component split: app facade, shell, main chat, right inspector, timeline, memory visualization drawer, shared helpers, and CSS/JS assets split "
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-030",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented Codex Chat Phase 2 JOC shell behavior: top page tabs, page-local left drawer, main work-surface pages, right icon rail, inspector tab panels, bottom timeline filters, c"
-        }
-      ]
-    },
-    {
-      "date_end": "2026-05-08",
-      "date_start": "2026-05-08",
-      "epoch_id": "E-004",
-      "evidence_refs": [
-        "ION/04_packages/kernel/ion_codex_chat_memory_visualization.py",
-        "ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py",
-        "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
-        "ION/tests/test_kernel_ion_dual_codex_chat.py",
-        "ION/05_context/current/ACTIVE_CODEX_CAPSULE_CHAT_MODEL.json",
-        "ION/tests/test_kernel_ion_cockpit_playwright_smoke.py",
-        "ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json",
-        "ION/05_context/current/codex_solo/history/codex_solo_post_20260508T155446+0000.json",
-        "ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json",
-        "ION/04_packages/kernel/ion_codex_chat_main_ui.py",
-        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
-        "ION/tests/test_kernel_ion_codex_chat_response_carrier.py",
-        "ION/tests/test_kernel_ion_codex_chat_engine.py",
-        "ION/04_packages/kernel/ion_dual_codex_chat.py",
-        "ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py"
-      ],
-      "row_count": 10,
-      "row_end": "C-040",
-      "row_start": "C-031",
-      "status_counts": {
-        "IMPLEMENTED": 1,
-        "VERIFIED": 9
-      },
-      "summaries": [
-        {
-          "date": "2026-05-08",
-          "id": "C-036",
-          "status": "VERIFIED",
-          "summary": "Implemented source-ref drilldown and compact selected-turn trace linking in Codex Chat: source refs and carrier phase events are selectable, update the selected-node panel, and hig"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-037",
-          "status": "VERIFIED",
-          "summary": "Persisted Codex Chat context inspector selection across reloads: memory, route, source, and trace selections now store in browser state/hash and restore before default selection; l"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-038",
-          "status": "VERIFIED",
-          "summary": "Added grouped source-reference drilldown and route edge summaries to Codex Chat: source refs now expose grouped filters and lanes, route graph shows type counts before detailed edg"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-039",
-          "status": "VERIFIED",
-          "summary": "Improved Codex Chat response-carrier prompt quality: mounted Hot Context and context package selector, removed hard-coded root assumption, strengthened direct-answer continuity rul"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-040",
-          "status": "VERIFIED",
-          "summary": "Added response-run observability to Codex Chat: recent response carrier run packets are projected into the active model and Evidence/Runs inspector with prompt, return, event, stdo"
-        }
-      ]
-    },
     {
       "date_end": "2026-05-08",
       "date_start": "2026-05-08",
       "epoch_id": "E-005",
       "evidence_refs": [
+        "ION/04_packages/kernel/ion_codex_chat_memory_visualization_ui.py",
+        "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+        "ION/tests/test_kernel_ion_dual_codex_chat.py",
+        "ION/tests/test_kernel_ion_cockpit_playwright_smoke.py",
+        "ION/05_context/current/codex_cli/playwright_cockpit_shell_smoke_latest.json",
+        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
+        "ION/tests/test_kernel_ion_codex_chat_response_carrier.py",
+        "ION/tests/test_kernel_ion_codex_chat_engine.py",
+        "ION/05_context/current/codex_cli/playwright_cockpit_pending_smoke_latest.json",
+        "ION/04_packages/kernel/ion_dual_codex_chat.py",
+        "ION/04_packages/kernel/ion_codex_chat_right_inspector_ui.py",
         "ION/06_intelligence/research/user_handling_trials/2026-05-08_ion_first_custom_gpt_user_handling_case_study_v0_2.md",
         "ION/06_intelligence/evidence/user_handling_trials/2026-05-08_ion_first_custom_gpt_user_handling_evidence_index.json",
         "ION/06_intelligence/research/user_handling_trials/2026-05-08_ion_prompt_burden_continuity_benchmark_v0_1.md",
@@ -665,29 +655,35 @@
         "ION/06_intelligence/evidence/sandbox_agent_package_evolution/2026-05-08_sandbox_agent_package_v1_4_ai_assistant_work_evidence_index.json",
         "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ACTIVE_ROOT_CANDIDATE_IMPORT_RECEIPT_20260508T174843Z.json",
         "ION/05_context/current/ai_assistant_work/AI_ASSISTANT_WORK_STATE_INDEX_V0_5.json",
-        "ION/tests/test_kernel_ai_assistant_work_template_instances.py",
-        "ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_REVIEW_20260508T175230Z.md",
-        "ION/05_context/current/ai_assistant_work/route_compiler/AI_ASSISTANT_WORK_ROUTE_COMPILER_CANDIDATE_MAP_20260508T175230Z.json",
-        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_REVIEW_RECEIPT_20260508T175340Z.json",
-        "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
-        "ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
-        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_ROUTE_COMPILER_IMPLEMENTATION_RECEIPT_20260508T181926Z.json",
-        "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_phase4_product_reconciliation_matrix.md",
-        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_PHASE4_PRODUCT_RECONCILIATION_RECEIPT_20260508T182228Z.json",
-        "ION/04_packages/kernel/ion_custom_gpt_action_gateway.py",
-        "ION/tests/test_kernel_ion_custom_gpt_action_gateway.py",
-        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_GATEWAY_ROUTE_METADATA_RECEIPT_20260508T182713Z.json"
+        "ION/tests/test_kernel_ai_assistant_work_template_instances.py"
       ],
       "row_count": 10,
-      "row_end": "C-050",
-      "row_start": "C-041",
+      "row_end": "C-047",
+      "row_start": "C-038",
       "status_counts": {
-        "IMPLEMENTED": 2,
-        "PLANNED": 2,
-        "VERIFIED": 5,
+        "PLANNED": 1,
+        "VERIFIED": 8,
         "done": 1
       },
       "summaries": [
+        {
+          "date": "2026-05-08",
+          "id": "C-043",
+          "status": "VERIFIED",
+          "summary": "Reviewed AI Assistant Work route compiler next packet and mapped candidate routes to active Codex chat skills, native lenses, Custom GPT/MCP/product lanes, and next compiler implem"
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-044",
+          "status": "done",
+          "summary": "Implemented candidate-only Assistant Work route compiler and wired route metadata into Codex chat engine, queued objectives, turn traces, UI model drawers, and right inspector."
+        },
+        {
+          "date": "2026-05-08",
+          "id": "C-045",
+          "status": "VERIFIED",
+          "summary": "Documented Phase 4 product reconciliation matrix across Codex Capsule Chat, Action Gateway, MCP Action, data-zip Custom GPT product, local cockpit, and full ION pipeline."
+        },
         {
           "date": "2026-05-08",
           "id": "C-046",
@@ -699,24 +695,6 @@
           "id": "C-047",
           "status": "PLANNED",
           "summary": "Planned candidate-domain operation ladder for assistant-work surfaces: candidate domains/agents/templates/routes may operate under containment for classification, proof shaping, ro"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-048",
-          "status": "IMPLEMENTED",
-          "summary": "Implemented candidate-domain lifecycle gate: added provisional protocol, candidate lifecycle registry, scorecards, promotion proposal draft, and route compiler filtering for inacti"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-049",
-          "status": "IMPLEMENTED",
-          "summary": "Formalized root source lanes for workpackets, diffs, and ION_sandbox: added lane READMEs, machine-readable indexes, consolidated source-lane policy, receipt, and git hygiene for sa"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-050",
-          "status": "PLANNED",
-          "summary": "Documented GitHub release strategy for ION_sandbox: recommend a dedicated release/ion-sandbox-gpt-v1 branch with curated product root, after cache cleanup, metadata repair, Cursor "
         }
       ]
     },
@@ -725,45 +703,37 @@
       "date_start": "2026-05-08",
       "epoch_id": "E-006",
       "evidence_refs": [
+        "ION/02_architecture/ION_CANDIDATE_DOMAIN_OPERATION_PROTOCOL.md",
+        "ION/05_context/current/ai_assistant_work/candidate_lifecycle/CANDIDATE_DOMAIN_LIFECYCLE_REGISTRY_V0_1.yaml",
+        "ION/04_packages/kernel/ion_assistant_work_route_compiler.py",
+        "ION/tests/test_kernel_ion_assistant_work_route_compiler.py",
+        "ION/05_context/current/ai_assistant_work/receipts/AI_ASSISTANT_WORK_CANDIDATE_DOMAIN_LIFECYCLE_IMPLEMENTATION_RECEIPT_20260508T185104Z.json",
+        "workpackets/README.md",
+        "workpackets/WORKPACKET_INDEX_20260508T190626Z.json",
+        "diffs/README.md",
+        "diffs/DIFF_INDEX_20260508T190626Z.json",
+        "ION_sandbox/README.md",
+        "ION_sandbox/ION_SANDBOX_INDEX_20260508T190626Z.json",
+        "ION/05_context/current/source_lanes/ION_ROOT_SOURCE_LANE_POLICY_20260508T190626Z.md",
+        "ION/05_context/current/source_lanes/receipts/ION_ROOT_SOURCE_LANE_FORMALIZATION_RECEIPT_20260508T190626Z.json",
+        "ION/06_intelligence/research/sandbox_agent_package_evolution/2026-05-08_ion_sandbox_github_release_strategy.md",
+        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GITHUB_RELEASE_STRATEGY_RECEIPT_20260508T191612Z.json",
         "ion-sandbox-gpt/RELEASE_MANIFEST.json",
         "ion-sandbox-gpt/RELEASE_READINESS.md",
         "ion-sandbox-gpt/VALIDATION_REPORT.json",
         "ion-sandbox-gpt/ION/05_context/current/ACTIVE_WORK_PACKET.json",
-        "ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py",
-        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_ROOT_PREP_RECEIPT_20260508T192928Z.json",
-        "ION/05_context/current/source_lanes/receipts/ION_SANDBOX_GPT_RELEASE_BRANCH_PUSH_RECEIPT_20260508T193825Z.json",
-        "ION/04_packages/kernel/ion_dual_codex_chat.py",
-        "ION/04_packages/kernel/ion_codex_chat_engine.py",
-        "ION/04_packages/kernel/ion_codex_chat_response_carrier.py",
-        "ION/04_packages/kernel/ion_codex_solo_context.py",
-        "ION/05_context/current/codex_cli/CODEX_CAPSULE_CHAT_ACTIVE_ROOT_BRANCH_PUSH_RECEIPT_20260508T201115Z.json",
-        "ION/tests/test_kernel_ion_dual_codex_chat.py",
-        "ION/tests/test_kernel_ion_codex_chat_engine.py",
-        "ION/05_context/current/codex_solo/recovery/CODEX_SESSION_RECOVERY_20260509T173524Z.md",
-        ".codex/config.toml",
-        ".codex/hooks/ion_session_start_context.py"
+        "ion-sandbox-gpt/ION/tests/test_kernel_ion_stale_surface_audit.py"
       ],
-      "row_count": 4,
-      "row_end": "C-054",
-      "row_start": "C-051",
+      "row_count": 10,
+      "row_end": "C-057",
+      "row_start": "C-048",
       "status_counts": {
-        "IMPLEMENTED": 1,
+        "IMPLEMENTED": 6,
+        "PLANNED": 1,
         "PUBLISHED": 2,
         "RECOVERED": 1
       },
       "summaries": [
-        {
-          "date": "2026-05-08",
-          "id": "C-051",
-          "status": "IMPLEMENTED",
-          "summary": "Prepared sanitized ion-sandbox-gpt release root from ION_sandbox snapshot: repaired active GPT sandbox packet, release metadata, Cursor optional test boundary, passed focused relea"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "C-052",
-          "status": "PUBLISHED",
-          "summary": "Published release/ion-sandbox-gpt-v1 to GitHub with curated ion-sandbox-gpt release root, candidate-domain/source-lane documentation, release validation proof, and branch-push rece"
-        },
         {
           "date": "2026-05-08",
           "id": "C-053",
@@ -775,6 +745,255 @@
           "id": "C-054",
           "status": "RECOVERED",
           "summary": "Recovered lost Codex CLI terminal session and verified final pushed branch state"
+        },
+        {
+          "date": "2026-05-09",
+          "id": "C-055",
+          "status": "IMPLEMENTED",
+          "summary": "Exposed bounded codex-runner reconcile and capsule chat MCP bridge tools with focused tests."
+        },
+        {
+          "date": "2026-05-09",
+          "id": "C-056",
+          "status": "IMPLEMENTED",
+          "summary": "Implemented bounded Codex worker live telemetry surface with safe preview gating and tests."
+        },
+        {
+          "date": "2026-05-09",
+          "id": "C-057",
+          "status": "IMPLEMENTED",
+          "summary": "Built Custom GPT carrier package v2.6.7 candidate with Codex Capsule/queue relay docs, dAimon doctrine updates, and validated zip/test receipt."
+        }
+      ]
+    },
+    {
+      "date_end": "2026-05-10",
+      "date_start": "2026-05-09",
+      "epoch_id": "E-007",
+      "evidence_refs": [
+        "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T223722Z0000_codex_req_2026_05_09t223716z0000_daimon_custom_gpt_infrastructure_update_packet_/run.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T224639Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-09T232413Z0000_codex_req_2026_05_09t225713z0000_proof_repair_packet_for_blocked_daimon_custom_g/run.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-09T232820Z0000_task_return.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/live_vertical_slice_summary.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/gemini_handoff_summary.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/phoenix_readiness.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/cloud_run_deploy_summary.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/cloud_run_live_health.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/atlas_access_list_update.json",
+        "/home/sev/ION - Production/dAimon/scripts/check_cloud_run_live.py",
+        "/home/sev/ION - Production/dAimon/scripts/deploy_cloud_run.py",
+        "ION/05_context/current/codex_solo/history/codex_solo_post_20260510T045248+0000.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/demo_evidence_package.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/dashboard_evidence_trace.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/demo_video_claims.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/agent_builder_mcp_trace_validation.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/agent_builder_mcp_trace.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/agent_engine_deploy_summary.json",
+        "/home/sev/ION - Production/dAimon/sample_outputs/agent_engine_query_response.json"
+      ],
+      "row_count": 10,
+      "row_end": "C-067",
+      "row_start": "C-058",
+      "status_counts": {
+        "CHECKPOINT": 4,
+        "COMPLETE": 1,
+        "HANDOFF_READY": 1,
+        "IMPLEMENTED": 2,
+        "PROVEN": 1,
+        "VERIFIED": 1
+      },
+      "summaries": [
+        {
+          "date": "2026-05-10",
+          "id": "C-063",
+          "status": "CHECKPOINT",
+          "summary": "dAimon Cloud Run proof update committed and pushed to GitHub on main at 33f29ed; repo is clean. Remaining gate is Agent Builder MongoDB MCP trace export."
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-064",
+          "status": "PROVEN",
+          "summary": "dAimon final live proof gate passed: deployed Vertex AI Agent Engine proof agent called Cloud Run find_continuity_objects, Cloud Run queried live MongoDB-backed receipt-cleared sta"
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-065",
+          "status": "IMPLEMENTED",
+          "summary": "Added parent-scope Codex startup bridge so chats launched from /home/sev/ION - Production load the active ION Codex Solo capsule context."
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-066",
+          "status": "VERIFIED",
+          "summary": "Audited and hardened Codex Solo startup continuity: added parent bridge regression coverage and startup recency snapshot so truncated boot context preserves latest capsule rows."
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-067",
+          "status": "IMPLEMENTED",
+          "summary": "Created Codex Carrier Limits as a first-class ION context domain with protocol, registry, current limits snapshot, route integration, and focused regression coverage."
+        }
+      ]
+    },
+    {
+      "date_end": "2026-05-11",
+      "date_start": "2026-05-10",
+      "epoch_id": "E-008",
+      "evidence_refs": [
+        "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T171106Z0000_codex_req_agent_2026_05_10t171017z0000_context_cartographer_read_only_collaborat/run.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T171322Z0000_task_return.json",
+        "ION/04_packages/kernel/ion_codex_queue_runner.py",
+        "ION/tests/test_kernel_ion_codex_queue_runner.py",
+        "ION/tests/test_kernel_ion_chatgpt_browser_mcp_connector_contract.py",
+        "ION/tests/test_kernel_ion_chatgpt_browser_mcp_http_preview.py",
+        "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T175308Z0000_codex_req_agent_2026_05_10t175229z0000_context_cartographer_post_patch_lifecycle/run.json",
+        "ION/05_context/current/chatgpt_connector/task_returns/2026-05-10T175640Z0000_task_return.json",
+        "ION/05_context/current/chatgpt_connector/agent_invocations/2026-05-10T175229Z0000_context_cartographer_post_patch_lifecycle_telemetry_proof_perform_read_only_insp.json",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/docs/custom_gpt_factory_domain.md",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/registry/custom_gpt_role_registry.json",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/schemas/custom_gpt_role_package.schema.json",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/schemas/capsule_family.schema.json",
+        "ION/06_intelligence/orchestration/custom_gpt/factory/PACKETS/CUSTOM_GPT_FACTORY_002_GENERATE_FIRST_ROLE_PACKS.md",
+        "ION/05_context/current/custom_gpt_factory/CUSTOM_GPT_FACTORY_001_DOMAIN_AND_AGENT_DESIGN.json",
+        "ION/05_context/current/custom_gpt_capsule_system/build_drafts/FIRST_TWO_CUSTOM_GPT_BUILD_PACKET.md",
+        "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DAIMON_COMPANION_BUILDER_FIELDS.json",
+        "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DOM_CARTOGRAPHER_BUILDER_FIELDS.json",
+        "ION/05_context/current/custom_gpt_capsule_system/build_drafts/FIRST_TWO_BUILD_VALIDATION_AND_RELEASE_CHECKLIST.md",
+        "AGENTS.md"
+      ],
+      "row_count": 10,
+      "row_end": "C-077",
+      "row_start": "C-068",
+      "status_counts": {
+        "BLOCKED_ARTIFACT_NOT_PRESENT": 1,
+        "IMPLEMENTED": 5,
+        "VERIFIED": 4
+      },
+      "summaries": [
+        {
+          "date": "2026-05-10",
+          "id": "C-074",
+          "status": "VERIFIED",
+          "summary": "Corrected Custom GPT Capsule System v0.4 intake after root workpackets lane miss: found zip in `ION_CODEX FULL/workpackets`, verified sha256, copied to ION inbox, staged candidate "
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-073",
+          "status": "BLOCKED_ARTIFACT_NOT_PRESENT",
+          "summary": "Created blocked-intake record for sandbox Custom GPT Capsule System v0.4 setup-card package; local zip is absent, so ingestion/comparison/build drafts are blocked until artifact is"
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-072",
+          "status": "IMPLEMENTED",
+          "summary": "Created DOM_PERCEPTION_001 Browser Perception domain design packet constrained by the Portable ION Page Companion product context, including domain registry proposal, perception ag"
+        },
+        {
+          "date": "2026-05-10",
+          "id": "C-071",
+          "status": "IMPLEMENTED",
+          "summary": "Created durable Portable ION Page Companion product context for one portable ION companion across pages, one shared governed chat/context graph, page/workflow branches, governed DO"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-077",
+          "status": "IMPLEMENTED",
+          "summary": "Created Helixion JOC orchestration context package and reusable ION/Codex skill lane for the full ION dAimon WisdomNET rebuild."
+        }
+      ]
+    },
+    {
+      "date_end": "2026-05-11",
+      "date_start": "2026-05-11",
+      "epoch_id": "E-009",
+      "evidence_refs": [
+        "ION/04_packages/kernel/ion_local_cockpit_app.py",
+        "ION/04_packages/kernel/ion_cockpit_view_model.py",
+        "ION/08_ui/joc_cockpit_shell/LocalCockpitApp.tsx",
+        "ION/08_ui/joc_cockpit_shell/ServiceConsolePanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+        "ION/08_ui/joc_cockpit_shell/package.json",
+        "ION/08_ui/joc_cockpit_shell/dist/index.html",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json",
+        "ION/08_ui/joc_cockpit_shell/HelixionDevelopmentPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+        "ION/08_ui/joc_cockpit_shell/QueueGatewayCockpitPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css",
+        "ION/08_ui/joc_cockpit_shell/CodexCapsuleChatWorkbenchPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/ExtensionMicroShellPanel.tsx",
+        "ION/08_ui/joc_cockpit_shell/DocsProjectsPackagesPanel.tsx",
+        "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_WORKFLOW_GATE_RECEIPT_20260511.json",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+        "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+        "/home/sev/.codex/skills/ion-orchestration/SKILL.md"
+      ],
+      "row_count": 10,
+      "row_end": "C-090",
+      "row_start": "C-078",
+      "status_counts": {
+        "CANDIDATE_IMPLEMENTED": 1,
+        "CANDIDATE_IMPLEMENTED_BUILD_PASSED": 1,
+        "CANDIDATE_IMPLEMENTED_TESTED": 1,
+        "CORRECTIVE_GATE_CREATED": 1,
+        "IMPLEMENTED": 6
+      },
+      "summaries": [
+        {
+          "date": "2026-05-11",
+          "id": "C-083",
+          "status": "IMPLEMENTED",
+          "summary": "Built the local JOC docs/projects/packages visibility panel for project favorites, Codex context packages, package ZIP artifacts, safe full-project package state, and Custom GPT bu"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-084",
+          "status": "CORRECTIVE_GATE_CREATED",
+          "summary": "Added the UI Frontend Excellence workflow gate for Helixion/JOC rebuild work, including a joc_work_surface_ui_packet corrective architecture packet and skill routing rule to preven"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-085",
+          "status": "CANDIDATE_IMPLEMENTED_BUILD_PASSED",
+          "summary": "Implemented candidate Helixion/JOC shell-zone refactor under the UI Frontend Excellence workflow gate: active pages, page rail, universal inspector drawer tabs, and bottom timeline"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-088",
+          "status": "CANDIDATE_IMPLEMENTED_TESTED",
+          "summary": "Implemented bounded queue timeout policy at connector/broker boundaries for agent/cartography/proof/design workloads; enforced workload-diff return contract when required; added ta"
+        },
+        {
+          "date": "2026-05-11",
+          "id": "C-090",
+          "status": "CANDIDATE_IMPLEMENTED",
+          "summary": "Created candidate extension queue protocol context package v0.1 with protocols, schemas, templates, UI contracts, and packet drafts for selected-request start and queue classificat"
+        }
+      ]
+    },
+    {
+      "date_end": "2026-05-11",
+      "date_start": "2026-05-11",
+      "epoch_id": "E-010",
+      "evidence_refs": [
+        "ION/04_packages/kernel/ion_codex_queue_runner.py",
+        "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+        "ION/tests/test_kernel_ion_codex_queue_runner.py",
+        "ION/tests/test_kernel_ion_chatgpt_browser_mcp_connector_contract.py"
+      ],
+      "row_count": 1,
+      "row_end": "C-091",
+      "row_start": "C-091",
+      "status_counts": {
+        "CANDIDATE_IMPLEMENTED_TESTED": 1
+      },
+      "summaries": [
+        {
+          "date": "2026-05-11",
+          "id": "C-091",
+          "status": "CANDIDATE_IMPLEMENTED_TESTED",
+          "summary": "Implemented worker spawn-contract enforcement, deterministic workload-class template routing, return-template pre-submit linting, and template-invalid salvage metadata/status propa"
         }
       ]
     }

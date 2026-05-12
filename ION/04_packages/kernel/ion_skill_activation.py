@@ -54,6 +54,47 @@ TEMPLATE_TERMS = (
     "proof contract",
     "governance",
 )
+ORCHESTRATION_TERMS = (
+    "helixion",
+    "joc",
+    "wisdomnet",
+    "daimon",
+    "dAimon",
+    "orchestration",
+    "orchestrate",
+    "masterpiece",
+    "master plan",
+    "portable companion",
+    "browser carrier",
+    "action gateway",
+)
+UI_FRONTEND_TERMS = (
+    "ui",
+    "frontend",
+    "front-end",
+    "joc ui",
+    "cockpit shell",
+    "work surface",
+    "work-surface",
+    "drawer",
+    "drawers",
+    "left rail",
+    "right rail",
+    "right inspector",
+    "bottom timeline",
+    "top bar",
+    "tabs",
+    "monolith",
+    "monolithic",
+    "panel wall",
+    "scrolling dashboard",
+    "codex chat ui",
+    "capsule chat ui",
+    "daimon companion",
+    "extension ui",
+    "docs/packages",
+    "visual proof",
+)
 
 
 def _now() -> str:
@@ -198,12 +239,18 @@ def choose_ion_skill(
     if lane_id == "ion_system":
         selected = "ion-full-workflow-handoff"
         reason = "ion_lane_uses_existing_full_ion_handoff"
+    elif any(term.lower() in text for term in UI_FRONTEND_TERMS):
+        selected = "ui-frontend-excellence"
+        reason = "ui_frontend_excellence_language_detected"
     elif any(term in text for term in RECOVERY_TERMS):
         selected = "codex-recovery"
         reason = "recovery_trigger_detected"
     elif mode in QUEUE_EXECUTION_MODES:
         selected = "codex-solo-work"
         reason = "codex_queue_execution_mode"
+    elif any(term.lower() in text for term in ORCHESTRATION_TERMS):
+        selected = "helixion-joc-orchestration"
+        reason = "helixion_joc_orchestration_language_detected"
     elif any(term in text for term in TEMPLATE_TERMS):
         selected = "template-curation"
         reason = "skill_template_governance_language_detected"

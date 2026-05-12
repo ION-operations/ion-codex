@@ -1,36 +1,36 @@
 {
   "entries": [
     {
-      "bytes": 29551,
+      "bytes": 53678,
       "classification": "codex_solo_minimum_working_context",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/CAPSULE.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "0cb0fadbbb15edab96477c09d100d638b9445291226adc3656ac2911207eaf2c",
+      "sha256": "4868d0c96cc6b27cc3447280d702907cabb4607332172d801810f59c67539b2a",
       "why": "Minimum context the standalone Codex lane must always carry."
     },
     {
-      "bytes": 2006,
+      "bytes": 1939,
       "classification": "codex_solo_lookup_receipt_index",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/MINI.md",
       "repo_relative": true,
       "required": true,
-      "sha256": "fba83b1d26a2b0a4387f835b394adbc151b9cd3234d9871414c270e5badcb880",
+      "sha256": "6a2a10e7e9b81b6fd7f010cacb83ba429c2b3192cf9b38a4d625c2f1c0736476",
       "why": "Lookup index and receipt summary for capsule history."
     },
     {
-      "bytes": 38678,
+      "bytes": 51071,
       "classification": "codex_solo_long_horizon_index",
       "exists": true,
       "is_file": true,
       "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
       "repo_relative": true,
       "required": true,
-      "sha256": "c970971b30bad9f6be005ddc5a4a89d347da4ec228fb21107390d0faf483fb1d",
+      "sha256": "98d9946fbd96fd779b20f91e0887deca97af65bf5e09d7c9b9bd57b2fb215b90",
       "why": "Compressed long-horizon capsule index for older continuity lookup."
     },
     {
@@ -100,14 +100,14 @@
       "why": "Defines skills as activation control while templates remain proof law."
     },
     {
-      "bytes": 9803,
+      "bytes": 13788,
       "classification": "codex_skill_activation_registry",
       "exists": true,
       "is_file": true,
       "path": "ION/03_registry/ion_skill_registry.yaml",
       "repo_relative": true,
       "required": true,
-      "sha256": "bc64b6fdbe8805c22dc3ec5faee2ec765ca2f2184e9333f4591c5c1aa83dcdb1",
+      "sha256": "721e5784a88328561204ef949f45d41d6387d85fa85000f43ebe5730b0d0f5f4",
       "why": "Active skill registry for Codex chat, ION handoff, recovery, template curation, and receipts."
     },
     {
@@ -133,6 +133,39 @@
       "why": "Maps ION native roles into chat-engine lenses without making them user-facing chores."
     },
     {
+      "bytes": 4616,
+      "classification": "codex_carrier_limits_protocol",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/02_architecture/CODEX_CARRIER_LIMITS_CONTEXT_PROTOCOL.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "ef5b860f34f74e89abe6812e34e049f9cbb19986013c000ef7295ebf042ba9f3",
+      "why": "Defines Codex carrier limits as a first-class context domain and separates local hard limits from dynamic external limits."
+    },
+    {
+      "bytes": 3528,
+      "classification": "codex_carrier_limits_registry",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/03_registry/codex_carrier_limits_registry.yaml",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "61d1ba2f8630c776ad0230a394044e9c789532cb8cfb4688c70d28cb04fb673e",
+      "why": "Machine-readable registry for Codex carrier limit classes, sources, and verification requirements."
+    },
+    {
+      "bytes": 4404,
+      "classification": "codex_carrier_limits_current_context",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/codex_solo/CODEX_CARRIER_LIMITS_CONTEXT.json",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "288229aca3de7a1dd6dd593ef875c11bab29e1ab4beb5311703e0e7f658fbc10",
+      "why": "Current Codex carrier limits snapshot used for context planning and startup audits."
+    },
+    {
       "bytes": 3312,
       "classification": "codex_capsule_chat_rebuild_orchestration",
       "exists": true,
@@ -153,45 +186,89 @@
       "required": true,
       "sha256": "050112e9456f270894f796468b1009a60dc646eba731e38ac543548867b9cb29",
       "why": "Chat-first app UI orchestration using JOC/ION drawers and Capsule context."
+    },
+    {
+      "bytes": 23254,
+      "classification": "helixion_joc_master_evolution_plan",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "f93d49387388cd15f6efab92534750f58eac06f81699f9931866dfec0a399610",
+      "why": "Master evolution plan for Helixion, JOC, ION, dAimon, WisdomNET, extension, queue, and Codex surfaces."
+    },
+    {
+      "bytes": 7620,
+      "classification": "helixion_joc_orchestration_workflow_protocol",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "64314b72cb3d7c354bf991f6a4fb2d172fd4ddb3ec0fa60f31eb686c87800e98",
+      "why": "ION-native orchestration law for Helixion/JOC rebuild context, skills, routes, packets, and receipts."
+    },
+    {
+      "bytes": 7157,
+      "classification": "helixion_joc_orchestration_context_package",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "5f61a624348d498151721d6ca5bd8147cd8e585ec51c229e510766b49fc730a8",
+      "why": "Machine-readable context package for future Helixion/JOC rebuild orchestration work."
+    },
+    {
+      "bytes": 7400,
+      "classification": "helixion_joc_orchestration_context_brief",
+      "exists": true,
+      "is_file": true,
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+      "repo_relative": true,
+      "required": true,
+      "sha256": "926e705ad737cf8873c2915f61d9b48c9da9126f91ab6808355993079dba4faa",
+      "why": "Human/model-readable briefing for the Helixion/JOC orchestration package."
     }
   ],
   "live_execution_authority": false,
   "production_authority": false,
   "schema_id": "ion.codex_solo_route.v1",
-  "updated_at": "2026-05-09T17:35:55+00:00",
+  "updated_at": "2026-05-11T20:36:01+00:00",
   "validation": {
     "entries": [
       {
-        "bytes": 29551,
+        "bytes": 53678,
         "classification": "codex_solo_minimum_working_context",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/CAPSULE.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "0cb0fadbbb15edab96477c09d100d638b9445291226adc3656ac2911207eaf2c",
+        "sha256": "4868d0c96cc6b27cc3447280d702907cabb4607332172d801810f59c67539b2a",
         "why": "Minimum context the standalone Codex lane must always carry."
       },
       {
-        "bytes": 2006,
+        "bytes": 1939,
         "classification": "codex_solo_lookup_receipt_index",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/MINI.md",
         "repo_relative": true,
         "required": true,
-        "sha256": "fba83b1d26a2b0a4387f835b394adbc151b9cd3234d9871414c270e5badcb880",
+        "sha256": "6a2a10e7e9b81b6fd7f010cacb83ba429c2b3192cf9b38a4d625c2f1c0736476",
         "why": "Lookup index and receipt summary for capsule history."
       },
       {
-        "bytes": 38678,
+        "bytes": 51071,
         "classification": "codex_solo_long_horizon_index",
         "exists": true,
         "is_file": true,
         "path": "ION/05_context/current/codex_solo/LONG_HORIZON.json",
         "repo_relative": true,
         "required": true,
-        "sha256": "c970971b30bad9f6be005ddc5a4a89d347da4ec228fb21107390d0faf483fb1d",
+        "sha256": "98d9946fbd96fd779b20f91e0887deca97af65bf5e09d7c9b9bd57b2fb215b90",
         "why": "Compressed long-horizon capsule index for older continuity lookup."
       },
       {
@@ -261,14 +338,14 @@
         "why": "Defines skills as activation control while templates remain proof law."
       },
       {
-        "bytes": 9803,
+        "bytes": 13788,
         "classification": "codex_skill_activation_registry",
         "exists": true,
         "is_file": true,
         "path": "ION/03_registry/ion_skill_registry.yaml",
         "repo_relative": true,
         "required": true,
-        "sha256": "bc64b6fdbe8805c22dc3ec5faee2ec765ca2f2184e9333f4591c5c1aa83dcdb1",
+        "sha256": "721e5784a88328561204ef949f45d41d6387d85fa85000f43ebe5730b0d0f5f4",
         "why": "Active skill registry for Codex chat, ION handoff, recovery, template curation, and receipts."
       },
       {
@@ -294,6 +371,39 @@
         "why": "Maps ION native roles into chat-engine lenses without making them user-facing chores."
       },
       {
+        "bytes": 4616,
+        "classification": "codex_carrier_limits_protocol",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/02_architecture/CODEX_CARRIER_LIMITS_CONTEXT_PROTOCOL.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "ef5b860f34f74e89abe6812e34e049f9cbb19986013c000ef7295ebf042ba9f3",
+        "why": "Defines Codex carrier limits as a first-class context domain and separates local hard limits from dynamic external limits."
+      },
+      {
+        "bytes": 3528,
+        "classification": "codex_carrier_limits_registry",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/03_registry/codex_carrier_limits_registry.yaml",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "61d1ba2f8630c776ad0230a394044e9c789532cb8cfb4688c70d28cb04fb673e",
+        "why": "Machine-readable registry for Codex carrier limit classes, sources, and verification requirements."
+      },
+      {
+        "bytes": 4404,
+        "classification": "codex_carrier_limits_current_context",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/05_context/current/codex_solo/CODEX_CARRIER_LIMITS_CONTEXT.json",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "288229aca3de7a1dd6dd593ef875c11bab29e1ab4beb5311703e0e7f658fbc10",
+        "why": "Current Codex carrier limits snapshot used for context planning and startup audits."
+      },
+      {
         "bytes": 3312,
         "classification": "codex_capsule_chat_rebuild_orchestration",
         "exists": true,
@@ -314,6 +424,50 @@
         "required": true,
         "sha256": "050112e9456f270894f796468b1009a60dc646eba731e38ac543548867b9cb29",
         "why": "Chat-first app UI orchestration using JOC/ION drawers and Capsule context."
+      },
+      {
+        "bytes": 23254,
+        "classification": "helixion_joc_master_evolution_plan",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "f93d49387388cd15f6efab92534750f58eac06f81699f9931866dfec0a399610",
+        "why": "Master evolution plan for Helixion, JOC, ION, dAimon, WisdomNET, extension, queue, and Codex surfaces."
+      },
+      {
+        "bytes": 7620,
+        "classification": "helixion_joc_orchestration_workflow_protocol",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "64314b72cb3d7c354bf991f6a4fb2d172fd4ddb3ec0fa60f31eb686c87800e98",
+        "why": "ION-native orchestration law for Helixion/JOC rebuild context, skills, routes, packets, and receipts."
+      },
+      {
+        "bytes": 7157,
+        "classification": "helixion_joc_orchestration_context_package",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "5f61a624348d498151721d6ca5bd8147cd8e585ec51c229e510766b49fc730a8",
+        "why": "Machine-readable context package for future Helixion/JOC rebuild orchestration work."
+      },
+      {
+        "bytes": 7400,
+        "classification": "helixion_joc_orchestration_context_brief",
+        "exists": true,
+        "is_file": true,
+        "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+        "repo_relative": true,
+        "required": true,
+        "sha256": "926e705ad737cf8873c2915f61d9b48c9da9126f91ab6808355993079dba4faa",
+        "why": "Human/model-readable briefing for the Helixion/JOC orchestration package."
       }
     ],
     "findings": [],
