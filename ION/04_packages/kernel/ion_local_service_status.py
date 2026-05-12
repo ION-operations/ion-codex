@@ -17,6 +17,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from kernel.ion_local_port_routing import build_local_port_routing_truth
+
 SCHEMA_ID = "ion.local_service_status.v1"
 READY_VERDICT = "ION_LOCAL_SERVICE_STATUS_PROJECTED"
 DEFAULT_PROBE_TIMEOUT_SECONDS = 0.35
@@ -191,6 +193,7 @@ def build_local_service_status(
         "generated_at": utc_now(),
         "verdict": READY_VERDICT,
         "status": status,
+        "port_routing": build_local_port_routing_truth(root),
         "probe_http": probe_http,
         "probe_timeout_seconds": timeout_seconds,
         "service_count": service_count,

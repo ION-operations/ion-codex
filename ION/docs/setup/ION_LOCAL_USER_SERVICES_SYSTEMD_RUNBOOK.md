@@ -16,6 +16,7 @@ Included:
 - Action Gateway on `127.0.0.1:8777`.
 - Cloudflare tunnel `ion-actions` for `https://ion-actions.helixion.net`.
 - Local-only cockpit app on `127.0.0.1:8788`.
+- Routing truth: `ION/docs/setup/ION_LOCAL_PORT_ROUTING_TRUTH.md`.
 
 Excluded:
 
@@ -23,6 +24,7 @@ Excluded:
 - Production deploy authority.
 - Live execution authority.
 - Automatic installation during repo checkout.
+- Running the sibling dAimon Gemini websocket bridge on `127.0.0.1:8765`.
 
 ## Operator Install Procedure
 
@@ -79,6 +81,12 @@ Expected public endpoints:
 ```text
 https://ion.helixion.net/mcp
 https://ion-actions.helixion.net/health
+```
+
+Expected companion reservation:
+
+```text
+dAimon Gemini websocket bridge: ws://127.0.0.1:8795
 ```
 
 Check journals:

@@ -1,0 +1,123 @@
+{
+  "schema_id": "ion.local_port_routing_registry.v1",
+  "active_packet": "PCKT-ION-MCP-PORT-ROUTING-TRUTH-001",
+  "status": "candidate_local_routing_truth",
+  "generated_for": "local_connector_port_collision_repair",
+  "authority": {
+    "production_authority": false,
+    "deployment_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "assignments": [
+    {
+      "service_id": "ion_chatops_bridge",
+      "owner": "ION",
+      "local_port": 8767,
+      "bind_host": "127.0.0.1",
+      "transport": "http",
+      "local_base_url": "http://127.0.0.1:8767",
+      "public_url": null,
+      "endpoint_path": "/health",
+      "tunnel_name": null,
+      "unit_name": "ion-chatops.service",
+      "collision_policy": "local_ion_only"
+    },
+    {
+      "service_id": "ion_mcp_preview",
+      "owner": "ION",
+      "local_port": 8765,
+      "bind_host": "127.0.0.1",
+      "transport": "http",
+      "local_base_url": "http://127.0.0.1:8765",
+      "public_url": "https://ion.helixion.net/mcp",
+      "endpoint_path": "/mcp",
+      "tunnel_name": "ion-browser",
+      "unit_name": "ion-mcp-preview.service",
+      "collision_policy": "exclusive_owner"
+    },
+    {
+      "service_id": "ion_action_gateway",
+      "owner": "ION",
+      "local_port": 8777,
+      "bind_host": "127.0.0.1",
+      "transport": "http",
+      "local_base_url": "http://127.0.0.1:8777",
+      "public_url": "https://ion-actions.helixion.net",
+      "endpoint_path": "/health",
+      "tunnel_name": "ion-actions",
+      "unit_name": "ion-action-gateway.service",
+      "collision_policy": "exclusive_owner"
+    },
+    {
+      "service_id": "ion_local_cockpit",
+      "owner": "ION",
+      "local_port": 8788,
+      "bind_host": "127.0.0.1",
+      "transport": "http",
+      "local_base_url": "http://127.0.0.1:8788",
+      "public_url": null,
+      "endpoint_path": "/health",
+      "tunnel_name": null,
+      "unit_name": "ion-cockpit-app.service",
+      "collision_policy": "local_ion_only"
+    },
+    {
+      "service_id": "daimon_gemini_bridge",
+      "owner": "dAimon_gemini",
+      "local_port": 8795,
+      "bind_host": "127.0.0.1",
+      "transport": "websocket",
+      "local_base_url": "ws://127.0.0.1:8795",
+      "public_url": null,
+      "endpoint_path": "/",
+      "tunnel_name": null,
+      "unit_name": null,
+      "collision_policy": "external_companion_must_not_use_8765",
+      "migration_required": true
+    },
+    {
+      "service_id": "daimon_gemini_reserved_secondary",
+      "owner": "dAimon_gemini",
+      "local_port": 8796,
+      "bind_host": "127.0.0.1",
+      "transport": "reserved",
+      "local_base_url": null,
+      "public_url": null,
+      "endpoint_path": null,
+      "tunnel_name": null,
+      "unit_name": null,
+      "collision_policy": "reserved_for_future_daimon_ui_or_health"
+    }
+  ],
+  "known_collision": {
+    "observed_at": "2026-05-12",
+    "port": 8765,
+    "expected_owner": "ion_mcp_preview",
+    "observed_owner": "daimon_gemini_bridge",
+    "observed_process": "python3 scripts/ion_bridge_server.py",
+    "observed_cwd": "/home/sev/ION - Production/dAimon_gemini",
+    "observed_tunnel": "cloudflared tunnel run --url http://127.0.0.1:8765 ion-browser",
+    "resolution": "move daimon_gemini_bridge to 127.0.0.1:8795 before starting ion_mcp_preview on 127.0.0.1:8765"
+  },
+  "migration_plan": {
+    "daimon_gemini_bridge_target_port": 8795,
+    "required_external_paths": [
+      "/home/sev/ION - Production/dAimon_gemini/scripts/ion_bridge_server.py",
+      "/home/sev/ION - Production/dAimon_gemini/extension/src/background.js"
+    ],
+    "required_external_changes": [
+      "replace hardcoded websocket server bind port 8765 with configurable DAIMON_GEMINI_BRIDGE_PORT defaulting to 8795",
+      "replace hardcoded extension websocket URL ws://localhost:8765 with ws://localhost:8795 or a configurable value",
+      "restart dAimon Gemini bridge after Braden approval",
+      "start or restart ION MCP preview on 127.0.0.1:8765 after dAimon releases the port",
+      "keep ion-browser Cloudflare tunnel pointed at http://127.0.0.1:8765 for ION MCP only"
+    ]
+  },
+  "non_claims": [
+    "does_not_start_services",
+    "does_not_enable_live_action_mutation",
+    "does_not_grant_production_authority",
+    "does_not_delete_evidence"
+  ]
+}

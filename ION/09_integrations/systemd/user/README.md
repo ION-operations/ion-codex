@@ -13,6 +13,11 @@ execution authority.
 - `ion-action-tunnel.service`: Cloudflare named tunnel `ion-actions`.
 - `ion-cockpit-app.service`: local-only cockpit UI on `127.0.0.1:8788`.
 
+The dAimon Gemini websocket bridge must not use `8765`. The local routing truth
+reserves `127.0.0.1:8795` for that sibling bridge so `8765` stays available for
+ION MCP preview and the `ion-browser` tunnel. See
+`ION/docs/setup/ION_LOCAL_PORT_ROUTING_TRUTH.md`.
+
 ## Template Variables
 
 Replace these placeholders before copying units to `~/.config/systemd/user`:
