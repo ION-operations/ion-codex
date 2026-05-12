@@ -1,5 +1,6 @@
 import json
 import time
+import zipfile
 from pathlib import Path
 
 from kernel.ion_chatops_bridge import (
@@ -15,6 +16,7 @@ from kernel.ion_chatops_bridge import (
     build_chatops_local_operator_status,
     build_sev_context_brief,
     classify_chatops_action,
+    create_chatops_project_context_sync_zip,
     prepare_chatops_artifact_upload,
     prepare_chatops_agent_next,
     resolve_chatops_artifact_download,
@@ -117,6 +119,7 @@ def test_chatops_policy_owner_surfaces_ready(tmp_path):
     assert result["local_operator_surface"]["send_click_authority"] is False
     assert result["sandbox_return_surface"]["owner"] == "ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py"
     assert result["sandbox_return_surface"]["direct_apply_authority"] is False
+    assert result["export_surface"]["project_context_sync_zip"] == "POST /exports/project-context-sync-zip"
     assert result["main_policy"]["main_auto_push_allowed"] is False
     assert all(owner["exists"] for owner in result["owner_paths"].values())
 
@@ -387,12 +390,59 @@ def test_chatops_context_pack_includes_agent_and_package_controls(tmp_path):
     assert result["pack"]["callsign"] == "Sev"
     assert result["pack"]["bridge_tools"]["agent_prepare_next"] == "POST /agent/prepare-next with Braden approval"
     assert result["pack"]["bridge_tools"]["compact_zip"] == "POST /exports/lifecycle-zip with package_class=COMPACT_RUNTIME and Braden approval"
+    assert result["pack"]["bridge_tools"]["project_context_sync_zip"] == "POST /exports/project-context-sync-zip with selected project_paths and Braden approval"
     assert result["pack"]["bridge_tools"]["attachable_artifacts"] == "GET /artifacts/attachables"
     assert result["pack"]["bridge_tools"]["prepare_artifact_upload"] == "POST /artifacts/prepare-upload with Braden approval"
     assert result["pack"]["bridge_tools"]["local_operator_attach_artifact"] == "POST /operator/attach-artifact with Braden approval"
     assert result["pack"]["bridge_tools"]["sandbox_returns"] == "GET /sandbox/returns"
     assert result["pack"]["sandbox_returns"]["inbox_root"] == "ION/05_context/inbox/chatgpt_sandbox_returns"
     assert "ION local context pack" in result["prompt"]
+
+
+def test_chatops_project_context_sync_zip_requires_approval_and_builds_manifest(tmp_path):
+    _seed_root(tmp_path)
+    project_rel = "ION/05_context/current/context_packages/demo"
+    project_dir = tmp_path / project_rel
+    project_dir.mkdir(parents=True, exist_ok=True)
+    (project_dir / "README.md").write_text("# Demo context\n", encoding="utf-8")
+    (project_dir / "packet.json").write_text(json.dumps({"project": "demo"}) + "\n", encoding="utf-8")
+
+    blocked = create_chatops_project_context_sync_zip(tmp_path, {"project_paths": [project_rel]})
+    result = create_chatops_project_context_sync_zip(tmp_path, _approved({"project_paths": [project_rel]}))
+
+    assert blocked["ok"] is False
+    assert blocked["finding"] == "approval_failed"
+    assert result["ok"] is True
+    assert result["production_authority"] is False
+    assert result["live_execution_authority"] is False
+    assert result["selected_project_count"] == 1
+    assert (tmp_path / result["zip_path"]).exists()
+    assert (tmp_path / result["manifest_path"]).exists()
+    assert (tmp_path / result["receipt_path"]).exists()
+    manifest = json.loads((tmp_path / result["manifest_path"]).read_text(encoding="utf-8"))
+    assert manifest["authority"]["production_authority"] is False
+    assert manifest["selected_projects"][0]["path"] == project_rel
+    with zipfile.ZipFile(tmp_path / result["zip_path"]) as zf:
+        names = set(zf.namelist())
+    assert "ION_CONTEXT_SYNC_MANIFEST.json" in names
+    assert "projects/01_demo/README.md" in names
+    assert "projects/01_demo/packet.json" in names
+
+
+def test_chatops_project_context_sync_zip_blocks_disallowed_paths(tmp_path):
+    _seed_root(tmp_path)
+    outside = tmp_path / "ION/03_registry/not_a_context_package.md"
+    outside.parent.mkdir(parents=True, exist_ok=True)
+    outside.write_text("blocked\n", encoding="utf-8")
+
+    result = create_chatops_project_context_sync_zip(
+        tmp_path,
+        _approved({"project_paths": ["ION/03_registry/not_a_context_package.md"]}),
+    )
+
+    assert result["ok"] is False
+    assert result["finding"] == "context_sync_policy_blocked"
+    assert any("path_prefix_not_allowed" in finding for finding in result["findings"])
 
 
 def test_chatops_artifact_upload_prepare_requires_approval_and_ticket(tmp_path):

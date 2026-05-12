@@ -1,6 +1,9 @@
 import type { IonActionPacket, ValidationResult } from "./schema";
 
 const DAEMON_BASE = "http://127.0.0.1:8767";
+const ACTION_GATEWAY_DEFAULT_BASE = "http://127.0.0.1:8777";
+const ACTION_GATEWAY_BASE_STORAGE_KEY = "ionActionGatewayBase";
+const ACTION_GATEWAY_TOKEN_STORAGE_KEY = "ionActionGatewayToken";
 const APPROVAL_TOKEN = "ION_CHATOPS_APPROVED";
 
 async function postJson(path: string, payload: unknown): Promise<any> {
@@ -14,6 +17,38 @@ async function postJson(path: string, payload: unknown): Promise<any> {
 
 async function getJson(path: string): Promise<any> {
   const response = await fetch(`${DAEMON_BASE}${path}`);
+  return response.json();
+}
+
+async function actionGatewayConfig(): Promise<{ base: string; token: string }> {
+  if (!chrome.storage?.local) {
+    return { base: ACTION_GATEWAY_DEFAULT_BASE, token: "" };
+  }
+  const stored = await chrome.storage.local.get([ACTION_GATEWAY_BASE_STORAGE_KEY, ACTION_GATEWAY_TOKEN_STORAGE_KEY]);
+  return {
+    base: String(stored[ACTION_GATEWAY_BASE_STORAGE_KEY] || ACTION_GATEWAY_DEFAULT_BASE).replace(/\/+$/, ""),
+    token: String(stored[ACTION_GATEWAY_TOKEN_STORAGE_KEY] || "").trim()
+  };
+}
+
+async function actionGatewayJson(method: "GET" | "POST", path: string, payload?: unknown): Promise<any> {
+  const config = await actionGatewayConfig();
+  if (!config.token) {
+    return {
+      ok: false,
+      refusal_class: "AUTH_MISSING",
+      finding: "ion_action_gateway_token_missing",
+      hint: `Set chrome.storage.local ${ACTION_GATEWAY_TOKEN_STORAGE_KEY} so the extension can poll the local Action Gateway.`
+    };
+  }
+  const response = await fetch(`${config.base}${path}`, {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${config.token}`
+    },
+    body: method === "POST" ? JSON.stringify(payload ?? {}) : undefined
+  });
   return response.json();
 }
 
@@ -87,6 +122,185 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
 
+  if (message.type === "ion_chatops_bounded_agent_status") {
+    (async () => {
+      const invocationId = String(message.payload?.invocation_id ?? "").trim();
+      const suffix = invocationId ? `?invocation_id=${encodeURIComponent(invocationId)}` : "";
+      const result = await actionGatewayJson("GET", `/agent/status${suffix}`);
+      sendResponse({ ok: Boolean(result?.ok), stage: "bounded_agent_status", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "bounded_agent_status_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_agent_relay_pending") {
+    (async () => {
+      const invocationId = String(message.payload?.invocation_id ?? "").trim();
+      const suffix = invocationId ? `?invocation_id=${encodeURIComponent(invocationId)}` : "";
+      const result = await actionGatewayJson("GET", `/agent/relay/pending${suffix}`);
+      sendResponse({ ok: Boolean(result?.ok), stage: "agent_relay_pending", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "agent_relay_pending_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_agent_receipts_recent") {
+    (async () => {
+      const result = await actionGatewayJson("GET", "/agent/receipts/recent?limit=12");
+      sendResponse({ ok: Boolean(result?.ok), stage: "agent_receipts_recent", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "agent_receipts_recent_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_agent_invoke_bounded") {
+    (async () => {
+      const approved = await requestBridgeApproval(sender, "agent_invoke_bounded", "Submit a bounded ION agent invocation packet through the Action Gateway.", "bounded_agent_invocation_approval_required");
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED" });
+        return;
+      }
+      const result = await actionGatewayJson("POST", "/agent/invoke", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "agent_invoke_bounded", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "agent_invoke_bounded_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_agent_relay_respond") {
+    (async () => {
+      const approved = await requestBridgeApproval(sender, "agent_relay_respond", "Record a bounded relay response without widening authority.", "bounded_agent_relay_response_approval_required");
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED" });
+        return;
+      }
+      const result = await actionGatewayJson("POST", "/agent/relay/respond", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "agent_relay_respond", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "agent_relay_respond_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_agent_control") {
+    (async () => {
+      const action = String(message.payload?.action ?? "control");
+      const approved = await requestBridgeApproval(sender, "agent_control", `Submit bounded agent control action: ${action}.`, "bounded_agent_control_approval_required");
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED" });
+        return;
+      }
+      const result = await actionGatewayJson("POST", "/agent/control", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "agent_control", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "agent_control_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_browser_queue_status") {
+    (async () => {
+      const result = await actionGatewayJson("GET", "/browser-queue/status?include_packets=1");
+      sendResponse({ ok: Boolean(result?.ok), stage: "browser_queue_status", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "browser_queue_status_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_browser_queue_claim") {
+    (async () => {
+      const result = await actionGatewayJson("POST", "/browser-queue/claim", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "browser_queue_claim", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "browser_queue_claim_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_browser_queue_result") {
+    (async () => {
+      const result = await actionGatewayJson("POST", "/browser-queue/result", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "browser_queue_result", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "browser_queue_result_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_browser_queue_control") {
+    (async () => {
+      const payload = { ...(message.payload ?? {}) };
+      if (payload.operation === "approve" && !payload.approval) {
+        const approved = await requestBridgeApproval(sender, "browser_queue_packet_approval", `Approve queued browser-carrier packet ${payload.packet_id ?? ""}.`, "browser_queue_operator_approval_required");
+        if (!approved) {
+          sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED" });
+          return;
+        }
+        payload.approval = approvedPayload({}).approval;
+      }
+      const result = await actionGatewayJson("POST", "/browser-queue/control", payload);
+      sendResponse({ ok: Boolean(result?.ok), stage: "browser_queue_control", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "browser_queue_control_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_codex_chat_model") {
+    (async () => {
+      const result = await getJson("/codex-chat/model");
+      sendResponse({ ok: Boolean(result?.ok), stage: "codex_chat_model", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "codex_chat_model_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_codex_chat_turn") {
+    (async () => {
+      const result = await postJson("/codex-chat/turn", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "codex_chat_turn", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "codex_chat_turn_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_codex_chat_queue") {
+    (async () => {
+      const result = await postJson("/codex-chat/queue", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "codex_chat_queue", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "codex_chat_queue_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_codex_chat_memory") {
+    (async () => {
+      const result = await postJson("/codex-chat/memory", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "codex_chat_memory", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "codex_chat_memory_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_asset_capture") {
+    (async () => {
+      const result = await postJson("/assets/capture", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "asset_capture", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "asset_capture_exception", error: error.message });
+    });
+    return true;
+  }
+
   if (message.type === "ion_chatops_context_pack") {
     (async () => {
       const result = await getJson("/exports/context-pack");
@@ -103,6 +317,26 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ ok: Boolean(result?.ok), stage: "sandbox_returns", result });
     })().catch((error: Error) => {
       sendResponse({ ok: false, stage: "sandbox_returns_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_docs_browse") {
+    (async () => {
+      const result = await postJson("/docs/browse", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "docs_browse", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "docs_browse_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_docs_prepare_drop") {
+    (async () => {
+      const result = await postJson("/docs/prepare-drop", message.payload ?? {});
+      sendResponse({ ok: Boolean(result?.ok), stage: "docs_prepare_drop", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "docs_prepare_drop_exception", error: error.message });
     });
     return true;
   }
@@ -367,6 +601,32 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ ok: Boolean(result?.ok), stage: "compact_zip", result });
     })().catch((error: Error) => {
       sendResponse({ ok: false, stage: "compact_zip_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_project_context_sync_zip") {
+    (async () => {
+      const projectPaths = Array.isArray(message.payload?.project_paths)
+        ? message.payload.project_paths.map((path: unknown) => String(path ?? "").trim()).filter(Boolean)
+        : [];
+      const approved = await requestBridgeApproval(
+        sender,
+        "project_context_sync_zip",
+        `Create one ION context sync ZIP from ${projectPaths.length} selected project package(s).`,
+        "context_sync_zip_approval_required"
+      );
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED" });
+        return;
+      }
+      const result = await postJson("/exports/project-context-sync-zip", approvedPayload({
+        ...(message.payload ?? {}),
+        project_paths: projectPaths
+      }));
+      sendResponse({ ok: Boolean(result?.ok), stage: "project_context_sync_zip", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "project_context_sync_zip_exception", error: error.message });
     });
     return true;
   }

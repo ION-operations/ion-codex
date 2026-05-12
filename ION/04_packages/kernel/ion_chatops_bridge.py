@@ -9,6 +9,7 @@ existing ChatGPT connector queue owner.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import mimetypes
@@ -17,6 +18,7 @@ import secrets
 import shutil
 import subprocess
 import time
+import zipfile
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -26,6 +28,7 @@ from urllib.parse import unquote
 from .ion_carrier_onboard import resolve_shell_root_from_ion_root
 from .ion_carrier_onboarding_packet import build_carrier_onboarding_packet
 from .ion_chatgpt_browser_mcp_connector_contract import call_chatgpt_connector_tool
+from .ion_cockpit_service_manager import build_service_console_model
 from .ion_chatgpt_sandbox_return_intake import (
     build_sandbox_return_diff_preview,
     build_sandbox_return_queue_projection,
@@ -38,6 +41,13 @@ from .ion_codex_queue_runner import (
     build_codex_queue_runner_status,
     prepare_codex_queue_run,
     process_codex_queue_once,
+)
+from .ion_dual_codex_chat import (
+    WRITE_CONFIRMATION_TOKEN,
+    build_dual_codex_chat_model,
+    pin_dual_chat_memory,
+    queue_chat_codex_work_packet,
+    record_chat_turn,
 )
 from .ion_lifecycle_packager import create_lifecycle_package_zip, lifecycle_package_manifest_to_dict
 from .ion_safe_full_project_packager import create_safe_full_project_package, safe_full_project_package_result_to_dict
@@ -60,6 +70,7 @@ RUNTIME_DIR = BASE_DIR / "runtime"
 ARTIFACTS_DIR = BASE_DIR / "artifacts"
 EXPORTS_DIR = BASE_DIR / "exports"
 ARTIFACT_TICKETS_DIR = RUNTIME_DIR / "artifact_upload_tickets"
+CAPTURED_ASSETS_DIR = ARTIFACTS_DIR / "chatgpt_captures"
 MAX_BROWSER_UPLOAD_BYTES = 25 * 1024 * 1024
 
 POLICY_PATHS = {
@@ -130,6 +141,30 @@ ATTACHABLE_ROOTS = (
     "ION/05_context/inbox/chatgpt_sandbox_returns/",
     "ION/06_artifacts/packages/",
 )
+
+DOCS_BROWSER_ROOTS = (
+    "ION",
+    "dAimon_ION",
+    "ION/02_architecture",
+    "ION/03_registry",
+    "ION/05_context",
+    "ION/06_artifacts",
+    "ION/09_integrations",
+)
+DOCS_BROWSER_MAX_ENTRIES = 120
+DOCS_BROWSER_MAX_SCAN = 5000
+CONTEXT_SYNC_SOURCE_PREFIXES = (
+    "ION/05_context/history/kernel_store/context_packages/",
+    "ION/05_context/current/context_packages/",
+    "ION/05_context/current/",
+    "ION/06_artifacts/packages/",
+    "ION/05_context/history/front_door_runtime/persona_response_packages/",
+    "ION/05_context/history/front_door_runtime/relay_return_packages/",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/",
+)
+CONTEXT_SYNC_MAX_PROJECTS = 12
+CONTEXT_SYNC_MAX_FILES = 3000
+CONTEXT_SYNC_MAX_BYTES = 60 * 1024 * 1024
 
 FAILURE_CLASSES = (
     "CHATOPS_SCHEMA_FAILURE",
@@ -701,6 +736,306 @@ def _path_from_repo_rel(root: Path, rel_value: str | Path | None) -> Path | None
     return path
 
 
+def _docs_root_aliases(root: Path) -> dict[str, Path]:
+    daimon_candidates = [
+        root / "dAimon_ION",
+        root / "dAimon",
+        root.parent / "dAimon",
+        root.parent / "dAimon_ION",
+    ]
+    daimon = next((path for path in daimon_candidates if path.exists()), root.parent / "dAimon")
+    return {
+        "ION": root / "ION",
+        "dAimon_ION": daimon,
+    }
+
+
+def _docs_path_blocked(path: Path) -> bool:
+    lowered = f"/{path.as_posix().lower()}"
+    if any(token in lowered for token in PROTECTED_PATH_TOKENS):
+        return True
+    return any(part.startswith(".") or part in {"__pycache__", "node_modules"} for part in path.parts)
+
+
+def _resolve_docs_virtual_path(root: Path, value: str | Path | None, root_hint: str | Path | None = None) -> tuple[Path | None, str, str | None]:
+    raw = str(value or "").replace("\\", "/").strip().strip("/")
+    hint = str(root_hint or "").replace("\\", "/").strip().strip("/")
+    if not raw and hint:
+        raw = hint
+    if not raw:
+        return None, "", None
+    if raw.startswith("/") or raw.startswith("../") or "/../" in raw or raw.endswith("/.."):
+        return None, raw, "path_escape"
+    aliases = _docs_root_aliases(root)
+    parts = [part for part in raw.split("/") if part]
+    if not parts:
+        return None, "", None
+    alias = parts[0]
+    if alias not in aliases and hint:
+        hint_parts = [part for part in hint.split("/") if part]
+        if hint_parts and hint_parts[0] in aliases:
+            alias = hint_parts[0]
+            parts = [alias, *parts]
+            raw = "/".join(parts)
+    base = aliases.get(alias)
+    if base is None:
+        return None, raw, "docs_root_not_allowed"
+    try:
+        base_resolved = base.expanduser().resolve()
+        actual = (base_resolved / Path(*parts[1:])).resolve()
+        actual.relative_to(base_resolved)
+    except (OSError, ValueError):
+        return None, raw, "path_escape"
+    if _docs_path_blocked(Path(*parts)):
+        return None, raw, "protected_path_token"
+    return actual, raw, None
+
+
+def _docs_virtual_path(root: Path, actual: Path, alias: str) -> str:
+    base = _docs_root_aliases(root)[alias].expanduser().resolve()
+    rel = actual.resolve().relative_to(base).as_posix()
+    return alias if rel == "." else f"{alias}/{rel}"
+
+
+def _docs_entry(root: Path, actual: Path, alias: str) -> dict[str, Any] | None:
+    if actual.is_symlink() or _docs_path_blocked(actual):
+        return None
+    try:
+        stat = actual.stat()
+        virtual_path = _docs_virtual_path(root, actual, alias)
+    except (OSError, ValueError):
+        return None
+    kind = "folder" if actual.is_dir() else "file"
+    return {
+        "kind": kind,
+        "name": actual.name,
+        "path": virtual_path,
+        "size_bytes": stat.st_size if kind == "file" else None,
+        "thumbnail": actual.suffix[1:4].upper() if kind == "file" and actual.suffix else actual.name[:2].upper(),
+    }
+
+
+def build_chatops_docs_browse(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    raw_path = str(packet.get("path") or packet.get("root") or "").strip()
+    query = str(packet.get("query") or "").strip().lower()
+    aliases = _docs_root_aliases(shell_root)
+    roots = list(DOCS_BROWSER_ROOTS)
+
+    if not raw_path:
+        entries = []
+        for alias, actual in aliases.items():
+            if not actual.exists():
+                continue
+            entries.append({
+                "kind": "folder",
+                "name": "Daimon" if alias == "dAimon_ION" else alias,
+                "path": alias,
+                "size_bytes": None,
+                "thumbnail": alias[:2].upper(),
+            })
+        return {
+            "schema_id": "ion.chatops.docs_browse_result.v1",
+            "ok": True,
+            "verdict": READY_VERDICT,
+            "roots": roots,
+            "current_root": "",
+            "path": "",
+            "query": query,
+            "breadcrumbs": [],
+            "entries": entries,
+            "status": "Docs home",
+            "production_authority": False,
+            "live_execution_authority": False,
+        }
+
+    actual, virtual_path, finding = _resolve_docs_virtual_path(shell_root, raw_path, packet.get("root"))
+    if actual is None or finding:
+        return {
+            "schema_id": "ion.chatops.docs_browse_result.v1",
+            "ok": False,
+            "finding": finding or "docs_path_not_found",
+            "path": virtual_path,
+            "roots": roots,
+            "production_authority": False,
+            "live_execution_authority": False,
+        }
+    if not actual.exists() or not actual.is_dir():
+        return {
+            "schema_id": "ion.chatops.docs_browse_result.v1",
+            "ok": False,
+            "finding": "docs_directory_not_found",
+            "path": virtual_path,
+            "roots": roots,
+            "production_authority": False,
+            "live_execution_authority": False,
+        }
+    alias = virtual_path.split("/", 1)[0]
+    source_iter = actual.rglob("*") if query else actual.iterdir()
+    entries: list[dict[str, Any]] = []
+    scanned = 0
+    truncated = False
+    for child in source_iter:
+        scanned += 1
+        if scanned > DOCS_BROWSER_MAX_SCAN:
+            truncated = True
+            break
+        if query and query not in child.name.lower():
+            continue
+        entry = _docs_entry(shell_root, child, alias)
+        if entry:
+            entries.append(entry)
+        if len(entries) >= DOCS_BROWSER_MAX_ENTRIES:
+            truncated = True
+            break
+    entries.sort(key=lambda row: (row["kind"] != "folder", str(row["name"]).lower()))
+    return {
+        "schema_id": "ion.chatops.docs_browse_result.v1",
+        "ok": True,
+        "verdict": READY_VERDICT,
+        "roots": roots,
+        "current_root": alias,
+        "path": virtual_path,
+        "query": query,
+        "breadcrumbs": virtual_path.split("/") if virtual_path else [],
+        "entries": entries,
+        "entry_count": len(entries),
+        "truncated": truncated,
+        "status": f"{len(entries)} docs item(s)" + (" (truncated)" if truncated else ""),
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def _docs_source_size(path: Path) -> tuple[int, int, str | None]:
+    if path.is_file():
+        return path.stat().st_size, 1, None
+    total = 0
+    count = 0
+    for child in path.rglob("*"):
+        if child.is_symlink() or not child.is_file() or _docs_path_blocked(child):
+            continue
+        count += 1
+        total += child.stat().st_size
+        if total > MAX_BROWSER_UPLOAD_BYTES:
+            return total, count, "docs_drop_source_too_large"
+    return total, count, None
+
+
+def _zip_docs_source(source: Path, zip_path: Path) -> int:
+    zip_path.parent.mkdir(parents=True, exist_ok=True)
+    count = 0
+    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        if source.is_file():
+            archive.write(source, arcname=source.name)
+            return 1
+        base_parent = source.parent
+        for child in source.rglob("*"):
+            if child.is_symlink() or not child.is_file() or _docs_path_blocked(child):
+                continue
+            archive.write(child, arcname=child.relative_to(base_parent).as_posix())
+            count += 1
+    return count
+
+
+def prepare_chatops_docs_drop(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    operation = "docs_prepare_zip_drop"
+    actual, virtual_path, finding = _resolve_docs_virtual_path(shell_root, packet.get("path"), packet.get("root"))
+    if actual is None or finding or not actual.exists() or not (actual.is_file() or actual.is_dir()):
+        result = {"ok": False, "finding": finding or "docs_path_not_found", "path": virtual_path}
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="failed",
+            packet=packet,
+            result=result,
+            failure_classification="POLICY_BLOCK_WORKING_AS_DESIGNED",
+        )
+        return {**result, "schema_id": "ion.chatops.docs_drop_prepare_result.v1", "receipt_path": receipt_path}
+    total_size, file_count, size_finding = _docs_source_size(actual)
+    if size_finding:
+        result = {
+            "ok": False,
+            "finding": size_finding,
+            "path": virtual_path,
+            "source_size_bytes": total_size,
+            "file_count": file_count,
+            "max_browser_upload_bytes": MAX_BROWSER_UPLOAD_BYTES,
+        }
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="failed",
+            packet=packet,
+            result=result,
+            failure_classification="POLICY_BLOCK_WORKING_AS_DESIGNED",
+        )
+        return {**result, "schema_id": "ion.chatops.docs_drop_prepare_result.v1", "receipt_path": receipt_path}
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    zip_name = f"docs_drop_{stamp}_{_safe_slug(virtual_path)}.zip"
+    zip_path = shell_root / ARTIFACTS_DIR / "docs_drop" / zip_name
+    zipped_count = _zip_docs_source(actual, zip_path)
+    record = _artifact_record(shell_root, zip_path)
+    if not record or not record.get("attachable"):
+        result = {"ok": False, "finding": (record or {}).get("finding") or "docs_zip_not_attachable", "artifact": record}
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="failed",
+            packet=packet,
+            result=result,
+            files_touched=[_repo_rel(zip_path, shell_root)] if zip_path.exists() else [],
+            failure_classification="POLICY_BLOCK_WORKING_AS_DESIGNED",
+        )
+        return {**result, "schema_id": "ion.chatops.docs_drop_prepare_result.v1", "receipt_path": receipt_path}
+    token = secrets.token_urlsafe(24)
+    ticket = {
+        "schema_id": "ion.chatops.artifact_upload_ticket.v1",
+        "created_at": _now(),
+        "token": token,
+        "artifact": record,
+        "operation": operation,
+        "source_path": virtual_path,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+    ticket_path = shell_root / ARTIFACT_TICKETS_DIR / f"{_safe_slug(token)}.json"
+    _write_json(ticket_path, ticket)
+    result = {
+        "ok": True,
+        "artifact": record,
+        "source_path": virtual_path,
+        "source_size_bytes": total_size,
+        "file_count": zipped_count,
+        "download_token": token,
+        "download_url": f"http://127.0.0.1:{DEFAULT_PORT}/artifacts/download/{token}",
+        "ticket_path": _repo_rel(ticket_path, shell_root),
+        "content_type": record.get("content_type"),
+        "filename": record.get("name"),
+        "size_bytes": record.get("size_bytes"),
+        "sha256": record.get("sha256"),
+    }
+    receipt_path = _write_operation_receipt(
+        shell_root,
+        operation=operation,
+        status="completed",
+        packet=packet,
+        result=result,
+        files_touched=[_repo_rel(zip_path, shell_root), _repo_rel(ticket_path, shell_root)],
+        target_refs=[{"provider": "local_ion", "path": virtual_path, "role": "docs_zip_source"}],
+    )
+    return {
+        "schema_id": "ion.chatops.docs_drop_prepare_result.v1",
+        "ok": True,
+        "verdict": READY_VERDICT,
+        "receipt_path": receipt_path,
+        **result,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
 def _is_attachable_rel_path(rel: str) -> bool:
     lowered = f"/{rel.lower()}"
     if any(token in lowered for token in PROTECTED_PATH_TOKENS):
@@ -739,6 +1074,217 @@ def _artifact_record(root: Path, path: Path) -> dict[str, Any] | None:
         "attachable": True,
         "finding": None,
     }
+
+
+def _read_codex_context_document(shell_root: Path, rel_path: str, *, limit: int = 20000) -> dict[str, Any]:
+    path = shell_root / rel_path
+    if not path.exists() or not path.is_file():
+        return {"path": rel_path, "present": False, "text": "", "truncated": False}
+    text = path.read_text(encoding="utf-8", errors="replace")
+    truncated = len(text) > limit
+    return {
+        "path": rel_path,
+        "present": True,
+        "text": text[:limit],
+        "truncated": truncated,
+        "size_chars": len(text),
+    }
+
+
+def _enrich_chatops_codex_model(shell_root: Path, model: dict[str, Any]) -> dict[str, Any]:
+    model["context_documents"] = {
+        "capsule": _read_codex_context_document(shell_root, "ION/05_context/current/codex_solo/CAPSULE.md"),
+        "mini": _read_codex_context_document(shell_root, "ION/05_context/current/codex_solo/MINI.md"),
+        "hot_context": _read_codex_context_document(shell_root, "ION/05_context/current/codex_solo/HOT_CONTEXT.md"),
+    }
+    model["service_console"] = build_service_console_model(shell_root)
+    return model
+
+
+def build_chatops_codex_chat_model(root: str | Path | None = None) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    model = _enrich_chatops_codex_model(shell_root, build_dual_codex_chat_model(shell_root))
+    return {
+        "schema_id": "ion.chatops.codex_chat_model_proxy.v1",
+        "ok": True,
+        "model": model,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def record_chatops_codex_chat_turn(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    result = record_chat_turn(
+        shell_root,
+        lane_id=str(packet.get("lane_id") or "codex_general"),
+        message=str(packet.get("message") or ""),
+        author=str(packet.get("author") or "operator"),
+        execution_mode=str(packet.get("execution_mode") or "respond_only"),
+    )
+    if isinstance(result.get("model"), dict):
+        result["model"] = _enrich_chatops_codex_model(shell_root, result["model"])
+    return result
+
+
+def queue_chatops_codex_chat_work(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    result = queue_chat_codex_work_packet(
+        shell_root,
+        lane_id=str(packet.get("lane_id") or "codex_general"),
+        objective=str(packet.get("objective") or packet.get("message") or ""),
+        confirmation=str(packet.get("confirmation") or WRITE_CONFIRMATION_TOKEN),
+        source_turn_id=str(packet.get("source_turn_id") or "") or None,
+    )
+    if isinstance(result.get("model"), dict):
+        result["model"] = _enrich_chatops_codex_model(shell_root, result["model"])
+    return result
+
+
+def pin_chatops_codex_chat_memory(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    result = pin_dual_chat_memory(
+        shell_root,
+        lane_id=str(packet.get("lane_id") or "codex_general"),
+        text=str(packet.get("text") or ""),
+        source_turn_id=str(packet.get("source_turn_id") or "") or None,
+        confirmation=str(packet.get("confirmation") or WRITE_CONFIRMATION_TOKEN),
+    )
+    if isinstance(result.get("model"), dict):
+        result["model"] = _enrich_chatops_codex_model(shell_root, result["model"])
+    return result
+
+
+def _safe_capture_filename(filename: Any, *, asset_kind: str, content_type: str) -> str:
+    raw = Path(str(filename or "")).name.strip()
+    raw = re.sub(r"[^A-Za-z0-9._ -]+", "_", raw).strip(" ._-")
+    if not raw:
+        raw = re.sub(r"[^A-Za-z0-9._-]+", "_", asset_kind or "chatgpt_asset").strip("._-") or "chatgpt_asset"
+    if "." not in raw:
+        guessed = mimetypes.guess_extension(content_type.split(";", 1)[0].strip()) if content_type else None
+        if guessed:
+            raw = f"{raw}{guessed}"
+    return raw[:160] or "chatgpt_asset.bin"
+
+
+def _safe_capture_token(value: Any) -> str:
+    token = re.sub(r"[^A-Za-z0-9._-]+", "_", str(value or "").lower()).strip("._-")
+    return token[:80] or "asset"
+
+
+def capture_chatops_page_asset(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    asset_kind = _safe_capture_token(packet.get("asset_kind") or "chatgpt_asset")
+    content_type = str(packet.get("content_type") or "application/octet-stream").strip() or "application/octet-stream"
+    filename = _safe_capture_filename(packet.get("filename"), asset_kind=asset_kind, content_type=content_type)
+    encoded = str(packet.get("data_base64") or "").strip()
+    text_payload = packet.get("text")
+    try:
+        if encoded:
+            if "," in encoded and encoded.lower().startswith("data:"):
+                encoded = encoded.split(",", 1)[1]
+            content = base64.b64decode(encoded, validate=True)
+        elif text_payload is not None:
+            content = str(text_payload).encode("utf-8")
+            if not content_type or content_type == "application/octet-stream":
+                content_type = "text/plain; charset=utf-8"
+        else:
+            return {"ok": False, "finding": "asset_content_required"}
+    except Exception as exc:
+        return {"ok": False, "finding": "asset_decode_failed", "error": exc.__class__.__name__}
+    if not content:
+        return {"ok": False, "finding": "asset_content_empty"}
+    if len(content) > MAX_BROWSER_UPLOAD_BYTES:
+        return {
+            "ok": False,
+            "finding": "asset_too_large",
+            "size_bytes": len(content),
+            "max_bytes": MAX_BROWSER_UPLOAD_BYTES,
+        }
+    now_token = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ%f")
+    capture_id = f"chatgpt_capture_{now_token}_{_safe_capture_token(filename)}"
+    capture_dir = shell_root / CAPTURED_ASSETS_DIR / capture_id
+    capture_dir.mkdir(parents=True, exist_ok=True)
+    artifact_path = capture_dir / filename
+    artifact_path.write_bytes(content)
+    sha256 = hashlib.sha256(content).hexdigest()
+    manifest = {
+        "schema_id": "ion.chatops.chatgpt_asset_capture.v1",
+        "capture_id": capture_id,
+        "asset_kind": asset_kind,
+        "filename": filename,
+        "content_type": content_type,
+        "size_bytes": len(content),
+        "sha256": sha256,
+        "artifact_path": _repo_rel(artifact_path, shell_root),
+        "source_url": str(packet.get("source_url") or ""),
+        "page_url": str(packet.get("page_url") or ""),
+        "chat_context_hint": str(packet.get("chat_context_hint") or ""),
+        "dom_summary": packet.get("dom_summary") if isinstance(packet.get("dom_summary"), Mapping) else {},
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+    manifest_path = capture_dir / "manifest.json"
+    _write_json(manifest_path, manifest)
+    objective = "\n".join([
+        "Organize this ChatGPT-generated asset into the correct ION project location.",
+        "",
+        f"Asset path: {_repo_rel(artifact_path, shell_root)}",
+        f"Manifest path: {_repo_rel(manifest_path, shell_root)}",
+        f"Asset kind: {asset_kind}",
+        f"Filename: {filename}",
+        f"Content type: {content_type}",
+        f"Source URL: {manifest['source_url'] or 'not_available'}",
+        f"Page URL: {manifest['page_url'] or 'not_available'}",
+        "",
+        "Do not silently overwrite project files. Inspect the manifest, infer the best destination, and return a proof-bearing integration proposal or bounded patch.",
+    ])
+    queue_result = call_chatgpt_connector_tool(
+        shell_root,
+        "ion_request_codex_work_packet",
+        {
+            "objective": objective,
+            "required_context_reads": [
+                {"path": _repo_rel(manifest_path, shell_root), "kind": "file", "required": True},
+            ],
+            "request_kind": "chatgpt_asset_organization",
+        },
+    )
+    data = queue_result.get("data") if isinstance(queue_result.get("data"), Mapping) else {}
+    result = {
+        "schema_id": "ion.chatops.asset_capture_result.v1",
+        "ok": True,
+        "finding": "asset_captured_queue_ok" if queue_result.get("ok") else "asset_captured_queue_blocked",
+        "capture_id": capture_id,
+        "artifact_path": _repo_rel(artifact_path, shell_root),
+        "manifest_path": _repo_rel(manifest_path, shell_root),
+        "filename": filename,
+        "content_type": content_type,
+        "size_bytes": len(content),
+        "sha256": sha256,
+        "queue_ok": bool(queue_result.get("ok")),
+        "queue_request_id": data.get("request_id"),
+        "packet_path": data.get("packet_path"),
+        "queue_result": queue_result,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+    receipt_path = _write_operation_receipt(
+        shell_root,
+        operation="chatgpt_asset_capture",
+        status="completed" if queue_result.get("ok") else "captured_queue_blocked",
+        packet={key: value for key, value in packet.items() if key != "data_base64"},
+        result=result,
+        files_touched=[_repo_rel(artifact_path, shell_root), _repo_rel(manifest_path, shell_root)],
+        target_refs=[
+            {"provider": "local_ion", "path": _repo_rel(artifact_path, shell_root), "role": "captured_asset"},
+            {"provider": "local_ion", "path": _repo_rel(manifest_path, shell_root), "role": "capture_manifest"},
+        ],
+        failure_classification=None if queue_result.get("ok") else "AGENT_INVOCATION_FAILURE",
+    )
+    result["receipt_path"] = receipt_path
+    return result
 
 
 def build_chatops_attachable_artifacts(root: str | Path | None = None, *, limit: int = 30) -> dict[str, Any]:
@@ -1459,9 +2005,12 @@ def build_chatops_context_pack(root: str | Path | None = None) -> dict[str, Any]
             "onboard": "GET /context/sev/onboarding",
             "agent_status": "GET /agent/status",
             "agent_queue": "GET /agent/queue",
+            "docs_browse": "POST /docs/browse",
+            "docs_prepare_drop": "POST /docs/prepare-drop",
             "agent_prepare_next": "POST /agent/prepare-next with Braden approval",
             "agent_start_one": "POST /agent/process-one with start=true and Braden approval",
             "compact_zip": "POST /exports/lifecycle-zip with package_class=COMPACT_RUNTIME and Braden approval",
+            "project_context_sync_zip": "POST /exports/project-context-sync-zip with selected project_paths and Braden approval",
             "attachable_artifacts": "GET /artifacts/attachables",
             "prepare_artifact_upload": "POST /artifacts/prepare-upload with Braden approval",
             "local_operator_status": "GET /operator/status",
@@ -1620,6 +2169,187 @@ def create_chatops_safe_full_zip(root: str | Path | None, packet: Mapping[str, A
         return {"schema_id": "ion.chatops.export_result.v1", "ok": False, "finding": "package_failed", "error": str(exc), "receipt_path": receipt_path}
 
 
+def _validate_context_sync_path(shell_root: Path, rel_value: str) -> tuple[Path | None, str | None]:
+    rel = rel_value.replace("\\", "/").strip()
+    if not rel:
+        return None, "path_required"
+    if rel.startswith("/") or rel.startswith("../") or "/../" in rel or rel.endswith("/.."):
+        return None, "path_escape"
+    lowered = f"/{rel.lower()}"
+    if any(token in lowered for token in PROTECTED_PATH_TOKENS):
+        return None, "protected_path_token"
+    if not any(rel == prefix.rstrip("/") or rel.startswith(prefix) for prefix in CONTEXT_SYNC_SOURCE_PREFIXES):
+        return None, "path_prefix_not_allowed"
+    target = (shell_root / rel).resolve()
+    try:
+        target.relative_to(shell_root)
+    except ValueError:
+        return None, "path_escape"
+    if not target.exists():
+        return None, "path_not_found"
+    return target, None
+
+
+def _iter_context_sync_files(path: Path) -> list[Path]:
+    if path.is_file():
+        return [path]
+    files: list[Path] = []
+    for candidate in sorted(path.rglob("*")):
+        if not candidate.is_file():
+            continue
+        rel_parts = {part.lower() for part in candidate.parts}
+        if "__pycache__" in rel_parts or ".git" in rel_parts:
+            continue
+        lowered = candidate.as_posix().lower()
+        if any(token in lowered for token in PROTECTED_PATH_TOKENS):
+            continue
+        files.append(candidate)
+    return files
+
+
+def create_chatops_project_context_sync_zip(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    approval = _validate_bridge_operation_approval(packet)
+    raw_paths = packet.get("project_paths")
+    project_paths = [str(path).strip() for path in raw_paths] if isinstance(raw_paths, list) else []
+    project_paths = [path for path in dict.fromkeys(project_paths) if path]
+    if not approval["accepted"]:
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation="project_context_sync_zip",
+            status="rejected",
+            packet=packet,
+            result=approval,
+            failure_classification="USER_APPROVAL_REJECTED",
+        )
+        return {"schema_id": "ion.chatops.project_context_sync_result.v1", "ok": False, "finding": "approval_failed", "receipt_path": receipt_path}
+    if not project_paths:
+        return {"schema_id": "ion.chatops.project_context_sync_result.v1", "ok": False, "finding": "project_paths_required"}
+    if len(project_paths) > CONTEXT_SYNC_MAX_PROJECTS:
+        return {"schema_id": "ion.chatops.project_context_sync_result.v1", "ok": False, "finding": "too_many_project_paths", "max_projects": CONTEXT_SYNC_MAX_PROJECTS}
+
+    selected: list[dict[str, Any]] = []
+    files: list[tuple[Path, str]] = []
+    findings: list[str] = []
+    total_bytes = 0
+    for index, rel in enumerate(project_paths, start=1):
+        target, finding = _validate_context_sync_path(shell_root, rel)
+        if not target:
+            findings.append(f"{rel}:{finding}")
+            continue
+        project_slug = _safe_slug(Path(rel).stem or Path(rel).name or f"project_{index}")
+        target_files = _iter_context_sync_files(target)
+        selected.append({
+            "path": rel,
+            "kind": "file" if target.is_file() else "folder",
+            "file_count": len(target_files),
+            "slug": project_slug,
+        })
+        for file_path in target_files:
+            total_bytes += file_path.stat().st_size
+            if len(files) >= CONTEXT_SYNC_MAX_FILES:
+                findings.append("file_count_limit_exceeded")
+                break
+            if total_bytes > CONTEXT_SYNC_MAX_BYTES:
+                findings.append("byte_limit_exceeded")
+                break
+            rel_to_target = file_path.name if target.is_file() else file_path.relative_to(target).as_posix()
+            archive_name = f"projects/{index:02d}_{project_slug}/{rel_to_target}"
+            files.append((file_path, archive_name))
+        if findings:
+            break
+
+    if findings:
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation="project_context_sync_zip",
+            status="failed",
+            packet=packet,
+            result={"findings": findings, "selected_projects": selected},
+            failure_classification="POLICY_BLOCK_WORKING_AS_DESIGNED",
+        )
+        return {
+            "schema_id": "ion.chatops.project_context_sync_result.v1",
+            "ok": False,
+            "finding": "context_sync_policy_blocked",
+            "findings": findings,
+            "receipt_path": receipt_path,
+        }
+
+    created_at = _now()
+    sync_id = f"context_sync_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}_{secrets.token_hex(3)}"
+    sync_dir = shell_root / EXPORTS_DIR / "context_sync"
+    sync_dir.mkdir(parents=True, exist_ok=True)
+    manifest_rel = (EXPORTS_DIR / "context_sync" / f"{sync_id}.manifest.json").as_posix()
+    zip_rel = (EXPORTS_DIR / "context_sync" / f"{sync_id}.zip").as_posix()
+    manifest_path = shell_root / manifest_rel
+    zip_path = shell_root / zip_rel
+    manifest = {
+        "schema_id": "ion.chatops.project_context_sync_manifest.v1",
+        "sync_id": sync_id,
+        "created_at": created_at,
+        "source": "ion_chatops_bridge",
+        "selected_projects": selected,
+        "file_count": len(files),
+        "total_source_bytes": total_bytes,
+        "authority": {
+            "production_authority": False,
+            "live_execution_authority": False,
+            "secrets_authority": False,
+        },
+        "non_claims": [
+            "This ZIP is a browser context synchronization artifact, not accepted ION state.",
+            "Importing or uploading this ZIP does not grant mutation, production, live execution, or secrets authority.",
+        ],
+    }
+    _write_json(manifest_path, manifest)
+    with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("ION_CONTEXT_SYNC_MANIFEST.json", json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+        zf.writestr(
+            "README.md",
+            "\n".join([
+                "# ION Project Context Sync",
+                "",
+                "This package was generated by the local ION ChatOps bridge for browser context synchronization.",
+                "It is context material only and does not grant production, live execution, mutation, or secrets authority.",
+                "",
+                f"sync_id: {sync_id}",
+                f"created_at: {created_at}",
+                "",
+            ]),
+        )
+        for file_path, archive_name in files:
+            zf.write(file_path, archive_name)
+    zip_sha = _sha256_file(zip_path)
+    manifest["zip_path"] = zip_rel
+    manifest["zip_sha256"] = zip_sha
+    _write_json(manifest_path, manifest)
+    receipt_path = _write_operation_receipt(
+        shell_root,
+        operation="project_context_sync_zip",
+        status="completed",
+        packet=packet,
+        result=manifest,
+        files_touched=[manifest_rel, zip_rel],
+        target_refs=[{"provider": "local_ion", "path": zip_rel, "role": "project_context_sync_zip"}],
+        failure_classification=None,
+    )
+    return {
+        "schema_id": "ion.chatops.project_context_sync_result.v1",
+        "ok": True,
+        "operation": "project_context_sync_zip",
+        "sync_id": sync_id,
+        "selected_project_count": len(selected),
+        "file_count": len(files),
+        "zip_path": zip_rel,
+        "zip_sha256": zip_sha,
+        "manifest_path": manifest_rel,
+        "receipt_path": receipt_path,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
 def _sandbox_approval_or_reject(root: Path, packet: Mapping[str, Any], operation: str) -> dict[str, Any] | None:
     approval = _validate_bridge_operation_approval(packet)
     if approval["accepted"]:
@@ -1748,6 +2478,7 @@ def build_chatops_policy(root: str | Path | None = None) -> dict[str, Any]:
             "context_pack": "GET /exports/context-pack",
             "compact_runtime_zip": "POST /exports/lifecycle-zip",
             "safe_full_project_zip": "POST /exports/safe-full-zip",
+            "project_context_sync_zip": "POST /exports/project-context-sync-zip",
             "attachable_artifacts": "GET /artifacts/attachables",
             "prepare_artifact_upload": "POST /artifacts/prepare-upload",
             "browser_upload_limit_bytes": MAX_BROWSER_UPLOAD_BYTES,
@@ -1766,6 +2497,14 @@ def build_chatops_policy(root: str | Path | None = None) -> dict[str, Any]:
             "supported_suffixes": list(ATTACHABLE_FILE_SUFFIXES),
             "max_browser_upload_bytes": MAX_BROWSER_UPLOAD_BYTES,
             "silent_upload_authority": False,
+            "send_click_authority": False,
+        },
+        "docs_browser_surface": {
+            "browse": "POST /docs/browse",
+            "prepare_drop": "POST /docs/prepare-drop",
+            "roots": list(DOCS_BROWSER_ROOTS),
+            "max_entries": DOCS_BROWSER_MAX_ENTRIES,
+            "max_browser_upload_bytes": MAX_BROWSER_UPLOAD_BYTES,
             "send_click_authority": False,
         },
         "local_operator_surface": {
@@ -2018,6 +2757,9 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
             if path == "/agent/queue":
                 _http_response(self, 200, build_chatops_agent_queue(root))
                 return
+            if path == "/codex-chat/model":
+                _http_response(self, 200, build_chatops_codex_chat_model(root))
+                return
             if path == "/operator/status":
                 _http_response(self, 200, build_chatops_local_operator_status(root))
                 return
@@ -2075,6 +2817,30 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 result = submit_chatops_action(root, packet)
                 _http_response(self, 200 if result.get("ok") else 409, result)
                 return
+            if path == "/docs/browse":
+                result = build_chatops_docs_browse(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/docs/prepare-drop":
+                result = prepare_chatops_docs_drop(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/codex-chat/turn":
+                result = record_chatops_codex_chat_turn(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/codex-chat/queue":
+                result = queue_chatops_codex_chat_work(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/codex-chat/memory":
+                result = pin_chatops_codex_chat_memory(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/assets/capture":
+                result = capture_chatops_page_asset(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
             if path == "/agent/prepare-next":
                 result = prepare_chatops_agent_next(root, packet)
                 _http_response(self, 200 if result.get("ok") else 409, result)
@@ -2089,6 +2855,10 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 return
             if path == "/exports/safe-full-zip":
                 result = create_chatops_safe_full_zip(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/exports/project-context-sync-zip":
+                result = create_chatops_project_context_sync_zip(root, packet)
                 _http_response(self, 200 if result.get("ok") else 409, result)
                 return
             if path == "/artifacts/prepare-upload":

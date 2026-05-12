@@ -42,14 +42,22 @@ remain outside repo state.
 
 ```text
 GET  /health
+GET  /openapi.yaml
 GET  /policy
 GET  /context-pack
 GET  /codex/queue
 GET  /agent/status
+GET  /projects/daimon/visibility
 GET  /receipts/recent
 POST /actions/validate
 POST /actions/submit
 ```
+
+`/projects/daimon/visibility` gives a Custom GPT read-only visibility into the
+dAimon project through curated receipt artifacts only. It exposes proof status,
+known connector surfaces, Cloud Run/Agent Engine/MongoDB names, artifact
+inventory, and current blockers. It does not expose `.env`, secrets, tokens,
+MongoDB URIs, raw service account JSON, or mutation authority.
 
 `/actions/submit` requires a mutating idempotency key and Braden approval
 evidence before routing to the existing ChatOps owner.
@@ -62,9 +70,10 @@ approval failure, schema failure, owner refusal, and Steward gate required.
 
 ## Custom GPT Setup
 
-1. Add `openapi.yaml` as the Custom GPT Action schema.
+1. Add `openapi.yaml` as the Custom GPT Action schema, or import it from
+   `https://ion-actions.helixion.net/openapi.yaml`.
 2. Configure bearer/API-key auth with the gateway token.
-3. Test health, policy, context pack, and queue reads during explicit connector
-   setup or diagnostics only.
+3. Test health, policy, context pack, queue reads, and dAimon visibility during
+   explicit connector setup or diagnostics only.
 4. Use validate before submit.
 5. Submit only after explicit Braden approval evidence is present.

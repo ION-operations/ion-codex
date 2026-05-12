@@ -1,14 +1,12 @@
 openapi: 3.1.0
 info:
   title: ION Custom GPT Action Gateway
-  version: 0.3.1
-  description: >-
-    Explicit-use-only non-production connector for ION Custom GPT Actions. Do
-    not call this Action to mount ION, boot the uploaded sandbox/package, answer
-    from files, satisfy /guest-mode, satisfy /what is ION?, or start first-time
-    context. Use only when the user explicitly asks for live gateway/local hub
-    status, queue/receipt reads, validation, submit, or a connector-backed
-    draft.
+  version: 0.4.0
+  description: Explicit-use-only non-production connector for ION Custom GPT Actions.
+    Do not call this Action to mount ION, boot the uploaded sandbox/package, answer
+    from files, satisfy /guest-mode, satisfy /what is ION?, or start first-time context.
+    Use only when the user explicitly asks for live gateway/local hub status, queue/receipt
+    reads, validation, submit, or a connector-backed draft.
 servers:
   - url: https://ion-actions.helixion.net
     description: Operator-approved HTTPS tunnel hostname for the Action Gateway.
@@ -18,69 +16,88 @@ paths:
   /health:
     get:
       operationId: ionGatewayHealth
-      summary: "Explicit-use only: read gateway health when the user asks for live connector status."
-      description: Do not use for sandbox/package boot, /guest-mode, /what is ION?, first-time context, or uploaded-file answers.
+      summary: 'Explicit-use only: read gateway health when the user asks for live
+        connector status.'
+      description: Do not use for sandbox/package boot, /guest-mode, /what is ION?,
+        first-time context, or uploaded-file answers.
       security: []
       responses:
-        "200":
+        '200':
           description: Health response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GatewayHealthResponse"
+                $ref: '#/components/schemas/GatewayHealthResponse'
   /policy:
     get:
       operationId: ionGatewayPolicy
-      summary: "Explicit-use only: read bounded gateway policy for connector-lane work."
-      description: Do not use as the default ION mount path; use only after a connector-lane trigger.
+      summary: 'Explicit-use only: read bounded gateway policy for connector-lane
+        work.'
+      description: Do not use as the default ION mount path; use only after a connector-lane
+        trigger.
       responses:
-        "200":
+        '200':
           description: Policy response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GatewayPolicyResponse"
+                $ref: '#/components/schemas/GatewayPolicyResponse'
   /context-pack:
     get:
       operationId: ionGatewayContextPack
-      summary: "Explicit-use only: read current local hub context pack."
-      description: Local hub context is not the same as uploaded sandbox context; do not call for /guest-mode or package boot.
+      summary: 'Explicit-use only: read current local hub context pack.'
+      description: Local hub context is not the same as uploaded sandbox context;
+        do not call for /guest-mode or package boot.
       responses:
-        "200":
+        '200':
           description: Context pack response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GatewayContextPackResponse"
+                $ref: '#/components/schemas/GatewayContextPackResponse'
   /codex/queue:
     get:
       operationId: ionGatewayCodexQueue
-      summary: "Explicit-use only: read Codex queue status when requested."
+      summary: 'Explicit-use only: read Codex queue status when requested.'
       description: Do not call unless the user asks for local queue/runtime status.
       responses:
-        "200":
+        '200':
           description: Queue response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GatewayCodexQueueResponse"
+                $ref: '#/components/schemas/GatewayCodexQueueResponse'
   /agent/status:
     get:
       operationId: ionGatewayAgentStatus
-      summary: "Explicit-use only: read agent backend status when requested."
+      summary: 'Explicit-use only: read agent backend status when requested.'
       description: Do not call unless the user asks for live local agent/backend status.
       responses:
-        "200":
+        '200':
           description: Agent status response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GatewayAgentStatusResponse"
+                $ref: '#/components/schemas/GatewayAgentStatusResponse'
+  /projects/daimon/visibility:
+    get:
+      operationId: ionGatewayDaimonVisibility
+      summary: 'Explicit-use only: read curated dAimon project visibility.'
+      description: Returns safe dAimon receipts, proof status, connection surfaces,
+        and blockers. Does not expose secrets or grant mutation authority.
+      responses:
+        '200':
+          description: dAimon project visibility response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayDaimonVisibilityResponse'
   /receipts/recent:
     get:
       operationId: ionGatewayReceiptsRecent
-      summary: "Explicit-use only: read recent gateway and ChatOps receipts."
-      description: Do not call unless the user asks for connector receipt proof or local hub receipts.
+      summary: 'Explicit-use only: read recent gateway and ChatOps receipts.'
+      description: Do not call unless the user asks for connector receipt proof or
+        local hub receipts.
       parameters:
         - name: limit
           in: query
@@ -90,48 +107,243 @@ paths:
             minimum: 1
             maximum: 50
       responses:
-        "200":
+        '200':
           description: Recent receipt response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GatewayReceiptsRecentResponse"
-  /actions/validate:
+                $ref: '#/components/schemas/GatewayReceiptsRecentResponse'
+  /browser-queue/status:
+    get:
+      operationId: ionBrowserQueueStatus
+      summary: Read the ION browser-carrier queue status.
+      description: Use only when the user asks about queued browser work, carrier
+        state, receipts, blockers, or autoplay status.
+      parameters:
+        - name: include_packets
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Browser-carrier queue status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrowserQueueStatusResponse'
+  /browser-queue/receipts/recent:
+    get:
+      operationId: ionBrowserQueueReceiptsRecent
+      summary: Read recent browser-carrier gateway receipts.
+      description: Use only when the user asks for proof of enqueue, claim, result,
+        control, or browser carrier queue work.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+      responses:
+        '200':
+          description: Recent browser-carrier receipt response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayReceiptsRecentResponse'
+  /browser-queue/enqueue:
     post:
-      operationId: ionGatewayValidateAction
-      summary: "Explicit-use only: validate a bounded ION action packet without mutation."
-      description: Use only for a connector-backed draft/action the user asked to validate.
+      operationId: ionBrowserQueueEnqueue
+      summary: Submit a bounded packet for the browser extension carrier loop.
+      description: Enqueues typed work for the browser extension to paste into ChatGPT
+        after output stops. Production and live execution authority are refused; mutation-capable
+        packets require operator approval evidence.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GatewayActionEnvelope"
+              $ref: '#/components/schemas/BrowserQueuePacketEnvelope'
       responses:
-        "200":
+        '200':
+          description: Enqueue result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrowserQueueMutationResponse'
+  /actions/validate:
+    post:
+      operationId: ionGatewayValidateAction
+      summary: 'Explicit-use only: validate a bounded ION action packet without mutation.'
+      description: Use only for a connector-backed draft/action the user asked to
+        validate.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayActionEnvelope'
+      responses:
+        '200':
           description: Validation response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GatewayActionResult"
+                $ref: '#/components/schemas/GatewayActionResult'
   /actions/submit:
     post:
       operationId: ionGatewaySubmitAction
-      summary: "Explicit-use only: submit an approved bounded ION action packet."
-      description: Use only after explicit user approval and required bounded-action proof.
+      summary: 'Explicit-use only: submit an approved bounded ION action packet.'
+      description: Use only after explicit user approval and required bounded-action
+        proof.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GatewayActionEnvelope"
+              $ref: '#/components/schemas/GatewayActionEnvelope'
       responses:
-        "200":
+        '200':
           description: Submit response.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GatewayActionResult"
+                $ref: '#/components/schemas/GatewayActionResult'
+  /agent/invoke:
+    post:
+      operationId: ionGatewayAgentInvoke
+      summary: Submit a bounded ION agent invocation packet.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentInvocationEnvelope'
+      responses:
+        '200':
+          description: Bounded invocation accepted or replayed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInvocationMutationResponse'
+        '400':
+          description: Invocation refused by policy or validation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInvocationMutationResponse'
+  /agent/relay/pending:
+    get:
+      operationId: ionGatewayAgentRelayPending
+      summary: List bounded agent relay questions waiting for ChatGPT or operator.
+      parameters:
+        - name: invocation_id
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: include_answered
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Pending relay messages.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRelayPendingResponse'
+  /agent/relay/respond:
+    post:
+      operationId: ionGatewayAgentRelayRespond
+      summary: Answer or settle a bounded agent relay question.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRelayResponseEnvelope'
+      responses:
+        '200':
+          description: Relay response recorded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRelayMutationResponse'
+        '400':
+          description: Relay response refused.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRelayMutationResponse'
+  /agent/control:
+    post:
+      operationId: ionGatewayAgentControl
+      summary: Pause, resume, or cancel a bounded agent invocation when safe.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentControlEnvelope'
+      responses:
+        '200':
+          description: Control request recorded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInvocationMutationResponse'
+        '400':
+          description: Control request refused.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInvocationMutationResponse'
+  /agent/receipts/recent:
+    get:
+      operationId: ionGatewayAgentReceiptsRecent
+      summary: Return recent bounded-agent invocation and relay receipts.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: Recent bounded-agent receipts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentReceiptsRecentResponse'
+  /agent/settle:
+    post:
+      operationId: ionGatewayAgentSettle
+      summary: Record proof-bearing settlement for a bounded agent invocation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentSettlementEnvelope'
+      responses:
+        '200':
+          description: Settlement recorded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentSettlementMutationResponse'
+        '400':
+          description: Settlement refused.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentSettlementMutationResponse'
 components:
   securitySchemes:
     bearerAuth:
@@ -173,7 +385,7 @@ components:
         status:
           type: string
         auth:
-          $ref: "#/components/schemas/FlexibleObject"
+          $ref: '#/components/schemas/FlexibleObject'
         supported_mvp_intents:
           type: array
           items:
@@ -199,11 +411,11 @@ components:
         ok:
           type: boolean
         active_work_packet:
-          $ref: "#/components/schemas/FlexibleObject"
+          $ref: '#/components/schemas/FlexibleObject'
         policy:
-          $ref: "#/components/schemas/FlexibleObject"
+          $ref: '#/components/schemas/FlexibleObject'
         local_paths:
-          $ref: "#/components/schemas/FlexibleObject"
+          $ref: '#/components/schemas/FlexibleObject'
         production_authority:
           type: boolean
         live_execution_authority:
@@ -255,11 +467,47 @@ components:
         gateway_receipts:
           type: array
           items:
-            $ref: "#/components/schemas/FlexibleObject"
+            $ref: '#/components/schemas/FlexibleObject'
         chatops_receipts:
           type: array
           items:
-            $ref: "#/components/schemas/FlexibleObject"
+            $ref: '#/components/schemas/FlexibleObject'
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    GatewayDaimonVisibilityResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        ok:
+          type: boolean
+        project:
+          $ref: '#/components/schemas/FlexibleObject'
+        connector_surfaces:
+          $ref: '#/components/schemas/FlexibleObject'
+        live_surfaces:
+          $ref: '#/components/schemas/FlexibleObject'
+        claim_state:
+          $ref: '#/components/schemas/FlexibleObject'
+        artifact_inventory:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlexibleObject'
+        current_blockers:
+          type: array
+          items:
+            type: string
+        recommended_next_actions:
+          type: array
+          items:
+            type: string
+        non_claims:
+          type: array
+          items:
+            type: string
         production_authority:
           type: boolean
         live_execution_authority:
@@ -283,11 +531,193 @@ components:
         gateway_receipt_path:
           type: string
         chatops_result:
-          $ref: "#/components/schemas/FlexibleObject"
+          $ref: '#/components/schemas/FlexibleObject'
         production_authority:
           type: boolean
         live_execution_authority:
           type: boolean
+    BrowserQueueStatusResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        ok:
+          type: boolean
+        paused:
+          type: boolean
+        killed:
+          type: boolean
+        pending_count:
+          type: integer
+        counts:
+          $ref: '#/components/schemas/FlexibleObject'
+        packets:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlexibleObject'
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    BrowserQueueMutationResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        schema_id:
+          type: string
+        ok:
+          type: boolean
+        packet_id:
+          type: string
+        state:
+          type: string
+        claimed:
+          type: boolean
+        lease_id:
+          type: string
+        gateway_receipt_path:
+          type: string
+        refusal_class:
+          type: string
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+    BrowserQueueClaimRequest:
+      type: object
+      additionalProperties: true
+      properties:
+        carrier_id:
+          type: string
+        chat_url:
+          type: string
+    BrowserQueueResultEnvelope:
+      type: object
+      additionalProperties: true
+      required:
+        - packet_id
+        - lease_id
+        - status
+      properties:
+        packet_id:
+          type: string
+        lease_id:
+          type: string
+        carrier_id:
+          type: string
+        chat_url:
+          type: string
+        status:
+          type: string
+          enum:
+            - completed
+            - blocked
+            - failed
+        blocked_reason:
+          type: string
+        assistant_text:
+          type: string
+        structured_blocks:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+            properties:
+              type:
+                type: string
+              text:
+                type: string
+              metadata:
+                $ref: '#/components/schemas/FlexibleObject'
+    BrowserQueueControlEnvelope:
+      type: object
+      additionalProperties: true
+      required:
+        - operation
+      properties:
+        operation:
+          type: string
+          enum:
+            - pause
+            - resume
+            - kill
+            - cancel
+            - retry
+            - approve
+        packet_id:
+          type: string
+        approval:
+          type: object
+          additionalProperties: true
+          properties:
+            approved:
+              type: boolean
+            approved_by:
+              type: string
+            approval_token:
+              type: string
+    BrowserQueuePacketEnvelope:
+      type: object
+      additionalProperties: true
+      required:
+        - idempotency_key
+        - objective
+      properties:
+        packet_id:
+          type: string
+        idempotency_key:
+          type: string
+        objective:
+          type: string
+        prompt:
+          type: string
+        allowed_actions:
+          type: array
+          items:
+            type: string
+        authority:
+          oneOf:
+            - type: string
+            - type: object
+              additionalProperties: true
+              properties:
+                scope:
+                  type: string
+                production_authority:
+                  type: boolean
+                live_execution_authority:
+                  type: boolean
+        requires_operator_approval:
+          type: boolean
+        auto_run:
+          type: boolean
+        max_turns:
+          type: integer
+          minimum: 1
+          maximum: 8
+        stop_condition:
+          type: string
+        context_refs:
+          type: array
+          items:
+            type: string
+        approval:
+          type: object
+          additionalProperties: true
+          properties:
+            approved:
+              type: boolean
+            approved_by:
+              type: string
+            approval_token:
+              type: string
+        production_authority:
+          type: boolean
+          const: false
+        live_execution_authority:
+          type: boolean
+          const: false
     FlexibleObject:
       type: object
       additionalProperties: true
@@ -382,3 +812,270 @@ components:
                   type: array
                   items:
                     type: string
+    AgentInvocationEnvelope:
+      type: object
+      additionalProperties: true
+      required:
+        - idempotency_key
+        - agent_role
+        - objective
+      properties:
+        schema_id:
+          type: string
+          enum:
+            - ion.agent_invocation_packet.v1
+        invocation_id:
+          type: string
+        idempotency_key:
+          type: string
+        created_by:
+          type: string
+        agent_role:
+          type: string
+        agent_display_name:
+          type: string
+        objective:
+          type: string
+        capsule_context:
+          type: object
+          additionalProperties: true
+          properties:
+            inline_summary:
+              type: string
+            context_refs:
+              type: array
+              items:
+                type: string
+        authority:
+          type: object
+          additionalProperties: true
+          properties:
+            production_authority:
+              type: boolean
+            live_execution_authority:
+              type: boolean
+            local_write_authority:
+              type: string
+        execution:
+          type: object
+          additionalProperties: true
+          properties:
+            backend:
+              type: string
+            queue:
+              type: boolean
+            max_runtime_seconds:
+              type: integer
+            max_steps:
+              type: integer
+        proof_required:
+          type: object
+          additionalProperties: true
+          properties:
+            receipt:
+              type: boolean
+        relay_policy:
+          type: object
+          additionalProperties: true
+          properties:
+            allow_relay_to_chatgpt:
+              type: boolean
+            allow_relay_to_operator:
+              type: boolean
+        settlement:
+          type: object
+          additionalProperties: true
+          properties:
+            settlement_target:
+              type: string
+    AgentInvocationMutationResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        ok:
+          type: boolean
+        status:
+          type: string
+        invocation_id:
+          type: string
+        capsule_context_path:
+          type: string
+        codex_work_request_path:
+          type: string
+        receipt_paths:
+          type: array
+          items:
+            type: string
+        error:
+          type: string
+    AgentRelayPendingResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        ok:
+          type: boolean
+        relay_messages:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+            properties:
+              relay_id:
+                type: string
+              invocation_id:
+                type: string
+              status:
+                type: string
+              question:
+                type: string
+        count:
+          type: integer
+    AgentRelayResponseEnvelope:
+      type: object
+      additionalProperties: true
+      required:
+        - relay_id
+        - response
+      properties:
+        schema_id:
+          type: string
+          enum:
+            - ion.agent_relay_response.v1
+        relay_id:
+          type: string
+        invocation_id:
+          type: string
+        answered_by:
+          type: string
+          enum:
+            - chatgpt_browser
+            - operator
+        response:
+          type: string
+        authority_delta:
+          type: object
+          nullable: true
+          additionalProperties: true
+          properties:
+            requested_authority_change:
+              type: string
+        continue:
+          type: boolean
+    AgentRelayMutationResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        ok:
+          type: boolean
+        relay_id:
+          type: string
+        invocation_id:
+          type: string
+        status:
+          type: string
+        receipt_path:
+          type: string
+        error:
+          type: string
+    AgentControlEnvelope:
+      type: object
+      additionalProperties: true
+      required:
+        - invocation_id
+        - action
+      properties:
+        invocation_id:
+          type: string
+        action:
+          type: string
+          enum:
+            - pause
+            - resume
+            - cancel
+        reason:
+          type: string
+    AgentReceiptsRecentResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        ok:
+          type: boolean
+        receipts:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+            properties:
+              receipt_id:
+                type: string
+              event:
+                type: string
+              invocation_id:
+                type: string
+              created_at:
+                type: string
+        count:
+          type: integer
+    AgentSettlementEnvelope:
+      type: object
+      additionalProperties: true
+      required:
+        - invocation_id
+        - terminal_state
+      properties:
+        schema_id:
+          type: string
+          enum:
+            - ion.agent_invocation_settlement.v1
+        invocation_id:
+          type: string
+        terminal_state:
+          type: string
+          enum:
+            - accepted
+            - blocked
+            - deferred
+            - rejected
+            - failed
+        settled_by:
+          type: string
+          enum:
+            - chatgpt_browser
+            - operator
+            - codex_cli
+        settlement_target:
+          type: string
+        summary:
+          type: string
+        proof_packet_path:
+          type: string
+        task_return_path:
+          type: string
+        evidence_refs:
+          type: array
+          items:
+            type: string
+        blockers:
+          type: array
+          items:
+            type: string
+    AgentSettlementMutationResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        ok:
+          type: boolean
+        invocation_id:
+          type: string
+        terminal_state:
+          type: string
+        status:
+          type: string
+        settlement_path:
+          type: string
+        receipt_path:
+          type: string
+        refusal_class:
+          type: string
+        finding:
+          type: string

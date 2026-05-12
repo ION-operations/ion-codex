@@ -4,6 +4,7 @@ from pathlib import Path
 from kernel.ion_chatops_bridge import ACTION_SCHEMA, APPROVAL_TOKEN
 from kernel.ion_custom_gpt_action_gateway import (
     READY_VERDICT,
+    build_daimon_project_visibility,
     build_gateway_health,
     build_gateway_policy_surface,
     build_recent_gateway_receipts,
@@ -14,6 +15,7 @@ from kernel.ion_custom_gpt_action_gateway import (
 
 
 def _seed_root(root: Path) -> None:
+    root.mkdir(parents=True, exist_ok=True)
     (root / "pyproject.toml").write_text("[project]\nname = \"ion-gateway-test\"\n", encoding="utf-8")
     (root / "ION/REPO_AUTHORITY.md").parent.mkdir(parents=True, exist_ok=True)
     (root / "ION/REPO_AUTHORITY.md").write_text("# authority\n", encoding="utf-8")
@@ -179,6 +181,106 @@ def _seed_assistant_work_fission(root: Path) -> None:
     )
 
 
+def _seed_daimon_repo(parent: Path) -> Path:
+    root = parent / "dAimon"
+    outputs = root / "sample_outputs"
+    outputs.mkdir(parents=True, exist_ok=True)
+    (root / "README.md").write_text("# dAimon\n", encoding="utf-8")
+    (root / "docs").mkdir(parents=True, exist_ok=True)
+    (root / "docs/google_user_access_readiness.md").write_text("# Google User Access\n", encoding="utf-8")
+    (root / "agent_builder").mkdir(parents=True, exist_ok=True)
+    (root / "agent_builder/openapi_tools_contract.json").write_text("{}\n", encoding="utf-8")
+    (root / "agent_builder/system_prompt.md").write_text("# System prompt\n", encoding="utf-8")
+    (outputs / "demo_evidence_package.json").write_text(
+        json.dumps(
+            {
+                "headline_status": "live_vertical_slice_proven_agent_builder_mcp_proven",
+                "metrics": {"cloud_run_live_proven": True, "google_user_access_proven": False},
+                "claim_matrix": [
+                    {
+                        "claim_id": "cloud_run_kernel_live_endpoint",
+                        "status": "proven_live_cloud_run",
+                        "evidence": ["sample_outputs/cloud_run_live_health.json"],
+                        "non_claim": False,
+                    },
+                    {
+                        "claim_id": "google_user_tester_access",
+                        "status": "pending_google_user_access",
+                        "evidence": ["sample_outputs/google_user_access_readiness.json"],
+                        "blockers": ["gcloud reauthentication required"],
+                        "non_claim": True,
+                    },
+                ],
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (outputs / "cloud_run_live_health.json").write_text(
+        json.dumps(
+            {
+                "ok": True,
+                "cloud_run_url": "https://daimon.example.run.app",
+                "auth_mode": "gcloud_identity_token",
+                "evidence": {"mongodb": {"database": "ion_continuity_bridge"}},
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (outputs / "cloud_run_deploy_summary.json").write_text(
+        json.dumps({"ok": True, "project": "example-project", "region": "us-central1", "cloud_run_url": "https://daimon.example.run.app"}) + "\n",
+        encoding="utf-8",
+    )
+    (outputs / "agent_builder_mcp_trace_validation.json").write_text(
+        json.dumps({"ok": True, "proof_status": "proven_live_agent_builder_mcp", "live_mcp_execution_proven": True}) + "\n",
+        encoding="utf-8",
+    )
+    (outputs / "agent_engine_deploy_summary.json").write_text(
+        json.dumps(
+            {
+                "remote_agent_name": "projects/123/locations/us-central1/reasoningEngines/456",
+                "service_account": "123-compute@developer.gserviceaccount.com",
+                "location": "us-central1",
+                "cloud_run_url": "https://daimon.example.run.app",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (outputs / "google_user_access_readiness.json").write_text(
+        json.dumps(
+            {
+                "ok": False,
+                "proof_status": "google_user_access_blocked_or_incomplete",
+                "target_principals": [],
+                "runtime_identity": {
+                    "agent_engine_resource": "projects/123/locations/us-central1/reasoningEngines/456",
+                    "agent_service_account": "123-compute@developer.gserviceaccount.com",
+                },
+                "blockers": [
+                    "No target users configured; pass --target-user.",
+                    "ERROR: (gcloud.services.list) Please run: gcloud auth login",
+                ],
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (outputs / "live_vertical_slice_summary.json").write_text(
+        json.dumps({"mongo_database": "ion_continuity_bridge", "mongo_collection": "daimon_continuity_objects"}) + "\n",
+        encoding="utf-8",
+    )
+    for name in [
+        "dashboard_evidence_trace.json",
+        "demo_video_claims.json",
+        "agent_builder_mcp_trace.json",
+        "orchestration_validation.json",
+    ]:
+        (outputs / name).write_text("{}\n", encoding="utf-8")
+    return root
+
+
 def _action(action_id: str, intent: str = "register_artifact") -> dict:
     return {
         "ion_action": {
@@ -232,6 +334,29 @@ def test_gateway_policy_surface_imports_chatops_hard_gates(tmp_path):
     assert "delete_file" in result["imported_chatops_hard_gated_intents"]
     assert result["auth"]["required"] is True
     assert "secret-token" not in json.dumps(result)
+
+
+def test_daimon_project_visibility_reads_curated_receipts_without_secrets(tmp_path):
+    ion_root = tmp_path / "ION_CODEX FULL"
+    _seed_root(ion_root)
+    daimon_root = _seed_daimon_repo(tmp_path)
+
+    result = build_daimon_project_visibility(ion_root)
+    text = json.dumps(result)
+
+    assert result["ok"] is True
+    assert result["project"]["repo_path"] == daimon_root.as_posix()
+    assert result["live_surfaces"]["cloud_run_url"] == "https://daimon.example.run.app"
+    assert result["live_surfaces"]["mongodb_database"] == "ion_continuity_bridge"
+    assert result["claim_state"]["headline_status"] == "live_vertical_slice_proven_agent_builder_mcp_proven"
+    assert result["claim_state"]["google_user_access"]["proof_status"] == "google_user_access_blocked_or_incomplete"
+    assert "gcloud reauthentication required before IAM/user-access queries can complete" in result["current_blockers"]
+    assert "MONGODB_URI" not in text
+    assert "mongodb+srv://" not in text
+    assert "password=" not in text.lower()
+    assert "token_value" not in text
+    assert result["production_authority"] is False
+    assert result["live_execution_authority"] is False
 
 
 def test_gateway_auth_rejects_missing_and_accepts_valid_token(monkeypatch, tmp_path):
@@ -359,3 +484,73 @@ def test_gateway_submit_routes_to_chatops_owner_and_blocks_replay(tmp_path):
     assert (tmp_path / first["owner_result"]["receipt_path"]).exists()
     assert second["ok"] is False
     assert second["refusal_class"] == "IDEMPOTENCY_REPLAY_BLOCKED"
+
+
+
+def test_gateway_agent_invocation_status_and_relay_wrappers(tmp_path):
+    from kernel.ion_custom_gpt_action_gateway import (
+        build_gateway_agent_pending_relays,
+        build_gateway_agent_status,
+        submit_gateway_agent_invocation,
+        submit_gateway_agent_relay_response,
+        submit_gateway_agent_settlement,
+    )
+    from kernel.ion_agent_invocation_broker import create_agent_relay_message
+
+    _seed_root(tmp_path)
+    packet = {
+        "schema_id": "ion.agent_invocation_packet.v1",
+        "idempotency_key": "gateway-agent-key-001",
+        "agent_role": "role.context_cartographer",
+        "objective": "Return a bounded proof report.",
+        "authority": {
+            "production_authority": False,
+            "live_execution_authority": False,
+            "local_write_authority": "none",
+            "allowed_paths": ["ION/"],
+        },
+        "capsule_context": {"inline_summary": "Gateway wrapper test."},
+    }
+    invoked = submit_gateway_agent_invocation(tmp_path, packet)
+    assert invoked["ok"] is True
+
+    status = build_gateway_agent_status(tmp_path, invocation_id=invoked["invocation_id"])
+    assert status["ok"] is True
+    assert status["invocation"]["invocation_id"] == invoked["invocation_id"]
+
+    relay = create_agent_relay_message(
+        tmp_path,
+        {
+            "invocation_id": invoked["invocation_id"],
+            "from_agent": "role.context_cartographer",
+            "to": "chatgpt_browser",
+            "question_type": "route",
+            "question": "Continue?",
+        },
+    )
+    pending = build_gateway_agent_pending_relays(tmp_path, invocation_id=invoked["invocation_id"])
+    assert pending["count"] == 1
+    response = submit_gateway_agent_relay_response(
+        tmp_path,
+        {
+            "schema_id": "ion.agent_relay_response.v1",
+            "relay_id": relay["relay_id"],
+            "invocation_id": invoked["invocation_id"],
+            "answered_by": "chatgpt_browser",
+            "response": "Continue within the same authority ceiling.",
+            "continue": True,
+        },
+    )
+    assert response["ok"] is True
+    settled = submit_gateway_agent_settlement(
+        tmp_path,
+        {
+            "schema_id": "ion.agent_invocation_settlement.v1",
+            "invocation_id": invoked["invocation_id"],
+            "terminal_state": "blocked",
+            "settled_by": "chatgpt_browser",
+            "summary": "Wrapper settlement smoke.",
+            "evidence_refs": [invoked["capsule_context_path"]],
+        },
+    )
+    assert settled["ok"] is True

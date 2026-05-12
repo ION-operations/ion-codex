@@ -15,14 +15,28 @@ limits:
   require_idempotency_key_for_mutation: true
 allowed_get_paths:
   - /health
+  - /openapi.yaml
   - /policy
   - /context-pack
   - /codex/queue
   - /agent/status
+  - /projects/daimon/visibility
+  - /browser-queue/status
+  - /browser-queue/receipts/recent
   - /receipts/recent
+  - /agent/relay/pending
+  - /agent/receipts/recent
 allowed_post_paths:
   - /actions/validate
   - /actions/submit
+  - /browser-queue/enqueue
+  - /browser-queue/claim
+  - /browser-queue/result
+  - /browser-queue/control
+  - /agent/invoke
+  - /agent/relay/respond
+  - /agent/control
+  - /agent/settle
 supported_mvp_intents:
   - register_artifact
   - write_file_draft
@@ -50,6 +64,8 @@ refusal_classes:
   - APPROVAL_EVIDENCE_INVALID
   - PATH_NOT_ALLOWED
   - SCHEMA_INVALID
+  - QUEUE_FULL
+  - BROWSER_PACKET_BLOCKED
   - LOCAL_DAEMON_UNAVAILABLE
   - ION_OWNER_REFUSED
   - STEWARD_GATE_REQUIRED

@@ -1,0 +1,50 @@
+{
+  "background_messages": {
+    "ion_chatops_agent_control": {
+      "authority": "requires_bridge_approval",
+      "method": "POST",
+      "path": "/agent/control"
+    },
+    "ion_chatops_agent_invoke_bounded": {
+      "authority": "requires_bridge_approval",
+      "method": "POST",
+      "path": "/agent/invoke"
+    },
+    "ion_chatops_agent_receipts_recent": {
+      "authority": "read",
+      "method": "GET",
+      "path": "/agent/receipts/recent?limit=12"
+    },
+    "ion_chatops_agent_relay_pending": {
+      "authority": "read",
+      "method": "GET",
+      "path": "/agent/relay/pending"
+    },
+    "ion_chatops_agent_relay_respond": {
+      "authority": "requires_bridge_approval",
+      "method": "POST",
+      "path": "/agent/relay/respond"
+    },
+    "ion_chatops_bounded_agent_status": {
+      "authority": "read",
+      "method": "GET",
+      "path": "/agent/status"
+    }
+  },
+  "gateway_base_storage_key": "ionActionGatewayBase",
+  "gateway_token_storage_key": "ionActionGatewayToken",
+  "panel_surfaces": [
+    "Bounded Lane",
+    "Relays",
+    "Receipts"
+  ],
+  "purpose": "Expose the bounded ION agent invocation and relay lane inside the dAimon/ION browser companion without granting unrestricted autonomy.",
+  "safety_law": [
+    "Observe/read surfaces do not mutate state.",
+    "Invocation, relay response, and control messages require visible bridge approval.",
+    "No production authority, no live unrestricted authority, no credentials, no broad shell, no destructive deletion, no push_main.",
+    "Agent output remains candidate until proof, settlement, and receipt."
+  ],
+  "schema_id": "ion.daimon_companion_agent_lane_contract.v1",
+  "status": "candidate"
+}

@@ -9,7 +9,7 @@ MVP behavior:
 - send candidates to the background worker;
 - validate actions against the localhost daemon;
 - show a compact top status rail near the ChatGPT header controls;
-- show Rescan and Onboard controls in the top rail;
+- show Rescan, Onboard, and Context Sync controls in the top rail;
 - fetch a compact Sev carrier onboarding/context brief from the local daemon and
   paste it into ChatGPT;
 - render composer-attached tabs and an upward drawer for Status, Action, Agent,
@@ -24,6 +24,8 @@ MVP behavior:
   backed by `kernel.ion_codex_queue_runner`;
 - request pasteable context packs and approval-gated package ZIPs backed by the
   existing lifecycle and safe full-project packagers;
+- select discovered ION project context packages from the top rail and request
+  one approval-gated context sync ZIP from the local bridge;
 - list ChatGPT sandbox returns and request approval-gated diff preview or
   Codex review queueing through the sandbox return intake owner;
 - list attachable local package/inbox artifacts and request approval-gated
@@ -46,6 +48,10 @@ MVP behavior:
 - show an approval modal for Braden;
 - insert a known-good Sev re-entry prompt into the ChatGPT composer;
 - keep fabricated smoke/Codex work-packet actions under Diagnostics as local bridge tests;
+- import bounded ION queue-pack `.json` or `.zip` files into the ChatGPT message
+  queue without splitting long prompts on blank lines;
+- queue operator-selected files, ZIPs, and images as in-memory browser file
+  items, then attempt visible drag/drop playback without clicking Send;
 - submit approved actions to `http://127.0.0.1:8767/actions/submit`;
 - paste or copy compact receipt summaries.
 
@@ -69,6 +75,23 @@ changes.
 
 The extension icon assets live in `icons/` and are wired into both the manifest
 extension icon set and the toolbar action icon.
+
+## Queue Pack Import
+
+The Queue tab can import `.json` or `.zip` prompt-chain packages with
+`schema_id: ion.extension.queue_pack.v1`. ZIP packs must include
+`ion_queue_pack.json`; large prompt bodies can live under `prompts/` and be
+referenced from manifest steps with `prompt_ref`.
+
+Use `QUEUE_PACK_AUTHORING.md` as the Custom GPT authoring instruction and
+`examples/ION_QUEUE_PACK_EXAMPLE.json` as the smallest importable example.
+Imported packs are prompt queue material only. They do not grant local file,
+cloud, secret, production, or live execution authority.
+
+The floating queue panel also supports operator-selected file items through the
+`⇪` queue button. These file objects are held in browser memory only until page
+reload. Playing a file item attempts a visible ChatGPT drop against the current
+drop zone and still does not click Send.
 
 ## Emergency Safe Mode
 
@@ -148,6 +171,13 @@ The Packages tab is for moving context into ChatGPT or another carrier sandbox.
 `Context Pack` pastes a compact current-state packet into the composer.
 `Compact ZIP` and `Safe Full ZIP` create local package artifacts through the
 existing ION packagers and copy the resulting path, sha256, and receipt summary.
+
+The top-rail `Context Sync` panel scans governed ION context/package roots,
+lets Braden select current project packages, and sends those relative paths to
+`POST /exports/project-context-sync-zip`. The daemon validates allowed roots,
+requires approval, writes a manifest/receipt, and returns one ZIP for sync. This
+ZIP is context material only; it does not grant mutation, production, live
+execution, or secrets authority.
 
 The Sandbox tab projects returns under
 `ION/05_context/inbox/chatgpt_sandbox_returns/`. `Returns` is a read-only queue

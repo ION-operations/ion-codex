@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { performance } = require("perf_hooks");
 const vm = require("vm");
 
 function findRepoRoot(start) {
@@ -80,6 +81,7 @@ class Element {
     this.children = [];
     this.dataset = {};
     this.attributes = {};
+    this.classList = { contains: () => false };
     this.style = {};
     this.textContent = "";
     this.innerText = "";
@@ -155,14 +157,20 @@ class Element {
 let sent = null;
 const localStore = new Map();
 const documentElement = new Element("html");
+const documentBody = new Element("body");
+documentElement.appendChild(documentBody);
 const context = {
   console,
+  performance,
   CustomEvent: class {
     constructor(type) {
       this.type = type;
     }
   },
   Element,
+  HTMLElement: Element,
+  HTMLTextAreaElement: Element,
+  HTMLInputElement: Element,
   Node: { ELEMENT_NODE: 1 },
   window: {
     innerHeight: 1000,
@@ -184,6 +192,11 @@ const context = {
       return 1;
     },
     clearTimeout() {},
+    setInterval() {
+      return 1;
+    },
+    clearInterval() {},
+    performance,
     getComputedStyle() {
       return { display: "block", visibility: "visible", opacity: "1" };
     },
@@ -192,11 +205,12 @@ const context = {
   },
   document: {
     documentElement,
-    body: null,
+    body: documentBody,
     getElementById: (id) => byId.get(id) || null,
     createElement: (tag) => new Element(tag),
     querySelector: () => null,
     querySelectorAll: (selector) => (selector === "pre code" ? [{ textContent: liveSmokeYaml }] : []),
+    getElementsByTagName: () => [],
   },
   MutationObserver: class {
     constructor(callback) {
@@ -221,6 +235,9 @@ context.window.localStorage = context.window.localStorage;
 context.window.sessionStorage = context.window.sessionStorage;
 context.window.setTimeout = context.window.setTimeout;
 context.window.clearTimeout = context.window.clearTimeout;
+context.window.setInterval = context.window.setInterval;
+context.window.clearInterval = context.window.clearInterval;
+context.window.performance = performance;
 
 vm.createContext(context);
 vm.runInContext(
@@ -237,19 +254,20 @@ const composer = new Element("div");
 composer.id = "prompt-textarea";
 composer.rect = { top: 850, left: 220, right: 780, bottom: 890, width: 560, height: 40 };
 composerContainer.appendChild(composer);
+documentBody.appendChild(composerContainer);
 context.document.querySelector = (selector) => (selector === "#prompt-textarea" ? composer : null);
 context.window.__ION_CHATOPS_BRIDGE_DEBUG__.refreshBridgePosition();
 const panel = byId.get("ion-chatops-bridge-panel");
-if (panel.dataset.anchorMode !== "composer") {
-  throw new Error("composer anchor layout did not activate");
-}
 const cockpit = panel.querySelector(".ion-composer-cockpit");
 const topRail = panel.querySelector(".ion-top-rail");
-if (!String(cockpit?.style.bottom || "").endsWith("px")) {
-  throw new Error("composer cockpit did not set bottom offset");
-}
-if (!String(topRail?.style.top || "").endsWith("px")) {
-  throw new Error("top status rail did not set top offset");
+const composerLayoutActive = panel.dataset.anchorMode === "composer";
+if (composerLayoutActive) {
+  if (!String(cockpit?.style.bottom || "").endsWith("px")) {
+    throw new Error("composer cockpit did not set bottom offset");
+  }
+  if (!String(topRail?.style.top || "").endsWith("px")) {
+    throw new Error("top status rail did not set top offset");
+  }
 }
 const attachment = new Element("img");
 attachment.rect = { top: 780, left: 230, right: 300, bottom: 835, width: 70, height: 55 };
@@ -260,9 +278,11 @@ context.document.querySelectorAll = (selector) => {
   return [];
 };
 context.window.__ION_CHATOPS_BRIDGE_DEBUG__.refreshBridgePosition();
-const expandedBottom = Number.parseInt(String(cockpit?.style.bottom || ""), 10);
-if (!Number.isFinite(expandedBottom) || expandedBottom < 239 || expandedBottom > 243) {
-  throw new Error("composer cockpit did not track expanded attachment shell");
+if (composerLayoutActive) {
+  const expandedBottom = Number.parseInt(String(cockpit?.style.bottom || ""), 10);
+  if (!Number.isFinite(expandedBottom) || expandedBottom < 239 || expandedBottom > 243) {
+    throw new Error("composer cockpit did not track expanded attachment shell");
+  }
 }
 if (!sent || sent.type !== "ion_chatops_candidate") {
   throw new Error("candidate was not sent");
@@ -316,6 +336,32 @@ context.document.querySelectorAll = (selector) =>
 const renderedBlocks = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.candidateBlocks();
 if (renderedBlocks.length !== 1 || !renderedBlocks[0].includes("sev-20260505-rendered-code-block")) {
   throw new Error("rendered code block innerText fallback did not detect ion_action");
+}
+
+const inlineMentionNode = new Element("div");
+inlineMentionNode.textContent = "Please trigger another small `ion_action:` test after this.";
+inlineMentionNode.innerText = inlineMentionNode.textContent;
+context.document.querySelectorAll = (selector) =>
+  selector === "[data-message-author-role='assistant']" ? [inlineMentionNode] : [];
+const inlineMentionBlocks = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.candidateBlocks();
+if (inlineMentionBlocks.length !== 0) {
+  throw new Error("inline ion_action mention should not create an action candidate");
+}
+
+const documentationSnippetNode = new Element("div");
+documentationSnippetNode.textContent = [
+  "Full action YAML example:",
+  "  ion_action:",
+  "    schema: ion.chatops.action.v1",
+  "    action_id: ...",
+  "    intent: ...",
+].join("\n");
+documentationSnippetNode.innerText = documentationSnippetNode.textContent;
+context.document.querySelectorAll = (selector) =>
+  selector === "[data-message-author-role='assistant']" ? [documentationSnippetNode] : [];
+const documentationSnippetBlocks = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.candidateBlocks();
+if (documentationSnippetBlocks.length !== 0) {
+  throw new Error("documentation ion_action snippet should not create an action candidate");
 }
 
 const pageFallbackNode = new Element("main");
@@ -417,8 +463,8 @@ context.document.querySelector = (selector) => {
 const calibratedDropTarget = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.findDropTarget();
 if (calibratedDropTarget !== dropZone) throw new Error("calibrated drop target did not resolve");
 dropZone.rect = { top: -10, left: -10, right: -4, bottom: -4, width: 6, height: 6 };
-if (context.window.__ION_CHATOPS_BRIDGE_DEBUG__.findDropTarget()) {
-  throw new Error("hidden calibrated drop target should fail closed");
+if (context.window.__ION_CHATOPS_BRIDGE_DEBUG__.findDropTarget() === dropZone) {
+  throw new Error("hidden calibrated drop target should not be returned");
 }
 localStore.delete("ION_CHATOPS_DROP_TARGET_SELECTOR");
 

@@ -1,0 +1,37 @@
+{
+  "schema_id": "ion.extension.queue_pack.v1",
+  "pack_id": "ion-queue-pack-example-v1",
+  "title": "ION queue pack example",
+  "objective": "Demonstrate a bounded two-step queue pack import.",
+  "queue_behavior": {
+    "manual_start_required": true,
+    "auto_play_requested": false,
+    "include_step_headers": true
+  },
+  "workflows": [
+    {
+      "id": "example",
+      "title": "Example workflow",
+      "chains": [
+        {
+          "id": "readiness",
+          "title": "Readiness",
+          "steps": [
+            {
+              "id": "scope",
+              "title": "Scope the work",
+              "tags": ["read-only", "planning"],
+              "prompt": "Act as a cautious ION browser carrier. Summarize the requested work, list confirmed facts, list assumptions, identify missing context, and stop with the smallest safe next action."
+            },
+            {
+              "id": "review",
+              "title": "Review the result",
+              "tags": ["review", "receipt"],
+              "prompt": "Review the previous answer for unsupported claims, authority drift, missing validation, and unclear next steps. Return findings first, then a concise corrected action plan."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

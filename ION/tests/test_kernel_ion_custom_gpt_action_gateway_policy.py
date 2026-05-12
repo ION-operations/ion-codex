@@ -17,6 +17,7 @@ def test_action_gateway_policy_file_declares_draft_non_production():
     assert "production_authority: false" in text
     assert "live_execution_authority: false" in text
     assert "listen_port: 8777" in text
+    assert "  - /openapi.yaml" in text
 
 
 def test_action_gateway_policy_names_supported_and_hard_gated_intents():
@@ -56,6 +57,7 @@ def test_action_gateway_openapi_exposes_only_mvp_paths():
         "/context-pack:",
         "/codex/queue:",
         "/agent/status:",
+        "/projects/daimon/visibility:",
         "/receipts/recent:",
         "/actions/validate:",
         "/actions/submit:",
@@ -98,3 +100,15 @@ def test_action_gateway_openapi_has_explicit_object_properties_for_gpt_actions()
                 media = response.get("content", {}).get("application/json", {})
                 schema = media.get("schema", {})
                 assert schema.get("$ref"), f"response schema should use explicit component ref at {path_name} {method_name} {status_code}"
+
+
+def test_policy_and_openapi_include_bounded_agent_surfaces():
+    policy = yaml.safe_load(Path(POLICY_RELATIVE_PATH).read_text(encoding="utf-8"))
+    openapi = yaml.safe_load(Path(OPENAPI_RELATIVE_PATH).read_text(encoding="utf-8"))
+
+    for path in ["/agent/relay/pending", "/agent/receipts/recent"]:
+        assert path in policy.get("allowed_get_paths", [])
+        assert path in openapi.get("paths", {})
+    for path in ["/agent/invoke", "/agent/relay/respond", "/agent/control", "/agent/settle"]:
+        assert path in policy.get("allowed_post_paths", [])
+        assert path in openapi.get("paths", {})
