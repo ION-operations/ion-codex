@@ -1,0 +1,45 @@
+{
+  "schema_id": "ion.git_runtime_evidence_quarantine_receipt.v1",
+  "receipt_id": "GIT_RUNTIME_EVIDENCE_QUARANTINE_POLICY_RECEIPT_20260512",
+  "created_at": "2026-05-12T00:05:00Z",
+  "status": "runtime_evidence_quarantined_by_gitignore_policy_not_deleted",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "git_add_authority": true,
+    "git_commit_authority": true,
+    "git_push_authority": false,
+    "direct_main_authority": false,
+    "delete_authority": false,
+    "cleanup_authority": false
+  },
+  "intent": "Prevent high-volume ChatGPT connector and action gateway runtime residue from polluting normal source commits while keeping local evidence intact and explicitly recoverable.",
+  "policy_change": ".gitignore now excludes high-volume live connector/runtime residue directories by default.",
+  "ignored_by_default": [
+    "ION/05_context/current/action_gateway/receipts/",
+    "ION/05_context/current/chatgpt_connector/agent_invocations/",
+    "ION/05_context/current/chatgpt_connector/capsule_messages/",
+    "ION/05_context/current/chatgpt_connector/carrier_message_acks/",
+    "ION/05_context/current/chatgpt_connector/carrier_messages/",
+    "ION/05_context/current/chatgpt_connector/codex_queue_runs/",
+    "ION/05_context/current/chatgpt_connector/codex_work_requests/",
+    "ION/05_context/current/chatgpt_connector/probes/",
+    "ION/05_context/current/chatgpt_connector/task_returns/"
+  ],
+  "recovery_rule": "If a specific runtime receipt or proof run is intentionally public-safe evidence, add it explicitly with git add -f and document why it is being promoted out of quarantine.",
+  "not_performed": [
+    "file deletion",
+    "runtime cleanup",
+    "git push",
+    "direct main push",
+    "test run",
+    "full validation"
+  ],
+  "remaining_expected_dirty_lanes": [
+    "tracked active queue/state JSON",
+    "codex_capsule_chat state",
+    "root workpackets",
+    "root diffs",
+    "what_is_ion imported material"
+  ]
+}

@@ -52,3 +52,16 @@ ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRI
 ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/040_PRODUCT_DOCS/ION_ONTOLOGICAL_JOURNAL_GPT55_ENTRIES_0_39_CURRENT_ROOT_ENHANCED.md
 ION_sandbox/ION_FULL_GPT_SANDBOX_AGENT_PACKAGE_v1_4_AI_ASSISTANT_WORK_TEMPLATE_INSTANCE_EXERCISES_CANDIDATE_20260508T154333Z/
 ion-sandbox-gpt/
+# ION live connector/runtime residue.
+# These are local carrier/queue traces, not normal source. Commit selected
+# public-safe receipts explicitly with `git add -f` when they are intended
+# evidence for a review branch or volatile live-state mirror.
+ION/05_context/current/action_gateway/receipts/
+ION/05_context/current/chatgpt_connector/agent_invocations/
+ION/05_context/current/chatgpt_connector/capsule_messages/
+ION/05_context/current/chatgpt_connector/carrier_message_acks/
+ION/05_context/current/chatgpt_connector/carrier_messages/
+ION/05_context/current/chatgpt_connector/codex_queue_runs/
+ION/05_context/current/chatgpt_connector/codex_work_requests/
+ION/05_context/current/chatgpt_connector/probes/
+ION/05_context/current/chatgpt_connector/task_returns/
