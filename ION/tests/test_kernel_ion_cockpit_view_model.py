@@ -65,6 +65,9 @@ def test_build_cockpit_view_model_summarizes_v88_runtime(tmp_path):
     assert model["top_bar"]["local_service_count"] == 6
     assert model["local_services"]["schema_id"] == "ion.local_service_status.v1"
     assert model["local_services"]["install_authority"] is False
+    assert model["service_console"]["schema_id"] == "ion.cockpit_service_console.v1"
+    assert model["service_console"]["production_authority"] is False
+    assert model["service_console"]["live_execution_authority"] is False
     assert model["top_bar"]["gate_count"] == 0
     assert model["agents"]["spawn_rows"][0]["role"] == "STEWARD"
     assert model["agents"]["spawn_rows"][0]["return_recorded"] is True

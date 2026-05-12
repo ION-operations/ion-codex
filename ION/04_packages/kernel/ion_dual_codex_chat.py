@@ -33,6 +33,7 @@ from .ion_codex_model_moves import (
     summarize_model_move,
 )
 from .ion_codex_chat_app_ui import render_codex_chat_app_html
+from .ion_cockpit_service_manager import build_service_console_model
 from .ion_codex_chat_engine import (
     build_codex_chat_carrier_objective,
     build_codex_chat_engine_surface,
@@ -1100,6 +1101,7 @@ def build_dual_codex_chat_model(root: str | Path | None = None, *, write: bool =
         "agents": agent_surface,
         "skills": skill_surface,
         "chat_engine": chat_engine_surface,
+        "service_console": build_service_console_model(shell_root),
         "assistant_work_routes": chat_engine_surface.get("assistant_work_routes") if isinstance(chat_engine_surface.get("assistant_work_routes"), Mapping) else {},
         "chat_response_carrier": chat_response_carrier,
         "remote_access": {

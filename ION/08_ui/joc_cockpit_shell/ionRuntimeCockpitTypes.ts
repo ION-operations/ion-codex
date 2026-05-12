@@ -188,6 +188,196 @@ export type IonLocalServiceStatus = {
   live_execution_authority: boolean;
 };
 
+export type IonHelixionJocRebuildProjection = {
+  schema_id?: string;
+  status?: string;
+  decision?: string;
+  master_plan_path?: string;
+  registry_path?: string;
+  current_plan_path?: string;
+  master_plan_present?: boolean;
+  registry_present?: boolean;
+  current_plan_present?: boolean;
+  ready_for_phase_1?: boolean;
+  phase_0_gate?: Record<string, unknown>;
+  product_roles?: Record<string, string>;
+  required_surfaces?: string[];
+  canonical_zones?: string[];
+  canonical_object_types?: string[];
+  allowed_v1_capabilities?: string[];
+  forbidden_v1_capabilities?: string[];
+  next_build_sequence?: string[];
+  source_authorities?: string[];
+  orchestration_context_package?: Record<string, unknown>;
+  local_shell?: Record<string, unknown>;
+  react_bundle?: Record<string, unknown>;
+  development_urls?: string[];
+  latest_capsule_entry_id?: string;
+  latest_history_receipt?: string;
+  latest_codex_solo_checkpoint_id?: string;
+  authority_posture?: Record<string, unknown>;
+  production_authority?: boolean;
+  live_execution_authority?: boolean;
+  unrestricted_browser_control?: boolean;
+};
+
+export type IonServiceConsoleModel = {
+  schema_id?: 'ion.cockpit_service_console.v1' | string;
+  ok?: boolean;
+  verdict?: string;
+  headline?: string;
+  required_issue_count?: number;
+  warning_count?: number;
+  generated_at?: string;
+  shell_root?: string;
+  operator_message?: string;
+  production_authority?: boolean;
+  live_execution_authority?: boolean;
+  services?: Array<{
+    id?: string;
+    unit?: string;
+    label?: string;
+    role?: string;
+    critical?: boolean;
+    fix_label?: string;
+    active?: boolean;
+    status?: string;
+    finding?: string;
+    severity?: string;
+    restart_confirmation?: string;
+  }>;
+};
+
+export type IonChatgptBrowserMcpSummary = {
+  schema_id?: 'ion.chatgpt_browser_mcp_cockpit_summary.v1' | string;
+  connector_contract_verdict?: string;
+  http_preview_verdict?: string;
+  transport_state?: string;
+  active_connector_url?: string;
+  carrier_id?: string;
+  project_facing_callsign?: string;
+  callsign_authority?: string;
+  callsign_decision_receipt?: string;
+  tool_count?: number;
+  first_parity_tools_present?: string[];
+  visibility_tools_present?: string[];
+  agent_invocation_tools_present?: string[];
+  carrier_message_count?: number;
+  codex_work_request_count?: number;
+  latest_carrier_messages?: Array<Record<string, unknown>>;
+  latest_task_returns?: Array<Record<string, unknown>>;
+  latest_agent_invocations?: Array<Record<string, unknown>>;
+  latest_artifact_receipts?: Array<Record<string, unknown>>;
+  latest_decisions?: Array<Record<string, unknown>>;
+  codex_queue_runner?: Record<string, unknown>;
+  agent_invocation_broker?: Record<string, unknown>;
+  artifact_upload_status_counts?: Record<string, number>;
+  adapter_gap_not_core_failure?: boolean;
+  production_authority?: boolean;
+  live_execution_authority?: boolean;
+};
+
+export type IonCodexCapsuleChatSummary = {
+  schema_id?: 'ion.codex_capsule_chat_cockpit_summary.v1' | string;
+  model_path?: string;
+  model_present?: boolean;
+  verdict?: string;
+  generated_at?: string;
+  product?: Record<string, unknown>;
+  product_mode?: Record<string, unknown>;
+  authority?: Record<string, unknown>;
+  conversation_summary?: Record<string, unknown>;
+  turn_trace_count?: number;
+  queued_request_count?: number;
+  runner_active?: boolean;
+  response_run_count?: number;
+  latest_response_status?: string;
+  latest_response_runs?: Array<Record<string, unknown>>;
+  latest_work_requests?: Array<Record<string, unknown>>;
+  latest_task_returns?: Array<Record<string, unknown>>;
+  codex_queue_path?: string;
+  capsule?: {
+    ok?: boolean;
+    path?: string;
+    entry_count?: number;
+    context_line_limit?: number;
+    recent_rows?: Array<Record<string, unknown>>;
+  };
+  mini?: {
+    ok?: boolean;
+    role?: string;
+    line_count?: number;
+    max_lines?: number;
+    text_excerpt?: string;
+  };
+  hot_context?: Record<string, unknown>;
+  memory_visualization?: Record<string, unknown>;
+  chat_engine?: Record<string, unknown>;
+  skills?: Record<string, unknown>;
+  response_carrier?: Record<string, unknown>;
+  execution_bridge?: Record<string, unknown>;
+  production_authority?: boolean;
+  live_execution_authority?: boolean;
+  secrets_authority?: boolean;
+};
+
+export type IonExtensionMicroShellSummary = {
+  schema_id?: 'ion.extension_micro_shell_cockpit_summary.v1' | string;
+  status?: string;
+  extension_root?: string;
+  manifest?: Record<string, unknown>;
+  agent_lane_contract?: Record<string, unknown>;
+  portable_companion?: Record<string, unknown>;
+  page_perception?: {
+    domain_registry_path?: string;
+    task_return_path?: string;
+    domain_registry_present?: boolean;
+    task_return_present?: boolean;
+    domain_count?: number;
+    domains?: Array<Record<string, unknown>>;
+    task_return_headings?: string[];
+  };
+  queue_pack_authoring?: Record<string, unknown>;
+  current_v1_authority?: Record<string, unknown>;
+  safety_law?: string[];
+  required_boundaries?: string[];
+  implementation_gates?: string[];
+  non_claim_boundaries?: string[];
+  production_authority?: boolean;
+  live_execution_authority?: boolean;
+  unrestricted_browser_control?: boolean;
+  silent_browser_send_authority?: boolean;
+};
+
+export type IonDocsProjectsPackagesSummary = {
+  schema_id?: 'ion.docs_projects_packages_cockpit_summary.v1' | string;
+  status?: string;
+  context_packages?: {
+    path?: string;
+    generated_at?: string;
+    package_count?: number;
+    selected_by_default?: string[];
+    package_types?: Record<string, number>;
+    packages?: Array<Record<string, unknown>>;
+    production_authority?: boolean;
+    live_execution_authority?: boolean;
+  };
+  project_favorites?: Array<Record<string, unknown>>;
+  artifact_packages?: {
+    root?: string;
+    zip_count_visible?: number;
+    latest_zips?: Array<Record<string, unknown>>;
+    auto_zip_drop_authority?: boolean;
+    drop_zone_execution_authority?: boolean;
+  };
+  safe_full_project_package?: Record<string, unknown>;
+  custom_gpt_context?: Record<string, unknown>;
+  operator_model?: Record<string, unknown>;
+  production_authority?: boolean;
+  live_execution_authority?: boolean;
+  unrestricted_filesystem_mutation?: boolean;
+};
+
 export type IonCockpitViewModel = {
   schema_id: 'ion.cockpit_view_model.v1';
   generated_at: string;
@@ -215,6 +405,20 @@ export type IonCockpitViewModel = {
     local_service_status?: string;
     local_service_count?: number;
     local_service_missing_template_count?: number;
+    helixion_rebuild_status?: string;
+    helixion_rebuild_ready_for_phase_1?: boolean;
+    browser_carrier_message_count?: number;
+    codex_work_request_count?: number;
+    action_gateway_tool_count?: number;
+    action_gateway_transport_state?: string;
+    codex_capsule_chat_verdict?: string;
+    codex_capsule_chat_turn_count?: number;
+    codex_capsule_chat_response_run_count?: number;
+    extension_version?: string;
+    extension_panel_count?: number;
+    page_perception_domain_count?: number;
+    context_package_count?: number;
+    artifact_package_count?: number;
   };
   queues: IonQueueState;
   agents: {
@@ -241,6 +445,12 @@ export type IonCockpitViewModel = {
   safe_full_project_package?: IonSafeFullProjectPackage;
   v72_mcp_donor_reconciliation?: IonV72McpDonorReconciliation;
   local_services?: IonLocalServiceStatus;
+  service_console?: IonServiceConsoleModel;
+  helixion_joc_rebuild?: IonHelixionJocRebuildProjection;
+  chatgpt_browser_mcp?: IonChatgptBrowserMcpSummary;
+  codex_capsule_chat?: IonCodexCapsuleChatSummary;
+  extension_micro_shell?: IonExtensionMicroShellSummary;
+  docs_projects_packages?: IonDocsProjectsPackagesSummary;
   receipts: Record<string, unknown>[];
   authority_classes: IonAuthorityClass[];
   source_paths: Record<string, string>;

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from kernel.ion_local_cockpit_app import build_cockpit_health, build_cockpit_html
+from kernel.ion_local_cockpit_app import build_cockpit_health, build_cockpit_html, build_react_cockpit_html, resolve_react_static_asset
 
 
 def test_local_cockpit_health_is_visibility_only(tmp_path: Path):
@@ -54,3 +54,15 @@ def test_local_cockpit_html_renders_codex_and_service_state():
     assert "ION_CODEX_QUEUE_RUNNER_READY" in html
     assert "ion-cockpit-app.service" in html
     assert "Reconciliation write" in html
+
+
+def test_local_cockpit_react_bundle_helpers_are_local_only(tmp_path: Path):
+    dist = tmp_path / "ION/08_ui/joc_cockpit_shell/dist"
+    asset = dist / "assets/app.js"
+    asset.parent.mkdir(parents=True)
+    (dist / "index.html").write_text("<main id=\"root\"></main>", encoding="utf-8")
+    asset.write_text("console.log('ion')", encoding="utf-8")
+
+    assert build_react_cockpit_html(tmp_path) == "<main id=\"root\"></main>"
+    assert resolve_react_static_asset(tmp_path, "/joc-static/assets/app.js") == asset.resolve()
+    assert resolve_react_static_asset(tmp_path, "/joc-static/../secret") is None

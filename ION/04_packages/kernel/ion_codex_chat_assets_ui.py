@@ -20,13 +20,14 @@ CODEX_CHAT_APP_CSS = """
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 * { box-sizing: border-box; }
-html, body { min-height: 100%; }
+html, body { height: 100%; min-height: 100%; overflow: hidden; }
 body { margin: 0; background: var(--bg); color: var(--text); }
 button, textarea { font: inherit; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3, p { margin: 0; letter-spacing: 0; }
 .capsule-app {
-  min-height: 100vh;
+  height: 100vh;
+  min-height: 0;
   display: grid;
   grid-template-columns: 54px 280px minmax(0, 1fr) 360px 54px;
   grid-template-rows: 46px minmax(0, 1fr) 120px;
@@ -52,13 +53,17 @@ h1, h2, h3, p { margin: 0; letter-spacing: 0; }
 .top-page-tabs {
   display: inline-flex;
   align-items: center;
+  flex: 1 1 auto;
+  max-width: min(58vw, 980px);
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 6px;
-  overflow: hidden;
+  overflow-x: auto;
+  scrollbar-width: thin;
   background: #090d0f;
 }
 .top-page-tab {
+  flex: 0 0 auto;
   min-height: 28px;
   border: 0;
   border-right: 1px solid var(--line);
@@ -162,8 +167,45 @@ h1, h2, h3, p { margin: 0; letter-spacing: 0; }
 .main-page[hidden] { display: none; }
 .page-surface {
   height: 100%;
+  min-height: 0;
   overflow: auto;
   padding: 18px min(5vw, 56px);
+}
+.page-surface-shell {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  overflow: hidden;
+  padding: 0;
+}
+.page-scroll-body {
+  min-height: 0;
+  overflow: auto;
+  padding: 18px min(5vw, 56px);
+}
+.page-anchor-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 42px;
+  padding: 8px min(5vw, 56px);
+  border-top: 1px solid var(--line);
+  background: #07090a;
+  color: var(--muted);
+  font-size: 12px;
+}
+.page-anchor-bar b { color: var(--text); }
+.page-anchor-actions { display: inline-flex; align-items: center; gap: 8px; }
+.page-anchor-actions span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  background: #0b1012;
+  white-space: nowrap;
 }
 .page-surface h2 {
   margin-bottom: 6px;
