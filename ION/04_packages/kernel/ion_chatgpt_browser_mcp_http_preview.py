@@ -794,8 +794,13 @@ def handle_mcp_jsonrpc(root: str | Path, payload: Mapping[str, Any]) -> dict[str
             }
             return _jsonrpc_result(msg_id, _tool_call_result(tool_name, blocked, is_error=True))
 
+        # The HTTP/MCP adapter performs the public write-confirmation gate above,
+        # but the connector contract also performs its own defense-in-depth
+        # confirmation checks. Preserve the confirmation field when forwarding
+        # bounded write calls; stripping it caused write tools such as
+        # ion_bounded_patch_apply to fail closed with confirmation_required even
+        # after a valid MCP confirmation.
         clean_args = dict(arguments)
-        clean_args.pop("confirmation", None)
         result = call_chatgpt_connector_tool(root, tool_name, clean_args)
         return _jsonrpc_result(msg_id, _tool_call_result(tool_name, result, is_error=not bool(result.get("ok"))))
     if method == "ping":

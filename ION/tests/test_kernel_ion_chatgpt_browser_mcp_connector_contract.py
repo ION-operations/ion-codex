@@ -11,7 +11,7 @@ from kernel.ion_chatgpt_browser_mcp_connector_contract import (
     call_chatgpt_connector_tool,
     write_chatgpt_browser_mcp_connector_contract,
 )
-from kernel.ion_chatgpt_browser_mcp_http_preview import documented_launch_requests_serve
+from kernel.ion_chatgpt_browser_mcp_http_preview import documented_launch_requests_serve, handle_mcp_jsonrpc
 
 
 def _seed_root(root: Path) -> None:
@@ -913,6 +913,99 @@ def test_bounded_patch_preview_and_apply_with_receipt_and_replay(tmp_path):
     assert replay["data"]["idempotent_replay"] is True
     assert replay["data"]["duplicate_prevented"] is True
     assert replay["data"]["receipt_path"] == applied["data"]["receipt_path"]
+
+
+def test_http_mcp_bounded_patch_apply_preserves_confirmation(tmp_path):
+    _seed_root(tmp_path)
+    target = tmp_path / "ION/04_packages/kernel/http_patch_target.py"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text("VALUE = 1\n", encoding="utf-8")
+    original_sha = hashlib.sha256(target.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
+
+    blocked = handle_mcp_jsonrpc(
+        tmp_path,
+        {
+            "jsonrpc": "2.0",
+            "id": "missing-confirmation",
+            "method": "tools/call",
+            "params": {
+                "name": "ion_bounded_patch_apply",
+                "arguments": {
+                    "idempotency_key": "http-patch-target-001",
+                    "operations": [
+                        {
+                            "path": "ION/04_packages/kernel/http_patch_target.py",
+                            "old_text": "VALUE = 1\n",
+                            "new_text": "VALUE = 2\n",
+                            "expected_sha256": original_sha,
+                        }
+                    ],
+                },
+            },
+        },
+    )
+    blocked_content = blocked["result"]["structuredContent"]
+    assert blocked["result"]["isError"] is True
+    assert blocked_content["finding"] == "bounded_write_confirmation_required"
+
+    applied = handle_mcp_jsonrpc(
+        tmp_path,
+        {
+            "jsonrpc": "2.0",
+            "id": "with-confirmation",
+            "method": "tools/call",
+            "params": {
+                "name": "ion_bounded_patch_apply",
+                "arguments": {
+                    "confirmation": "ION_BOUNDED_WRITE_CONFIRMED",
+                    "idempotency_key": "http-patch-target-001",
+                    "operations": [
+                        {
+                            "path": "ION/04_packages/kernel/http_patch_target.py",
+                            "old_text": "VALUE = 1\n",
+                            "new_text": "VALUE = 2\n",
+                            "expected_sha256": original_sha,
+                        }
+                    ],
+                },
+            },
+        },
+    )
+    applied_content = applied["result"]["structuredContent"]
+    assert applied["result"]["isError"] is False
+    assert applied_content["ok"] is True
+    assert applied_content["data"]["status"] == "CANDIDATE_PATCH_APPLIED"
+    assert target.read_text(encoding="utf-8") == "VALUE = 2\n"
+
+    replay = handle_mcp_jsonrpc(
+        tmp_path,
+        {
+            "jsonrpc": "2.0",
+            "id": "replay-confirmation",
+            "method": "tools/call",
+            "params": {
+                "name": "ion_bounded_patch_apply",
+                "arguments": {
+                    "confirmation": "ION_BOUNDED_WRITE_CONFIRMED",
+                    "idempotency_key": "http-patch-target-001",
+                    "operations": [
+                        {
+                            "path": "ION/04_packages/kernel/http_patch_target.py",
+                            "old_text": "VALUE = 1\n",
+                            "new_text": "VALUE = 2\n",
+                            "expected_sha256": original_sha,
+                        }
+                    ],
+                },
+            },
+        },
+    )
+    replay_content = replay["result"]["structuredContent"]
+    assert replay["result"]["isError"] is False
+    assert replay_content["ok"] is True
+    assert replay_content["mutates_active_state"] is False
+    assert replay_content["data"]["idempotent_replay"] is True
+    assert replay_content["data"]["duplicate_prevented"] is True
 
 
 def test_bounded_patch_blocks_protected_shared_context(tmp_path):
