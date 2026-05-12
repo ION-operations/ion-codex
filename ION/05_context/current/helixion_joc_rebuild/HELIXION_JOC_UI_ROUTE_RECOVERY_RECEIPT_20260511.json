@@ -1,0 +1,67 @@
+{
+  "schema_id": "ion.helixion_joc.ui_route_recovery_receipt.v1",
+  "receipt_id": "HELIXION_JOC_UI_ROUTE_RECOVERY_20260511",
+  "created_at": "2026-05-11",
+  "status": "RECOVERY_ROUTE_PATCH_APPLIED",
+  "operator_trigger": "Approved recovery pass after monolithic JOC UI failure investigation.",
+  "problem_statement": "JOC/Helixion/dAimon UI work was allowed to proceed through general Helixion orchestration and generic frontend implementation instead of the UI Frontend Excellence domain and JOC work-surface packet.",
+  "root_cause": {
+    "routing_gap": "The UI Frontend Excellence domain and joc_work_surface_ui_packet existed in candidate current context but were not mounted as an active skill or context package in the accepted Codex solo routing path.",
+    "execution_gap": "The implementation treated JOC as a visual theme and data inventory target instead of a binding shell/page/drawer/timeline architecture.",
+    "quality_gate_gap": "Visual proof and JOC canon settlement were not required before UI implementation claims."
+  },
+  "changes": [
+    {
+      "path": "ION/04_packages/kernel/ion_skill_activation.py",
+      "change": "Added UI_FRONTEND_TERMS and routed JOC UI, cockpit shell, drawers, inspectors, bottom timeline, monolith, extension UI, dAimon companion, Docs/Packages, and visual proof language to ui-frontend-excellence before generic recovery/orchestration selection."
+    },
+    {
+      "path": "ION/03_registry/ion_skill_registry.yaml",
+      "change": "Added ui-frontend-excellence specialist skill with required UI canon context mount, joc_work_surface_ui_packet template activation, non-monolith proof contract, and visual-proof-before-acceptance requirement."
+    },
+    {
+      "path": "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "change": "Added ui_frontend_excellence_package and included the UI protocol/domain/template/packet in route-depth refs so future UI work can mount the correct canon before implementation."
+    }
+  ],
+  "quarantine": {
+    "applies_to": [
+      "C-078",
+      "C-079",
+      "C-080",
+      "C-081",
+      "C-082",
+      "C-083",
+      "C-085"
+    ],
+    "meaning": "These UI implementation checkpoints are candidate/provisional inventory only. They are not accepted JOC product architecture and must not be treated as settled UI canon.",
+    "allowed_reuse": "Data surfaces, view-model ideas, and evidence references may be reused only after explicit mapping into TOP_BAR, LEFT_ICON_RAIL, LEFT_DRAWER, MAIN_WORK_SURFACE, RIGHT_INSPECTOR, RIGHT_ICON_RAIL, and BOTTOM_TIMELINE."
+  },
+  "mandatory_next_route": [
+    "JOC_UI_CANON_STEWARD",
+    "FRONTEND_WORK_SURFACE_ARCHITECT",
+    "INTERACTION_STATE_WEAVER",
+    "CONTEXT_VISUALIZATION_CARTOGRAPHER",
+    "COMPONENT_BUILDER",
+    "VISUAL_PROOF_AUDITOR"
+  ],
+  "hard_gates": [
+    "No new JOC/Helixion UI implementation without ui-frontend-excellence activation.",
+    "No large scrolling dashboard or panel wall as accepted architecture.",
+    "No React/Vite/product route work before shell/page/drawer/timeline contract is settled for the target surface.",
+    "No visual-quality or accepted-state claim without explicit visual proof or an unrun proof note.",
+    "No silent browser control, production mutation, credentials, purchases, or destructive actions."
+  ],
+  "non_claims": [
+    "This receipt does not fix or rebuild the UI.",
+    "This receipt does not validate the route patches with tests.",
+    "This receipt does not claim the 8765 cockpit and 8788 development shell are unified.",
+    "This receipt does not accept C-078 through C-085 as final product UI."
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  }
+}

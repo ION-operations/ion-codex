@@ -1,0 +1,124 @@
+{
+  "schema_id": "ion.action_surface_test_log.v0_1",
+  "status": "candidate_validation_record",
+  "generated_at": "2026-05-11T00:00:00Z",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false
+  },
+  "gateway_policy_health_checks": [
+    {
+      "name": "action_gateway_health",
+      "command": "python3 -S -m kernel.ion_custom_gpt_action_gateway --health --json",
+      "result": {
+        "verdict": "ION_CUSTOM_GPT_ACTION_GATEWAY_READY",
+        "status": "draft_non_production",
+        "production_authority": false,
+        "live_execution_authority": false
+      }
+    },
+    {
+      "name": "action_gateway_policy",
+      "command": "python3 -S -m kernel.ion_custom_gpt_action_gateway --policy --json",
+      "result": {
+        "verdict": "ION_CUSTOM_GPT_ACTION_GATEWAY_READY",
+        "status": "draft_non_production",
+        "public_transport": "cloudflare_tunnel",
+        "max_body_bytes": 262144,
+        "require_idempotency_key_for_mutation": true,
+        "production_authority": false,
+        "live_execution_authority": false
+      }
+    }
+  ],
+  "mcp_preview_snapshot_check": {
+    "source": "ION/05_context/current/CHATGPT_BROWSER_HTTP_MCP_PREVIEW_V121.json",
+    "result": {
+      "verdict": "ION_CHATGPT_BROWSER_HTTP_MCP_PREVIEW_READY",
+      "version_line": "V121_CHATGPT_BROWSER_HTTP_MCP_PREVIEW",
+      "endpoint_path": "/mcp",
+      "default_bind_host": "127.0.0.1",
+      "default_port": 8765,
+      "connector_state": "LOCAL_HTTP_PREVIEW_NOT_PUBLIC_CONNECTOR",
+      "write_confirmation_token": "ION_BOUNDED_WRITE_CONFIRMED",
+      "allowed_tools_count_snapshot": 42
+    }
+  },
+  "action_gateway_validate_only_matrix": [
+    {
+      "case": "ion.action.v1_schema_fail",
+      "expected": "SCHEMA_INVALID",
+      "result": {
+        "ok": false,
+        "refusal_class": "SCHEMA_INVALID",
+        "intent": "create_codex_work_packet",
+        "chatops_findings": [
+          "schema_must_be_ion_chatops_action_v1"
+        ]
+      }
+    },
+    {
+      "case": "ion.chatops.action.v1_create_codex_work_packet",
+      "expected": "validation_only_pass",
+      "result": {
+        "ok": true,
+        "refusal_class": null,
+        "intent": "create_codex_work_packet",
+        "chatops_findings": []
+      }
+    },
+    {
+      "case": "ion.chatops.action.v1_register_artifact",
+      "expected": "validation_only_pass",
+      "result": {
+        "ok": true,
+        "refusal_class": null,
+        "intent": "register_artifact",
+        "chatops_findings": []
+      }
+    },
+    {
+      "case": "ion.chatops.action.v1_write_file_draft",
+      "expected": "validation_only_pass",
+      "result": {
+        "ok": true,
+        "refusal_class": null,
+        "intent": "write_file_draft",
+        "chatops_findings": []
+      }
+    },
+    {
+      "case": "ion.chatops.action.v1_create_github_issue_draft_schema_gap",
+      "expected": "schema_mismatch_gap",
+      "result": {
+        "ok": false,
+        "refusal_class": "SCHEMA_INVALID",
+        "intent": "create_github_issue_draft",
+        "chatops_findings": [
+          "github_owner_required",
+          "github_repo_required",
+          "github_title_required",
+          "github_body_required"
+        ]
+      }
+    }
+  ],
+  "browser_queue_snapshot": {
+    "source": "ION/05_context/current/action_gateway/runtime/browser_queue.json",
+    "packet_count": 2,
+    "queued_count": 1,
+    "needs_operator_count": 1,
+    "max_queue_length": 25,
+    "max_autoplay_turns": 10,
+    "packets": [
+      {
+        "packet_id": "BQ-e80d77cedffc2f39",
+        "state": "queued"
+      },
+      {
+        "packet_id": "B01_RUNTIME_CONNECTORS_ACTIVATION_20260510",
+        "state": "needs_operator"
+      }
+    ]
+  }
+}

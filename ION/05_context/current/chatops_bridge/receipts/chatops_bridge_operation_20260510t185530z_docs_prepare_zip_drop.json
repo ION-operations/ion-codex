@@ -1,0 +1,51 @@
+{
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": null,
+  "created_at": "2026-05-10T18:55:30+00:00",
+  "failure_classification": null,
+  "files_touched": [
+    "ION/05_context/current/chatops_bridge/artifacts/docs_drop/docs_drop_20260510T185530Z_daimon_ion_license.zip",
+    "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/mpigugq0xkwvubnh8nz0lhkl3zb1tcxb.json"
+  ],
+  "live_execution_authority": false,
+  "operation": "docs_prepare_zip_drop",
+  "production_authority": false,
+  "receipt_id": "chatops_bridge_operation_20260510T185530Z_docs_prepare_zip_drop",
+  "schema_id": "ion.chatops.bridge_operation_receipt.v1",
+  "status": "completed",
+  "target_refs": [
+    {
+      "path": "dAimon_ION/LICENSE",
+      "provider": "local_ion",
+      "role": "docs_zip_source"
+    }
+  ],
+  "validation": {
+    "result": {
+      "artifact": {
+        "attachable": true,
+        "content_type": "application/zip",
+        "finding": null,
+        "mtime": "2026-05-10T18:55:30+00:00",
+        "name": "docs_drop_20260510T185530Z_daimon_ion_license.zip",
+        "path": "ION/05_context/current/chatops_bridge/artifacts/docs_drop/docs_drop_20260510T185530Z_daimon_ion_license.zip",
+        "sha256": "192bc763c47883a58ed001724cb01cf17777c050aae2d0242c84b171dd07b757",
+        "size_bytes": 526
+      },
+      "content_type": "application/zip",
+      "download_token": "MpIgUgq0XKwvubNh8Nz0LHkl3Zb1TCXB",
+      "download_url": "http://127.0.0.1:8767/artifacts/download/MpIgUgq0XKwvubNh8Nz0LHkl3Zb1TCXB",
+      "file_count": 1,
+      "filename": "docs_drop_20260510T185530Z_daimon_ion_license.zip",
+      "ok": true,
+      "sha256": "192bc763c47883a58ed001724cb01cf17777c050aae2d0242c84b171dd07b757",
+      "size_bytes": 526,
+      "source_path": "dAimon_ION/LICENSE",
+      "source_size_bytes": 689,
+      "ticket_path": "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/mpigugq0xkwvubnh8nz0lhkl3zb1tcxb.json"
+    }
+  }
+}

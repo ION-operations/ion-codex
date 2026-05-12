@@ -1,0 +1,73 @@
+{
+  "schema_id": "ion.custom_gpt_capsule_system.setup_cards.blocker.v1",
+  "packet_id": "CUSTOM_GPT_CAPSULE_SYSTEM_003_SETUP_CARDS_BLOCKER",
+  "status": "SUPERSEDED_ARTIFACT_FOUND_IN_ROOT_WORKPACKETS",
+  "created_date": "2026-05-10",
+  "sandbox_package": {
+    "id": "ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4",
+    "posture": "candidate_sandbox_context_package",
+    "reported_sha256": "d3a2de8c391f84123b7d6d7a26193a7697db5775ac3c88be210fd9fad1bfd9e9",
+    "reported_role_count": 12,
+    "reported_validation": "PASS"
+  },
+  "local_checks": [
+    {
+      "path": "/mnt/data/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4.zip",
+      "exists": false
+    },
+    {
+      "path": "/home/sev/ION - Production/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4.zip",
+      "exists": false
+    },
+    {
+      "path": "/home/sev/ION - Production/ION_CODEX FULL/ION/05_context/inbox/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4.zip",
+      "exists": false
+    },
+    {
+      "path": "/home/sev/ION - Production/ION_CODEX FULL/ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4.zip",
+      "exists": false
+    }
+  ],
+  "required_local_staging_path": "/home/sev/ION - Production/ION_CODEX FULL/ION/05_context/inbox/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4.zip",
+  "corrected_source_artifact_path": "/home/sev/ION - Production/ION_CODEX FULL/workpackets/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4.zip",
+  "corrected_ingest_packet_path": "ION/05_context/current/custom_gpt_capsule_system/CUSTOM_GPT_CAPSULE_SYSTEM_003_SETUP_CARDS_INGEST.json",
+  "correction_note": "Prior blocker searched the ION subtree and common inbox/artifact roots but missed the main ION_CODEX FULL/workpackets artifact lane.",
+  "existing_local_custom_gpt_roots": [
+    "ION/06_artifacts/packages/custom_gpt/",
+    "ION/06_intelligence/orchestration/custom_gpt/"
+  ],
+  "latest_local_candidate_zip_observed": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_7_CANDIDATE_20260509T224136Z.zip",
+  "latest_local_candidate_source_root_observed": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/",
+  "blocked_operations": [
+    "sha256_verification",
+    "manifest_parse",
+    "candidate_context_package_staging",
+    "comparison_against_existing_custom_gpt_package_root",
+    "daimon_companion_build_draft_generation",
+    "dom_cartographer_build_draft_generation"
+  ],
+  "corrected_operations_completed": [
+    "sha256_verification",
+    "candidate_context_package_staging",
+    "comparison_against_existing_custom_gpt_package_root",
+    "daimon_companion_build_draft_generation",
+    "dom_cartographer_build_draft_generation"
+  ],
+  "non_claims": [
+    "The sandbox package is not accepted local ION state.",
+    "No Custom GPTs were published.",
+    "No live actions were configured.",
+    "No setup card contents were fabricated from the relay summary.",
+    "No build drafts were generated from unverified sandbox contents."
+  ],
+  "next_gate": {
+    "name": "CUSTOM_GPT_CAPSULE_SYSTEM_003_SETUP_CARDS_LOCAL_INGEST",
+    "requires": [
+      "zip_exists_at_required_local_staging_path",
+      "sha256_matches_reported_value",
+      "package_manifest_and_proof_files_parse",
+      "candidate_package_staged",
+      "dAimon_Companion_and_DOM_Cartographer_build_drafts_generated_from_verified_contents"
+    ]
+  }
+}

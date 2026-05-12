@@ -1,0 +1,74 @@
+{
+  "schema_id": "ion.helixion_joc.ui_recovery_receipt.v1",
+  "receipt_id": "HELIXION_JOC_UI_RECOVERY_002_EXISTING_COCKPIT_TOP_PAGES_20260511",
+  "created_at": "2026-05-11",
+  "status": "CANDIDATE_UI_RECOVERY_PATCH_APPLIED_NOT_VISUALLY_PROVED",
+  "objective": "Move Helixion/JOC/dAimon recovery back into the existing 8765 Codex/JOC cockpit shell instead of continuing the failed 8788 React prototype path.",
+  "operator_context": "Operator approved recovery and asked to proceed after identifying that the previous implementation ignored JOC page/drawer canon and created a monolithic panel board.",
+  "source_law": [
+    "ION/05_context/current/ai_assistant_work/protocols/UI_FRONTEND_EXCELLENCE_DOMAIN_PROTOCOL_V0_1.md",
+    "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+    "ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md",
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_ROUTE_RECOVERY_RECEIPT_20260511.json"
+  ],
+  "changes": [
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_shell_ui.py",
+      "change": "Replaced external 8788 JOC DEV and DOCS/PKG top-bar chips with canonical in-shell top pages: Chat, JOC, Queue, Codex, Extension, Docs, Projects, WisdomNET, Gates, Receipts, and Settings."
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_shell_ui.py",
+      "change": "Added focused candidate main pages for JOC recovery, queue carrier, Codex/Capsule, dAimon extension, Docs/Packages, Projects, WisdomNET, and Gates/Recovery using the existing 8765 shell zones."
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+      "change": "Adjusted top page tab CSS to support a larger canonical page set without clipping into a hidden monolith."
+    }
+  ],
+  "architecture": {
+    "target_surface": "http://127.0.0.1:8765/cockpit/chat",
+    "failed_surface_status": "http://127.0.0.1:8788/helixion/development remains candidate/provisional and is no longer the primary recovery target.",
+    "shell_zones_used": [
+      "TOP_BAR",
+      "LEFT_ICON_RAIL",
+      "LEFT_DRAWER",
+      "MAIN_WORK_SURFACE",
+      "RIGHT_INSPECTOR",
+      "RIGHT_ICON_RAIL",
+      "BOTTOM_TIMELINE"
+    ],
+    "rule": "Top bar selects one focused main page; left drawer and right inspector carry page-local tools/proof instead of stacking everything on one page."
+  },
+  "quarantine": {
+    "still_applies_to": [
+      "C-078",
+      "C-079",
+      "C-080",
+      "C-081",
+      "C-082",
+      "C-083",
+      "C-085"
+    ],
+    "meaning": "Prior 8788/React UI work remains candidate inventory only and is not accepted product UI."
+  },
+  "validation": {
+    "tests_run": false,
+    "browser_visual_proof_run": false,
+    "service_reload_run": false,
+    "reason": "Operator did not request tests/reload; this pass applied bounded recovery edits only.",
+    "acceptance_status": "not_accepted_until_visual_proof"
+  },
+  "non_claims": [
+    "This does not finish the Docs/Packages feature.",
+    "This does not finish the dAimon extension feature.",
+    "This does not claim the page visuals are final.",
+    "This does not claim the 8765 service has reloaded the changed renderer.",
+    "This does not authorize live browser control, silent send, production mutation, credentials, purchases, or destructive actions."
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  }
+}

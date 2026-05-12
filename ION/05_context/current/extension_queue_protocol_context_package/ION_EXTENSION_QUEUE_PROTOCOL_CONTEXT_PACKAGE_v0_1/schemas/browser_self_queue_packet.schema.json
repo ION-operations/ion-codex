@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.schema.browser_self_queue_packet.v0_1",
+  "type": "object",
+  "required": ["schema_id", "packet_id", "conversation_target", "prompt", "state"],
+  "properties": {
+    "schema_id": {"const": "ion.browser_self_queue_packet.v0_1"},
+    "packet_id": {"type": "string"},
+    "conversation_target": {"enum": ["current_chat", "branch_chat"]},
+    "branch_id": {"type": ["string", "null"]},
+    "prompt": {"type": "string"},
+    "state": {"enum": ["draft", "candidate", "approved", "claimed", "running", "proof_accepted", "settled", "cancelled", "superseded"]},
+    "result_capture_ref": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

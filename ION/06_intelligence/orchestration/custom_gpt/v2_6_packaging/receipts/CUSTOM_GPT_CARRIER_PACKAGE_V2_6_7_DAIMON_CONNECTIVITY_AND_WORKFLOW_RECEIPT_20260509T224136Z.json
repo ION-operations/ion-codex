@@ -1,0 +1,78 @@
+{
+  "schema_id": "ion.custom_gpt_carrier_package_repair_receipt.v1",
+  "receipt_id": "custom-gpt-carrier-v2-6-7-daimon-connectivity-workflow-20260509T224136Z",
+  "created_at": "2026-05-09T22:41:36Z",
+  "status": "candidate_packaged",
+  "objective": "Update Custom GPT carrier package to include proven Codex Capsule/queue/reconcile/live-telemetry relay surfaces and dAimon governed-state doctrine with project-bound continuity guidance.",
+  "authority_boundary": {
+    "candidate_only": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false
+  },
+  "instruction_kernel": {
+    "path": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE_8K.md",
+    "character_count": 7985,
+    "builder_limit": 8000,
+    "added_laws": [
+      "Codex Capsule bridge surfaces are explicit connector-lane tools.",
+      "Queue process/reconcile/telemetry surfaces are bounded and proof-gated.",
+      "Voice misrecognition safety gate requires confirmation for ambiguous authority-bearing commands.",
+      "Raw Codex output is candidate only until proof gates and receipts are satisfied."
+    ]
+  },
+  "changed_paths": [
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/000_READ_FIRST_MOUNT_ORDER.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/001_GPT_INSTRUCTIONS_PASTE_8K.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/002_KNOWLEDGE_UPLOAD_MANIFEST.json",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/010_V2_6_7_DAIMON_RELAY_AND_GOVERNED_STATE_NOTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/011_V2_6_7_VOICE_MISRECOGNITION_SAFETY_GATE_NOTE.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/CODEX_CAPSULE_BRIDGE_RUNBOOK_V2_6_7.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/CODEX_QUEUE_RECONCILE_LIVE_TELEMETRY_RUNBOOK_V2_6_7.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/030_CUSTOM_GPT_ADAPTER/FIRST_CONTACT_PROJECT_IDENTITY_AND_COLLAB_MODEL_V2_6_7.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/040_PRODUCT_DOCS/DAIMON_PROJECT_DOCTRINE_V2_6_7.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/060_ACTION_SCHEMAS/ACTION_SELECTION_AND_PROOF_MAP.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/060_ACTION_SCHEMAS/CONNECTION_SURFACE_MANIFEST_V2_6_7.md",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/090_VALIDATION/PACKAGE_MANIFEST.json",
+    "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/090_VALIDATION/V2_6_VALIDATION_REPORT.md",
+    "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_7_CANDIDATE_20260509T224136Z.zip"
+  ],
+  "artifact": {
+    "path": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_7_CANDIDATE_20260509T224136Z.zip",
+    "sha256": "1100ee4d91956611244d0f3c49021e1e2ddbc79a0a38146a02131dbb5d86d8e4",
+    "file_count": 4296,
+    "compressed_size_bytes": 5581366,
+    "uncompressed_size_bytes": 17206884,
+    "zip_test": "passed"
+  },
+  "validation": [
+    {
+      "scope": "instruction_kernel",
+      "command": "wc -m 001_GPT_INSTRUCTIONS_PASTE_8K.md",
+      "result": "7985 characters (< 8000)"
+    },
+    {
+      "scope": "package_tests",
+      "command": "PYTHONPATH=ION/04_packages pytest -q ION/tests/test_kernel_ion_custom_gpt_carrier_instruction_gates.py",
+      "result": "5 passed in 0.04s"
+    },
+    {
+      "scope": "artifact",
+      "command": "unzip -tq ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_7_CANDIDATE_20260509T224136Z.zip",
+      "result": "No errors detected"
+    },
+    {
+      "scope": "artifact",
+      "command": "zipinfo -t ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_7_CANDIDATE_20260509T224136Z.zip",
+      "result": "4296 files, 17206884 bytes uncompressed, 5581366 bytes compressed"
+    }
+  ],
+  "non_claims": [
+    "This does not grant production authority.",
+    "This does not grant live execution authority.",
+    "This does not certify external provider/GPT builder upload behavior.",
+    "This does not treat raw Codex worker output as accepted state without proof-gated returns."
+  ],
+  "next_packet": "Use 001_GPT_INSTRUCTIONS_PASTE_8K.md in the GPT Builder, upload the v2.6.7 candidate zip, and run a bounded connector-lane smoke across capsule send/poll and queue process/reconcile with proof-return verification."
+}

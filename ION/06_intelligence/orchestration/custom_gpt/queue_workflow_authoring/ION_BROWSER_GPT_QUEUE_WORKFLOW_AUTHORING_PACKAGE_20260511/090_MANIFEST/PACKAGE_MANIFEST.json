@@ -1,0 +1,30 @@
+{
+  "schema_id": "ion.browser_gpt_queue_workflow_authoring_package_manifest.v1",
+  "package_id": "ion_browser_gpt_queue_workflow_authoring_package_20260511",
+  "created_at": "2026-05-11",
+  "purpose": "Governed internal ION package for Browser GPT / Custom GPT authoring of advanced queue-pack workflows importable by the ION ChatOps Bridge.",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_extension_direct_file_authority": false,
+    "manual_start_required_default": true
+  },
+  "mount_order": [
+    "000_READ_FIRST.md",
+    "001_BROWSER_GPT_SYSTEM_INSTRUCTIONS.md",
+    "010_PROTOCOL/ION_QUEUE_WORKFLOW_AUTHORING_PROTOCOL.md",
+    "020_SCHEMAS/ion_extension_queue_pack.schema.json",
+    "030_TEMPLATES/queue_pack_manifest.template.json",
+    "030_TEMPLATES/workflow_step_prompt.template.md",
+    "050_VALIDATION/QUEUE_WORKFLOW_VALIDATION_CHECKLIST.md"
+  ],
+  "example_queue_pack": "040_EXAMPLES/advanced_orchestration_queue_pack/ion_queue_pack.json",
+  "importable_seed_zip": "ION/06_artifacts/packages/custom_gpt/ION_ADVANCED_ORCHESTRATION_QUEUE_PACK_SEED_20260511.zip",
+  "non_claims": [
+    "Queue packs are prompt material only.",
+    "Queue pack import does not grant production authority.",
+    "Queue pack import does not grant live execution authority.",
+    "Queue pack import does not grant permission to access secrets or mutate local/cloud systems."
+  ]
+}

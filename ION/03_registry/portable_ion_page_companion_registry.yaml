@@ -1,0 +1,96 @@
+schema_id: ion.portable_page_companion.registry.v1
+context_id: PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT
+status: active_product_context
+created_date: "2026-05-10"
+source:
+  carrier_message_id: carmsg_2026-05-10T181352Z0000_chatgpt_browser_carrier_to_codex_cli_carrier
+  ack_packet_path: ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T182014Z0000_carmsg_2026_05_10t181352z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json
+primary_files:
+  product_context_protocol: ION/02_architecture/PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT.md
+  joc_automation_lineage_synthesis: ION/02_architecture/DAIMON_EXTENSION_JOC_AUTOMATION_LINEAGE_SYNTHESIS.md
+  current_context_snapshot: ION/05_context/current/portable_ion_page_companion/PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT.json
+governs:
+  - portable_ion_logo_affordance
+  - page_aware_ion_helixion_companion
+  - one_shared_governed_chat_context_graph
+  - page_session_context_branches
+  - governed_dom_page_perception
+  - page_workflow_memory
+  - user_approved_safe_page_actions
+  - joc_micro_shell_ui_model
+  - visible_automation_event_stream
+  - browser_carrier_queue_trace
+  - blocked_capability_warning_surface
+inherited_protocols:
+  joc_cockpit_shell:
+    path: ION/02_architecture/ION_JOC_COCKPIT_SHELL_COMPONENT_CONTRACT_PROTOCOL.md
+    adopted_as: primary_companion_ui_layout_model
+  joc_reactive_os_stream:
+    path: ION/02_architecture/ION_JOC_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL_PROTOCOL.md
+    adopted_as: visible_automation_event_rail
+  joc_dry_run_dispatch_trace:
+    path: ION/02_architecture/ION_JOC_DRY_RUN_DISPATCH_EXECUTION_TRACE_VIEW_MODEL_PROTOCOL.md
+    adopted_as: gpt_actions_to_browser_queue_trace_blueprint
+  local_visual_harness:
+    path: ION/02_architecture/LOCAL_VISUAL_HARNESS_PROTOTYPE_PROTOCOL.md
+    adopted_as: perception_evidence_intake_model
+  visual_fixture_sandbox_review:
+    path: ION/02_architecture/VISUAL_FIXTURE_RUNNER_LOCAL_SANDBOX_REVIEW_PROTOCOL.md
+    adopted_as: execution_sandbox_review_gate
+  local_browser_execution_sandbox:
+    path: ION/02_architecture/LOCAL_BROWSER_EXECUTION_SANDBOX_SPEC_PROTOCOL.md
+    adopted_as: browser_execution_safety_floor
+  browser_file_attachment_automation:
+    path: ION/02_architecture/ION_BROWSER_FILE_ATTACHMENT_AUTOMATION_PROTOCOL.md
+    adopted_as: first_concrete_screen_dom_calibration_lane
+  automation_state:
+    path: ION/02_architecture/AUTOMATION_STATE_PROTOCOL.md
+    adopted_as: runtime_maturity_ladder
+connections:
+  DOM_PERCEPTION_001_DOMAIN_DESIGN:
+    relationship: constrains
+    note: DOM Perception defines how ION sees a page; this product context defines how the user carries ION onto pages.
+    work_request_path: ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T172639Z0000_dom_perception_001_domain_design_design_the_ion_daimon_browser_perception_domain.json
+  DOM_PERCEPTION_002_CONTEXT_PACKAGE_INGEST_AND_OPERATION_MODEL:
+    relationship: constrains
+    note: Page observations must remain provisional until settled into accepted context packages.
+    work_request_path: ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T173958Z0000_dom_perception_002_context_package_ingest_and_operation_model_goal_ingest_the_sa.json
+  ION_EXTENSION_MINI_HELIXION_CONTEXT_PACKAGE:
+    relationship: frames_surface
+    note: Mini-Helixion is the cockpit opened by the portable companion, not the whole product model.
+  LIVING_OPERATIONAL_GRAPH:
+    relationship: graph_binding
+    note: Page branches, workflow branches, settlement edges, and receipt edges belong in the global graph.
+  DAIMON_EXTENSION_JOC_AUTOMATION_LINEAGE_SYNTHESIS:
+    relationship: inherited_ui_and_automation_model
+    note: Older JOC cockpit and automation protocols are the primary UI/safety model for the portable dAimon companion.
+safety_law:
+  - Observe by default.
+  - Plan before acting.
+  - Preview before clicking.
+  - Ask before navigation/forms.
+  - Receipt every state-bearing workflow.
+  - Never treat page memory as accepted context without settlement.
+current_v1_authority:
+  autoplay_queue: allowed_with_visible_state_pause_kill_and_receipts
+  gated_local_mutation: allowed_only_with_approval_policy_gates_and_proof_receipts
+  dom_page_perception: allowed_as_provisional_observation_with_scope_and_redaction
+  attachment_drop_target_calibration: allowed_as_first_concrete_screen_dom_calibration_lane
+  gpt_actions_enqueue: allowed_as_typed_queue_bridge
+  result_capture: allowed_for_browser_carrier_packet_receipts
+  silent_sensitive_send: forbidden
+  credentials: forbidden
+  purchases: forbidden
+  destructive_actions: forbidden
+  production_mutation: forbidden
+  unrestricted_browser_control: forbidden
+implementation_gates:
+  - product_packet_exists
+  - joc_lineage_synthesis_registered
+  - extension_shell_portable_icon
+  - joc_micro_shell_layout
+  - visible_automation_event_stream
+  - page_branch_provisional_perception
+  - settled_context_package_ingest
+  - replayable_workflow_memory_without_autonomous_authority
+  - approved_action_executor_with_receipts

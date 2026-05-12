@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.browser_perception.extension_action_trace_event.schema.v1",
+  "title": "Extension Action Trace Event",
+  "type": "object",
+  "required": ["event_id", "page_session_id", "event_kind", "occurred_at", "authority_state"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "page_session_id": { "type": "string" },
+    "workflow_branch_id": { "type": "string" },
+    "event_kind": { "enum": ["observation", "plan", "preview", "approval_requested", "approval_granted", "approval_denied", "execution", "receipt", "redaction", "settlement"] },
+    "occurred_at": { "type": "string" },
+    "authority_state": { "enum": ["observation_only", "planning_only", "awaiting_user_approval", "approved_for_bounded_action", "completed", "blocked"] },
+    "summary": { "type": "string" },
+    "context_refs": { "type": "array", "items": { "type": "string" } },
+    "receipt_refs": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

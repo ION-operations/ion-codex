@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.browser_perception.ax_region.schema.v1",
+  "title": "Accessibility Region",
+  "type": "object",
+  "required": ["region_id", "source", "role", "name", "state", "freshness_state"],
+  "properties": {
+    "region_id": { "type": "string" },
+    "source": { "const": "accessibility_tree" },
+    "role": { "type": "string" },
+    "name": { "type": "string" },
+    "state": { "type": "object" },
+    "relationships": { "type": "array", "items": { "type": "object" } },
+    "dom_region_ref": { "type": "string" },
+    "gap_notes": { "type": "array", "items": { "type": "string" } },
+    "freshness_state": { "enum": ["current", "stale", "partial", "unknown"] }
+  },
+  "additionalProperties": true
+}

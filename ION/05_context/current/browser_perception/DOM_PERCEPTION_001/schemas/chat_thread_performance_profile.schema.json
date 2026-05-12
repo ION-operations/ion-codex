@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.browser_perception.chat_thread_performance_profile.schema.v1",
+  "title": "Chat Thread Performance Profile",
+  "type": "object",
+  "required": ["profile_id", "page_session_id", "thread_size_class", "risk_level", "findings"],
+  "properties": {
+    "profile_id": { "type": "string" },
+    "page_session_id": { "type": "string" },
+    "thread_size_class": { "enum": ["small", "medium", "large", "extreme", "unknown"] },
+    "risk_level": { "enum": ["low", "medium", "high", "blocked"] },
+    "visible_turn_count": { "type": "integer", "minimum": 0 },
+    "unresolved_ranges": { "type": "array", "items": { "type": "object" } },
+    "long_task_observations": { "type": "array", "items": { "type": "object" } },
+    "findings": { "type": "array", "items": { "type": "string" } },
+    "mitigations": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

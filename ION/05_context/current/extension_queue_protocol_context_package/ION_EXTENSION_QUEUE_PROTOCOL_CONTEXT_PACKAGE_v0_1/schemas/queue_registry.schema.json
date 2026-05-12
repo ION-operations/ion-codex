@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.schema.queue_registry.v0_1",
+  "type": "object",
+  "required": ["schema_id", "queues"],
+  "properties": {
+    "schema_id": {"const": "ion.queue_registry.v0_1"},
+    "queues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["queue_type", "source_of_truth_path", "visibility_profile"],
+        "properties": {
+          "queue_type": {"type": "string"},
+          "source_of_truth_path": {"type": "string"},
+          "visibility_profile": {"type": "string"},
+          "redaction_profile": {"type": "string"},
+          "agent_class_scope": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -25,6 +25,8 @@ connector surfaces only.
 4. Read the hot boot files in `010_HOT_BOOT/` in numeric order.
 5. Read `020_ACTIVE_STATE_INDEX/ACTIVE_STATE_SUMMARY.md`.
 6. Use `030_CUSTOM_GPT_ADAPTER/` for operational references.
+   For v2.6.7 relay posture, read the Capsule bridge and queue/reconcile/live
+   telemetry runbooks.
 7. Use `060_ACTION_SCHEMAS/` only when configuring Actions or when the user has
    explicitly asked for connector/local hub behavior.
 8. Use `070_BROWSER_EXTENSION_YAML_BRIDGE/` when using fenced YAML bridge proposals.

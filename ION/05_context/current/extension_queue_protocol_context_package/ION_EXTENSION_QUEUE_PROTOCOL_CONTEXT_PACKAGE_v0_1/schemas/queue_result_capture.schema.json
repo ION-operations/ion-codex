@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.schema.queue_result_capture.v0_1",
+  "type": "object",
+  "required": ["schema_id", "queue_type", "request_id", "proof_gate_state"],
+  "properties": {
+    "schema_id": {"const": "ion.queue_result_capture.v0_1"},
+    "queue_type": {"type": "string"},
+    "request_id": {"type": "string"},
+    "latest_return_path": {"type": ["string", "null"]},
+    "task_return_path": {"type": ["string", "null"]},
+    "proof_gate_state": {"type": "string"},
+    "workload_diff_present": {"type": "boolean"},
+    "touched_paths": {"type": "array", "items": {"type": "string"}},
+    "receipt_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

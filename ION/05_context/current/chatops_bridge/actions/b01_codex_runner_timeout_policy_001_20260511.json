@@ -1,0 +1,42 @@
+{
+  "approval": {
+    "approval_token": "ION_CHATOPS_APPROVED",
+    "approved": true,
+    "approved_by": "Braden"
+  },
+  "created_at": "2026-05-11T02:58:48+00:00",
+  "ion_action": {
+    "action_id": "b01-codex-runner-timeout-policy-001-20260511",
+    "actor": {
+      "callsign": "Sev",
+      "carrier": "chatgpt_browser"
+    },
+    "authority": {
+      "human_sovereign": "Braden",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true
+    },
+    "context_refs": [
+      "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/04_packages/kernel/ion_agent_invocation_broker.py",
+      "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T232654Z0000_codex_req_agent_2026_05_10t232654z0000_runtime_cartographer_read_only_capability/run.json",
+      "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-10T231342Z0000_codex_req_agent_2026_05_10t231337z0000_context_cartographer_fresh_chatgpt_carrie/run.json"
+    ],
+    "intent": "create_codex_work_packet",
+    "objective": "B01_CODEX_RUNNER_TIMEOUT_POLICY_001.\n\nImplement a bounded fix for Codex queue timeout policy so cartography, probe, agent-invocation, and design workloads receive realistic runtime budgets and return workload-scoped diffs.\n\nContext proof from B01:\n- ION/04_packages/kernel/ion_codex_queue_runner.py already defines DEFAULT_CODEX_TIMEOUT_SECONDS = 1800 and MAX_CODEX_TIMEOUT_SECONDS = 7200.\n- Failed RUNTIME_CARTOGRAPHER run received timeout_seconds = 180 and failed before latest_return.md was produced.\n- Failed CONTEXT_CARTOGRAPHER run received timeout_seconds = 30 and failed before latest_return.md was produced.\n- The runner itself appears healthy; the shorter timeouts likely come from caller/API invocation policy.\n\nInspect:\n- ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py\n- ION/04_packages/kernel/ion_agent_invocation_broker.py\n- ION/04_packages/kernel/ion_codex_queue_runner.py\n\nPatch only if evidence confirms caller-side timeout override is too low or missing workload-class policy.\n\nRequired implementation:\n- Add or repair workload-class timeout policy at the connector/broker boundary.\n- Avoid 30s/180s budgets for agent/cartography/proof packets.\n- Prefer at least 900s for agent/cartography/proof workloads unless caller requests larger up to 7200.\n- Preserve no production authority and no live execution authority.\n- Require WORKLOAD DIFF in future queued workload return contracts where applicable.\n- Do not read secrets.\n- Do not deploy.\n- Do not push git.\n- Do not broaden shell access.\n- Run targeted validation only.\n\nRequired return sections:\n- CONTEXT PROOF\n- TEMPLATE ACTION PROOF\n- VALIDATION\n- RESULT\n- WORKLOAD DIFF\n- BLOCKERS\n- RECOMMENDED NEXT PACKET",
+    "receipts": {
+      "requested": [
+        "codex_work_packet_receipt",
+        "action_receipt",
+        "workload_diff_receipt"
+      ]
+    },
+    "schema": "ion.chatops.action.v1"
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatops.action_packet.v1",
+  "source": "ion_chatops_bridge"
+}

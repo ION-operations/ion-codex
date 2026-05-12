@@ -1,0 +1,46 @@
+{
+  "schema_id": "ion.custom_gpt_capsule_system.setup_cards.ingest.v1",
+  "packet_id": "CUSTOM_GPT_CAPSULE_SYSTEM_003_SETUP_CARDS_LOCAL_INGEST",
+  "status": "CANDIDATE_STAGED_HASH_VERIFIED",
+  "created_date": "2026-05-10",
+  "source_artifact_path": "ION_CODEX FULL/workpackets/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4.zip",
+  "standard_inbox_copy_path": "ION/05_context/inbox/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4.zip",
+  "staged_package_path": "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/",
+  "sha256": "d3a2de8c391f84123b7d6d7a26193a7697db5775ac3c88be210fd9fad1bfd9e9",
+  "sha256_matches_reported": true,
+  "manifest_file_count": 45,
+  "validation_status": "PASS",
+  "role_count": 12,
+  "registry_role_ids": [
+    "ion_core_carrier",
+    "daimon_companion",
+    "atlas_systems_cartographer",
+    "wisdomnet_librarian",
+    "context_cartographer",
+    "runtime_cartographer",
+    "dom_cartographer",
+    "integration_architect",
+    "nemesis_audit",
+    "scribe",
+    "living_graph_designer",
+    "mason_builder"
+  ],
+  "comparison": {
+    "carrier_package_root": "ION/06_intelligence/orchestration/custom_gpt/v2_6_packaging/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508/",
+    "latest_candidate_zip": "ION/06_artifacts/packages/custom_gpt/ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_7_CANDIDATE_20260509T224136Z.zip",
+    "existing_package_role": "broad ION Custom GPT carrier package with hot boot, action schemas, active state indexes, and general ION carrier instructions",
+    "v0_4_package_role": "candidate role setup-card layer for multiple capsule-first Custom GPT role carriers",
+    "relationship": "composes_with; v0_4 does not supersede v2.6.7 and should not be treated as accepted local state until settled"
+  },
+  "generated_build_drafts": [
+    "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DAIMON_COMPANION_CUSTOM_GPT_BUILD_DRAFT.md",
+    "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DOM_CARTOGRAPHER_CUSTOM_GPT_BUILD_DRAFT.md"
+  ],
+  "supersedes_blocker_receipt": "C-073",
+  "non_claims": [
+    "No Custom GPTs were published.",
+    "No live actions were configured.",
+    "The package is staged as candidate local context, not accepted engine law.",
+    "Build drafts are generated from verified package contents and still require operator review."
+  ]
+}

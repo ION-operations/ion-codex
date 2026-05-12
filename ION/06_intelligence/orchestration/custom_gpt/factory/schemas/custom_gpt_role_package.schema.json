@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.custom_gpt_factory.custom_gpt_role_package.schema.v1",
+  "title": "Custom GPT Role Package",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "role_id",
+    "name",
+    "description",
+    "instructions_path",
+    "knowledge_manifest_path",
+    "action_policy_path",
+    "conversation_starters_path",
+    "codex_cli_capsule_path",
+    "role_output_contract_path",
+    "non_claims_path",
+    "validation",
+    "release_posture"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.custom_gpt_factory.role_package.v1"
+    },
+    "role_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "instructions_path": {
+      "type": "string"
+    },
+    "knowledge_manifest_path": {
+      "type": "string"
+    },
+    "action_policy_path": {
+      "type": "string"
+    },
+    "conversation_starters_path": {
+      "type": "string"
+    },
+    "codex_cli_capsule_path": {
+      "type": "string"
+    },
+    "role_output_contract_path": {
+      "type": "string"
+    },
+    "non_claims_path": {
+      "type": "string"
+    },
+    "validation": {
+      "type": "object",
+      "required": ["instruction_lint", "secret_request_lint", "overclaim_lint", "action_policy_lint", "starter_prompt_smoke"],
+      "properties": {
+        "instruction_lint": { "enum": ["pending", "pass", "fail", "blocked"] },
+        "secret_request_lint": { "enum": ["pending", "pass", "fail", "blocked"] },
+        "overclaim_lint": { "enum": ["pending", "pass", "fail", "blocked"] },
+        "action_policy_lint": { "enum": ["pending", "pass", "fail", "blocked"] },
+        "retrieval_knowledge_bloat_check": { "enum": ["pending", "pass", "fail", "blocked"] },
+        "starter_prompt_smoke": { "enum": ["pending", "pass", "fail", "blocked"] },
+        "role_boundary_contradiction_check": { "enum": ["pending", "pass", "fail", "blocked"] },
+        "capsule_version_sync_check": { "enum": ["pending", "pass", "fail", "blocked"] }
+      },
+      "additionalProperties": true
+    },
+    "release_posture": {
+      "enum": ["draft", "candidate", "reviewed", "published", "rejected", "superseded"]
+    },
+    "receipt_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}

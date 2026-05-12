@@ -1,0 +1,54 @@
+{
+  "schema_id": "ion.helixion_joc.ui_recovery_receipt.v1",
+  "receipt_id": "HELIXION_JOC_UI_RECOVERY_003_ANCHORED_PAGES_AND_DRAWER_CANON_20260511",
+  "created_at": "2026-05-11",
+  "status": "CANDIDATE_UI_RECOVERY_PATCH_APPLIED_NOT_VISUALLY_PROVED",
+  "operator_correction": "Pages should have anchored bottom bars and page bottoms, not require scrolling to the UI bottom. Drawers need real functional canon instead of empty placeholders. Operator is not seeing prior page changes in the running cockpit.",
+  "changes": [
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+      "change": "Locked html/body and the capsule app to viewport height with overflow hidden so the shell owns the UI height instead of the browser page scrolling to reach the bottom."
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+      "change": "Added page-surface-shell, page-scroll-body, and page-anchor-bar classes so page content scrolls internally while the page bottom/status/action bar stays anchored."
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_left_drawer_ui.py",
+      "change": "Added canonical functional page-local drawer panels for JOC, Queue, Codex, Extension, Docs, Projects, WisdomNET, and Gates."
+    },
+    {
+      "path": "ION/04_packages/kernel/ion_codex_chat_shell_ui.py",
+      "change": "Added canonical left-rail drawer buttons and bottom-anchored bars to focused recovery pages."
+    }
+  ],
+  "drawer_canon": {
+    "top_bar": "Selects the active primary page.",
+    "left_icon_rail": "Opens page-local instrument drawers. It is not the primary global navigation.",
+    "left_drawer": "Holds page-local controls, filters, selectors, calibration tools, and tree/favorite/action tabs.",
+    "main_work_surface": "Shows one focused page body. Only the page body scrolls.",
+    "right_inspector": "Shows selected object detail, context, proof, evidence, assistant state, and receipts.",
+    "right_icon_rail": "Switches universal inspector lenses.",
+    "bottom_timeline": "Shows temporal events, receipts, gates, async waits, zips, drops, queue sends, failures, and service health.",
+    "page_anchor_bar": "Shows page-local bottom status/actions anchored above the global bottom timeline."
+  },
+  "visibility_note": "If the running 8765 cockpit service has already imported the renderer modules, these changes will not appear until the service is reloaded. No service reload was performed in this pass.",
+  "validation": {
+    "tests_run": false,
+    "browser_visual_proof_run": false,
+    "service_reload_run": false,
+    "acceptance_status": "not_accepted_until_visual_proof"
+  },
+  "non_claims": [
+    "This does not claim the operator can see the changes before service reload.",
+    "This does not finish the full drawer interaction system.",
+    "This does not claim final visual quality.",
+    "This does not authorize live browser control or production mutation."
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  }
+}

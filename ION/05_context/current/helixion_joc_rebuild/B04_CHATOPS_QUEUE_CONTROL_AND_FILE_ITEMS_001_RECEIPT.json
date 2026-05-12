@@ -1,0 +1,48 @@
+{
+  "schema_id": "ion.chatops_queue_control_and_file_items_receipt.v1",
+  "packet_id": "B04_CHATOPS_QUEUE_CONTROL_AND_FILE_ITEMS_001",
+  "generated_at": "2026-05-11T00:00:00Z",
+  "accepted_state": "ACCEPTED_AS_B04_QUEUE_CONTROL_CANDIDATE",
+  "implemented": [
+    "Queue row edit/save/cancel/delete controls",
+    "Queue move earlier/later controls",
+    "Queue drag-to-reorder support",
+    "Play path now waits for ChatGPT Send to unlock after paste",
+    "Send-button detection prefers enabled candidates and respects aria/data disabled states",
+    "Operator file picker can queue files, ZIPs, and images as in-memory queue items",
+    "File queue items attempt visible drag/drop playback without clicking Send"
+  ],
+  "preserved": [
+    "Prompt queue pack import",
+    "Manual text queue add",
+    "Gateway browser queue controls",
+    "No automatic final Send for file/drop items",
+    "No production/live/secrets authority"
+  ],
+  "validation": [
+    "node --check ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "node ION/09_integrations/browser_extension/ion_chatops_bridge/tests/live_smoke_parser_simulation.js",
+    "unzip -t ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_queue_control_file_items_20260511.zip"
+  ],
+  "touched_paths": [
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_QUEUE_CONTROL_AND_FILE_ITEMS_001.md",
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_QUEUE_CONTROL_AND_FILE_ITEMS_001_RECEIPT.json",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/README.md",
+    "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_queue_control_file_items_20260511.zip"
+  ],
+  "package_artifact": {
+    "zip_path": "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_queue_control_file_items_20260511.zip",
+    "zip_sha256": "a9aceb1fb51d9b9b88390d7af5289af3e3ffdb09644cff62c5520003d909919d",
+    "zip_entries": 23
+  },
+  "authority_boundaries": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false,
+    "silent_browser_send": false,
+    "persistent_file_access": false
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.browser_perception.mutation_event.schema.v1",
+  "title": "Mutation Event",
+  "type": "object",
+  "required": ["event_id", "page_session_id", "observed_at", "batch_kind", "summary"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "page_session_id": { "type": "string" },
+    "observed_at": { "type": "string" },
+    "batch_kind": { "enum": ["dom_mutation", "route_transition", "streaming_update", "lazy_load", "virtualization_churn", "observer_backpressure"] },
+    "summary": { "type": "string" },
+    "affected_region_refs": { "type": "array", "items": { "type": "string" } },
+    "stability_window_ms": { "type": "integer", "minimum": 0 },
+    "freshness_invalidated": { "type": "boolean" }
+  },
+  "additionalProperties": true
+}

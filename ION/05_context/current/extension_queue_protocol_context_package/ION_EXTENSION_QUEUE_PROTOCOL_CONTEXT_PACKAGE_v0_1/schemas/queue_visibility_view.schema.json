@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.schema.queue_visibility_view.v0_1",
+  "type": "object",
+  "required": ["schema_id", "queue_type", "viewer_carrier_id", "rows"],
+  "properties": {
+    "schema_id": {"const": "ion.queue_visibility_view.v0_1"},
+    "queue_type": {"type": "string"},
+    "viewer_carrier_id": {"type": "string"},
+    "rows": {"type": "array", "items": {"type": "object"}},
+    "redaction_applied": {"type": "boolean"},
+    "redaction_reasons": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

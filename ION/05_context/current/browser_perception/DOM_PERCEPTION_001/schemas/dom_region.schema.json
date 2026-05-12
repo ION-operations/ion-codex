@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.browser_perception.dom_region.schema.v1",
+  "title": "DOM Region",
+  "type": "object",
+  "required": ["region_id", "source", "selector_candidates", "semantic_role", "freshness_state"],
+  "properties": {
+    "region_id": { "type": "string" },
+    "source": { "const": "dom" },
+    "selector_candidates": { "type": "array", "items": { "type": "string" } },
+    "unstable_selector_warnings": { "type": "array", "items": { "type": "string" } },
+    "semantic_role": { "type": "string" },
+    "text_summary": { "type": "string" },
+    "attributes": { "type": "object" },
+    "shadow_boundary": { "type": "string" },
+    "freshness_state": { "enum": ["current", "stale", "partial", "unknown"] },
+    "redaction_state": { "enum": ["none", "masked", "excluded", "summarized"] }
+  },
+  "additionalProperties": true
+}

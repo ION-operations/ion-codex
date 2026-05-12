@@ -1,0 +1,46 @@
+{
+  "approval": {
+    "approval_token": "ION_CHATOPS_APPROVED",
+    "approved": true,
+    "approved_by": "Braden"
+  },
+  "created_at": "2026-05-11T16:07:49+00:00",
+  "ion_action": {
+    "action_id": "b01-b04-extension-queue-protocol-context-package-001-20260511",
+    "actor": {
+      "callsign": "Sev",
+      "carrier": "chatgpt_browser"
+    },
+    "authority": {
+      "human_sovereign": "Braden",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true
+    },
+    "context_refs": [
+      "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/04_packages/kernel/ion_custom_gpt_action_gateway.py",
+      "ION/04_packages/kernel/ion_chatops_bridge.py",
+      "ION/05_context/current/action_gateway/runtime/browser_queue.json",
+      "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json",
+      "ION/09_integrations/browser_extension/ion_chatops_bridge/"
+    ],
+    "intent": "create_codex_work_packet",
+    "objective": "B01_B04_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_001.\n\nGoal:\nCreate the first protocol/schema/template context package for ION extension queues, chat self-queue, selected request start, dynamic editable queue packets, agent queue visibility, queue settlement, and agent/capsule/protocol classification in the extension cockpit.\n\nProduct frame:\nThe extension must distinguish and visualize:\n- Codex work queue\n- browser/self-chat queue\n- carrier-message queue\n- action/approval receipts\n- agent invocation queue\n- branch carrier messages\n- capsule/context-bound agents\n- full ION orchestration agents\n- Codex CLI implementation workers\n- local ops / daemon workers\n\nCore problem:\nThe current extension Agent panel exposes generic controls like Start One, but that starts the queue head and may not start the selected/latest/approved action.\nION needs explicit queue taxonomy, selected-request start, editable candidate queue packets, queue visibility views, and mode memory.\n\nRequired context reads:\n- ION/04_packages/kernel/ion_codex_queue_runner.py\n- ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py\n- ION/04_packages/kernel/ion_custom_gpt_action_gateway.py\n- ION/04_packages/kernel/ion_chatops_bridge.py\n- ION/05_context/current/action_gateway/runtime/browser_queue.json\n- ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json\n- ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json\n- ION/09_integrations/browser_extension/ion_chatops_bridge/README.md\n- ION/09_integrations/browser_extension/ion_chatops_bridge/src/schema.ts\n- ION/09_integrations/browser_extension/ion_chatops_bridge/src/background.ts\n- ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts\n- ION/09_integrations/browser_extension/ion_chatops_bridge/src/approval_ui.ts\n\nIf exact extension paths differ, locate the current browser extension source under ION/09_integrations or equivalent current repo path and report the path evidence.\n\nRequired outputs:\nCreate or propose a context package under an appropriate current path such as:\nION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/\n\nInclude:\n- MANIFEST.json\n- README.md\n\nPROTOCOLS:\n- EXTENSION_QUEUE_REGISTRY_PROTOCOL.md\n- EXTENSION_QUEUE_PACKET_LIFECYCLE_PROTOCOL.md\n- AGENT_EDITABLE_QUEUE_PACKET_PROTOCOL.md\n- QUEUE_VISIBILITY_AND_REDACTION_PROTOCOL.md\n- SELECTED_REQUEST_START_PROTOCOL.md\n- CHAT_SELF_QUEUE_PROTOCOL.md\n- BRANCH_CARRIER_MESSAGE_QUEUE_PROTOCOL.md\n- RESULT_CAPTURE_AND_RETURN_PROTOCOL.md\n- QUEUE_EVENT_LEDGER_PROTOCOL.md\n- QUEUE_SETTLEMENT_PROTOCOL.md\n\nSCHEMAS:\n- extension_queue_packet.schema.json\n- queue_event.schema.json\n- queue_registry.schema.json\n- queue_visibility_view.schema.json\n- selected_request_start.schema.json\n- browser_self_queue_packet.schema.json\n- agent_classification.schema.json\n- queue_result_capture.schema.json\n\nTEMPLATES:\n- CREATE_QUEUE_PACKET_TEMPLATE.md\n- EDIT_QUEUE_PACKET_TEMPLATE.md\n- APPROVE_QUEUE_PACKET_TEMPLATE.md\n- START_SELECTED_REQUEST_TEMPLATE.md\n- CAPTURE_CHAT_RETURN_TEMPLATE.md\n- SETTLE_QUEUE_RESULT_TEMPLATE.md\n\nUI_CONTRACTS:\n- extension_agent_cockpit_modes.md\n- queue_panel_requirements.md\n- selected_request_start_ui.md\n- approval_overlay_mode_memory.md\n\nPACKETS:\n- B04_EXTENSION_CHAT_SELF_QUEUE_AND_AGENT_COCKPIT_001.md\n- B01_SELECTED_REQUEST_START_AND_QUEUE_CLASSIFICATION_001.md\n\nRequired protocol rules:\n- Queue packets are candidate transitions, not accepted state.\n- Agents may edit draft/candidate queue packets only through diff-bearing queue events.\n- Approved, claimed, running, proof-accepted, and settled packets are locked except through supersession or cancellation receipts.\n- Extension UI must distinguish Start queue head from Start selected request.\n- Safe default for branch work is Start selected request only.\n- Every start action must show queue_type, request_id, request_path, agent_class, context_binding, authority, and expected proof before execution.\n- Queue views must redact secrets and expose only lawful context for the viewing carrier.\n- Browser/self-chat queue must support queued prompts to this ChatGPT conversation or branch chats, plus return capture and settlement routing.\n- Codex queue items must show worker lifecycle, latest_return.md, task_return.json, proof gate state, WORKLOAD DIFF, touched paths, and receipts.\n\nRequired validation:\n- JSON schema files parse.\n- Any Python touched compiles if code is changed.\n- If only docs/schemas are added, run a lightweight JSON validation script or Python json.load over all created JSON files.\n- Do not deploy.\n- Do not push git.\n- Do not read secrets.\n- Do not start arbitrary shell beyond targeted validation.\n- Do not mutate production state.\n- Do not claim the context package accepted; it is candidate until parent settlement.\n\nRequired return sections:\n- CONTEXT PROOF\n- TEMPLATE ACTION PROOF\n- VALIDATION\n- RESULT\n- WORKLOAD DIFF\n- BLOCKERS\n- RECOMMENDED NEXT PACKET",
+    "receipts": {
+      "requested": [
+        "codex_work_packet_receipt",
+        "action_receipt",
+        "workload_diff_receipt",
+        "extension_queue_protocol_context_package_receipt"
+      ]
+    },
+    "schema": "ion.chatops.action.v1"
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatops.action_packet.v1",
+  "source": "ion_chatops_bridge"
+}

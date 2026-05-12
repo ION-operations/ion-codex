@@ -1,0 +1,42 @@
+{
+  "schema_id": "ion.chatops_marker_popover_toggle_receipt.v1",
+  "packet_id": "B04_CHATOPS_MARKER_POPOVER_TOGGLE_001",
+  "generated_at": "2026-05-11T00:00:00Z",
+  "accepted_state": "ACCEPTED_AS_B04_MARKER_POPOVER_TOGGLE_CANDIDATE",
+  "implemented": [
+    "Registry marker popovers track the opening badge id",
+    "Clicking the same marker again closes the existing popover",
+    "Clicking a different marker switches the popover to that marker",
+    "Keyboard Enter/Space uses the same toggle behavior"
+  ],
+  "preserved": [
+    "Marker detail rows",
+    "Copy text, selector, detail, focus, and close actions",
+    "DOM registry scan behavior",
+    "Visual-only marker safety boundary"
+  ],
+  "validation": [
+    "node --check ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "node ION/09_integrations/browser_extension/ion_chatops_bridge/tests/live_smoke_parser_simulation.js",
+    "unzip -t ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_marker_popover_toggle_20260511.zip"
+  ],
+  "touched_paths": [
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_MARKER_POPOVER_TOGGLE_001.md",
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_MARKER_POPOVER_TOGGLE_001_RECEIPT.json",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_marker_popover_toggle_20260511.zip"
+  ],
+  "package_artifact": {
+    "zip_path": "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_marker_popover_toggle_20260511.zip",
+    "zip_sha256": "3bbbc61a2567d179de434e88e1a4eeb0752282d695d5af88a60ac807268598f2",
+    "zip_entries": 23
+  },
+  "authority_boundaries": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false,
+    "silent_browser_send": false
+  }
+}

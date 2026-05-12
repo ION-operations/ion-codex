@@ -1,0 +1,24 @@
+{
+  "schema_id": "ion.browser_extension.context_workflow_rail_receipt.v1",
+  "generated_at": "2026-05-11T00:00:00Z",
+  "project": "ION ChatOps Browser Bridge",
+  "change_summary": [
+    "Added a left-side ION Context rail anchored beside the ChatGPT composer.",
+    "Rail supports context-pack insertion, project package refresh, context sync ZIP request, queue workflow pack import, receipt read shortcut, and right queue expansion.",
+    "Queue workflow import reuses the existing queue-pack parser/import path.",
+    "Floating ION rails are excluded from ChatGPT send/stop button discovery."
+  ],
+  "touched_paths": [
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/approval_ui.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "ION/05_context/current/helixion_joc_rebuild/CHATOPS_CONTEXT_WORKFLOW_RAIL_RECEIPT_20260511.json"
+  ],
+  "validation": [
+    "node --check ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "git diff --check scoped to changed browser extension files"
+  ],
+  "production_authority": false,
+  "live_execution_authority": false,
+  "secrets_authority": false
+}

@@ -32,6 +32,15 @@ Use Actions only after one of these triggers:
 | Sign in or auth | Extension/gateway/OAuth UI | No chat secrets |
 | Attach/export packages | Extension artifacts/packages tabs | User-visible browser/local handoff |
 
+Codex relay surfaces for explicit connector-lane work:
+
+- `ion_codex_capsule_chat_status`, `ion_codex_capsule_message_send`,
+  `ion_codex_capsule_message_poll`, `ion_codex_capsule_sync_to_queue`
+- `ion_codex_work_queue`, `ion_codex_queue_process_once`,
+  `ion_codex_runner_reconcile`, `ion_codex_worker_live_status`,
+  `ion_daemon_status`
+- `/cockpit/worker`, `/cockpit/worker/model.json` for bounded live projections
+
 ## Proof Ladder
 
 Use the highest available proof:
@@ -44,6 +53,9 @@ Use the highest available proof:
 
 User statements can start a route, but they do not prove runtime access, current
 state, successful execution, or accepted continuity.
+
+Raw worker output is not accepted continuity until context proof and template
+action proof gates pass and a task-return receipt path confirms acceptance.
 
 ## Connection Claims
 

@@ -1,0 +1,387 @@
+{
+  "schema_id": "ion.helixion_joc_rebuild_current_plan.v1",
+  "created_at": "2026-05-10",
+  "status": "phase_2_local_react_shell_built",
+  "authority_posture": {
+    "planning_only": true,
+    "runtime_authority_granted": false,
+    "production_authority": false,
+    "unrestricted_browser_control": false
+  },
+  "decision": "Rebuild Helixion as the full JOC cockpit glass for ION, dAimon, WisdomNET, Codex, browser extension carrier work, and GPT Actions queue packets.",
+  "master_plan_path": "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+  "registry_path": "ION/03_registry/helixion_joc_evolution_registry.yaml",
+  "primary_product_roles": {
+    "ION": "law and state substrate",
+    "dAimon": "user-facing portable integration companion",
+    "Helixion": "JOC cockpit glass and local/full app surface",
+    "WisdomNET": "federated hub for evolved packs, connectors, workflows, and trusted states"
+  },
+  "source_authorities": [
+    "_ui_canon_bundle/CANON_JOC_UI_ARCHITECTURE.md",
+    "_ui_canon_bundle/JOC_UI_REQUIREMENTS.md",
+    "_ui_canon_bundle/OPUS1_JOC_MASTER_VISION.md",
+    "_ui_canon_bundle/OPUS1_JOC_UI_DESIGN.md",
+    "ION/02_architecture/DAIMON_EXTENSION_JOC_AUTOMATION_LINEAGE_SYNTHESIS.md",
+    "ION/02_architecture/PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT.md",
+    "ION/02_architecture/DOM_PERCEPTION_001_BROWSER_PERCEPTION_DOMAIN_DESIGN.md",
+    "ION/02_architecture/ION_JOC_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL_PROTOCOL.md",
+    "ION/02_architecture/LOCAL_BROWSER_EXECUTION_SANDBOX_SPEC_PROTOCOL.md",
+    "ION/02_architecture/ION_BROWSER_FILE_ATTACHMENT_AUTOMATION_PROTOCOL.md",
+    "workpackets/ION_Helixion_IDE_Bridge_v0_Workpacket.md",
+    "workpackets/ion_extension_work_packets/ION_EXT_DOM_COCKPIT_SHELL_PACKET.md",
+    "workpackets/ion_extension_work_packets/ION_EXT_CODEX_AGENT_COCKPIT_PACKET.md",
+    "workpackets/ion_daimon_wisdomnet_product_concept.md"
+  ],
+  "required_surfaces": [
+    "full_helixion_joc_app",
+    "mini_helixion_browser_extension",
+    "daimon_page_companion",
+    "chatgpt_carrier_cockpit",
+    "codex_capsule_chat_workbench",
+    "gpt_actions_queue_gateway",
+    "wisdomnet_candidate_hub"
+  ],
+  "canonical_zones": [
+    "top_status_bar",
+    "left_mode_rail",
+    "main_work_surface",
+    "right_inspector_drawers",
+    "bottom_timeline_log_rail"
+  ],
+  "canonical_object_types": [
+    "CockpitSurface",
+    "CarrierState",
+    "QueuePacket",
+    "AutoplayRun",
+    "PageBranch",
+    "DomEvidence",
+    "CaptureTarget",
+    "AttachTarget",
+    "DropTarget",
+    "ApprovalGate",
+    "CodexChatTurn",
+    "ContextPackage",
+    "ProjectPackage",
+    "WisdomPack",
+    "ServiceHealth",
+    "Receipt",
+    "RepairTask",
+    "BlockedCapability"
+  ],
+  "allowed_v1_capabilities": [
+    "visible_autoplay_queue_for_bounded_packets",
+    "operator_approved_local_mutation",
+    "provisional_dom_page_perception",
+    "attachment_drop_target_calibration",
+    "typed_gpt_action_enqueue",
+    "result_capture_with_receipts",
+    "codex_queue_visibility_and_approved_enqueue",
+    "service_health_and_confirmed_reset_controls"
+  ],
+  "forbidden_v1_capabilities": [
+    "silent_sensitive_send",
+    "credential_access",
+    "secret_harvesting",
+    "purchases",
+    "destructive_actions",
+    "production_mutation",
+    "unrestricted_browser_control",
+    "silent_account_operation",
+    "silent_page_memory_promotion"
+  ],
+  "next_build_sequence": [
+    "phase_1_unified_view_model_foundation",
+    "phase_2_local_helixion_joc_rebuild",
+    "phase_3_extension_portable_joc_micro_shell",
+    "phase_4_queue_packet_execution_cockpit",
+    "phase_5_page_perception_workflow_memory",
+    "phase_6_projects_docs_packages_context_surfaces",
+    "phase_7_wisdomnet_candidate_hub",
+    "phase_8_advanced_automation_lanes"
+  ],
+  "phase_1_projection_seed": {
+    "status": "seeded",
+    "implemented_at": "2026-05-10",
+    "purpose": "Expose Helixion/dAimon/WisdomNET rebuild state as first-class cockpit projection data before deeper UI and extension rebuild work.",
+    "touched_files": [
+      "ION/04_packages/kernel/ion_cockpit_view_model.py",
+      "ION/04_packages/kernel/ion_local_cockpit_app.py",
+      "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+      "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+      "ION/08_ui/joc_cockpit_shell/HelixionEvolutionPanel.tsx"
+    ],
+    "runtime_authority_granted": false,
+    "production_authority": false,
+    "unrestricted_browser_control": false
+  },
+  "phase_1_orchestration_context_package": {
+    "status": "active",
+    "implemented_at": "2026-05-10",
+    "purpose": "Create an ION-native orchestration context package and reusable skill route for the full Helixion/JOC/ION/dAimon/WisdomNET rebuild.",
+    "protocol_path": "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+    "package_markdown_path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+    "package_json_path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json",
+    "load_receipt_path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_LOAD_RECEIPT.json",
+    "ion_skill_id": "helixion-joc-orchestration",
+    "codex_skill_path": "/home/sev/.codex/skills/ion-orchestration/SKILL.md",
+    "codex_solo_context_package_id": "helixion_joc_orchestration_package",
+    "codex_solo_checkpoint_id": "codex_solo_post_20260511T005445+0000",
+    "capsule_entry_id": "C-077",
+    "context_refresh": {
+      "status": "complete",
+      "refreshed_at": "2026-05-11T00:54:45+00:00",
+      "refreshed_surfaces": [
+        "ION/05_context/current/codex_solo/CAPSULE.md",
+        "ION/05_context/current/codex_solo/MINI.md",
+        "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+        "ION/05_context/current/codex_solo/ROUTE.json",
+        "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+        "ION/05_context/current/codex_solo/LONG_HORIZON.json",
+        "ION/05_context/current/codex_solo/STATUS.json"
+      ],
+      "history_receipt": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T005445+0000.json"
+    },
+    "runtime_authority_granted": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false
+  },
+  "phase_2_local_shell_seed": {
+    "status": "local_react_shell_built",
+    "implemented_at": "2026-05-10",
+    "purpose": "Begin moving the local Helixion cockpit page from generic dashboard styling toward the DXL/JOC matte-black instrument-panel surface while preserving existing service controls, and expose the rebuild through focused local development URLs.",
+    "development_urls": [
+      "http://127.0.0.1:8788/joc/evolution",
+      "http://127.0.0.1:8788/helixion/development",
+      "http://127.0.0.1:8788/development"
+    ],
+    "touched_files": [
+      "ION/04_packages/kernel/ion_local_cockpit_app.py",
+      "ION/04_packages/kernel/ion_cockpit_view_model.py",
+      "ION/08_ui/joc_cockpit_shell/LocalCockpitApp.tsx",
+      "ION/08_ui/joc_cockpit_shell/ServiceConsolePanel.tsx",
+      "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+      "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+      "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css",
+      "ION/08_ui/joc_cockpit_shell/package.json",
+      "ION/08_ui/joc_cockpit_shell/vite.config.ts",
+      "ION/08_ui/joc_cockpit_shell/tsconfig.json",
+      "ION/08_ui/joc_cockpit_shell/index.html",
+      "ION/08_ui/joc_cockpit_shell/main.tsx"
+    ],
+    "react_bundle": {
+      "status": "built",
+      "built_at": "2026-05-11",
+      "dist_root": "ION/08_ui/joc_cockpit_shell/dist",
+      "static_route": "/joc-static/*",
+      "legacy_route": "/cockpit/legacy",
+      "served_routes": [
+        "/",
+        "/app",
+        "/cockpit",
+        "/joc/evolution",
+        "/helixion/development",
+        "/development"
+      ]
+    },
+    "codex_solo_checkpoint_id": "codex_solo_post_20260511T011822+0000",
+    "capsule_entry_id": "C-078",
+    "history_receipt": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T011822+0000.json",
+    "validation_note": "npm install and npm run build completed. Python and browser tests were not run.",
+    "service_console_projection": [
+      "ION/04_packages/kernel/ion_cockpit_view_model.py now projects service_console",
+      "React ServiceConsolePanel posts only to the existing /cockpit/services/restart endpoint with the existing confirmation token"
+    ],
+    "react_shell_refinement": {
+      "status": "development_panel_added",
+      "implemented_at": "2026-05-11",
+      "purpose": "Expose local development URLs, React bundle status, latest Codex capsule checkpoint, and orchestration package refs directly inside the React JOC shell.",
+      "panel": "ION/08_ui/joc_cockpit_shell/HelixionDevelopmentPanel.tsx",
+      "built_assets": [
+        "ION/08_ui/joc_cockpit_shell/dist/index.html",
+        "ION/08_ui/joc_cockpit_shell/dist/assets/index-DQ0nAqB_.css",
+        "ION/08_ui/joc_cockpit_shell/dist/assets/index-C64rG4OH.js"
+      ],
+      "codex_solo_checkpoint_id": "codex_solo_post_20260511T012337+0000",
+      "capsule_entry_id": "C-079",
+      "history_receipt": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T012337+0000.json",
+      "runtime_authority_granted": false,
+      "production_authority": false,
+      "live_execution_authority": false
+    },
+    "runtime_authority_granted": false,
+    "production_authority": false,
+    "unrestricted_browser_control": false
+  },
+  "phase_3_queue_gateway_cockpit_seed": {
+    "status": "local_visibility_panel_built",
+    "implemented_at": "2026-05-11",
+    "workstream": "W5_browser_queue_action_gateway_cockpit",
+    "purpose": "Expose GPT Actions/browser carrier state, queue counts, latest packet/receipt files, tool coverage, and queue authority boundaries inside the local React JOC shell.",
+    "source_paths": [
+      "ION/04_packages/kernel/ion_cockpit_view_model.py",
+      "ION/08_ui/joc_cockpit_shell/QueueGatewayCockpitPanel.tsx",
+      "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+      "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+      "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css"
+    ],
+    "built_assets": [
+      "ION/08_ui/joc_cockpit_shell/dist/index.html",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-B6IQhqOk.css",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-BboGqdlD.js"
+    ],
+    "codex_solo_checkpoint_id": "codex_solo_post_20260511T012706+0000",
+    "capsule_entry_id": "C-080",
+    "history_receipt": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T012706+0000.json",
+    "authority_note": "Visibility-only cockpit surface. It does not process live queue packets, silently send browser prompts, or grant production/live execution authority.",
+    "runtime_authority_granted": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "unrestricted_browser_control": false
+  },
+  "phase_4_codex_capsule_chat_workbench_seed": {
+    "status": "local_tabbed_workbench_built",
+    "implemented_at": "2026-05-11",
+    "workstream": "W3_codex_capsule_chat_as_joc_workbench",
+    "purpose": "Expose the Codex Capsule Chat model inside the local React JOC shell with internal tabs for overview, Capsule/Mini context, response runs, queue handoffs, and skill activation.",
+    "source_paths": [
+      "ION/04_packages/kernel/ion_cockpit_view_model.py",
+      "ION/08_ui/joc_cockpit_shell/CodexCapsuleChatWorkbenchPanel.tsx",
+      "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+      "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+      "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css"
+    ],
+    "built_assets": [
+      "ION/08_ui/joc_cockpit_shell/dist/index.html",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-zcJ1iSk6.css",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-D4l8Nu9i.js"
+    ],
+    "codex_solo_checkpoint_id": "codex_solo_post_20260511T013016+0000",
+    "capsule_entry_id": "C-081",
+    "history_receipt": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T013016+0000.json",
+    "authority_note": "Workbench visibility only. Hidden reasoning remains hidden, response runs are evidence, and accepted state still requires receipts.",
+    "runtime_authority_granted": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "unrestricted_browser_control": false
+  },
+  "phase_5_extension_micro_shell_visibility_seed": {
+    "status": "local_tabbed_visibility_panel_built",
+    "implemented_at": "2026-05-11",
+    "workstream": "W4_extension_portable_joc_micro_shell_and_W6_page_perception_capture",
+    "purpose": "Expose the portable dAimon companion product context, browser extension bridge manifest, bounded agent lane contract, DOM perception domain map, queue-pack authoring refs, and authority boundaries inside the local React JOC shell.",
+    "source_paths": [
+      "ION/04_packages/kernel/ion_cockpit_view_model.py",
+      "ION/08_ui/joc_cockpit_shell/ExtensionMicroShellPanel.tsx",
+      "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+      "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+      "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css",
+      "ION/05_context/current/portable_ion_page_companion/PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT.json",
+      "ION/03_registry/browser_perception_domain_registry_proposal.yaml",
+      "ION/09_integrations/browser_extension/ion_chatops_bridge/manifest.json",
+      "ION/09_integrations/browser_extension/ion_chatops_bridge/AGENT_INVOCATION_LANE_CONTRACT.json"
+    ],
+    "built_assets": [
+      "ION/08_ui/joc_cockpit_shell/dist/index.html",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-BeQf23sw.css",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-7jXnbyLA.js"
+    ],
+    "codex_solo_checkpoint_id": "codex_solo_post_20260511T013600+0000",
+    "capsule_entry_id": "C-082",
+    "history_receipt": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T013600+0000.json",
+    "authority_note": "Visibility/calibration surface only. The panel does not edit extension runtime, grant unrestricted browser control, process live queue packets, or silently send browser prompts.",
+    "runtime_authority_granted": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "unrestricted_browser_control": false
+  },
+  "phase_6_docs_projects_packages_visibility_seed": {
+    "status": "local_tabbed_visibility_panel_built",
+    "implemented_at": "2026-05-11",
+    "workstream": "W7_docs_projects_packages_context_surfaces",
+    "purpose": "Expose local project favorites, Codex context packages, package ZIP artifacts, safe full-project package state, and Custom GPT build/factory materials inside the local React JOC shell.",
+    "source_paths": [
+      "ION/04_packages/kernel/ion_cockpit_view_model.py",
+      "ION/08_ui/joc_cockpit_shell/DocsProjectsPackagesPanel.tsx",
+      "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+      "ION/08_ui/joc_cockpit_shell/ionRuntimeCockpitTypes.ts",
+      "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css",
+      "ION/05_context/current/codex_solo/CONTEXT_PACKAGES.json",
+      "ION/06_artifacts/packages"
+    ],
+    "built_assets": [
+      "ION/08_ui/joc_cockpit_shell/dist/index.html",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-DeBVx3P5.css",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-DWK3ucCd.js"
+    ],
+    "codex_solo_checkpoint_id": "codex_solo_post_20260511T014044+0000",
+    "capsule_entry_id": "C-083",
+    "history_receipt": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T014044+0000.json",
+    "authority_note": "Visibility/workbench surface only. It does not auto-zip, drag/drop, mutate project files, or grant package acceptance without receipts.",
+    "runtime_authority_granted": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "unrestricted_filesystem_mutation": false
+  },
+  "phase_0_exit_gate": {
+    "source_map_exists": true,
+    "feature_inheritance_map_exists": true,
+    "authority_posture_explicit": true,
+    "blocked_capabilities_listed": true,
+    "receipt_expectations_listed": true,
+    "ui_canon_identified": true,
+    "ready_for_phase_1": true
+  },
+  "ui_frontend_excellence_workflow_gate": {
+    "status": "corrective_gate_active",
+    "implemented_at": "2026-05-11",
+    "trigger": "Operator identified that the rebuild was being implemented as a monolithic panel surface instead of through the correct UI agent/domain workflow.",
+    "domain": "ui_frontend_excellence_domain",
+    "template_id": "joc_work_surface_ui_packet",
+    "required_packet": "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+    "receipt": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_WORKFLOW_GATE_RECEIPT_20260511.json",
+    "codex_solo_checkpoint_id": "codex_solo_post_20260511T033756+0000",
+    "capsule_entry_id": "C-084",
+    "history_receipt": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T033756+0000.json",
+    "agent_route": [
+      "JOC_UI_CANON_STEWARD",
+      "FRONTEND_WORK_SURFACE_ARCHITECT",
+      "INTERACTION_STATE_WEAVER",
+      "CONTEXT_VISUALIZATION_CARTOGRAPHER",
+      "COMPONENT_BUILDER",
+      "VISUAL_PROOF_AUDITOR"
+    ],
+    "active_law": [
+      "non_monolith_shell_first",
+      "work_surface_before_components",
+      "drawer_tab_lens_state_before_more_panels",
+      "visual_proof_before_done_claim"
+    ],
+    "current_correction": "Treat C-079 through C-083 panels as candidate data surfaces, not settled app architecture, until mapped into TOP_BAR, LEFT_ICON_RAIL, LEFT_DRAWER, MAIN_WORK_SURFACE, RIGHT_INSPECTOR, RIGHT_ICON_RAIL, and BOTTOM_TIMELINE.",
+    "authority_note": "Candidate workflow/control-plane correction only. No production authority, live browser authority, screenshot proof, or accepted UI state is claimed."
+  },
+  "phase_7_shell_zone_refactor_seed": {
+    "status": "candidate_implemented_build_passed",
+    "implemented_at": "2026-05-11",
+    "workstream": "W10_ui_frontend_excellence_workflow_gate",
+    "workflow_packet": "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+    "receipt": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_REPAIR_001_SHELL_ZONE_REFACTOR_RECEIPT_20260511.json",
+    "purpose": "Convert the local React JOC prototype from a vertical panel board into shell-zone page architecture with one active main page, page navigation, a universal right inspector drawer, and bottom timeline.",
+    "source_paths": [
+      "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+      "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css"
+    ],
+    "built_assets": [
+      "ION/08_ui/joc_cockpit_shell/dist/index.html",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-RYq2pmLe.css",
+      "ION/08_ui/joc_cockpit_shell/dist/assets/index-DAST9qyz.js"
+    ],
+    "codex_solo_checkpoint_id": "codex_solo_post_20260511T034546+0000",
+    "capsule_entry_id": "C-085",
+    "history_receipt": "ION/05_context/current/codex_solo/history/codex_solo_post_20260511T034546+0000.json",
+    "validation_note": "npm run build passed. Tests, browser smoke, and screenshots were not run.",
+    "authority_note": "Candidate implementation only. Visual proof and accepted UI state are not claimed."
+  }
+}

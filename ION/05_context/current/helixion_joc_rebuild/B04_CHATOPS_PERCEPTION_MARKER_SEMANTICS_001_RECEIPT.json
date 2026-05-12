@@ -1,0 +1,46 @@
+{
+  "schema_id": "ion.chatops_perception_marker_semantics_receipt.v1",
+  "packet_id": "B04_CHATOPS_PERCEPTION_MARKER_SEMANTICS_001",
+  "generated_at": "2026-05-11T00:00:00Z",
+  "accepted_state": "ACCEPTED_AS_B04_PERCEPTION_MARKER_UI_CANDIDATE",
+  "implemented": [
+    "Low-signal DOM markers are dim until hover or focus",
+    "High-signal YAML and send markers remain visible",
+    "Marker colors are aligned to read chunks, code/source surfaces, valid candidates, blocked candidates, and duplicates",
+    "Registry popover now reports category, meaning, rect, selector, and text excerpt",
+    "Diagnostics panel includes a marker legend",
+    "Message and code chunk borders are subdued by default and strengthen on hover/focus"
+  ],
+  "preserved": [
+    "Manual DOM action registry refresh",
+    "Complete YAML action packet detection",
+    "Inline ion_action mention filtering",
+    "Composer control capture statistics",
+    "Drop zone, attach target, tabs anchor, and inspector preview colors",
+    "Visual-only marker safety boundary"
+  ],
+  "validation": [
+    "node --check ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "node ION/09_integrations/browser_extension/ion_chatops_bridge/tests/live_smoke_parser_simulation.js",
+    "unzip -t ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_perception_markers_20260511.zip"
+  ],
+  "touched_paths": [
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_PERCEPTION_MARKER_SEMANTICS_001.md",
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_PERCEPTION_MARKER_SEMANTICS_001_RECEIPT.json",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_perception_markers_20260511.zip"
+  ],
+  "package_artifact": {
+    "zip_path": "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_perception_markers_20260511.zip",
+    "zip_sha256": "e3e0970d7b6eeecf9c0cc7026e0f204780c8040644e93fb9e67544180fea0f7a",
+    "zip_entries": 23
+  },
+  "authority_boundaries": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false,
+    "silent_browser_send": false
+  }
+}

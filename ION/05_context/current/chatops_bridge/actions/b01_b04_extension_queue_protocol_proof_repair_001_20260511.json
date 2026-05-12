@@ -1,0 +1,42 @@
+{
+  "approval": {
+    "approval_token": "ION_CHATOPS_APPROVED",
+    "approved": true,
+    "approved_by": "Braden"
+  },
+  "created_at": "2026-05-11T17:00:55+00:00",
+  "ion_action": {
+    "action_id": "b01-b04-extension-queue-protocol-proof-repair-001-20260511",
+    "actor": {
+      "callsign": "Sev",
+      "carrier": "chatgpt_browser"
+    },
+    "authority": {
+      "human_sovereign": "Braden",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true
+    },
+    "context_refs": [
+      "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T160749Z0000_b01_b04_extension_queue_protocol_context_package_001_goal_create_the_first_proto.json",
+      "ION/05_context/current/chatgpt_connector/task_returns/2026-05-11T161321Z0000_task_return.json",
+      "ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T160953Z0000_codex_req_2026_05_11t160749z0000_b01_b04_extension_queue_protocol_context_packag/latest_return.md",
+      "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/MANIFEST.json"
+    ],
+    "intent": "create_codex_work_packet",
+    "objective": "B01_B04_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_001_PROOF_REPAIR.\n\nGoal:\nRepair the proof return for the already-created candidate extension queue protocol context package.\nDo not recreate the package unless a file is missing.\nDo not implement extension runtime changes.\n\nCurrent blocker:\nThe prior task return was blocked because CONTEXT PROOF omitted this required work request path:\nION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T160749Z0000_b01_b04_extension_queue_protocol_context_package_001_goal_create_the_first_proto.json\n\nRequired reads:\n- Read this repair work request path and include it explicitly in CONTEXT PROOF.\n- Read the original blocked work request path:\n  ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-11T160749Z0000_b01_b04_extension_queue_protocol_context_package_001_goal_create_the_first_proto.json\n- Read the blocked task return:\n  ION/05_context/current/chatgpt_connector/task_returns/2026-05-11T161321Z0000_task_return.json\n- Read the prior latest_return.md:\n  ION/05_context/current/chatgpt_connector/codex_queue_runs/codex_run_2026-05-11T160953Z0000_codex_req_2026_05_11t160749z0000_b01_b04_extension_queue_protocol_context_packag/latest_return.md\n- Verify candidate package exists:\n  ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1/MANIFEST.json\n\nRequired action:\nProduce a corrected proof return that explicitly includes evidence for:\n- this repair work_request_path\n- original blocked work_request_path\n- blocked task return path\n- prior latest_return.md\n- candidate package manifest\n- package JSON validation result\n\nRequired validation:\n- Parse the candidate package MANIFEST.json.\n- Parse all schema JSON files under the package schemas directory.\n- Do not deploy.\n- Do not push git.\n- Do not read secrets.\n- Do not claim the package is accepted.\n- State candidate-only status until parent settlement.\n\nRequired return sections:\n- CONTEXT PROOF\n- TEMPLATE ACTION PROOF\n- VALIDATION\n- RESULT\n- WORKLOAD DIFF\n- BLOCKERS\n- RECOMMENDED NEXT PACKET",
+    "receipts": {
+      "requested": [
+        "codex_work_packet_receipt",
+        "action_receipt",
+        "proof_repair_receipt",
+        "workload_diff_receipt"
+      ]
+    },
+    "schema": "ion.chatops.action.v1"
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatops.action_packet.v1",
+  "source": "ion_chatops_bridge"
+}

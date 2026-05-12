@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.schema.selected_request_start.v0_1",
+  "type": "object",
+  "required": ["schema_id", "queue_type", "request_id", "request_path", "start_mode", "expected_proof"],
+  "properties": {
+    "schema_id": {"const": "ion.selected_request_start.v0_1"},
+    "queue_type": {"type": "string"},
+    "request_id": {"type": "string"},
+    "request_path": {"type": "string"},
+    "start_mode": {"enum": ["start_queue_head", "start_selected_request"]},
+    "agent_class": {"$ref": "agent_classification.schema.json"},
+    "context_binding": {"type": "string"},
+    "authority": {"type": "object"},
+    "expected_proof": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

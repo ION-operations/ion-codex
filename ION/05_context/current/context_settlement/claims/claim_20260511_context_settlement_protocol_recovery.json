@@ -1,0 +1,29 @@
+{
+  "schema_id": "ion.context_settlement.claim.v1",
+  "claim_id": "claim_20260511_context_settlement_protocol_recovery",
+  "created_at": "2026-05-11",
+  "agent_id": "codex_context_settlement_recovery",
+  "purpose": "Create the initial multi-agent context and workpacket settlement protocol after C-088 checkpoint collision.",
+  "write_scope": [
+    "ION/02_architecture/ION_MULTI_AGENT_CONTEXT_AND_WORKPACKET_SETTLEMENT_PROTOCOL_V0_1.md",
+    "ION/05_context/current/context_settlement/README.md",
+    "ION/05_context/current/context_settlement/CONTEXT_SETTLEMENT_REGISTRY_V0_1.json",
+    "ION/05_context/current/context_settlement/conflicts/CHECKPOINT_COLLISION_C088_20260511.json",
+    "ION/05_context/current/context_settlement/inbox/SETTLE_UI_RECOVERY_ANCHORED_PAGES_AND_DRAWER_CANON_20260511.json",
+    "ION/05_context/current/context_settlement/inbox/SETTLE_WORKPACKETS_DIFFS_INGESTION_002_20260510T234208.json"
+  ],
+  "shared_context_write": false,
+  "requested_settlement": true,
+  "ttl_minutes": 45,
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  },
+  "non_claims": [
+    "This claim does not grant exclusive repository authority.",
+    "This claim does not grant shared context write authority.",
+    "This claim does not settle any checkpoint."
+  ]
+}

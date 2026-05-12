@@ -1,0 +1,40 @@
+{
+  "schema_id": "ion.helixion_joc_ui_repair_receipt.v1",
+  "receipt_id": "HELIXION_JOC_UI_REPAIR_001_SHELL_ZONE_REFACTOR_20260511",
+  "created_at": "2026-05-11T03:45:00Z",
+  "status": "CANDIDATE_IMPLEMENTED_BUILD_PASSED",
+  "workflow_gate": "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+  "objective": "Refactor the local React JOC shell away from a vertical panel board into a shell-zone work surface with one active main page, page navigation, universal right inspector drawer tabs, and bottom timeline.",
+  "implemented_changes": [
+    "Live top navigation now switches active pages instead of scrolling to panels.",
+    "Left icon rail now maps to active pages.",
+    "Main work surface renders one active page body at a time.",
+    "Existing candidate panels are grouped into mission, queue, codex, extension, docs, gates, and receipts pages.",
+    "Right inspector now uses universal drawer tabs for receipts, context, debug, and timeline.",
+    "Docs/Packages hash route selects the Docs page instead of scrolling a monolithic board."
+  ],
+  "source_paths": [
+    "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx",
+    "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css"
+  ],
+  "built_assets": [
+    "ION/08_ui/joc_cockpit_shell/dist/index.html",
+    "ION/08_ui/joc_cockpit_shell/dist/assets/index-RYq2pmLe.css",
+    "ION/08_ui/joc_cockpit_shell/dist/assets/index-DAST9qyz.js"
+  ],
+  "validation": {
+    "npm_run_build": "passed",
+    "tests_run": false,
+    "browser_smoke_run": false,
+    "screenshots_run": false,
+    "visual_proof_claimed": false
+  },
+  "authority_boundary": {
+    "candidate_only": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "unrestricted_browser_control": false,
+    "accepted_ui_state": false
+  },
+  "next_gate": "Visual Proof Auditor pass with screenshot/browser validation, then decide whether this shell replaces or merges with the 8765 Codex Chat cockpit route."
+}

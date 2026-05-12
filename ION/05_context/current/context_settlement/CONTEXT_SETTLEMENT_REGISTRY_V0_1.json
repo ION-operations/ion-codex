@@ -1,0 +1,63 @@
+{
+  "schema_id": "ion.context_settlement.registry.v1",
+  "created_at": "2026-05-11",
+  "status": "ACTIVE_PROVISIONAL",
+  "protocol": "ION/02_architecture/ION_MULTI_AGENT_CONTEXT_AND_WORKPACKET_SETTLEMENT_PROTOCOL_V0_1.md",
+  "purpose": "Serialize shared ION context updates while allowing parallel agents to produce candidate receipts, workpackets, diffs, and task returns.",
+  "settled_surfaces": [
+    "ION/05_context/current/codex_solo/CAPSULE.md",
+    "ION/05_context/current/codex_solo/MINI.md",
+    "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+    "ION/05_context/current/codex_solo/STATUS.json",
+    "ION/05_context/current/codex_solo/ROUTE.json",
+    "checkpoint indexes / C-number assignment"
+  ],
+  "folders": {
+    "claims": "ION/05_context/current/context_settlement/claims",
+    "inbox": "ION/05_context/current/context_settlement/inbox",
+    "accepted": "ION/05_context/current/context_settlement/accepted",
+    "conflicts": "ION/05_context/current/context_settlement/conflicts"
+  },
+  "source_artifacts": [
+    {
+      "artifact_id": "ion_workpackets_diffs_ingestion_002_20260510T234208",
+      "path": "ION_CODEX FULL/workpackets/ion_workpackets_diffs_ingestion_002_20260510T234208.zip",
+      "role": "candidate workpacket/diff ingestion and settlement batch source law",
+      "authority": "candidate control artifact; no diff application or state promotion"
+    }
+  ],
+  "settlement_batches": [
+    "B00_root_and_folder_proof",
+    "B01_indexes_and_front_doors",
+    "B02_patch_diff_affected_path_review",
+    "B03_custom_gpt_and_instruction_surfaces",
+    "B04_action_gateway_mcp_connector_surfaces",
+    "B05_extension_dom_cockpit_surfaces",
+    "B06_ui_joc_opus_context_packages",
+    "B07_self_knowledge_and_doctrine_witnesses",
+    "B08_codex_cli_ide_local_worker_surfaces",
+    "B09_lineage_daimon_unclassified_candidates",
+    "C00_active_agent_claim_review",
+    "C01_checkpoint_assignment_and_shared_context_settlement",
+    "C02_generated_capsule_mini_hot_context_update"
+  ],
+  "active_conflicts": [
+    "ION/05_context/current/context_settlement/conflicts/CHECKPOINT_COLLISION_C088_20260511.json"
+  ],
+  "pending_inbox_packets": [
+    "ION/05_context/current/context_settlement/inbox/SETTLE_UI_RECOVERY_ANCHORED_PAGES_AND_DRAWER_CANON_20260511.json",
+    "ION/05_context/current/context_settlement/inbox/SETTLE_WORKPACKETS_DIFFS_INGESTION_002_20260510T234208.json"
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  },
+  "non_claims": [
+    "This registry does not settle or accept any candidate packet.",
+    "This registry does not run the local content-proof scanner.",
+    "This registry does not update Capsule/Mini/HOT_CONTEXT.",
+    "This registry does not resolve the C-088 collision by itself."
+  ]
+}

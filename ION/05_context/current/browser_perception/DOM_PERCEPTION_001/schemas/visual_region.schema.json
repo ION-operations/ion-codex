@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.browser_perception.visual_region.schema.v1",
+  "title": "Visual Region",
+  "type": "object",
+  "required": ["region_id", "source", "bounding_box", "viewport_state", "freshness_state"],
+  "properties": {
+    "region_id": { "type": "string" },
+    "source": { "const": "visual_geometry" },
+    "bounding_box": {
+      "type": "object",
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "width": { "type": "number" },
+        "height": { "type": "number" }
+      }
+    },
+    "viewport_state": { "type": "object" },
+    "scroll_container_ref": { "type": "string" },
+    "occlusion": { "type": "object" },
+    "click_preview_only": { "type": "boolean", "default": true },
+    "freshness_state": { "enum": ["current", "stale", "partial", "unknown"] }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,59 @@
+schema_id: ion.browser_perception.workflow_family.v1
+status: proposal
+created_date: "2026-05-10"
+family_id: DOM_PERCEPTION_001_WORKFLOW_PACKET_FAMILY
+governing_product_context: PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT
+workflows:
+  - workflow_id: DOM_READ_001_REGION_MAP
+    purpose: Capture a scoped DOM region map with selector candidates, semantic anchors, region lineage, and unstable selector warnings.
+    primary_agent: DOM_CARTOGRAPHER
+    input_scope: user_approved_page_or_region_scope
+    output: dom_region_map
+    mutation_allowed: false
+    acceptance: regions_include_provenance_freshness_scope_and_redaction
+  - workflow_id: AX_READ_001_ACCESSIBILITY_SNAPSHOT
+    purpose: Capture accessibility-visible structure and identify gaps between DOM-visible and AX-visible state.
+    primary_agent: ACCESSIBILITY_CARTOGRAPHER
+    input_scope: user_approved_page_or_region_scope
+    output: ax_region_map
+    mutation_allowed: false
+    acceptance: roles_names_states_relationships_and_gaps_are_explicit
+  - workflow_id: VISUAL_READ_001_GEOMETRY_MAP
+    purpose: Capture visible geometry, viewport regions, scroll containers, sticky overlays, and occlusion hazards.
+    primary_agent: VISUAL_GEOMETRY_CARTOGRAPHER
+    input_scope: current_viewport_or_user_approved_region
+    output: visual_region_map
+    mutation_allowed: false
+    acceptance: geometry_has_viewport_scroll_and_occlusion_provenance
+  - workflow_id: MUTATION_READ_001_TIMELINE
+    purpose: Record debounced mutation batches, route transitions, streaming states, and snapshot staleness.
+    primary_agent: MUTATION_WATCHER
+    input_scope: capped_observer_scope
+    output: mutation_timeline
+    mutation_allowed: false
+    acceptance: timeline_is_bounded_debounced_and_perf_budgeted
+  - workflow_id: CHATGPT_LONG_THREAD_001_PERFORMANCE_AUDIT
+    purpose: Profile long ChatGPT-like threads for lag, freeze, virtualization gaps, scroll hazards, and streaming partial states.
+    primary_agent: CHAT_LENGTH_NEMESIS
+    input_scope: chat_page_branch
+    output: chat_thread_performance_profile
+    mutation_allowed: false
+    acceptance: unresolved_gaps_are_marked_not_filled_by_inference
+  - workflow_id: EXTENSION_COCKPIT_001_EVENT_TRACE
+    purpose: Record Mini-Helixion companion panel events, carrier messages, plans, approvals, receipts, and context refs.
+    primary_agent: COCKPIT_SCRIBE
+    input_scope: companion_panel_session
+    output: extension_action_trace_event_stream
+    mutation_allowed: false
+    acceptance: state_bearing_events_have_receipt_or_pending_receipt_status
+  - workflow_id: PERCEPTION_SYNTHESIS_001_PAGE_STATE_OBJECT
+    purpose: Merge DOM, AX, visual, mutation, event, and human semantic evidence into a page state object.
+    primary_agent: PERCEPTION_SYNTHESIZER
+    input_scope: scoped_source_snapshots
+    output: page_state_object
+    mutation_allowed: false
+    acceptance: every_field_has_source_freshness_confidence_and_settlement_state
+approval_boundary:
+  observation: allowed_with_scope
+  planning: allowed_with_visible_plan
+  state_bearing_action: requires_preview_user_approval_and_receipt

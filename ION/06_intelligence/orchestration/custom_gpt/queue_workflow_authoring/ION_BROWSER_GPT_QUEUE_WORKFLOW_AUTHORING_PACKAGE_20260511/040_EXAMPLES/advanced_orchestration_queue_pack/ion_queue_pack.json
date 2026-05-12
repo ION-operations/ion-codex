@@ -1,0 +1,114 @@
+{
+  "schema_id": "ion.extension.queue_pack.v1",
+  "pack_id": "ion-advanced-protocol-orchestration-seed-20260511",
+  "title": "ION Advanced Protocol Orchestration Seed",
+  "objective": "Run a governed multi-chain ION orchestration schedule for a serious project or integration goal, ending with verification and receipt notes.",
+  "queue_behavior": {
+    "manual_start_required": true,
+    "auto_play_requested": false,
+    "include_step_headers": true
+  },
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "requires_operator_approval_for_mutation": true
+  },
+  "gates": [
+    {
+      "id": "mutation_gate",
+      "kind": "human_approval",
+      "summary": "Any file write, connector mutation, cloud action, deploy, account change, or browser send beyond queued prompt execution requires explicit Braden approval.",
+      "requires_operator_approval": true
+    },
+    {
+      "id": "secrets_gate",
+      "kind": "hard_block",
+      "summary": "Do not request, store, expose, or infer secrets, tokens, cookies, private keys, passwords, OAuth codes, or connection strings.",
+      "requires_operator_approval": false
+    }
+  ],
+  "workflows": [
+    {
+      "id": "ion_protocol_orchestration",
+      "title": "ION protocol orchestration",
+      "chains": [
+        {
+          "id": "intake",
+          "title": "Intake and authority",
+          "steps": [
+            {
+              "id": "scope_intent_authority",
+              "title": "Scope intent and authority",
+              "tags": ["intake", "authority", "read-only"],
+              "prompt_ref": "prompts/01_intake/01_scope_intent_authority.md"
+            },
+            {
+              "id": "context_inventory",
+              "title": "Inventory available context",
+              "tags": ["context", "inventory", "read-only"],
+              "prompt_ref": "prompts/01_intake/02_context_inventory.md"
+            }
+          ]
+        },
+        {
+          "id": "orchestration",
+          "title": "Route and schedule",
+          "steps": [
+            {
+              "id": "build_route",
+              "title": "Build the ION route",
+              "tags": ["route", "planning", "protocol"],
+              "prompt_ref": "prompts/02_orchestration/01_build_route.md"
+            },
+            {
+              "id": "build_schedule",
+              "title": "Build the orchestration schedule",
+              "tags": ["schedule", "workflow", "approval-gates"],
+              "prompt_ref": "prompts/02_orchestration/02_build_schedule.md"
+            }
+          ]
+        },
+        {
+          "id": "execution_drafts",
+          "title": "Bounded execution drafts",
+          "steps": [
+            {
+              "id": "draft_work_packets",
+              "title": "Draft bounded work packets",
+              "tags": ["draft", "codex", "queue"],
+              "prompt_ref": "prompts/03_execution/01_draft_work_packets.md",
+              "requires_operator_approval": true
+            },
+            {
+              "id": "draft_connector_actions",
+              "title": "Draft connector actions",
+              "tags": ["draft", "connector", "approval-gates"],
+              "prompt_ref": "prompts/03_execution/02_draft_connector_actions.md",
+              "requires_operator_approval": true
+            }
+          ]
+        },
+        {
+          "id": "verification_receipt",
+          "title": "Verification and receipt",
+          "steps": [
+            {
+              "id": "verify_plan",
+              "title": "Verify the orchestration plan",
+              "tags": ["verification", "risk", "non-claims"],
+              "prompt_ref": "prompts/04_verification/01_verify_plan.md"
+            },
+            {
+              "id": "receipt_and_next_action",
+              "title": "Receipt and next safe action",
+              "tags": ["receipt", "handoff", "next-action"],
+              "prompt_ref": "prompts/04_verification/02_receipt_and_next_action.md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

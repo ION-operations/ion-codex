@@ -1,0 +1,25 @@
+{
+  "schema_id": "ion.helixion_joc_ui_workflow_gate_receipt.v1",
+  "receipt_id": "helixion_joc_ui_workflow_gate_20260511",
+  "created_at": "2026-05-11T01:50:00Z",
+  "status": "CORRECTIVE_WORKFLOW_GATE_CREATED",
+  "trigger": "Operator identified that the JOC/Helixion UI work was proceeding as a large monolithic panel board instead of through the UI agent/domain workflow.",
+  "finding": "The correct workflow is the candidate ui_frontend_excellence_domain with joc_work_surface_ui_packet, routed through JOC_UI_CANON_STEWARD, FRONTEND_WORK_SURFACE_ARCHITECT, INTERACTION_STATE_WEAVER, CONTEXT_VISUALIZATION_CARTOGRAPHER, COMPONENT_BUILDER, and VISUAL_PROOF_AUDITOR.",
+  "created_packet": "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+  "source_evidence": [
+    "ION/05_context/current/ai_assistant_work/protocols/UI_FRONTEND_EXCELLENCE_DOMAIN_PROTOCOL_V0_1.md",
+    "ION/05_context/current/ai_assistant_work/domains/ui_frontend_excellence_domain.domain_packet.yaml",
+    "ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml",
+    "ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md"
+  ],
+  "authority_boundary": {
+    "candidate_only": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "unrestricted_browser_control": false,
+    "silent_browser_send": false,
+    "tests_run": false,
+    "screenshots_run": false
+  },
+  "next_gate": "Use HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511 as the implementation contract before further broad JOC UI changes."
+}

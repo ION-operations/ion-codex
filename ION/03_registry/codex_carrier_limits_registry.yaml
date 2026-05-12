@@ -1,0 +1,90 @@
+schema_id: ion.codex_carrier_limits_registry.v1
+status: ACTIVE
+created_at: 2026-05-10T16:05:00+00:00
+domain_id: codex_carrier_limits
+domain_name: Codex Carrier Limits
+primary_protocol: ION/02_architecture/CODEX_CARRIER_LIMITS_CONTEXT_PROTOCOL.md
+current_context: ION/05_context/current/codex_solo/CODEX_CARRIER_LIMITS_CONTEXT.json
+production_authority: false
+live_execution_authority: false
+secrets_authority: false
+
+classification:
+  local_enforced_limit:
+    authority: repo_current_truth
+    rule: "May be treated as current local truth when validated by tests or direct command output."
+  local_configuration_limit:
+    authority: local_runtime_truth
+    rule: "May change with ~/.codex/config.toml, project .codex/config.toml, CLI version, or launch root."
+  openai_published_limit:
+    authority: external_reference
+    rule: "Must be rechecked from official OpenAI sources before claims that depend on current product/model limits."
+  account_or_plan_limit:
+    authority: dynamic_account_state
+    rule: "Must be verified at runtime or from account UI/API; never hard-code as ION law."
+  unknown_harness_limit:
+    authority: empirical_only
+    rule: "Probe safely and document observed behavior; never claim total certainty."
+
+local_enforced_limits:
+  codex_solo_boot_context_default_bytes:
+    value: 24000
+    unit: bytes
+    source: kernel.ion_codex_solo_context.DEFAULT_BOOT_CONTEXT_MAX_BYTES
+  codex_solo_mini_max_lines:
+    value: 30
+    unit: lines
+    source: kernel.ion_codex_solo_context.MAX_MINI_LINES
+  codex_solo_capsule_active_context_lines:
+    value: 80
+    unit: lines
+    source: kernel.ion_codex_solo_context.MAX_CAPSULE_CONTEXT_LINES
+  codex_solo_capsule_rows_per_long_horizon_epoch:
+    value: 10
+    unit: capsule_rows
+    source: kernel.ion_codex_solo_context.MAX_CAPSULE_ROWS_PER_EPOCH
+  codex_solo_hot_context_recent_long_horizon_epochs:
+    value: 6
+    unit: epochs
+    source: kernel.ion_codex_solo_context.MAX_LONG_HORIZON_EPOCHS_IN_HOT_CONTEXT
+  codex_solo_route_excerpt_chars:
+    value: 1600
+    unit: characters
+    source: kernel.ion_codex_solo_context.MAX_ROUTE_EXCERPT_CHARS
+  active_root_session_start_hook_timeout:
+    value: 10
+    unit: seconds
+    source: .codex/config.toml
+  parent_session_start_hook_timeout:
+    value: 10
+    unit: seconds
+    source: /home/sev/ION - Production/.codex/config.toml
+  ion_local_mcp_startup_timeout:
+    value: 10
+    unit: seconds
+    source: .codex/config.toml
+  ion_local_mcp_tool_timeout:
+    value: 60
+    unit: seconds
+    source: .codex/config.toml
+
+external_references:
+  openai_model_compare:
+    url: https://developers.openai.com/api/docs/models/compare
+    current_observation: "GPT-5.5 lists 1,050,000 context window and 128,000 max output tokens."
+    authority: openai_published_limit
+  openai_codex_plan_limits:
+    url: https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan/
+    current_observation: "Codex usage limits vary by plan, task size, complexity, execution surface, and context held."
+    authority: account_or_plan_limit
+  openai_codex_cli:
+    url: https://developers.openai.com/codex/cli
+    current_observation: "Codex CLI can inspect repositories, edit files, and run commands in the selected directory."
+    authority: openai_published_limit
+
+verification_requirements:
+  - active_root_boot_context_ready
+  - parent_root_bridge_ready
+  - startup_recency_snapshot_contains_latest_capsule_row
+  - focused_continuity_tests_pass
+  - material_limit_changes_receipted_to_codex_solo_capsule

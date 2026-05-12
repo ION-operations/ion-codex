@@ -1,0 +1,54 @@
+{
+  "schema_id": "ion.context_settlement.inbox_packet.v1",
+  "packet_id": "SETTLE_UI_RECOVERY_ANCHORED_PAGES_AND_DRAWER_CANON_20260511",
+  "created_at": "2026-05-11",
+  "status": "CANDIDATE_PENDING_SETTLEMENT",
+  "source_type": "receipt",
+  "domain": "ui_joc_opus",
+  "risk_class": "ui_joc_context_and_state_patch_candidate",
+  "settlement_batch": "B06_ui_joc_opus_context_packages",
+  "source_refs": [
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_RECOVERY_002_EXISTING_COCKPIT_TOP_PAGES_RECEIPT_20260511.json",
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_RECOVERY_003_ANCHORED_PAGES_AND_DRAWER_CANON_RECEIPT_20260511.json",
+    "ION/05_context/current/context_settlement/conflicts/CHECKPOINT_COLLISION_C088_20260511.json"
+  ],
+  "implementation_refs": [
+    "ION/04_packages/kernel/ion_codex_chat_shell_ui.py",
+    "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+    "ION/04_packages/kernel/ion_codex_chat_left_drawer_ui.py"
+  ],
+  "requested_outcome": "MERGE_PROPOSAL_REQUIRED",
+  "checkpoint_request": {
+    "assign_c_number": true,
+    "agent_assigned_c_number": "C-088",
+    "agent_assigned_c_number_status": "collision_recorded_do_not_use_without_settlement",
+    "preferred_settlement": "assign_next_available_checkpoint_after_conflict_review"
+  },
+  "required_review": [
+    "JOC_UI_CANON_STEWARD",
+    "FRONTEND_WORK_SURFACE_ARCHITECT",
+    "VISUAL_PROOF_AUDITOR",
+    "context_settler"
+  ],
+  "acceptance_gates": [
+    "C-088 collision resolved without overwriting concurrent queue-timeout state",
+    "existing 8765 cockpit service reload status known",
+    "page switching visually verified",
+    "composer and page bottom bars anchored to UI shell",
+    "left drawers confirmed as page-local instruments",
+    "right inspector and bottom timeline remain visible",
+    "no monolithic scroll page accepted"
+  ],
+  "non_claims": [
+    "This packet does not claim accepted UI state.",
+    "This packet does not claim browser visual proof.",
+    "This packet does not claim the running 8765 service has reloaded.",
+    "This packet does not assign a valid C-number."
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  }
+}

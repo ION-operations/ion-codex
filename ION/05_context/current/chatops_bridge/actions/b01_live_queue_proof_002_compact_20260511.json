@@ -1,0 +1,35 @@
+{
+  "approval": {
+    "approval_token": "ION_CHATOPS_APPROVED",
+    "approved": true,
+    "approved_by": "Braden"
+  },
+  "created_at": "2026-05-11T15:21:16+00:00",
+  "ion_action": {
+    "action_id": "b01-live-queue-proof-002-compact-20260511",
+    "actor": {
+      "callsign": "Sev",
+      "carrier": "chatgpt_browser"
+    },
+    "authority": {
+      "human_sovereign": "Braden",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true
+    },
+    "intent": "create_codex_work_packet",
+    "objective": "B01_CODEX_RUNNER_TIMEOUT_POLICY_002_LIVE_QUEUE_PROOF compact retry.\n\nProve the patched Codex queue timeout policy on a real queued workload path.\nConfirm the next Codex run uses a normalized timeout >=900 and <=7200,\nproduces latest_return.md, includes WORKLOAD DIFF, and passes proof-gate intake.\n\nDo not edit runtime code unless a blocking defect is found.\nIf blocked, return BLOCKED_NEEDS_PATCH.\n\nRequired sections:\nCONTEXT PROOF\nTEMPLATE ACTION PROOF\nVALIDATION\nRESULT\nWORKLOAD DIFF\nBLOCKERS\nRECOMMENDED NEXT PACKET",
+    "receipts": {
+      "requested": [
+        "codex_work_packet_receipt",
+        "action_receipt",
+        "workload_diff_receipt"
+      ]
+    },
+    "schema": "ion.chatops.action.v1"
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatops.action_packet.v1",
+  "source": "ion_chatops_bridge"
+}

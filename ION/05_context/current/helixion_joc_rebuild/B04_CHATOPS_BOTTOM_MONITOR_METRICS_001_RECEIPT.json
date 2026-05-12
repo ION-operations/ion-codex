@@ -1,0 +1,53 @@
+{
+  "schema_id": "ion.chatops_bottom_monitor_metrics_receipt.v1",
+  "packet_id": "B04_CHATOPS_BOTTOM_MONITOR_METRICS_001",
+  "generated_at": "2026-05-11T13:59:12Z",
+  "accepted_state": "ACCEPTED_AS_B04_BOTTOM_MONITOR_METRICS_CANDIDATE",
+  "implemented": [
+    "Bottom monitor strip now shows visible assistant and user message counts as Msgs A/U",
+    "Action scan metrics are surfaced as candidate, valid, blocked, duplicate, and code-block counts",
+    "Queue metrics are surfaced as unsent queue count, file queue count, active waiting/sending count, pause state, and send availability",
+    "Connection metrics show send/output/no-send state plus source-chip count, composer controls, and uploaded attachments",
+    "Existing loaded transcript, lag, long task, and DOM pressure metrics remain available"
+  ],
+  "future_metric_ideas": [
+    "last action receipt and latest queue target",
+    "gateway and MCP preview health flags",
+    "active project/context package selected in the top sync panel",
+    "file/image/zip attachment staging count",
+    "DOM confidence for composer, send, attach, drop, and source surfaces",
+    "queue autoplay/manual mode and mid-output send permission",
+    "loaded transcript pressure trend since last refresh"
+  ],
+  "validation": [
+    "node --check ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "node ION/09_integrations/browser_extension/ion_chatops_bridge/tests/live_smoke_parser_simulation.js",
+    "unzip -t ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_bottom_monitor_metrics_20260511.zip",
+    "zipgrep 'Msgs A' ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_bottom_monitor_metrics_20260511.zip"
+  ],
+  "visual_validation": {
+    "browser_extension_reload": "not_run",
+    "reason": "No live browser reload requested in this lane; package artifact is ready for operator reload."
+  },
+  "touched_paths": [
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_BOTTOM_MONITOR_METRICS_001.md",
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_BOTTOM_MONITOR_METRICS_001_RECEIPT.json",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/approval_ui.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_bottom_monitor_metrics_20260511.zip"
+  ],
+  "package_artifact": {
+    "zip_path": "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_bottom_monitor_metrics_20260511.zip",
+    "zip_sha256": "995552cbac4281413ab0ea9e3b839bc47b623333b8b7a1c944911429a498b9a6",
+    "zip_entries": 23
+  },
+  "authority_boundaries": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false,
+    "silent_browser_send": false,
+    "accepted_ion_state": false
+  }
+}

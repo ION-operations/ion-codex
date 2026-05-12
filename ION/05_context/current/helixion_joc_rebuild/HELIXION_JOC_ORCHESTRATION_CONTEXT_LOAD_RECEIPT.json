@@ -1,0 +1,35 @@
+{
+  "schema_id": "ion.context_load_receipt.v1",
+  "receipt_id": "helixion_joc_orchestration_context_load_20260510",
+  "created_at": "2026-05-10",
+  "package_id": "helixion_joc_orchestration_package",
+  "package_paths": [
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md",
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json"
+  ],
+  "source_refs": [
+    "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+    "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+    "ION/03_registry/helixion_joc_evolution_registry.yaml",
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json",
+    "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+    "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+    "ION/02_architecture/CONTEXT_NODE_AND_PACKAGE_PROTOCOL.md",
+    "ION/02_architecture/ION_AGENT_CONTEXT_CONTINUITY_TIMELINE_AND_ROUTE_MAP_PROTOCOL.md"
+  ],
+  "context_proof": {
+    "capsule_policy": "Capsule is minimum context; Mini is lookup only.",
+    "route_deeper_required": true,
+    "package_in_current_context_package_index": true,
+    "skill_registry_entry_added": true,
+    "codex_skill_added": true
+  },
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false
+  },
+  "verdict": "HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE_COMPILED"
+}
+

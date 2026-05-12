@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.schema.extension_queue_packet.v0_1",
+  "type": "object",
+  "required": ["schema_id", "queue_type", "packet_id", "state", "request_id", "request_path"],
+  "properties": {
+    "schema_id": {"const": "ion.extension_queue_packet.v0_1"},
+    "queue_type": {"type": "string"},
+    "packet_id": {"type": "string"},
+    "state": {"enum": ["draft", "candidate", "approved", "claimed", "running", "proof_accepted", "settled", "cancelled", "superseded"]},
+    "request_id": {"type": "string"},
+    "request_path": {"type": "string"},
+    "agent_class": {"$ref": "agent_classification.schema.json"},
+    "context_binding": {"type": "string"},
+    "authority": {"type": "object"},
+    "expected_proof": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

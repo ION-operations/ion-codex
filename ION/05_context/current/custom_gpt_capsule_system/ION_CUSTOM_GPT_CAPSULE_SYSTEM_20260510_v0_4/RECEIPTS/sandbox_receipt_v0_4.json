@@ -1,0 +1,12 @@
+{
+  "schema_id": "ion.sandbox_receipt.v1",
+  "artifact": "ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4.zip",
+  "created_at": "2026-05-10T19:05:00Z",
+  "result": "candidate setup cards generated",
+  "validation": "PASS",
+  "non_claims": [
+    "not published",
+    "not accepted local state",
+    "not full ION engine package"
+  ]
+}

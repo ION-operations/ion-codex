@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.schema.queue_event.v0_1",
+  "type": "object",
+  "required": ["schema_id", "event_id", "queue_type", "packet_id", "event_type", "created_at"],
+  "properties": {
+    "schema_id": {"const": "ion.queue_event.v0_1"},
+    "event_id": {"type": "string"},
+    "queue_type": {"type": "string"},
+    "packet_id": {"type": "string"},
+    "event_type": {"type": "string"},
+    "before_state": {"type": ["string", "null"]},
+    "after_state": {"type": ["string", "null"]},
+    "diff": {"type": ["object", "null"]},
+    "actor": {"type": "object"},
+    "created_at": {"type": "string"}
+  },
+  "additionalProperties": true
+}

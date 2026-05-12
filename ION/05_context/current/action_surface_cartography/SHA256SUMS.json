@@ -1,0 +1,18 @@
+{
+  "schema_id": "ion.sha256_manifest.v1",
+  "status": "candidate_hash_manifest",
+  "generated_at": "2026-05-11T00:00:00Z",
+  "files": {
+    "ION/05_context/current/action_surface_cartography/ION_ACTIONS_CONNECTOR_CONTEXT_PACKAGE_V0_1.md": "e048b5c209fc3bf917750163215a5791d4dd6e7f54b023f943571647a02fcec2",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_CONTEXT_PACKAGE_MANIFEST_V0_1.json": "7d7d69923e020ac19301267c9d2c24225f60c16fc8099b676c1fa69dca4cbf50",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_TEST_LOG_V0_1.json": "d97b9d3ac75913f2fc77df0cc98abb9533ea64e5005be0779e83fd9750e1c072",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_LIMITS_AND_VARIABLES_V0_1.json": "0d7df7628479275931de5c51aa4d15c8f90566fc69f7401b8fa79a71a2b2108e",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_ROADMAP_V0_1.md": "cbd79e59e39891e303ed80f60f60e8ecfae1840f8dfd5b99b1f99bb597e3bebc",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_CONTEXT_PACKAGE_001_WORK_PACKET.md": "746aef5ada4611136649f734325694b0f5cec4031c56a0fab8e466ee1a70217d",
+    "ION/05_context/current/context_settlement/inbox/SETTLE_ACTION_SURFACE_CONTEXT_PACKAGE_001_20260511.json": "a81622536b38e107960e56639d132ebbf82a03b258fe809aa6d83ede10cc6b84",
+    "ION/05_context/current/context_settlement/claims/claim_20260511_action_surface_context_package_001.json": "dd92e0263332c48e83257a156332a88acda420c86f8fb41916d736c253ae4f5c"
+  },
+  "notes": [
+    "SHA256SUMS.json self-hash omitted to avoid recursion."
+  ]
+}

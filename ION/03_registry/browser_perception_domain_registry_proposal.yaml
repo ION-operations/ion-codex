@@ -1,0 +1,91 @@
+schema_id: ion.browser_perception.domain_registry_proposal.v1
+status: proposal
+created_date: "2026-05-10"
+proposal_id: DOM_PERCEPTION_001_DOMAIN_REGISTRY_PROPOSAL
+governing_product_context: PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT
+primary_design_doc: ION/02_architecture/DOM_PERCEPTION_001_BROWSER_PERCEPTION_DOMAIN_DESIGN.md
+domains:
+  - domain_id: browser_perception_core
+    purpose: Shared capture lifecycle, scope negotiation, redaction policy, event bus, snapshot freshness, and common object IDs.
+    primary_outputs:
+      - capture_scope_receipt
+      - page_session_id
+      - source_snapshot_envelope
+      - freshness_confidence_metadata
+    safety_boundary: passive_observation_and_scope_enforcement_only
+  - domain_id: chatgpt_dom_reader
+    purpose: Specialized reader for ChatGPT-like long chat pages, transcript turns, composer state, tool cards, and streaming states.
+    primary_outputs:
+      - chat_thread_map
+      - turn_region_map
+      - composer_state_object
+      - tool_action_trace_refs
+    safety_boundary: no_hidden_chat_submission_or_page_action
+  - domain_id: page_state_cartography
+    purpose: Semantic map of page topology, stable landmarks, regions, forms, panels, lists, modals, and route state.
+    primary_outputs:
+      - page_topology_map
+      - page_branch_identity_candidates
+      - semantic_region_inventory
+    safety_boundary: provisional_map_until_settlement
+  - domain_id: accessibility_tree_reader
+    purpose: Accessibility tree roles, names, states, relationships, and accessibility-visible gaps.
+    primary_outputs:
+      - ax_region_map
+      - role_name_state_relationships
+      - accessibility_gap_report
+    safety_boundary: no_claim_that_ax_view_equals_user_truth
+  - domain_id: visual_geometry_reader
+    purpose: Bounding boxes, viewport regions, scroll containers, occlusion, sticky layers, and geometry hazards.
+    primary_outputs:
+      - visual_region_map
+      - viewport_occupancy_report
+      - click_target_geometry_evidence
+    safety_boundary: geometry_supports_preview_not_autonomous_clicks
+  - domain_id: mutation_timeline_monitor
+    purpose: Debounced mutation batches, route changes, streaming states, virtualization churn, lazy loading, and stale snapshot risk.
+    primary_outputs:
+      - mutation_timeline
+      - stability_windows
+      - refresh_triggers
+      - mutation_storm_warnings
+    safety_boundary: capped_observers_and_backpressure_required
+  - domain_id: long_chat_resilience
+    purpose: Long-chat lag, freeze, scroll loss, excessive DOM growth, transcript gaps, and recovery hazards.
+    primary_outputs:
+      - chat_performance_profile
+      - thread_segmentation_plan
+      - stale_offscreen_warning
+      - freeze_risk_mitigations
+    safety_boundary: do_not_force_full_page_expansion
+  - domain_id: extension_cockpit_surface
+    purpose: Mini-Helixion data contracts for page-aware perception summaries, branch state, workflow drafts, and ticker facts.
+    primary_outputs:
+      - cockpit_event_trace
+      - top_ticker_facts
+      - bottom_panel_data_contracts
+      - page_branch_summary
+    safety_boundary: UI_surface_not_authority_source
+  - domain_id: action_trace_and_agent_comms
+    purpose: Plans, approvals, dry-runs, carrier messages, context refs, task returns, receipts, and workflow replay records.
+    primary_outputs:
+      - extension_action_trace_event
+      - workflow_approval_receipt
+      - carrier_context_ref
+      - replayable_workflow_draft_ref
+    safety_boundary: records_and_routes_only_no_unsafe_browser_control
+  - domain_id: perception_security_and_privacy
+    purpose: No-secrets posture, redaction, per-page scopes, iframe and shadow DOM boundaries, retention, and settlement gates.
+    primary_outputs:
+      - redaction_report
+      - sensitive_field_exclusions
+      - scope_violation_warning
+      - settlement_readiness_status
+    safety_boundary: fail_closed_on_scope_or_secret_risk
+shared_graph_binding:
+  global_chat_graph: required
+  page_branch: required
+  page_session: required
+  workflow_branch: optional_until_workflow_draft_exists
+  settlement_edge: required_for_accepted_context
+  receipt_edge: required_for_state_bearing_transition

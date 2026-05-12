@@ -1,0 +1,63 @@
+{
+  "schema_id": "ion.helixion_joc_rebuild_receipt.v1",
+  "receipt_id": "browser_gpt_queue_workflow_authoring_package_20260511",
+  "created_at": "2026-05-11",
+  "status": "implemented_and_packaged",
+  "purpose": "Create the internal ION package that lets Browser GPT / Custom GPT author advanced ION protocol orchestration schedules as saved queue-pack workflows for the ION ChatOps Bridge.",
+  "authority_posture": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_extension_direct_file_authority": false,
+    "queue_pack_import_is_approval": false
+  },
+  "package_root": "ION/06_intelligence/orchestration/custom_gpt/queue_workflow_authoring/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511",
+  "artifacts": [
+    {
+      "path": "ION/06_artifacts/packages/custom_gpt/ION_ADVANCED_ORCHESTRATION_QUEUE_PACK_SEED_20260511.zip",
+      "sha256": "38fb7a91379243b4bbe8295c185fc4f4c85dce60284c4bf1f761e4a02281662b",
+      "role": "ready_to_import_seed_queue_pack",
+      "import_root_contains": "ion_queue_pack.json"
+    },
+    {
+      "path": "ION/06_artifacts/packages/custom_gpt/ION_BROWSER_GPT_QUEUE_WORKFLOW_AUTHORING_PACKAGE_20260511.zip",
+      "sha256": "80d8aa38dd5952e2dc18f8aa803d0b4536d57789e9dbd97445fac8cd1e13572d",
+      "role": "full_authoring_instruction_package"
+    }
+  ],
+  "implemented_surfaces": [
+    "Browser GPT system instructions",
+    "ION queue workflow authoring protocol",
+    "queue pack JSON schema",
+    "manifest and prompt templates",
+    "advanced orchestration seed queue pack",
+    "validation checklist",
+    "extension authoring doc link"
+  ],
+  "seed_queue_pack": {
+    "schema_id": "ion.extension.queue_pack.v1",
+    "pack_id": "ion-advanced-protocol-orchestration-seed-20260511",
+    "step_count": 8,
+    "chains": [
+      "intake",
+      "orchestration",
+      "execution_drafts",
+      "verification_receipt"
+    ],
+    "manual_start_required": true,
+    "auto_play_requested": false
+  },
+  "validation": {
+    "json_parse_manifest": "passed",
+    "json_parse_schema": "passed",
+    "json_parse_seed_queue_pack": "passed",
+    "seed_zip_root_manifest": "ion_queue_pack.json present at ZIP root",
+    "prompt_ref_resolution": "passed; missing_prompt_refs=[]",
+    "targeted_diff_check": "passed"
+  },
+  "non_claims": [
+    "This package creates prompt workflows only.",
+    "It does not grant local mutation, cloud mutation, production, live execution, browser send, or secrets authority.",
+    "Connector visibility or queue import is not accepted state and is not approval to act."
+  ]
+}

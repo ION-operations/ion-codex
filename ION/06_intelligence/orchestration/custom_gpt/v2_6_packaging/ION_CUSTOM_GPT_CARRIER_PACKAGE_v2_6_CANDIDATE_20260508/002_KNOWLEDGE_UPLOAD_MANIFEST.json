@@ -2,26 +2,28 @@
   "schema_id": "ion.custom_gpt_knowledge_upload_manifest.v2_6",
   "status": "candidate",
   "package_id": "ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_CANDIDATE_20260508",
-  "revision": "v2_6_6_always_on_workflow_law",
+  "revision": "v2_6_7_daimon_relay_and_project_continuity",
   "recommended_gpt_instruction_source": "001_GPT_INSTRUCTIONS_PASTE_8K.md",
   "design_rule": "Keep behavior law in the GPT instructions field; use knowledge files as reference and retrieval reserve.",
   "safe_under_strict_10_file_ceiling": true,
   "recommended_knowledge_files": [
-    "ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_6_CANDIDATE_20260509T015007Z.zip",
+    "ION_CUSTOM_GPT_CARRIER_PACKAGE_v2_6_7_CANDIDATE_20260509T224136Z.zip",
     "001_GPT_INSTRUCTIONS_PASTE_8K.md",
     "010_HOT_BOOT/BOOT_0_KERNEL_LAW.md",
     "010_HOT_BOOT/BOOT_1_CUSTOM_GPT_CARRIER_MOUNT.md",
     "010_HOT_BOOT/BOOT_2_SIGN_IN_AND_REENTRY.md",
     "010_HOT_BOOT/BOOT_3_ACTIONS_MCP_TOOL_SELECTION.md",
-    "010_HOT_BOOT/BOOT_4_DYNAMIC_DOMAINS_AND_PERSONA.md",
     "010_HOT_BOOT/BOOT_5_STATE_EXPORT_AND_RECEIPTS.md",
-    "040_PRODUCT_DOCS/WHAT_IS_ION_SHORT.md",
-    "040_PRODUCT_DOCS/ION_ONTOLOGICAL_JOURNAL_INDEX_0_39.md"
+    "060_ACTION_SCHEMAS/CONNECTION_SURFACE_MANIFEST_V2_6_7.md",
+    "030_CUSTOM_GPT_ADAPTER/CODEX_CAPSULE_BRIDGE_RUNBOOK_V2_6_7.md",
+    "030_CUSTOM_GPT_ADAPTER/CODEX_QUEUE_RECONCILE_LIVE_TELEMETRY_RUNBOOK_V2_6_7.md"
   ],
   "optional_reference_files_if_space_allows": [
+    "040_PRODUCT_DOCS/DAIMON_PROJECT_DOCTRINE_V2_6_7.md",
+    "030_CUSTOM_GPT_ADAPTER/FIRST_CONTACT_PROJECT_IDENTITY_AND_COLLAB_MODEL_V2_6_7.md",
+    "011_V2_6_7_VOICE_MISRECOGNITION_SAFETY_GATE_NOTE.md",
     "060_ACTION_SCHEMAS/action_gateway/openapi.yaml",
-    "060_ACTION_SCHEMAS/mcp_json_rpc/openapi.yaml",
-    "070_BROWSER_EXTENSION_YAML_BRIDGE/ION_ACTION_YAML_REFERENCE.md"
+    "060_ACTION_SCHEMAS/mcp_json_rpc/openapi.yaml"
   ],
   "actions_to_configure": [
     {
@@ -40,5 +42,5 @@
     "This manifest does not grant live execution authority.",
     "Uploaded knowledge files are reference material; accepted state still requires proof and receipts."
   ],
-  "revision_note": "v2.6.6 adds Always-On ION Workflow Law: when the package is mounted GPT is ION through the carrier, chat is only the Persona output channel, sandbox/package workflow is the work surface, and no substantive response may occur without an ION workflow object."
+  "revision_note": "v2.6.7 adds proven Codex Capsule/queue/reconcile/live-telemetry connection surfaces, dAimon governed-state doctrine, project-bound first-contact identity notes, voice misrecognition safety gate, and explicit proof-gate non-claims."
 }

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.custom_gpt_factory.capsule_family.schema.v1",
+  "title": "Capsule Family",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "family_id",
+    "role_id",
+    "shared_micro_core_path",
+    "role_capsule_path",
+    "custom_gpt_package_ref",
+    "codex_cli_capsule_ref",
+    "sync_status",
+    "authority_boundary"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.custom_gpt_factory.capsule_family.v1"
+    },
+    "family_id": {
+      "type": "string"
+    },
+    "role_id": {
+      "type": "string"
+    },
+    "shared_micro_core_path": {
+      "type": "string"
+    },
+    "role_capsule_path": {
+      "type": "string"
+    },
+    "custom_gpt_package_ref": {
+      "type": "string"
+    },
+    "codex_cli_capsule_ref": {
+      "type": "string"
+    },
+    "sync_status": {
+      "enum": ["draft", "candidate_synced", "drift_detected", "accepted_synced", "superseded"]
+    },
+    "authority_boundary": {
+      "type": "object",
+      "required": ["production_authority", "live_execution_authority", "secret_handling", "state_acceptance"],
+      "properties": {
+        "production_authority": { "type": "boolean" },
+        "live_execution_authority": { "type": "boolean" },
+        "secret_handling": { "enum": ["forbidden_in_chat", "external_auth_only", "not_applicable"] },
+        "state_acceptance": { "enum": ["candidate_until_receipted", "accepted_by_receipt", "not_applicable"] }
+      },
+      "additionalProperties": true
+    },
+    "version": {
+      "type": "string"
+    },
+    "receipt_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}

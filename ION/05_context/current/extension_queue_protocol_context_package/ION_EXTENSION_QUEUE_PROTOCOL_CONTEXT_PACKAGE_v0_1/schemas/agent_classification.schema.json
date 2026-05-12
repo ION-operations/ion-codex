@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.schema.agent_classification.v0_1",
+  "type": "object",
+  "required": ["class_id", "context_binding", "authority"],
+  "properties": {
+    "class_id": {"enum": ["capsule_context_bound_agent", "full_ion_orchestration_agent", "codex_cli_implementation_worker", "local_ops_daemon_worker"]},
+    "context_binding": {"type": "string"},
+    "authority": {
+      "type": "object",
+      "required": ["production_authority", "live_execution_authority"],
+      "properties": {
+        "production_authority": {"const": false},
+        "live_execution_authority": {"const": false}
+      }
+    }
+  },
+  "additionalProperties": true
+}

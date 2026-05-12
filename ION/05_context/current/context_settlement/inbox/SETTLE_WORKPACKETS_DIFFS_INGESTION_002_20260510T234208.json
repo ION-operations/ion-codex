@@ -1,0 +1,52 @@
+{
+  "schema_id": "ion.context_settlement.inbox_packet.v1",
+  "packet_id": "SETTLE_WORKPACKETS_DIFFS_INGESTION_002_20260510T234208",
+  "created_at": "2026-05-11",
+  "status": "CANDIDATE_PENDING_SETTLEMENT",
+  "source_type": "workpacket_context_package",
+  "domain": "workpacket_diff_ingestion",
+  "risk_class": "governance_protocol_candidate",
+  "settlement_batch": "B00_root_and_folder_proof_then_B01_to_B09",
+  "source_refs": [
+    "ION_CODEX FULL/workpackets/ion_workpackets_diffs_ingestion_002_20260510T234208.zip"
+  ],
+  "observed_contents": [
+    "ACCEPTANCE_AND_NON_PROMOTION_RULES.md",
+    "LOCAL_CONTENT_PROOF_RUNBOOK.md",
+    "PARSER_SPEC_WORKPACKETS_DIFFS_v1.json",
+    "SETTLEMENT_BATCHES_v2.json",
+    "SETTLEMENT_BATCHES_v2.md",
+    "ion_local_workpackets_diffs_ingest.py",
+    "seed_index_derived_bundle_001/ION_WORKPACKETS_DIFFS_INGESTION_PLAN.md"
+  ],
+  "requested_outcome": "ACCEPTED_AS_WITNESS",
+  "checkpoint_request": {
+    "assign_c_number": true,
+    "agent_assigned_c_number": null,
+    "preferred_settlement": "record as workpacket/diff ingestion control artifact after content-proof scan is run or explicitly deferred"
+  },
+  "required_next_action_before_promotion": [
+    "Run ion_local_workpackets_diffs_ingest.py read-only against ION_CODEX FULL only when authorized.",
+    "Review CONTENT_PROOF_MANIFEST.json and LOCAL_CONTENT_PROOF_REPORT.md.",
+    "Settle by B00 through B09 batches.",
+    "Do not apply any diff during ingestion.",
+    "Do not promote workpacket or diff material to current law without settlement receipt."
+  ],
+  "integration_with_multi_agent_protocol": [
+    "Candidate workpackets, diffs, and receipts feed context_settlement/inbox.",
+    "Shared context updates are generated only after context settler approval.",
+    "C-number assignment is serialized by the context settler."
+  ],
+  "non_claims": [
+    "This packet does not prove the local scanner has run.",
+    "This packet does not apply or approve any diff.",
+    "This packet does not mutate source files.",
+    "This packet does not promote any workpacket to current law."
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  }
+}

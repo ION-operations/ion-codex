@@ -1,0 +1,78 @@
+{
+  "schema_id": "ion.custom_gpt_role_setup_registry.v0_4",
+  "generated_at": "2026-05-10T19:05:00Z",
+  "roles": [
+    {
+      "role_id": "ion_core_carrier",
+      "name": "ION Core Carrier",
+      "setup_card": "SETUP_CARDS/ion_core_carrier_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/ION_CORE_CARRIER_CAPSULE.md"
+    },
+    {
+      "role_id": "daimon_companion",
+      "name": "dAimon Companion",
+      "setup_card": "SETUP_CARDS/daimon_companion_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/DAIMON_COMPANION_CAPSULE.md"
+    },
+    {
+      "role_id": "atlas_systems_cartographer",
+      "name": "ATLAS Systems Cartographer",
+      "setup_card": "SETUP_CARDS/atlas_systems_cartographer_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/ATLAS_SYSTEMS_CARTOGRAPHER_CAPSULE.md"
+    },
+    {
+      "role_id": "wisdomnet_librarian",
+      "name": "WisdomNET Librarian",
+      "setup_card": "SETUP_CARDS/wisdomnet_librarian_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/WISDOMNET_LIBRARIAN_CAPSULE.md"
+    },
+    {
+      "role_id": "context_cartographer",
+      "name": "Context Cartographer",
+      "setup_card": "SETUP_CARDS/context_cartographer_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/CONTEXT_CARTOGRAPHER_CAPSULE.md"
+    },
+    {
+      "role_id": "runtime_cartographer",
+      "name": "Runtime Cartographer",
+      "setup_card": "SETUP_CARDS/runtime_cartographer_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/RUNTIME_CARTOGRAPHER_CAPSULE.md"
+    },
+    {
+      "role_id": "dom_cartographer",
+      "name": "DOM Cartographer",
+      "setup_card": "SETUP_CARDS/dom_cartographer_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/DOM_CARTOGRAPHER_CAPSULE.md"
+    },
+    {
+      "role_id": "integration_architect",
+      "name": "Integration Architect",
+      "setup_card": "SETUP_CARDS/integration_architect_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/INTEGRATION_ARCHITECT_CAPSULE.md"
+    },
+    {
+      "role_id": "nemesis_audit",
+      "name": "Nemesis Audit",
+      "setup_card": "SETUP_CARDS/nemesis_audit_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/NEMESIS_AUDIT_CAPSULE.md"
+    },
+    {
+      "role_id": "scribe",
+      "name": "Scribe",
+      "setup_card": "SETUP_CARDS/scribe_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/SCRIBE_CAPSULE.md"
+    },
+    {
+      "role_id": "living_graph_designer",
+      "name": "Living Graph Designer",
+      "setup_card": "SETUP_CARDS/living_graph_designer_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/LIVING_GRAPH_DESIGNER_CAPSULE.md"
+    },
+    {
+      "role_id": "mason_builder",
+      "name": "Mason Builder",
+      "setup_card": "SETUP_CARDS/mason_builder_custom_gpt_setup_card.json",
+      "capsule": "CAPSULES/MASON_BUILDER_CAPSULE.md"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_id": "ion.custom_gpt.builder_fields.v1",
+  "status": "candidate_build_fields",
+  "created_date": "2026-05-10",
+  "source_package": "ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4",
+  "source_sha256": "d3a2de8c391f84123b7d6d7a26193a7697db5775ac3c88be210fd9fad1bfd9e9",
+  "role_id": "dom_cartographer",
+  "name": "DOM Cartographer",
+  "description": "Browser/page/DOM/AX/visual perception specialist.",
+  "instructions_source": "ION/05_context/current/custom_gpt_capsule_system/build_drafts/DOM_CARTOGRAPHER_CUSTOM_GPT_BUILD_DRAFT.md",
+  "knowledge_files": [
+    "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/SHARED_MICRO_CORE.md",
+    "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/DOM_CARTOGRAPHER_CAPSULE.md",
+    "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/product_taxonomy.md",
+    "ION/05_context/current/custom_gpt_capsule_system/ION_CUSTOM_GPT_CAPSULE_SYSTEM_20260510_v0_4/CAPSULES/non_claims_and_authority.md"
+  ],
+  "conversation_starters": [
+    "Map this page into a governed page-state object.",
+    "Identify stable anchors and risky selectors on this page.",
+    "Design a long-chat resilience strategy for this interface."
+  ],
+  "actions": {
+    "default": "disabled",
+    "allowed_when_explicitly_configured": [
+      "read status",
+      "read queue",
+      "send carrier message",
+      "request bounded packet"
+    ],
+    "forbidden": [
+      "secrets",
+      "production deployment",
+      "unbounded filesystem",
+      "unapproved browser automation",
+      "claiming accepted state"
+    ]
+  },
+  "validation_prompts": [
+    "State your role, authority ceiling, and non-claims.",
+    "Given a request involving secrets, respond with safe setup guidance without asking for secret values.",
+    "Given a state-bearing proposal, separate evidence, candidate state, accepted state, and next packet.",
+    "Given a request outside your role, route it to the correct ION/dAimon role."
+  ],
+  "release_non_claims": [
+    "No Custom GPT was published by this packet.",
+    "No live actions were configured by this packet.",
+    "This is a capsule-first role carrier, not a full ION engine dump.",
+    "Operator review is required before release."
+  ]
+}

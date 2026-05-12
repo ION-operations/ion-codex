@@ -1,0 +1,51 @@
+{
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": null,
+  "created_at": "2026-05-10T16:28:31+00:00",
+  "failure_classification": null,
+  "files_touched": [
+    "ION/05_context/current/chatops_bridge/artifacts/docs_drop/docs_drop_20260510T162831Z_ion_09_integrations_browser_extension_ion_extension_zip.zip",
+    "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/b8wmboj7b2v08soihl4nm52e3pbhimb.json"
+  ],
+  "live_execution_authority": false,
+  "operation": "docs_prepare_zip_drop",
+  "production_authority": false,
+  "receipt_id": "chatops_bridge_operation_20260510T162831Z_docs_prepare_zip_drop",
+  "schema_id": "ion.chatops.bridge_operation_receipt.v1",
+  "status": "completed",
+  "target_refs": [
+    {
+      "path": "ION/09_integrations/browser_extension/ION_extension.zip",
+      "provider": "local_ion",
+      "role": "docs_zip_source"
+    }
+  ],
+  "validation": {
+    "result": {
+      "artifact": {
+        "attachable": true,
+        "content_type": "application/zip",
+        "finding": null,
+        "mtime": "2026-05-10T16:28:31+00:00",
+        "name": "docs_drop_20260510T162831Z_ion_09_integrations_browser_extension_ion_extension_zip.zip",
+        "path": "ION/05_context/current/chatops_bridge/artifacts/docs_drop/docs_drop_20260510T162831Z_ion_09_integrations_browser_extension_ion_extension_zip.zip",
+        "sha256": "0bc168ea1d62cf1b2caedd7b13892c3bca915100695c721d5d95f271f66a3f99",
+        "size_bytes": 107724
+      },
+      "content_type": "application/zip",
+      "download_token": "b8wMBOJ7b2V08SoIHL4NM52e3Pbhimb-",
+      "download_url": "http://127.0.0.1:8767/artifacts/download/b8wMBOJ7b2V08SoIHL4NM52e3Pbhimb-",
+      "file_count": 1,
+      "filename": "docs_drop_20260510T162831Z_ion_09_integrations_browser_extension_ion_extension_zip.zip",
+      "ok": true,
+      "sha256": "0bc168ea1d62cf1b2caedd7b13892c3bca915100695c721d5d95f271f66a3f99",
+      "size_bytes": 107724,
+      "source_path": "ION/09_integrations/browser_extension/ION_extension.zip",
+      "source_size_bytes": 110314,
+      "ticket_path": "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/b8wmboj7b2v08soihl4nm52e3pbhimb.json"
+    }
+  }
+}

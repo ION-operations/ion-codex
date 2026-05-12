@@ -1,0 +1,49 @@
+{
+  "schema_id": "ion.context_settlement.conflict_receipt.v1",
+  "conflict_id": "CHECKPOINT_COLLISION_C088_20260511",
+  "created_at": "2026-05-11",
+  "status": "CONFLICT_RECORDED_PENDING_SETTLEMENT",
+  "conflict_class": "checkpoint_collision",
+  "summary": "A UI recovery agent attempted to record C-088 while another active lane had already recorded C-088 for bounded queue timeout policy.",
+  "observed_collision": {
+    "existing_or_concurrent_c088": {
+      "source": "ION/05_context/current/codex_solo/MINI.md",
+      "summary": "C-088 bounded queue timeout policy at connector/broker boundaries",
+      "status": "CANDIDATE_IMPLEMENTED_TESTED"
+    },
+    "colliding_ui_recovery_c088": {
+      "source": "ION/05_context/current/codex_solo/CAPSULE.md",
+      "summary": "C-088 anchored cockpit pages and drawer canon recovery patch",
+      "status": "CANDIDATE_UI_RECOVERY_PATCHED_NOT_VISUALLY_PROVED"
+    }
+  },
+  "root_cause": "Multiple agents were active while shared context files still allowed direct manual C-number assignment and direct Capsule/Mini/HOT_CONTEXT edits.",
+  "required_settlement": [
+    "Do not overwrite the existing queue-timeout C-088.",
+    "Move the UI recovery evidence into context_settlement/inbox as a candidate packet.",
+    "Assign a new checkpoint only through the context settler.",
+    "Record that direct shared-context writes are blocked for future worker agents."
+  ],
+  "recommended_outcome": "MERGE_PROPOSAL_REQUIRED",
+  "candidate_new_checkpoint": "unassigned_by_worker_agent",
+  "evidence_refs": [
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_RECOVERY_003_ANCHORED_PAGES_AND_DRAWER_CANON_RECEIPT_20260511.json",
+    "ION/04_packages/kernel/ion_codex_chat_assets_ui.py",
+    "ION/04_packages/kernel/ion_codex_chat_left_drawer_ui.py",
+    "ION/04_packages/kernel/ion_codex_chat_shell_ui.py",
+    "ION/05_context/current/codex_solo/CAPSULE.md",
+    "ION/05_context/current/codex_solo/MINI.md"
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  },
+  "non_claims": [
+    "This conflict receipt does not resolve or renumber the collision.",
+    "This receipt does not assert which C-088 should remain accepted.",
+    "This receipt does not update Capsule/Mini/HOT_CONTEXT.",
+    "This receipt does not validate the UI recovery patch."
+  ]
+}

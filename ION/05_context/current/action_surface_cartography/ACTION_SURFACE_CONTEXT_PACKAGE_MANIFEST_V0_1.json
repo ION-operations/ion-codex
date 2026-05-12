@@ -1,0 +1,60 @@
+{
+  "schema_id": "ion.action_surface_context_package_manifest.v0_1",
+  "package_id": "ACTION_SURFACE_CONTEXT_PACKAGE_001",
+  "version": "0.1",
+  "status": "candidate_context_package_not_settled_law",
+  "created_at": "2026-05-11T00:00:00Z",
+  "goal": "ACTION_SURFACE_CONTEXT_PACKAGE_001_MATERIALIZE_LIVE_REPO_CANDIDATE",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "deployment_authority": false
+  },
+  "required_outputs": [
+    "ION/05_context/current/action_surface_cartography/ION_ACTIONS_CONNECTOR_CONTEXT_PACKAGE_V0_1.md",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_CONTEXT_PACKAGE_MANIFEST_V0_1.json",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_TEST_LOG_V0_1.json",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_LIMITS_AND_VARIABLES_V0_1.json",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_ROADMAP_V0_1.md",
+    "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_CONTEXT_PACKAGE_001_WORK_PACKET.md",
+    "ION/05_context/current/action_surface_cartography/SHA256SUMS.json",
+    "ION/05_context/current/context_settlement/inbox/SETTLE_ACTION_SURFACE_CONTEXT_PACKAGE_001_20260511.json",
+    "ION/05_context/current/context_settlement/claims/claim_20260511_action_surface_context_package_001.json"
+  ],
+  "key_findings_required_record": {
+    "action_gateway_verdict": "ION_CUSTOM_GPT_ACTION_GATEWAY_READY",
+    "action_gateway_status": "draft_non_production",
+    "action_gateway_public_transport": "cloudflare_tunnel",
+    "action_gateway_local_listen": "127.0.0.1:8777",
+    "action_gateway_max_body_bytes": 262144,
+    "action_gateway_idempotency_required_for_mutation": true,
+    "mcp_preview_verdict": "ION_CHATGPT_BROWSER_HTTP_MCP_PREVIEW_READY",
+    "mcp_preview_version": "V121_CHATGPT_BROWSER_HTTP_MCP_PREVIEW",
+    "mcp_preview_endpoint": "/mcp",
+    "mcp_preview_default_bind": "127.0.0.1:8765",
+    "mcp_preview_connector_state": "LOCAL_HTTP_PREVIEW_NOT_PUBLIC_CONNECTOR",
+    "mcp_preview_write_confirmation_token": "ION_BOUNDED_WRITE_CONFIRMED",
+    "mcp_tools_exposed_recorded": 44,
+    "assistant_work_route_compiler_degraded": [
+      "pyyaml_unavailable",
+      "route_registry_missing_or_invalid",
+      "lifecycle_registry_missing_or_invalid"
+    ],
+    "path_policy_limit": "target_path_not_in_artifact_transfer_roots"
+  },
+  "evidence_refs": [
+    "ION/03_registry/ion_custom_gpt_action_gateway_policy.yaml",
+    "ION/04_packages/kernel/ion_custom_gpt_action_gateway.py",
+    "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+    "ION/04_packages/kernel/ion_chatops_bridge.py",
+    "ION/05_context/current/CHATGPT_BROWSER_HTTP_MCP_PREVIEW_V121.json",
+    "ION/05_context/current/action_gateway/runtime/browser_queue.json",
+    "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+    "ION/05_context/current/ACTIVE_CARRIER_MESSAGE_QUEUE.json"
+  ],
+  "notes": [
+    "Package remains candidate/witness until settlement intake.",
+    "No C-number assigned by agent.",
+    "No shared codex_solo Capsule/Mini/HOT_CONTEXT/STATUS/ROUTE mutation performed."
+  ]
+}

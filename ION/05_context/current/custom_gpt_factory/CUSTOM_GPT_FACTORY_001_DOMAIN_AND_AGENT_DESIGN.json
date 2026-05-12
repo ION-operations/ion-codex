@@ -1,0 +1,32 @@
+{
+  "schema_id": "ion.custom_gpt_factory.domain_design_packet.v1",
+  "packet_id": "CUSTOM_GPT_FACTORY_001_DOMAIN_AND_AGENT_DESIGN",
+  "status": "PROPOSAL_CREATED",
+  "created_date": "2026-05-10",
+  "work_request_id": "codex_req_2026-05-10T184613Z0000_custom_gpt_factory_001_domain_and_agent_design_goal_design_the_ion_daimon_custom",
+  "carrier_authorization_message_id": "carmsg_2026-05-10T192948Z0000_chatgpt_browser_carrier_to_codex_cli_carrier",
+  "carrier_ack_packet_path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T193041Z0000_carmsg_2026_05_10t192948z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+  "product_taxonomy_alignment_message": "ION/05_context/current/chatgpt_connector/carrier_messages/2026-05-10T182947Z0000_carmsg_2026_05_10t182947z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json",
+  "staged_under_existing_custom_gpt_root": true,
+  "artifacts": [
+    "ION/06_intelligence/orchestration/custom_gpt/factory/docs/custom_gpt_factory_domain.md",
+    "ION/06_intelligence/orchestration/custom_gpt/factory/registry/custom_gpt_role_registry.json",
+    "ION/06_intelligence/orchestration/custom_gpt/factory/schemas/custom_gpt_role_package.schema.json",
+    "ION/06_intelligence/orchestration/custom_gpt/factory/schemas/capsule_family.schema.json",
+    "ION/06_intelligence/orchestration/custom_gpt/factory/PACKETS/CUSTOM_GPT_FACTORY_002_GENERATE_FIRST_ROLE_PACKS.md"
+  ],
+  "relationships": {
+    "existing_v2_6_7_custom_gpt_carrier_package": "composes_with",
+    "verified_v0_4_setup_card_package": "uses_as_candidate_role_setup_layer",
+    "codex_cli_capsule_system": "aligns_capsule_family"
+  },
+  "boundaries": [
+    "No GPTs were published.",
+    "No live actions were configured.",
+    "No production deployment occurred.",
+    "No secrets were requested or handled.",
+    "No full ION package dump is authorized for role GPTs.",
+    "GPT configs remain candidate artifacts until reviewed and receipted."
+  ],
+  "recommended_next_packet": "CUSTOM_GPT_FACTORY_002_GENERATE_FIRST_ROLE_PACKS"
+}

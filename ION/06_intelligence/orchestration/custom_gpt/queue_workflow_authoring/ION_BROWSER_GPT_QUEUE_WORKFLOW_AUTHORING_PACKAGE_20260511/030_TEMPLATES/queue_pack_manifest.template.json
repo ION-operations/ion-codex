@@ -1,0 +1,70 @@
+{
+  "schema_id": "ion.extension.queue_pack.v1",
+  "pack_id": "replace-with-stable-pack-id-v1",
+  "title": "Replace With Human Workflow Title",
+  "objective": "Replace with one concrete objective for this queued workflow.",
+  "queue_behavior": {
+    "manual_start_required": true,
+    "auto_play_requested": false,
+    "include_step_headers": true
+  },
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "requires_operator_approval_for_mutation": true
+  },
+  "gates": [
+    {
+      "id": "operator_approval_for_mutation",
+      "kind": "human_approval",
+      "summary": "Any mutating/local/cloud/account/deploy action requires explicit Braden approval.",
+      "requires_operator_approval": true
+    }
+  ],
+  "workflows": [
+    {
+      "id": "main",
+      "title": "Main workflow",
+      "chains": [
+        {
+          "id": "intake",
+          "title": "Intake and boundaries",
+          "steps": [
+            {
+              "id": "scope",
+              "title": "Scope the workflow",
+              "tags": ["intake", "read-only", "authority"],
+              "prompt_ref": "prompts/01_intake/01_scope.md"
+            }
+          ]
+        },
+        {
+          "id": "orchestration",
+          "title": "ION orchestration schedule",
+          "steps": [
+            {
+              "id": "route",
+              "title": "Build the route",
+              "tags": ["planning", "protocol", "queue"],
+              "prompt_ref": "prompts/02_orchestration/01_route.md"
+            }
+          ]
+        },
+        {
+          "id": "verification",
+          "title": "Verification and receipt",
+          "steps": [
+            {
+              "id": "verify",
+              "title": "Verify the workflow output",
+              "tags": ["verification", "receipt"],
+              "prompt_ref": "prompts/04_verification/01_verify.md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

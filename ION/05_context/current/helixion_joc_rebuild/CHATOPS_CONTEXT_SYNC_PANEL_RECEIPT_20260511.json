@@ -1,0 +1,46 @@
+{
+  "schema_id": "ion.helixion_joc_rebuild_receipt.v1",
+  "receipt_id": "chatops_context_sync_panel_20260511",
+  "created_at": "2026-05-11",
+  "status": "implemented_static_checked",
+  "purpose": "Add a top-rail ION Context Sync panel to the ChatOps browser carrier so Braden can select current project context packages and request one approved sync ZIP through the local bridge.",
+  "authority_posture": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false,
+    "browser_extension_direct_file_authority": false
+  },
+  "implemented_surfaces": {
+    "browser_top_rail": "Context Sync dropdown beside the existing ION onboarding/version control.",
+    "project_selection": "Multi-select discovered ION project context packages from governed package roots.",
+    "local_bridge_route": "POST /exports/project-context-sync-zip with Braden approval.",
+    "artifact_output": "One ZIP plus manifest and operation receipt under the ChatOps bridge export lane.",
+    "non_claims": [
+      "The sync ZIP is context material only, not accepted ION state.",
+      "The browser extension selects paths but does not compile ZIPs directly.",
+      "Importing or uploading the ZIP does not grant mutation, production, live execution, or secrets authority."
+    ]
+  },
+  "touched_files": [
+    "ION/04_packages/kernel/ion_chatops_bridge.py",
+    "ION/tests/test_kernel_ion_chatops_bridge_policy.py",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/approval_ui.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/background.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/background.js",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/README.md"
+  ],
+  "verification": {
+    "node_check_dist_content": "passed",
+    "node_check_dist_background": "passed",
+    "python_ast_parse_ion_chatops_bridge": "passed",
+    "git_diff_check_targeted_files": "passed",
+    "pytest": "not_run_protocol_boundary"
+  },
+  "activation_required": [
+    "Restart the local ChatOps bridge daemon so the new /exports/project-context-sync-zip route is served.",
+    "Reload the unpacked browser extension so Chrome uses the updated dist files."
+  ]
+}

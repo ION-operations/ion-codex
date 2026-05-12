@@ -1,0 +1,47 @@
+{
+  "schema_id": "ion.context_settlement.inbox_packet.v1",
+  "packet_id": "SETTLE_AGENT_BRANCH_CAPSULE_PROTOCOL_20260511",
+  "created_at": "2026-05-11",
+  "status": "CANDIDATE_PENDING_SETTLEMENT",
+  "source_type": "governance_protocol",
+  "domain": "context_settlement",
+  "risk_class": "governance_protocol_candidate",
+  "settlement_batch": "C00_active_agent_claim_review_then_C01_checkpoint_assignment_and_shared_context_settlement",
+  "source_refs": [
+    "ION/02_architecture/ION_AGENT_BRANCH_CAPSULE_PROTOCOL_V0_1.md",
+    "ION/05_context/current/agent_context_branches/BRANCH_CAPSULE_REGISTRY_V0_1.json",
+    "ION/05_context/current/agent_context_branches/templates/AGENT_BRANCH_CAPSULE.template.md",
+    "ION/05_context/current/agent_context_branches/templates/AGENT_BRANCH_STATUS.template.json",
+    "ION/05_context/current/agent_context_branches/templates/AGENT_CONTEXT_IDENTITY_CARD.template.md"
+  ],
+  "requested_outcome": "ACCEPTED_AS_WITNESS",
+  "checkpoint_request": {
+    "assign_c_number": true,
+    "agent_assigned_c_number": null,
+    "preferred_settlement": "record branch capsule protocol as active provisional governance only after settler review"
+  },
+  "required_review": [
+    "context_settler",
+    "ION protocol steward",
+    "Codex solo context steward"
+  ],
+  "acceptance_gates": [
+    "does not mutate shared Capsule/Mini/HOT_CONTEXT directly",
+    "does not assign C-number directly",
+    "branch identity fields are complete",
+    "wrong-context drift checks are explicit",
+    "settlement-only merge path is preserved"
+  ],
+  "non_claims": [
+    "This packet does not create active branches for current agents.",
+    "This packet does not settle or promote the protocol.",
+    "This packet does not resolve existing context conflicts.",
+    "This packet does not update shared context."
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_id": "ion.extension_queue_protocol_context_package_manifest.v0_1",
+  "package_id": "ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1",
+  "status": "CANDIDATE_NOT_ACCEPTED",
+  "created_by": "CODEX_CLI_CARRIER",
+  "production_authority": false,
+  "live_execution_authority": false,
+  "root": "ION/05_context/current/extension_queue_protocol_context_package/ION_EXTENSION_QUEUE_PROTOCOL_CONTEXT_PACKAGE_v0_1",
+  "includes": {
+    "protocols": [
+      "protocols/EXTENSION_QUEUE_REGISTRY_PROTOCOL.md",
+      "protocols/EXTENSION_QUEUE_PACKET_LIFECYCLE_PROTOCOL.md",
+      "protocols/AGENT_EDITABLE_QUEUE_PACKET_PROTOCOL.md",
+      "protocols/QUEUE_VISIBILITY_AND_REDACTION_PROTOCOL.md",
+      "protocols/SELECTED_REQUEST_START_PROTOCOL.md",
+      "protocols/CHAT_SELF_QUEUE_PROTOCOL.md",
+      "protocols/BRANCH_CARRIER_MESSAGE_QUEUE_PROTOCOL.md",
+      "protocols/RESULT_CAPTURE_AND_RETURN_PROTOCOL.md",
+      "protocols/QUEUE_EVENT_LEDGER_PROTOCOL.md",
+      "protocols/QUEUE_SETTLEMENT_PROTOCOL.md"
+    ],
+    "schemas": [
+      "schemas/extension_queue_packet.schema.json",
+      "schemas/queue_event.schema.json",
+      "schemas/queue_registry.schema.json",
+      "schemas/queue_visibility_view.schema.json",
+      "schemas/selected_request_start.schema.json",
+      "schemas/browser_self_queue_packet.schema.json",
+      "schemas/agent_classification.schema.json",
+      "schemas/queue_result_capture.schema.json"
+    ],
+    "templates": [
+      "templates/CREATE_QUEUE_PACKET_TEMPLATE.md",
+      "templates/EDIT_QUEUE_PACKET_TEMPLATE.md",
+      "templates/APPROVE_QUEUE_PACKET_TEMPLATE.md",
+      "templates/START_SELECTED_REQUEST_TEMPLATE.md",
+      "templates/CAPTURE_CHAT_RETURN_TEMPLATE.md",
+      "templates/SETTLE_QUEUE_RESULT_TEMPLATE.md"
+    ],
+    "ui_contracts": [
+      "ui_contracts/extension_agent_cockpit_modes.md",
+      "ui_contracts/queue_panel_requirements.md",
+      "ui_contracts/selected_request_start_ui.md",
+      "ui_contracts/approval_overlay_mode_memory.md"
+    ],
+    "packets": [
+      "packets/B04_EXTENSION_CHAT_SELF_QUEUE_AND_AGENT_COCKPIT_001.md",
+      "packets/B01_SELECTED_REQUEST_START_AND_QUEUE_CLASSIFICATION_001.md"
+    ]
+  }
+}

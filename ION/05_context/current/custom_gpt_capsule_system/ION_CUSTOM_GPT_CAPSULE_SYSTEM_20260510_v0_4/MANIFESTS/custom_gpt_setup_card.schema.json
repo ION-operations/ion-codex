@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Custom GPT Role Setup Card",
+  "type": "object",
+  "required": [
+    "role_id",
+    "name",
+    "description",
+    "instructions",
+    "knowledge_files",
+    "capabilities",
+    "actions_policy",
+    "conversation_starters",
+    "validation_prompts",
+    "release_checklist"
+  ],
+  "properties": {
+    "role_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "instructions": {
+      "type": "string"
+    },
+    "knowledge_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "actions_policy": {
+      "type": "object"
+    },
+    "conversation_starters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation_prompts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "release_checklist": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

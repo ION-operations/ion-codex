@@ -1,0 +1,259 @@
+schema_id: ion.helixion_joc_evolution_registry.v1
+created_at: "2026-05-10"
+status: active
+authority_posture: "registry and planning only; no runtime authority granted"
+master_plan: "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md"
+
+product_layers:
+  ion:
+    role: "law and state substrate"
+    owns:
+      - state_transition_law
+      - context_graph
+      - proof_gates
+      - receipts
+      - settlement
+      - queues
+      - carrier_routing
+      - authority_boundaries
+  daimon:
+    role: "user-facing integration companion"
+    owns:
+      - portable_page_companion
+      - page_context_branches
+      - integration_guidance
+      - workflow_capture
+      - api_and_settings_assistance
+      - operator_safe_automation_guidance
+  helixion:
+    role: "cockpit glass for ION and dAimon"
+    owns:
+      - full_joc_app
+      - local_service_console
+      - codex_chat_workbench
+      - queue_cockpit
+      - project_and_package_surfaces
+      - receipts_and_timeline
+  wisdomnet:
+    role: "federation hub for evolved states and packs"
+    owns:
+      - candidate_packs
+      - trusted_packs
+      - connector_packs
+      - workflow_recipes
+      - page_models
+      - safety_scores
+      - adoption_gates
+
+canon_sources:
+  joc_ui_architecture:
+    path: "_ui_canon_bundle/CANON_JOC_UI_ARCHITECTURE.md"
+    adopted_role: "five-zone cockpit layout"
+  joc_ui_requirements:
+    path: "_ui_canon_bundle/JOC_UI_REQUIREMENTS.md"
+    adopted_role: "DXL matte-black instrument-panel aesthetic"
+  joc_master_vision:
+    path: "_ui_canon_bundle/OPUS1_JOC_MASTER_VISION.md"
+    adopted_role: "mission dashboard and AI fleet orchestration model"
+  joc_ui_design:
+    path: "_ui_canon_bundle/OPUS1_JOC_UI_DESIGN.md"
+    adopted_role: "drawer, right inspector, bottom timeline, dynamic surface patterns"
+  daimon_extension_lineage:
+    path: "ION/02_architecture/DAIMON_EXTENSION_JOC_AUTOMATION_LINEAGE_SYNTHESIS.md"
+    adopted_role: "binding lineage synthesis for portable dAimon extension"
+  portable_companion:
+    path: "ION/02_architecture/PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT.md"
+    adopted_role: "one companion across pages with governed context branches"
+  dom_perception:
+    path: "ION/02_architecture/DOM_PERCEPTION_001_BROWSER_PERCEPTION_DOMAIN_DESIGN.md"
+    adopted_role: "DOM, AX, visual, event, and page branch perception"
+  reactive_os_stream:
+    path: "ION/02_architecture/ION_JOC_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL_PROTOCOL.md"
+    adopted_role: "visible automation event model"
+  browser_sandbox:
+    path: "ION/02_architecture/LOCAL_BROWSER_EXECUTION_SANDBOX_SPEC_PROTOCOL.md"
+    adopted_role: "safety floor for visual/browser execution"
+  browser_file_attachment:
+    path: "ION/02_architecture/ION_BROWSER_FILE_ATTACHMENT_AUTOMATION_PROTOCOL.md"
+    adopted_role: "attach/drop target calibration and operator-present file automation"
+  helixion_ide_bridge:
+    path: "workpackets/ION_Helixion_IDE_Bridge_v0_Workpacket.md"
+    adopted_role: "browser GPT as face, Helixion as glass, steward as authority, Codex as hands"
+  dom_cockpit_shell:
+    path: "workpackets/ion_extension_work_packets/ION_EXT_DOM_COCKPIT_SHELL_PACKET.md"
+    adopted_role: "composer-anchored ChatGPT cockpit"
+  codex_agent_cockpit:
+    path: "workpackets/ion_extension_work_packets/ION_EXT_CODEX_AGENT_COCKPIT_PACKET.md"
+    adopted_role: "Codex lane visible in extension through daemon and proof returns"
+
+implementation_targets:
+  full_helixion_app:
+    primary_files:
+      - "ION/04_packages/kernel/ion_local_cockpit_app.py"
+      - "ION/04_packages/kernel/ion_cockpit_view_model.py"
+      - "ION/08_ui/joc_cockpit_shell/JocCockpitShell.tsx"
+      - "ION/08_ui/joc_cockpit_shell/ion-runtime-cockpit.css"
+    target_posture: "local-only visibility shell rebuilt as DXL JOC cockpit"
+  codex_chat_workbench:
+    primary_files:
+      - "ION/04_packages/kernel/ion_dual_codex_chat.py"
+      - "ION/04_packages/kernel/ion_codex_chat_app_ui.py"
+      - "ION/04_packages/kernel/ion_codex_chat_engine.py"
+    target_posture: "primary Codex Capsule Chat surface with visible context, queue, receipts, and authority"
+  browser_extension:
+    primary_files:
+      - "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts"
+      - "ION/09_integrations/browser_extension/ion_chatops_bridge/src/background.ts"
+      - "ION/09_integrations/browser_extension/ion_chatops_bridge/src/schema.ts"
+      - "ION/09_integrations/browser_extension/ion_chatops_bridge/manifest.json"
+    target_posture: "portable dAimon JOC micro-shell"
+  action_gateway:
+    primary_files:
+      - "ION/09_integrations/custom_gpt_action_gateway/openapi.yaml"
+    target_posture: "typed packet and status bridge, not autonomous loop"
+
+canonical_surfaces:
+  - id: helixion_dashboard
+    zones: [top_bar, left_rail, main_surface, right_inspector, bottom_timeline]
+    required_objects: [CarrierState, ServiceHealth, QueuePacket, Receipt, BlockedCapability]
+  - id: daimon_page_companion
+    zones: [top_rail, side_panel, inspector, timeline]
+    required_objects: [PageBranch, DomEvidence, CaptureTarget, WorkflowBranch, ApprovalGate]
+  - id: chatgpt_carrier_cockpit
+    zones: [composer_tabs, right_queue_panel, bottom_telemetry, diagnostics]
+    required_objects: [QueuePacket, AutoplayRun, OutputDetector, Receipt, RepairTask]
+  - id: codex_capsule_chat
+    zones: [chat_surface, context_inspector, queue_rail, receipt_timeline]
+    required_objects: [CodexChatTurn, ContextPackage, QueuePacket, Receipt, AuthorityScope]
+  - id: wisdomnet_hub
+    zones: [pack_grid, trust_inspector, evidence_rail, conflict_panel]
+    required_objects: [WisdomPack, Receipt, SafetyScore, AdoptionGate, ConflictReport]
+
+feature_map:
+  queue_autoplay:
+    inherited_from:
+      - reactive_os_stream
+      - helixion_ide_bridge
+      - action_gateway
+    required_gates:
+      - max_queue_length
+      - max_autoplay_turns
+      - pause
+      - kill_switch
+      - output_stopped_detector
+      - idempotency_key
+      - receipt_after_each_packet
+  element_capture_frame:
+    inherited_from:
+      - dom_perception
+      - browser_file_attachment
+    required_gates:
+      - ignore_ion_overlay_elements
+      - selector_preview
+      - rect_preview
+      - save_load_delete
+      - stale_target_check
+      - evidence_refs
+  docs_projects_packages:
+    inherited_from:
+      - browser_file_attachment
+      - portable_companion
+    required_gates:
+      - visible_source_path
+      - zip_progress
+      - drop_target_preview
+      - approval_when_required
+      - receipt_or_repair
+  codex_chat:
+    inherited_from:
+      - codex_agent_cockpit
+      - helixion_ide_bridge
+    required_gates:
+      - show_capsule
+      - show_mini
+      - show_context_refs
+      - show_queue_mode
+      - show_authority
+      - show_receipts
+  wisdomnet:
+    inherited_from:
+      - daimon_wisdomnet_product_concept
+    required_gates:
+      - candidate_by_default
+      - proof_required_for_trust
+      - local_enterprise_global_scope
+      - conflict_reporting
+      - adoption_gate
+
+forbidden_v1_capabilities:
+  - unrestricted_browser_control
+  - credential_access
+  - secret_harvesting
+  - purchases
+  - destructive_actions
+  - account_operations
+  - production_mutation
+  - silent_sensitive_send
+  - silent_page_memory_promotion
+
+allowed_v1_capabilities:
+  - bounded_autoplay_queue_with_visible_controls
+  - operator_approved_local_mutation
+  - provisional_dom_page_perception
+  - attach_drop_target_calibration
+  - typed_gpt_action_enqueue
+  - result_capture_with_receipts
+  - codex_queue_visibility_and_approved_enqueue
+  - service_health_and_confirmed_reset_controls
+
+build_phases:
+  - id: phase_0
+    name: "master plan and registry"
+    status: active
+    gate: "every major feature maps to inherited protocol or new explicit safety gate"
+  - id: phase_1
+    name: "unified view-model foundation"
+    status: planned
+    gate: "projection exposes authority, blocked capabilities, receipts, service health, queue state, context refs"
+  - id: phase_2
+    name: "local Helixion JOC rebuild"
+    status: planned
+    gate: "local app reads as DXL JOC cockpit, not generic dashboard"
+  - id: phase_3
+    name: "extension portable JOC micro-shell"
+    status: planned
+    gate: "no overlay self-inspection, no button drift, no sensitive silent send"
+  - id: phase_4
+    name: "queue and packet execution cockpit"
+    status: planned
+    gate: "packet lifecycle visible from enqueue to receipt or blocker"
+  - id: phase_5
+    name: "page perception and workflow memory"
+    status: planned
+    gate: "page observations remain provisional until settled"
+  - id: phase_6
+    name: "projects docs packages context surfaces"
+    status: planned
+    gate: "file actions show source, progress, hash where available, target, result, repair path"
+  - id: phase_7
+    name: "WisdomNET candidate hub"
+    status: planned
+    gate: "trust requires proof and adoption gate"
+  - id: phase_8
+    name: "advanced automation lanes"
+    status: planned
+    gate: "no live account, credential, purchase, destructive, production, or unrestricted browser automation"
+
+orchestration_context:
+  protocol: "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md"
+  package_markdown: "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.md"
+  package_json: "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_PACKAGE.json"
+  load_receipt: "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_LOAD_RECEIPT.json"
+  ion_skill_id: "helixion-joc-orchestration"
+  codex_skill_name: "ion-orchestration"
+  context_package_id: "helixion_joc_orchestration_package"
+  authority:
+    production_authority: false
+    live_execution_authority: false
+    secrets_authority: false
+    unrestricted_browser_control: false

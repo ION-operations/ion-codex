@@ -1,0 +1,160 @@
+{
+  "schema_id": "ion.helixion_joc_orchestration_context_package.v1",
+  "package_id": "helixion_joc_orchestration_package",
+  "status": "active_context_package",
+  "created_at": "2026-05-10",
+  "purpose": "Provide the bounded ION-native context package for orchestrating the Helixion/JOC rebuild across ION, dAimon, WisdomNET, Codex, the browser extension, Custom GPT Actions, queues, receipts, and page perception.",
+  "called_by": [
+    "helixion-joc-orchestration",
+    "ion-orchestration",
+    "context-mount",
+    "template-curation"
+  ],
+  "manager_agent": "Vizier",
+  "specialist_agents": [
+    "Relay",
+    "Steward",
+    "Context Cartographer",
+    "Mason/Codex",
+    "Nemesis",
+    "Scribe",
+    "WisdomNET Curator",
+    "JOC_UI_CANON_STEWARD",
+    "FRONTEND_WORK_SURFACE_ARCHITECT",
+    "INTERACTION_STATE_WEAVER",
+    "CONTEXT_VISUALIZATION_CARTOGRAPHER",
+    "VISUAL_PROOF_AUDITOR"
+  ],
+  "root_nodes": [
+    "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+    "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+    "ION/03_registry/helixion_joc_evolution_registry.yaml",
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json"
+  ],
+  "included_nodes": [
+    "ION/02_architecture/DAIMON_EXTENSION_JOC_AUTOMATION_LINEAGE_SYNTHESIS.md",
+    "ION/02_architecture/PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT.md",
+    "ION/02_architecture/DOM_PERCEPTION_001_BROWSER_PERCEPTION_DOMAIN_DESIGN.md",
+    "ION/02_architecture/ION_SKILL_ACTIVATION_PROTOCOL.md",
+    "ION/03_registry/ion_skill_registry.yaml",
+    "ION/02_architecture/ION_CODEX_CHAT_ENGINE_PROTOCOL.md",
+    "ION/02_architecture/CONTEXT_NODE_AND_PACKAGE_PROTOCOL.md",
+    "ION/02_architecture/ION_AGENT_CONTEXT_CONTINUITY_TIMELINE_AND_ROUTE_MAP_PROTOCOL.md",
+    "ION/02_architecture/ION_CARRIER_CYCLE_PLAN_PROTOCOL.md",
+    "ION/02_architecture/ION_CARRIER_TASK_RETURN_INTAKE_PROTOCOL.md",
+    "ION/02_architecture/ION_JOC_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL_PROTOCOL.md",
+    "ION/02_architecture/ION_JOC_DRY_RUN_DISPATCH_EXECUTION_TRACE_VIEW_MODEL_PROTOCOL.md",
+    "ION/02_architecture/ION_CUSTOM_GPT_ACTION_GATEWAY_PROTOCOL.md",
+    "ION/02_architecture/LOCAL_BROWSER_EXECUTION_SANDBOX_SPEC_PROTOCOL.md",
+    "ION/02_architecture/ION_BROWSER_FILE_ATTACHMENT_AUTOMATION_PROTOCOL.md",
+    "ION/05_context/current/ai_assistant_work/protocols/UI_FRONTEND_EXCELLENCE_DOMAIN_PROTOCOL_V0_1.md",
+    "ION/05_context/current/ai_assistant_work/domains/ui_frontend_excellence_domain.domain_packet.yaml",
+    "ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml",
+    "ION/05_context/current/ai_assistant_work/analysis/UI_FRONTEND_CANON_SYNTHESIS_REPORT_20260509T025441Z.md",
+    "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+    "ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md"
+  ],
+  "excluded_nodes": [
+    "credentials",
+    "secrets",
+    "raw browser sessions",
+    "unbounded shell commands",
+    "production deployment authority",
+    "unrestricted browser automation"
+  ],
+  "traversal_rules": [
+    "Mount Capsule first; Mini is lookup only.",
+    "Mount this package for Helixion/JOC orchestration work.",
+    "Use route_depth_package for exact source only when needed.",
+    "Do not spawn agents from user wording; use carrier-cycle plan when multi-role work is required.",
+    "Do not treat raw worker prose as accepted state.",
+    "Do not run tests or validation unless explicitly requested by the operator.",
+    "For JOC/frontend work, use ui_frontend_excellence_domain and joc_work_surface_ui_packet before broad implementation.",
+    "Do not accept a large scrolling panel board as settled JOC architecture.",
+    "Write a receipt or current-plan update for material planning/control-plane work."
+  ],
+  "authority_scope": {
+    "planning": true,
+    "documentation": true,
+    "context_package_assembly": true,
+    "registry_updates": true,
+    "bounded_local_edits_when_requested": true,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false
+  },
+  "template_scope": [
+    "ION/07_templates/context/ION_CONTEXT_LOAD_PROOF.md",
+    "ION/07_templates/actions/TEMPLATE_DEVELOPMENT.md",
+    "ION/07_templates/actions/FULL_CARRIER_ACTION_RECEIPT.md",
+    "ION/07_templates/reports/AUDIT.md",
+    "ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml"
+  ],
+  "output_required": [
+    "phase",
+    "objective",
+    "source_refs",
+    "files_touched_or_planned",
+    "authority_boundaries",
+    "implemented_vs_planned",
+    "receipt_or_current_context_update",
+    "next_gate"
+  ],
+  "fan_in_target": "Helixion/JOC full app rebuild and portable dAimon extension cockpit",
+  "settlement_template": "ION_CONTEXT_DELTA_RECEIPT",
+  "skill_activation": {
+    "ion_skill_id": "helixion-joc-orchestration",
+    "codex_skill_name": "ion-orchestration",
+    "selected_native_lenses": [
+      "Relay",
+      "Steward",
+      "Vizier",
+      "Context Cartographer",
+      "Mason/Codex",
+      "Nemesis",
+      "Scribe",
+      "WisdomNET Curator"
+    ]
+  },
+  "route_deeper": [
+    {
+      "route_id": "master_plan",
+      "path": "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+      "when_to_open": "architecture, phase, source-map, or product-split decisions"
+    },
+    {
+      "route_id": "workflow_protocol",
+      "path": "ION/02_architecture/HELIXION_JOC_ORCHESTRATION_WORKFLOW_PROTOCOL.md",
+      "when_to_open": "orchestration law, skill route, carrier route, or future automation questions"
+    },
+    {
+      "route_id": "current_plan",
+      "path": "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json",
+      "when_to_open": "current phase and continuity state"
+    },
+    {
+      "route_id": "registry",
+      "path": "ION/03_registry/helixion_joc_evolution_registry.yaml",
+      "when_to_open": "feature-to-protocol and surface ownership decisions"
+    },
+    {
+      "route_id": "ui_frontend_excellence_domain",
+      "path": "ION/05_context/current/ai_assistant_work/protocols/UI_FRONTEND_EXCELLENCE_DOMAIN_PROTOCOL_V0_1.md",
+      "when_to_open": "JOC UI, cockpit shell, drawer system, context visualization, or monolithic UI correction"
+    },
+    {
+      "route_id": "helixion_joc_ui_packet",
+      "path": "ION/05_context/current/ai_assistant_work/next/HELIXION_JOC_WORK_SURFACE_UI_PACKET_20260511.json",
+      "when_to_open": "before broad Helixion/JOC UI implementation or repair"
+    }
+  ],
+  "receipt_targets": [
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_ORCHESTRATION_CONTEXT_LOAD_RECEIPT.json",
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json",
+    "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_UI_WORKFLOW_GATE_RECEIPT_20260511.json"
+  ],
+  "production_authority": false,
+  "live_execution_authority": false,
+  "secrets_authority": false
+}

@@ -1,0 +1,58 @@
+{
+  "schema_id": "ion.agent_branch_capsule.registry.v1",
+  "created_at": "2026-05-11",
+  "status": "ACTIVE_PROVISIONAL",
+  "protocol": "ION/02_architecture/ION_AGENT_BRANCH_CAPSULE_PROTOCOL_V0_1.md",
+  "settlement_protocol": "ION/02_architecture/ION_MULTI_AGENT_CONTEXT_AND_WORKPACKET_SETTLEMENT_PROTOCOL_V0_1.md",
+  "purpose": "Track unique context capsules for each active conversation, agent, and bounded task so parallel agents cannot write wrong shared context.",
+  "shared_context_surfaces_are_read_only_for_workers": [
+    "ION/05_context/current/codex_solo/CAPSULE.md",
+    "ION/05_context/current/codex_solo/MINI.md",
+    "ION/05_context/current/codex_solo/HOT_CONTEXT.md",
+    "ION/05_context/current/codex_solo/STATUS.json",
+    "ION/05_context/current/codex_solo/ROUTE.json"
+  ],
+  "branch_root": "ION/05_context/current/agent_context_branches",
+  "templates": {
+    "capsule": "ION/05_context/current/agent_context_branches/templates/AGENT_BRANCH_CAPSULE.template.md",
+    "status": "ION/05_context/current/agent_context_branches/templates/AGENT_BRANCH_STATUS.template.json",
+    "identity_card": "ION/05_context/current/agent_context_branches/templates/AGENT_CONTEXT_IDENTITY_CARD.template.md"
+  },
+  "required_identity_fields": [
+    "context_instance_id",
+    "branch_id",
+    "branch_type",
+    "agent_tag",
+    "conversation_tag",
+    "parent_context_id",
+    "root",
+    "loaded_refs",
+    "write_scope",
+    "shared_context_write",
+    "settlement_required"
+  ],
+  "drift_findings": [
+    "missing_context_instance_id",
+    "missing_conversation_tag",
+    "missing_agent_tag",
+    "parent_context_unknown",
+    "root_mismatch",
+    "loaded_refs_missing_required_parent_proof",
+    "write_scope_overlaps_active_claim",
+    "shared_context_direct_write_attempted",
+    "c_number_assigned_by_worker"
+  ],
+  "registered_branches": [],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  },
+  "non_claims": [
+    "This registry does not create a branch for any currently running agent.",
+    "This registry does not settle any branch output.",
+    "This registry does not update shared Capsule/Mini/HOT_CONTEXT.",
+    "This registry does not resolve existing context conflicts."
+  ]
+}

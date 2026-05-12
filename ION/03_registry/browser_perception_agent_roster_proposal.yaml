@@ -1,0 +1,116 @@
+schema_id: ion.browser_perception.agent_roster_proposal.v1
+status: proposal
+created_date: "2026-05-10"
+proposal_id: DOM_PERCEPTION_001_AGENT_ROSTER_PROPOSAL
+governing_product_context: PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT
+agents:
+  - role_id: role.dom_cartographer
+    display_name: DOM_CARTOGRAPHER
+    purpose: Map DOM regions, selector candidates, semantic anchors, unstable selectors, shadow boundaries, and region lineage.
+    reads:
+      - dom_snapshot
+      - html_attributes
+      - text_node_samples
+      - shadow_root_metadata
+    writes:
+      - dom_region_map
+      - selector_stability_report
+      - semantic_anchor_index
+    forbidden:
+      - page_mutation
+      - hidden_form_submission
+      - credential_reading
+  - role_id: role.accessibility_cartographer
+    display_name: ACCESSIBILITY_CARTOGRAPHER
+    purpose: Map accessibility roles, names, states, relationships, hidden gaps, and screen-reader-visible structure.
+    reads:
+      - accessibility_tree_snapshot
+      - aria_attributes
+      - focus_state
+    writes:
+      - ax_region_map
+      - accessibility_gap_report
+    forbidden:
+      - claiming_ax_state_as_complete_user_truth
+  - role_id: role.visual_geometry_cartographer
+    display_name: VISUAL_GEOMETRY_CARTOGRAPHER
+    purpose: Map bounding boxes, scroll layers, occlusion, viewport regions, sticky overlays, and geometry hazards.
+    reads:
+      - layout_boxes
+      - viewport_state
+      - scroll_container_state
+      - computed_visibility
+    writes:
+      - visual_region_map
+      - occlusion_report
+      - click_preview_geometry
+    forbidden:
+      - autonomous_click_execution
+  - role_id: role.mutation_watcher
+    display_name: MUTATION_WATCHER
+    purpose: Track dynamic changes, debounced mutation batches, route transitions, streaming states, and stability windows.
+    reads:
+      - mutation_observer_batches
+      - history_route_events
+      - streaming_markers
+    writes:
+      - mutation_timeline
+      - stability_window_report
+      - stale_snapshot_alert
+    forbidden:
+      - unbounded_mutation_logging
+  - role_id: role.chat_length_nemesis
+    display_name: CHAT_LENGTH_NEMESIS
+    purpose: Find long-chat lag, freeze, scroll, virtualization, and transcript inspection failure modes.
+    reads:
+      - chat_thread_map
+      - performance_profile
+      - scroll_anchor_state
+    writes:
+      - chat_thread_performance_profile
+      - freeze_risk_report
+      - mitigation_recommendations
+    forbidden:
+      - forcing_full_transcript_expansion_without_user_request
+  - role_id: role.extension_performance_steward
+    display_name: EXTENSION_PERFORMANCE_STEWARD
+    purpose: Protect page performance through batching, throttling, observer caps, storage quotas, and event bus budgets.
+    reads:
+      - observer_metrics
+      - capture_duration_metrics
+      - storage_usage
+    writes:
+      - performance_budget_report
+      - backpressure_decision
+      - capture_degradation_notice
+    forbidden:
+      - blocking_main_thread_for_full_page_analysis
+  - role_id: role.perception_synthesizer
+    display_name: PERCEPTION_SYNTHESIZER
+    purpose: Merge DOM, AX, visual, mutation, event, and human semantic sources into trustworthy page state objects.
+    reads:
+      - dom_region_map
+      - ax_region_map
+      - visual_region_map
+      - mutation_timeline
+      - user_semantic_notes
+    writes:
+      - page_state_object
+      - source_disagreement_report
+      - settlement_candidate_summary
+    forbidden:
+      - promoting_provisional_memory_to_accepted_context
+  - role_id: role.cockpit_scribe
+    display_name: COCKPIT_SCRIBE
+    purpose: Record action traces, carrier messages, context package refs, receipts, and Mini-Helixion panel events.
+    reads:
+      - companion_panel_events
+      - carrier_messages
+      - workflow_drafts
+      - approval_events
+    writes:
+      - extension_action_trace_event
+      - receipt_refs
+      - cockpit_timeline
+    forbidden:
+      - acting_as_authority_for_unsettled_context

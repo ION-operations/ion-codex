@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.extension.queue_pack.schema.json",
+  "title": "ION Extension Queue Pack",
+  "type": "object",
+  "required": ["schema_id", "pack_id", "title", "objective"],
+  "properties": {
+    "schema_id": {
+      "const": "ion.extension.queue_pack.v1"
+    },
+    "pack_id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 180
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 1000
+    },
+    "queue_behavior": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "manual_start_required": { "type": "boolean" },
+        "auto_play_requested": { "type": "boolean" },
+        "include_step_headers": { "type": "boolean" }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "production_authority": { "const": false },
+        "live_execution_authority": { "const": false },
+        "secrets_authority": { "const": false },
+        "requires_operator_approval_for_mutation": { "type": "boolean" }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gate" }
+    },
+    "workflows": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/workflow" },
+      "maxItems": 40
+    },
+    "chains": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/chain" },
+      "maxItems": 80
+    },
+    "steps": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/step" },
+      "maxItems": 120
+    },
+    "prompts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/step" },
+      "maxItems": 120
+    },
+    "queue": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/step" },
+      "maxItems": 120
+    }
+  },
+  "$defs": {
+    "gate": {
+      "type": "object",
+      "required": ["id", "kind", "summary"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "type": "string" },
+        "summary": { "type": "string" },
+        "requires_operator_approval": { "type": "boolean" }
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "required": ["id", "title"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "chains": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/chain" },
+          "maxItems": 40
+        },
+        "steps": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/step" },
+          "maxItems": 120
+        }
+      }
+    },
+    "chain": {
+      "type": "object",
+      "required": ["id", "title"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "steps": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/step" },
+          "maxItems": 120
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "required": ["id", "title"],
+      "additionalProperties": true,
+      "anyOf": [
+        { "required": ["prompt"] },
+        { "required": ["text"] },
+        { "required": ["prompt_ref"] }
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "prompt": { "type": "string", "maxLength": 24000 },
+        "text": { "type": "string", "maxLength": 24000 },
+        "prompt_ref": { "type": "string" },
+        "requires_operator_approval": { "type": "boolean" },
+        "expected_output": { "type": "string" },
+        "stop_condition": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": true
+}

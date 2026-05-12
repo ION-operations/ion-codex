@@ -1,0 +1,104 @@
+{
+  "schema_id": "ion.browser_perception.issue_fix_library.v1",
+  "status": "proposal",
+  "created_date": "2026-05-10",
+  "library_id": "DOM_PERCEPTION_001_ISSUE_FIX_LIBRARY",
+  "issues": [
+    {
+      "issue_id": "LONG_CHAT_DOM_GROWTH_LAG_FREEZE",
+      "symptom": "Long conversations accumulate enough nodes, layout work, or transcript state to make inspection laggy or frozen.",
+      "risk": "Perception blocks the page or captures stale partial state.",
+      "detection": ["node_count_growth", "long_task_observer", "capture_duration_budget_exceeded", "scroll_jank"],
+      "mitigation": ["segment_thread", "sample_visible_and_near_visible_ranges", "defer_offscreen_reads", "emit_freeze_risk_report"],
+      "owner": "CHAT_LENGTH_NEMESIS"
+    },
+    {
+      "issue_id": "VIRTUALIZED_LISTS_OFFSCREEN_CONTENT",
+      "symptom": "Only visible rows or turns exist in DOM while offscreen content is absent or recycled.",
+      "risk": "The system falsely claims complete page knowledge.",
+      "detection": ["recycled_node_identity", "scroll_height_discontinuity", "missing_expected_anchors"],
+      "mitigation": ["mark_unresolved_ranges", "preserve_scroll_anchors", "request_user_scope_for_targeted_scroll_read"],
+      "owner": "DOM_CARTOGRAPHER"
+    },
+    {
+      "issue_id": "BRITTLE_SELECTORS_REACT_SPA_CHURN",
+      "symptom": "Generated classes, hydration, route changes, or component churn invalidate selectors.",
+      "risk": "Saved workflows target the wrong element.",
+      "detection": ["selector_instability_score", "route_transition_event", "anchor_mismatch"],
+      "mitigation": ["multi_anchor_selectors", "semantic_and_ax_fallbacks", "preview_target_before_action"],
+      "owner": "DOM_CARTOGRAPHER"
+    },
+    {
+      "issue_id": "MUTATION_OBSERVER_OVERHEAD",
+      "symptom": "Observer callbacks create excessive CPU, memory, or event volume.",
+      "risk": "The extension harms page performance.",
+      "detection": ["mutation_batch_rate", "callback_duration", "dropped_event_count"],
+      "mitigation": ["debounce_batches", "summarize_not_store_raw", "apply_backpressure", "disable_low_value_subtrees"],
+      "owner": "EXTENSION_PERFORMANCE_STEWARD"
+    },
+    {
+      "issue_id": "MESSAGE_STREAMING_PARTIAL_DOM_STATE",
+      "symptom": "Streaming messages expose incomplete turns or transient DOM fragments.",
+      "risk": "The graph settles incomplete content as final.",
+      "detection": ["streaming_marker_present", "turn_terminal_marker_absent", "mutation_still_active"],
+      "mitigation": ["mark_partial", "wait_for_stability_window", "store_terminal_state_only_for_settlement"],
+      "owner": "MUTATION_WATCHER"
+    },
+    {
+      "issue_id": "SCROLL_ANCHORING_LAZY_LOADING",
+      "symptom": "Reading or user movement shifts scroll position and triggers lazy loading.",
+      "risk": "User loses place or perception changes the page state indirectly.",
+      "detection": ["scroll_anchor_delta", "lazy_load_mutation_after_scroll", "viewport_jump"],
+      "mitigation": ["capture_scroll_anchor", "avoid_forced_scroll_without_user_scope", "restore_preview_only_when_approved"],
+      "owner": "VISUAL_GEOMETRY_CARTOGRAPHER"
+    },
+    {
+      "issue_id": "HIDDEN_ARIA_INACCESSIBLE_GAPS",
+      "symptom": "DOM-visible, AX-visible, and human-visible states disagree.",
+      "risk": "The synthesized page state misrepresents what the user can perceive or operate.",
+      "detection": ["dom_ax_region_mismatch", "aria_hidden_conflict", "zero_area_focusable_control"],
+      "mitigation": ["source_disagreement_report", "confidence_downgrade", "user_visible_preview"],
+      "owner": "ACCESSIBILITY_CARTOGRAPHER"
+    },
+    {
+      "issue_id": "SHADOW_DOM_IFRAMES",
+      "symptom": "Important UI lives in shadow roots or iframes with different access boundaries.",
+      "risk": "Capture is incomplete or crosses scope boundaries.",
+      "detection": ["shadow_root_present", "iframe_cross_origin", "permission_denied"],
+      "mitigation": ["record_boundary", "scope_explicitly", "fail_closed_on_cross_origin"],
+      "owner": "PERCEPTION_SECURITY_AND_PRIVACY"
+    },
+    {
+      "issue_id": "RATE_LIMITS_PRIVACY_NO_SECRETS",
+      "symptom": "Page contains credentials, tokens, private data, or sensitive form fields.",
+      "risk": "Secrets enter ION context or logs.",
+      "detection": ["sensitive_input_type", "secret_pattern", "credential_manager_region", "user_redaction_scope"],
+      "mitigation": ["mask_or_exclude", "redaction_receipt", "forbid_graph_promotion_without_redaction"],
+      "owner": "PERCEPTION_SECURITY_AND_PRIVACY"
+    },
+    {
+      "issue_id": "EXTENSION_SERVICE_WORKER_LIFECYCLE",
+      "symptom": "Extension service worker sleeps, restarts, or loses volatile state.",
+      "risk": "Workflow traces or receipts become incomplete.",
+      "detection": ["worker_restart_event", "missing_session_state", "heartbeat_gap"],
+      "mitigation": ["persist_minimal_session_state", "idempotent_event_ids", "resume_with_gap_receipt"],
+      "owner": "COCKPIT_SCRIBE"
+    },
+    {
+      "issue_id": "STALE_SNAPSHOTS_VS_LIVE_PAGE_STATE",
+      "symptom": "Captured state ages while page continues changing.",
+      "risk": "Plans execute against obsolete targets.",
+      "detection": ["freshness_window_expired", "mutation_after_snapshot", "route_changed"],
+      "mitigation": ["stale_state_warning", "refresh_before_plan", "preview_target_before_action"],
+      "owner": "PERCEPTION_SYNTHESIZER"
+    },
+    {
+      "issue_id": "USER_VISIBLE_VS_MODEL_INFERRED_MISMATCH",
+      "symptom": "The model infers a task, status, or page meaning not explicitly visible or user-confirmed.",
+      "risk": "ION acts on a false interpretation.",
+      "detection": ["inferred_without_source", "low_confidence_semantic_label", "user_correction"],
+      "mitigation": ["label_as_inferred", "ask_for_confirmation", "never_settle_without_receipt"],
+      "owner": "PERCEPTION_SYNTHESIZER"
+    }
+  ]
+}

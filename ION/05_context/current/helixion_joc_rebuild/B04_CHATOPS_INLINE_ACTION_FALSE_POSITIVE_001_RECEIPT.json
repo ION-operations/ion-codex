@@ -1,0 +1,49 @@
+{
+  "schema_id": "ion.chatops_inline_action_false_positive_receipt.v1",
+  "packet_id": "B04_CHATOPS_INLINE_ACTION_FALSE_POSITIVE_001",
+  "generated_at": "2026-05-11T00:00:00Z",
+  "accepted_state": "ACCEPTED_AS_B04_FALSE_POSITIVE_FIX_CANDIDATE",
+  "implemented": [
+    "Structural prefilter for scan candidate extraction",
+    "Inline ion_action mention ignore behavior",
+    "Incomplete documentation ion_action snippet ignore behavior",
+    "DOM registry annotation uses the same concrete packet prefilter",
+    "Regression coverage in live_smoke_parser_simulation.js",
+    "Non-body drop targets outside viewport are rejected by visibleDropRect"
+  ],
+  "preserved": [
+    "Complete YAML action packet detection",
+    "Rendered ChatGPT code block innerText fallback",
+    "Assistant message container fallback",
+    "Page fallback multi-action splitting",
+    "Local validation for concrete but invalid action packets",
+    "Safe mode send block"
+  ],
+  "validation": [
+    "node --check ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "node ION/09_integrations/browser_extension/ion_chatops_bridge/tests/live_smoke_parser_simulation.js",
+    "git diff --check scoped to changed extension/B04 files",
+    "JSON parse of B04 receipt",
+    "unzip -t ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_inline_false_positive_20260511.zip"
+  ],
+  "touched_paths": [
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_INLINE_ACTION_FALSE_POSITIVE_001.md",
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_INLINE_ACTION_FALSE_POSITIVE_001_RECEIPT.json",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/tests/live_smoke_parser_simulation.js",
+    "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_inline_false_positive_20260511.zip"
+  ],
+  "package_artifact": {
+    "zip_path": "ION/06_artifacts/packages/browser_extension/ion_chatops_bridge_B04_inline_false_positive_20260511.zip",
+    "zip_sha256": "b21f502f08764b8e1b952e4fa62e177ac8173e13e9cc822f398fa3e0db44a54f",
+    "zip_entries": 23
+  },
+  "authority_boundaries": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false,
+    "silent_browser_send": false
+  }
+}

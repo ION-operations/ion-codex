@@ -1,0 +1,39 @@
+{
+  "schema_id": "ion.agent_branch_status.v1",
+  "status": "BRANCH_ACTIVE",
+  "created_at": "<utc_timestamp>",
+  "updated_at": "<utc_timestamp>",
+  "context_instance_id": "<ctx_YYYYMMDDTHHMMSSZ_agent_tag>",
+  "branch_id": "<branch_YYYYMMDDTHHMMSSZ_agent_tag>",
+  "branch_type": "<conversation|agent|task|workpacket>",
+  "agent_tag": "<agent_tag>",
+  "conversation_tag": "<conversation_tag>",
+  "task_tag": "<task_tag>",
+  "parent_context_id": "<parent_context_id>",
+  "parent_branch_id": null,
+  "root": "/home/sev/ION - Production/ION_CODEX FULL",
+  "loaded_refs": [],
+  "write_scope": [],
+  "claim_refs": [],
+  "receipt_refs": [],
+  "task_return_refs": [],
+  "settlement_request_refs": [],
+  "drift": {
+    "status": "clear",
+    "findings": [],
+    "blocked": false
+  },
+  "shared_context_write": false,
+  "settlement_required": true,
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  },
+  "non_claims": [
+    "This branch status is not shared accepted context.",
+    "This branch status does not assign a C-number.",
+    "This branch status does not settle its receipts."
+  ]
+}

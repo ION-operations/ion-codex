@@ -1,0 +1,16 @@
+{
+  "schema_id": "ion.packet.custom_gpt_capsule_system.v0_4",
+  "packet_id": "CUSTOM_GPT_CAPSULE_SYSTEM_003_SETUP_CARDS",
+  "objective": "Generate Custom GPT setup cards for capsule-first role carriers.",
+  "outputs": [
+    "SETUP_CARDS/*",
+    "CAPSULES/*",
+    "REGISTRY/custom_gpt_role_setup_registry.json",
+    "VALIDATION/CUSTOM_GPT_CAPSULE_VALIDATION_MATRIX_v0_4.md"
+  ],
+  "non_claims": [
+    "No GPTs published",
+    "No actions configured live",
+    "Candidate setup package only"
+  ]
+}

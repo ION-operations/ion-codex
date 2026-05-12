@@ -1,0 +1,123 @@
+{
+  "schema_id": "ion.portable_page_companion.product_context.v1",
+  "context_id": "PORTABLE_ION_PAGE_COMPANION_001_PRODUCT_CONTEXT",
+  "status": "active_product_context",
+  "created_date": "2026-05-10",
+  "source": {
+    "carrier_message_id": "carmsg_2026-05-10T181352Z0000_chatgpt_browser_carrier_to_codex_cli_carrier",
+    "ack_packet_path": "ION/05_context/current/chatgpt_connector/carrier_message_acks/2026-05-10T182014Z0000_carmsg_2026_05_10t181352z0000_chatgpt_browser_carrier_to_codex_cli_carrier.json"
+  },
+  "product_thesis": "One portable ION logo/icon follows the user across pages. Clicking it opens a page-aware ION/Helixion companion panel connected to one governed ION chat/context graph with page, session, context, and workflow branches.",
+  "architecture_distinctions": {
+    "DOM_PERCEPTION": "How ION sees a page.",
+    "PORTABLE_PAGE_COMPANION": "How the user carries ION onto any page.",
+    "MINI_HELIXION": "The embedded cockpit surface opened from the companion.",
+    "LIVING_OPERATIONAL_GRAPH": "The global city map of all context, branches, workflows, receipts, and settlements."
+  },
+  "joc_inheritance_decision": {
+    "status": "active",
+    "synthesis_path": "ION/02_architecture/DAIMON_EXTENSION_JOC_AUTOMATION_LINEAGE_SYNTHESIS.md",
+    "decision": "Older JOC is the primary UI and automation model for the portable dAimon companion.",
+    "companion_surface": "JOC micro-shell adapted to browser-carrier needs, not a generic extension popup.",
+    "layout_zones": ["top_status_bar", "left_or_side_mode_rail", "main_work_surface", "right_inspector_drawers", "bottom_timeline_receipt_rail"],
+    "visual_language": ["DXL_matte_black_instrument_panel", "compact_monospace_labels", "dense_telemetry", "explicit_mode_status_surfaces", "visible_automation_stream", "split_inspector_drawers", "command_mission_dashboard_feel"],
+    "adapted_content": ["browser_queue_packets", "gpt_actions_packet_visibility", "autoplay_pause_kill", "output_stopped_detector", "current_claimed_packet", "dom_page_evidence", "attachment_drop_target_calibration", "approval_gate_panel", "receipts_result_capture", "local_mutation_proof", "carrier_health_status", "blocked_capability_warnings"]
+  },
+  "inherited_protocols": {
+    "joc_cockpit_shell": "ION/02_architecture/ION_JOC_COCKPIT_SHELL_COMPONENT_CONTRACT_PROTOCOL.md",
+    "joc_reactive_os_stream": "ION/02_architecture/ION_JOC_REACTIVE_OS_STREAM_AND_AUTOMATION_VIEW_MODEL_PROTOCOL.md",
+    "joc_dry_run_dispatch_trace": "ION/02_architecture/ION_JOC_DRY_RUN_DISPATCH_EXECUTION_TRACE_VIEW_MODEL_PROTOCOL.md",
+    "local_visual_harness": "ION/02_architecture/LOCAL_VISUAL_HARNESS_PROTOTYPE_PROTOCOL.md",
+    "visual_fixture_sandbox_review": "ION/02_architecture/VISUAL_FIXTURE_RUNNER_LOCAL_SANDBOX_REVIEW_PROTOCOL.md",
+    "local_browser_execution_sandbox": "ION/02_architecture/LOCAL_BROWSER_EXECUTION_SANDBOX_SPEC_PROTOCOL.md",
+    "browser_file_attachment_automation": "ION/02_architecture/ION_BROWSER_FILE_ATTACHMENT_AUTOMATION_PROTOCOL.md",
+    "automation_state": "ION/02_architecture/AUTOMATION_STATE_PROTOCOL.md"
+  },
+  "shared_graph_model": {
+    "global_chat_graph": "Shared ION/Codex/ChatGPT context graph.",
+    "page_branch": "URL or page-class scoped branch for a page family.",
+    "session_branch": "Time-bounded page visit or task session.",
+    "workflow_branch": "Replayable, user-approved routine derived from one or more page sessions.",
+    "settlement_edge": "Explicit promotion from observed page memory into accepted ION context.",
+    "receipt_edge": "Durable proof that a context or workflow state transition occurred."
+  },
+  "page_context_package_shape": {
+    "page_identity": ["origin", "url_pattern", "title_pattern", "page_class", "stable_app_identifiers"],
+    "capture_scope": "What the user allowed the companion to observe.",
+    "redaction_policy": "What was ignored, summarized, masked, or forbidden.",
+    "perception_summary": ["stable_dom_landmarks", "visible_task_state", "forms", "controls", "semantic_regions"],
+    "workflow_candidates": "User-described or inferred routines, stored as drafts until approved.",
+    "action_boundary": "Permitted observation and explicitly approved action classes.",
+    "provenance": ["source_page_session", "capture_time", "tool_version", "carrier_surface"],
+    "receipts": ["capture_receipts", "settlement_receipts", "action_receipts", "replay_receipts"]
+  },
+  "safety_law": [
+    "Observe by default.",
+    "Plan before acting.",
+    "Preview before clicking.",
+    "Ask before navigation/forms.",
+    "Receipt every state-bearing workflow.",
+    "Never treat page memory as accepted context without settlement."
+  ],
+  "required_boundaries": [
+    "per_page_capability_scopes",
+    "visible_action_plans_before_state_changes",
+    "dry_run_or_preview_for_clicks_navigation_forms_purchases_submissions_account_changes_and_destructive_actions",
+    "explicit_approval_for_each_state_bearing_action_batch",
+    "no_hidden_navigation_or_background_form_submission",
+    "no_credential_capture_secret_extraction_or_bypass_of_page_user_intent",
+    "no_claims_that_provisional_page_memory_is_verified_truth",
+    "receipts_for_captures_promotions_action_approvals_executions_and_replays"
+  ],
+  "current_v1_authority": {
+    "autoplay_queue": "allowed_with_visible_state_pause_kill_and_receipts",
+    "gated_local_mutation": "allowed_only_with_approval_policy_gates_and_proof_receipts",
+    "dom_page_perception": "allowed_as_provisional_observation_with_scope_and_redaction",
+    "attachment_drop_target_calibration": "allowed_as_first_concrete_screen_dom_calibration_lane",
+    "gpt_actions_enqueue": "allowed_as_typed_queue_bridge",
+    "result_capture": "allowed_for_browser_carrier_packet_receipts",
+    "silent_sensitive_send": "forbidden",
+    "credentials": "forbidden",
+    "purchases": "forbidden",
+    "destructive_actions": "forbidden",
+    "production_mutation": "forbidden",
+    "unrestricted_browser_control": "forbidden"
+  },
+  "connected_work": {
+    "DOM_PERCEPTION_001_DOMAIN_DESIGN": {
+      "relationship": "constrained_by_this_product_context",
+      "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T172639Z0000_dom_perception_001_domain_design_design_the_ion_daimon_browser_perception_domain.json"
+    },
+    "DOM_PERCEPTION_002_CONTEXT_PACKAGE_INGEST_AND_OPERATION_MODEL": {
+      "relationship": "constrained_by_this_product_context",
+      "work_request_path": "ION/05_context/current/chatgpt_connector/codex_work_requests/2026-05-10T173958Z0000_dom_perception_002_context_package_ingest_and_operation_model_goal_ingest_the_sa.json"
+    },
+    "ION_EXTENSION_MINI_HELIXION_CONTEXT_PACKAGE": {
+      "relationship": "surface_model"
+    },
+    "LIVING_OPERATIONAL_GRAPH": {
+      "relationship": "global_graph_binding"
+    },
+    "DAIMON_EXTENSION_JOC_AUTOMATION_LINEAGE_SYNTHESIS": {
+      "relationship": "inherited_ui_and_automation_model",
+      "path": "ION/02_architecture/DAIMON_EXTENSION_JOC_AUTOMATION_LINEAGE_SYNTHESIS.md"
+    }
+  },
+  "implementation_gates": [
+    "product_packet_exists_and_is_linked",
+    "joc_lineage_synthesis_registered",
+    "extension_shell_shows_one_portable_ion_affordance",
+    "extension_shell_uses_joc_micro_shell_layout",
+    "visible_automation_event_stream_exists",
+    "page_branch_stores_provisional_page_perception_with_scope_and_redaction",
+    "context_package_ingest_settles_selected_page_memory_into_shared_graph",
+    "workflow_memory_stores_replayable_plans_without_autonomous_action_authority",
+    "approved_action_executor_requires_preview_explicit_consent_and_receipts"
+  ],
+  "non_claim_boundaries": [
+    "The companion does not imply autonomous browser authority.",
+    "Observed page memory is provisional until settled.",
+    "Saved workflows are plans until approved for execution.",
+    "Context carried to ChatGPT/Codex must include provenance and settlement state."
+  ]
+}

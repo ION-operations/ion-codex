@@ -1,0 +1,345 @@
+{
+  "schema": "ion.ai_assistant_work.template_instance.v0_1",
+  "instance_id": "helixion_joc_work_surface_ui_packet_20260511",
+  "template_id": "joc_work_surface_ui_packet",
+  "case_type": "corrective_work_surface_architecture_packet",
+  "status": "candidate_needs_settlement_before_more_ui_implementation",
+  "created_at": "2026-05-11T01:50:00Z",
+  "authority_boundary": {
+    "candidate_only": true,
+    "mutates_ION_03_registry": false,
+    "mutates_product_front_door": false,
+    "external_execution_authority": false,
+    "production_authority": false,
+    "live_execution_authority": false,
+    "requires_explicit_acceptance_to_land": true
+  },
+  "source_template_spec": "ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml",
+  "primary_agent": "FRONTEND_WORK_SURFACE_ARCHITECT",
+  "domain_id": "ui_frontend_excellence_domain",
+  "agent_route": [
+    "JOC_UI_CANON_STEWARD",
+    "FRONTEND_WORK_SURFACE_ARCHITECT",
+    "INTERACTION_STATE_WEAVER",
+    "CONTEXT_VISUALIZATION_CARTOGRAPHER",
+    "COMPONENT_BUILDER",
+    "VISUAL_PROOF_AUDITOR"
+  ],
+  "objective": "Correct the Helixion/JOC rebuild from a large vertical panel board into a JOC-grade maintained work surface with single active pages, stable shell zones, page-local drawers, universal inspector drawers, and bottom timeline/event rail.",
+  "sections": {
+    "INTENT": "Rebuild Helixion/JOC/dAimon/WisdomNET as a usable operational cockpit, not a monolithic dashboard. The operator should reach Docs/Packages, Codex Chat, queue, extension, DOM perception, gates, receipts, and WisdomNET through top-level pages and special drawers, while internal ION machinery is translated into route, status, proof, memory, timeline, and next-step surfaces.",
+    "SOURCE_EVIDENCE": [
+      "ION/05_context/current/ai_assistant_work/protocols/UI_FRONTEND_EXCELLENCE_DOMAIN_PROTOCOL_V0_1.md",
+      "ION/05_context/current/ai_assistant_work/domains/ui_frontend_excellence_domain.domain_packet.yaml",
+      "ION/05_context/current/ai_assistant_work/template_specs/joc_work_surface_ui_packet.template_spec.yaml",
+      "ION/05_context/current/ai_assistant_work/analysis/UI_FRONTEND_CANON_SYNTHESIS_REPORT_20260509T025441Z.md",
+      "ION/05_context/current/ai_assistant_work/source_evidence/UI_FRONTEND_CANON_SOURCE_EVIDENCE_MAP_20260509T025441Z.json",
+      "ION/05_context/current/codex_cli/CODEX_CHAT_JOC_CONTEXT_VISUALIZATION_ORCHESTRATION_20260508.md",
+      "ION/02_architecture/HELIXION_JOC_DAIMON_WISDOMNET_MASTER_EVOLUTION_PLAN.md",
+      "ION/05_context/current/helixion_joc_rebuild/HELIXION_JOC_REBUILD_CURRENT_PLAN.json"
+    ],
+    "CORRECTIVE_FINDING": [
+      "Recent React panels created useful projection inventory but repeated the known monolith failure by placing many large panels in one vertical main surface.",
+      "The current product surface used by the operator is http://127.0.0.1:8765/cockpit/chat, while the new React shell is on http://127.0.0.1:8788/helixion/development; this split is confusing until the shell route and product hierarchy are settled.",
+      "No further broad UI implementation should proceed until the page/drawer/timeline architecture below is used as the implementation contract."
+    ],
+    "SHELL_ZONES": [
+      {
+        "zone": "TOP_BAR",
+        "purpose": "Primary pages, mission/status chips, project/version sync, service health, and critical gate indicators. It must include direct access to Chat, JOC, Queue, Codex, Extension, Docs/Packages, Projects, WisdomNET, Gates, Receipts, and Settings without overlapping content."
+      },
+      {
+        "zone": "LEFT_ICON_RAIL",
+        "purpose": "Stable icon rail for active page instruments. It opens page-local drawers and never becomes the global navigation replacement."
+      },
+      {
+        "zone": "LEFT_DRAWER",
+        "purpose": "Page-local controls, filters, favorites, tree selectors, model/context lenses, calibration tools, and page-specific actions. It uses tabs when content would otherwise scroll heavily."
+      },
+      {
+        "zone": "MAIN_WORK_SURFACE",
+        "purpose": "Exactly one active page body at a time: Chat, Mission/JOC, Queue, Codex, Extension, Docs/Packages, Projects, WisdomNET, Gates, Receipts, or Settings. Only the active page owns substantial scroll."
+      },
+      {
+        "zone": "RIGHT_INSPECTOR",
+        "purpose": "Universal assistant/context/evidence/user/settings drawer. On non-chat pages it shows compact Codex/dAimon chat and selected object details. On chat page it shows selected-turn context, route, receipts, and proof."
+      },
+      {
+        "zone": "RIGHT_ICON_RAIL",
+        "purpose": "Universal inspector mode selector: Assistant, Context, Evidence, Receipts, Health, Settings."
+      },
+      {
+        "zone": "BOTTOM_TIMELINE",
+        "purpose": "Temporal truth rail for queue events, model calls, file/package operations, DOM capture, receipts, service state, gates, and user corrections. It is filterable by event lane."
+      }
+    ],
+    "USER_PRIMARY_FLOW": "The operator opens the existing cockpit, chooses a top-level page such as Docs/Packages, sees a focused main surface, opens page-local drawers for favorites/tree/actions, uses the right inspector for detail/chat/proof, and watches the bottom timeline for what the system is doing. The operator should not hunt through a vertical wall of internal panels.",
+    "DRAWER_AND_LENS_MATRIX": [
+      {
+        "page": "Chat",
+        "main_surface": "conversation timeline and composer",
+        "left_drawers": [
+          "Composer",
+          "Models",
+          "Skills",
+          "Context Lens",
+          "Run Mode"
+        ],
+        "right_inspector_tabs": [
+          "Assistant",
+          "Selected Turn Context",
+          "Evidence",
+          "Receipts",
+          "Settings"
+        ],
+        "bottom_lanes": [
+          "model",
+          "context",
+          "queue",
+          "receipt",
+          "gate"
+        ]
+      },
+      {
+        "page": "Docs/Packages",
+        "main_surface": "thumbnail/favorites grid plus selected package/document detail",
+        "left_drawers": [
+          "Favorites",
+          "Folder Tree",
+          "Package Filters",
+          "Queue Pack Import"
+        ],
+        "right_inspector_tabs": [
+          "Selected File",
+          "Package Proof",
+          "Drop Target",
+          "Receipts"
+        ],
+        "bottom_lanes": [
+          "zip",
+          "drop",
+          "package",
+          "receipt",
+          "blocked"
+        ]
+      },
+      {
+        "page": "Projects",
+        "main_surface": "ION assembled context packages and current project cards",
+        "left_drawers": [
+          "Project Roots",
+          "Versions",
+          "Context Packages",
+          "Sync State"
+        ],
+        "right_inspector_tabs": [
+          "Project Detail",
+          "Latest Version",
+          "Context Graph",
+          "Receipts"
+        ],
+        "bottom_lanes": [
+          "sync",
+          "package",
+          "receipt",
+          "gate"
+        ]
+      },
+      {
+        "page": "Extension",
+        "main_surface": "portable dAimon companion, DOM perception, capture/calibration, and browser-carrier health",
+        "left_drawers": [
+          "Element Capture",
+          "Drop Zones",
+          "Inspector",
+          "Queue Buttons",
+          "Prompt Library"
+        ],
+        "right_inspector_tabs": [
+          "Selected DOM Element",
+          "Anchor Geometry",
+          "Evidence",
+          "Safety"
+        ],
+        "bottom_lanes": [
+          "dom",
+          "calibration",
+          "queue",
+          "receipt",
+          "blocked"
+        ]
+      },
+      {
+        "page": "Queue",
+        "main_surface": "queue packets, autoplay/manual control, output-stopped detector, and gateway receipts",
+        "left_drawers": [
+          "Manual Queue",
+          "Autoplay",
+          "GPT Actions Packets",
+          "Safety Limits"
+        ],
+        "right_inspector_tabs": [
+          "Packet Detail",
+          "Receipts",
+          "Carrier Health",
+          "Approval"
+        ],
+        "bottom_lanes": [
+          "packet",
+          "send",
+          "wait",
+          "receipt",
+          "gate"
+        ]
+      }
+    ],
+    "SCREEN_AND_INTERACTION_STATES": [
+      {
+        "state": "loading",
+        "user_feedback": "Show which page/view-model/service is loading, with skeleton regions inside the correct shell zone."
+      },
+      {
+        "state": "slow_response",
+        "user_feedback": "Show elapsed wait, active detector state, active packet/run, and safe pause/stop controls in the relevant page and bottom timeline."
+      },
+      {
+        "state": "error",
+        "user_feedback": "Name the failing service/data source and offer inspect/retry/fix buttons when a local service repair path exists."
+      },
+      {
+        "state": "empty",
+        "user_feedback": "Show purposeful empty states: no selected package, no queue packets, no DOM capture, no active project, with the next lawful selection visible."
+      },
+      {
+        "state": "permission",
+        "user_feedback": "Show blocked authority as a clear gate: no production, no silent browser send, no unrestricted browser control, no package acceptance without receipts."
+      },
+      {
+        "state": "active_drag_or_zip",
+        "user_feedback": "For future extension runtime only, show zip percentage, selected drop target, approval state, and cancellation path."
+      }
+    ],
+    "COMPONENT_CONTRACTS": [
+      {
+        "component": "JocRuntimeShell",
+        "owned_zone": "outer shell",
+        "props": [
+          "activePage",
+          "activeLeftDrawer",
+          "activeRightInspector",
+          "timelineFilters",
+          "runtimeProjection"
+        ],
+        "testable_obligation": "Only one main page renders as active; top bar changes pages without creating a vertical dashboard."
+      },
+      {
+        "component": "TopPageBar",
+        "owned_zone": "TOP_BAR",
+        "props": [
+          "pages",
+          "activePage",
+          "statusChips",
+          "serviceAlerts"
+        ],
+        "testable_obligation": "Docs/Packages and JOC development surfaces are reachable from the operator's current cockpit without unclear port jumping."
+      },
+      {
+        "component": "PageLocalDrawer",
+        "owned_zone": "LEFT_DRAWER",
+        "props": [
+          "activePage",
+          "drawerTabs",
+          "selectedTab"
+        ],
+        "testable_obligation": "Drawer content is page-specific and tabbed before it becomes scroll-heavy."
+      },
+      {
+        "component": "UniversalInspector",
+        "owned_zone": "RIGHT_INSPECTOR",
+        "props": [
+          "mode",
+          "selectedObject",
+          "assistantContext",
+          "receipts"
+        ],
+        "testable_obligation": "Selected object details, assistant chat, context, and proof do not compete as main-page panels."
+      },
+      {
+        "component": "BottomEventTimeline",
+        "owned_zone": "BOTTOM_TIMELINE",
+        "props": [
+          "events",
+          "filters",
+          "selectedEvent"
+        ],
+        "testable_obligation": "Async work, receipts, gates, and corrections are visible as time-ordered events with filters."
+      },
+      {
+        "component": "DocsPackagesPage",
+        "owned_zone": "MAIN_WORK_SURFACE",
+        "props": [
+          "favorites",
+          "contextPackages",
+          "artifactPackages",
+          "selectedItem",
+          "packageAuthority"
+        ],
+        "testable_obligation": "Shows thumbnails/favorites as a real page and sends detail/proof/actions to drawers/inspector, not a long panel stack."
+      }
+    ],
+    "CONTEXT_AND_PROOF_VISUALIZATION": [
+      "Context packages, Capsule, Mini, HOT_CONTEXT, route refs, and package selections appear as user-facing context/proof lenses.",
+      "Receipts, validation gaps, and non-claims remain visible in right inspector and bottom timeline.",
+      "Do not display raw hidden reasoning, secrets, or unread files as if read.",
+      "Current panel inventory from C-079 through C-083 may be reused as data surfaces only after mapping each surface to a page/drawer/inspector/timeline zone."
+    ],
+    "MISSION_SESSION_DRIVER_SURFACES": [
+      "local service health and repair state",
+      "ChatGPT browser carrier health",
+      "queue gateway packet state",
+      "Codex Capsule Chat response carrier state",
+      "extension drop/DOM calibration state",
+      "package zip/drop operation state",
+      "public/local route separation"
+    ],
+    "INTELLIGENCE_MAP_OR_CONTEXT_SELECTION": [
+      "selected project/package source path",
+      "why the context package is selected",
+      "latest version/receipt for each project",
+      "active/omitted/blocked context markers",
+      "Capsule/Mini/long-horizon separation",
+      "DOM capture evidence and selector/geometry proof"
+    ],
+    "VALIDATION_PLAN": [
+      "No visual completion claim until screenshot/browser validation is explicitly run.",
+      "Build validation may be run only when implementation resumes.",
+      "Add shell-zone structure checks for top bar, left rail/drawer, main page, right inspector/rail, and bottom timeline.",
+      "Add no-monolith regression: docs/packages and queue pages must not render as one continuous wall of panels.",
+      "Add interaction checks for page switch, drawer switch, right inspector switch, timeline filter, and Docs/Packages top-bar access."
+    ],
+    "NON_CLAIMS": [
+      "This packet is candidate current-context work, not accepted canon.",
+      "It does not claim the current React prototype is visually correct.",
+      "It does not claim the current 8765 cockpit and 8788 JOC shell are product-integrated.",
+      "It does not authorize live browser control, silent send, production mutation, or package acceptance.",
+      "It does not claim tests, screenshots, or browser validation were run."
+    ],
+    "SETTLEMENT_ROUTE": "JOC_UI_CANON_STEWARD reviews source alignment, FRONTEND_WORK_SURFACE_ARCHITECT owns the shell/page/drawer contract, INTERACTION_STATE_WEAVER covers loading/slow/error/permission states, CONTEXT_VISUALIZATION_CARTOGRAPHER covers context/proof lenses, COMPONENT_BUILDER implements bounded patches, and VISUAL_PROOF_AUDITOR checks build/screenshot/layout evidence before any done claim."
+  },
+  "next_packet": {
+    "packet_id": "HELIXION_JOC_UI_REPAIR_001_SHELL_ZONE_REFACTOR",
+    "status": "blocked_until_operator_accepts_or_directs_implementation",
+    "objective": "Refactor the local JOC prototype from vertical panel board into the shell/page/drawer architecture defined above, then decide whether it belongs inside the 8765 Codex Chat cockpit, the 8788 local JOC service, or a unified route.",
+    "implementation_rule": "No new feature panels until each existing surface is mapped to a shell zone."
+  },
+  "expected_validation": {
+    "should_pass_template_shape": true,
+    "visual_validation_status": "not_run",
+    "build_validation_status": "not_run",
+    "expected_failure_kinds": [
+      "current prototype still needs visual proof",
+      "current service split remains confusing",
+      "current implementation history includes monolith-risk panels"
+    ]
+  }
+}

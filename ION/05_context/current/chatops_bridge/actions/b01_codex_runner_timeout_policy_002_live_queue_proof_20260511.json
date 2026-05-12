@@ -1,0 +1,45 @@
+{
+  "approval": {
+    "approval_token": "ION_CHATOPS_APPROVED",
+    "approved": true,
+    "approved_by": "Braden"
+  },
+  "created_at": "2026-05-11T15:32:46+00:00",
+  "ion_action": {
+    "action_id": "b01-codex-runner-timeout-policy-002-live-queue-proof-20260511",
+    "actor": {
+      "callsign": "Sev",
+      "carrier": "chatgpt_browser"
+    },
+    "authority": {
+      "human_sovereign": "Braden",
+      "live_execution_authority": false,
+      "production_authority": false,
+      "requires_approval": true
+    },
+    "context_refs": [
+      "ION/04_packages/kernel/ion_codex_queue_runner.py",
+      "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
+      "ION/04_packages/kernel/ion_agent_invocation_broker.py",
+      "ION/04_packages/kernel/ion_carrier_task_return.py",
+      "ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json",
+      "ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json",
+      "ION/05_context/current/chatgpt_connector/task_returns/2026-05-11T143901Z0000_task_return.json"
+    ],
+    "intent": "create_codex_work_packet",
+    "objective": "B01_CODEX_RUNNER_TIMEOUT_POLICY_002_LIVE_QUEUE_PROOF.\n\nGoal:\nProve that the patched Codex queue timeout/model-effort policy works on a live queued workload path after B01_CODEX_RUNNER_TIMEOUT_POLICY_001 landed with accepted proof.\n\nThis packet is itself the live proof workload. When Codex runs this packet, inspect its own run packet and verify:\n- timeout_seconds is normalized to at least 900 for this agent/proof workload.\n- timeout_seconds is capped at or below 7200.\n- latest_return.md is produced.\n- latest_return.md includes ### WORKLOAD DIFF.\n- context proof and template action proof pass task-return intake.\n- worker lifecycle events are visible.\n- no stale active_run remains after terminal state.\n\nRequired context:\n- ION/04_packages/kernel/ion_codex_queue_runner.py\n- ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py\n- ION/04_packages/kernel/ion_agent_invocation_broker.py\n- ION/04_packages/kernel/ion_carrier_task_return.py\n- ION/05_context/current/chatgpt_connector/runtime/codex_queue_runner_state.json\n- ION/05_context/current/ACTIVE_CHATGPT_CONNECTOR_CODEX_WORK_QUEUE.json\n\nRequired checks:\n- Read this work request.\n- Read this run's run.json.\n- Confirm timeout_seconds in run.json.\n- Confirm latest_return path exists before final status if possible.\n- Confirm WORKLOAD DIFF section is present in your own return.\n- Do not edit runtime code unless a blocking defect is discovered.\n- If a defect is discovered, report it as BLOCKED_NEEDS_PATCH instead of broad patching.\n\nRequired return sections:\n- CONTEXT PROOF\n- TEMPLATE ACTION PROOF\n- VALIDATION\n- RESULT\n- WORKLOAD DIFF\n- BLOCKERS\n- RECOMMENDED NEXT PACKET\n\nBoundaries:\n- No secrets.\n- No provider calls.\n- No deployment.\n- No git push.\n- No arbitrary shell.\n- No production authority.\n- No live execution authority.\n- No accepted state claim beyond proof-return intake.",
+    "receipts": {
+      "requested": [
+        "codex_work_packet_receipt",
+        "action_receipt",
+        "workload_diff_receipt",
+        "live_queue_proof_receipt"
+      ]
+    },
+    "schema": "ion.chatops.action.v1"
+  },
+  "live_execution_authority": false,
+  "production_authority": false,
+  "schema_id": "ion.chatops.action_packet.v1",
+  "source": "ion_chatops_bridge"
+}

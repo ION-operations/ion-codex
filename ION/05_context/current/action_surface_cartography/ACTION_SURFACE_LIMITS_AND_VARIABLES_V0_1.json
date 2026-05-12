@@ -1,0 +1,70 @@
+{
+  "schema_id": "ion.action_surface_limits_and_variables.v0_1",
+  "status": "candidate_constraints_snapshot",
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "deployment_authority": false
+  },
+  "forbidden_capability_classes": [
+    "arbitrary shell",
+    "arbitrary file write",
+    "browser/computer control",
+    "credential access",
+    "direct delete",
+    "git push",
+    "production deployment",
+    "provider API calls",
+    "unbounded filesystem access",
+    "direct accept of unproofed worker output"
+  ],
+  "bounded_write_gate": {
+    "confirmation_token": "ION_BOUNDED_WRITE_CONFIRMED",
+    "path_policy_limit_example": "target_path_not_in_artifact_transfer_roots"
+  },
+  "recorded_surface_facts": {
+    "action_gateway": {
+      "verdict": "ION_CUSTOM_GPT_ACTION_GATEWAY_READY",
+      "status": "draft_non_production",
+      "public_transport": "cloudflare_tunnel",
+      "local_listen": "127.0.0.1:8777",
+      "max_body_bytes": 262144,
+      "require_idempotency_key_for_mutation": true,
+      "production_authority": false,
+      "live_execution_authority": false
+    },
+    "mcp_preview": {
+      "verdict": "ION_CHATGPT_BROWSER_HTTP_MCP_PREVIEW_READY",
+      "version_line": "V121_CHATGPT_BROWSER_HTTP_MCP_PREVIEW",
+      "endpoint_path": "/mcp",
+      "default_bind": "127.0.0.1:8765",
+      "connector_state": "LOCAL_HTTP_PREVIEW_NOT_PUBLIC_CONNECTOR",
+      "write_confirmation_token": "ION_BOUNDED_WRITE_CONFIRMED",
+      "recorded_tools_exposed": 44,
+      "local_snapshot_allowed_tools_count": 42
+    },
+    "assistant_work_route_compiler_degraded": [
+      "pyyaml_unavailable",
+      "route_registry_missing_or_invalid",
+      "lifecycle_registry_missing_or_invalid"
+    ],
+    "large_response_pressure": {
+      "ion_context_plan": "large_or_truncated",
+      "ion_cockpit_view": "response_too_large_in_some_flows",
+      "queue_read_guidance": "use low limits and pagination"
+    },
+    "browser_queue_record": {
+      "pending_count": 2,
+      "queued": 1,
+      "needs_operator": 1,
+      "max_queue_length": 25,
+      "max_autoplay_turns": 10,
+      "queued_echo_packet": "BQ-e80d77cedffc2f39",
+      "needs_operator_packet": "B01_RUNTIME_CONNECTORS_ACTIVATION_20260510"
+    }
+  },
+  "notes": [
+    "pending_count=2 is represented by total packets currently in browser queue snapshot.",
+    "This file is candidate context only and not accepted shared state."
+  ]
+}

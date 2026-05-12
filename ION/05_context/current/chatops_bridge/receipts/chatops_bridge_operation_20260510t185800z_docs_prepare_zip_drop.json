@@ -1,0 +1,51 @@
+{
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": null,
+  "created_at": "2026-05-10T18:58:00+00:00",
+  "failure_classification": null,
+  "files_touched": [
+    "ION/05_context/current/chatops_bridge/artifacts/docs_drop/docs_drop_20260510T185800Z_ion_repo_authority_md.zip",
+    "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/ffwsppxdbo8zfazo1ofowxypewv0ytgb.json"
+  ],
+  "live_execution_authority": false,
+  "operation": "docs_prepare_zip_drop",
+  "production_authority": false,
+  "receipt_id": "chatops_bridge_operation_20260510T185800Z_docs_prepare_zip_drop",
+  "schema_id": "ion.chatops.bridge_operation_receipt.v1",
+  "status": "completed",
+  "target_refs": [
+    {
+      "path": "ION/REPO_AUTHORITY.md",
+      "provider": "local_ion",
+      "role": "docs_zip_source"
+    }
+  ],
+  "validation": {
+    "result": {
+      "artifact": {
+        "attachable": true,
+        "content_type": "application/zip",
+        "finding": null,
+        "mtime": "2026-05-10T18:58:00+00:00",
+        "name": "docs_drop_20260510T185800Z_ion_repo_authority_md.zip",
+        "path": "ION/05_context/current/chatops_bridge/artifacts/docs_drop/docs_drop_20260510T185800Z_ion_repo_authority_md.zip",
+        "sha256": "6871eee0281ef39c780827abe672f049861f22fc905a510244f344c3a308c53e",
+        "size_bytes": 3949
+      },
+      "content_type": "application/zip",
+      "download_token": "FfWSpPXDbO8zfazo1OFoWXYpeWv0ytGb",
+      "download_url": "http://127.0.0.1:8767/artifacts/download/FfWSpPXDbO8zfazo1OFoWXYpeWv0ytGb",
+      "file_count": 1,
+      "filename": "docs_drop_20260510T185800Z_ion_repo_authority_md.zip",
+      "ok": true,
+      "sha256": "6871eee0281ef39c780827abe672f049861f22fc905a510244f344c3a308c53e",
+      "size_bytes": 3949,
+      "source_path": "ION/REPO_AUTHORITY.md",
+      "source_size_bytes": 9259,
+      "ticket_path": "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/ffwsppxdbo8zfazo1ofowxypewv0ytgb.json"
+    }
+  }
+}

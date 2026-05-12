@@ -1,0 +1,30 @@
+{
+  "schema_id": "ion.context_settlement.claim.v1",
+  "claim_id": "claim_20260511_agent_branch_capsule_protocol",
+  "created_at": "2026-05-11",
+  "agent_id": "codex_agent_branch_capsule_protocol",
+  "purpose": "Create the provisional agent branch capsule protocol, registry, and templates so each active agent/conversation has isolated context and wrong-context drift can be detected.",
+  "write_scope": [
+    "ION/02_architecture/ION_AGENT_BRANCH_CAPSULE_PROTOCOL_V0_1.md",
+    "ION/05_context/current/agent_context_branches/README.md",
+    "ION/05_context/current/agent_context_branches/BRANCH_CAPSULE_REGISTRY_V0_1.json",
+    "ION/05_context/current/agent_context_branches/templates/AGENT_BRANCH_CAPSULE.template.md",
+    "ION/05_context/current/agent_context_branches/templates/AGENT_BRANCH_STATUS.template.json",
+    "ION/05_context/current/agent_context_branches/templates/AGENT_CONTEXT_IDENTITY_CARD.template.md",
+    "ION/05_context/current/context_settlement/inbox/SETTLE_AGENT_BRANCH_CAPSULE_PROTOCOL_20260511.json"
+  ],
+  "shared_context_write": false,
+  "requested_settlement": true,
+  "ttl_minutes": 45,
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "browser_control_authority": false
+  },
+  "non_claims": [
+    "This claim does not create accepted shared context.",
+    "This claim does not assign a C-number.",
+    "This claim does not settle the branch capsule protocol."
+  ]
+}

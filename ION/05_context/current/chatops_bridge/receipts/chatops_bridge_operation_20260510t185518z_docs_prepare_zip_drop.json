@@ -1,0 +1,51 @@
+{
+  "actor": {
+    "callsign": "Sev",
+    "carrier": "chatgpt_browser"
+  },
+  "approved_by": null,
+  "created_at": "2026-05-10T18:55:18+00:00",
+  "failure_classification": null,
+  "files_touched": [
+    "ION/05_context/current/chatops_bridge/artifacts/docs_drop/docs_drop_20260510T185518Z_ion_04_packages_ion_kernel_egg_info.zip",
+    "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/jm4ujvizo8twr_8tqmdx8iemxloir0z.json"
+  ],
+  "live_execution_authority": false,
+  "operation": "docs_prepare_zip_drop",
+  "production_authority": false,
+  "receipt_id": "chatops_bridge_operation_20260510T185518Z_docs_prepare_zip_drop",
+  "schema_id": "ion.chatops.bridge_operation_receipt.v1",
+  "status": "completed",
+  "target_refs": [
+    {
+      "path": "ION/04_packages/ion_kernel.egg-info",
+      "provider": "local_ion",
+      "role": "docs_zip_source"
+    }
+  ],
+  "validation": {
+    "result": {
+      "artifact": {
+        "attachable": true,
+        "content_type": "application/zip",
+        "finding": null,
+        "mtime": "2026-05-10T18:55:18+00:00",
+        "name": "docs_drop_20260510T185518Z_ion_04_packages_ion_kernel_egg_info.zip",
+        "path": "ION/05_context/current/chatops_bridge/artifacts/docs_drop/docs_drop_20260510T185518Z_ion_04_packages_ion_kernel_egg_info.zip",
+        "sha256": "359428cacc51c26329f9a34ec0ccad4cb4047dd6b264e68bedf2ebf0f35a9a1c",
+        "size_bytes": 10543
+      },
+      "content_type": "application/zip",
+      "download_token": "JM4uJviZO8TwR--8TQMdx8IEMxLOIR0z",
+      "download_url": "http://127.0.0.1:8767/artifacts/download/JM4uJviZO8TwR--8TQMdx8IEMxLOIR0z",
+      "file_count": 4,
+      "filename": "docs_drop_20260510T185518Z_ion_04_packages_ion_kernel_egg_info.zip",
+      "ok": true,
+      "sha256": "359428cacc51c26329f9a34ec0ccad4cb4047dd6b264e68bedf2ebf0f35a9a1c",
+      "size_bytes": 10543,
+      "source_path": "ION/04_packages/ion_kernel.egg-info",
+      "source_size_bytes": 47941,
+      "ticket_path": "ION/05_context/current/chatops_bridge/runtime/artifact_upload_tickets/jm4ujvizo8twr_8tqmdx8iemxloir0z.json"
+    }
+  }
+}

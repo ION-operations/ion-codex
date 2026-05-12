@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.browser_perception.page_state_object.schema.v1",
+  "title": "Page State Object",
+  "type": "object",
+  "required": ["schema_id", "page_state_id", "page_branch_id", "page_session_id", "sources", "regions", "freshness", "settlement_state"],
+  "properties": {
+    "schema_id": { "const": "ion.browser_perception.page_state_object.v1" },
+    "page_state_id": { "type": "string" },
+    "page_branch_id": { "type": "string" },
+    "page_session_id": { "type": "string" },
+    "url_pattern": { "type": "string" },
+    "page_class": { "type": "string" },
+    "sources": { "type": "array", "items": { "type": "string" } },
+    "regions": { "type": "array", "items": { "type": "object" } },
+    "freshness": { "type": "object" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "redaction_policy": { "type": "object" },
+    "settlement_state": { "enum": ["provisional", "candidate", "settled", "rejected", "superseded"] },
+    "receipt_refs": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

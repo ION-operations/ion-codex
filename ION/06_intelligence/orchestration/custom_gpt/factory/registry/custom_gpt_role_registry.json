@@ -1,0 +1,89 @@
+{
+  "schema_id": "ion.custom_gpt_factory.role_registry.v1",
+  "status": "proposal",
+  "created_date": "2026-05-10",
+  "domain": "custom_gpt_factory",
+  "governing_design_doc": "ION/06_intelligence/orchestration/custom_gpt/factory/docs/custom_gpt_factory_domain.md",
+  "taxonomy": {
+    "ION": "engine, continuity substrate, context graph, state-transition law, packets, proof gates, receipts, and settlement",
+    "dAimon": "agent/product layer users meet for safe system, page, API, workflow, database, and tool integration into ION",
+    "WisdomNET": "global federation hub for evolved states, domain packs, templates, connectors, workflows, receipts, and carrier evolutions"
+  },
+  "factory_agents": [
+    {
+      "role_id": "gpt_factory_architect",
+      "display_name": "GPT_FACTORY_ARCHITECT",
+      "purpose": "Own GPT roster, role boundaries, package layout, composition rules, and release topology.",
+      "primary_outputs": ["factory_domain_map", "role_family_map", "build_packet_structure", "package_layout_decisions"]
+    },
+    {
+      "role_id": "capsule_compiler",
+      "display_name": "CAPSULE_COMPILER",
+      "purpose": "Compile shared micro-core, product taxonomy, role capsule, non-claims, and output contract into GPT-ready instructions and knowledge files.",
+      "primary_outputs": ["custom_gpt_instructions.md", "custom_gpt_knowledge_manifest.json", "codex_cli_capsule.md", "role_output_contract.md"]
+    },
+    {
+      "role_id": "action_schema_curator",
+      "display_name": "ACTION_SCHEMA_CURATOR",
+      "purpose": "Manage actions, OpenAPI schemas, auth modes, allowed domains, tool policies, and least-privilege configuration.",
+      "primary_outputs": ["custom_gpt_action_policy.md", "action_schema_manifest", "auth_mode_notes", "forbidden_tool_list"]
+    },
+    {
+      "role_id": "gpt_nemesis",
+      "display_name": "GPT_NEMESIS",
+      "purpose": "Audit overclaiming, privacy, secret handling, instruction conflicts, retrieval bloat, and marketplace/workspace risk.",
+      "primary_outputs": ["overclaim_lint_report", "secret_request_lint_report", "instruction_conflict_report", "release_risk_decision"]
+    },
+    {
+      "role_id": "gpt_qa_cartographer",
+      "display_name": "GPT_QA_CARTOGRAPHER",
+      "purpose": "Test GPT behavior, starters, output contracts, retrieval behavior, refusal posture, and role-boundary routing.",
+      "primary_outputs": ["starter_prompt_smoke_report", "retrieval_behavior_report", "role_boundary_contradiction_report", "validation_matrix"]
+    },
+    {
+      "role_id": "gpt_release_scribe",
+      "display_name": "GPT_RELEASE_SCRIBE",
+      "purpose": "Create manifests, changelogs, version notes, setup instructions, and release receipts.",
+      "primary_outputs": ["gpt_build_manifest.json", "changelog", "setup_instructions", "gpt_release_receipt.json"]
+    },
+    {
+      "role_id": "gpt_wisdomnet_packager",
+      "display_name": "GPT_WISDOMNET_PACKAGER",
+      "purpose": "Prepare trusted role, capsule, connector, workflow, and receipt packs for WisdomNET contribution.",
+      "primary_outputs": ["wisdomnet_candidate_contribution_bundle", "trust_provenance_manifest", "compatibility_notes"]
+    }
+  ],
+  "first_role_packages": [
+    "ion_core_carrier",
+    "daimon_companion",
+    "atlas_systems_cartographer",
+    "wisdomnet_librarian",
+    "context_cartographer",
+    "runtime_cartographer",
+    "dom_cartographer",
+    "integration_architect",
+    "nemesis_audit",
+    "scribe",
+    "living_graph_designer",
+    "mason_builder"
+  ],
+  "validation_gates": [
+    "instruction_lint",
+    "secret_request_lint",
+    "overclaim_lint",
+    "action_policy_lint",
+    "retrieval_knowledge_bloat_check",
+    "starter_prompt_smoke_tests",
+    "role_boundary_contradiction_checks",
+    "capsule_version_sync_with_codex_cli_capsules",
+    "release_receipt_completeness_check"
+  ],
+  "boundaries": [
+    "no_secrets",
+    "no_production_deployment",
+    "no_gpt_store_publishing_in_design_packet",
+    "no_raw_full_ion_package_dump_into_every_gpt",
+    "no_claim_any_gpt_is_the_whole_ion_organism",
+    "gpt_configs_are_candidate_artifacts_until_reviewed"
+  ]
+}

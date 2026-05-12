@@ -1,0 +1,40 @@
+{
+  "schema_id": "ion.chatops_mode_visibility_receipt.v1",
+  "packet_id": "B04_CHATOPS_MODE_VISIBILITY_001",
+  "generated_at": "2026-05-11T00:00:00Z",
+  "accepted_state": "ACCEPTED_AS_UI_BEHAVIOR_DISCOVERY",
+  "implemented": [
+    "Mode taxonomy protocol document",
+    "B04 mode visibility packet",
+    "Top-rail mode memory badge",
+    "Status-tab structured mode memory display",
+    "Browser-local mode memory persistence",
+    "Approval modal explicit mode memory",
+    "Action receipt queue_target line for mode memory parsing"
+  ],
+  "not_implemented": [
+    "Pinned capture overlay toggle",
+    "Complete screenshot canon set",
+    "Full mode manager canon"
+  ],
+  "touched_paths": [
+    "ION/02_architecture/ION_CHATOPS_MODE_VISIBILITY_PROTOCOL.md",
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_MODE_VISIBILITY_001.md",
+    "ION/05_context/current/helixion_joc_rebuild/B04_CHATOPS_MODE_VISIBILITY_001_RECEIPT.json",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/approval_ui.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/src/content.ts",
+    "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js"
+  ],
+  "validation": [
+    "node --check ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js",
+    "git diff --check scoped to changed browser extension and B04 files",
+    "JSON parse of B04 receipt"
+  ],
+  "authority_boundaries": {
+    "production_authority": false,
+    "live_execution_authority": false,
+    "secrets_authority": false,
+    "unrestricted_browser_control": false,
+    "silent_browser_send": false
+  }
+}

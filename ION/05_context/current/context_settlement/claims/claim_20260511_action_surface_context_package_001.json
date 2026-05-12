@@ -1,0 +1,25 @@
+{
+  "schema_id": "ion.context_settlement_claim.v1",
+  "claim_id": "claim_20260511_action_surface_context_package_001",
+  "created_at": "2026-05-11T00:00:00Z",
+  "status": "candidate_claim",
+  "package_ref": "ION/05_context/current/action_surface_cartography/ION_ACTIONS_CONNECTOR_CONTEXT_PACKAGE_V0_1.md",
+  "manifest_ref": "ION/05_context/current/action_surface_cartography/ACTION_SURFACE_CONTEXT_PACKAGE_MANIFEST_V0_1.json",
+  "positive_claims": [
+    "Candidate action-surface context package artifacts were materialized in-repo.",
+    "Required context paths were read before writes.",
+    "Required key findings were recorded in candidate package artifacts."
+  ],
+  "non_claims": [
+    "No production readiness claimed.",
+    "No IDE equivalence achieved claim.",
+    "No raw shell authority claim for ChatGPT Browser carrier.",
+    "No secrets were read, printed, stored, or requested.",
+    "No git push performed.",
+    "No direct shared context mutation was performed."
+  ],
+  "authority": {
+    "production_authority": false,
+    "live_execution_authority": false
+  }
+}
