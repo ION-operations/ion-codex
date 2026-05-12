@@ -1,0 +1,41 @@
+{
+  "$id": "ion.agent_relay_response.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "answered_by": {
+      "enum": [
+        "chatgpt_browser",
+        "operator"
+      ]
+    },
+    "authority_delta": {},
+    "continue": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "invocation_id": {
+      "type": "string"
+    },
+    "relay_id": {
+      "type": "string"
+    },
+    "response": {
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "ion.agent_relay_response.v1"
+    }
+  },
+  "required": [
+    "schema_id",
+    "relay_id",
+    "invocation_id",
+    "answered_by",
+    "response"
+  ],
+  "title": "ION Agent Relay Response v1",
+  "type": "object"
+}

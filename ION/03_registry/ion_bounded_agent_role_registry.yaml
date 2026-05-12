@@ -1,0 +1,38 @@
+schema_id: ion.bounded_agent_role_registry.v1
+roles:
+  role.context_cartographer:
+    display_name: CONTEXT_CARTOGRAPHER
+    default_authority_ceiling: read_only
+    default_read_zones: [ION/]
+    write_posture: none
+    settlement_target: chatgpt_browser
+  role.runtime_cartographer:
+    display_name: RUNTIME_CARTOGRAPHER
+    default_authority_ceiling: read_only
+    default_read_zones: [ION/04_packages/kernel/, ION/05_context/current/]
+    write_posture: none
+    settlement_target: chatgpt_browser
+  role.canon_librarian:
+    display_name: CANON_LIBRARIAN
+    default_authority_ceiling: read_only
+    default_read_zones: [ION/02_architecture/, ION/03_registry/, ION/05_context/current/]
+    write_posture: candidate_only
+    settlement_target: chatgpt_browser
+  role.template_curator:
+    display_name: TEMPLATE_CURATOR
+    default_authority_ceiling: gated_local
+    default_read_zones: [ION/]
+    write_posture: bounded_drafts
+    settlement_target: chatgpt_browser
+  role.scribe:
+    display_name: SCRIBE
+    default_authority_ceiling: gated_local
+    default_read_zones: [ION/]
+    write_posture: bounded_drafts
+    settlement_target: chatgpt_browser
+  role.nemesis_reviewer:
+    display_name: NEMESIS_REVIEWER
+    default_authority_ceiling: read_only
+    default_read_zones: [ION/]
+    write_posture: none
+    settlement_target: chatgpt_browser

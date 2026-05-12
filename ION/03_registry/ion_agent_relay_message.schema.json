@@ -1,0 +1,78 @@
+{
+  "$id": "ion.agent_relay_message.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "authority_needed": {
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "evidence_refs": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "from_agent": {
+      "type": "string"
+    },
+    "invocation_id": {
+      "type": "string"
+    },
+    "options": {
+      "type": "array"
+    },
+    "question": {
+      "type": "string"
+    },
+    "question_type": {
+      "enum": [
+        "context",
+        "route",
+        "approval",
+        "knowledge",
+        "blocker",
+        "settlement"
+      ]
+    },
+    "relay_id": {
+      "type": "string"
+    },
+    "response": {},
+    "run_id": {
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "ion.agent_relay_message.v1"
+    },
+    "status": {
+      "enum": [
+        "WAITING",
+        "ANSWERED",
+        "ESCALATED",
+        "CANCELLED"
+      ]
+    },
+    "to": {
+      "enum": [
+        "chatgpt_browser",
+        "operator"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "relay_id",
+    "invocation_id",
+    "from_agent",
+    "to",
+    "question_type",
+    "question",
+    "status"
+  ],
+  "title": "ION Agent Relay Message v1",
+  "type": "object"
+}

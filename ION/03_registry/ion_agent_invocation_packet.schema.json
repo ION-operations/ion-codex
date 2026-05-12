@@ -1,0 +1,85 @@
+{
+  "$id": "ion.agent_invocation_packet.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "agent_display_name": {
+      "type": "string"
+    },
+    "agent_role": {
+      "type": "string"
+    },
+    "authority": {
+      "additionalProperties": true,
+      "properties": {
+        "live_execution_authority": {
+          "const": false
+        },
+        "local_write_authority": {
+          "enum": [
+            "none",
+            "gated",
+            "bounded"
+          ]
+        },
+        "production_authority": {
+          "const": false
+        }
+      },
+      "required": [
+        "production_authority",
+        "live_execution_authority"
+      ],
+      "type": "object"
+    },
+    "capsule_context": {
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "execution": {
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "idempotency_key": {
+      "minLength": 8,
+      "type": "string"
+    },
+    "invocation_id": {
+      "type": "string"
+    },
+    "objective": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "proof_required": {
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "relay_policy": {
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "schema_id": {
+      "const": "ion.agent_invocation_packet.v1"
+    },
+    "settlement": {
+      "additionalProperties": true,
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_id",
+    "idempotency_key",
+    "agent_role",
+    "objective",
+    "authority"
+  ],
+  "title": "ION Agent Invocation Packet v1",
+  "type": "object"
+}
