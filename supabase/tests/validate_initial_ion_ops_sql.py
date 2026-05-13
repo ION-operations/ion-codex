@@ -18,6 +18,7 @@ MIGRATION_001 = REPO_ROOT / "supabase" / "migrations" / "001_initial_ion_ops.sql
 MIGRATION_002 = REPO_ROOT / "supabase" / "migrations" / "002_dev_private_cockpit_read_policies.sql"
 MIGRATION_003 = REPO_ROOT / "supabase" / "migrations" / "003_ion_ops_authority_and_rpc.sql"
 MIGRATION_004 = REPO_ROOT / "supabase" / "migrations" / "004_ion_ops_api_grants.sql"
+MIGRATION_005 = REPO_ROOT / "supabase" / "migrations" / "005_ion_ops_cockpit_readmodel_fixes.sql"
 SEED = REPO_ROOT / "supabase" / "seed" / "001_ion_ops_bootstrap_seed.sql"
 LIVE_SNAPSHOT = REPO_ROOT / "supabase" / "live_schema_snapshots" / "ion_ops_live_schema_20260513.sql"
 DOCS = [
@@ -137,6 +138,19 @@ REQUIRED_EVENT_MIRROR_DOC_SNIPPETS = [
     "does not grant anon execute on write rpcs",
 ]
 
+REQUIRED_005_SNIPPETS = [
+    "create or replace view ion_ops.v_recent_automation_events",
+    "create or replace view ion_ops.v_cockpit_overview",
+    "created_at",
+    "order by created_at desc, occurred_at desc",
+    "'event_id', recent.event_id",
+    "'carrier_id', recent.carrier_id",
+    "'branch_id', recent.branch_id",
+    "'packet_id', recent.packet_id",
+    "'accepted_state_claim', recent.accepted_state_claim",
+    "'settlement_required', recent.settlement_required",
+]
+
 SECRET_KEY_PATTERNS = [
     re.compile(r"supabase[_-]?service[_-]?role[_-]?key\s*[:=]\s*['\"]?eyJ", re.IGNORECASE),
     re.compile(r"service_role\s*[:=]\s*['\"]?eyJ", re.IGNORECASE),
@@ -191,7 +205,7 @@ def _tracked_env_files() -> list[str]:
 
 
 def main() -> int:
-    for path in [MIGRATION_001, MIGRATION_002, MIGRATION_003, MIGRATION_004, SEED, LIVE_SNAPSHOT, *DOCS]:
+    for path in [MIGRATION_001, MIGRATION_002, MIGRATION_003, MIGRATION_004, MIGRATION_005, SEED, LIVE_SNAPSHOT, *DOCS]:
         if not path.exists():
             print(f"missing required file: {path.relative_to(REPO_ROOT)}")
             return 1
@@ -200,6 +214,7 @@ def main() -> int:
     sql_002 = _read_lower(MIGRATION_002)
     sql_003 = _read_lower(MIGRATION_003)
     sql_004 = _read_lower(MIGRATION_004)
+    sql_005 = _read_lower(MIGRATION_005)
     live_sql = _read_lower(LIVE_SNAPSHOT)
     event_mirror_doc = _read_lower(REPO_ROOT / "ION" / "docs" / "setup" / "ION_SUPABASE_EVENT_MIRROR.md")
 
@@ -208,8 +223,9 @@ def main() -> int:
     missing_002 = _missing(sql_002, REQUIRED_002_SNIPPETS)
     missing_003 = _missing(sql_003, REQUIRED_003_SNIPPETS)
     missing_004 = _missing(sql_004, REQUIRED_004_SNIPPETS)
+    missing_005 = _missing(sql_005, REQUIRED_005_SNIPPETS)
     missing_event_mirror_doc = _missing(event_mirror_doc, REQUIRED_EVENT_MIRROR_DOC_SNIPPETS)
-    if missing_001 or missing_live or missing_002 or missing_003 or missing_004 or missing_event_mirror_doc:
+    if missing_001 or missing_live or missing_002 or missing_003 or missing_004 or missing_005 or missing_event_mirror_doc:
         print("missing required migration/live snippets:")
         for label, missing in [
             ("001", missing_001),
@@ -217,6 +233,7 @@ def main() -> int:
             ("002", missing_002),
             ("003", missing_003),
             ("004", missing_004),
+            ("005", missing_005),
             ("event_mirror_doc", missing_event_mirror_doc),
         ]:
             for snippet in missing:
@@ -246,7 +263,7 @@ def main() -> int:
         "production_authority', true",
         "live_execution_authority', true",
     ]
-    combined = "\n".join([sql_001, sql_002, sql_003, sql_004, _read_lower(SEED)])
+    combined = "\n".join([sql_001, sql_002, sql_003, sql_004, sql_005, _read_lower(SEED)])
     for forbidden in forbidden_defaults:
         if forbidden in combined:
             print(f"forbidden authority default found: {forbidden}")

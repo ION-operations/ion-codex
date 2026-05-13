@@ -32,6 +32,8 @@ seed rows: automation event, service health snapshots, carrier mount receipts
 supabase/migrations/001_initial_ion_ops.sql
 supabase/migrations/002_dev_private_cockpit_read_policies.sql
 supabase/migrations/003_ion_ops_authority_and_rpc.sql
+supabase/migrations/004_ion_ops_api_grants.sql
+supabase/migrations/005_ion_ops_cockpit_readmodel_fixes.sql
 supabase/seed/001_ion_ops_bootstrap_seed.sql
 supabase/tests/validate_initial_ion_ops_sql.py
 ION/02_architecture/ION_SUPABASE_OPERATING_RUNTIME_PROTOCOL_V0_1.md
@@ -50,6 +52,15 @@ ION/02_architecture/ION_SUPABASE_OPERATING_RUNTIME_PROTOCOL_V0_1.md
 003_ion_ops_authority_and_rpc.sql
   Typed RPC operation layer for safe AI/runtime writes.
   Rejects accepted-state, production, and live-execution authority claims.
+
+004_ion_ops_api_grants.sql
+  API grant layer for backend-only local ION adapter writes through typed RPCs.
+  Does not grant anon execute on write RPCs.
+
+005_ion_ops_cockpit_readmodel_fixes.sql
+  Cockpit readmodel repair layer. Ensures v_recent_automation_events exposes
+  created_at for PostgREST ordering and gives v_cockpit_overview richer event
+  identity/status fields for the first cockpit data source.
 ```
 
 ## Apply Order
@@ -108,8 +119,8 @@ Current layered policy intent:
 
 ```text
 anon: no explicit access
-authenticated: private cockpit read via 002, typed RPC writes via 003
-service_role: backend/operator adapter writes only
+authenticated: private cockpit read via 002, authority-introspection RPC only
+service_role: backend/operator adapter typed RPC writes via 003/004
 ```
 
 The typed RPC functions in `003` are the safe AI/runtime write surface:
@@ -132,6 +143,44 @@ live_execution_authority: true
 
 Material writes should go through a local ION adapter or approved backend lane,
 not direct browser table writes.
+
+## Cockpit Readmodels
+
+The first cockpit read surface is Supabase-backed but remains an operational
+mirror. It should never be treated as accepted ION state.
+
+Primary views:
+
+```text
+ion_ops.v_current_carrier_mounts
+ion_ops.v_latest_service_health
+ion_ops.v_recent_automation_events
+ion_ops.v_cockpit_overview
+```
+
+`005_ion_ops_cockpit_readmodel_fixes.sql` ensures recent events expose:
+
+```text
+occurred_at
+created_at
+event_id
+event_type
+severity
+carrier_id
+agent_tag
+branch_id
+packet_id
+title
+summary
+accepted_state_claim
+settlement_required
+```
+
+Cockpit clients may order recent automation events by:
+
+```text
+created_at desc, occurred_at desc
+```
 
 ## First Adapter Targets
 
