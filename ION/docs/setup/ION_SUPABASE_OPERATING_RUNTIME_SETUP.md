@@ -115,9 +115,9 @@ service_role: backend/operator adapter writes only
 The typed RPC functions in `003` are the safe AI/runtime write surface:
 
 ```text
-ion_ops.ion_ops_record_automation_event
-ion_ops.ion_ops_record_service_health_snapshot
-ion_ops.ion_ops_record_carrier_mount_receipt
+ion_ops.record_automation_event
+ion_ops.record_service_health_snapshot
+ion_ops.record_carrier_mount_receipt
 ion_ops.ion_ops_rpc_authority
 ```
 

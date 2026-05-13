@@ -65,14 +65,14 @@ as $$
     'accepted_state_claim_default', false,
     'chatgpt_direct_db_mutation', false,
     'allowed_rpc', jsonb_build_array(
-      'ion_ops_record_automation_event',
-      'ion_ops_record_service_health_snapshot',
-      'ion_ops_record_carrier_mount_receipt'
+      'record_automation_event',
+      'record_service_health_snapshot',
+      'record_carrier_mount_receipt'
     )
   );
 $$;
 
-create or replace function ion_ops.ion_ops_record_automation_event(
+create or replace function ion_ops.record_automation_event(
   p_event_type text,
   p_title text default null,
   p_summary text default null,
@@ -166,7 +166,7 @@ begin
 end;
 $$;
 
-create or replace function ion_ops.ion_ops_record_service_health_snapshot(
+create or replace function ion_ops.record_service_health_snapshot(
   p_service_name text,
   p_status text,
   p_snapshot_id uuid default gen_random_uuid(),
@@ -263,7 +263,7 @@ begin
 end;
 $$;
 
-create or replace function ion_ops.ion_ops_record_carrier_mount_receipt(
+create or replace function ion_ops.record_carrier_mount_receipt(
   p_agent_tag text,
   p_carrier_type text,
   p_context_instance_id text,
@@ -381,6 +381,6 @@ grant usage on schema ion_ops to authenticated, service_role;
 grant execute on function ion_ops.assert_ion_authority(jsonb) to authenticated, service_role;
 grant execute on function ion_ops.reject_accepted_state_claim(jsonb) to authenticated, service_role;
 grant execute on function ion_ops.ion_ops_rpc_authority() to authenticated, service_role;
-grant execute on function ion_ops.ion_ops_record_automation_event(text, text, text, uuid, timestamptz, timestamptz, text, text, text, text, text, text, text, text, text, text, jsonb, jsonb, jsonb, boolean) to authenticated, service_role;
-grant execute on function ion_ops.ion_ops_record_service_health_snapshot(text, text, uuid, timestamptz, text, text, text, text, integer, integer, text, text, boolean, boolean, jsonb, jsonb, jsonb) to authenticated, service_role;
-grant execute on function ion_ops.ion_ops_record_carrier_mount_receipt(text, text, text, uuid, timestamptz, text, text, text, text, text, text, text, jsonb, jsonb, jsonb, jsonb, jsonb, jsonb, jsonb, jsonb, boolean, boolean) to authenticated, service_role;
+grant execute on function ion_ops.record_automation_event(text, text, text, uuid, timestamptz, timestamptz, text, text, text, text, text, text, text, text, text, text, jsonb, jsonb, jsonb, boolean) to authenticated, service_role;
+grant execute on function ion_ops.record_service_health_snapshot(text, text, uuid, timestamptz, text, text, text, text, integer, integer, text, text, boolean, boolean, jsonb, jsonb, jsonb) to authenticated, service_role;
+grant execute on function ion_ops.record_carrier_mount_receipt(text, text, text, uuid, timestamptz, text, text, text, text, text, text, text, jsonb, jsonb, jsonb, jsonb, jsonb, jsonb, jsonb, jsonb, boolean, boolean) to authenticated, service_role;
