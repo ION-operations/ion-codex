@@ -118,6 +118,33 @@ def test_default_schema_is_ion_ops_and_public_is_not_assumed() -> None:
     assert config.schema != "public"
 
 
+def test_backend_key_is_preferred_for_write_rpc() -> None:
+    config = mirror.SupabaseConfig.from_env(
+        {
+            "SUPABASE_URL": "https://example.supabase.co",
+            "SUPABASE_SERVICE_ROLE_KEY": "service-role-test-key",
+            "SUPABASE_SECRET_KEY": "secret-test-key",
+            "SUPABASE_KEY": "publishable-test-key",
+        }
+    )
+
+    assert config.key == "service-role-test-key"
+    assert config.key_source == "SUPABASE_SERVICE_ROLE_KEY"
+
+
+def test_secret_key_is_preferred_over_publishable_fallback() -> None:
+    config = mirror.SupabaseConfig.from_env(
+        {
+            "SUPABASE_URL": "https://example.supabase.co",
+            "SUPABASE_SECRET_KEY": "secret-test-key",
+            "SUPABASE_KEY": "publishable-test-key",
+        }
+    )
+
+    assert config.key == "secret-test-key"
+    assert config.key_source == "SUPABASE_SECRET_KEY"
+
+
 def test_supabase_schema_env_override_is_forwarded() -> None:
     calls: list[tuple[str, dict[str, object], dict[str, str], float]] = []
 

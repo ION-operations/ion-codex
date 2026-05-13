@@ -37,12 +37,19 @@ Required for non-dry-run calls:
 
 ```text
 SUPABASE_URL
+SUPABASE_SERVICE_ROLE_KEY
+SUPABASE_SECRET_KEY
 SUPABASE_KEY
 SUPABASE_SCHEMA=ion_ops
 ```
 
-`SUPABASE_KEY` should be a key appropriate for the RPC lane. Do not commit
-`.env.supabase.local` and do not print keys in logs.
+For local ION backend writes, prefer `SUPABASE_SERVICE_ROLE_KEY` or
+`SUPABASE_SECRET_KEY`. `SUPABASE_KEY` remains a fallback for explicitly scoped
+dev use, but the long-term adapter posture is backend-only write access through
+typed RPCs. Publishable keys are for browser/client surfaces and should not be
+used for local backend mirror writes.
+
+Do not commit `.env.supabase.local` and do not print keys in logs.
 
 `SUPABASE_SCHEMA` defaults to `ion_ops`. The Supabase dashboard must expose the
 `ion_ops` schema under Project Settings -> API -> Data API / Exposed schemas.
@@ -56,6 +63,15 @@ Accept-Profile: ion_ops
 
 Do not move the functions to `public` to make RPC calls work. The intended
 runtime boundary is the separate `ion_ops` schema plus RLS and typed RPCs.
+
+The `ion_ops` API grants are managed by:
+
+```text
+supabase/migrations/004_ion_ops_api_grants.sql
+```
+
+That migration grants schema usage and write RPC execution to `service_role`,
+keeps authenticated cockpit reads separate from writes, and does not grant anon execute on write RPCs.
 
 ## Dry-run example
 

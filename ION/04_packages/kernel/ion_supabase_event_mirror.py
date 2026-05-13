@@ -119,26 +119,35 @@ class SupabaseConfig:
     url: str
     key: str
     schema: str = DEFAULT_SUPABASE_SCHEMA
+    key_source: str = "SUPABASE_KEY"
 
     @classmethod
     def from_env(cls, environ: dict[str, str] | None = None) -> "SupabaseConfig":
         env = environ if environ is not None else os.environ
         url = env.get("SUPABASE_URL", "").strip().rstrip("/")
-        key = (
-            env.get("SUPABASE_KEY")
-            or env.get("SUPABASE_ANON_KEY")
-            or env.get("NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY")
-            or env.get("VITE_SUPABASE_PUBLISHABLE_KEY")
-            or ""
-        ).strip()
+        key_source = ""
+        key = ""
+        for candidate in [
+            "SUPABASE_SERVICE_ROLE_KEY",
+            "SUPABASE_SECRET_KEY",
+            "SUPABASE_KEY",
+            "SUPABASE_ANON_KEY",
+            "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+            "VITE_SUPABASE_PUBLISHABLE_KEY",
+        ]:
+            value = (env.get(candidate) or "").strip()
+            if value:
+                key = value
+                key_source = candidate
+                break
         schema = (env.get("SUPABASE_SCHEMA") or DEFAULT_SUPABASE_SCHEMA).strip() or DEFAULT_SUPABASE_SCHEMA
         if not url:
             raise SupabaseMirrorError("SUPABASE_URL is required for non-dry-run mirror calls")
         if not key:
             raise SupabaseMirrorError(
-                "SUPABASE_KEY or a publishable Supabase key is required for non-dry-run mirror calls"
+                "SUPABASE_SERVICE_ROLE_KEY, SUPABASE_SECRET_KEY, SUPABASE_KEY, or a publishable Supabase key is required for non-dry-run mirror calls"
             )
-        return cls(url=url, key=key, schema=schema)
+        return cls(url=url, key=key, schema=schema, key_source=key_source)
 
 
 def _now_id() -> str:
