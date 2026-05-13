@@ -1,10 +1,16 @@
 -- ION operating runtime bootstrap.
 --
--- Base migration only: schema, tables, indexes, triggers, RLS enablement,
--- service writer posture, and views. Broad private-cockpit authenticated read
--- policies live in 002_dev_private_cockpit_read_policies.sql.
+-- Baseline-aligned to the manually created live ion_ops schema captured in:
+-- supabase/live_schema_snapshots/ion_ops_live_schema_20260513.sql
+--
+-- Base migration only: schema, tables, indexes, triggers, RLS enablement, and
+-- views. Broad private-cockpit authenticated read policies live in
+-- 002_dev_private_cockpit_read_policies.sql. Typed guarded RPC operations live
+-- in 003_ion_ops_authority_and_rpc.sql.
 
 create schema if not exists ion_ops;
+
+comment on schema ion_ops is 'ION operational mirror schema. ION files/Git/receipts remain truth; Supabase indexes selected runtime events for cockpit/query/realtime visibility.';
 
 create extension if not exists pgcrypto;
 
@@ -13,39 +19,47 @@ returns trigger
 language plpgsql
 as $$
 begin
-  new.updated_at = timezone('utc', now());
+  new.updated_at = now();
   return new;
 end;
 $$;
 
 create table if not exists ion_ops.automation_events (
-  id uuid primary key default gen_random_uuid(),
-  event_id text not null unique,
+  event_id uuid primary key default gen_random_uuid(),
+  occurred_at timestamptz not null default now(),
+  observed_at timestamptz not null default now(),
+  source_system text not null default 'ion',
   event_type text not null,
-  event_status text not null default 'recorded',
   severity text not null default 'info'
     check (severity in ('debug', 'info', 'notice', 'warning', 'error', 'critical')),
-  source_system text not null default 'ion',
-  source_carrier text,
-  context_instance_id text,
+  carrier_id text,
+  carrier_type text,
+  agent_tag text,
   branch_id text,
+  context_instance_id text,
   packet_id text,
   correlation_id text,
   idempotency_key text,
-  summary text not null,
-  details jsonb not null default '{}'::jsonb,
+  title text,
+  summary text,
+  payload jsonb not null default '{}'::jsonb,
   evidence_refs jsonb not null default '[]'::jsonb,
-  occurred_at timestamptz not null default timezone('utc', now()),
-  recorded_at timestamptz not null default timezone('utc', now()),
-  updated_at timestamptz not null default timezone('utc', now())
+  source_posture jsonb not null default '{}'::jsonb,
+  accepted_state_claim boolean not null default false,
+  settlement_required boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
 
+comment on table ion_ops.automation_events is 'Queryable mirror of ION automation/runtime events. Events are evidence, not accepted state.';
+
 create table if not exists ion_ops.carrier_mount_receipts (
-  id uuid primary key default gen_random_uuid(),
-  receipt_id text not null unique,
-  agent_tag text not null,
-  carrier text not null,
+  mount_receipt_id uuid primary key default gen_random_uuid(),
+  mounted_at timestamptz not null default now(),
+  carrier_id text,
+  carrier_type text not null,
   carrier_instance_id text,
+  agent_tag text not null,
   conversation_tag text,
   context_instance_id text not null,
   branch_id text,
@@ -54,56 +68,66 @@ create table if not exists ion_ops.carrier_mount_receipts (
   model_lane text,
   loaded_refs jsonb not null default '[]'::jsonb,
   authority jsonb not null default '{}'::jsonb,
+  write_scope jsonb not null default '[]'::jsonb,
   source_posture jsonb not null default '{}'::jsonb,
   return_target jsonb not null default '{}'::jsonb,
   persona_presentation jsonb not null default '{}'::jsonb,
-  receipt_status text not null default 'candidate'
-    check (receipt_status in ('candidate', 'active', 'superseded', 'archived', 'blocked')),
-  mounted_at timestamptz not null default timezone('utc', now()),
-  recorded_at timestamptz not null default timezone('utc', now()),
-  updated_at timestamptz not null default timezone('utc', now())
+  drift_findings jsonb not null default '[]'::jsonb,
+  raw_receipt jsonb not null default '{}'::jsonb,
+  accepted_state_authority boolean not null default false,
+  settlement_required boolean not null default true,
+  valid boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
+
+comment on table ion_ops.carrier_mount_receipts is 'Mirror of ION carrier mount receipts. A carrier is not its name; it is a mounted context instance with source posture, authority, and return target.';
 
 create table if not exists ion_ops.service_health_snapshots (
-  id uuid primary key default gen_random_uuid(),
-  snapshot_id text not null unique,
+  snapshot_id uuid primary key default gen_random_uuid(),
+  observed_at timestamptz not null default now(),
   service_name text not null,
-  service_owner text not null default 'ION',
-  service_kind text,
-  port integer check (port is null or (port > 0 and port <= 65535)),
-  url text,
+  service_role text,
+  carrier_id text,
+  endpoint text,
+  host text,
+  port integer,
+  pid integer,
   status text not null default 'unknown'
-    check (status in ('healthy', 'degraded', 'down', 'unknown', 'blocked')),
-  status_detail text,
+    check (status in ('ready', 'healthy', 'degraded', 'blocked', 'unknown', 'offline')),
+  verdict text,
+  version_line text,
+  production_authority boolean not null default false,
+  live_execution_authority boolean not null default false,
   health jsonb not null default '{}'::jsonb,
-  observed_at timestamptz not null default timezone('utc', now()),
-  recorded_at timestamptz not null default timezone('utc', now()),
-  updated_at timestamptz not null default timezone('utc', now())
+  findings jsonb not null default '[]'::jsonb,
+  source_posture jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
 
-create unique index if not exists automation_events_idempotency_key_uidx
-  on ion_ops.automation_events (idempotency_key)
-  where idempotency_key is not null;
+comment on table ion_ops.service_health_snapshots is 'Point-in-time mirror of service health observations for ION cockpit/runtime visibility.';
 
-create index if not exists automation_events_occurred_at_idx
-  on ion_ops.automation_events (occurred_at desc);
+create index if not exists automation_events_agent_tag_idx on ion_ops.automation_events (agent_tag);
+create index if not exists automation_events_branch_id_idx on ion_ops.automation_events (branch_id);
+create index if not exists automation_events_correlation_id_idx on ion_ops.automation_events (correlation_id);
+create index if not exists automation_events_event_type_idx on ion_ops.automation_events (event_type);
+create index if not exists automation_events_occurred_at_idx on ion_ops.automation_events (occurred_at desc);
+create index if not exists automation_events_packet_id_idx on ion_ops.automation_events (packet_id);
+create index if not exists automation_events_payload_gin_idx on ion_ops.automation_events using gin (payload);
 
-create index if not exists automation_events_packet_idx
-  on ion_ops.automation_events (packet_id)
-  where packet_id is not null;
+create index if not exists carrier_mount_receipts_agent_tag_idx on ion_ops.carrier_mount_receipts (agent_tag);
+create index if not exists carrier_mount_receipts_branch_id_idx on ion_ops.carrier_mount_receipts (branch_id);
+create index if not exists carrier_mount_receipts_context_instance_id_idx on ion_ops.carrier_mount_receipts (context_instance_id);
+create index if not exists carrier_mount_receipts_loaded_refs_gin_idx on ion_ops.carrier_mount_receipts using gin (loaded_refs);
+create index if not exists carrier_mount_receipts_mounted_at_idx on ion_ops.carrier_mount_receipts (mounted_at desc);
+create index if not exists carrier_mount_receipts_source_posture_gin_idx on ion_ops.carrier_mount_receipts using gin (source_posture);
 
-create index if not exists carrier_mount_receipts_context_idx
-  on ion_ops.carrier_mount_receipts (context_instance_id, mounted_at desc);
-
-create index if not exists carrier_mount_receipts_branch_idx
-  on ion_ops.carrier_mount_receipts (branch_id, mounted_at desc)
-  where branch_id is not null;
-
-create index if not exists service_health_snapshots_service_idx
-  on ion_ops.service_health_snapshots (service_name, observed_at desc);
-
-create index if not exists service_health_snapshots_status_idx
-  on ion_ops.service_health_snapshots (status, observed_at desc);
+create index if not exists service_health_snapshots_health_gin_idx on ion_ops.service_health_snapshots using gin (health);
+create index if not exists service_health_snapshots_observed_at_idx on ion_ops.service_health_snapshots (observed_at desc);
+create index if not exists service_health_snapshots_port_idx on ion_ops.service_health_snapshots (port);
+create index if not exists service_health_snapshots_service_name_idx on ion_ops.service_health_snapshots (service_name);
+create index if not exists service_health_snapshots_status_idx on ion_ops.service_health_snapshots (status);
 
 drop trigger if exists automation_events_set_updated_at on ion_ops.automation_events;
 create trigger automation_events_set_updated_at
@@ -124,131 +148,119 @@ alter table ion_ops.automation_events enable row level security;
 alter table ion_ops.carrier_mount_receipts enable row level security;
 alter table ion_ops.service_health_snapshots enable row level security;
 
-drop policy if exists automation_events_service_write on ion_ops.automation_events;
-create policy automation_events_service_write
-on ion_ops.automation_events
-for all
-to service_role
-using (true)
-with check (true);
-
-drop policy if exists carrier_mount_receipts_service_write on ion_ops.carrier_mount_receipts;
-create policy carrier_mount_receipts_service_write
-on ion_ops.carrier_mount_receipts
-for all
-to service_role
-using (true)
-with check (true);
-
-drop policy if exists service_health_snapshots_service_write on ion_ops.service_health_snapshots;
-create policy service_health_snapshots_service_write
-on ion_ops.service_health_snapshots
-for all
-to service_role
-using (true)
-with check (true);
-
 create or replace view ion_ops.v_current_carrier_mounts
 with (security_invoker = true)
 as
-select distinct on (context_instance_id)
-  receipt_id,
+select
   agent_tag,
-  carrier,
-  carrier_instance_id,
-  conversation_tag,
+  carrier_type,
+  carrier_id,
   context_instance_id,
   branch_id,
-  parent_context_id,
   current_packet,
-  model_lane,
-  authority,
-  source_posture,
-  persona_presentation,
-  receipt_status,
+  accepted_state_authority,
+  settlement_required,
+  valid,
   mounted_at,
-  recorded_at,
-  updated_at
+  source_posture,
+  authority,
+  persona_presentation
 from ion_ops.carrier_mount_receipts
-order by context_instance_id, mounted_at desc, recorded_at desc;
+where valid = true
+order by mounted_at desc;
 
 create or replace view ion_ops.v_latest_service_health
 with (security_invoker = true)
 as
 select distinct on (service_name)
-  snapshot_id,
   service_name,
-  service_owner,
-  service_kind,
+  service_role,
+  carrier_id,
+  endpoint,
+  host,
   port,
-  url,
   status,
-  status_detail,
-  health,
+  verdict,
+  production_authority,
+  live_execution_authority,
   observed_at,
-  recorded_at,
-  updated_at
+  health,
+  findings
 from ion_ops.service_health_snapshots
-order by service_name, observed_at desc, recorded_at desc;
+order by service_name, observed_at desc;
 
 create or replace view ion_ops.v_recent_automation_events
 with (security_invoker = true)
 as
 select
   event_id,
-  event_type,
-  event_status,
-  severity,
+  occurred_at,
   source_system,
-  source_carrier,
-  context_instance_id,
+  event_type,
+  severity,
+  carrier_id,
+  agent_tag,
   branch_id,
   packet_id,
-  correlation_id,
+  title,
   summary,
-  details,
-  evidence_refs,
-  occurred_at,
-  recorded_at
+  accepted_state_claim,
+  settlement_required
 from ion_ops.automation_events
-order by occurred_at desc, recorded_at desc
-limit 200;
+order by occurred_at desc
+limit 100;
 
 create or replace view ion_ops.v_cockpit_overview
 with (security_invoker = true)
 as
 select
-  timezone('utc', now()) as generated_at,
+  now() as generated_at,
   (
     select count(*)
+    from ion_ops.carrier_mount_receipts
+    where valid = true
+  ) as mounted_carrier_count,
+  (
+    select jsonb_agg(
+      jsonb_build_object(
+        'agent_tag', agent_tag,
+        'carrier_type', carrier_type,
+        'context_instance_id', context_instance_id,
+        'current_packet', current_packet,
+        'settlement_required', settlement_required,
+        'mounted_at', mounted_at
+      ) order by mounted_at desc
+    )
     from ion_ops.v_current_carrier_mounts
-    where receipt_status in ('candidate', 'active')
-  ) as current_carrier_count,
+  ) as mounted_carriers,
   (
-    select count(*)
+    select jsonb_agg(
+      jsonb_build_object(
+        'service_name', service_name,
+        'port', port,
+        'status', status,
+        'verdict', verdict,
+        'observed_at', observed_at
+      ) order by service_name
+    )
     from ion_ops.v_latest_service_health
-    where status in ('healthy', 'degraded', 'down', 'blocked', 'unknown')
-  ) as tracked_service_count,
+  ) as service_health,
   (
-    select count(*)
-    from ion_ops.v_latest_service_health
-    where status in ('degraded', 'down', 'blocked')
-  ) as attention_service_count,
-  (
-    select jsonb_agg(to_jsonb(h) order by h.service_name)
-    from ion_ops.v_latest_service_health h
-  ) as latest_service_health,
-  (
-    select jsonb_agg(to_jsonb(e) order by e.occurred_at desc)
+    select jsonb_agg(
+      jsonb_build_object(
+        'event_type', recent.event_type,
+        'severity', recent.severity,
+        'agent_tag', recent.agent_tag,
+        'title', recent.title,
+        'occurred_at', recent.occurred_at
+      ) order by recent.occurred_at desc
+    )
     from (
       select *
       from ion_ops.v_recent_automation_events
-      limit 20
-    ) e
-  ) as recent_automation_events;
-
-grant usage on schema ion_ops to service_role;
-grant select, insert, update, delete on all tables in schema ion_ops to service_role;
-
-alter default privileges in schema ion_ops
-grant select, insert, update, delete on tables to service_role;
+      order by occurred_at desc
+      limit 10
+    ) recent
+  ) as recent_events,
+  false as accepted_state_claim,
+  true as settlement_required;
