@@ -21,6 +21,10 @@ allowed_get_paths:
   - /codex/queue
   - /agent/status
   - /projects/daimon/visibility
+  - /supabase/cockpit/overview
+  - /supabase/events/recent
+  - /supabase/service-health/latest
+  - /supabase/carrier-mounts/current
   - /browser-queue/status
   - /browser-queue/receipts/recent
   - /receipts/recent
@@ -33,6 +37,9 @@ allowed_post_paths:
   - /browser-queue/claim
   - /browser-queue/result
   - /browser-queue/control
+  - /supabase/events/record
+  - /supabase/service-health/record
+  - /supabase/carrier-mounts/record
   - /agent/invoke
   - /agent/relay/respond
   - /agent/control
@@ -69,6 +76,9 @@ refusal_classes:
   - LOCAL_DAEMON_UNAVAILABLE
   - ION_OWNER_REFUSED
   - STEWARD_GATE_REQUIRED
+  - SUPABASE_ENV_MISSING
+  - SUPABASE_SCHEMA_PERMISSION_BLOCKED
+  - SUPABASE_API_UNAVAILABLE
 storage:
   receipts: ION/05_context/current/action_gateway/receipts/
   runtime: ION/05_context/current/action_gateway/runtime/

@@ -15,6 +15,8 @@ import re
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib import request as url_request
+from urllib.error import HTTPError, URLError
 
 try:
     from .ion_agent_invocation_broker import (
@@ -37,8 +39,8 @@ except ImportError:  # pragma: no cover - direct script execution fallback
         settle_agent_invocation,
     )
 
-from typing import Any, Mapping
-from urllib.parse import parse_qs, urlparse
+from typing import Any, Callable, Mapping
+from urllib.parse import parse_qs, urlencode, urlparse
 
 from .ion_carrier_onboard import resolve_shell_root_from_ion_root
 from .ion_chatops_bridge import (
@@ -54,6 +56,12 @@ from .ion_chatops_bridge import (
 )
 from .ion_codex_queue_runner import build_codex_queue_runner_status
 from .ion_assistant_work_route_compiler import compile_assistant_work_route
+from .ion_supabase_event_mirror import (
+    DEFAULT_SUPABASE_SCHEMA,
+    SupabaseConfig,
+    SupabaseMirrorError,
+    mirror_event,
+)
 
 SCHEMA_ID = "ion.custom_gpt_action_gateway.v1"
 READY_VERDICT = "ION_CUSTOM_GPT_ACTION_GATEWAY_READY"
@@ -96,7 +104,48 @@ REFUSAL_CLASSES = (
     "LOCAL_DAEMON_UNAVAILABLE",
     "ION_OWNER_REFUSED",
     "STEWARD_GATE_REQUIRED",
+    "SUPABASE_ENV_MISSING",
+    "SUPABASE_SCHEMA_PERMISSION_BLOCKED",
+    "SUPABASE_API_UNAVAILABLE",
 )
+
+SUPABASE_READ_ROUTES = {
+    "/supabase/cockpit/overview": {
+        "relation": "v_cockpit_overview",
+        "select": "*",
+        "limit": 1,
+        "order": None,
+        "schema_id": "ion.action_gateway.supabase_cockpit_overview.v1",
+    },
+    "/supabase/events/recent": {
+        "relation": "v_recent_automation_events",
+        "select": "*",
+        "limit": 20,
+        "max_limit": 100,
+        "order": "created_at.desc",
+        "schema_id": "ion.action_gateway.supabase_recent_events.v1",
+    },
+    "/supabase/service-health/latest": {
+        "relation": "v_latest_service_health",
+        "select": "*",
+        "limit": 100,
+        "order": None,
+        "schema_id": "ion.action_gateway.supabase_latest_service_health.v1",
+    },
+    "/supabase/carrier-mounts/current": {
+        "relation": "v_current_carrier_mounts",
+        "select": "*",
+        "limit": 100,
+        "order": None,
+        "schema_id": "ion.action_gateway.supabase_current_carrier_mounts.v1",
+    },
+}
+
+SUPABASE_WRITE_ROUTES = {
+    "/supabase/events/record": "automation_event",
+    "/supabase/service-health/record": "service_health_snapshot",
+    "/supabase/carrier-mounts/record": "carrier_mount_receipt",
+}
 
 
 def _now() -> str:
@@ -210,6 +259,10 @@ def _default_policy() -> dict[str, Any]:
         "/agent/relay/pending",
         "/agent/receipts/recent",
             "/projects/daimon/visibility",
+            "/supabase/cockpit/overview",
+            "/supabase/events/recent",
+            "/supabase/service-health/latest",
+            "/supabase/carrier-mounts/current",
             "/browser-queue/status",
             "/browser-queue/receipts/recent",
             "/receipts/recent",
@@ -221,6 +274,9 @@ def _default_policy() -> dict[str, Any]:
             "/browser-queue/claim",
             "/browser-queue/result",
             "/browser-queue/control",
+            "/supabase/events/record",
+            "/supabase/service-health/record",
+            "/supabase/carrier-mounts/record",
         "/agent/invoke",
         "/agent/relay/respond",
         "/agent/control",
@@ -1612,6 +1668,191 @@ def build_recent_gateway_receipts(root: str | Path | None, limit: int = 20) -> d
     }
 
 
+def _supabase_error_payload(
+    *,
+    route: str,
+    finding: str,
+    refusal_class: str,
+    error: str | None = None,
+) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "schema_id": "ion.action_gateway.supabase_error.v1",
+        "ok": False,
+        "route": route,
+        "finding": finding,
+        "refusal_class": refusal_class,
+        "production_authority": False,
+        "live_execution_authority": False,
+        "accepted_state_claim": False,
+    }
+    if error:
+        payload["error"] = error
+    return payload
+
+
+def _classify_supabase_error(error: str) -> tuple[str, str]:
+    lowered = error.lower()
+    if "supabase_url" in lowered or "supabase_service_role_key" in lowered or "supabase_secret_key" in lowered:
+        return "supabase_env_missing", "SUPABASE_ENV_MISSING"
+    if "invalid schema" in lowered or "permission denied for schema" in lowered or "pgrst106" in lowered:
+        return "supabase_schema_permission_blocked", "SUPABASE_SCHEMA_PERMISSION_BLOCKED"
+    return "supabase_api_unavailable", "SUPABASE_API_UNAVAILABLE"
+
+
+def _supabase_config_or_error(
+    route: str,
+    environ: Mapping[str, str] | None = None,
+) -> tuple[SupabaseConfig | None, dict[str, Any] | None]:
+    try:
+        return SupabaseConfig.from_env(dict(environ) if environ is not None else None), None
+    except SupabaseMirrorError as exc:
+        finding, refusal = _classify_supabase_error(str(exc))
+        return None, _supabase_error_payload(route=route, finding=finding, refusal_class=refusal, error=str(exc))
+
+
+def _http_get_json(url: str, headers: Mapping[str, str], timeout: float) -> Any:
+    req = url_request.Request(url, headers=dict(headers), method="GET")
+    try:
+        with url_request.urlopen(req, timeout=timeout) as response:
+            raw = response.read().decode("utf-8")
+            return json.loads(raw or "null")
+    except HTTPError as exc:
+        raw = exc.read().decode("utf-8", errors="replace")
+        raise SupabaseMirrorError(f"Supabase REST HTTP {exc.code}: {raw}") from exc
+    except URLError as exc:
+        raise SupabaseMirrorError(f"Supabase REST connection failed: {exc}") from exc
+
+
+def _bounded_query_limit(params: Mapping[str, list[str]], *, default: int, maximum: int) -> int:
+    raw = params.get("limit", [str(default)])[0]
+    try:
+        value = int(raw)
+    except (TypeError, ValueError):
+        value = default
+    return max(1, min(value, maximum))
+
+
+def build_supabase_readmodel_response(
+    root: str | Path | None,
+    route: str,
+    query: str = "",
+    *,
+    environ: Mapping[str, str] | None = None,
+    http_get: Callable[[str, Mapping[str, str], float], Any] | None = None,
+) -> dict[str, Any]:
+    _resolve_root(root)
+    spec = SUPABASE_READ_ROUTES.get(route)
+    if not spec:
+        return _supabase_error_payload(route=route, finding="endpoint_not_allowed", refusal_class="ENDPOINT_NOT_ALLOWED")
+    config, error = _supabase_config_or_error(route, environ)
+    if error:
+        return error
+    assert config is not None
+
+    params = parse_qs(query)
+    limit = int(spec.get("limit") or 20)
+    if "max_limit" in spec:
+        limit = _bounded_query_limit(params, default=limit, maximum=int(spec["max_limit"]))
+
+    query_params: dict[str, Any] = {
+        "select": spec.get("select") or "*",
+        "limit": str(limit),
+    }
+    if spec.get("order"):
+        query_params["order"] = str(spec["order"])
+    url = f"{config.url}/rest/v1/{spec['relation']}?{urlencode(query_params)}"
+    headers = {
+        "apikey": config.key,
+        "Authorization": f"Bearer {config.key}",
+        "Accept": "application/json",
+        "Accept-Profile": config.schema or DEFAULT_SUPABASE_SCHEMA,
+    }
+    try:
+        rows = (http_get or _http_get_json)(url, headers, 20.0)
+    except Exception as exc:
+        finding, refusal = _classify_supabase_error(str(exc))
+        return _supabase_error_payload(route=route, finding=finding, refusal_class=refusal, error=str(exc))
+    return {
+        "schema_id": spec["schema_id"],
+        "ok": True,
+        "route": route,
+        "tool": route,
+        "data": rows,
+        "count": len(rows) if isinstance(rows, list) else None,
+        "supabase_schema": config.schema,
+        "production_authority": False,
+        "live_execution_authority": False,
+        "accepted_state_claim": False,
+    }
+
+
+def submit_supabase_record_event(
+    root: str | Path | None,
+    route: str,
+    packet: Mapping[str, Any],
+    *,
+    environ: Mapping[str, str] | None = None,
+    http_post: Callable[[str, dict[str, Any], dict[str, str], float], Any] | None = None,
+) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    kind = SUPABASE_WRITE_ROUTES.get(route)
+    if not kind:
+        return _supabase_error_payload(route=route, finding="endpoint_not_allowed", refusal_class="ENDPOINT_NOT_ALLOWED")
+    data = dict(packet)
+    data.setdefault("kind", kind)
+    if data.get("client_request_id") and not data.get("idempotency_key"):
+        data["idempotency_key"] = data["client_request_id"]
+    try:
+        result = mirror_event(
+            data,
+            ion_root=shell_root,
+            dry_run=False,
+            kind=kind,
+            environ=dict(environ) if environ is not None else None,
+            http_post=http_post,
+        )
+    except SupabaseMirrorError as exc:
+        finding, refusal = _classify_supabase_error(str(exc))
+        if "rejected " in str(exc).lower():
+            finding, refusal = "supabase_payload_rejected", "SCHEMA_INVALID"
+        return _supabase_error_payload(route=route, finding=finding, refusal_class=refusal, error=str(exc))
+    except Exception as exc:
+        return _supabase_error_payload(route=route, finding="supabase_api_unavailable", refusal_class="SUPABASE_API_UNAVAILABLE", error=str(exc))
+
+    if not result.get("ok"):
+        finding, refusal = _classify_supabase_error(str(result.get("error") or "supabase mirror failed"))
+        result.update(
+            {
+                "route": route,
+                "tool": route,
+                "refusal_class": refusal,
+                "finding": finding,
+                "production_authority": False,
+                "live_execution_authority": False,
+                "accepted_state_claim": False,
+            }
+        )
+        return result
+
+    remote = result.get("remote_result")
+    remote_row_id = None
+    if isinstance(remote, Mapping):
+        remote_row_id = remote.get("event_id") or remote.get("snapshot_id") or remote.get("mount_receipt_id")
+    result.update(
+        {
+            "schema_id": "ion.action_gateway.supabase_record_result.v1",
+            "route": route,
+            "tool": route,
+            "kind": kind,
+            "remote_row_id": remote_row_id,
+            "production_authority": False,
+            "live_execution_authority": False,
+            "accepted_state_claim": False,
+        }
+    )
+    return result
+
+
 def _openapi_surface(root: str | Path | None = None) -> dict[str, Any]:
     shell_root = _resolve_root(root)
     path = shell_root / OPENAPI_RELATIVE_PATH
@@ -1720,6 +1961,10 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 payload = build_daimon_project_visibility(root)
                 _http_response(self, 200 if payload.get("ok") else 404, payload)
                 return
+            if path in SUPABASE_READ_ROUTES:
+                payload = build_supabase_readmodel_response(root, path, parsed.query)
+                _http_response(self, _response_status(payload), payload)
+                return
             if path == "/browser-queue/status":
                 params = parse_qs(parsed.query)
                 include_packets = params.get("include_packets", ["1"])[0] not in {"0", "false", "False"}
@@ -1758,6 +2003,10 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 _http_response(self, 400, {"ok": False, "refusal_class": "SCHEMA_INVALID", "finding": "json_object_required"})
                 return
             path = urlparse(self.path).path
+            if path in SUPABASE_WRITE_ROUTES:
+                payload = submit_supabase_record_event(root, path, packet)
+                _http_response(self, _response_status(payload), payload)
+                return
             if path == "/actions/validate":
                 payload = validate_gateway_action_packet(root, packet)
                 _http_response(self, 200 if payload.get("ok") else 409, payload)

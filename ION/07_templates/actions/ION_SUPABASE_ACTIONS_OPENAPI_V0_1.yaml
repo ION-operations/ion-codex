@@ -1,0 +1,282 @@
+openapi: 3.1.0
+info:
+  title: ION Supabase Cockpit Actions
+  version: 0.1.0
+  description: >
+    Custom GPT action schema for the ION Action Gateway Supabase cockpit lane.
+    GPT authenticates to the ION Action Gateway. The gateway uses local backend
+    environment to talk to Supabase. Do not connect GPT Actions directly to
+    Supabase and do not put Supabase credentials in this schema.
+servers:
+  - url: https://ion-actions.helixion.net
+    description: ION Action Gateway HTTPS tunnel. GPT authenticates here, not to Supabase.
+security:
+  - bearerAuth: []
+paths:
+  /supabase/cockpit/overview:
+    get:
+      operationId: ionSupabaseCockpitOverview
+      summary: Read the Supabase-backed ION cockpit overview.
+      responses:
+        "200":
+          description: Cockpit overview readmodel.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonGatewayEnvelope"
+  /supabase/events/recent:
+    get:
+      operationId: ionSupabaseRecentEvents
+      summary: Read recent ION automation events.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        "200":
+          description: Recent automation events.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonGatewayEnvelope"
+  /supabase/service-health/latest:
+    get:
+      operationId: ionSupabaseLatestServiceHealth
+      summary: Read latest ION service health snapshots.
+      responses:
+        "200":
+          description: Latest service health rows.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonGatewayEnvelope"
+  /supabase/carrier-mounts/current:
+    get:
+      operationId: ionSupabaseCurrentCarrierMounts
+      summary: Read current carrier mount receipts.
+      responses:
+        "200":
+          description: Current carrier mounts.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonGatewayEnvelope"
+  /supabase/events/record:
+    post:
+      operationId: ionSupabaseRecordAutomationEvent
+      summary: Record a guarded ION automation event through the Action Gateway.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AutomationEventInput"
+      responses:
+        "200":
+          description: Event mirror result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonGatewayEnvelope"
+  /supabase/service-health/record:
+    post:
+      operationId: ionSupabaseRecordServiceHealth
+      summary: Record a guarded ION service health snapshot through the Action Gateway.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceHealthInput"
+      responses:
+        "200":
+          description: Service health mirror result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonGatewayEnvelope"
+  /supabase/carrier-mounts/record:
+    post:
+      operationId: ionSupabaseRecordCarrierMount
+      summary: Record a guarded ION carrier mount receipt through the Action Gateway.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CarrierMountInput"
+      responses:
+        "200":
+          description: Carrier mount mirror result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IonGatewayEnvelope"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: ION Action Gateway bearer token. This is not a Supabase credential.
+  schemas:
+    IonGatewayEnvelope:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        data:
+          type:
+            - array
+            - object
+            - "null"
+        route:
+          type: string
+        tool:
+          type: string
+        receipt_path:
+          type: string
+        remote_row_id:
+          type:
+            - string
+            - "null"
+        refusal_class:
+          type: string
+        finding:
+          type: string
+        production_authority:
+          type: boolean
+        live_execution_authority:
+          type: boolean
+        accepted_state_claim:
+          type: boolean
+      additionalProperties: true
+    AutomationEventInput:
+      type: object
+      required:
+        - event_type
+      properties:
+        event_type:
+          type: string
+        severity:
+          type: string
+        source_system:
+          type: string
+        carrier_id:
+          type: string
+        carrier_type:
+          type: string
+        agent_tag:
+          type: string
+        branch_id:
+          type: string
+        context_instance_id:
+          type: string
+        packet_id:
+          type: string
+        client_request_id:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        payload:
+          type: object
+          properties: {}
+          additionalProperties: true
+        source_posture:
+          type: object
+          properties: {}
+          additionalProperties: true
+        settlement_required:
+          type: boolean
+          default: true
+        accepted_state_claim:
+          type: boolean
+          default: false
+      additionalProperties: true
+    ServiceHealthInput:
+      type: object
+      required:
+        - service_name
+        - status
+      properties:
+        service_name:
+          type: string
+        status:
+          type: string
+        service_role:
+          type: string
+        carrier_id:
+          type: string
+        endpoint:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+        verdict:
+          type: string
+        health:
+          type: object
+          properties: {}
+          additionalProperties: true
+        findings:
+          type: array
+          items:
+            type: object
+            properties: {}
+            additionalProperties: true
+        production_authority:
+          type: boolean
+          default: false
+        live_execution_authority:
+          type: boolean
+          default: false
+      additionalProperties: true
+    CarrierMountInput:
+      type: object
+      required:
+        - agent_tag
+        - carrier_type
+        - context_instance_id
+      properties:
+        agent_tag:
+          type: string
+        carrier_type:
+          type: string
+        context_instance_id:
+          type: string
+        carrier_id:
+          type: string
+        carrier_instance_id:
+          type: string
+        branch_id:
+          type: string
+        current_packet:
+          type: string
+        authority:
+          type: object
+          properties:
+            production_authority:
+              type: boolean
+              default: false
+            live_execution_authority:
+              type: boolean
+              default: false
+            accepted_state_authority:
+              type: boolean
+              default: false
+          additionalProperties: true
+        source_posture:
+          type: object
+          properties: {}
+          additionalProperties: true
+        settlement_required:
+          type: boolean
+          default: true
+      additionalProperties: true
