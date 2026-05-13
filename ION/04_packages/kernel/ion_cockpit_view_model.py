@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from .ion_agent_invocation_broker import build_agent_broker_status
+from .ion_chatgpt_sandbox_return_intake import build_sandbox_return_queue_projection
 from .ion_codex_queue_runner import build_codex_queue_runner_status
 
 CURRENT = Path("ION/05_context/current")
@@ -411,6 +412,27 @@ def _chatgpt_browser_mcp_summary(root: Path) -> dict[str, Any]:
     }
 
 
+def _chatgpt_sandbox_returns_summary(root: Path) -> dict[str, Any]:
+    projection = build_sandbox_return_queue_projection(root)
+    returns = [row for row in listify(projection.get("returns")) if isinstance(row, dict)]
+    status_counts: dict[str, int] = {}
+    for row in returns:
+        status = compact(row.get("status"), "unknown")
+        status_counts[status] = status_counts.get(status, 0) + 1
+    return {
+        "schema_id": "ion.chatgpt_sandbox_returns_cockpit_summary.v1",
+        "queue_path": projection.get("queue_path"),
+        "inbox_root": projection.get("inbox_root"),
+        "return_count": projection.get("return_count"),
+        "status_counts": status_counts,
+        "latest_returns": returns[:10],
+        "direct_apply_authority": False,
+        "git_push_authority": False,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
 def build_cockpit_view_model(ion_root: str | Path = ".") -> dict[str, Any]:
     root = Path(ion_root).resolve()
     active_files = dict(ACTIVE_FILES)
@@ -432,6 +454,7 @@ def build_cockpit_view_model(ion_root: str | Path = ".") -> dict[str, Any]:
     active_spawn_count = _active_spawn_queue_count(data["turn"], spawn_rows)
     plan_spawn_count = _spawn_count(spawn_rows)
     deferred_spawn_count = _deferred_spawn_count(spawn_rows)
+    sandbox_returns = _chatgpt_sandbox_returns_summary(root)
     counts = {
         "spawn_rows": len(spawn_rows),
         "spawn_true": active_spawn_count,
@@ -468,6 +491,7 @@ def build_cockpit_view_model(ion_root: str | Path = ".") -> dict[str, Any]:
             "return_counts": return_counts,
             "steward_queue_count": len(steward_items),
             "operator_queue_pending": len(pending_operator),
+            "sandbox_return_count": sandbox_returns.get("return_count", 0),
         },
         "queues": {
             "operator_messages": operator_items,
@@ -483,6 +507,7 @@ def build_cockpit_view_model(ion_root: str | Path = ".") -> dict[str, Any]:
         "safe_full_project_package": data["safe_full_project_package"],
         "v72_mcp_donor_reconciliation": data["v72_mcp_donor_reconciliation"],
         "chatgpt_browser_mcp": _chatgpt_browser_mcp_summary(root),
+        "chatgpt_sandbox_returns": sandbox_returns,
         "receipts": recent_receipts(root),
         "authority_classes": [
             "ACTIVE_RUNTIME_AUTHORITY",

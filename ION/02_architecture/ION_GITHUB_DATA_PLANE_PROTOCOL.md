@@ -46,15 +46,17 @@ Current configured data-plane target:
 ```text
 branch: main
 remote: https://github.com/ION-operations/ion-codex.git
-visibility: private
+visibility: public collaboration repository
 auth path: gh browser login with git credential helper
 ```
 
-No first commit or push is authorized by this read-only setup slice. The next
+The initial public bootstrap push was completed on 2026-05-05 after explicit
+operator authorization, exact path staging, validation, and secret-scan receipt
+evidence. This bootstrap does not grant general `main` push authority. The next
 push-capable slice must define ION runtime push authority with staged diff
 proof, validation proof, secret scan proof, receipt capture, and rollback proof.
-Until that profile exists, operator bootstrap may perform the first push
-manually, but manual approval is not the final automation model.
+Future `main` updates should use the repository's branch and pull-request gate
+unless a separate ION break-glass policy explicitly authorizes otherwise.
 
 ## Prior-Art Consolidation
 
@@ -87,7 +89,7 @@ Rejected or constrained prior art:
 
 ## Repository Recommendation
 
-Use one private canonical repository under the GitHub account/org:
+Use one public collaboration repository under the GitHub account/org:
 
 ```text
 ION-operations/ion-codex
@@ -99,12 +101,20 @@ Rationale:
   spaces;
 - keeps ION code, architecture docs, registries, connector state, and receipts
   in one reviewable repository;
+- allows outside users and AI collaborators to inspect, discuss, and contribute
+  through public issues, branches, and pull requests;
 - allows issues, branches, pull requests, and releases to carry artifact refs
   without using MCP message bodies as the durable storage layer.
 
 Large binary artifacts should not be pasted through MCP. Store them as GitHub
 release assets, Git LFS objects, or external artifact refs recorded in ION
 receipts.
+
+More perfected production builds, infrastructure configuration, deployment
+state, credentials, and other sensitive operational surfaces may live in private
+repositories later. Public collaboration status for this repo is not authority
+to publish secrets, production credentials, private logs, or unsafe runtime
+state.
 
 ## Plane Split
 
@@ -150,7 +160,7 @@ not as proof that they still need to be run:
 
 ```bash
 gh auth login --hostname github.com --git-protocol https --scopes repo
-gh repo create ION-operations/ion-codex --private --description "ION Codex carrier workspace and data plane" --disable-wiki
+gh repo create ION-operations/ion-codex --public --description "ION Codex carrier workspace and data plane" --disable-wiki
 git remote add origin https://github.com/ION-operations/ion-codex.git
 git remote -v
 ```
@@ -163,7 +173,7 @@ git commit -m "Initialize ION Codex data plane"
 git push -u origin main
 ```
 
-If `gh` is unavailable, create the empty private repository in the GitHub UI
+If `gh` is unavailable, create the empty public repository in the GitHub UI
 under `ION-operations`, then run only the `git remote add` and verification
 commands above.
 
@@ -184,13 +194,15 @@ commands above.
 
 ## First Implementation Slices
 
-Slice 0 is complete as local setup evidence only:
+Slice 0 is complete as local setup and bootstrap evidence:
 
 - local git initialized;
 - branch is `main`;
-- private GitHub repository exists under `ION-operations/ion-codex`;
+- public GitHub repository exists under `ION-operations/ion-codex`;
 - `origin` points to `https://github.com/ION-operations/ion-codex.git`;
 - GitHub CLI authentication was completed by browser login outside ION files.
+- initial bootstrap commit `6edea5f9ad843ad8526c4272d07885fca8065217`
+  was pushed to `origin/main` after gate checks.
 
 Slice 1 should be read-only:
 

@@ -2,11 +2,13 @@ from pathlib import Path
 
 from kernel.ion_chatgpt_browser_mcp_http_preview import (
     BOUNDED_QUEUE_RECEIPT_TOOLS,
+    APP_PATHS,
     READY_VERDICT,
     WRITE_CONFIRMATION_TOKEN,
     audit_http_mcp_preview,
     handle_mcp_jsonrpc,
     http_mcp_tool_list,
+    render_ion_connector_landing,
     write_http_mcp_preview_audit,
 )
 
@@ -180,3 +182,20 @@ def test_write_http_preview_audit(tmp_path):
     assert output.exists()
     assert result["verdict"] == READY_VERDICT
     assert result["write_confirmation_required"] is True
+
+
+def test_connector_landing_page_is_safe_human_ui():
+    html = render_ion_connector_landing(Path.cwd(), public_base_url="https://ion.example.test")
+
+    assert "<title>ION Connector</title>" in html
+    assert "https://ion.example.test/mcp" in html
+    assert "ION_STATUS_READY" not in html
+    assert "production_authority" not in html
+    assert "Production authority" in html
+    assert "ion_status" in html
+    assert "arbitrary_shell" in html
+    assert "/home/sev" not in html
+
+
+def test_connector_landing_paths_include_root_app_and_ion():
+    assert {"/", "/app", "/ion"} <= APP_PATHS

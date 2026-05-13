@@ -1,0 +1,6 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security or secret exposure
+    url: https://github.com/ION-operations/ion-codex/security/advisories/new
+    about: Report secrets, credentials, or sensitive vulnerabilities privately.
+

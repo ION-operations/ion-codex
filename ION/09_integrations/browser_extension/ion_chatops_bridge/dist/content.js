@@ -3,30 +3,50 @@
   const inFlightActionIds = new Set();
   const submittedActionIds = new Set();
   const reportedBlockedActionIds = new Set();
+  const PANEL_ID = "ion-chatops-bridge-panel";
+  const MODAL_ID = "ion-chatops-bridge-approval";
+  const DOM_REGISTRY_STYLE_ID = "ion-chatops-dom-registry-style";
+  const ATTACH_PREVIEW_ID = "ion-chatops-attach-target-preview";
+  const DROP_PREVIEW_ID = "ion-chatops-drop-target-preview";
+  const SAFE_MODE_KEY = "ION_CHATOPS_SAFE_MODE";
+  const ATTACH_TARGET_SELECTOR_KEY = "ION_CHATOPS_ATTACH_TARGET_SELECTOR";
+  const DROP_TARGET_SELECTOR_KEY = "ION_CHATOPS_DROP_TARGET_SELECTOR";
+  const SCAN_DEBOUNCE_MS = 450;
   const ION_ACTION_LINE = /(^|\n)\s*ion_action:\s*(\n|$)/;
-  const ACTION_SCAN_SELECTORS = [
+  const AUTO_SCAN_SELECTORS = [
     "pre code",
     "pre",
     "code",
-    "[data-message-author-role='assistant']",
-    "[data-message-author-role='assistant'] .markdown",
     "[data-message-author-role='assistant'] pre",
     "[data-message-author-role='assistant'] code",
     "[data-message-author-role='assistant'] [class*='font-mono']",
     "[data-message-author-role='assistant'] [class*='whitespace-pre']",
     "[data-message-author-role='assistant'] [class*='overflow-x-auto']",
-    "article .markdown",
     "article pre",
     "article pre code",
     "article [class*='font-mono']",
     "article [class*='whitespace-pre']",
     "article [class*='overflow-x-auto']",
+  ];
+  const MANUAL_SCAN_SELECTORS = [
+    ...AUTO_SCAN_SELECTORS,
+    "[data-message-author-role='assistant']",
+    "[data-message-author-role='assistant'] .markdown",
+    "article .markdown",
     "main",
   ];
-  const PANEL_ID = "ion-chatops-bridge-panel";
-  const MODAL_ID = "ion-chatops-bridge-approval";
   const STYLE_ID = "ion-chatops-bridge-style";
   const LOG_LIMIT = 12;
+  const TOP_BAR_GAP = 8;
+  const PANEL_TOP = 2;
+  const DEFAULT_LEFT_BOUNDARY = 50;
+  const DEFAULT_RIGHT_RESERVE = 250;
+  const PANEL_PREFERRED_WIDTH = 640;
+  const PANEL_MIN_WIDTH = 320;
+  const PANEL_TINY_WIDTH = 230;
+  const COMPOSER_PANEL_MAX_WIDTH = 920;
+  const TAB_LIFT_KEY = "ION_CHATOPS_TAB_LIFT_PX";
+  const DRAWER_MAX_KEY = "ION_CHATOPS_DRAWER_MAX_PX";
   const bridgeState = {
     title: "Monitoring ChatGPT",
     detail: "Waiting for ion_action YAML blocks.",
@@ -34,10 +54,36 @@
     action: "No action detected yet.",
     agent: "Codex-backed agent status has not been requested yet.",
     packages: "No context pack or ZIP export has been requested yet.",
+    sandbox: "No ChatGPT sandbox returns have been requested yet.",
+    automation: "Automation controls are staged only. This packet does not execute macros.",
+    artifacts: "Artifact detection is staged only. No upload or local file movement occurs in this shell slice.",
+    settings: "No local calibration has been changed in this session.",
     diagnostics: "Normal carrier flow: Sev emits an ion_action YAML block in ChatGPT, the extension detects it, Braden approves it, the local daemon records/executes it, and ION writes a receipt.\n\nThe buttons below are local diagnostics only. They fabricate known-good test actions so the extension/daemon path can be checked without waiting on ChatGPT to emit YAML.",
     tools: "Daemon: http://127.0.0.1:8767\nUse Rescan after ChatGPT finishes rendering a YAML block.",
     logs: [],
+    anchor: {
+      mode: "topbar_fallback",
+      rect: null,
+      element: null,
+      health: "degraded",
+      detail: "Composer anchor has not been evaluated yet.",
+      source: "none",
+      attachmentsDetected: 0,
+    },
   };
+  let composerResizeObserver = null;
+  let observedComposerElement = null;
+  let scanTimer = null;
+  let scanRunning = false;
+  let scanQueued = false;
+  function safeModeDisabled() {
+    try {
+      const value = window.localStorage?.getItem(SAFE_MODE_KEY) ?? window.sessionStorage?.getItem(SAFE_MODE_KEY);
+      return ["1", "true", "disabled", "off"].includes(String(value ?? "").trim().toLowerCase());
+    } catch (_error) {
+      return false;
+    }
+  }
   const SEV_REENTRY_PROMPT = `You are Sev, Braden's ION browser carrier.
 
 You do not have direct local repo context unless ION provides it. Use ION ChatOps action blocks to ask the local bridge/Codex for durable work.
@@ -111,6 +157,315 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     requested:
       - codex_work_packet_receipt
       - action_receipt`;
+
+  function ensureDomRegistryStyle() {
+    if (document.getElementById(DOM_REGISTRY_STYLE_ID)) return;
+    const style = document.createElement("style");
+    style.id = DOM_REGISTRY_STYLE_ID;
+    style.textContent = `
+    .ion-dom-badge {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      z-index: 7;
+      height: 18px;
+      max-width: 220px;
+      padding: 0 7px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      background: rgba(12,12,12,0.68);
+      color: rgba(255,255,255,0.62);
+      font: 10px/18px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+    }
+    .ion-dom-badge[data-tone="valid"] {
+      border-color: rgba(16,185,129,0.45);
+      color: rgba(190,255,230,0.92);
+    }
+    .ion-dom-badge[data-tone="blocked"],
+    .ion-dom-badge[data-tone="duplicate"] {
+      border-color: rgba(251,191,36,0.45);
+      color: rgba(255,236,180,0.92);
+    }
+    .ion-dom-badge[data-tone="duplicate"] {
+      border-color: rgba(248,113,113,0.50);
+      color: rgba(255,210,210,0.92);
+    }
+    [data-ion-code-index] {
+      outline: 1px solid rgba(255,255,255,0.05);
+      outline-offset: 3px;
+    }
+    [data-ion-yaml-status="valid"] {
+      outline-color: rgba(16,185,129,0.42);
+    }
+    [data-ion-yaml-status="blocked"],
+    [data-ion-yaml-status="duplicate"] {
+      outline-color: rgba(251,191,36,0.42);
+    }
+    [data-ion-control-role] {
+      position: relative;
+      box-shadow: 0 0 0 1px rgba(255,112,28,0.34), 0 0 0 4px rgba(255,112,28,0.07) !important;
+      border-radius: 10px !important;
+    }
+    [data-ion-control-role="composer_input"] {
+      box-shadow: 0 0 0 1px rgba(255,112,28,0.36), 0 0 0 5px rgba(255,112,28,0.06) !important;
+    }
+    [data-ion-control-role="attach_button"],
+    [data-ion-control-role="voice_button"] {
+      box-shadow: 0 0 0 1px rgba(52,211,153,0.28), 0 0 0 4px rgba(52,211,153,0.06) !important;
+    }
+    [data-ion-control-role="send_button"] {
+      box-shadow: 0 0 0 1px rgba(251,191,36,0.42), 0 0 0 4px rgba(251,191,36,0.07) !important;
+    }
+      [data-ion-control-role="source_plane"],
+      [data-ion-control-role="uploaded_attachment"] {
+        box-shadow: 0 0 0 1px rgba(129,140,248,0.40), 0 0 0 4px rgba(129,140,248,0.07) !important;
+      }
+      #${ATTACH_PREVIEW_ID},
+      #${DROP_PREVIEW_ID} {
+        position: fixed;
+        z-index: 2147483645;
+        pointer-events: none;
+        border: 2px solid rgba(52,211,153,0.98);
+        border-radius: 12px;
+        box-shadow: 0 0 0 5px rgba(52,211,153,0.18), 0 0 28px rgba(52,211,153,0.55);
+        background: rgba(52,211,153,0.08);
+      }
+      #${DROP_PREVIEW_ID} {
+        border-color: rgba(96,165,250,0.98);
+        box-shadow: 0 0 0 5px rgba(96,165,250,0.16), 0 0 34px rgba(96,165,250,0.50);
+        background: rgba(96,165,250,0.08);
+      }
+    `;
+    document.documentElement.appendChild(style);
+  }
+
+  function registryText(node, mode) {
+    if (mode === "auto") return node.textContent ?? "";
+    const inner = typeof node.innerText === "string" ? node.innerText : "";
+    return inner || node.textContent || "";
+  }
+
+  function registryRectVisible(node) {
+    if (shouldIgnoreScanNode(node)) return false;
+    const rect = node.getBoundingClientRect();
+    return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+  }
+
+  function captureRectVisible(node) {
+    if (node.closest(`#${PANEL_ID}`) || node.closest(`#${MODAL_ID}`)) return false;
+    const rect = node.getBoundingClientRect();
+    return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+  }
+
+  function allowRegistryBadge(host) {
+    const currentPosition = window.getComputedStyle(host).position;
+    if (!currentPosition || currentPosition === "static") host.style.position = "relative";
+  }
+
+  function ensureRegistryBadge(host, kind, text, tone = "idle") {
+    allowRegistryBadge(host);
+    const existing = Array.from(host.children).find((child) => child.dataset?.ionBadge === kind);
+    const badge = existing ?? document.createElement("span");
+    badge.className = "ion-dom-badge";
+    badge.dataset.ionBadge = kind;
+    badge.dataset.tone = tone;
+    if (badge.textContent !== text) badge.textContent = text;
+    if (!existing) host.appendChild(badge);
+  }
+
+  function captureLabel(node) {
+    return `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""} ${node.textContent ?? ""}`.replace(/\s+/g, " ").trim();
+  }
+
+  function noteCapture(stats, node, role, status = "healthy", label = "") {
+    node.dataset.ionControlRole = role;
+    node.dataset.ionCaptureStatus = status;
+    if (label) node.dataset.ionCaptureLabel = label.slice(0, 80);
+    stats.composerCapture[role] = (stats.composerCapture[role] ?? 0) + 1;
+  }
+
+  function uniqueElements(selectors) {
+    const elements = [];
+    const seenElements = new Set();
+    document.querySelectorAll(selectors).forEach((node) => {
+      if (seenElements.has(node) || shouldIgnoreScanNode(node) || !registryRectVisible(node)) return;
+      seenElements.add(node);
+      elements.push(node);
+    });
+    return elements;
+  }
+
+  function annotateMessages(stats) {
+    const nodes = uniqueElements("[data-message-author-role], article");
+    nodes.forEach((node, index) => {
+      const role = node.getAttribute("data-message-author-role") || "message";
+      node.dataset.ionMessageIndex = String(index + 1);
+      ensureRegistryBadge(node, "message", `ION msg ${index + 1} ${role}`, "idle");
+    });
+    stats.messages = nodes.length;
+  }
+
+  function codeBlockHosts() {
+    const hosts = [];
+    const seenHosts = new Set();
+    document.querySelectorAll("pre, pre code, code, [class*='font-mono'], [class*='whitespace-pre'], [class*='overflow-x-auto']").forEach((node) => {
+      if (shouldIgnoreScanNode(node) || !registryRectVisible(node)) return;
+      const host = node.closest("pre") ?? node;
+      if (seenHosts.has(host) || shouldIgnoreScanNode(host) || !registryRectVisible(host)) return;
+      seenHosts.add(host);
+      hosts.push(host);
+    });
+    return hosts;
+  }
+
+  function annotateCodeBlocks(stats, mode) {
+    const actionIds = new Set();
+    const hosts = codeBlockHosts();
+    hosts.forEach((host, index) => {
+      const label = `ION CODE #${index + 1}`;
+      host.dataset.ionCodeIndex = String(index + 1);
+      host.dataset.ionYamlStatus = "none";
+      let tone = "idle";
+      let badge = label;
+      const text = registryText(host, mode);
+      if (ION_ACTION_LINE.test(text) || extractIonActionYaml(text) !== null) {
+        stats.yamlBlocks += 1;
+        const parsed = parseIonActionYamlWithDiagnostics(text);
+        const packet = parsed.packet;
+        const actionId = packet?.ion_action?.action_id;
+        if (!packet) {
+          stats.invalidActions += 1;
+          tone = "blocked";
+          badge = `ION YAML #${index + 1} · blocked`;
+          host.dataset.ionYamlStatus = "blocked";
+          host.dataset.ionYamlFinding = parsed.finding ?? "parse_failed";
+        } else if (actionId && actionIds.has(actionId)) {
+          stats.duplicateActions += 1;
+          tone = "duplicate";
+          badge = `ION YAML #${index + 1} · duplicate`;
+          host.dataset.ionYamlStatus = "duplicate";
+          host.dataset.ionActionId = actionId;
+        } else {
+          if (actionId) actionIds.add(actionId);
+          const local = localValidate(packet);
+          host.dataset.ionActionId = actionId ?? "";
+          if (local.accepted) {
+            stats.validActions += 1;
+            tone = "valid";
+            badge = `ION YAML #${index + 1} · valid`;
+            host.dataset.ionYamlStatus = "valid";
+          } else {
+            stats.invalidActions += 1;
+            tone = "blocked";
+            badge = `ION YAML #${index + 1} · blocked`;
+            host.dataset.ionYamlStatus = "blocked";
+            host.dataset.ionYamlFinding = local.findings.join("|");
+          }
+        }
+      }
+      if (!ION_ACTION_LINE.test(text) && extractIonActionYaml(text) === null) badge = `ION CODE #${index + 1}`;
+      ensureRegistryBadge(host, "code", badge, tone);
+    });
+    stats.codeBlocks = hosts.length;
+  }
+
+  function annotateComposerControls(stats) {
+    const composer = findComposer();
+    const composerRect = composer?.getBoundingClientRect();
+    if (composer && captureRectVisible(composer)) {
+      noteCapture(stats, composer, "composer_input", "healthy", "composer input");
+    }
+    const controls = Array.from(document.querySelectorAll("button, [role='button'], input[type='file']")).filter((node) => {
+      if (!captureRectVisible(node)) return false;
+      const rect = node.getBoundingClientRect();
+      const nearComposer = composerRect ? Math.abs(rect.top - composerRect.top) < 180 || Math.abs(rect.bottom - composerRect.bottom) < 180 : false;
+      const label = captureLabel(node).toLowerCase();
+      return nearComposer || /send|attach|upload|file|voice|mic|stop|plus/.test(label);
+    });
+    controls.forEach((node) => {
+      const label = captureLabel(node).toLowerCase();
+      const role =
+        label.includes("send") ? "send_button" :
+        label.includes("attach") || label.includes("upload") || label.includes("file") || label.includes("plus") ? "attach_button" :
+        label.includes("mic") || label.includes("voice") ? "voice_button" :
+        label.includes("stop") ? "stop_button" :
+        /model|thinking|source|tool|github|drive/.test(label) ? "source_plane" :
+        "composer_control";
+      noteCapture(stats, node, role, role === "send_button" ? "approval_required" : "healthy", captureLabel(node));
+    });
+    const chips = Array.from(
+      document.querySelectorAll(
+        "img, [data-testid*='attachment' i], [data-testid*='upload' i], [data-testid*='file' i], [data-testid*='image' i], [aria-label*='remove' i], [aria-label*='file' i], [aria-label*='image' i], [class*='attachment' i]",
+      ),
+    ).filter((node) => {
+      if (!captureRectVisible(node)) return false;
+      const rect = node.getBoundingClientRect();
+      return composerRect ? rect.bottom >= composerRect.top - 260 && rect.top <= composerRect.bottom + 120 : rect.top > window.innerHeight * 0.45;
+    });
+    chips.forEach((node) => {
+      noteCapture(stats, node, "uploaded_attachment", "composer_expanded", captureLabel(node) || node.tagName.toLowerCase());
+    });
+    const sources = Array.from(
+      document.querySelectorAll("button, [role='button'], [aria-label], [data-testid], [class*='chip' i], [class*='pill' i]"),
+    ).filter((node) => {
+      if (!captureRectVisible(node)) return false;
+      const label = captureLabel(node);
+      return /github|drive|source|tool|connector|memory|search/i.test(label) && (!composerRect || Math.abs(node.getBoundingClientRect().bottom - composerRect.bottom) < 320);
+    });
+    sources.forEach((node) => {
+      const label = captureLabel(node) || "source";
+      noteCapture(stats, node, "source_plane", "source_plane_only", label);
+      if (!stats.selectedSources.includes(label)) stats.selectedSources.push(label);
+    });
+    stats.uploadedAttachments = chips.length;
+    stats.composerControls = Object.values(stats.composerCapture).reduce((sum, count) => sum + count, 0);
+  }
+
+  function updateDomActionRegistry(mode = "manual") {
+    ensureDomRegistryStyle();
+    const stats = {
+      messages: 0,
+      codeBlocks: 0,
+      yamlBlocks: 0,
+      validActions: 0,
+      invalidActions: 0,
+      duplicateActions: 0,
+      composerControls: 0,
+      composerCapture: {},
+      selectedSources: [],
+      uploadedAttachments: 0,
+      lastUpdated: new Date().toLocaleTimeString(),
+    };
+    if (mode === "manual") annotateMessages(stats);
+    annotateCodeBlocks(stats, mode);
+    if (mode === "manual") annotateComposerControls(stats);
+    setBridgeDiagnosticsDetail(
+      [
+        "DOM action registry",
+        `messages: ${stats.messages}`,
+        `code_blocks: ${stats.codeBlocks}`,
+        `ion_yaml_blocks: ${stats.yamlBlocks}`,
+        `valid_actions: ${stats.validActions}`,
+      `invalid_actions: ${stats.invalidActions}`,
+      `duplicate_actions: ${stats.duplicateActions}`,
+      `composer_controls: ${stats.composerControls}`,
+      `uploaded_attachments: ${stats.uploadedAttachments}`,
+      `capture_roles: ${Object.entries(stats.composerCapture).map(([role, count]) => `${role}=${count}`).join(", ") || "none"}`,
+      `selected_sources: ${stats.selectedSources.join(", ") || "none"}`,
+      `scan_mode: ${mode}`,
+      `last_updated: ${stats.lastUpdated}`,
+        "",
+        "Automation markers are visual only. They do not click, submit, upload, or mutate ION state.",
+      ].join("\n"),
+    );
+    return stats;
+  }
 
   function scalar(raw) {
     const value = raw.trim().replace(/\s+#.*$/, "");
@@ -313,29 +668,42 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       }
       #${PANEL_ID} {
         position: fixed;
-        top: 2px;
-        left: 58px;
-        right: auto;
-        bottom: auto;
         z-index: 2147483646;
-        width: clamp(430px, 56vw, 640px);
-        max-width: calc(100vw - 380px);
-        border: 1px solid rgba(255,255,255,0.10);
-        border-radius: 10px;
-        background: rgba(33, 33, 33, 0.94);
-        box-shadow: 0 8px 28px rgba(0,0,0,0.22);
-        padding: 4px;
-        backdrop-filter: blur(12px);
+        inset: 0;
+        box-sizing: border-box;
+        pointer-events: none;
       }
-      #${PANEL_ID}[data-expanded="true"] {
-        width: clamp(430px, 56vw, 640px);
-        max-width: calc(100vw - 380px);
+      #${PANEL_ID} .ion-top-rail,
+      #${PANEL_ID} .ion-composer-cockpit {
+        position: fixed;
+        box-sizing: border-box;
+        pointer-events: auto;
       }
-      #${PANEL_ID} .ion-toolbar {
+      #${PANEL_ID} .ion-top-rail {
         display: flex;
         align-items: center;
         gap: 6px;
-        min-height: 34px;
+        min-height: 30px;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 10px;
+        background: rgba(33, 33, 33, 0.78);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        padding: 2px 4px;
+        backdrop-filter: blur(12px);
+      }
+      #${PANEL_ID}[data-anchor-health="degraded"] .ion-top-rail {
+        border-color: rgba(251,191,36,0.28);
+      }
+      #${PANEL_ID} .ion-composer-cockpit {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        max-width: calc(100vw - 24px);
+        pointer-events: none;
+      }
+      #${PANEL_ID}[data-anchor-mode="topbar_fallback"] .ion-composer-cockpit {
+        pointer-events: auto;
       }
       #${PANEL_ID} .ion-row {
         display: flex;
@@ -361,6 +729,10 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         font-size: 12px;
         font-weight: 600;
         line-height: 1.25;
+        max-width: 220px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         overflow-wrap: anywhere;
         color: rgba(255,255,255,0.88);
       }
@@ -373,9 +745,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       #${PANEL_ID} .ion-tool,
       #${PANEL_ID} .ion-tab {
         flex: 0 0 auto;
-        height: 28px;
         border: 1px solid transparent;
-        border-radius: 8px;
         color: rgba(255,255,255,0.82);
         background: transparent;
         padding: 0 8px;
@@ -384,11 +754,10 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         line-height: 1;
         cursor: pointer;
       }
-      #${PANEL_ID} .ion-toggle {
-        min-width: 32px;
-        margin-left: 2px;
+      #${PANEL_ID} .ion-tool {
+        height: 26px;
+        border-radius: 8px;
       }
-      #${PANEL_ID} .ion-toggle:hover,
       #${PANEL_ID} .ion-tool:hover,
       #${PANEL_ID} .ion-tab:hover {
         background: rgba(255,255,255,0.08);
@@ -400,6 +769,32 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         gap: 2px;
         flex: 0 0 auto;
       }
+      #${PANEL_ID}[data-layout="compact"] .ion-title {
+        max-width: 150px;
+      }
+      #${PANEL_ID}[data-layout="compact"] .ion-label {
+        display: none;
+      }
+      #${PANEL_ID}[data-layout="compact"] .ion-tool,
+      #${PANEL_ID}[data-layout="compact"] .ion-toggle {
+        height: 27px;
+        padding: 0 6px;
+        font-size: 11px;
+      }
+      #${PANEL_ID}[data-layout="tiny"] .ion-row > div {
+        display: none;
+      }
+      #${PANEL_ID}[data-layout="tiny"] .ion-tool {
+        padding: 0 5px;
+        font-size: 0;
+      }
+      #${PANEL_ID}[data-layout="tiny"] .ion-tool::first-letter,
+      #${PANEL_ID}[data-layout="tiny"] .ion-toggle {
+        font-size: 11px;
+      }
+      #${PANEL_ID}[data-layout="tiny"] [data-tool="insert-reentry"] {
+        display: none;
+      }
       #${PANEL_ID} .ion-tab-panel .ion-toolbar-actions {
         flex-wrap: wrap;
         gap: 6px;
@@ -409,26 +804,62 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       #${PANEL_ID} .ion-expanded {
         display: none;
       }
+      #${PANEL_ID} .ion-tabs {
+        display: flex;
+        gap: 3px;
+        align-items: flex-end;
+        overflow-x: auto;
+        scrollbar-width: none;
+        margin: 0;
+        padding: 0 0 0 8px;
+        pointer-events: auto;
+      }
+      #${PANEL_ID} .ion-tabs::-webkit-scrollbar {
+        display: none;
+      }
       #${PANEL_ID}[data-expanded="true"] .ion-expanded {
         display: block;
-        border-top: 1px solid rgba(255,255,255,0.08);
-        margin: 4px 2px 0;
-        padding: 8px 8px 9px;
-      }
-      #${PANEL_ID}[data-expanded="true"] .ion-tabs {
-        display: flex;
+        border: 1px solid rgba(255,112,28,0.82);
+        border-bottom: 0;
+        border-radius: 14px 14px 0 0;
+        background: rgba(24, 24, 24, 0.96);
+        box-shadow: 0 -16px 46px rgba(0,0,0,0.34), 0 -1px 12px rgba(255,112,28,0.15);
+        backdrop-filter: blur(14px);
+        margin: 0;
+        padding: 10px 10px 11px;
+        max-height: min(38vh, var(--ion-chatops-drawer-max-px, 360px));
+        overflow: auto;
+        pointer-events: auto;
       }
       #${PANEL_ID}[data-expanded="true"] .ion-tab-panel[data-active="true"] {
         display: flex;
       }
-      #${PANEL_ID} .ion-tabs {
-        gap: 6px;
-        margin-top: 0;
+      #${PANEL_ID}[data-anchor-mode="topbar_fallback"][data-expanded="true"] .ion-expanded {
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 10px 28px rgba(0,0,0,0.26);
+      }
+      #${PANEL_ID} .ion-tab {
+        height: 22px;
+        max-width: 118px;
+        border: 1px solid rgba(255,112,28,0.70);
+        border-bottom: 0;
+        border-radius: 8px 8px 0 0;
+        background: rgba(32,32,32,0.96);
+        color: #ffb27a;
+        padding: 0 9px;
+        font-size: 11px;
+        line-height: 21px;
+        box-shadow: 0 -1px 8px rgba(255,112,28,0.16);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        pointer-events: auto;
       }
       #${PANEL_ID} .ion-tab[data-active="true"] {
-        color: rgba(255,255,255,0.96);
-        background: rgba(255,255,255,0.11);
-        border-color: rgba(255,255,255,0.10);
+        color: #ffd2b0;
+        background: rgba(255,112,28,0.16);
+        border-color: rgba(255,112,28,0.95);
       }
       #${PANEL_ID} .ion-detail {
         margin-top: 0;
@@ -442,6 +873,13 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         flex-direction: column;
         gap: 8px;
         margin-top: 9px;
+      }
+      #${PANEL_ID}[data-layout="compact"] .ion-tab {
+        padding: 0 6px;
+        max-width: 94px;
+      }
+      #${PANEL_ID}[data-layout="tiny"] .ion-tabs {
+        display: none;
       }
       #${MODAL_ID} {
         position: fixed;
@@ -503,6 +941,409 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     document.documentElement.appendChild(style);
   }
 
+  function rectIsVisible(rect) {
+    return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+  }
+
+  function isBridgeElement(element) {
+    return Boolean(element.closest(`#${PANEL_ID}`) ?? element.closest(`#${MODAL_ID}`));
+  }
+
+  function visibleRect(element) {
+    if (isBridgeElement(element)) return null;
+    const style = window.getComputedStyle(element);
+    if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) return null;
+    const rect = element.getBoundingClientRect();
+    return rectIsVisible(rect) ? rect : null;
+  }
+
+  function detectLeftBoundary() {
+    const selectors = [
+      "nav",
+      "aside",
+      "[role='navigation']",
+      "[aria-label*='sidebar' i]",
+      "[aria-label*='side bar' i]",
+      "[data-testid*='sidebar' i]",
+      "[data-testid*='left' i]",
+      "[class*='sidebar' i]",
+      "[class*='side-bar' i]",
+    ];
+    let boundary = DEFAULT_LEFT_BOUNDARY;
+    document.querySelectorAll(selectors.join(",")).forEach((element) => {
+      const rect = visibleRect(element);
+      if (!rect) return;
+      const plausibleLeftSurface =
+        rect.left <= 24 &&
+        rect.top <= 92 &&
+        rect.bottom >= 34 &&
+        rect.width >= 38 &&
+        rect.width <= window.innerWidth * 0.72;
+      if (plausibleLeftSurface) boundary = Math.max(boundary, rect.right);
+    });
+    return Math.min(Math.max(boundary, DEFAULT_LEFT_BOUNDARY), window.innerWidth - 120);
+  }
+
+  function detectRightBoundary() {
+    let boundary = window.innerWidth - TOP_BAR_GAP;
+    const selectors = [
+      "header button",
+      "header a[role='button']",
+      "[role='banner'] button",
+      "[role='banner'] a[role='button']",
+      "button[aria-label*='share' i]",
+      "button[aria-label*='more' i]",
+      "button[aria-label*='memory' i]",
+      "[data-testid*='share' i]",
+      "[data-testid*='more' i]",
+    ];
+    document.querySelectorAll(selectors.join(",")).forEach((element) => {
+      const rect = visibleRect(element);
+      if (!rect) return;
+      const plausibleRightTopControl =
+        rect.top <= 82 &&
+        rect.bottom >= 16 &&
+        rect.left >= window.innerWidth * 0.48 &&
+        rect.width <= 180 &&
+        rect.height <= 56;
+      if (plausibleRightTopControl) boundary = Math.min(boundary, rect.left);
+    });
+    if (boundary === window.innerWidth - TOP_BAR_GAP) {
+      boundary = Math.max(TOP_BAR_GAP, window.innerWidth - DEFAULT_RIGHT_RESERVE);
+    }
+    return Math.max(boundary, 160);
+  }
+
+  function topRail(panel) {
+    return panel.querySelector(".ion-top-rail");
+  }
+
+  function composerCockpit(panel) {
+    return panel.querySelector(".ion-composer-cockpit");
+  }
+
+  function readNumberSetting(key, fallback, min, max) {
+    try {
+      const raw = window.localStorage?.getItem(key);
+      const value = raw === null || raw === undefined ? Number.NaN : Number.parseInt(raw, 10);
+      if (!Number.isFinite(value)) return fallback;
+      return Math.max(min, Math.min(max, value));
+    } catch (_error) {
+      return fallback;
+    }
+  }
+
+  function writeNumberSetting(key, value, min, max) {
+    const bounded = Math.max(min, Math.min(max, Math.round(value)));
+    try {
+      window.localStorage?.setItem(key, String(bounded));
+    } catch (_error) {
+    }
+    return bounded;
+  }
+
+  function attachTargetSelector() {
+    try {
+      return String(window.localStorage?.getItem(ATTACH_TARGET_SELECTOR_KEY) ?? "").trim();
+    } catch (_error) {
+      return "";
+    }
+  }
+
+  function dropTargetSelector() {
+    try {
+      return String(window.localStorage?.getItem(DROP_TARGET_SELECTOR_KEY) ?? "").trim();
+    } catch (_error) {
+      return "";
+    }
+  }
+
+  function settingsSummary() {
+    const selector = attachTargetSelector();
+    const dropSelector = dropTargetSelector();
+    return [
+      `attach_target: ${selector || "not calibrated"}`,
+      `drop_zone: ${dropSelector || "default page/composer zone"}`,
+      `tab_lift_px: ${readNumberSetting(TAB_LIFT_KEY, 2, -24, 48)}`,
+      `drawer_max_px: ${readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680)}`,
+      "",
+      "Use Preview Drop Zone before Drop Latest. Pick Drop Zone if the blue ring is not where ChatGPT accepts file drops.",
+      "Use Pick Attach Target, then click ChatGPT's real attach/add-file button once.",
+      "Local Attach is a fallback and should only be used after Preview Target rings the correct button and Dry Run passes.",
+    ].join("\n");
+  }
+
+  function adjustTabLift(delta) {
+    const next = writeNumberSetting(TAB_LIFT_KEY, readNumberSetting(TAB_LIFT_KEY, 2, -24, 48) + delta, -24, 48);
+    bridgeState.settings = `tab_lift_px set to ${next}`;
+    appendBridgeLog(`Layout adjusted: tab_lift_px=${next}`);
+    renderPanel();
+  }
+
+  function adjustDrawerMax(delta) {
+    const next = writeNumberSetting(DRAWER_MAX_KEY, readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680) + delta, 220, 680);
+    bridgeState.settings = `drawer_max_px set to ${next}`;
+    appendBridgeLog(`Layout adjusted: drawer_max_px=${next}`);
+    renderPanel();
+  }
+
+  function resetLayoutSettings() {
+    try {
+      window.localStorage?.removeItem(TAB_LIFT_KEY);
+      window.localStorage?.removeItem(DRAWER_MAX_KEY);
+    } catch (_error) {
+    }
+    bridgeState.settings = "Layout tuning reset to defaults.";
+    appendBridgeLog("Layout tuning reset");
+    renderPanel();
+  }
+
+  function topBarGeometry() {
+    const left = Math.ceil(detectLeftBoundary() + TOP_BAR_GAP);
+    const right = Math.floor(detectRightBoundary() - TOP_BAR_GAP);
+    const available = Math.max(PANEL_TINY_WIDTH, right - left);
+    const preferred = Math.min(PANEL_PREFERRED_WIDTH, Math.floor(window.innerWidth * 0.58));
+    const width = Math.max(Math.min(preferred, available), Math.min(PANEL_MIN_WIDTH, available));
+    const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 430 ? "compact" : "normal";
+    return { left, available, width, layout };
+  }
+
+  function applyTopRailLayout(panel) {
+    const { left, available, width } = topBarGeometry();
+    const rail = topRail(panel);
+    if (!rail) return;
+    rail.style.top = `${PANEL_TOP}px`;
+    rail.style.left = `${left}px`;
+    rail.style.right = "auto";
+    rail.style.bottom = "auto";
+    rail.style.width = `${width}px`;
+    rail.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+    if (typeof panel.style.setProperty === "function") {
+      panel.style.setProperty("--ion-chatops-modal-left", `${left}px`);
+      panel.style.setProperty("--ion-chatops-modal-width", `${Math.min(420, available)}px`);
+    }
+  }
+
+  function applyTopBarLayout(panel) {
+    const { left, available, width, layout } = topBarGeometry();
+    const cockpit = composerCockpit(panel);
+    panel.dataset.anchorMode = "topbar_fallback";
+    panel.dataset.anchorHealth = "degraded";
+    panel.dataset.layout = layout;
+    applyTopRailLayout(panel);
+    if (cockpit) {
+      cockpit.style.top = `${PANEL_TOP + 36}px`;
+      cockpit.style.left = `${left}px`;
+      cockpit.style.right = "auto";
+      cockpit.style.bottom = "auto";
+      cockpit.style.width = `${width}px`;
+      cockpit.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+    }
+    if (typeof panel.style.setProperty === "function") {
+      panel.style.setProperty("--ion-chatops-modal-left", `${left}px`);
+      panel.style.setProperty("--ion-chatops-modal-width", `${Math.min(420, available)}px`);
+    }
+    positionApprovalModal();
+  }
+
+  function viewportHeight() {
+    return Math.floor(window.visualViewport?.height ?? window.innerHeight);
+  }
+
+  function findComposerInput() {
+    const selectors = [
+      "#prompt-textarea",
+      "textarea",
+      "[contenteditable='true'][role='textbox']",
+      "[contenteditable='true']",
+    ];
+    for (const selector of selectors) {
+      const node = document.querySelector(selector);
+      if (!node || isBridgeElement(node)) continue;
+      const rect = visibleRect(node);
+      if (rect && rect.top > viewportHeight() * 0.45) return node;
+    }
+    return null;
+  }
+
+  function elementContains(parent, child) {
+    let current = child;
+    while (current) {
+      if (current === parent) return true;
+      current = current.parentElement;
+    }
+    return false;
+  }
+
+  function lowerViewportElement(element) {
+    const rect = visibleRect(element);
+    if (!rect) return false;
+    return rect.bottom > viewportHeight() * 0.58 && rect.top > viewportHeight() * 0.25;
+  }
+
+  function composerButtonCount(element) {
+    return Array.from(element.querySelectorAll("button, [role='button']")).filter((node) => {
+      const rect = visibleRect(node);
+      if (!rect) return false;
+      const label = `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""} ${node.textContent ?? ""}`.toLowerCase();
+      return /send|attach|upload|file|voice|mic|audio|plus|stop|model|tool|source|github|drive/.test(label);
+    }).length;
+  }
+
+  function composerAttachmentNodes(input) {
+    const inputRect = input.getBoundingClientRect();
+    const selectors = [
+      "img",
+      "video",
+      "[data-testid*='attachment' i]",
+      "[data-testid*='upload' i]",
+      "[data-testid*='file' i]",
+      "[data-testid*='image' i]",
+      "[aria-label*='remove' i]",
+      "[aria-label*='attachment' i]",
+      "[aria-label*='uploaded' i]",
+      "[aria-label*='file' i]",
+      "[aria-label*='image' i]",
+      "[class*='attachment' i]",
+      "[class*='file' i]",
+    ].join(",");
+    const nodes = [];
+    const seen = new Set();
+    document.querySelectorAll(selectors).forEach((node) => {
+      if (seen.has(node) || isBridgeElement(node)) return;
+      seen.add(node);
+      const rect = visibleRect(node);
+      if (!rect) return;
+      const nearInputX = rect.right >= inputRect.left - 80 && rect.left <= inputRect.right + 80;
+      const nearInputY = rect.bottom >= inputRect.top - 260 && rect.top <= inputRect.bottom + 80;
+      if (lowerViewportElement(node) && nearInputX && nearInputY) nodes.push(node);
+    });
+    return nodes;
+  }
+
+  function candidateComposerContainer(input) {
+    let best = null;
+    let current = input;
+    let depth = 0;
+    const leftBoundary = detectLeftBoundary();
+    const attachmentNodes = composerAttachmentNodes(input);
+    while (current?.parentElement && depth < 14) {
+      current = current.parentElement;
+      depth += 1;
+      if (isBridgeElement(current)) break;
+      const rect = visibleRect(current);
+      if (!rect) continue;
+      const bottomHalf = rect.bottom > viewportHeight() * 0.58 && rect.top > viewportHeight() * 0.22;
+      const respectsSidebar = rect.left >= Math.max(0, leftBoundary - 12);
+      const plausibleWidth =
+        rect.width >= Math.min(320, window.innerWidth * 0.42) &&
+        rect.width <= Math.min(window.innerWidth * 0.90, window.innerWidth - leftBoundary - 16);
+      const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(420, viewportHeight() * 0.48);
+      if (!bottomHalf || !respectsSidebar || !plausibleWidth || !plausibleHeight) continue;
+      const containsAttachments = attachmentNodes.every((node) => elementContains(current, node));
+      if (attachmentNodes.length && !containsAttachments) continue;
+      const buttons = composerButtonCount(current);
+      const radius = Number.parseFloat(window.getComputedStyle(current).borderRadius || "0") || 0;
+      const score =
+        (buttons >= 2 ? 0 : 60) +
+        (radius >= 10 ? 0 : 16) +
+        (attachmentNodes.length ? 0 : 6) +
+        rect.width / 100 +
+        rect.height / 44 +
+        depth * 0.35;
+      if (!best || score < best.score) best = { element: current, score };
+    }
+    return best?.element ?? input;
+  }
+
+  function observeComposerAnchor(element) {
+    if (typeof ResizeObserver === "undefined") return;
+    if (observedComposerElement === element) return;
+    composerResizeObserver?.disconnect();
+    observedComposerElement = element;
+    if (!element) return;
+    composerResizeObserver = new ResizeObserver(() => {
+      window.requestAnimationFrame?.(() => refreshBridgePosition()) ?? window.setTimeout(() => refreshBridgePosition(), 0);
+    });
+    composerResizeObserver.observe(element);
+  }
+
+  function detectComposerAnchor() {
+    const input = findComposerInput();
+    if (!input) {
+      observeComposerAnchor(null);
+      return {
+        mode: "topbar_fallback",
+        rect: null,
+        element: null,
+        health: "degraded",
+        detail: "Composer anchor not found; using top-bar fallback layout.",
+        source: "not_found",
+        attachmentsDetected: 0,
+      };
+    }
+    const attachments = composerAttachmentNodes(input);
+    const container = candidateComposerContainer(input);
+    const rect = container.getBoundingClientRect();
+    if (!rectIsVisible(rect)) {
+      observeComposerAnchor(null);
+      return {
+        mode: "topbar_fallback",
+        rect: null,
+        element: null,
+        health: "degraded",
+        detail: "Composer candidate was not visible; using top-bar fallback layout.",
+        source: "candidate_not_visible",
+        attachmentsDetected: attachments.length,
+      };
+    }
+    observeComposerAnchor(container);
+    return {
+      mode: "composer",
+      rect,
+      element: container,
+      health: "ready",
+      source: attachments.length ? "full_composer_shell_with_attachments" : "full_composer_shell",
+      attachmentsDetected: attachments.length,
+      detail: [
+        `Composer anchor ready: ${Math.round(rect.left)},${Math.round(rect.top)} ${Math.round(rect.width)}x${Math.round(rect.height)}.`,
+        `source: ${attachments.length ? "full_composer_shell_with_attachments" : "full_composer_shell"}`,
+        `attachments_detected: ${attachments.length}`,
+      ].join("\n"),
+    };
+  }
+
+  function applyComposerLayout(panel, anchor) {
+    if (anchor.mode !== "composer" || !anchor.rect) return false;
+    const rect = anchor.rect;
+    const viewport = viewportHeight();
+    const margin = 12;
+    const left = Math.max(margin, Math.round(rect.left));
+    const available = Math.max(PANEL_TINY_WIDTH, Math.min(Math.round(rect.width), window.innerWidth - left - margin));
+    const width = available;
+    const tabLift = readNumberSetting(TAB_LIFT_KEY, 2, -24, 48);
+    const drawerMax = readNumberSetting(DRAWER_MAX_KEY, 360, 220, 680);
+    const bottom = Math.max(4, Math.round(viewport - rect.top + tabLift));
+    const layout = width < PANEL_MIN_WIDTH ? "tiny" : width < 520 ? "compact" : "normal";
+    const cockpit = composerCockpit(panel);
+    panel.dataset.anchorMode = "composer";
+    panel.dataset.anchorHealth = anchor.health;
+    panel.dataset.layout = layout;
+    if (cockpit) {
+      cockpit.style.top = "auto";
+      cockpit.style.left = `${left}px`;
+      cockpit.style.right = "auto";
+      cockpit.style.bottom = `${bottom}px`;
+      cockpit.style.width = `${width}px`;
+      cockpit.style.maxWidth = `${available}px`;
+    }
+    if (typeof panel.style.setProperty === "function") {
+      panel.style.setProperty("--ion-chatops-drawer-max-px", `${drawerMax}px`);
+    }
+    positionApprovalModal();
+    return true;
+  }
+
   function ensurePanel() {
     ensureStyle();
     let panel = document.getElementById(PANEL_ID);
@@ -513,7 +1354,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.dataset.expanded = "false";
     panel.dataset.tab = "status";
     panel.innerHTML = `
-      <div class="ion-toolbar">
+      <div class="ion-top-rail">
         <div class="ion-row">
           <span class="ion-dot"></span>
           <div>
@@ -524,58 +1365,108 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
         <div class="ion-toolbar-actions">
           <button type="button" class="ion-tool" data-tool="rescan">Rescan</button>
           <button type="button" class="ion-tool" data-tool="insert-reentry">Onboard</button>
-          <button type="button" class="ion-toggle" title="Expand ION ChatOps details">+</button>
         </div>
       </div>
-      <div class="ion-expanded">
+      <div class="ion-composer-cockpit">
+        <div class="ion-expanded">
+          <div class="ion-tab-panel" data-panel="status"><div class="ion-detail" data-field="status"></div></div>
+          <div class="ion-tab-panel" data-panel="action"><div class="ion-detail" data-field="action"></div></div>
+          <div class="ion-tab-panel" data-panel="agent">
+            <div class="ion-detail" data-field="agent"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="agent-status">Status</button>
+              <button type="button" class="ion-tool" data-tool="agent-queue">Queue</button>
+              <button type="button" class="ion-tool" data-tool="agent-preview">Preview Next</button>
+              <button type="button" class="ion-tool" data-tool="agent-latest">Latest Runs</button>
+              <button type="button" class="ion-tool" data-tool="agent-prepare">Prepare Next</button>
+              <button type="button" class="ion-tool" data-tool="agent-start">Start One</button>
+            </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="packages">
+            <div class="ion-detail" data-field="packages"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="context-pack">Context Pack</button>
+              <button type="button" class="ion-tool" data-tool="compact-zip">Compact ZIP</button>
+              <button type="button" class="ion-tool" data-tool="safe-full-zip">Safe Full ZIP</button>
+            </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="sandbox">
+            <div class="ion-detail" data-field="sandbox"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="sandbox-returns">Returns</button>
+              <button type="button" class="ion-tool" data-tool="sandbox-diff">Diff Preview</button>
+              <button type="button" class="ion-tool" data-tool="sandbox-review">Queue Review</button>
+            </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="automation"><div class="ion-detail" data-field="automation"></div></div>
+          <div class="ion-tab-panel" data-panel="artifacts">
+            <div class="ion-detail" data-field="artifacts"></div>
+          <div class="ion-toolbar-actions">
+            <button type="button" class="ion-tool" data-tool="artifact-attachables">Attachables</button>
+            <button type="button" class="ion-tool" data-tool="artifact-preview-drop">Preview Drop Zone</button>
+            <button type="button" class="ion-tool" data-tool="artifact-preview-attach">Preview Target</button>
+            <button type="button" class="ion-tool" data-tool="artifact-dry-run-attach">Dry Run Attach</button>
+            <button type="button" class="ion-tool" data-tool="artifact-drop-latest">Drop Latest</button>
+            <button type="button" class="ion-tool" data-tool="artifact-local-attach">Local Attach</button>
+          </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="settings">
+            <div class="ion-detail" data-field="settings"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="settings-pick-attach">Pick Attach Target</button>
+              <button type="button" class="ion-tool" data-tool="settings-clear-attach">Clear Attach Target</button>
+              <button type="button" class="ion-tool" data-tool="settings-pick-drop">Pick Drop Zone</button>
+              <button type="button" class="ion-tool" data-tool="settings-clear-drop">Clear Drop Zone</button>
+              <button type="button" class="ion-tool" data-tool="settings-tabs-up">Tabs Up</button>
+              <button type="button" class="ion-tool" data-tool="settings-tabs-down">Tabs Down</button>
+              <button type="button" class="ion-tool" data-tool="settings-drawer-taller">Drawer Taller</button>
+              <button type="button" class="ion-tool" data-tool="settings-drawer-shorter">Drawer Shorter</button>
+              <button type="button" class="ion-tool" data-tool="settings-layout-reset">Reset Layout</button>
+            </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="diagnostics">
+            <div class="ion-detail" data-field="diagnostics"></div>
+            <div class="ion-toolbar-actions">
+              <button type="button" class="ion-tool" data-tool="insert-smoke">Submit Smoke Test</button>
+              <button type="button" class="ion-tool" data-tool="insert-codex">Queue Codex Test Work</button>
+            </div>
+          </div>
+          <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
+        </div>
         <div class="ion-tabs">
           <button type="button" class="ion-tab" data-tab="status">Status</button>
           <button type="button" class="ion-tab" data-tab="action">Action</button>
           <button type="button" class="ion-tab" data-tab="agent">Agent</button>
           <button type="button" class="ion-tab" data-tab="packages">Packages</button>
+          <button type="button" class="ion-tab" data-tab="sandbox">Sandbox</button>
+          <button type="button" class="ion-tab" data-tab="automation">Automation</button>
+          <button type="button" class="ion-tab" data-tab="artifacts">Artifacts</button>
+          <button type="button" class="ion-tab" data-tab="settings">Settings</button>
           <button type="button" class="ion-tab" data-tab="diagnostics">Diagnostics</button>
-          <button type="button" class="ion-tab" data-tab="tools">Log</button>
+          <button type="button" class="ion-tab" data-tab="tools">Logs</button>
         </div>
-        <div class="ion-tab-panel" data-panel="status"><div class="ion-detail" data-field="status"></div></div>
-        <div class="ion-tab-panel" data-panel="action"><div class="ion-detail" data-field="action"></div></div>
-        <div class="ion-tab-panel" data-panel="agent">
-          <div class="ion-detail" data-field="agent"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="agent-status">Status</button>
-            <button type="button" class="ion-tool" data-tool="agent-queue">Queue</button>
-            <button type="button" class="ion-tool" data-tool="agent-prepare">Prepare Next</button>
-            <button type="button" class="ion-tool" data-tool="agent-start">Start One</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="packages">
-          <div class="ion-detail" data-field="packages"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="context-pack">Context Pack</button>
-            <button type="button" class="ion-tool" data-tool="compact-zip">Compact ZIP</button>
-            <button type="button" class="ion-tool" data-tool="safe-full-zip">Safe Full ZIP</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="diagnostics">
-          <div class="ion-detail" data-field="diagnostics"></div>
-          <div class="ion-toolbar-actions">
-            <button type="button" class="ion-tool" data-tool="insert-smoke">Submit Smoke Test</button>
-            <button type="button" class="ion-tool" data-tool="insert-codex">Queue Codex Test Work</button>
-          </div>
-        </div>
-        <div class="ion-tab-panel" data-panel="tools"><div class="ion-detail" data-field="tools"></div></div>
       </div>
     `;
     document.documentElement.appendChild(panel);
-    panel.querySelector(".ion-toggle")?.addEventListener("click", () => {
-      panel.dataset.expanded = panel.dataset.expanded === "true" ? "false" : "true";
-      renderPanel(panel);
-    });
     panel.querySelectorAll(".ion-tab").forEach((tab) => {
       tab.addEventListener("click", () => {
-        panel.dataset.tab = tab.dataset.tab ?? "status";
+        const nextTab = tab.dataset.tab ?? "status";
+        if (panel.dataset.expanded === "true" && panel.dataset.tab === nextTab) {
+          panel.dataset.expanded = "false";
+        } else {
+          panel.dataset.expanded = "true";
+          panel.dataset.tab = nextTab;
+        }
         renderPanel(panel);
       });
     });
+    if (typeof document.addEventListener === "function") {
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        panel.dataset.expanded = "false";
+        renderPanel(panel);
+      });
+    }
     panel.querySelector('[data-tool="rescan"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-rescan"));
     });
@@ -594,6 +1485,12 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.querySelector('[data-tool="agent-queue"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-agent-queue"));
     });
+    panel.querySelector('[data-tool="agent-preview"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-agent-preview"));
+    });
+    panel.querySelector('[data-tool="agent-latest"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-agent-latest"));
+    });
     panel.querySelector('[data-tool="agent-prepare"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-agent-prepare"));
     });
@@ -609,6 +1506,60 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     panel.querySelector('[data-tool="safe-full-zip"]')?.addEventListener("click", () => {
       window.dispatchEvent(new CustomEvent("ion-chatops-safe-full-zip"));
     });
+    panel.querySelector('[data-tool="sandbox-returns"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-returns"));
+    });
+    panel.querySelector('[data-tool="sandbox-diff"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-diff"));
+    });
+    panel.querySelector('[data-tool="sandbox-review"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-sandbox-review"));
+    });
+    panel.querySelector('[data-tool="artifact-attachables"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-artifact-attachables"));
+    });
+  panel.querySelector('[data-tool="artifact-drop-latest"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-drop-latest"));
+  });
+  panel.querySelector('[data-tool="artifact-preview-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-preview-attach"));
+  });
+    panel.querySelector('[data-tool="artifact-preview-drop"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-artifact-preview-drop"));
+    });
+  panel.querySelector('[data-tool="artifact-dry-run-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-dry-run-attach"));
+  });
+  panel.querySelector('[data-tool="artifact-local-attach"]')?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("ion-chatops-artifact-local-attach"));
+  });
+    panel.querySelector('[data-tool="settings-pick-attach"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-pick-attach"));
+    });
+    panel.querySelector('[data-tool="settings-clear-attach"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-attach"));
+    });
+    panel.querySelector('[data-tool="settings-pick-drop"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-pick-drop"));
+    });
+    panel.querySelector('[data-tool="settings-clear-drop"]')?.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("ion-chatops-settings-clear-drop"));
+    });
+    panel.querySelector('[data-tool="settings-tabs-up"]')?.addEventListener("click", () => {
+      adjustTabLift(4);
+    });
+    panel.querySelector('[data-tool="settings-tabs-down"]')?.addEventListener("click", () => {
+      adjustTabLift(-4);
+    });
+    panel.querySelector('[data-tool="settings-drawer-taller"]')?.addEventListener("click", () => {
+      adjustDrawerMax(40);
+    });
+    panel.querySelector('[data-tool="settings-drawer-shorter"]')?.addEventListener("click", () => {
+      adjustDrawerMax(-40);
+    });
+    panel.querySelector('[data-tool="settings-layout-reset"]')?.addEventListener("click", () => {
+      resetLayoutSettings();
+    });
     panel.querySelector('[data-tool="collapse"]')?.addEventListener("click", () => {
       panel.dataset.expanded = "false";
       renderPanel(panel);
@@ -618,10 +1569,31 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   }
 
   function positionPanelAboveComposer(panel = ensurePanel()) {
-    panel.style.top = "2px";
-    panel.style.left = "58px";
-    panel.style.right = "auto";
-    panel.style.bottom = "auto";
+    const anchor = detectComposerAnchor();
+    bridgeState.anchor = anchor;
+    applyTopRailLayout(panel);
+    if (!applyComposerLayout(panel, anchor)) applyTopBarLayout(panel);
+  }
+
+  function positionApprovalModal(modal = document.getElementById(MODAL_ID)) {
+    const panel = document.getElementById(PANEL_ID);
+    if (!modal || !panel) return;
+    const anchorElement =
+      panel.dataset.expanded === "true"
+        ? composerCockpit(panel) ?? topRail(panel)
+        : topRail(panel) ?? composerCockpit(panel);
+    const rect = (anchorElement ?? panel).getBoundingClientRect();
+    const available = Math.max(PANEL_TINY_WIDTH, window.innerWidth - rect.left - TOP_BAR_GAP);
+    modal.style.left = `${rect.left}px`;
+    modal.style.width = `${Math.min(420, available)}px`;
+    modal.style.maxWidth = `${Math.max(PANEL_TINY_WIDTH, available)}px`;
+    if (panel.dataset.anchorMode === "composer") {
+      modal.style.top = "auto";
+      modal.style.bottom = `${Math.max(12, viewportHeight() - rect.top + TOP_BAR_GAP)}px`;
+    } else {
+      modal.style.bottom = "auto";
+      modal.style.top = `${Math.max(48, rect.bottom + TOP_BAR_GAP)}px`;
+    }
   }
 
   function renderPanel(panel = ensurePanel()) {
@@ -629,8 +1601,6 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     positionPanelAboveComposer(panel);
     const titleNode = panel.querySelector(".ion-title");
     if (titleNode) titleNode.textContent = bridgeState.title;
-    const toggle = panel.querySelector(".ion-toggle");
-    if (toggle) toggle.textContent = panel.dataset.expanded === "true" ? "-" : "+";
     const activeTab = panel.dataset.tab ?? "status";
     panel.querySelectorAll(".ion-tab").forEach((tab) => {
       tab.dataset.active = String(tab.dataset.tab === activeTab);
@@ -642,13 +1612,21 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     const actionNode = panel.querySelector('[data-field="action"]');
     const agentNode = panel.querySelector('[data-field="agent"]');
     const packagesNode = panel.querySelector('[data-field="packages"]');
+    const sandboxNode = panel.querySelector('[data-field="sandbox"]');
+    const automationNode = panel.querySelector('[data-field="automation"]');
+    const artifactsNode = panel.querySelector('[data-field="artifacts"]');
+    const settingsNode = panel.querySelector('[data-field="settings"]');
     const diagnosticsNode = panel.querySelector('[data-field="diagnostics"]');
     const toolsNode = panel.querySelector('[data-field="tools"]');
     if (statusNode) statusNode.textContent = bridgeState.detail;
     if (actionNode) actionNode.textContent = bridgeState.action;
     if (agentNode) agentNode.textContent = bridgeState.agent;
     if (packagesNode) packagesNode.textContent = bridgeState.packages;
-    if (diagnosticsNode) diagnosticsNode.textContent = bridgeState.diagnostics;
+    if (sandboxNode) sandboxNode.textContent = bridgeState.sandbox;
+    if (automationNode) automationNode.textContent = bridgeState.automation;
+    if (artifactsNode) artifactsNode.textContent = bridgeState.artifacts;
+    if (settingsNode) settingsNode.textContent = `${bridgeState.settings}\n\n${settingsSummary()}`;
+    if (diagnosticsNode) diagnosticsNode.textContent = `${bridgeState.anchor.detail}\n\n${bridgeState.diagnostics}`;
     if (toolsNode) {
       toolsNode.textContent = `${bridgeState.tools}\n\nRecent:\n${bridgeState.logs.join("\n") || "No events yet."}`;
     }
@@ -679,6 +1657,26 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
 
   function setBridgePackageDetail(detail) {
     bridgeState.packages = detail;
+    renderPanel();
+  }
+
+  function setBridgeSandboxDetail(detail) {
+    bridgeState.sandbox = detail;
+    renderPanel();
+  }
+
+  function setBridgeArtifactDetail(detail) {
+    bridgeState.artifacts = detail;
+    renderPanel();
+  }
+
+  function setBridgeSettingsDetail(detail) {
+    bridgeState.settings = detail;
+    renderPanel();
+  }
+
+  function setBridgeDiagnosticsDetail(detail) {
+    bridgeState.diagnostics = detail;
     renderPanel();
   }
 
@@ -733,6 +1731,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       modal.querySelector('[data-choice="reject"]')?.addEventListener("click", () => finish(false));
       modal.querySelector('[data-choice="approve"]')?.addEventListener("click", () => finish(true));
       document.documentElement.appendChild(modal);
+      positionApprovalModal(modal);
     });
   }
 
@@ -774,6 +1773,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       modal.querySelector('[data-choice="reject"]')?.addEventListener("click", () => finish(false));
       modal.querySelector('[data-choice="approve"]')?.addEventListener("click", () => finish(true));
       document.documentElement.appendChild(modal);
+      positionApprovalModal(modal);
     });
   }
 
@@ -797,10 +1797,11 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     );
   }
 
-  function candidateBlocks() {
+  function candidateBlocks(mode = "manual") {
+    const selectors = mode === "auto" ? AUTO_SCAN_SELECTORS : MANUAL_SCAN_SELECTORS;
     const nodes = [];
     const seenNodes = new Set();
-    for (const selector of ACTION_SCAN_SELECTORS) {
+    for (const selector of selectors) {
       document.querySelectorAll(selector).forEach((node) => {
         if (seenNodes.has(node) || shouldIgnoreScanNode(node)) return;
         seenNodes.add(node);
@@ -812,7 +1813,7 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     for (const node of nodes) {
       const rawCandidates = [
         node.textContent ?? "",
-        typeof node.innerText === "string" ? node.innerText : "",
+        mode === "manual" && typeof node.innerText === "string" ? node.innerText : "",
       ];
       for (const text of rawCandidates) {
         if (!(ION_ACTION_LINE.test(text) || extractIonActionYaml(text) !== null)) continue;
@@ -926,6 +1927,37 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     return text.length > max ? `${text.slice(0, max)}\n...` : text;
   }
 
+  function formatBytes(value) {
+    const bytes = Number(value);
+    if (!Number.isFinite(bytes) || bytes < 0) return "unknown size";
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KiB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MiB`;
+  }
+
+  function summarizeAttachables(result) {
+    const rows = Array.isArray(result?.candidates) ? result.candidates : [];
+    const attachables = rows.filter((row) => row?.attachable && typeof row.path === "string");
+    if (!attachables.length) return "No attachable package or sandbox-return artifact is available.";
+    const selected = attachables[0];
+    const lines = [
+      `attachable_count: ${attachables.length}`,
+      "selected_latest:",
+      `  name: ${selected.name ?? "unknown"}`,
+      `  path: ${selected.path}`,
+      `  size: ${formatBytes(selected.size_bytes)}`,
+      `  sha256: ${selected.sha256 ?? ""}`,
+    ];
+    if (attachables.length > 1) {
+      lines.push("", "other_attachables:");
+      attachables.slice(1, 4).forEach((row, index) => {
+        lines.push(`  ${index + 2}. ${row.name ?? row.path} (${formatBytes(row.size_bytes)})`);
+      });
+    }
+    lines.push("", "Use Local Attach for OS file-picker assist, or Drop Latest for browser synthetic drop. Neither clicks Send.");
+    return lines.join("\n");
+  }
+
   async function copyBridgeResult(label, detail) {
     await copyReceiptSummary(`${label}\n${detail}`);
   }
@@ -947,6 +1979,74 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       setBridgeAgentDetail(detail);
       setBridgeStatus(response?.ok ? `${label} submitted` : `${label} blocked`, detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
       if (response?.ok) await copyBridgeResult(label, detail);
+    });
+  }
+
+  function inactiveQueueStatus(status) {
+    return /SUPERSEDED|FULFILLED|INVALID|ARCHIVE_ONLY|SETTLED|DUPLICATE|BLOCKED|CANCELLED/i.test(status);
+  }
+
+  function firstActionableRequest(queue) {
+    const rows = Array.isArray(queue?.requests) ? queue.requests : [];
+    return rows.find((row) => !inactiveQueueStatus(String(row?.status ?? ""))) ?? null;
+  }
+
+  function requestAgentPreview() {
+    setBridgeStatus("Agent preview", "Reading queue/status before any Codex mutation.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_agent_status" }, (statusResponse) => {
+      chrome.runtime.sendMessage({ type: "ion_chatops_agent_queue" }, async (queueResponse) => {
+        if (!statusResponse?.ok || !queueResponse?.ok) {
+          const detail = !statusResponse?.ok ? blockedDetail(statusResponse) : blockedDetail(queueResponse);
+          setBridgeAgentDetail(detail);
+          setBridgeStatus("Agent preview blocked", detail, "error");
+          return;
+        }
+        const status = statusResponse.result;
+        const queue = queueResponse.result;
+        const request = firstActionableRequest(queue);
+        const detail = [
+          "Codex agent preview",
+          `runner_verdict: ${status?.verdict ?? ""}`,
+          `queued_request_count: ${status?.queued_request_count ?? 0}`,
+          `active_process_running: ${Boolean(status?.active_process_running)}`,
+          `next_request_path: ${status?.next_request_path ?? "none"}`,
+          request
+            ? `next_actionable_request: ${request.request_id ?? ""}\nstatus: ${request.status ?? ""}\nobjective: ${request.objective ?? ""}`
+            : "next_actionable_request: none",
+          "",
+          "Preview only. No Codex worker was prepared or started.",
+        ].join("\n");
+        setBridgeAgentDetail(detail);
+        setBridgeStatus("Agent preview ready", detail.split("\n")[1] ?? "", "success");
+        await copyBridgeResult("Agent preview", detail);
+      });
+    });
+  }
+
+  function requestAgentLatestRuns() {
+    setBridgeStatus("Latest Codex runs", "Reading latest Codex queue runner receipts.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_agent_status" }, async (response) => {
+      if (!response?.ok) {
+        const detail = blockedDetail(response);
+        setBridgeAgentDetail(detail);
+        setBridgeStatus("Latest Codex runs blocked", detail, "error");
+        return;
+      }
+      const runs = Array.isArray(response.result?.latest_runs) ? response.result.latest_runs : [];
+      const detail = runs.length
+        ? runs
+          .slice(0, 6)
+          .map((run, index) => [
+            `#${index + 1} ${run.status ?? ""}`,
+            `run_id: ${run.run_id ?? ""}`,
+            `request_id: ${run.request_id ?? ""}`,
+            `path: ${run.path ?? ""}`,
+          ].join("\n"))
+          .join("\n\n")
+        : "No Codex queue runs found.";
+      setBridgeAgentDetail(detail);
+      setBridgeStatus("Latest Codex runs ready", runs[0]?.status ?? "No runs found.", "success");
+      await copyBridgeResult("Latest Codex runs", detail);
     });
   }
 
@@ -979,6 +2079,657 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
       setBridgePackageDetail(response?.ok ? `${detail}\n\n${compactJson(result, 1400)}` : detail);
       setBridgeStatus(response?.ok ? `${label} ready` : `${label} blocked`, detail, response?.ok ? "success" : "error");
       if (response?.ok) await copyBridgeResult(label, detail);
+    });
+  }
+
+  function latestSandboxReturnId(result) {
+    const rows = Array.isArray(result?.returns) ? result.returns : [];
+    const first = rows.find((row) => typeof row?.return_id === "string" && row.return_id.trim());
+    return first?.return_id ?? null;
+  }
+
+  function requestSandboxReturns() {
+    setBridgeStatus("Sandbox returns", "Fetching ChatGPT sandbox return queue.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_sandbox_returns" }, async (response) => {
+      const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+      setBridgeSandboxDetail(detail);
+      setBridgeStatus(response?.ok ? "Sandbox returns ready" : "Sandbox returns blocked", detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+      if (response?.ok) await copyBridgeResult("Sandbox returns", detail);
+    });
+  }
+
+  function requestSandboxMutation(type, label) {
+    setBridgeStatus(label, "Requesting latest sandbox return projection before approval.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_sandbox_returns" }, (queueResponse) => {
+      const returnId = latestSandboxReturnId(queueResponse?.result);
+      if (!queueResponse?.ok || !returnId) {
+        const detail = queueResponse?.ok ? "No sandbox returns are available." : blockedDetail(queueResponse);
+        setBridgeSandboxDetail(detail);
+        setBridgeStatus(`${label} blocked`, detail, "error");
+        return;
+      }
+      chrome.runtime.sendMessage({ type, payload: { return_id: returnId } }, async (response) => {
+        const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+        setBridgeSandboxDetail(detail);
+        setBridgeStatus(response?.ok ? `${label} submitted` : `${label} blocked`, detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+        if (response?.ok) await copyBridgeResult(label, detail);
+      });
+    });
+  }
+
+  function requestArtifactAttachables() {
+    setBridgeStatus("Attachables", "Reading local packages and sandbox return artifacts.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_artifact_attachables" }, async (response) => {
+      const detail = response?.ok ? summarizeAttachables(response.result) : blockedDetail(response);
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus(response?.ok ? "Attachables ready" : "Attachables blocked", detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+      if (response?.ok) await copyBridgeResult("Attachable artifacts", detail);
+    });
+  }
+
+  function visibleDropRect(element) {
+    if (!visibleElement(element)) return null;
+    const rect = element.getBoundingClientRect();
+    if (element === document.body || rect.height > window.innerHeight * 1.2) {
+      return {
+        left: 8,
+        top: 56,
+        right: window.innerWidth - 8,
+        bottom: window.innerHeight - 96,
+        width: window.innerWidth - 16,
+        height: Math.max(160, window.innerHeight - 152),
+        x: 8,
+        y: 56,
+        toJSON: () => ({}),
+      };
+    }
+    return rect;
+  }
+
+  function storedDropSelector() {
+    try {
+      return String(window.localStorage?.getItem(DROP_TARGET_SELECTOR_KEY) ?? "").trim();
+    } catch (_error) {
+      return "";
+    }
+  }
+
+  function calibratedDropTargetElement() {
+    const selector = storedDropSelector();
+    if (!selector) return null;
+    let node = null;
+    try {
+      node = document.querySelector(selector);
+    } catch (_error) {
+      setBridgeArtifactDetail(`calibrated_drop_selector_invalid\nselector: ${selector}`);
+      return null;
+    }
+    if (!node || !visibleDropRect(node)) {
+      setBridgeArtifactDetail(`calibrated_drop_target_missing_or_hidden\nselector: ${selector}`);
+      return null;
+    }
+    return node;
+  }
+
+  function defaultDropTargetElement() {
+    const composer = findComposer();
+    const main = document.querySelector("main");
+    const composerShell =
+      composer?.closest("form") ??
+      composer?.closest("[data-testid*='composer']") ??
+      null;
+    const candidates = [main, composerShell, document.body, composer].filter(Boolean);
+    return candidates.find((candidate) => visibleDropRect(candidate)) ?? null;
+  }
+
+  function findDropTarget() {
+    const calibrated = calibratedDropTargetElement();
+    if (calibrated) return calibrated;
+    if (storedDropSelector()) return null;
+    return defaultDropTargetElement();
+  }
+
+  function composerRect() {
+    const composer = findComposer();
+    return composer?.getBoundingClientRect() ?? null;
+  }
+
+  function composerShellRect() {
+    const composer = findComposer();
+    if (!composer) return null;
+    let best = composer;
+    let current = composer;
+    let depth = 0;
+    while (current?.parentElement && depth < 10) {
+      current = current.parentElement;
+      depth += 1;
+      if (isBridgeElement(current)) break;
+      if (!visibleElement(current)) continue;
+      const rect = current.getBoundingClientRect();
+      const lower = rect.bottom > window.innerHeight * 0.58 && rect.top > window.innerHeight * 0.22;
+      const plausibleWidth = rect.width >= Math.min(320, window.innerWidth * 0.40) && rect.width <= window.innerWidth * 0.92;
+      const plausibleHeight = rect.height >= 36 && rect.height <= Math.max(430, window.innerHeight * 0.50);
+      if (!lower || !plausibleWidth || !plausibleHeight) continue;
+      const buttons = current.querySelectorAll("button, [role='button'], input[type='file']").length;
+      if (buttons >= 2 || /form/i.test(current.tagName) || String(current.getAttribute("data-testid") ?? "").toLowerCase().includes("composer")) {
+        best = current;
+      }
+    }
+    return best?.getBoundingClientRect() ?? null;
+  }
+
+  function rectPayload(rect) {
+    return {
+      x: Math.round(rect.left),
+      y: Math.round(rect.top),
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+    };
+  }
+
+  function controlLabel(node) {
+    return `${node.getAttribute("aria-label") ?? ""} ${node.getAttribute("data-testid") ?? ""} ${node.textContent ?? ""}`.replace(/\s+/g, " ").trim();
+  }
+
+  function visibleElement(node) {
+    const rect = node.getBoundingClientRect();
+    return rect.width > 1 && rect.height > 1 && rect.bottom > 0 && rect.right > 0 && rect.top < window.innerHeight && rect.left < window.innerWidth;
+  }
+
+  function cssEscape(value) {
+    const css = window.CSS;
+    if (typeof css?.escape === "function") return css.escape(value);
+    return value.replace(/["\\#.;:[\]()>+~*=\s]/g, "\\$&");
+  }
+
+  function cssString(value) {
+    return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+  }
+
+  function storedAttachSelector() {
+    try {
+      return String(window.localStorage?.getItem(ATTACH_TARGET_SELECTOR_KEY) ?? "").trim();
+    } catch (_error) {
+      return "";
+    }
+  }
+
+  function elementWithinComposerBand(node, rect) {
+    const bounds = node.getBoundingClientRect();
+    if (!rect) return bounds.top > window.innerHeight * 0.45;
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+    const xMatch = centerX >= rect.left - 110 && centerX <= rect.right + 110;
+    const yMatch = centerY >= rect.top - 260 && centerY <= rect.bottom + 160;
+    return xMatch && yMatch;
+  }
+
+  function selectorForElement(node) {
+    const id = node.id?.trim();
+    if (id) return `#${cssEscape(id)}`;
+    const tag = node.tagName.toLowerCase();
+    const dataTestId = node.getAttribute("data-testid")?.trim();
+    if (dataTestId) return `${tag}[data-testid="${cssString(dataTestId)}"]`;
+    const aria = node.getAttribute("aria-label")?.trim();
+    if (aria) return `${tag}[aria-label="${cssString(aria)}"]`;
+    const title = node.getAttribute("title")?.trim();
+    if (title) return `${tag}[title="${cssString(title)}"]`;
+    const parts = [];
+    let current = node;
+    let depth = 0;
+    while (current && current.nodeType === Node.ELEMENT_NODE && depth < 5 && !isBridgeElement(current)) {
+      const parent = current.parentElement;
+      let part = current.tagName.toLowerCase();
+      if (parent) {
+        const siblings = Array.from(parent.children).filter((sibling) => sibling.tagName === current?.tagName);
+        if (siblings.length > 1) part += `:nth-of-type(${siblings.indexOf(current) + 1})`;
+      }
+      parts.unshift(part);
+      current = parent;
+      depth += 1;
+    }
+    return parts.join(" > ");
+  }
+
+  function attachCandidateFromEventTarget(target) {
+    if (!(target instanceof Element)) return null;
+    if (isBridgeElement(target)) return null;
+    const candidate = target.closest("button, [role='button'], input[type='file'], label, [aria-label], [data-testid]");
+    if (candidate && !isBridgeElement(candidate)) return candidate;
+    return target;
+  }
+
+  function dropCandidateFromEventTarget(target) {
+    if (!(target instanceof Element)) return null;
+    if (isBridgeElement(target)) return null;
+    const candidate =
+      target.closest("main, form, [data-testid*='composer' i], [data-message-author-role], article, section, div") ??
+      (target instanceof HTMLElement ? target : null);
+    return candidate && !isBridgeElement(candidate) ? candidate : null;
+  }
+
+  function calibratedAttachControlElement(rect) {
+    const selector = storedAttachSelector();
+    if (!selector) return null;
+    let node = null;
+    try {
+      node = document.querySelector(selector);
+    } catch (_error) {
+      setBridgeArtifactDetail(`calibrated_attach_selector_invalid\nselector: ${selector}`);
+      return null;
+    }
+    if (!node || !visibleElement(node)) {
+      setBridgeArtifactDetail(`calibrated_attach_target_missing_or_hidden\nselector: ${selector}`);
+      return null;
+    }
+    if (!elementWithinComposerBand(node, rect)) {
+      const bounds = node.getBoundingClientRect();
+      setBridgeArtifactDetail([
+        "calibrated_attach_target_not_near_composer",
+        `selector: ${selector}`,
+        `target_rect: ${JSON.stringify(rectPayload(bounds))}`,
+        `composer_rect: ${rect ? JSON.stringify(rectPayload(rect)) : "missing"}`,
+        "Use Settings -> Pick Attach Target to re-calibrate.",
+      ].join("\n"));
+      return null;
+    }
+    return node;
+  }
+
+  function findAttachControlElement() {
+    const rect = composerShellRect() ?? composerRect();
+    const calibrated = calibratedAttachControlElement(rect);
+    if (calibrated) return calibrated;
+    if (storedAttachSelector()) return null;
+    const nodes = Array.from(document.querySelectorAll("button, [role='button'], input[type='file']"));
+    return nodes.find((node) => {
+      if (!visibleElement(node)) return false;
+      const label = controlLabel(node).toLowerCase();
+      return elementWithinComposerBand(node, rect) && /attach|upload|file|plus|add/.test(label);
+    }) ?? null;
+  }
+
+  function findAttachControlRect() {
+    const candidate = findAttachControlElement();
+    if (!candidate) return null;
+    const bounds = candidate.getBoundingClientRect();
+    const borderX = Math.max(0, (window.outerWidth - window.innerWidth) / 2);
+    const chromeY = Math.max(0, window.outerHeight - window.innerHeight - borderX);
+    const screenRect = {
+      x: Math.round(window.screenX + borderX + bounds.left),
+      y: Math.round(window.screenY + chromeY + bounds.top),
+      width: Math.round(bounds.width),
+      height: Math.round(bounds.height),
+    };
+    return {
+      x: Math.round(bounds.left),
+      y: Math.round(bounds.top),
+      width: Math.round(bounds.width),
+      height: Math.round(bounds.height),
+      label: controlLabel(candidate),
+      screen_rect: screenRect,
+      coordinate_space: "viewport_css_pixels",
+    };
+  }
+
+  function localAttachPayload() {
+    const targetRect = findAttachControlRect();
+    const composer = composerShellRect() ?? composerRect();
+    if (!targetRect || !composer) return null;
+    return {
+      target_kind: "attach_button",
+      target_rect: targetRect,
+      target_screen_rect: targetRect.screen_rect,
+      composer_rect: rectPayload(composer),
+      viewport: {
+        width: Math.round(window.innerWidth),
+        height: Math.round(window.innerHeight),
+      },
+      device_pixel_ratio: window.devicePixelRatio || 1,
+      page_url: window.location.href,
+      captured_at_ms: Date.now(),
+    };
+  }
+
+  function beginAttachTargetPicker() {
+    setBridgeStatus("Pick attach target", "Click ChatGPT's real attach/add-file button. The next page click will be captured.", "working");
+    setBridgeSettingsDetail("Attach target picker armed. Click the ChatGPT attach/add-file button, not the ION panel.");
+    const handler = (event) => {
+      const candidate = attachCandidateFromEventTarget(event.target);
+      if (!candidate) {
+        setBridgeSettingsDetail("Attach target pick ignored because the click was inside ION UI or not an element.");
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      document.removeEventListener("click", handler, true);
+      const selector = selectorForElement(candidate);
+      try {
+        window.localStorage?.setItem(ATTACH_TARGET_SELECTOR_KEY, selector);
+      } catch (_error) {
+        setBridgeSettingsDetail("Attach target could not be saved to localStorage.");
+        setBridgeStatus("Attach target not saved", "localStorage write failed.", "error");
+        return;
+      }
+      const detail = [
+        "attach_target_calibrated",
+        `selector: ${selector}`,
+        `label: ${controlLabel(candidate) || candidate.tagName.toLowerCase()}`,
+        `rect: ${JSON.stringify(rectPayload(candidate.getBoundingClientRect()))}`,
+      ].join("\n");
+      setBridgeSettingsDetail(detail);
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Attach target calibrated", "Preview Target should now ring the selected button.", "success");
+      previewAttachTarget();
+    };
+    document.addEventListener("click", handler, true);
+    window.setTimeout(() => {
+      document.removeEventListener("click", handler, true);
+    }, 12000);
+  }
+
+  function clearAttachTargetCalibration() {
+    try {
+      window.localStorage?.removeItem(ATTACH_TARGET_SELECTOR_KEY);
+    } catch (_error) {
+    }
+    document.getElementById(ATTACH_PREVIEW_ID)?.remove();
+    const detail = "attach_target_calibration_cleared\nPreview Target will use the guarded automatic heuristic again.";
+    setBridgeSettingsDetail(detail);
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Attach target cleared", "Pick Attach Target can be used to bind it again.", "idle");
+  }
+
+  function beginDropTargetPicker() {
+    setBridgeStatus("Pick drop zone", "Click the ChatGPT area where a normal file drag/drop is accepted.", "working");
+    setBridgeSettingsDetail("Drop-zone picker armed. Click the ChatGPT page/composer area you would normally drop a file onto.");
+    const handler = (event) => {
+      const candidate = dropCandidateFromEventTarget(event.target);
+      if (!candidate) {
+        setBridgeSettingsDetail("Drop-zone pick ignored because the click was inside ION UI or not a page element.");
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      document.removeEventListener("click", handler, true);
+      const selector = selectorForElement(candidate);
+      try {
+        window.localStorage?.setItem(DROP_TARGET_SELECTOR_KEY, selector);
+      } catch (_error) {
+        setBridgeSettingsDetail("Drop zone could not be saved to localStorage.");
+        setBridgeStatus("Drop zone not saved", "localStorage write failed.", "error");
+        return;
+      }
+      const rect = visibleDropRect(candidate) ?? candidate.getBoundingClientRect();
+      const detail = [
+        "drop_zone_calibrated",
+        `selector: ${selector}`,
+        `label: ${controlLabel(candidate) || candidate.tagName.toLowerCase()}`,
+        `rect: ${JSON.stringify(rectPayload(rect))}`,
+      ].join("\n");
+      setBridgeSettingsDetail(detail);
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Drop zone calibrated", "Preview Drop Zone should now ring the selected drop area.", "success");
+      previewDropTarget();
+    };
+    document.addEventListener("click", handler, true);
+    window.setTimeout(() => {
+      document.removeEventListener("click", handler, true);
+    }, 12000);
+  }
+
+  function clearDropTargetCalibration() {
+    try {
+      window.localStorage?.removeItem(DROP_TARGET_SELECTOR_KEY);
+    } catch (_error) {
+    }
+    document.getElementById(DROP_PREVIEW_ID)?.remove();
+    const detail = "drop_zone_calibration_cleared\nDrop Latest will use the guarded default page/composer drop zone again.";
+    setBridgeSettingsDetail(detail);
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Drop zone cleared", "Pick Drop Zone can be used to bind it again.", "idle");
+  }
+
+  function previewDropTarget() {
+    ensureDomRegistryStyle();
+    const target = findDropTarget();
+    document.getElementById(DROP_PREVIEW_ID)?.remove();
+    if (!target) {
+      const detail = storedDropSelector()
+        ? "drop_target_not_detected\nSaved drop zone is missing or hidden. Use Settings -> Pick Drop Zone again or Clear Drop Zone."
+        : "drop_target_not_detected\nNo page/composer drop zone was found.";
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Drop zone missing", detail, "error");
+      return;
+    }
+    const rect = visibleDropRect(target) ?? target.getBoundingClientRect();
+    const overlay = document.createElement("div");
+    overlay.id = DROP_PREVIEW_ID;
+    overlay.style.left = `${Math.round(rect.left)}px`;
+    overlay.style.top = `${Math.round(rect.top)}px`;
+    overlay.style.width = `${Math.round(rect.width)}px`;
+    overlay.style.height = `${Math.round(rect.height)}px`;
+    document.documentElement.appendChild(overlay);
+    window.setTimeout(() => overlay.remove(), 4000);
+    const detail = [
+      "preview_drop_zone",
+      `selector: ${storedDropSelector() || "default_page_or_composer_drop_zone"}`,
+      `target: ${target.tagName.toLowerCase()}`,
+      `rect: ${JSON.stringify(rectPayload(rect))}`,
+      "Drop Latest dispatches visible drag/drop events here. Browser/ChatGPT may still reject synthetic drops.",
+    ].join("\n");
+    setBridgeArtifactDetail(detail);
+    setBridgeStatus("Drop zone previewed", "Blue ring marks the current Drop Latest target.", "success");
+  }
+
+  function previewAttachTarget() {
+    ensureDomRegistryStyle();
+    const target = findAttachControlElement();
+    document.getElementById(ATTACH_PREVIEW_ID)?.remove();
+    if (!target) {
+      const detail = storedAttachSelector()
+        ? "attach_control_not_detected\nSaved attach target is missing, hidden, or no longer near the composer. Use Settings -> Pick Attach Target again or Clear Attach Target."
+        : "attach_control_not_detected\nNo target ring was drawn. Use Settings -> Pick Attach Target if the heuristic cannot find the attach/add-file button.";
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Attach target missing", detail, "error");
+      return;
+    }
+    const rect = target.getBoundingClientRect();
+    const overlay = document.createElement("div");
+    overlay.id = ATTACH_PREVIEW_ID;
+    overlay.style.left = `${Math.round(rect.left - 5)}px`;
+    overlay.style.top = `${Math.round(rect.top - 5)}px`;
+    overlay.style.width = `${Math.round(rect.width + 10)}px`;
+    overlay.style.height = `${Math.round(rect.height + 10)}px`;
+    document.documentElement.appendChild(overlay);
+    window.setTimeout(() => overlay.remove(), 4000);
+    const payload = localAttachPayload();
+    const detail = payload ? compactJson(payload, 1200) : "attach_target_payload_unavailable";
+    setBridgeArtifactDetail(`preview_attach_target\n${detail}`);
+    setBridgeStatus("Attach target previewed", "Green ring marks the exact attach target. Reject Local Attach if the ring is wrong.", "success");
+  }
+
+  function uploadedAttachmentCount() {
+    const rect = composerRect();
+    return Array.from(
+      document.querySelectorAll(
+        "img, [data-testid*='attachment' i], [data-testid*='upload' i], [data-testid*='file' i], [data-testid*='image' i], [aria-label*='remove' i], [aria-label*='file' i], [aria-label*='image' i], [class*='attachment' i]",
+      ),
+    ).filter((node) => {
+      if (!visibleElement(node)) return false;
+      const bounds = node.getBoundingClientRect();
+      return rect ? bounds.bottom >= rect.top - 300 && bounds.top <= rect.bottom + 160 : bounds.top > window.innerHeight * 0.45;
+    }).length;
+  }
+
+  function waitForUploadChip(previousCount, label, baseDetail) {
+    const started = Date.now();
+    const poll = () => {
+      const count = uploadedAttachmentCount();
+      if (count > previousCount) {
+        const detail = `${baseDetail}\n\nupload_chip_verified: true\nuploaded_attachment_count: ${count}`;
+        setBridgeArtifactDetail(detail);
+        setBridgeStatus(`${label} verified`, "Upload chip/thumbnail detected. No Send click was performed.", "success");
+        return;
+      }
+      if (Date.now() - started > 15000) {
+        const detail = `${baseDetail}\n\nupload_chip_verified: false\nuploaded_attachment_count: ${count}\nfinding: upload_chip_not_observed_after_operator_attempt`;
+        setBridgeArtifactDetail(detail);
+        setBridgeStatus(`${label} unverified`, "Local helper returned, but no upload chip was observed yet. No Send click was performed.", "error");
+        return;
+      }
+      window.setTimeout(poll, 600);
+    };
+    poll();
+  }
+
+  function dispatchDropCleanupEvents(target, transfer) {
+    const cleanupTargets = [
+      target,
+      document.body,
+      document.documentElement,
+      document,
+      window,
+    ].filter(Boolean);
+    const dispatchDrag = (eventName) => {
+      cleanupTargets.forEach((eventTarget) => {
+        try {
+          const event = new DragEvent(eventName, {
+            bubbles: true,
+            cancelable: true,
+            composed: true,
+            dataTransfer: transfer,
+          });
+          eventTarget.dispatchEvent(event);
+        } catch (_error) {
+        }
+      });
+    };
+    const dispatchEscape = () => {
+      [document, window].forEach((eventTarget) => {
+        try {
+          eventTarget.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", code: "Escape", bubbles: true, cancelable: true }));
+          eventTarget.dispatchEvent(new KeyboardEvent("keyup", { key: "Escape", code: "Escape", bubbles: true, cancelable: true }));
+        } catch (_error) {
+        }
+      });
+    };
+    ["dragleave", "dragend"].forEach(dispatchDrag);
+    window.setTimeout(() => ["dragleave", "dragend"].forEach(dispatchDrag), 120);
+    window.setTimeout(dispatchEscape, 260);
+    window.setTimeout(() => document.getElementById(DROP_PREVIEW_ID)?.remove(), 500);
+  }
+
+  async function attemptPreparedArtifactDrop(result) {
+    const downloadUrl = String(result?.download_url ?? "").trim();
+    const filename = String(result?.filename ?? result?.artifact?.name ?? "ion-artifact.bin").trim();
+    const contentType = String(result?.content_type ?? result?.artifact?.content_type ?? "application/octet-stream").trim();
+    const target = findDropTarget();
+    if (!downloadUrl || !target) {
+      const detail = !downloadUrl ? "download_url_missing" : "chatgpt_drop_target_not_found";
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Artifact drop blocked", detail, "error");
+      return;
+    }
+    try {
+      previewDropTarget();
+      const response = await fetch(downloadUrl);
+      if (!response.ok) throw new Error(`download_failed_${response.status}`);
+      const blob = await response.blob();
+      const file = new File([blob], filename, { type: contentType || blob.type || "application/octet-stream" });
+      const transfer = new DataTransfer();
+      transfer.items.add(file);
+      for (const eventName of ["dragenter", "dragover", "drop"]) {
+        const event = new DragEvent(eventName, {
+          bubbles: true,
+          cancelable: true,
+          composed: true,
+          dataTransfer: transfer,
+        });
+        target.dispatchEvent(event);
+      }
+      dispatchDropCleanupEvents(target, transfer);
+      const detail = [
+        "visible_browser_drop_attempted",
+        `filename: ${filename}`,
+        `size_bytes: ${file.size}`,
+        `sha256: ${result?.sha256 ?? ""}`,
+        `receipt_path: ${result?.receipt_path ?? ""}`,
+        "drop_overlay_cleanup: dragleave_dragend_escape_attempted",
+        "",
+        "If ChatGPT ignored the synthetic drop, use the manifest/hash above with the manual attach picker or the future native macro lane.",
+        "No Send click was performed.",
+      ].join("\n");
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Artifact drop attempted", `${filename}\nNo Send click was performed.`, "success");
+      await copyBridgeResult("Artifact drop receipt", detail);
+    } catch (error) {
+      const detail = `artifact_drop_failed: ${error instanceof Error ? error.message : String(error)}`;
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Artifact drop failed", detail, "error");
+    }
+  }
+
+  function requestArtifactDropLatest() {
+    setBridgeStatus("Artifact drop latest", "Requesting Braden approval before preparing a browser drop ticket.", "working");
+    chrome.runtime.sendMessage({ type: "ion_chatops_artifact_prepare_latest" }, async (response) => {
+      const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+      setBridgeArtifactDetail(detail);
+      if (!response?.ok) {
+        setBridgeStatus("Artifact drop blocked", detail.split("\n")[0] ?? "", "error");
+        return;
+      }
+      setBridgeStatus("Artifact ticket ready", "Attempting visible ChatGPT drag/drop. No Send click will occur.", "working");
+      await attemptPreparedArtifactDrop(response.result);
+    });
+  }
+
+  function requestArtifactLocalAttachLatest() {
+    const payload = localAttachPayload();
+    const beforeCount = uploadedAttachmentCount();
+    if (!payload) {
+      const detail = "attach_control_or_composer_not_detected\nUse Preview Attach Target first and confirm Diagnostics sees the attach/add-file control.";
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Local attach blocked", detail, "error");
+      return;
+    }
+    previewAttachTarget();
+    setBridgeStatus("Local attach latest", "Requesting approval after local geometry capture. The daemon will dry-run before any mouse movement.", "working");
+    chrome.runtime.sendMessage({
+      type: "ion_chatops_artifact_local_attach_latest",
+      payload,
+    }, async (response) => {
+      const detail = response?.ok ? compactJson(response.result) : blockedDetail(response);
+      setBridgeArtifactDetail(detail);
+      if (!response?.ok) {
+        setBridgeStatus("Local attach blocked", detail.split("\n")[0] ?? "", "error");
+        return;
+      }
+      await copyBridgeResult("Local artifact attach", detail);
+      waitForUploadChip(beforeCount, "Local attach", detail);
+    });
+  }
+
+  function requestArtifactLocalAttachDryRun() {
+    const payload = localAttachPayload();
+    if (!payload) {
+      const detail = "attach_control_or_composer_not_detected\nUse Preview Attach Target and confirm the green ring is on the attach button.";
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus("Dry run blocked", detail, "error");
+      return;
+    }
+    previewAttachTarget();
+    setBridgeStatus("Dry run attach", "Requesting daemon geometry validation. No mouse movement will occur.", "working");
+    chrome.runtime.sendMessage({
+      type: "ion_chatops_artifact_local_attach_dry_run",
+      payload,
+    }, async (response) => {
+      const detail = response?.ok ? compactJson(response.result, 2200) : blockedDetail(response);
+      setBridgeArtifactDetail(detail);
+      setBridgeStatus(response?.ok ? "Dry run passed" : "Dry run blocked", detail.split("\n")[0] ?? "", response?.ok ? "success" : "error");
+      if (response?.ok) await copyBridgeResult("Local attach dry run", detail);
     });
   }
 
@@ -1054,61 +2805,136 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     submitPacket(label, parsed.packet);
   }
 
-  function scan() {
-    refreshBridgePosition();
-    let processed = 0;
-    for (const block of candidateBlocks()) {
-      const key = `${block.length}:${block.slice(0, 160)}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      processed += 1;
-      const parsed = parseIonActionYamlWithDiagnostics(block);
-      const packet = parsed.packet;
-      if (!packet) {
-        setBridgeStatus("YAML detected but not parsed", parsed.finding ?? "unknown_parse_failure", "error");
-        setBridgeActionDetail((parsed.extracted_yaml ?? block).slice(0, 1200));
-        continue;
-      }
-      if (shouldSkipAction(packet)) continue;
-      const local = localValidate(packet);
-      if (!local.accepted) {
-        if (!markBlockedOnce(packet, local.findings)) continue;
-        setBridgeStatus("YAML blocked locally", local.findings.join("\n"), "error");
-        setBridgeActionDetail(JSON.stringify(packet.ion_action, null, 2));
-        console.warn("ION ChatOps candidate failed local validation", local);
-        continue;
-      }
-      setBridgeActionDetail(actionSummary(packet));
-      const actionId = packet.ion_action.action_id;
-      if (actionId) inFlightActionIds.add(actionId);
-      setBridgeStatus("ION action detected", `${packet.ion_action.intent}: ${packet.ion_action.action_id}\nValidating with local daemon.`, "working");
-      chrome.runtime.sendMessage({ type: "ion_chatops_candidate", packet }, async (response) => {
-        if (!response?.ok || !response?.result) {
-          if (actionId) inFlightActionIds.delete(actionId);
-          setBridgeStatus(
-            "ION action blocked",
-            blockedDetail(response),
-            "error",
-          );
-          return;
-        }
-        if (actionId) {
-          inFlightActionIds.delete(actionId);
-          submittedActionIds.add(actionId);
-        }
-        const result = response.result;
-        const summary = [
-          "ION ChatOps receipt",
-          `action_id: ${packet.ion_action.action_id}`,
-          `intent: ${packet.ion_action.intent}`,
-          `receipt_path: ${result.receipt_path ?? ""}`,
-          `status: ${result.verdict ?? ""}`
-        ].join("\n");
-        await copyReceiptSummary(summary);
-        setBridgeStatus("ION action submitted", summary, "success");
-      });
+  function scan(mode = "manual") {
+    if (scanRunning) {
+      scanQueued = true;
+      return 0;
     }
-    return processed;
+    scanRunning = true;
+    refreshBridgePosition();
+    try {
+      updateDomActionRegistry(mode);
+      let processed = 0;
+      for (const block of candidateBlocks(mode)) {
+        const key = `${block.length}:${block.slice(0, 160)}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        processed += 1;
+        const parsed = parseIonActionYamlWithDiagnostics(block);
+        const packet = parsed.packet;
+        if (!packet) {
+          setBridgeStatus("YAML detected but not parsed", parsed.finding ?? "unknown_parse_failure", "error");
+          setBridgeActionDetail((parsed.extracted_yaml ?? block).slice(0, 1200));
+          continue;
+        }
+        if (shouldSkipAction(packet)) continue;
+        const local = localValidate(packet);
+        if (!local.accepted) {
+          if (!markBlockedOnce(packet, local.findings)) continue;
+          setBridgeStatus("YAML blocked locally", local.findings.join("\n"), "error");
+          setBridgeActionDetail(JSON.stringify(packet.ion_action, null, 2));
+          console.warn("ION ChatOps candidate failed local validation", local);
+          continue;
+        }
+        setBridgeActionDetail(actionSummary(packet));
+        const actionId = packet.ion_action.action_id;
+        if (actionId) inFlightActionIds.add(actionId);
+        setBridgeStatus("ION action detected", `${packet.ion_action.intent}: ${packet.ion_action.action_id}\nValidating with local daemon.`, "working");
+        chrome.runtime.sendMessage({ type: "ion_chatops_candidate", packet }, async (response) => {
+          if (!response?.ok || !response?.result) {
+            if (actionId) inFlightActionIds.delete(actionId);
+            setBridgeStatus(
+              "ION action blocked",
+              blockedDetail(response),
+              "error",
+            );
+            return;
+          }
+          if (actionId) {
+            inFlightActionIds.delete(actionId);
+            submittedActionIds.add(actionId);
+          }
+          const result = response.result;
+          const summary = [
+            "ION ChatOps receipt",
+            `action_id: ${packet.ion_action.action_id}`,
+            `intent: ${packet.ion_action.intent}`,
+            `receipt_path: ${result.receipt_path ?? ""}`,
+            `status: ${result.verdict ?? ""}`
+          ].join("\n");
+          await copyReceiptSummary(summary);
+          setBridgeStatus("ION action submitted", summary, "success");
+        });
+      }
+      return processed;
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : String(error);
+      console.warn("ION ChatOps scan failed", error);
+      setBridgeStatus("ION scan degraded", detail, "error");
+      setBridgeDiagnosticsDetail(`Scan failed in ${mode} mode.\n${detail}`);
+      return 0;
+    } finally {
+      scanRunning = false;
+      if (scanQueued) {
+        scanQueued = false;
+        scheduleScan("auto");
+      }
+    }
+  }
+
+  function mutationTouchesIonUi(mutation) {
+    const isIonNode = (node) => {
+      if (node.nodeType !== Node.ELEMENT_NODE) return false;
+      const element = node;
+      return Boolean(
+        element.closest(`#${PANEL_ID}`) ||
+          element.closest(`#${MODAL_ID}`) ||
+          element.closest(`#${DOM_REGISTRY_STYLE_ID}`) ||
+          element.id === PANEL_ID ||
+          element.id === MODAL_ID ||
+          element.id === DOM_REGISTRY_STYLE_ID ||
+          element.closest(".ion-dom-badge")
+      );
+    };
+    if (isIonNode(mutation.target)) return true;
+    return Array.from(mutation.addedNodes).some(isIonNode) || Array.from(mutation.removedNodes).some(isIonNode);
+  }
+
+  function scheduleScan(mode = "auto") {
+    if (scanTimer !== null) return;
+    scanTimer = window.setTimeout(() => {
+      scanTimer = null;
+      scan(mode);
+    }, SCAN_DEBOUNCE_MS);
+  }
+
+  function initializeBridge() {
+    const observerRoot = document.body ?? document.documentElement;
+    const observer = new MutationObserver((mutations) => {
+      if (mutations.length && mutations.every(mutationTouchesIonUi)) return;
+      scheduleScan("auto");
+    });
+    observer.observe(observerRoot, { childList: true, subtree: true });
+    window.addEventListener("resize", () => refreshBridgePosition());
+    if (typeof document.addEventListener === "function") {
+      document.addEventListener("transitionend", (event) => {
+        const target = event.target;
+        if (target instanceof Element && shouldIgnoreScanNode(target)) return;
+        refreshBridgePosition();
+      }, true);
+      document.addEventListener(
+        "click",
+        (event) => {
+          const target = event.target;
+          if (target instanceof Element && shouldIgnoreScanNode(target)) return;
+          window.setTimeout(() => refreshBridgePosition(), 60);
+          window.setTimeout(() => refreshBridgePosition(), 260);
+        },
+        true,
+      );
+    }
+    setBridgeStatus("Monitoring ChatGPT", "Waiting for ion_action YAML blocks.", "idle");
+    scheduleScan("auto");
   }
 
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
@@ -1133,20 +2959,25 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
     parseStrictIonActionYaml,
     localValidate,
     candidateBlocks,
+    updateDomActionRegistry,
     submitActionText,
+    refreshBridgePosition,
+    previewAttachTarget,
+    previewDropTarget,
+    findDropTarget,
+    localAttachPayload,
+    requestArtifactLocalAttachDryRun,
+    beginAttachTargetPicker,
     rescan: () => {
       seen.clear();
-      return scan();
+      return scan("manual");
     },
+    scheduleScan,
   };
-
-  const observer = new MutationObserver(() => scan());
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-  window.addEventListener("resize", () => refreshBridgePosition());
   window.addEventListener("ion-chatops-rescan", () => {
     seen.clear();
     setBridgeStatus("Manual rescan", "Scanning rendered ChatGPT code blocks.", "working");
-    const found = scan();
+    const found = scan("manual");
     if (!found) {
       setBridgeStatus(
         "No action block found",
@@ -1170,6 +3001,12 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   window.addEventListener("ion-chatops-agent-queue", () => {
     requestAgentRead("ion_chatops_agent_queue", "Agent queue");
   });
+  window.addEventListener("ion-chatops-agent-preview", () => {
+    requestAgentPreview();
+  });
+  window.addEventListener("ion-chatops-agent-latest", () => {
+    requestAgentLatestRuns();
+  });
   window.addEventListener("ion-chatops-agent-prepare", () => {
     requestAgentMutation("ion_chatops_agent_prepare_next", "Agent prepare next");
   });
@@ -1185,6 +3022,48 @@ For implementation work, prefer create_codex_work_packet so local Codex can insp
   window.addEventListener("ion-chatops-safe-full-zip", () => {
     requestZip("ion_chatops_safe_full_zip", "Safe full project ZIP");
   });
-  setBridgeStatus("Monitoring ChatGPT", "Waiting for ion_action YAML blocks.", "idle");
-  scan();
+  window.addEventListener("ion-chatops-sandbox-returns", () => {
+    requestSandboxReturns();
+  });
+  window.addEventListener("ion-chatops-sandbox-diff", () => {
+    requestSandboxMutation("ion_chatops_sandbox_diff_latest", "Sandbox diff preview");
+  });
+  window.addEventListener("ion-chatops-sandbox-review", () => {
+    requestSandboxMutation("ion_chatops_sandbox_queue_latest", "Sandbox queue review");
+  });
+  window.addEventListener("ion-chatops-artifact-attachables", () => {
+    requestArtifactAttachables();
+  });
+  window.addEventListener("ion-chatops-artifact-drop-latest", () => {
+    requestArtifactDropLatest();
+  });
+  window.addEventListener("ion-chatops-artifact-preview-attach", () => {
+    previewAttachTarget();
+  });
+  window.addEventListener("ion-chatops-artifact-preview-drop", () => {
+    previewDropTarget();
+  });
+  window.addEventListener("ion-chatops-artifact-dry-run-attach", () => {
+    requestArtifactLocalAttachDryRun();
+  });
+  window.addEventListener("ion-chatops-artifact-local-attach", () => {
+    requestArtifactLocalAttachLatest();
+  });
+  window.addEventListener("ion-chatops-settings-pick-attach", () => {
+    beginAttachTargetPicker();
+  });
+  window.addEventListener("ion-chatops-settings-clear-attach", () => {
+    clearAttachTargetCalibration();
+  });
+  window.addEventListener("ion-chatops-settings-pick-drop", () => {
+    beginDropTargetPicker();
+  });
+  window.addEventListener("ion-chatops-settings-clear-drop", () => {
+    clearDropTargetCalibration();
+  });
+  if (safeModeDisabled()) {
+    console.info(`ION ChatOps Bridge disabled by ${SAFE_MODE_KEY}. Remove the flag and reload to re-enable.`);
+  } else {
+    initializeBridge();
+  }
 })();

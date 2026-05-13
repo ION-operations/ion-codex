@@ -21,8 +21,47 @@ POST /actions/validate
 POST /actions/submit
 GET  /actions/{action_id}
 GET  /receipts/{receipt_id}
+GET  /sandbox/returns
+GET  /sandbox/returns/{return_id}
+GET  /artifacts/attachables
+GET  /artifacts/download/{download_token}
+GET  /operator/status
+POST /artifacts/prepare-upload
+POST /operator/attach-artifact
+POST /sandbox/returns/register
+POST /sandbox/returns/file
+POST /sandbox/returns/commit
+POST /sandbox/returns/diff-preview
+POST /sandbox/returns/queue-review
 ```
 
 The daemon does not expose shell, delete, credential access, production deploy,
 or git push. It writes receipts under
 `ION/05_context/current/chatops_bridge/receipts/`.
+
+The sandbox return endpoints land review material only under
+`ION/05_context/inbox/chatgpt_sandbox_returns/` and use
+`ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py`. They do not apply
+patches to live source; `queue-review` only creates a bounded Codex review work
+packet.
+
+The artifact endpoints expose only approved package/inbox candidates from
+bounded ION roots. `prepare-upload` requires Braden approval, writes a download
+ticket receipt, and serves a localhost file stream for the browser extension to
+attempt a visible ChatGPT drag/drop. It does not click Send, apply patches, or
+upload anything silently.
+
+The local operator endpoints expose bounded desktop-assist status and approved
+artifact attachment only. `/operator/attach-artifact` validates a prepared
+upload ticket, rejects any send-after-attach request, requires an extension
+target rectangle, checks the active window is a browser/ChatGPT surface by
+default, and uses the available local helper, currently `xdotool` on Linux/X11,
+to select the exact approved artifact in the OS file picker. Screen coordinates
+from the extension are preferred for the desktop click; viewport coordinates are
+retained as evidence. The browser extension still verifies whether an upload
+chip appears. No Send click is performed.
+
+Before a real attach, the extension calls the same endpoint with `dry_run: true`.
+The daemon validates target kind, viewport rect, screen rect, composer proximity,
+ChatGPT page URL, capture freshness, and display bounds. Geometry failures return
+`LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID` and do not move the pointer.

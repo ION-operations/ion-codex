@@ -11,15 +11,29 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import mimetypes
 import re
+import secrets
+import shutil
+import subprocess
+import time
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Mapping
+from urllib.parse import unquote
 
 from .ion_carrier_onboard import resolve_shell_root_from_ion_root
 from .ion_carrier_onboarding_packet import build_carrier_onboarding_packet
 from .ion_chatgpt_browser_mcp_connector_contract import call_chatgpt_connector_tool
+from .ion_chatgpt_sandbox_return_intake import (
+    build_sandbox_return_diff_preview,
+    build_sandbox_return_queue_projection,
+    commit_sandbox_return,
+    queue_sandbox_return_codex_review,
+    register_sandbox_return,
+    write_sandbox_return_file,
+)
 from .ion_codex_queue_runner import (
     build_codex_queue_runner_status,
     prepare_codex_queue_run,
@@ -45,6 +59,8 @@ RECEIPTS_DIR = BASE_DIR / "receipts"
 RUNTIME_DIR = BASE_DIR / "runtime"
 ARTIFACTS_DIR = BASE_DIR / "artifacts"
 EXPORTS_DIR = BASE_DIR / "exports"
+ARTIFACT_TICKETS_DIR = RUNTIME_DIR / "artifact_upload_tickets"
+MAX_BROWSER_UPLOAD_BYTES = 25 * 1024 * 1024
 
 POLICY_PATHS = {
     "runtime_protocol": "ION/02_architecture/ION_BROWSER_CARRIER_RUNTIME_PROTOCOL.md",
@@ -53,6 +69,10 @@ POLICY_PATHS = {
     "extension_policy": "ION/03_registry/ion_chatops_extension_policy.yaml",
     "daemon_policy": "ION/03_registry/ion_chatops_local_daemon_policy.yaml",
     "github_data_plane_registry": "ION/03_registry/ion_github_data_plane_registry.yaml",
+    "operator_attachment_protocol": "ION/02_architecture/ION_BROWSER_FILE_ATTACHMENT_AUTOMATION_PROTOCOL.md",
+    "sandbox_return_protocol": "ION/02_architecture/ION_CHATGPT_SANDBOX_RETURN_INTAKE_PROTOCOL.md",
+    "sandbox_return_schema": "ION/03_registry/ion_chatgpt_sandbox_return.schema.json",
+    "sandbox_return_intake": "ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py",
     "connector_contract": "ION/04_packages/kernel/ion_chatgpt_browser_mcp_connector_contract.py",
     "codex_queue_runner": "ION/04_packages/kernel/ion_codex_queue_runner.py",
     "lifecycle_packager": "ION/04_packages/kernel/ion_lifecycle_packager.py",
@@ -93,6 +113,22 @@ PROTECTED_PATH_TOKENS = (
     "token",
     "credential",
     "vault",
+)
+
+ATTACHABLE_FILE_SUFFIXES = (
+    ".zip",
+    ".md",
+    ".txt",
+    ".json",
+    ".diff",
+    ".patch",
+)
+
+ATTACHABLE_ROOTS = (
+    "ION/05_context/current/chatops_bridge/exports/",
+    "ION/05_context/current/chatops_bridge/artifacts/",
+    "ION/05_context/inbox/chatgpt_sandbox_returns/",
+    "ION/06_artifacts/packages/",
 )
 
 FAILURE_CLASSES = (
@@ -651,6 +687,530 @@ def _rel_if_inside_root(root: Path, value: str | Path | None) -> str | None:
         return path.as_posix()
 
 
+def _path_from_repo_rel(root: Path, rel_value: str | Path | None) -> Path | None:
+    if rel_value is None:
+        return None
+    rel = str(rel_value).replace("\\", "/").strip()
+    if not rel or rel.startswith("/") or rel.startswith("../") or "/../" in rel or rel.endswith("/.."):
+        return None
+    path = (root / rel).resolve()
+    try:
+        path.relative_to(root)
+    except ValueError:
+        return None
+    return path
+
+
+def _is_attachable_rel_path(rel: str) -> bool:
+    lowered = f"/{rel.lower()}"
+    if any(token in lowered for token in PROTECTED_PATH_TOKENS):
+        return False
+    return any(rel.startswith(prefix) for prefix in ATTACHABLE_ROOTS)
+
+
+def _artifact_record(root: Path, path: Path) -> dict[str, Any] | None:
+    if not path.is_file():
+        return None
+    rel = _repo_rel(path, root)
+    if not _is_attachable_rel_path(rel):
+        return None
+    suffix = path.suffix.lower()
+    if suffix not in ATTACHABLE_FILE_SUFFIXES:
+        return None
+    stat = path.stat()
+    if stat.st_size > MAX_BROWSER_UPLOAD_BYTES:
+        return {
+            "path": rel,
+            "name": path.name,
+            "size_bytes": stat.st_size,
+            "sha256": None,
+            "mtime": datetime.fromtimestamp(stat.st_mtime, timezone.utc).replace(microsecond=0).isoformat(),
+            "content_type": mimetypes.guess_type(path.name)[0] or "application/octet-stream",
+            "attachable": False,
+            "finding": "file_exceeds_browser_upload_limit",
+        }
+    return {
+        "path": rel,
+        "name": path.name,
+        "size_bytes": stat.st_size,
+        "sha256": _sha256_file(path),
+        "mtime": datetime.fromtimestamp(stat.st_mtime, timezone.utc).replace(microsecond=0).isoformat(),
+        "content_type": mimetypes.guess_type(path.name)[0] or "application/octet-stream",
+        "attachable": True,
+        "finding": None,
+    }
+
+
+def build_chatops_attachable_artifacts(root: str | Path | None = None, *, limit: int = 30) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    candidates: list[dict[str, Any]] = []
+    for rel_root in ATTACHABLE_ROOTS:
+        base = shell_root / rel_root
+        if not base.exists():
+            continue
+        for suffix in ATTACHABLE_FILE_SUFFIXES:
+            for path in base.rglob(f"*{suffix}"):
+                record = _artifact_record(shell_root, path)
+                if record:
+                    candidates.append(record)
+    candidates.sort(key=lambda row: str(row.get("mtime") or ""), reverse=True)
+    return {
+        "schema_id": "ion.chatops.attachable_artifacts.v1",
+        "ok": True,
+        "verdict": READY_VERDICT,
+        "max_browser_upload_bytes": MAX_BROWSER_UPLOAD_BYTES,
+        "candidate_count": len(candidates),
+        "candidates": candidates[:limit],
+        "allowed_roots": list(ATTACHABLE_ROOTS),
+        "supported_suffixes": list(ATTACHABLE_FILE_SUFFIXES),
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def prepare_chatops_artifact_upload(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    approval = _validate_bridge_operation_approval(packet)
+    operation = "artifact_prepare_browser_drop"
+    if not approval["accepted"]:
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="rejected",
+            packet=packet,
+            result=approval,
+            failure_classification="USER_APPROVAL_REJECTED",
+        )
+        return {
+            "schema_id": "ion.chatops.artifact_upload_prepare_result.v1",
+            "ok": False,
+            "finding": "approval_failed",
+            "approval": approval,
+            "receipt_path": receipt_path,
+            "production_authority": False,
+            "live_execution_authority": False,
+        }
+    artifact_path = _path_from_repo_rel(shell_root, packet.get("artifact_path") or packet.get("path"))
+    if artifact_path is None or not artifact_path.exists():
+        result = {"ok": False, "finding": "artifact_not_found"}
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="failed",
+            packet=packet,
+            result=result,
+            failure_classification="POLICY_BLOCK_WORKING_AS_DESIGNED",
+        )
+        return {**result, "schema_id": "ion.chatops.artifact_upload_prepare_result.v1", "receipt_path": receipt_path}
+    record = _artifact_record(shell_root, artifact_path)
+    if not record or not record.get("attachable"):
+        result = {"ok": False, "finding": (record or {}).get("finding") or "artifact_not_attachable", "artifact": record}
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="failed",
+            packet=packet,
+            result=result,
+            failure_classification="POLICY_BLOCK_WORKING_AS_DESIGNED",
+        )
+        return {**result, "schema_id": "ion.chatops.artifact_upload_prepare_result.v1", "receipt_path": receipt_path}
+    token = secrets.token_urlsafe(24)
+    ticket = {
+        "schema_id": "ion.chatops.artifact_upload_ticket.v1",
+        "created_at": _now(),
+        "token": token,
+        "artifact": record,
+        "operation": operation,
+        "approved_by": approval.get("approved_by"),
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+    ticket_path = shell_root / ARTIFACT_TICKETS_DIR / f"{_safe_slug(token)}.json"
+    _write_json(ticket_path, ticket)
+    result = {
+        "ok": True,
+        "artifact": record,
+        "download_token": token,
+        "download_url": f"http://127.0.0.1:{DEFAULT_PORT}/artifacts/download/{token}",
+        "ticket_path": _repo_rel(ticket_path, shell_root),
+        "content_type": record.get("content_type"),
+        "filename": record.get("name"),
+        "size_bytes": record.get("size_bytes"),
+        "sha256": record.get("sha256"),
+    }
+    receipt_path = _write_operation_receipt(
+        shell_root,
+        operation=operation,
+        status="completed",
+        packet=packet,
+        result=result,
+        files_touched=[_repo_rel(ticket_path, shell_root)],
+        target_refs=[{"provider": "local_ion", "path": record["path"], "role": "browser_attachment_candidate"}],
+    )
+    return {
+        "schema_id": "ion.chatops.artifact_upload_prepare_result.v1",
+        "ok": True,
+        "verdict": READY_VERDICT,
+        "receipt_path": receipt_path,
+        **result,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def resolve_chatops_artifact_download(root: str | Path | None, token: str) -> tuple[Path | None, dict[str, Any]]:
+    shell_root = _resolve_root(root)
+    ticket_path = shell_root / ARTIFACT_TICKETS_DIR / f"{_safe_slug(token)}.json"
+    ticket = _read_json(ticket_path)
+    if not ticket:
+        return None, {"ok": False, "finding": "ticket_not_found"}
+    artifact = ticket.get("artifact") if isinstance(ticket.get("artifact"), Mapping) else {}
+    path = _path_from_repo_rel(shell_root, artifact.get("path"))
+    if path is None or not path.exists() or not path.is_file():
+        return None, {"ok": False, "finding": "artifact_not_found", "ticket": ticket}
+    record = _artifact_record(shell_root, path)
+    if not record or not record.get("attachable") or record.get("sha256") != artifact.get("sha256"):
+        return None, {"ok": False, "finding": "artifact_ticket_validation_failed", "ticket": ticket, "current": record}
+    return path, {"ok": True, "ticket": ticket, "artifact": record}
+
+
+def _operator_tool_paths() -> dict[str, str | None]:
+    return {name: shutil.which(name) for name in ("xdotool", "ydotool", "wtype", "xclip", "xsel", "wl-copy")}
+
+
+def _operator_run(args: list[str], *, timeout: float = 3.0) -> dict[str, Any]:
+    try:
+        completed = subprocess.run(args, capture_output=True, text=True, timeout=timeout, check=False)
+        return {
+            "ok": completed.returncode == 0,
+            "returncode": completed.returncode,
+            "stdout": completed.stdout.strip(),
+            "stderr": completed.stderr.strip(),
+            "args": args[:1] + ["..."],
+        }
+    except Exception as exc:
+        return {"ok": False, "returncode": None, "stdout": "", "stderr": str(exc), "args": args[:1] + ["..."]}
+
+
+def _operator_active_window_title() -> str:
+    tools = _operator_tool_paths()
+    if not tools.get("xdotool"):
+        return ""
+    window = _operator_run([tools["xdotool"] or "xdotool", "getactivewindow"], timeout=1.0)
+    if not window.get("ok") or not window.get("stdout"):
+        return ""
+    title = _operator_run([tools["xdotool"] or "xdotool", "getwindowname", str(window["stdout"])], timeout=1.0)
+    return str(title.get("stdout") or "").strip() if title.get("ok") else ""
+
+
+def _operator_display_geometry() -> dict[str, Any]:
+    tools = _operator_tool_paths()
+    xdotool = tools.get("xdotool")
+    if not xdotool:
+        return {"ok": False, "finding": "xdotool_missing"}
+    result = _operator_run([xdotool, "getdisplaygeometry"], timeout=1.0)
+    if not result.get("ok"):
+        return {"ok": False, "finding": "display_geometry_unavailable", "result": result}
+    parts = str(result.get("stdout") or "").split()
+    if len(parts) < 2:
+        return {"ok": False, "finding": "display_geometry_parse_failed", "result": result}
+    try:
+        width = int(float(parts[0]))
+        height = int(float(parts[1]))
+    except ValueError:
+        return {"ok": False, "finding": "display_geometry_parse_failed", "result": result}
+    return {"ok": True, "width": width, "height": height}
+
+
+def build_chatops_local_operator_status(root: str | Path | None = None) -> dict[str, Any]:
+    _resolve_root(root)
+    tools = _operator_tool_paths()
+    xdotool_ready = bool(tools.get("xdotool"))
+    return {
+        "schema_id": "ion.chatops.local_operator_status.v1",
+        "ok": True,
+        "verdict": READY_VERDICT if xdotool_ready else BLOCKED_VERDICT,
+        "backend": "linux_desktop_automation",
+        "tools": tools,
+        "active_window_title": _operator_active_window_title() if xdotool_ready else "",
+        "display_geometry": _operator_display_geometry() if xdotool_ready else {"ok": False, "finding": "xdotool_missing"},
+        "supported_operations": ["attach_approved_artifact"] if xdotool_ready else [],
+        "requires_operator_presence": True,
+        "silent_upload_authority": False,
+        "send_click_authority": False,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def _target_center(packet: Mapping[str, Any]) -> tuple[int, int] | None:
+    rect = packet.get("target_screen_rect") or packet.get("target_rect")
+    if not isinstance(rect, Mapping):
+        return None
+    try:
+        x = float(rect.get("x") if rect.get("x") is not None else rect.get("left"))
+        y = float(rect.get("y") if rect.get("y") is not None else rect.get("top"))
+        width = float(rect.get("width") or 0)
+        height = float(rect.get("height") or 0)
+    except (TypeError, ValueError):
+        return None
+    if width <= 0 or height <= 0:
+        return None
+    return int(round(x + width / 2)), int(round(y + height / 2))
+
+
+def _rect_payload(packet: Mapping[str, Any], key: str) -> Mapping[str, Any] | None:
+    rect = packet.get(key)
+    return rect if isinstance(rect, Mapping) else None
+
+
+def _rect_numbers(rect: Mapping[str, Any] | None) -> dict[str, float] | None:
+    if not rect:
+        return None
+    try:
+        x = float(rect.get("x") if rect.get("x") is not None else rect.get("left"))
+        y = float(rect.get("y") if rect.get("y") is not None else rect.get("top"))
+        width = float(rect.get("width") or 0)
+        height = float(rect.get("height") or 0)
+    except (TypeError, ValueError):
+        return None
+    return {"x": x, "y": y, "width": width, "height": height, "center_x": x + width / 2, "center_y": y + height / 2}
+
+
+def _operator_active_window_allowed(title: str) -> bool:
+    lowered = title.lower()
+    return bool(re.search(r"chatgpt|google chrome|chromium|chrome", lowered))
+
+
+def _validate_operator_attach_geometry(packet: Mapping[str, Any], status: Mapping[str, Any]) -> dict[str, Any]:
+    findings: list[str] = []
+    target = _rect_numbers(_rect_payload(packet, "target_rect"))
+    screen_target = _rect_numbers(_rect_payload(packet, "target_screen_rect"))
+    composer = _rect_numbers(_rect_payload(packet, "composer_rect"))
+    viewport = packet.get("viewport") if isinstance(packet.get("viewport"), Mapping) else {}
+    display = status.get("display_geometry") if isinstance(status.get("display_geometry"), Mapping) else {}
+    now_ms = int(time.time() * 1000)
+
+    if str(packet.get("target_kind") or "") != "attach_button":
+        findings.append("target_kind_must_be_attach_button")
+    if not target:
+        findings.append("target_rect_required")
+    elif target["width"] <= 1 or target["height"] <= 1:
+        findings.append("target_rect_too_small")
+    if not screen_target:
+        findings.append("target_screen_rect_required")
+    elif screen_target["width"] <= 1 or screen_target["height"] <= 1:
+        findings.append("target_screen_rect_too_small")
+
+    if screen_target:
+        if screen_target["center_x"] < 40 or screen_target["center_y"] < 40:
+            findings.append("target_screen_center_implausibly_near_origin")
+        if display.get("ok") is True:
+            width = float(display.get("width") or 0)
+            height = float(display.get("height") or 0)
+            if width > 0 and height > 0 and not (0 <= screen_target["center_x"] <= width and 0 <= screen_target["center_y"] <= height):
+                findings.append("target_screen_center_outside_display")
+
+    if target and viewport:
+        try:
+            viewport_width = float(viewport.get("width") or 0)
+            viewport_height = float(viewport.get("height") or 0)
+        except (TypeError, ValueError):
+            viewport_width = 0
+            viewport_height = 0
+        if viewport_width > 0 and viewport_height > 0:
+            if not (0 <= target["center_x"] <= viewport_width and 0 <= target["center_y"] <= viewport_height):
+                findings.append("target_viewport_center_outside_viewport")
+
+    if target and composer:
+        near_x = composer["x"] - 96 <= target["center_x"] <= composer["x"] + composer["width"] + 96
+        near_y = composer["y"] - 96 <= target["center_y"] <= composer["y"] + composer["height"] + 96
+        if not (near_x and near_y):
+            findings.append("target_not_near_composer_rect")
+    else:
+        findings.append("composer_rect_required")
+
+    page_url = str(packet.get("page_url") or "")
+    if page_url and not page_url.startswith("https://chatgpt.com/"):
+        findings.append("page_url_not_chatgpt")
+
+    try:
+        captured_at = int(float(packet.get("captured_at_ms") or 0))
+    except (TypeError, ValueError):
+        captured_at = 0
+    if not captured_at:
+        findings.append("capture_timestamp_required")
+    elif abs(now_ms - captured_at) > 60000:
+        findings.append("target_geometry_stale")
+
+    return {
+        "ok": not findings,
+        "findings": findings,
+        "target_rect": target,
+        "target_screen_rect": screen_target,
+        "composer_rect": composer,
+        "viewport": dict(viewport),
+        "display_geometry": dict(display),
+        "planned_click": _target_center(packet),
+        "page_url": page_url,
+        "captured_at_ms": captured_at,
+        "age_ms": abs(now_ms - captured_at) if captured_at else None,
+    }
+
+
+def _operator_failure(root: Path, packet: Mapping[str, Any], *, finding: str, result: Mapping[str, Any], status: str = "failed") -> dict[str, Any]:
+    receipt_path = _write_operation_receipt(
+        root,
+        operation="local_operator_attach_artifact",
+        status=status,
+        packet=packet,
+        result={"ok": False, "finding": finding, **dict(result)},
+        failure_classification="POLICY_BLOCK_WORKING_AS_DESIGNED",
+    )
+    return {
+        "schema_id": "ion.chatops.local_operator_attach_result.v1",
+        "ok": False,
+        "finding": finding,
+        "receipt_path": receipt_path,
+        "production_authority": False,
+        "live_execution_authority": False,
+        **dict(result),
+    }
+
+
+def attach_chatops_artifact_with_local_operator(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    operation = "local_operator_attach_artifact"
+    approval = _validate_bridge_operation_approval(packet)
+    if not approval["accepted"]:
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="rejected",
+            packet=packet,
+            result=approval,
+            failure_classification="USER_APPROVAL_REJECTED",
+        )
+        return {
+            "schema_id": "ion.chatops.local_operator_attach_result.v1",
+            "ok": False,
+            "finding": "approval_failed",
+            "approval": approval,
+            "receipt_path": receipt_path,
+            "production_authority": False,
+            "live_execution_authority": False,
+        }
+    if bool(packet.get("send_after_attach")):
+        return _operator_failure(
+            shell_root,
+            packet,
+            finding="send_click_not_authorized",
+            result={"send_click_authority": False},
+        )
+    token = str(packet.get("download_token") or packet.get("token") or "").strip()
+    artifact_path, validation = resolve_chatops_artifact_download(shell_root, token)
+    if not artifact_path:
+        return _operator_failure(shell_root, packet, finding=str(validation.get("finding") or "artifact_ticket_invalid"), result={"ticket_validation": validation})
+    center = _target_center(packet)
+    status = build_chatops_local_operator_status(shell_root)
+    geometry = _validate_operator_attach_geometry(packet, status)
+    if not geometry.get("ok"):
+        return _operator_failure(
+            shell_root,
+            packet,
+            finding="LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID",
+            result={"artifact": validation.get("artifact"), "geometry": geometry, "operator_status": status},
+            status="blocked",
+        )
+    if center is None:
+        return _operator_failure(shell_root, packet, finding="attach_target_rect_required", result={"artifact": validation.get("artifact"), "geometry": geometry})
+    if bool(packet.get("dry_run")):
+        result = {
+            "ok": True,
+            "dry_run": True,
+            "operation": operation,
+            "artifact": validation.get("artifact"),
+            "target_center": center,
+            "geometry": geometry,
+            "operator_status": status,
+            "no_send_click_performed": True,
+        }
+        receipt_path = _write_operation_receipt(
+            shell_root,
+            operation=operation,
+            status="completed",
+            packet=packet,
+            result=result,
+            target_refs=[{"provider": "local_ion", "path": (validation.get("artifact") or {}).get("path"), "role": "approved_local_operator_attachment"}],
+        )
+        return {
+            "schema_id": "ion.chatops.local_operator_attach_result.v1",
+            "ok": True,
+            "verdict": READY_VERDICT,
+            "receipt_path": receipt_path,
+            "production_authority": False,
+            "live_execution_authority": False,
+            **result,
+        }
+    tools = status.get("tools") if isinstance(status.get("tools"), Mapping) else {}
+    xdotool = str(tools.get("xdotool") or "")
+    if not xdotool:
+        return _operator_failure(shell_root, packet, finding="desktop_automation_tool_missing", result={"operator_status": status, "required_tool": "xdotool"})
+    before_title = _operator_active_window_title()
+    if bool(packet.get("active_window_required", True)) and not _operator_active_window_allowed(before_title):
+        return _operator_failure(shell_root, packet, finding="active_window_not_chatgpt", result={"active_window_title": before_title})
+    assert center is not None
+    click = _operator_run([xdotool, "mousemove", "--sync", str(center[0]), str(center[1]), "click", "1"], timeout=2.0)
+    if not click.get("ok"):
+        return _operator_failure(shell_root, packet, finding="attach_click_failed", result={"click": click, "active_window_title": before_title})
+    time.sleep(float(packet.get("post_click_delay_seconds") or 0.45))
+    picker_title = _operator_active_window_title()
+    if bool(packet.get("file_picker_title_check", True)) and not re.search(r"open|file|select|choose|upload", picker_title, flags=re.I):
+        return _operator_failure(
+            shell_root,
+            packet,
+            finding="file_picker_not_detected",
+            result={"active_window_before": before_title, "active_window_after_click": picker_title, "click": click},
+        )
+    commands = [
+        [xdotool, "key", "--clearmodifiers", "ctrl+l"],
+        [xdotool, "type", "--delay", "1", "--clearmodifiers", artifact_path.as_posix()],
+        [xdotool, "key", "--clearmodifiers", "Return"],
+    ]
+    command_results = [_operator_run(command, timeout=5.0) for command in commands]
+    ok = all(item.get("ok") for item in command_results)
+    result = {
+        "ok": ok,
+        "operation": operation,
+        "artifact": validation.get("artifact"),
+        "target_center": center,
+        "geometry": geometry,
+        "active_window_before": before_title,
+        "active_window_after_click": picker_title,
+        "command_results": command_results,
+        "no_send_click_performed": True,
+        "verification": "extension_should_confirm_upload_chip",
+    }
+    receipt_path = _write_operation_receipt(
+        shell_root,
+        operation=operation,
+        status="completed" if ok else "failed",
+        packet=packet,
+        result=result,
+        target_refs=[{"provider": "local_ion", "path": (validation.get("artifact") or {}).get("path"), "role": "approved_local_operator_attachment"}],
+        failure_classification=None if ok else "LOCAL_DAEMON_FAILURE",
+    )
+    return {
+        "schema_id": "ion.chatops.local_operator_attach_result.v1",
+        "ok": ok,
+        "verdict": READY_VERDICT if ok else BLOCKED_VERDICT,
+        "receipt_path": receipt_path,
+        "production_authority": False,
+        "live_execution_authority": False,
+        **result,
+    }
+
+
 def _operation_receipt_path(root: Path, receipt_id: str) -> Path:
     return root / RECEIPTS_DIR / f"{_safe_slug(receipt_id)}.json"
 
@@ -867,6 +1427,7 @@ def build_chatops_context_pack(root: str | Path | None = None) -> dict[str, Any]
     sev_context = build_sev_context_brief(shell_root)
     agent_status = build_chatops_agent_status(shell_root)
     agent_queue = build_chatops_agent_queue(shell_root)
+    sandbox_returns = build_sandbox_return_queue_projection(shell_root)
     latest_receipts = _latest_chatops_files(shell_root, RECEIPTS_DIR, limit=8)
     pack = {
         "schema": "ion.chatops.context_pack.v1",
@@ -887,6 +1448,12 @@ def build_chatops_context_pack(root: str | Path | None = None) -> dict[str, Any]
             "request_count": agent_queue.get("request_count"),
             "requests": agent_queue.get("requests"),
         },
+        "sandbox_returns": {
+            "queue_path": sandbox_returns.get("queue_path"),
+            "inbox_root": sandbox_returns.get("inbox_root"),
+            "return_count": sandbox_returns.get("return_count"),
+            "returns": sandbox_returns.get("returns"),
+        },
         "latest_chatops_receipts": latest_receipts,
         "bridge_tools": {
             "onboard": "GET /context/sev/onboarding",
@@ -895,6 +1462,13 @@ def build_chatops_context_pack(root: str | Path | None = None) -> dict[str, Any]
             "agent_prepare_next": "POST /agent/prepare-next with Braden approval",
             "agent_start_one": "POST /agent/process-one with start=true and Braden approval",
             "compact_zip": "POST /exports/lifecycle-zip with package_class=COMPACT_RUNTIME and Braden approval",
+            "attachable_artifacts": "GET /artifacts/attachables",
+            "prepare_artifact_upload": "POST /artifacts/prepare-upload with Braden approval",
+            "local_operator_status": "GET /operator/status",
+            "local_operator_attach_artifact": "POST /operator/attach-artifact with Braden approval",
+            "sandbox_returns": "GET /sandbox/returns",
+            "sandbox_diff_preview": "POST /sandbox/returns/diff-preview with Braden approval",
+            "sandbox_queue_review": "POST /sandbox/returns/queue-review with Braden approval",
         },
         "authority": {
             "production_authority": False,
@@ -1046,6 +1620,101 @@ def create_chatops_safe_full_zip(root: str | Path | None, packet: Mapping[str, A
         return {"schema_id": "ion.chatops.export_result.v1", "ok": False, "finding": "package_failed", "error": str(exc), "receipt_path": receipt_path}
 
 
+def _sandbox_approval_or_reject(root: Path, packet: Mapping[str, Any], operation: str) -> dict[str, Any] | None:
+    approval = _validate_bridge_operation_approval(packet)
+    if approval["accepted"]:
+        return None
+    receipt_path = _write_operation_receipt(
+        root,
+        operation=operation,
+        status="rejected",
+        packet=packet,
+        result=approval,
+        failure_classification="USER_APPROVAL_REJECTED",
+    )
+    return {
+        "schema_id": "ion.chatops.sandbox_return_operation_result.v1",
+        "ok": False,
+        "finding": "approval_failed",
+        "approval": approval,
+        "receipt_path": receipt_path,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def _sandbox_return_detail(root: Path, return_id: str) -> dict[str, Any]:
+    projection = build_sandbox_return_queue_projection(root)
+    rows = [row for row in projection.get("returns", []) if isinstance(row, Mapping) and row.get("return_id") == return_id]
+    if not rows:
+        return {
+            "schema_id": "ion.chatops.sandbox_return_detail.v1",
+            "ok": False,
+            "finding": "return_not_found",
+            "return_id": return_id,
+            "production_authority": False,
+            "live_execution_authority": False,
+        }
+    base = root / "ION/05_context/inbox/chatgpt_sandbox_returns" / return_id
+    manifest = _read_json(base / "SANDBOX_RETURN_MANIFEST.json") or {}
+    diff_preview = _read_json(base / "DIFF_PREVIEW.json") or {}
+    summary = ""
+    if (base / "SUMMARY.md").exists():
+        summary = (base / "SUMMARY.md").read_text(encoding="utf-8", errors="replace")[:4000]
+    return {
+        "schema_id": "ion.chatops.sandbox_return_detail.v1",
+        "ok": True,
+        "return": rows[0],
+        "manifest": manifest,
+        "summary": summary,
+        "diff_preview": diff_preview,
+        "production_authority": False,
+        "live_execution_authority": False,
+    }
+
+
+def register_chatops_sandbox_return(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_register")
+    if rejected:
+        return rejected
+    return register_sandbox_return(shell_root, packet)
+
+
+def write_chatops_sandbox_return_file(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_file")
+    if rejected:
+        return rejected
+    return_id = str(packet.get("return_id") or "").strip()
+    rel_path = str(packet.get("path") or packet.get("rel_path") or "").strip()
+    return write_sandbox_return_file(shell_root, return_id, rel_path, packet)
+
+
+def commit_chatops_sandbox_return(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_commit")
+    if rejected:
+        return rejected
+    return commit_sandbox_return(shell_root, str(packet.get("return_id") or "").strip())
+
+
+def preview_chatops_sandbox_return_diff(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_diff_preview")
+    if rejected:
+        return rejected
+    return build_sandbox_return_diff_preview(shell_root, str(packet.get("return_id") or "").strip())
+
+
+def queue_chatops_sandbox_return_review(root: str | Path | None, packet: Mapping[str, Any]) -> dict[str, Any]:
+    shell_root = _resolve_root(root)
+    rejected = _sandbox_approval_or_reject(shell_root, packet, "sandbox_return_queue_review")
+    if rejected:
+        return rejected
+    return queue_sandbox_return_codex_review(shell_root, str(packet.get("return_id") or "").strip())
+
+
 def build_chatops_policy(root: str | Path | None = None) -> dict[str, Any]:
     shell_root = _resolve_root(root)
     owner_paths = {
@@ -1079,10 +1748,48 @@ def build_chatops_policy(root: str | Path | None = None) -> dict[str, Any]:
             "context_pack": "GET /exports/context-pack",
             "compact_runtime_zip": "POST /exports/lifecycle-zip",
             "safe_full_project_zip": "POST /exports/safe-full-zip",
+            "attachable_artifacts": "GET /artifacts/attachables",
+            "prepare_artifact_upload": "POST /artifacts/prepare-upload",
+            "browser_upload_limit_bytes": MAX_BROWSER_UPLOAD_BYTES,
             "packager_owners": [
                 "ION/04_packages/kernel/ion_lifecycle_packager.py",
                 "ION/04_packages/kernel/ion_safe_full_project_packager.py",
             ],
+        },
+        "artifact_upload_surface": {
+            "list": "GET /artifacts/attachables",
+            "prepare_upload": "POST /artifacts/prepare-upload",
+            "download_ticket": "GET /artifacts/download/{token}",
+            "local_operator_status": "GET /operator/status",
+            "local_operator_attach": "POST /operator/attach-artifact",
+            "allowed_roots": list(ATTACHABLE_ROOTS),
+            "supported_suffixes": list(ATTACHABLE_FILE_SUFFIXES),
+            "max_browser_upload_bytes": MAX_BROWSER_UPLOAD_BYTES,
+            "silent_upload_authority": False,
+            "send_click_authority": False,
+        },
+        "local_operator_surface": {
+            "status": "GET /operator/status",
+            "attach_artifact": "POST /operator/attach-artifact",
+            "backend": "xdotool_first_linux_desktop_helper",
+            "operator_present_required": True,
+            "active_browser_or_chatgpt_window_required": True,
+            "file_picker_title_check": True,
+            "send_click_authority": False,
+            "silent_upload_authority": False,
+        },
+        "sandbox_return_surface": {
+            "queue": "GET /sandbox/returns",
+            "detail": "GET /sandbox/returns/{return_id}",
+            "register": "POST /sandbox/returns/register",
+            "file": "POST /sandbox/returns/file",
+            "commit": "POST /sandbox/returns/commit",
+            "diff_preview": "POST /sandbox/returns/diff-preview",
+            "queue_review": "POST /sandbox/returns/queue-review",
+            "inbox_root": "ION/05_context/inbox/chatgpt_sandbox_returns/",
+            "owner": "ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py",
+            "direct_apply_authority": False,
+            "git_push_authority": False,
         },
         "main_policy": {
             "main_auto_push_allowed": False,
@@ -1269,6 +1976,23 @@ def _http_response(handler: BaseHTTPRequestHandler, status: int, payload: Mappin
     handler.wfile.write(body)
 
 
+def _http_file_response(handler: BaseHTTPRequestHandler, path: Path, artifact: Mapping[str, Any]) -> None:
+    size = path.stat().st_size
+    content_type = str(artifact.get("content_type") or mimetypes.guess_type(path.name)[0] or "application/octet-stream")
+    filename = re.sub(r'["\r\n]+', "_", path.name)
+    handler.send_response(200)
+    handler.send_header("Content-Type", content_type)
+    handler.send_header("Content-Length", str(size))
+    handler.send_header("Content-Disposition", f'attachment; filename="{filename}"')
+    handler.send_header("Access-Control-Allow-Origin", "https://chatgpt.com")
+    handler.send_header("Access-Control-Allow-Headers", "Content-Type")
+    handler.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    handler.end_headers()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            handler.wfile.write(chunk)
+
+
 def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
     class ChatOpsHandler(BaseHTTPRequestHandler):
         def log_message(self, format: str, *args: Any) -> None:  # noqa: A002 - stdlib signature
@@ -1294,8 +2018,31 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
             if path == "/agent/queue":
                 _http_response(self, 200, build_chatops_agent_queue(root))
                 return
+            if path == "/operator/status":
+                _http_response(self, 200, build_chatops_local_operator_status(root))
+                return
             if path == "/exports/context-pack":
                 _http_response(self, 200, build_chatops_context_pack(root))
+                return
+            if path == "/artifacts/attachables":
+                _http_response(self, 200, build_chatops_attachable_artifacts(root))
+                return
+            if path.startswith("/artifacts/download/"):
+                token = unquote(path.rsplit("/", 1)[-1])
+                artifact_path, validation = resolve_chatops_artifact_download(root, token)
+                if not artifact_path:
+                    _http_response(self, 404, validation)
+                    return
+                artifact = validation.get("artifact") if isinstance(validation.get("artifact"), Mapping) else {}
+                _http_file_response(self, artifact_path, artifact)
+                return
+            if path == "/sandbox/returns":
+                _http_response(self, 200, build_sandbox_return_queue_projection(root))
+                return
+            if path.startswith("/sandbox/returns/"):
+                return_id = path.rsplit("/", 1)[-1]
+                payload = _sandbox_return_detail(root, return_id)
+                _http_response(self, 200 if payload.get("ok") else 404, payload)
                 return
             if path.startswith("/actions/"):
                 action_id = path.rsplit("/", 1)[-1]
@@ -1342,6 +2089,34 @@ def make_handler(root: Path) -> type[BaseHTTPRequestHandler]:
                 return
             if path == "/exports/safe-full-zip":
                 result = create_chatops_safe_full_zip(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/artifacts/prepare-upload":
+                result = prepare_chatops_artifact_upload(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/operator/attach-artifact":
+                result = attach_chatops_artifact_with_local_operator(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/register":
+                result = register_chatops_sandbox_return(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/file":
+                result = write_chatops_sandbox_return_file(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/commit":
+                result = commit_chatops_sandbox_return(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/diff-preview":
+                result = preview_chatops_sandbox_return_diff(root, packet)
+                _http_response(self, 200 if result.get("ok") else 409, result)
+                return
+            if path == "/sandbox/returns/queue-review":
+                result = queue_chatops_sandbox_return_review(root, packet)
                 _http_response(self, 200 if result.get("ok") else 409, result)
                 return
             _http_response(self, 404, {"ok": False, "finding": "not_found"})

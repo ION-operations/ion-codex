@@ -76,12 +76,15 @@ const byId = new Map();
 class Element {
   constructor(tag) {
     this.tag = tag;
+    this.tagName = tag.toUpperCase();
     this.children = [];
     this.dataset = {};
     this.attributes = {};
     this.style = {};
     this.textContent = "";
     this.innerText = "";
+    this.parentElement = null;
+    this.rect = { top: 800, left: 0, right: 640, bottom: 840, width: 640, height: 40 };
     this._id = "";
     this._innerHTML = "";
     this.classNodes = new Map();
@@ -107,8 +110,13 @@ class Element {
     this.attributes[key] = value;
   }
 
+  getAttribute(key) {
+    return this.attributes[key] ?? null;
+  }
+
   appendChild(child) {
     this.children.push(child);
+    child.parentElement = this;
     if (child.id) byId.set(child.id, child);
     return child;
   }
@@ -122,7 +130,7 @@ class Element {
   }
 
   getBoundingClientRect() {
-    return { top: 800 };
+    return this.rect;
   }
 
   addEventListener() {}
@@ -145,6 +153,7 @@ class Element {
 }
 
 let sent = null;
+const localStore = new Map();
 const documentElement = new Element("html");
 const context = {
   console,
@@ -153,19 +162,46 @@ const context = {
       this.type = type;
     }
   },
+  Element,
+  Node: { ELEMENT_NODE: 1 },
   window: {
     innerHeight: 1000,
+    innerWidth: 1000,
+    outerHeight: 1000,
+    outerWidth: 1000,
+    screenX: 0,
+    screenY: 0,
+    devicePixelRatio: 1,
+    location: { href: "https://chatgpt.com/c/test" },
+    localStorage: {
+      getItem: (key) => localStore.get(key) ?? null,
+      setItem: (key, value) => localStore.set(key, String(value)),
+      removeItem: (key) => localStore.delete(key),
+    },
+    sessionStorage: { getItem: () => null },
+    setTimeout(callback) {
+      callback();
+      return 1;
+    },
+    clearTimeout() {},
+    getComputedStyle() {
+      return { display: "block", visibility: "visible", opacity: "1" };
+    },
     addEventListener() {},
     dispatchEvent() {},
   },
   document: {
     documentElement,
+    body: null,
     getElementById: (id) => byId.get(id) || null,
     createElement: (tag) => new Element(tag),
     querySelector: () => null,
     querySelectorAll: (selector) => (selector === "pre code" ? [{ textContent: liveSmokeYaml }] : []),
   },
   MutationObserver: class {
+    constructor(callback) {
+      this.callback = callback;
+    }
     observe() {}
   },
   chrome: {
@@ -179,6 +215,12 @@ const context = {
   },
   navigator: { clipboard: { writeText: async () => {} } },
 };
+context.window.window = context.window;
+context.window.document = context.document;
+context.window.localStorage = context.window.localStorage;
+context.window.sessionStorage = context.window.sessionStorage;
+context.window.setTimeout = context.window.setTimeout;
+context.window.clearTimeout = context.window.clearTimeout;
 
 vm.createContext(context);
 vm.runInContext(
@@ -188,6 +230,39 @@ vm.runInContext(
 
 if (!byId.has("ion-chatops-bridge-panel")) {
   throw new Error("status panel did not render");
+}
+const composerContainer = new Element("form");
+composerContainer.rect = { top: 820, left: 190, right: 810, bottom: 910, width: 620, height: 90 };
+const composer = new Element("div");
+composer.id = "prompt-textarea";
+composer.rect = { top: 850, left: 220, right: 780, bottom: 890, width: 560, height: 40 };
+composerContainer.appendChild(composer);
+context.document.querySelector = (selector) => (selector === "#prompt-textarea" ? composer : null);
+context.window.__ION_CHATOPS_BRIDGE_DEBUG__.refreshBridgePosition();
+const panel = byId.get("ion-chatops-bridge-panel");
+if (panel.dataset.anchorMode !== "composer") {
+  throw new Error("composer anchor layout did not activate");
+}
+const cockpit = panel.querySelector(".ion-composer-cockpit");
+const topRail = panel.querySelector(".ion-top-rail");
+if (!String(cockpit?.style.bottom || "").endsWith("px")) {
+  throw new Error("composer cockpit did not set bottom offset");
+}
+if (!String(topRail?.style.top || "").endsWith("px")) {
+  throw new Error("top status rail did not set top offset");
+}
+const attachment = new Element("img");
+attachment.rect = { top: 780, left: 230, right: 300, bottom: 835, width: 70, height: 55 };
+composerContainer.rect = { top: 760, left: 190, right: 810, bottom: 910, width: 620, height: 150 };
+composerContainer.appendChild(attachment);
+context.document.querySelectorAll = (selector) => {
+  if (selector.includes("img")) return [attachment];
+  return [];
+};
+context.window.__ION_CHATOPS_BRIDGE_DEBUG__.refreshBridgePosition();
+const expandedBottom = Number.parseInt(String(cockpit?.style.bottom || ""), 10);
+if (!Number.isFinite(expandedBottom) || expandedBottom < 239 || expandedBottom > 243) {
+  throw new Error("composer cockpit did not track expanded attachment shell");
 }
 if (!sent || sent.type !== "ion_chatops_candidate") {
   throw new Error("candidate was not sent");
@@ -269,6 +344,145 @@ if (!pageFallbackBlocks.some((block) => block.includes("sev-20260505-rendered-co
   throw new Error("page fallback missed later concrete ion_action block");
 }
 
+const registryMessage = new Element("article");
+registryMessage.setAttribute("data-message-author-role", "assistant");
+registryMessage.rect = { top: 240, left: 190, right: 810, bottom: 340, width: 620, height: 100 };
+const registryCode = new Element("pre");
+registryCode.textContent = renderedCodeBlockYaml;
+registryCode.innerText = renderedCodeBlockYaml;
+registryCode.rect = { top: 360, left: 210, right: 790, bottom: 500, width: 580, height: 140 };
+const registryButton = new Element("button");
+registryButton.setAttribute("aria-label", "Send message");
+registryButton.rect = { top: 860, left: 760, right: 800, bottom: 900, width: 40, height: 40 };
+context.document.querySelector = (selector) => (selector === "#prompt-textarea" ? composer : null);
+context.document.querySelectorAll = (selector) => {
+  if (selector === "[data-message-author-role], article") return [registryMessage];
+  if (selector === "pre, pre code, code, [class*='font-mono'], [class*='whitespace-pre'], [class*='overflow-x-auto']") return [registryCode];
+  if (selector === "button, [role='button'], input[type='file']") return [registryButton];
+  return [];
+};
+const registryStats = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.updateDomActionRegistry();
+if (registryStats.messages !== 1) throw new Error("DOM registry did not count messages");
+if (registryStats.codeBlocks !== 1) throw new Error("DOM registry did not count code blocks");
+if (registryStats.validActions !== 1) throw new Error("DOM registry did not mark valid YAML action");
+if (registryStats.composerControls < 2) throw new Error("DOM registry did not mark composer controls");
+if (registryCode.dataset.ionYamlStatus !== "valid") throw new Error("DOM registry did not set valid YAML status");
+if (registryButton.dataset.ionControlRole !== "send_button") throw new Error("DOM registry did not classify send control");
+if (composer.dataset.ionControlRole !== "composer_input") throw new Error("DOM registry did not classify composer input");
+
+const profileButton = new Element("button");
+profileButton.setAttribute("aria-label", "BB profile menu");
+profileButton.rect = { top: 930, left: 8, right: 48, bottom: 970, width: 40, height: 40 };
+const attachButton = new Element("button");
+attachButton.setAttribute("aria-label", "Attach files");
+attachButton.rect = { top: 872, left: 198, right: 238, bottom: 912, width: 40, height: 40 };
+context.document.querySelector = (selector) => (selector === "#prompt-textarea" ? composer : null);
+context.document.querySelectorAll = (selector) => {
+  if (selector === "button, [role='button'], input[type='file']") return [profileButton, attachButton];
+  return [];
+};
+let attachPayload = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.localAttachPayload();
+if (!attachPayload) throw new Error("local attach payload was not produced");
+if (!String(attachPayload.target_rect.label || "").includes("Attach files")) {
+  throw new Error("attach heuristic selected the wrong visible control");
+}
+localStore.set("ION_CHATOPS_ATTACH_TARGET_SELECTOR", "button[aria-label=\"BB profile menu\"]");
+context.document.querySelector = (selector) => {
+  if (selector === "#prompt-textarea") return composer;
+  if (selector === "button[aria-label=\"BB profile menu\"]") return profileButton;
+  return null;
+};
+attachPayload = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.localAttachPayload();
+if (attachPayload) throw new Error("calibrated target outside composer band should fail closed");
+localStore.set("ION_CHATOPS_ATTACH_TARGET_SELECTOR", "button[aria-label=\"Attach files\"]");
+context.document.querySelector = (selector) => {
+  if (selector === "#prompt-textarea") return composer;
+  if (selector === "button[aria-label=\"Attach files\"]") return attachButton;
+  return null;
+};
+attachPayload = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.localAttachPayload();
+if (!attachPayload || !String(attachPayload.target_rect.label || "").includes("Attach files")) {
+  throw new Error("calibrated attach target did not resolve");
+}
+localStore.delete("ION_CHATOPS_ATTACH_TARGET_SELECTOR");
+const dropZone = new Element("main");
+dropZone.setAttribute("data-testid", "chatgpt-drop-zone");
+dropZone.rect = { top: 120, left: 160, right: 980, bottom: 920, width: 820, height: 800 };
+localStore.set("ION_CHATOPS_DROP_TARGET_SELECTOR", "main[data-testid=\"chatgpt-drop-zone\"]");
+context.document.querySelector = (selector) => {
+  if (selector === "#prompt-textarea") return composer;
+  if (selector === "main[data-testid=\"chatgpt-drop-zone\"]") return dropZone;
+  return null;
+};
+const calibratedDropTarget = context.window.__ION_CHATOPS_BRIDGE_DEBUG__.findDropTarget();
+if (calibratedDropTarget !== dropZone) throw new Error("calibrated drop target did not resolve");
+dropZone.rect = { top: -10, left: -10, right: -4, bottom: -4, width: 6, height: 6 };
+if (context.window.__ION_CHATOPS_BRIDGE_DEBUG__.findDropTarget()) {
+  throw new Error("hidden calibrated drop target should fail closed");
+}
+localStore.delete("ION_CHATOPS_DROP_TARGET_SELECTOR");
+
+byId.clear();
+let disabledSent = null;
+const disabledDocumentElement = new Element("html");
+const disabledContext = {
+  console: { ...console, info() {} },
+  CustomEvent: context.CustomEvent,
+  Element,
+  Node: { ELEMENT_NODE: 1 },
+  window: {
+    innerHeight: 1000,
+    innerWidth: 1000,
+    localStorage: { getItem: (key) => (key === "ION_CHATOPS_SAFE_MODE" ? "disabled" : null) },
+    sessionStorage: { getItem: () => null },
+    setTimeout() {
+      throw new Error("safe mode should not schedule scans");
+    },
+    clearTimeout() {},
+    getComputedStyle() {
+      return { display: "block", visibility: "visible", opacity: "1" };
+    },
+    addEventListener() {},
+    dispatchEvent() {},
+  },
+  document: {
+    documentElement: disabledDocumentElement,
+    body: null,
+    getElementById: (id) => byId.get(id) || null,
+    createElement: (tag) => new Element(tag),
+    querySelector() {
+      throw new Error("safe mode should not query DOM");
+    },
+    querySelectorAll() {
+      throw new Error("safe mode should not scan DOM");
+    },
+  },
+  MutationObserver: class {
+    observe() {
+      throw new Error("safe mode should not observe DOM");
+    }
+  },
+  chrome: {
+    runtime: {
+      sendMessage(message, callback) {
+        disabledSent = message;
+        callback({ ok: false, stage: "safe_mode_unexpected_send" });
+      },
+      onMessage: { addListener() {} },
+    },
+  },
+  navigator: { clipboard: { writeText: async () => {} } },
+};
+disabledContext.window.window = disabledContext.window;
+disabledContext.window.document = disabledContext.document;
+vm.createContext(disabledContext);
+vm.runInContext(
+  fs.readFileSync(path.join(REPO_ROOT, "ION/09_integrations/browser_extension/ion_chatops_bridge/dist/content.js"), "utf8"),
+  disabledContext,
+);
+if (byId.has("ion-chatops-bridge-panel")) throw new Error("safe mode rendered the status panel");
+if (disabledSent) throw new Error("safe mode sent an action candidate");
+
 console.log(JSON.stringify({
   ok: true,
   panel: true,
@@ -280,4 +494,6 @@ console.log(JSON.stringify({
   assistant_container_detected: assistantBlocks.length,
   rendered_dom_detected: renderedBlocks.length,
   page_fallback_blocks: pageFallbackBlocks.length,
+  dom_registry: registryStats,
+  safe_mode_disabled: true,
 }));

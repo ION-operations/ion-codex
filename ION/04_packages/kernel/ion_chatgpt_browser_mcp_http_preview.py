@@ -7,6 +7,7 @@ it is not a public hosted connector and does not claim deployment authority.
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -29,10 +30,15 @@ WRITE_CONFIRMATION_TOKEN = "ION_BOUNDED_WRITE_CONFIRMED"
 DEFAULT_BIND_HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
 OUTPUT_RELATIVE_PATH = Path("ION/05_context/current/CHATGPT_BROWSER_HTTP_MCP_PREVIEW_V121.json")
+APP_PATHS = {"/", "/app", "/ion"}
 
 
 def _json_text(value: Any) -> str:
     return json.dumps(value, indent=2, sort_keys=True)
+
+
+def _html_text(value: Any) -> str:
+    return html.escape(str(value), quote=True)
 
 
 def _tool_schema(name: str) -> dict[str, Any]:
@@ -470,6 +476,181 @@ def audit_http_mcp_preview(root: str | Path | None = None) -> dict[str, Any]:
     }
 
 
+def render_ion_connector_landing(root: str | Path, *, public_base_url: str | None = None) -> str:
+    """Render a safe human-facing landing page for the tunnel root.
+
+    The page intentionally exposes only connector posture and tool names. It does
+    not expose secrets, local absolute paths, source excerpts, or shell controls.
+    """
+
+    audit = audit_http_mcp_preview(root)
+    base = (public_base_url or "").rstrip("/")
+    connector_hint = f"{base}/mcp" if base else "/mcp"
+    health_hint = f"{base}/health" if base else "/health"
+    status_class = "ready" if audit.get("accepted") else "blocked"
+    allowed_tools = audit.get("allowed_tools") if isinstance(audit.get("allowed_tools"), list) else []
+    forbidden_tools = audit.get("forbidden_tools") if isinstance(audit.get("forbidden_tools"), list) else []
+    findings = audit.get("findings") if isinstance(audit.get("findings"), list) else []
+    tool_items = "\n".join(f"<li><code>{_html_text(tool)}</code></li>" for tool in allowed_tools[:80])
+    forbidden_items = "\n".join(f"<li><code>{_html_text(tool)}</code></li>" for tool in forbidden_tools[:80])
+    finding_items = "\n".join(f"<li>{_html_text(item)}</li>" for item in findings) or "<li>none</li>"
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ION Connector</title>
+  <style>
+    :root {{
+      color-scheme: dark;
+      --bg: #101112;
+      --panel: #181a1b;
+      --line: #303336;
+      --text: #f4f4f2;
+      --muted: #a8a8a1;
+      --ok: #20d88f;
+      --warn: #ff9f43;
+      --accent: #ff7a1a;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }}
+    main {{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 48px 22px 56px;
+    }}
+    header {{
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 22px;
+    }}
+    h1 {{
+      margin: 0 0 8px;
+      font-size: clamp(34px, 7vw, 68px);
+      line-height: 0.94;
+      letter-spacing: 0;
+    }}
+    h2 {{
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }}
+    p {{ color: var(--muted); max-width: 760px; }}
+    code {{
+      background: #0b0c0d;
+      border: 1px solid #26292b;
+      border-radius: 6px;
+      color: #f5d0b4;
+      padding: 2px 5px;
+      overflow-wrap: anywhere;
+    }}
+    .grid {{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }}
+    .card {{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }}
+    .status {{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+    }}
+    .dot {{
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--warn);
+      box-shadow: 0 0 14px rgba(255, 159, 67, 0.42);
+    }}
+    .status.ready .dot {{
+      background: var(--ok);
+      box-shadow: 0 0 14px rgba(32, 216, 143, 0.42);
+    }}
+    .status.blocked .dot {{
+      background: #ff6565;
+      box-shadow: 0 0 14px rgba(255, 101, 101, 0.42);
+    }}
+    .laws {{
+      display: grid;
+      gap: 8px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }}
+    .laws li {{
+      border-left: 2px solid var(--accent);
+      padding-left: 10px;
+      color: var(--muted);
+    }}
+    .tools {{
+      columns: 2;
+      padding-left: 18px;
+      color: var(--muted);
+    }}
+    @media (max-width: 760px) {{
+      .grid {{ grid-template-columns: 1fr; }}
+      .tools {{ columns: 1; }}
+      main {{ padding-top: 28px; }}
+    }}
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="status {status_class}"><span class="dot"></span><span>{_html_text(audit.get("verdict"))}</span></div>
+      <h1>ION Connector</h1>
+      <p>A bounded browser-carrier surface for ION. This page is a status/UI landing surface; MCP tools remain on <code>{_html_text(connector_hint)}</code>.</p>
+    </header>
+    <section class="grid" aria-label="connector summary">
+      <article class="card">
+        <h2>Current Surface</h2>
+        <p>Endpoint path: <code>{_html_text(audit.get("endpoint_path"))}</code></p>
+        <p>Health JSON: <code>{_html_text(health_hint)}</code></p>
+        <p>Write confirmation required: <code>{_html_text(audit.get("write_confirmation_required"))}</code></p>
+      </article>
+      <article class="card">
+        <h2>Authority Boundary</h2>
+        <ul class="laws">
+          <li>Production authority: <code>{_html_text(audit.get("production_authority"))}</code></li>
+          <li>Live execution authority: <code>{_html_text(audit.get("live_execution_authority"))}</code></li>
+          <li>Deployment authority: <code>{_html_text(audit.get("deployment_authority"))}</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>Allowed MCP Tools</h2>
+        <ul class="tools">{tool_items}</ul>
+      </article>
+      <article class="card">
+        <h2>Blocked Capabilities</h2>
+        <ul class="tools">{forbidden_items}</ul>
+        <h2>Findings</h2>
+        <ul>{finding_items}</ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
+"""
+
+
 def write_http_mcp_preview_audit(
     root: str | Path | None = None,
     *,
@@ -494,8 +675,36 @@ class IonChatGPTPreviewHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _send_html(self, status: int, body_text: str) -> None:
+        body = body_text.encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _public_base_url(self) -> str:
+        host = self.headers.get("host") or ""
+        if not host:
+            return ""
+        proto = self.headers.get("x-forwarded-proto") or ("https" if host.endswith(".trycloudflare.com") else "http")
+        return f"{proto}://{host}"
+
     def do_GET(self) -> None:  # noqa: N802 - stdlib handler name
-        if self.path != "/health":
+        path = self.path.split("?", 1)[0]
+        if path in APP_PATHS:
+            self._send_html(
+                200,
+                render_ion_connector_landing(self.server.ion_root, public_base_url=self._public_base_url()),  # type: ignore[attr-defined]
+            )
+            return
+        if path == "/app/status.json":
+            self._send_json(200, audit_http_mcp_preview(self.server.ion_root))  # type: ignore[attr-defined]
+            return
+        if path != "/health":
             self._send_json(404, {"ok": False, "error": "not_found"})
             return
         self._send_json(200, audit_http_mcp_preview(self.server.ion_root))  # type: ignore[attr-defined]

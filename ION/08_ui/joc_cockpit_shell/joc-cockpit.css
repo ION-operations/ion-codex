@@ -1,0 +1,707 @@
+:root {
+  --ion-bg: #0a0a0a;
+  --ion-surface: #0e0e0e;
+  --ion-panel: #111111;
+  --ion-border: #1e1e1e;
+  --ion-border-active: #444444;
+  --ion-text: #cccccc;
+  --ion-text-secondary: #aaaaaa;
+  --ion-text-muted: #555555;
+  --ion-ok: #33cc66;
+  --ion-watch: #cc9900;
+  --ion-blocked: #cc3333;
+  --ion-font: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+}
+
+.ion-joc-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 360px;
+  grid-template-rows: 40px minmax(0, 1fr) 240px;
+  grid-template-areas:
+    "top top top"
+    "rail main inspector"
+    "rail timeline inspector";
+  background: var(--ion-bg);
+  color: var(--ion-text);
+  font-family: var(--ion-font);
+  letter-spacing: 0.7px;
+}
+
+.ion-topbar {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 12px;
+  background: var(--ion-surface);
+  border-bottom: 1px solid var(--ion-border);
+}
+
+.ion-brand {
+  font-size: 11px;
+  font-weight: 700;
+  color: #888888;
+}
+
+.ion-topnav {
+  display: flex;
+  height: 100%;
+}
+
+.ion-topnav button,
+.ion-left-rail button {
+  color: var(--ion-text-secondary);
+  background: transparent;
+  border: 0;
+  font-family: var(--ion-font);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  cursor: pointer;
+}
+
+.ion-topnav button {
+  padding: 0 10px;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+
+.ion-topnav button:hover {
+  color: var(--ion-text);
+  background: var(--ion-panel);
+  border-color: var(--ion-border);
+}
+
+.ion-state-strip {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+  font-size: 8px;
+  color: var(--ion-text-muted);
+  text-transform: uppercase;
+}
+
+.ion-left-rail {
+  grid-area: rail;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #080808;
+  border-right: 1px solid var(--ion-border);
+}
+
+.ion-left-rail button {
+  width: 47px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-bottom: 1px solid var(--ion-border);
+}
+
+.ion-left-rail button:hover {
+  color: var(--ion-text);
+  background: var(--ion-panel);
+}
+
+.ion-main-work-surface {
+  grid-area: main;
+  min-width: 0;
+  padding: 12px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: min-content;
+  overflow: auto;
+}
+
+.ion-right-inspector {
+  grid-area: inspector;
+  min-width: 0;
+  padding: 10px;
+  background: var(--ion-surface);
+  border-left: 1px solid var(--ion-border);
+  overflow: auto;
+}
+
+.ion-bottom-timeline {
+  grid-area: timeline;
+  min-width: 0;
+  padding: 8px 10px;
+  background: var(--ion-surface);
+  border-top: 1px solid var(--ion-border);
+  overflow: auto;
+}
+
+.ion-panel,
+.ion-receipt-card {
+  background: var(--ion-surface);
+  border: 1px solid var(--ion-border);
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.ion-hero-panel {
+  grid-column: 1 / -1;
+  min-height: 150px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.025), transparent 38%),
+    var(--ion-surface);
+}
+
+.ion-section-title {
+  margin-bottom: 7px;
+  color: var(--ion-text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.ion-hero-panel h1 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.ion-verdict-band {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 5px 8px;
+  border: 1px solid var(--ion-border-active);
+  background: #0b120e;
+  color: var(--ion-ok);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ion-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ion-metric {
+  border: 1px solid var(--ion-border);
+  background: var(--ion-panel);
+  padding: 8px;
+  min-height: 44px;
+}
+
+.ion-metric span,
+.ion-receipt-scope,
+.ion-stream-row p {
+  display: block;
+  color: var(--ion-text-muted);
+  font-size: 8px;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.ion-metric b {
+  display: block;
+  margin-top: 4px;
+  color: var(--ion-text);
+  font-size: 11px;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.ion-evidence-chain {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.ion-evidence-chain span,
+.ion-blocked-list span {
+  border: 1px solid var(--ion-border);
+  background: var(--ion-panel);
+  padding: 6px;
+  color: var(--ion-text-secondary);
+  font-size: 8px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.ion-visual-lens p {
+  margin: 0;
+  color: var(--ion-text-secondary);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.ion-receipt-card {
+  margin-bottom: 8px;
+}
+
+.ion-receipt-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--ion-text-secondary);
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ion-receipt-head b {
+  color: var(--ion-ok);
+}
+
+.ion-receipt-verdict {
+  margin-top: 6px;
+  color: var(--ion-text);
+  font-size: 10px;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.ion-receipt-card ul {
+  margin: 8px 0 0;
+  padding-left: 16px;
+  color: var(--ion-text-secondary);
+  font-size: 8px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.ion-blocked-list {
+  display: grid;
+  gap: 5px;
+}
+
+.ion-blocked-list span {
+  color: var(--ion-blocked);
+  text-align: left;
+}
+
+.ion-stream-row {
+  display: grid;
+  grid-template-columns: 72px 230px 140px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 6px 0;
+  border-top: 1px solid var(--ion-border);
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.ion-stream-row time {
+  color: var(--ion-text-muted);
+}
+
+.ion-stream-row span,
+.ion-stream-row b {
+  color: var(--ion-text-secondary);
+}
+
+.ion-stream-row.is-ok b { color: var(--ion-ok); }
+.ion-stream-row.is-watch b { color: var(--ion-watch); }
+.ion-stream-row.is-blocked b { color: var(--ion-blocked); }
+
+@media (min-width: 2560px) {
+  .ion-joc-shell {
+    grid-template-columns: 48px minmax(0, 1fr) 400px;
+  }
+  .ion-main-work-surface {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1279px) {
+  .ion-joc-shell {
+    grid-template-columns: 44px minmax(0, 1fr);
+    grid-template-rows: 40px minmax(0, 1fr) 180px;
+    grid-template-areas:
+      "top top"
+      "rail main"
+      "timeline timeline";
+  }
+  .ion-right-inspector { display: none; }
+  .ion-main-work-surface { grid-template-columns: 1fr; }
+}
+
+
+.ion-reactive-stream-panel {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.ion-loop-coverage {
+  display: grid;
+  grid-template-columns: 110px repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 8px;
+  align-items: stretch;
+}
+
+.ion-loop-coverage span,
+.ion-loop-coverage b {
+  display: block;
+  border: 1px solid var(--ion-border);
+  background: var(--ion-panel);
+  padding: 5px 6px;
+  color: var(--ion-text-muted);
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.ion-loop-coverage b.is-covered {
+  color: var(--ion-ok);
+}
+
+.ion-loop-coverage b.is-missing {
+  color: var(--ion-blocked);
+}
+
+.ion-stream-stack {
+  display: grid;
+  gap: 6px;
+}
+
+.ion-stream-event {
+  border: 1px solid var(--ion-border);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.02), transparent 42%),
+    var(--ion-panel);
+  border-radius: 2px;
+  padding: 8px;
+}
+
+.ion-stream-event.is-ok {
+  border-left: 2px solid var(--ion-ok);
+}
+
+.ion-stream-event.is-watch {
+  border-left: 2px solid var(--ion-watch);
+}
+
+.ion-stream-event.is-blocked,
+.ion-stream-event.is-repair {
+  border-left: 2px solid var(--ion-blocked);
+}
+
+.ion-stream-event-head {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 32px;
+  gap: 6px;
+  color: var(--ion-text-secondary);
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ion-stream-event-head b {
+  color: var(--ion-text);
+  text-align: right;
+}
+
+.ion-stream-phase,
+.ion-authority-scope {
+  margin-top: 5px;
+  color: var(--ion-text-muted);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.ion-stream-event p {
+  margin: 6px 0;
+  color: var(--ion-text-secondary);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.ion-evidence-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ion-evidence-tags span {
+  border: 1px solid var(--ion-border);
+  background: #090909;
+  padding: 4px 5px;
+  color: var(--ion-text-muted);
+  font-size: 7px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ion-evidence-tags span.is-blocked {
+  color: var(--ion-blocked);
+  border-color: #3a1515;
+}
+
+.ion-automation-overlay-panel {
+  min-height: 260px;
+}
+
+.ion-overlay-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.ion-overlay-frame {
+  position: relative;
+  height: 128px;
+  margin-bottom: 10px;
+  border: 1px solid var(--ion-border);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+    #070707;
+  background-size: 24px 24px;
+  overflow: hidden;
+}
+
+.ion-overlay-target {
+  position: absolute;
+  border: 1px solid var(--ion-border-active);
+  background: rgba(14,14,14,0.86);
+  padding: 5px 7px;
+  color: var(--ion-text-secondary);
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ion-overlay-target.is-injection {
+  left: 18px;
+  bottom: 18px;
+}
+
+.ion-overlay-target.is-extraction {
+  right: 18px;
+  top: 18px;
+}
+
+.ion-overlay-target.is-health {
+  left: 42%;
+  top: 46%;
+  color: var(--ion-watch);
+}
+
+/* V58 Cognitive Explorer and Infinite Context command palette */
+.ion-command-palette,
+.ion-cognitive-explorer {
+  border-color: #2a2a2a;
+}
+
+.ion-panel-head,
+.ion-node-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ion-panel-head b,
+.ion-node-top b {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 8px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #aaaaaa;
+}
+
+.ion-query-readout,
+.ion-command-input {
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #1e1e1e;
+  background: #0a0a0a;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 10px;
+  color: #cccccc;
+}
+
+.ion-command-input {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.ion-command-input span,
+.ion-route-class-row span,
+.ion-blocked-list span {
+  border: 1px solid #1e1e1e;
+  background: #111111;
+  color: #aaaaaa;
+  padding: 3px 6px;
+  font-size: 8px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.ion-route-class-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 6px 0 10px;
+}
+
+.ion-explorer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 8px;
+}
+
+.ion-node-list,
+.ion-dependency-web,
+.ion-route-proof > div,
+.ion-injection-preview {
+  border: 1px solid #1e1e1e;
+  background: #0a0a0a;
+  padding: 8px;
+}
+
+.ion-node-card,
+.ion-edge-card {
+  border-top: 1px solid #1e1e1e;
+  padding: 7px 0;
+}
+
+.ion-node-card strong,
+.ion-node-card code,
+.ion-node-card small,
+.ion-edge-card span,
+.ion-edge-card b,
+.ion-edge-card small {
+  display: block;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+}
+
+.ion-node-card strong {
+  color: #cccccc;
+  font-size: 10px;
+  margin: 4px 0;
+}
+
+.ion-node-card code,
+.ion-node-card small,
+.ion-edge-card span,
+.ion-edge-card small,
+.ion-route-proof li {
+  color: #888888;
+  font-size: 8px;
+  overflow-wrap: anywhere;
+}
+
+.ion-edge-card b {
+  color: #cccccc;
+  font-size: 8px;
+  margin: 3px 0;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.ion-route-proof {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.ion-route-proof p,
+.ion-injection-preview p {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.ion-route-proof ul {
+  margin: 0;
+  padding-left: 14px;
+}
+
+.ion-mission-router,
+.ion-route-matrix { display: grid; gap: 10px; }
+.ion-route-head,
+.ion-target-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+.ion-route-head h2,
+.ion-target-card h3 { margin: 0; font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace); font-size: 11px; letter-spacing: 0.8px; color: #cccccc; text-transform: uppercase; }
+.ion-route-head p,
+.ion-route-reasoning p,
+.ion-receipt-preview p,
+.ion-risk-note,
+.ion-route-factor-grid p { margin: 4px 0 0; font-size: 9px; line-height: 1.45; color: #888888; }
+.ion-verdict-chip { border: 1px solid #2a2a2a; color: #cccccc; background: #111111; padding: 4px 6px; font-size: 8px; letter-spacing: 1px; text-transform: uppercase; }
+.ion-ring-lanes { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }
+.ion-target-card,
+.ion-route-factor-grid article { background: #0e0e0e; border: 1px solid #1e1e1e; border-radius: 2px; padding: 8px; }
+.ion-target-primary { border-color: #444444; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
+.ion-target-top span,
+.ion-target-top b,
+.ion-route-factor-grid span,
+.ion-route-factor-grid b { font-size: 8px; letter-spacing: 1px; color: #555555; text-transform: uppercase; }
+.ion-target-top b,
+.ion-route-factor-grid b { color: #aaaaaa; }
+.ion-target-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+.ion-tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ion-target-meta span,
+.ion-tag-row span { border: 1px solid #1e1e1e; background: #111111; color: #777777; padding: 3px 5px; font-size: 8px; text-transform: uppercase; letter-spacing: 0.7px; }
+.ion-route-factor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 6px; }
+
+/* V88 runtime projection strip (live cockpit view model) */
+.ion-runtime-panel {
+  border-color: #2a2a2a;
+  margin-bottom: 10px;
+}
+.ion-runtime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+.ion-runtime-metric {
+  border: 1px solid #1e1e1e;
+  border-radius: 2px;
+  padding: 6px 8px;
+  background: #0e0e0e;
+}
+.ion-runtime-metric span {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: #666666;
+  text-transform: uppercase;
+}
+.ion-runtime-metric b {
+  font-size: 11px;
+  color: #cccccc;
+}
+.ion-runtime-status.ion-runtime-status--ok {
+  color: var(--ion-ok);
+}
+.ion-runtime-status.ion-runtime-status--warn {
+  color: var(--ion-watch);
+}
+.ion-runtime-objective {
+  margin-top: 10px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: #9a9a9a;
+  word-break: break-word;
+}
+.ion-runtime-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 9px;
+  color: #666666;
+  letter-spacing: 0.04em;
+}

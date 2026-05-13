@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ion.chatgpt_sandbox_return.v1",
+  "title": "ION ChatGPT Sandbox Return Manifest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_id",
+    "return_id",
+    "created_at",
+    "authoring_carrier",
+    "human_sovereign",
+    "source_snapshot",
+    "base_assumptions",
+    "changed_paths",
+    "sandbox_validation",
+    "receipts_requested"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "ion.chatgpt_sandbox_return.v1"
+    },
+    "return_id": {
+      "type": "string",
+      "pattern": "^sev-[0-9]{8}-[0-9]{6}-[a-z0-9][a-z0-9_-]{1,80}$"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "authoring_carrier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["callsign", "carrier", "sandbox"],
+      "properties": {
+        "callsign": {
+          "const": "Sev"
+        },
+        "carrier": {
+          "const": "chatgpt_browser"
+        },
+        "sandbox": {
+          "const": true
+        }
+      }
+    },
+    "human_sovereign": {
+      "const": "Braden"
+    },
+    "source_snapshot": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "archive_root_confirmed",
+        "expected_root_markers"
+      ],
+      "properties": {
+        "package_path_seen_by_chatgpt": {
+          "type": ["string", "null"]
+        },
+        "package_sha256": {
+          "type": "string"
+        },
+        "archive_root_confirmed": {
+          "const": true
+        },
+        "expected_root_markers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "pyproject.toml"
+          }
+        }
+      }
+    },
+    "base_assumptions": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "production_authority",
+        "live_execution_authority",
+        "direct_apply_authority",
+        "git_push_authority"
+      ],
+      "properties": {
+        "production_authority": {
+          "const": false
+        },
+        "live_execution_authority": {
+          "const": false
+        },
+        "direct_apply_authority": {
+          "const": false
+        },
+        "git_push_authority": {
+          "const": false
+        }
+      }
+    },
+    "changed_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "not": {
+          "pattern": "(^/|\\.\\.|\\.env|secret|token|credential|vault)"
+        }
+      }
+    },
+    "intended_review_commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sandbox_validation": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "receipts_requested": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema_id": "ion.github_data_plane.bootstrap_push_receipt.v1",
+  "created_at": "2026-05-05T04:14:53Z",
+  "action_id": "initial-github-data-plane-load-bootstrap-authorized",
+  "human_sovereign": "Braden",
+  "carrier": "CODEX_CLI_CARRIER",
+  "production_authority": false,
+  "live_execution_authority": false,
+  "github_mutation_performed": true,
+  "git_mutation_performed": true,
+  "operation": "one_time_initial_bootstrap_push",
+  "repository": {
+    "owner": "ION-operations",
+    "name": "ion-codex",
+    "url": "https://github.com/ION-operations/ion-codex",
+    "visibility": "public",
+    "default_branch": "main"
+  },
+  "commit": {
+    "sha": "6edea5f9ad843ad8526c4272d07885fca8065217",
+    "short_sha": "6edea5f",
+    "message": "Initialize ION Codex data plane",
+    "branch": "main",
+    "remote_ref": "refs/heads/main"
+  },
+  "authorization_evidence": {
+    "bootstrap_authorization": "ION/05_context/current/github_data_plane/BOOTSTRAP_UPLOAD_AUTHORIZATION_2026-05-05T041221Z.json",
+    "commit_proposal": "ION/05_context/current/github_data_plane/commit_proposals/github_commit_proposal_2026-05-05T041250Z0000_initial_github_data_plane_load_bootstrap_authorized.json",
+    "path_manifest": "ION/05_context/current/github_data_plane/commit_proposals/github_commit_proposal_2026-05-05T041250Z0000_initial_github_data_plane_load_bootstrap_authorized.paths.json"
+  },
+  "pre_push_evidence": {
+    "remote_heads_before_push": [],
+    "worktree_clean_before_push": true,
+    "exact_path_manifest_staged": true,
+    "secret_scan_findings": 0,
+    "validation": [
+      {
+        "command": "python3 -m pytest ION/tests -q",
+        "result": "264 passed"
+      },
+      {
+        "command": "python3 -S -m kernel.ion_status --ion-root . --json",
+        "result": "ION_STATUS_READY"
+      }
+    ]
+  },
+  "post_push_evidence": {
+    "origin_main_sha": "6edea5f9ad843ad8526c4272d07885fca8065217",
+    "upstream": "origin/main",
+    "worktree_clean_after_push": true,
+    "github_cli_view": {
+      "nameWithOwner": "ION-operations/ion-codex",
+      "isPrivate": false,
+      "viewerPermission": "ADMIN",
+      "pushedAt": "2026-05-05T04:14:53Z"
+    }
+  },
+  "boundaries": {
+    "main_auto_push_allowed_after_bootstrap": false,
+    "future_main_update_path": "pull_request_or_merge_gate",
+    "production_deploy_authorized": false,
+    "secrets_authorized": false,
+    "force_push_authorized": false,
+    "repository_settings_authority": "operator_policy_only"
+  },
+  "notes": [
+    "The repository is intentionally public for collaboration.",
+    "Private production builds and infrastructure repositories may be introduced later.",
+    "This receipt records evidence only and does not authorize future pushes."
+  ]
+}

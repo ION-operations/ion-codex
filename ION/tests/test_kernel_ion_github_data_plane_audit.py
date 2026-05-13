@@ -58,7 +58,7 @@ def test_github_data_plane_audit_reports_current_repo_without_mutation():
     assert result["verdict"] == READY_VERDICT
     assert result["git"]["git_present"] is True
     assert result["git"]["origin_configured"] is True
-    assert result["registry_alignment"]["branch_alignment"] == "MATCHES_REGISTRY"
+    assert result["registry_alignment"]["branch_alignment"] in {"MATCHES_REGISTRY", "ALLOWED_WORK_BRANCH"}
     assert result["registry_alignment"]["remote_alignment"] == "MATCHES_REGISTRY"
     assert result["network_access_used"] is False
     assert result["github_mutation_performed"] is False
@@ -94,6 +94,18 @@ def test_github_data_plane_audit_handles_first_commit_ready_repo(tmp_path):
     assert result["git"]["worktree"]["untracked_count"] >= 1
     assert result["first_commit_readiness"]["can_prepare_human_review_commit"] is True
     assert result["first_commit_readiness"]["first_commit_status"] == "NO_LOCAL_COMMITS_YET"
+
+
+def test_github_data_plane_audit_accepts_allowed_work_branch(tmp_path):
+    _write_owner_surfaces(tmp_path)
+    _init_repo(tmp_path)
+    _run_git(tmp_path, "checkout", "-b", "docs/public-data-plane-policy")
+
+    result = audit_github_data_plane(tmp_path)
+
+    assert result["accepted"] is True
+    assert result["registry_alignment"]["branch_alignment"] == "ALLOWED_WORK_BRANCH"
+    assert "active_branch_mismatch" not in result["findings"]
 
 
 def test_github_data_plane_audit_parses_dirty_worktree_counts(tmp_path):

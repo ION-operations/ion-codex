@@ -10,6 +10,8 @@ storage:
   receipts: ION/05_context/current/chatops_bridge/receipts/
   runtime: ION/05_context/current/chatops_bridge/runtime/
   artifacts: ION/05_context/current/chatops_bridge/artifacts/
+  sandbox_returns: ION/05_context/inbox/chatgpt_sandbox_returns/
+  sandbox_return_receipts: ION/05_context/current/chatgpt_sandbox_returns/receipts/
 supported_mvp_intents:
   - register_artifact
   - write_file_draft
@@ -20,6 +22,15 @@ allowed_write_prefixes:
   - ION/03_registry/
   - ION/05_context/current/chatops_bridge/
   - ION/05_context/inbox/
+sandbox_return_surface:
+  owner: ION/04_packages/kernel/ion_chatgpt_sandbox_return_intake.py
+  protocol: ION/02_architecture/ION_CHATGPT_SANDBOX_RETURN_INTAKE_PROTOCOL.md
+  schema: ION/03_registry/ion_chatgpt_sandbox_return.schema.json
+  queue: ION/05_context/current/ACTIVE_CHATGPT_SANDBOX_RETURN_QUEUE.json
+  inbox_root: ION/05_context/inbox/chatgpt_sandbox_returns/
+  direct_apply_authority: false
+  git_push_authority: false
+  approval_required_for_write_endpoints: true
 protected_path_tokens:
   - /.git/
   - .env

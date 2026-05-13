@@ -45,6 +45,7 @@ TRANSPORT_INSTALLED_NOT_RUNNING = "INSTALLED_NOT_RUNNING"
 TRANSPORT_LOCAL_HTTP_RUNNING_ONLY = "LOCAL_HTTP_RUNNING_ONLY"
 TRANSPORT_TUNNEL_RUNNING_NOT_VERIFIED = "TUNNEL_RUNNING_NOT_VERIFIED"
 TRANSPORT_TUNNEL_RUNNING_VERIFIED = "TUNNEL_RUNNING_VERIFIED"
+TRANSPORT_STABLE_HOSTNAME_NOT_ACTIVE = "STABLE_HOSTNAME_NOT_ACTIVE"
 TRANSPORT_CHATGPT_CONNECTOR_ADDED_NOT_TESTED = "CHATGPT_CONNECTOR_ADDED_NOT_TESTED"
 TRANSPORT_CHATGPT_CONNECTOR_TESTED_READY = "CHATGPT_CONNECTOR_TESTED_READY"
 
@@ -90,12 +91,42 @@ def connector_url_from_tunnel_url(tunnel_url: str, endpoint_path: str = DEFAULT_
     return f"{tunnel_url.rstrip('/')}{normalized_endpoint}"
 
 
+def normalize_stable_hostname(value: str | None) -> str | None:
+    if not value:
+        return None
+    stripped = value.strip()
+    stripped = stripped.removeprefix("https://").removeprefix("http://")
+    host = stripped.split("/", 1)[0].strip()
+    return host or None
+
+
 def build_cloudflared_command(
     *,
     local_url: str,
     cloudflared_binary: str = "cloudflared",
+    tunnel_name: str | None = None,
+    config_path: str | None = None,
+    credentials_file: str | None = None,
 ) -> list[str]:
+    if tunnel_name:
+        command = [cloudflared_binary, "tunnel"]
+        if config_path:
+            command.extend(["--config", config_path])
+        command.append("run")
+        if credentials_file:
+            command.extend(["--credentials-file", credentials_file])
+        command.extend(["--url", local_url, tunnel_name])
+        return command
     return [cloudflared_binary, "tunnel", "--url", local_url]
+
+
+def build_cloudflared_route_dns_command(
+    *,
+    tunnel_name: str,
+    hostname: str,
+    cloudflared_binary: str = "cloudflared",
+) -> list[str]:
+    return [cloudflared_binary, "tunnel", "route", "dns", tunnel_name, hostname]
 
 
 def _read_json(path: Path) -> dict[str, Any] | None:
@@ -128,7 +159,7 @@ def _http_json_request(
     payload: Mapping[str, Any] | None = None,
     timeout: float = 3.0,
 ) -> dict[str, Any]:
-    headers = {"Accept": "application/json"}
+    headers = {"Accept": "application/json", "User-Agent": "ION-Connector-Health/1.0"}
     data: bytes | None = None
     if payload is not None:
         data = json.dumps(payload).encode("utf-8")
@@ -283,6 +314,9 @@ def write_tunnel_status(
     running: bool,
     local_url: str,
     endpoint_path: str = DEFAULT_ENDPOINT_PATH,
+    transport_mode: str = "quick_tunnel",
+    tunnel_name: str | None = None,
+    stable_hostname: str | None = None,
     error: str | None = None,
     process_id: int | None = None,
     output: str | Path | None = None,
@@ -294,9 +328,12 @@ def write_tunnel_status(
         "schema_id": STATUS_SCHEMA_ID,
         "version_line": VERSION_LINE,
         "method": "cloudflare_tunnel",
+        "transport_mode": transport_mode,
         "running": running,
         "local_url": local_url,
         "endpoint_path": endpoint_path,
+        "tunnel_name": tunnel_name,
+        "stable_hostname": stable_hostname,
         "tunnel_url": tunnel_url,
         "connector_url": connector_url,
         "error": error,
@@ -317,6 +354,10 @@ def audit_cloudflare_tunnel(
     local_url: str | None = None,
     endpoint_path: str = DEFAULT_ENDPOINT_PATH,
     cloudflared_binary: str = "cloudflared",
+    tunnel_name: str | None = None,
+    stable_hostname: str | None = None,
+    config_path: str | None = None,
+    credentials_file: str | None = None,
 ) -> dict[str, Any]:
     shell_root = Path(root or ".").expanduser().resolve()
     preview = audit_http_mcp_preview(shell_root)
@@ -324,6 +365,9 @@ def audit_cloudflare_tunnel(
     active_status = _read_json(shell_root / STATUS_RELATIVE_PATH)
     findings: list[str] = []
     resolved_local_url = local_url or default_local_url()
+    normalized_stable_hostname = normalize_stable_hostname(stable_hostname)
+    stable_tunnel_url = f"https://{normalized_stable_hostname}" if normalized_stable_hostname else None
+    stable_connector_url = connector_url_from_tunnel_url(stable_tunnel_url, endpoint_path) if stable_tunnel_url else None
     status_connector_url = active_status.get("connector_url") if active_status else None
     status_tunnel_url = active_status.get("tunnel_url") if active_status else None
     status_running = bool(active_status.get("running")) if active_status else False
@@ -336,6 +380,10 @@ def audit_cloudflare_tunnel(
         findings.append("v121_http_mcp_preview_not_ready")
     if not cloudflared_path:
         findings.append("cloudflared_not_found_on_path")
+    if normalized_stable_hostname and not tunnel_name:
+        findings.append("stable_hostname_requires_named_tunnel")
+    if tunnel_name and not (credentials_file or config_path or (Path.home() / ".cloudflared/cert.pem").exists()):
+        findings.append("named_tunnel_credentials_or_config_not_found_locally")
     if status_connector_url and not candidate_connector_url:
         findings.append("stale_active_connector_url_not_currently_running")
     if status_running and not active_process_running:
@@ -363,11 +411,17 @@ def audit_cloudflare_tunnel(
 
     active_connector_url = candidate_connector_url
     active_tunnel_url = status_tunnel_url if candidate_connector_url else None
+    stable_connector_active = bool(stable_connector_url and active_connector_url == stable_connector_url)
+    if stable_connector_url and not stable_connector_active:
+        findings.append("stable_connector_url_not_active")
     active_running = transport_state in {TRANSPORT_TUNNEL_RUNNING_NOT_VERIFIED, TRANSPORT_TUNNEL_RUNNING_VERIFIED}
     accepted = preview_ready
     if not preview_ready:
         verdict = BLOCKED_VERDICT
         connector_state = "BLOCKED"
+    elif stable_connector_url and not stable_connector_active:
+        verdict = SETUP_REQUIRED_VERDICT
+        connector_state = TRANSPORT_STABLE_HOSTNAME_NOT_ACTIVE
     elif transport_state == TRANSPORT_TUNNEL_RUNNING_VERIFIED:
         verdict = READY_VERDICT
         connector_state = transport_state
@@ -387,9 +441,22 @@ def audit_cloudflare_tunnel(
         "required_public_connector_path": connector_url_from_tunnel_url("https://<cloudflare-tunnel-host>", endpoint_path),
         "cloudflared_found": bool(cloudflared_path),
         "cloudflared_path": cloudflared_path,
+        "stable_hostname": normalized_stable_hostname,
+        "stable_tunnel_url": stable_tunnel_url,
+        "stable_connector_url": stable_connector_url,
+        "stable_connector_active": stable_connector_active,
+        "tunnel_name": tunnel_name,
+        "named_tunnel_route_dns_command": build_cloudflared_route_dns_command(
+            tunnel_name=tunnel_name,
+            hostname=normalized_stable_hostname,
+            cloudflared_binary=cloudflared_path or cloudflared_binary,
+        ) if tunnel_name and normalized_stable_hostname else None,
         "cloudflared_command": build_cloudflared_command(
             local_url=resolved_local_url,
             cloudflared_binary=cloudflared_path or cloudflared_binary,
+            tunnel_name=tunnel_name,
+            config_path=config_path,
+            credentials_file=credentials_file,
         ),
         "active_status_path": str(STATUS_RELATIVE_PATH),
         "active_tunnel_url": active_tunnel_url,
@@ -417,6 +484,10 @@ def write_cloudflare_tunnel_audit(
     local_url: str | None = None,
     endpoint_path: str = DEFAULT_ENDPOINT_PATH,
     cloudflared_binary: str = "cloudflared",
+    tunnel_name: str | None = None,
+    stable_hostname: str | None = None,
+    config_path: str | None = None,
+    credentials_file: str | None = None,
     output: str | Path | None = None,
 ) -> dict[str, Any]:
     shell_root = Path(root or ".").expanduser().resolve()
@@ -425,6 +496,10 @@ def write_cloudflare_tunnel_audit(
         local_url=local_url,
         endpoint_path=endpoint_path,
         cloudflared_binary=cloudflared_binary,
+        tunnel_name=tunnel_name,
+        stable_hostname=stable_hostname,
+        config_path=config_path,
+        credentials_file=credentials_file,
     )
     out = shell_root / (Path(output) if output else OUTPUT_RELATIVE_PATH)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -438,6 +513,10 @@ def run_cloudflare_tunnel(
     local_url: str,
     endpoint_path: str = DEFAULT_ENDPOINT_PATH,
     cloudflared_binary: str = "cloudflared",
+    tunnel_name: str | None = None,
+    stable_hostname: str | None = None,
+    config_path: str | None = None,
+    credentials_file: str | None = None,
 ) -> int:
     shell_root = Path(root).expanduser().resolve()
     cloudflared_path = find_cloudflared(cloudflared_binary)
@@ -448,12 +527,21 @@ def run_cloudflare_tunnel(
             running=False,
             local_url=local_url,
             endpoint_path=endpoint_path,
+            transport_mode="named_tunnel" if tunnel_name else "quick_tunnel",
+            tunnel_name=tunnel_name,
+            stable_hostname=stable_hostname,
             error="cloudflared_not_found_on_path",
         )
         print("cloudflared not found on PATH; install it before starting the tunnel.", file=sys.stderr)
         return 2
 
-    command = build_cloudflared_command(local_url=local_url, cloudflared_binary=cloudflared_path)
+    command = build_cloudflared_command(
+        local_url=local_url,
+        cloudflared_binary=cloudflared_path,
+        tunnel_name=tunnel_name,
+        config_path=config_path,
+        credentials_file=credentials_file,
+    )
     proc = subprocess.Popen(
         command,
         stdout=subprocess.PIPE,
@@ -462,6 +550,21 @@ def run_cloudflare_tunnel(
         bufsize=1,
     )
     tunnel_url: str | None = None
+    normalized_stable_hostname = normalize_stable_hostname(stable_hostname)
+    if tunnel_name and normalized_stable_hostname:
+        tunnel_url = f"https://{normalized_stable_hostname}"
+        status = write_tunnel_status(
+            shell_root,
+            tunnel_url=tunnel_url,
+            running=True,
+            local_url=local_url,
+            endpoint_path=endpoint_path,
+            transport_mode="named_tunnel",
+            tunnel_name=tunnel_name,
+            stable_hostname=normalized_stable_hostname,
+            process_id=proc.pid,
+        )
+        print(json.dumps(status, indent=2, sort_keys=True), flush=True)
 
     def shutdown(*_: object) -> None:
         write_tunnel_status(
@@ -470,6 +573,9 @@ def run_cloudflare_tunnel(
             running=False,
             local_url=local_url,
             endpoint_path=endpoint_path,
+            transport_mode="named_tunnel" if tunnel_name else "quick_tunnel",
+            tunnel_name=tunnel_name,
+            stable_hostname=normalized_stable_hostname,
             error="shutdown",
             process_id=proc.pid,
         )
@@ -493,6 +599,9 @@ def run_cloudflare_tunnel(
                         running=True,
                         local_url=local_url,
                         endpoint_path=endpoint_path,
+                        transport_mode="named_tunnel" if tunnel_name else "quick_tunnel",
+                        tunnel_name=tunnel_name,
+                        stable_hostname=normalized_stable_hostname,
                         process_id=proc.pid,
                     )
                     print(json.dumps(status, indent=2, sort_keys=True), flush=True)
@@ -503,6 +612,9 @@ def run_cloudflare_tunnel(
             running=False,
             local_url=local_url,
             endpoint_path=endpoint_path,
+            transport_mode="named_tunnel" if tunnel_name else "quick_tunnel",
+            tunnel_name=tunnel_name,
+            stable_hostname=normalized_stable_hostname,
             error=f"cloudflared_exited:{returncode}",
             process_id=proc.pid,
         )
@@ -520,6 +632,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--local-url", default=None)
     parser.add_argument("--endpoint-path", default=DEFAULT_ENDPOINT_PATH)
     parser.add_argument("--cloudflared-binary", default="cloudflared")
+    parser.add_argument("--tunnel-name", default=None)
+    parser.add_argument("--stable-hostname", default=None)
+    parser.add_argument("--cloudflared-config", default=None)
+    parser.add_argument("--credentials-file", default=None)
     parser.add_argument("--self-test", action="store_true")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--output", default=None)
@@ -534,6 +650,10 @@ def main(argv: list[str] | None = None) -> int:
             local_url=local_url,
             endpoint_path=args.endpoint_path,
             cloudflared_binary=args.cloudflared_binary,
+            tunnel_name=args.tunnel_name,
+            stable_hostname=args.stable_hostname,
+            config_path=args.cloudflared_config,
+            credentials_file=args.credentials_file,
         )
 
     if args.write:
@@ -542,6 +662,10 @@ def main(argv: list[str] | None = None) -> int:
             local_url=local_url,
             endpoint_path=args.endpoint_path,
             cloudflared_binary=args.cloudflared_binary,
+            tunnel_name=args.tunnel_name,
+            stable_hostname=args.stable_hostname,
+            config_path=args.cloudflared_config,
+            credentials_file=args.credentials_file,
             output=args.output,
         )
     else:
@@ -550,6 +674,10 @@ def main(argv: list[str] | None = None) -> int:
             local_url=local_url,
             endpoint_path=args.endpoint_path,
             cloudflared_binary=args.cloudflared_binary,
+            tunnel_name=args.tunnel_name,
+            stable_hostname=args.stable_hostname,
+            config_path=args.cloudflared_config,
+            credentials_file=args.credentials_file,
         )
     print(json.dumps(result, indent=2, sort_keys=True) if args.json or args.self_test else result["verdict"])
     return 0 if result["accepted"] else 1

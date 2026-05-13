@@ -8,15 +8,37 @@ MVP behavior:
 - parse the strict `ion.chatops.action.v1` subset, including simple YAML lists;
 - send candidates to the background worker;
 - validate actions against the localhost daemon;
-- show a compact in-page toolbar near the ChatGPT header controls;
-- show Rescan and Onboard controls in the toolbar;
+- show a compact top status rail near the ChatGPT header controls;
+- show Rescan and Onboard controls in the top rail;
 - fetch a compact Sev carrier onboarding/context brief from the local daemon and
   paste it into ChatGPT;
-- expand downward into tabbed Status, Action, Agent, Packages, Diagnostics, and Log views;
+- render composer-attached tabs and an upward drawer for Status, Action, Agent,
+  Packages, Sandbox, Automation, Artifacts, Settings, Diagnostics, and Log views;
+- anchor composer tabs to the full visible composer shell, including uploaded
+  image/file thumbnails when ChatGPT expands the composer;
+- show subtle visual capture borders for composer input, attach/send/voice
+  controls, selected source chips such as GitHub, and uploaded thumbnails;
+- annotate rendered code/YAML blocks with compact workflow badges such as
+  `ION CODE #N` and `ION YAML #N · valid`;
 - show Codex queue runner status/queue and approval-gated prepare/start controls
   backed by `kernel.ion_codex_queue_runner`;
 - request pasteable context packs and approval-gated package ZIPs backed by the
   existing lifecycle and safe full-project packagers;
+- list ChatGPT sandbox returns and request approval-gated diff preview or
+  Codex review queueing through the sandbox return intake owner;
+- list attachable local package/inbox artifacts and request approval-gated
+  browser drop tickets from the local daemon;
+- preview and calibrate the ChatGPT page/composer drop zone used by `Drop
+  Latest`; this is now the primary browser upload path because ChatGPT accepts
+  ordinary drag/drop over broad page regions;
+- calibrate the ChatGPT attach/add-file target by letting Braden pick the
+  exact page element once, then using that saved selector before heuristics;
+- tune composer tab lift and drawer height from the Settings tab without a code
+  patch;
+- attempt a visible ChatGPT drag/drop for an approved artifact without clicking
+  Send;
+- request approval-gated local operator attachment of an approved artifact
+  through the daemon without clicking Send;
 - show an approval modal for Braden;
 - insert a known-good Sev re-entry prompt into the ChatGPT composer;
 - keep fabricated smoke/Codex work-packet actions under Diagnostics as local bridge tests;
@@ -43,6 +65,30 @@ changes.
 
 The extension icon assets live in `icons/` and are wired into both the manifest
 extension icon set and the toolbar action icon.
+
+## Emergency Safe Mode
+
+If ChatGPT fails to load with the extension enabled, disable the content script
+without uninstalling the extension:
+
+```js
+localStorage.setItem("ION_CHATOPS_SAFE_MODE", "disabled")
+```
+
+Then reload ChatGPT. The content script exits early and prints a compact console
+message. To re-enable it:
+
+```js
+localStorage.removeItem("ION_CHATOPS_SAFE_MODE")
+sessionStorage.removeItem("ION_CHATOPS_SAFE_MODE")
+```
+
+Reload the page after removing the flag.
+
+Automatic scanning is deliberately throttled. MutationObserver events schedule a
+single debounced scan over code/YAML-bearing surfaces, ignore the extension's own
+panel/modal updates, and avoid broad whole-page scans. Use the manual `Rescan`
+button after ChatGPT finishes rendering a YAML block.
 
 ## YAML Subset
 
@@ -88,7 +134,127 @@ read/status projections. `Prepare Next` writes a prepared run packet but does
 not start Codex. `Start One` starts one bounded queue-runner worker after
 Braden approval.
 
+The Diagnostics tab includes the DOM capture registry. It shows whether the
+extension sees the composer input, send/attach/voice controls, selected source
+planes such as GitHub, uploaded thumbnails, and YAML/code block status. These
+markers are visual perception aids only; they do not click, send, upload, or
+mutate ION state.
+
 The Packages tab is for moving context into ChatGPT or another carrier sandbox.
 `Context Pack` pastes a compact current-state packet into the composer.
 `Compact ZIP` and `Safe Full ZIP` create local package artifacts through the
 existing ION packagers and copy the resulting path, sha256, and receipt summary.
+
+The Sandbox tab projects returns under
+`ION/05_context/inbox/chatgpt_sandbox_returns/`. `Returns` is a read-only queue
+projection. `Diff Preview` runs the bounded preview/check path for the latest
+return after Braden approval. `Queue Review` creates a focused Codex review
+packet after Braden approval. None of these controls apply patches to live
+source.
+
+## File And ZIP Attachment Lane
+
+Protocol owner: `ION/02_architecture/ION_BROWSER_FILE_ATTACHMENT_AUTOMATION_PROTOCOL.md`
+
+The Artifacts tab includes the first guarded file lane:
+
+- `Attachables`: lists files the daemon considers safe to present for browser
+  attachment from bounded package/inbox roots.
+- `Preview Drop Zone`: draws a blue ring around the ChatGPT page/composer area
+  that `Drop Latest` will dispatch drag/drop events to.
+- `Preview Target`: draws a temporary green ring around the exact ChatGPT
+  attach/add-file control the extension currently sees.
+- `Dry Run Attach`: prepares the selected artifact and asks the daemon to
+  validate target geometry/backend state without moving the pointer.
+- `Drop Latest`: asks Braden for approval, asks the daemon for a one-use-ish
+  localhost download ticket, fetches the file as a browser `File`, and attempts
+  visible `dragenter`/`dragover`/`drop` events against the calibrated
+  page/composer drop zone. After dispatching the drop, it sends best-effort
+  `dragleave`/`dragend`/Escape cleanup events so ChatGPT's full-page "Add
+  anything" overlay does not remain latched.
+- `Local Attach`: asks Braden for approval, prepares a daemon upload ticket, and
+  asks the local operator helper to open the ChatGPT attach control and select
+  the exact approved artifact through the OS file picker. This path is
+  `xdotool`-first on Linux, uses extension-provided screen coordinates, and
+  fails closed if the active window is not a browser/ChatGPT surface, the attach
+  target is stale/missing, or the file picker is not detected.
+
+`Local Attach` performs a daemon dry run before any mouse movement. If geometry
+is missing, stale, near the screen origin, outside the display, or not near the
+composer, the daemon blocks with `LOCAL_OPERATOR_TARGET_GEOMETRY_INVALID`.
+
+If `Preview Target` rings the wrong page element, use:
+
+```text
+Settings -> Pick Attach Target
+```
+
+Then click ChatGPT's real attach/add-file button once. The extension stores a
+selector under `ION_CHATOPS_ATTACH_TARGET_SELECTOR` in page `localStorage`.
+After calibration, `Preview Target`, `Dry Run Attach`, and `Local Attach` use
+that saved target first. If the saved target disappears or is no longer near
+the composer, attach automation fails closed and asks for re-calibration instead
+of falling back to a random visible control.
+
+The Settings tab also exposes lightweight visual tuning:
+
+```text
+Tabs Up / Tabs Down
+Drawer Taller / Drawer Shorter
+Reset Layout
+```
+
+These write only local browser settings:
+
+```text
+ION_CHATOPS_TAB_LIFT_PX
+ION_CHATOPS_DRAWER_MAX_PX
+```
+
+Because ChatGPT accepts normal drag/drop over broad page regions, the preferred
+browser lane is:
+
+```text
+Settings -> Pick Drop Zone
+-> click the page/composer area where manual file drops work
+-> Artifacts -> Preview Drop Zone
+-> Artifacts -> Drop Latest
+```
+
+The drop-zone selector is stored in page `localStorage`:
+
+```text
+ION_CHATOPS_DROP_TARGET_SELECTOR
+```
+
+If the saved drop zone is hidden or stale, `Drop Latest` fails visibly and asks
+for re-calibration. `Local Attach` remains a fallback for OS file-picker
+assistance; it is not the primary ChatGPT upload lane.
+
+`Attachables` intentionally shows a compact selected-artifact summary rather
+than dumping the full daemon JSON. The selected artifact is the same latest
+candidate used by `Drop Latest` and `Local Attach`.
+
+Browsers do not allow ordinary page scripts to set local file inputs to
+arbitrary paths. ChatGPT or the browser may also reject synthetic drag/drop.
+When that happens, the panel still provides the manifest/hash/receipt so Braden
+can use `Local Attach`, the manual attach picker, or a future native/debugger
+lane.
+
+The intended ION path is:
+
+1. local daemon creates or exposes a public-safe package with manifest and
+   sha256;
+2. extension shows exact file path, size, hash, and intended chat target;
+3. Braden approves the attach operation;
+4. extension uses the most reliable available browser path:
+   - approved visible synthetic drag/drop where accepted;
+   - approved local operator file-picker assistance where available;
+   - user-visible attach picker guidance;
+   - approved downloaded package handoff;
+   - future Chrome-extension/native or debugger-mediated upload lane if
+     explicitly gated;
+5. ION records the package/export receipt and any returned sandbox artifact.
+
+No file should be uploaded without explicit user approval, a manifest, and a
+receipt when ION state is touched. This MVP does not click Send.

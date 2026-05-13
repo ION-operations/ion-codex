@@ -97,6 +97,235 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
 
+  if (message.type === "ion_chatops_sandbox_returns") {
+    (async () => {
+      const result = await getJson("/sandbox/returns");
+      sendResponse({ ok: Boolean(result?.ok), stage: "sandbox_returns", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "sandbox_returns_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_artifact_attachables") {
+    (async () => {
+      const result = await getJson("/artifacts/attachables");
+      sendResponse({ ok: Boolean(result?.ok), stage: "artifact_attachables", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "artifact_attachables_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_artifact_prepare_latest") {
+    (async () => {
+      const attachables = await getJson("/artifacts/attachables");
+      const rows = Array.isArray(attachables?.candidates) ? attachables.candidates : [];
+      const candidate = rows.find((row: any) => row?.attachable && typeof row.path === "string");
+      if (!attachables?.ok || !candidate) {
+        sendResponse({
+          ok: false,
+          stage: "artifact_prepare_latest",
+          finding: attachables?.ok ? "no_attachable_artifact" : "attachables_unavailable",
+          result: attachables
+        });
+        return;
+      }
+      const approved = await requestBridgeApproval(
+        sender,
+        "artifact_prepare_browser_drop",
+        `Prepare ${candidate.name ?? candidate.path} (${candidate.size_bytes ?? "unknown"} bytes) for a visible ChatGPT file drop. This will not click Send.`,
+        "browser_file_upload_approval_required"
+      );
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED", candidate });
+        return;
+      }
+      const result = await postJson("/artifacts/prepare-upload", approvedPayload({ artifact_path: candidate.path }));
+      sendResponse({ ok: Boolean(result?.ok), stage: "artifact_prepare_latest", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "artifact_prepare_latest_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_artifact_local_attach_latest") {
+    (async () => {
+      const attachables = await getJson("/artifacts/attachables");
+      const rows = Array.isArray(attachables?.candidates) ? attachables.candidates : [];
+      const candidate = rows.find((row: any) => row?.attachable && typeof row.path === "string");
+      if (!attachables?.ok || !candidate) {
+        sendResponse({
+          ok: false,
+          stage: "artifact_local_attach_latest",
+          finding: attachables?.ok ? "no_attachable_artifact" : "attachables_unavailable",
+          result: attachables
+        });
+        return;
+      }
+      const approved = await requestBridgeApproval(
+        sender,
+        "local_operator_attach_artifact",
+        `Let the local ION operator helper attach ${candidate.name ?? candidate.path} (${candidate.size_bytes ?? "unknown"} bytes) to the active ChatGPT composer. This will not click Send.`,
+        "local_operator_artifact_attach_approval_required"
+      );
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED", candidate });
+        return;
+      }
+      const prepared = await postJson("/artifacts/prepare-upload", approvedPayload({ artifact_path: candidate.path }));
+      if (!prepared?.ok) {
+        sendResponse({ ok: false, stage: "artifact_prepare_latest", result: prepared });
+        return;
+      }
+      const operatorResult = await postJson("/operator/attach-artifact", approvedPayload({
+        download_token: prepared.download_token,
+        target_kind: message.payload?.target_kind ?? "attach_button",
+        target_rect: message.payload?.target_rect ?? null,
+        target_screen_rect: message.payload?.target_screen_rect ?? null,
+        composer_rect: message.payload?.composer_rect ?? null,
+        viewport: message.payload?.viewport ?? null,
+        device_pixel_ratio: message.payload?.device_pixel_ratio ?? null,
+        page_url: message.payload?.page_url ?? "",
+        captured_at_ms: message.payload?.captured_at_ms ?? null,
+        selected_artifact: candidate,
+        dry_run: true,
+        active_window_required: true,
+        file_picker_title_check: true,
+        send_after_attach: false
+      }));
+      if (!operatorResult?.ok) {
+        sendResponse({
+          ok: false,
+          stage: "artifact_local_attach_dry_run",
+          result: {
+            prepared,
+            operator: operatorResult
+          }
+        });
+        return;
+      }
+      const attachResult = await postJson("/operator/attach-artifact", approvedPayload({
+        download_token: prepared.download_token,
+        target_kind: message.payload?.target_kind ?? "attach_button",
+        target_rect: message.payload?.target_rect ?? null,
+        target_screen_rect: message.payload?.target_screen_rect ?? null,
+        composer_rect: message.payload?.composer_rect ?? null,
+        viewport: message.payload?.viewport ?? null,
+        device_pixel_ratio: message.payload?.device_pixel_ratio ?? null,
+        page_url: message.payload?.page_url ?? "",
+        captured_at_ms: message.payload?.captured_at_ms ?? null,
+        selected_artifact: candidate,
+        active_window_required: true,
+        file_picker_title_check: true,
+        send_after_attach: false
+      }));
+      sendResponse({
+        ok: Boolean(attachResult?.ok),
+        stage: "artifact_local_attach_latest",
+        result: {
+          prepared,
+          dry_run: operatorResult,
+          operator: attachResult
+        }
+      });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "artifact_local_attach_latest_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_artifact_local_attach_dry_run") {
+    (async () => {
+      const attachables = await getJson("/artifacts/attachables");
+      const rows = Array.isArray(attachables?.candidates) ? attachables.candidates : [];
+      const candidate = rows.find((row: any) => row?.attachable && typeof row.path === "string");
+      if (!attachables?.ok || !candidate) {
+        sendResponse({
+          ok: false,
+          stage: "artifact_local_attach_dry_run",
+          finding: attachables?.ok ? "no_attachable_artifact" : "attachables_unavailable",
+          result: attachables
+        });
+        return;
+      }
+      const approved = await requestBridgeApproval(
+        sender,
+        "local_operator_attach_artifact_dry_run",
+        `Dry-run local attach geometry for ${candidate.name ?? candidate.path}. This will not move the mouse or click Send.`,
+        "local_operator_geometry_dry_run"
+      );
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED", candidate });
+        return;
+      }
+      const prepared = await postJson("/artifacts/prepare-upload", approvedPayload({ artifact_path: candidate.path }));
+      if (!prepared?.ok) {
+        sendResponse({ ok: false, stage: "artifact_prepare_latest", result: prepared });
+        return;
+      }
+      const operatorResult = await postJson("/operator/attach-artifact", approvedPayload({
+        download_token: prepared.download_token,
+        target_kind: message.payload?.target_kind ?? "attach_button",
+        target_rect: message.payload?.target_rect ?? null,
+        target_screen_rect: message.payload?.target_screen_rect ?? null,
+        composer_rect: message.payload?.composer_rect ?? null,
+        viewport: message.payload?.viewport ?? null,
+        device_pixel_ratio: message.payload?.device_pixel_ratio ?? null,
+        page_url: message.payload?.page_url ?? "",
+        captured_at_ms: message.payload?.captured_at_ms ?? null,
+        selected_artifact: candidate,
+        dry_run: true,
+        active_window_required: true,
+        file_picker_title_check: true,
+        send_after_attach: false
+      }));
+      sendResponse({
+        ok: Boolean(operatorResult?.ok),
+        stage: "artifact_local_attach_dry_run",
+        result: {
+          prepared,
+          operator: operatorResult
+        }
+      });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "artifact_local_attach_dry_run_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_sandbox_diff_latest") {
+    (async () => {
+      const returnId = String(message.payload?.return_id ?? "").trim();
+      const approved = await requestBridgeApproval(sender, "sandbox_return_diff_preview", `Build a read-only diff preview for sandbox return ${returnId}.`);
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED" });
+        return;
+      }
+      const result = await postJson("/sandbox/returns/diff-preview", approvedPayload({ return_id: returnId }));
+      sendResponse({ ok: Boolean(result?.ok), stage: "sandbox_diff_preview", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "sandbox_diff_preview_exception", error: error.message });
+    });
+    return true;
+  }
+
+  if (message.type === "ion_chatops_sandbox_queue_latest") {
+    (async () => {
+      const returnId = String(message.payload?.return_id ?? "").trim();
+      const approved = await requestBridgeApproval(sender, "sandbox_return_queue_review", `Queue a bounded Codex review packet for sandbox return ${returnId}.`);
+      if (!approved) {
+        sendResponse({ ok: false, stage: "approval", finding: "USER_APPROVAL_REJECTED" });
+        return;
+      }
+      const result = await postJson("/sandbox/returns/queue-review", approvedPayload({ return_id: returnId }));
+      sendResponse({ ok: Boolean(result?.ok), stage: "sandbox_queue_review", result });
+    })().catch((error: Error) => {
+      sendResponse({ ok: false, stage: "sandbox_queue_review_exception", error: error.message });
+    });
+    return true;
+  }
+
   if (message.type === "ion_chatops_agent_prepare_next") {
     (async () => {
       const approved = await requestBridgeApproval(sender, "agent_prepare_next", "Create a prepared Codex queue run packet for the next queued ION work request.");
