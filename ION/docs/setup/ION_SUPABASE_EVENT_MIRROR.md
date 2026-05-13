@@ -38,10 +38,24 @@ Required for non-dry-run calls:
 ```text
 SUPABASE_URL
 SUPABASE_KEY
+SUPABASE_SCHEMA=ion_ops
 ```
 
 `SUPABASE_KEY` should be a key appropriate for the RPC lane. Do not commit
 `.env.supabase.local` and do not print keys in logs.
+
+`SUPABASE_SCHEMA` defaults to `ion_ops`. The Supabase dashboard must expose the
+`ion_ops` schema under Project Settings -> API -> Data API / Exposed schemas.
+The adapter keeps clean RPC names and routes them through PostgREST schema
+profile headers:
+
+```text
+Content-Profile: ion_ops
+Accept-Profile: ion_ops
+```
+
+Do not move the functions to `public` to make RPC calls work. The intended
+runtime boundary is the separate `ion_ops` schema plus RLS and typed RPCs.
 
 ## Dry-run example
 

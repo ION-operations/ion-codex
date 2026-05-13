@@ -104,7 +104,38 @@ def test_non_dry_run_uses_rpc_without_live_supabase(tmp_path: Path) -> None:
     assert url == "https://example.supabase.co/rest/v1/rpc/record_service_health_snapshot"
     assert payload["p_service_name"] == "ION MCP preview"
     assert headers["apikey"] == "public-test-key"
+    assert headers["Content-Profile"] == "ion_ops"
+    assert headers["Accept-Profile"] == "ion_ops"
     assert json.loads(Path(result["receipt_path"]).read_text(encoding="utf-8"))["status"] == "MIRROR_RECORDED"
+
+
+def test_default_schema_is_ion_ops_and_public_is_not_assumed() -> None:
+    config = mirror.SupabaseConfig.from_env(
+        {"SUPABASE_URL": "https://example.supabase.co", "SUPABASE_KEY": "public-test-key"}
+    )
+
+    assert config.schema == "ion_ops"
+    assert config.schema != "public"
+
+
+def test_supabase_schema_env_override_is_forwarded() -> None:
+    calls: list[tuple[str, dict[str, object], dict[str, str], float]] = []
+
+    def fake_post(url: str, payload: dict[str, object], headers: dict[str, str], timeout: float) -> dict[str, object]:
+        calls.append((url, payload, headers, timeout))
+        return {"mirrored": True}
+
+    config = mirror.SupabaseConfig.from_env(
+        {
+            "SUPABASE_URL": "https://example.supabase.co",
+            "SUPABASE_KEY": "public-test-key",
+            "SUPABASE_SCHEMA": "ion_ops_dev",
+        }
+    )
+    mirror.call_rpc(config, "record_automation_event", {"p_event_type": "unit_test"}, http_post=fake_post)
+
+    assert calls[0][2]["Content-Profile"] == "ion_ops_dev"
+    assert calls[0][2]["Accept-Profile"] == "ion_ops_dev"
 
 
 def test_builds_carrier_mount_rpc_args() -> None:

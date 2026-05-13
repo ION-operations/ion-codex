@@ -26,6 +26,8 @@ RPC_BY_KIND = {
     "carrier_mount_receipt": "record_carrier_mount_receipt",
 }
 
+DEFAULT_SUPABASE_SCHEMA = "ion_ops"
+
 FIELD_MAPS = {
     "automation_event": {
         "event_type",
@@ -116,6 +118,7 @@ class SupabaseMirrorError(ValueError):
 class SupabaseConfig:
     url: str
     key: str
+    schema: str = DEFAULT_SUPABASE_SCHEMA
 
     @classmethod
     def from_env(cls, environ: dict[str, str] | None = None) -> "SupabaseConfig":
@@ -128,13 +131,14 @@ class SupabaseConfig:
             or env.get("VITE_SUPABASE_PUBLISHABLE_KEY")
             or ""
         ).strip()
+        schema = (env.get("SUPABASE_SCHEMA") or DEFAULT_SUPABASE_SCHEMA).strip() or DEFAULT_SUPABASE_SCHEMA
         if not url:
             raise SupabaseMirrorError("SUPABASE_URL is required for non-dry-run mirror calls")
         if not key:
             raise SupabaseMirrorError(
                 "SUPABASE_KEY or a publishable Supabase key is required for non-dry-run mirror calls"
             )
-        return cls(url=url, key=key)
+        return cls(url=url, key=key, schema=schema)
 
 
 def _now_id() -> str:
@@ -256,6 +260,8 @@ def call_rpc(
         "Authorization": f"Bearer {config.key}",
         "Content-Type": "application/json",
         "Accept": "application/json",
+        "Content-Profile": config.schema,
+        "Accept-Profile": config.schema,
         "Prefer": "return=representation",
     }
     post = http_post or _http_post_json
