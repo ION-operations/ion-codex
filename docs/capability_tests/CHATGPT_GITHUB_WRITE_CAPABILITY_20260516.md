@@ -5,13 +5,13 @@ Branch: `test/chatgpt-github-write-capability-20260516`
 Repository: `ION-operations/ION`
 Accepted state claim: false
 Production authority claim: false
-Purpose: verify whether this ChatGPT connector can create a branch, write a useful Markdown artifact, read it back, and support later PR-style review without mutating the default branch.
+Purpose: verify whether this ChatGPT connector can create a branch, write a useful Markdown artifact, read it back, compare the scratch branch, update the same file, and support later PR-style review without mutating the default branch.
 
 ## Write gate
 
 ```yaml
 write_gate:
-  action: create scratch-branch capability document
+  action: create/update scratch-branch capability document
   repository: ION-operations/ION
   branch: test/chatgpt-github-write-capability-20260516
   path: docs/capability_tests/CHATGPT_GITHUB_WRITE_CAPABILITY_20260516.md
@@ -22,6 +22,7 @@ write_gate:
     - GitHub connector exposed write-capable repository permissions
     - default branch was not targeted
     - scratch branch was created first
+    - file was read back before update
   duplicate_risk: low
   allowed_output: candidate documentation artifact only
   forbidden_output:
@@ -45,7 +46,8 @@ Tested operations:
 3. Create scratch branch.
 4. Create this Markdown file on the scratch branch.
 5. Read the file back after writing.
-6. Optionally compare branch to base and inspect commit status.
+6. Compare the scratch branch against the base commit.
+7. Update this same file using the blob SHA returned from read-back.
 
 ## ION/Codex native integration capture
 
@@ -157,19 +159,23 @@ This document does not claim:
 - that Supabase has a ready receipt schema in this repository;
 - that this scratch branch should be merged.
 
-## Capability-test conclusion placeholder
-
-This section should be updated after the connector reads this file back and optionally compares the branch.
-
-Expected result:
+## Capability-test result
 
 ```yaml
 capability_test_result:
   branch_created: true
   file_created: true
-  file_read_back: pending
+  file_read_back: true
+  branch_compared_to_base: true
+  file_updated_after_read_back: true
   default_branch_mutated: false
-  suitable_for_candidate_docs: likely
+  commits_on_scratch_branch: 2
+  suitable_for_candidate_docs: true
+  suitable_for_structured_markdown_artifacts: true
   suitable_for_large_artifacts: unproven
   next_recommended_surface: draft PR or issue linked to branch
 ```
+
+## Limits still unproven
+
+This test does not prove maximum safe payload size. It proves that the connector can perform normal GitHub source-control operations on a scratch branch. Larger tests should be deliberately staged in increasing payload sizes and should stop well below GitHub hard limits unless there is a specific need.
